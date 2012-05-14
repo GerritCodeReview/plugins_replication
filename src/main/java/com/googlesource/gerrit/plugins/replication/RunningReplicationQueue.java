@@ -20,7 +20,7 @@ import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.InternalUser;
-import com.google.gerrit.server.account.GroupCache;
+import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
@@ -69,7 +69,7 @@ class RunningReplicationQueue implements
   private final RemoteSiteUser.Factory replicationUserFactory;
   private final InternalUser.Factory internalUserFactory;
   private final GitRepositoryManager gitRepositoryManager;
-  private final GroupCache groupCache;
+  private final GroupBackend groupBackend;
   private volatile boolean running;
   boolean replicateAllOnPluginStart;
 
@@ -77,7 +77,7 @@ class RunningReplicationQueue implements
   RunningReplicationQueue(final Injector i, final WorkQueue wq, final SitePaths site,
       final RemoteSiteUser.Factory ruf, final InternalUser.Factory iuf,
       final SchemaFactory<ReviewDb> db,
-      final GitRepositoryManager grm, GroupCache gc)
+      final GitRepositoryManager grm, GroupBackend gb)
       throws ConfigInvalidException, IOException {
     injector = i;
     workQueue = wq;
@@ -85,7 +85,7 @@ class RunningReplicationQueue implements
     replicationUserFactory = ruf;
     internalUserFactory = iuf;
     gitRepositoryManager = grm;
-    groupCache = gc;
+    groupBackend = gb;
     configs = allConfigs(new File(site.etc_dir, "replication.config"));
   }
 
@@ -208,7 +208,7 @@ class RunningReplicationQueue implements
 
       r.add(new Destination(injector, c, cfg, database,
           replicationUserFactory, internalUserFactory,
-          gitRepositoryManager, groupCache));
+          gitRepositoryManager, groupBackend));
     }
     return Collections.unmodifiableList(r);
   }

@@ -16,12 +16,14 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
+import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.InternalUser;
-import com.google.gerrit.server.account.GroupCache;
+import com.google.gerrit.server.account.GroupBackend;
+import com.google.gerrit.server.account.GroupBackends;
 import com.google.gerrit.server.account.ListGroupMembership;
 import com.google.gerrit.server.config.FactoryModule;
 import com.google.gerrit.server.git.GitRepositoryManager;
@@ -76,7 +78,7 @@ class Destination {
       final RemoteSiteUser.Factory replicationUserFactory,
       final InternalUser.Factory internalUserFactory,
       final GitRepositoryManager gitRepositoryManager,
-      GroupCache groupCache) {
+      GroupBackend groupBackend) {
     remote = rc;
     delay = Math.max(0, getInt(rc, cfg, "replicationdelay", 15));
     retryDelay = Math.max(0, getInt(rc, cfg, "replicationretry", 1));
@@ -90,11 +92,11 @@ class Destination {
     if (authGroupNames.length > 0) {
       ImmutableSet.Builder<AccountGroup.UUID> builder = ImmutableSet.builder();
       for (String name : authGroupNames) {
-        AccountGroup g = groupCache.get(new AccountGroup.NameKey(name));
+        GroupReference g = GroupBackends.findExactSuggestion(groupBackend, name);
         if (g != null) {
-          builder.add(g.getGroupUUID());
+          builder.add(g.getUUID());
         } else {
-          RunningReplicationQueue.log.warn("Group \"{0}\" not in database, removing from authGroup", name);
+          RunningReplicationQueue.log.warn("Group \"{0}\" not found, removing from authGroup", name);
         }
       }
       remoteUser = replicationUserFactory.create(
