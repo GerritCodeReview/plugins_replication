@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.base.Throwables;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.Project.NameKey;
@@ -58,6 +59,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
 
 /**
  * A push to remote operation started by {@link GitReferenceUpdatedListener}.
@@ -79,6 +81,7 @@ class PushOne implements ProjectRunnable {
   private final RemoteConfig config;
   private final CredentialsProvider credentialsProvider;
   private final TagCache tagCache;
+  private final PerThreadRequestScope.Scoper threadScoper;
 
   private final Set<String> delta = new HashSet<String>();
   private final Project.NameKey projectName;
@@ -98,7 +101,7 @@ class PushOne implements ProjectRunnable {
   PushOne(final GitRepositoryManager grm, final SchemaFactory<ReviewDb> s,
       final Destination p, final RemoteConfig c,
       final SecureCredentialsProvider.Factory cpFactory,
-      final TagCache tc,
+      final TagCache tc, final PerThreadRequestScope.Scoper ts,
       @Assisted final Project.NameKey d, @Assisted final URIish u) {
     repoManager = grm;
     schema = s;
@@ -106,6 +109,7 @@ class PushOne implements ProjectRunnable {
     config = c;
     credentialsProvider = cpFactory.create(c.getName());
     tagCache = tc;
+    threadScoper = ts;
     projectName = d;
     uri = u;
   }
@@ -161,12 +165,16 @@ class PushOne implements ProjectRunnable {
   }
 
   public void run() {
-    PerThreadRequestScope ctx = new PerThreadRequestScope();
-    PerThreadRequestScope old = PerThreadRequestScope.set(ctx);
     try {
-      runPushOperation();
-    } finally {
-      PerThreadRequestScope.set(old);
+      threadScoper.scope(new Callable<Void>(){
+        @Override
+        public Void call() {
+          runPushOperation();
+          return null;
+        }
+      }).call();
+    } catch (Exception e) {
+      throw Throwables.propagate(e);
     }
   }
 
