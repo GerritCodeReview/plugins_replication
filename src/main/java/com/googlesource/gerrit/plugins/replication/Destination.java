@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.gerrit.reviewdb.client.AccountGroup;
@@ -30,9 +31,10 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.PerRequestProjectControlCache;
 import com.google.gerrit.server.project.ProjectControl;
+import com.google.gerrit.server.util.RequestContext;
 import com.google.gwtorm.server.SchemaFactory;
-import com.google.inject.AbstractModule;
 import com.google.inject.Injector;
+import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
 
@@ -50,6 +52,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 class Destination {
@@ -66,6 +69,7 @@ class Destination {
   private final GitRepositoryManager gitManager;
   private final boolean replicatePermissions;
   private volatile WorkQueue.Executor pool;
+  private final PerThreadRequestScope.Scoper threadScoper;
 
   Destination(final Injector injector,
       final RemoteConfig rc,
@@ -105,23 +109,39 @@ class Destination {
       remoteUser = internalUserFactory.create();
     }
 
-    projectControlFactory = injector.createChildInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          bindScope(RequestScoped.class, PerThreadRequestScope.REQUEST);
-          bind(PerRequestProjectControlCache.class).in(RequestScoped.class);
-          bind(CurrentUser.class).toInstance(remoteUser);
-        }
-      }).getInstance(ProjectControl.Factory.class);
-
-    opFactory = injector.createChildInjector(new FactoryModule() {
+    Injector child = injector.createChildInjector(new FactoryModule() {
       @Override
       protected void configure() {
+        bindScope(RequestScoped.class, PerThreadRequestScope.REQUEST);
+        bind(PerThreadRequestScope.Propagator.class);
+        bind(PerRequestProjectControlCache.class).in(RequestScoped.class);
+
         bind(Destination.class).toInstance(Destination.this);
         bind(RemoteConfig.class).toInstance(remote);
         install(new FactoryModuleBuilder().build(PushOne.Factory.class));
       }
-    }).getInstance(PushOne.Factory.class);
+
+      @Provides
+      public PerThreadRequestScope.Scoper provideScoper(
+          final PerThreadRequestScope.Propagator propagator) {
+        final RequestContext requestContext = new RequestContext() {
+          @Override
+          public CurrentUser getCurrentUser() {
+            return remoteUser;
+          }
+        };
+        return new PerThreadRequestScope.Scoper() {
+          @Override
+          public <T> Callable<T> scope(Callable<T> callable) {
+            return propagator.scope(requestContext, callable);
+          }
+        };
+      }
+    });
+
+    projectControlFactory = child.getInstance(ProjectControl.Factory.class);
+    opFactory = child.getInstance(PushOne.Factory.class);
+    threadScoper = child.getInstance(PerThreadRequestScope.Scoper.class);
   }
 
   void start(WorkQueue workQueue) {
@@ -143,21 +163,24 @@ class Destination {
     return cfg.getInt("remote", rc.getName(), name, defValue);
   }
 
-  void schedule(Project.NameKey project, String ref, URIish uri) {
-    PerThreadRequestScope ctx = new PerThreadRequestScope();
-    PerThreadRequestScope old = PerThreadRequestScope.set(ctx);
+  void schedule(final Project.NameKey project, final String ref,
+      final URIish uri) {
     try {
-      try {
-        if (!controlFor(project).isVisible()) {
-          return;
+      boolean visible = threadScoper.scope(new Callable<Boolean>(){
+        @Override
+        public Boolean call() throws NoSuchProjectException {
+          return controlFor(project).isVisible();
         }
-      } catch (NoSuchProjectException err) {
-        ReplicationQueue.log.error(String.format(
-            "source project %s not available", project), err);
+      }).call();
+      if (!visible) {
         return;
       }
-    } finally {
-      PerThreadRequestScope.set(old);
+    } catch (NoSuchProjectException err) {
+      ReplicationQueue.log.error(String.format(
+          "source project %s not available", project), err);
+      return;
+    } catch (Exception e) {
+      throw Throwables.propagate(e);
     }
 
     if (!replicatePermissions) {

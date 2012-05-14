@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -57,6 +58,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
 
 /**
  * A push to remote operation started by {@link GitReferenceUpdatedListener}.
@@ -78,6 +80,7 @@ class PushOne implements ProjectRunnable {
   private final RemoteConfig config;
   private final CredentialsProvider credentialsProvider;
   private final TagCache tagCache;
+  private final PerThreadRequestScope.Scoper threadScoper;
 
   private final Project.NameKey projectName;
   private final URIish uri;
@@ -94,6 +97,7 @@ class PushOne implements ProjectRunnable {
       final RemoteConfig c,
       final SecureCredentialsFactory cpFactory,
       final TagCache tc,
+      final PerThreadRequestScope.Scoper ts,
       @Assisted final Project.NameKey d,
       @Assisted final URIish u) {
     gitManager = grm;
@@ -102,6 +106,7 @@ class PushOne implements ProjectRunnable {
     config = c;
     credentialsProvider = cpFactory.create(c.getName());
     tagCache = tc;
+    threadScoper = ts;
     projectName = d;
     uri = u;
   }
@@ -169,12 +174,16 @@ class PushOne implements ProjectRunnable {
 
   @Override
   public void run() {
-    PerThreadRequestScope ctx = new PerThreadRequestScope();
-    PerThreadRequestScope old = PerThreadRequestScope.set(ctx);
     try {
-      runPushOperation();
-    } finally {
-      PerThreadRequestScope.set(old);
+      threadScoper.scope(new Callable<Void>(){
+        @Override
+        public Void call() {
+          runPushOperation();
+          return null;
+        }
+      }).call();
+    } catch (Exception e) {
+      throw Throwables.propagate(e);
     }
   }
 
