@@ -17,12 +17,14 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.InternalUser;
-import com.google.gerrit.server.account.GroupCache;
+import com.google.gerrit.server.account.GroupBackend;
+import com.google.gerrit.server.account.GroupBackends;
 import com.google.gerrit.server.account.ListGroupMembership;
 import com.google.gerrit.server.config.FactoryModule;
 import com.google.gerrit.server.git.GitRepositoryManager;
@@ -78,7 +80,7 @@ class Destination {
       final RemoteSiteUser.Factory replicationUserFactory,
       final InternalUser.Factory internalUserFactory,
       final GitRepositoryManager gitRepositoryManager,
-      final GroupCache groupCache) {
+      final GroupBackend groupBackend) {
     remote = rc;
     gitManager = gitRepositoryManager;
     delay = Math.max(0, getInt(rc, cfg, "replicationdelay", 15));
@@ -95,9 +97,9 @@ class Destination {
     if (authGroupNames.length > 0) {
       ImmutableSet.Builder<AccountGroup.UUID> builder = ImmutableSet.builder();
       for (String name : authGroupNames) {
-        AccountGroup g = groupCache.get(new AccountGroup.NameKey(name));
+        GroupReference g = GroupBackends.findExactSuggestion(groupBackend, name);
         if (g != null) {
-          builder.add(g.getGroupUUID());
+          builder.add(g.getUUID());
         } else {
           ReplicationQueue.log.warn(String.format(
               "Group \"%s\" not recognized, removing from authGroup", name));
