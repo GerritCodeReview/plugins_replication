@@ -86,7 +86,7 @@ limitations under the License.
   <repositories>
     <repository>
       <id>gerrit-api-repository</id>
-      <url>https://gerrit-api.commondatastorage.googleapis.com/snapshot/</url>
+      <url>https://gerrit-api.commondatastorage.googleapis.com/release/</url>
     </repository>
   </repositories>
 </project>
