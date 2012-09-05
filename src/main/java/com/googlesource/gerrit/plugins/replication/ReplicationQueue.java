@@ -129,8 +129,10 @@ class ReplicationQueue implements
     }
 
     for (Destination cfg : configs) {
-      for (URIish uri : cfg.getURIs(project, urlMatch)) {
-        cfg.schedule(project, PushOne.ALL_REFS, uri);
+      if (cfg.wouldPushProject(project)) {
+        for (URIish uri : cfg.getURIs(project, urlMatch)) {
+          cfg.schedule(project, PushOne.ALL_REFS, uri);
+        }
       }
     }
   }
@@ -145,7 +147,7 @@ class ReplicationQueue implements
     Project.NameKey project = new Project.NameKey(event.getProjectName());
     for (GitReferenceUpdatedListener.Update u : event.getUpdates()) {
       for (Destination cfg : configs) {
-        if (cfg.wouldPushRef(u.getRefName())) {
+        if (cfg.wouldPushProject(project) && cfg.wouldPushRef(u.getRefName())) {
           for (URIish uri : cfg.getURIs(project, null)) {
             cfg.schedule(project, u.getRefName(), uri);
           }
@@ -241,6 +243,9 @@ class ReplicationQueue implements
 
     Project.NameKey projectName = new Project.NameKey(event.getProjectName());
     for (Destination config : configs) {
+      if (!config.wouldPushProject(projectName)) {
+        continue;
+      }
       List<URIish> uriList = config.getURIs(projectName, "*");
       String[] adminUrls = config.getAdminUrls();
       boolean adminURLUsed = false;
