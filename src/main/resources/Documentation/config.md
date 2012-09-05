@@ -198,7 +198,7 @@ remote.NAME.authGroup
 	can be specified for this group to control if a project should
 	be replicated or not to the remote.
 
-	By default, replicates without group control, i.e replicates
+	By default, replicates without group control, i.e. replicates
 	everything to all remotes.
 
 remote.NAME.replicatePermissions
@@ -215,6 +215,14 @@ remote.NAME.mirror
 	access denied via `authGroup` option).
 
 	By default, false, do not remove remote branches.
+
+remote.NAME.projectMatch
+:   Specifies which repositories should be replicated to the
+    remote. It supports three formats: regular expressions,
+    wildcard matching, and single project matching.
+
+    By default, replicates without matching, i.e. replicates
+    everything to all remotes.
 
 File `secure.config`
 --------------------
