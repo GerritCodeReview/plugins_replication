@@ -198,7 +198,7 @@ remote.NAME.authGroup
 	can be specified for this group to control if a project should
 	be replicated or not to the remote.
 
-	By default, replicates without group control, i.e replicates
+	By default, replicates without group control, i.e. replicates
 	everything to all remotes.
 
 remote.NAME.replicatePermissions
@@ -228,6 +228,18 @@ remote.NAME.remoteNameStyle
 
 	By default, "slash," remote name will contain slashes as they
 	do in Gerrit.
+
+remote.NAME.projects
+:	Specifies which repositories should be replicated to the
+	remote. It supports three formats: regular expressions,
+	wildcard matching, and single project matching.
+
+	`foo/*` would match all projects beginning with `foo/`.
+	`^foo/(bar|baz)$` would match the projects `foo/bar` and
+	`foo/baz`.
+
+	By default, replicates without matching, i.e. replicates
+	everything to all remotes.
 
 File `secure.config`
 --------------------
