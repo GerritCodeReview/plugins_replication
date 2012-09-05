@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+import com.google.gerrit.common.data.AccessSection;
 import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
@@ -39,6 +40,8 @@ import com.google.inject.Injector;
 import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
+
+import dk.brics.automaton.RegExp;
 
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.lib.Constants;
@@ -63,6 +66,7 @@ class Destination {
 
   private final RemoteConfig remote;
   private final String[] adminUrls;
+  private final String[] projects;
   private final int delay;
   private final int retryDelay;
   private final Map<URIish, PushOne> pending = new HashMap<URIish, PushOne>();
@@ -91,6 +95,7 @@ class Destination {
     poolName = "ReplicateTo-" + rc.getName();
     replicatePermissions =
         cfg.getBoolean("remote", rc.getName(), "replicatePermissions", true);
+    projects = cfg.getStringList("remote", rc.getName(), "projects");
 
     final CurrentUser remoteUser;
     String[] authGroupNames = cfg.getStringList("remote", rc.getName(), "authGroup");
@@ -319,6 +324,35 @@ class Destination {
         pending.remove(op.getURI());
       }
     }
+  }
+
+  boolean wouldPushProject(Project.NameKey project) {
+    // by default push all projects
+    if (projects.length < 1) {
+      return true;
+    }
+
+    for (final String projectMatch : projects) {
+      // Regular expression
+      if (isRE(projectMatch)) {
+        if ((new RegExp(projectMatch, RegExp.NONE)).
+            toAutomaton().run(project.get())) return true;
+      // Wildcard matching
+      } else if (projectMatch.endsWith("/*")) {
+        if (project.get().startsWith(
+            projectMatch.substring(0, projectMatch.length() - 1))) return true;
+      // Just directly match
+      } else if (project.get().equals(projectMatch)) {
+        return true;
+      }
+    }
+
+    // Nothing matched, so don't push the project
+    return false;
+  }
+
+  private static boolean isRE(String str) {
+    return str.startsWith(AccessSection.REGEX_PREFIX);
   }
 
   boolean wouldPushRef(String ref) {
