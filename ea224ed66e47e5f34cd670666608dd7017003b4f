@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAI5H//+rQ\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2012-09-06T06:56:50Z",
+      "side": 1,
+      "message": "This new configuration parameter should be documented in the config.md file.",
+      "revId": "ea224ed66e47e5f34cd670666608dd7017003b4f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAI5H//+rM\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2012-09-06T06:56:50Z",
+      "side": 1,
+      "message": "[optional] you may remove the else to save one level of indention",
+      "revId": "ea224ed66e47e5f34cd670666608dd7017003b4f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAI5H//+q8\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2012-09-06T06:56:50Z",
+      "side": 1,
+      "message": "I think \u0027new RegExp(projectPattern)\u0027 is the same as \u0027new RegExp(projectPattern, RegExp.ALL)\u0027, which means that all optional regexp syntax is enabled. In the other place where we use RegExp (in the RefControl class) we instantiate it with \u0027new RegExp(refPattern, RegExp.NONE)\u0027. In this case we disable the optional regexp syntax. I think we should be consistent here and instantiate the RegExp above as \u0027new RegExp(projectPattern, RegExp.NONE)\u0027.",
+      "revId": "ea224ed66e47e5f34cd670666608dd7017003b4f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAI5H//+rE\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2012-09-06T06:56:50Z",
+      "side": 1,
+      "message": "[optional] the same method exists in RefControl where it\u0027s public static, you may just use it from there",
+      "revId": "ea224ed66e47e5f34cd670666608dd7017003b4f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
