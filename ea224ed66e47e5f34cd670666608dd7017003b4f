@@ -121,6 +121,24 @@
       "revId": "ea224ed66e47e5f34cd670666608dd7017003b4f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAI5H//+iE\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2012-09-07T06:05:49Z",
+      "side": 1,
+      "message": "I agree. This is why I made the comment only optional. Would be good to find a more suitable place for this method, but right now I have no good idea where this could be. It\u0027s also okay for me to have the method here again.",
+      "parentUuid": "AAAI1n///Uw\u003d",
+      "revId": "ea224ed66e47e5f34cd670666608dd7017003b4f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
