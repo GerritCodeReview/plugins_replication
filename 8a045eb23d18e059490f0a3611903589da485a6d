@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAJLn////c\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2012-09-16T18:51:38Z",
+      "side": 1,
+      "message": "test for isRE first.",
+      "revId": "8a045eb23d18e059490f0a3611903589da485a6d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAJLn////Y\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2012-09-16T18:51:38Z",
+      "side": 1,
+      "message": "The ^ is real, it anchors at the start. Don\u0027t trim it.",
+      "revId": "8a045eb23d18e059490f0a3611903589da485a6d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAJLn////U\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2012-09-16T18:51:38Z",
+      "side": 1,
+      "message": "This is a project name and not a regex. It may fail to compile.",
+      "revId": "8a045eb23d18e059490f0a3611903589da485a6d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAJLn////g\u003d",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2012-09-16T18:51:38Z",
+      "side": 1,
+      "message": "Other blocks use tabs here.",
+      "revId": "8a045eb23d18e059490f0a3611903589da485a6d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
