@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "AAAJMH///+s\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1010813
+      },
+      "writtenOn": "2012-09-17T18:48:00Z",
+      "side": 1,
+      "message": "I thought that was a bit odd, perhaps I misunderstood the snippet I copied that from. Will do.",
+      "parentUuid": "AAAJLn////Y\u003d",
+      "revId": "8a045eb23d18e059490f0a3611903589da485a6d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAJLn////U\u003d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2012-09-16T18:51:38Z",
       "side": 1,
       "message": "This is a project name and not a regex. It may fail to compile.",
+      "revId": "8a045eb23d18e059490f0a3611903589da485a6d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAJMH///+o\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1010813
+      },
+      "writtenOn": "2012-09-17T18:48:00Z",
+      "side": 1,
+      "message": "Is there a function within RegExp for escaping? I\u0027m thinking something along the lines of php\u0027s preg_quote().",
+      "parentUuid": "AAAJLn////U\u003d",
       "revId": "8a045eb23d18e059490f0a3611903589da485a6d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
