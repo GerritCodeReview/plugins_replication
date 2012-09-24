@@ -63,6 +63,7 @@ class ReplicationQueue implements
     GitReferenceUpdatedListener,
     NewProjectCreatedListener {
   static final Logger log = LoggerFactory.getLogger(ReplicationQueue.class);
+  private static final WrappedLogger wrappedLog = new WrappedLogger(log);
 
   static String replaceName(String in, String name) {
     String key = "${name}";
@@ -122,23 +123,27 @@ class ReplicationQueue implements
     }
   }
 
-  void scheduleFullSync(final Project.NameKey project, final String urlMatch) {
+  void scheduleFullSync(final Project.NameKey project, final String urlMatch,
+      ReplicationState state) {
     if (!running) {
-      log.warn("Replication plugin did not finish startup before event");
+      wrappedLog.warn("Replication plugin did not finish startup before event", state);
       return;
     }
 
     for (Destination cfg : configs) {
       for (URIish uri : cfg.getURIs(project, urlMatch)) {
-        cfg.schedule(project, PushOne.ALL_REFS, uri);
+        cfg.schedule(project, PushOne.ALL_REFS, uri, state);
       }
     }
   }
 
   @Override
   public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
+    ReplicationState state =
+        new ReplicationState(ReplicationType.GIT_UPDATED);
+
     if (!running) {
-      log.warn("Replication plugin did not finish startup before event");
+      wrappedLog.warn("Replication plugin did not finish startup before event", state);
       return;
     }
 
@@ -147,11 +152,12 @@ class ReplicationQueue implements
       for (Destination cfg : configs) {
         if (cfg.wouldPushRef(u.getRefName())) {
           for (URIish uri : cfg.getURIs(project, null)) {
-            cfg.schedule(project, u.getRefName(), uri);
+            cfg.schedule(project, u.getRefName(), uri, state);
           }
         }
       }
     }
+    state.markAllPushTasksScheduled();
   }
 
   private List<Destination> allDestinations(File cfgPath)

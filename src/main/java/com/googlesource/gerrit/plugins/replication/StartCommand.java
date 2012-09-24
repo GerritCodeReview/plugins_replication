@@ -24,19 +24,28 @@ import com.google.inject.Inject;
 
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 @RequiresCapability(GlobalCapability.START_REPLICATION)
 @CommandMetaData(name="start", descr="Start replication for specific project or all projects")
 final class StartCommand extends SshCommand {
+  private static final Logger log = LoggerFactory.getLogger(StartCommand.class);
   @Option(name = "--all", usage = "push all known projects")
   private boolean all;
 
   @Option(name = "--url", metaVar = "PATTERN", usage = "pattern to match URL on")
   private String urlMatch;
+
+  @Option(name = "--wait",
+      usage = "wait for replication to finish before exiting")
+  private boolean wait;
 
   @Argument(index = 0, multiValued = true, metaVar = "PROJECT", usage = "project name")
   private List<String> projectNames = new ArrayList<String>(2);
@@ -56,18 +65,57 @@ final class StartCommand extends SshCommand {
       throw new UnloggedFailure(1, "error: cannot combine --all and PROJECT");
     }
 
+    ReplicationState state =
+        new ReplicationState(ReplicationType.COMMAND, this);
+    Future<?> future = null;
     if (all) {
-      pushAllFactory.create(urlMatch).schedule(0, TimeUnit.SECONDS);
-
+      future = pushAllFactory.create(urlMatch, state).schedule(0, TimeUnit.SECONDS);
     } else {
       for (String name : projectNames) {
         Project.NameKey key = new Project.NameKey(name);
         if (projectCache.get(key) != null) {
-          replication.scheduleFullSync(key, urlMatch);
+          replication.scheduleFullSync(key, urlMatch, state);
         } else {
-          throw new UnloggedFailure(1, "error: '" + name + "': not a Gerrit project");
+          writeStdErrSync("error: '" + name + "': not a Gerrit project");
         }
       }
+      state.markAllPushTasksScheduled();
     }
+
+    if (wait) {
+      if (future != null) {
+        try {
+          future.get();
+        } catch (InterruptedException e) {
+          log.warn("Thread was interrupted while waiting for PushAll operation to finish", e);
+        } catch (ExecutionException e) {
+          log.warn("An exception was thrown in PushAll operation", e);
+        }
+      }
+
+      if (state.hasPushTask()) {
+        state.waitForReplication();
+      } else {
+        writeStdOutSync("Nothing to replicate");
+      }
+    }
+  }
+
+  public void writeStdOutSync(final String message) {
+    synchronized (stdout) {
+      stdout.println(message);
+      stdout.flush();
+    }
+  }
+
+  public void writeStdErrSync(final String message) {
+    synchronized (stderr) {
+      stderr.println(message);
+      stderr.flush();
+    }
+  }
+
+  public boolean inWaitMode() {
+    return wait;
   }
 }

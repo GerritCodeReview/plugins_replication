@@ -50,6 +50,7 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.URIish;
+import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -61,6 +62,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 class Destination {
+  private static final Logger log = ReplicationQueue.log;
+  private static final WrappedLogger wrappedLog = new WrappedLogger(log);
+
   private final int poolThreads;
   private final String poolName;
 
@@ -107,7 +111,7 @@ class Destination {
         if (g != null) {
           builder.add(g.getUUID());
         } else {
-          ReplicationQueue.log.warn(String.format(
+          log.warn(String.format(
               "Group \"%s\" not recognized, removing from authGroup", name));
         }
       }
@@ -178,7 +182,7 @@ class Destination {
   }
 
   void schedule(final Project.NameKey project, final String ref,
-      final URIish uri) {
+      final URIish uri, ReplicationState state) {
     try {
       boolean visible = threadScoper.scope(new Callable<Boolean>(){
         @Override
@@ -190,8 +194,8 @@ class Destination {
         return;
       }
     } catch (NoSuchProjectException err) {
-      ReplicationQueue.log.error(String.format(
-          "source project %s not available", project), err);
+      wrappedLog.error(String.format(
+          "source project %s not available", project), err, state);
       return;
     } catch (Exception e) {
       throw Throwables.propagate(e);
@@ -207,8 +211,8 @@ class Destination {
         try {
           git = gitManager.openRepository(project);
         } catch (IOException err) {
-          ReplicationQueue.log.error(String.format(
-              "source project %s not available", project), err);
+          wrappedLog.error(String.format(
+              "source project %s not available", project), err, state);
           return;
         }
         try {
@@ -219,8 +223,8 @@ class Destination {
             return;
           }
         } catch (IOException err) {
-          ReplicationQueue.log.error(String.format(
-              "cannot check type of project %s", project), err);
+          wrappedLog.error(String.format(
+              "cannot check type of project %s", project), err, state);
           return;
         } finally {
           git.close();
@@ -236,6 +240,8 @@ class Destination {
         pending.put(uri, e);
       }
       e.addRef(ref);
+      state.increasePushTaskCount();
+      e.addState(ref, state);
     }
   }
 
@@ -287,6 +293,8 @@ class Destination {
           // here, find out replication to its URI is already pending
           // for retry (blocking).
           pendingPushOp.addRefs(pushOp.getRefs());
+          pendingPushOp.addStates(pushOp.getStates());
+          pushOp.removeStates();
 
         } else {
           // The one pending is one that is NOT retrying, it was just
@@ -305,6 +313,8 @@ class Destination {
           pending.remove(uri);
 
           pushOp.addRefs(pendingPushOp.getRefs());
+          pushOp.addStates(pendingPushOp.getStates());
+          pendingPushOp.removeStates();
         }
       }
 

@@ -46,7 +46,9 @@ class OnStartStop implements LifecycleListener {
 
     if (srvInfo.getState() == ServerInformation.State.STARTUP
         && queue.replicateAllOnPluginStart) {
-      pushAllFuture.set(pushAll.create(null).schedule(30, TimeUnit.SECONDS));
+      ReplicationState state =
+          new ReplicationState(ReplicationType.STARTUP);
+      pushAllFuture.set(pushAll.create(null, state).schedule(30, TimeUnit.SECONDS));
     }
   }
 
