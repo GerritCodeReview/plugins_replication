@@ -15,8 +15,10 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.base.Throwables;
+import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.reviewdb.client.Project;
@@ -33,6 +35,8 @@ import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+
+import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
 import com.jcraft.jsch.JSchException;
 
@@ -56,7 +60,9 @@ import org.eclipse.jgit.transport.URIish;
 import org.slf4j.Logger;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -70,6 +76,7 @@ import java.util.concurrent.Callable;
  */
 class PushOne implements ProjectRunnable {
   private static final Logger log = ReplicationQueue.log;
+  private static final WrappedLogger wrappedLog = new WrappedLogger(log);
   static final String ALL_REFS = "..all..";
 
   interface Factory {
@@ -92,6 +99,8 @@ class PushOne implements ProjectRunnable {
   private Repository git;
   private boolean retrying;
   private boolean canceled;
+  private final Multimap<String,ReplicationState> stateMap =
+      LinkedListMultimap.create();
 
   @Inject
   PushOne(final GitRepositoryManager grm,
@@ -177,6 +186,42 @@ class PushOne implements ProjectRunnable {
     }
   }
 
+  void addState(String ref, ReplicationState state) {
+    stateMap.put(ref, state);
+  }
+
+  Multimap<String,ReplicationState> getStates() {
+    return stateMap;
+  }
+
+  ReplicationState[] getStatesAsArray() {
+    Set<ReplicationState> statesSet = new HashSet<ReplicationState>();
+    statesSet.addAll(stateMap.values());
+    return statesSet.toArray(new ReplicationState[statesSet.size()]);
+  }
+
+  ReplicationState[] getStatesByRef(String ref) {
+    Collection<ReplicationState> states = stateMap.get(ref);
+    return states.toArray(new ReplicationState[states.size()]);
+  }
+
+  void addStates(Multimap<String,ReplicationState> states) {
+    stateMap.putAll(states);
+  }
+
+  void removeStates() {
+    stateMap.clear();
+  }
+
+  private void statesCleanUp() {
+    if (!stateMap.isEmpty() && !isRetrying()) {
+      for (Map.Entry<String,ReplicationState> entry : stateMap.entries()) {
+        entry.getValue().notifyRefReplicated(projectName.get(), entry.getKey(), uri,
+            RefPushResult.FAILED);
+      }
+    }
+  }
+
   @Override
   public void run() {
     try {
@@ -189,6 +234,8 @@ class PushOne implements ProjectRunnable {
       }).call();
     } catch (Exception e) {
       throw Throwables.propagate(e);
+    } finally {
+      statesCleanUp();
     }
   }
 
@@ -206,16 +253,16 @@ class PushOne implements ProjectRunnable {
         git = gitManager.openRepository(projectName);
         runImpl();
       } catch (RepositoryNotFoundException e) {
-        log.error("Cannot replicate " + projectName + "; " + e.getMessage());
+        wrappedLog.error("Cannot replicate " + projectName + "; " + e.getMessage(), getStatesAsArray());
 
       } catch (RemoteRepositoryException e) {
         log.error("Cannot replicate " + projectName + "; " + e.getMessage());
 
       } catch (NoRemoteRepositoryException e) {
-        log.error("Cannot replicate to " + uri + "; repository not found");
+        wrappedLog.error("Cannot replicate to " + uri + "; repository not found", getStatesAsArray());
 
       } catch (NotSupportedException e) {
-        log.error("Cannot replicate to " + uri, e);
+        wrappedLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
 
       } catch (TransportException e) {
         Throwable cause = e.getCause();
@@ -229,13 +276,13 @@ class PushOne implements ProjectRunnable {
         // The remote push operation should be retried.
         pool.reschedule(this);
       } catch (IOException e) {
-        log.error("Cannot replicate to " + uri, e);
+        wrappedLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
 
       } catch (RuntimeException e) {
-        log.error("Unexpected error during replication to " + uri, e);
+        wrappedLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
 
       } catch (Error e) {
-        log.error("Unexpected error during replication to " + uri, e);
+        wrappedLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
 
       } finally {
         if (git != null) {
@@ -258,36 +305,7 @@ class PushOne implements ProjectRunnable {
       }
     }
 
-    for (RemoteRefUpdate u : res.getRemoteUpdates()) {
-      switch (u.getStatus()) {
-        case OK:
-        case UP_TO_DATE:
-        case NON_EXISTING:
-          break;
-
-        case NOT_ATTEMPTED:
-        case AWAITING_REPORT:
-        case REJECTED_NODELETE:
-        case REJECTED_NONFASTFORWARD:
-        case REJECTED_REMOTE_CHANGED:
-          log.error(String.format("Failed replicate of %s to %s: status %s",
-              u.getRemoteName(), uri, u.getStatus()));
-          break;
-
-        case REJECTED_OTHER_REASON:
-          if ("non-fast-forward".equals(u.getMessage())) {
-            log.error(String.format("Failed replicate of %s to %s"
-                + ", remote rejected non-fast-forward push."
-                + "  Check receive.denyNonFastForwards variable in config file"
-                + " of destination repository.", u.getRemoteName(), uri));
-          } else {
-            log.error(String.format(
-                "Failed replicate of %s to %s, reason: %s",
-                u.getRemoteName(), uri, u.getMessage()));
-          }
-          break;
-      }
-    }
+    updateStates(res.getRemoteUpdates());
   }
 
   private PushResult pushVia(Transport tn)
@@ -336,7 +354,7 @@ class PushOne implements ProjectRunnable {
       try {
         db = schema.open();
       } catch (OrmException e) {
-        log.error("Cannot read database to replicate to " + projectName, e);
+        wrappedLog.error("Cannot read database to replicate to " + projectName, e, getStatesAsArray());
         return Collections.emptyList();
       }
       try {
@@ -444,5 +462,71 @@ class PushOne implements ProjectRunnable {
     String dst = spec.getDestination();
     boolean force = spec.isForceUpdate();
     cmds.add(new RemoteRefUpdate(git, (Ref) null, dst, force, null, null));
+  }
+
+  private void updateStates(Collection<RemoteRefUpdate> refUpdates) {
+    Set<String> doneRefs = new HashSet<String>();
+    boolean anyRefFailed = false;
+
+    for (RemoteRefUpdate u : refUpdates) {
+      RefPushResult pushStatus = RefPushResult.SUCCEEDED;
+      Set<ReplicationState> logStates = new HashSet<ReplicationState>();
+
+      logStates.addAll(stateMap.get(u.getSrcRef()));
+      logStates.addAll(stateMap.get(ALL_REFS));
+      ReplicationState[] logStatesArray = logStates.toArray(new ReplicationState[logStates.size()]);
+
+      doneRefs.add(u.getSrcRef());
+      switch (u.getStatus()) {
+        case OK:
+        case UP_TO_DATE:
+        case NON_EXISTING:
+          break;
+
+        case NOT_ATTEMPTED:
+        case AWAITING_REPORT:
+        case REJECTED_NODELETE:
+        case REJECTED_NONFASTFORWARD:
+        case REJECTED_REMOTE_CHANGED:
+          wrappedLog.error(String.format("Failed replicate of %s to %s: status %s",
+              u.getRemoteName(), uri, u.getStatus()), logStatesArray);
+          pushStatus = RefPushResult.FAILED;
+          anyRefFailed = true;
+          break;
+
+        case REJECTED_OTHER_REASON:
+          if ("non-fast-forward".equals(u.getMessage())) {
+            wrappedLog.error(String.format("Failed replicate of %s to %s"
+                + ", remote rejected non-fast-forward push."
+                + "  Check receive.denyNonFastForwards variable in config file"
+                + " of destination repository.", u.getRemoteName(), uri), logStatesArray);
+          } else {
+            wrappedLog.error(String.format(
+                "Failed replicate of %s to %s, reason: %s",
+                u.getRemoteName(), uri, u.getMessage()), logStatesArray);
+          }
+          pushStatus = RefPushResult.FAILED;
+          anyRefFailed = true;
+          break;
+      }
+
+      for (ReplicationState rs : getStatesByRef(u.getSrcRef())) {
+        rs.notifyRefReplicated(projectName.get(), u.getSrcRef(),
+              uri, pushStatus);
+      }
+    }
+
+    doneRefs.add(ALL_REFS);
+    for (ReplicationState rs : getStatesByRef(ALL_REFS)) {
+      rs.notifyRefReplicated(projectName.get(), ALL_REFS,
+          uri, anyRefFailed ? RefPushResult.FAILED : RefPushResult.SUCCEEDED);
+    }
+    for (Map.Entry<String,ReplicationState> entry : stateMap.entries()) {
+      if (!doneRefs.contains(entry.getKey())) {
+        entry.getValue().notifyRefReplicated(projectName.get(), entry.getKey(), uri,
+            RefPushResult.NOT_ATTEMPTED);
+      }
+    }
+    stateMap.clear();
   }
 }
