@@ -9,6 +9,7 @@ SYNOPSIS
 --------
 ```
 ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start
+  [--wait]
   [--url <PATTERN>]
   {--all | <PROJECT> ...}
 ```
@@ -68,8 +69,11 @@ This command is intended to be used in scripts.
 OPTIONS
 -------
 
+`--wait`
+:	Wait for replication to finish before exiting.
+
 `--all`
-:	Schedule replicating for all projects.
+:	Schedule replication for all projects.
 
 `--url <PATTERN>`
 :	Replicate only to replication destinations whose URL contains
