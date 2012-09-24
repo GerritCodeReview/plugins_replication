@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAJWn///yc\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1010813
+      },
+      "writtenOn": "2012-09-24T16:23:38Z",
+      "side": 1,
+      "message": "Done as part of PS5.",
+      "parentUuid": "AAAJVH///14\u003d",
+      "revId": "d397a7dd1439ef5cf0f4d88c764d1e9ca983d2da",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAJVH///10\u003d",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2012-09-23T01:18:24Z",
       "side": 1,
       "message": "I think that making this just remote.NAME.project (or projects?) would be better.  I am picturing individual projects being listed with multiple project entries in the config file.",
+      "revId": "d397a7dd1439ef5cf0f4d88c764d1e9ca983d2da",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAJWn///yY\u003d",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1010813
+      },
+      "writtenOn": "2012-09-24T16:23:38Z",
+      "side": 1,
+      "message": "Renamed to projects, and refactored to allow you to include multiple projects items in your config.",
+      "parentUuid": "AAAJVH///10\u003d",
       "revId": "d397a7dd1439ef5cf0f4d88c764d1e9ca983d2da",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
