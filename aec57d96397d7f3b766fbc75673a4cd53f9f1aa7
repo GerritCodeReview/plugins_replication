@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAJY3///mg\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2012-09-26T23:58:36Z",
+      "side": 1,
+      "message": "nit:  the extra set of parrens around the new block make it kind of confusing.",
+      "revId": "aec57d96397d7f3b766fbc75673a4cd53f9f1aa7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAJY3///mc\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2012-09-26T23:58:36Z",
+      "side": 1,
+      "message": "This is a bit of a tricky question, but on case insensitive filesystems should we be making this match case insensitive?  It seems like we would need to add a getCannonical() method for projects somewhere?  That would have to be implementated by the project cache, but it seems like an odd place to ask that question.",
+      "revId": "aec57d96397d7f3b766fbc75673a4cd53f9f1aa7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAJY3///mY\u003d",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2012-09-26T23:58:36Z",
+      "side": 1,
+      "message": "This could probably use the examples from your commit message.",
+      "revId": "aec57d96397d7f3b766fbc75673a4cd53f9f1aa7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
