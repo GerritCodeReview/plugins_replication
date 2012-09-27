@@ -41,7 +41,7 @@ other reasons why an administrator may wish to trigger replication:
 	though the automatic replication pushed it there in parallel
 	to the rsync.
 
-	Its a good idea to run replicate with `--all` to ensure all
+	It's a good idea to run replicate with `--all` to ensure all
 	projects are consistent after the rsync is complete.
 
 * After deleting a ref by hand.

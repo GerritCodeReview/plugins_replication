@@ -108,13 +108,13 @@ remote.NAME.adminUrl
 	remote block, listing different destinations which share the
 	same settings.
 
-	The adminUrl can be used as a ssh alternative to the url
+	The adminUrl can be used as an ssh alternative to the url
 	option, but only related to repository creation.  If not
 	specified, the repository creation tries to follow the default
 	way through the url value specified.
 
-	It is useful when remote.NAME.url protocols does not allow
-	repository creation although their usage are mandatory in the
+	It is useful when the remote.NAME.url protocols do not allow
+	repository creation although their usage is mandatory in the
 	local environment.  In that case, an alternative SSH url could
 	be specified to repository creation.
 
@@ -259,7 +259,7 @@ Supported options:
   * StrictHostKeyChecking
 
 SSH authentication must be by passwordless public key, as there is no
-facility to read passphases on startup or passwords during the SSH
+facility to read passphrases on startup or passwords during the SSH
 connection setup, and SSH agents are not supported from Java.
 
 Host keys for any destination SSH servers must appear in the user's
