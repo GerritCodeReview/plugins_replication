@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAJe3///9Q\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1010813
+      },
+      "writtenOn": "2012-09-27T17:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAJY3///mg\u003d",
+      "revId": "aec57d96397d7f3b766fbc75673a4cd53f9f1aa7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAJY3///mc\u003d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "AAAJe3///9I\u003d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1010813
+      },
+      "writtenOn": "2012-09-27T17:59:13Z",
+      "side": 1,
+      "message": "Indeed, that\u0027s probably outside the scope of this patch. Could easily make a fix later if something changed in core.",
+      "parentUuid": "AAAJY3///mc\u003d",
+      "revId": "aec57d96397d7f3b766fbc75673a4cd53f9f1aa7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAJY3///mY\u003d",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2012-09-26T23:58:36Z",
       "side": 1,
       "message": "This could probably use the examples from your commit message.",
+      "revId": "aec57d96397d7f3b766fbc75673a4cd53f9f1aa7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAJe3///9M\u003d",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1010813
+      },
+      "writtenOn": "2012-09-27T17:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAJY3///mY\u003d",
       "revId": "aec57d96397d7f3b766fbc75673a4cd53f9f1aa7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
