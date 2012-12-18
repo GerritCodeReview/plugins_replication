@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
@@ -70,6 +71,7 @@ class Destination {
   private final ProjectControl.Factory projectControlFactory;
   private final GitRepositoryManager gitManager;
   private final boolean replicatePermissions;
+  private final String remoteNameStyle;
   private volatile WorkQueue.Executor pool;
   private final PerThreadRequestScope.Scoper threadScoper;
 
@@ -91,6 +93,8 @@ class Destination {
     poolName = "ReplicateTo-" + rc.getName();
     replicatePermissions =
         cfg.getBoolean("remote", rc.getName(), "replicatePermissions", true);
+    remoteNameStyle = Objects.firstNonNull(
+        cfg.getString("remote", rc.getName(), "remoteNameStyle"), "slash");
 
     final CurrentUser remoteUser;
     String[] authGroupNames = cfg.getStringList("remote", rc.getName(), "authGroup");
@@ -344,6 +348,14 @@ class Destination {
         String name = project.get();
         if (needsUrlEncoding(uri)) {
           name = encode(name);
+        }
+        if (remoteNameStyle.equals("dash")) {
+          name = name.replace("/", "-");
+        } else if(remoteNameStyle.equals("underscore")) {
+          name = name.replace("/", "_");
+        } else if (!remoteNameStyle.equals("slash")) {
+            ReplicationQueue.log.debug(String.format(
+                "Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle));
         }
         String replacedPath = ReplicationQueue.replaceName(uri.getPath(), name);
         if (replacedPath != null) {
