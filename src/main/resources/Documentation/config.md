@@ -216,6 +216,17 @@ remote.NAME.mirror
 
 	By default, false, do not remove remote branches.
 
+remote.NAME.isGithubOrGitorious
+:	If true, enable github and gitorious-style repository naming.
+
+	Github and Gitorious do not permit slashes "/" in repository
+	names and changes this to dashes "-" at repository creation
+	time. If set to true, this changes slashes to dashes the
+	`${name}` placeholder.
+
+	By default, false, destination repository is not Github or
+	Gitorious
+
 File `secure.config`
 --------------------
 
