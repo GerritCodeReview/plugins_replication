@@ -70,6 +70,7 @@ class Destination {
   private final ProjectControl.Factory projectControlFactory;
   private final GitRepositoryManager gitManager;
   private final boolean replicatePermissions;
+  private final boolean isGithubOrGitorious;
   private volatile WorkQueue.Executor pool;
   private final PerThreadRequestScope.Scoper threadScoper;
 
@@ -91,6 +92,8 @@ class Destination {
     poolName = "ReplicateTo-" + rc.getName();
     replicatePermissions =
         cfg.getBoolean("remote", rc.getName(), "replicatePermissions", true);
+    isGithubOrGitorious =
+        cfg.getBoolean("remote", rc.getName(), "isGithubOrGitorious", false);
 
     final CurrentUser remoteUser;
     String[] authGroupNames = cfg.getStringList("remote", rc.getName(), "authGroup");
@@ -346,6 +349,13 @@ class Destination {
           name = encode(name);
         }
         String replacedPath = ReplicationQueue.replaceName(uri.getPath(), name);
+        if (isGithubOrGitorious) {
+          // We're replicating to github or gitorious, so replace all slashes
+          // after the first one
+          int firstSlash = replacedPath.indexOf("/") + 1;
+          replacedPath = replacedPath.substring(0,firstSlash) +
+              replacedPath.substring(firstSlash,replacedPath.length()).replace("/", "-");
+        }
         if (replacedPath != null) {
           uri = uri.setPath(replacedPath);
           r.add(uri);
