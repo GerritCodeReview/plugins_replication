@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "M8nAO8D0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1010813
+      },
+      "writtenOn": "2012-12-19T03:38:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "M-eUBNhA",
+      "revId": "e6c25cc942a17ed681b253ebd4956fa358f723f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "M-cX8OgE",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-12-19T01:44:38Z",
       "side": 1,
       "message": "What about:\n\n  remote.NAME.remoteNameStyle \u003d slash | dash | underscore\n\n- If slash, its the current default behavior.\n- If dash, replace(\u0027/\u0027, \u0027-\u0027)\n- If underscore, replace(\u0027/\u0027, \u0027_\u0027)\n\nSpecifically the github.com/android URL space uses _ instead of / so I think the underscore case happens.",
+      "revId": "e6c25cc942a17ed681b253ebd4956fa358f723f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "M8pAZlIc",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1010813
+      },
+      "writtenOn": "2012-12-19T03:38:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "M-cX8OgE",
       "revId": "e6c25cc942a17ed681b253ebd4956fa358f723f3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
