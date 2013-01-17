@@ -85,6 +85,17 @@ gerrit.replicateOnStartup
 :	If true, replicates to all remotes on startup to ensure they
 	are in-sync with this server.  By default, true.
 
+replication.lockErrorMaxRetries
+:	Number of times to retry a replication operation if a
+	lock error is detected.
+
+	If two or more replication operations (to the same GIT and Ref)
+	are scheduled at the approximate same time (and end up on different
+	replication threads), there is a large probability that the last
+	push to complete will fail with a remote "failure to lock" error.
+
+	Default: 0 (disabled)
+
 remote.NAME.url
 :	Address of the remote server to push to.  Multiple URLs may be
 	specified within a single remote block, listing different
