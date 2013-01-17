@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "OgQHxqiU",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1010362
+      },
+      "writtenOn": "2013-01-17T22:39:43Z",
+      "side": 1,
+      "message": "So I just understand: You mean that if I push \"refs/heads/test\" to a git-daemon and the mirror have a ref named \"refs/head/test/abc\", the git daemon would throw a \"failed to lock\" error? Would Gerrit give the same error during a push in the same circumstances? If so, is there really any real world use-cases where we can expect to really run into this error when working with Gerrit slaves?\n\nThis is certainly no issue for us though... But I will do some further testing tomorrow.",
+      "parentUuid": "OfgQLNuY",
+      "revId": "13e595f2d3ecd6b1f532ee705fdcefdfafa3edb7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Oe8eJHoA",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
