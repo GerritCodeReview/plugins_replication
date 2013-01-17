@@ -77,6 +77,7 @@ class Destination {
   private final int delay;
   private final int retryDelay;
   private final Object stateLock = new Object();
+  private final int lockErrorMaxRetries;
   private final Map<URIish, PushOne> pending = new HashMap<URIish, PushOne>();
   private final Map<URIish, PushOne> inFlight = new HashMap<URIish, PushOne>();
   private final PushOne.Factory opFactory;
@@ -105,6 +106,7 @@ class Destination {
     gitManager = gitRepositoryManager;
     delay = Math.max(0, getInt(rc, cfg, "replicationdelay", 15));
     retryDelay = Math.max(0, getInt(rc, cfg, "replicationretry", 1));
+    lockErrorMaxRetries = cfg.getInt("replication", "lockErrorMaxRetries", 0);
     adminUrls = cfg.getStringList("remote", rc.getName(), "adminUrl");
 
     poolThreads = Math.max(0, getInt(rc, cfg, "threads", 1));
@@ -509,6 +511,10 @@ class Destination {
 
   String[] getAdminUrls() {
     return adminUrls;
+  }
+
+  int getLockErrorMaxRetries() {
+    return lockErrorMaxRetries;
   }
 
   private static boolean matches(URIish uri, String urlMatch) {

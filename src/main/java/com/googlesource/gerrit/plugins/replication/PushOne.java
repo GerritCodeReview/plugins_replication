@@ -104,6 +104,8 @@ class PushOne implements ProjectRunnable {
   private boolean canceled;
   private final Multimap<String,ReplicationState> stateMap =
       LinkedListMultimap.create();
+  private final int maxLockRetries;
+  private int lockRetryCount;
 
   @Inject
   PushOne(final GitRepositoryManager grm,
@@ -128,6 +130,8 @@ class PushOne implements ProjectRunnable {
     replicationQueue = rq;
     projectName = d;
     uri = u;
+    lockRetryCount = 0;
+    maxLockRetries = pool.getLockErrorMaxRetries();
   }
 
   @Override
@@ -293,6 +297,19 @@ class PushOne implements ProjectRunnable {
       if (cause instanceof JSchException
           && cause.getMessage().startsWith("UnknownHostKey:")) {
         log.error("Cannot replicate to " + uri + ": " + cause.getMessage());
+      } else if (e instanceof LockFailureException) {
+        lockRetryCount++;
+        // The LockFailureException message contains both URI and reason
+        // for this failure.
+        log.error("Cannot replicate to " + e.getMessage());
+
+        // The remote push operation should be retried.
+        if (lockRetryCount <= maxLockRetries) {
+          pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
+        } else {
+          log.error("Giving up after " + lockRetryCount
+              + " of this error during replication to " + e.getMessage());
+        }
       } else {
         log.error("Cannot replicate to " + uri, e);
         // The remote push operation should be retried.
@@ -300,7 +317,6 @@ class PushOne implements ProjectRunnable {
       }
     } catch (IOException e) {
       wrappedLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
-
     } catch (RuntimeException e) {
       wrappedLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
 
@@ -521,7 +537,8 @@ class PushOne implements ProjectRunnable {
     cmds.add(new RemoteRefUpdate(git, (Ref) null, dst, force, null, null));
   }
 
-  private void updateStates(Collection<RemoteRefUpdate> refUpdates) {
+  private void updateStates(Collection<RemoteRefUpdate> refUpdates)
+      throws LockFailureException {
     Set<String> doneRefs = new HashSet<String>();
     boolean anyRefFailed = false;
 
@@ -557,6 +574,8 @@ class PushOne implements ProjectRunnable {
                 + ", remote rejected non-fast-forward push."
                 + "  Check receive.denyNonFastForwards variable in config file"
                 + " of destination repository.", u.getRemoteName(), uri), logStatesArray);
+          } else if ("failed to lock".equals(u.getMessage())) {
+            throw new LockFailureException(uri, u.getMessage());
           } else {
             wrappedLog.error(String.format(
                 "Failed replicate of %s to %s, reason: %s",
@@ -586,4 +605,12 @@ class PushOne implements ProjectRunnable {
     }
     stateMap.clear();
   }
+
+  public class LockFailureException extends TransportException {
+    private static final long serialVersionUID = 1L;
+
+    public LockFailureException(URIish uri, String message) {
+      super(uri, message);
+    }
+  };
 }
