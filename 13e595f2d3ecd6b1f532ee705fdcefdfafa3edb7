@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Oe8eJHoA",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2013-01-17T19:28:58Z",
+      "side": 1,
+      "message": "[optional] Have a LockFailureException as subclass of RemoteRepositoryException so that above you can simply check with instanceof without need to check on the message.",
+      "revId": "13e595f2d3ecd6b1f532ee705fdcefdfafa3edb7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
