@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "OfgQLNuY",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-01-17T21:19:34Z",
+      "side": 1,
+      "message": "This a cool change.  Unfortunately, there are failed to lock cases which are not transient: when a ref is a \"directory\" (imagine the mirror has a ref named \u0027foo/bar\u0027 and the push is on the ref \u0027foo\u0027) on the receiving end.  You will need to somehow be able to detect those cases or else they will fill up the queue forever.",
+      "revId": "13e595f2d3ecd6b1f532ee705fdcefdfafa3edb7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Oe8eJHoA",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
