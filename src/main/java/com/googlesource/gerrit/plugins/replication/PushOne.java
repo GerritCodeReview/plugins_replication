@@ -37,6 +37,7 @@ import com.jcraft.jsch.JSchException;
 
 import org.eclipse.jgit.errors.NoRemoteRepositoryException;
 import org.eclipse.jgit.errors.NotSupportedException;
+import org.eclipse.jgit.errors.RemoteRepositoryException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.lib.Constants;
@@ -214,6 +215,11 @@ class PushOne implements ProjectRunnable {
         if (cause instanceof JSchException
             && cause.getMessage().startsWith("UnknownHostKey:")) {
           log.error("Cannot replicate to " + uri + ": " + cause.getMessage());
+        } else if (e instanceof RemoteRepositoryException
+            && e.getMessage().endsWith("failed to lock")) {
+          // The RemoteRepositoryException message contains both URI and reason
+          // for this intermediate failure.
+          log.error("Cannot replicate to " + e.getMessage());
         } else {
           log.error("Cannot replicate to " + uri, e);
         }
@@ -272,6 +278,8 @@ class PushOne implements ProjectRunnable {
                 + ", remote rejected non-fast-forward push."
                 + "  Check receive.denyNonFastForwards variable in config file"
                 + " of destination repository.", u.getRemoteName(), uri));
+          } else if ("failed to lock".equals(u.getMessage())) {
+            throw new RemoteRepositoryException(uri, u.getMessage());
           } else {
             log.error(String.format(
                 "Failed replicate of %s to %s, reason: %s",
