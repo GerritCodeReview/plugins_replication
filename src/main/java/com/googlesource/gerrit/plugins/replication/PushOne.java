@@ -37,6 +37,7 @@ import com.jcraft.jsch.JSchException;
 
 import org.eclipse.jgit.errors.NoRemoteRepositoryException;
 import org.eclipse.jgit.errors.NotSupportedException;
+import org.eclipse.jgit.errors.RemoteRepositoryException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.lib.Constants;
@@ -69,6 +70,7 @@ import java.util.concurrent.Callable;
 class PushOne implements ProjectRunnable {
   private static final Logger log = ReplicationQueue.log;
   static final String ALL_REFS = "..all..";
+  static final int MAX_LOCK_TRIES = 3;
 
   interface Factory {
     PushOne create(Project.NameKey d, URIish u);
@@ -89,6 +91,7 @@ class PushOne implements ProjectRunnable {
   private Repository git;
   private boolean retrying;
   private boolean canceled;
+  private int lockRetry;
 
   @Inject
   PushOne(final GitRepositoryManager grm,
@@ -109,6 +112,7 @@ class PushOne implements ProjectRunnable {
     threadScoper = ts;
     projectName = d;
     uri = u;
+    lockRetry = 0;
   }
 
   @Override
@@ -214,12 +218,22 @@ class PushOne implements ProjectRunnable {
         if (cause instanceof JSchException
             && cause.getMessage().startsWith("UnknownHostKey:")) {
           log.error("Cannot replicate to " + uri + ": " + cause.getMessage());
+        } else if (e instanceof LockFailureException) {
+          lockRetry++;
+          // The LockFailureException message contains both URI and reason
+          // for this failure.
+          log.error("Cannot replicate to " + e.getMessage());
         } else {
           log.error("Cannot replicate to " + uri, e);
         }
 
         // The remote push operation should be retried.
-        pool.reschedule(this);
+        if (lockRetry < MAX_LOCK_TRIES) {
+          pool.reschedule(this);
+        } else {
+          log.error("Giving up after " + MAX_LOCK_TRIES +
+              " attempts to replicate, but still failing due to: " + e.getMessage());
+        }
       } catch (IOException e) {
         log.error("Cannot replicate to " + uri, e);
 
@@ -272,6 +286,8 @@ class PushOne implements ProjectRunnable {
                 + ", remote rejected non-fast-forward push."
                 + "  Check receive.denyNonFastForwards variable in config file"
                 + " of destination repository.", u.getRemoteName(), uri));
+          } else if ("failed to lock".equals(u.getMessage())) {
+            throw new LockFailureException(uri, u.getMessage());
           } else {
             log.error(String.format(
                 "Failed replicate of %s to %s, reason: %s",
@@ -436,4 +452,12 @@ class PushOne implements ProjectRunnable {
     boolean force = spec.isForceUpdate();
     cmds.add(new RemoteRefUpdate(git, (Ref) null, dst, force, null, null));
   }
+
+  public class LockFailureException extends RemoteRepositoryException {
+    private static final long serialVersionUID = 1L;
+
+    public LockFailureException(URIish uri, String message) {
+      super(uri, message);
+    }
+  };
 }
