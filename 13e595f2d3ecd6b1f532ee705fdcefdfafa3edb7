@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "OgII3.t0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1010362
+      },
+      "writtenOn": "2013-01-18T14:04:07Z",
+      "side": 1,
+      "message": "People changes the hierarchy of branches on the mirror and not on the master? If so, replication will never happen on those branches as it is today! That\u0027s sounds very dangerous and more of a faulty setup. In these cases I would probably feel more secure to have the PushOp left in the replication queue so I can catch an error like that more quickly, than just let it fail \"silently\" and accept that the replication will never happen at all.\n\nHow about this; I let Gerrit retry a certain amount of times on lock errors. 5? 10? That way you will only have the PushOp in the queue for a short while and the queue will never risk filling up.\n\nIf the lock error is due to circumstances described in the commit message, the PushOp will very, very likely succeed on the second try.\n\nThat would at least be far better than what we have today...",
+      "parentUuid": "OfsQIPuU",
+      "revId": "13e595f2d3ecd6b1f532ee705fdcefdfafa3edb7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Oe8eJHoA",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
