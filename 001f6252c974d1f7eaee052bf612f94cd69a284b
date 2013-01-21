@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "OsrD-uO8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1006454
+      },
+      "writtenOn": "2013-01-21T17:15:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "OsbH-wO8",
+      "revId": "001f6252c974d1f7eaee052bf612f94cd69a284b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "OsVEFNBo",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2013-01-21T16:49:08Z",
       "side": 1,
       "message": "I think it would be good to log the \"else\" condition with an error here that indicates that the retries have runout.",
+      "revId": "001f6252c974d1f7eaee052bf612f94cd69a284b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OsnACsBU",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1006454
+      },
+      "writtenOn": "2013-01-21T17:15:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "OsVEFNBo",
       "revId": "001f6252c974d1f7eaee052bf612f94cd69a284b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
