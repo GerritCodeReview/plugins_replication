@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "OsbH-wO8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-01-21T16:49:08Z",
+      "side": 1,
+      "message": "10 seems excessive.  10 would surely indicate extreme contention and a very miss-tuned system.  I think this should be a configuration parameter and I would suggest a default of 3.",
+      "revId": "001f6252c974d1f7eaee052bf612f94cd69a284b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OsVEFNBo",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-01-21T16:49:08Z",
+      "side": 1,
+      "message": "I think it would be good to log the \"else\" condition with an error here that indicates that the retries have runout.",
+      "revId": "001f6252c974d1f7eaee052bf612f94cd69a284b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
