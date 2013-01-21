@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "OsPJHiE0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1006454
+      },
+      "writtenOn": "2013-01-21T17:26:43Z",
+      "side": 1,
+      "message": "Users are already complaining that our replication times are to long :/ And a increased replication delay are not guaranteed to catch all the lock errors. Thanks though",
+      "parentUuid": "OsZERXFo",
+      "revId": "93c9ba8b6f11a6293cffbce101e524121002fbc5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "OsfEcaHM",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2013-01-21T17:19:20Z",
       "side": 1,
       "message": "Out of date?\n\nDocumentation for this parameter?",
+      "revId": "93c9ba8b6f11a6293cffbce101e524121002fbc5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OsLJRAAk",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1006454
+      },
+      "writtenOn": "2013-01-21T17:26:43Z",
+      "side": 1,
+      "message": "The parameter is not configurable (and I don\u0027t think it should be..), so I see no need to mention it in the documentation.",
+      "parentUuid": "OsfEcaHM",
       "revId": "93c9ba8b6f11a6293cffbce101e524121002fbc5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
