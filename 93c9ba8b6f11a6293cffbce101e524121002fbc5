@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "OsZERXFo",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-01-21T17:19:20Z",
+      "side": 1,
+      "message": "You really should consider better tuning your system by increasing your replication delay.",
+      "revId": "93c9ba8b6f11a6293cffbce101e524121002fbc5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OsfEcaHM",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-01-21T17:19:20Z",
+      "side": 1,
+      "message": "Out of date?\n\nDocumentation for this parameter?",
+      "revId": "93c9ba8b6f11a6293cffbce101e524121002fbc5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
