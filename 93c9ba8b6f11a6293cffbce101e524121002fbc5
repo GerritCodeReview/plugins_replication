@@ -69,6 +69,24 @@
       "revId": "93c9ba8b6f11a6293cffbce101e524121002fbc5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OtO71XxE",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-01-22T22:37:23Z",
+      "side": 1,
+      "message": "The retry limit deals with potential infinite loops, but I still think that the retry should be disabled by default to not add to the contention problem.  Perhaps it would make more sense to disable this feature by having the retry count default to 0 (instead of adding an enable parameter)?",
+      "parentUuid": "OsLJRAAk",
+      "revId": "93c9ba8b6f11a6293cffbce101e524121002fbc5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
