@@ -21,6 +21,7 @@ import com.google.common.collect.Sets;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
+import com.google.gerrit.server.git.ChangeCache;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
 import com.google.gerrit.server.git.ProjectRunnable;
@@ -81,6 +82,7 @@ class PushOne implements ProjectRunnable {
   private final CredentialsProvider credentialsProvider;
   private final TagCache tagCache;
   private final PerThreadRequestScope.Scoper threadScoper;
+  private final ChangeCache changeCache;
 
   private final Project.NameKey projectName;
   private final URIish uri;
@@ -98,6 +100,7 @@ class PushOne implements ProjectRunnable {
       final SecureCredentialsFactory cpFactory,
       final TagCache tc,
       final PerThreadRequestScope.Scoper ts,
+      final ChangeCache cc,
       @Assisted final Project.NameKey d,
       @Assisted final URIish u) {
     gitManager = grm;
@@ -107,6 +110,7 @@ class PushOne implements ProjectRunnable {
     credentialsProvider = cpFactory.create(c.getName());
     tagCache = tc;
     threadScoper = ts;
+    changeCache = cc;
     projectName = d;
     uri = u;
   }
@@ -332,7 +336,8 @@ class PushOne implements ProjectRunnable {
         return Collections.emptyList();
       }
       try {
-        local = new VisibleRefFilter(tagCache, git, pc, db, true).filter(local, true);
+        local = new VisibleRefFilter(tagCache, changeCache, git, pc, db, true)
+            .filter(local, true);
       } finally {
         db.close();
       }
