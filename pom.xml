@@ -22,11 +22,11 @@ limitations under the License.
   <groupId>com.googlesource.gerrit.plugins.replication</groupId>
   <artifactId>replication</artifactId>
   <packaging>jar</packaging>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
 
   <properties>
     <Gerrit-ApiType>plugin</Gerrit-ApiType>
-    <Gerrit-ApiVersion>2.5</Gerrit-ApiVersion>
+    <Gerrit-ApiVersion>2.6-SNAPSHOT</Gerrit-ApiVersion>
   </properties>
 
   <build>

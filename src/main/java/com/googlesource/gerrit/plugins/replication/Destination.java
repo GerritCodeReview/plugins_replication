@@ -28,6 +28,7 @@ import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.account.GroupBackends;
 import com.google.gerrit.server.account.ListGroupMembership;
 import com.google.gerrit.server.config.FactoryModule;
+import com.google.gerrit.server.config.RequestScopedReviewDbProvider;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
 import com.google.gerrit.server.git.WorkQueue;
@@ -37,6 +38,7 @@ import com.google.gerrit.server.project.ProjectControl;
 import com.google.gerrit.server.util.RequestContext;
 import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
@@ -129,11 +131,17 @@ class Destination {
 
       @Provides
       public PerThreadRequestScope.Scoper provideScoper(
-          final PerThreadRequestScope.Propagator propagator) {
+          final PerThreadRequestScope.Propagator propagator,
+          final Provider<RequestScopedReviewDbProvider> dbProvider) {
         final RequestContext requestContext = new RequestContext() {
           @Override
           public CurrentUser getCurrentUser() {
             return remoteUser;
+          }
+
+          @Override
+          public Provider<ReviewDb> getReviewDbProvider() {
+            return dbProvider.get();
           }
         };
         return new PerThreadRequestScope.Scoper() {
