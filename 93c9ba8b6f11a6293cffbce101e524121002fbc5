@@ -87,6 +87,24 @@
       "revId": "93c9ba8b6f11a6293cffbce101e524121002fbc5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QVI4mO8Q",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1006454
+      },
+      "writtenOn": "2013-02-27T16:44:22Z",
+      "side": 1,
+      "message": "The retry is now configurable and defaulted to off.",
+      "parentUuid": "OtO71XxE",
+      "revId": "93c9ba8b6f11a6293cffbce101e524121002fbc5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
