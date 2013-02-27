@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "QYSHvLkE",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2013-02-27T20:47:06Z",
+      "side": 1,
+      "message": "Are you sure this doesn\u0027t prevent rescheduling in cases where it will succeed? What kinds of errors cause jgit to throw this exception?",
+      "revId": "dfb3259793c93e54e86a38f87ec92fe7abca4a28",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
