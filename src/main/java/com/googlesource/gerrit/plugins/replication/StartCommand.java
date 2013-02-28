@@ -18,6 +18,7 @@ import com.google.gerrit.common.data.GlobalCapability;
 import com.google.gerrit.extensions.annotations.RequiresCapability;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.project.ProjectCache;
+import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
 
@@ -28,8 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/** Force a project to replicate, again. */
 @RequiresCapability(GlobalCapability.START_REPLICATION)
+@CommandMetaData(name="start", descr="Force a project to replicate, again")
 final class StartCommand extends SshCommand {
   @Option(name = "--all", usage = "push all known projects")
   private boolean all;
