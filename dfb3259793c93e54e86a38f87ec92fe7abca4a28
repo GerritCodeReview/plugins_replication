@@ -16,6 +16,24 @@
       "revId": "dfb3259793c93e54e86a38f87ec92fe7abca4a28",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QcRHv7EA",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-02-28T01:41:23Z",
+      "side": 1,
+      "message": "jgit will throw this exception while receive pack of remote repository, it receives \"ERR \" string in its input stream, as this exception\u0027s comment said, remote repository has a problem as that it cannot be accessed.",
+      "parentUuid": "QYSHvLkE",
+      "revId": "dfb3259793c93e54e86a38f87ec92fe7abca4a28",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
