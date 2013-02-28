@@ -34,6 +34,24 @@
       "revId": "dfb3259793c93e54e86a38f87ec92fe7abca4a28",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QYQHU6jc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2013-02-28T13:00:31Z",
+      "side": 1,
+      "message": "And receiving \"ERR\" string once means you are guaranteed to continue getting \"ERR\" each retry?",
+      "parentUuid": "QcRHv7EA",
+      "revId": "dfb3259793c93e54e86a38f87ec92fe7abca4a28",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
