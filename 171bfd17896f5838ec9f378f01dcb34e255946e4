@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Qg38Dbxs",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-03-01T06:07:55Z",
+      "side": 1,
+      "message": "Have you been running this, we are considering it, any advice?  Maybe a note about the things to consider before enabling this, the potential problems, the importance of tuning the replication delay to avoid contention in the first place?",
+      "revId": "171bfd17896f5838ec9f378f01dcb34e255946e4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
