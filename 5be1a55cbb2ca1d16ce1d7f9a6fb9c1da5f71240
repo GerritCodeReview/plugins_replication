@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Qe8cj3rI",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-03-01T12:07:02Z",
+      "side": 1,
+      "message": "The hyphen is not necessary.",
+      "revId": "5be1a55cbb2ca1d16ce1d7f9a6fb9c1da5f71240",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Qe6cm6sM",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-03-01T12:07:02Z",
+      "side": 1,
+      "message": "\"the same time\"",
+      "revId": "5be1a55cbb2ca1d16ce1d7f9a6fb9c1da5f71240",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Qe2cV0kg",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-03-01T12:07:02Z",
+      "side": 1,
+      "message": "s/you/your",
+      "revId": "5be1a55cbb2ca1d16ce1d7f9a6fb9c1da5f71240",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Qe4cp5pg",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-03-01T12:07:02Z",
+      "side": 1,
+      "message": "\"in the queue\"",
+      "revId": "5be1a55cbb2ca1d16ce1d7f9a6fb9c1da5f71240",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
