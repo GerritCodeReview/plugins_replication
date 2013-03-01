@@ -249,51 +249,55 @@ class PushOne implements ProjectRunnable {
     // we start replication (instead a new instance, with the same URI, is
     // created and scheduled for a future point in time.)
     //
-    pool.notifyStarting(this);
-
-    // It should only verify if it was canceled after calling notifyStarting,
-    // since the canceled flag would be set locking the queue.
-    if (!canceled) {
-      try {
-        git = gitManager.openRepository(projectName);
-        runImpl();
-      } catch (RepositoryNotFoundException e) {
-        wrappedLog.error("Cannot replicate " + projectName + "; " + e.getMessage(), getStatesAsArray());
-
-      } catch (RemoteRepositoryException e) {
-        log.error("Cannot replicate " + projectName + "; " + e.getMessage());
-
-      } catch (NoRemoteRepositoryException e) {
-        wrappedLog.error("Cannot replicate to " + uri + "; repository not found", getStatesAsArray());
-
-      } catch (NotSupportedException e) {
-        wrappedLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
-
-      } catch (TransportException e) {
-        Throwable cause = e.getCause();
-        if (cause instanceof JSchException
-            && cause.getMessage().startsWith("UnknownHostKey:")) {
-          log.error("Cannot replicate to " + uri + ": " + cause.getMessage());
-        } else {
-          log.error("Cannot replicate to " + uri, e);
-        }
-
-        // The remote push operation should be retried.
-        pool.reschedule(this);
-      } catch (IOException e) {
-        wrappedLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
-
-      } catch (RuntimeException e) {
-        wrappedLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
-
-      } catch (Error e) {
-        wrappedLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
-
-      } finally {
-        if (git != null) {
-          git.close();
-        }
+    if (!pool.requestRunway(this)) {
+      if (!canceled) {
+        log.info("Rescheduling replication to " + uri +
+                 " to avoid collision with an in-flight push.");
+        pool.reschedule(this, Destination.RetryReason.COLLISION);
       }
+      return;
+    }
+
+    try {
+      git = gitManager.openRepository(projectName);
+      runImpl();
+    } catch (RepositoryNotFoundException e) {
+      wrappedLog.error("Cannot replicate " + projectName + "; " + e.getMessage(), getStatesAsArray());
+
+    } catch (RemoteRepositoryException e) {
+      log.error("Cannot replicate " + projectName + "; " + e.getMessage());
+
+    } catch (NoRemoteRepositoryException e) {
+      wrappedLog.error("Cannot replicate to " + uri + "; repository not found", getStatesAsArray());
+
+    } catch (NotSupportedException e) {
+      wrappedLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
+
+    } catch (TransportException e) {
+      Throwable cause = e.getCause();
+      if (cause instanceof JSchException
+          && cause.getMessage().startsWith("UnknownHostKey:")) {
+        log.error("Cannot replicate to " + uri + ": " + cause.getMessage());
+      } else {
+        log.error("Cannot replicate to " + uri, e);
+      }
+
+      // The remote push operation should be retried.
+      pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
+    } catch (IOException e) {
+      wrappedLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
+
+    } catch (RuntimeException e) {
+      wrappedLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
+
+    } catch (Error e) {
+      wrappedLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
+
+    } finally {
+      if (git != null) {
+        git.close();
+      }
+      pool.notifyFinished(this);
     }
   }
 

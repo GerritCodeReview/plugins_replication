@@ -75,7 +75,9 @@ class Destination {
   private final String[] projects;
   private final int delay;
   private final int retryDelay;
+  private final Object stateLock = new Object();
   private final Map<URIish, PushOne> pending = new HashMap<URIish, PushOne>();
+  private final Map<URIish, PushOne> inFlight = new HashMap<URIish, PushOne>();
   private final PushOne.Factory opFactory;
   private final ProjectControl.Factory projectControlFactory;
   private final GitRepositoryManager gitManager;
@@ -83,6 +85,10 @@ class Destination {
   private final String remoteNameStyle;
   private volatile WorkQueue.Executor pool;
   private final PerThreadRequestScope.Scoper threadScoper;
+
+  protected static enum RetryReason {
+    TRANSPORT_ERROR, COLLISION;
+  }
 
   Destination(final Injector injector,
       final RemoteConfig rc,
@@ -207,7 +213,7 @@ class Destination {
 
     if (!replicatePermissions) {
       PushOne e;
-      synchronized (pending) {
+      synchronized (stateLock) {
         e = pending.get(uri);
       }
       if (e == null) {
@@ -236,7 +242,7 @@ class Destination {
       }
     }
 
-    synchronized (pending) {
+    synchronized (stateLock) {
       PushOne e = pending.get(uri);
       if (e == null) {
         e = opFactory.create(project, uri);
@@ -252,17 +258,20 @@ class Destination {
   /**
    * It schedules again a PushOp instance.
    * <p>
-   * It is assumed to be previously scheduled and found a
-   * transport exception. It will schedule it as a push
-   * operation to be retried after the minutes count
-   * determined by class attribute retryDelay.
+   * If the reason for rescheduling is to avoid a collison
+   * with an in-flight push to the same URI, we don't
+   * mark the operation as "retrying," and we schedule
+   * using the replication delay, rather than the retry
+   * delay.  Otherwise,  the operation is marked as
+   * "retrying" and scheduled to run following the
+   * minutes count determined by class attribute retryDelay.
    * <p>
    * In case the PushOp instance to be scheduled has same
-   * URI than one also pending for retry, it adds to the one
+   * URI than one marked as "retrying," it adds to the one
    * pending the refs list of the parameter instance.
    * <p>
-   * In case the PushOp instance to be scheduled has same
-   * URI than one pending, but not pending for retry, it
+   * In case the PushOp instance to be scheduled has the
+   * same URI as one pending, but not marked "retrying," it
    * indicates the one pending should be canceled when it
    * starts executing, removes it from pending list, and
    * adds its refs to the parameter instance. The parameter
@@ -270,14 +279,13 @@ class Destination {
    * <p>
    * Notice all operations to indicate a PushOp should be
    * canceled, or it is retrying, or remove/add it from/to
-   * pending Map should be protected by the lock on pending
-   * Map class instance attribute.
+   * pending Map should be protected by synchronizing on the
+   * stateLock object.
    *
    * @param pushOp The PushOp instance to be scheduled.
    */
-  void reschedule(PushOne pushOp) {
-    // It locks access to pending variable.
-    synchronized (pending) {
+  void reschedule(PushOne pushOp, RetryReason reason) {
+    synchronized (stateLock) {
       URIish uri = pushOp.getURI();
       PushOne pendingPushOp = pending.get(uri);
 
@@ -323,13 +331,17 @@ class Destination {
       }
 
       if (pendingPushOp == null || !pendingPushOp.isRetrying()) {
-        // The PushOp method param instance should be scheduled for retry.
-        // Remember when retrying it should be used different delay.
-
-        pushOp.setToRetry();
-
         pending.put(uri, pushOp);
-        pool.schedule(pushOp, retryDelay, TimeUnit.MINUTES);
+        switch (reason) {
+          case COLLISION:
+            pool.schedule(pushOp, delay, TimeUnit.SECONDS);
+            break;
+          case TRANSPORT_ERROR:
+          default:
+            pushOp.setToRetry();
+            pool.schedule(pushOp, retryDelay, TimeUnit.MINUTES);
+            break;
+        }
       }
     }
   }
@@ -339,11 +351,23 @@ class Destination {
     return projectControlFactory.controlFor(project);
   }
 
-  void notifyStarting(PushOne op) {
-    synchronized (pending) {
-      if (!op.wasCanceled()) {
-        pending.remove(op.getURI());
+  boolean requestRunway(PushOne op) {
+    synchronized (stateLock) {
+      if (op.wasCanceled()) {
+        return false;
       }
+      pending.remove(op.getURI());
+      if (inFlight.containsKey(op.getURI())) {
+        return false;
+      }
+      inFlight.put(op.getURI(), op);
+    }
+    return true;
+  }
+
+  void notifyFinished(PushOne op) {
+    synchronized (stateLock) {
+      inFlight.remove(op.getURI());
     }
   }
 
