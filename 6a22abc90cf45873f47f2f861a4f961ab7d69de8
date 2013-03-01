@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Qg9-zmyo",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-03-01T00:52:44Z",
+      "side": 1,
+      "message": "I know this was copied from the comment, but I don\u0027t think it properly describes what the command does.\n\n- The command can push all projects with the --all option, so \"a project\" is wrong.\n\n- \"again\" is probably not necessary\n\nMaybe change it to something simple like:\n\n \"Start replication\"",
+      "revId": "6a22abc90cf45873f47f2f861a4f961ab7d69de8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
