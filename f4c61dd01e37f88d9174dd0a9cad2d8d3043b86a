@@ -16,6 +16,24 @@
       "revId": "f4c61dd01e37f88d9174dd0a9cad2d8d3043b86a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Qk.8VgUw",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1010015
+      },
+      "writtenOn": "2013-03-01T08:14:22Z",
+      "side": 1,
+      "message": "take back my comments sorry I make a mistaken.\n\n\n \n\n \n$   ssh -p 29418  bruce.zu@jptolx7599  replication-1.1-SNAPSHOT   --help\nreplication-1.1-SNAPSHOT [COMMAND] [ARG ...] [--] [--help (-h)]\n\n --          : end of options\n --help (-h) : display this help text\n\nAvailable commands of replication-1.1-SNAPSHOT are:\n\n   start   Start replication for specific project or all projects\n\nSee \u0027replication-1.1-SNAPSHOT COMMAND --help\u0027 for more information.",
+      "parentUuid": "Qky8NyUQ",
+      "revId": "f4c61dd01e37f88d9174dd0a9cad2d8d3043b86a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
