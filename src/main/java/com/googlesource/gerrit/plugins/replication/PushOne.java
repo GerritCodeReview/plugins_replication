@@ -196,9 +196,14 @@ class PushOne implements ProjectRunnable {
     // we start replication (instead a new instance, with the same URI, is
     // created and scheduled for a future point in time.)
     //
-    pool.notifyStarting(this);
+    if not (pool.requestRunway(this)) {
+      log.info("Rescheduling replication to " + uri +
+               " to avoid collision with an in-flight push.");
+      pool.reschedule(this, RetryReason.COLLISON);
+      return;
+    }
 
-    // It should only verify if it was canceled after calling notifyStarting,
+    // It should only verify if it was canceled after calling requestRunway,
     // since the canceled flag would be set locking the queue.
     if (!canceled) {
       try {
@@ -223,7 +228,7 @@ class PushOne implements ProjectRunnable {
         }
 
         // The remote push operation should be retried.
-        pool.reschedule(this);
+        pool.reschedule(this, RetryReason.TRANSPORT_ERROR);
       } catch (IOException e) {
         log.error("Cannot replicate to " + uri, e);
 
@@ -237,6 +242,7 @@ class PushOne implements ProjectRunnable {
         if (git != null) {
           git.close();
         }
+        pool.notifyFinished(this);
       }
     }
   }
