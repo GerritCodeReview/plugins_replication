@@ -52,6 +52,24 @@
       "revId": "6a22abc90cf45873f47f2f861a4f961ab7d69de8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QlO7un0I",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2013-03-01T07:14:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "Qeycb2oE",
+      "revId": "6a22abc90cf45873f47f2f861a4f961ab7d69de8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
