@@ -195,49 +195,52 @@ class PushOne implements ProjectRunnable {
     // Lock the queue, and remove ourselves, so we can't be modified once
     // we start replication (instead a new instance, with the same URI, is
     // created and scheduled for a future point in time.)
-    //
-    pool.notifyStarting(this);
-
-    // It should only verify if it was canceled after calling notifyStarting,
-    // since the canceled flag would be set locking the queue.
-    if (!canceled) {
-      try {
-        git = gitManager.openRepository(projectName);
-        runImpl();
-      } catch (RepositoryNotFoundException e) {
-        log.error("Cannot replicate " + projectName + "; " + e.getMessage());
-
-      } catch (NoRemoteRepositoryException e) {
-        log.error("Cannot replicate to " + uri + "; repository not found");
-
-      } catch (NotSupportedException e) {
-        log.error("Cannot replicate to " + uri, e);
-
-      } catch (TransportException e) {
-        Throwable cause = e.getCause();
-        if (cause instanceof JSchException
-            && cause.getMessage().startsWith("UnknownHostKey:")) {
-          log.error("Cannot replicate to " + uri + ": " + cause.getMessage());
-        } else {
-          log.error("Cannot replicate to " + uri, e);
-        }
-
-        // The remote push operation should be retried.
-        pool.reschedule(this);
-      } catch (IOException e) {
-        log.error("Cannot replicate to " + uri, e);
-
-      } catch (RuntimeException e) {
-        log.error("Unexpected error during replication to " + uri, e);
-
-      } catch (Error e) {
-        log.error("Unexpected error during replication to " + uri, e);
-
-      } finally {
-        if (git != null) {
-          git.close();
-        }
+    if (!pool.requestRunway(this)) {
+      if (!canceled) {
+        log.info("Rescheduling replication to " + uri +
+                 " to avoid collision with an in-flight push.");
+        pool.reschedule(this, Destination.RetryReason.COLLISION);
       }
+      return;
+    }
+
+    try {
+      git = gitManager.openRepository(projectName);
+      runImpl();
+    } catch (RepositoryNotFoundException e) {
+      log.error("Cannot replicate " + projectName + "; " + e.getMessage());
+
+    } catch (NoRemoteRepositoryException e) {
+      log.error("Cannot replicate to " + uri + "; repository not found");
+
+    } catch (NotSupportedException e) {
+      log.error("Cannot replicate to " + uri, e);
+
+    } catch (TransportException e) {
+      Throwable cause = e.getCause();
+      if (cause instanceof JSchException
+          && cause.getMessage().startsWith("UnknownHostKey:")) {
+        log.error("Cannot replicate to " + uri + ": " + cause.getMessage());
+      } else {
+        log.error("Cannot replicate to " + uri, e);
+      }
+
+      // The remote push operation should be retried.
+      pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
+    } catch (IOException e) {
+      log.error("Cannot replicate to " + uri, e);
+
+    } catch (RuntimeException e) {
+      log.error("Unexpected error during replication to " + uri, e);
+
+    } catch (Error e) {
+      log.error("Unexpected error during replication to " + uri, e);
+
+    } finally {
+      if (git != null) {
+        git.close();
+      }
+      pool.notifyFinished(this);
     }
   }
 
