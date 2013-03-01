@@ -16,6 +16,24 @@
       "revId": "171bfd17896f5838ec9f378f01dcb34e255946e4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QlO4Vf0w",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1006454
+      },
+      "writtenOn": "2013-03-01T09:53:41Z",
+      "side": 1,
+      "message": "We have been running it in production for 6 weeks+ with no issues. User complaints of missing commits have pretty much disappeared. \n\nWe are still using the default replicationDelay of 15 seconds and we cannot really go higher than that without pissing off users and breaking builds for other sites.\n\nTogether with my JGit-patch here: https://git.eclipse.org/r/#/c/10307/ we have pretty much gotten rid of all of our replication woes. Our replicationTimes are most often really short (even for the large Gits with many refs), so the short replicationDelay is certainly no big issue for us anymore.\n\nWe allow 3 lock error retries in our setup, but 1 retry should be enough in most situations.\n\nWe control all our mirrors, so the namespacing issue you mentioned before do not really affect us. But I think with a lockErrorMaxRetries set to 1, that should not be a big problem either.\n\nI\u0027ll add a note about contention risks to the documentation and also a note to suggest a default value less than 3 retires.",
+      "parentUuid": "Qg38Dbxs",
+      "revId": "171bfd17896f5838ec9f378f01dcb34e255946e4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
