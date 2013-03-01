@@ -69,6 +69,7 @@ class Destination {
   private final int delay;
   private final int retryDelay;
   private final Map<URIish, PushOne> pending = new HashMap<URIish, PushOne>();
+  private final Map<URIish, PushOne> inflight = new HashMap<URIish, PushOne>();
   private final PushOne.Factory opFactory;
   private final ProjectControl.Factory projectControlFactory;
   private final GitRepositoryManager gitManager;
@@ -228,6 +229,13 @@ class Destination {
       }
     }
 
+    synchronized (inflight) {
+      PushOne e = inflight.get(uri);
+      if (e != null) {
+        /* reschedule and return */
+      }
+    }
+
     synchronized (pending) {
       PushOne e = pending.get(uri);
       if (e == null) {
@@ -329,6 +337,14 @@ class Destination {
     synchronized (pending) {
       if (!op.wasCanceled()) {
         pending.remove(op.getURI());
+      }
+    }
+  }
+
+  void notifyFinished(PushOne op) {
+    synchronized (inflight) {
+      if (!op.wasCanceled()) {
+        inflight.remote(op.getURI());
       }
     }
   }

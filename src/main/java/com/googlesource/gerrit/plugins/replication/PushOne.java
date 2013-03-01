@@ -239,6 +239,7 @@ class PushOne implements ProjectRunnable {
         }
       }
     }
+    pool.notifyFinished(this);
   }
 
   private void runImpl() throws IOException {
