@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Qky8NyUQ",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1010015
+      },
+      "writtenOn": "2013-03-01T08:06:02Z",
+      "side": 1,
+      "message": "$  ssh -p 29418  bruce.zu@jptolx7599  replication-1.1-SNAPSHOT --help\nreplication-1.1-SNAPSHOT [COMMAND] [ARG ...] [--] [--help (-h)]\n\n--          : end of options\n--help (-h) : display this help text\n\nAvailable commands of replication-1.1-SNAPSHOT are:\n\n   start\n\nSee \u0027replication-1.1-SNAPSHOT COMMAND --help\u0027 for more information.\n\n $\n\n\n\n\n\n\n\n\nMy feedback: \n\nStart  option have not detail  description\n\ndoes not need  the last line any more in the result of –help option.",
+      "revId": "f4c61dd01e37f88d9174dd0a9cad2d8d3043b86a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
