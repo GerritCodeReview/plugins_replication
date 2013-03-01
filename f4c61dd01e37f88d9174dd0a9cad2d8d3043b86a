@@ -34,6 +34,24 @@
       "revId": "f4c61dd01e37f88d9174dd0a9cad2d8d3043b86a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QlG4Dzxs",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2013-03-01T08:44:41Z",
+      "side": 1,
+      "message": "Note: --help is even not needed any more\n ssh gerit replication\ndoes the job, or even try core commands:\n ssh gerrit gerrit\nand compare it with `git` itself (without options)\n git\n\n ;-)",
+      "parentUuid": "Qk.8VgUw",
+      "revId": "f4c61dd01e37f88d9174dd0a9cad2d8d3043b86a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
