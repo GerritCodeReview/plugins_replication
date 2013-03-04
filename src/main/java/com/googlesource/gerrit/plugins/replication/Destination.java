@@ -230,20 +230,19 @@ class Destination {
     }
 
     synchronized (inflight) {
-      PushOne e = inflight.get(uri);
-      if (e != null) {
-        /* reschedule and return */
+      synchronized (pending) {
+        PushOne e = inflight.get(uri);
+        if (e != null) {
+          /* reschedule and return */
+        }
+        e = pending.get(uri);
+        if (e == null) {
+          e = opFactory.create(project, uri);
+          pool.schedule(e, delay, TimeUnit.SECONDS);
+          pending.put(uri, e);
+        }
+        e.addRef(ref);
       }
-    }
-
-    synchronized (pending) {
-      PushOne e = pending.get(uri);
-      if (e == null) {
-        e = opFactory.create(project, uri);
-        pool.schedule(e, delay, TimeUnit.SECONDS);
-        pending.put(uri, e);
-      }
-      e.addRef(ref);
     }
   }
 
@@ -334,18 +333,19 @@ class Destination {
   }
 
   void notifyStarting(PushOne op) {
-    synchronized (pending) {
-      if (!op.wasCanceled()) {
-        pending.remove(op.getURI());
+    synchronized (inflight) {
+      synchronized (pending) {
+        if (!op.wasCanceled()) {
+          pending.remove(op.getURI());
+          inflight.put(e.getURI(), e);
+        }
       }
     }
   }
 
   void notifyFinished(PushOne op) {
     synchronized (inflight) {
-      if (!op.wasCanceled()) {
-        inflight.remote(op.getURI());
-      }
+      inflight.remove(op.getURI());
     }
   }
 

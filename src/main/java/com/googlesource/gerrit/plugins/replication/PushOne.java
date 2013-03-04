@@ -237,9 +237,9 @@ class PushOne implements ProjectRunnable {
         if (git != null) {
           git.close();
         }
+        pool.notifyFinished(this);
       }
     }
-    pool.notifyFinished(this);
   }
 
   private void runImpl() throws IOException {
