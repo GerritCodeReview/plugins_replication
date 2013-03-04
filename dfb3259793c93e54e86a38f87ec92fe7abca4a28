@@ -52,6 +52,24 @@
       "revId": "dfb3259793c93e54e86a38f87ec92fe7abca4a28",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QtM7uY0M",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-03-04T03:30:55Z",
+      "side": 1,
+      "message": "Currently at least for errors \"access denied, repository not exported or not found\" we know it will continue getting \"ERR\", and it will be rescheduled again and again, never end. If we know some \"ERR\"s are recoverable at a later time, we can add code to distinguish them then.",
+      "parentUuid": "QYQHU6jc",
+      "revId": "dfb3259793c93e54e86a38f87ec92fe7abca4a28",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
