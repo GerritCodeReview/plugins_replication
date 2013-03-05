@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "QzHYNEEQ",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-03-05T18:28:44Z",
+      "side": 1,
+      "message": "Hmm, is there anyway we can actually confirm that things are inflight?  What if some unexpected exception happens in the completion path and an entry never gets removed from the inflight map, will it then block new entries for the URI indefinitely?  Perhaps we need to build in a timeout to being in the inflight queue?",
+      "parentUuid": "QzPb4AAk",
+      "revId": "166a77045e4d51f590f616cfff1bc4bec00727e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "QzNb9BPc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
