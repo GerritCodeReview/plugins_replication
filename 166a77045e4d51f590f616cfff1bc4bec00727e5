@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "Q5J7uHUI",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-03-05T19:47:04Z",
+      "side": 1,
+      "message": "Not quite what I meant.  I assume if we are checking !cancelled, it can sometimes actually be cancelled.  It isn\u0027t obvious to me that the entry is being removed from inFlight in those cases?",
+      "parentUuid": "QzDYqeIw",
+      "revId": "166a77045e4d51f590f616cfff1bc4bec00727e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "QzNb9BPc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
