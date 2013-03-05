@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "QzJbzjCs",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2013-03-05T17:16:16Z",
+      "side": 1,
+      "message": "Move this type into class Destination. It probably doesn\u0027t need to be public either.",
+      "revId": "166a77045e4d51f590f616cfff1bc4bec00727e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QzPb4AAk",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2013-03-05T17:16:16Z",
+      "side": 1,
+      "message": "use inflight.containsKey(op.getURI()) instead of !\u003d null",
+      "revId": "166a77045e4d51f590f616cfff1bc4bec00727e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QzNb9BPc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2013-03-05T17:16:16Z",
+      "side": 1,
+      "message": "if (!pool.requestRunway(this))",
+      "revId": "166a77045e4d51f590f616cfff1bc4bec00727e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
