@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "QznQk6Ls",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2013-03-05T15:16:16Z",
+      "side": 1,
+      "message": "Lets avoid double locking. Instead make a new object that will be our lock for both of these maps:\n\n  private final Object stateLock \u003d new Object();\n\nand then replace all uses of \"synchronized (pending)\" with \"synchronized (stateLock)\". Any reference to either pending or inflight should be wrapped with the synchronized (stateLock) statement.",
+      "revId": "cbba11ef2abe8b98962d53cf750ef7a4777849ad",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "QzlQh7Kk",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2013-03-05T15:16:16Z",
+      "side": 1,
+      "message": "Is this as simple as saying:\n\n  PushOne b \u003d pending.get(uri);\n  if (b !\u003d null) {\n    pool.schedule(b, delay, TimeUnit.SECONDS);\n    return;\n  }\n\nI have to go digging around the code more in this plugin to remember how these PushOne objects are used.",
+      "revId": "cbba11ef2abe8b98962d53cf750ef7a4777849ad",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
