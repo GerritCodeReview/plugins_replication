@@ -161,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "Q4x8D4xs",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2013-03-05T19:53:02Z",
+      "side": 1,
+      "message": "If an op is cancelled, it should never get into inFlight.  It can only be marked \u0027cancelled\u0027 while it\u0027s in the pending queue.",
+      "parentUuid": "Q5J7uHUI",
+      "revId": "166a77045e4d51f590f616cfff1bc4bec00727e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "QzNb9BPc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
