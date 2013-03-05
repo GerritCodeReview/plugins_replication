@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "QzLYV6E0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2013-03-05T18:30:06Z",
+      "side": 1,
+      "message": "Removal from inFlight is done by notifyFinished in a finally block. If the JVM can avoid calling that... the JVM is corrupt and needs to die and be restarted. :-)",
+      "parentUuid": "QzHYNEEQ",
+      "revId": "166a77045e4d51f590f616cfff1bc4bec00727e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "QzNb9BPc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
