@@ -197,6 +197,24 @@
     },
     {
       "key": {
+        "uuid": "Q478a93o",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2013-03-05T20:15:56Z",
+      "side": 1,
+      "message": "The only place that PushOne.cancel() is called is from Destination.reschedule(), which is synchronized with stateLock.\n\nThere\u0027s nothing to prevent a later change from calling cancel() in a unsafe way, i.e., without locking stateLock, but that was true prior to this patch.  If you think it\u0027s a good idea, I can add a comment to PushOne.cancel() stating that it can only be called within a synchronized(stateLock) block.",
+      "parentUuid": "Q5N74pQk",
+      "revId": "166a77045e4d51f590f616cfff1bc4bec00727e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "QzNb9BPc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
