@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "QzPYPYDc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-03-05T18:45:31Z",
+      "side": 1,
+      "message": "OK, I admit I am paranoid.  Should the call to this function be put in the try for that finally too then so that other weird JVM runtime exceptions will be caught (and the !cancelled on line 208 of PushOne)?",
+      "parentUuid": "QzLYV6E0",
+      "revId": "166a77045e4d51f590f616cfff1bc4bec00727e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "QzNb9BPc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
