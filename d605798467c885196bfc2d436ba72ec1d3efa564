@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Sh7sNh0Q",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1012422
+      },
+      "writtenOn": "2013-03-23T03:08:10Z",
+      "side": 1,
+      "message": "s/retyring/retrying/",
+      "revId": "d605798467c885196bfc2d436ba72ec1d3efa564",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sh5sSy14",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1012422
+      },
+      "writtenOn": "2013-03-23T03:08:10Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "d605798467c885196bfc2d436ba72ec1d3efa564",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ShV0lW7k",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1012422
+      },
+      "writtenOn": "2013-03-23T03:08:10Z",
+      "side": 1,
+      "message": "This is changed to stateLock now, correct?",
+      "revId": "d605798467c885196bfc2d436ba72ec1d3efa564",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Shxsf22U",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1012422
+      },
+      "writtenOn": "2013-03-23T03:08:10Z",
+      "side": 1,
+      "message": "This comment looks like it is no longer accurate. (It\u0027s locking stateLock now, not pending.)",
+      "revId": "d605798467c885196bfc2d436ba72ec1d3efa564",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Sh1slY7k",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1012422
+      },
+      "writtenOn": "2013-03-23T03:08:10Z",
+      "side": 1,
+      "message": "Looks like you\u0027ve got an extra space here after \"requestRunway\"",
+      "revId": "d605798467c885196bfc2d436ba72ec1d3efa564",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Shzsil7M",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1012422
+      },
+      "writtenOn": "2013-03-23T03:08:10Z",
+      "side": 1,
+      "message": "s/so op/so the op/",
+      "revId": "d605798467c885196bfc2d436ba72ec1d3efa564",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
