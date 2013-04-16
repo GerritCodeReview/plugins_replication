@@ -52,6 +52,24 @@
       "revId": "6c403577a078ac8f1d646760ca1cac0d110d8934",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TYIIUek0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2013-04-16T16:58:06Z",
+      "side": 1,
+      "message": "I had forgotten about this.  I refactored as you suggested; it is a bit cleaner that way.",
+      "parentUuid": "TYGIPdjs",
+      "revId": "6c403577a078ac8f1d646760ca1cac0d110d8934",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
