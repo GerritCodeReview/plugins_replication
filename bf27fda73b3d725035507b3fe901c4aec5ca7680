@@ -16,6 +16,24 @@
       "revId": "bf27fda73b3d725035507b3fe901c4aec5ca7680",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Ta3cUkEw",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2013-04-16T16:06:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "TYIL7mv4",
+      "revId": "bf27fda73b3d725035507b3fe901c4aec5ca7680",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
