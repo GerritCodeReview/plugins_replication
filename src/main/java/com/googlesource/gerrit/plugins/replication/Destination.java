@@ -76,6 +76,7 @@ class Destination {
   private final String remoteNameStyle;
   private volatile WorkQueue.Executor pool;
   private final PerThreadRequestScope.Scoper threadScoper;
+  private final Project.NameKey project;
 
   Destination(final Injector injector,
       final RemoteConfig rc,
@@ -97,6 +98,12 @@ class Destination {
         cfg.getBoolean("remote", rc.getName(), "replicatePermissions", true);
     remoteNameStyle = Objects.firstNonNull(
         cfg.getString("remote", rc.getName(), "remoteNameStyle"), "slash");
+    String projectName = cfg.getString("remote", rc.getName(), "project");
+    if (projectName == null) {
+      project = null;
+    } else {
+      project = new Project.NameKey(projectName);
+    }
 
     final CurrentUser remoteUser;
     String[] authGroupNames = cfg.getStringList("remote", rc.getName(), "authGroup");
@@ -351,24 +358,28 @@ class Destination {
 
   List<URIish> getURIs(Project.NameKey project, String urlMatch) {
     List<URIish> r = Lists.newArrayListWithCapacity(remote.getURIs().size());
-    for (URIish uri : remote.getURIs()) {
-      if (matches(uri, urlMatch)) {
-        String name = project.get();
-        if (needsUrlEncoding(uri)) {
-          name = encode(name);
-        }
-        if (remoteNameStyle.equals("dash")) {
-          name = name.replace("/", "-");
-        } else if(remoteNameStyle.equals("underscore")) {
-          name = name.replace("/", "_");
-        } else if (!remoteNameStyle.equals("slash")) {
-            ReplicationQueue.log.debug(String.format(
-                "Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle));
-        }
-        String replacedPath = ReplicationQueue.replaceName(uri.getPath(), name);
-        if (replacedPath != null) {
-          uri = uri.setPath(replacedPath);
-          r.add(uri);
+    if (!replicatesSingleProject() || getProject().equals(project)) {
+      for (URIish uri : remote.getURIs()) {
+        if (matches(uri, urlMatch)) {
+          String name = project.get();
+          if (needsUrlEncoding(uri)) {
+            name = encode(name);
+          }
+          if (remoteNameStyle.equals("dash")) {
+            name = name.replace("/", "-");
+          } else if(remoteNameStyle.equals("underscore")) {
+            name = name.replace("/", "_");
+          } else if (!remoteNameStyle.equals("slash")) {
+              ReplicationQueue.log.debug(String.format(
+                  "Unknown remoteNameStyle: %s, falling back to slash",
+                  remoteNameStyle));
+          }
+          String replacedPath = ReplicationQueue.replaceName(uri.getPath(),
+              name, replicatesSingleProject());
+          if (replacedPath != null) {
+            uri = uri.setPath(replacedPath);
+            r.add(uri);
+          }
         }
       }
     }
@@ -405,5 +416,24 @@ class Destination {
       return true;
     }
     return uri.toString().contains(urlMatch);
+  }
+
+  /**
+   * Checks whether or not the destination covers only a single project
+   *
+   * @return true, iff the destination covers only a single project
+   */
+  public boolean replicatesSingleProject() {
+    return project != null;
+  }
+
+  /**
+   * Gets the project to replicate
+   *
+   * @return The projects NameKey, if the destination replicates only a single
+   *        project. {@code null} otherwise.
+   */
+  public Project.NameKey getProject() {
+    return project;
   }
 }

@@ -96,11 +96,15 @@ remote.NAME.url
 	replaced with the Gerrit project name.  This is a Gerrit
 	specific extension to the otherwise standard Git URL syntax
 	and it must be included in each URL so that Gerrit can figure
-	out where each project needs to be replicated.
+	out where each project needs to be replicated.  If the
+	destination is used for a single project (see
+	[remote.NAME.project][3] below), using `${name}` in the URL is
+	optional.
 
 	See [git push][1] for details on Git URL syntax.
 
 [1]: http://www.git-scm.com/docs/git-push#URLS
+[3]: #remote.NAME.project
 
 remote.NAME.adminUrl
 :	Address of the alternative remote server only for repository
@@ -129,6 +133,12 @@ remote.NAME.uploadpack
 	if using the SSH transport.
 
 	Defaults to `git-upload-pack`.
+
+<a name="remote.NAME.project">remote.NAME.project</a>
+:	Name of the project to replicate. Only this project gets
+	replicated. If unset (default) all projects get replicated.
+
+	Unset per default.
 
 remote.NAME.push
 :	Standard Git refspec denoting what should be replicated.
