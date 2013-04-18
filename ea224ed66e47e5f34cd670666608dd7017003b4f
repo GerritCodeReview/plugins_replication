@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "TliwKcy8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-04-18T13:53:03Z",
+      "side": 1,
+      "message": "There are other cases as well where we use new RegExp\n\n  grep -R new.RegExp */src\n  gerrit-server/src/main/java/com/google/gerrit/server/query/change/RegexTopicPredicate.java: this.pattern \u003d new RunAutomaton(new RegExp(re).toAutomaton());\n  gerrit-server/src/main/java/com/google/gerrit/server/query/change/RegexFilePredicate.java: Automaton automaton \u003d new RegExp(re).toAutomaton();\n  gerrit-server/src/main/java/com/google/gerrit/server/query/change/RegexProjectPredicate.java: this.pattern \u003d new RunAutomaton(new RegExp(re).toAutomaton());\n  gerrit-server/src/main/java/com/google/gerrit/server/query/change/RegexRefPredicate.java: this.pattern \u003d new RunAutomaton(new RegExp(re).toAutomaton());\n  gerrit-server/src/main/java/com/google/gerrit/server/query/change/RegexBranchPredicate.java: this.pattern \u003d new RunAutomaton(new RegExp(re).toAutomaton());\n  gerrit-server/src/main/java/com/google/gerrit/server/project/RefControl.java: return new RegExp(refPattern, RegExp.NONE);\n\nOnly one of them uses RegExp.NONE. Should we harmonize them?",
+      "parentUuid": "AAAJAn///Ks\u003d",
+      "revId": "ea224ed66e47e5f34cd670666608dd7017003b4f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAI5H//+rE\u003d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 1
