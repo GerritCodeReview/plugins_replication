@@ -23,7 +23,7 @@ import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.CurrentUser;
-import com.google.gerrit.server.InternalUser;
+import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.account.GroupBackends;
 import com.google.gerrit.server.account.ListGroupMembership;
@@ -82,7 +82,7 @@ class Destination {
       final Config cfg,
       final SchemaFactory<ReviewDb> db,
       final RemoteSiteUser.Factory replicationUserFactory,
-      final InternalUser.Factory internalUserFactory,
+      final PluginUser pluginUser,
       final GitRepositoryManager gitRepositoryManager,
       final GroupBackend groupBackend) {
     remote = rc;
@@ -114,7 +114,7 @@ class Destination {
       remoteUser = replicationUserFactory.create(
           new ListGroupMembership(builder.build()));
     } else {
-      remoteUser = internalUserFactory.create();
+      remoteUser = pluginUser;
     }
 
     Injector child = injector.createChildInjector(new FactoryModule() {

@@ -22,7 +22,7 @@ import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
-import com.google.gerrit.server.InternalUser;
+import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.GitRepositoryManager;
@@ -78,7 +78,7 @@ class ReplicationQueue implements
   private final List<Destination> configs;
   private final SchemaFactory<ReviewDb> database;
   private final RemoteSiteUser.Factory replicationUserFactory;
-  private final InternalUser.Factory internalUserFactory;
+  private final PluginUser pluginUser;
   private final GitRepositoryManager gitRepositoryManager;
   private final GroupBackend groupBackend;
   private volatile boolean running;
@@ -86,7 +86,7 @@ class ReplicationQueue implements
 
   @Inject
   ReplicationQueue(final Injector i, final WorkQueue wq, final SitePaths site,
-      final RemoteSiteUser.Factory ruf, final InternalUser.Factory iuf,
+      final RemoteSiteUser.Factory ruf, final PluginUser pu,
       final SchemaFactory<ReviewDb> db,
       final GitRepositoryManager grm, final GroupBackend gb)
       throws ConfigInvalidException, IOException {
@@ -94,7 +94,7 @@ class ReplicationQueue implements
     workQueue = wq;
     database = db;
     replicationUserFactory = ruf;
-    internalUserFactory = iuf;
+    pluginUser = pu;
     gitRepositoryManager = grm;
     groupBackend = gb;
     configs = allDestinations(new File(site.etc_dir, "replication.config"));
@@ -208,7 +208,7 @@ class ReplicationQueue implements
       }
 
       dest.add(new Destination(injector, c, cfg, database,
-          replicationUserFactory, internalUserFactory,
+          replicationUserFactory, pluginUser,
           gitRepositoryManager, groupBackend));
     }
     return dest.build();
