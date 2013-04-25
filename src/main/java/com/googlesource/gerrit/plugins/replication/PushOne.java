@@ -38,6 +38,7 @@ import com.jcraft.jsch.JSchException;
 
 import org.eclipse.jgit.errors.NoRemoteRepositoryException;
 import org.eclipse.jgit.errors.NotSupportedException;
+import org.eclipse.jgit.errors.RemoteRepositoryException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.lib.Constants;
@@ -205,6 +206,9 @@ class PushOne implements ProjectRunnable {
         git = gitManager.openRepository(projectName);
         runImpl();
       } catch (RepositoryNotFoundException e) {
+        log.error("Cannot replicate " + projectName + "; " + e.getMessage());
+
+      } catch (RemoteRepositoryException e) {
         log.error("Cannot replicate " + projectName + "; " + e.getMessage());
 
       } catch (NoRemoteRepositoryException e) {
