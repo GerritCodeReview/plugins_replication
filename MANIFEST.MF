@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Gerrit-ApiType: plugin
+Gerrit-ApiVersion: 2.6
+Gerrit-Module: com.googlesource.gerrit.plugins.replication.ReplicationModule
+Gerrit-SshModule: com.googlesource.gerrit.plugins.replication.SshModule
+Implementation-Vendor: Gerrit Code Review
+Implementation-URL: http://code.google.com/p/gerrit/
+Implementation-Title: Plugin replication
+Implementation-Version: @VERSION@
