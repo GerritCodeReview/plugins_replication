@@ -21,6 +21,7 @@ limitations under the License.
 
   <groupId>com.googlesource.gerrit.plugins.replication</groupId>
   <artifactId>replication</artifactId>
+  <name>replication</name>
   <packaging>jar</packaging>
   <version>2.6-rc2</version>
 
