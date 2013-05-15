@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "UqHpRGRY",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-05-15T05:50:45Z",
+      "side": 1,
+      "message": "I think Eclipse will automatically format the code correctly if the Gerrit code style file is added for the project.",
+      "parentUuid": "Tlkz9v.8",
+      "revId": "5a72dda9f16e63846971f85b79d2eb72f470ff72",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Tky8KaS8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 8
