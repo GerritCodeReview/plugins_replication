@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Up3tRHxY",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-05-15T05:53:03Z",
+      "side": 1,
+      "message": "- s/be finished/finish\n\n- s/before returning from this command/before exiting.",
+      "revId": "49361acbccced6c7198c04cb1c174a3fa4699bde",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "UqNqOJXs",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-05-15T05:53:03Z",
+      "side": 1,
+      "message": "s/replicating/replication",
+      "revId": "49361acbccced6c7198c04cb1c174a3fa4699bde",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
