@@ -10,5 +10,6 @@ java_test(
   deps = [
     ':replication__plugin__compile',
     '//lib:junit',
+    '//lib/jgit:jgit',
   ],
 )
