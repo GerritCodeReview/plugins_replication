@@ -64,11 +64,14 @@ class ReplicationQueue implements
     NewProjectCreatedListener {
   static final Logger log = LoggerFactory.getLogger(ReplicationQueue.class);
 
-  static String replaceName(String in, String name) {
+  static String replaceName(String in, String name, boolean keyIsOptional) {
     String key = "${name}";
     int n = in.indexOf(key);
     if (0 <= n) {
       return in.substring(0, n) + name + in.substring(n + key.length());
+    }
+    if (keyIsOptional) {
+      return in;
     }
     return null;
   }
@@ -188,14 +191,6 @@ class ReplicationQueue implements
         continue;
       }
 
-      for (URIish u : c.getURIs()) {
-        if (u.getPath() == null || !u.getPath().contains("${name}")) {
-          throw new ConfigInvalidException(String.format(
-              "remote.%s.url \"%s\" lacks ${name} placeholder in %s",
-              c.getName(), u, cfg.getFile()));
-        }
-      }
-
       // If destination for push is not set assume equal to source.
       for (RefSpec ref : c.getPushRefSpecs()) {
         if (ref.getDestination() == null) {
@@ -209,9 +204,21 @@ class ReplicationQueue implements
           .setForceUpdate(true));
       }
 
-      dest.add(new Destination(injector, c, cfg, database,
-          replicationUserFactory, pluginUser,
-          gitRepositoryManager, groupBackend));
+      Destination destination = new Destination(injector, c, cfg, database,
+          replicationUserFactory, pluginUser, gitRepositoryManager,
+          groupBackend);
+
+      if (!destination.isSingleProjectMatch()) {
+        for (URIish u : c.getURIs()) {
+          if (u.getPath() == null || !u.getPath().contains("${name}")) {
+            throw new ConfigInvalidException(String.format(
+                "remote.%s.url \"%s\" lacks ${name} placeholder in %s",
+                c.getName(), u, cfg.getFile()));
+          }
+        }
+      }
+
+      dest.add(destination);
     }
     return dest.build();
   }
@@ -263,7 +270,8 @@ class ReplicationQueue implements
           continue;
         }
 
-        String path = replaceName(uri.getPath(), projectName.get());
+        String path = replaceName(uri.getPath(), projectName.get(),
+            config.isSingleProjectMatch());
         if (path == null) {
           log.warn(String.format("adminURL %s does not contain ${name}", uri));
           continue;
