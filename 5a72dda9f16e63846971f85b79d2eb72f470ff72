@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9d162d8e_053d12cb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-05-30T16:22:38Z",
+      "side": 1,
+      "message": "1st nit: Due to ^ handling of dk.brics.automaton.RegExp, we switched to using matching on Strings directly, as other parts of gerrit (OpenId) also use Java\u0027s regular expressions.\n\n2nd nit: Done in Patch Set 10",
+      "parentUuid": "Tlkz9v.8",
+      "revId": "5a72dda9f16e63846971f85b79d2eb72f470ff72",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Tky8KaS8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 8
@@ -48,6 +66,24 @@
       "writtenOn": "2013-04-18T13:54:41Z",
       "side": 1,
       "message": "Nit:\nDo we need the slash in \"/*\"?\n\n-----------------------------------------------\n\nNit:\nWhen reading the above “isRE” (line 337) it\u0027s immediately obvious that\nit\u0027s a check for a regular expression.\n\nSo seeing “endsWith(\"/*\")” took me a second look to realize that we\nmatch for a glob. Could we extract that to an “isGlob(...)”, or\n“isWildcard(...)” [1]?\n\nUpon third look, there is a comment in the above if block about\nwildcard matching. Seems my brain is not adapted to pull this comment\nto the if block :-(\n\n[1] I could also use that when trying to implement\nreplicatesSingleProject (along the lines of\nI6b010807560f4b44e8aac6ccfb32b061ce366a66) to make ${name} optional in\nthe URLs",
+      "revId": "5a72dda9f16e63846971f85b79d2eb72f470ff72",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd1931c1_c61dc272",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-05-30T16:22:38Z",
+      "side": 1,
+      "message": "1st nit: Killed slash in Patch Set 10\n\n2nd nit: Done in Patch Set 10",
+      "parentUuid": "Tky8KaS8",
       "revId": "5a72dda9f16e63846971f85b79d2eb72f470ff72",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "9d162d8e_65420657",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-05-30T16:22:38Z",
+      "side": 1,
+      "message": "Done in Patch Set 10",
+      "parentUuid": "Tkw8HpSc",
+      "revId": "5a72dda9f16e63846971f85b79d2eb72f470ff72",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "Tk88ZnYY",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 8
@@ -88,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "bd1931c1_063d1acb",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-05-30T16:22:38Z",
+      "side": 1,
+      "message": "Done in Patch Set 10",
+      "parentUuid": "Tk88ZnYY",
+      "revId": "5a72dda9f16e63846971f85b79d2eb72f470ff72",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "TlgwHtyc",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 8
@@ -99,6 +171,24 @@
       "writtenOn": "2013-04-18T13:54:41Z",
       "side": 1,
       "message": "Nit: Should we add that the beginning \u0027^\u0027 is mandatory to treat the expression as regular expression?",
+      "revId": "5a72dda9f16e63846971f85b79d2eb72f470ff72",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9d162d8e_8528e285",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-05-30T16:22:38Z",
+      "side": 1,
+      "message": "Done in Patch Set 10",
+      "parentUuid": "TlgwHtyc",
       "revId": "5a72dda9f16e63846971f85b79d2eb72f470ff72",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
