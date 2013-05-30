@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd1931c1_a626c6c1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-05-30T16:25:10Z",
+      "side": 1,
+      "message": "We should also check for wouldPushProject here. Otherwise, we\u0027d try replicating projects also for remotes that would not want them.\n\nFixed in Patch Set 10.",
+      "revId": "7c4feef720ad25c7fb661936ee4f3f845ef572a6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd1f299f_680dc343",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-05-30T16:25:10Z",
+      "side": 1,
+      "message": "dk.brics.automaton.RegExp does not allow using ^ directly. So those examples do not work.\n\nIn Patch Set 10, we switched to using Java\u0027s regular expressions, which allows for simpler code and allows to use \"^\" directly.",
+      "revId": "7c4feef720ad25c7fb661936ee4f3f845ef572a6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
