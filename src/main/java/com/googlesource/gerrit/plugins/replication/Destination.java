@@ -367,6 +367,22 @@ class Destination {
     return false;
   }
 
+  boolean isSingleProjectMatch() {
+    boolean ret = (projects.length == 1);
+    if (ret) {
+      String projectMatch = projects[0];
+      if (isRE(projectMatch) || isWildcard(projectMatch)) {
+        // projectMatch is either regular expression, or wild-card.
+        //
+        // Even though they might refer to a single project now, they need not
+        // after new projects have been created. Hence, we do not treat them as
+        // matching a single project.
+        ret = false;
+      }
+    }
+    return ret;
+  }
+
   private static boolean isRE(String str) {
     return str.startsWith(AccessSection.REGEX_PREFIX);
   }
@@ -407,7 +423,8 @@ class Destination {
             ReplicationQueue.log.debug(String.format(
                 "Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle));
         }
-        String replacedPath = ReplicationQueue.replaceName(uri.getPath(), name);
+        String replacedPath = ReplicationQueue.replaceName(uri.getPath(), name,
+            isSingleProjectMatch());
         if (replacedPath != null) {
           uri = uri.setPath(replacedPath);
           r.add(uri);

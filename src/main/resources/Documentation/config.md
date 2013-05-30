@@ -96,11 +96,15 @@ remote.NAME.url
 	replaced with the Gerrit project name.  This is a Gerrit
 	specific extension to the otherwise standard Git URL syntax
 	and it must be included in each URL so that Gerrit can figure
-	out where each project needs to be replicated.
+	out where each project needs to be replicated. `${name}` may
+	only be omitted if the remote refers to a single repository
+	(i.e.: Exactly one [remote.NAME.projects][3] and that name's
+	value is a single project match.).
 
 	See [git push][1] for details on Git URL syntax.
 
 [1]: http://www.git-scm.com/docs/git-push#URLS
+[3]: #remote.NAME.projects
 
 remote.NAME.adminUrl
 :	Address of the alternative remote server only for repository
@@ -229,7 +233,7 @@ remote.NAME.remoteNameStyle
 	By default, "slash," remote name will contain slashes as they
 	do in Gerrit.
 
-remote.NAME.projects
+<a name="remote.NAME.projects">remote.NAME.projects</a>
 :	Specifies which repositories should be replicated to the
 	remote. It can be provided more than once, and supports three
 	formats: regular expressions, wildcard matching, and single
