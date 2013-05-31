@@ -98,6 +98,7 @@ class PushOne implements ProjectRunnable {
   private boolean pushAllRefs;
   private Repository git;
   private boolean retrying;
+  private int retryCount;
   private boolean canceled;
   private final Multimap<String,ReplicationState> stateMap =
       LinkedListMultimap.create();
@@ -142,7 +143,10 @@ class PushOne implements ProjectRunnable {
 
   @Override
   public String toString() {
-    return "push " + uri;
+    if (retryCount == 0) {
+      return "push " + uri;
+    }
+    return "(retry " + retryCount + ") " + "push " + uri;
   }
 
   boolean isRetrying() {
@@ -151,6 +155,7 @@ class PushOne implements ProjectRunnable {
 
   void setToRetry() {
     retrying = true;
+    retryCount++;
   }
 
   void cancel() {
