@@ -143,10 +143,11 @@ class PushOne implements ProjectRunnable {
 
   @Override
   public String toString() {
+    String str = "push " + uri + " " + getRefs().toString();
     if (retryCount == 0) {
-      return "push " + uri;
+      return str;
     }
-    return "(retry " + retryCount + ") " + "push " + uri;
+    return "(retry " + retryCount + ") " + str;
   }
 
   boolean isRetrying() {
