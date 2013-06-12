@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1db23d5c_91b37cf8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-06-12T20:58:42Z",
+      "side": 1,
+      "message": "We have actually been running this patch in production for a few days now, and I think that it is not fine grained enough.  If I understand, the URI does not contain the ref being pushed which means that this completely serializes all the pushes per project?\n\nSince we have several active projects that take a while to replicate ~20-30s, this can be problematic when there are several changes in one of those projects needing replication.   In effect, what was a decent replication time 30s, can now become several minutes instead.   I am not sure that serializing everything without regards to the refs is wise; there is no reason that multiple changes shouldn\u0027t be pushed in parallel, is there?",
+      "revId": "69d590eece16de24742e93c1c6fb5d80173a629b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
