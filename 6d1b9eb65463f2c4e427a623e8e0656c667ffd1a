@@ -34,6 +34,24 @@
       "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_22f8aefe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-06-13T06:22:13Z",
+      "side": 1,
+      "message": "In that case maybe the message is a bit misleading.",
+      "parentUuid": "4ae78994_62eeb642",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
