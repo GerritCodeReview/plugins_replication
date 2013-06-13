@@ -16,6 +16,24 @@
       "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_62eeb642",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-13T03:02:11Z",
+      "side": 1,
+      "message": "Even the project is up-to-date, we still have to schedule a push task for this project, before that, we don\u0027t know it is up-to-date. so this message is not for that case.\n\nthis only for some occasional situations, such as you give a url pattern in command line by using \"--url \u003cPATTERN\u003e\", but can\u0027t find any url to match, so don\u0027t need push task to be scheduled.",
+      "parentUuid": "3d7b8161_82d79a41",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
