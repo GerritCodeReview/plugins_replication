@@ -2,6 +2,363 @@
   "comments": [
     {
       "key": {
+        "uuid": "2aec1579_01a12ae3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/OnStartStop.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "ServerInformation.State uses STARTUP (no underscore) in line 47, while we use START_UP (with underscore) here. I do not have a preference either way, but I\u0027d prefer to stay consistent one way or the other.",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca23799b_f6fcc0f4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "We are showing basicall any problem to the user, except this error message and the one on line 273.\n\nSure, we are rescheduling this push operation, but is there a reason to hide this error from the user?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca23799b_36f35826",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "* In different places Push (addPushCount), PushTask (hasPushTask), Task (allTaskScheduled) is used to refer to the task of pushing a repo elsewhere. I have no real preference on the wording, but it would be nice to have a consistent naming.\n\n* Quite a lot of functions break the flow. I\u0027ve seen advices in gerrit to not do this. Given it\u0027s only a plugin I am not sure, if breaking the flow is permitted.",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_c238e2d6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "Although type is final, pushProcessing is not. Should we make that final as well?\n\nNot sure, but maybe taskLock, and allTaskFinished should be final as well, although they do not get initialized in the constructor?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_a235dedc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "“taskLock” is a misnomer for me. It\u0027s not a lock that is related to a task. It\u0027s a lock to assure that only one thread modifies the accounting fields.\n\nI\u0027d at least strip off the leading “task”. What about accountingLock, bookkeepingLock, lock, innerLock, ...?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2aec1579_c138e2d6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "s/Task/Tasks/",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_8262daea",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "Currying of the first parameter is at least unusual.\nIf there is no currying of the other parameters as well it typically hints at wrong parameter order in the other method.\n\nWould it make sense to reverse the order of the parameters of the constructor in line 43?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_823bfad6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "For a default PushProcessing, AutoStartProcessing comes with a bad name.\n\nIf it\u0027s meant as default, I\u0027d rename AutoStartProcessing to something more\nclosely resembling what it\u0027s doing. What about NoopProcessing, EmptyProcessing, ...\n\nIf it\u0027s meant as PushProcessing for Replicationtype.START_UP, I\u0027d harmonize naming between the enum and it\u0027s PushProcessor.\n\nIn the latter case, the plain \u0027else\u0027 is bound to bite us once other values are added to the enum. What about turning that if\u0027s into a switch with a sane\ndefault?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2aec1579_214aee6e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "I can only find a single use of addPushCount. There count is 1.\n\nWould it make sense to we simplify addPushCount to increasePushCount and\nget rid of the unnecessary parameter?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_224aee6e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "Nit: Identation",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2aec1579_e12be682",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "Since we\u0027re only reading a single field, do we need to lock?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_022fea92",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "Rephrasing those three lines to\n\n  return totalPushCount !\u003d 0;\n\nwould make it easier for me to understand what\u0027s going on.\nThen you can also omit the trailing \"return true;\"\n\nGiven the comment on line 64, could not we just turn that\nmethod into\n\n  public boolean hasPushTask() {\n    return totalPushCount !\u003d 0;\n  }\n\n? Additionally, that would not break the flow.",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_e22be682",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "If I somewhat understand the code correctly, that method is called after all tasks for this state have been successfully scheduled. So I\u0027d s/Task/Tasks/ .\n\nTo me, the method name is missing a verb as it\u0027s changing the internal representation of the object. What about setAllTasksScheduled, markAllTasksScheduled, or something the like?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_4245f25c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "Having this abstract class and it\u0027s three descendants within ReplicationState is ok, but since they\u0027re taking about half of the file\u0027s lines of code, ReplicationState gets crowded with code that\u0027s not it\u0027s primary concern. Would it make sense to split the off the PushProcessing classes into separate files?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_4297328d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "As “PushProcessing” does not process a push, but rather formats output\nI find the name misleading. What about for example “OutputFormatter”?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_2261cee4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "We do not need a real StartCommand, but only some object with writeStd{Out,Err}Sync. Adding and using an interface for that would make it easier to see that we abuse StartCommand to do just achieve that.",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_425cd230",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "All caps is making me feel like someone screams at me. (cf. RFC 1855)",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2aec1579_8162daea",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "As the only caller is not within a lock (line 77), this assignment does not seem to be protected by a lock.\n\nEither more than one threads can be in this part, then we should guard against it. Or only one thread can be, then we can throw out some locks.",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2aec1579_6167d6fc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "Since further values might be added to RefPushResult in the future, it would be better to add a separate case NOT_ATTEMPTED, and provide an error message for the default case.",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d9595bb_9b12ab68",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "Since GitUpdateProcessing and AutoStartProcessing are currently doing the same thing, could we join them for now? That would also allow to simplify the ReplicationState constructor.",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_c24fc272",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "To see that we cannot deadlock here is really tricky.\n\nTypically, it\u0027s the last completed replication that lowers the state\u0027s latch.\n\nHowever, if “all” is true, and all replications finished before PushAll can call allTaskScheduled, it\u0027s the extra condition in waitForReplication\u0027s locked statement that does the trick. The latch stays at 1 for this setting.\nThis is unnecessarily complicated.\nCannot we decrease the latch in both settings?\nThat would make waitForReplication much simpler.",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d7b8161_82d79a41",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
         "patchSetId": 5
@@ -49,6 +406,57 @@
       "side": 1,
       "message": "In that case maybe the message is a bit misleading.",
       "parentUuid": "4ae78994_62eeb642",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_0256ca0e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/WrappedLogger.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "This function is only called with a single state.\n\nShould we keep the ReplicationState... for consistency?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa200592_35f35026",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/WrappedLogger.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "Nit: Trailing blank line",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ae78994_e252c618",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/WrappedLogger.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-13T22:59:33Z",
+      "side": 1,
+      "message": "This function is unused.",
       "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
