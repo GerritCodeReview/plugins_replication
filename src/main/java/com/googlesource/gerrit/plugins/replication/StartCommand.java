@@ -14,7 +14,6 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.gerrit.common.data.GlobalCapability;
 import com.google.gerrit.extensions.annotations.RequiresCapability;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.project.ProjectCache;
@@ -33,7 +32,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-@RequiresCapability(GlobalCapability.START_REPLICATION)
+@RequiresCapability(StartReplicationCapability.START_REPLICATION)
 @CommandMetaData(name="start", descr="Start replication for specific project or all projects")
 final class StartCommand extends SshCommand {
   private static final Logger log = LoggerFactory.getLogger(StartCommand.class);

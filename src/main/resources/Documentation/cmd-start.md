@@ -63,9 +63,7 @@ has no read access for the replicated projects.
 ACCESS
 ------
 Caller must be a member of the privileged 'Administrators' group,
-or have been granted [the 'Start Replication' global capability][1].
-
-[1]: ../../../Documentation/access-control.html#capability_startReplication
+or have been granted the 'Start Replication' plugin-owned capability.
 
 SCRIPTING
 ---------
