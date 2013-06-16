@@ -57,9 +57,7 @@ other reasons why an administrator may wish to trigger replication:
 ACCESS
 ------
 Caller must be a member of the privileged 'Administrators' group,
-or have been granted [the 'Start Replication' global capability][1].
-
-[1]: ../../../Documentation/access-control.html#capability_startReplication
+or have been granted the 'Start Replication' global capability.
 
 SCRIPTING
 ---------

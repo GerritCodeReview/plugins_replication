@@ -19,6 +19,11 @@ configuration is not recommended.  It is also possible to specify a
 local path as replication target. This makes e.g. sense if a network
 share is mounted to which the repositories should be replicated.
 
+Start Replication
+~~~~~~~~~~~~~~~~~
+
+Allow access to execute `replication start` command.
+
 Enabling Replication
 --------------------
 
