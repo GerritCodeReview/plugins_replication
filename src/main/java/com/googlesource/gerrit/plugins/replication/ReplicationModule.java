@@ -14,6 +14,10 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.googlesource.gerrit.plugins.replication.StartReplicationCapability.START_REPLICATION;
+
+import com.google.gerrit.extensions.annotations.Exports;
+import com.google.gerrit.extensions.config.CapabilityDefinition;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.NewProjectCreatedListener;
@@ -38,8 +42,10 @@ class ReplicationModule extends AbstractModule {
     bind(LifecycleListener.class)
       .annotatedWith(UniqueAnnotations.create())
       .to(OnStartStop.class);
-
     bind(SecureCredentialsFactory.class).in(Scopes.SINGLETON);
+    bind(CapabilityDefinition.class).annotatedWith(
+        Exports.named(START_REPLICATION)).to(StartReplicationCapability.class);
+
     install(new FactoryModuleBuilder().build(PushAll.Factory.class));
     install(new FactoryModuleBuilder().build(RemoteSiteUser.Factory.class));
   }
