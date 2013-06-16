@@ -19,6 +19,12 @@ configuration is not recommended.  It is also possible to specify a
 local path as replication target. This makes e.g. sense if a network
 share is mounted to which the repositories should be replicated.
 
+Start Replication
+~~~~~~~~~~~~~~~~~
+
+This is a global capability, provided by this plugin.
+Allow access to execute the `replication start` command.
+
 Enabling Replication
 --------------------
 
