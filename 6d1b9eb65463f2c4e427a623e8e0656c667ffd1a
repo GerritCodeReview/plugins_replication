@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2a8895e1_61e9f637",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/OnStartStop.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Here we also use STARTUP.",
+      "parentUuid": "2aec1579_01a12ae3",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca23799b_f6fcc0f4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-13T22:59:33Z",
       "side": 1,
       "message": "We are showing basicall any problem to the user, except this error message and the one on line 273.\n\nSure, we are rescheduling this push operation, but is there a reason to hide this error from the user?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a8309c5_22f3ee25",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Because this message can mislead the user, the user may think it\u0027s the last result of replication, so we hide it.",
+      "parentUuid": "ca23799b_f6fcc0f4",
       "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2a8895e1_410f123f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "1)Make them consistent,  s/addPushCount/addPushTaskCount; s/allTaskScheduled/AllPushTasksScheduled;",
+      "parentUuid": "ca23799b_36f35826",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ae78994_c238e2d6",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2013-06-13T22:59:33Z",
       "side": 1,
       "message": "Although type is final, pushProcessing is not. Should we make that final as well?\n\nNot sure, but maybe taskLock, and allTaskFinished should be final as well, although they do not get initialized in the constructor?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a8309c5_c203221c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ae78994_c238e2d6",
       "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "4a8309c5_6210165e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Agree, how about \"countingLock\"?",
+      "parentUuid": "4ae78994_a235dedc",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2aec1579_c138e2d6",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 5
@@ -98,6 +188,24 @@
       "writtenOn": "2013-06-13T22:59:33Z",
       "side": 1,
       "message": "s/Task/Tasks/",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca961906_5ee93537",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aec1579_c138e2d6",
       "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "4a8309c5_82151a4f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ae78994_8262daea",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ae78994_823bfad6",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 5
@@ -132,6 +258,24 @@
       "writtenOn": "2013-06-13T22:59:33Z",
       "side": 1,
       "message": "For a default PushProcessing, AutoStartProcessing comes with a bad name.\n\nIf it\u0027s meant as default, I\u0027d rename AutoStartProcessing to something more\nclosely resembling what it\u0027s doing. What about NoopProcessing, EmptyProcessing, ...\n\nIf it\u0027s meant as PushProcessing for Replicationtype.START_UP, I\u0027d harmonize naming between the enum and it\u0027s PushProcessor.\n\nIn the latter case, the plain \u0027else\u0027 is bound to bite us once other values are added to the enum. What about turning that if\u0027s into a switch with a sane\ndefault?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a8895e1_81ee7a3f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ae78994_823bfad6",
       "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "4a8309c5_220a0e30",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aec1579_214aee6e",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ae78994_224aee6e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 5
@@ -166,6 +328,24 @@
       "writtenOn": "2013-06-13T22:59:33Z",
       "side": 1,
       "message": "Nit: Identation",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a8309c5_420f123f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ae78994_224aee6e",
       "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "4a8309c5_e223c6b2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aec1579_e12be682",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ae78994_022fea92",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 5
@@ -200,6 +398,24 @@
       "writtenOn": "2013-06-13T22:59:33Z",
       "side": 1,
       "message": "Rephrasing those three lines to\n\n  return totalPushCount !\u003d 0;\n\nwould make it easier for me to understand what\u0027s going on.\nThen you can also omit the trailing \"return true;\"\n\nGiven the comment on line 64, could not we just turn that\nmethod into\n\n  public boolean hasPushTask() {\n    return totalPushCount !\u003d 0;\n  }\n\n? Additionally, that would not break the flow.",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a8309c5_02210aaa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ae78994_022fea92",
       "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "2a8895e1_21f3ee25",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ae78994_e22be682",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ae78994_4245f25c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 5
@@ -234,6 +468,24 @@
       "writtenOn": "2013-06-13T22:59:33Z",
       "side": 1,
       "message": "Having this abstract class and it\u0027s three descendants within ReplicationState is ok, but since they\u0027re taking about half of the file\u0027s lines of code, ReplicationState gets crowded with code that\u0027s not it\u0027s primary concern. Would it make sense to split the off the PushProcessing classes into separate files?",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a8309c5_a21dbe72",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ae78994_4245f25c",
       "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "2a8895e1_41f872ff",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "If type \u003d COMMAND, it mainly output something, but if type \u003d GIT_UPDATED, it may do something else, such as send stream events, I think using \"PushResultProcessing\" is also an option.",
+      "parentUuid": "4ae78994_4297328d",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ae78994_2261cee4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 5
@@ -268,6 +538,24 @@
       "writtenOn": "2013-06-13T22:59:33Z",
       "side": 1,
       "message": "We do not need a real StartCommand, but only some object with writeStd{Out,Err}Sync. Adding and using an interface for that would make it easier to see that we abuse StartCommand to do just achieve that.",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a8309c5_c21a4278",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "writeStd{Out,Err}Sync is defined in StartCommand, if we use interface, we need to create an interface, this interface is only used here, I think it is an overkill.",
+      "parentUuid": "4ae78994_2261cee4",
       "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -291,6 +579,24 @@
     },
     {
       "key": {
+        "uuid": "2a8895e1_e1fc26f5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Change to Succeeded!",
+      "parentUuid": "4ae78994_425cd230",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2aec1579_8162daea",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 5
@@ -302,6 +608,24 @@
       "writtenOn": "2013-06-13T22:59:33Z",
       "side": 1,
       "message": "As the only caller is not within a lock (line 77), this assignment does not seem to be protected by a lock.\n\nEither more than one threads can be in this part, then we should guard against it. Or only one thread can be, then we can throw out some locks.",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a8895e1_01fa6af6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "we use AtomicBoolean",
+      "parentUuid": "2aec1579_8162daea",
       "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -325,6 +649,24 @@
     },
     {
       "key": {
+        "uuid": "2a8895e1_c103221c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aec1579_6167d6fc",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d9595bb_9b12ab68",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 5
@@ -342,6 +684,24 @@
     },
     {
       "key": {
+        "uuid": "2a8895e1_6110165e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Change AutoStartProcessing to NoopPRocessing, keep GitUpdateProcessing, we want to do something in GitUpdateProcessing.",
+      "parentUuid": "5d9595bb_9b12ab68",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ae78994_c24fc272",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
         "patchSetId": 5
@@ -353,6 +713,24 @@
       "writtenOn": "2013-06-13T22:59:33Z",
       "side": 1,
       "message": "To see that we cannot deadlock here is really tricky.\n\nTypically, it\u0027s the last completed replication that lowers the state\u0027s latch.\n\nHowever, if “all” is true, and all replications finished before PushAll can call allTaskScheduled, it\u0027s the extra condition in waitForReplication\u0027s locked statement that does the trick. The latch stays at 1 for this setting.\nThis is unnecessarily complicated.\nCannot we decrease the latch in both settings?\nThat would make waitForReplication much simpler.",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a8309c5_a2061e2d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Agree, we also decrease the latch in \"allTaskScheduled()\", then \" waitForReplication()\" will be much simpler.",
+      "parentUuid": "4ae78994_c24fc272",
       "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -429,6 +807,24 @@
     },
     {
       "key": {
+        "uuid": "4a8309c5_42f872ff",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/WrappedLogger.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "I think keeping consistency is easy for use.",
+      "parentUuid": "4ae78994_0256ca0e",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa200592_35f35026",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/WrappedLogger.java",
         "patchSetId": 5
@@ -446,6 +842,24 @@
     },
     {
       "key": {
+        "uuid": "4a8309c5_e2fc26f5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/WrappedLogger.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa200592_35f35026",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ae78994_e252c618",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/WrappedLogger.java",
         "patchSetId": 5
@@ -457,6 +871,24 @@
       "writtenOn": "2013-06-13T22:59:33Z",
       "side": 1,
       "message": "This function is unused.",
+      "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a8309c5_02fa6af6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/WrappedLogger.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-17T07:21:28Z",
+      "side": 1,
+      "message": "It\u0027s a common function, it is more likely to be used in the future.",
+      "parentUuid": "4ae78994_e252c618",
       "revId": "6d1b9eb65463f2c4e427a623e8e0656c667ffd1a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
