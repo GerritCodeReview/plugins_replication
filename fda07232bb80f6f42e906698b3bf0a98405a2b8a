@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a9d2d25_fbf92f02",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-06-17T02:23:07Z",
+      "side": 1,
+      "message": "Please wrap this in the same way as the other lines.\n\n bind(CapabilityDefinition.class)\n   .annotatedWith(Exports.named(START_REPLICATION))\n   .to(StartReplicationCapability.class);",
+      "revId": "fda07232bb80f6f42e906698b3bf0a98405a2b8a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a9d2d25_bb03a71c",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-06-17T02:23:07Z",
+      "side": 1,
+      "message": "It should be mentioned somewhere that this is a global capability provided by the plugin.",
+      "revId": "fda07232bb80f6f42e906698b3bf0a98405a2b8a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a6ce9f0_7a33d915",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-06-17T02:23:07Z",
+      "side": 1,
+      "message": "\"to execute the\"",
+      "revId": "fda07232bb80f6f42e906698b3bf0a98405a2b8a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
