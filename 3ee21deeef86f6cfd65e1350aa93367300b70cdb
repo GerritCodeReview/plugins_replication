@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aadba537_1d3b73d8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-19T08:54:06Z",
+      "side": 1,
+      "message": "Yes, we should avoid these two cases, now we exit earlier by a \"return\" statement in these two exceptions.",
+      "parentUuid": "aadba537_dd1d8b72",
+      "revId": "3ee21deeef86f6cfd65e1350aa93367300b70cdb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aadba537_fd1a4777",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-19T08:12:50Z",
       "side": 1,
       "message": "I agree that this message is relevant to the user.\nBut would the site-admin be interested in it?\n\nTo me, a writeStdErrSync would be more appropriate here, but I am fine with keeping it as it is now.",
+      "revId": "3ee21deeef86f6cfd65e1350aa93367300b70cdb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cade1927_fe35e1db",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-19T08:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aadba537_fd1a4777",
       "revId": "3ee21deeef86f6cfd65e1350aa93367300b70cdb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
