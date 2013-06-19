@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aadba537_dd1d8b72",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-19T08:12:50Z",
+      "side": 1,
+      "message": "While you addressed the first paragraph of this line\u0027s comment on patch set 6,\nbut the other two have not been addressed:\n\n\u003e If the exception occurs before the any push task has been scheduled, the user sees \"Nothing to replicate\" and the command exits with status 0.\n\n\u003e If the exception occurs after at least one task has been pushed, possible outcomes varies a bit but can for example cause the thread to hang.\n\nWe could for example set a flag in the two catch blocks to remember\nthat an error occurred. Then we could wrap the if/else part of lines\n97–105 by a check that no error occurred.\n\nThereby we\u0027d avoid the \"Nothing to replicate\" message if an error\noccurred. And, we\u0027d avoid deadlocks.",
+      "revId": "3ee21deeef86f6cfd65e1350aa93367300b70cdb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aadba537_fd1a4777",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2013-06-19T08:12:50Z",
+      "side": 1,
+      "message": "I agree that this message is relevant to the user.\nBut would the site-admin be interested in it?\n\nTo me, a writeStdErrSync would be more appropriate here, but I am fine with keeping it as it is now.",
+      "revId": "3ee21deeef86f6cfd65e1350aa93367300b70cdb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
