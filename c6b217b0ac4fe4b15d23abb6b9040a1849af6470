@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cade1927_3e15894d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-19T06:06:49Z",
+      "side": 1,
+      "message": "Change to \"pushResultProcessing\"",
+      "parentUuid": "caf0d9a0_2e10e75c",
+      "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "caf0d9a0_ce03231c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2013-06-18T20:37:13Z",
       "side": 1,
       "message": "Should the “Push” in totalPushCount, and finishedPushCount also be harmonized to “PushTask(s)”?",
+      "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aadba537_9dfce3f4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-19T06:06:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caf0d9a0_ce03231c",
       "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "aadba537_bdf99f03",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-19T06:06:49Z",
+      "side": 1,
+      "message": "Agreed, Done",
+      "parentUuid": "cade1927_1ee9ad38",
+      "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cade1927_9efcddf4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2013-06-18T20:37:13Z",
       "side": 1,
       "message": "Is there a reason, the patch set 5\u0027s \u0027\u003c\u0027 got replaced by a \u0027!\u003d\u0027?\n\nI liked the \u0027\u003c\u0027 better, as it exposed the correspondence to the condition on line 84.\n\nWell ... although \u0027\u003c\u0027 is more robust, I actually do not care whether it\u0027s \u0027\u003c\u0027, or \u0027!\u003d\u0027. But I\u0027d prefer to either use \u0027\u003c\u0027 in both cases or \u0027!\u003d\u0027 in both cases.",
+      "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aadba537_dd066b2e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-19T06:06:49Z",
+      "side": 1,
+      "message": "Yes, \u0027\u003c\u0027 is more robust, Done.",
+      "parentUuid": "cade1927_9efcddf4",
       "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "cade1927_7e0f113f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-19T06:06:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cade1927_3eee6941",
+      "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aadba537_1de9b338",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 6
@@ -98,6 +188,24 @@
       "writtenOn": "2013-06-18T20:37:13Z",
       "side": 1,
       "message": "See comment for line 93.",
+      "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cade1927_5e0a5530",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-19T06:06:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aadba537_1de9b338",
       "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "cade1927_9e23fdb3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-19T06:06:49Z",
+      "side": 1,
+      "message": "Agreed, Done",
+      "parentUuid": "cade1927_5ef33524",
+      "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cade1927_7ef8f1ff",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 6
@@ -132,6 +258,24 @@
       "writtenOn": "2013-06-18T20:37:13Z",
       "side": 1,
       "message": "It\u0027s already better visible than in the last patch set, but with the\nabove comments in lines 75–109, it becomes even more apparent that for\nboth notifyRefReplicated, and markAllPushTasksScheduled, we\nessentially do the same thing at the end of the methods.\n\nBoth methods at the end essentially finalize the state after all\nPushTasks have been completed. What about putting that into something\nlike:\n\n  private void allPushTasksDidComplete() {\n    pushProcessing.onAllNodesReplicated();\n    allPushTasksFinished.countDown();\n  }\n\nThen we\u0027d have a single method were all different code paths of\nreplication finally come together. That would benefit both\nreadability, and extendability.\n\nWell ... maybe that\u0027s overengineered ... but I too often get\nmulti-threaded stuff wrong, so it would help me see the structure of\nthe code.",
+      "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca8c594b_0ee98b38",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-19T06:06:49Z",
+      "side": 1,
+      "message": "Yes, that\u0027s better, done.",
+      "parentUuid": "cade1927_7ef8f1ff",
       "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "cade1927_be20b9a7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-19T06:06:49Z",
+      "side": 1,
+      "message": "Yes, it\u0027s better to let calling code to process this exception, done.",
+      "parentUuid": "ea24bdf4_e706022e",
+      "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea24bdf4_a7fc0af4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
         "patchSetId": 6
@@ -166,6 +328,24 @@
       "writtenOn": "2013-06-18T20:37:13Z",
       "side": 1,
       "message": "If we reach this code path, the exception is written to the\nlog. That\u0027s fine.\nBut it\u0027s not visible to the user [1].\n\nIf the exception occurs before the any push task has been scheduled,\nthe user sees \"Nothing to replicate\" and the command exits with status\n0.\n\nIf the exception occurs after at least one task has been pushed,\npossible outcomes varies a bit but can for example cause the thread to\nhang.\n\n[1] Note that since PushAll.run does not rethrow, the\nInterruptedException, ... did not go through PushAll.run\u0027s try/catch\nblock.",
+      "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cade1927_fe1a4177",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-19T06:06:49Z",
+      "side": 1,
+      "message": "Make the log visible to user, done.",
+      "parentUuid": "ea24bdf4_a7fc0af4",
       "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "4ab4e9dd_da4f4572",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-19T06:06:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea24bdf4_87f90604",
+      "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aadba537_3dee6f41",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
         "patchSetId": 6
@@ -200,6 +398,24 @@
       "writtenOn": "2013-06-18T20:37:13Z",
       "side": 1,
       "message": "That certainly gets the job done.\n\nHowever, it considerably adds complexity as it tightens the coupling\nbetween OnStartStop, and CommandProcessing.\n\nWouldn\u0027t it also work if we put the check for wait mode directly in\nStartCommand.writeStdOutSync, and StartCommand.writeStdErrSync?\n\nThen we would avoid enlarging the surface of StartCommand while\ngetting the same functionality. And CommandProcessing could avoid\ngetting dependent on the state and semantics of StartCommand.\nThat would also keep CommandProcessing simpler.",
+      "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cade1927_de1d8572",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-06-19T06:06:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aadba537_3dee6f41",
       "revId": "c6b217b0ac4fe4b15d23abb6b9040a1849af6470",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
