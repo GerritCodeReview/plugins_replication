@@ -69,6 +69,24 @@
       "revId": "69d590eece16de24742e93c1c6fb5d80173a629b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a98a1f6_9c7385ae",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1012098
+      },
+      "writtenOn": "2013-06-27T07:16:58Z",
+      "side": 1,
+      "message": "Any update?\n\nThis patch has greatly improved the reliability of replication on our gerrit server, and I would like to see it merged, but my attention span is waning.",
+      "parentUuid": "1db23d5c_d1ad0490",
+      "revId": "69d590eece16de24742e93c1c6fb5d80173a629b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
