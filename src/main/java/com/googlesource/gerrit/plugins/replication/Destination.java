@@ -18,6 +18,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+import com.google.gerrit.common.data.AccessSection;
 import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
@@ -66,6 +67,7 @@ class Destination {
 
   private final RemoteConfig remote;
   private final String[] adminUrls;
+  private final String[] projects;
   private final int delay;
   private final int retryDelay;
   private final Map<URIish, PushOne> pending = new HashMap<URIish, PushOne>();
@@ -97,6 +99,7 @@ class Destination {
         cfg.getBoolean("remote", rc.getName(), "replicatePermissions", true);
     remoteNameStyle = Objects.firstNonNull(
         cfg.getString("remote", rc.getName(), "remoteNameStyle"), "slash");
+    projects = cfg.getStringList("remote", rc.getName(), "projects");
 
     final CurrentUser remoteUser;
     String[] authGroupNames = cfg.getStringList("remote", rc.getName(), "authGroup");
@@ -331,6 +334,45 @@ class Destination {
         pending.remove(op.getURI());
       }
     }
+  }
+
+  boolean wouldPushProject(Project.NameKey project) {
+    // by default push all projects
+    if (projects.length < 1) {
+      return true;
+    }
+
+    String projectName = project.get();
+    for (final String projectMatch : projects) {
+      if (isRE(projectMatch)) {
+        // projectMatch is a regular expression
+        if (projectName.matches(projectMatch)) {
+          return true;
+        }
+      } else if (isWildcard(projectMatch)) {
+        // projectMatch is a wildcard
+        if (projectName.startsWith(
+            projectMatch.substring(0, projectMatch.length() - 1))) {
+          return true;
+        }
+      } else {
+        // No special case, so we try to match directly
+        if (projectName.equals(projectMatch)) {
+          return true;
+        }
+      }
+    }
+
+    // Nothing matched, so don't push the project
+    return false;
+  }
+
+  private static boolean isRE(String str) {
+    return str.startsWith(AccessSection.REGEX_PREFIX);
+  }
+
+  private static boolean isWildcard(String str) {
+    return str.endsWith("*");
   }
 
   boolean wouldPushRef(String ref) {
