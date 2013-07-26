@@ -9,6 +9,7 @@ SYNOPSIS
 --------
 ```
 ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start
+  [--wait]
   [--url <PATTERN>]
   {--all | <PROJECT> ...}
 ```
@@ -54,6 +55,11 @@ other reasons why an administrator may wish to trigger replication:
 	replication on just the affected project can update the
 	mirrors.
 
+If you get message "Nothing to replicate" while running this command,
+it may be caused by several reasons, such as you give a wrong url
+pattern in command options, or the authGroup in the replication.config
+has no read access for the replicated projects.
+
 ACCESS
 ------
 Caller must be a member of the privileged 'Administrators' group,
@@ -68,8 +74,11 @@ This command is intended to be used in scripts.
 OPTIONS
 -------
 
+`--wait`
+:	Wait for replication to finish before exiting.
+
 `--all`
-:	Schedule replicating for all projects.
+:	Schedule replication for all projects.
 
 `--url <PATTERN>`
 :	Replicate only to replication destinations whose URL contains
