@@ -5,7 +5,10 @@ gerrit_plugin(
   manifest_entries = [
     'Gerrit-Module: com.googlesource.gerrit.plugins.replication.ReplicationModule',
     'Gerrit-SshModule: com.googlesource.gerrit.plugins.replication.SshModule'
-  ]
+  ],
+  deps = [
+    '//lib/commons:io',
+  ],
 )
 
 java_test(
