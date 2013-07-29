@@ -44,6 +44,7 @@ import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
 
+import org.apache.commons.io.FilenameUtils;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
@@ -429,6 +430,8 @@ class Destination {
           name = name.replace("/", "-");
         } else if(remoteNameStyle.equals("underscore")) {
           name = name.replace("/", "_");
+        } else if (remoteNameStyle.equals("basenameOnly")) {
+          name = FilenameUtils.getBaseName(name);
         } else if (!remoteNameStyle.equals("slash")) {
             ReplicationQueue.log.debug(String.format(
                 "Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle));
