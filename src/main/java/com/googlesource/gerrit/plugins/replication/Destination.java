@@ -429,6 +429,11 @@ class Destination {
           name = name.replace("/", "-");
         } else if(remoteNameStyle.equals("underscore")) {
           name = name.replace("/", "_");
+        } else if (remoteNameStyle.equals("basenameOnly")) {
+          int basenameStart = name.lastIndexOf("/") + 1;
+          if (name.length() > basenameStart) {
+            name = name.substring(basenameStart);
+          }
         } else if (!remoteNameStyle.equals("slash")) {
             ReplicationQueue.log.debug(String.format(
                 "Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle));
