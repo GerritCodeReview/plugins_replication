@@ -14,6 +14,8 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.inject.Injector;
+
 import org.eclipse.jgit.transport.URIish;
 
 import java.util.concurrent.CountDownLatch;
@@ -35,16 +37,25 @@ public class ReplicationState {
   private int finishedPushTasksCount;
 
   public ReplicationState(ReplicationType type) {
-    this(type, null);
+    this(type, null, null);
   }
 
   public ReplicationState(ReplicationType type, StartCommand sshCommand) {
+    this(type, sshCommand, null);
+  }
+
+  public ReplicationState(ReplicationType type, Injector injector) {
+    this(type, null, injector);
+  }
+
+  public ReplicationState(ReplicationType type, StartCommand sshCommand,
+      Injector injector) {
     switch(type) {
       case COMMAND:
         pushResultProcessing = new CommandProcessing(sshCommand);
         break;
       case GIT_UPDATED:
-        pushResultProcessing = new GitUpdateProcessing();
+        pushResultProcessing = injector.getInstance(GitUpdateProcessing.class);
         break;
       case STARTUP:
       default:
