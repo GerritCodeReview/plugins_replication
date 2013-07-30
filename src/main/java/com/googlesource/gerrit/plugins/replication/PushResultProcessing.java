@@ -14,11 +14,24 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.gerrit.common.ChangeHooks;
+import com.google.gerrit.reviewdb.client.Change;
+import com.google.gerrit.reviewdb.client.PatchSet;
+import com.google.gerrit.reviewdb.server.ReviewDb;
+import com.google.gerrit.server.events.ChangeEvent;
+import com.google.gwtorm.server.OrmException;
+import com.google.gwtorm.server.SchemaFactory;
+import com.google.inject.Inject;
+
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
 import org.eclipse.jgit.transport.URIish;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class PushResultProcessing {
@@ -104,15 +117,110 @@ public abstract class PushResultProcessing {
   }
 
   public static class GitUpdateProcessing extends PushResultProcessing {
+    static final Logger log = LoggerFactory.getLogger(GitUpdateProcessing.class);
+
+    private final ChangeHooks hooks;
+    private final SchemaFactory<ReviewDb> schema;
+    private final Map<String, ReplicationData> replications =
+        new HashMap<String, ReplicationData>();
+    private String replicatedProject;
+
+    @Inject
+    public GitUpdateProcessing(ChangeHooks hooks, SchemaFactory<ReviewDb> schema) {
+      this.hooks = hooks;
+      this.schema = schema;
+    }
+
     @Override
     void onOneNodeReplicated(String project, String ref, URIish uri,
         RefPushResult status) {
-      //TODO: send stream events
+      updateReplicationInfo(project, ref);
+      if (ref.startsWith("refs/changes/")) {
+        ReplicationData rd = setChangeInfo(ref);
+        if (rd.change != null) {
+          PatchSetReplicatedEvent event =
+              new PatchSetReplicatedEvent(replicatedProject, ref, uri, status);
+          postEvent(rd.change, event);
+        }
+      }
     }
 
     @Override
     void onAllNodesReplicated(int totalPushTasksCount) {
-      //TODO: send stream events
+      if (totalPushTasksCount == 0) {
+        return;
+      }
+      for (Map.Entry<String, ReplicationData> e : replications.entrySet()) {
+        ReplicationData rd = e.getValue();
+        if (rd.change != null) {
+          PatchSetReplicationDoneEvent event =
+              new PatchSetReplicationDoneEvent(replicatedProject, e.getKey(),
+              rd.count);
+          postEvent(rd.change, event);
+        }
+      }
+    }
+
+    private synchronized void updateReplicationInfo(String project, String ref) {
+      if (replicatedProject == null) {
+        replicatedProject = project;
+      }
+
+      ReplicationData rd = replications.get(ref);
+      if (rd == null) {
+        rd = new ReplicationData();
+        replications.put(ref, rd);
+      }
+      rd.count++;
+
+    }
+
+    private synchronized ReplicationData setChangeInfo(String ref) {
+      ReplicationData rd = replications.get(ref);
+      if (rd.change != null) {
+        return rd;
+      }
+
+      PatchSet.Id id = PatchSet.Id.fromRef(ref);
+
+      ReviewDb db;
+      try {
+        db = schema.open();
+      } catch (OrmException e) {
+        log.error("Cannot open database", e);
+        return rd;
+      }
+      try {
+        Change c = db.changes().get(id.getParentKey());
+        rd.change = c;
+      } catch (OrmException e) {
+        log.error("Cannot get change from database", e);
+      } finally {
+        db.close();
+      }
+      return rd;
+    }
+
+    private void postEvent(Change c, ChangeEvent event) {
+      ReviewDb db;
+      try {
+        db = schema.open();
+      } catch (OrmException e) {
+        log.error("Cannot open database for post event", e);
+        return;
+      }
+      try {
+        hooks.postEvent(c, event, db);
+      } catch (OrmException e) {
+        log.error("Cannot send event for a database error", e);
+      } finally {
+        db.close();
+      }
+    }
+
+    private static class ReplicationData {
+      int count;
+      Change change;
     }
   }
 
