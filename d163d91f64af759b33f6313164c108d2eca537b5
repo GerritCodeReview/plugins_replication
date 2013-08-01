@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b371678e_74196889",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-08-01T07:02:16Z",
+      "side": 1,
+      "message": "It might be better to name this `basenameOnly`.",
+      "revId": "d163d91f64af759b33f6313164c108d2eca537b5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b371678e_541c6c7a",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-08-01T07:02:16Z",
+      "side": 1,
+      "message": "s/slahes/slashes",
+      "revId": "d163d91f64af759b33f6313164c108d2eca537b5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b371678e_341ff071",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-08-01T07:02:16Z",
+      "side": 1,
+      "message": "Move the comma after the closing quote, rather than removing it completely.",
+      "revId": "d163d91f64af759b33f6313164c108d2eca537b5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9312a30c_b3233872",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-08-01T07:02:16Z",
+      "side": 1,
+      "message": "s/myrepo/my-repo",
+      "revId": "d163d91f64af759b33f6313164c108d2eca537b5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
