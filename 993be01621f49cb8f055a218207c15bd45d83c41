@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8749c43_cee50358",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2013-08-10T00:45:59Z",
+      "side": 1,
+      "message": "This may be an information leak. Task toString output is filtered for users based on being able to see the project named by getProjectNameKey(), and administrators can see all tasks.\n\nWith the addition of reference information a user may be able to see a project and one reference (e.g. \"master\") but learn of another by seeing its replication ask working on a hidden name (e.g. \"sekret\"). This might be bad.\n\nThere is no easy way to find out if the caller is an Administrator and should be allowed to see anything, or a normal user that might need to have the references filtered from them.\n\nOne alternative is to add a new SSH command in this plugin that is restricted to an administrator using @RequiresCapability(\"administrateServer\") and shows the contents of the replication queue in a more detailed formatting.",
+      "revId": "993be01621f49cb8f055a218207c15bd45d83c41",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
