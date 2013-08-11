@@ -16,6 +16,24 @@
       "revId": "993be01621f49cb8f055a218207c15bd45d83c41",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8fce4ed_9cea8524",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2013-08-11T16:47:55Z",
+      "side": 1,
+      "message": "Once plugin-owned capabilities change landed, it would be:\n\n @RequiresCapability(value\u003d\"administrateServer\", scope\u003dCapabilityScope.CORE)",
+      "parentUuid": "f8749c43_cee50358",
+      "revId": "993be01621f49cb8f055a218207c15bd45d83c41",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
