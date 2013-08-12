@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3802b4bb_01f0d015",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationCapability.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2013-08-12T19:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "586f6876_a9b75d1d",
+      "revId": "32787d16a03e16669a67b31f57a88f2997576f90",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "786a6c67_aa42ef46",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationCapability.java",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "b8fce4ed_9c38c5e8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationCapability.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2013-08-12T19:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "786a6c67_aa42ef46",
+      "revId": "32787d16a03e16669a67b31f57a88f2997576f90",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "586f6876_89b2992e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationCapability.java",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2013-08-12T19:13:37Z",
       "side": 1,
       "message": "nit: blank line between field and method",
+      "revId": "32787d16a03e16669a67b31f57a88f2997576f90",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8fce4ed_fc3d89d6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationCapability.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2013-08-12T19:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "586f6876_89b2992e",
       "revId": "32787d16a03e16669a67b31f57a88f2997576f90",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
