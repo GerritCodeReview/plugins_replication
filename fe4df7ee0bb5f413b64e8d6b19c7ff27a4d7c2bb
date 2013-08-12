@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "786a6c67_0a321b04",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationCapability.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2013-08-12T19:38:49Z",
+      "side": 1,
+      "message": "nit: blank line after a field",
+      "revId": "fe4df7ee0bb5f413b64e8d6b19c7ff27a4d7c2bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
