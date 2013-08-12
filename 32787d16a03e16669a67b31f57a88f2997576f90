@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "586f6876_a9b75d1d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationCapability.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2013-08-12T19:13:37Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be public, package visible is sufficient.",
+      "revId": "32787d16a03e16669a67b31f57a88f2997576f90",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "786a6c67_aa42ef46",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationCapability.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2013-08-12T19:13:37Z",
+      "side": 1,
+      "message": "nit: no blank line before first static field.",
+      "revId": "32787d16a03e16669a67b31f57a88f2997576f90",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "586f6876_89b2992e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationCapability.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2013-08-12T19:13:37Z",
+      "side": 1,
+      "message": "nit: blank line between field and method",
+      "revId": "32787d16a03e16669a67b31f57a88f2997576f90",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
