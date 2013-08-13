@@ -16,6 +16,24 @@
       "revId": "7ec017fbac3f34fffc7af175d0dec181d18c33f2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "586f6876_897a992d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2013-08-13T05:43:38Z",
+      "side": 1,
+      "message": "It can be, but the Eclipse formatter doesn\u0027t usually line wrap these. In the core server none of the @CommandMetaData annotations are line wrapped because of the way Eclipse handles it by default.",
+      "parentUuid": "f85d7cd3_a6dea653",
+      "revId": "7ec017fbac3f34fffc7af175d0dec181d18c33f2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
