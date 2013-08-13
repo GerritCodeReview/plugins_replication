@@ -33,7 +33,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 @RequiresCapability(StartReplicationCapability.START_REPLICATION)
-@CommandMetaData(name="start", descr="Start replication for specific project or all projects")
+@CommandMetaData(name = "start", description = "Start replication for specific project or all projects")
 final class StartCommand extends SshCommand {
   private static final Logger log = LoggerFactory.getLogger(StartCommand.class);
   private static final WrappedLogger wrappedLog = new WrappedLogger(log);
