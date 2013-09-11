@@ -16,6 +16,24 @@
       "revId": "f46fd60135c3f798cc24aab073ded368bd426d8e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7195dc0_c6a142e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1010813
+      },
+      "writtenOn": "2013-09-11T15:35:48Z",
+      "side": 1,
+      "message": "Absolutely. For example you won\u0027t be able to do this when replicating to github.",
+      "parentUuid": "27db7507_50312cfe",
+      "revId": "f46fd60135c3f798cc24aab073ded368bd426d8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
