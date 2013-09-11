@@ -21,6 +21,7 @@ import com.google.gerrit.extensions.config.CapabilityDefinition;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.NewProjectCreatedListener;
+import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
@@ -36,6 +37,9 @@ class ReplicationModule extends AbstractModule {
         .to(ReplicationQueue.class);
 
     DynamicSet.bind(binder(), NewProjectCreatedListener.class)
+        .to(ReplicationQueue.class);
+
+    DynamicSet.bind(binder(), ProjectDeletedListener.class)
         .to(ReplicationQueue.class);
 
     bind(OnStartStop.class).in(Scopes.SINGLETON);
