@@ -34,6 +34,24 @@
       "revId": "f46fd60135c3f798cc24aab073ded368bd426d8e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07e031ae_ef7641d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2013-09-11T15:38:35Z",
+      "side": 1,
+      "message": "That was exactly my point: OpenStack guys ...",
+      "parentUuid": "e7195dc0_c6a142e8",
+      "revId": "f46fd60135c3f798cc24aab073ded368bd426d8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
