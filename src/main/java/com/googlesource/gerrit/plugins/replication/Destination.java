@@ -82,6 +82,7 @@ class Destination {
   private final ProjectControl.Factory projectControlFactory;
   private final GitRepositoryManager gitManager;
   private final boolean replicatePermissions;
+  private final boolean replicateProjectDeletions;
   private final String remoteNameStyle;
   private volatile WorkQueue.Executor pool;
   private final PerThreadRequestScope.Scoper threadScoper;
@@ -108,6 +109,8 @@ class Destination {
     poolName = "ReplicateTo-" + rc.getName();
     replicatePermissions =
         cfg.getBoolean("remote", rc.getName(), "replicatePermissions", true);
+    replicateProjectDeletions =
+        cfg.getBoolean("remote", rc.getName(), "replicateProjectDeletions", false);
     remoteNameStyle = Objects.firstNonNull(
         cfg.getString("remote", rc.getName(), "remoteNameStyle"), "slash");
     projects = cfg.getStringList("remote", rc.getName(), "projects");
@@ -440,6 +443,10 @@ class Destination {
 
   boolean isReplicatePermissions() {
     return replicatePermissions;
+  }
+
+  boolean isReplicateProjectDeletions() {
+    return replicateProjectDeletions;
   }
 
   List<URIish> getURIs(Project.NameKey project, String urlMatch) {
