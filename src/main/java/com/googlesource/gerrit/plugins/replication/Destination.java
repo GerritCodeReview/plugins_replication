@@ -81,13 +81,14 @@ class Destination {
   private final PushOne.Factory opFactory;
   private final ProjectControl.Factory projectControlFactory;
   private final GitRepositoryManager gitManager;
+  private final boolean createMissingRepos;
   private final boolean replicatePermissions;
   private final String remoteNameStyle;
   private volatile WorkQueue.Executor pool;
   private final PerThreadRequestScope.Scoper threadScoper;
 
   protected static enum RetryReason {
-    TRANSPORT_ERROR, COLLISION;
+    TRANSPORT_ERROR, COLLISION, REPOSITORY_MISSING;
   }
 
   Destination(final Injector injector,
@@ -106,6 +107,8 @@ class Destination {
 
     poolThreads = Math.max(0, getInt(rc, cfg, "threads", 1));
     poolName = "ReplicateTo-" + rc.getName();
+    createMissingRepos =
+        cfg.getBoolean("remote", rc.getName(), "createMissingRepositories", true);
     replicatePermissions =
         cfg.getBoolean("remote", rc.getName(), "replicatePermissions", true);
     remoteNameStyle = Objects.firstNonNull(
@@ -436,6 +439,10 @@ class Destination {
       }
     }
     return false;
+  }
+
+  boolean isCreateMissingRepos() {
+    return createMissingRepos;
   }
 
   boolean isReplicatePermissions() {

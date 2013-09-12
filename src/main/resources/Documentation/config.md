@@ -187,6 +187,16 @@ remote.NAME.authGroup
 	By default, replicates without group control, i.e. replicates
 	everything to all remotes.
 
+remote.NAME.createMissingRepositories
+:	If true, a repository is automatically created on the remote site
+	if during the replication of a ref it is found to be missing.
+	E.g. a repository can be missing on the remote site if the remote
+	site was not available at the moment when a new project was created
+	and hence the repository for the new project could not be created on
+	the remote site.
+
+	By default, true, missing repositories are created.
+
 remote.NAME.replicatePermissions
 :	If true, permissions-only projects and the refs/meta/config
 	branch will also be replicated to the remote site.  These

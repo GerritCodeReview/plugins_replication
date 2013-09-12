@@ -21,6 +21,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.git.ChangeCache;
@@ -91,6 +92,7 @@ class PushOne implements ProjectRunnable {
   private final TagCache tagCache;
   private final PerThreadRequestScope.Scoper threadScoper;
   private final ChangeCache changeCache;
+  private final ReplicationQueue replicationQueue;
 
   private final Project.NameKey projectName;
   private final URIish uri;
@@ -112,6 +114,7 @@ class PushOne implements ProjectRunnable {
       final TagCache tc,
       final PerThreadRequestScope.Scoper ts,
       final ChangeCache cc,
+      final ReplicationQueue rq,
       @Assisted final Project.NameKey d,
       @Assisted final URIish u) {
     gitManager = grm;
@@ -122,6 +125,7 @@ class PushOne implements ProjectRunnable {
     tagCache = tc;
     threadScoper = ts;
     changeCache = cc;
+    replicationQueue = rq;
     projectName = d;
     uri = u;
   }
@@ -268,7 +272,18 @@ class PushOne implements ProjectRunnable {
       log.error("Cannot replicate " + projectName + "; " + e.getMessage());
 
     } catch (NoRemoteRepositoryException e) {
-      wrappedLog.error("Cannot replicate to " + uri + "; repository not found", getStatesAsArray());
+      if (pool.isCreateMissingRepos()) {
+        try {
+          createRepository();
+          log.warn("Missing repository created; retry replication to " + uri);
+          pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
+        } catch (IOException ioe) {
+          wrappedLog.error("Cannot replicate to " + uri + "; failed to create missing repository",
+              ioe, getStatesAsArray());
+        }
+      } else {
+        wrappedLog.error("Cannot replicate to " + uri + "; repository not found", getStatesAsArray());
+      }
 
     } catch (NotSupportedException e) {
       wrappedLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
@@ -299,6 +314,23 @@ class PushOne implements ProjectRunnable {
       }
       pool.notifyFinished(this);
     }
+  }
+
+  private void createRepository() throws IOException {
+    final Ref head = git.getRef(Constants.HEAD);
+    NewProjectCreatedListener.Event event =
+        new NewProjectCreatedListener.Event() {
+          @Override
+          public String getProjectName() {
+            return projectName.get();
+          }
+
+          @Override
+          public String getHeadName() {
+            return head != null ? head.getName() : null;
+          }
+        };
+    replicationQueue.onNewProjectCreated(event);
   }
 
   private void runImpl() throws IOException {
