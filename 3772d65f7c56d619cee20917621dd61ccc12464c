@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "271615dd_f8e77157",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-09-13T07:44:07Z",
+      "side": 1,
+      "message": "Should this mention that creation was attempted?",
+      "revId": "3772d65f7c56d619cee20917621dd61ccc12464c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
