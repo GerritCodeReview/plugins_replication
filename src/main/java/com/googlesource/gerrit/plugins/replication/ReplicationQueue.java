@@ -15,8 +15,6 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.ChangeHooks;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
@@ -25,14 +23,9 @@ import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
-import com.google.gerrit.server.PluginUser;
-import com.google.gerrit.server.account.GroupBackend;
-import com.google.gerrit.server.config.SitePaths;
-import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 
@@ -42,9 +35,6 @@ import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.RefUpdate;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.storage.file.FileBasedConfig;
-import org.eclipse.jgit.transport.RefSpec;
-import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.RemoteSession;
 import org.eclipse.jgit.transport.SshSessionFactory;
 import org.eclipse.jgit.transport.URIish;
@@ -83,39 +73,26 @@ class ReplicationQueue implements
     return null;
   }
 
-  private final Injector injector;
   private final WorkQueue workQueue;
-  private final List<Destination> configs;
   private final SchemaFactory<ReviewDb> database;
-  private final RemoteSiteUser.Factory replicationUserFactory;
-  private final PluginUser pluginUser;
-  private final GitRepositoryManager gitRepositoryManager;
-  private final GroupBackend groupBackend;
   private final ChangeHooks changeHooks;
+  private final ReplicationConfig config;
   private volatile boolean running;
   boolean replicateAllOnPluginStart;
 
   @Inject
-  ReplicationQueue(final Injector i, final WorkQueue wq, final SitePaths site,
-      final RemoteSiteUser.Factory ruf, final PluginUser pu,
-      final SchemaFactory<ReviewDb> db,
-      final GitRepositoryManager grm, final GroupBackend gb,
-      final ChangeHooks ch)
+  ReplicationQueue(final WorkQueue wq, final ReplicationConfig rc,
+      final SchemaFactory<ReviewDb> db, final ChangeHooks ch)
       throws ConfigInvalidException, IOException {
-    injector = i;
     workQueue = wq;
     database = db;
-    replicationUserFactory = ruf;
-    pluginUser = pu;
-    gitRepositoryManager = grm;
-    groupBackend = gb;
     changeHooks = ch;
-    configs = allDestinations(new File(site.etc_dir, "replication.config"));
+    config = rc;
   }
 
   @Override
   public void start() {
-    for (Destination cfg : configs) {
+    for (Destination cfg : config.getDestinations()) {
       cfg.start(workQueue);
     }
     running = true;
@@ -125,7 +102,7 @@ class ReplicationQueue implements
   public void stop() {
     running = false;
     int discarded = 0;
-    for (Destination cfg : configs) {
+    for (Destination cfg : config.getDestinations()) {
       discarded += cfg.shutdown();
     }
     if (discarded > 0) {
@@ -142,7 +119,7 @@ class ReplicationQueue implements
       return;
     }
 
-    for (Destination cfg : configs) {
+    for (Destination cfg : config.getDestinations()) {
       if (cfg.wouldPushProject(project)) {
         for (URIish uri : cfg.getURIs(project, urlMatch)) {
           cfg.schedule(project, PushOne.ALL_REFS, uri, state);
@@ -160,7 +137,7 @@ class ReplicationQueue implements
     }
 
     Project.NameKey project = new Project.NameKey(event.getProjectName());
-    for (Destination cfg : configs) {
+    for (Destination cfg : config.getDestinations()) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(event.getRefName())) {
         for (URIish uri : cfg.getURIs(project, null)) {
           cfg.schedule(project, event.getRefName(), uri, state);
@@ -168,85 +145,6 @@ class ReplicationQueue implements
       }
     }
     state.markAllPushTasksScheduled();
-  }
-
-  private List<Destination> allDestinations(File cfgPath)
-      throws ConfigInvalidException, IOException {
-    FileBasedConfig cfg = new FileBasedConfig(cfgPath, FS.DETECTED);
-    if (!cfg.getFile().exists()) {
-      log.warn("No " + cfg.getFile() + "; not replicating");
-      return Collections.emptyList();
-    }
-    if (cfg.getFile().length() == 0) {
-      log.info("Empty " + cfg.getFile() + "; not replicating");
-      return Collections.emptyList();
-    }
-
-    try {
-      cfg.load();
-    } catch (ConfigInvalidException e) {
-      throw new ConfigInvalidException(String.format(
-          "Config file %s is invalid: %s",cfg.getFile(), e.getMessage()), e);
-    } catch (IOException e) {
-      throw new IOException(String.format(
-          "Cannot read %s: %s", cfg.getFile(),  e.getMessage()), e);
-    }
-
-    replicateAllOnPluginStart = cfg.getBoolean(
-        "gerrit", "replicateOnStartup",
-        true);
-
-    ImmutableList.Builder<Destination> dest = ImmutableList.builder();
-    for (RemoteConfig c : allRemotes(cfg)) {
-      if (c.getURIs().isEmpty()) {
-        continue;
-      }
-
-      // If destination for push is not set assume equal to source.
-      for (RefSpec ref : c.getPushRefSpecs()) {
-        if (ref.getDestination() == null) {
-          ref.setDestination(ref.getSource());
-        }
-      }
-
-      if (c.getPushRefSpecs().isEmpty()) {
-        c.addPushRefSpec(new RefSpec()
-          .setSourceDestination("refs/*", "refs/*")
-          .setForceUpdate(true));
-      }
-
-      Destination destination = new Destination(injector, c, cfg, database,
-          replicationUserFactory, pluginUser, gitRepositoryManager,
-          groupBackend);
-
-      if (!destination.isSingleProjectMatch()) {
-        for (URIish u : c.getURIs()) {
-          if (u.getPath() == null || !u.getPath().contains("${name}")) {
-            throw new ConfigInvalidException(String.format(
-                "remote.%s.url \"%s\" lacks ${name} placeholder in %s",
-                c.getName(), u, cfg.getFile()));
-          }
-        }
-      }
-
-      dest.add(destination);
-    }
-    return dest.build();
-  }
-
-  private static List<RemoteConfig> allRemotes(FileBasedConfig cfg)
-      throws ConfigInvalidException {
-    Set<String> names = cfg.getSubsections("remote");
-    List<RemoteConfig> result = Lists.newArrayListWithCapacity(names.size());
-    for (String name : names) {
-      try {
-        result.add(new RemoteConfig(cfg, name));
-      } catch (URISyntaxException e) {
-        throw new ConfigInvalidException(String.format(
-            "remote %s has invalid URL in %s", name, cfg.getFile()));
-      }
-    }
-    return result;
   }
 
   @Override
@@ -265,7 +163,7 @@ class ReplicationQueue implements
 
   private Set<URIish> getURIs(Project.NameKey projectName,
       boolean forProjectDeletion) {
-    if (configs.isEmpty()) {
+    if (config.getDestinations().isEmpty()) {
       return Collections.emptySet();
     }
     if (!running) {
@@ -274,7 +172,7 @@ class ReplicationQueue implements
     }
 
     Set<URIish> uris = Sets.newHashSet();
-    for (Destination config : configs) {
+    for (Destination config : this.config.getDestinations()) {
       if (!config.wouldPushProject(projectName)) {
         continue;
       }
