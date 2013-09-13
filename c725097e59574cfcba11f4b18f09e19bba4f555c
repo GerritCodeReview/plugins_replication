@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "271615dd_98ec353e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-09-13T07:46:15Z",
+      "side": 1,
+      "message": "s/creation/deletion",
+      "revId": "c725097e59574cfcba11f4b18f09e19bba4f555c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "071bd107_f7e78057",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-09-13T07:46:15Z",
+      "side": 1,
+      "message": "Indent this with tab.",
+      "revId": "c725097e59574cfcba11f4b18f09e19bba4f555c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
