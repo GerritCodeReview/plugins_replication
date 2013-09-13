@@ -34,6 +34,23 @@
       "revId": "9d9c87b555f3bfefa540e1d20b04c9f5c7751f3c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "271615dd_9803d520",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2013-09-13T15:52:50Z",
+      "side": 1,
+      "message": "singular \u0027config\u0027?",
+      "revId": "9d9c87b555f3bfefa540e1d20b04c9f5c7751f3c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
