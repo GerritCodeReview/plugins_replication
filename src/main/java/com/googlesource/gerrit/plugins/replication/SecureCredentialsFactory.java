@@ -25,7 +25,7 @@ import org.eclipse.jgit.util.FS;
 import java.io.IOException;
 
 /** Looks up a remote's password in secure.config. */
-class SecureCredentialsFactory {
+class SecureCredentialsFactory implements CredentialsFactory {
   private final Config config;
 
   @Inject
@@ -51,7 +51,7 @@ class SecureCredentialsFactory {
     return cfg;
   }
 
-  SecureCredentialsProvider create(String remoteName) {
+  public SecureCredentialsProvider create(String remoteName) {
     String user = config.getString("remote", remoteName, "username");
     String pass = config.getString("remote", remoteName, "password");
     return new SecureCredentialsProvider(user, pass);
