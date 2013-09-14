@@ -67,6 +67,10 @@ gerrit.replicateOnStartup
 :	If true, replicates to all remotes on startup to ensure they
 	are in-sync with this server.  By default, true.
 
+gerrit.autoReload
+:	If true, reload automatically the replication config when modified
+	without the explicit plugin reload.  By default, false.
+
 remote.NAME.url
 :	Address of the remote server to push to.  Multiple URLs may be
 	specified within a single remote block, listing different
