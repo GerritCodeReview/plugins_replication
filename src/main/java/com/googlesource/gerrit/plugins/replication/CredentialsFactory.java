@@ -13,20 +13,8 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.gerrit.server.git.WorkQueue;
+interface CredentialsFactory {
 
-import java.util.List;
-
-public interface ReplicationConfig {
-
-  List<Destination> getDestinations();
-
-  boolean isReplicateAllOnPluginStart();
-
-  boolean isEmpty();
-
-  int shutdown();
-
-  void startup(WorkQueue workQueue);
+  SecureCredentialsProvider create(String remoteName);
 
 }

@@ -32,7 +32,6 @@ import com.google.inject.internal.UniqueAnnotations;
 class ReplicationModule extends AbstractModule {
   @Override
   protected void configure() {
-    bind(ReplicationConfig.class);
     bind(ReplicationQueue.class).in(Scopes.SINGLETON);
 
     DynamicSet.bind(binder(), GitReferenceUpdatedListener.class)
@@ -48,12 +47,15 @@ class ReplicationModule extends AbstractModule {
     bind(LifecycleListener.class)
       .annotatedWith(UniqueAnnotations.create())
       .to(OnStartStop.class);
-    bind(SecureCredentialsFactory.class).in(Scopes.SINGLETON);
+    bind(CredentialsFactory.class).to(
+        AutoReloadSecureCredentialsFactoryDecorator.class).in(Scopes.SINGLETON);
     bind(CapabilityDefinition.class)
       .annotatedWith(Exports.named(START_REPLICATION))
       .to(StartReplicationCapability.class);
 
     install(new FactoryModuleBuilder().build(PushAll.Factory.class));
     install(new FactoryModuleBuilder().build(RemoteSiteUser.Factory.class));
+
+    bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
   }
 }

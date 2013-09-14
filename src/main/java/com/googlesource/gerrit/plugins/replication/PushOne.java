@@ -110,7 +110,7 @@ class PushOne implements ProjectRunnable {
       final SchemaFactory<ReviewDb> s,
       final Destination p,
       final RemoteConfig c,
-      final SecureCredentialsFactory cpFactory,
+      final CredentialsFactory cpFactory,
       final TagCache tc,
       final PerThreadRequestScope.Scoper ts,
       final ChangeCache cc,
