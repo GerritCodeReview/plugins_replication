@@ -91,19 +91,14 @@ class ReplicationQueue implements
 
   @Override
   public void start() {
-    for (Destination cfg : config.getDestinations()) {
-      cfg.start(workQueue);
-    }
+    config.startup(workQueue);
     running = true;
   }
 
   @Override
   public void stop() {
     running = false;
-    int discarded = 0;
-    for (Destination cfg : config.getDestinations()) {
-      discarded += cfg.shutdown();
-    }
+    int discarded = config.shutdown();
     if (discarded > 0) {
       log.warn(String.format(
           "Cancelled %d replication events during shutdown",
