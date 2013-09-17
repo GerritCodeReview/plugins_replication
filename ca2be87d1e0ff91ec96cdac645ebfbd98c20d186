@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e73cfda4_4e2f9395",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-09-17T16:52:29Z",
+      "side": 1,
+      "message": "Perhaps these should be rescheduled also?",
+      "revId": "ca2be87d1e0ff91ec96cdac645ebfbd98c20d186",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e73cfda4_6e2c4fa0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-09-17T16:52:29Z",
+      "side": 1,
+      "message": "nit:missing space in indent, or is there something wrong with the diff view?",
+      "revId": "ca2be87d1e0ff91ec96cdac645ebfbd98c20d186",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c739b9b5_ad355dec",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-09-17T16:52:29Z",
+      "side": 1,
+      "message": "I know this changes current behavior, but perhaps the default really should be true here?  I think that the for most configurations it makes a lot more sense to create new repos than to not.",
+      "revId": "ca2be87d1e0ff91ec96cdac645ebfbd98c20d186",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
