@@ -50,6 +50,24 @@
       "revId": "ca2be87d1e0ff91ec96cdac645ebfbd98c20d186",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c7229989_251b4e8a",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-09-18T00:15:20Z",
+      "side": 1,
+      "message": "Make sense, but if we do that it should be very clearly documented as a change in behaviour.",
+      "parentUuid": "c739b9b5_ad355dec",
+      "revId": "ca2be87d1e0ff91ec96cdac645ebfbd98c20d186",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
