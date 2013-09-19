@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "443a27c6_715338ee",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2013-09-19T20:25:30Z",
+      "side": 1,
+      "message": "Yeah, and I guess a retry can always be forced on a new but quiescent repo by running the replicate command.",
+      "parentUuid": "871c2153_c3def65a",
+      "revId": "ca2be87d1e0ff91ec96cdac645ebfbd98c20d186",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e73cfda4_6e2c4fa0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 4
