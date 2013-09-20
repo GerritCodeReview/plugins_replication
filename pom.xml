@@ -39,6 +39,8 @@ limitations under the License.
         <configuration>
           <archive>
             <manifestEntries>
+              <Gerrit-PluginName>replication</Gerrit-PluginName>
+
               <Gerrit-Module>com.googlesource.gerrit.plugins.replication.ReplicationModule</Gerrit-Module>
               <Gerrit-SshModule>com.googlesource.gerrit.plugins.replication.SshModule</Gerrit-SshModule>
 
