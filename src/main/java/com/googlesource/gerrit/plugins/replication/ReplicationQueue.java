@@ -17,9 +17,11 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.NewProjectCreatedListener;
+import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.PluginUser;
@@ -61,7 +63,8 @@ import java.util.Set;
 class ReplicationQueue implements
     LifecycleListener,
     GitReferenceUpdatedListener,
-    NewProjectCreatedListener {
+    NewProjectCreatedListener,
+    ProjectDeletedListener {
   static final Logger log = LoggerFactory.getLogger(ReplicationQueue.class);
   private static final WrappedLogger wrappedLog = new WrappedLogger(log);
 
@@ -246,17 +249,34 @@ class ReplicationQueue implements
 
   @Override
   public void onNewProjectCreated(NewProjectCreatedListener.Event event) {
+    for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()), false)) {
+      createProject(uri, event.getHeadName());
+    }
+  }
+
+  @Override
+  public void onProjectDeleted(ProjectDeletedListener.Event event) {
+    for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()), true)) {
+      deleteProject(uri);
+    }
+  }
+
+  private Set<URIish> getURIs(Project.NameKey projectName,
+      boolean forProjectDeletion) {
     if (configs.isEmpty()) {
-      return;
+      return Collections.emptySet();
     }
     if (!running) {
       log.error("Replication plugin did not finish startup before event");
-      return;
+      return Collections.emptySet();
     }
 
-    Project.NameKey projectName = new Project.NameKey(event.getProjectName());
+    Set<URIish> uris = Sets.newHashSet();
     for (Destination config : configs) {
       if (!config.wouldPushProject(projectName)) {
+        continue;
+      }
+      if (forProjectDeletion && !config.isReplicateProjectDeletions()) {
         continue;
       }
       List<URIish> uriList = config.getURIs(projectName, "*");
@@ -289,16 +309,17 @@ class ReplicationQueue implements
           continue;
         }
 
-        createProject(uri, event.getHeadName());
+        uris.add(uri);
         adminURLUsed = true;
       }
 
       if (!adminURLUsed) {
         for (URIish uri : uriList) {
-          createProject(uri, event.getHeadName());
+          uris.add(uri);
         }
       }
     }
+    return uris;
   }
 
   private void createProject(URIish replicateURI, String head) {
@@ -342,21 +363,7 @@ class ReplicationQueue implements
     }
     OutputStream errStream = newErrorBufferStream();
     try {
-      RemoteSession ssh = connect(uri);
-      Process proc = ssh.exec(cmd, 0);
-      proc.getOutputStream().close();
-      StreamCopyThread out = new StreamCopyThread(proc.getInputStream(), errStream);
-      StreamCopyThread err = new StreamCopyThread(proc.getErrorStream(), errStream);
-      out.start();
-      err.start();
-      try {
-        proc.waitFor();
-        out.halt();
-        err.halt();
-      } catch (InterruptedException interrupted) {
-        // Don't wait, drop out immediately.
-      }
-      ssh.disconnect();
+      executeRemotSsh(uri, cmd, errStream);
     } catch (IOException e) {
       log.error(String.format(
              "Error creating remote repository at %s:\n"
@@ -365,6 +372,81 @@ class ReplicationQueue implements
           + "  Output: %s",
           uri, e, cmd, errStream), e);
     }
+  }
+
+  private void deleteProject(URIish replicateURI) {
+    if (!replicateURI.isRemote()) {
+      deleteLocally(replicateURI);
+    } else if (isSSH(replicateURI)) {
+      deleteRemoteSsh(replicateURI);
+    } else {
+      log.warn(String.format("Cannot delete project on remote site %s."
+          + " Only local paths and SSH URLs are supported"
+          + " for remote repository deletion", replicateURI));
+    }
+  }
+
+  private static void deleteLocally(URIish uri) {
+    try {
+      recursivelyDelete(new File(uri.getPath()));
+    } catch (IOException e) {
+      log.error(String.format("Failed to delete repository %s", uri.getPath()), e);
+    }
+  }
+
+  public static void recursivelyDelete(File dir) throws IOException {
+    File[] contents = dir.listFiles();
+    if (contents != null) {
+      for (File d : contents) {
+        if (d.isDirectory()) {
+          recursivelyDelete(d);
+        } else {
+          if (!d.delete()) {
+            throw new IOException("Failed to delete: " + d.getAbsolutePath());
+          }
+        }
+      }
+    }
+    if (!dir.delete()) {
+      throw new IOException("Failed to delete: " + dir.getAbsolutePath());
+    }
+  }
+
+  private static void deleteRemoteSsh(URIish uri) {
+    String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
+    String cmd = "rm -rf " + quotedPath;
+    OutputStream errStream = newErrorBufferStream();
+    try {
+      executeRemotSsh(uri, cmd, errStream);
+    } catch (IOException e) {
+      log.error(String.format(
+             "Error deleting remote repository at %s:\n"
+          + "  Exception: %s\n"
+          + "  Command: %s\n"
+          + "  Output: %s",
+          uri, e, cmd, errStream), e);
+    }
+  }
+
+  private static void executeRemotSsh(URIish uri, String cmd,
+      OutputStream errStream) throws IOException {
+    RemoteSession ssh = connect(uri);
+    Process proc = ssh.exec(cmd, 0);
+    proc.getOutputStream().close();
+    StreamCopyThread out =
+        new StreamCopyThread(proc.getInputStream(), errStream);
+    StreamCopyThread err =
+        new StreamCopyThread(proc.getErrorStream(), errStream);
+    out.start();
+    err.start();
+    try {
+      proc.waitFor();
+      out.halt();
+      err.halt();
+    } catch (InterruptedException interrupted) {
+      // Don't wait, drop out immediately.
+    }
+    ssh.disconnect();
   }
 
   private static RemoteSession connect(URIish uri) throws TransportException {
