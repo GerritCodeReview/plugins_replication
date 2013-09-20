@@ -319,9 +319,11 @@ class ReplicationQueue implements
       try {
         repo.create(true /* bare */);
 
-        RefUpdate u = repo.updateRef(Constants.HEAD);
-        u.disableRefLog();
-        u.link(head);
+        if (head != null) {
+          RefUpdate u = repo.updateRef(Constants.HEAD);
+          u.disableRefLog();
+          u.link(head);
+        }
       } finally {
         repo.close();
       }
@@ -333,9 +335,11 @@ class ReplicationQueue implements
   private static void createRemoteSsh(URIish uri, String head) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd = "mkdir -p " + quotedPath
-            + "&& cd " + quotedPath
-            + "&& git init --bare"
-            + "&& git symbolic-ref HEAD " + QuotedString.BOURNE.quote(head);
+            + " && cd " + quotedPath
+            + " && git init --bare";
+    if (head != null) {
+      cmd = cmd + " && git symbolic-ref HEAD " + QuotedString.BOURNE.quote(head);
+    }
     OutputStream errStream = newErrorBufferStream();
     try {
       RemoteSession ssh = connect(uri);
