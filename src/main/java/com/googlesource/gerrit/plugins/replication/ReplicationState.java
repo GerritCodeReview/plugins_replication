@@ -14,8 +14,6 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import org.eclipse.jgit.transport.URIish;
-
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -66,9 +64,9 @@ public class ReplicationState {
     return totalPushTasksCount != 0;
   }
 
-  public void notifyRefReplicated(String project, String ref, URIish uri,
+  public void notifyRefReplicated(String project, String ref, String node,
       RefPushResult status) {
-    pushResultProcessing.onOneNodeReplicated(project, ref, uri, status);
+    pushResultProcessing.onOneNodeReplicated(project, ref, node, status);
 
     countingLock.lock();
     try {

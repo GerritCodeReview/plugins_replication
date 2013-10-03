@@ -16,13 +16,11 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
-import org.eclipse.jgit.transport.URIish;
-
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class PushResultProcessing {
-  abstract void onOneNodeReplicated(String project, String ref, URIish uri, RefPushResult status);
+  abstract void onOneNodeReplicated(String project, String ref,  String node, RefPushResult status);
 
   abstract void onAllNodesReplicated(int totalPushTasksCount);
 
@@ -43,17 +41,13 @@ public abstract class PushResultProcessing {
     }
 
     @Override
-    void onOneNodeReplicated(String project, String ref, URIish uri,
+    void onOneNodeReplicated(String project, String ref, String node,
         RefPushResult status) {
       StringBuilder sb = new StringBuilder();
       sb.append("Replicate ");
       sb.append(project);
       sb.append(" to ");
-      if (uri.getHost() != null) {
-        sb.append(uri.getHost());
-      } else {
-        sb.append("localhost");
-      }
+      sb.append(node);
       sb.append(", ");
       switch (status) {
         case SUCCEEDED:
@@ -105,7 +99,7 @@ public abstract class PushResultProcessing {
 
   public static class GitUpdateProcessing extends PushResultProcessing {
     @Override
-    void onOneNodeReplicated(String project, String ref, URIish uri,
+    void onOneNodeReplicated(String project, String ref, String node,
         RefPushResult status) {
       //TODO: send stream events
     }
@@ -118,7 +112,7 @@ public abstract class PushResultProcessing {
 
   public static class NoopProcessing extends PushResultProcessing {
     @Override
-    void onOneNodeReplicated(String project, String ref, URIish uri,
+    void onOneNodeReplicated(String project, String ref, String node,
         RefPushResult status) {
     }
 

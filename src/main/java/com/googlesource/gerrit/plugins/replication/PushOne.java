@@ -104,6 +104,7 @@ class PushOne implements ProjectRunnable {
   private boolean canceled;
   private final Multimap<String,ReplicationState> stateMap =
       LinkedListMultimap.create();
+  private final String nodeName;
 
   @Inject
   PushOne(final GitRepositoryManager grm,
@@ -128,6 +129,7 @@ class PushOne implements ProjectRunnable {
     replicationQueue = rq;
     projectName = d;
     uri = u;
+    nodeName = resolveNodeName();
   }
 
   @Override
@@ -225,7 +227,7 @@ class PushOne implements ProjectRunnable {
   private void statesCleanUp() {
     if (!stateMap.isEmpty() && !isRetrying()) {
       for (Map.Entry<String,ReplicationState> entry : stateMap.entries()) {
-        entry.getValue().notifyRefReplicated(projectName.get(), entry.getKey(), uri,
+        entry.getValue().notifyRefReplicated(projectName.get(), entry.getKey(), nodeName,
             RefPushResult.FAILED);
       }
     }
@@ -553,21 +555,35 @@ class PushOne implements ProjectRunnable {
 
       for (ReplicationState rs : getStatesByRef(u.getSrcRef())) {
         rs.notifyRefReplicated(projectName.get(), u.getSrcRef(),
-              uri, pushStatus);
+            nodeName, pushStatus);
       }
     }
 
     doneRefs.add(ALL_REFS);
     for (ReplicationState rs : getStatesByRef(ALL_REFS)) {
       rs.notifyRefReplicated(projectName.get(), ALL_REFS,
-          uri, anyRefFailed ? RefPushResult.FAILED : RefPushResult.SUCCEEDED);
+          nodeName, anyRefFailed ? RefPushResult.FAILED : RefPushResult.SUCCEEDED);
     }
     for (Map.Entry<String,ReplicationState> entry : stateMap.entries()) {
       if (!doneRefs.contains(entry.getKey())) {
-        entry.getValue().notifyRefReplicated(projectName.get(), entry.getKey(), uri,
+        entry.getValue().notifyRefReplicated(projectName.get(), entry.getKey(), nodeName,
             RefPushResult.NOT_ATTEMPTED);
       }
     }
     stateMap.clear();
+  }
+
+  private String resolveNodeName(){
+    StringBuilder sb = new StringBuilder();
+    if (uri.isRemote()) {
+      sb.append(uri.getHost());
+      if (uri.getPort() != -1) {
+        sb.append(":");
+        sb.append(uri.getPort());
+      }
+    } else {
+      sb.append(uri.getPath());
+    }
+    return sb.toString();
   }
 }
