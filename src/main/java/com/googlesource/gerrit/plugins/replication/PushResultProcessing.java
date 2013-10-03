@@ -34,6 +34,20 @@ public abstract class PushResultProcessing {
     // Default doing nothing
   }
 
+  private static String resolveNodeName(URIish uri) {
+    StringBuilder sb = new StringBuilder();
+    if (uri.isRemote()) {
+      sb.append(uri.getHost());
+      if (uri.getPort() != -1) {
+        sb.append(":");
+        sb.append(uri.getPort());
+      }
+    } else {
+      sb.append(uri.getPath());
+    }
+    return sb.toString();
+  }
+
   public static class CommandProcessing extends PushResultProcessing {
     private WeakReference<StartCommand> sshCommand;
     private AtomicBoolean hasError = new AtomicBoolean();
@@ -49,11 +63,7 @@ public abstract class PushResultProcessing {
       sb.append("Replicate ");
       sb.append(project);
       sb.append(" to ");
-      if (uri.getHost() != null) {
-        sb.append(uri.getHost());
-      } else {
-        sb.append("localhost");
-      }
+      sb.append(resolveNodeName(uri));
       sb.append(", ");
       switch (status) {
         case SUCCEEDED:
