@@ -59,6 +59,24 @@
     },
     {
       "key": {
+        "uuid": "e1778d7c_76fc10e8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-10T15:18:02Z",
+      "side": 1,
+      "message": "Forget my comment, I saw that the same ReplicationState can be called for multiple ref",
+      "parentUuid": "a1c11554_b4f1c012",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c174497d_3519b08e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
         "patchSetId": 2
@@ -88,6 +106,24 @@
       "side": 1,
       "message": "I think the same thing, I will upload a new patch set soon",
       "parentUuid": "c174497d_3519b08e",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1778d7c_9607ec2f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-10T15:18:02Z",
+      "side": 1,
+      "message": "There is a problem to send stream event for any ref that is replicated. Sending stream event requires a associated change so it is not currently possible to send refReplicatedEvent for a ref that as not associated with a change.\n\nWe could add a method in ChangeHooks to post a streamEvent that do not require a change and bypass the validation for change visibility, Any suggestion regarding this issue?",
+      "parentUuid": "e1778d7c_36f29816",
       "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -134,6 +170,24 @@
         "endLine": 162,
         "endChar": 5
       },
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a171158e_14f594fd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-10T15:18:02Z",
+      "side": 1,
+      "message": "totalPushTasksCount can be the count for more that one ref, so this data collecting is required to be able to send a stream event when replication to all node is completed for a specific ref.",
+      "parentUuid": "c1228989_a50c9e54",
       "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
