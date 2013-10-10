@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "c1228989_e5ef7630",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PatchSetReplicatedEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-10T12:43:41Z",
+      "side": 1,
+      "message": "This is quite verbose. Why not generate the status string from the enum name:\n\n  return status.name().toLowerCase().replace(\"_\", \"-\");",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 31
+      },
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1228989_05f572fd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PatchSetReplicatedEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-10T12:43:41Z",
+      "side": 1,
+      "message": "What is the purpose of the \"unknown\" here? Why is it better than status.name()?",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1c11554_b4f1c012",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
         "patchSetId": 2
@@ -13,6 +53,155 @@
       "writtenOn": "2013-10-07T15:07:25Z",
       "side": 1,
       "message": "Why use a map? Maybe I am wrong but everytime a git reference is updated, a ReplicationState is created and it contains a GitUpdateProcessing. So a git update processing is only processing for one ref so we do not need a map.",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c174497d_3519b08e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-10T12:43:41Z",
+      "side": 1,
+      "message": "What about the replication of other references (refs/heads/*, ...) ?\n\nDo you want to have: PatchSetReplicatedEvent and BranchReplicatedEvent as two different kinds of events? Does it make more sense to have only one event type: RefReplicatedEvent? The replication plugin should probably try to stay neutral to all different reference types in Gerrit core... therefore, I would propose to have only RefReplicatedEvent.",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1228989_65fc66e8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-10T12:43:41Z",
+      "side": 1,
+      "message": "Maybe I am missing something important but couldn\u0027t this be just as simple as:\n\n  void onOneNodeReplicated(String project, String ref, URIish uri,\n        RefPushResult status) {\n    postEvent(loadChange(ref), new PatchSetReplicatedEvent(...))\n  }\n\nIt looks to me like you are trying to collect the data for the onAllNodesReplicated?",
+      "range": {
+        "startLine": 135,
+        "startChar": 1,
+        "endLine": 146,
+        "endChar": 5
+      },
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1228989_a50c9e54",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-10T12:43:41Z",
+      "side": 1,
+      "message": "It looks like the necessity for updateReplicationInfo and setChangeInfo and all this data collecting is because you need that data in this method in order to fire the event?\n\nWhat about passing the necessary data (project, ref, uri) to the onAllNodesUpdated method? This would almost completely eliminate the complexity here. This method could then be as simple as:\n\n  void onAllNodesReplicated(int totalPushTasksCount) {\n    postEvent(loadChange(ref), new PatchSetReplicationDoneEvent(project, ref, totalPushTasksCount));\n  }",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 5
+      },
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c174497d_b50ce054",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-10T12:43:41Z",
+      "side": 1,
+      "message": "nit: looks like we don\u0027t use spaces before and after ++ in our code",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1228989_25f26e16",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-10T12:43:41Z",
+      "side": 1,
+      "message": "Maybe I am missing something but wasn\u0027t the ref already validated when the patch set was created? Why do we expect an IllegalArgumentException here?",
+      "range": {
+        "startLine": 187,
+        "startChar": 15,
+        "endLine": 187,
+        "endChar": 39
+      },
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c174497d_d5015c1b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-10T12:43:41Z",
+      "side": 1,
+      "message": "if this is not needed remove this line",
+      "range": {
+        "startLine": 200,
+        "startChar": 10,
+        "endLine": 200,
+        "endChar": 17
+      },
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1228989_8507a22f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-10T12:43:41Z",
+      "side": 1,
+      "message": "Why count when totalPushTaskCount will be passed to the onAllNodesReplicated?",
+      "range": {
+        "startLine": 228,
+        "startChar": 10,
+        "endLine": 228,
+        "endChar": 15
+      },
       "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
