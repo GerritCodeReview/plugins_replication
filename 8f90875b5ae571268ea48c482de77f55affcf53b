@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fef56c3d_fff37f19",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-11T13:23:35Z",
+      "side": 1,
+      "message": "Even if we only send event for patchset replicated for now, I think we should name the event RefReplicatedEvent since we will need an event for the other refs.",
+      "revId": "8f90875b5ae571268ea48c482de77f55affcf53b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
