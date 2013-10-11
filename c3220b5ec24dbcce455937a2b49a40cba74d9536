@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "5e3598d0_72e0d844",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PatchSetReplicatedEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-10-11T06:26:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1228989_e5ef7630",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1228989_05f572fd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PatchSetReplicatedEvent.java",
         "patchSetId": 2
@@ -36,6 +54,24 @@
       "writtenOn": "2013-10-10T12:43:41Z",
       "side": 1,
       "message": "What is the purpose of the \"unknown\" here? Why is it better than status.name()?",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e3aa4c5_71e0d844",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PatchSetReplicatedEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-10-11T06:26:20Z",
+      "side": 1,
+      "message": "We use the above suggested code, remove this line now.",
+      "parentUuid": "c1228989_05f572fd",
       "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -71,6 +107,24 @@
       "side": 1,
       "message": "Forget my comment, I saw that the same ReplicationState can be called for multiple ref",
       "parentUuid": "a1c11554_b4f1c012",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e3598d0_52e5d452",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-10-11T06:26:20Z",
+      "side": 1,
+      "message": "Yes, it can have multiple ref.",
+      "parentUuid": "e1778d7c_76fc10e8",
       "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -130,6 +184,24 @@
     },
     {
       "key": {
+        "uuid": "5e3598d0_32ea5023",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-10-11T06:26:20Z",
+      "side": 1,
+      "message": "Patchset has more validation conditions than the normal branch ref, so we deal with them differently, if we need to send event for normal branch ref replication, we can add another patch to do it using the ChangeHooks.postEvent(Branch.NameKey branchName, ChangeEvent event), this method doesn\u0027t require a change, just require a branch name.",
+      "parentUuid": "e1778d7c_9607ec2f",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1228989_65fc66e8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
         "patchSetId": 2
@@ -147,6 +219,24 @@
         "endLine": 146,
         "endChar": 5
       },
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e3598d0_12ef4c33",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-10-11T06:26:20Z",
+      "side": 1,
+      "message": "yes, this method needs to collent data for onAllNodesReplicated, because maybe there are several ref replications that trigger the same onAllNodesReplicated.",
+      "parentUuid": "c1228989_65fc66e8",
       "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -194,6 +284,24 @@
     },
     {
       "key": {
+        "uuid": "5e3598d0_f2f3a819",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-10-11T06:26:20Z",
+      "side": 1,
+      "message": "yes, it maybe for more than one ref.",
+      "parentUuid": "a171158e_14f594fd",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c174497d_b50ce054",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
         "patchSetId": 2
@@ -205,6 +313,24 @@
       "writtenOn": "2013-10-10T12:43:41Z",
       "side": 1,
       "message": "nit: looks like we don\u0027t use spaces before and after ++ in our code",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e3aa4c5_51e5d452",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-10-11T06:26:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c174497d_b50ce054",
       "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -234,6 +360,24 @@
     },
     {
       "key": {
+        "uuid": "5e3598d0_d2f0a40f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-10-11T06:26:20Z",
+      "side": 1,
+      "message": "Yes, we can remove this.",
+      "parentUuid": "c1228989_25f26e16",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c174497d_d5015c1b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
         "patchSetId": 2
@@ -257,6 +401,24 @@
     },
     {
       "key": {
+        "uuid": "5e3598d0_b2fd20e6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-10-11T06:26:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c174497d_d5015c1b",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1228989_8507a22f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
         "patchSetId": 2
@@ -274,6 +436,24 @@
         "endLine": 228,
         "endChar": 15
       },
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e3598d0_92fa1cea",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-10-11T06:26:20Z",
+      "side": 1,
+      "message": "totalPushTaskCount is the total count for all ref.",
+      "parentUuid": "c1228989_8507a22f",
       "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
