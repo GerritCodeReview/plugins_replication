@@ -202,6 +202,24 @@
     },
     {
       "key": {
+        "uuid": "3e3aa4c5_b1a1a0ec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-11T13:48:41Z",
+      "side": 1,
+      "message": "\u003e Any suggestion regarding this issue?\n\nMaybe stream event should be extended to support that events without an associated change can be streamed?\n\nThe replication plugin listens on the GitReferenceUpdated event (means on ANY reference) and, for me, it makes sense that it also posts events for ANY reference.",
+      "parentUuid": "e1778d7c_9607ec2f",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1228989_65fc66e8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
         "patchSetId": 2
@@ -296,6 +314,24 @@
       "side": 1,
       "message": "yes, it maybe for more than one ref.",
       "parentUuid": "a171158e_14f594fd",
+      "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e3598d0_929e9caa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-11T13:48:41Z",
+      "side": 1,
+      "message": "\u003e totalPushTasksCount can be the count for more that one ref\n\nTechnically correct. However, I think we never pass more than one Update for one Event and we could change that API. I will try that.\n\nIf we look at the place where the GitReferenceUpdated event is fired (GitReferenceUpdated:58):\n\n    Event event \u003d new Event(project, ref, o.name(), n.name());\n    for (GitReferenceUpdatedListener l : listeners) {\n      try {\n        l.onGitReferenceUpdated(event);\n      } catch (RuntimeException e) {\n        log.warn(\"Failure in GitReferenceUpdatedListener\", e);\n      }\n    }\n\nand at the Event.getUpdates() (GitReferenceUpdated:88):\n\n    public List\u003cGitReferenceUpdatedListener.Update\u003e getUpdates() {\n      GitReferenceUpdatedListener.Update update \u003d\n          new GitReferenceUpdatedListener.Update() {\n            @Override\n            public String getRefName() {\n              return ref;\n            }\n\n            @Override\n            public String getOldObjectId() {\n              return oldObjectId;\n            }\n\n            @Override\n            public String getNewObjectId() {\n              return newObjectId;\n            }\n          };\n      return ImmutableList.of(update);\n\nI see that we always have only one Update object inside one Event object.",
+      "parentUuid": "5e3598d0_f2f3a819",
       "revId": "c3220b5ec24dbcce455937a2b49a40cba74d9536",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
