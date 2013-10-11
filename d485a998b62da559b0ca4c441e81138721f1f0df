@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ef16050_20ef8a33",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2013-10-11T06:54:13Z",
+      "side": 1,
+      "message": "We used to pass the URI, but now pass only the host:port string? Why can\u0027t the formatting happen using the uri in the implementation of this method?",
+      "range": {
+        "startLine": 230,
+        "startChar": 80,
+        "endLine": 230,
+        "endChar": 88
+      },
+      "revId": "d485a998b62da559b0ca4c441e81138721f1f0df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ef16050_40ea8e23",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2013-10-11T06:54:13Z",
+      "side": 1,
+      "message": "nit: space after ) before {",
+      "range": {
+        "startLine": 576,
+        "startChar": 30,
+        "endLine": 576,
+        "endChar": 35
+      },
+      "revId": "d485a998b62da559b0ca4c441e81138721f1f0df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
