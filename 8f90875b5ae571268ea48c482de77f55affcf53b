@@ -16,6 +16,24 @@
       "revId": "8f90875b5ae571268ea48c482de77f55affcf53b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e66c012_58e05d44",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-10-12T06:08:57Z",
+      "side": 1,
+      "message": "I think seperating PatchsetReplicatedEvent from other ref replication event has some advantage:\n1. Patchset may has more interesting for tools that interact with gerrit, and these tools will not bother to differentiate which one is a patchset replication by compare \"refs/changes/\".\n2. PatchsetReplicatedEvent may provide more infomation about a change and patchset if some tools need them.",
+      "parentUuid": "fef56c3d_fff37f19",
+      "revId": "8f90875b5ae571268ea48c482de77f55affcf53b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
