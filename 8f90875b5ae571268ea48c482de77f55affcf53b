@@ -34,6 +34,24 @@
       "revId": "8f90875b5ae571268ea48c482de77f55affcf53b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ece304a_acfa83e9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-15T18:09:03Z",
+      "side": 1,
+      "message": "If we take jenkins gerrit-trigger plugin for example, it will need other refs event, patchset-replicated is not enough. When a build is configured to trigger on ref-updated or change merged, it will need to wait for ref replicated which are not refs/changes.\n\nI still think it would be easier to just send ref-replicated event for any ref replicated. Tools won\u0027t have to differentiate ref-replicated since the patchset-created contains the ref name so the tools just need to wait for that specific ref to be replicated.",
+      "parentUuid": "1e66c012_58e05d44",
+      "revId": "8f90875b5ae571268ea48c482de77f55affcf53b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
