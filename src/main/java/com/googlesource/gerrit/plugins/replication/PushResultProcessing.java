@@ -14,9 +14,22 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.gerrit.common.ChangeHooks;
+import com.google.gerrit.reviewdb.client.Branch;
+import com.google.gerrit.reviewdb.client.Change;
+import com.google.gerrit.reviewdb.client.PatchSet;
+import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.reviewdb.server.ReviewDb;
+import com.google.gerrit.server.events.ChangeEvent;
+import com.google.gerrit.server.project.NoSuchChangeException;
+import com.google.gwtorm.server.OrmException;
+import com.google.gwtorm.server.SchemaFactory;
+
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
 import org.eclipse.jgit.transport.URIish;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -114,15 +127,73 @@ public abstract class PushResultProcessing {
   }
 
   public static class GitUpdateProcessing extends PushResultProcessing {
+    static final Logger log = LoggerFactory.getLogger(GitUpdateProcessing.class);
+
+    private final ChangeHooks hooks;
+    private final SchemaFactory<ReviewDb> schema;
+    private String replicatedProject;
+    private String replicatedRef;
+
+    public GitUpdateProcessing(ChangeHooks hooks, SchemaFactory<ReviewDb> schema) {
+      this.hooks = hooks;
+      this.schema = schema;
+    }
+
     @Override
     void onOneNodeReplicated(String project, String ref, URIish uri,
         RefPushResult status) {
-      //TODO: send stream events
+      updateReplicationInfo(project, ref);
+      RefReplicatedEvent event =
+          new RefReplicatedEvent(project, ref, resolveNodeName(uri), status);
+      postEvent(project, ref, event);
     }
 
     @Override
     void onAllNodesReplicated(int totalPushTasksCount) {
-      //TODO: send stream events
+      if (totalPushTasksCount == 0) {
+        return;
+      }
+      RefReplicationDoneEvent event =
+          new RefReplicationDoneEvent(replicatedProject, replicatedRef,
+              totalPushTasksCount);
+      postEvent(replicatedProject, replicatedRef, event);
+    }
+
+    private synchronized void updateReplicationInfo(String project, String ref) {
+      if (replicatedProject == null) {
+        replicatedProject = project;
+      }
+      if (replicatedRef == null) {
+        replicatedRef = ref;
+      }
+    }
+
+    private void postEvent(String project, String ref, ChangeEvent event) {
+      if (PatchSet.isRef(ref)) {
+        try {
+          ReviewDb db = schema.open();
+          try {
+            hooks.postEvent(retrieveChange(ref, db), event, db);
+          } finally {
+            db.close();
+          }
+        } catch (Exception e) {
+          log.error("Cannot post event", e);
+        }
+      }else{
+        Branch.NameKey branch = new Branch.NameKey(Project.NameKey.parse(project), ref);
+        hooks.postEvent(branch, event);
+      }
+    }
+
+    private Change retrieveChange(String ref,ReviewDb db)
+        throws OrmException, NoSuchChangeException {
+      PatchSet.Id id = PatchSet.Id.fromRef(ref);
+      Change change = db.changes().get(id.getParentKey());
+      if (change == null) {
+        throw new NoSuchChangeException(id.getParentKey());
+      }
+      return change;
     }
   }
 
