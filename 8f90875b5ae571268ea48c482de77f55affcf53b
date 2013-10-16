@@ -70,6 +70,24 @@
       "revId": "8f90875b5ae571268ea48c482de77f55affcf53b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ece304a_8ca1c7ec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-16T17:39:59Z",
+      "side": 1,
+      "message": "You are right, we must post event using the method that require a change is the ref is a change otherwise we use the other one. See the change I have submitted: https://gerrit-review.googlesource.com/#/c/50920",
+      "parentUuid": "7ecb3c3d_6b7241a4",
+      "revId": "8f90875b5ae571268ea48c482de77f55affcf53b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
