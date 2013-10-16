@@ -18,6 +18,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.gerrit.common.ChangeHooks;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.NewProjectCreatedListener;
@@ -90,6 +91,7 @@ class ReplicationQueue implements
   private final PluginUser pluginUser;
   private final GitRepositoryManager gitRepositoryManager;
   private final GroupBackend groupBackend;
+  private final ChangeHooks changeHooks;
   private volatile boolean running;
   boolean replicateAllOnPluginStart;
 
@@ -97,7 +99,8 @@ class ReplicationQueue implements
   ReplicationQueue(final Injector i, final WorkQueue wq, final SitePaths site,
       final RemoteSiteUser.Factory ruf, final PluginUser pu,
       final SchemaFactory<ReviewDb> db,
-      final GitRepositoryManager grm, final GroupBackend gb)
+      final GitRepositoryManager grm, final GroupBackend gb,
+      final ChangeHooks ch)
       throws ConfigInvalidException, IOException {
     injector = i;
     workQueue = wq;
@@ -106,6 +109,7 @@ class ReplicationQueue implements
     pluginUser = pu;
     gitRepositoryManager = grm;
     groupBackend = gb;
+    changeHooks = ch;
     configs = allDestinations(new File(site.etc_dir, "replication.config"));
   }
 
@@ -149,8 +153,7 @@ class ReplicationQueue implements
 
   @Override
   public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
-    ReplicationState state = new ReplicationState(new GitUpdateProcessing());
-
+    ReplicationState state = new ReplicationState(new GitUpdateProcessing(changeHooks, database));
     if (!running) {
       wrappedLog.warn("Replication plugin did not finish startup before event", state);
       return;
