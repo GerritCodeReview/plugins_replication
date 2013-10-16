@@ -149,8 +149,7 @@ class ReplicationQueue implements
 
   @Override
   public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
-    ReplicationState state = new ReplicationState(new GitUpdateProcessing());
-
+    ReplicationState state = new ReplicationState(injector.getInstance(GitUpdateProcessing.class));
     if (!running) {
       wrappedLog.warn("Replication plugin did not finish startup before event", state);
       return;
