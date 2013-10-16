@@ -156,12 +156,10 @@ class ReplicationQueue implements
     }
 
     Project.NameKey project = new Project.NameKey(event.getProjectName());
-    for (GitReferenceUpdatedListener.Update u : event.getUpdates()) {
-      for (Destination cfg : configs) {
-        if (cfg.wouldPushProject(project) && cfg.wouldPushRef(u.getRefName())) {
-          for (URIish uri : cfg.getURIs(project, null)) {
-            cfg.schedule(project, u.getRefName(), uri, state);
-          }
+    for (Destination cfg : configs) {
+      if (cfg.wouldPushProject(project) && cfg.wouldPushRef(event.getRefName())) {
+        for (URIish uri : cfg.getURIs(project, null)) {
+          cfg.schedule(project, event.getRefName(), uri, state);
         }
       }
     }
