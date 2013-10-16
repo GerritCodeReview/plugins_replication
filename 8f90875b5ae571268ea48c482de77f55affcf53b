@@ -52,6 +52,24 @@
       "revId": "8f90875b5ae571268ea48c482de77f55affcf53b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ecb3c3d_6b7241a4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1010992
+      },
+      "writtenOn": "2013-10-16T07:16:55Z",
+      "side": 1,
+      "message": "There is a testing for draft change in ChangeHookRunner.isVisibleTo(Change change, IdentifiedUser user, ReviewDb db), I\u0027m not sure that we can bypass it for patchset replication.",
+      "parentUuid": "9ece304a_acfa83e9",
+      "revId": "8f90875b5ae571268ea48c482de77f55affcf53b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
