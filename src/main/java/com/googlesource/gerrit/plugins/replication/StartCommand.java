@@ -21,6 +21,8 @@ import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
 
+import com.googlesource.gerrit.plugins.replication.PushResultProcessing.CommandProcessing;
+
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
 import org.slf4j.Logger;
@@ -65,8 +67,7 @@ final class StartCommand extends SshCommand {
       throw new UnloggedFailure(1, "error: cannot combine --all and PROJECT");
     }
 
-    ReplicationState state =
-        new ReplicationState(ReplicationType.COMMAND, this);
+    ReplicationState state = new ReplicationState(new CommandProcessing(this));
     Future<?> future = null;
     if (all) {
       future = pushAllFactory.create(urlMatch, state).schedule(0, TimeUnit.SECONDS);

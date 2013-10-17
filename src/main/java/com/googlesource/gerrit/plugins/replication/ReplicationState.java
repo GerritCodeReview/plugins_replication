@@ -20,8 +20,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.googlesource.gerrit.plugins.replication.PushResultProcessing.CommandProcessing;
-import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.NoopProcessing;
 
 public class ReplicationState {
@@ -34,23 +32,12 @@ public class ReplicationState {
   private int totalPushTasksCount;
   private int finishedPushTasksCount;
 
-  public ReplicationState(ReplicationType type) {
-    this(type, null);
+  public ReplicationState() {
+    pushResultProcessing = new NoopProcessing();
   }
 
-  public ReplicationState(ReplicationType type, StartCommand sshCommand) {
-    switch(type) {
-      case COMMAND:
-        pushResultProcessing = new CommandProcessing(sshCommand);
-        break;
-      case GIT_UPDATED:
-        pushResultProcessing = new GitUpdateProcessing();
-        break;
-      case STARTUP:
-      default:
-        pushResultProcessing = new NoopProcessing();
-        break;
-    }
+  public ReplicationState(PushResultProcessing processing) {
+    pushResultProcessing = processing;
   }
 
   public void increasePushTaskCount() {

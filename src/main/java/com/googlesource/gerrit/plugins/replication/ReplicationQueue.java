@@ -33,6 +33,8 @@ import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
+import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
+
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
@@ -147,8 +149,7 @@ class ReplicationQueue implements
 
   @Override
   public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
-    ReplicationState state =
-        new ReplicationState(ReplicationType.GIT_UPDATED);
+    ReplicationState state = new ReplicationState(new GitUpdateProcessing());
 
     if (!running) {
       wrappedLog.warn("Replication plugin did not finish startup before event", state);
