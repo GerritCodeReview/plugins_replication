@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1ed5e0ff_805ab629",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-18T14:10:37Z",
+      "side": 1,
+      "message": "Oups, setup issue, fixed now",
+      "parentUuid": "7e109c95_83af3ebf",
+      "revId": "43fe6201993cdd0028bf604050093b89bbb59a4a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ed0e40e_a1b25e25",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-18T13:37:16Z",
       "side": 1,
       "message": "Is this feature useful if it only streams events in some cases and doesn\u0027t do so in other cases?",
+      "revId": "43fe6201993cdd0028bf604050093b89bbb59a4a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be16948d_25848e64",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-18T14:10:37Z",
+      "side": 1,
+      "message": "It think it is useful since most of the replications are cause by a reference updated but the feature will only be complete once we implemented for replication at start up and replication cause by command. You want the event to be implemented for the 2 other use cases as part of this change or I can do it as a separate change?",
+      "parentUuid": "3ed0e40e_a1b25e25",
       "revId": "43fe6201993cdd0028bf604050093b89bbb59a4a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
