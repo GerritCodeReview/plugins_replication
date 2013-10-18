@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "be16948d_c545ba4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-18T13:59:17Z",
+      "side": 1,
+      "message": "Yes, I only intended to send events for replication cause by a reference updated for now. I see the need to get stream events for any cause of replication (start up or command) but I will do that later on. I updated the commit message to be more clear.",
+      "parentUuid": "7e109c95_03c4ee82",
+      "revId": "db8370aa08b71ec16ef2443688cf011415d25ca2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e109c95_63b9620b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2013-10-18T13:34:00Z",
       "side": 1,
       "message": "I see you uploaded a new patch-set but I don\u0027t know your opinion about what I wrote above? Do you agree/disagree?",
+      "parentUuid": "7e109c95_63b9620b",
+      "revId": "db8370aa08b71ec16ef2443688cf011415d25ca2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ed5e0ff_4060aedb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-18T13:59:17Z",
+      "side": 1,
+      "message": "It simplified the code because we no longer need to keep a map of ref updated and I think you are right, we could rely on the totalPushTasksCount for the GitUpdateProcessing. As I said in my comment in the commit message, I think we will need replication event for command and the implementation in the CommandProcessing will need to handle the fact that onOneNodeReplicated will get called for more than one project/ref.",
       "parentUuid": "7e109c95_63b9620b",
       "revId": "db8370aa08b71ec16ef2443688cf011415d25ca2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
