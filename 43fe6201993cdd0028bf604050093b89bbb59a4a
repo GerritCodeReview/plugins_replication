@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e109c95_83af3ebf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-18T13:37:16Z",
+      "side": 1,
+      "message": "Why do you have two different spellings of your name (in the Author line and in the Commit line)?",
+      "revId": "43fe6201993cdd0028bf604050093b89bbb59a4a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ed0e40e_a1b25e25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-18T13:37:16Z",
+      "side": 1,
+      "message": "Is this feature useful if it only streams events in some cases and doesn\u0027t do so in other cases?",
+      "revId": "43fe6201993cdd0028bf604050093b89bbb59a4a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
