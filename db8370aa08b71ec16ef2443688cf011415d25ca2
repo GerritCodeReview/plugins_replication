@@ -33,6 +33,24 @@
       "revId": "db8370aa08b71ec16ef2443688cf011415d25ca2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ed0e40e_81be3af2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-18T13:34:00Z",
+      "side": 1,
+      "message": "I see you uploaded a new patch-set but I don\u0027t know your opinion about what I wrote above? Do you agree/disagree?",
+      "parentUuid": "7e109c95_63b9620b",
+      "revId": "db8370aa08b71ec16ef2443688cf011415d25ca2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
