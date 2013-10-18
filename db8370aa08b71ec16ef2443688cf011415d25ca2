@@ -105,6 +105,24 @@
       "revId": "db8370aa08b71ec16ef2443688cf011415d25ca2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be16948d_a597de92",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-18T14:43:45Z",
+      "side": 1,
+      "message": "This new callback would be great, It would easy to implement the stream event for command, lets me know how it goes.",
+      "parentUuid": "7e109c95_c3a936ba",
+      "revId": "db8370aa08b71ec16ef2443688cf011415d25ca2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
