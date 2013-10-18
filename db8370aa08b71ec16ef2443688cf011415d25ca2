@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e109c95_03c4ee82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-18T12:36:26Z",
+      "side": 1,
+      "message": "From what I see in your code the ref-replicated and ref-replication-done events will NOT be sent when the replication is triggered from the \"start\" command of the replication plugin i.e.:\n\n  $ ssh me@gerrit replication start --all\n\nThe reason is that in that case the ReplicationState will use a CommandProcessing instance instead of a GitUpdateProcessing instance (where your event streaming happens).\n\nIs this behavior intentional? Do you also want to stream events done from the \"start\" command?",
+      "revId": "db8370aa08b71ec16ef2443688cf011415d25ca2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e109c95_63b9620b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-18T12:36:26Z",
+      "side": 1,
+      "message": "I was thinking that after c573d8abf66ccf21187defcd4818e85892a9507d we can rely on the totalPushTaskCount as one event will be fired for one ref. Why do you still need the replicationCount?\n\nOn the other hand, I am not sure if you want to stream events for replications triggered from the \"start\" command (see my comment on the commit message). If yes, then even the assumption that one instance of the ReplicationState will be used to process one RefUpdate event is not true any more. The \"start --all\" will trigger replication of all repositories and all refs and will use one single ReplicationState instance for scheduled replication tasks. Since one ReplicationState instance contains exactly one PushResultProcessing instance, the onOneNodeReplicated would be called with different (project, ref, uri, ..) values. This will not happen with the GitUpdateProcessing instances so this implementation is OK. However, we should keep this fact in mind if we are going to support event streaming for the replications triggered from the \"start\" command (this support would be done into the CommandProcessing class above).",
+      "revId": "db8370aa08b71ec16ef2443688cf011415d25ca2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
