@@ -69,6 +69,24 @@
       "revId": "43fe6201993cdd0028bf604050093b89bbb59a4a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e109c95_23280a63",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-18T14:14:41Z",
+      "side": 1,
+      "message": "I think we could go in smaller steps and continue with the other cases in follow up changes.",
+      "parentUuid": "be16948d_25848e64",
+      "revId": "43fe6201993cdd0028bf604050093b89bbb59a4a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
