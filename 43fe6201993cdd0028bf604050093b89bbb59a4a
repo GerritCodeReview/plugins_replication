@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "be16948d_45938aa8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-18T14:50:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e109c95_633202d3",
+      "revId": "43fe6201993cdd0028bf604050093b89bbb59a4a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e109c95_433706c1",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 5
@@ -118,6 +136,24 @@
       "writtenOn": "2013-10-18T14:26:41Z",
       "side": 1,
       "message": "You don\u0027t need to do that anymore. This class can get injected whatever it needs and then can pass parameters explicitly:\n\n  new ReplicationState(new GitUpdateProcessing(changeHooks, database));\n\nthis.database already exists. You only need to add the injection of the ChangeHooks.",
+      "revId": "43fe6201993cdd0028bf604050093b89bbb59a4a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be16948d_658e8684",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-18T14:50:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e109c95_433706c1",
       "revId": "43fe6201993cdd0028bf604050093b89bbb59a4a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
