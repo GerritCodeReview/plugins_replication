@@ -87,6 +87,24 @@
       "revId": "db8370aa08b71ec16ef2443688cf011415d25ca2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e109c95_c3a936ba",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-18T14:12:53Z",
+      "side": 1,
+      "message": "I am also fine with supporting the other causes of replication later.\n\nWhat I already see is that the implementation in the CommandProcessing will be quite similar to this one but a bit more complex. Maybe the complexity could be reduced by introducing yet another callback method in the PushResultProcessing:\n\n  void onOneRefReplicated(String project, String ref, int totalPushTasksCount)\n\nwhich would be invoked when one ref is replicated to all replication targets. Having a callback like this would simplify both this change and\nthe future change that would support streaming of events when the replication is triggered from the \"start\" command. I will check on Monday how easy/hard it would be to add this new callback. However, this change doesn\u0027t have to wait... if you fix the remaining issues we can submit it and then later simplify this code if/when the new callback is available.",
+      "parentUuid": "1ed5e0ff_4060aedb",
+      "revId": "db8370aa08b71ec16ef2443688cf011415d25ca2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
