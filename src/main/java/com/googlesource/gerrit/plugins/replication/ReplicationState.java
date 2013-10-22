@@ -14,82 +14,99 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import org.eclipse.jgit.transport.URIish;
-
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.NoopProcessing;
 
+import org.eclipse.jgit.transport.URIish;
+
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class ReplicationState {
+
   private boolean allScheduled;
   private final PushResultProcessing pushResultProcessing;
-
-  private final Lock countingLock = new ReentrantLock();
   private final CountDownLatch allPushTasksFinished = new CountDownLatch(1);
-
-  private int totalPushTasksCount;
-  private int finishedPushTasksCount;
+  private final Map<SimpleEntry<String, String>, RefReplicationInfo> replicationInfoPerProjectRef;
+  private final AtomicInteger totalPushTasksCount;
+  private final AtomicInteger finishedPushTasksCount;
 
   public ReplicationState() {
-    pushResultProcessing = new NoopProcessing();
+    this(new NoopProcessing());
   }
 
   public ReplicationState(PushResultProcessing processing) {
     pushResultProcessing = processing;
+    replicationInfoPerProjectRef =
+        new ConcurrentHashMap<SimpleEntry<String, String>, RefReplicationInfo>();
+    totalPushTasksCount = new AtomicInteger();
+    finishedPushTasksCount = new AtomicInteger();
   }
 
-  public void increasePushTaskCount() {
-    countingLock.lock();
-    try {
-      totalPushTasksCount++;
-    } finally {
-      countingLock.unlock();
-    }
+  public void increasePushTaskCount(String project, String ref) {
+    getRefReplicationInfo(project, ref).nodesToReplicateCount.incrementAndGet();
+    totalPushTasksCount.incrementAndGet();
   }
 
   public boolean hasPushTask() {
-    return totalPushTasksCount != 0;
+    return totalPushTasksCount.get() != 0;
   }
 
   public void notifyRefReplicated(String project, String ref, URIish uri,
       RefPushResult status) {
-    pushResultProcessing.onOneNodeReplicated(project, ref, uri, status);
+    pushResultProcessing.onRefReplicatedToOneNode(project, ref, uri, status);
 
-    countingLock.lock();
-    try {
-      finishedPushTasksCount++;
-      if (!allScheduled) {
-        return;
-      }
-      if (finishedPushTasksCount < totalPushTasksCount) {
-        return;
-      }
-    } finally {
-      countingLock.unlock();
+    RefReplicationInfo refReplicationInfo = getRefReplicationInfo(project, ref);
+    refReplicationInfo.replicatedNodesCount.incrementAndGet();
+    if (allScheduled && refReplicationInfo.nodesToReplicateCount.get() == refReplicationInfo.replicatedNodesCount.get()) {
+      fireOnRefReplicatedToAllNodes(project, ref);
     }
 
-    doAllPushTasksCompleted();
+    finishedPushTasksCount.incrementAndGet();
+    verifyAllPushTasksCompleted();
   }
 
   public void markAllPushTasksScheduled() {
-    countingLock.lock();
-    try {
-      allScheduled = true;
-      if (finishedPushTasksCount < totalPushTasksCount) {
-        return;
-      }
-    } finally {
-      countingLock.unlock();
-    }
-
-    doAllPushTasksCompleted();
+    allScheduled = true;
+    verifyAllPushTasksCompleted();
   }
 
-  private void doAllPushTasksCompleted() {
-    pushResultProcessing.onAllNodesReplicated(totalPushTasksCount);
-    allPushTasksFinished.countDown();
+  private void verifyAllPushTasksCompleted() {
+    if (allScheduled && finishedPushTasksCount.get() == totalPushTasksCount.get()) {
+      fireRemainingOnRefReplicatedToAllNodes();
+      pushResultProcessing.onAllRefsReplicatedToAllNodes(totalPushTasksCount.get());
+      allPushTasksFinished.countDown();
+    }
+  }
+
+  private void fireRemainingOnRefReplicatedToAllNodes(){
+    //Some could be remaining if replication of a ref is completed before all tasks are scheduled
+    for (SimpleEntry<String, String> projectRefKey : replicationInfoPerProjectRef.keySet()) {
+      fireOnRefReplicatedToAllNodes(projectRefKey.getKey(), projectRefKey.getValue());
+    }
+  }
+
+  private void fireOnRefReplicatedToAllNodes(String project, String ref) {
+    SimpleEntry<String, String> projectRefKey = new SimpleEntry<String, String>(project, ref);
+    RefReplicationInfo refReplicationInfo = null;
+    refReplicationInfo = replicationInfoPerProjectRef.remove(projectRefKey);
+    if (refReplicationInfo!=null) {
+      pushResultProcessing.onRefReplicatedToAllNodes(
+          refReplicationInfo.project, refReplicationInfo.ref,
+          refReplicationInfo.nodesToReplicateCount.get());
+    }
+  }
+
+  private RefReplicationInfo getRefReplicationInfo(String project, String ref) {
+    SimpleEntry<String, String> projectRefKey = new SimpleEntry<String, String>(project, ref);
+    if (!replicationInfoPerProjectRef.containsKey(projectRefKey)) {
+      RefReplicationInfo refReplicationInfo = new RefReplicationInfo(project, ref);
+      replicationInfoPerProjectRef.put(projectRefKey, refReplicationInfo);
+      return refReplicationInfo;
+    }
+    return replicationInfoPerProjectRef.get(projectRefKey);
   }
 
   public void waitForReplication() throws InterruptedException {
@@ -119,5 +136,19 @@ public class ReplicationState {
      * ref was successfully replicated.
      */
     SUCCEEDED;
+  }
+
+  private class RefReplicationInfo {
+    private final String project;
+    private final String ref;
+    private final AtomicInteger nodesToReplicateCount;
+    private final AtomicInteger replicatedNodesCount;
+
+    public RefReplicationInfo(String project, String ref) {
+      this.project = project;
+      this.ref = ref;
+      nodesToReplicateCount = new AtomicInteger();
+      replicatedNodesCount = new AtomicInteger();
+    }
   }
 }

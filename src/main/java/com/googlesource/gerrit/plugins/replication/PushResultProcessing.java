@@ -22,9 +22,12 @@ import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class PushResultProcessing {
-  abstract void onOneNodeReplicated(String project, String ref, URIish uri, RefPushResult status);
 
-  abstract void onAllNodesReplicated(int totalPushTasksCount);
+  abstract void onRefReplicatedToOneNode(String project, String ref, URIish uri, RefPushResult status);
+
+  abstract void onRefReplicatedToAllNodes(String project, String ref, int nodesCount);
+
+  abstract void onAllRefsReplicatedToAllNodes(int totalPushTasksCount);
 
   void writeStdOut(final String message) {
     // Default doing nothing
@@ -57,7 +60,7 @@ public abstract class PushResultProcessing {
     }
 
     @Override
-    void onOneNodeReplicated(String project, String ref, URIish uri,
+    void onRefReplicatedToOneNode(String project, String ref, URIish uri,
         RefPushResult status) {
       StringBuilder sb = new StringBuilder();
       sb.append("Replicate ");
@@ -84,7 +87,18 @@ public abstract class PushResultProcessing {
     }
 
     @Override
-    void onAllNodesReplicated(int totalPushTasksCount) {
+    void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {
+      StringBuilder sb = new StringBuilder();
+      sb.append("Replication of ");
+      sb.append(project);
+      sb.append(" completed to ");
+      sb.append(nodesCount);
+      sb.append(" nodes, ");
+      writeStdOut(sb.toString());
+    }
+
+    @Override
+    void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {
       if (totalPushTasksCount == 0) {
         return;
       }
@@ -115,25 +129,34 @@ public abstract class PushResultProcessing {
 
   public static class GitUpdateProcessing extends PushResultProcessing {
     @Override
-    void onOneNodeReplicated(String project, String ref, URIish uri,
+    void onRefReplicatedToOneNode(String project, String ref, URIish uri,
         RefPushResult status) {
       //TODO: send stream events
     }
 
     @Override
-    void onAllNodesReplicated(int totalPushTasksCount) {
+    void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {
+      //TODO: send stream events
+    }
+
+    @Override
+    void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {
       //TODO: send stream events
     }
   }
 
   public static class NoopProcessing extends PushResultProcessing {
     @Override
-    void onOneNodeReplicated(String project, String ref, URIish uri,
+    void onRefReplicatedToOneNode(String project, String ref, URIish uri,
         RefPushResult status) {
     }
 
     @Override
-    void onAllNodesReplicated(int totalPushTasksCount) {
+    void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {
+    }
+
+    @Override
+    void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {
     }
   }
 }

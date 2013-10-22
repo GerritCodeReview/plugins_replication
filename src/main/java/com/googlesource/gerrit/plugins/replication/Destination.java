@@ -256,7 +256,7 @@ class Destination {
         pending.put(uri, e);
       }
       e.addRef(ref);
-      state.increasePushTaskCount();
+      state.increasePushTaskCount(project.get(), ref);
       e.addState(ref, state);
     }
   }
