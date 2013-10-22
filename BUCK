@@ -17,6 +17,7 @@ java_test(
   srcs = glob(['src/test/java/**/*.java']),
   deps = [
     ':replication__plugin__compile',
+    '//lib:easymock',
     '//lib:junit',
     '//lib/jgit:jgit',
   ],
