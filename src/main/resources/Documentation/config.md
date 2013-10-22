@@ -284,11 +284,11 @@ If present, Gerrit reads and caches `~/.ssh/config` at startup, and
 supports most SSH configuration options.  For example:
 
 ```
-  Host host-one.example.com:
+  Host host-one.example.com
     IdentityFile ~/.ssh/id_hostone
     PreferredAuthentications publickey
 
-  Host mirror*.us.some.org:
+  Host mirror*.us.some.org
     User mirror-updater
     IdentityFile ~/.ssh/id_pubmirror
     PreferredAuthentications publickey
