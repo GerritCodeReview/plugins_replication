@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3e0d44ea_f902b71e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-24T15:54:29Z",
+      "side": 1,
+      "message": "Done, added in method onRefReplicatedToOneNode also",
+      "parentUuid": "de1b4826_76feb0e1",
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de1b4826_d607c42c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-10-24T14:29:09Z",
       "side": 1,
       "message": "Consider using the com.google.common.collect.Table instead. This is a Map with 2 keys for a value.",
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e0d44ea_990d7b51",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-24T15:54:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de1b4826_d607c42c",
       "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -59,6 +95,24 @@
     },
     {
       "key": {
+        "uuid": "fe064cce_d707bc2c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-24T15:54:29Z",
+      "side": 1,
+      "message": "You are right, put back the counting lock.",
+      "parentUuid": "de1b4826_960d4c51",
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de1b4826_f602c01e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 1
@@ -76,6 +130,24 @@
         "endLine": 51,
         "endChar": 3
       },
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe064cce_f702c01e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-24T15:54:29Z",
+      "side": 1,
+      "message": "You are right, put back the counting lock.",
+      "parentUuid": "de1b4826_f602c01e",
       "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -122,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "3e0d44ea_d907f32c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-24T15:54:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be18542d_55fbacef",
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de1b4826_b6084841",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 1
@@ -133,6 +223,24 @@
       "writtenOn": "2013-10-24T14:29:09Z",
       "side": 1,
       "message": "nit: line too long",
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe064cce_171ad481",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-24T15:54:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de1b4826_b6084841",
       "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -156,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "3e0d44ea_391d4f7a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-24T15:54:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be18542d_75fea8e1",
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de1b4826_56fbb4ef",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 1
@@ -167,6 +293,24 @@
       "writtenOn": "2013-10-24T14:29:09Z",
       "side": 1,
       "message": "Make this class static.\nIt doesn\u0027t need a reference to an instance of the outer class.\nMove it at the top just before the Map is using it.",
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe064cce_371d587a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-10-24T15:54:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de1b4826_56fbb4ef",
       "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
