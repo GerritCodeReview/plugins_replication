@@ -1,0 +1,175 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de1b4826_76feb0e1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-24T14:29:09Z",
+      "side": 1,
+      "message": "What about reporting the ref also? A user may get wrong impression that the whole project was replicated when only one ref (or a subset of all refs) was actually replicated.",
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de1b4826_d607c42c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-24T14:29:09Z",
+      "side": 1,
+      "message": "Consider using the com.google.common.collect.Table instead. This is a Map with 2 keys for a value.",
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de1b4826_960d4c51",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-24T14:29:09Z",
+      "side": 1,
+      "message": "I don\u0027t think this is a good replacement for the (removed) countingLock to maintain the thread safety.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 49
+      },
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de1b4826_f602c01e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-24T14:29:09Z",
+      "side": 1,
+      "message": "Looking at this method and others that access the totalPushTasksCount, finishedPushTasksCount, etc... I don\u0027t think this code is thread safe like it was with the countingLock. While each of these variables is thread safe in isolation, together they are not. Before your change the whole block in the notifyRefReplicated was protected with the countingLock against other threads.\nNow this is not the case. The result of a check in one line may not be valid immediately after that line because another thread may have modified those variables immediately after the check is done.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 3
+      },
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be18542d_15f13412",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-24T14:29:09Z",
+      "side": 1,
+      "message": "Even this single comparison is not thread safe as any of these variables could be\nchanged immediately after its get() method returns and before the get() method of another variable is invoked.\n\nnit: this line is too long",
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be18542d_55fbacef",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-24T14:29:09Z",
+      "side": 1,
+      "message": "nit: lines too long",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 93
+      },
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de1b4826_b6084841",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-24T14:29:09Z",
+      "side": 1,
+      "message": "nit: line too long",
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be18542d_75fea8e1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-24T14:29:09Z",
+      "side": 1,
+      "message": "nit: line too long",
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de1b4826_56fbb4ef",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-10-24T14:29:09Z",
+      "side": 1,
+      "message": "Make this class static.\nIt doesn\u0027t need a reference to an instance of the outer class.\nMove it at the top just before the Map is using it.",
+      "revId": "8f2cd73f9a900a89e0507b1c95b8b7eef8e33c24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
