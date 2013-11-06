@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e391900_0014c658",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-11-06T20:18:21Z",
+      "side": 1,
+      "message": "optional: could be named RefReplicationStatus\n\nand then it could have a method:\n\n  boolean allDone() {\n    return replicatedNodesCount \u003d\u003d nodesToReplicationCount;\n  }\n\nwhich could be used at the line 85",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de77c87c_b6e4e858",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-11-06T20:18:21Z",
+      "side": 1,
+      "message": "optional: a shorter name like \"statusByProjectRef\" or \"statusByRef\" or just \"status\" would probably make the rest of the code easier to read:\n\n  status.get(project, ref)\n\nThe \"replication\" part of the name is, for me, assumed since we are in the ReplicationState class.",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e2f11b5_e210c666",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-11-06T20:18:21Z",
+      "side": 1,
+      "message": "either use the allDone() method as proposed above or swap the left and right side of comparison to have it consistent with the line 88 (done count at the left and total count at the right side)",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e2f11b5_0214ca58",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-11-06T20:18:21Z",
+      "side": 1,
+      "message": "optional:\n\n  allPushTasksCompleted \u003d finishedPushTasksCount \u003d\u003d totalPushTasksCount;",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e391900_a016ba61",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-11-06T20:18:21Z",
+      "side": 1,
+      "message": "nit: use spaces around the !\u003d operator",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e391900_e010c266",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-11-06T20:18:21Z",
+      "side": 1,
+      "message": "I think I understood the need for this: we can only reliably check if a ref is replicated to all nodes if we are sure that all replication tasks are already scheduled. This is because we don\u0027t have \"allScheduled\" on the RefReplicationInfo level.\n\nHowever, don\u0027t we know the number of replication targets in advance? I think yes. If we store that number in this class then we could move the lines 85-87 out of the \"if (allScheduled)\" block and check \"allScheduled\" on the RefReplicationInfo level.  This shouldn\u0027t be hard to do and could remove the need for fireRemaningOnRefReplicatedToAllNodes method.",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e2f11b5_422d32ae",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-11-06T20:18:21Z",
+      "side": 1,
+      "message": "nit: convert this comment to javadoc of this method?",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e2f11b5_2232ae0f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2013-11-06T20:18:21Z",
+      "side": 1,
+      "message": "call doRefPushTasksCompleted(refRepInfo) instead of repeating the same code here",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
