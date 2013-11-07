@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1e1a41b4_66e96e28",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-11-07T15:53:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e391900_0014c658",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de77c87c_b6e4e858",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2013-11-06T20:18:21Z",
       "side": 1,
       "message": "optional: a shorter name like \"statusByProjectRef\" or \"statusByRef\" or just \"status\" would probably make the rest of the code easier to read:\n\n  status.get(project, ref)\n\nThe \"replication\" part of the name is, for me, assumed since we are in the ReplicationState class.",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e1a41b4_46eef231",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-11-07T15:53:16Z",
+      "side": 1,
+      "message": "Done, I like statusByProjectRef. It\u0027s shorter and but we are still able to determine what this table is holding.",
+      "parentUuid": "de77c87c_b6e4e858",
       "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "1e1a41b4_a6f24612",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-11-07T15:53:16Z",
+      "side": 1,
+      "message": "Done, use allDone as suggested",
+      "parentUuid": "9e2f11b5_e210c666",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e2f11b5_0214ca58",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2013-11-06T20:18:21Z",
       "side": 1,
       "message": "optional:\n\n  allPushTasksCompleted \u003d finishedPushTasksCount \u003d\u003d totalPushTasksCount;",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e2545ef_47eeee31",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-11-07T15:53:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e2f11b5_0214ca58",
       "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "1e1a41b4_86ef4a2a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-11-07T15:53:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e391900_a016ba61",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e391900_e010c266",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 4
@@ -98,6 +188,24 @@
       "writtenOn": "2013-11-06T20:18:21Z",
       "side": 1,
       "message": "I think I understood the need for this: we can only reliably check if a ref is replicated to all nodes if we are sure that all replication tasks are already scheduled. This is because we don\u0027t have \"allScheduled\" on the RefReplicationInfo level.\n\nHowever, don\u0027t we know the number of replication targets in advance? I think yes. If we store that number in this class then we could move the lines 85-87 out of the \"if (allScheduled)\" block and check \"allScheduled\" on the RefReplicationInfo level.  This shouldn\u0027t be hard to do and could remove the need for fireRemaningOnRefReplicatedToAllNodes method.",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e1a41b4_c6f942f7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-11-07T15:53:16Z",
+      "side": 1,
+      "message": "Like you said, we can only reliably check if a ref is replicated to all nodes if we are sure that all replication tasks are already scheduled.\n\nEven if we bring the allScheduled at the RefReplicationInfo level, we still need the global allScheduled to be able to fire the last callback(onAllRefsReplicatedToAllNodes) and since the replication is done asynchronously, there is still a chance that the replication of the ref is completed before we mark it as all scheduled.\n\nThe only advantages I see to have the allScheduled at the RefReplicationInfo level is that we could fire the event for the replications that complete before they are marked as all scheduled more often(we could check every time a ref is done to one node) and not wait until all the push task are completed before sending the missing events.\n\nI am not sure it\u0027s worth it to add this complexity (another method plus we must keep the original allScheduled and the fireRemainingOnRefReplicatedToAllNodes) for this corner case. It is unlikely that the replication complete before it is all scheduled.",
+      "parentUuid": "5e391900_e010c266",
       "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "1e1a41b4_e6fc3ee9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-11-07T15:53:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e2f11b5_422d32ae",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e2f11b5_2232ae0f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 4
@@ -132,6 +258,24 @@
       "writtenOn": "2013-11-06T20:18:21Z",
       "side": 1,
       "message": "call doRefPushTasksCompleted(refRepInfo) instead of repeating the same code here",
+      "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e2545ef_a7f24a12",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2013-11-07T15:53:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e2f11b5_2232ae0f",
       "revId": "b7b894b62cfc48d3b8481a4ee80de11e4bfae1c3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
