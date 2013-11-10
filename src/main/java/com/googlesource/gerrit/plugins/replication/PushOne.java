@@ -363,6 +363,8 @@ class PushOne implements ProjectRunnable {
       return new PushResult();
     }
 
+    log.info("Push to " + uri + " references: " + todo);
+
     return tn.push(NullProgressMonitor.INSTANCE, todo);
   }
 
