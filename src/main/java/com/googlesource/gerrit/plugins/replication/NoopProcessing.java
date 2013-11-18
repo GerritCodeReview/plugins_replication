@@ -18,33 +18,17 @@ import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResul
 
 import org.eclipse.jgit.transport.URIish;
 
-public abstract class PushResultProcessing {
-
-  abstract void onRefReplicatedToOneNode(String project, String ref, URIish uri, RefPushResult status);
-
-  abstract void onRefReplicatedToAllNodes(String project, String ref, int nodesCount);
-
-  abstract void onAllRefsReplicatedToAllNodes(int totalPushTasksCount);
-
-  void writeStdOut(final String message) {
-    // Default doing nothing
+public class NoopProcessing extends PushResultProcessing {
+  @Override
+  void onRefReplicatedToOneNode(String project, String ref, URIish uri,
+      RefPushResult status) {
   }
 
-  void writeStdErr(final String message) {
-    // Default doing nothing
+  @Override
+  void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {
   }
 
-  protected static String resolveNodeName(URIish uri) {
-    StringBuilder sb = new StringBuilder();
-    if (uri.isRemote()) {
-      sb.append(uri.getHost());
-      if (uri.getPort() != -1) {
-        sb.append(":");
-        sb.append(uri.getPort());
-      }
-    } else {
-      sb.append(uri.getPath());
-    }
-    return sb.toString();
+  @Override
+  void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {
   }
 }

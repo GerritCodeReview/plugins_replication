@@ -34,8 +34,6 @@ import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
-
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;

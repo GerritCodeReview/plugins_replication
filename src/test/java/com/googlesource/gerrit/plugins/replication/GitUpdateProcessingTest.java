@@ -34,7 +34,6 @@ import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
 import com.google.gwtorm.server.StandardKeyEncoder;
 
-import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
 import junit.framework.TestCase;
