@@ -20,6 +20,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.ChangeHooks;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
@@ -67,7 +68,8 @@ class ReplicationQueue implements
     LifecycleListener,
     GitReferenceUpdatedListener,
     NewProjectCreatedListener,
-    ProjectDeletedListener {
+    ProjectDeletedListener,
+    HeadUpdatedListener {
   static final Logger log = LoggerFactory.getLogger(ReplicationQueue.class);
   private static final WrappedLogger wrappedLog = new WrappedLogger(log);
 
@@ -263,6 +265,13 @@ class ReplicationQueue implements
     }
   }
 
+  @Override
+  public void onHeadUpdated(HeadUpdatedListener.Event event) {
+    for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()), false)) {
+      updateHead(uri, event.getNewHeadName());
+    }
+  }
+
   private Set<URIish> getURIs(Project.NameKey projectName,
       boolean forProjectDeletion) {
     if (configs.isEmpty()) {
@@ -427,6 +436,51 @@ class ReplicationQueue implements
           + "  Command: %s\n"
           + "  Output: %s",
           uri, e, cmd, errStream), e);
+    }
+  }
+
+  private void updateHead(URIish replicateURI, String newHead) {
+    if (!replicateURI.isRemote()) {
+      updateHeadLocally(replicateURI, newHead);
+    } else if (isSSH(replicateURI)) {
+      updateHeadRemoteSsh(replicateURI, newHead);
+    } else {
+      log.warn(String.format("Cannot update HEAD of project on remote site %s."
+          + " Only local paths and SSH URLs are supported"
+          + " for remote HEAD update.", replicateURI));
+    }
+  }
+
+  private static void updateHeadRemoteSsh(URIish uri, String newHead) {
+    String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
+    String cmd = "cd " + quotedPath
+            + " && git symbolic-ref HEAD " + QuotedString.BOURNE.quote(newHead);
+    OutputStream errStream = newErrorBufferStream();
+    try {
+      executeRemotSsh(uri, cmd, errStream);
+    } catch (IOException e) {
+      log.error(String.format(
+             "Error updating HEAD of remote repository at %s to %s:\n"
+          + "  Exception: %s\n"
+          + "  Command: %s\n"
+          + "  Output: %s",
+          uri, newHead, e, cmd, errStream), e);
+    }
+  }
+
+  private static void updateHeadLocally(URIish uri, String newHead) {
+    try {
+      Repository repo = new FileRepository(uri.getPath());
+      try {
+        if (newHead != null) {
+          RefUpdate u = repo.updateRef(Constants.HEAD);
+          u.link(newHead);
+        }
+      } finally {
+        repo.close();
+      }
+    } catch (IOException e) {
+      log.error(String.format("Failed to update HEAD of repository %s to %s", uri.getPath(), newHead), e);
     }
   }
 
