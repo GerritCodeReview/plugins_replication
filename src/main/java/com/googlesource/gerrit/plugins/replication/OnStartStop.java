@@ -28,15 +28,18 @@ class OnStartStop implements LifecycleListener {
   private final ServerInformation srvInfo;
   private final PushAll.Factory pushAll;
   private final ReplicationQueue queue;
+  private final ReplicationConfig config;
 
   @Inject
   OnStartStop(
       ServerInformation srvInfo,
       PushAll.Factory pushAll,
-      ReplicationQueue queue) {
+      ReplicationQueue queue,
+      ReplicationConfig config) {
     this.srvInfo = srvInfo;
     this.pushAll = pushAll;
     this.queue = queue;
+    this.config = config;
     this.pushAllFuture = Atomics.newReference();
   }
 
@@ -45,7 +48,7 @@ class OnStartStop implements LifecycleListener {
     queue.start();
 
     if (srvInfo.getState() == ServerInformation.State.STARTUP
-        && queue.replicateAllOnPluginStart) {
+        && config.isReplicateAllOnPluginStart()) {
       ReplicationState state = new ReplicationState();
       pushAllFuture.set(pushAll.create(null, state).schedule(30, TimeUnit.SECONDS));
     }

@@ -80,7 +80,6 @@ class ReplicationQueue implements
   private final ChangeHooks changeHooks;
   private final ReplicationConfig config;
   private volatile boolean running;
-  boolean replicateAllOnPluginStart;
 
   @Inject
   ReplicationQueue(final WorkQueue wq, final ReplicationConfig rc,
