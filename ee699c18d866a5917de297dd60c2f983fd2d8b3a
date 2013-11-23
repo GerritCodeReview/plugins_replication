@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e2cb97a_a80abb38",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2013-11-23T14:59:21Z",
+      "side": 1,
+      "message": "s/that/than",
+      "range": {
+        "startLine": 18,
+        "startChar": 38,
+        "endLine": 18,
+        "endChar": 42
+      },
+      "revId": "ee699c18d866a5917de297dd60c2f983fd2d8b3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e31c5d1_4714ce59",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2013-11-23T14:59:21Z",
+      "side": 1,
+      "message": "s/Factory/RemoteSiteUser.Factory\n\nWe have to many factories and never import them directly.",
+      "range": {
+        "startLine": 45,
+        "startChar": 16,
+        "endLine": 45,
+        "endChar": 23
+      },
+      "revId": "ee699c18d866a5917de297dd60c2f983fd2d8b3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e31c5d1_2717da60",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2013-11-23T14:59:21Z",
+      "side": 1,
+      "message": "nit: space too much",
+      "range": {
+        "startLine": 46,
+        "startChar": 16,
+        "endLine": 46,
+        "endChar": 17
+      },
+      "revId": "ee699c18d866a5917de297dd60c2f983fd2d8b3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e2cb97a_c8ffefd5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2013-11-23T14:59:21Z",
+      "side": 1,
+      "message": "Are these really events that are discarded? Why is the shutdown not waiting until all events have been processed? It\u0027s quite bad to loose replication events...\n\nMaybe this question is not directly related to this change.",
+      "range": {
+        "startLine": 99,
+        "startChar": 14,
+        "endLine": 99,
+        "endChar": 57
+      },
+      "revId": "ee699c18d866a5917de297dd60c2f983fd2d8b3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e31c5d1_6711d268",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2013-11-23T14:59:21Z",
+      "side": 1,
+      "message": "wrong indention",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 74,
+        "endChar": 66
+      },
+      "revId": "ee699c18d866a5917de297dd60c2f983fd2d8b3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
