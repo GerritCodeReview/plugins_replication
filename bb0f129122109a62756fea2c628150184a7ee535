@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e34b1672_e41f5a6f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1012758
+      },
+      "writtenOn": "2013-11-26T09:08:24Z",
+      "side": 1,
+      "message": "nit: Trailing whitespace.",
+      "range": {
+        "startLine": 13,
+        "startChar": 44,
+        "endLine": 13,
+        "endChar": 45
+      },
+      "revId": "bb0f129122109a62756fea2c628150184a7ee535",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
