@@ -32,6 +32,7 @@ import com.google.inject.internal.UniqueAnnotations;
 class ReplicationModule extends AbstractModule {
   @Override
   protected void configure() {
+    bind(ReplicationConfig.class);
     bind(ReplicationQueue.class).in(Scopes.SINGLETON);
 
     DynamicSet.bind(binder(), GitReferenceUpdatedListener.class)
