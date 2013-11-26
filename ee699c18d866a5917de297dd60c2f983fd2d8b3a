@@ -148,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "83889ae3_a114de5b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2013-11-26T08:31:50Z",
+      "side": 1,
+      "message": "Yes, I noticed that this is the same shutdown behaviour as before. This should be fixed in another change.",
+      "parentUuid": "83889ae3_e11ae687",
+      "revId": "ee699c18d866a5917de297dd60c2f983fd2d8b3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e31c5d1_6711d268",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 7
