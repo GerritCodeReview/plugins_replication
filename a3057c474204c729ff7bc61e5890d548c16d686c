@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "a383dec3_2201ae1c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2013-11-26T08:29:53Z",
+      "side": 1,
+      "message": "Not really, for sure a String.format() is slower and not necessarily clearer (as your eyes need to go back and forth to see what is what)",
+      "parentUuid": "c348d27a_43e3c64a",
+      "revId": "a3057c474204c729ff7bc61e5890d548c16d686c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c348d27a_23e8ca22",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
         "patchSetId": 8
@@ -42,6 +60,24 @@
         "endLine": 90,
         "endChar": 42
       },
+      "revId": "a3057c474204c729ff7bc61e5890d548c16d686c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83889ae3_810c3a56",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2013-11-26T08:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c348d27a_23e8ca22",
       "revId": "a3057c474204c729ff7bc61e5890d548c16d686c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "a383dec3_42063236",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2013-11-26T08:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c348d27a_03edce32",
+      "revId": "a3057c474204c729ff7bc61e5890d548c16d686c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c348d27a_e3f19211",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 8
@@ -88,6 +142,24 @@
         "endLine": 74,
         "endChar": 66
       },
+      "revId": "a3057c474204c729ff7bc61e5890d548c16d686c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a383dec3_e21ae687",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2013-11-26T08:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c348d27a_e3f19211",
       "revId": "a3057c474204c729ff7bc61e5890d548c16d686c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
