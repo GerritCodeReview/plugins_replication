@@ -48,6 +48,24 @@
     },
     {
       "key": {
+        "uuid": "a383dec3_02182a8d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2013-11-26T08:29:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e31c5d1_4714ce59",
+      "revId": "ee699c18d866a5917de297dd60c2f983fd2d8b3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e31c5d1_2717da60",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
         "patchSetId": 7
@@ -65,6 +83,24 @@
         "endLine": 46,
         "endChar": 17
       },
+      "revId": "ee699c18d866a5917de297dd60c2f983fd2d8b3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83889ae3_41063236",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2013-11-26T08:29:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e31c5d1_2717da60",
       "revId": "ee699c18d866a5917de297dd60c2f983fd2d8b3a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -94,6 +130,24 @@
     },
     {
       "key": {
+        "uuid": "83889ae3_e11ae687",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2013-11-26T08:29:45Z",
+      "side": 1,
+      "message": "Fair point, the problem is more related to the replication shutdown as it is today (and it was before).\n\nI think there should be another change after that to introduce a more \"graceful\" shutdown in order to allow pending events to complete: I simply left current logic \u0027as-is\u0027 in this change, with the good and bad on how it was before.\n\nI do prefer to introduce the graceful shutdown / reload with another individual change after that (and I agree, it makes sense to allow existing events to complete).",
+      "parentUuid": "5e2cb97a_c8ffefd5",
+      "revId": "ee699c18d866a5917de297dd60c2f983fd2d8b3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e31c5d1_6711d268",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 7
@@ -111,6 +165,24 @@
         "endLine": 74,
         "endChar": 66
       },
+      "revId": "ee699c18d866a5917de297dd60c2f983fd2d8b3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a383dec3_622c96b2",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2013-11-26T08:29:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e31c5d1_6711d268",
       "revId": "ee699c18d866a5917de297dd60c2f983fd2d8b3a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
