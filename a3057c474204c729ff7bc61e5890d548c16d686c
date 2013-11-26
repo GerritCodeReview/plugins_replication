@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c348d27a_43e3c64a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-11-26T06:47:12Z",
+      "side": 1,
+      "message": "How about:\n\n \"Config file \" + config.getFile() + \" does not exist\"\n\n?\n\nAnd is it better to use String.format instead of concatenation?",
+      "range": {
+        "startLine": 86,
+        "startChar": 15,
+        "endLine": 86,
+        "endChar": 39
+      },
+      "revId": "a3057c474204c729ff7bc61e5890d548c16d686c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c348d27a_23e8ca22",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-11-26T06:47:12Z",
+      "side": 1,
+      "message": "\"Config file \" + config.getFile() + \" is empty\"",
+      "range": {
+        "startLine": 90,
+        "startChar": 15,
+        "endLine": 90,
+        "endChar": 42
+      },
+      "revId": "a3057c474204c729ff7bc61e5890d548c16d686c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c348d27a_03edce32",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-11-26T06:47:12Z",
+      "side": 1,
+      "message": "Enclose in backticks.",
+      "range": {
+        "startLine": 72,
+        "startChar": 10,
+        "endLine": 72,
+        "endChar": 28
+      },
+      "revId": "a3057c474204c729ff7bc61e5890d548c16d686c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c348d27a_e3f19211",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-11-26T06:47:12Z",
+      "side": 1,
+      "message": "Tabs are missing on this paragraph.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 66
+      },
+      "revId": "a3057c474204c729ff7bc61e5890d548c16d686c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
