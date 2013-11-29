@@ -124,8 +124,8 @@ remote.NAME.uploadpack
 
 remote.NAME.push
 :	Standard Git refspec denoting what should be replicated.
-	Setting this to `+refs/heads/*:refs/heads/*` would mirror only
-	the active branches, but not the change refs under
+	Setting this to `+refs/heads/*:refs/heads/*` would mirror using
+	forced push only the active branches, but not the change refs under
 	`refs/changes/`, or the tags under `refs/tags/`.
 
 	Multiple push keys can be supplied, to specify multiple
@@ -134,7 +134,7 @@ remote.NAME.push
 	and `refs/tags/*`, but excludes all others, including
 	`refs/changes/*`.
 
-	Defaults to `+refs/*:refs/*` (all refs) if not specified.
+	Defaults to `refs/*:refs/*` (push all refs) if not specified.
 
 [2]: #example_file
 
