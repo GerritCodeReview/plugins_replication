@@ -127,6 +127,11 @@ remote.NAME.push
 	Setting this to `+refs/heads/*:refs/heads/*` would mirror only
 	the active branches, but not the change refs under
 	`refs/changes/`, or the tags under `refs/tags/`.
+	Note that prefixing a source refspec with `+` causes the replication
+	to be done with a `git push --force` command.
+	Be aware that when you are pushing to remote repositories that may
+	have read/write access (e.g. GitHub) you may want to omit the `+`
+	for not risking to overwrite remote branches.
 
 	Multiple push keys can be supplied, to specify multiple
 	patterns to match against.  In the [example above][2], remote
@@ -134,7 +139,7 @@ remote.NAME.push
 	and `refs/tags/*`, but excludes all others, including
 	`refs/changes/*`.
 
-	Defaults to `+refs/*:refs/*` (all refs) if not specified.
+	Defaults to `refs/*:refs/*` (push all refs) if not specified.
 
 [2]: #example_file
 

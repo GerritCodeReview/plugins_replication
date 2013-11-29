@@ -118,8 +118,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
       }
 
       if (c.getPushRefSpecs().isEmpty()) {
-        c.addPushRefSpec(new RefSpec().setSourceDestination("refs/*", "refs/*")
-            .setForceUpdate(true));
+        c.addPushRefSpec(new RefSpec().setSourceDestination("refs/*", "refs/*"));
       }
 
       Destination destination =
