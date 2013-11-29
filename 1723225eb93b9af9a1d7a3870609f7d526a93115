@@ -22,6 +22,30 @@
       "revId": "1723225eb93b9af9a1d7a3870609f7d526a93115",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3cbde64_c28a024d",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2013-11-29T10:45:29Z",
+      "side": 0,
+      "message": "The leading \u0027+\u0027 on the refspec indicates a \"forced push\" operation: the change proposed avoid doing \"forced\" operations by default unless you explicitly put the \u0027+\u0027 in your push config.",
+      "parentUuid": "03174a8c_45626aed",
+      "range": {
+        "startLine": 137,
+        "startChar": 14,
+        "endLine": 137,
+        "endChar": 15
+      },
+      "revId": "1723225eb93b9af9a1d7a3870609f7d526a93115",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
