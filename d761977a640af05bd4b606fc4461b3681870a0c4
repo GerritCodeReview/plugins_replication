@@ -93,6 +93,30 @@
       "revId": "d761977a640af05bd4b606fc4461b3681870a0c4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "231a8eb4_46b0b20d",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-11-29T10:51:13Z",
+      "side": 1,
+      "message": "I would revert the change in this paragraph, and add a new paragraph below this one.  Something like:\n\n\"Note that prefixing a source refspec with `+` causes the replication to be done with force push.\"\n\nAnd perhaps also add another sentence about how the user should be careful about using this when pushing to slaves that are not read-only, for example Github.",
+      "parentUuid": "83d09a10_4168b2cc",
+      "range": {
+        "startLine": 127,
+        "startChar": 59,
+        "endLine": 128,
+        "endChar": 12
+      },
+      "revId": "d761977a640af05bd4b606fc4461b3681870a0c4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
