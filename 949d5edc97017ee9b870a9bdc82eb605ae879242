@@ -16,6 +16,24 @@
       "revId": "949d5edc97017ee9b870a9bdc82eb605ae879242",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03c74ad6_85cce2a5",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2013-12-10T07:09:21Z",
+      "side": 1,
+      "message": "\u003e it is still all there\n\nBut only until git gc is run, right?",
+      "parentUuid": "83d09a10_61d21645",
+      "revId": "949d5edc97017ee9b870a9bdc82eb605ae879242",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
