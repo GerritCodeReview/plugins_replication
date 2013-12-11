@@ -34,6 +34,24 @@
       "revId": "949d5edc97017ee9b870a9bdc82eb605ae879242",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "436302c4_77f970f4",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2013-12-11T08:51:51Z",
+      "side": 1,
+      "message": "Actually the branch is overwritten (intended as branch label pointing to a SHA-1) and the history is tracked on the Git reflog.\n\nIf the commit remains unreferenced in its detached branch, then the git gc would just take the unreferenced BLOBs and TREEs and trash them out :-O\n\nTechnically speaking the branch is overwritten and commits potentially (but not yet until the first git gc) lost.",
+      "parentUuid": "03c74ad6_85cce2a5",
+      "revId": "949d5edc97017ee9b870a9bdc82eb605ae879242",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
