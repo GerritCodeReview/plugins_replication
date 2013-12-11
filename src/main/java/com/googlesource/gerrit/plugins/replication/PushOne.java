@@ -23,6 +23,7 @@ import com.google.common.collect.Sets;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.git.ChangeCache;
 import com.google.gerrit.server.git.GitRepositoryManager;
@@ -38,7 +39,6 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
-
 import com.jcraft.jsch.JSchException;
 
 import org.eclipse.jgit.errors.NoRemoteRepositoryException;
@@ -417,7 +417,7 @@ class PushOne implements ProjectRunnable {
     boolean noPerms = !pool.isReplicatePermissions();
     Map<String, Ref> remote = listRemote(tn);
     for (Ref src : local.values()) {
-      if (noPerms && GitRepositoryManager.REF_CONFIG.equals(src.getName())) {
+      if (noPerms && RefNames.REFS_CONFIG.equals(src.getName())) {
         continue;
       }
 
@@ -455,7 +455,7 @@ class PushOne implements ProjectRunnable {
         // If the ref still exists locally, send it, otherwise delete it.
         Ref srcRef = local.get(src);
         if (srcRef != null &&
-            !(noPerms && GitRepositoryManager.REF_CONFIG.equals(src))) {
+            !(noPerms && RefNames.REFS_CONFIG.equals(src))) {
           push(cmds, spec, srcRef);
         } else if (config.isMirror()) {
           delete(cmds, spec);

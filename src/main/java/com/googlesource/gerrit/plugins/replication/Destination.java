@@ -22,6 +22,7 @@ import com.google.gerrit.common.data.AccessSection;
 import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.PluginUser;
@@ -235,7 +236,7 @@ class Destination {
           Ref head = git.getRef(Constants.HEAD);
           if (head != null
               && head.isSymbolic()
-              && GitRepositoryManager.REF_CONFIG.equals(head.getLeaf().getName())) {
+              && RefNames.REFS_CONFIG.equals(head.getLeaf().getName())) {
             return;
           }
         } catch (IOException err) {
@@ -433,7 +434,7 @@ class Destination {
   }
 
   boolean wouldPushRef(String ref) {
-    if (!replicatePermissions && GitRepositoryManager.REF_CONFIG.equals(ref)) {
+    if (!replicatePermissions && RefNames.REFS_CONFIG.equals(ref)) {
       return false;
     }
     for (RefSpec s : remote.getPushRefSpecs()) {
