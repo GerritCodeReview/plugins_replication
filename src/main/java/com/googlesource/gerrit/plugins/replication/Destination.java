@@ -260,6 +260,11 @@ public class Destination {
   }
 
   void schedule(Project.NameKey project, String ref, URIish uri, ReplicationState state) {
+    schedule(project, ref, uri, state, false);
+  }
+
+  void schedule(
+      Project.NameKey project, String ref, URIish uri, ReplicationState state, boolean now) {
     repLog.info("scheduling replication {}:{} => {}", project, ref, uri);
     if (!shouldReplicate(project, ref, state)) {
       return;
@@ -295,7 +300,7 @@ public class Destination {
       if (e == null) {
         e = opFactory.create(project, uri);
         addRef(e, ref);
-        pool.schedule(e, config.getDelay(), TimeUnit.SECONDS);
+        pool.schedule(e, now ? 0 : config.getDelay(), TimeUnit.SECONDS);
         pending.put(uri, e);
       } else if (!e.getRefs().contains(ref)) {
         addRef(e, ref);
