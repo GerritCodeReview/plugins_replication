@@ -27,7 +27,7 @@ public class PushAll implements Runnable {
   private final ReplicationStateListener stateLog;
 
   public interface Factory {
-    PushAll create(String urlMatch, ReplicationFilter filter, ReplicationState state);
+    PushAll create(String urlMatch, ReplicationFilter filter, ReplicationState state, boolean now);
   }
 
   private final WorkQueue workQueue;
@@ -36,6 +36,7 @@ public class PushAll implements Runnable {
   private final String urlMatch;
   private final ReplicationFilter filter;
   private final ReplicationState state;
+  private final boolean now;
 
   @Inject
   protected PushAll(
@@ -45,7 +46,8 @@ public class PushAll implements Runnable {
       ReplicationStateListener stateLog,
       @Assisted @Nullable String urlMatch,
       @Assisted ReplicationFilter filter,
-      @Assisted ReplicationState state) {
+      @Assisted ReplicationState state,
+      @Assisted boolean now) {
     this.workQueue = wq;
     this.projectCache = projectCache;
     this.replication = rq;
@@ -53,6 +55,7 @@ public class PushAll implements Runnable {
     this.urlMatch = urlMatch;
     this.filter = filter;
     this.state = state;
+    this.now = now;
   }
 
   Future<?> schedule(long delay, TimeUnit unit) {
@@ -64,7 +67,7 @@ public class PushAll implements Runnable {
     try {
       for (Project.NameKey nameKey : projectCache.all()) {
         if (filter.matches(nameKey)) {
-          replication.scheduleFullSync(nameKey, urlMatch, state);
+          replication.scheduleFullSync(nameKey, urlMatch, state, now);
         }
       }
     } catch (Exception e) {
