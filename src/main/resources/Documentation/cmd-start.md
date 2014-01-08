@@ -9,6 +9,7 @@ SYNOPSIS
 --------
 ```
 ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start
+  [--now]
   [--wait]
   [--url <PATTERN>]
   {--all | <PROJECT PATTERN> ...}
@@ -84,6 +85,10 @@ This command is intended to be used in scripts.
 
 OPTIONS
 -------
+
+`--now`
+:   Start replicating right away without waiting the per remote
+	replication delay.
 
 `--wait`
 :	Wait for replication to finish before exiting.

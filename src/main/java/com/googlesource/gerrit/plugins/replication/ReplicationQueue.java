@@ -109,8 +109,13 @@ public class ReplicationQueue
     }
   }
 
-  void scheduleFullSync(
-      final Project.NameKey project, final String urlMatch, ReplicationState state) {
+  void scheduleFullSync(Project.NameKey project, String urlMatch,
+      ReplicationState state) {
+    scheduleFullSync(project, urlMatch, state, false);
+  }
+
+  void scheduleFullSync(Project.NameKey project, String urlMatch,
+      ReplicationState state, boolean now) {
     if (!running) {
       stateLog.warn("Replication plugin did not finish startup before event", state);
       return;
@@ -119,7 +124,7 @@ public class ReplicationQueue
     for (Destination cfg : config.getDestinations(FilterType.ALL)) {
       if (cfg.wouldPushProject(project)) {
         for (URIish uri : cfg.getURIs(project, urlMatch)) {
-          cfg.schedule(project, PushOne.ALL_REFS, uri, state);
+          cfg.schedule(project, PushOne.ALL_REFS, uri, state, now);
         }
       }
     }
