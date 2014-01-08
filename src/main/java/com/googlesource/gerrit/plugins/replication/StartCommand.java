@@ -44,6 +44,9 @@ final class StartCommand extends SshCommand {
   @Option(name = "--wait", usage = "wait for replication to finish before exiting")
   private boolean wait;
 
+  @Option(name = "--now", usage = "start replication without waiting for replicationDelay")
+  private boolean now;
+
   @Argument(index = 0, multiValued = true, metaVar = "PATTERN", usage = "project name pattern")
   private List<String> projectPatterns = new ArrayList<>(2);
 
@@ -66,7 +69,7 @@ final class StartCommand extends SshCommand {
       projectFilter = new ReplicationFilter(projectPatterns);
     }
 
-    future = pushFactory.create(urlMatch, projectFilter, state).schedule(0, TimeUnit.SECONDS);
+    future = pushFactory.create(urlMatch, projectFilter, state, now).schedule(0, TimeUnit.SECONDS);
 
     if (wait) {
       if (future != null) {
