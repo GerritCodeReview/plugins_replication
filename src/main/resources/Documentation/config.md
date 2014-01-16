@@ -212,7 +212,7 @@ remote.NAME.replicateProjectDeletions
 	By default, false, do *not* replicate project deletions.
 
 remote.NAME.mirror
-:	If true, replication will remove remote branches that absent
+:	If true, replication will remove remote branches that are absent
 	locally or invisible to the replication (for example read
 	access denied via `authGroup` option).
 
@@ -224,18 +224,20 @@ remote.NAME.remoteNameStyle
 	placeholder.
 
 	Github and Gitorious do not permit slashes "/" in repository
-	names and changes this to dashes "-" at repository creation
-	time. If set to "dash", this changes slashes to dashes in the
-	repository name. If set to "underscore", this changes slashes
-	to underscores in the repository name.
+	names and will change them to dashes "-" at repository creation
+	time.
+
+	If this setting is set to "dash", slashes will be replaced with
+	dashes in the remote repository name. If set to "underscore",
+	slashes will be replaced with underscores in the repository name.
 
 	Option "basenameOnly" makes `${name}` to be only the basename
 	(the part after the last slash) of the repository path on the
 	Gerrit server, e.g. `${name}` of `foo/bar/my-repo.git` would
 	be `my-repo`.
 
-	By default, "slash" remote name will contain slashes as they
-	do in Gerrit.
+	By default, "slash", i.e. remote names will contain slashes as
+	they do in Gerrit.
 
 <a name="remote.NAME.projects">remote.NAME.projects</a>
 :	Specifies which repositories should be replicated to the
