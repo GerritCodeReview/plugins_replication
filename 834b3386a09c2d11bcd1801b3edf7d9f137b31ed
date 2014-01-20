@@ -16,6 +16,24 @@
       "revId": "834b3386a09c2d11bcd1801b3edf7d9f137b31ed",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d22fc28a_8b3aedd4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-01-20T09:29:03Z",
+      "side": 1,
+      "message": "Thanks.  Fixed in next ps.",
+      "parentUuid": "1294fafd_5d293b9d",
+      "revId": "834b3386a09c2d11bcd1801b3edf7d9f137b31ed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
