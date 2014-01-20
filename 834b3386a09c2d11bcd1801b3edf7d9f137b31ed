@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1294fafd_5d293b9d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1006454
+      },
+      "writtenOn": "2014-01-20T09:20:48Z",
+      "side": 1,
+      "message": "The LockFailureError is not being thrown here. Compare to PS11. I can try  to fix it next week, but my time is a bit limited atm (paternal leave).",
+      "revId": "834b3386a09c2d11bcd1801b3edf7d9f137b31ed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
