@@ -22,6 +22,30 @@
       "revId": "6af56b1d71daf42cc9c00df610152668d473af0b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9288eae3_c13a42d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-01-21T07:07:48Z",
+      "side": 1,
+      "message": "Reworded it.  Hopefully it\u0027s clearer now.",
+      "parentUuid": "1294fafd_1d897360",
+      "range": {
+        "startLine": 19,
+        "startChar": 48,
+        "endLine": 20,
+        "endChar": 6
+      },
+      "revId": "6af56b1d71daf42cc9c00df610152668d473af0b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
