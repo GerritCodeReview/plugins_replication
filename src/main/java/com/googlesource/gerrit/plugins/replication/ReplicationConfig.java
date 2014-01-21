@@ -23,6 +23,8 @@ public interface ReplicationConfig {
 
   boolean isReplicateAllOnPluginStart();
 
+  boolean isDefaultForceUpdate();
+
   boolean isEmpty();
 
   int shutdown();
