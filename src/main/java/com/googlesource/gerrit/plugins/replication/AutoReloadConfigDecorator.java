@@ -113,6 +113,11 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   }
 
   @Override
+  public synchronized boolean isDefaultForceUpdate() {
+    return currentConfig.isDefaultForceUpdate();
+  }
+
+  @Override
   public synchronized boolean isEmpty() {
     return currentConfig.isEmpty();
   }

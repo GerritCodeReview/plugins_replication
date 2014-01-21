@@ -73,6 +73,10 @@ gerrit.autoReload
 	the replication plugin. When the reload takes place, pending replication
 	events based on old settings are discarded. By default, false.
 
+gerrit.defaultForceUpdate
+:	If true, the default push refspec will be set to use forced
+	update to the remote when no refspec is given.  By default, false.
+
 remote.NAME.url
 :	Address of the remote server to push to.  Multiple URLs may be
 	specified within a single remote block, listing different
@@ -141,7 +145,9 @@ remote.NAME.push
 	and `refs/tags/*`, but excludes all others, including
 	`refs/changes/*`.
 
-	Defaults to `refs/*:refs/*` (push all refs) if not specified.
+	Defaults to `refs/*:refs/*` (push all refs) if not specified,
+	or `+refs/*:refs/*` (force push all refs) if not specified and
+	`gerrit.defaultForceUpdate` is true.
 
 [2]: #example_file
 
