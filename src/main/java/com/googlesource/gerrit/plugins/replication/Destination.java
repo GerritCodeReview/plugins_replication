@@ -437,6 +437,9 @@ class Destination {
     if (!replicatePermissions && RefNames.REFS_CONFIG.equals(ref)) {
       return false;
     }
+    if (ref.startsWith(RefNames.REFS_CACHE_AUTOMERGE)) {
+      return false;
+    }
     for (RefSpec s : remote.getPushRefSpecs()) {
       if (s.matchSource(ref)) {
         return true;
