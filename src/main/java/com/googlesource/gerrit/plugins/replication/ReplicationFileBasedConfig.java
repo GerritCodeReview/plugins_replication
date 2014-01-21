@@ -48,6 +48,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private List<Destination> destinations;
   private File cfgPath;
   private boolean replicateAllOnPluginStart;
+  private boolean defaultForceUpdate;
   private Injector injector;
   private final SchemaFactory<ReviewDb> database;
   private final RemoteSiteUser.Factory replicationUserFactory;
@@ -104,6 +105,9 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     replicateAllOnPluginStart =
         config.getBoolean("gerrit", "replicateOnStartup", true);
 
+    defaultForceUpdate =
+        config.getBoolean("gerrit", "defaultForceUpdate", false);
+
     ImmutableList.Builder<Destination> dest = ImmutableList.builder();
     for (RemoteConfig c : allRemotes(config)) {
       if (c.getURIs().isEmpty()) {
@@ -118,7 +122,8 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
       }
 
       if (c.getPushRefSpecs().isEmpty()) {
-        c.addPushRefSpec(new RefSpec().setSourceDestination("refs/*", "refs/*"));
+        c.addPushRefSpec(new RefSpec().setSourceDestination("refs/*", "refs/*")
+            .setForceUpdate(defaultForceUpdate));
       }
 
       Destination destination =
@@ -146,6 +151,14 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   @Override
   public boolean isReplicateAllOnPluginStart() {
     return replicateAllOnPluginStart;
+  }
+
+  /* (non-Javadoc)
+   * @see com.googlesource.gerrit.plugins.replication.ReplicationConfig#isDefaultForceUpdate()
+   */
+  @Override
+  public boolean isDefaultForceUpdate() {
+    return defaultForceUpdate;
   }
 
   private static List<RemoteConfig> allRemotes(FileBasedConfig cfg)
