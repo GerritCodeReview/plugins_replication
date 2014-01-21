@@ -426,7 +426,7 @@ class PushOne implements ProjectRunnable {
     boolean noPerms = !pool.isReplicatePermissions();
     Map<String, Ref> remote = listRemote(tn);
     for (Ref src : local.values()) {
-      if (noPerms && GitRepositoryManager.REF_CONFIG.equals(src.getName())) {
+      if (!canPushRef(src.getName(), noPerms)) {
         continue;
       }
 
@@ -463,8 +463,7 @@ class PushOne implements ProjectRunnable {
       if (spec != null) {
         // If the ref still exists locally, send it, otherwise delete it.
         Ref srcRef = local.get(src);
-        if (srcRef != null &&
-            !(noPerms && GitRepositoryManager.REF_CONFIG.equals(src))) {
+        if (srcRef != null && canPushRef(src, noPerms)) {
           push(cmds, spec, srcRef);
         } else if (config.isMirror()) {
           delete(cmds, spec);
@@ -472,6 +471,11 @@ class PushOne implements ProjectRunnable {
       }
     }
     return cmds;
+  }
+
+  private boolean canPushRef(String ref, boolean noPerms) {
+    return !(noPerms && GitRepositoryManager.REF_CONFIG.equals(ref)) &&
+        !ref.startsWith(GitRepositoryManager.REFS_CACHE_AUTOMERGE);
   }
 
   private Map<String, Ref> listRemote(Transport tn)
