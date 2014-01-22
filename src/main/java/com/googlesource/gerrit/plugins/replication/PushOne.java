@@ -266,7 +266,9 @@ class PushOne implements ProjectRunnable {
       git = gitManager.openRepository(projectName);
       runImpl();
     } catch (RepositoryNotFoundException e) {
-      wrappedLog.error("Cannot replicate " + projectName + "; " + e.getMessage(), getStatesAsArray());
+      wrappedLog.error("Cannot replicate " + projectName
+          + "; due to local repository error: "
+          + e.getMessage(), getStatesAsArray());
 
     } catch (RemoteRepositoryException e) {
       log.error("Cannot replicate " + projectName + "; " + e.getMessage());
