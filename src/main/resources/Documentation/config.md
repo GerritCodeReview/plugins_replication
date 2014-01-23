@@ -130,6 +130,10 @@ remote.NAME.push
 
 	Defaults to `+refs/*:refs/*` (all refs) if not specified.
 
+	Note that the `refs/meta/config` branch is only replicated
+	when `replicatePermissions` is true, even if the push refspec
+	is 'all refs'.
+
 [2]: #example_file
 
 remote.NAME.timeout
