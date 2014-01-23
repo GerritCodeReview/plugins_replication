@@ -266,7 +266,7 @@ class ReplicationQueue implements
     }
     OutputStream errStream = newErrorBufferStream();
     try {
-      executeRemotSsh(uri, cmd, errStream);
+      executeRemoteSsh(uri, cmd, errStream);
     } catch (IOException e) {
       log.error(String.format(
              "Error creating remote repository at %s:\n"
@@ -320,7 +320,7 @@ class ReplicationQueue implements
     String cmd = "rm -rf " + quotedPath;
     OutputStream errStream = newErrorBufferStream();
     try {
-      executeRemotSsh(uri, cmd, errStream);
+      executeRemoteSsh(uri, cmd, errStream);
     } catch (IOException e) {
       log.error(String.format(
              "Error deleting remote repository at %s:\n"
@@ -349,7 +349,7 @@ class ReplicationQueue implements
             + " && git symbolic-ref HEAD " + QuotedString.BOURNE.quote(newHead);
     OutputStream errStream = newErrorBufferStream();
     try {
-      executeRemotSsh(uri, cmd, errStream);
+      executeRemoteSsh(uri, cmd, errStream);
     } catch (IOException e) {
       log.error(String.format(
              "Error updating HEAD of remote repository at %s to %s:\n"
@@ -376,7 +376,7 @@ class ReplicationQueue implements
     }
   }
 
-  private static void executeRemotSsh(URIish uri, String cmd,
+  private static void executeRemoteSsh(URIish uri, String cmd,
       OutputStream errStream) throws IOException {
     RemoteSession ssh = connect(uri);
     Process proc = ssh.exec(cmd, 0);
