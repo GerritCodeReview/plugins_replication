@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f24cc6b4_bc15415e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-01-23T09:08:20Z",
+      "side": 1,
+      "message": "In our testing we\u0027re finding that if the git does not exist on the remote, a RemoteRepositoryException is raised with \u0027access denied or repository not exported\u0027, instead of NoRemoteRepositoryException.\n\nThis means that the repository is never created on the remote.\n\nHave you seen this behaviour before?",
+      "revId": "a9fcff5c4d0d99d7bc209431377bdba01ee04c2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
