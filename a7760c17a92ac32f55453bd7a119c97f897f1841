@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f24cc6b4_7cd73937",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-01-24T14:11:18Z",
+      "side": 1,
+      "message": "I didn\u0027t know that.  Thanks.\n\nSince \\n is already used in quite a few other places, I think it would be better to do the same here for consistency and then fix them all at once in a separate change.",
+      "parentUuid": "12695a06_15e09437",
+      "range": {
+        "startLine": 353,
+        "startChar": 46,
+        "endLine": 353,
+        "endChar": 48
+      },
+      "revId": "a7760c17a92ac32f55453bd7a119c97f897f1841",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "12695a06_75e58847",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 1
