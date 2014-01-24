@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12695a06_15e09437",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2014-01-24T13:47:06Z",
+      "side": 1,
+      "message": "You can use %n to get the platform-specific line separator.",
+      "range": {
+        "startLine": 353,
+        "startChar": 46,
+        "endLine": 353,
+        "endChar": 48
+      },
+      "revId": "a7760c17a92ac32f55453bd7a119c97f897f1841",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "12695a06_75e58847",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2014-01-24T13:47:06Z",
+      "side": 1,
+      "message": "You can use %n to get the platform-specific line separator.",
+      "range": {
+        "startLine": 398,
+        "startChar": 46,
+        "endLine": 398,
+        "endChar": 48
+      },
+      "revId": "a7760c17a92ac32f55453bd7a119c97f897f1841",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
