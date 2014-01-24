@@ -271,24 +271,20 @@ class PushOne implements ProjectRunnable {
           + e.getMessage(), getStatesAsArray());
 
     } catch (RemoteRepositoryException e) {
-      log.error("Cannot replicate " + projectName
-          + "; Remote repository error: "
-          + e.getMessage());
-
-    } catch (NoRemoteRepositoryException e) {
-      if (pool.isCreateMissingRepos()) {
-        try {
-          createRepository();
-          log.warn("Missing repository created; retry replication to " + uri);
-          pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
-        } catch (IOException ioe) {
-          wrappedLog.error("Cannot replicate to " + uri + "; failed to create missing repository",
-              ioe, getStatesAsArray());
-        }
+      // Tried to replicate to a remote via anonymous git:// but the repository
+      // does not exist.  In this case NoRemoteRepositoryException is not
+      // raised.
+      final String msg = e.getMessage();
+      if (msg.contains("access denied")) {
+        createRepository();
       } else {
-        wrappedLog.error("Cannot replicate to " + uri + "; repository not found", getStatesAsArray());
+        log.error("Cannot replicate " + projectName
+            + "; Remote repository error: "
+            + msg);
       }
 
+    } catch (NoRemoteRepositoryException e) {
+      createRepository();
     } catch (NotSupportedException e) {
       wrappedLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
 
@@ -320,21 +316,32 @@ class PushOne implements ProjectRunnable {
     }
   }
 
-  private void createRepository() throws IOException {
-    final Ref head = git.getRef(Constants.HEAD);
-    NewProjectCreatedListener.Event event =
-        new NewProjectCreatedListener.Event() {
-          @Override
-          public String getProjectName() {
-            return projectName.get();
-          }
+  private void createRepository() {
+    if (pool.isCreateMissingRepos()) {
+      try {
+        final Ref head = git.getRef(Constants.HEAD);
+        NewProjectCreatedListener.Event event =
+            new NewProjectCreatedListener.Event() {
+              @Override
+              public String getProjectName() {
+                return projectName.get();
+              }
 
-          @Override
-          public String getHeadName() {
-            return head != null ? head.getName() : null;
-          }
-        };
-    replicationQueue.onNewProjectCreated(event);
+              @Override
+              public String getHeadName() {
+                return head != null ? head.getName() : null;
+              }
+            };
+        replicationQueue.onNewProjectCreated(event);
+        log.warn("Missing repository created; retry replication to " + uri);
+        pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
+      } catch (IOException ioe) {
+        wrappedLog.error("Cannot replicate to " + uri + "; failed to create missing repository",
+            ioe, getStatesAsArray());
+      }
+    } else {
+      wrappedLog.error("Cannot replicate to " + uri + "; repository not found", getStatesAsArray());
+    }
   }
 
   private void runImpl() throws IOException {
