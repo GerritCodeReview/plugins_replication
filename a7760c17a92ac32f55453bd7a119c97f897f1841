@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d2626223_13e0ac37",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2014-01-24T14:19:06Z",
+      "side": 1,
+      "message": "You are right, let\u0027s keep it consistent.\n\nFor your info, %n in a formatter is the same as System.getProperty(\"line.separator\").",
+      "parentUuid": "f24cc6b4_7cd73937",
+      "range": {
+        "startLine": 353,
+        "startChar": 46,
+        "endLine": 353,
+        "endChar": 48
+      },
+      "revId": "a7760c17a92ac32f55453bd7a119c97f897f1841",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "12695a06_75e58847",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 1
