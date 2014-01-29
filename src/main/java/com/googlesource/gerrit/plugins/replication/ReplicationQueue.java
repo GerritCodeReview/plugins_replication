@@ -228,8 +228,10 @@ class ReplicationQueue implements
   private void createProject(URIish replicateURI, String head) {
     if (!replicateURI.isRemote()) {
       createLocally(replicateURI, head);
+      log.info("Created local repository: " + replicateURI);
     } else if (isSSH(replicateURI)) {
       createRemoteSsh(replicateURI, head);
+      log.info("Created remote repository: " + replicateURI);
     } else {
       log.warn(String.format("Cannot create new project on remote site %s."
           + " Only local paths and SSH URLs are supported"
@@ -252,7 +254,9 @@ class ReplicationQueue implements
         repo.close();
       }
     } catch (IOException e) {
-      log.error(String.format("Failed to create repository %s", uri.getPath()), e);
+      log.error(String.format(
+          "Error creating local repository %s:\n",
+          uri.getPath()), e);
     }
   }
 
@@ -280,8 +284,10 @@ class ReplicationQueue implements
   private void deleteProject(URIish replicateURI) {
     if (!replicateURI.isRemote()) {
       deleteLocally(replicateURI);
+      log.info("Deleted local repository: " + replicateURI);
     } else if (isSSH(replicateURI)) {
       deleteRemoteSsh(replicateURI);
+      log.info("Deleted remote repository: " + replicateURI);
     } else {
       log.warn(String.format("Cannot delete project on remote site %s."
           + " Only local paths and SSH URLs are supported"
@@ -293,7 +299,9 @@ class ReplicationQueue implements
     try {
       recursivelyDelete(new File(uri.getPath()));
     } catch (IOException e) {
-      log.error(String.format("Failed to delete repository %s", uri.getPath()), e);
+      log.error(String.format(
+          "Error deleting local repository %s:\n",
+          uri.getPath()), e);
     }
   }
 

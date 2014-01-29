@@ -149,6 +149,10 @@ remote.NAME.push
 	or `+refs/*:refs/*` (force push all refs) if not specified and
 	`gerrit.defaultForceUpdate` is true.
 
+	Note that the `refs/meta/config` branch is only replicated
+	when `replicatePermissions` is true, even if the push refspec
+	is 'all refs'.
+
 [2]: #example_file
 
 remote.NAME.timeout
