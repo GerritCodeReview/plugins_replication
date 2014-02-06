@@ -61,7 +61,7 @@ class ReplicationQueue implements
     ProjectDeletedListener,
     HeadUpdatedListener {
   static final Logger log = LoggerFactory.getLogger(ReplicationQueue.class);
-  private static final WrappedLogger wrappedLog = new WrappedLogger(log);
+  private static final ReplicationStateLogger stateLog = new ReplicationStateLogger(log);
 
   static String replaceName(String in, String name, boolean keyIsOptional) {
     String key = "${name}";
@@ -111,7 +111,7 @@ class ReplicationQueue implements
   void scheduleFullSync(final Project.NameKey project, final String urlMatch,
       ReplicationState state) {
     if (!running) {
-      wrappedLog.warn("Replication plugin did not finish startup before event", state);
+      stateLog.warn("Replication plugin did not finish startup before event", state);
       return;
     }
 
@@ -128,7 +128,7 @@ class ReplicationQueue implements
   public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
     ReplicationState state = new ReplicationState(new GitUpdateProcessing(changeHooks, database));
     if (!running) {
-      wrappedLog.warn("Replication plugin did not finish startup before event", state);
+      stateLog.warn("Replication plugin did not finish startup before event", state);
       return;
     }
 

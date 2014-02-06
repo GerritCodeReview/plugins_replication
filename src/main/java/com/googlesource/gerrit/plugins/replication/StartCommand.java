@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
 @CommandMetaData(name = "start", description = "Start replication for specific project or all projects")
 final class StartCommand extends SshCommand {
   private static final Logger log = LoggerFactory.getLogger(StartCommand.class);
-  private static final WrappedLogger wrappedLog = new WrappedLogger(log);
+  private static final ReplicationStateLogger stateLog = new ReplicationStateLogger(log);
   @Option(name = "--all", usage = "push all known projects")
   private boolean all;
 
@@ -88,10 +88,10 @@ final class StartCommand extends SshCommand {
         try {
           future.get();
         } catch (InterruptedException e) {
-          wrappedLog.error("Thread was interrupted while waiting for PushAll operation to finish", e, state);
+          stateLog.error("Thread was interrupted while waiting for PushAll operation to finish", e, state);
           return;
         } catch (ExecutionException e) {
-          wrappedLog.error("An exception was thrown in PushAll operation", e, state);
+          stateLog.error("An exception was thrown in PushAll operation", e, state);
           return;
         }
       }

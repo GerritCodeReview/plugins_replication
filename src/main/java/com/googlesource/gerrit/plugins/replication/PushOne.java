@@ -77,7 +77,7 @@ import java.util.concurrent.Callable;
  */
 class PushOne implements ProjectRunnable {
   private static final Logger log = ReplicationQueue.log;
-  private static final WrappedLogger wrappedLog = new WrappedLogger(log);
+  private static final ReplicationStateLogger stateLog = new ReplicationStateLogger(log);
   static final String ALL_REFS = "..all..";
 
   interface Factory {
@@ -270,7 +270,7 @@ class PushOne implements ProjectRunnable {
       git = gitManager.openRepository(projectName);
       runImpl();
     } catch (RepositoryNotFoundException e) {
-      wrappedLog.error("Cannot replicate " + projectName
+      stateLog.error("Cannot replicate " + projectName
           + "; Local repository error: "
           + e.getMessage(), getStatesAsArray());
 
@@ -290,7 +290,7 @@ class PushOne implements ProjectRunnable {
     } catch (NoRemoteRepositoryException e) {
       createRepository();
     } catch (NotSupportedException e) {
-      wrappedLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
+      stateLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
 
     } catch (TransportException e) {
       Throwable cause = e.getCause();
@@ -316,12 +316,12 @@ class PushOne implements ProjectRunnable {
         pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
       }
     } catch (IOException e) {
-      wrappedLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
+      stateLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
     } catch (RuntimeException e) {
-      wrappedLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
+      stateLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
 
     } catch (Error e) {
-      wrappedLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
+      stateLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
 
     } finally {
       if (git != null) {
@@ -351,11 +351,11 @@ class PushOne implements ProjectRunnable {
         log.warn("Missing repository created; retry replication to " + uri);
         pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
       } catch (IOException ioe) {
-        wrappedLog.error("Cannot replicate to " + uri + "; failed to create missing repository",
+        stateLog.error("Cannot replicate to " + uri + "; failed to create missing repository",
             ioe, getStatesAsArray());
       }
     } else {
-      wrappedLog.error("Cannot replicate to " + uri + "; repository not found", getStatesAsArray());
+      stateLog.error("Cannot replicate to " + uri + "; repository not found", getStatesAsArray());
     }
   }
 
@@ -423,7 +423,7 @@ class PushOne implements ProjectRunnable {
       try {
         db = schema.open();
       } catch (OrmException e) {
-        wrappedLog.error("Cannot read database to replicate to " + projectName, e, getStatesAsArray());
+        stateLog.error("Cannot read database to replicate to " + projectName, e, getStatesAsArray());
         return Collections.emptyList();
       }
       try {
@@ -562,7 +562,7 @@ class PushOne implements ProjectRunnable {
         case REJECTED_NODELETE:
         case REJECTED_NONFASTFORWARD:
         case REJECTED_REMOTE_CHANGED:
-          wrappedLog.error(String.format("Failed replicate of %s to %s: status %s",
+          stateLog.error(String.format("Failed replicate of %s to %s: status %s",
               u.getRemoteName(), uri, u.getStatus()), logStatesArray);
           pushStatus = RefPushResult.FAILED;
           anyRefFailed = true;
@@ -570,14 +570,14 @@ class PushOne implements ProjectRunnable {
 
         case REJECTED_OTHER_REASON:
           if ("non-fast-forward".equals(u.getMessage())) {
-            wrappedLog.error(String.format("Failed replicate of %s to %s"
+            stateLog.error(String.format("Failed replicate of %s to %s"
                 + ", remote rejected non-fast-forward push."
                 + "  Check receive.denyNonFastForwards variable in config file"
                 + " of destination repository.", u.getRemoteName(), uri), logStatesArray);
           } else if ("failed to lock".equals(u.getMessage())) {
             throw new LockFailureException(uri, u.getMessage());
           } else {
-            wrappedLog.error(String.format(
+            stateLog.error(String.format(
                 "Failed replicate of %s to %s, reason: %s",
                 u.getRemoteName(), uri, u.getMessage()), logStatesArray);
           }
