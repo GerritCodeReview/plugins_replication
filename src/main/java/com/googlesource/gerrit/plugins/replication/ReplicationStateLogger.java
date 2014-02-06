@@ -16,11 +16,19 @@ package com.googlesource.gerrit.plugins.replication;
 
 import org.slf4j.Logger;
 
-public class WrappedLogger {
+/**
+ * Wrapper around a Logger that also logs out the replication state.
+ * <p>
+ * When logging replication errors it is useful to know the current
+ * replication state.  This utility class wraps the methods from Logger
+ * and logs additional information about the replication state to the
+ * stderr console.
+ */
+public class ReplicationStateLogger {
 
   private final Logger logger;
 
-  public WrappedLogger(Logger logger) {
+  public ReplicationStateLogger(Logger logger) {
     this.logger = logger;
   }
 

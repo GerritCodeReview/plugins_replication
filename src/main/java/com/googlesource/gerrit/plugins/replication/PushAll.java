@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
 
 class PushAll implements Runnable {
   private static final Logger log = LoggerFactory.getLogger(PushAll.class);
-  private static final WrappedLogger wrappedLog = new WrappedLogger(log);
+  private static final ReplicationStateLogger stateLog = new ReplicationStateLogger(log);
 
   interface Factory {
     PushAll create(String urlMatch, ReplicationState state);
@@ -62,7 +62,7 @@ class PushAll implements Runnable {
         replication.scheduleFullSync(nameKey, urlMatch, state);
       }
     } catch (Exception e) {
-      wrappedLog.error("Cannot enumerate known projects", e, state);
+      stateLog.error("Cannot enumerate known projects", e, state);
     }
     state.markAllPushTasksScheduled();
   }

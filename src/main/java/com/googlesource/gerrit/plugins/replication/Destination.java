@@ -66,7 +66,7 @@ import java.util.concurrent.TimeUnit;
 
 class Destination {
   private static final Logger log = ReplicationQueue.log;
-  private static final WrappedLogger wrappedLog = new WrappedLogger(log);
+  private static final ReplicationStateLogger stateLog = new ReplicationStateLogger(log);
 
   private final int poolThreads;
   private final String poolName;
@@ -213,7 +213,7 @@ class Destination {
         return;
       }
     } catch (NoSuchProjectException err) {
-      wrappedLog.error(String.format(
+      stateLog.error(String.format(
           "source project %s not available", project), err, state);
       return;
     } catch (Exception e) {
@@ -230,7 +230,7 @@ class Destination {
         try {
           git = gitManager.openRepository(project);
         } catch (IOException err) {
-          wrappedLog.error(String.format(
+          stateLog.error(String.format(
               "source project %s not available", project), err, state);
           return;
         }
@@ -242,7 +242,7 @@ class Destination {
             return;
           }
         } catch (IOException err) {
-          wrappedLog.error(String.format(
+          stateLog.error(String.format(
               "cannot check type of project %s", project), err, state);
           return;
         } finally {
