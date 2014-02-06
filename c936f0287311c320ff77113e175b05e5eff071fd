@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "128cfab8_fd3727f7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-02-06T09:07:17Z",
+      "side": 1,
+      "message": "If the retry is not configured, or set to 0, this results in the log:\n\n Giving up after 0 attempts to replicate",
+      "range": {
+        "startLine": 311,
+        "startChar": 18,
+        "endLine": 312,
+        "endChar": 35
+      },
+      "revId": "c936f0287311c320ff77113e175b05e5eff071fd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
