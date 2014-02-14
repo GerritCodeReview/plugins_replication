@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf4d5911_dbd9539d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2014-02-14T21:39:28Z",
+      "side": 1,
+      "message": "Someone pointed out to me that this comment could be misleading since we\u0027re not counting retry attempts that happened due to other TransportExceptions. I\u0027ll reword and push another PS.",
+      "range": {
+        "startLine": 310,
+        "startChar": 20,
+        "endLine": 311,
+        "endChar": 38
+      },
+      "revId": "41c1fdca91d662fb49cc9a7b3bc1284c70b894b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
