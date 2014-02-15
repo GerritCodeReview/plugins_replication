@@ -46,6 +46,30 @@
       "revId": "055feeb3f66b7fd4ff16195e744777159fc4d418",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef505da6_bce80120",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-02-15T00:24:29Z",
+      "side": 1,
+      "message": "Ooh, good catch.  Thanks!",
+      "parentUuid": "ef969d57_8c166768",
+      "range": {
+        "startLine": 310,
+        "startChar": 10,
+        "endLine": 310,
+        "endChar": 42
+      },
+      "revId": "055feeb3f66b7fd4ff16195e744777159fc4d418",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
