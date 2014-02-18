@@ -295,10 +295,9 @@ class PushOne implements ProjectRunnable {
         log.error("Cannot replicate to " + uri + ": " + cause.getMessage());
       } else {
         log.error("Cannot replicate to " + uri, e);
+        // The remote push operation should be retried.
+        pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
       }
-
-      // The remote push operation should be retried.
-      pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
     } catch (IOException e) {
       wrappedLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
 
