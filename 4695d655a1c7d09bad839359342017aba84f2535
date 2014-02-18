@@ -70,6 +70,30 @@
       "revId": "4695d655a1c7d09bad839359342017aba84f2535",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f6fe175_293ccdcf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2014-02-18T20:36:33Z",
+      "side": 1,
+      "message": "https://gerrit-review.googlesource.com/54720",
+      "parentUuid": "af6ae563_ca3ac3ac",
+      "range": {
+        "startLine": 297,
+        "startChar": 6,
+        "endLine": 299,
+        "endChar": 76
+      },
+      "revId": "4695d655a1c7d09bad839359342017aba84f2535",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
