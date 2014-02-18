@@ -22,6 +22,30 @@
       "revId": "4695d655a1c7d09bad839359342017aba84f2535",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cf5479b3_033f6ec7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2014-02-18T20:06:27Z",
+      "side": 1,
+      "message": "Good catch, I missed that. This is a tricky block of code. From what I understand, this error cannot be resolved without restarting Gerrit, so I doesn\u0027t make sense to me to retry it. If my understanding is correct, I\u0027ll precede this change with another that moves the retry into the else and includes reasoning for the behavior change in that commit message.",
+      "parentUuid": "af6ae563_0a753b9e",
+      "range": {
+        "startLine": 297,
+        "startChar": 6,
+        "endLine": 299,
+        "endChar": 76
+      },
+      "revId": "4695d655a1c7d09bad839359342017aba84f2535",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
