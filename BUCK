@@ -3,6 +3,8 @@ gerrit_plugin(
   srcs = glob(['src/main/java/**/*.java']),
   resources = glob(['src/main/resources/**/*']),
   manifest_entries = [
+    'Implementation-Title: Replication plugin',
+    'Implementation-URL: https://gerrit.googlesource.com/plugins/replication',
     'Gerrit-PluginName: replication',
     'Gerrit-Module: com.googlesource.gerrit.plugins.replication.ReplicationModule',
     'Gerrit-SshModule: com.googlesource.gerrit.plugins.replication.SshModule'
