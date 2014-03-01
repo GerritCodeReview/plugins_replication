@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f26f59c_864dea07",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-03-01T13:58:29Z",
+      "side": 1,
+      "message": "This URL is wrong. I adjusted it from gerrit URL, it is exists, but is wrong. I thik the only URL if at all we can add here is this:\n\n  https://gerrit.googlesource.com/plugins/replication",
+      "revId": "650c51f7e6bab7f340eb326ab224669f51105c59",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
