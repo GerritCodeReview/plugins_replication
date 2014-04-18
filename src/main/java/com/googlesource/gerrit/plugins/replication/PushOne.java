@@ -317,12 +317,8 @@ class PushOne implements ProjectRunnable {
       }
     } catch (IOException e) {
       stateLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
-    } catch (RuntimeException e) {
+    } catch (RuntimeException | Error e) {
       stateLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
-
-    } catch (Error e) {
-      stateLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
-
     } finally {
       if (git != null) {
         git.close();

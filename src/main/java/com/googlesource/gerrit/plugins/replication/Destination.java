@@ -267,7 +267,7 @@ class Destination {
   /**
    * It schedules again a PushOp instance.
    * <p>
-   * If the reason for rescheduling is to avoid a collison
+   * If the reason for rescheduling is to avoid a collision
    * with an in-flight push to the same URI, we don't
    * mark the operation as "retrying," and we schedule
    * using the replication delay, rather than the retry
