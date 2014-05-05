@@ -18,7 +18,7 @@ java_test(
   name = 'replication_tests',
   srcs = glob(['src/test/java/**/*.java']),
   deps = [
-    ':replication__plugin__compile',
+    ':replication__plugin',
     '//gerrit-common:server',
     '//gerrit-reviewdb:server',
     '//gerrit-server:server',
