@@ -15,13 +15,11 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
-import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
@@ -50,7 +48,6 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private boolean replicateAllOnPluginStart;
   private boolean defaultForceUpdate;
   private Injector injector;
-  private final SchemaFactory<ReviewDb> database;
   private final RemoteSiteUser.Factory replicationUserFactory;
   private final PluginUser pluginUser;
   private final GitRepositoryManager gitRepositoryManager;
@@ -60,13 +57,12 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   @Inject
   public ReplicationFileBasedConfig(final Injector injector, final SitePaths site,
       final RemoteSiteUser.Factory ruf, final PluginUser pu,
-      final SchemaFactory<ReviewDb> db, final GitRepositoryManager grm,
+      final GitRepositoryManager grm,
       final GroupBackend gb) throws ConfigInvalidException, IOException {
     this.cfgPath = new File(site.etc_dir, "replication.config");
     this.injector = injector;
     this.replicationUserFactory = ruf;
     this.pluginUser = pu;
-    this.database = db;
     this.gitRepositoryManager = grm;
     this.groupBackend = gb;
     this.config = new FileBasedConfig(cfgPath, FS.DETECTED);
@@ -127,7 +123,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
       }
 
       Destination destination =
-          new Destination(injector, c, config, database, replicationUserFactory,
+          new Destination(injector, c, config, replicationUserFactory,
               pluginUser, gitRepositoryManager, groupBackend);
 
       if (!destination.isSingleProjectMatch()) {

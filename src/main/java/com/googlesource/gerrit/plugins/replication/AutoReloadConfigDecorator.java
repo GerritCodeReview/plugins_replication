@@ -13,13 +13,11 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
-import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
@@ -44,14 +42,13 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private final SitePaths site;
   private final RemoteSiteUser.Factory remoteSiteUserFactory;
   private final PluginUser pluginUser;
-  private final SchemaFactory<ReviewDb> db;
   private final GitRepositoryManager gitRepositoryManager;
   private final GroupBackend groupBackend;
   private final WorkQueue workQueue;
 
   @Inject
   public AutoReloadConfigDecorator(Injector injector, SitePaths site,
-      RemoteSiteUser.Factory ruf, PluginUser pu, SchemaFactory<ReviewDb> db,
+      RemoteSiteUser.Factory ruf, PluginUser pu,
       GitRepositoryManager grm, GroupBackend gb,
       WorkQueue workQueue) throws ConfigInvalidException,
       IOException {
@@ -59,7 +56,6 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     this.site = site;
     this.remoteSiteUserFactory = ruf;
     this.pluginUser = pu;
-    this.db = db;
     this.gitRepositoryManager = grm;
     this.groupBackend = gb;
     this.currentConfig = loadConfig();
@@ -70,7 +66,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private ReplicationFileBasedConfig loadConfig()
       throws ConfigInvalidException, IOException {
     return new ReplicationFileBasedConfig(injector, site,
-        remoteSiteUserFactory, pluginUser, db, gitRepositoryManager,
+        remoteSiteUserFactory, pluginUser, gitRepositoryManager,
         groupBackend);
   }
 
