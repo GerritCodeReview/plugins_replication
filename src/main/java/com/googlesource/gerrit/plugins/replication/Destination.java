@@ -38,7 +38,6 @@ import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.PerRequestProjectControlCache;
 import com.google.gerrit.server.project.ProjectControl;
 import com.google.gerrit.server.util.RequestContext;
-import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.Provides;
@@ -97,7 +96,6 @@ class Destination {
   Destination(final Injector injector,
       final RemoteConfig rc,
       final Config cfg,
-      final SchemaFactory<ReviewDb> db,
       final RemoteSiteUser.Factory replicationUserFactory,
       final PluginUser pluginUser,
       final GitRepositoryManager gitRepositoryManager,
