@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bfaa1cea_4c07bf35",
+        "filename": "BUCK",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2014-06-10T07:23:29Z",
+      "side": 1,
+      "message": "My Buck doesn\u0027t seem to like this:\n\n  Traceback (most recent call last):\n    File \"/Users/d044411/git/gerrit/.buckd/tmp/buck_run.CHCX7Bqc3u/buck2397358332091349949.py\", line 1048, in \u003cmodule\u003e\n      main()\n    File \"/Users/d044411/git/gerrit/.buckd/tmp/buck_run.CHCX7Bqc3u/buck2397358332091349949.py\", line 475, in main\n      buildFileProcessor.process(build_file.rstrip())\n    File \"/Users/d044411/git/gerrit/.buckd/tmp/buck_run.CHCX7Bqc3u/buck2397358332091349949.py\", line 400, in process\n      build_env[\u0027BUILD_FILE_SYMBOL_TABLE\u0027])\n    File \"/Users/d044411/git/gerrit/./plugins/replication/BUCK\", line 13, in \u003cmodule\u003e\n      \u0027//lib/commons:io\u0027,\n  TypeError: gerrit_plugin() got an unexpected keyword argument \u0027compile_deps\u0027",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 14
+      },
+      "revId": "41c0bdd9fca148debcb1c4618323823d8331b396",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
