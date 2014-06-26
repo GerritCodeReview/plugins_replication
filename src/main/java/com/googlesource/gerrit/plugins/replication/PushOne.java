@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.base.Stopwatch;
 import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Lists;
@@ -68,6 +69,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A push to remote operation started by {@link GitReferenceUpdatedListener}.
@@ -182,8 +184,10 @@ class PushOne implements ProjectRunnable {
     if (ALL_REFS.equals(ref)) {
       delta.clear();
       pushAllRefs = true;
+      log.trace("Added all refs for replication to " + uri);
     } else if (!pushAllRefs) {
       delta.add(ref);
+      log.trace("Added ref " + ref + " for replication to " + uri);
     }
   }
 
@@ -266,9 +270,13 @@ class PushOne implements ProjectRunnable {
       return;
     }
 
+    Stopwatch stopwatch = Stopwatch.createStarted();
+    log.debug("Replication to " + uri + " started...");
     try {
       git = gitManager.openRepository(projectName);
       runImpl();
+      log.info("Replication to " + uri + " completed in "
+          + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
     } catch (RepositoryNotFoundException e) {
       stateLog.error("Cannot replicate " + projectName
           + "; Local repository error: "
