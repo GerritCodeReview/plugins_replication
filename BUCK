@@ -22,9 +22,9 @@ java_test(
     '//gerrit-common:server',
     '//gerrit-reviewdb:server',
     '//gerrit-server:server',
-    '//lib:easymock',
     '//lib:gwtorm',
     '//lib:junit',
+    '//lib/easymock:easymock',
     '//lib/jgit:jgit',
   ],
 )
