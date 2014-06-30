@@ -64,8 +64,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 class Destination {
-  private static final Logger log = ReplicationQueue.log;
-  private static final ReplicationStateLogger stateLog = new ReplicationStateLogger(log);
+  private static final Logger repLog = ReplicationQueue.repLog;
+  private static final ReplicationStateLogger stateLog =
+      new ReplicationStateLogger(repLog);
 
   private final int poolThreads;
   private final String poolName;
@@ -128,7 +129,7 @@ class Destination {
         if (g != null) {
           builder.add(g.getUUID());
         } else {
-          log.warn(String.format(
+          repLog.warn(String.format(
               "Group \"%s\" not recognized, removing from authGroup", name));
         }
       }
@@ -472,8 +473,9 @@ class Destination {
         } else if (remoteNameStyle.equals("basenameOnly")) {
           name = FilenameUtils.getBaseName(name);
         } else if (!remoteNameStyle.equals("slash")) {
-            ReplicationQueue.log.debug(String.format(
-                "Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle));
+          repLog.debug(String.format(
+              "Unknown remoteNameStyle: %s, falling back to slash",
+              remoteNameStyle));
         }
         String replacedPath = ReplicationQueue.replaceName(uri.getPath(), name,
             isSingleProjectMatch());

@@ -47,6 +47,8 @@ class ReplicationModule extends AbstractModule {
     bind(LifecycleListener.class)
       .annotatedWith(UniqueAnnotations.create())
       .to(OnStartStop.class);
+    bind(LifecycleListener.class).annotatedWith(UniqueAnnotations.create()).to(
+        ReplicationLogFile.class);
     bind(CredentialsFactory.class).to(
         AutoReloadSecureCredentialsFactoryDecorator.class).in(Scopes.SINGLETON);
     bind(CapabilityDefinition.class)

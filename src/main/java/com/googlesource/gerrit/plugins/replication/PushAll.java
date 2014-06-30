@@ -21,15 +21,12 @@ import com.google.gerrit.server.project.ProjectCache;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 class PushAll implements Runnable {
-  private static final Logger log = LoggerFactory.getLogger(PushAll.class);
-  private static final ReplicationStateLogger stateLog = new ReplicationStateLogger(log);
+  private static final ReplicationStateLogger stateLog =
+      new ReplicationStateLogger(ReplicationQueue.repLog);
 
   interface Factory {
     PushAll create(String urlMatch, ReplicationState state);

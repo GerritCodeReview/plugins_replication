@@ -60,8 +60,10 @@ class ReplicationQueue implements
     NewProjectCreatedListener,
     ProjectDeletedListener,
     HeadUpdatedListener {
-  static final Logger log = LoggerFactory.getLogger(ReplicationQueue.class);
-  private static final ReplicationStateLogger stateLog = new ReplicationStateLogger(log);
+  static final String REPLICATION_LOG_NAME = "replication_log";
+  static final Logger repLog = LoggerFactory.getLogger(REPLICATION_LOG_NAME);
+  private static final ReplicationStateLogger stateLog =
+      new ReplicationStateLogger(repLog);
 
   static String replaceName(String in, String name, boolean keyIsOptional) {
     String key = "${name}";
@@ -102,16 +104,16 @@ class ReplicationQueue implements
     running = false;
     int discarded = config.shutdown();
     if (discarded > 0) {
-      log.warn(String.format(
-          "Cancelled %d replication events during shutdown",
-          discarded));
+      repLog.warn(String.format(
+          "Cancelled %d replication events during shutdown", discarded));
     }
   }
 
   void scheduleFullSync(final Project.NameKey project, final String urlMatch,
       ReplicationState state) {
     if (!running) {
-      stateLog.warn("Replication plugin did not finish startup before event", state);
+      stateLog.warn("Replication plugin did not finish startup before event",
+          state);
       return;
     }
 
@@ -170,7 +172,7 @@ class ReplicationQueue implements
       return Collections.emptySet();
     }
     if (!running) {
-      log.error("Replication plugin did not finish startup before event");
+      repLog.error("Replication plugin did not finish startup before event");
       return Collections.emptySet();
     }
 
@@ -195,20 +197,23 @@ class ReplicationQueue implements
         try {
           uri = new URIish(url);
         } catch (URISyntaxException e) {
-          log.warn(String.format("adminURL '%s' is invalid: %s", url, e.getMessage()));
+          repLog.warn(String.format("adminURL '%s' is invalid: %s", url,
+              e.getMessage()));
           continue;
         }
 
         String path = replaceName(uri.getPath(), projectName.get(),
             config.isSingleProjectMatch());
         if (path == null) {
-          log.warn(String.format("adminURL %s does not contain ${name}", uri));
+          repLog.warn(String
+              .format("adminURL %s does not contain ${name}", uri));
           continue;
         }
 
         uri = uri.setPath(path);
         if (!isSSH(uri)) {
-          log.warn(String.format("adminURL '%s' is invalid: only SSH is supported", uri));
+          repLog.warn(String.format(
+              "adminURL '%s' is invalid: only SSH is supported", uri));
           continue;
         }
 
@@ -228,12 +233,12 @@ class ReplicationQueue implements
   private void createProject(URIish replicateURI, String head) {
     if (!replicateURI.isRemote()) {
       createLocally(replicateURI, head);
-      log.info("Created local repository: " + replicateURI);
+      repLog.info("Created local repository: " + replicateURI);
     } else if (isSSH(replicateURI)) {
       createRemoteSsh(replicateURI, head);
-      log.info("Created remote repository: " + replicateURI);
+      repLog.info("Created remote repository: " + replicateURI);
     } else {
-      log.warn(String.format("Cannot create new project on remote site %s."
+      repLog.warn(String.format("Cannot create new project on remote site %s."
           + " Only local paths and SSH URLs are supported"
           + " for remote repository creation", replicateURI));
     }
@@ -254,9 +259,8 @@ class ReplicationQueue implements
         repo.close();
       }
     } catch (IOException e) {
-      log.error(String.format(
-          "Error creating local repository %s:\n",
-          uri.getPath()), e);
+      repLog.error(String.format(
+          "Error creating local repository %s:\n", uri.getPath()), e);
     }
   }
 
@@ -272,7 +276,7 @@ class ReplicationQueue implements
     try {
       executeRemoteSsh(uri, cmd, errStream);
     } catch (IOException e) {
-      log.error(String.format(
+      repLog.error(String.format(
              "Error creating remote repository at %s:\n"
           + "  Exception: %s\n"
           + "  Command: %s\n"
@@ -284,12 +288,12 @@ class ReplicationQueue implements
   private void deleteProject(URIish replicateURI) {
     if (!replicateURI.isRemote()) {
       deleteLocally(replicateURI);
-      log.info("Deleted local repository: " + replicateURI);
+      repLog.info("Deleted local repository: " + replicateURI);
     } else if (isSSH(replicateURI)) {
       deleteRemoteSsh(replicateURI);
-      log.info("Deleted remote repository: " + replicateURI);
+      repLog.info("Deleted remote repository: " + replicateURI);
     } else {
-      log.warn(String.format("Cannot delete project on remote site %s."
+      repLog.warn(String.format("Cannot delete project on remote site %s."
           + " Only local paths and SSH URLs are supported"
           + " for remote repository deletion", replicateURI));
     }
@@ -299,7 +303,7 @@ class ReplicationQueue implements
     try {
       recursivelyDelete(new File(uri.getPath()));
     } catch (IOException e) {
-      log.error(String.format(
+      repLog.error(String.format(
           "Error deleting local repository %s:\n",
           uri.getPath()), e);
     }
@@ -330,7 +334,7 @@ class ReplicationQueue implements
     try {
       executeRemoteSsh(uri, cmd, errStream);
     } catch (IOException e) {
-      log.error(String.format(
+      repLog.error(String.format(
              "Error deleting remote repository at %s:\n"
           + "  Exception: %s\n"
           + "  Command: %s\n"
@@ -345,9 +349,10 @@ class ReplicationQueue implements
     } else if (isSSH(replicateURI)) {
       updateHeadRemoteSsh(replicateURI, newHead);
     } else {
-      log.warn(String.format("Cannot update HEAD of project on remote site %s."
-          + " Only local paths and SSH URLs are supported"
-          + " for remote HEAD update.", replicateURI));
+      repLog.warn(String.format(
+          "Cannot update HEAD of project on remote site %s."
+              + " Only local paths and SSH URLs are supported"
+              + " for remote HEAD update.", replicateURI));
     }
   }
 
@@ -359,7 +364,7 @@ class ReplicationQueue implements
     try {
       executeRemoteSsh(uri, cmd, errStream);
     } catch (IOException e) {
-      log.error(String.format(
+      repLog.error(String.format(
              "Error updating HEAD of remote repository at %s to %s:\n"
           + "  Exception: %s\n"
           + "  Command: %s\n"
@@ -380,7 +385,9 @@ class ReplicationQueue implements
         repo.close();
       }
     } catch (IOException e) {
-      log.error(String.format("Failed to update HEAD of repository %s to %s", uri.getPath(), newHead), e);
+      repLog.error(
+          String.format("Failed to update HEAD of repository %s to %s",
+              uri.getPath(), newHead), e);
     }
   }
 

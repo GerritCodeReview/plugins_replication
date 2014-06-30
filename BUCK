@@ -11,6 +11,7 @@ gerrit_plugin(
   ],
   provided_deps = [
     '//lib/commons:io',
+    '//lib/log:log4j'
   ],
 )
 
