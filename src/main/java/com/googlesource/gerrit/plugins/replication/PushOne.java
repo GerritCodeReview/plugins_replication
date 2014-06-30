@@ -34,6 +34,7 @@ import com.google.gerrit.server.git.TagCache;
 import com.google.gerrit.server.git.VisibleRefFilter;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.ProjectControl;
+import com.google.gerrit.server.util.IdGenerator;
 import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
@@ -60,6 +61,7 @@ import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.Transport;
 import org.eclipse.jgit.transport.URIish;
 import org.slf4j.Logger;
+import org.slf4j.MDC;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -82,6 +84,7 @@ class PushOne implements ProjectRunnable {
   private static final ReplicationStateLogger stateLog =
       new ReplicationStateLogger(repLog);
   static final String ALL_REFS = "..all..";
+  static final String ID_MDC_KEY = "pushOneId";
 
   interface Factory {
     PushOne create(Project.NameKey d, URIish u);
@@ -109,6 +112,7 @@ class PushOne implements ProjectRunnable {
       LinkedListMultimap.create();
   private final int maxLockRetries;
   private int lockRetryCount;
+  private final int id;
 
   @Inject
   PushOne(final GitRepositoryManager grm,
@@ -120,6 +124,7 @@ class PushOne implements ProjectRunnable {
       final PerThreadRequestScope.Scoper ts,
       final ChangeCache cc,
       final ReplicationQueue rq,
+      final IdGenerator ig,
       @Assisted final Project.NameKey d,
       @Assisted final URIish u) {
     gitManager = grm;
@@ -135,6 +140,7 @@ class PushOne implements ProjectRunnable {
     uri = u;
     lockRetryCount = 0;
     maxLockRetries = pool.getLockErrorMaxRetries();
+    id = ig.next();
   }
 
   @Override
@@ -154,10 +160,12 @@ class PushOne implements ProjectRunnable {
 
   @Override
   public String toString() {
-    if (retryCount == 0) {
-      return "push " + uri;
+    String print = "[" + IdGenerator.format(id) + "] push " + uri;
+
+    if (retryCount > 0) {
+      print = "(retry " + retryCount + ") " + print;
     }
-    return "(retry " + retryCount + ") " + "push " + uri;
+    return print;
   }
 
   boolean isRetrying() {
@@ -262,6 +270,7 @@ class PushOne implements ProjectRunnable {
     // we start replication (instead a new instance, with the same URI, is
     // created and scheduled for a future point in time.)
     //
+    MDC.put(ID_MDC_KEY, IdGenerator.format(id));
     if (!pool.requestRunway(this)) {
       if (!canceled) {
         repLog.info("Rescheduling replication to " + uri

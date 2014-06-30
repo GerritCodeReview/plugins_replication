@@ -37,7 +37,8 @@ public class ReplicationLogFile implements LifecycleListener {
         LogManager.getLogger(ReplicationQueue.REPLICATION_LOG_NAME);
     replicationLogger.removeAllAppenders();
     replicationLogger.addAppender(systemLog.createAsyncAppender(
-        replicationLogger.getName(), new PatternLayout("[%d] %m%n")));
+        replicationLogger.getName(), new PatternLayout("[%d] [%X{"
+            + PushOne.ID_MDC_KEY + "}] %m%n")));
     replicationLogger.setAdditivity(false);
   }
 
