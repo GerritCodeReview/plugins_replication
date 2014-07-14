@@ -202,6 +202,7 @@ class Destination {
   void schedule(final Project.NameKey project, final String ref,
       final URIish uri, ReplicationState state) {
     try {
+      log.debug("scheduling replication {}:{} => {}", project, ref, uri);
       boolean visible = threadScoper.scope(new Callable<Boolean>(){
         @Override
         public Boolean call() throws NoSuchProjectException {
@@ -209,6 +210,8 @@ class Destination {
         }
       }).call();
       if (!visible) {
+        stateLog.warn(String.format("project %s is not visible", project),
+            state);
         return;
       }
     } catch (NoSuchProjectException err) {
@@ -260,6 +263,8 @@ class Destination {
       e.addRef(ref);
       state.increasePushTaskCount(project.get(), ref);
       e.addState(ref, state);
+      log.debug("scheduled {}:{} => {} to run after {}s", project, ref,
+          e, delay);
     }
   }
 
