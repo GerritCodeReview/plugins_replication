@@ -202,7 +202,7 @@ class Destination {
   void schedule(final Project.NameKey project, final String ref,
       final URIish uri, ReplicationState state) {
     try {
-      repLog.debug("scheduling replication {}:{} => {}", project, ref, uri);
+      repLog.info("scheduling replication {}:{} => {}", project, ref, uri);
       boolean visible = threadScoper.scope(new Callable<Boolean>(){
         @Override
         public Boolean call() throws NoSuchProjectException {
@@ -263,7 +263,7 @@ class Destination {
       e.addRef(ref);
       state.increasePushTaskCount(project.get(), ref);
       e.addState(ref, state);
-      repLog.debug("scheduled {}:{} => {} to run after {}s", project, ref,
+      repLog.info("scheduled {}:{} => {} to run after {}s", project, ref,
           e, delay);
     }
   }
