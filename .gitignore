@@ -5,3 +5,6 @@
 /.settings/org.eclipse.m2e.core.prefs
 /.idea
 replication.iml
+/.buckd
+/buck-cache
+/buck-out
