@@ -91,7 +91,7 @@ public class GitUpdateProcessingTest extends TestCase {
 
     reset(changeHooksMock);
     RefReplicatedEvent expectedEvent =
-        new RefReplicatedEvent("someProject", "refs/changes/1/1/1", "someHost",
+        new RefReplicatedEvent("someProject", "refs/changes/01/1/1", "someHost",
             RefPushResult.FAILED);
     changeHooksMock.postEvent(eq(expectedChange),
         RefReplicatedEventEquals.eqEvent(expectedEvent),
