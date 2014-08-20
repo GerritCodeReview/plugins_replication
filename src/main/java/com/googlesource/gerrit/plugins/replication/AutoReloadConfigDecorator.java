@@ -22,8 +22,6 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
 
-import com.googlesource.gerrit.plugins.replication.RemoteSiteUser;
-
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
