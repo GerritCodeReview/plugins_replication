@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.extensions.events.LifecycleListener;
+import com.google.gerrit.extensions.systemstatus.ServerInformation;
 import com.google.gerrit.server.util.SystemLog;
 import com.google.inject.Inject;
 
@@ -25,25 +26,40 @@ import org.apache.log4j.PatternLayout;
 public class ReplicationLogFile implements LifecycleListener {
 
   private final SystemLog systemLog;
+  private final ServerInformation serverInfo;
+  private static boolean started;
 
   @Inject
-  public ReplicationLogFile(final SystemLog systemLog) {
+  public ReplicationLogFile(final SystemLog systemLog,
+      ServerInformation serverInfo) {
     this.systemLog = systemLog;
+    this.serverInfo = serverInfo;
   }
 
   @Override
   public void start() {
-    Logger replicationLogger =
-        LogManager.getLogger(ReplicationQueue.REPLICATION_LOG_NAME);
-    replicationLogger.removeAllAppenders();
-    replicationLogger.addAppender(systemLog.createAsyncAppender(
-        replicationLogger.getName(), new PatternLayout("[%d] [%X{"
-            + PushOne.ID_MDC_KEY + "}] %m%n")));
-    replicationLogger.setAdditivity(false);
+    if (!started) {
+      Logger replicationLogger =
+          LogManager.getLogger(ReplicationQueue.REPLICATION_LOG_NAME);
+      replicationLogger.removeAllAppenders();
+      replicationLogger.addAppender(systemLog.createAsyncAppender(
+          replicationLogger.getName(), new PatternLayout("[%d] [%X{"
+              + PushOne.ID_MDC_KEY + "}] %m%n")));
+      replicationLogger.setAdditivity(false);
+      started = true;
+    }
   }
 
   @Override
   public void stop() {
-    LogManager.getLogger(ReplicationQueue.repLog.getName()).removeAllAppenders();
+    // stop is called when plugin is unloaded or when the server shutdown.
+    // Only clean up when the server is shutting down to prevent issue when a
+    // plugin is reloaded. The issue is that gerrit load the new plugin and then
+    // unload the old one so because loggers are static, the unload of the old
+    // plugin would remove the appenders just created by the new plugin.
+    if (serverInfo.getState() == ServerInformation.State.SHUTDOWN) {
+      LogManager.getLogger(ReplicationQueue.repLog.getName())
+          .removeAllAppenders();
+    }
   }
 }
