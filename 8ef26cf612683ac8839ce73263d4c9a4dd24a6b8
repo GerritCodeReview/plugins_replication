@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3109d96_034fce81",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1006454
+      },
+      "writtenOn": "2014-08-25T15:48:28Z",
+      "side": 1,
+      "message": "Not really happy about the implementation since it means I need to modify the Extension API Interface to allow passing the result of the Project Creation out of the onNewProjectCreated() method. I\u0027ll try something else. Thoughts/comments?",
+      "revId": "8ef26cf612683ac8839ce73263d4c9a4dd24a6b8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
