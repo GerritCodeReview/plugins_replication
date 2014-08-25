@@ -22,7 +22,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
-import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.reviewdb.server.ReviewDb;
@@ -348,21 +347,14 @@ class PushOne implements ProjectRunnable {
     if (pool.isCreateMissingRepos()) {
       try {
         final Ref head = git.getRef(Constants.HEAD);
-        NewProjectCreatedListener.Event event =
-            new NewProjectCreatedListener.Event() {
-              @Override
-              public String getProjectName() {
-                return projectName.get();
-              }
-
-              @Override
-              public String getHeadName() {
-                return head != null ? head.getName() : null;
-              }
-            };
-        replicationQueue.onNewProjectCreated(event);
-        repLog.warn("Missing repository created; retry replication to " + uri);
-        pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
+        if (replicationQueue.createProject(projectName, head != null ? head.getName() : null)) {
+          repLog.warn("Missing repository created; retry replication to " + uri);
+          pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
+        } else {
+          repLog.warn("Missing repository could not be created when replicating " + uri +
+              ". You can only create missing repositories locally, over SSH or when " +
+              "using adminUrl in replication.config. See documentation for more information.");
+        }
       } catch (IOException ioe) {
         stateLog.error("Cannot replicate to " + uri + "; failed to create missing repository",
             ioe, getStatesAsArray());
