@@ -146,10 +146,12 @@ class ReplicationQueue implements
   }
 
   @Override
-  public void onNewProjectCreated(NewProjectCreatedListener.Event event) {
+  public boolean onNewProjectCreated(NewProjectCreatedListener.Event event) {
+    boolean success = true;
     for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()), false)) {
-      createProject(uri, event.getHeadName());
+      success &= createProject(uri, event.getHeadName());
     }
+    return success;
   }
 
   @Override
@@ -230,7 +232,7 @@ class ReplicationQueue implements
     return uris;
   }
 
-  private void createProject(URIish replicateURI, String head) {
+  private boolean createProject(URIish replicateURI, String head) {
     if (!replicateURI.isRemote()) {
       createLocally(replicateURI, head);
       repLog.info("Created local repository: " + replicateURI);
@@ -241,7 +243,9 @@ class ReplicationQueue implements
       repLog.warn(String.format("Cannot create new project on remote site %s."
           + " Only local paths and SSH URLs are supported"
           + " for remote repository creation", replicateURI));
+      return false;
     }
+    return true;
   }
 
   private static void createLocally(URIish uri, String head) {

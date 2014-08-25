@@ -360,9 +360,14 @@ class PushOne implements ProjectRunnable {
                 return head != null ? head.getName() : null;
               }
             };
-        replicationQueue.onNewProjectCreated(event);
-        repLog.warn("Missing repository created; retry replication to " + uri);
-        pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
+        if (replicationQueue.onNewProjectCreated(event)) {
+          repLog.warn("Missing repository created; retry replication to " + uri);
+          pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
+        } else {
+          repLog.warn("Missing repository could not be created when replicating " + uri +
+              ". You can only create missing repositories locally, over SSH or when " +
+              "using adminUrl in replication.config. See documentation for more information.");
+        }
       } catch (IOException ioe) {
         stateLog.error("Cannot replicate to " + uri + "; failed to create missing repository",
             ioe, getStatesAsArray());
