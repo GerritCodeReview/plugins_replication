@@ -16,6 +16,24 @@
       "revId": "8ef26cf612683ac8839ce73263d4c9a4dd24a6b8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13ab299f_ded5e555",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-08-26T01:34:41Z",
+      "side": 1,
+      "message": "Call `createProject` directly instead of through `onNewProjectCreated`?",
+      "parentUuid": "b3109d96_034fce81",
+      "revId": "8ef26cf612683ac8839ce73263d4c9a4dd24a6b8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
