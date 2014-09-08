@@ -14,7 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
@@ -116,7 +116,7 @@ class Destination {
         cfg.getBoolean("remote", rc.getName(), "replicatePermissions", true);
     replicateProjectDeletions =
         cfg.getBoolean("remote", rc.getName(), "replicateProjectDeletions", false);
-    remoteNameStyle = Objects.firstNonNull(
+    remoteNameStyle = MoreObjects.firstNonNull(
         cfg.getString("remote", rc.getName(), "remoteNameStyle"), "slash");
     projects = cfg.getStringList("remote", rc.getName(), "projects");
 
