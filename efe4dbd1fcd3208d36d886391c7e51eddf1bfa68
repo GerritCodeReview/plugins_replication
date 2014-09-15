@@ -22,6 +22,30 @@
       "revId": "efe4dbd1fcd3208d36d886391c7e51eddf1bfa68",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a82390_2ffe49ce",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2014-09-15T18:39:39Z",
+      "side": 1,
+      "message": "I wrote that code and back then, I did not find a normal scenario where the change was null so that\u0027s why I was throwing an exception.\n\nWe discovered that when a change is deleted, the GitReferenceUpdatedListener are notified after the change is remove from the database so this is a normal scenario where the change will be null. \n\nThe ideal would be a able to differentiate a delete change vs a missing change from the db but this is not possible here so I think that\u0027s ok to just do a null check without logging anything.",
+      "parentUuid": "9082af17_4af37305",
+      "range": {
+        "startLine": 183,
+        "startChar": 12,
+        "endLine": 183,
+        "endChar": 33
+      },
+      "revId": "efe4dbd1fcd3208d36d886391c7e51eddf1bfa68",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
