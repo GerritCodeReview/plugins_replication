@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9082af17_4af37305",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2014-09-15T18:10:58Z",
+      "side": 1,
+      "message": "The original code seems to imply that change \u003d\u003d null is an error condition. I agree we want replicate to continue as best it can, but should null changes at least be logged?",
+      "range": {
+        "startLine": 183,
+        "startChar": 12,
+        "endLine": 183,
+        "endChar": 33
+      },
+      "revId": "efe4dbd1fcd3208d36d886391c7e51eddf1bfa68",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
