@@ -15,7 +15,6 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.server.config.SitePaths;
-import com.google.inject.Inject;
 
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
@@ -23,6 +22,8 @@ import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 
 import java.io.IOException;
+
+import javax.inject.Inject;
 
 /** Looks up a remote's password in secure.config. */
 class SecureCredentialsFactory implements CredentialsFactory {

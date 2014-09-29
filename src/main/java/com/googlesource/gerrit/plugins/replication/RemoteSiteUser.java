@@ -19,12 +19,13 @@ import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.account.CapabilityControl;
 import com.google.gerrit.server.account.GroupMembership;
-import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
+
+import javax.inject.Inject;
 
 class RemoteSiteUser extends CurrentUser {
   interface Factory {

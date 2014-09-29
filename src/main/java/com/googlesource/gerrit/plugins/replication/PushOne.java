@@ -36,7 +36,6 @@ import com.google.gerrit.server.project.ProjectControl;
 import com.google.gerrit.server.util.IdGenerator;
 import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
-import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
@@ -71,6 +70,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 /**
  * A push to remote operation started by {@link GitReferenceUpdatedListener}.

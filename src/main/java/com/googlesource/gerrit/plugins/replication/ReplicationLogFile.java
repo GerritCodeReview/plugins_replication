@@ -17,11 +17,12 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.systemstatus.ServerInformation;
 import com.google.gerrit.server.util.SystemLog;
-import com.google.inject.Inject;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
+
+import javax.inject.Inject;
 
 public class ReplicationLogFile implements LifecycleListener {
 

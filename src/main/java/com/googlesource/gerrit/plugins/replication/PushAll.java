@@ -18,11 +18,12 @@ import com.google.gerrit.common.Nullable;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.project.ProjectCache;
-import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 class PushAll implements Runnable {
   private static final ReplicationStateLogger stateLog =

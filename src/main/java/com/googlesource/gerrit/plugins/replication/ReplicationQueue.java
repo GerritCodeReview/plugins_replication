@@ -26,7 +26,6 @@ import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.gwtorm.server.SchemaFactory;
-import com.google.inject.Inject;
 
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 
@@ -52,6 +51,8 @@ import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+
+import javax.inject.Inject;
 
 /** Manages automatic replication to remote repositories. */
 class ReplicationQueue implements

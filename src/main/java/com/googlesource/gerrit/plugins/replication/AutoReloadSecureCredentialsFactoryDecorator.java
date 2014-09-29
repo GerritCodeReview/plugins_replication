@@ -14,7 +14,6 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.server.config.SitePaths;
-import com.google.inject.Inject;
 
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
@@ -24,6 +23,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
+
+import javax.inject.Inject;
 
 public class AutoReloadSecureCredentialsFactoryDecorator implements
     CredentialsFactory {

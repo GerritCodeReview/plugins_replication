@@ -17,11 +17,12 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.util.concurrent.Atomics;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.systemstatus.ServerInformation;
-import com.google.inject.Inject;
 
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
+
+import javax.inject.Inject;
 
 class OnStartStop implements LifecycleListener {
   private final AtomicReference<Future<?>> pushAllFuture;

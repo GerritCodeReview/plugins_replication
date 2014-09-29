@@ -19,7 +19,6 @@ import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
-import com.google.inject.Inject;
 
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.CommandProcessing;
 
@@ -33,6 +32,8 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 @RequiresCapability(StartReplicationCapability.START_REPLICATION)
 @CommandMetaData(name = "start", description = "Start replication for specific project or all projects")
