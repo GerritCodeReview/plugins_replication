@@ -27,5 +27,6 @@ java_test(
     '//lib:junit',
     '//lib/easymock:easymock',
     '//lib/jgit:jgit',
+    '//lib/log:api'
   ],
 )
