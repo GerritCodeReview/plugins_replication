@@ -179,7 +179,10 @@ public abstract class PushResultProcessing {
         try {
           ReviewDb db = schema.open();
           try {
-            hooks.postEvent(retrieveChange(ref, db), event, db);
+            Change change = retrieveChange(ref, db);
+            if (change != null) {
+              hooks.postEvent(change, event, db);
+            }
           } finally {
             db.close();
           }
@@ -196,9 +199,6 @@ public abstract class PushResultProcessing {
         throws OrmException, NoSuchChangeException {
       PatchSet.Id id = PatchSet.Id.fromRef(ref);
       Change change = db.changes().get(id.getParentKey());
-      if (change == null) {
-        throw new NoSuchChangeException(id.getParentKey());
-      }
       return change;
     }
   }
