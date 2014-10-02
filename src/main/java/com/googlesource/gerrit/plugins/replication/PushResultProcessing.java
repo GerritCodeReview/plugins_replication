@@ -21,7 +21,6 @@ import com.google.gerrit.reviewdb.client.PatchSet;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.events.ChangeEvent;
-import com.google.gerrit.server.project.NoSuchChangeException;
 import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
 
@@ -195,8 +194,7 @@ public abstract class PushResultProcessing {
       }
     }
 
-    private Change retrieveChange(String ref, ReviewDb db)
-        throws OrmException, NoSuchChangeException {
+    private Change retrieveChange(String ref, ReviewDb db) throws OrmException {
       PatchSet.Id id = PatchSet.Id.fromRef(ref);
       Change change = db.changes().get(id.getParentKey());
       return change;
