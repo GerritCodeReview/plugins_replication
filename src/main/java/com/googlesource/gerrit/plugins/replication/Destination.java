@@ -200,16 +200,19 @@ class Destination {
     return cfg.getInt("remote", rc.getName(), name, defValue);
   }
 
+  private boolean isVisible(final Project.NameKey project) throws Exception {
+    return threadScoper.scope(new Callable<Boolean>() {
+      @Override
+      public Boolean call() throws NoSuchProjectException {
+        return controlFor(project).isVisible();
+      }
+    }).call();
+  }
+
   void schedule(final Project.NameKey project, final String ref,
       final URIish uri, ReplicationState state) {
     try {
-      boolean visible = threadScoper.scope(new Callable<Boolean>(){
-        @Override
-        public Boolean call() throws NoSuchProjectException {
-          return controlFor(project).isVisible();
-        }
-      }).call();
-      if (!visible) {
+      if (!isVisible(project)) {
         return;
       }
     } catch (NoSuchProjectException err) {
@@ -382,7 +385,16 @@ class Destination {
     }
   }
 
-  boolean wouldPushProject(Project.NameKey project) {
+  boolean wouldPushProject(final Project.NameKey project) {
+    try {
+      if (!isVisible(project)) {
+        return false;
+      }
+    } catch (Exception e) {
+      log.warn(String.format(
+          "Could not determine visibility for project '%s'!", project));
+    }
+
     // by default push all projects
     if (projects.length < 1) {
       return true;
