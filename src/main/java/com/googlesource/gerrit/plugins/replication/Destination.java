@@ -381,6 +381,17 @@ class Destination {
   }
 
   boolean wouldPushProject(Project.NameKey project) {
+    try {
+      ProjectControl pc = projectControlFactory.controlFor(project);
+      if (!pc.isVisible()) {
+        // don't push projects this user can't see
+        return false;
+      }
+    } catch (NoSuchProjectException e) {
+      log.warn(String.format("While replicating, project '%s' does not exist!",
+          project));
+    }
+
     // by default push all projects
     if (projects.length < 1) {
       return true;
