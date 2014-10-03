@@ -380,7 +380,22 @@ class Destination {
     }
   }
 
-  boolean wouldPushProject(Project.NameKey project) {
+  boolean wouldPushProject(final Project.NameKey project) {
+    try {
+      boolean visible = threadScoper.scope(new Callable<Boolean>() {
+        @Override
+        public Boolean call() throws NoSuchProjectException {
+          return controlFor(project).isVisible();
+        }
+      }).call();
+      if (!visible) {
+        return false;
+      }
+    } catch (Exception e) {
+      log.warn(String.format(
+          "Could not determine visibility for project '%s'!", project));
+    }
+
     // by default push all projects
     if (projects.length < 1) {
       return true;
