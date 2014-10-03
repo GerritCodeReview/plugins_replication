@@ -200,24 +200,29 @@ class Destination {
     return cfg.getInt("remote", rc.getName(), name, defValue);
   }
 
-  void schedule(final Project.NameKey project, final String ref,
-      final URIish uri, ReplicationState state) {
+  private boolean isVisible(final Project.NameKey project,
+      ReplicationState... states) {
+    boolean ret = false;
     try {
-      boolean visible = threadScoper.scope(new Callable<Boolean>(){
+      ret = threadScoper.scope(new Callable<Boolean>() {
         @Override
         public Boolean call() throws NoSuchProjectException {
           return controlFor(project).isVisible();
         }
       }).call();
-      if (!visible) {
-        return;
-      }
     } catch (NoSuchProjectException err) {
-      stateLog.error(String.format(
-          "source project %s not available", project), err, state);
-      return;
+      stateLog.error(String.format("source project %s not available", project),
+          err, states);
     } catch (Exception e) {
       throw Throwables.propagate(e);
+    }
+    return ret;
+  }
+
+  void schedule(final Project.NameKey project, final String ref,
+      final URIish uri, ReplicationState state) {
+    if (!isVisible(project, state)) {
+      return;
     }
 
     if (!replicatePermissions) {
@@ -380,7 +385,11 @@ class Destination {
     }
   }
 
-  boolean wouldPushProject(Project.NameKey project) {
+  boolean wouldPushProject(final Project.NameKey project) {
+    if (!isVisible(project)) {
+      return false;
+    }
+
     // by default push all projects
     if (projects.length < 1) {
       return true;
