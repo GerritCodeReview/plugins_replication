@@ -342,6 +342,8 @@ class Destination {
       if (pendingPushOp == null || !pendingPushOp.isRetrying()) {
         pending.put(uri, pushOp);
         switch (reason) {
+          case REPOSITORY_MISSING:
+            pool.schedule(pushOp, 0, TimeUnit.NANOSECONDS);
           case COLLISION:
             pool.schedule(pushOp, delay, TimeUnit.SECONDS);
             break;
