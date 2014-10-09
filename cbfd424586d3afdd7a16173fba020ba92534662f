@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1077a0c2_b685062d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1006454
+      },
+      "writtenOn": "2014-10-09T09:11:15Z",
+      "side": 1,
+      "message": "The same block is",
+      "revId": "cbfd424586d3afdd7a16173fba020ba92534662f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1077a0c2_5652722d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1006454
+      },
+      "writtenOn": "2014-10-09T09:11:15Z",
+      "side": 1,
+      "message": "The logic can be found in the schedule()-method. Perhaps you can extract it and reuse the code in both places?",
+      "revId": "cbfd424586d3afdd7a16173fba020ba92534662f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
