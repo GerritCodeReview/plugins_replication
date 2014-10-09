@@ -33,6 +33,24 @@
       "revId": "cbfd424586d3afdd7a16173fba020ba92534662f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0db3405_d01afc60",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1012612
+      },
+      "writtenOn": "2014-10-09T13:06:49Z",
+      "side": 1,
+      "message": "I wouldn\u0027t have a problem turning this into an isVisible private function and then just calling that both places...",
+      "parentUuid": "1077a0c2_5652722d",
+      "revId": "cbfd424586d3afdd7a16173fba020ba92534662f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
