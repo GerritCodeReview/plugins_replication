@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70d9bc6e_ced3e366",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1012612
+      },
+      "writtenOn": "2014-10-10T13:25:33Z",
+      "side": 1,
+      "message": "Just a question -- on line #218, we catch the NoSuchProjectException explicitly, then throw all other exceptions up the stack.  Should we possibly do the same here?",
+      "range": {
+        "startLine": 393,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 5
+      },
+      "revId": "01e179f47f2a09796890c5ac4e78e2cc945e8a7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
