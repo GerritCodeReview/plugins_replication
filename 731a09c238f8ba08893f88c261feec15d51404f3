@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0ea68ee_31041037",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2014-10-10T16:58:27Z",
+      "side": 1,
+      "message": "From previous review I saw, we only use final for member variables now, we longer use final everywhere.",
+      "range": {
+        "startLine": 203,
+        "startChar": 28,
+        "endLine": 203,
+        "endChar": 33
+      },
+      "revId": "731a09c238f8ba08893f88c261feec15d51404f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0ea68ee_11010c27",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2014-10-10T16:58:27Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 388,
+        "startChar": 27,
+        "endLine": 388,
+        "endChar": 32
+      },
+      "revId": "731a09c238f8ba08893f88c261feec15d51404f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
