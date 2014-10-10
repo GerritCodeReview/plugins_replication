@@ -70,6 +70,30 @@
       "revId": "01e179f47f2a09796890c5ac4e78e2cc945e8a7e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0ea68ee_f1f568e8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2014-10-10T14:55:19Z",
+      "side": 1,
+      "message": "You could move the exception handling into the isVisible method.",
+      "parentUuid": "d0ea68ee_31ed3021",
+      "range": {
+        "startLine": 393,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 5
+      },
+      "revId": "01e179f47f2a09796890c5ac4e78e2cc945e8a7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
