@@ -14,6 +14,8 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.gerrit.reviewdb.client.Change;
+import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.events.ChangeEvent;
 
 public class RefReplicationDoneEvent extends ChangeEvent {
@@ -26,5 +28,25 @@ public class RefReplicationDoneEvent extends ChangeEvent {
     this.project = project;
     this.ref = ref;
     this.nodesCount = nodesCount;
+  }
+
+  @Override
+  public String getType() {
+    return type;
+  }
+
+  @Override
+  public Project.NameKey getProjectNameKey() {
+    return new Project.NameKey(project);
+  }
+
+  @Override
+  public Change.Key getChangeKey() {
+    return null;
+  }
+
+  @Override
+  public String getRefName() {
+    return ref;
   }
 }
