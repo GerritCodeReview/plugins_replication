@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f0e5ac1c_527c34a7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1012612
+      },
+      "writtenOn": "2014-10-10T18:57:53Z",
+      "side": 1,
+      "message": "I will admit to ignorance on this (most of my OO experience is in C++!) -- but there, at least, it\u0027s considered good form to use const whenever possible, since it\u0027s easier to remove it if unneeded than add it later.\n\nAlso, it has to be final, or else you get an error, \"Cannot refer to a non-final variable project inside an inner class defined in a different method.\"",
+      "parentUuid": "d0ea68ee_31041037",
+      "range": {
+        "startLine": 203,
+        "startChar": 28,
+        "endLine": 203,
+        "endChar": 33
+      },
+      "revId": "731a09c238f8ba08893f88c261feec15d51404f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0ea68ee_11010c27",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 6
