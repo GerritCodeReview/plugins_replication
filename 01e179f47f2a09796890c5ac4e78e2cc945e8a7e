@@ -118,6 +118,30 @@
       "revId": "01e179f47f2a09796890c5ac4e78e2cc945e8a7e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0ea68ee_710a9849",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2014-10-10T15:02:10Z",
+      "side": 1,
+      "message": "It\u0027s not an issue, it will additionally log this message back to the user who ran the replication start command in case the replication was started by a command otherwise all the other cases are no-op and the log will only end up in the log file",
+      "parentUuid": "d0ea68ee_d1fa64d8",
+      "range": {
+        "startLine": 393,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 5
+      },
+      "revId": "01e179f47f2a09796890c5ac4e78e2cc945e8a7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
