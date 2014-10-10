@@ -69,6 +69,24 @@
       "revId": "cbfd424586d3afdd7a16173fba020ba92534662f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0ea68ee_91ddfc73",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1012612
+      },
+      "writtenOn": "2014-10-10T13:23:19Z",
+      "side": 1,
+      "message": "Thanks David -- sorry, I got a bit distracted. :)",
+      "parentUuid": "f00e8cb4_cad3c366",
+      "revId": "cbfd424586d3afdd7a16173fba020ba92534662f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
