@@ -94,6 +94,30 @@
       "revId": "01e179f47f2a09796890c5ac4e78e2cc945e8a7e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0ea68ee_d1fa64d8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1012612
+      },
+      "writtenOn": "2014-10-10T14:56:52Z",
+      "side": 1,
+      "message": "I considered that.  Note that it\u0027d go to the stateLog instead, though.  Not sure if that\u0027s an issue.",
+      "parentUuid": "d0ea68ee_f1f568e8",
+      "range": {
+        "startLine": 393,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 5
+      },
+      "revId": "01e179f47f2a09796890c5ac4e78e2cc945e8a7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
