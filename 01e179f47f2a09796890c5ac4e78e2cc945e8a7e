@@ -46,6 +46,30 @@
       "revId": "01e179f47f2a09796890c5ac4e78e2cc945e8a7e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0ea68ee_31ed3021",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1012612
+      },
+      "writtenOn": "2014-10-10T13:34:41Z",
+      "side": 1,
+      "message": "Yeah, I wondered because it seemed like the only exception that\u0027d likely come out would be the NoSuchProjectException and so I removed it... but now that decision doesn\u0027t really make sense to me. :P",
+      "parentUuid": "f00e8cb4_6ae3b737",
+      "range": {
+        "startLine": 393,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 5
+      },
+      "revId": "01e179f47f2a09796890c5ac4e78e2cc945e8a7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
