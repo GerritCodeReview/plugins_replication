@@ -69,6 +69,30 @@
       "revId": "731a09c238f8ba08893f88c261feec15d51404f3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0e5ac1c_f251e828",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1012612
+      },
+      "writtenOn": "2014-10-10T18:59:34Z",
+      "side": 1,
+      "message": "schedule() defines it as final, and I changed this to match, but apparently this could be done either way.",
+      "parentUuid": "d0ea68ee_11010c27",
+      "range": {
+        "startLine": 388,
+        "startChar": 27,
+        "endLine": 388,
+        "endChar": 32
+      },
+      "revId": "731a09c238f8ba08893f88c261feec15d51404f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
