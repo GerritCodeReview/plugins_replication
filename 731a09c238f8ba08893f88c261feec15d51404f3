@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "70d9bc6e_eef57fe8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2014-10-14T13:13:34Z",
+      "side": 1,
+      "message": "I did not realize it is used in an anonymous class, forget my comment.",
+      "parentUuid": "f0e5ac1c_527c34a7",
+      "range": {
+        "startLine": 203,
+        "startChar": 28,
+        "endLine": 203,
+        "endChar": 33
+      },
+      "revId": "731a09c238f8ba08893f88c261feec15d51404f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0ea68ee_11010c27",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 6
