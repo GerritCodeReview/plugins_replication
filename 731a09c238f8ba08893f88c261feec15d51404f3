@@ -73,6 +73,29 @@
     },
     {
       "key": {
+        "uuid": "f00e8cb4_caa7439c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-10-16T05:45:35Z",
+      "side": 1,
+      "message": "Can we not just return the result of threadScoper.scope()...call() here rather than creating the temporary variable and returning at line 219?",
+      "range": {
+        "startLine": 207,
+        "startChar": 6,
+        "endLine": 207,
+        "endChar": 16
+      },
+      "revId": "731a09c238f8ba08893f88c261feec15d51404f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0ea68ee_11010c27",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 6
