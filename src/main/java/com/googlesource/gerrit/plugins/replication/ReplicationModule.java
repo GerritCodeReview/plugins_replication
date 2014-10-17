@@ -47,8 +47,10 @@ class ReplicationModule extends AbstractModule {
     bind(LifecycleListener.class)
       .annotatedWith(UniqueAnnotations.create())
       .to(OnStartStop.class);
-    bind(LifecycleListener.class).annotatedWith(UniqueAnnotations.create()).to(
-        ReplicationLogFile.class);
+    if (canConfigureLog4j()) {
+      bind(LifecycleListener.class).annotatedWith(UniqueAnnotations.create())
+          .to(ReplicationLogFile.class);
+    }
     bind(CredentialsFactory.class).to(
         AutoReloadSecureCredentialsFactoryDecorator.class).in(Scopes.SINGLETON);
     bind(CapabilityDefinition.class)
@@ -60,4 +62,9 @@ class ReplicationModule extends AbstractModule {
 
     bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
   }
+
+  private boolean canConfigureLog4j() {
+    return false;
+  }
+
 }
