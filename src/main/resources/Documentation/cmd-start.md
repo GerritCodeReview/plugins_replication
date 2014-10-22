@@ -11,7 +11,7 @@ SYNOPSIS
 ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start
   [--wait]
   [--url <PATTERN>]
-  {--all | <PROJECT> ...}
+  {--all | <PROJECT PATTERN> ...}
 ```
 
 DESCRIPTION
@@ -60,6 +60,19 @@ it may be caused by several reasons, such as you give a wrong url
 pattern in command options, or the authGroup in the replication.config
 has no read access for the replicated projects.
 
+If one or several project patterns are supplied, only those projects
+conforming to both this/these pattern(s) and those defined in
+replication.config for the target host(s) are queued for replication.
+
+The patterns follow the same format as those in replication.config,
+where wildcard or regular expression patterns can be given.
+Regular expression patterns must match a complete project name to be
+considered a match.
+
+A regular expression pattern starts with `^` and a wildcard pattern ends
+with a `*`. If the pattern starts with `^` and ends with `*`, it is
+treated as a regular expression.
+
 ACCESS
 ------
 Caller must be a member of the privileged 'Administrators' group,
@@ -104,6 +117,18 @@ locally by hand:
 ```
   $ git --git-dir=/home/git/tools/gerrit.git update-ref -d refs/changes/00/100/1
   $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start tools/gerrit
+```
+
+Replicate only projects located in the `documentation` subdirectory:
+
+```
+  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start documentation/*
+```
+
+Replicate projects whose path includes a folder named `vendor` to host slave1:
+
+```
+  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --url slave1 ^(|.*/)vendor(|/.*)
 ```
 
 SEE ALSO
