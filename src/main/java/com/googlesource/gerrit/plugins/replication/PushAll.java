@@ -29,22 +29,30 @@ class PushAll implements Runnable {
       new ReplicationStateLogger(ReplicationQueue.repLog);
 
   interface Factory {
-    PushAll create(String urlMatch, ReplicationState state);
+    PushAll create(String urlMatch,
+        ReplicationFilter filter,
+        ReplicationState state);
   }
 
   private final WorkQueue workQueue;
   private final ProjectCache projectCache;
   private final ReplicationQueue replication;
   private final String urlMatch;
+  private final ReplicationFilter filter;
   private final ReplicationState state;
 
   @Inject
-  PushAll(WorkQueue wq, ProjectCache projectCache, ReplicationQueue rq,
-      @Assisted @Nullable String urlMatch, @Assisted ReplicationState state) {
+  PushAll(WorkQueue wq,
+      ProjectCache projectCache,
+      ReplicationQueue rq,
+      @Assisted @Nullable String urlMatch,
+      @Assisted ReplicationFilter filter,
+      @Assisted ReplicationState state) {
     this.workQueue = wq;
     this.projectCache = projectCache;
     this.replication = rq;
     this.urlMatch = urlMatch;
+    this.filter = filter;
     this.state = state;
   }
 
@@ -56,7 +64,9 @@ class PushAll implements Runnable {
   public void run() {
     try {
       for (Project.NameKey nameKey : projectCache.all()) {
-        replication.scheduleFullSync(nameKey, urlMatch, state);
+        if (filter.matches(nameKey)) {
+          replication.scheduleFullSync(nameKey, urlMatch, state);
+        }
       }
     } catch (Exception e) {
       stateLog.error("Cannot enumerate known projects", e, state);
