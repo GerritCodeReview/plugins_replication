@@ -15,8 +15,6 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.extensions.annotations.RequiresCapability;
-import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
@@ -49,17 +47,11 @@ final class StartCommand extends SshCommand {
       usage = "wait for replication to finish before exiting")
   private boolean wait;
 
-  @Argument(index = 0, multiValued = true, metaVar = "PROJECT", usage = "project name")
+  @Argument(index = 0, multiValued = true, metaVar = "PATTERN", usage = "project name pattern")
   private List<String> projectNames = new ArrayList<String>(2);
 
   @Inject
-  private PushAll.Factory pushAllFactory;
-
-  @Inject
-  private ReplicationQueue replication;
-
-  @Inject
-  private ProjectCache projectCache;
+  private PushAll.Factory pushFactory;
 
   @Override
   protected void run() throws Failure {
@@ -69,19 +61,16 @@ final class StartCommand extends SshCommand {
 
     ReplicationState state = new ReplicationState(new CommandProcessing(this));
     Future<?> future = null;
+
+    ReplicationFilter projectFilter;
+
     if (all) {
-      future = pushAllFactory.create(urlMatch, state).schedule(0, TimeUnit.SECONDS);
+      projectFilter = ReplicationFilter.all();
     } else {
-      for (String name : projectNames) {
-        Project.NameKey key = new Project.NameKey(name);
-        if (projectCache.get(key) != null) {
-          replication.scheduleFullSync(key, urlMatch, state);
-        } else {
-          writeStdErrSync("error: '" + name + "': not a Gerrit project");
-        }
-      }
-      state.markAllPushTasksScheduled();
+      projectFilter = new ReplicationFilter(projectNames);
     }
+
+    future = pushFactory.create(urlMatch, projectFilter, state).schedule(0, TimeUnit.SECONDS);
 
     if (wait) {
       if (future != null) {
