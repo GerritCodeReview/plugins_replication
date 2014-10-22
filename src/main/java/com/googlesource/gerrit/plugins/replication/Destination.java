@@ -18,7 +18,6 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
-import com.google.gerrit.common.data.AccessSection;
 import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Project;
@@ -57,6 +56,7 @@ import org.slf4j.Logger;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -390,36 +390,15 @@ class Destination {
       return true;
     }
 
-    String projectName = project.get();
-    for (final String projectMatch : projects) {
-      if (isRE(projectMatch)) {
-        // projectMatch is a regular expression
-        if (projectName.matches(projectMatch)) {
-          return true;
-        }
-      } else if (isWildcard(projectMatch)) {
-        // projectMatch is a wildcard
-        if (projectName.startsWith(
-            projectMatch.substring(0, projectMatch.length() - 1))) {
-          return true;
-        }
-      } else {
-        // No special case, so we try to match directly
-        if (projectName.equals(projectMatch)) {
-          return true;
-        }
-      }
-    }
-
-    // Nothing matched, so don't push the project
-    return false;
+    return (new ReplicationFilter(Arrays.asList(projects))).matches(project);
   }
 
   boolean isSingleProjectMatch() {
     boolean ret = (projects.length == 1);
     if (ret) {
       String projectMatch = projects[0];
-      if (isRE(projectMatch) || isWildcard(projectMatch)) {
+      if (ReplicationFilter.isRE(projectMatch)
+          || ReplicationFilter.isWildcard(projectMatch)) {
         // projectMatch is either regular expression, or wild-card.
         //
         // Even though they might refer to a single project now, they need not
@@ -429,14 +408,6 @@ class Destination {
       }
     }
     return ret;
-  }
-
-  private static boolean isRE(String str) {
-    return str.startsWith(AccessSection.REGEX_PREFIX);
-  }
-
-  private static boolean isWildcard(String str) {
-    return str.endsWith("*");
   }
 
   boolean wouldPushRef(String ref) {
