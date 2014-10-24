@@ -27,7 +27,7 @@ public class ReplicationLogFile implements LifecycleListener {
 
   private final SystemLog systemLog;
   private final ServerInformation serverInfo;
-  private static boolean started = false;
+  private static boolean started;
 
   @Inject
   public ReplicationLogFile(final SystemLog systemLog,
