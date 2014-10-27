@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55c2ea1e_4d1c3990",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-10-27T10:25:50Z",
+      "side": 1,
+      "message": "private final",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 9
+      },
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55c2ea1e_6d21f5c8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-10-27T10:25:50Z",
+      "side": 1,
+      "message": "Not needed? See comment below.",
+      "range": {
+        "startLine": 24,
+        "startChar": 18,
+        "endLine": 24,
+        "endChar": 26
+      },
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5bafe9a_6afc77d3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-10-27T10:25:50Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55c2ea1e_0d2631e2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-10-27T10:25:50Z",
+      "side": 1,
+      "message": "Is it really needed? You could have the same information, when you would create the instance of ReplicationFilter() with ImmutableList.of() as parameter, and would check on line 48:\n\n  if (names.isEmpty()) {\n    return true;\n  }",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 33,
+        "endChar": 3
+      },
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5bafe9a_0af13bfa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-10-27T10:25:50Z",
+      "side": 1,
+      "message": "No final in new code. Yes, it was final in the old code, but after copy/paste it\u0027s new code.",
+      "range": {
+        "startLine": 52,
+        "startChar": 11,
+        "endLine": 52,
+        "endChar": 16
+      },
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
