@@ -114,6 +114,40 @@
       "revId": "19008e99925cebd101311276f09959110734fa79",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5bafe9a_4a45f371",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2014-10-27T16:00:15Z",
+      "side": 1,
+      "message": "Please describe what a pattern could be. From the examples below it looks like you want to support both a wildcard (/* at the end) and a regular expression. How are these two distinguished? Is the purpose of \"^\" in the second example to mark it as a regular expression? If yes, see my comment on the example 2 below.",
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5bafe9a_6a4a3783",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2014-10-27T16:00:15Z",
+      "side": 1,
+      "message": "Is the purpose of the ^ to mark this as a regular expression (same like in the access permission editor for ref patterns)?\n\nI think that this regex doesn\u0027t really match what you describe in the text as it will only match paths which start with \"vendor/\" or \"/vendor/\" but not \"/a/vendor/\"",
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
