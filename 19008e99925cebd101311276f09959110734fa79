@@ -388,6 +388,24 @@
       "revId": "19008e99925cebd101311276f09959110734fa79",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b50a4612_981ff5f5",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-10-28T10:35:39Z",
+      "side": 1,
+      "message": "I agree with Felix here.  The current implementation is consistent with the existing behaviour; it would be better to change it in a follow-up commit for separate review.",
+      "parentUuid": "55c2ea1e_4da199b1",
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
