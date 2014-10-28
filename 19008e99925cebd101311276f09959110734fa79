@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "55c2ea1e_2dc76d72",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1017803
+      },
+      "writtenOn": "2014-10-28T09:38:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55c2ea1e_4d1c3990",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 9
+      },
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "55c2ea1e_6d21f5c8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
         "patchSetId": 4
@@ -71,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "f5bafe9a_4ab893ef",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1017803
+      },
+      "writtenOn": "2014-10-28T09:38:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55c2ea1e_6d21f5c8",
+      "range": {
+        "startLine": 24,
+        "startChar": 18,
+        "endLine": 24,
+        "endChar": 26
+      },
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55c2ea1e_cdab4995",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1017803
+      },
+      "writtenOn": "2014-10-28T09:38:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5bafe9a_6afc77d3",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "55c2ea1e_0d2631e2",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
         "patchSetId": 4
@@ -82,6 +154,30 @@
       "writtenOn": "2014-10-27T10:25:50Z",
       "side": 1,
       "message": "Is it really needed? You could have the same information, when you would create the instance of ReplicationFilter() with ImmutableList.of() as parameter, and would check on line 48:\n\n  if (names.isEmpty()) {\n    return true;\n  }",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 33,
+        "endChar": 3
+      },
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5bafe9a_6abd57de",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1017803
+      },
+      "writtenOn": "2014-10-28T09:38:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55c2ea1e_0d2631e2",
       "range": {
         "startLine": 31,
         "startChar": 2,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "55c2ea1e_eda8859a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1017803
+      },
+      "writtenOn": "2014-10-28T09:38:00Z",
+      "side": 1,
+      "message": "Done, but I\u0027m curious. Is it just a convention about not sprinkling the code with unneeded keywords, or something more?",
+      "parentUuid": "f5bafe9a_0af13bfa",
+      "range": {
+        "startLine": 52,
+        "startChar": 11,
+        "endLine": 52,
+        "endChar": 16
+      },
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5bafe9a_4a45f371",
         "filename": "src/main/resources/Documentation/cmd-start.md",
         "patchSetId": 4
@@ -134,6 +254,24 @@
     },
     {
       "key": {
+        "uuid": "55c2ea1e_8db541f5",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1017803
+      },
+      "writtenOn": "2014-10-28T09:38:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5bafe9a_4a45f371",
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5bafe9a_6a4a3783",
         "filename": "src/main/resources/Documentation/cmd-start.md",
         "patchSetId": 4
@@ -145,6 +283,24 @@
       "writtenOn": "2014-10-27T16:00:15Z",
       "side": 1,
       "message": "Is the purpose of the ^ to mark this as a regular expression (same like in the access permission editor for ref patterns)?\n\nI think that this regex doesn\u0027t really match what you describe in the text as it will only match paths which start with \"vendor/\" or \"/vendor/\" but not \"/a/vendor/\"",
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5bafe9a_0ac29b61",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1017803
+      },
+      "writtenOn": "2014-10-28T09:38:00Z",
+      "side": 1,
+      "message": "The problem with this example is that the pattern is only treated as a regex if it starts with \u0027^\u0027, which this example doesn\u0027t. And it isn\u0027t treated as a wildcard pattern either, as it doesn\u0027t end with a \u0027*\u0027...\nI hope the new one looks better!",
+      "parentUuid": "f5bafe9a_6a4a3783",
       "revId": "19008e99925cebd101311276f09959110734fa79",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
