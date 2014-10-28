@@ -304,6 +304,24 @@
       "revId": "19008e99925cebd101311276f09959110734fa79",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5bafe9a_eaa8679a",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-10-28T10:11:23Z",
+      "side": 1,
+      "message": "I wonder if it would be much simpler not try to induce if the provided project name is normal expression or a regex, but explicitly add this option? Something that GNU find command is doing with --regex option:\n\n  -regex pattern\n  True if the whole path of the file matches pattern using regular expression.\n  To match a file named ``./foo/xyzzy\u0027\u0027, you can use the regular expression \n  ``.*/[xyz]*\u0027\u0027 or ``.*/foo/.*\u0027\u0027, but not ``xyzzy\u0027\u0027 or ``/foo/\u0027\u0027.\n\nSo that the user can say:\n\n  $ ssh gerrit replication start --regex \".*/foo/.*\"",
+      "parentUuid": "f5bafe9a_0ac29b61",
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
