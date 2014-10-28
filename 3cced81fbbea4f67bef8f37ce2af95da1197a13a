@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5bafe9a_ea91475c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2014-10-28T15:45:49Z",
+      "side": 1,
+      "message": "nit: static before non-static",
+      "revId": "3cced81fbbea4f67bef8f37ce2af95da1197a13a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55c2ea1e_ad8b5d26",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2014-10-28T15:45:49Z",
+      "side": 1,
+      "message": "Collections.\u003cString\u003e emptyList()\n\nis more standard.",
+      "range": {
+        "startLine": 31,
+        "startChar": 33,
+        "endLine": 31,
+        "endChar": 59
+      },
+      "revId": "3cced81fbbea4f67bef8f37ce2af95da1197a13a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55c2ea1e_8d8ea137",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2014-10-28T15:45:49Z",
+      "side": 1,
+      "message": "According to this implementation the following string:\n\n  ^abc.*\n\nis both a regex and a wildcard.\n\nI see that this is just copied from the old code but maybe it is time to fix it.\nIn the old code these were private methods and the code in that class took care to invoked them in correct order. Now that these methods are public it is more critical that they are implemented correctly.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 3
+      },
+      "revId": "3cced81fbbea4f67bef8f37ce2af95da1197a13a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55c2ea1e_4d067911",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2014-10-28T15:45:49Z",
+      "side": 1,
+      "message": "Are all ReplicationFilter instances short-living (created for a command and then dropped)? If yes, then this code is OK. Otherwise, if a ReplicationFilter instance would be used multiple time, then it would make sense to compile the regular expressions once and cache the Pattern instances.",
+      "revId": "3cced81fbbea4f67bef8f37ce2af95da1197a13a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5bafe9a_8a8e8b37",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2014-10-28T15:45:49Z",
+      "side": 1,
+      "message": "It should probably be mentioned that regular expressions (and wildcards too) must match the project name fully. If they match only a part of the project name then this is not considered a match.",
+      "revId": "3cced81fbbea4f67bef8f37ce2af95da1197a13a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5bafe9a_ca94834f",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2014-10-28T15:45:49Z",
+      "side": 1,
+      "message": "What is then the following:\n\n  ^abc.*\n\nAccording to the definition it is both a regex and a wildcard.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 11
+      },
+      "revId": "3cced81fbbea4f67bef8f37ce2af95da1197a13a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55c2ea1e_6d0b3516",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2014-10-28T15:45:49Z",
+      "side": 1,
+      "message": "1. This example is still not matching the text as it will match those project names that end with \"vendor\" or \"vendor/\" but not those which include it anywhere in its name.\n\n2. Why is the \"$\" needed?\n\nA correct regex would be:\n\n  ^(|.*/)vendor(|/.*)",
+      "range": {
+        "startLine": 127,
+        "startChar": 74,
+        "endLine": 127,
+        "endChar": 79
+      },
+      "revId": "3cced81fbbea4f67bef8f37ce2af95da1197a13a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
