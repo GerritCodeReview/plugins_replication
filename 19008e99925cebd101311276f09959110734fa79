@@ -237,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "f5bafe9a_8ab52bf5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-10-28T10:25:06Z",
+      "side": 1,
+      "message": "Yes. In new code final is only supposed to be used in two cases:\n\n* 1. instance variables that initialized only once in ctor\n* 2. inner classes require final outer instance variables",
+      "parentUuid": "55c2ea1e_eda8859a",
+      "range": {
+        "startLine": 52,
+        "startChar": 11,
+        "endLine": 52,
+        "endChar": 16
+      },
+      "revId": "19008e99925cebd101311276f09959110734fa79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5bafe9a_4a45f371",
         "filename": "src/main/resources/Documentation/cmd-start.md",
         "patchSetId": 4
