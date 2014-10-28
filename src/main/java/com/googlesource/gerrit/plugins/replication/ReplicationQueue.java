@@ -30,7 +30,6 @@ import com.google.inject.Inject;
 
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 
-import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Constants;
@@ -85,8 +84,7 @@ class ReplicationQueue implements
 
   @Inject
   ReplicationQueue(final WorkQueue wq, final ReplicationConfig rc,
-      final SchemaFactory<ReviewDb> db, final ChangeHooks ch)
-      throws ConfigInvalidException, IOException {
+      final SchemaFactory<ReviewDb> db, final ChangeHooks ch) {
     workQueue = wq;
     database = db;
     changeHooks = ch;

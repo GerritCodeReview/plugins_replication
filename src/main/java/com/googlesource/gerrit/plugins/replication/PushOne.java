@@ -617,5 +617,5 @@ class PushOne implements ProjectRunnable {
     public LockFailureException(URIish uri, String message) {
       super(uri, message);
     }
-  };
+  }
 }

@@ -41,10 +41,20 @@ public abstract class PushResultProcessing {
 
   abstract void onAllRefsReplicatedToAllNodes(int totalPushTasksCount);
 
+  /**
+   * Write message to standard out.
+   *
+   * @param message message text.
+   */
   void writeStdOut(final String message) {
     // Default doing nothing
   }
 
+  /**
+   * Write message to standard error.
+   *
+   * @param message message text.
+   */
   void writeStdErr(final String message) {
     // Default doing nothing
   }

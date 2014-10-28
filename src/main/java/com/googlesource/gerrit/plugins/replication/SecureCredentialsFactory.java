@@ -51,6 +51,7 @@ class SecureCredentialsFactory implements CredentialsFactory {
     return cfg;
   }
 
+  @Override
   public SecureCredentialsProvider create(String remoteName) {
     String user = config.getString("remote", remoteName, "username");
     String pass = config.getString("remote", remoteName, "password");
