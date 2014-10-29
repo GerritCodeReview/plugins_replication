@@ -53,6 +53,7 @@ public class GitUpdateProcessingTest extends TestCase {
   private ChangeAccess changeAccessMock;
   private GitUpdateProcessing gitUpdateProcessing;
 
+  @Override
   protected void setUp() throws Exception {
     super.setUp();
     changeHooksMock = createMock(ChangeHooks.class);
@@ -105,7 +106,7 @@ public class GitUpdateProcessingTest extends TestCase {
     verify(changeHooksMock);
   }
 
-  public void testOnAllNodesReplicated() throws URISyntaxException {
+  public void testOnAllNodesReplicated() {
     reset(changeHooksMock);
     RefReplicationDoneEvent expectedDoneEvent =
         new RefReplicationDoneEvent("someProject", "refs/heads/master", 5);

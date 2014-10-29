@@ -184,6 +184,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     return cfgPath;
   }
 
+  @Override
   public int shutdown() {
     int discarded = 0;
     for (Destination cfg : destinations) {
