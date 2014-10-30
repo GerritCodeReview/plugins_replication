@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "95daa231_bf0c375a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1017803
+      },
+      "writtenOn": "2014-10-30T08:34:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b566c610_b85df936",
+      "revId": "6a2a898c3be555c722f59f55366c2c176aab51f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "955d4234_e7c7624e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-29T16:04:46Z",
       "side": 1,
       "message": "return true;",
+      "revId": "6a2a898c3be555c722f59f55366c2c176aab51f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "95daa231_df19fb9a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1017803
+      },
+      "writtenOn": "2014-10-30T08:34:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "955d4234_e7c7624e",
       "revId": "6a2a898c3be555c722f59f55366c2c176aab51f3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "95daa231_ff16bf69",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1017803
+      },
+      "writtenOn": "2014-10-30T08:34:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b566c610_58b85def",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 9
+      },
+      "revId": "6a2a898c3be555c722f59f55366c2c176aab51f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b566c610_78bd21de",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
         "patchSetId": 7
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "95daa231_1f452373",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1017803
+      },
+      "writtenOn": "2014-10-30T08:34:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b566c610_78bd21de",
+      "revId": "6a2a898c3be555c722f59f55366c2c176aab51f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "955d4234_c7c45e4c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
         "patchSetId": 7
@@ -87,6 +165,24 @@
       "writtenOn": "2014-10-29T16:04:46Z",
       "side": 1,
       "message": "according to 272d5c92d733d19633e9e3bb467b19aa641d6cc7 it is preferable to list all enum constants vs using the default: case. The commit message explains why.",
+      "revId": "6a2a898c3be555c722f59f55366c2c176aab51f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "95daa231_3f4ae781",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFilter.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1017803
+      },
+      "writtenOn": "2014-10-30T08:34:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "955d4234_c7c45e4c",
       "revId": "6a2a898c3be555c722f59f55366c2c176aab51f3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
