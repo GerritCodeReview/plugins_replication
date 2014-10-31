@@ -220,7 +220,7 @@ class PushOne implements ProjectRunnable {
   }
 
   ReplicationState[] getStatesAsArray() {
-    Set<ReplicationState> statesSet = new HashSet<ReplicationState>();
+    Set<ReplicationState> statesSet = new HashSet<>();
     statesSet.addAll(stateMap.values());
     return statesSet.toArray(new ReplicationState[statesSet.size()]);
   }
@@ -544,12 +544,12 @@ class PushOne implements ProjectRunnable {
 
   private void updateStates(Collection<RemoteRefUpdate> refUpdates)
       throws LockFailureException {
-    Set<String> doneRefs = new HashSet<String>();
+    Set<String> doneRefs = new HashSet<>();
     boolean anyRefFailed = false;
 
     for (RemoteRefUpdate u : refUpdates) {
       RefPushResult pushStatus = RefPushResult.SUCCEEDED;
-      Set<ReplicationState> logStates = new HashSet<ReplicationState>();
+      Set<ReplicationState> logStates = new HashSet<>();
 
       logStates.addAll(stateMap.get(u.getSrcRef()));
       logStates.addAll(stateMap.get(ALL_REFS));

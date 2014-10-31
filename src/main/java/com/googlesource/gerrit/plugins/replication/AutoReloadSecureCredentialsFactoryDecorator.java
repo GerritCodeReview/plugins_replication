@@ -42,8 +42,7 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements
     this.site = site;
     this.config = config;
     this.secureCredentialsFactory =
-        new AtomicReference<SecureCredentialsFactory>(
-            new SecureCredentialsFactory(site));
+        new AtomicReference<>(new SecureCredentialsFactory(site));
     this.secureCredentialsFactoryLoadTs = getSecureConfigLastEditTs();
   }
 

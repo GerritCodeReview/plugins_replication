@@ -78,7 +78,7 @@ public abstract class PushResultProcessing {
     private AtomicBoolean hasError = new AtomicBoolean();
 
     CommandProcessing(StartCommand sshCommand) {
-      this.sshCommand = new WeakReference<StartCommand>(sshCommand);
+      this.sshCommand = new WeakReference<>(sshCommand);
     }
 
     @Override

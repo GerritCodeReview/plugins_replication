@@ -78,8 +78,8 @@ class Destination {
   private final int retryDelay;
   private final Object stateLock = new Object();
   private final int lockErrorMaxRetries;
-  private final Map<URIish, PushOne> pending = new HashMap<URIish, PushOne>();
-  private final Map<URIish, PushOne> inFlight = new HashMap<URIish, PushOne>();
+  private final Map<URIish, PushOne> pending = new HashMap<>();
+  private final Map<URIish, PushOne> inFlight = new HashMap<>();
   private final PushOne.Factory opFactory;
   private final ProjectControl.Factory projectControlFactory;
   private final GitRepositoryManager gitManager;

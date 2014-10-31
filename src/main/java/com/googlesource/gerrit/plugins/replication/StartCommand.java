@@ -48,7 +48,7 @@ final class StartCommand extends SshCommand {
   private boolean wait;
 
   @Argument(index = 0, multiValued = true, metaVar = "PATTERN", usage = "project name pattern")
-  private List<String> projectPatterns = new ArrayList<String>(2);
+  private List<String> projectPatterns = new ArrayList<>(2);
 
   @Inject
   private PushAll.Factory pushFactory;
