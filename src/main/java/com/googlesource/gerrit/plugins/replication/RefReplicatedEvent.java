@@ -21,7 +21,6 @@ import com.google.gerrit.server.events.ChangeEvent;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
 public class RefReplicatedEvent extends ChangeEvent {
-  public final String type = "ref-replicated";
   public final String project;
   public final String ref;
   public final String targetNode;
@@ -29,6 +28,7 @@ public class RefReplicatedEvent extends ChangeEvent {
 
   public RefReplicatedEvent(String project, String ref, String targetNode,
       RefPushResult status) {
+    super("ref-replicated");
     this.project = project;
     this.ref = ref;
     this.targetNode = targetNode;
