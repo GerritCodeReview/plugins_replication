@@ -14,14 +14,12 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.server.events.ChangeEvent;
+import com.google.gerrit.server.events.RefEvent;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
-public class RefReplicatedEvent extends ChangeEvent {
-  public final String type = "ref-replicated";
+public class RefReplicatedEvent extends RefEvent {
   public final String project;
   public final String ref;
   public final String targetNode;
@@ -29,6 +27,7 @@ public class RefReplicatedEvent extends ChangeEvent {
 
   public RefReplicatedEvent(String project, String ref, String targetNode,
       RefPushResult status) {
+    super("ref-replicated");
     this.project = project;
     this.ref = ref;
     this.targetNode = targetNode;
@@ -47,11 +46,6 @@ public class RefReplicatedEvent extends ChangeEvent {
   @Override
   public Project.NameKey getProjectNameKey() {
     return new Project.NameKey(project);
-  }
-
-  @Override
-  public Change.Key getChangeKey() {
-    return null;
   }
 
   @Override
