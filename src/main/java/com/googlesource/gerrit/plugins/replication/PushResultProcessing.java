@@ -20,7 +20,7 @@ import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.client.PatchSet;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
-import com.google.gerrit.server.events.ChangeEvent;
+import com.google.gerrit.server.events.RefEvent;
 import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
 
@@ -183,7 +183,7 @@ public abstract class PushResultProcessing {
     void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {
     }
 
-    private void postEvent(String project, String ref, ChangeEvent event) {
+    private void postEvent(String project, String ref, RefEvent event) {
       if (PatchSet.isRef(ref)) {
         try {
           ReviewDb db = schema.open();
