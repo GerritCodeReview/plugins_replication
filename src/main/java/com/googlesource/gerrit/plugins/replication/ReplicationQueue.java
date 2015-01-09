@@ -29,6 +29,7 @@ import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
 
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
+import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 
 import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
@@ -115,7 +116,7 @@ class ReplicationQueue implements
       return;
     }
 
-    for (Destination cfg : config.getDestinations()) {
+    for (Destination cfg : config.getDestinations(FilterType.ALL)) {
       if (cfg.wouldPushProject(project)) {
         for (URIish uri : cfg.getURIs(project, urlMatch)) {
           cfg.schedule(project, PushOne.ALL_REFS, uri, state);
@@ -133,7 +134,7 @@ class ReplicationQueue implements
     }
 
     Project.NameKey project = new Project.NameKey(event.getProjectName());
-    for (Destination cfg : config.getDestinations()) {
+    for (Destination cfg : config.getDestinations(FilterType.ALL)) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(event.getRefName())) {
         for (URIish uri : cfg.getURIs(project, null)) {
           cfg.schedule(project, event.getRefName(), uri, state);
@@ -145,28 +146,31 @@ class ReplicationQueue implements
 
   @Override
   public void onNewProjectCreated(NewProjectCreatedListener.Event event) {
-    for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()), false)) {
+    for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()),
+        FilterType.PROJECT_CREATION)) {
       createProject(uri, event.getHeadName());
     }
   }
 
   @Override
   public void onProjectDeleted(ProjectDeletedListener.Event event) {
-    for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()), true)) {
+    for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()),
+        FilterType.PROJECT_DELETION)) {
       deleteProject(uri);
     }
   }
 
   @Override
   public void onHeadUpdated(HeadUpdatedListener.Event event) {
-    for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()), false)) {
+    for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()),
+        FilterType.ALL)) {
       updateHead(uri, event.getNewHeadName());
     }
   }
 
   private Set<URIish> getURIs(Project.NameKey projectName,
-      boolean forProjectDeletion) {
-    if (config.getDestinations().isEmpty()) {
+      FilterType filterType) {
+    if (config.getDestinations(filterType).isEmpty()) {
       return Collections.emptySet();
     }
     if (!running) {
@@ -175,13 +179,11 @@ class ReplicationQueue implements
     }
 
     Set<URIish> uris = Sets.newHashSet();
-    for (Destination config : this.config.getDestinations()) {
+    for (Destination config : this.config.getDestinations(filterType)) {
       if (!config.wouldPushProject(projectName)) {
         continue;
       }
-      if (forProjectDeletion && !config.isReplicateProjectDeletions()) {
-        continue;
-      }
+
       List<URIish> uriList = config.getURIs(projectName, "*");
       String[] adminUrls = config.getAdminUrls();
       boolean adminURLUsed = false;
@@ -230,7 +232,7 @@ class ReplicationQueue implements
 
   public boolean createProject(Project.NameKey project, String head) {
     boolean success = false;
-    for (URIish uri : getURIs(project, false)) {
+    for (URIish uri : getURIs(project, FilterType.PROJECT_CREATION)) {
       success &= createProject(uri, head);
     }
     return success;
