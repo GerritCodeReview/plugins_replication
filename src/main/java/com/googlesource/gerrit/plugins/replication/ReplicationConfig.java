@@ -19,7 +19,13 @@ import java.util.List;
 
 public interface ReplicationConfig {
 
-  List<Destination> getDestinations();
+  enum FilterType {
+    PROJECT_CREATION,
+    PROJECT_DELETION,
+    ALL
+  }
+
+  List<Destination> getDestinations(FilterType filterType);
 
   boolean isReplicateAllOnPluginStart();
 

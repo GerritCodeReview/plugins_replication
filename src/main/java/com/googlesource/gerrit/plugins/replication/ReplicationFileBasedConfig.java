@@ -13,6 +13,8 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.gerrit.server.PluginUser;
@@ -69,14 +71,47 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     this.destinations = allDestinations();
   }
 
-  /* (non-Javadoc)
-   * @see com.googlesource.gerrit.plugins.replication.ReplicationConfig#getDestinations()
+  /*
+   * (non-Javadoc)
+   * @see
+   * com.googlesource.gerrit.plugins.replication.ReplicationConfig#getDestinations
+   * (com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType)
    */
   @Override
-  public List<Destination> getDestinations() {
-    return destinations;
-  }
+  public List<Destination> getDestinations(FilterType filterType) {
+    Predicate<Destination> filter;
+    switch (filterType) {
+      case PROJECT_CREATION :
+        filter = new Predicate<Destination>() {
 
+          @Override
+          public boolean apply(Destination dest) {
+            if (dest == null || !dest.isCreateMissingRepos()) {
+              return false;
+            }
+            return true;
+          }
+        };
+        break;
+      case PROJECT_DELETION :
+        filter = new Predicate<Destination>() {
+
+          @Override
+          public boolean apply(Destination dest) {
+            if (dest == null || !dest.isReplicateProjectDeletions()) {
+              return false;
+            }
+            return true;
+          }
+        };
+        break;
+      case ALL :
+        return destinations;
+      default :
+        return destinations;
+    }
+    return FluentIterable.from(destinations).filter(filter).toList();
+  }
   private List<Destination> allDestinations()
       throws ConfigInvalidException, IOException {
     if (!config.getFile().exists()) {
