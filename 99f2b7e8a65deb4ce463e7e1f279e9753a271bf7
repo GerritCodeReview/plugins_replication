@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0bccd752_2bd75956",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RefReplicatedEvent.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-01-16T01:02:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b3057e8_cbaeb5a3",
+      "range": {
+        "startLine": 23,
+        "startChar": 13,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "99f2b7e8a65deb4ce463e7e1f279e9753a271bf7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b335bf6_ec686bd9",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RefReplicationDoneEvent.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2015-01-15T17:03:56Z",
       "side": 1,
       "message": "This too should be a RefEvent.",
+      "range": {
+        "startLine": 21,
+        "startChar": 45,
+        "endLine": 21,
+        "endChar": 56
+      },
+      "revId": "99f2b7e8a65deb4ce463e7e1f279e9753a271bf7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0bccd752_cbdb357d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RefReplicationDoneEvent.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-01-16T01:02:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b335bf6_ec686bd9",
       "range": {
         "startLine": 21,
         "startChar": 45,
