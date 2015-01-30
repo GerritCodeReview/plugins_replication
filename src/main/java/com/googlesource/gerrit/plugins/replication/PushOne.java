@@ -296,7 +296,7 @@ class PushOne implements ProjectRunnable {
       // does not exist.  In this case NoRemoteRepositoryException is not
       // raised.
       final String msg = e.getMessage();
-      if (msg.contains("access denied")) {
+      if (msg.contains("access denied") || msg.contains("no such repository")) {
         createRepository();
       } else {
         repLog.error("Cannot replicate " + projectName
