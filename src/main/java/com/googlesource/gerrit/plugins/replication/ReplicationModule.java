@@ -24,6 +24,7 @@ import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
+import com.google.gerrit.server.events.EventTypes;
 import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
@@ -59,5 +60,8 @@ class ReplicationModule extends AbstractModule {
     install(new FactoryModuleBuilder().build(RemoteSiteUser.Factory.class));
 
     bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
+
+    EventTypes.registerClass(new RefReplicatedEvent(null, null, null, null));
+    EventTypes.registerClass(new RefReplicationDoneEvent(null, null, 0));
   }
 }
