@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult.SUCCEEDED;
 import static com.googlesource.gerrit.plugins.replication.StartReplicationCapability.START_REPLICATION;
 
 import com.google.gerrit.extensions.annotations.Exports;
@@ -24,10 +25,12 @@ import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
+import com.google.gerrit.server.events.EventTypes;
 import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
+
 
 class ReplicationModule extends AbstractModule {
   @Override
@@ -59,5 +62,8 @@ class ReplicationModule extends AbstractModule {
     install(new FactoryModuleBuilder().build(RemoteSiteUser.Factory.class));
 
     bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
+
+    EventTypes.registerClass(new RefReplicatedEvent(null, null, null, SUCCEEDED));
+    EventTypes.registerClass(new RefReplicationDoneEvent(null, null, 0));
   }
 }
