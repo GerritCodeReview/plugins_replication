@@ -24,7 +24,7 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 
-import com.google.gerrit.common.ChangeHooks;
+import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.server.ChangeAccess;
@@ -49,15 +49,15 @@ public class GitUpdateProcessingTest extends TestCase {
     KeyUtil.setEncoderImpl(new StandardKeyEncoder());
   }
 
-  private ChangeHooks changeHooksMock;
+  private EventDispatcher dispatcherMock;
   private ChangeAccess changeAccessMock;
   private GitUpdateProcessing gitUpdateProcessing;
 
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    changeHooksMock = createMock(ChangeHooks.class);
-    replay(changeHooksMock);
+    dispatcherMock = createMock(EventDispatcher.class);
+    replay(dispatcherMock);
     changeAccessMock = createNiceMock(ChangeAccess.class);
     replay(changeAccessMock);
     ReviewDb reviewDbMock = createNiceMock(ReviewDb.class);
@@ -66,22 +66,22 @@ public class GitUpdateProcessingTest extends TestCase {
     SchemaFactory<ReviewDb> schemaMock = createMock(SchemaFactory.class);
     expect(schemaMock.open()).andReturn(reviewDbMock).anyTimes();
     replay(schemaMock);
-    gitUpdateProcessing = new GitUpdateProcessing(changeHooksMock, schemaMock);
+    gitUpdateProcessing = new GitUpdateProcessing(dispatcherMock, schemaMock);
   }
 
   public void testHeadRefReplicated() throws URISyntaxException {
-    reset(changeHooksMock);
+    reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent("someProject", "refs/heads/master", "someHost",
             RefPushResult.SUCCEEDED);
-    changeHooksMock.postEvent(anyObject(Branch.NameKey.class),
+    dispatcherMock.postEvent(anyObject(Branch.NameKey.class),
         RefReplicatedEventEquals.eqEvent(expectedEvent));
     expectLastCall().once();
-    replay(changeHooksMock);
+    replay(dispatcherMock);
 
     gitUpdateProcessing.onRefReplicatedToOneNode("someProject", "refs/heads/master",
         new URIish("git://someHost/someProject.git"), RefPushResult.SUCCEEDED);
-    verify(changeHooksMock);
+    verify(dispatcherMock);
   }
 
   public void testChangeRefReplicated() throws URISyntaxException, OrmException {
@@ -90,32 +90,32 @@ public class GitUpdateProcessingTest extends TestCase {
     expect(changeAccessMock.get(anyObject(Change.Id.class))).andReturn(expectedChange);
     replay(changeAccessMock);
 
-    reset(changeHooksMock);
+    reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent("someProject", "refs/changes/01/1/1", "someHost",
             RefPushResult.FAILED);
-    changeHooksMock.postEvent(eq(expectedChange),
+    dispatcherMock.postEvent(eq(expectedChange),
         RefReplicatedEventEquals.eqEvent(expectedEvent),
         anyObject(ReviewDb.class));
     expectLastCall().once();
-    replay(changeHooksMock);
+    replay(dispatcherMock);
 
     gitUpdateProcessing.onRefReplicatedToOneNode("someProject",
         "refs/changes/01/1/1", new URIish("git://someHost/someProject.git"),
         RefPushResult.FAILED);
-    verify(changeHooksMock);
+    verify(dispatcherMock);
   }
 
   public void testOnAllNodesReplicated() {
-    reset(changeHooksMock);
+    reset(dispatcherMock);
     RefReplicationDoneEvent expectedDoneEvent =
         new RefReplicationDoneEvent("someProject", "refs/heads/master", 5);
-    changeHooksMock.postEvent(anyObject(Branch.NameKey.class),
+    dispatcherMock.postEvent(anyObject(Branch.NameKey.class),
         RefReplicationDoneEventEquals.eqEvent(expectedDoneEvent));
     expectLastCall().once();
-    replay(changeHooksMock);
+    replay(dispatcherMock);
 
     gitUpdateProcessing.onRefReplicatedToAllNodes("someProject", "refs/heads/master", 5);
-    verify(changeHooksMock);
+    verify(dispatcherMock);
   }
 }
