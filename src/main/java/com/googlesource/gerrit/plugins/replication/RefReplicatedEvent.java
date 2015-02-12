@@ -39,11 +39,6 @@ public class RefReplicatedEvent extends RefEvent {
   }
 
   @Override
-  public String getType() {
-    return type;
-  }
-
-  @Override
   public Project.NameKey getProjectNameKey() {
     return new Project.NameKey(project);
   }
