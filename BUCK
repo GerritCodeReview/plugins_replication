@@ -21,11 +21,13 @@ java_test(
   deps = [
     ':replication__plugin',
     '//gerrit-common:server',
+    '//gerrit-extension-api:api',
     '//gerrit-reviewdb:server',
     '//gerrit-server:server',
     '//lib:gwtorm',
     '//lib:junit',
     '//lib/easymock:easymock',
+    '//lib/guice:guice',
     '//lib/jgit:jgit',
   ],
 )
