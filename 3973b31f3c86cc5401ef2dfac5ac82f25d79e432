@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f67bf134_6b072141",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RefReplicatedEvent.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-02-12T15:43:07Z",
+      "side": 1,
+      "message": "The 2 functions can be removed too!",
+      "range": {
+        "startLine": 42,
+        "startChar": 9,
+        "endLine": 42,
+        "endChar": 16
+      },
+      "revId": "3973b31f3c86cc5401ef2dfac5ac82f25d79e432",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
