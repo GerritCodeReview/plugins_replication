@@ -25,6 +25,7 @@ import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 
 import com.google.gerrit.common.EventDispatcher;
+import com.google.gerrit.extensions.registration.TestDynamicItem;
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.server.ChangeAccess;
@@ -49,6 +50,13 @@ public class GitUpdateProcessingTest extends TestCase {
     KeyUtil.setEncoderImpl(new StandardKeyEncoder());
   }
 
+  private TestDynamicItem<EventDispatcher> dispatcher =
+      new TestDynamicItem<EventDispatcher>(null, null, null) {
+        public EventDispatcher get() {
+          return dispatcherMock;
+        }
+      };
+
   private EventDispatcher dispatcherMock;
   private ChangeAccess changeAccessMock;
   private GitUpdateProcessing gitUpdateProcessing;
@@ -66,7 +74,7 @@ public class GitUpdateProcessingTest extends TestCase {
     SchemaFactory<ReviewDb> schemaMock = createMock(SchemaFactory.class);
     expect(schemaMock.open()).andReturn(reviewDbMock).anyTimes();
     replay(schemaMock);
-    gitUpdateProcessing = new GitUpdateProcessing(dispatcherMock, schemaMock);
+    gitUpdateProcessing = new GitUpdateProcessing(dispatcher, schemaMock);
   }
 
   public void testHeadRefReplicated() throws URISyntaxException {
