@@ -25,6 +25,7 @@ import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 
 import com.google.gerrit.common.EventDispatcher;
+import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.server.ChangeAccess;
@@ -33,6 +34,8 @@ import com.google.gwtorm.client.KeyUtil;
 import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
 import com.google.gwtorm.server.StandardKeyEncoder;
+
+// import com.google.inject.Provider;
 
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
@@ -50,6 +53,21 @@ public class GitUpdateProcessingTest extends TestCase {
   }
 
   private EventDispatcher dispatcherMock;
+//   private Provider<EventDispatcher> dispatcherProvider =
+//       new Provider<EventDispatcher>() {
+//           public EventDispatcher get() {
+//             return dispatcherMock;
+//           }
+//       };
+
+//   private DynamicItem<EventDispatcher> diDispatcher =
+//       new DynamicItem<EventDispatcher>(null, null, null) {
+//         public EventDispatcher get() {
+//           return dispatcherMock;
+//         }
+//       };
+  private DynamicItem<EventDispatcher> diDispatcher =
+      new DynamicItem<EventDispatcher>(null, null, null);
   private ChangeAccess changeAccessMock;
   private GitUpdateProcessing gitUpdateProcessing;
 

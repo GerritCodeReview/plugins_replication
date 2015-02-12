@@ -22,6 +22,7 @@ import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
+import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.git.WorkQueue;
@@ -78,13 +79,13 @@ class ReplicationQueue implements
 
   private final WorkQueue workQueue;
   private final SchemaFactory<ReviewDb> database;
-  private final EventDispatcher dispatcher;
+  private DynamicItem<EventDispatcher> dispatcher;
   private final ReplicationConfig config;
   private volatile boolean running;
 
   @Inject
-  ReplicationQueue(final WorkQueue wq, final ReplicationConfig rc,
-      final SchemaFactory<ReviewDb> db, final EventDispatcher dis) {
+  ReplicationQueue(WorkQueue wq, ReplicationConfig rc,
+      SchemaFactory<ReviewDb> db, DynamicItem<EventDispatcher> dis) {
     workQueue = wq;
     database = db;
     dispatcher = dis;
@@ -126,7 +127,8 @@ class ReplicationQueue implements
 
   @Override
   public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
-    ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher, database));
+    ReplicationState state = new ReplicationState(
+        new GitUpdateProcessing(dispatcher, database));
     if (!running) {
       stateLog.warn("Replication plugin did not finish startup before event", state);
       return;

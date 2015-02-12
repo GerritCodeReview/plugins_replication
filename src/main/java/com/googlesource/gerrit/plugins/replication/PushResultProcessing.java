@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.common.EventDispatcher;
+import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.client.PatchSet;
@@ -156,10 +157,10 @@ public abstract class PushResultProcessing {
   public static class GitUpdateProcessing extends PushResultProcessing {
     static final Logger log = LoggerFactory.getLogger(GitUpdateProcessing.class);
 
-    private final EventDispatcher dispatcher;
+    private final DynamicItem<EventDispatcher> dispatcher;
     private final SchemaFactory<ReviewDb> schema;
 
-    public GitUpdateProcessing(EventDispatcher dispatcher,
+    public GitUpdateProcessing(DynamicItem<EventDispatcher> dispatcher,
         SchemaFactory<ReviewDb> schema) {
       this.dispatcher = dispatcher;
       this.schema = schema;
@@ -185,13 +186,18 @@ public abstract class PushResultProcessing {
     }
 
     private void postEvent(String project, String ref, RefEvent event) {
+      EventDispatcher dis = dispatcher.get();
+      if (dis == null) {
+        return;
+      }
+
       if (PatchSet.isRef(ref)) {
         try {
           ReviewDb db = schema.open();
           try {
             Change change = retrieveChange(ref, db);
             if (change != null) {
-              dispatcher.postEvent(change, event, db);
+              dis.postEvent(change, event, db);
             }
           } finally {
             db.close();
@@ -201,7 +207,7 @@ public abstract class PushResultProcessing {
         }
       } else {
         Branch.NameKey branch = new Branch.NameKey(Project.NameKey.parse(project), ref);
-        dispatcher.postEvent(branch, event);
+        dis.postEvent(branch, event);
       }
     }
 
