@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7669c173_071d3603",
+        "filename": "BUCK",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-02-17T17:29:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f67bf134_4ba58593",
+      "revId": "19c85f42000b8a93fc1877c6b0ca3f6122a3e296",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7669c173_079f763d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "f67bf134_4b234552",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-02-17T17:29:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7669c173_079f763d",
+      "revId": "19c85f42000b8a93fc1877c6b0ca3f6122a3e296",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f67bf134_6ba2c18e",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/GitUpdateProcessingTest.java",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2015-02-15T12:48:31Z",
       "side": 1,
       "message": "Remove this if not used?",
+      "revId": "19c85f42000b8a93fc1877c6b0ca3f6122a3e296",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f67bf134_6b208144",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/GitUpdateProcessingTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-02-17T17:29:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f67bf134_6ba2c18e",
       "revId": "19c85f42000b8a93fc1877c6b0ca3f6122a3e296",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "f67bf134_2b1a790c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/GitUpdateProcessingTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-02-17T17:29:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7669c173_279cfa45",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 11
+      },
+      "revId": "19c85f42000b8a93fc1877c6b0ca3f6122a3e296",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f67bf134_0b9f7d3d",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/GitUpdateProcessingTest.java",
         "patchSetId": 1
@@ -87,6 +165,30 @@
       "writtenOn": "2015-02-15T12:48:31Z",
       "side": 1,
       "message": "Just name it \"dispatcher\"?",
+      "range": {
+        "startLine": 69,
+        "startChar": 39,
+        "endLine": 69,
+        "endChar": 51
+      },
+      "revId": "19c85f42000b8a93fc1877c6b0ca3f6122a3e296",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f67bf134_0b1d3d03",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/GitUpdateProcessingTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2015-02-17T17:29:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f67bf134_0b9f7d3d",
       "range": {
         "startLine": 69,
         "startChar": 39,
