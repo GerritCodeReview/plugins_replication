@@ -13,6 +13,7 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.gerrit.common.FileUtil;
 import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.config.SitePaths;
@@ -27,7 +28,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 
 @Singleton
@@ -62,9 +62,8 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     this.workQueue = workQueue;
   }
 
-  private static long getLastModified(ReplicationFileBasedConfig cfg)
-      throws IOException {
-    return Files.getLastModifiedTime(cfg.getCfgPath()).toMillis();
+  private static long getLastModified(ReplicationFileBasedConfig cfg) {
+    return FileUtil.lastModified(cfg.getCfgPath());
   }
 
   private ReplicationFileBasedConfig loadConfig()

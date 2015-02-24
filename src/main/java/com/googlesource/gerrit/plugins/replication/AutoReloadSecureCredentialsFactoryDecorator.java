@@ -11,7 +11,10 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 package com.googlesource.gerrit.plugins.replication;
+
+import static com.google.gerrit.common.FileUtil.lastModified;
 
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
@@ -45,11 +48,11 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements
     this.secureCredentialsFactoryLoadTs = getSecureConfigLastEditTs();
   }
 
-  private long getSecureConfigLastEditTs() throws IOException {
+  private long getSecureConfigLastEditTs() {
     if (!Files.exists(site.secure_config)) {
       return 0L;
     }
-    return Files.getLastModifiedTime(site.secure_config).toMillis();
+    return lastModified(site.secure_config);
   }
 
   @Override
@@ -69,8 +72,7 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements
     return secureCredentialsFactory.get().create(remoteName);
   }
 
-
-  private boolean needsReload() throws IOException {
+  private boolean needsReload() {
     return config.getConfig().getBoolean("gerrit", "autoReload", false) &&
         getSecureConfigLastEditTs() != secureCredentialsFactoryLoadTs;
   }
