@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 @Singleton
@@ -57,8 +58,13 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     this.gitRepositoryManager = grm;
     this.groupBackend = gb;
     this.currentConfig = loadConfig();
-    this.currentConfigTs = currentConfig.getCfgPath().lastModified();
+    this.currentConfigTs = getLastModified(currentConfig);
     this.workQueue = workQueue;
+  }
+
+  private static long getLastModified(ReplicationFileBasedConfig cfg)
+      throws IOException {
+    return Files.getLastModifiedTime(cfg.getCfgPath()).toMillis();
   }
 
   private ReplicationFileBasedConfig loadConfig()
@@ -79,25 +85,27 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   }
 
   private void reloadIfNeeded() {
-    if (isAutoReload()
-        && currentConfig.getCfgPath().lastModified() > currentConfigTs) {
-      try {
-        ReplicationFileBasedConfig newConfig = loadConfig();
-        newConfig.startup(workQueue);
-        int discarded = currentConfig.shutdown();
+    try {
+      if (isAutoReload()) {
+        long lastModified = getLastModified(currentConfig);
+        if (lastModified > currentConfigTs) {
+          ReplicationFileBasedConfig newConfig = loadConfig();
+          newConfig.startup(workQueue);
+          int discarded = currentConfig.shutdown();
 
-        this.currentConfig = newConfig;
-        this.currentConfigTs = currentConfig.getCfgPath().lastModified();
-        log.info("Configuration reloaded: "
-            + currentConfig.getDestinations().size() + " destinations, "
-            + discarded + " replication events discarded");
+          this.currentConfig = newConfig;
+          this.currentConfigTs = lastModified;
+          log.info("Configuration reloaded: "
+              + currentConfig.getDestinations().size() + " destinations, "
+              + discarded + " replication events discarded");
 
-      } catch (Exception e) {
-        log.error(
-            "Cannot reload replication configuration: keeping existing settings",
-            e);
-        return;
+        }
       }
+    } catch (Exception e) {
+      log.error(
+          "Cannot reload replication configuration: keeping existing settings",
+          e);
+      return;
     }
   }
 

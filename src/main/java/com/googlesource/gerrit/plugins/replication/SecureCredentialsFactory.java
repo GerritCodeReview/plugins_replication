@@ -36,7 +36,8 @@ class SecureCredentialsFactory implements CredentialsFactory {
 
   private static Config load(SitePaths site)
       throws ConfigInvalidException, IOException {
-    FileBasedConfig cfg = new FileBasedConfig(site.secure_config, FS.DETECTED);
+    FileBasedConfig cfg =
+        new FileBasedConfig(site.secure_config.toFile(), FS.DETECTED);
     if (cfg.getFile().exists() && cfg.getFile().length() > 0) {
       try {
         cfg.load();

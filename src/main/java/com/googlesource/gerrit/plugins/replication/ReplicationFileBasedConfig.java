@@ -33,9 +33,9 @@ import org.eclipse.jgit.util.FS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -44,7 +44,7 @@ import java.util.Set;
 public class ReplicationFileBasedConfig implements ReplicationConfig {
   static final Logger log = LoggerFactory.getLogger(ReplicationFileBasedConfig.class);
   private List<Destination> destinations;
-  private File cfgPath;
+  private Path cfgPath;
   private boolean replicateAllOnPluginStart;
   private boolean defaultForceUpdate;
   private Injector injector;
@@ -59,13 +59,13 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
       final RemoteSiteUser.Factory ruf, final PluginUser pu,
       final GitRepositoryManager grm,
       final GroupBackend gb) throws ConfigInvalidException, IOException {
-    this.cfgPath = new File(site.etc_dir, "replication.config");
+    this.cfgPath = site.etc_dir.resolve("replication.config");
     this.injector = injector;
     this.replicationUserFactory = ruf;
     this.pluginUser = pu;
     this.gitRepositoryManager = grm;
     this.groupBackend = gb;
-    this.config = new FileBasedConfig(cfgPath, FS.DETECTED);
+    this.config = new FileBasedConfig(cfgPath.toFile(), FS.DETECTED);
     this.destinations = allDestinations();
   }
 
@@ -180,7 +180,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     return destinations.isEmpty();
   }
 
-  File getCfgPath() {
+  Path getCfgPath() {
     return cfgPath;
   }
 

@@ -17,12 +17,11 @@ import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 
 import org.eclipse.jgit.errors.ConfigInvalidException;
-import org.eclipse.jgit.storage.file.FileBasedConfig;
-import org.eclipse.jgit.util.FS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class AutoReloadSecureCredentialsFactoryDecorator implements
@@ -46,34 +45,32 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements
     this.secureCredentialsFactoryLoadTs = getSecureConfigLastEditTs();
   }
 
-  private long getSecureConfigLastEditTs() {
-    FileBasedConfig cfg = new FileBasedConfig(site.secure_config, FS.DETECTED);
-    if (cfg.getFile().exists()) {
-      return cfg.getFile().lastModified();
-    } else {
+  private long getSecureConfigLastEditTs() throws IOException {
+    if (!Files.exists(site.secure_config)) {
       return 0L;
     }
+    return Files.getLastModifiedTime(site.secure_config).toMillis();
   }
 
   @Override
   public SecureCredentialsProvider create(String remoteName) {
-    if (needsReload()) {
-      try {
+    try {
+      if (needsReload()) {
         secureCredentialsFactory.compareAndSet(secureCredentialsFactory.get(),
             new SecureCredentialsFactory(site));
         secureCredentialsFactoryLoadTs = getSecureConfigLastEditTs();
         log.info("secure.config reloaded as it was updated on the file system");
-      } catch (Exception e) {
-        log.error("Unexpected error while trying to reload "
-            + "secure.config: keeping existing credentials", e);
       }
+    } catch (Exception e) {
+      log.error("Unexpected error while trying to reload "
+          + "secure.config: keeping existing credentials", e);
     }
 
     return secureCredentialsFactory.get().create(remoteName);
   }
 
 
-  private boolean needsReload() {
+  private boolean needsReload() throws IOException {
     return config.getConfig().getBoolean("gerrit", "autoReload", false) &&
         getSecureConfigLastEditTs() != secureCredentialsFactoryLoadTs;
   }
