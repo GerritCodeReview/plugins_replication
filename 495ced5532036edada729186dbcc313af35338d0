@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "451a45b5_a61d260d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2015-02-26T13:51:12Z",
+      "side": 1,
+      "message": "If we decide to proceed with this change, you need to update the createMissingRepositories documentation in config.md.\n\nOn my side, I have no objection to that change but I am curious about your motivation.",
+      "parentUuid": "85527d4f_584b5d72",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 17
+      },
+      "revId": "495ced5532036edada729186dbcc313af35338d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85527d4f_b85f192b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
         "patchSetId": 2
