@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85db5d05_90823431",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-02-26T12:28:01Z",
+      "side": 1,
+      "message": "effect",
+      "range": {
+        "startLine": 7,
+        "startChar": 44,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "495ced5532036edada729186dbcc313af35338d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_7846216c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-02-26T12:28:01Z",
+      "side": 1,
+      "message": "nit: lines too long",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "495ced5532036edada729186dbcc313af35338d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_584b5d72",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-02-26T12:28:01Z",
+      "side": 1,
+      "message": "I understand your intention but I am undecided on whether this option should also prevent remote project creation for the project-created event.\n\nIf I follow the a9fcff5c well, the createMissingRepositories option was introduced only to solve the issue of a missing target project, which could happen when at the moment of the processing the project-created event a replication target system is not available/reachable.\n\nMaybe you should tell us a bit more about your motivation for this change/feature.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 17
+      },
+      "revId": "495ced5532036edada729186dbcc313af35338d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_b85f192b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-02-26T12:28:01Z",
+      "side": 1,
+      "message": "nit: line too long",
+      "revId": "495ced5532036edada729186dbcc313af35338d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_985cd537",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-02-26T12:28:01Z",
+      "side": 1,
+      "message": "nit: line too long",
+      "revId": "495ced5532036edada729186dbcc313af35338d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85db5d05_b07f388c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-02-26T12:28:01Z",
+      "side": 1,
+      "message": "optional: inline the predicate code here (and also in the line 108).\nThe code is quire short and we avoid the mappings: PROJECT_CREATION \u003e FOR_CREATION, PROJECT_DELETION \u003e FOR_DELETION",
+      "revId": "495ced5532036edada729186dbcc313af35338d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_f8599145",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-02-26T12:28:01Z",
+      "side": 1,
+      "message": "What should the result of the filter(null) in the line 116?",
+      "revId": "495ced5532036edada729186dbcc313af35338d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
