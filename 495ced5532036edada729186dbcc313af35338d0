@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "85527d4f_78c10159",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-02-27T07:54:57Z",
+      "side": 1,
+      "message": "Well first of the documentation says [1].\nSo it\u0027s only concerned with how a true value in the config effects project creation - If a project is found to be missing it should be created. Pretty self explanatory if you look at the config name \"createMissingRepositories\".\n\nBut a \"false\" value is more like - In some instances repos are created in others not so much it depends on stuff. This would be the expected behavior for a:\ncreateMissingRepositories \u003d perChance\nValue.\n\nIMO createMissingRepositories \u003d false cannot be interpreted in any other way than - Repositories will never be created automatically on this Destination.\n\n[1]\nremote.NAME.createMissingRepositories\nIf true, a repository is automatically created on the remote site if during the replication of a ref it is found to be missing. E.g. a repository can be missing on the remote site if the remote site was not available at the moment when a new project was created and hence the repository for the new project could not be created on the remote site.\n\nBy default, true, missing repositories are created.",
+      "parentUuid": "451a45b5_a61d260d",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 17
+      },
+      "revId": "495ced5532036edada729186dbcc313af35338d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85527d4f_b85f192b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
         "patchSetId": 2
@@ -106,6 +130,24 @@
       "writtenOn": "2015-02-26T12:28:01Z",
       "side": 1,
       "message": "nit: line too long",
+      "revId": "495ced5532036edada729186dbcc313af35338d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_18bc45e5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-02-27T07:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85527d4f_b85f192b",
       "revId": "495ced5532036edada729186dbcc313af35338d0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -129,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "85db5d05_50b7ec02",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-02-27T07:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85527d4f_985cd537",
+      "revId": "495ced5532036edada729186dbcc313af35338d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85db5d05_b07f388c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
         "patchSetId": 2
@@ -146,6 +206,24 @@
     },
     {
       "key": {
+        "uuid": "85db5d05_b0565812",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-02-27T07:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85db5d05_b07f388c",
+      "revId": "495ced5532036edada729186dbcc313af35338d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85527d4f_f8599145",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
         "patchSetId": 2
@@ -157,6 +235,24 @@
       "writtenOn": "2015-02-26T12:28:01Z",
       "side": 1,
       "message": "What should the result of the filter(null) in the line 116?",
+      "revId": "495ced5532036edada729186dbcc313af35338d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85db5d05_70bc70e6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-02-27T07:54:57Z",
+      "side": 1,
+      "message": "CBA Didn\u0027t expect it to ever reach here, just a matter of \"Yeah, ok, I\u0027ll give that variable something if it makes the compiler happy...!\"\n\nI\u0027ve now taken the approach that default means \u0027no filter\u0027, which off course is more clear than passing a null- predicate to filter() ... I hope...",
+      "parentUuid": "85527d4f_f8599145",
       "revId": "495ced5532036edada729186dbcc313af35338d0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
