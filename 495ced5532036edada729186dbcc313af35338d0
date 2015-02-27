@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "85db5d05_10c16459",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-02-27T07:55:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "451a45b5_a61d260d",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 17
+      },
+      "revId": "495ced5532036edada729186dbcc313af35338d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85527d4f_b85f192b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
         "patchSetId": 2
