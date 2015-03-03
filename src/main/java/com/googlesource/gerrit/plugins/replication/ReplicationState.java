@@ -17,8 +17,6 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
-import com.googlesource.gerrit.plugins.replication.PushResultProcessing.NoopProcessing;
-
 import org.eclipse.jgit.transport.URIish;
 
 import java.util.concurrent.CountDownLatch;
@@ -50,10 +48,6 @@ public class ReplicationState {
   private final Table<String, String, RefReplicationStatus> statusByProjectRef;
   private int totalPushTasksCount;
   private int finishedPushTasksCount;
-
-  public ReplicationState() {
-    this(new NoopProcessing());
-  }
 
   public ReplicationState(PushResultProcessing processing) {
     pushResultProcessing = processing;
