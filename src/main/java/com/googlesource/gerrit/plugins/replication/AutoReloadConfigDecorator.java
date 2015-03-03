@@ -78,9 +78,9 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   }
 
   @Override
-  public synchronized List<Destination> getDestinations() {
+  public synchronized List<Destination> getDestinations(FilterType filterType) {
     reloadIfNeeded();
-    return currentConfig.getDestinations();
+    return currentConfig.getDestinations(filterType);
   }
 
   private void reloadIfNeeded() {
@@ -95,8 +95,8 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
           this.currentConfig = newConfig;
           this.currentConfigTs = lastModified;
           log.info("Configuration reloaded: "
-              + currentConfig.getDestinations().size() + " destinations, "
-              + discarded + " replication events discarded");
+            + currentConfig.getDestinations(FilterType.ALL).size() + " destinations, "
+            + discarded + " replication events discarded");
 
         }
       }
