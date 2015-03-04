@@ -26,8 +26,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
-class RemoteSiteUser extends CurrentUser {
-  interface Factory {
+public class RemoteSiteUser extends CurrentUser {
+  public interface Factory {
     RemoteSiteUser create(@Assisted GroupMembership authGroups);
   }
 

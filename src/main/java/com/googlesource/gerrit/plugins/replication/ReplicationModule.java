@@ -31,7 +31,6 @@ import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
 
-
 class ReplicationModule extends AbstractModule {
   @Override
   protected void configure() {
@@ -62,7 +61,11 @@ class ReplicationModule extends AbstractModule {
     install(new FactoryModuleBuilder().build(RemoteSiteUser.Factory.class));
 
     bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
+
     bind(ReplicationStateListener.class).to(ReplicationStateLogger.class);
+
+    bind(ReplicationSshSessionFactory.class).to(
+        DefaultReplicationSshSessionFactory.class);
 
     EventTypes.registerClass(new RefReplicatedEvent(null, null, null, SUCCEEDED));
     EventTypes.registerClass(new RefReplicationDoneEvent(null, null, 0));
