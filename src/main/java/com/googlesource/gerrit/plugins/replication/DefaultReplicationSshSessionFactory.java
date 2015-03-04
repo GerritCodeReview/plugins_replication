@@ -1,4 +1,4 @@
-// Copyright (C) 2013 The Android Open Source Project
+// Copyright (C) 2015 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.gerrit.extensions.config.CapabilityDefinition;
+import org.eclipse.jgit.transport.SshSessionFactory;
 
-public class StartReplicationCapability extends CapabilityDefinition {
-  public static final String START_REPLICATION = "startReplication";
+class DefaultReplicationSshSessionFactory implements
+    ReplicationSshSessionFactory {
 
   @Override
-  public String getDescription() {
-    return "Start Replication";
+  public SshSessionFactory create() {
+    return SshSessionFactory.getInstance();
   }
 }
