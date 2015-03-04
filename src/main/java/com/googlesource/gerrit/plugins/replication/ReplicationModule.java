@@ -31,6 +31,8 @@ import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
 
+import org.eclipse.jgit.transport.SshSessionFactory;
+
 
 class ReplicationModule extends AbstractModule {
   @Override
@@ -66,5 +68,7 @@ class ReplicationModule extends AbstractModule {
 
     EventTypes.registerClass(new RefReplicatedEvent(null, null, null, SUCCEEDED));
     EventTypes.registerClass(new RefReplicationDoneEvent(null, null, 0));
+
+    bind(SshSessionFactory.class).toProvider(SshSessionFactoryProvider.class);
   }
 }
