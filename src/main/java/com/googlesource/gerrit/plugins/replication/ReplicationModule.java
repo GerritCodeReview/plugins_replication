@@ -59,5 +59,8 @@ class ReplicationModule extends AbstractModule {
     install(new FactoryModuleBuilder().build(RemoteSiteUser.Factory.class));
 
     bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
+
+    bind(ReplicationSshSessionFactory.class).to(
+        DefaultReplicationSshSessionFactory.class);
   }
 }
