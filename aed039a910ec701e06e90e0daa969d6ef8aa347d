@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "85527d4f_d8148de5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2015-03-04T12:59:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85527d4f_d8fdad35",
+      "range": {
+        "startLine": 12,
+        "startChar": 32,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "revId": "aed039a910ec701e06e90e0daa969d6ef8aa347d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72a1d25d_dc0a2d1f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2015-03-04T12:59:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85527d4f_382ae925",
+      "range": {
+        "startLine": 12,
+        "startChar": 59,
+        "endLine": 12,
+        "endChar": 66
+      },
+      "revId": "aed039a910ec701e06e90e0daa969d6ef8aa347d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85527d4f_182f2536",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "85527d4f_f817d1e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2015-03-04T12:59:29Z",
+      "side": 1,
+      "message": "I mean here, configuration for replication plugin can be obtained from different place eg. REST based api of a \u0027master\u0027 node. Then $site_path/replication.config is not needed.",
+      "parentUuid": "85527d4f_182f2536",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "aed039a910ec701e06e90e0daa969d6ef8aa347d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72a1d25d_bc7ac1a0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2015-03-04T12:07:32Z",
       "side": 1,
       "message": "known_hosts?",
+      "range": {
+        "startLine": 20,
+        "startChar": 31,
+        "endLine": 20,
+        "endChar": 40
+      },
+      "revId": "aed039a910ec701e06e90e0daa969d6ef8aa347d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72a1d25d_fc07e913",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2015-03-04T12:59:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72a1d25d_bc7ac1a0",
       "range": {
         "startLine": 20,
         "startChar": 31,
