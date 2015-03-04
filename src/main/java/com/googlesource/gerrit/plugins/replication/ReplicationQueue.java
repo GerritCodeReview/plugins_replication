@@ -28,6 +28,7 @@ import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
@@ -55,7 +56,7 @@ import java.util.List;
 import java.util.Set;
 
 /** Manages automatic replication to remote repositories. */
-class ReplicationQueue implements
+public class ReplicationQueue implements
     LifecycleListener,
     GitReferenceUpdatedListener,
     NewProjectCreatedListener,
@@ -83,6 +84,7 @@ class ReplicationQueue implements
   private final SchemaFactory<ReviewDb> database;
   private final DynamicItem<EventDispatcher> dispatcher;
   private final ReplicationConfig config;
+  private final Provider<SshSessionFactory> sshSessionFactoryProvider;
   private volatile boolean running;
 
   @Inject
@@ -90,12 +92,14 @@ class ReplicationQueue implements
       ReplicationConfig rc,
       SchemaFactory<ReviewDb> db,
       DynamicItem<EventDispatcher> dis,
-      ReplicationStateListener sl) {
+      ReplicationStateListener sl,
+      Provider<SshSessionFactory> sshSessionFactoryProvider) {
     workQueue = wq;
     database = db;
     dispatcher = dis;
     config = rc;
     stateLog = sl;
+    this.sshSessionFactoryProvider = sshSessionFactoryProvider;
   }
 
   @Override
@@ -276,7 +280,7 @@ class ReplicationQueue implements
     }
   }
 
-  private static void createRemoteSsh(URIish uri, String head) {
+  private void createRemoteSsh(URIish uri, String head) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd = "mkdir -p " + quotedPath
             + " && cd " + quotedPath
@@ -339,7 +343,7 @@ class ReplicationQueue implements
     }
   }
 
-  private static void deleteRemoteSsh(URIish uri) {
+  private void deleteRemoteSsh(URIish uri) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd = "rm -rf " + quotedPath;
     OutputStream errStream = newErrorBufferStream();
@@ -368,7 +372,7 @@ class ReplicationQueue implements
     }
   }
 
-  private static void updateHeadRemoteSsh(URIish uri, String newHead) {
+  private void updateHeadRemoteSsh(URIish uri, String newHead) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd = "cd " + quotedPath
             + " && git symbolic-ref HEAD " + QuotedString.BOURNE.quote(newHead);
@@ -398,7 +402,7 @@ class ReplicationQueue implements
     }
   }
 
-  private static void executeRemoteSsh(URIish uri, String cmd,
+  private void executeRemoteSsh(URIish uri, String cmd,
       OutputStream errStream) throws IOException {
     RemoteSession ssh = connect(uri);
     Process proc = ssh.exec(cmd, 0);
@@ -419,8 +423,8 @@ class ReplicationQueue implements
     ssh.disconnect();
   }
 
-  private static RemoteSession connect(URIish uri) throws TransportException {
-    return SshSessionFactory.getInstance().getSession(uri, null, FS.DETECTED,
+  private RemoteSession connect(URIish uri) throws TransportException {
+    return sshSessionFactoryProvider.get().getSession(uri, null, FS.DETECTED,
         SSH_REMOTE_TIMEOUT);
   }
 
