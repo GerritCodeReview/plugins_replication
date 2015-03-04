@@ -13,7 +13,7 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
-interface CredentialsFactory {
+public interface CredentialsFactory {
 
   SecureCredentialsProvider create(String remoteName);
 
