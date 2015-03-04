@@ -64,10 +64,14 @@ class ReplicationModule extends AbstractModule {
     install(new FactoryModuleBuilder().build(RemoteSiteUser.Factory.class));
 
     bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
+
     bind(ReplicationStateListener.class).to(ReplicationStateLogger.class);
 
     EventTypes.registerClass(new RefReplicatedEvent(null, null, null,
         SUCCEEDED, RemoteRefUpdate.Status.OK));
+    bind(ReplicationSshSessionFactory.class).to(
+        DefaultReplicationSshSessionFactory.class);
+
     EventTypes.registerClass(new RefReplicationDoneEvent(null, null, 0));
   }
 }

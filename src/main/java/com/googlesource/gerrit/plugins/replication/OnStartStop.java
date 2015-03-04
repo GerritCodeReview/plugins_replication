@@ -28,7 +28,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-class OnStartStop implements LifecycleListener {
+public class OnStartStop implements LifecycleListener {
   private final AtomicReference<Future<?>> pushAllFuture;
   private final ServerInformation srvInfo;
   private final PushAll.Factory pushAll;
@@ -38,7 +38,7 @@ class OnStartStop implements LifecycleListener {
   private final EventDispatcher eventDispatcher;
 
   @Inject
-  OnStartStop(
+  protected OnStartStop(
       ServerInformation srvInfo,
       PushAll.Factory pushAll,
       ReplicationQueue queue,
