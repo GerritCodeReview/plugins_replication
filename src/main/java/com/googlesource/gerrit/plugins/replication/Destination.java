@@ -66,7 +66,7 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
-class Destination {
+public class Destination {
   private static final Logger repLog = ReplicationQueue.repLog;
   private final ReplicationStateListener stateLog;
 
@@ -98,7 +98,7 @@ class Destination {
     TRANSPORT_ERROR, COLLISION, REPOSITORY_MISSING;
   }
 
-  Destination(final Injector injector,
+  protected Destination(final Injector injector,
       final RemoteConfig rc,
       final Config cfg,
       final RemoteSiteUser.Factory replicationUserFactory,
@@ -203,11 +203,11 @@ class Destination {
     }
   }
 
-  void start(WorkQueue workQueue) {
+  public void start(WorkQueue workQueue) {
     pool = workQueue.createQueue(poolThreads, poolName);
   }
 
-  int shutdown() {
+  public int shutdown() {
     int cnt = 0;
     if (pool != null) {
       for (Runnable r : pool.getQueue()) {

@@ -24,10 +24,10 @@ import com.google.inject.assistedinject.Assisted;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-class PushAll implements Runnable {
+public class PushAll implements Runnable {
   private final ReplicationStateListener stateLog;
 
-  interface Factory {
+  public interface Factory {
     PushAll create(String urlMatch,
         ReplicationFilter filter,
         ReplicationState state);
@@ -41,7 +41,7 @@ class PushAll implements Runnable {
   private final ReplicationState state;
 
   @Inject
-  PushAll(WorkQueue wq,
+  protected PushAll(WorkQueue wq,
       ProjectCache projectCache,
       ReplicationQueue rq,
       ReplicationStateListener stateLog,
