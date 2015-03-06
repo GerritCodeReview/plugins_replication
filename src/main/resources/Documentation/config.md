@@ -330,6 +330,9 @@ remote.NAME.username
 remote.NAME.password
 :	Password to use for HTTP authentication on this remote.
 
+remote.NAME.passphase
+:	Passphase for public key used for SSH authentication on this remote.
+
 File `~/.ssh/config`
 --------------------
 

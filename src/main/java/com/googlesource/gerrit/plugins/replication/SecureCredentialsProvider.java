@@ -23,10 +23,12 @@ import org.eclipse.jgit.transport.URIish;
 class SecureCredentialsProvider extends CredentialsProvider {
   private final String cfgUser;
   private final String cfgPass;
+  private final String cfgPassphase;
 
-  SecureCredentialsProvider(String user, String pass) {
+  SecureCredentialsProvider(String user, String pass, String passphase) {
     cfgUser = user;
     cfgPass = pass;
+    this.cfgPassphase = passphase;
   }
 
   @Override
@@ -40,6 +42,8 @@ class SecureCredentialsProvider extends CredentialsProvider {
       if (i instanceof CredentialItem.Username) {
         continue;
       } else if (i instanceof CredentialItem.Password) {
+        continue;
+      } else if (i instanceof CredentialItem.StringType) {
         continue;
       } else {
         return false;
@@ -55,7 +59,7 @@ class SecureCredentialsProvider extends CredentialsProvider {
     if (username == null) {
       username = cfgUser;
     }
-    if (username == null) {
+    if (username == null && cfgPassphase == null) {
       return false;
     }
 
@@ -63,7 +67,7 @@ class SecureCredentialsProvider extends CredentialsProvider {
     if (password == null) {
       password = cfgPass;
     }
-    if (password == null) {
+    if (password == null && cfgPassphase == null) {
       return false;
     }
 
@@ -72,6 +76,8 @@ class SecureCredentialsProvider extends CredentialsProvider {
         ((CredentialItem.Username) i).setValue(username);
       } else if (i instanceof CredentialItem.Password) {
         ((CredentialItem.Password) i).setValue(password.toCharArray());
+      } else if (i instanceof CredentialItem.StringType) {
+        ((CredentialItem.StringType) i).setValue(cfgPassphase);
       } else {
         throw new UnsupportedCredentialItem(uri, i.getPromptText());
       }
