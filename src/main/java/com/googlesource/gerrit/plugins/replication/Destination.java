@@ -89,6 +89,7 @@ public class Destination {
   private final String remoteNameStyle;
   private volatile WorkQueue.Executor pool;
   private final PerThreadRequestScope.Scoper threadScoper;
+  private final String name;
 
   protected static enum RetryReason {
     TRANSPORT_ERROR, COLLISION, REPOSITORY_MISSING;
@@ -102,26 +103,27 @@ public class Destination {
       final GitRepositoryManager gitRepositoryManager,
       final GroupBackend groupBackend) {
     remote = rc;
+    name = rc.getName();
     gitManager = gitRepositoryManager;
     delay = Math.max(0, getInt(rc, cfg, "replicationdelay", 15));
     retryDelay = Math.max(0, getInt(rc, cfg, "replicationretry", 1));
     lockErrorMaxRetries = cfg.getInt("replication", "lockErrorMaxRetries", 0);
-    adminUrls = cfg.getStringList("remote", rc.getName(), "adminUrl");
+    adminUrls = cfg.getStringList("remote", name, "adminUrl");
 
     poolThreads = Math.max(0, getInt(rc, cfg, "threads", 1));
-    poolName = "ReplicateTo-" + rc.getName();
+    poolName = "ReplicateTo-" + name;
     createMissingRepos =
-        cfg.getBoolean("remote", rc.getName(), "createMissingRepositories", true);
+        cfg.getBoolean("remote", name, "createMissingRepositories", true);
     replicatePermissions =
-        cfg.getBoolean("remote", rc.getName(), "replicatePermissions", true);
+        cfg.getBoolean("remote", name, "replicatePermissions", true);
     replicateProjectDeletions =
-        cfg.getBoolean("remote", rc.getName(), "replicateProjectDeletions", false);
+        cfg.getBoolean("remote", name, "replicateProjectDeletions", false);
     remoteNameStyle = MoreObjects.firstNonNull(
-        cfg.getString("remote", rc.getName(), "remoteNameStyle"), "slash");
-    projects = cfg.getStringList("remote", rc.getName(), "projects");
+        cfg.getString("remote", name, "remoteNameStyle"), "slash");
+    projects = cfg.getStringList("remote", name, "projects");
 
     final CurrentUser remoteUser;
-    String[] authGroupNames = cfg.getStringList("remote", rc.getName(), "authGroup");
+    String[] authGroupNames = cfg.getStringList("remote", name, "authGroup");
     if (authGroupNames.length > 0) {
       ImmutableSet.Builder<AccountGroup.UUID> builder = ImmutableSet.builder();
       for (String name : authGroupNames) {
@@ -438,6 +440,10 @@ public class Destination {
 
   boolean isReplicateProjectDeletions() {
     return replicateProjectDeletions;
+  }
+
+  String getName() {
+    return name;
   }
 
   List<URIish> getURIs(Project.NameKey project, String urlMatch) {
