@@ -141,6 +141,27 @@ remote.NAME.adminUrl
 	local environment.  In that case, an alternative SSH url could
 	be specified to repository creation.
 
+	To enable replication to different Gerrit instance use `gerrit://`
+	as protocol name fallowed by hostname of slave Gerrit server eg.
+
+	`gerrit://replica1.my.org/`
+
+	In this case replication will use Gerrit's SSH API to
+	create/remove project and update repository HEAD referece.
+
+	NODE: In order to be replicate project deletion delete-project
+	plugin must be installed on slave Gerrit.
+
+remote.NAME.replicateToGerritUser
+: An alternative way to provide user name used for replication
+to another Gerrit instance. Only applicable when
+[remote.NAME.adminUrl] starts with `gerrit://`
+
+remote.NAME.replicateToGerritPassword
+: An alternative way to provide user password used for replication
+to another Gerrit instance. Only applicatable when
+[remote.NAME.adminUrl] starts with `gerrit://`
+
 remote.NAME.receivepack
 :	Path of the `git-receive-pack` executable on the remote
 	system, if using the SSH transport.
