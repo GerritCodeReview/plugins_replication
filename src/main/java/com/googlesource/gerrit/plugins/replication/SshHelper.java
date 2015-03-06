@@ -28,15 +28,20 @@ import org.eclipse.jgit.util.io.StreamCopyThread;
 class SshHelper {
   private static final int SSH_REMOTE_TIMEOUT = 120 * 1000; // 2 minutes = 120 * 1000ms
 
+  private final CredentialsFactory credentialsFactory;
   private final Provider<SshSessionFactory> sshSessionFactoryProvider;
 
   @Inject
-  SshHelper(Provider<SshSessionFactory> sshSessionFactoryProvider) {
+  SshHelper(
+      CredentialsFactory credentialsFactory,
+      Provider<SshSessionFactory> sshSessionFactoryProvider) {
+    this.credentialsFactory = credentialsFactory;
     this.sshSessionFactoryProvider = sshSessionFactoryProvider;
   }
 
-  void executeRemoteSsh(URIish uri, String cmd, OutputStream errStream) throws IOException {
-    RemoteSession ssh = connect(uri);
+  void executeRemoteSsh(String remoteName, URIish uri, String cmd, OutputStream errStream)
+      throws IOException {
+    RemoteSession ssh = connect(remoteName, uri);
     Process proc = ssh.exec(cmd, 0);
     proc.getOutputStream().close();
     StreamCopyThread out = new StreamCopyThread(proc.getInputStream(), errStream);
@@ -82,7 +87,10 @@ class SshHelper {
     };
   }
 
-  RemoteSession connect(URIish uri) throws TransportException {
-    return sshSessionFactoryProvider.get().getSession(uri, null, FS.DETECTED, SSH_REMOTE_TIMEOUT);
+  RemoteSession connect(String remoteName, URIish uri) throws TransportException {
+    SecureCredentialsProvider credentialsProvider = credentialsFactory.create(remoteName);
+    return sshSessionFactoryProvider
+        .get()
+        .getSession(uri, credentialsProvider, FS.DETECTED, SSH_REMOTE_TIMEOUT);
   }
 }
