@@ -35,7 +35,7 @@ class SshHelper {
     this.sshSessionFactoryProvider = sshSessionFactoryProvider;
   }
 
-  void executeRemoteSsh(URIish uri, String cmd, OutputStream errStream) throws IOException {
+  int executeRemoteSsh(URIish uri, String cmd, OutputStream errStream) throws IOException {
     RemoteSession ssh = connect(uri);
     Process proc = ssh.exec(cmd, 0);
     proc.getOutputStream().close();
@@ -51,6 +51,7 @@ class SshHelper {
       // Don't wait, drop out immediately.
     }
     ssh.disconnect();
+    return proc.exitValue();
   }
 
   OutputStream newErrorBufferStream() {
