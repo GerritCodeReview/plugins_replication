@@ -15,6 +15,8 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
@@ -31,9 +33,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Map;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.RefUpdate;
@@ -71,12 +71,14 @@ public class ReplicationQueue
   private final SshHelper sshHelper;
   private final DynamicItem<EventDispatcher> dispatcher;
   private final ReplicationConfig config;
+  private final GerritSshApi gerritAdmin;
   private volatile boolean running;
 
   @Inject
   ReplicationQueue(
       WorkQueue wq,
       SshHelper sh,
+      GerritSshApi ag,
       ReplicationConfig rc,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListener sl) {
@@ -85,6 +87,7 @@ public class ReplicationQueue
     dispatcher = dis;
     config = rc;
     stateLog = sl;
+    gerritAdmin = ag;
   }
 
   @Override
@@ -143,37 +146,39 @@ public class ReplicationQueue
 
   @Override
   public void onNewProjectCreated(NewProjectCreatedListener.Event event) {
-    for (URIish uri :
-        getURIs(new Project.NameKey(event.getProjectName()), FilterType.PROJECT_CREATION)) {
-      createProject(uri, event.getHeadName());
+    String projectName = event.getProjectName();
+    for (Map.Entry<String, URIish> entry :
+        getURIs(new Project.NameKey(projectName), FilterType.PROJECT_CREATION).entries()) {
+      createProject(entry.getKey(), entry.getValue(), projectName, event.getHeadName());
     }
   }
 
   @Override
   public void onProjectDeleted(ProjectDeletedListener.Event event) {
-    for (URIish uri :
-        getURIs(new Project.NameKey(event.getProjectName()), FilterType.PROJECT_DELETION)) {
-      deleteProject(uri);
+    String projectName = event.getProjectName();
+    for (Map.Entry<String, URIish> entry :
+        getURIs(new Project.NameKey(projectName), FilterType.PROJECT_DELETION).entries()) {
+      deleteProject(entry.getKey(), entry.getValue(), projectName);
     }
   }
 
   @Override
   public void onHeadUpdated(HeadUpdatedListener.Event event) {
-    for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()), FilterType.ALL)) {
-      updateHead(uri, event.getNewHeadName());
+    Project.NameKey project = new Project.NameKey(event.getProjectName());
+    for (Map.Entry<String, URIish> entry : getURIs(project, FilterType.ALL).entries()) {
+      updateHead(entry.getKey(), entry.getValue(), project.get(), event.getNewHeadName());
     }
   }
 
-  private Set<URIish> getURIs(Project.NameKey projectName, FilterType filterType) {
-    if (config.getDestinations(filterType).isEmpty()) {
-      return Collections.emptySet();
-    }
+  private Multimap<String, URIish> getURIs(Project.NameKey projectName, FilterType filterType) {
     if (!running) {
       repLog.error("Replication plugin did not finish startup before event");
-      return Collections.emptySet();
+      return HashMultimap.create();
     }
-
-    Set<URIish> uris = new HashSet<>();
+    if (config.getDestinations(filterType).isEmpty()) {
+      return HashMultimap.create();
+    }
+    Multimap<String, URIish> result = HashMultimap.create();
     for (Destination config : this.config.getDestinations(filterType)) {
       if (!config.wouldPushProject(projectName)) {
         continue;
@@ -194,45 +199,50 @@ public class ReplicationQueue
           continue;
         }
 
-        String path = replaceName(uri.getPath(), projectName.get(), config.isSingleProjectMatch());
-        if (path == null) {
-          repLog.warn(String.format("adminURL %s does not contain ${name}", uri));
-          continue;
+        if (!isGerrit(uri)) {
+          String path =
+              replaceName(uri.getPath(), projectName.get(), config.isSingleProjectMatch());
+          if (path == null) {
+            repLog.warn(String.format("adminURL %s does not contain ${name}", uri));
+            continue;
+          }
+          uri = uri.setPath(path);
+          if (!isSSH(uri)) {
+            repLog.warn(String.format("adminURL '%s' is invalid: only SSH is supported", uri));
+            continue;
+          }
         }
-
-        uri = uri.setPath(path);
-        if (!isSSH(uri)) {
-          repLog.warn(String.format("adminURL '%s' is invalid: only SSH is supported", uri));
-          continue;
-        }
-
-        uris.add(uri);
+        result.put(config.getRemoteConfigName(), uri);
         adminURLUsed = true;
       }
 
       if (!adminURLUsed) {
         for (URIish uri : config.getURIs(projectName, "*")) {
-          uris.add(uri);
+          result.put(config.getRemoteConfigName(), uri);
         }
       }
     }
-    return uris;
+    return result;
   }
 
-  public boolean createProject(Project.NameKey project, String head) {
+  public boolean createProject(String remoteName, Project.NameKey project, String head) {
     boolean success = true;
-    for (URIish uri : getURIs(project, FilterType.PROJECT_CREATION)) {
-      success &= createProject(uri, head);
+    for (Map.Entry<String, URIish> entry :
+        getURIs(project, FilterType.PROJECT_CREATION).entries()) {
+      success &= createProject(remoteName, entry.getValue(), project.get(), head);
     }
     return success;
   }
 
-  private boolean createProject(URIish replicateURI, String head) {
-    if (!replicateURI.isRemote()) {
+  private boolean createProject(
+      String remoteName, URIish replicateURI, String projectName, String head) {
+    if (isGerrit(replicateURI)) {
+      gerritAdmin.createProject(remoteName, replicateURI, projectName, head);
+    } else if (!replicateURI.isRemote()) {
       createLocally(replicateURI, head);
       repLog.info("Created local repository: " + replicateURI);
     } else if (isSSH(replicateURI)) {
-      createRemoteSsh(replicateURI, head);
+      createRemoteSsh(remoteName, replicateURI, head);
       repLog.info("Created remote repository: " + replicateURI);
     } else {
       repLog.warn(
@@ -260,7 +270,7 @@ public class ReplicationQueue
     }
   }
 
-  private void createRemoteSsh(URIish uri, String head) {
+  private void createRemoteSsh(String remoteName, URIish uri, String head) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd = "mkdir -p " + quotedPath + " && cd " + quotedPath + " && git init --bare";
     if (head != null) {
@@ -268,7 +278,7 @@ public class ReplicationQueue
     }
     OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
-      sshHelper.executeRemoteSsh(uri, cmd, errStream);
+      sshHelper.executeRemoteSsh(remoteName, uri, cmd, errStream);
     } catch (IOException e) {
       repLog.error(
           String.format(
@@ -281,12 +291,15 @@ public class ReplicationQueue
     }
   }
 
-  private void deleteProject(URIish replicateURI) {
-    if (!replicateURI.isRemote()) {
+  private void deleteProject(String remoteName, URIish replicateURI, String projectName) {
+    if (isGerrit(replicateURI)) {
+      gerritAdmin.deleteProject(remoteName, replicateURI, projectName);
+      repLog.info("Deleted remote repository: " + replicateURI);
+    } else if (!replicateURI.isRemote()) {
       deleteLocally(replicateURI);
       repLog.info("Deleted local repository: " + replicateURI);
     } else if (isSSH(replicateURI)) {
-      deleteRemoteSsh(replicateURI);
+      deleteRemoteSsh(remoteName, replicateURI);
       repLog.info("Deleted remote repository: " + replicateURI);
     } else {
       repLog.warn(
@@ -324,12 +337,12 @@ public class ReplicationQueue
     }
   }
 
-  private void deleteRemoteSsh(URIish uri) {
+  private void deleteRemoteSsh(String remoteName, URIish uri) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd = "rm -rf " + quotedPath;
     OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
-      sshHelper.executeRemoteSsh(uri, cmd, errStream);
+      sshHelper.executeRemoteSsh(remoteName, uri, cmd, errStream);
     } catch (IOException e) {
       repLog.error(
           String.format(
@@ -342,11 +355,14 @@ public class ReplicationQueue
     }
   }
 
-  private void updateHead(URIish replicateURI, String newHead) {
-    if (!replicateURI.isRemote()) {
+  private void updateHead(
+      String remoteName, URIish replicateURI, String projectName, String newHead) {
+    if (isGerrit(replicateURI)) {
+      gerritAdmin.updateHead(remoteName, replicateURI, projectName, newHead);
+    } else if (!replicateURI.isRemote()) {
       updateHeadLocally(replicateURI, newHead);
     } else if (isSSH(replicateURI)) {
-      updateHeadRemoteSsh(replicateURI, newHead);
+      updateHeadRemoteSsh(remoteName, replicateURI, newHead);
     } else {
       repLog.warn(
           String.format(
@@ -357,13 +373,13 @@ public class ReplicationQueue
     }
   }
 
-  private void updateHeadRemoteSsh(URIish uri, String newHead) {
+  private void updateHeadRemoteSsh(String remoteName, URIish uri, String newHead) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd =
         "cd " + quotedPath + " && git symbolic-ref HEAD " + QuotedString.BOURNE.quote(newHead);
     OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
-      sshHelper.executeRemoteSsh(uri, cmd, errStream);
+      sshHelper.executeRemoteSsh(remoteName, uri, cmd, errStream);
     } catch (IOException e) {
       repLog.error(
           String.format(
@@ -400,5 +416,10 @@ public class ReplicationQueue
       return true;
     }
     return false;
+  }
+
+  private static boolean isGerrit(URIish uri) {
+    String scheme = uri.getScheme();
+    return scheme != null && scheme.toLowerCase().equals("gerrit+ssh");
   }
 }
