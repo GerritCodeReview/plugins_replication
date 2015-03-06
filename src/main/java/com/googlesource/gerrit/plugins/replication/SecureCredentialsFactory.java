@@ -56,6 +56,7 @@ class SecureCredentialsFactory implements CredentialsFactory {
   public SecureCredentialsProvider create(String remoteName) {
     String user = config.getString("remote", remoteName, "username");
     String pass = config.getString("remote", remoteName, "password");
-    return new SecureCredentialsProvider(user, pass);
+    String passphrase = config.getString("remote", remoteName, "passphrase");
+    return new SecureCredentialsProvider(user, pass, passphrase);
   }
 }
