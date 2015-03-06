@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72a1d25d_fca9290e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2015-03-06T15:05:53Z",
+      "side": 1,
+      "message": "s/passphase/passphrase/",
+      "range": {
+        "startLine": 10,
+        "startChar": 24,
+        "endLine": 10,
+        "endChar": 33
+      },
+      "revId": "6fb53484eaa0f61038c4f92fb1b1691d3c8cfe6f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72a1d25d_9cb6e56d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2015-03-06T15:05:53Z",
+      "side": 1,
+      "message": "s/passphase/passphrase/",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 25
+      },
+      "revId": "6fb53484eaa0f61038c4f92fb1b1691d3c8cfe6f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_fbdeab64",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2015-03-06T15:05:53Z",
+      "side": 1,
+      "message": "s/add/adds/",
+      "range": {
+        "startLine": 13,
+        "startChar": 16,
+        "endLine": 13,
+        "endChar": 19
+      },
+      "revId": "6fb53484eaa0f61038c4f92fb1b1691d3c8cfe6f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_7bcbbbab",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2015-03-06T15:05:53Z",
+      "side": 1,
+      "message": "s/passphase/passphrase/",
+      "range": {
+        "startLine": 59,
+        "startChar": 11,
+        "endLine": 59,
+        "endChar": 20
+      },
+      "revId": "6fb53484eaa0f61038c4f92fb1b1691d3c8cfe6f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_5bd07752",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2015-03-06T15:05:53Z",
+      "side": 1,
+      "message": "s/passphase/passphrase/",
+      "range": {
+        "startLine": 28,
+        "startChar": 61,
+        "endLine": 28,
+        "endChar": 70
+      },
+      "revId": "6fb53484eaa0f61038c4f92fb1b1691d3c8cfe6f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_bbd43347",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2015-03-06T15:05:53Z",
+      "side": 1,
+      "message": "s/cfgPassphase/cfgPassphrase/",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 21
+      },
+      "revId": "6fb53484eaa0f61038c4f92fb1b1691d3c8cfe6f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85527d4f_9bd16f57",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2015-03-06T15:05:53Z",
+      "side": 1,
+      "message": "s/passphase/passphrase/",
+      "range": {
+        "startLine": 333,
+        "startChar": 12,
+        "endLine": 333,
+        "endChar": 21
+      },
+      "revId": "6fb53484eaa0f61038c4f92fb1b1691d3c8cfe6f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72a1d25d_dcac6d21",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2015-03-06T15:05:53Z",
+      "side": 1,
+      "message": "s/Passphase/Passphrase/",
+      "range": {
+        "startLine": 334,
+        "startChar": 2,
+        "endLine": 334,
+        "endChar": 11
+      },
+      "revId": "6fb53484eaa0f61038c4f92fb1b1691d3c8cfe6f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
