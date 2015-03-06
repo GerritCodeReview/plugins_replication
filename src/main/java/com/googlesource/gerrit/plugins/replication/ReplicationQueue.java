@@ -71,12 +71,14 @@ public class ReplicationQueue
   private final SshHelper sshHelper;
   private final DynamicItem<EventDispatcher> dispatcher;
   private final ReplicationConfig config;
+  private final GerritSshApi gerritAdmin;
   private volatile boolean running;
 
   @Inject
   ReplicationQueue(
       WorkQueue wq,
       SshHelper sh,
+      GerritSshApi ag,
       ReplicationConfig rc,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListener sl) {
@@ -85,6 +87,7 @@ public class ReplicationQueue
     dispatcher = dis;
     config = rc;
     stateLog = sl;
+    gerritAdmin = ag;
   }
 
   @Override
@@ -143,24 +146,25 @@ public class ReplicationQueue
 
   @Override
   public void onNewProjectCreated(NewProjectCreatedListener.Event event) {
-    for (URIish uri :
-        getURIs(new Project.NameKey(event.getProjectName()), FilterType.PROJECT_CREATION)) {
-      createProject(uri, event.getHeadName());
+    String projectName = event.getProjectName();
+    for (URIish uri : getURIs(new Project.NameKey(projectName), FilterType.PROJECT_CREATION)) {
+      createProject(uri, projectName, event.getHeadName());
     }
   }
 
   @Override
   public void onProjectDeleted(ProjectDeletedListener.Event event) {
-    for (URIish uri :
-        getURIs(new Project.NameKey(event.getProjectName()), FilterType.PROJECT_DELETION)) {
-      deleteProject(uri);
+    String projectName = event.getProjectName();
+    for (URIish uri : getURIs(new Project.NameKey(projectName), FilterType.PROJECT_DELETION)) {
+      deleteProject(uri, projectName);
     }
   }
 
   @Override
   public void onHeadUpdated(HeadUpdatedListener.Event event) {
-    for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()), FilterType.ALL)) {
-      updateHead(uri, event.getNewHeadName());
+    Project.NameKey project = new Project.NameKey(event.getProjectName());
+    for (URIish uri : getURIs(project, FilterType.ALL)) {
+      updateHead(uri, project.get(), event.getNewHeadName());
     }
   }
 
@@ -172,8 +176,7 @@ public class ReplicationQueue
       repLog.error("Replication plugin did not finish startup before event");
       return Collections.emptySet();
     }
-
-    Set<URIish> uris = new HashSet<>();
+    Set<URIish> result = new HashSet<>();
     for (Destination config : this.config.getDestinations(filterType)) {
       if (!config.wouldPushProject(projectName)) {
         continue;
@@ -194,41 +197,44 @@ public class ReplicationQueue
           continue;
         }
 
-        String path = replaceName(uri.getPath(), projectName.get(), config.isSingleProjectMatch());
-        if (path == null) {
-          repLog.warn(String.format("adminURL %s does not contain ${name}", uri));
-          continue;
+        if (!isGerrit(uri)) {
+          String path =
+              replaceName(uri.getPath(), projectName.get(), config.isSingleProjectMatch());
+          if (path == null) {
+            repLog.warn(String.format("adminURL %s does not contain ${name}", uri));
+            continue;
+          }
+          uri = uri.setPath(path);
+          if (!isSSH(uri)) {
+            repLog.warn(String.format("adminURL '%s' is invalid: only SSH is supported", uri));
+            continue;
+          }
         }
-
-        uri = uri.setPath(path);
-        if (!isSSH(uri)) {
-          repLog.warn(String.format("adminURL '%s' is invalid: only SSH is supported", uri));
-          continue;
-        }
-
-        uris.add(uri);
+        result.add(uri);
         adminURLUsed = true;
       }
 
       if (!adminURLUsed) {
         for (URIish uri : config.getURIs(projectName, "*")) {
-          uris.add(uri);
+          result.add(uri);
         }
       }
     }
-    return uris;
+    return result;
   }
 
   public boolean createProject(Project.NameKey project, String head) {
     boolean success = true;
     for (URIish uri : getURIs(project, FilterType.PROJECT_CREATION)) {
-      success &= createProject(uri, head);
+      success &= createProject(uri, project.get(), head);
     }
     return success;
   }
 
-  private boolean createProject(URIish replicateURI, String head) {
-    if (!replicateURI.isRemote()) {
+  private boolean createProject(URIish replicateURI, String projectName, String head) {
+    if (isGerrit(replicateURI)) {
+      gerritAdmin.createProject(replicateURI, projectName, head);
+    } else if (!replicateURI.isRemote()) {
       createLocally(replicateURI, head);
       repLog.info("Created local repository: " + replicateURI);
     } else if (isSSH(replicateURI)) {
@@ -281,8 +287,11 @@ public class ReplicationQueue
     }
   }
 
-  private void deleteProject(URIish replicateURI) {
-    if (!replicateURI.isRemote()) {
+  private void deleteProject(URIish replicateURI, String projectName) {
+    if (isGerrit(replicateURI)) {
+      gerritAdmin.deleteProject(replicateURI, projectName);
+      repLog.info("Deleted remote repository: " + replicateURI);
+    } else if (!replicateURI.isRemote()) {
       deleteLocally(replicateURI);
       repLog.info("Deleted local repository: " + replicateURI);
     } else if (isSSH(replicateURI)) {
@@ -342,8 +351,10 @@ public class ReplicationQueue
     }
   }
 
-  private void updateHead(URIish replicateURI, String newHead) {
-    if (!replicateURI.isRemote()) {
+  private void updateHead(URIish replicateURI, String projectName, String newHead) {
+    if (isGerrit(replicateURI)) {
+      gerritAdmin.updateHead(replicateURI, projectName, newHead);
+    } else if (!replicateURI.isRemote()) {
       updateHeadLocally(replicateURI, newHead);
     } else if (isSSH(replicateURI)) {
       updateHeadRemoteSsh(replicateURI, newHead);
@@ -400,5 +411,10 @@ public class ReplicationQueue
       return true;
     }
     return false;
+  }
+
+  private static boolean isGerrit(URIish uri) {
+    String scheme = uri.getScheme();
+    return scheme != null && scheme.toLowerCase().equals("gerrit+ssh");
   }
 }
