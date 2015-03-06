@@ -14,6 +14,8 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.googlesource.gerrit.plugins.replication.SshHelper.newErrorBufferStream;
+
 import com.google.common.base.Strings;
 import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
@@ -30,17 +32,13 @@ import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 
-import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.RefUpdate;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.transport.RemoteSession;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.URIish;
-import org.eclipse.jgit.util.FS;
 import org.eclipse.jgit.util.QuotedString;
-import org.eclipse.jgit.util.io.StreamCopyThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,7 +62,7 @@ public class ReplicationQueue implements
     HeadUpdatedListener {
   static final String REPLICATION_LOG_NAME = "replication_log";
   static final Logger repLog = LoggerFactory.getLogger(REPLICATION_LOG_NAME);
-  private static final int SSH_REMOTE_TIMEOUT = 120 * 1000;
+  static final int SSH_REMOTE_TIMEOUT = 120 * 1000;
   private static final ReplicationStateLogger stateLog =
       new ReplicationStateLogger(repLog);
 
@@ -85,6 +83,7 @@ public class ReplicationQueue implements
   private final EventDispatcher dispatcher;
   private final ReplicationConfig config;
   private final ReplicationSshSessionFactory sshSessionFactory;
+  private final GerritSshApi gerritAdmin;
   private volatile boolean running;
   private CredentialsFactory credentialsFactory;
 
@@ -95,13 +94,15 @@ public class ReplicationQueue implements
       ReplicationConfig rc,
       SchemaFactory<ReviewDb> db,
       ReplicationSshSessionFactory sshSessionFactory,
-      CredentialsFactory credentialsFactory) {
+      CredentialsFactory credentialsFactory,
+      GerritSshApi gerritAdmin) {
     workQueue = wq;
     database = db;
     dispatcher = dis;
     config = rc;
     this.sshSessionFactory = sshSessionFactory;
     this.credentialsFactory = credentialsFactory;
+    this.gerritAdmin = gerritAdmin;
   }
 
   @Override
@@ -164,7 +165,7 @@ public class ReplicationQueue implements
       SecureCredentialsProvider credsProvider =
           credentialsFactory.create(entry.getKey());
       for (URIish uri : entry.getValue()) {
-        createProject(credsProvider, uri, event.getHeadName());
+        createProject(credsProvider, uri, projectName, event.getHeadName());
       }
     }
   }
@@ -178,7 +179,7 @@ public class ReplicationQueue implements
       SecureCredentialsProvider credsProvider =
           credentialsFactory.create(entry.getKey());
       for (URIish uri : entry.getValue()) {
-        deleteProject(credsProvider, uri);
+        deleteProject(credsProvider, uri, projectName);
       }
     }
   }
@@ -191,7 +192,7 @@ public class ReplicationQueue implements
       SecureCredentialsProvider credsProvider =
           credentialsFactory.create(entry.getKey());
       for (URIish uri : entry.getValue()) {
-        updateHead(credsProvider, uri, event.getNewHeadName());
+        updateHead(credsProvider, uri, projectName, event.getNewHeadName());
       }
     }
   }
@@ -231,19 +232,22 @@ public class ReplicationQueue implements
           continue;
         }
 
-        String path = replaceName(uri.getPath(), projectName.get(),
-            config.isSingleProjectMatch());
-        if (path == null) {
-          repLog.warn(String
-              .format("adminURL %s does not contain ${name}", uri));
-          continue;
-        }
+        if (!isGerrit(uri)) {
+          String path = replaceName(uri.getPath(), projectName.get(),
+              config.isSingleProjectMatch());
 
-        uri = uri.setPath(path);
-        if (!isSSH(uri)) {
-          repLog.warn(String.format(
-              "adminURL '%s' is invalid: only SSH is supported", uri));
-          continue;
+          if (path == null) {
+            repLog.warn(String
+                .format("adminURL %s does not contain ${name}", uri));
+            continue;
+          }
+
+          uri = uri.setPath(path);
+          if (!isSSH(uri)) {
+            repLog.warn(String.format(
+                "adminURL '%s' is invalid: only SSH is supported", uri));
+            continue;
+          }
         }
 
         uris.add(uri);
@@ -267,15 +271,18 @@ public class ReplicationQueue implements
       SecureCredentialsProvider credsProvider =
           credentialsFactory.create(entry.getKey());
       for (URIish uri : entry.getValue()) {
-        success &= createProject(credsProvider, uri, head);
+        success &= createProject(credsProvider, uri, project.get(), head);
       }
     }
     return success;
   }
 
   private boolean createProject(CredentialsProvider credsProvider,
-      URIish replicateURI, String head) {
-    if (!replicateURI.isRemote()) {
+      URIish replicateURI, String projectName, String head) {
+    if (isGerrit(replicateURI)) {
+      gerritAdmin.createProject(credsProvider, replicateURI, projectName, head);
+      repLog.info("Created remote repository: " + replicateURI);
+    } else if (!replicateURI.isRemote()) {
       createLocally(replicateURI, head);
       repLog.info("Created local repository: " + replicateURI);
     } else if (isSSH(replicateURI)) {
@@ -332,9 +339,12 @@ public class ReplicationQueue implements
     }
   }
 
-  private void deleteProject(CredentialsProvider credsProvider,
-      URIish replicateURI) {
-    if (!replicateURI.isRemote()) {
+  private void deleteProject(SecureCredentialsProvider credsProvider,
+      URIish replicateURI, String projectName) {
+    if (isGerrit(replicateURI)) {
+      gerritAdmin.deleteProject(credsProvider, replicateURI, projectName);
+      repLog.info("Deleted remote repository: " + replicateURI);
+    } else if (!replicateURI.isRemote()) {
       deleteLocally(replicateURI);
       repLog.info("Deleted local repository: " + replicateURI);
     } else if (isSSH(replicateURI)) {
@@ -392,8 +402,10 @@ public class ReplicationQueue implements
   }
 
   private void updateHead(CredentialsProvider credsProvider,
-      URIish replicateURI, String newHead) {
-    if (!replicateURI.isRemote()) {
+      URIish replicateURI, String projectName, String newHead) {
+    if (isGerrit(replicateURI)) {
+      gerritAdmin.updateHead(credsProvider, replicateURI, projectName, newHead);
+    } else if (!replicateURI.isRemote()) {
       updateHeadLocally(replicateURI, newHead);
     } else if (isSSH(replicateURI)) {
       updateHeadRemoteSsh(credsProvider, replicateURI, newHead);
@@ -441,60 +453,10 @@ public class ReplicationQueue implements
     }
   }
 
-  private void executeRemoteSsh(CredentialsProvider credsProvider, URIish uri,
+  private void executeRemoteSsh(CredentialsProvider credsProvier, URIish uri,
       String cmd, OutputStream errStream) throws IOException {
-    RemoteSession ssh = connect(credsProvider, uri);
-    Process proc = ssh.exec(cmd, 0);
-    proc.getOutputStream().close();
-    StreamCopyThread out =
-        new StreamCopyThread(proc.getInputStream(), errStream);
-    StreamCopyThread err =
-        new StreamCopyThread(proc.getErrorStream(), errStream);
-    out.start();
-    err.start();
-    try {
-      proc.waitFor();
-      out.halt();
-      err.halt();
-    } catch (InterruptedException interrupted) {
-      // Don't wait, drop out immediately.
-    }
-    ssh.disconnect();
-  }
-
-  private RemoteSession connect(CredentialsProvider credsProvider, URIish uri)
-      throws TransportException {
-    return sshSessionFactory.create().getSession(uri, credsProvider,
-        FS.DETECTED, SSH_REMOTE_TIMEOUT);
-  }
-
-  private static OutputStream newErrorBufferStream() {
-    return new OutputStream() {
-      private final StringBuilder out = new StringBuilder();
-      private final StringBuilder line = new StringBuilder();
-
-      @Override
-      public synchronized String toString() {
-        while (out.length() > 0 && out.charAt(out.length() - 1) == '\n') {
-          out.setLength(out.length() - 1);
-        }
-        return out.toString();
-      }
-
-      @Override
-      public synchronized void write(final int b) {
-        if (b == '\r') {
-          return;
-        }
-
-        line.append((char) b);
-
-        if (b == '\n') {
-          out.append(line);
-          line.setLength(0);
-        }
-      }
-    };
+    SshHelper.executeRemoteSsh(credsProvier, sshSessionFactory, uri, cmd,
+        errStream);
   }
 
   private static boolean isSSH(URIish uri) {
@@ -509,5 +471,10 @@ public class ReplicationQueue implements
       return true;
     }
     return false;
+  }
+
+  private static boolean isGerrit(URIish uri) {
+    String scheme = uri.getScheme();
+    return scheme != null && scheme.toLowerCase().equals("gerrit");
   }
 }
