@@ -329,7 +329,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       // does not exist.  In this case NoRemoteRepositoryException is not
       // raised.
       String msg = e.getMessage();
-      if (msg.contains("access denied") || msg.contains("no such repository")) {
+      if (msg.contains("access denied") || msg.contains("no such repository")
+          || msg.contains("Git repository not found")) {
         createRepository();
       } else {
         repLog.error("Cannot replicate " + projectName
@@ -392,7 +393,9 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     if (pool.isCreateMissingRepos()) {
       try {
         Ref head = git.exactRef(Constants.HEAD);
-        if (replicationQueue.createProject(projectName, head != null ? head.getName() : null)) {
+        String remoteName = config.getName();
+        if (replicationQueue.createProject(remoteName, projectName,
+            head != null ? head.getName() : null)) {
           repLog.warn("Missing repository created; retry replication to " + uri);
           pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
         } else {
