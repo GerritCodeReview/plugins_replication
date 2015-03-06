@@ -64,7 +64,7 @@ public class ReplicationQueue implements
     HeadUpdatedListener {
   static final String REPLICATION_LOG_NAME = "replication_log";
   static final Logger repLog = LoggerFactory.getLogger(REPLICATION_LOG_NAME);
-  private static final int SSH_REMOTE_TIMEOUT = 120 * 1000;
+  static final int SSH_REMOTE_TIMEOUT = 120 * 1000;
 
   private final ReplicationStateListener stateLog;
 
