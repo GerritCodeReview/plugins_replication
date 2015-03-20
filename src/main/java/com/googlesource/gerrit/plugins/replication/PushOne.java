@@ -611,7 +611,7 @@ class PushOne implements ProjectRunnable {
     stateMap.clear();
   }
 
-  public class LockFailureException extends TransportException {
+  public static class LockFailureException extends TransportException {
     private static final long serialVersionUID = 1L;
 
     public LockFailureException(URIish uri, String message) {
