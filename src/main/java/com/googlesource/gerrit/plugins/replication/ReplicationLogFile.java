@@ -19,6 +19,7 @@ import com.google.gerrit.extensions.systemstatus.ServerInformation;
 import com.google.gerrit.server.util.SystemLog;
 import com.google.inject.Inject;
 
+import org.apache.log4j.AsyncAppender;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
@@ -41,10 +42,12 @@ public class ReplicationLogFile implements LifecycleListener {
     if (!started) {
       Logger replicationLogger =
           LogManager.getLogger(ReplicationQueue.REPLICATION_LOG_NAME);
-      replicationLogger.removeAllAppenders();
-      replicationLogger.addAppender(systemLog.createAsyncAppender(
-          replicationLogger.getName(), new PatternLayout("[%d] [%X{"
-              + PushOne.ID_MDC_KEY + "}] %m%n")));
+      String loggerName = replicationLogger.getName();
+      AsyncAppender asyncAppender = systemLog.createAsyncAppender(
+          loggerName, new PatternLayout("[%d] [%X{"
+              + PushOne.ID_MDC_KEY + "}] %m%n"));
+      replicationLogger.removeAppender(loggerName);
+      replicationLogger.addAppender(asyncAppender);
       replicationLogger.setAdditivity(false);
       started = true;
     }
