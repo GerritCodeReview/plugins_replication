@@ -62,6 +62,7 @@ class ReplicationQueue implements
     HeadUpdatedListener {
   static final String REPLICATION_LOG_NAME = "replication_log";
   static final Logger repLog = LoggerFactory.getLogger(REPLICATION_LOG_NAME);
+  private static final int SSH_REMOTE_TIMEOUT = 120 * 1000;
   private static final ReplicationStateLogger stateLog =
       new ReplicationStateLogger(repLog);
 
@@ -423,7 +424,8 @@ class ReplicationQueue implements
   }
 
   private static RemoteSession connect(URIish uri) throws TransportException {
-    return SshSessionFactory.getInstance().getSession(uri, null, FS.DETECTED, 0);
+    return SshSessionFactory.getInstance().getSession(uri, null, FS.DETECTED,
+        SSH_REMOTE_TIMEOUT);
   }
 
   private static OutputStream newErrorBufferStream() {
