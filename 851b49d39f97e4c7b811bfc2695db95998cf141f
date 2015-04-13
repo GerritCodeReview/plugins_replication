@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3062faee_49be41f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2015-04-13T14:27:17Z",
+      "side": 1,
+      "message": "You based your change on the master branch but submitted it to stable-2.11, the parent should be this commit instead: :90c23d25bdef78bd7f5639cedf9a4790e0437ebe Merge branch \u0027stable-2.10\u0027 into stable-2.11",
+      "range": {
+        "startLine": 1,
+        "startChar": 12,
+        "endLine": 1,
+        "endChar": 49
+      },
+      "revId": "851b49d39f97e4c7b811bfc2695db95998cf141f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702e3292_0bc83da4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2015-04-13T14:27:17Z",
+      "side": 1,
+      "message": "private?",
+      "revId": "851b49d39f97e4c7b811bfc2695db95998cf141f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3062faee_69b9050e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2015-04-13T14:27:17Z",
+      "side": 1,
+      "message": "use TimeUnit to do the conversion?\n\n(int)TimeUnit.SECONDS.toMillis(120)",
+      "range": {
+        "startLine": 64,
+        "startChar": 40,
+        "endLine": 64,
+        "endChar": 50
+      },
+      "revId": "851b49d39f97e4c7b811bfc2695db95998cf141f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
