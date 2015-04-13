@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d0527e22_26c3368c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-04-13T14:50:45Z",
+      "side": 1,
+      "message": "Rebased",
+      "parentUuid": "3062faee_49be41f8",
+      "range": {
+        "startLine": 1,
+        "startChar": 12,
+        "endLine": 1,
+        "endChar": 49
+      },
+      "revId": "851b49d39f97e4c7b811bfc2695db95998cf141f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "702e3292_0bc83da4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 2
