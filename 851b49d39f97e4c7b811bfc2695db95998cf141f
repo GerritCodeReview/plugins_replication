@@ -86,6 +86,24 @@
       "revId": "851b49d39f97e4c7b811bfc2695db95998cf141f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70471268_a3d6fa42",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1006454
+      },
+      "writtenOn": "2015-04-14T07:53:43Z",
+      "side": 1,
+      "message": "Thanks! \"private\" makes sense. (Done)\n\nI used the \"* 1000\" because it seems to be the preferred way to do time scaling in Gerrit:\n\n$ git grep \"\\* 1000\"",
+      "parentUuid": "702e3292_0bc83da4",
+      "revId": "851b49d39f97e4c7b811bfc2695db95998cf141f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
