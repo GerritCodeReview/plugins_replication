@@ -22,6 +22,30 @@
       "revId": "16db002a0bfe6559a6395dabf155b7a8bfadc968",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505f6e27_6a5d7756",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1006454
+      },
+      "writtenOn": "2015-04-14T11:13:32Z",
+      "side": 1,
+      "message": "A \"ssh mkdir\" should be a quick operation while for instance calculating branch visibility/commit reachability for a replication operation can take a reasonable amount of time (no traffic during this time). I\u0027m not sure it is fair to use the same value for both operations. But if you feel strongly about it, I\u0027ll give in.",
+      "parentUuid": "70471268_43374612",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 33
+      },
+      "revId": "16db002a0bfe6559a6395dabf155b7a8bfadc968",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
