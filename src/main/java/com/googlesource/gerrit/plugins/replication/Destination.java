@@ -72,7 +72,9 @@ class Destination {
 
   private final RemoteConfig remote;
   private final String[] adminUrls;
+  private final String[] urls;
   private final String[] projects;
+  private final String[] authGroupNames;
   private final int delay;
   private final int retryDelay;
   private final Object stateLock = new Object();
@@ -109,6 +111,7 @@ class Destination {
     retryDelay = Math.max(0, getInt(rc, cfg, "replicationretry", 1));
     lockErrorMaxRetries = cfg.getInt("replication", "lockErrorMaxRetries", 0);
     adminUrls = cfg.getStringList("remote", rc.getName(), "adminUrl");
+    urls = cfg.getStringList("remote", rc.getName(), "url");
 
     poolThreads = Math.max(0, getInt(rc, cfg, "threads", 1));
     poolName = "ReplicateTo-" + rc.getName();
@@ -123,7 +126,7 @@ class Destination {
     projects = cfg.getStringList("remote", rc.getName(), "projects");
 
     final CurrentUser remoteUser;
-    String[] authGroupNames = cfg.getStringList("remote", rc.getName(), "authGroup");
+    authGroupNames = cfg.getStringList("remote", rc.getName(), "authGroup");
     if (authGroupNames.length > 0) {
       ImmutableSet.Builder<AccountGroup.UUID> builder = ImmutableSet.builder();
       for (String name : authGroupNames) {
@@ -495,6 +498,22 @@ class Destination {
 
   String[] getAdminUrls() {
     return adminUrls;
+  }
+
+  String[] getUrls() {
+    return urls;
+  }
+
+  RemoteConfig getRemoteConfig() {
+    return remote;
+  }
+
+  String[] getAuthGroupNames() {
+    return authGroupNames;
+  }
+
+  String[] getProjects() {
+    return projects;
   }
 
   int getLockErrorMaxRetries() {
