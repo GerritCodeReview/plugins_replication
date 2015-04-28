@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "501daef5_da4dc551",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2015-04-28T10:46:37Z",
+      "side": 1,
+      "message": "Should this command be protected by any capability?",
+      "revId": "a93ed6d49acca7fcb620bbb7c33a57c8a0d235a0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30203a2d_19b34bca",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2015-04-28T10:46:37Z",
+      "side": 1,
+      "message": "in Gerrit core we always use \u0027\\n\u0027",
+      "revId": "a93ed6d49acca7fcb620bbb7c33a57c8a0d235a0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "501daef5_3a62c1be",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2015-04-28T10:46:37Z",
+      "side": 1,
+      "message": "[optional] Maybe make this a boolean --json option as in ReviewCommand.",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 39,
+        "endChar": 24
+      },
+      "revId": "a93ed6d49acca7fcb620bbb7c33a57c8a0d235a0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "501daef5_fa5209ed",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2015-04-28T10:46:37Z",
+      "side": 1,
+      "message": "Don\u0027t we need a seperator between the values?",
+      "range": {
+        "startLine": 69,
+        "startChar": 6,
+        "endLine": 71,
+        "endChar": 7
+      },
+      "revId": "a93ed6d49acca7fcb620bbb7c33a57c8a0d235a0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "501daef5_9a474d2e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2015-04-28T10:46:37Z",
+      "side": 1,
+      "message": "in Gerrit core we always use stdout.print(\"...\\n\") to ensure that line endings are the same on all platforms.",
+      "range": {
+        "startLine": 86,
+        "startChar": 6,
+        "endLine": 86,
+        "endChar": 20
+      },
+      "revId": "a93ed6d49acca7fcb620bbb7c33a57c8a0d235a0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
