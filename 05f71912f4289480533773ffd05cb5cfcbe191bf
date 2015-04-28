@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "501daef5_7adb5917",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-04-28T06:53:51Z",
+      "side": 1,
+      "message": "Can someone explain why there is a need for synchronized here?\n\nPrintwriter#println is synchronized and both printwriters are flushed in SshCommand#start...",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 7
+      },
+      "revId": "05f71912f4289480533773ffd05cb5cfcbe191bf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
