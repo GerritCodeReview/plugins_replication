@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "30203a2d_d97b9376",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-04-28T11:10:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30203a2d_19b34bca",
+      "revId": "a93ed6d49acca7fcb620bbb7c33a57c8a0d235a0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "501daef5_3a62c1be",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
         "patchSetId": 1
@@ -93,6 +111,30 @@
       "writtenOn": "2015-04-28T10:46:37Z",
       "side": 1,
       "message": "in Gerrit core we always use stdout.print(\"...\\n\") to ensure that line endings are the same on all platforms.",
+      "range": {
+        "startLine": 86,
+        "startChar": 6,
+        "endLine": 86,
+        "endChar": 20
+      },
+      "revId": "a93ed6d49acca7fcb620bbb7c33a57c8a0d235a0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30203a2d_f980d7d0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-04-28T11:10:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "501daef5_9a474d2e",
       "range": {
         "startLine": 86,
         "startChar": 6,
