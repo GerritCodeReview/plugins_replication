@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "707ab234_8b2b6daf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-04-29T11:04:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1017b6d9_98667525",
+      "range": {
+        "startLine": 28,
+        "startChar": 61,
+        "endLine": 28,
+        "endChar": 67
+      },
+      "revId": "bbd9dae1f2e49d4c7eeb6f9bfaf4b53e6ddab6c6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f019420f_b76b48ee",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2015-04-28T13:20:09Z",
       "side": 1,
       "message": "remove final",
+      "range": {
+        "startLine": 54,
+        "startChar": 26,
+        "endLine": 54,
+        "endChar": 31
+      },
+      "revId": "bbd9dae1f2e49d4c7eeb6f9bfaf4b53e6ddab6c6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "506bee69_2a783fbb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-04-29T11:04:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f019420f_b76b48ee",
       "range": {
         "startLine": 54,
         "startChar": 26,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "506bee69_ca43a373",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-04-29T11:04:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f019420f_f761c00f",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 43
+      },
+      "revId": "bbd9dae1f2e49d4c7eeb6f9bfaf4b53e6ddab6c6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f019420f_97664425",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "506bee69_ea48e791",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-04-29T11:04:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f019420f_97664425",
+      "range": {
+        "startLine": 66,
+        "startChar": 43,
+        "endLine": 66,
+        "endChar": 48
+      },
+      "revId": "bbd9dae1f2e49d4c7eeb6f9bfaf4b53e6ddab6c6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1017b6d9_b86b39ee",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
         "patchSetId": 2
@@ -105,6 +201,30 @@
       "writtenOn": "2015-04-28T13:20:09Z",
       "side": 1,
       "message": "Adding a list of values concatenated into a single json property make it hard to read/use:\n\n{\"Url\":\"some-url/${name}.gitsome-other-url/${name}.git\"}\n\nuse a json array instead?\n\n{\"Url\":[ \"some-url/${name}.git\", \"some-other-url/${name}.git\"]}",
+      "range": {
+        "startLine": 72,
+        "startChar": 6,
+        "endLine": 72,
+        "endChar": 45
+      },
+      "revId": "bbd9dae1f2e49d4c7eeb6f9bfaf4b53e6ddab6c6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "707ab234_ab30a917",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-04-29T11:04:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1017b6d9_b86b39ee",
       "range": {
         "startLine": 72,
         "startChar": 6,
