@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b070aa50_2d060d4e",
+        "filename": "src/main/resources/Documentation/cmd-list.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2015-04-29T15:28:07Z",
+      "side": 1,
+      "message": "--remote",
+      "range": {
+        "startLine": 68,
+        "startChar": 47,
+        "endLine": 68,
+        "endChar": 54
+      },
+      "revId": "c890eb47677332059abf602913d81d1f8c711008",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b070aa50_cd31891f",
+        "filename": "src/main/resources/Documentation/cmd-list.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2015-04-29T15:28:07Z",
+      "side": 1,
+      "message": "--remote",
+      "range": {
+        "startLine": 69,
+        "startChar": 48,
+        "endLine": 69,
+        "endChar": 54
+      },
+      "revId": "c890eb47677332059abf602913d81d1f8c711008",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
