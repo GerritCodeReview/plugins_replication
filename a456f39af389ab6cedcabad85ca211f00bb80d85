@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "707ab234_2bbef9a0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-04-30T10:21:48Z",
+      "side": 1,
+      "message": "I might be mistaken, but isn\u0027t the case that the former solution had one char for all instances of ListCommand. And this solution has 7 two-char Strings for each instance.\nIs this optimized in the compiler?",
+      "range": {
+        "startLine": 84,
+        "startChar": 36,
+        "endLine": 84,
+        "endChar": 40
+      },
+      "revId": "a456f39af389ab6cedcabad85ca211f00bb80d85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
