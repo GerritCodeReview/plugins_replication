@@ -190,12 +190,13 @@ public class Destination {
   private boolean isVisible(final Project.NameKey project,
       ReplicationState... states) {
     try {
-      return threadScoper.scope(new Callable<Boolean>() {
-        @Override
-        public Boolean call() throws NoSuchProjectException {
-          return controlFor(project).isVisible();
-        }
-      }).call();
+      return config.replicateHiddenProjects()
+          || threadScoper.scope(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws NoSuchProjectException {
+              return controlFor(project).isVisible();
+            }
+          }).call();
     } catch (NoSuchProjectException err) {
       stateLog.error(String.format("source project %s not available", project),
           err, states);

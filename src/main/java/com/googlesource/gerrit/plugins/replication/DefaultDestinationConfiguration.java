@@ -27,6 +27,7 @@ class DefaultDestinationConfiguration implements DestinationConfiguration {
   private final int poolThreads;
   private final boolean createMissingRepos;
   private final boolean replicatePermissions;
+  private final boolean replicateHiddenProjects;
   private final boolean replicateProjectDeletions;
   private final String remoteNameStyle;
   private final String[] urls;
@@ -50,6 +51,8 @@ class DefaultDestinationConfiguration implements DestinationConfiguration {
         cfg.getBoolean("remote", name, "replicatePermissions", true);
     replicateProjectDeletions =
         cfg.getBoolean("remote", name, "replicateProjectDeletions", false);
+    replicateHiddenProjects =
+        cfg.getBoolean("remote", name, "replicateHiddenProjects", false);
     remoteNameStyle =
         MoreObjects.firstNonNull(cfg.getString("remote", name, "remoteNameStyle"), "slash");
   }
@@ -97,6 +100,11 @@ class DefaultDestinationConfiguration implements DestinationConfiguration {
   @Override
   public String getRemoteNameStyle() {
     return remoteNameStyle;
+  }
+
+  @Override
+  public boolean replicateHiddenProjects() {
+    return replicateHiddenProjects;
   }
 
   @Override
