@@ -14,7 +14,6 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -32,7 +31,6 @@ import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.account.GroupBackends;
 import com.google.gerrit.server.account.GroupIncludeCache;
 import com.google.gerrit.server.account.ListGroupMembership;
-import com.google.gerrit.server.config.ConfigUtil;
 import com.google.gerrit.server.config.RequestScopedReviewDbProvider;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
@@ -48,7 +46,6 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
 
 import org.apache.commons.io.FilenameUtils;
-import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -70,30 +67,15 @@ import java.util.concurrent.TimeUnit;
 public class Destination {
   private static final Logger repLog = ReplicationQueue.repLog;
   private final ReplicationStateListener stateLog;
-
-  private final int poolThreads;
-  private final String poolName;
-
-  private final RemoteConfig remote;
-  private final String[] adminUrls;
-  private final String[] urls;
-  private final String[] projects;
-  private final String[] authGroupNames;
-  private final int delay;
-  private final int retryDelay;
   private final Object stateLock = new Object();
-  private final int lockErrorMaxRetries;
   private final Map<URIish, PushOne> pending = new HashMap<>();
   private final Map<URIish, PushOne> inFlight = new HashMap<>();
   private final PushOne.Factory opFactory;
   private final ProjectControl.Factory projectControlFactory;
   private final GitRepositoryManager gitManager;
-  private final boolean createMissingRepos;
-  private final boolean replicatePermissions;
-  private final boolean replicateProjectDeletions;
-  private final String remoteNameStyle;
   private volatile WorkQueue.Executor pool;
   private final PerThreadRequestScope.Scoper threadScoper;
+  private final DestinationConfiguration config;
 
   protected static enum RetryReason {
     TRANSPORT_ERROR, COLLISION, REPOSITORY_MISSING;
@@ -111,43 +93,21 @@ public class Destination {
   }
 
   protected Destination(Injector injector,
-      RemoteConfig rc,
-      Config cfg,
+      DestinationConfiguration cfg,
       RemoteSiteUser.Factory replicationUserFactory,
       PluginUser pluginUser,
       GitRepositoryManager gitRepositoryManager,
       GroupBackend groupBackend,
       ReplicationStateListener stateLog,
       GroupIncludeCache groupIncludeCache) {
-    remote = rc;
+    config = cfg;
     gitManager = gitRepositoryManager;
     this.stateLog = stateLog;
 
-    delay = Math.max(0,
-        getTimeUnit(rc, cfg, "replicationdelay", 15, TimeUnit.SECONDS));
-    retryDelay = Math.max(0,
-        getTimeUnit(rc, cfg, "replicationretry", 1, TimeUnit.MINUTES));
-    lockErrorMaxRetries = cfg.getInt("replication", "lockErrorMaxRetries", 0);
-    adminUrls = cfg.getStringList("remote", rc.getName(), "adminUrl");
-    urls = cfg.getStringList("remote", rc.getName(), "url");
-
-    poolThreads = Math.max(0, getInt(rc, cfg, "threads", 1));
-    poolName = "ReplicateTo-" + rc.getName();
-    createMissingRepos =
-        cfg.getBoolean("remote", rc.getName(), "createMissingRepositories", true);
-    replicatePermissions =
-        cfg.getBoolean("remote", rc.getName(), "replicatePermissions", true);
-    replicateProjectDeletions =
-        cfg.getBoolean("remote", rc.getName(), "replicateProjectDeletions", false);
-    remoteNameStyle = MoreObjects.firstNonNull(
-        cfg.getString("remote", rc.getName(), "remoteNameStyle"), "slash");
-    projects = cfg.getStringList("remote", rc.getName(), "projects");
-
     final CurrentUser remoteUser;
-    authGroupNames = cfg.getStringList("remote", rc.getName(), "authGroup");
-    if (authGroupNames.length > 0) {
+    if (cfg.getAuthGroupNames().length > 0) {
       ImmutableSet.Builder<AccountGroup.UUID> builder = ImmutableSet.builder();
-      for (String name : authGroupNames) {
+      for (String name : cfg.getAuthGroupNames()) {
         GroupReference g = GroupBackends.findExactSuggestion(groupBackend, name);
         if (g != null) {
           builder.add(g.getUUID());
@@ -171,7 +131,7 @@ public class Destination {
         bind(PerRequestProjectControlCache.class).in(RequestScoped.class);
 
         bind(Destination.class).toInstance(Destination.this);
-        bind(RemoteConfig.class).toInstance(remote);
+        bind(RemoteConfig.class).toInstance(config.getRemoteConfig());
         install(new FactoryModuleBuilder().build(PushOne.Factory.class));
       }
 
@@ -222,7 +182,8 @@ public class Destination {
   }
 
   public void start(WorkQueue workQueue) {
-    pool = workQueue.createQueue(poolThreads, poolName);
+    String poolName = "ReplicateTo-" + config.getRemoteConfig().getName();
+    pool = workQueue.createQueue(config.getPoolThreads(), poolName);
   }
 
   public int shutdown() {
@@ -236,17 +197,6 @@ public class Destination {
       pool = null;
     }
     return cnt;
-  }
-
-  private static int getInt(
-      RemoteConfig rc, Config cfg, String name, int defValue) {
-    return cfg.getInt("remote", rc.getName(), name, defValue);
-  }
-
-  private static int getTimeUnit(
-      RemoteConfig rc, Config cfg, String name, int defValue, TimeUnit unit) {
-    return (int)ConfigUtil.getTimeUnit(
-        cfg, "remote", rc.getName(), name, defValue, unit);
   }
 
   private boolean isVisible(final Project.NameKey project,
@@ -275,7 +225,7 @@ public class Destination {
       return;
     }
 
-    if (!replicatePermissions) {
+    if (!config.replicatePermissions()) {
       PushOne e;
       synchronized (stateLock) {
         e = pending.get(uri);
@@ -306,14 +256,14 @@ public class Destination {
       PushOne e = pending.get(uri);
       if (e == null) {
         e = opFactory.create(project, uri);
-        pool.schedule(e, delay, TimeUnit.SECONDS);
+        pool.schedule(e, config.getDelay(), TimeUnit.SECONDS);
         pending.put(uri, e);
       }
       e.addRef(ref);
       state.increasePushTaskCount(project.get(), ref);
       e.addState(ref, state);
       repLog.info("scheduled {}:{} => {} to run after {}s", project, ref,
-          e, delay);
+          e, config.getDelay());
     }
   }
 
@@ -396,13 +346,13 @@ public class Destination {
         pending.put(uri, pushOp);
         switch (reason) {
           case COLLISION:
-            pool.schedule(pushOp, delay, TimeUnit.SECONDS);
+            pool.schedule(pushOp, config.getDelay(), TimeUnit.SECONDS);
             break;
           case TRANSPORT_ERROR:
           case REPOSITORY_MISSING:
           default:
             pushOp.setToRetry();
-            pool.schedule(pushOp, retryDelay, TimeUnit.MINUTES);
+            pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
             break;
         }
       }
@@ -440,6 +390,7 @@ public class Destination {
     }
 
     // by default push all projects
+    String[] projects = config.getProjects();
     if (projects.length < 1) {
       return true;
     }
@@ -448,6 +399,7 @@ public class Destination {
   }
 
   boolean isSingleProjectMatch() {
+    String[] projects = config.getProjects();
     boolean ret = (projects.length == 1);
     if (ret) {
       String projectMatch = projects[0];
@@ -465,10 +417,10 @@ public class Destination {
   }
 
   boolean wouldPushRef(String ref) {
-    if (!replicatePermissions && RefNames.REFS_CONFIG.equals(ref)) {
+    if (!config.replicatePermissions() && RefNames.REFS_CONFIG.equals(ref)) {
       return false;
     }
-    for (RefSpec s : remote.getPushRefSpecs()) {
+    for (RefSpec s : config.getRemoteConfig().getPushRefSpecs()) {
       if (s.matchSource(ref)) {
         return true;
       }
@@ -477,25 +429,27 @@ public class Destination {
   }
 
   boolean isCreateMissingRepos() {
-    return createMissingRepos;
+    return config.createMissingRepos();
   }
 
   boolean isReplicatePermissions() {
-    return replicatePermissions;
+    return config.replicatePermissions();
   }
 
   boolean isReplicateProjectDeletions() {
-    return replicateProjectDeletions;
+    return config.replicateProjectDeletions();
   }
 
   List<URIish> getURIs(Project.NameKey project, String urlMatch) {
-    List<URIish> r = Lists.newArrayListWithCapacity(remote.getURIs().size());
-    for (URIish uri : remote.getURIs()) {
+    List<URIish> r = Lists.newArrayListWithCapacity(
+        config.getRemoteConfig().getURIs().size());
+    for (URIish uri : config.getRemoteConfig().getURIs()) {
       if (matches(uri, urlMatch)) {
         String name = project.get();
         if (needsUrlEncoding(uri)) {
           name = encode(name);
         }
+        String remoteNameStyle = config.getRemoteNameStyle();
         if (remoteNameStyle.equals("dash")) {
           name = name.replace("/", "-");
         } else if(remoteNameStyle.equals("underscore")) {
@@ -540,27 +494,28 @@ public class Destination {
   }
 
   String[] getAdminUrls() {
-    return adminUrls;
+    return config.getAdminUrls();
   }
 
   String[] getUrls() {
-    return urls;
-  }
-
-  RemoteConfig getRemoteConfig() {
-    return remote;
+    return config.getUrls();
   }
 
   String[] getAuthGroupNames() {
-    return authGroupNames;
+    return config.getAuthGroupNames();
   }
 
   String[] getProjects() {
-    return projects;
+    return config.getProjects();
   }
 
+
   int getLockErrorMaxRetries() {
-    return lockErrorMaxRetries;
+    return config.getLockErrorMaxRetries();
+  }
+
+  String getRemoteConfigName() {
+    return config.getRemoteConfig().getName();
   }
 
   private static boolean matches(URIish uri, String urlMatch) {

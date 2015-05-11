@@ -48,7 +48,7 @@ final class ListCommand extends SshCommand {
   @Override
   protected void run() {
     for (Destination d : config.getDestinations(FilterType.ALL)) {
-      if (matches(d.getRemoteConfig().getName())) {
+      if (matches(d.getRemoteConfigName())) {
         printRemote(d);
       }
     }
@@ -92,7 +92,7 @@ final class ListCommand extends SshCommand {
   private void printRemote(Destination d) {
     if (json) {
       JsonObject obj = new JsonObject();
-      obj.addProperty("Remote", d.getRemoteConfig().getName());
+      obj.addProperty("Remote", d.getRemoteConfigName());
       addProperty(obj, "Url", d.getUrls());
       if (detail) {
         addProperty(obj, "AdminUrl", d.getAdminUrls());
@@ -106,7 +106,7 @@ final class ListCommand extends SshCommand {
     } else {
       StringBuilder out = new StringBuilder();
       out.append("Remote: ")
-        .append(d.getRemoteConfig().getName())
+        .append(d.getRemoteConfigName())
         .append("\n");
       for (String url : d.getUrls()) {
         out.append("Url: ")

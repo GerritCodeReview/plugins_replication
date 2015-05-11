@@ -168,8 +168,9 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
       }
 
       Destination destination =
-          new Destination(injector, c, config, replicationUserFactory,
-              pluginUser, gitRepositoryManager, groupBackend, stateLog, groupIncludeCache);
+          new Destination(injector, new DestinationConfiguration(c,
+              config), replicationUserFactory, pluginUser,
+              gitRepositoryManager, groupBackend, stateLog, groupIncludeCache);
 
       if (!destination.isSingleProjectMatch()) {
         for (URIish u : c.getURIs()) {
