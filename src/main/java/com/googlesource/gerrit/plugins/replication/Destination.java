@@ -199,13 +199,15 @@ public class Destination {
     return cnt;
   }
 
-  private boolean isVisible(final Project.NameKey project,
+  private boolean shouldReplicate(final Project.NameKey project,
       ReplicationState... states) {
     try {
       return threadScoper.scope(new Callable<Boolean>() {
         @Override
         public Boolean call() throws NoSuchProjectException {
-          return controlFor(project).isVisible();
+          ProjectControl projectControl = controlFor(project);
+          return projectControl.isReadable() && (!projectControl.isHidden()
+              || config.replicateHiddenProjects());
         }
       }).call();
     } catch (NoSuchProjectException err) {
@@ -220,7 +222,7 @@ public class Destination {
   void schedule(final Project.NameKey project, final String ref,
       final URIish uri, ReplicationState state) {
     repLog.info("scheduling replication {}:{} => {}", project, ref, uri);
-    if (!isVisible(project, state)) {
+    if (!shouldReplicate(project, state)) {
       return;
     }
 
@@ -384,7 +386,7 @@ public class Destination {
   }
 
   boolean wouldPushProject(final Project.NameKey project) {
-    if (!isVisible(project)) {
+    if (!shouldReplicate(project)) {
       return false;
     }
 
