@@ -29,6 +29,7 @@ class DestinationConfiguration {
   private final boolean createMissingRepos;
   private final boolean replicatePermissions;
   private final boolean replicateProjectDeletions;
+  private final boolean replicateHiddenProjects;
   private final String remoteNameStyle;
   private final ImmutableList<String> urls;
   private final ImmutableList<String> projects;
@@ -57,6 +58,8 @@ class DestinationConfiguration {
         cfg.getBoolean("remote", name, "replicatePermissions", true);
     replicateProjectDeletions =
         cfg.getBoolean("remote", name, "replicateProjectDeletions", false);
+    replicateHiddenProjects =
+        cfg.getBoolean("remote", name, "replicateHiddenProjects", false);
     remoteNameStyle = MoreObjects.firstNonNull(
         cfg.getString("remote", name, "remoteNameStyle"), "slash");
   }
@@ -107,6 +110,10 @@ class DestinationConfiguration {
 
   public boolean replicateProjectDeletions() {
     return replicateProjectDeletions;
+  }
+
+  public boolean replicateHiddenProjects() {
+    return replicateHiddenProjects;
   }
 
   public RemoteConfig getRemoteConfig() {
