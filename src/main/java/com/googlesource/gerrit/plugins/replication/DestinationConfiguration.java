@@ -18,5 +18,6 @@ public interface DestinationConfiguration {
   String getRemoteNameStyle();
   boolean replicatePermissions();
   boolean createMissingRepos();
+  boolean replicateHiddenProjects();
   boolean replicateProjectDeletions();
 }

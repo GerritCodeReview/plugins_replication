@@ -193,7 +193,10 @@ public class Destination {
       return threadScoper.scope(new Callable<Boolean>() {
         @Override
         public Boolean call() throws NoSuchProjectException {
-          return controlFor(project).isVisible();
+          ProjectControl projectControl = controlFor(project);
+          boolean notHidden = config.replicateHiddenProjects()
+              || !projectControl.isHidden();
+          return projectControl.isReadable() && notHidden;
         }
       }).call();
     } catch (NoSuchProjectException err) {
