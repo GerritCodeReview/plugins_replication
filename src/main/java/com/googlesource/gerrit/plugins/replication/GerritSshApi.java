@@ -38,8 +38,8 @@ public class GerritSshApi {
     this.sessionFactoryProvider = sessionFactoryProvider;
   }
 
-  public void createProject(CredentialsProvider credentialsProvider,
-      URIish uri, String projectName, String head) {
+  protected boolean createProject(CredentialsProvider credentialsProvider, URIish uri,
+      String projectName, String head) {
     OutputStream errStream = newErrorBufferStream();
     String cmd = "gerrit create-project --branch " + head + " " + projectName;
     try {
@@ -48,11 +48,13 @@ public class GerritSshApi {
       log.error(String.format("Error creating remote repository at %s:%n"
           + "  Exception: %s%n  Command: %s%n  Output: %s", uri, e,
           cmd, errStream), e);
+      return false;
     }
+    return true;
   }
 
-  public void deleteProject(SecureCredentialsProvider credsProvider,
-      URIish uri, String projectName) {
+  protected boolean deleteProject(SecureCredentialsProvider credsProvider, URIish uri,
+      String projectName) {
     OutputStream errStream = newErrorBufferStream();
     String cmd =
         "deleteproject delete --yes-really-delete --force " + projectName;
@@ -62,10 +64,13 @@ public class GerritSshApi {
       log.error(String.format("Error deleting remote repository at %s:%n"
           + "  Exception: %s%n  Command: %s%n  Output: %s", uri, e,
           cmd, errStream), e);
+
+      return false;
     }
+    return true;
   }
 
-  public void updateHead(CredentialsProvider credsProvider, URIish uri,
+  protected boolean updateHead(CredentialsProvider credsProvider, URIish uri,
       String projectName, String newHead) {
     OutputStream errStream = newErrorBufferStream();
     String cmd = "gerrit set-head " + projectName + " --new-head " + newHead;
@@ -76,7 +81,9 @@ public class GerritSshApi {
           "Error updating HEAD of remote repository at %s to %s:%n"
               + "  Exception: %s%n  Command: %s%n  Output: %s", uri,
           newHead, e, cmd, errStream), e);
+      return false;
     }
+    return true;
   }
 
   private URIish toSshUri(URIish uri) throws URISyntaxException {
