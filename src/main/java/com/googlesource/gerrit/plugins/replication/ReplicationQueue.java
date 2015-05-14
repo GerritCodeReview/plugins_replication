@@ -232,7 +232,7 @@ class ReplicationQueue implements
   }
 
   public boolean createProject(Project.NameKey project, String head) {
-    boolean success = false;
+    boolean success = true;
     for (URIish uri : getURIs(project, FilterType.PROJECT_CREATION)) {
       success &= createProject(uri, head);
     }
