@@ -256,6 +256,12 @@ remote.NAME.replicatePermissions
 
 	By default, true, replicating everything.
 
+remote.NAME.replicateNotVisileProjects
+:	If true, projects not visible for replication user will be replicated
+	to the remote site.
+
+	By default, false, do *not* replicate not visible projects.
+
 remote.NAME.replicateProjectDeletions
 :	If true, project deletions will also be replicated to the
 	remote site.
