@@ -85,6 +85,7 @@ class Destination {
   private final GitRepositoryManager gitManager;
   private final boolean createMissingRepos;
   private final boolean replicatePermissions;
+  private final boolean replicateHiddenProjects;
   private final boolean replicateProjectDeletions;
   private final String remoteNameStyle;
   private volatile WorkQueue.Executor pool;
@@ -114,6 +115,8 @@ class Destination {
         cfg.getBoolean("remote", rc.getName(), "createMissingRepositories", true);
     replicatePermissions =
         cfg.getBoolean("remote", rc.getName(), "replicatePermissions", true);
+    replicateHiddenProjects =
+        cfg.getBoolean("remote", rc.getName(), "replicateHiddenProjects", false);
     replicateProjectDeletions =
         cfg.getBoolean("remote", rc.getName(), "replicateProjectDeletions", false);
     remoteNameStyle = MoreObjects.firstNonNull(
@@ -202,12 +205,13 @@ class Destination {
   private boolean isVisible(final Project.NameKey project,
       ReplicationState... states) {
     try {
-      return threadScoper.scope(new Callable<Boolean>() {
-        @Override
-        public Boolean call() throws NoSuchProjectException {
-          return controlFor(project).isVisible();
-        }
-      }).call();
+      return replicateHiddenProjects
+          || threadScoper.scope(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws NoSuchProjectException {
+              return controlFor(project).isVisible();
+            }
+          }).call();
     } catch (NoSuchProjectException err) {
       stateLog.error(String.format("source project %s not available", project),
           err, states);
