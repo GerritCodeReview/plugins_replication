@@ -65,5 +65,7 @@ class ReplicationModule extends AbstractModule {
 
     EventTypes.registerClass(new RefReplicatedEvent(null, null, null, SUCCEEDED));
     EventTypes.registerClass(new RefReplicationDoneEvent(null, null, 0));
+
+    bind(ReplicationStateListener.class).to(ReplicationStateLogger.class);
   }
 }
