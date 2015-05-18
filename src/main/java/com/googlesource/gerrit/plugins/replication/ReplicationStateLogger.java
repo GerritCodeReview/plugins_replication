@@ -37,11 +37,6 @@ public class ReplicationStateLogger {
     logger.warn(msg);
   }
 
-  public void warn(String msg, Throwable t, ReplicationState... states) {
-    stateWriteErr("Warning: " + msg, states);
-    logger.warn(msg, t);
-  }
-
   public void error(String msg, ReplicationState... states) {
     stateWriteErr("Error: " + msg, states);
     logger.error(msg);
