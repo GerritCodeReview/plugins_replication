@@ -23,8 +23,6 @@ import com.googlesource.gerrit.plugins.replication.PushResultProcessing.CommandP
 
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +33,9 @@ import java.util.concurrent.TimeUnit;
 @RequiresCapability(StartReplicationCapability.START_REPLICATION)
 @CommandMetaData(name = "start", description = "Start replication for specific project or all projects")
 final class StartCommand extends SshCommand {
-  private static final Logger log = LoggerFactory.getLogger(StartCommand.class);
-  private static final ReplicationStateLogger stateLog = new ReplicationStateLogger(log);
+  @Inject
+  private ReplicationStateLogger stateLog;
+
   @Option(name = "--all", usage = "push all known projects")
   private boolean all;
 

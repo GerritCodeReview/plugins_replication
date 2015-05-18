@@ -55,12 +55,14 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private final GitRepositoryManager gitRepositoryManager;
   private final GroupBackend groupBackend;
   private final FileBasedConfig config;
+  private final ReplicationStateListener statLog;
 
   @Inject
   public ReplicationFileBasedConfig(final Injector injector, final SitePaths site,
       final RemoteSiteUser.Factory ruf, final PluginUser pu,
       final GitRepositoryManager grm,
-      final GroupBackend gb) throws ConfigInvalidException, IOException {
+      final GroupBackend gb,
+      final ReplicationStateListener statLog) throws ConfigInvalidException, IOException {
     this.cfgPath = site.etc_dir.resolve("replication.config");
     this.injector = injector;
     this.replicationUserFactory = ruf;
@@ -69,6 +71,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     this.groupBackend = gb;
     this.config = new FileBasedConfig(cfgPath.toFile(), FS.DETECTED);
     this.destinations = allDestinations();
+    this.statLog = statLog;
   }
 
   /*
@@ -159,7 +162,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
 
       Destination destination =
           new Destination(injector, c, config, replicationUserFactory,
-              pluginUser, gitRepositoryManager, groupBackend);
+              pluginUser, gitRepositoryManager, groupBackend, statLog);
 
       if (!destination.isSingleProjectMatch()) {
         for (URIish u : c.getURIs()) {

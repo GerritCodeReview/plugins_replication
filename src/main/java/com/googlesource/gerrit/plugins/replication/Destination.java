@@ -65,8 +65,7 @@ import java.util.concurrent.TimeUnit;
 
 class Destination {
   private static final Logger repLog = ReplicationQueue.repLog;
-  private static final ReplicationStateLogger stateLog =
-      new ReplicationStateLogger(repLog);
+  private final ReplicationStateListener stateLog;
 
   private final int poolThreads;
   private final String poolName;
@@ -100,13 +99,15 @@ class Destination {
       final RemoteSiteUser.Factory replicationUserFactory,
       final PluginUser pluginUser,
       final GitRepositoryManager gitRepositoryManager,
-      final GroupBackend groupBackend) {
+      final GroupBackend groupBackend,
+      final ReplicationStateListener stateLog) {
     remote = rc;
     gitManager = gitRepositoryManager;
     delay = Math.max(0, getInt(rc, cfg, "replicationdelay", 15));
     retryDelay = Math.max(0, getInt(rc, cfg, "replicationretry", 1));
     lockErrorMaxRetries = cfg.getInt("replication", "lockErrorMaxRetries", 0);
     adminUrls = cfg.getStringList("remote", rc.getName(), "adminUrl");
+    this.stateLog = stateLog;
 
     poolThreads = Math.max(0, getInt(rc, cfg, "threads", 1));
     poolName = "ReplicateTo-" + rc.getName();
