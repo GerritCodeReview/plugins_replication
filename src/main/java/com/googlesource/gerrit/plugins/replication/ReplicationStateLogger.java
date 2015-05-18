@@ -24,7 +24,7 @@ import org.slf4j.Logger;
  * and logs additional information about the replication state to the
  * stderr console.
  */
-public class ReplicationStateLogger {
+public class ReplicationStateLogger implements ReplicationStateListener {
 
   private final Logger logger;
 
@@ -32,16 +32,19 @@ public class ReplicationStateLogger {
     this.logger = logger;
   }
 
+  @Override
   public void warn(String msg, ReplicationState... states) {
     stateWriteErr("Warning: " + msg, states);
     logger.warn(msg);
   }
 
+  @Override
   public void error(String msg, ReplicationState... states) {
     stateWriteErr("Error: " + msg, states);
     logger.error(msg);
   }
 
+  @Override
   public void error(String msg, Throwable t, ReplicationState... states) {
     stateWriteErr("Error: " + msg, states);
     logger.error(msg, t);

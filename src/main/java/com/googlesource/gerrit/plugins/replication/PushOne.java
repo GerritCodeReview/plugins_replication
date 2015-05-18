@@ -80,7 +80,7 @@ import java.util.concurrent.TimeUnit;
  */
 class PushOne implements ProjectRunnable {
   private static final Logger repLog = ReplicationQueue.repLog;
-  private static final ReplicationStateLogger stateLog =
+  private static final ReplicationStateListener stateLog =
       new ReplicationStateLogger(repLog);
   static final String ALL_REFS = "..all..";
   static final String ID_MDC_KEY = "pushOneId";
