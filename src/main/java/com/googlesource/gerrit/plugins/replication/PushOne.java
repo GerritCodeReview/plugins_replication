@@ -14,6 +14,8 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
+
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedListMultimap;
@@ -59,7 +61,6 @@ import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.Transport;
 import org.eclipse.jgit.transport.URIish;
-import org.slf4j.Logger;
 import org.slf4j.MDC;
 
 import java.io.IOException;
@@ -79,8 +80,7 @@ import java.util.concurrent.TimeUnit;
  * take that lock to ensure they are working with a current view of the object.
  */
 class PushOne implements ProjectRunnable {
-  private static final Logger repLog = ReplicationQueue.repLog;
-  private static final ReplicationStateLogger stateLog =
+  private static final ReplicationStateListener stateLog =
       new ReplicationStateLogger(repLog);
   static final String ALL_REFS = "..all..";
   static final String ID_MDC_KEY = "pushOneId";

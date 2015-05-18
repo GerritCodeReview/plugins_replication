@@ -63,7 +63,7 @@ class ReplicationQueue implements
   static final String REPLICATION_LOG_NAME = "replication_log";
   static final Logger repLog = LoggerFactory.getLogger(REPLICATION_LOG_NAME);
   private static final int SSH_REMOTE_TIMEOUT = 120 * 1000;
-  private static final ReplicationStateLogger stateLog =
+  private static final ReplicationStateListener stateLog =
       new ReplicationStateLogger(repLog);
 
   static String replaceName(String in, String name, boolean keyIsOptional) {
