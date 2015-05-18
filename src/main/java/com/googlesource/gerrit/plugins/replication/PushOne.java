@@ -80,8 +80,7 @@ import java.util.concurrent.TimeUnit;
  * take that lock to ensure they are working with a current view of the object.
  */
 class PushOne implements ProjectRunnable {
-  private static final ReplicationStateListener stateLog =
-      new ReplicationStateLogger(repLog);
+  private final ReplicationStateListener stateLog;
   static final String ALL_REFS = "..all..";
   static final String ID_MDC_KEY = "pushOneId";
 
@@ -124,6 +123,7 @@ class PushOne implements ProjectRunnable {
       final ChangeCache cc,
       final ReplicationQueue rq,
       final IdGenerator ig,
+      final ReplicationStateListener sl,
       @Assisted final Project.NameKey d,
       @Assisted final URIish u) {
     gitManager = grm;
@@ -140,6 +140,7 @@ class PushOne implements ProjectRunnable {
     lockRetryCount = 0;
     maxLockRetries = pool.getLockErrorMaxRetries();
     id = ig.next();
+    stateLog = sl;
   }
 
   @Override
