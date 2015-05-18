@@ -44,12 +44,14 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private final GitRepositoryManager gitRepositoryManager;
   private final GroupBackend groupBackend;
   private final WorkQueue workQueue;
+  private final ReplicationStateListener stateLog;
 
   @Inject
   public AutoReloadConfigDecorator(Injector injector, SitePaths site,
       RemoteSiteUser.Factory ruf, PluginUser pu,
       GitRepositoryManager grm, GroupBackend gb,
-      WorkQueue workQueue) throws ConfigInvalidException,
+      WorkQueue workQueue,
+      ReplicationStateListener stateLog) throws ConfigInvalidException,
       IOException {
     this.injector = injector;
     this.site = site;
@@ -60,6 +62,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     this.currentConfig = loadConfig();
     this.currentConfigTs = getLastModified(currentConfig);
     this.workQueue = workQueue;
+    this.stateLog = stateLog;
   }
 
   private static long getLastModified(ReplicationFileBasedConfig cfg) {
@@ -70,7 +73,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
       throws ConfigInvalidException, IOException {
     return new ReplicationFileBasedConfig(injector, site,
         remoteSiteUserFactory, pluginUser, gitRepositoryManager,
-        groupBackend);
+        groupBackend, stateLog);
   }
 
   private synchronized boolean isAutoReload() {

@@ -25,8 +25,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 class PushAll implements Runnable {
-  private static final ReplicationStateLogger stateLog =
-      new ReplicationStateLogger(ReplicationQueue.repLog);
+  private final ReplicationStateListener stateLog;
 
   interface Factory {
     PushAll create(String urlMatch,
@@ -45,12 +44,14 @@ class PushAll implements Runnable {
   PushAll(WorkQueue wq,
       ProjectCache projectCache,
       ReplicationQueue rq,
+      ReplicationStateListener stateLog,
       @Assisted @Nullable String urlMatch,
       @Assisted ReplicationFilter filter,
       @Assisted ReplicationState state) {
     this.workQueue = wq;
     this.projectCache = projectCache;
     this.replication = rq;
+    this.stateLog = stateLog;
     this.urlMatch = urlMatch;
     this.filter = filter;
     this.state = state;

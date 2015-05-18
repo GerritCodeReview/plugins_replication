@@ -14,7 +14,9 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import org.slf4j.Logger;
+import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
+
+import com.google.inject.Singleton;
 
 /**
  * Wrapper around a Logger that also logs out the replication state.
@@ -24,30 +26,25 @@ import org.slf4j.Logger;
  * and logs additional information about the replication state to the
  * stderr console.
  */
-public class ReplicationStateLogger implements ReplicationStateListener {
-
-  private final Logger logger;
-
-  public ReplicationStateLogger(Logger logger) {
-    this.logger = logger;
-  }
+@Singleton
+class ReplicationStateLogger implements ReplicationStateListener {
 
   @Override
   public void warn(String msg, ReplicationState... states) {
     stateWriteErr("Warning: " + msg, states);
-    logger.warn(msg);
+    repLog.warn(msg);
   }
 
   @Override
   public void error(String msg, ReplicationState... states) {
     stateWriteErr("Error: " + msg, states);
-    logger.error(msg);
+    repLog.error(msg);
   }
 
   @Override
   public void error(String msg, Throwable t, ReplicationState... states) {
     stateWriteErr("Error: " + msg, states);
-    logger.error(msg, t);
+    repLog.error(msg, t);
   }
 
   private void stateWriteErr(String msg, ReplicationState[] states) {
