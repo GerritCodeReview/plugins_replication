@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6d257942_736dc0fd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2015-05-19T12:36:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edf249e5_afdad962",
+      "revId": "cce6218240077a5c247dd713a9fa1a0ef5a1dc8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0df07ddb_30ef6800",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2015-05-19T01:26:57Z",
       "side": 1,
       "message": "stateLog",
+      "range": {
+        "startLine": 58,
+        "startChar": 41,
+        "endLine": 58,
+        "endChar": 48
+      },
+      "revId": "cce6218240077a5c247dd713a9fa1a0ef5a1dc8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d257942_137a4cb5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2015-05-19T12:36:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0df07ddb_30ef6800",
       "range": {
         "startLine": 58,
         "startChar": 41,
