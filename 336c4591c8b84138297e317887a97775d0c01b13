@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6d4c9914_9bc18b85",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-05-19T04:20:55Z",
+      "side": 1,
+      "message": "nit: wrong order - should be before RemoteSession.",
+      "range": {
+        "startLine": 39,
+        "startChar": 34,
+        "endLine": 39,
+        "endChar": 53
+      },
+      "revId": "336c4591c8b84138297e317887a97775d0c01b13",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8de9cdd1_dc074d4a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 4
