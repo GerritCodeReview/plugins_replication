@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d257942_13ac8c98",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2015-05-19T12:02:06Z",
+      "side": 1,
+      "message": "From the name of this configuration parameter I expected that it will replicate projects that are in state HIDDEN, but with code here it also replicates non-HIDDEN projects which are not visible. Is this intended?",
+      "range": {
+        "startLine": 208,
+        "startChar": 13,
+        "endLine": 208,
+        "endChar": 36
+      },
+      "revId": "9b52b7d30f7f3412df7aa2b83faeb307b6d71616",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
