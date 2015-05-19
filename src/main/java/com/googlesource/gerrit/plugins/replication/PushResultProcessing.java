@@ -211,19 +211,4 @@ public abstract class PushResultProcessing {
       return change;
     }
   }
-
-  public static class NoopProcessing extends PushResultProcessing {
-    @Override
-    void onRefReplicatedToOneNode(String project, String ref, URIish uri,
-        RefPushResult status) {
-    }
-
-    @Override
-    void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {
-    }
-
-    @Override
-    void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {
-    }
-  }
 }
