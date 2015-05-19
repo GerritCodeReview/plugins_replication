@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6d257942_33ec2808",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2015-05-19T07:46:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d4c9914_9bc18b85",
+      "range": {
+        "startLine": 39,
+        "startChar": 34,
+        "endLine": 39,
+        "endChar": 53
+      },
+      "revId": "336c4591c8b84138297e317887a97775d0c01b13",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8de9cdd1_dc074d4a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2015-05-15T14:11:30Z",
       "side": 1,
       "message": "Question: would it make sense to use the SSH timeout values from gerrit.config? Or, possibly a configurable value in replication.config? (I understand this didn\u0027t change and is just rebasing the patch, but is it worth following up in a later patch?)",
+      "range": {
+        "startLine": 468,
+        "startChar": 21,
+        "endLine": 468,
+        "endChar": 39
+      },
+      "revId": "336c4591c8b84138297e317887a97775d0c01b13",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d257942_d3093465",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2015-05-19T07:46:46Z",
+      "side": 1,
+      "message": "I have a patch that extracts configuration from Destination class and splits concerns of maintaining thread queue from general remote configuration. This config option can go there, then instead of injecting Config object or annotated boolean we can use nice class or interface with shiny descriptive methods ;)",
+      "parentUuid": "8de9cdd1_dc074d4a",
       "range": {
         "startLine": 468,
         "startChar": 21,
