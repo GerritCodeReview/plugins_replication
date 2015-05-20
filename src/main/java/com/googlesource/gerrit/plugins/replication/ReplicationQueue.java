@@ -63,8 +63,8 @@ class ReplicationQueue implements
   static final String REPLICATION_LOG_NAME = "replication_log";
   static final Logger repLog = LoggerFactory.getLogger(REPLICATION_LOG_NAME);
   private static final int SSH_REMOTE_TIMEOUT = 120 * 1000;
-  private static final ReplicationStateListener stateLog =
-      new ReplicationStateLogger(repLog);
+
+  private final ReplicationStateListener stateLog;
 
   static String replaceName(String in, String name, boolean keyIsOptional) {
     String key = "${name}";
@@ -85,12 +85,16 @@ class ReplicationQueue implements
   private volatile boolean running;
 
   @Inject
-  ReplicationQueue(final WorkQueue wq, final ReplicationConfig rc,
-      final SchemaFactory<ReviewDb> db, final EventDispatcher dis) {
+  ReplicationQueue(final WorkQueue wq,
+      final ReplicationConfig rc,
+      final SchemaFactory<ReviewDb> db,
+      final EventDispatcher dis,
+      final ReplicationStateListener sl) {
     workQueue = wq;
     database = db;
     dispatcher = dis;
     config = rc;
+    stateLog = sl;
   }
 
   @Override
