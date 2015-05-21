@@ -70,6 +70,30 @@
       "revId": "44b951dd29b915e69b466a484f5efec6534bfd06",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0dea3d20_40cc8eb7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationLogFile.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2015-05-21T17:45:01Z",
+      "side": 1,
+      "message": "I just tested and it\u0027s always false. We can remove it, the real fix in that changes is to not remove appenders when calling unloading the plugin except if the server is shutting down",
+      "parentUuid": "4d1d15f6_bad011fd",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "44b951dd29b915e69b466a484f5efec6534bfd06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
