@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d827552_b2cca009",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1011624
+      },
+      "writtenOn": "2015-05-21T11:13:57Z",
+      "side": 1,
+      "message": "nit: s/fallowed/followed",
+      "revId": "46fb56bff0a6e0aeb6243f5329b3f9bea757a589",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad705150_ed98054f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1011624
+      },
+      "writtenOn": "2015-05-21T11:13:57Z",
+      "side": 1,
+      "message": "nit: s/applicatable/applicable/",
+      "revId": "46fb56bff0a6e0aeb6243f5329b3f9bea757a589",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
