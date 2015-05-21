@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d1d15f6_fa1d2965",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationLogFile.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-05-21T05:33:35Z",
+      "side": 1,
+      "message": "Is this working as expected for you?  When running Gerrit in the debugger I see that `started` is always false every time the plugin is reloaded.",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "44b951dd29b915e69b466a484f5efec6534bfd06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
