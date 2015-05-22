@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4de0b53c_a260fe0c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationLogFile.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-05-22T05:21:40Z",
+      "side": 0,
+      "message": "true was assigned to it. So i don\u0027t understand that the commit message claims that it\u0027s always false. Is the whole start method never called?",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 21
+      },
+      "revId": "e54f9f49b89edadc6d0686dcfa2a7e45226310f5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
