@@ -94,6 +94,30 @@
       "revId": "44b951dd29b915e69b466a484f5efec6534bfd06",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad9cd1d8_2df50dcf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationLogFile.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-05-22T01:01:22Z",
+      "side": 1,
+      "message": "Thanks for confirming.  Removed in [1].\n\n[1] https://gerrit-review.googlesource.com/68060",
+      "parentUuid": "0dea3d20_40cc8eb7",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "44b951dd29b915e69b466a484f5efec6534bfd06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
