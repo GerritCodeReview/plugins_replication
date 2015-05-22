@@ -46,6 +46,30 @@
       "revId": "e54f9f49b89edadc6d0686dcfa2a7e45226310f5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4de0b53c_6250b630",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationLogFile.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-05-22T07:44:50Z",
+      "side": 0,
+      "message": "I guess that it is false because each plugin (re)load is done from a new class loader... which means that a new ReplicationLogFile.class object is instantiated and thus all its (static) members initialized to their default value.",
+      "parentUuid": "ad9cd1d8_0d881122",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 21
+      },
+      "revId": "e54f9f49b89edadc6d0686dcfa2a7e45226310f5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
