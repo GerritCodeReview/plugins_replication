@@ -22,6 +22,30 @@
       "revId": "e54f9f49b89edadc6d0686dcfa2a7e45226310f5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad9cd1d8_0d881122",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationLogFile.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-05-22T05:25:16Z",
+      "side": 0,
+      "message": "start() gets called when the plugin is loaded and then `started` gets set to true.\n\nWhen the plugin is restarted, start() is called again, but this time `started` is false again.\n\nI\u0027m assuming it\u0027s because when the plugin is unloaded the static var is not persisted.",
+      "parentUuid": "4de0b53c_a260fe0c",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 21
+      },
+      "revId": "e54f9f49b89edadc6d0686dcfa2a7e45226310f5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
