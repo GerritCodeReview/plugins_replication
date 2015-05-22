@@ -28,7 +28,6 @@ public class ReplicationLogFile implements LifecycleListener {
 
   private final SystemLog systemLog;
   private final ServerInformation serverInfo;
-  private static boolean started;
 
   @Inject
   public ReplicationLogFile(final SystemLog systemLog,
@@ -39,18 +38,15 @@ public class ReplicationLogFile implements LifecycleListener {
 
   @Override
   public void start() {
-    if (!started) {
-      Logger replicationLogger =
-          LogManager.getLogger(ReplicationQueue.REPLICATION_LOG_NAME);
-      String loggerName = replicationLogger.getName();
-      AsyncAppender asyncAppender = systemLog.createAsyncAppender(
-          loggerName, new PatternLayout("[%d] [%X{"
-              + PushOne.ID_MDC_KEY + "}] %m%n"));
-      replicationLogger.removeAppender(loggerName);
-      replicationLogger.addAppender(asyncAppender);
-      replicationLogger.setAdditivity(false);
-      started = true;
-    }
+    Logger replicationLogger =
+        LogManager.getLogger(ReplicationQueue.REPLICATION_LOG_NAME);
+    String loggerName = replicationLogger.getName();
+    AsyncAppender asyncAppender = systemLog.createAsyncAppender(
+        loggerName, new PatternLayout("[%d] [%X{"
+            + PushOne.ID_MDC_KEY + "}] %m%n"));
+    replicationLogger.removeAppender(loggerName);
+    replicationLogger.addAppender(asyncAppender);
+    replicationLogger.setAdditivity(false);
   }
 
   @Override
