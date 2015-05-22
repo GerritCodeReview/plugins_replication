@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4de0b53c_c2ad429d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-05-22T08:00:07Z",
+      "side": 1,
+      "message": "No. It is a ReplicationLogFile.class object (not an instance of the class).",
+      "range": {
+        "startLine": 14,
+        "startChar": 31,
+        "endLine": 14,
+        "endChar": 56
+      },
+      "revId": "d2f4902543d0b6d3f2acf4a8d6b634b18d568f4b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
