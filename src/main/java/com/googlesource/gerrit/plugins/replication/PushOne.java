@@ -243,7 +243,7 @@ class PushOne implements ProjectRunnable {
     if (!stateMap.isEmpty() && !isRetrying()) {
       for (Map.Entry<String,ReplicationState> entry : stateMap.entries()) {
         entry.getValue().notifyRefReplicated(projectName.get(), entry.getKey(), uri,
-            RefPushResult.FAILED);
+            RefPushResult.FAILED, null);
       }
     }
   }
@@ -541,6 +541,7 @@ class PushOne implements ProjectRunnable {
       throws LockFailureException {
     Set<String> doneRefs = new HashSet<>();
     boolean anyRefFailed = false;
+    RemoteRefUpdate.Status lastRefStatusError = RemoteRefUpdate.Status.OK;
 
     for (RemoteRefUpdate u : refUpdates) {
       RefPushResult pushStatus = RefPushResult.SUCCEEDED;
@@ -566,6 +567,7 @@ class PushOne implements ProjectRunnable {
               u.getRemoteName(), uri, u.getStatus()), logStatesArray);
           pushStatus = RefPushResult.FAILED;
           anyRefFailed = true;
+          lastRefStatusError = u.getStatus();
           break;
 
         case REJECTED_OTHER_REASON:
@@ -583,24 +585,25 @@ class PushOne implements ProjectRunnable {
           }
           pushStatus = RefPushResult.FAILED;
           anyRefFailed = true;
+          lastRefStatusError = u.getStatus();
           break;
       }
 
       for (ReplicationState rs : getStatesByRef(u.getSrcRef())) {
         rs.notifyRefReplicated(projectName.get(), u.getSrcRef(),
-              uri, pushStatus);
+              uri, pushStatus, u.getStatus());
       }
     }
 
     doneRefs.add(ALL_REFS);
     for (ReplicationState rs : getStatesByRef(ALL_REFS)) {
-      rs.notifyRefReplicated(projectName.get(), ALL_REFS,
-          uri, anyRefFailed ? RefPushResult.FAILED : RefPushResult.SUCCEEDED);
+      rs.notifyRefReplicated(projectName.get(), ALL_REFS, uri, anyRefFailed
+          ? RefPushResult.FAILED : RefPushResult.SUCCEEDED, lastRefStatusError);
     }
-    for (Map.Entry<String,ReplicationState> entry : stateMap.entries()) {
+    for (Map.Entry<String, ReplicationState> entry : stateMap.entries()) {
       if (!doneRefs.contains(entry.getKey())) {
-        entry.getValue().notifyRefReplicated(projectName.get(), entry.getKey(), uri,
-            RefPushResult.NOT_ATTEMPTED);
+        entry.getValue().notifyRefReplicated(projectName.get(), entry.getKey(),
+            uri, RefPushResult.NOT_ATTEMPTED, null);
       }
     }
     stateMap.clear();

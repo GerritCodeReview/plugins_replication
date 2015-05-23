@@ -26,6 +26,7 @@ import com.google.gwtorm.server.SchemaFactory;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
+import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class PushResultProcessing {
 
-  abstract void onRefReplicatedToOneNode(String project, String ref, URIish uri, RefPushResult status);
+  abstract void onRefReplicatedToOneNode(String project, String ref, URIish uri, RefPushResult status, RemoteRefUpdate.Status refStatus);
 
   abstract void onRefReplicatedToAllNodes(String project, String ref, int nodesCount);
 
@@ -83,7 +84,7 @@ public abstract class PushResultProcessing {
 
     @Override
     void onRefReplicatedToOneNode(String project, String ref, URIish uri,
-        RefPushResult status) {
+        RefPushResult status, RemoteRefUpdate.Status refStatus) {
       StringBuilder sb = new StringBuilder();
       sb.append("Replicate ");
       sb.append(project);
@@ -107,6 +108,9 @@ public abstract class PushResultProcessing {
           sb.append("UNKNOWN RESULT!");
           break;
       }
+      sb.append(" (");
+      sb.append(refStatus.toString());
+      sb.append(")");
       writeStdOut(sb.toString());
     }
 
@@ -167,9 +171,9 @@ public abstract class PushResultProcessing {
 
     @Override
     void onRefReplicatedToOneNode(String project, String ref, URIish uri,
-        RefPushResult status) {
+        RefPushResult status, RemoteRefUpdate.Status refStatus) {
       RefReplicatedEvent event =
-          new RefReplicatedEvent(project, ref, resolveNodeName(uri), status);
+          new RefReplicatedEvent(project, ref, resolveNodeName(uri), status, refStatus);
       postEvent(project, ref, event);
     }
 

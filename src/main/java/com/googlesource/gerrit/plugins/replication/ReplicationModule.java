@@ -31,6 +31,8 @@ import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
 
+import org.eclipse.jgit.transport.RemoteRefUpdate;
+
 
 class ReplicationModule extends AbstractModule {
   @Override
@@ -64,7 +66,7 @@ class ReplicationModule extends AbstractModule {
     bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
     bind(ReplicationStateListener.class).to(ReplicationStateLogger.class);
 
-    EventTypes.registerClass(new RefReplicatedEvent(null, null, null, SUCCEEDED));
+    EventTypes.registerClass(new RefReplicatedEvent(null, null, null, SUCCEEDED, RemoteRefUpdate.Status.OK));
     EventTypes.registerClass(new RefReplicationDoneEvent(null, null, 0));
   }
 }

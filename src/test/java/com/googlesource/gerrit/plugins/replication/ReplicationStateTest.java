@@ -23,6 +23,7 @@ import static org.junit.Assert.assertTrue;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
+import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.Before;
 import org.junit.Test;
@@ -73,7 +74,7 @@ public class ReplicationStateTest {
 
     //expected events
     pushResultProcessingMock.onRefReplicatedToOneNode("someProject", "someRef",
-        uri, RefPushResult.SUCCEEDED);
+        uri, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock.onRefReplicatedToAllNodes("someProject",
         "someRef", 1);
     pushResultProcessingMock.onAllRefsReplicatedToAllNodes(1);
@@ -83,7 +84,7 @@ public class ReplicationStateTest {
     replicationState.increasePushTaskCount("someProject", "someRef");
     replicationState.markAllPushTasksScheduled();
     replicationState.notifyRefReplicated("someProject", "someRef", uri,
-        RefPushResult.SUCCEEDED);
+        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     verify(pushResultProcessingMock);
   }
 
@@ -96,9 +97,9 @@ public class ReplicationStateTest {
 
     //expected events
     pushResultProcessingMock.onRefReplicatedToOneNode("someProject", "someRef",
-        uri1, RefPushResult.SUCCEEDED);
+        uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock.onRefReplicatedToOneNode("someProject", "someRef",
-        uri2, RefPushResult.FAILED);
+        uri2, RefPushResult.FAILED, RemoteRefUpdate.Status.NON_EXISTING);
     pushResultProcessingMock.onRefReplicatedToAllNodes("someProject",
         "someRef", 2);
     pushResultProcessingMock.onAllRefsReplicatedToAllNodes(2);
@@ -109,9 +110,9 @@ public class ReplicationStateTest {
     replicationState.increasePushTaskCount("someProject", "someRef");
     replicationState.markAllPushTasksScheduled();
     replicationState.notifyRefReplicated("someProject", "someRef", uri1,
-        RefPushResult.SUCCEEDED);
+        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     replicationState.notifyRefReplicated("someProject", "someRef", uri2,
-        RefPushResult.FAILED);
+        RefPushResult.FAILED, RemoteRefUpdate.Status.NON_EXISTING);
     verify(pushResultProcessingMock);
   }
 
@@ -125,15 +126,15 @@ public class ReplicationStateTest {
 
     //expected events
     pushResultProcessingMock.onRefReplicatedToOneNode("someProject", "ref1",
-        uri1, RefPushResult.SUCCEEDED);
+        uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock.onRefReplicatedToOneNode("someProject", "ref1",
-        uri2, RefPushResult.SUCCEEDED);
+        uri2, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock.onRefReplicatedToOneNode("someProject", "ref1",
-        uri3, RefPushResult.SUCCEEDED);
+        uri3, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock.onRefReplicatedToOneNode("someProject", "ref2",
-        uri1, RefPushResult.SUCCEEDED);
+        uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock.onRefReplicatedToOneNode("someProject", "ref2",
-        uri2, RefPushResult.SUCCEEDED);
+        uri2, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock
         .onRefReplicatedToAllNodes("someProject", "ref1", 3);
     pushResultProcessingMock
@@ -149,15 +150,15 @@ public class ReplicationStateTest {
     replicationState.increasePushTaskCount("someProject", "ref2");
     replicationState.markAllPushTasksScheduled();
     replicationState.notifyRefReplicated("someProject", "ref1", uri1,
-        RefPushResult.SUCCEEDED);
+        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     replicationState.notifyRefReplicated("someProject", "ref1", uri2,
-        RefPushResult.SUCCEEDED);
+        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     replicationState.notifyRefReplicated("someProject", "ref1", uri3,
-        RefPushResult.SUCCEEDED);
+        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     replicationState.notifyRefReplicated("someProject", "ref2", uri1,
-        RefPushResult.SUCCEEDED);
+        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     replicationState.notifyRefReplicated("someProject", "ref2", uri2,
-        RefPushResult.SUCCEEDED);
+        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     verify(pushResultProcessingMock);
   }
 
@@ -169,9 +170,9 @@ public class ReplicationStateTest {
 
     //expected events
     pushResultProcessingMock.onRefReplicatedToOneNode("project1", "ref1", uri,
-        RefPushResult.SUCCEEDED);
+        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock.onRefReplicatedToOneNode("project2", "ref2", uri,
-        RefPushResult.SUCCEEDED);
+        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock.onRefReplicatedToAllNodes("project1", "ref1", 1);
     pushResultProcessingMock.onRefReplicatedToAllNodes("project2", "ref2", 1);
     pushResultProcessingMock.onAllRefsReplicatedToAllNodes(2);
@@ -182,9 +183,9 @@ public class ReplicationStateTest {
     replicationState.increasePushTaskCount("project2", "ref2");
     replicationState.markAllPushTasksScheduled();
     replicationState.notifyRefReplicated("project1", "ref1", uri,
-        RefPushResult.SUCCEEDED);
+        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     replicationState.notifyRefReplicated("project2", "ref2", uri,
-        RefPushResult.SUCCEEDED);
+        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     verify(pushResultProcessingMock);
   }
 
@@ -196,9 +197,9 @@ public class ReplicationStateTest {
 
    //expected events
     pushResultProcessingMock.onRefReplicatedToOneNode("someProject", "ref1",
-        uri1, RefPushResult.SUCCEEDED);
+        uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock.onRefReplicatedToOneNode("someProject", "ref2",
-        uri1, RefPushResult.SUCCEEDED);
+        uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock
         .onRefReplicatedToAllNodes("someProject", "ref1", 1);
     pushResultProcessingMock
@@ -210,9 +211,9 @@ public class ReplicationStateTest {
     replicationState.increasePushTaskCount("someProject", "ref1");
     replicationState.increasePushTaskCount("someProject", "ref2");
     replicationState.notifyRefReplicated("someProject", "ref1", uri1,
-        RefPushResult.SUCCEEDED);
+        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     replicationState.notifyRefReplicated("someProject", "ref2", uri1,
-        RefPushResult.SUCCEEDED);
+        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     replicationState.markAllPushTasksScheduled();
     verify(pushResultProcessingMock);
   }
