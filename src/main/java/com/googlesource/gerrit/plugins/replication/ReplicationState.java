@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
+import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
 
 import java.util.concurrent.CountDownLatch;
@@ -69,8 +70,9 @@ public class ReplicationState {
   }
 
   public void notifyRefReplicated(String project, String ref, URIish uri,
-      RefPushResult status) {
-    pushResultProcessing.onRefReplicatedToOneNode(project, ref, uri, status);
+      RefPushResult status, RemoteRefUpdate.Status refUpdateStatus) {
+    pushResultProcessing.onRefReplicatedToOneNode(project, ref, uri, status,
+        refUpdateStatus);
 
     RefReplicationStatus completedRefStatus = null;
     boolean allPushTaksCompleted = false;

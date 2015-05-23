@@ -39,6 +39,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResul
 
 import junit.framework.TestCase;
 
+import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
 
 import java.net.URISyntaxException;
@@ -73,14 +74,15 @@ public class GitUpdateProcessingTest extends TestCase {
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent("someProject", "refs/heads/master", "someHost",
-            RefPushResult.SUCCEEDED);
+            RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     dispatcherMock.postEvent(anyObject(Branch.NameKey.class),
         RefReplicatedEventEquals.eqEvent(expectedEvent));
     expectLastCall().once();
     replay(dispatcherMock);
 
-    gitUpdateProcessing.onRefReplicatedToOneNode("someProject", "refs/heads/master",
-        new URIish("git://someHost/someProject.git"), RefPushResult.SUCCEEDED);
+    gitUpdateProcessing.onRefReplicatedToOneNode("someProject",
+        "refs/heads/master", new URIish("git://someHost/someProject.git"),
+        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     verify(dispatcherMock);
   }
 
@@ -93,7 +95,7 @@ public class GitUpdateProcessingTest extends TestCase {
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent("someProject", "refs/changes/01/1/1", "someHost",
-            RefPushResult.FAILED);
+            RefPushResult.FAILED, RemoteRefUpdate.Status.REJECTED_NONFASTFORWARD);
     dispatcherMock.postEvent(eq(expectedChange),
         RefReplicatedEventEquals.eqEvent(expectedEvent),
         anyObject(ReviewDb.class));
@@ -102,7 +104,7 @@ public class GitUpdateProcessingTest extends TestCase {
 
     gitUpdateProcessing.onRefReplicatedToOneNode("someProject",
         "refs/changes/01/1/1", new URIish("git://someHost/someProject.git"),
-        RefPushResult.FAILED);
+        RefPushResult.FAILED, RemoteRefUpdate.Status.REJECTED_NONFASTFORWARD);
     verify(dispatcherMock);
   }
 
