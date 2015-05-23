@@ -19,19 +19,24 @@ import com.google.gerrit.server.events.RefEvent;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
+import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
+
 public class RefReplicatedEvent extends RefEvent {
   public final String project;
   public final String ref;
   public final String targetNode;
   public final String status;
+  public final Status refStatus;
 
   public RefReplicatedEvent(String project, String ref, String targetNode,
-      RefPushResult status) {
+      RefPushResult status, RemoteRefUpdate.Status refStatus) {
     super("ref-replicated");
     this.project = project;
     this.ref = ref;
     this.targetNode = targetNode;
     this.status = toStatusString(status);
+    this.refStatus = refStatus;
   }
 
   private String toStatusString(RefPushResult status) {
