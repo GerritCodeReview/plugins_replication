@@ -18,6 +18,7 @@ gerrit_plugin(
 java_test(
   name = 'replication_tests',
   srcs = glob(['src/test/java/**/*.java']),
+  labels = ['replication-plugin'],
   deps = [
     ':replication__plugin',
     '//gerrit-common:server',
