@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3962e8ee_c963510c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1012155
+      },
+      "writtenOn": "2015-06-02T13:31:48Z",
+      "side": 1,
+      "message": "\"replication-plugin\" would be of the schema \"$REPONAME-plugin\"\n\nWhy the additional \"-plugin\" suffix?\n\nI\u0027d rather keep the simpler \"$REPONAME\" for labels, since it is ... well ... simpler, and many other projects like:\n* its-base\n* its-bugzilla\n* its-phabricator\n* its-rtc\n* its-storyboard\n* cookbook-plugin (the repo is called \u0027cookbook-plugin\u0027, not \u0027cookbook\u0027)\n\nalready follow that pattern.\n\nSo it\u0027s\n* 2 using \"$REPONAME-plugin\" versus\n* 6 using \"$REPONAME\".",
+      "revId": "6ab5180213998854c1cd8169e4db84dfd7dd8bd7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
