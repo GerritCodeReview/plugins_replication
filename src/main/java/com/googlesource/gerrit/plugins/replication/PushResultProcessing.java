@@ -16,13 +16,9 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.reviewdb.client.Branch;
-import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.client.PatchSet;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.events.RefEvent;
-import com.google.gwtorm.server.OrmException;
-import com.google.gwtorm.server.SchemaFactory;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
@@ -157,12 +153,9 @@ public abstract class PushResultProcessing {
     static final Logger log = LoggerFactory.getLogger(GitUpdateProcessing.class);
 
     private final EventDispatcher dispatcher;
-    private final SchemaFactory<ReviewDb> schema;
 
-    public GitUpdateProcessing(EventDispatcher dispatcher,
-        SchemaFactory<ReviewDb> schema) {
+    public GitUpdateProcessing(EventDispatcher dispatcher) {
       this.dispatcher = dispatcher;
-      this.schema = schema;
     }
 
     @Override
@@ -170,40 +163,28 @@ public abstract class PushResultProcessing {
         RefPushResult status) {
       RefReplicatedEvent event =
           new RefReplicatedEvent(project, ref, resolveNodeName(uri), status);
-      postEvent(project, ref, event);
+      postEvent(project, event);
     }
 
     @Override
     void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {
       RefReplicationDoneEvent event =
           new RefReplicationDoneEvent(project, ref, nodesCount);
-      postEvent(project, ref, event);
+      postEvent(project, event);
     }
 
     @Override
     void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {
     }
 
-    private void postEvent(String project, String ref, RefEvent event) {
-      if (PatchSet.isRef(ref)) {
-        try (ReviewDb db = schema.open()) {
-          Change change = retrieveChange(ref, db);
-          if (change != null) {
-            dispatcher.postEvent(change, event, db);
-          }
-        } catch (Exception e) {
-          log.error("Cannot post event", e);
-        }
+    private void postEvent(String projectName, RefEvent event) {
+      Project.NameKey project = Project.NameKey.parse(projectName);
+      if (PatchSet.isRef(event.getRefName())) {
+        dispatcher.postEvent(project, event);
       } else {
-        Branch.NameKey branch = new Branch.NameKey(Project.NameKey.parse(project), ref);
+        Branch.NameKey branch = new Branch.NameKey(project, event.getRefName());
         dispatcher.postEvent(branch, event);
       }
-    }
-
-    private Change retrieveChange(String ref, ReviewDb db) throws OrmException {
-      PatchSet.Id id = PatchSet.Id.fromRef(ref);
-      Change change = db.changes().get(id.getParentKey());
-      return change;
     }
   }
 }
