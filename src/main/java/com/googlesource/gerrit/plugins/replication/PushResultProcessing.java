@@ -16,13 +16,9 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.reviewdb.client.Branch;
-import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.client.PatchSet;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.events.RefEvent;
-import com.google.gwtorm.server.OrmException;
-import com.google.gwtorm.server.SchemaFactory;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
@@ -157,12 +153,9 @@ public abstract class PushResultProcessing {
     static final Logger log = LoggerFactory.getLogger(GitUpdateProcessing.class);
 
     private final EventDispatcher dispatcher;
-    private final SchemaFactory<ReviewDb> schema;
 
-    public GitUpdateProcessing(EventDispatcher dispatcher,
-        SchemaFactory<ReviewDb> schema) {
+    public GitUpdateProcessing(EventDispatcher dispatcher) {
       this.dispatcher = dispatcher;
-      this.schema = schema;
     }
 
     @Override
@@ -184,31 +177,14 @@ public abstract class PushResultProcessing {
     void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {
     }
 
-    private void postEvent(String project, String ref, RefEvent event) {
+    private void postEvent(String projectName, String ref, RefEvent event) {
+      Project.NameKey project = Project.NameKey.parse(projectName);
       if (PatchSet.isRef(ref)) {
-        try {
-          ReviewDb db = schema.open();
-          try {
-            Change change = retrieveChange(ref, db);
-            if (change != null) {
-              dispatcher.postEvent(change, event, db);
-            }
-          } finally {
-            db.close();
-          }
-        } catch (Exception e) {
-          log.error("Cannot post event", e);
-        }
+        dispatcher.postEvent(project, event);
       } else {
-        Branch.NameKey branch = new Branch.NameKey(Project.NameKey.parse(project), ref);
+        Branch.NameKey branch = new Branch.NameKey(project, ref);
         dispatcher.postEvent(branch, event);
       }
-    }
-
-    private Change retrieveChange(String ref, ReviewDb db) throws OrmException {
-      PatchSet.Id id = PatchSet.Id.fromRef(ref);
-      Change change = db.changes().get(id.getParentKey());
-      return change;
     }
   }
 }
