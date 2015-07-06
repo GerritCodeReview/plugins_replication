@@ -93,7 +93,7 @@ OPTIONS
 
 `--url <PATTERN>`
 :	Replicate only to replication destinations whose URL contains
-	the substring <PATTERN>.  This can be useful to replicate
+	the substring `PATTERN`.  This can be useful to replicate
 	only to a previously down node, which has been brought back
 	online.
 
