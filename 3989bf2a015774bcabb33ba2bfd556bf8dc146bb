@@ -22,6 +22,30 @@
       "revId": "3989bf2a015774bcabb33ba2bfd556bf8dc146bb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5365bdc2_5aa1f5ac",
+        "filename": "src/main/resources/Documentation/cmd-list.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-07-06T09:07:52Z",
+      "side": 1,
+      "message": "Done.  And fixed for the existing one in [1].\n\n[1] https://gerrit-review.googlesource.com/#/c/69331/",
+      "parentUuid": "93149589_24077256",
+      "range": {
+        "startLine": 36,
+        "startChar": 5,
+        "endLine": 36,
+        "endChar": 25
+      },
+      "revId": "3989bf2a015774bcabb33ba2bfd556bf8dc146bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
