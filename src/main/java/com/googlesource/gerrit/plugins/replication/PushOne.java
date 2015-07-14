@@ -22,8 +22,10 @@ import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.Nullable;
+import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.restapi.AuthException;
+import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
@@ -415,6 +417,24 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       try {
         Ref head = git.exactRef(Constants.HEAD);
         if (replicationQueue.createProject(projectName, head != null ? head.getName() : null)) {
+          NewProjectCreatedListener.Event event =
+              new NewProjectCreatedListener.Event() {
+                @Override
+                public String getProjectName() {
+                  return projectName.get();
+                }
+
+                @Override
+                public String getHeadName() {
+                  return head != null ? head.getTarget().getName() : null;
+                }
+
+                @Override
+                public NotifyHandling getNotify() {
+                  return NotifyHandling.NONE;
+                }
+              };
+          replicationQueue.onNewProjectCreated(event);
           repLog.warn("Missing repository created; retry replication to " + uri);
           pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
         } else {
