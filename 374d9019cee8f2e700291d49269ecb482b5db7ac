@@ -46,6 +46,30 @@
       "revId": "374d9019cee8f2e700291d49269ecb482b5db7ac",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcf4a9d_55ebecea",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2015-07-24T11:30:44Z",
+      "side": 1,
+      "message": "Are you saying that we must each time create a new instance of SshSessionFactory and the instance cannot be reused?",
+      "parentUuid": "cdcf4a9d_95d86467",
+      "range": {
+        "startLine": 95,
+        "startChar": 12,
+        "endLine": 95,
+        "endChar": 39
+      },
+      "revId": "374d9019cee8f2e700291d49269ecb482b5db7ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
