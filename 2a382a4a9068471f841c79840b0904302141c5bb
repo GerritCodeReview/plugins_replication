@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "edd40e30_b6bc8807",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2015-07-24T08:28:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edd40e30_f6b20034",
+      "range": {
+        "startLine": 12,
+        "startChar": 21,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "revId": "2a382a4a9068471f841c79840b0904302141c5bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdcf4a9d_f5b2f833",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "cdcf4a9d_75c7088b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2015-07-24T08:28:32Z",
+      "side": 1,
+      "message": "I mean here SSH KnownHosts respository",
+      "parentUuid": "cdcf4a9d_f5b2f833",
+      "range": {
+        "startLine": 20,
+        "startChar": 31,
+        "endLine": 20,
+        "endChar": 35
+      },
+      "revId": "2a382a4a9068471f841c79840b0904302141c5bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdcf4a9d_d5b7fc21",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
         "patchSetId": 6
@@ -59,6 +107,30 @@
       "writtenOn": "2015-07-24T07:25:28Z",
       "side": 1,
       "message": "Why are you not binding SshSessionFactory with a provider instead?\n\n  bind(SshSessionFactory.class).toProvider(SshSessionFactoryProvider.class)",
+      "range": {
+        "startLine": 67,
+        "startChar": 1,
+        "endLine": 68,
+        "endChar": 51
+      },
+      "revId": "2a382a4a9068471f841c79840b0904302141c5bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcf4a9d_35d19046",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2015-07-24T08:28:32Z",
+      "side": 1,
+      "message": "IMO this approach is less error prone for the end consumers. It is more descriptive in a way that this will always provide a new instance. When simple SshSessionFactory binding doesn\u0027t tell you much and from the Guice error message you won\u0027t figure out that you need to bind it to a provider.",
+      "parentUuid": "cdcf4a9d_d5b7fc21",
       "range": {
         "startLine": 67,
         "startChar": 1,
