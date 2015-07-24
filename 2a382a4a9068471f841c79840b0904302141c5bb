@@ -96,6 +96,23 @@
     },
     {
       "key": {
+        "uuid": "cdcf4a9d_f5d9d86d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-07-24T08:51:37Z",
+      "side": 1,
+      "message": "nit: unrelated code reformatting",
+      "revId": "2a382a4a9068471f841c79840b0904302141c5bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdcf4a9d_d5b7fc21",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
         "patchSetId": 6
@@ -131,6 +148,30 @@
       "side": 1,
       "message": "IMO this approach is less error prone for the end consumers. It is more descriptive in a way that this will always provide a new instance. When simple SshSessionFactory binding doesn\u0027t tell you much and from the Guice error message you won\u0027t figure out that you need to bind it to a provider.",
       "parentUuid": "cdcf4a9d_d5b7fc21",
+      "range": {
+        "startLine": 67,
+        "startChar": 1,
+        "endLine": 68,
+        "endChar": 51
+      },
+      "revId": "2a382a4a9068471f841c79840b0904302141c5bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "edd40e30_56c41484",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-07-24T08:51:37Z",
+      "side": 1,
+      "message": "Isn\u0027t your ReplicationSshSessionFactory interface with its one and only \"create()\" method just another provider interface? It is neither different not better than the standard guice Provider interface with its get() method. Unless we have a really good reason not to do so, we should stick to the standards.",
+      "parentUuid": "cdcf4a9d_35d19046",
       "range": {
         "startLine": 67,
         "startChar": 1,
