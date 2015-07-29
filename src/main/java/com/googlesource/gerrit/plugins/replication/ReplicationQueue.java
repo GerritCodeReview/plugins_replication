@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.auto.value.AutoValue;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Queues;
+import com.google.gerrit.common.UsedAt;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
@@ -139,15 +140,30 @@ public class ReplicationQueue
     }
 
     for (Destination cfg : destinations.get().getAll(FilterType.ALL)) {
-      if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
-        for (URIish uri : cfg.getURIs(project, urlMatch)) {
-          replicationTasksStorage.create(
-              new ReplicateRefUpdate(project.get(), refName, uri, cfg.getRemoteConfigName()));
-          cfg.schedule(project, refName, uri, state, now);
-        }
-      } else {
-        repLog.debug("Skipping ref {} on project {}", refName, project.get());
+      pushReference(cfg, project, urlMatch, refName, state, now);
+    }
+  }
+
+  @UsedAt(UsedAt.Project.COLLABNET)
+  public void pushReference(Destination cfg, Project.NameKey project, String refName) {
+    pushReference(cfg, project, null, refName, null, true);
+  }
+
+  private void pushReference(
+      Destination cfg,
+      Project.NameKey project,
+      String urlMatch,
+      String refName,
+      ReplicationState state,
+      boolean now) {
+    if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
+      for (URIish uri : cfg.getURIs(project, urlMatch)) {
+        replicationTasksStorage.create(
+            new ReplicateRefUpdate(project.get(), refName, uri, cfg.getRemoteConfigName()));
+        cfg.schedule(project, refName, uri, state, now);
       }
+    } else {
+      repLog.debug("Skipping ref {} on project {}", refName, project.get());
     }
   }
 
