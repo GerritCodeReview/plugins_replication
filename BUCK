@@ -9,9 +9,11 @@ gerrit_plugin(
     'Gerrit-Module: com.googlesource.gerrit.plugins.replication.ReplicationModule',
     'Gerrit-SshModule: com.googlesource.gerrit.plugins.replication.SshModule'
   ],
+  deps = [
+    '//lib/commons:io',
+  ],
   provided_deps = [
     '//lib:gson',
-    '//lib/commons:io',
     '//lib/log:log4j'
   ],
 )
