@@ -35,11 +35,15 @@ import org.eclipse.jgit.util.FS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Singleton
@@ -55,6 +59,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private final GitRepositoryManager gitRepositoryManager;
   private final GroupBackend groupBackend;
   private final FileBasedConfig config;
+  private static Map<RemoteConfig, FileBasedConfig> configMap = new HashMap<>();
   private final ReplicationStateListener stateLog;
 
   @Inject
@@ -115,25 +120,32 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     }
     return FluentIterable.from(destinations).filter(filter).toList();
   }
+
+  private static boolean loadConfigFile(FileBasedConfig cfg)
+      throws ConfigInvalidException, IOException {
+    if (!cfg.getFile().exists()) {
+      log.warn("Config file " + cfg.getFile() + " does not exist; not replicating");
+    } else if (cfg.getFile().length() == 0) {
+      log.info("Config file " + cfg.getFile() + " is empty; not replicating");
+    } else {
+      try {
+        cfg.load();
+        return true;
+      } catch (ConfigInvalidException e) {
+        throw new ConfigInvalidException(String.format(
+            "Config file %s is invalid: %s", cfg.getFile(), e.getMessage()), e);
+      } catch (IOException e) {
+        throw new IOException(String.format("Cannot read %s: %s", cfg.getFile(),
+            e.getMessage()), e);
+      }
+    }
+    return false;
+  }
+
   private List<Destination> allDestinations()
       throws ConfigInvalidException, IOException {
-    if (!config.getFile().exists()) {
-      log.warn("Config file " + config.getFile() + " does not exist; not replicating");
+    if (!loadConfigFile(config)) {
       return Collections.emptyList();
-    }
-    if (config.getFile().length() == 0) {
-      log.info("Config file " + config.getFile() + " is empty; not replicating");
-      return Collections.emptyList();
-    }
-
-    try {
-      config.load();
-    } catch (ConfigInvalidException e) {
-      throw new ConfigInvalidException(String.format(
-          "Config file %s is invalid: %s", config.getFile(), e.getMessage()), e);
-    } catch (IOException e) {
-      throw new IOException(String.format("Cannot read %s: %s", config.getFile(),
-          e.getMessage()), e);
     }
 
     replicateAllOnPluginStart =
@@ -161,7 +173,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
       }
 
       Destination destination =
-          new Destination(injector, c, config, replicationUserFactory,
+          new Destination(injector, c, configMap.get(c), replicationUserFactory,
               pluginUser, gitRepositoryManager, groupBackend, stateLog);
 
       if (!destination.isSingleProjectMatch()) {
@@ -195,18 +207,53 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     return defaultForceUpdate;
   }
 
+  private static List<RemoteConfig> parseIncludedRemotes(FileBasedConfig cfg)
+     throws ConfigInvalidException, IOException {
+    String[] subConfigFiles = cfg.getStringList("include", "remote_file", "file");
+    List<RemoteConfig> result = new ArrayList<>();
+    for (String fileName : subConfigFiles) {
+      File configFile = new File(cfg.getFile().getParent(), fileName);
+      FileBasedConfig subConfig = new FileBasedConfig(configFile, FS.DETECTED);
+      if (!loadConfigFile(subConfig)) {
+        continue;
+      }
+
+      Set<String> names = subConfig.getSubsections("remote");
+      Set<String> supers = cfg.getSubsections("remote");
+      for (String name : names) {
+        try {
+          if (!supers.contains(name)) {
+            RemoteConfig rc = new RemoteConfig(subConfig, name);
+            configMap.put(rc, subConfig);
+            result.add(rc);
+          }
+        } catch (URISyntaxException e) {
+          throw new ConfigInvalidException(String.format(
+              "remote %s has invalid URL in %s", name, configFile));
+        }
+      }
+    }
+
+    return result;
+  }
+
   private static List<RemoteConfig> allRemotes(FileBasedConfig cfg)
-      throws ConfigInvalidException {
+      throws ConfigInvalidException, IOException {
     Set<String> names = cfg.getSubsections("remote");
+    List<RemoteConfig> included = parseIncludedRemotes(cfg);
     List<RemoteConfig> result = Lists.newArrayListWithCapacity(names.size());
     for (String name : names) {
       try {
-        result.add(new RemoteConfig(cfg, name));
+        RemoteConfig rc = new RemoteConfig(cfg, name);
+        configMap.put(rc, cfg);
+        result.add(rc);
       } catch (URISyntaxException e) {
         throw new ConfigInvalidException(String.format(
             "remote %s has invalid URL in %s", name, cfg.getFile()));
       }
     }
+
+    result.addAll(included);
     return result;
   }
 
