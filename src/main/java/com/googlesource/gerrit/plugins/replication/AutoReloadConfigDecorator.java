@@ -13,7 +13,6 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.gerrit.common.FileUtil;
 import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.config.SitePaths;
@@ -35,7 +34,6 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private static final Logger log = LoggerFactory
       .getLogger(AutoReloadConfigDecorator.class);
   private ReplicationFileBasedConfig currentConfig;
-  private long currentConfigTs;
 
   private final Injector injector;
   private final SitePaths site;
@@ -60,13 +58,8 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     this.gitRepositoryManager = grm;
     this.groupBackend = gb;
     this.currentConfig = loadConfig();
-    this.currentConfigTs = getLastModified(currentConfig);
     this.workQueue = workQueue;
     this.stateLog = stateLog;
-  }
-
-  private static long getLastModified(ReplicationFileBasedConfig cfg) {
-    return FileUtil.lastModified(cfg.getCfgPath());
   }
 
   private ReplicationFileBasedConfig loadConfig()
@@ -89,14 +82,12 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private void reloadIfNeeded() {
     try {
       if (isAutoReload()) {
-        long lastModified = getLastModified(currentConfig);
-        if (lastModified > currentConfigTs) {
+        if (currentConfig.isConfigChanged()) {
           ReplicationFileBasedConfig newConfig = loadConfig();
           newConfig.startup(workQueue);
           int discarded = currentConfig.shutdown();
 
           this.currentConfig = newConfig;
-          this.currentConfigTs = lastModified;
           log.info("Configuration reloaded: "
             + currentConfig.getDestinations(FilterType.ALL).size() + " destinations, "
             + discarded + " replication events discarded");
