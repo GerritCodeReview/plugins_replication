@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.base.Strings;
 import com.google.gerrit.common.data.GlobalCapability;
 import com.google.gerrit.extensions.annotations.RequiresCapability;
 import com.google.gerrit.sshd.CommandMetaData;
@@ -21,7 +22,6 @@ import com.google.gerrit.sshd.SshCommand;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import com.google.common.base.Strings;
 import com.google.inject.Inject;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
