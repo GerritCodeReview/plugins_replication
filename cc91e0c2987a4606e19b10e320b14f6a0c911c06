@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c4c569ce_25836e13",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-08-27T10:09:44Z",
+      "side": 1,
+      "message": "OK, you are right",
+      "parentUuid": "04d4e17b_47582ecf",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 11
+      },
+      "revId": "cc91e0c2987a4606e19b10e320b14f6a0c911c06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "245f25fb_b82f79c2",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 1
@@ -96,6 +120,24 @@
       "side": 1,
       "message": "Actually, this return is needed to prevent it from executing the code at line 259 onward in case of an error.\n\nSame for the return on line 249.",
       "parentUuid": "24d1e58c_a863bb90",
+      "revId": "cc91e0c2987a4606e19b10e320b14f6a0c911c06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4c569ce_c58d3a3e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-08-27T10:09:44Z",
+      "side": 1,
+      "message": "My mistake",
+      "parentUuid": "24d1e58c_8868776c",
       "revId": "cc91e0c2987a4606e19b10e320b14f6a0c911c06",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
