@@ -260,18 +260,13 @@ class ReplicationQueue implements
   }
 
   private static void createLocally(URIish uri, String head) {
-    try {
-      Repository repo = new FileRepository(uri.getPath());
-      try {
-        repo.create(true /* bare */);
+    try (Repository repo = new FileRepository(uri.getPath())) {
+      repo.create(true /* bare */);
 
-        if (head != null) {
-          RefUpdate u = repo.updateRef(Constants.HEAD);
-          u.disableRefLog();
-          u.link(head);
-        }
-      } finally {
-        repo.close();
+      if (head != null) {
+        RefUpdate u = repo.updateRef(Constants.HEAD);
+        u.disableRefLog();
+        u.link(head);
       }
     } catch (IOException e) {
       repLog.error(String.format(
@@ -389,15 +384,10 @@ class ReplicationQueue implements
   }
 
   private static void updateHeadLocally(URIish uri, String newHead) {
-    try {
-      Repository repo = new FileRepository(uri.getPath());
-      try {
-        if (newHead != null) {
-          RefUpdate u = repo.updateRef(Constants.HEAD);
-          u.link(newHead);
-        }
-      } finally {
-        repo.close();
+    try (Repository repo = new FileRepository(uri.getPath())) {
+      if (newHead != null) {
+        RefUpdate u = repo.updateRef(Constants.HEAD);
+        u.link(newHead);
       }
     } catch (IOException e) {
       repLog.error(

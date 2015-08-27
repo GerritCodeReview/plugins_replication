@@ -235,27 +235,23 @@ class Destination {
         e = pending.get(uri);
       }
       if (e == null) {
-        Repository git;
-        try {
-          git = gitManager.openRepository(project);
-        } catch (IOException err) {
-          stateLog.error(String.format(
-              "source project %s not available", project), err, state);
-          return;
-        }
-        try {
-          Ref head = git.getRef(Constants.HEAD);
-          if (head != null
-              && head.isSymbolic()
-              && RefNames.REFS_CONFIG.equals(head.getLeaf().getName())) {
+        try (Repository git = gitManager.openRepository(project)) {
+          try {
+            Ref head = git.getRef(Constants.HEAD);
+            if (head != null
+                && head.isSymbolic()
+                && RefNames.REFS_CONFIG.equals(head.getLeaf().getName())) {
+              return;
+            }
+          } catch (IOException err) {
+            stateLog.error(String.format(
+                "cannot check type of project %s", project), err, state);
             return;
           }
         } catch (IOException err) {
           stateLog.error(String.format(
-              "cannot check type of project %s", project), err, state);
+              "source project %s not available", project), err, state);
           return;
-        } finally {
-          git.close();
         }
       }
     }
