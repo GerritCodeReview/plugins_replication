@@ -22,6 +22,30 @@
       "revId": "679301a1b49245c78ca1bce0b62c9fa9e6b32eea",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4c569ce_657d668b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-08-27T10:11:44Z",
+      "side": 0,
+      "message": "\u003e If an exception is thrown inside this try block, does it get caught at line 199?\n\nYes",
+      "parentUuid": "04d4e17b_e7bfa246",
+      "range": {
+        "startLine": 191,
+        "startChar": 10,
+        "endLine": 198,
+        "endChar": 11
+      },
+      "revId": "679301a1b49245c78ca1bce0b62c9fa9e6b32eea",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
