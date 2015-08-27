@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4c569ce_85934262",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-08-27T09:58:41Z",
+      "side": 1,
+      "message": "move to the outer try statement and remove the return statement",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 11
+      },
+      "revId": "cc91e0c2987a4606e19b10e320b14f6a0c911c06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "245f25fb_b82f79c2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2015-08-27T09:58:41Z",
+      "side": 1,
+      "message": "not necessary",
+      "revId": "cc91e0c2987a4606e19b10e320b14f6a0c911c06",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
