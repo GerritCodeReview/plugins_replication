@@ -425,18 +425,12 @@ class PushOne implements ProjectRunnable {
         local = n;
       }
 
-      ReviewDb db;
-      try {
-        db = schema.open();
+      try (ReviewDb db = schema.open()) {
+        local = new VisibleRefFilter(tagCache, changeCache, git, pc, db, true)
+            .filter(local, true);
       } catch (OrmException e) {
         stateLog.error("Cannot read database to replicate to " + projectName, e, getStatesAsArray());
         return Collections.emptyList();
-      }
-      try {
-        local = new VisibleRefFilter(tagCache, changeCache, git, pc, db, true)
-            .filter(local, true);
-      } finally {
-        db.close();
       }
     }
 

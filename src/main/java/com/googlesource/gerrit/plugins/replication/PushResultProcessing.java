@@ -186,15 +186,10 @@ public abstract class PushResultProcessing {
 
     private void postEvent(String project, String ref, RefEvent event) {
       if (PatchSet.isRef(ref)) {
-        try {
-          ReviewDb db = schema.open();
-          try {
-            Change change = retrieveChange(ref, db);
-            if (change != null) {
-              dispatcher.postEvent(change, event, db);
-            }
-          } finally {
-            db.close();
+        try (ReviewDb db = schema.open()) {
+          Change change = retrieveChange(ref, db);
+          if (change != null) {
+            dispatcher.postEvent(change, event, db);
           }
         } catch (Exception e) {
           log.error("Cannot post event", e);
