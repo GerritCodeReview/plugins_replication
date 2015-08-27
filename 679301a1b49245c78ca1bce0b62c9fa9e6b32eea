@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04d4e17b_e7bfa246",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-08-27T10:09:30Z",
+      "side": 0,
+      "message": "If an exception is thrown inside this try block, does it get caught at line 199?\n\nIf not, my commit is changing the behaviour.",
+      "range": {
+        "startLine": 191,
+        "startChar": 10,
+        "endLine": 198,
+        "endChar": 11
+      },
+      "revId": "679301a1b49245c78ca1bce0b62c9fa9e6b32eea",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
