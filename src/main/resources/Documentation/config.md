@@ -77,6 +77,14 @@ gerrit.defaultForceUpdate
 :	If true, the default push refspec will be set to use forced
 	update to the remote when no refspec is given.  By default, false.
 
+gerrit.sshCommandTimeout
+:	Timeout for SSH command execution. If 0, there is no timeout and
+	the client waits indefinitely. If not set, defaults to 30 seconds.
+
+gerrit.sshConnectionTimeout
+:	Timeout for SSH connections. If 0, there is no timeout and
+        the client waits indefinitely. If not set, defaults to 30 seconds.
+
 replication.lockErrorMaxRetries
 :	Number of times to retry a replication operation if a lock
 	error is detected.

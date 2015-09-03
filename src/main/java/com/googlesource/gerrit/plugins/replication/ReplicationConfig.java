@@ -35,4 +35,8 @@ public interface ReplicationConfig {
   int shutdown();
 
   void startup(WorkQueue workQueue);
+
+  int getSshConnectionTimeout();
+
+  int getSshCommandTimeout();
 }
