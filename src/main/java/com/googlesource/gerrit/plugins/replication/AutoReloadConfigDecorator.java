@@ -110,4 +110,14 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   public synchronized void startup(WorkQueue workQueue) {
     currentConfig.startup(workQueue);
   }
+
+  @Override
+  public synchronized int getSshConnectionTimeout() {
+    return currentConfig.getSshConnectionTimeout();
+  }
+
+  @Override
+  public synchronized int getSshCommandTimeout() {
+    return currentConfig.getSshCommandTimeout();
+  }
 }

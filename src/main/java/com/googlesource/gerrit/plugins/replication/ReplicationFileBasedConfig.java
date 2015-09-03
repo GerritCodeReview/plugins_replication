@@ -13,10 +13,13 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
+import static java.util.concurrent.TimeUnit.MINUTES;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.google.gerrit.server.config.ConfigUtil;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
@@ -45,6 +48,8 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private Path cfgPath;
   private boolean replicateAllOnPluginStart;
   private boolean defaultForceUpdate;
+  private int sshCommandTimeout;
+  private int sshConnectionTimeout;
   private final FileBasedConfig config;
 
   @Inject
@@ -103,6 +108,13 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     replicateAllOnPluginStart = config.getBoolean("gerrit", "replicateOnStartup", true);
 
     defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);
+
+    sshCommandTimeout =
+        (int) ConfigUtil.getTimeUnit(config, "gerrit", null, "sshCommandTimeout", 0, SECONDS);
+    sshConnectionTimeout =
+        (int)
+            SECONDS.toMillis(
+                ConfigUtil.getTimeUnit(config, "gerrit", null, "sshConnectionTimeout", 2, MINUTES));
 
     ImmutableList.Builder<Destination> dest = ImmutableList.builder();
     for (RemoteConfig c : allRemotes(config)) {
@@ -202,5 +214,15 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     for (Destination cfg : destinations) {
       cfg.start(workQueue);
     }
+  }
+
+  @Override
+  public int getSshConnectionTimeout() {
+    return sshConnectionTimeout;
+  }
+
+  @Override
+  public int getSshCommandTimeout() {
+    return sshCommandTimeout;
   }
 }
