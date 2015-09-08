@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "04fea26f_5231941f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2015-09-08T07:56:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24f6469e_4b53a5dd",
+      "revId": "c58ab1cfdf502bdf73a8b13b74f14d850233b4b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44fb3a86_6c5cbbdf",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-08T05:46:48Z",
       "side": 1,
       "message": "nit: wrap this long line",
+      "revId": "c58ab1cfdf502bdf73a8b13b74f14d850233b4b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04fea26f_b2456080",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2015-09-08T07:56:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44fb3a86_6c5cbbdf",
       "revId": "c58ab1cfdf502bdf73a8b13b74f14d850233b4b3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "04fea26f_9242dc73",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2015-09-08T07:56:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44fb3a86_4c61ff95",
+      "revId": "c58ab1cfdf502bdf73a8b13b74f14d850233b4b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24f6469e_ab47a915",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/GitUpdateProcessingTest.java",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2015-09-08T05:46:48Z",
       "side": 1,
       "message": "long line",
+      "revId": "c58ab1cfdf502bdf73a8b13b74f14d850233b4b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04fea26f_f23fe8e9",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/GitUpdateProcessingTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2015-09-08T07:56:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24f6469e_ab47a915",
       "revId": "c58ab1cfdf502bdf73a8b13b74f14d850233b4b3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
