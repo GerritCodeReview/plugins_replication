@@ -14,51 +14,19 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.systemstatus.ServerInformation;
+import com.google.gerrit.server.util.PluginLogFile;
 import com.google.gerrit.server.util.SystemLog;
 import com.google.inject.Inject;
 
-import org.apache.log4j.AsyncAppender;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 
-public class ReplicationLogFile implements LifecycleListener {
-
-  private final SystemLog systemLog;
-  private final ServerInformation serverInfo;
+public class ReplicationLogFile extends PluginLogFile {
 
   @Inject
-  public ReplicationLogFile(final SystemLog systemLog,
+  public ReplicationLogFile(SystemLog systemLog,
       ServerInformation serverInfo) {
-    this.systemLog = systemLog;
-    this.serverInfo = serverInfo;
-  }
-
-  @Override
-  public void start() {
-    Logger replicationLogger =
-        LogManager.getLogger(ReplicationQueue.REPLICATION_LOG_NAME);
-    String loggerName = replicationLogger.getName();
-    AsyncAppender asyncAppender = systemLog.createAsyncAppender(
-        loggerName, new PatternLayout("[%d] [%X{"
-            + PushOne.ID_MDC_KEY + "}] %m%n"));
-    replicationLogger.removeAppender(loggerName);
-    replicationLogger.addAppender(asyncAppender);
-    replicationLogger.setAdditivity(false);
-  }
-
-  @Override
-  public void stop() {
-    // stop is called when plugin is unloaded or when the server shutdown.
-    // Only clean up when the server is shutting down to prevent issue when a
-    // plugin is reloaded. The issue is that gerrit load the new plugin and then
-    // unload the old one so because loggers are static, the unload of the old
-    // plugin would remove the appenders just created by the new plugin.
-    if (serverInfo.getState() == ServerInformation.State.SHUTDOWN) {
-      LogManager.getLogger(ReplicationQueue.repLog.getName())
-          .removeAllAppenders();
-    }
+    super(systemLog, serverInfo, ReplicationQueue.REPLICATION_LOG_NAME,
+        new PatternLayout("[%d] [%X{" + PushOne.ID_MDC_KEY + "}] %m%n"));
   }
 }
