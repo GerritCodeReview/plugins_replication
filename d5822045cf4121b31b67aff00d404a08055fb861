@@ -46,6 +46,30 @@
       "revId": "d5822045cf4121b31b67aff00d404a08055fb861",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78df0724_5e033550",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-09-29T04:19:16Z",
+      "side": 1,
+      "message": "nonVisible would be better.",
+      "parentUuid": "4d019a3c_31017042",
+      "range": {
+        "startLine": 17,
+        "startChar": 17,
+        "endLine": 17,
+        "endChar": 44
+      },
+      "revId": "d5822045cf4121b31b67aff00d404a08055fb861",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
