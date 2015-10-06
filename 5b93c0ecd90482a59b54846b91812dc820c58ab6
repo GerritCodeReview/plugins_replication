@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bc1bc6c_daf965b5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2015-10-06T13:13:55Z",
+      "side": 1,
+      "message": "Don\u0027t know, but this looks strange to me. If we have found that event.getRefName() is not a ref, why do we create a Branch.NameKey for it?",
+      "revId": "5b93c0ecd90482a59b54846b91812dc820c58ab6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
