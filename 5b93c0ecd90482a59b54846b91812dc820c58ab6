@@ -16,6 +16,24 @@
       "revId": "5b93c0ecd90482a59b54846b91812dc820c58ab6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2559ed73_3af781c0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-10-08T05:51:51Z",
+      "side": 1,
+      "message": "Good question, but this is not introduced by this change.  It\u0027s already like that in the original version since [1] which was added by Hugo.\n\nIf this should be fixed, I would prefer to do it in a follow-up.\n\n[1] Ic2163e0f28678cb484e4dba2989d08b93e3729b6",
+      "parentUuid": "2bc1bc6c_daf965b5",
+      "revId": "5b93c0ecd90482a59b54846b91812dc820c58ab6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
