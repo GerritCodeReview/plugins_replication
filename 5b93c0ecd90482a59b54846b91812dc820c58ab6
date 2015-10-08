@@ -70,6 +70,24 @@
       "revId": "5b93c0ecd90482a59b54846b91812dc820c58ab6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "853e19eb_fd0b4761",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-10-08T08:53:56Z",
+      "side": 1,
+      "message": "I renamed it in the patchset-change-ref topic.\n\nhttps://gerrit-review.googlesource.com/#/q/status:open+topic:patchset-change-ref",
+      "parentUuid": "2559ed73_daf125c4",
+      "revId": "5b93c0ecd90482a59b54846b91812dc820c58ab6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
