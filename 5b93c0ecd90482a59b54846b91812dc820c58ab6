@@ -52,6 +52,24 @@
       "revId": "5b93c0ecd90482a59b54846b91812dc820c58ab6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2559ed73_daf125c4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-10-08T07:35:47Z",
+      "side": 1,
+      "message": "Then it looks like it\u0027s just a badly named method.",
+      "parentUuid": "a5979d01_bed6391e",
+      "revId": "5b93c0ecd90482a59b54846b91812dc820c58ab6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
