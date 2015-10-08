@@ -190,7 +190,7 @@ public abstract class PushResultProcessing {
     }
 
     private void postEvent(String project, String ref, RefEvent event) {
-      if (PatchSet.isRef(ref)) {
+      if (PatchSet.isChangeRef(ref)) {
         try (ReviewDb db = schema.open()) {
           Change change = retrieveChange(ref, db);
           if (change != null) {
