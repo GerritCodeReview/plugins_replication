@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "45c9819b_d345d483",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2015-10-08T11:26:48Z",
+      "side": 1,
+      "message": "How does this work?\n\n1. We do create a RefReplicatedEvent here, which is a ProjectEvent\n2. in line 188 below we invoke EventDispatcher.postEvent(Project.NameKey projectName, ProjectEvent event) and provide the RefReplicatedEvent\n3. The implementation of this method in EventSourceImpl calls fireEvent(Project.NameKey project, Event event) which calls isVisibleTo(Project.NameKey project, Event event, CurrentUser user)\n4. isVisibleTo(Project.NameKey project, Event event, CurrentUser user) tries to cast the event to ProjectCreatedEvent, and this should fail for RefReplicatedEvent\n\nAm I missing anything?",
+      "range": {
+        "startLine": 169,
+        "startChar": 5,
+        "endLine": 171,
+        "endChar": 32
+      },
+      "revId": "5b93c0ecd90482a59b54846b91812dc820c58ab6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2bc1bc6c_daf965b5",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
         "patchSetId": 4
