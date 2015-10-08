@@ -184,7 +184,7 @@ public abstract class PushResultProcessing {
 
     private void postEvent(String projectName, RefEvent event) {
       Project.NameKey project = Project.NameKey.parse(projectName);
-      if (PatchSet.isRef(event.getRefName())) {
+      if (PatchSet.isChangeRef(event.getRefName())) {
         dispatcher.postEvent(project, event);
       } else {
         Branch.NameKey branch = new Branch.NameKey(project, event.getRefName());
