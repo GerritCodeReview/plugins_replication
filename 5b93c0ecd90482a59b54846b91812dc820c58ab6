@@ -34,6 +34,24 @@
       "revId": "5b93c0ecd90482a59b54846b91812dc820c58ab6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5979d01_bed6391e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-10-08T07:34:15Z",
+      "side": 1,
+      "message": "Doesn\u0027t it check if the ref is a change? Couldn\u0027t it still be a branch f.i.?\n\n  /** Is the reference name a change reference? */\n  public static boolean isRef(String name) {\n    return Id.fromRef(name) !\u003d null;\n  }",
+      "parentUuid": "2bc1bc6c_daf965b5",
+      "revId": "5b93c0ecd90482a59b54846b91812dc820c58ab6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
