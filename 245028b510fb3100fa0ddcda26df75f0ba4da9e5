@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ffefa6f_9285bc0b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-10-14T00:14:19Z",
+      "side": 1,
+      "message": "I think when looking at the log it\u0027s not going to be obvious what the time values mean.\n\nFor example:\n\n Replication to \u003cdest\u003e completed in 200ms 100ms 1 retries\n\nIf I understand the code correctly, the actual time it took to complete is \"100ms\", and the delay is \"200ms\", but with this log it reads as \"completed in 200ms\".\n\nI would change it to something like:\n\n repLog.info(\"Replication to \" + uri + \" completed in \"\n     + (finishedAt - startedAt) + \"ms. Delay: \"\n     + (startedAt - createdAt) + \"ms. Retries: \"\n     + retryCount);\n\nso the log would be:\n\n Replication to \u003cdest\u003e completed in 100ms. Delay: 100ms. Retries: 1",
+      "range": {
+        "startLine": 290,
+        "startChar": 12,
+        "endLine": 290,
+        "endChar": 78
+      },
+      "revId": "245028b510fb3100fa0ddcda26df75f0ba4da9e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
