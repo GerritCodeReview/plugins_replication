@@ -16,13 +16,13 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
-import com.google.common.base.Stopwatch;
 import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
+import com.google.gerrit.common.TimeUtil;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
@@ -71,7 +71,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
-import java.util.concurrent.TimeUnit;
 
 /**
  * A push to remote operation started by {@link GitReferenceUpdatedListener}.
@@ -111,6 +110,7 @@ class PushOne implements ProjectRunnable {
   private final int maxLockRetries;
   private int lockRetryCount;
   private final int id;
+  private final long createdAt;
 
   @Inject
   PushOne(final GitRepositoryManager grm,
@@ -141,6 +141,7 @@ class PushOne implements ProjectRunnable {
     maxLockRetries = pool.getLockErrorMaxRetries();
     id = ig.next();
     stateLog = sl;
+    createdAt = TimeUtil.nowMs();
   }
 
   @Override
@@ -280,13 +281,15 @@ class PushOne implements ProjectRunnable {
       return;
     }
 
-    Stopwatch stopwatch = Stopwatch.createStarted();
+    long startedAt = TimeUtil.nowMs();
     repLog.info("Replication to " + uri + " started...");
     try {
       git = gitManager.openRepository(projectName);
       runImpl();
+      long finishedAt = TimeUtil.nowMs();
       repLog.info("Replication to " + uri + " completed in "
-          + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
+          + (finishedAt - startedAt) + "ms, "
+          + (startedAt - createdAt) + "ms delay, " + retryCount + " retries");
     } catch (RepositoryNotFoundException e) {
       stateLog.error("Cannot replicate " + projectName
           + "; Local repository error: "
