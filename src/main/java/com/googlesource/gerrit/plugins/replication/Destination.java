@@ -162,7 +162,7 @@ class Destination {
           final Provider<RequestScopedReviewDbProvider> dbProvider) {
         final RequestContext requestContext = new RequestContext() {
           @Override
-          public CurrentUser getCurrentUser() {
+          public CurrentUser getUser() {
             return remoteUser;
           }
 
