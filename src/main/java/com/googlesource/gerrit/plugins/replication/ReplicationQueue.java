@@ -147,10 +147,12 @@ class ReplicationQueue implements
 
   @Override
   public void onNewProjectCreated(NewProjectCreatedListener.Event event) {
+    repLog.info("onNewProjectCreated START");
     for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()),
         FilterType.PROJECT_CREATION)) {
       createProject(uri, event.getHeadName());
     }
+    repLog.info("onNewProjectCreated FINISH");
   }
 
   @Override
@@ -240,6 +242,11 @@ class ReplicationQueue implements
   }
 
   private boolean createProject(URIish replicateURI, String head) {
+    try {
+      Thread.sleep(1000 * 60 * 1); // 1 minute
+    } catch(InterruptedException ex) {
+    }
+
     if (!replicateURI.isRemote()) {
       createLocally(replicateURI, head);
       repLog.info("Created local repository: " + replicateURI);
