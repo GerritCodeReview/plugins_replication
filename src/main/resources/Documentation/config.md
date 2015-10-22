@@ -183,17 +183,17 @@ remote.NAME.push
 [2]: #example_file
 
 remote.NAME.replicationDelay
-:	Number of seconds to wait before scheduling a remote push
-	operation.  Setting the delay to 0 effectively disables the
-	delay, causing the push to start as soon as possible.
+:	Time to wait before scheduling a remote push operation. Setting
+	the delay to 0 effectively disables the delay, causing the push
+	to start as soon as possible.
 
 	This is a Gerrit specific extension to the Git remote block.
 
 	By default, 15 seconds.
 
 remote.NAME.replicationRetry
-:	Number of minutes to wait before scheduling a remote push
-	operation previously failed due to an offline remote server.
+:	Time to wait before scheduling a remote push operation previously
+	failed due to an offline remote server.
 
 	If a remote push operation fails because a remote server was
 	offline, all push operations to the same destination URL are
