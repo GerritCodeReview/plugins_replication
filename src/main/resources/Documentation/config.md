@@ -238,13 +238,13 @@ remote.NAME.authGroup
 	everything to all remotes.
 
 remote.NAME.createMissingRepositories
-:	If true, a repository is automatically created on the remote site.
-	If the remote site was not available at the moment when a new
-	project was created, it will be created if during the replication
-	of a ref it is found to be missing.
-	
-	If false, repositories are never created automatically on this
-	remote.
+:	Specifies whether or not missing repositories should be created
+	automatically on this remote if found to be missing during replication
+	of a ref.
+
+	If true, repositories are created on this remote.
+
+	If false, repositories are not created on this remote.
 
 	By default, true, missing repositories are created.
 
