@@ -126,19 +126,19 @@ class ReplicationQueue implements
     }
   }
 
-  @Override
-  public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
-    ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher, database));
+  private void schedule(String projectName, String refName, FilterType type) {
+    ReplicationState state = new ReplicationState(
+        new GitUpdateProcessing(dispatcher, database));
     if (!running) {
-      stateLog.warn("Replication plugin did not finish startup before event", state);
+      stateLog.warn(
+          "Replication plugin did not finish startup before event", state);
       return;
     }
-
-    Project.NameKey project = new Project.NameKey(event.getProjectName());
-    for (Destination cfg : config.getDestinations(FilterType.ALL)) {
-      if (cfg.wouldPushProject(project) && cfg.wouldPushRef(event.getRefName())) {
+    Project.NameKey project = new Project.NameKey(projectName);
+    for (Destination cfg : config.getDestinations(type)) {
+      if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
         for (URIish uri : cfg.getURIs(project, null)) {
-          cfg.schedule(project, event.getRefName(), uri, state);
+          cfg.schedule(project, refName, uri, state);
         }
       }
     }
@@ -146,11 +146,14 @@ class ReplicationQueue implements
   }
 
   @Override
+  public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
+    schedule(event.getProjectName(), event.getRefName(), FilterType.ALL);
+  }
+
+  @Override
   public void onNewProjectCreated(NewProjectCreatedListener.Event event) {
-    for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()),
-        FilterType.PROJECT_CREATION)) {
-      createProject(uri, event.getHeadName());
-    }
+    schedule(event.getProjectName(), event.getHeadName(),
+        FilterType.PROJECT_CREATION);
   }
 
   @Override
