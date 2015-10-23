@@ -83,7 +83,6 @@ class Destination {
   private final PushOne.Factory opFactory;
   private final ProjectControl.Factory projectControlFactory;
   private final GitRepositoryManager gitManager;
-  private final boolean createMissingRepos;
   private final boolean replicatePermissions;
   private final boolean replicateProjectDeletions;
   private final String remoteNameStyle;
@@ -110,8 +109,6 @@ class Destination {
 
     poolThreads = Math.max(0, getInt(rc, cfg, "threads", 1));
     poolName = "ReplicateTo-" + rc.getName();
-    createMissingRepos =
-        cfg.getBoolean("remote", rc.getName(), "createMissingRepositories", true);
     replicatePermissions =
         cfg.getBoolean("remote", rc.getName(), "replicatePermissions", true);
     replicateProjectDeletions =
@@ -426,10 +423,6 @@ class Destination {
       }
     }
     return false;
-  }
-
-  boolean isCreateMissingRepos() {
-    return createMissingRepos;
   }
 
   boolean isReplicatePermissions() {

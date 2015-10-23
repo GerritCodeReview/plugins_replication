@@ -86,7 +86,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
 
           @Override
           public boolean apply(Destination dest) {
-            if (dest == null || !dest.isCreateMissingRepos()) {
+            if (dest == null) {
               return false;
             }
             return true;
