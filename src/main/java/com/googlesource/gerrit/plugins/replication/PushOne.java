@@ -24,6 +24,9 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.TimeUtil;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.metrics.Description;
+import com.google.gerrit.metrics.MetricMaker;
+import com.google.gerrit.metrics.Timer;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.reviewdb.server.ReviewDb;
@@ -111,6 +114,7 @@ class PushOne implements ProjectRunnable {
   private int lockRetryCount;
   private final int id;
   private final long createdAt;
+  private final MetricMaker metricMaker;
 
   @Inject
   PushOne(final GitRepositoryManager grm,
@@ -124,6 +128,7 @@ class PushOne implements ProjectRunnable {
       final ReplicationQueue rq,
       final IdGenerator ig,
       final ReplicationStateListener sl,
+      final MetricMaker mm,
       @Assisted final Project.NameKey d,
       @Assisted final URIish u) {
     gitManager = grm;
@@ -142,6 +147,7 @@ class PushOne implements ProjectRunnable {
     id = ig.next();
     stateLog = sl;
     createdAt = TimeUtil.nowMs();
+    metricMaker = mm;
   }
 
   @Override
@@ -282,7 +288,9 @@ class PushOne implements ProjectRunnable {
     }
 
     long startedAt = TimeUtil.nowMs();
+
     repLog.info("Replication to " + uri + " started...");
+    Timer.Context context = getMetricsTimerContext();
     try {
       git = gitManager.openRepository(projectName);
       runImpl();
@@ -290,6 +298,7 @@ class PushOne implements ProjectRunnable {
       repLog.info("Replication to " + uri + " completed in "
           + (finishedAt - startedAt) + "ms, "
           + (startedAt - createdAt) + "ms delay, " + retryCount + " retries");
+      context.close();
     } catch (RepositoryNotFoundException e) {
       stateLog.error("Cannot replicate " + projectName
           + "; Local repository error: "
@@ -345,6 +354,15 @@ class PushOne implements ProjectRunnable {
       }
       pool.notifyFinished(this);
     }
+  }
+
+  private Timer.Context getMetricsTimerContext() {
+    return metricMaker.newTimer(
+        String.format("/%s/execution_time", config.getName()),
+        new Description("Sucessful replication latency")
+          .setCumulative()
+          .setUnit(Description.Units.SECONDS))
+        .start();
   }
 
   private void createRepository() {
