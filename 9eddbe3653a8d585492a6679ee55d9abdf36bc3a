@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16feeae5_5f590fd9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-11-11T01:12:24Z",
+      "side": 1,
+      "message": "is\n\nor change \"time\" on the previous line to \"times\"",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 3
+      },
+      "revId": "9eddbe3653a8d585492a6679ee55d9abdf36bc3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6f876fc_ded1a14e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-11-11T01:12:24Z",
+      "side": 1,
+      "message": "Successful",
+      "range": {
+        "startLine": 362,
+        "startChar": 25,
+        "endLine": 362,
+        "endChar": 34
+      },
+      "revId": "9eddbe3653a8d585492a6679ee55d9abdf36bc3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
