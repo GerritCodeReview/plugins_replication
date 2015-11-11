@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d609b2de_9af1edc5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-11-11T08:24:56Z",
+      "side": 1,
+      "message": "Module",
+      "range": {
+        "startLine": 12,
+        "startChar": 32,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "revId": "ba03e3ec3fb92cdc263460514ccc38d1cd3422aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb142734_59ccc38c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-11-11T08:24:56Z",
+      "side": 1,
+      "message": "parts of the",
+      "range": {
+        "startLine": 15,
+        "startChar": 5,
+        "endLine": 15,
+        "endChar": 13
+      },
+      "revId": "ba03e3ec3fb92cdc263460514ccc38d1cd3422aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb142734_39c10f55",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-11-11T08:24:56Z",
+      "side": 1,
+      "message": "than",
+      "range": {
+        "startLine": 16,
+        "startChar": 22,
+        "endLine": 16,
+        "endChar": 26
+      },
+      "revId": "ba03e3ec3fb92cdc263460514ccc38d1cd3422aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d609b2de_faf629b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-11-11T08:24:56Z",
+      "side": 1,
+      "message": "ReplicationSshSessionFactory interface was added to enable consumers to modify(configure?) SSH sessions by modifying credentials factory and/or set the known_hosts repository.\n?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 51
+      },
+      "revId": "ba03e3ec3fb92cdc263460514ccc38d1cd3422aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb142734_19c64b6d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-11-11T08:24:56Z",
+      "side": 1,
+      "message": "unnecessary nl",
+      "revId": "ba03e3ec3fb92cdc263460514ccc38d1cd3422aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d609b2de_dafb65a1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-11-11T08:24:56Z",
+      "side": 1,
+      "message": "Unnecessary nl",
+      "revId": "ba03e3ec3fb92cdc263460514ccc38d1cd3422aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb142734_f9da773f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationSshSessionFactory.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-11-11T08:24:56Z",
+      "side": 1,
+      "message": "Unnecessary nl",
+      "revId": "ba03e3ec3fb92cdc263460514ccc38d1cd3422aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
