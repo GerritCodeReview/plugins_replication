@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f6f876fc_3ed7e541",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-11-11T01:12:44Z",
+      "side": 1,
+      "message": "Gerrit\u0027s",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "9eddbe3653a8d585492a6679ee55d9abdf36bc3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16feeae5_5f590fd9",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
