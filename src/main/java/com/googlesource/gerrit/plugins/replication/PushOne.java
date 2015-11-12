@@ -292,7 +292,7 @@ class PushOne implements ProjectRunnable {
     long startedAt = TimeUtil.nowMs();
 
     repLog.info("Replication to " + uri + " started...");
-    Timer1.Context context = execTimeMetric.getMetricsTimerContext(config.getName());
+    Timer1.Context context = execTimeMetric.start(config.getName());
     try {
       git = gitManager.openRepository(projectName);
       runImpl();
@@ -361,16 +361,18 @@ class PushOne implements ProjectRunnable {
   @Singleton
   public static class ExecTimeMetric {
     Timer1<String> execTime;
+
     @Inject
     ExecTimeMetric(MetricMaker metricMaker) {
       execTime = metricMaker.newTimer(
-          "/execution_time",
-          new Description("Successful replication latency")
+          "replication_latency",
+          new Description("Time spent pushing to remote destination.")
             .setCumulative()
-            .setUnit(Description.Units.SECONDS), Field.ofString("destination"));
+            .setUnit(Description.Units.SECONDS),
+          Field.ofString("destination"));
     }
 
-    private Timer1.Context getMetricsTimerContext(String name) {
+    Timer1.Context start(String name) {
       return execTime.start(name);
     }
   }
