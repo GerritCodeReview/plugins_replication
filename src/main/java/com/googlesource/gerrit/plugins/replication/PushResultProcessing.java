@@ -14,7 +14,6 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.client.PatchSet;
@@ -161,12 +160,9 @@ public abstract class PushResultProcessing {
   public static class GitUpdateProcessing extends PushResultProcessing {
     static final Logger log = LoggerFactory.getLogger(GitUpdateProcessing.class);
 
-    private final EventDispatcher dispatcher;
     private final SchemaFactory<ReviewDb> schema;
 
-    public GitUpdateProcessing(EventDispatcher dispatcher,
-        SchemaFactory<ReviewDb> schema) {
-      this.dispatcher = dispatcher;
+    public GitUpdateProcessing(SchemaFactory<ReviewDb> schema) {
       this.schema = schema;
     }
 
@@ -194,14 +190,15 @@ public abstract class PushResultProcessing {
         try (ReviewDb db = schema.open()) {
           Change change = retrieveChange(ref, db);
           if (change != null) {
-            dispatcher.postEvent(change, event, db);
+            // WTF are we going to do here?!!!            //dispatcher.postEvent(change, event, db);
           }
         } catch (Exception e) {
           log.error("Cannot post event", e);
         }
       } else {
         Branch.NameKey branch = new Branch.NameKey(Project.NameKey.parse(project), ref);
-        dispatcher.postEvent(branch, event);
+        // And here?!
+        //dispatcher.postEvent(branch, event);
       }
     }
 

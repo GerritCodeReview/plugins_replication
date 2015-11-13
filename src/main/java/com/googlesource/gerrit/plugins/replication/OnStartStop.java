@@ -35,7 +35,6 @@ class OnStartStop implements LifecycleListener {
   private final ReplicationQueue queue;
   private final ReplicationConfig config;
   private final SchemaFactory<ReviewDb> database;
-  private final EventDispatcher eventDispatcher;
 
   @Inject
   OnStartStop(
@@ -43,13 +42,11 @@ class OnStartStop implements LifecycleListener {
       PushAll.Factory pushAll,
       ReplicationQueue queue,
       ReplicationConfig config,
-      EventDispatcher eventDispatcher,
       SchemaFactory<ReviewDb> database) {
     this.srvInfo = srvInfo;
     this.pushAll = pushAll;
     this.queue = queue;
     this.config = config;
-    this.eventDispatcher = eventDispatcher;
     this.database = database;
     this.pushAllFuture = Atomics.newReference();
   }
@@ -60,9 +57,11 @@ class OnStartStop implements LifecycleListener {
 
     if (srvInfo.getState() == ServerInformation.State.STARTUP
         && config.isReplicateAllOnPluginStart()) {
-      ReplicationState state =
+// ToDo: Fire a different event here?
+      ReplicationState state = null;
+/*      ReplicationState state =
           new ReplicationState(new GitUpdateProcessing(eventDispatcher,
-              database));
+              database));*/
       pushAllFuture.set(pushAll.create(
           null, ReplicationFilter.all(), state).schedule(30, TimeUnit.SECONDS));
     }
