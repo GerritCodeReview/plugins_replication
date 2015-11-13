@@ -182,31 +182,18 @@ remote.NAME.push
 
 [2]: #example_file
 
-remote.NAME.timeout
-:	Number of seconds to wait for a network read or write to
-	complete before giving up and declaring the remote side is not
-	responding.  If 0, there is no timeout, and the push client
-	waits indefinitely.
-
-	A timeout should be large enough to mostly transfer the
-	objects to the other side.  1 second may be too small for
-	larger projects, especially over a WAN link, while 10-30
-	seconds is a much more reasonable timeout value.
-
-	Defaults to 0 seconds, wait indefinitely.
-
 remote.NAME.replicationDelay
-:	Number of seconds to wait before scheduling a remote push
-	operation.  Setting the delay to 0 effectively disables the
-	delay, causing the push to start as soon as possible.
+:	Time to wait before scheduling a remote push operation. Setting
+	the delay to 0 effectively disables the delay, causing the push
+	to start as soon as possible.
 
 	This is a Gerrit specific extension to the Git remote block.
 
 	By default, 15 seconds.
 
 remote.NAME.replicationRetry
-:	Number of minutes to wait before scheduling a remote push
-	operation previously failed due to an offline remote server.
+:	Time to wait before scheduling a remote push operation previously
+	failed due to an offline remote server.
 
 	If a remote push operation fails because a remote server was
 	offline, all push operations to the same destination URL are

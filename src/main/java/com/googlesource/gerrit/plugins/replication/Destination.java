@@ -29,6 +29,7 @@ import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.account.GroupBackends;
 import com.google.gerrit.server.account.ListGroupMembership;
+import com.google.gerrit.server.config.ConfigUtil;
 import com.google.gerrit.server.config.RequestScopedReviewDbProvider;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
@@ -107,8 +108,10 @@ class Destination {
     gitManager = gitRepositoryManager;
     this.stateLog = stateLog;
 
-    delay = Math.max(0, getInt(rc, cfg, "replicationdelay", 15));
-    retryDelay = Math.max(0, getInt(rc, cfg, "replicationretry", 1));
+    delay = Math.max(0,
+        getTimeUnit(rc, cfg, "replicationdelay", 15, TimeUnit.SECONDS));
+    retryDelay = Math.max(0,
+        getTimeUnit(rc, cfg, "replicationretry", 1, TimeUnit.MINUTES));
     lockErrorMaxRetries = cfg.getInt("replication", "lockErrorMaxRetries", 0);
     adminUrls = cfg.getStringList("remote", rc.getName(), "adminUrl");
     urls = cfg.getStringList("remote", rc.getName(), "url");
@@ -202,6 +205,12 @@ class Destination {
   private static int getInt(
       RemoteConfig rc, Config cfg, String name, int defValue) {
     return cfg.getInt("remote", rc.getName(), name, defValue);
+  }
+
+  private static int getTimeUnit(
+      RemoteConfig rc, Config cfg, String name, int defValue, TimeUnit unit) {
+    return (int)ConfigUtil.getTimeUnit(
+        cfg, "remote", rc.getName(), name, defValue, unit);
   }
 
   private boolean isVisible(final Project.NameKey project,
