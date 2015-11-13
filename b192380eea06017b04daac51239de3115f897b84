@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b203791_7b3ad719",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1021592
+      },
+      "writtenOn": "2015-11-13T17:08:00Z",
+      "side": 1,
+      "message": "This wont work. The MetricMaker plug-in glue does not add \"/\" at the end of \"plugins/\u003cname\u003e\". This will create metrics named plugins/replicationreplication_latency.",
+      "range": {
+        "startLine": 368,
+        "startChar": 10,
+        "endLine": 368,
+        "endChar": 32
+      },
+      "revId": "b192380eea06017b04daac51239de3115f897b84",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
