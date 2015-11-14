@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.Field;
+import com.google.gerrit.metrics.Histogram1;
 import com.google.gerrit.metrics.MetricMaker;
 import com.google.gerrit.metrics.Timer1;
 import com.google.inject.Inject;
@@ -24,19 +25,42 @@ import com.google.inject.Singleton;
 @Singleton
 public class ReplicationMetrics {
   Timer1<String> executionTime;
+  Histogram1<String> executionDelay;
+  Histogram1<String> executionRetries;
 
   @Inject
   ReplicationMetrics(MetricMaker metricMaker) {
+    Field<String> F_NAME = Field.ofString("destination");
+
     executionTime = metricMaker.newTimer(
         "replication_latency",
         new Description("Time spent pushing to remote destination.")
           .setCumulative()
           .setUnit(Description.Units.SECONDS),
-        Field.ofString("destination"));
+        F_NAME);
+
+    executionDelay = metricMaker.newHistogram(
+        "replication_delay",
+        new Description("Time spent waiting before pushing to remote destination")
+          .setCumulative()
+          .setUnit(Description.Units.SECONDS),
+        F_NAME);
+
+    executionRetries = metricMaker.newHistogram(
+        "replication_retries",
+        new Description("Number of retries when pushing to remote destination")
+          .setCumulative()
+          .setUnit("retries"),
+        F_NAME);
   }
 
   Timer1.Context start(String name) {
     return executionTime.start(name);
+  }
+
+  void record(String destination, long delay, long retries) {
+    executionDelay.record(destination, delay);
+    executionRetries.record(destination, retries);
   }
 
 }
