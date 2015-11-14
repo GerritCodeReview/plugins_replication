@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b4d3387_042276e4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-11-14T02:02:24Z",
+      "side": 1,
+      "message": "(optional):  startedAt \u003d NANOSECONDS.toMillis(context.getStartTime());",
+      "range": {
+        "startLine": 296,
+        "startChar": 0,
+        "endLine": 297,
+        "endChar": 56
+      },
+      "revId": "03c1906789c4ae76b14dbcffe4cc51ff6f9efded",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b4d3387_c4333e37",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2015-11-14T02:02:24Z",
+      "side": 1,
+      "message": "ooh. you can\u0027t compare startedAt from the nano timer to createdAt unless it also came fro the nano timer.",
+      "range": {
+        "startLine": 304,
+        "startChar": 13,
+        "endLine": 304,
+        "endChar": 34
+      },
+      "revId": "03c1906789c4ae76b14dbcffe4cc51ff6f9efded",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
