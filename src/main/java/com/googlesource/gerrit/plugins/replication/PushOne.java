@@ -289,10 +289,11 @@ class PushOne implements ProjectRunnable {
     Timer1.Context context = metrics.start(config.getName());
     try {
       long startedAt = context.getStartTime();
+      long delay = NANOSECONDS.toMillis(startedAt - createdAt);
+      metrics.record(config.getName(), delay, retryCount);
       git = gitManager.openRepository(projectName);
       runImpl();
       long elapsed = NANOSECONDS.toMillis(context.stop());
-      long delay = NANOSECONDS.toMillis(startedAt - createdAt);
       repLog.info("Replication to " + uri + " completed in "
           + (elapsed) + "ms, "
           + (delay) + "ms delay, " + retryCount + " retries");
