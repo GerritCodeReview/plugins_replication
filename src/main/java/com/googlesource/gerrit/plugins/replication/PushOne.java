@@ -24,9 +24,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
-import com.google.gerrit.metrics.Description;
-import com.google.gerrit.metrics.Field;
-import com.google.gerrit.metrics.MetricMaker;
 import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
@@ -43,7 +40,6 @@ import com.google.gerrit.server.util.IdGenerator;
 import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.google.inject.assistedinject.Assisted;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
@@ -116,7 +112,7 @@ class PushOne implements ProjectRunnable {
   private int lockRetryCount;
   private final int id;
   private final long createdAt;
-  private final ExecTimeMetric execTimeMetric;
+  private final ReplicationMetrics metrics;
 
   @Inject
   PushOne(final GitRepositoryManager grm,
@@ -130,7 +126,7 @@ class PushOne implements ProjectRunnable {
       final ReplicationQueue rq,
       final IdGenerator ig,
       final ReplicationStateListener sl,
-      final ExecTimeMetric etm,
+      final ReplicationMetrics m,
       @Assisted final Project.NameKey d,
       @Assisted final URIish u) {
     gitManager = grm;
@@ -149,7 +145,7 @@ class PushOne implements ProjectRunnable {
     id = ig.next();
     stateLog = sl;
     createdAt = System.nanoTime();
-    execTimeMetric = etm;
+    metrics = m;
   }
 
   @Override
@@ -290,7 +286,7 @@ class PushOne implements ProjectRunnable {
     }
 
     repLog.info("Replication to " + uri + " started...");
-    Timer1.Context context = execTimeMetric.start(config.getName());
+    Timer1.Context context = metrics.start(config.getName());
     try {
       long startedAt = context.getStartTime();
       git = gitManager.openRepository(projectName);
@@ -354,25 +350,6 @@ class PushOne implements ProjectRunnable {
         git.close();
       }
       pool.notifyFinished(this);
-    }
-  }
-
-  @Singleton
-  public static class ExecTimeMetric {
-    Timer1<String> execTime;
-
-    @Inject
-    ExecTimeMetric(MetricMaker metricMaker) {
-      execTime = metricMaker.newTimer(
-          "replication_latency",
-          new Description("Time spent pushing to remote destination.")
-            .setCumulative()
-            .setUnit(Description.Units.SECONDS),
-          Field.ofString("destination"));
-    }
-
-    Timer1.Context start(String name) {
-      return execTime.start(name);
     }
   }
 
