@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
+import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedListMultimap;
@@ -22,7 +23,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import com.google.gerrit.common.TimeUtil;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.Field;
@@ -148,7 +148,7 @@ class PushOne implements ProjectRunnable {
     maxLockRetries = pool.getLockErrorMaxRetries();
     id = ig.next();
     stateLog = sl;
-    createdAt = TimeUtil.nowMs();
+    createdAt = System.nanoTime();
     execTimeMetric = etm;
   }
 
@@ -289,18 +289,16 @@ class PushOne implements ProjectRunnable {
       return;
     }
 
-    long startedAt = TimeUtil.nowMs();
-
     repLog.info("Replication to " + uri + " started...");
     Timer1.Context context = execTimeMetric.start(config.getName());
     try {
+      long startedAt = context.getStartTime();
       git = gitManager.openRepository(projectName);
       runImpl();
-      long finishedAt = TimeUtil.nowMs();
+      long elapsed = context.stop();
       repLog.info("Replication to " + uri + " completed in "
-          + (finishedAt - startedAt) + "ms, "
+          + (NANOSECONDS.toMillis(elapsed)) + "ms, "
           + (startedAt - createdAt) + "ms delay, " + retryCount + " retries");
-      context.close();
     } catch (RepositoryNotFoundException e) {
       stateLog.error("Cannot replicate " + projectName
           + "; Local repository error: "
