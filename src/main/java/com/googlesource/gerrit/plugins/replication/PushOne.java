@@ -76,6 +76,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A push to remote operation started by {@link GitReferenceUpdatedListener}.
@@ -289,18 +290,18 @@ class PushOne implements ProjectRunnable {
       return;
     }
 
-    long startedAt = TimeUtil.nowMs();
-
     repLog.info("Replication to " + uri + " started...");
     Timer1.Context context = execTimeMetric.start(config.getName());
     try {
+      long startedAt = TimeUnit.MILLISECONDS.convert(
+          context.getStartTime(), TimeUnit.NANOSECONDS);
       git = gitManager.openRepository(projectName);
       runImpl();
-      long finishedAt = TimeUtil.nowMs();
+      long elapsed = TimeUnit.MILLISECONDS.convert(
+          context.stop(), TimeUnit.NANOSECONDS);
       repLog.info("Replication to " + uri + " completed in "
-          + (finishedAt - startedAt) + "ms, "
+          + (elapsed) + "ms, "
           + (startedAt - createdAt) + "ms delay, " + retryCount + " retries");
-      context.close();
     } catch (RepositoryNotFoundException e) {
       stateLog.error("Cannot replicate " + projectName
           + "; Local repository error: "
