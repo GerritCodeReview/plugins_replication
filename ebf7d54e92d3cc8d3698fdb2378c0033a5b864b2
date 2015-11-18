@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bbd507d1_5115b48b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationMetrics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-11-18T13:28:30Z",
+      "side": 1,
+      "message": "We\u0027re using seconds as the unit here, but the values we\u0027re putting in are in miliseconds.\n\nIs this going to take care of conversion, or should we change it to miliseconds?",
+      "range": {
+        "startLine": 39,
+        "startChar": 19,
+        "endLine": 39,
+        "endChar": 44
+      },
+      "revId": "ebf7d54e92d3cc8d3698fdb2378c0033a5b864b2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
