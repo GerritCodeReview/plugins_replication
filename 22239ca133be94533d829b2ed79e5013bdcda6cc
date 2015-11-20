@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb5c2765_d9b813eb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2015-11-20T20:08:16Z",
+      "side": 1,
+      "message": "nit: You could fix this premature wrap while changing these lines.",
+      "range": {
+        "startLine": 71,
+        "startChar": 63,
+        "endLine": 71,
+        "endChar": 64
+      },
+      "revId": "22239ca133be94533d829b2ed79e5013bdcda6cc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db59db74_1acc3d8c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2015-11-20T20:08:16Z",
+      "side": 1,
+      "message": "nit: Extra blank line added?",
+      "revId": "22239ca133be94533d829b2ed79e5013bdcda6cc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
