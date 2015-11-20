@@ -15,6 +15,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
+import com.google.gerrit.server.account.GroupIncludeCache;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
@@ -43,12 +44,14 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private final GitRepositoryManager gitRepositoryManager;
   private final GroupBackend groupBackend;
   private final WorkQueue workQueue;
+  private final GroupIncludeCache groupIncludeCache;
 
   @Inject
   public AutoReloadConfigDecorator(Injector injector, SitePaths site,
       RemoteSiteUser.Factory ruf, PluginUser pu,
       GitRepositoryManager grm, GroupBackend gb,
-      WorkQueue workQueue) throws ConfigInvalidException,
+      WorkQueue workQueue,
+      GroupIncludeCache groupIncludeCache) throws ConfigInvalidException,
       IOException {
     this.injector = injector;
     this.site = site;
@@ -56,6 +59,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     this.pluginUser = pu;
     this.gitRepositoryManager = grm;
     this.groupBackend = gb;
+    this.groupIncludeCache = groupIncludeCache;
     this.currentConfig = loadConfig();
     this.currentConfigTs = currentConfig.getCfgPath().lastModified();
     this.workQueue = workQueue;
@@ -63,9 +67,8 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
 
   private ReplicationFileBasedConfig loadConfig()
       throws ConfigInvalidException, IOException {
-    return new ReplicationFileBasedConfig(injector, site,
-        remoteSiteUserFactory, pluginUser, gitRepositoryManager,
-        groupBackend);
+    return new ReplicationFileBasedConfig(injector, site, remoteSiteUserFactory,
+        pluginUser, gitRepositoryManager, groupBackend, groupIncludeCache);
   }
 
   private synchronized boolean isAutoReload() {
