@@ -27,6 +27,7 @@ import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.account.GroupBackends;
+import com.google.gerrit.server.account.GroupIncludeCache;
 import com.google.gerrit.server.account.ListGroupMembership;
 import com.google.gerrit.server.config.ConfigUtil;
 import com.google.gerrit.server.config.FactoryModule;
@@ -101,7 +102,8 @@ class Destination {
       final RemoteSiteUser.Factory replicationUserFactory,
       final PluginUser pluginUser,
       final GitRepositoryManager gitRepositoryManager,
-      final GroupBackend groupBackend) {
+      final GroupBackend groupBackend,
+      final GroupIncludeCache groupIncludeCache) {
     remote = rc;
     gitManager = gitRepositoryManager;
     delay = Math.max(0,
@@ -131,6 +133,7 @@ class Destination {
         GroupReference g = GroupBackends.findExactSuggestion(groupBackend, name);
         if (g != null) {
           builder.add(g.getUUID());
+          builder.addAll(groupIncludeCache.parentGroupsOf(g.getUUID()));
         } else {
           repLog.warn(String.format(
               "Group \"%s\" not recognized, removing from authGroup", name));
