@@ -22,6 +22,30 @@
       "revId": "6d25f8b4ce4cfcd9a416dde9707098dc3ffc29b9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb5c2765_794aa759",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1021532
+      },
+      "writtenOn": "2015-11-25T18:40:59Z",
+      "side": 1,
+      "message": "The implication of this change fetching the parent groups is that the core is now able to check the permission of the parent groups. That was the reason why I changed it to \u0027Check\u0027.\n\nI guess the following sentence actually declares this fact and maybe it is better to change it back to \u0027Fetch\u0027 since fetching is what this change directly does.\n\nDONE",
+      "parentUuid": "bb5c2765_d965b3f1",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "6d25f8b4ce4cfcd9a416dde9707098dc3ffc29b9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
