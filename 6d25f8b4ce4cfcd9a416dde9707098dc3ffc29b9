@@ -46,6 +46,24 @@
       "revId": "6d25f8b4ce4cfcd9a416dde9707098dc3ffc29b9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9b53e354_58aa3dac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013267
+      },
+      "writtenOn": "2015-11-26T10:25:07Z",
+      "side": 1,
+      "message": "that\u0027s a matter of policy (if there even is one). if the summary is supposed to be as close to a user-visible changelog entry as possible, then \"check ... as well\" is be better, as that\u0027s the actual bugfix. if one wants to concentrate on the code change, \"fetch\" is presumably better. i personally think the former option is better; the code change is described later (or not at all if it\u0027s obvious enough - that\u0027s what the diff is for).\n\nbut that\u0027s just my opinion as an onlooker.",
+      "parentUuid": "bb5c2765_794aa759",
+      "revId": "6d25f8b4ce4cfcd9a416dde9707098dc3ffc29b9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
