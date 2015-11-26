@@ -64,6 +64,24 @@
       "revId": "6d25f8b4ce4cfcd9a416dde9707098dc3ffc29b9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb5c2765_39178f27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1021532
+      },
+      "writtenOn": "2015-11-26T14:22:30Z",
+      "side": 1,
+      "message": "I see. I amended the message to better consider those facts.\nWould you like to suggest anything on the latest patch set?\nThank you for the input.",
+      "parentUuid": "9b53e354_58aa3dac",
+      "revId": "6d25f8b4ce4cfcd9a416dde9707098dc3ffc29b9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
