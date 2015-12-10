@@ -249,6 +249,13 @@ remote.NAME.replicateProjectDeletions
 
 	By default, false, do *not* replicate project deletions.
 
+remote.NAME.forceLeaveQueueOnStop
+:	If true, remaining replication queues to the remote.NAME would not be removed on plugin's
+	stop/reload. Note that change of option values does not take effect to the the
+	remaining queue.
+
+	By default, false, queues are removed on plugin's stop or reload.
+
 remote.NAME.mirror
 :	If true, replication will remove remote branches that are absent
 	locally or invisible to the replication (for example read
