@@ -85,6 +85,7 @@ class Destination {
   private final ProjectControl.Factory projectControlFactory;
   private final GitRepositoryManager gitManager;
   private final boolean createMissingRepos;
+  private final boolean forceLeaveQueueOnStop;
   private final boolean replicatePermissions;
   private final boolean replicateProjectDeletions;
   private final String remoteNameStyle;
@@ -122,6 +123,8 @@ class Destination {
     remoteNameStyle = MoreObjects.firstNonNull(
         cfg.getString("remote", rc.getName(), "remoteNameStyle"), "slash");
     projects = cfg.getStringList("remote", rc.getName(), "projects");
+    forceLeaveQueueOnStop=
+        cfg.getBoolean("remote", rc.getName(), "forceLeaveQueueOnStop", false);
 
     final CurrentUser remoteUser;
     String[] authGroupNames = cfg.getStringList("remote", rc.getName(), "authGroup");
@@ -446,6 +449,10 @@ class Destination {
 
   boolean isReplicatePermissions() {
     return replicatePermissions;
+  }
+
+  boolean isForceLeaveQueueOnStop() {
+    return forceLeaveQueueOnStop;
   }
 
   boolean isReplicateProjectDeletions() {

@@ -223,7 +223,9 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   public int shutdown() {
     int discarded = 0;
     for (Destination cfg : destinations) {
-      discarded += cfg.shutdown();
+      if (!cfg.isForceLeaveQueueOnStop()) {
+        discarded += cfg.shutdown();
+      }
     }
     return discarded;
   }
