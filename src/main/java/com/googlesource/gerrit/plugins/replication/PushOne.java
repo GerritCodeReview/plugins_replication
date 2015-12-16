@@ -372,6 +372,7 @@ class PushOne implements ProjectRunnable {
     PushResult res;
     try {
       res = pushVia(tn);
+      updateHead();
     } finally {
       try {
         tn.close();
@@ -543,6 +544,11 @@ class PushOne implements ProjectRunnable {
     String dst = spec.getDestination();
     boolean force = spec.isForceUpdate();
     cmds.add(new RemoteRefUpdate(git, (Ref) null, dst, force, null, null));
+  }
+
+  private void updateHead() throws IOException {
+    replicationQueue.updateHead(uri, git.getRef(Constants.HEAD).getTarget()
+        .getName());
   }
 
   private void updateStates(Collection<RemoteRefUpdate> refUpdates)

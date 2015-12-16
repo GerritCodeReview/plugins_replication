@@ -354,7 +354,7 @@ class ReplicationQueue implements
     }
   }
 
-  private void updateHead(URIish replicateURI, String newHead) {
+  void updateHead(URIish replicateURI, String newHead) {
     if (!replicateURI.isRemote()) {
       updateHeadLocally(replicateURI, newHead);
     } else if (isSSH(replicateURI)) {
