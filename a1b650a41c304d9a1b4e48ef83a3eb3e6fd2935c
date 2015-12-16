@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25fd76c1_c4f29ec6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-12-16T06:10:15Z",
+      "side": 1,
+      "message": "Does this recurse up the parent hierarchy? For example if:\n\n- user \u0027u\u0027 is a member of group \u0027ga\u0027\n- group \u0027ga\u0027 is included in group \u0027gb\u0027\n- group \u0027gb\u0027 is included in group \u0027gc\u0027\n- group \u0027gc\u0027 is given READ permission of project \u0027p\u0027\n\nwill the permissions from \u0027gc\u0027 be applied?",
+      "range": {
+        "startLine": 136,
+        "startChar": 10,
+        "endLine": 136,
+        "endChar": 72
+      },
+      "revId": "a1b650a41c304d9a1b4e48ef83a3eb3e6fd2935c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
