@@ -22,6 +22,30 @@
       "revId": "a1b650a41c304d9a1b4e48ef83a3eb3e6fd2935c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e50fdeaf_0ad0bb1a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1021532
+      },
+      "writtenOn": "2015-12-16T15:08:08Z",
+      "side": 1,
+      "message": "No, it only looks at the direct parent. the permission from \u0027gc\u0027 won\u0027t be applied.",
+      "parentUuid": "25fd76c1_c4f29ec6",
+      "range": {
+        "startLine": 136,
+        "startChar": 10,
+        "endLine": 136,
+        "endChar": 72
+      },
+      "revId": "a1b650a41c304d9a1b4e48ef83a3eb3e6fd2935c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
