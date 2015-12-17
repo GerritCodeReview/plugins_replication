@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6503ee91_66840ec5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013267
+      },
+      "writtenOn": "2015-12-17T16:17:39Z",
+      "side": 1,
+      "message": "i was implying the second clause. the present makes sense wrt the verb that describes the developer\u0027s action, but not when referring to the code and how it changes.",
+      "parentUuid": "e50fdeaf_ea37a72d",
+      "revId": "9ba75bd16e065fd39742b6e4cfe134fc63156c14",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c512dad7_e937b52d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
