@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "2a06230b_3ca571c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1021532
+      },
+      "writtenOn": "2015-12-17T18:17:42Z",
+      "side": 1,
+      "message": "Change to \u0027direct parent groups\u0027?",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "a1b650a41c304d9a1b4e48ef83a3eb3e6fd2935c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a06230b_1caab590",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1021532
+      },
+      "writtenOn": "2015-12-17T18:17:42Z",
+      "side": 1,
+      "message": "Same as above",
+      "range": {
+        "startLine": 13,
+        "startChar": 18,
+        "endLine": 13,
+        "endChar": 31
+      },
+      "revId": "a1b650a41c304d9a1b4e48ef83a3eb3e6fd2935c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "25fd76c1_c4f29ec6",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 6
