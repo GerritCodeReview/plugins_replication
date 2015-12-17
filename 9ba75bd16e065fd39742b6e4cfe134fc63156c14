@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "e50fdeaf_ea37a72d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2015-12-17T14:03:07Z",
+      "side": 1,
+      "message": "Guideline [1] expects this in fact:\n- Use the present tense (fix instead of fixed)\n- Use the past tense when describing the status before this commit\n\n[1] https://gerrit-review.googlesource.com/Documentation/dev-contributing.html#commit-message",
+      "parentUuid": "850c62c1_87cdc63a",
+      "revId": "9ba75bd16e065fd39742b6e4cfe134fc63156c14",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c512dad7_e937b52d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
