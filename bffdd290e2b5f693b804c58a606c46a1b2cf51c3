@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2a06230b_5c2b9dbe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2015-12-18T20:16:22Z",
+      "side": 1,
+      "message": "Would document that a plugin reload is needed if changing the involved group memberships.",
+      "revId": "bffdd290e2b5f693b804c58a606c46a1b2cf51c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a06230b_7c2659f8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 8
