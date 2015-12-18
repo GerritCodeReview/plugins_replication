@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a06230b_bc5ce177",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2015-12-18T20:29:42Z",
+      "side": 1,
+      "message": "stop/reload",
+      "range": {
+        "startLine": 7,
+        "startChar": 55,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "0ecf37dd6972ff73c6b6b3f2eb409e67329dc1f7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ad0e3e3_8cb8e7e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2015-12-18T20:29:42Z",
+      "side": 1,
+      "message": "stopped or reloaded",
+      "range": {
+        "startLine": 12,
+        "startChar": 36,
+        "endLine": 12,
+        "endChar": 44
+      },
+      "revId": "0ecf37dd6972ff73c6b6b3f2eb409e67329dc1f7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a06230b_fc526963",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2015-12-18T20:29:42Z",
+      "side": 1,
+      "message": "p \u003d",
+      "range": {
+        "startLine": 126,
+        "startChar": 24,
+        "endLine": 126,
+        "endChar": 26
+      },
+      "revId": "0ecf37dd6972ff73c6b6b3f2eb409e67329dc1f7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a06230b_9c592588",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2015-12-18T20:29:42Z",
+      "side": 1,
+      "message": "towards the(?)",
+      "range": {
+        "startLine": 254,
+        "startChar": 69,
+        "endLine": 254,
+        "endChar": 79
+      },
+      "revId": "0ecf37dd6972ff73c6b6b3f2eb409e67329dc1f7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
