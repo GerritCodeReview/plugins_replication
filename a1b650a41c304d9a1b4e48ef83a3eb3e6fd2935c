@@ -116,6 +116,24 @@
       "revId": "a1b650a41c304d9a1b4e48ef83a3eb3e6fd2935c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4af7d747_9d592388",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1013267
+      },
+      "writtenOn": "2015-12-18T10:50:55Z",
+      "side": 1,
+      "message": "this seems like a bad idea to me. quite unintuitive.",
+      "parentUuid": "e50fdeaf_0ad0bb1a",
+      "revId": "a1b650a41c304d9a1b4e48ef83a3eb3e6fd2935c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
