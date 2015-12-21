@@ -71,6 +71,29 @@
     },
     {
       "key": {
+        "uuid": "6afc9b2b_9e9b5d36",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2015-12-21T09:09:12Z",
+      "side": 1,
+      "message": "I don\u0027t get the connection between the name and the action it performs. To me it sounds like \"make sure you leave nothing in the queue when you stop\" which is the opposite of what it does. If I\u0027m not mistaken preserveQueueOnStop or similar would be more descriptive.",
+      "range": {
+        "startLine": 126,
+        "startChar": 4,
+        "endLine": 126,
+        "endChar": 25
+      },
+      "revId": "0ecf37dd6972ff73c6b6b3f2eb409e67329dc1f7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a06230b_9c592588",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 2
