@@ -246,7 +246,7 @@ class Destination {
       if (e == null) {
         try (Repository git = gitManager.openRepository(project)) {
           try {
-            Ref head = git.getRef(Constants.HEAD);
+            Ref head = git.exactRef(Constants.HEAD);
             if (head != null
                 && head.isSymbolic()
                 && RefNames.REFS_CONFIG.equals(head.getLeaf().getName())) {

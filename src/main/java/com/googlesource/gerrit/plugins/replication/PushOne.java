@@ -356,7 +356,7 @@ class PushOne implements ProjectRunnable {
   private void createRepository() {
     if (pool.isCreateMissingRepos()) {
       try {
-        final Ref head = git.getRef(Constants.HEAD);
+        final Ref head = git.exactRef(Constants.HEAD);
         if (replicationQueue.createProject(projectName, head != null ? head.getName() : null)) {
           repLog.warn("Missing repository created; retry replication to " + uri);
           pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
