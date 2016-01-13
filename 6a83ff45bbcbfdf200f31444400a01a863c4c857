@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87a70abf_4fdc6d0a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2016-01-13T08:32:32Z",
+      "side": 1,
+      "message": "I actually like this much more than before :-) It wasn\u0027t clear at all WHY we were instantiating with all those nulls ... and the instance wasn\u0027t even needed !",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 85
+      },
+      "revId": "6a83ff45bbcbfdf200f31444400a01a863c4c857",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
