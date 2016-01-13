@@ -23,6 +23,8 @@ import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
 
 public class RefReplicatedEvent extends RefEvent {
+  static final String TYPE = "ref-replicated";
+
   public final String project;
   public final String ref;
   public final String targetNode;
@@ -31,7 +33,7 @@ public class RefReplicatedEvent extends RefEvent {
 
   public RefReplicatedEvent(String project, String ref, String targetNode,
       RefPushResult status, RemoteRefUpdate.Status refStatus) {
-    super("ref-replicated");
+    super(TYPE);
     this.project = project;
     this.ref = ref;
     this.targetNode = targetNode;

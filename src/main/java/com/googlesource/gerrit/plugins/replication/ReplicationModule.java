@@ -14,7 +14,6 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import static com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult.SUCCEEDED;
 import static com.googlesource.gerrit.plugins.replication.StartReplicationCapability.START_REPLICATION;
 
 import com.google.gerrit.extensions.annotations.Exports;
@@ -30,8 +29,6 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
-
-import org.eclipse.jgit.transport.RemoteRefUpdate;
 
 
 class ReplicationModule extends AbstractModule {
@@ -66,8 +63,7 @@ class ReplicationModule extends AbstractModule {
     bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
     bind(ReplicationStateListener.class).to(ReplicationStateLogger.class);
 
-    EventTypes.registerClass(new RefReplicatedEvent(null, null, null,
-        SUCCEEDED, RemoteRefUpdate.Status.OK));
-    EventTypes.registerClass(new RefReplicationDoneEvent(null, null, 0));
+    EventTypes.register(RefReplicatedEvent.TYPE, RefReplicatedEvent.class);
+    EventTypes.register(RefReplicationDoneEvent.TYPE, RefReplicationDoneEvent.class);
   }
 }
