@@ -362,6 +362,7 @@ class Destination {
             pool.schedule(pushOp, delay, TimeUnit.SECONDS);
             break;
           case TRANSPORT_ERROR:
+          case REPOSITORY_MISSING:
           default:
             pushOp.setToRetry();
             pool.schedule(pushOp, retryDelay, TimeUnit.MINUTES);
