@@ -375,18 +375,10 @@ class PushOne implements ProjectRunnable {
   }
 
   private void runImpl() throws IOException {
-    Transport tn = Transport.open(git, uri);
     PushResult res;
-    try {
+    try (Transport tn = Transport.open(git, uri)){
       res = pushVia(tn);
-    } finally {
-      try {
-        tn.close();
-      } catch (Throwable e2) {
-        repLog.warn("Unexpected error while closing " + uri, e2);
-      }
     }
-
     updateStates(res.getRemoteUpdates());
   }
 
@@ -506,11 +498,9 @@ class PushOne implements ProjectRunnable {
 
   private Map<String, Ref> listRemote(Transport tn)
       throws NotSupportedException, TransportException {
-    FetchConnection fc = tn.openFetch();
-    try {
+
+    try (FetchConnection fc = tn.openFetch()){
       return fc.getRefsMap();
-    } finally {
-      fc.close();
     }
   }
 
