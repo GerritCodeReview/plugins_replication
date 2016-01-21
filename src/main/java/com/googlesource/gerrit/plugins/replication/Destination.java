@@ -195,6 +195,9 @@ class Destination {
   int shutdown() {
     int cnt = 0;
     if (pool != null) {
+      for (Runnable r : pool.getQueue()) {
+        repLog.warn(String.format("Cancelling replication event %s", r));
+      }
       cnt = pool.shutdownNow().size();
       pool.unregisterWorkQueue();
       pool = null;
