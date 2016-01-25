@@ -163,13 +163,9 @@ class ReplicationQueue implements
 
   @Override
   public void onHeadUpdated(HeadUpdatedListener.Event event) {
-    updateHead(new Project.NameKey(event.getProjectName()),
-        event.getNewHeadName());
-  }
-
-  void updateHead(Project.NameKey project, String newHeadName) {
-    for (URIish uri : getURIs(project, FilterType.ALL)) {
-      updateHead(uri, newHeadName);
+    for (URIish uri : getURIs(new Project.NameKey(event.getProjectName()),
+        FilterType.ALL)) {
+      updateHead(uri, event.getNewHeadName());
     }
   }
 
