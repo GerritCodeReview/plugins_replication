@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b43efe47_20b7eaf5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationMetrics.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2016-01-26T14:15:23Z",
+      "side": 1,
+      "message": "Why not call it DESTINATION or DEST_FIELD (or similar)?",
+      "range": {
+        "startLine": 33,
+        "startChar": 18,
+        "endLine": 33,
+        "endChar": 24
+      },
+      "revId": "3b4080f5daa73e6cfb8b7e306d2efe45ccc9636b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
