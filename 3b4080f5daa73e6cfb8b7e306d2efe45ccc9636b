@@ -22,6 +22,30 @@
       "revId": "3b4080f5daa73e6cfb8b7e306d2efe45ccc9636b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f41dd6f7_5aad35a7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationMetrics.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-01-27T00:29:04Z",
+      "side": 1,
+      "message": "I just reused the name that had already been used in this context in other changes. But you\u0027re right, it can be improved.",
+      "parentUuid": "b43efe47_20b7eaf5",
+      "range": {
+        "startLine": 33,
+        "startChar": 18,
+        "endLine": 33,
+        "endChar": 24
+      },
+      "revId": "3b4080f5daa73e6cfb8b7e306d2efe45ccc9636b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
