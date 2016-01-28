@@ -46,6 +46,40 @@
       "revId": "3b4080f5daa73e6cfb8b7e306d2efe45ccc9636b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d420d22f_7967e727",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationMetrics.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2016-01-28T15:06:28Z",
+      "side": 1,
+      "message": "Maybe change this to MILLISECONDS since you are storing milliseconds below.",
+      "revId": "3b4080f5daa73e6cfb8b7e306d2efe45ccc9636b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d420d22f_596a23f3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationMetrics.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2016-01-28T15:06:28Z",
+      "side": 1,
+      "message": "Please get the units right, its there to document what the value is. By saying SECONDS above this should be seconds here for delay but its apparently milliseconds. Horribly confusing.",
+      "revId": "3b4080f5daa73e6cfb8b7e306d2efe45ccc9636b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
