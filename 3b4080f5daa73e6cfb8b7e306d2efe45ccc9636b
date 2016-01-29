@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "3473ee96_94bfe4ca",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationMetrics.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-01-29T01:16:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f41dd6f7_5aad35a7",
+      "range": {
+        "startLine": 33,
+        "startChar": 18,
+        "endLine": 33,
+        "endChar": 24
+      },
+      "revId": "3b4080f5daa73e6cfb8b7e306d2efe45ccc9636b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d420d22f_7967e727",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationMetrics.java",
         "patchSetId": 5
@@ -66,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "3473ee96_b4c4e06b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationMetrics.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-01-29T01:16:07Z",
+      "side": 1,
+      "message": "Done. Also changed the latency to milliseconds, in a separate commit.",
+      "parentUuid": "d420d22f_7967e727",
+      "revId": "3b4080f5daa73e6cfb8b7e306d2efe45ccc9636b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d420d22f_596a23f3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationMetrics.java",
         "patchSetId": 5
@@ -77,6 +119,24 @@
       "writtenOn": "2016-01-28T15:06:28Z",
       "side": 1,
       "message": "Please get the units right, its there to document what the value is. By saying SECONDS above this should be seconds here for delay but its apparently milliseconds. Horribly confusing.",
+      "revId": "3b4080f5daa73e6cfb8b7e306d2efe45ccc9636b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "146eeab0_d3b974e6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationMetrics.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-01-29T01:16:07Z",
+      "side": 1,
+      "message": "Done.  Added javadoc on this method mentioning the unit used in the delay param.",
+      "parentUuid": "d420d22f_596a23f3",
       "revId": "3b4080f5daa73e6cfb8b7e306d2efe45ccc9636b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
