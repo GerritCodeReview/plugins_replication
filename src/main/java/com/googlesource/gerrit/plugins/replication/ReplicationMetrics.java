@@ -35,6 +35,11 @@ public class ReplicationMetrics {
         Field.ofString("destination"));
   }
 
+  /**
+   * Start the replication latency timer for a destination.
+   * @param name the destination name.
+   * @return the timer context.
+   */
   Timer1.Context start(String name) {
     return executionTime.start(name);
   }
