@@ -31,7 +31,7 @@ public class ReplicationMetrics {
         "replication_latency",
         new Description("Time spent pushing to remote destination.")
           .setCumulative()
-          .setUnit(Description.Units.SECONDS),
+          .setUnit(Description.Units.MILLISECONDS),
         Field.ofString("destination"));
   }
 
