@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Lists;
 import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.extensions.config.FactoryModule;
@@ -28,6 +29,7 @@ import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.account.GroupBackends;
+import com.google.gerrit.server.account.GroupIncludeCache;
 import com.google.gerrit.server.account.ListGroupMembership;
 import com.google.gerrit.server.config.ConfigUtil;
 import com.google.gerrit.server.config.RequestScopedReviewDbProvider;
@@ -103,7 +105,8 @@ class Destination {
       final PluginUser pluginUser,
       final GitRepositoryManager gitRepositoryManager,
       final GroupBackend groupBackend,
-      final ReplicationStateListener stateLog) {
+      final ReplicationStateListener stateLog,
+      final GroupIncludeCache groupIncludeCache) {
     remote = rc;
     gitManager = gitRepositoryManager;
     this.stateLog = stateLog;
@@ -136,6 +139,7 @@ class Destination {
         GroupReference g = GroupBackends.findExactSuggestion(groupBackend, name);
         if (g != null) {
           builder.add(g.getUUID());
+          addRecursiveParents(g.getUUID(), builder, groupIncludeCache);
         } else {
           repLog.warn(String.format(
               "Group \"%s\" not recognized, removing from authGroup", name));
@@ -186,6 +190,17 @@ class Destination {
     projectControlFactory = child.getInstance(ProjectControl.Factory.class);
     opFactory = child.getInstance(PushOne.Factory.class);
     threadScoper = child.getInstance(PerThreadRequestScope.Scoper.class);
+  }
+
+  private void addRecursiveParents(AccountGroup.UUID g,
+      Builder<AccountGroup.UUID> builder, GroupIncludeCache groupIncludeCache) {
+    for (AccountGroup.UUID p : groupIncludeCache.parentGroupsOf(g)) {
+      if (builder.build().contains(p)) {
+        continue;
+      }
+      builder.add(p);
+      addRecursiveParents(p, builder, groupIncludeCache);
+    }
   }
 
   void start(WorkQueue workQueue) {
