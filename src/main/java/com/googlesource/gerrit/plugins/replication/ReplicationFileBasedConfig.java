@@ -19,6 +19,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
+import com.google.gerrit.server.account.GroupIncludeCache;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
@@ -56,14 +57,17 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private final GroupBackend groupBackend;
   private final FileBasedConfig config;
   private final ReplicationStateListener stateLog;
+  private final GroupIncludeCache groupIncludeCache;
 
   @Inject
   public ReplicationFileBasedConfig(final Injector injector, final SitePaths site,
       final RemoteSiteUser.Factory ruf, final PluginUser pu,
       final GitRepositoryManager grm,
       final GroupBackend gb,
-      final ReplicationStateListener stateLog) throws ConfigInvalidException, IOException {
+      final ReplicationStateListener stateLog,
+      final GroupIncludeCache groupIncludeCache) throws ConfigInvalidException, IOException {
     this.cfgPath = site.etc_dir.resolve("replication.config");
+    this.groupIncludeCache = groupIncludeCache;
     this.injector = injector;
     this.replicationUserFactory = ruf;
     this.pluginUser = pu;
@@ -162,7 +166,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
 
       Destination destination =
           new Destination(injector, c, config, replicationUserFactory,
-              pluginUser, gitRepositoryManager, groupBackend, stateLog);
+              pluginUser, gitRepositoryManager, groupBackend, stateLog, groupIncludeCache);
 
       if (!destination.isSingleProjectMatch()) {
         for (URIish u : c.getURIs()) {
