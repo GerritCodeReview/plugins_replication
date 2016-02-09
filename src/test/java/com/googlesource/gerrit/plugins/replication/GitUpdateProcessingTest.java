@@ -27,8 +27,9 @@ import static org.easymock.EasyMock.verify;
 import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Change;
-import com.google.gerrit.reviewdb.server.ChangeAccess;
+import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
+import com.google.gerrit.server.notedb.ChangeNotes;
 import com.google.gwtorm.client.KeyUtil;
 import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
@@ -51,7 +52,7 @@ public class GitUpdateProcessingTest extends TestCase {
   }
 
   private EventDispatcher dispatcherMock;
-  private ChangeAccess changeAccessMock;
+  private ChangeNotes notesMock;
   private GitUpdateProcessing gitUpdateProcessing;
 
   @Override
@@ -59,15 +60,20 @@ public class GitUpdateProcessingTest extends TestCase {
     super.setUp();
     dispatcherMock = createMock(EventDispatcher.class);
     replay(dispatcherMock);
-    changeAccessMock = createNiceMock(ChangeAccess.class);
-    replay(changeAccessMock);
     ReviewDb reviewDbMock = createNiceMock(ReviewDb.class);
-    expect(reviewDbMock.changes()).andReturn(changeAccessMock).anyTimes();
     replay(reviewDbMock);
     SchemaFactory<ReviewDb> schemaMock = createMock(SchemaFactory.class);
     expect(schemaMock.open()).andReturn(reviewDbMock).anyTimes();
     replay(schemaMock);
-    gitUpdateProcessing = new GitUpdateProcessing(dispatcherMock, schemaMock);
+    notesMock = createNiceMock(ChangeNotes.class);
+    replay(notesMock);
+    ChangeNotes.Factory notesFactoryMock = createMock(ChangeNotes.Factory.class);
+    expect(notesFactoryMock.create(eq(reviewDbMock),
+        anyObject(Project.NameKey.class), anyObject(Change.Id.class)))
+            .andReturn(notesMock).anyTimes();
+    replay(notesFactoryMock);
+    gitUpdateProcessing =
+        new GitUpdateProcessing(dispatcherMock, schemaMock, notesFactoryMock);
   }
 
   public void testHeadRefReplicated() throws URISyntaxException {
@@ -88,9 +94,9 @@ public class GitUpdateProcessingTest extends TestCase {
 
   public void testChangeRefReplicated() throws URISyntaxException, OrmException {
     Change expectedChange = new Change(null, null, null, null, null);
-    reset(changeAccessMock);
-    expect(changeAccessMock.get(anyObject(Change.Id.class))).andReturn(expectedChange);
-    replay(changeAccessMock);
+    reset(notesMock);
+    expect(notesMock.getChange()).andReturn(expectedChange);
+    replay(notesMock);
 
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =

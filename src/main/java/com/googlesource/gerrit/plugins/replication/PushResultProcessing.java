@@ -21,6 +21,7 @@ import com.google.gerrit.reviewdb.client.PatchSet;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.events.RefEvent;
+import com.google.gerrit.server.notedb.ChangeNotes;
 import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
 
@@ -163,11 +164,14 @@ public abstract class PushResultProcessing {
 
     private final EventDispatcher dispatcher;
     private final SchemaFactory<ReviewDb> schema;
+    private final ChangeNotes.Factory notesFactory;
 
     public GitUpdateProcessing(EventDispatcher dispatcher,
-        SchemaFactory<ReviewDb> schema) {
+        SchemaFactory<ReviewDb> schema,
+        ChangeNotes.Factory notesFactory) {
       this.dispatcher = dispatcher;
       this.schema = schema;
+      this.notesFactory = notesFactory;
     }
 
     @Override
@@ -192,7 +196,7 @@ public abstract class PushResultProcessing {
     private void postEvent(String project, String ref, RefEvent event) {
       if (PatchSet.isChangeRef(ref)) {
         try (ReviewDb db = schema.open()) {
-          Change change = retrieveChange(ref, db);
+          Change change = retrieveChange(project, ref, db);
           if (change != null) {
             dispatcher.postEvent(change, event, db);
           }
@@ -205,10 +209,12 @@ public abstract class PushResultProcessing {
       }
     }
 
-    private Change retrieveChange(String ref, ReviewDb db) throws OrmException {
+    private Change retrieveChange(String project, String ref, ReviewDb db)
+        throws OrmException {
       PatchSet.Id id = PatchSet.Id.fromRef(ref);
-      Change change = db.changes().get(id.getParentKey());
-      return change;
+      return notesFactory
+          .create(db, new Project.NameKey(project), id.getParentKey())
+          .getChange();
     }
   }
 }
