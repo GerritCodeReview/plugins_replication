@@ -40,6 +40,6 @@ java_test(
     '//lib:gwtorm',
     '//lib:junit',
     '//lib/easymock:easymock',
-    '//lib/jgit:jgit',
+    '@jgit//org.eclipse.jgit:jgit',
   ],
 )
