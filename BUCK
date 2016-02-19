@@ -34,12 +34,7 @@ java_test(
   source_under_test = [':replication__plugin'],
   deps = [
     ':replication__plugin',
-    '//gerrit-common:server',
-    '//gerrit-reviewdb:server',
-    '//gerrit-server:server',
-    '//lib:gwtorm',
-    '//lib:junit',
-    '//lib/easymock:easymock',
-    '@jgit//org.eclipse.jgit:jgit',
+    '//gerrit-acceptance-framework:lib'
+    '//gerrit-plugin-api:lib',
   ],
 )
