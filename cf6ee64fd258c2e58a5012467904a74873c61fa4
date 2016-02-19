@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdd7c47d_4a75d357",
+        "filename": "BUCK",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-02-19T08:00:50Z",
+      "side": 1,
+      "message": "This is a wrong fix. Well, the BUCK file was already wrong before it, to start with. The correct fix is to replace all this mess with (differently) predefined vars:\n\n  GERRIT_PLUGIN_API +\n  GERRIT_TESTS\n\nthat are available in standalone and in tree build modes. Or, substitute the varaibles and use them directly for core plugins, where we don\u0027t care about standalone build mode.\n\n\nWe are maintaining the cookbook-plugin to demonstrate all aspects of plugin developments and build toolchain is one of them, obviously. So, just consult how it\u0027s done there for this and other plugin changes. So `cat cookbook-plugin/BUCK` reveals:\n\n  include_defs(\u0027//bucklets/gerrit_plugin.bucklet\u0027)\n  [...]\n  java_test(\n    name \u003d \u0027cookbook_tests\u0027,\n    srcs \u003d glob([\u0027src/test/java/**/*IT.java\u0027]),\n    labels \u003d [\u0027cookbook-plugin\u0027],\n    source_under_test \u003d [\u0027:cookbook-plugin__plugin\u0027],\n    deps \u003d GERRIT_PLUGIN_API + GERRIT_TESTS + [\n      \u0027:cookbook-plugin__plugin\u0027,\n    ],\n  )",
+      "revId": "cf6ee64fd258c2e58a5012467904a74873c61fa4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
