@@ -17,7 +17,6 @@ package com.googlesource.gerrit.plugins.replication;
 import static org.easymock.EasyMock.anyObject;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.createNiceMock;
-import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
@@ -25,11 +24,7 @@ import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 
 import com.google.gerrit.common.EventDispatcher;
-import com.google.gerrit.reviewdb.client.Branch;
-import com.google.gerrit.reviewdb.client.Change;
-import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
-import com.google.gerrit.server.notedb.ChangeNotes;
 import com.google.gwtorm.client.KeyUtil;
 import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
@@ -52,7 +47,6 @@ public class GitUpdateProcessingTest extends TestCase {
   }
 
   private EventDispatcher dispatcherMock;
-  private ChangeNotes notesMock;
   private GitUpdateProcessing gitUpdateProcessing;
 
   @Override
@@ -65,24 +59,16 @@ public class GitUpdateProcessingTest extends TestCase {
     SchemaFactory<ReviewDb> schemaMock = createMock(SchemaFactory.class);
     expect(schemaMock.open()).andReturn(reviewDbMock).anyTimes();
     replay(schemaMock);
-    notesMock = createNiceMock(ChangeNotes.class);
-    replay(notesMock);
-    ChangeNotes.Factory notesFactoryMock = createMock(ChangeNotes.Factory.class);
-    expect(notesFactoryMock.create(eq(reviewDbMock),
-        anyObject(Project.NameKey.class), anyObject(Change.Id.class)))
-            .andReturn(notesMock).anyTimes();
-    replay(notesFactoryMock);
-    gitUpdateProcessing =
-        new GitUpdateProcessing(dispatcherMock, schemaMock, notesFactoryMock);
+    gitUpdateProcessing = new GitUpdateProcessing(dispatcherMock, schemaMock);
   }
 
-  public void testHeadRefReplicated() throws URISyntaxException {
+  public void testHeadRefReplicated() throws URISyntaxException, OrmException {
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent("someProject", "refs/heads/master", "someHost",
             RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    dispatcherMock.postEvent(anyObject(Branch.NameKey.class),
-        RefReplicatedEventEquals.eqEvent(expectedEvent));
+    dispatcherMock.postEvent(RefReplicatedEventEquals.eqEvent(expectedEvent),
+        anyObject(ReviewDb.class));
     expectLastCall().once();
     replay(dispatcherMock);
 
@@ -93,17 +79,11 @@ public class GitUpdateProcessingTest extends TestCase {
   }
 
   public void testChangeRefReplicated() throws URISyntaxException, OrmException {
-    Change expectedChange = new Change(null, null, null, null, null);
-    reset(notesMock);
-    expect(notesMock.getChange()).andReturn(expectedChange);
-    replay(notesMock);
-
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent("someProject", "refs/changes/01/1/1", "someHost",
             RefPushResult.FAILED, RemoteRefUpdate.Status.REJECTED_NONFASTFORWARD);
-    dispatcherMock.postEvent(eq(expectedChange),
-        RefReplicatedEventEquals.eqEvent(expectedEvent),
+    dispatcherMock.postEvent(RefReplicatedEventEquals.eqEvent(expectedEvent),
         anyObject(ReviewDb.class));
     expectLastCall().once();
     replay(dispatcherMock);
@@ -114,12 +94,13 @@ public class GitUpdateProcessingTest extends TestCase {
     verify(dispatcherMock);
   }
 
-  public void testOnAllNodesReplicated() {
+  public void testOnAllNodesReplicated() throws OrmException {
     reset(dispatcherMock);
     RefReplicationDoneEvent expectedDoneEvent =
         new RefReplicationDoneEvent("someProject", "refs/heads/master", 5);
-    dispatcherMock.postEvent(anyObject(Branch.NameKey.class),
-        RefReplicationDoneEventEquals.eqEvent(expectedDoneEvent));
+    dispatcherMock.postEvent(
+        RefReplicationDoneEventEquals.eqEvent(expectedDoneEvent),
+        anyObject(ReviewDb.class));
     expectLastCall().once();
     replay(dispatcherMock);
 
