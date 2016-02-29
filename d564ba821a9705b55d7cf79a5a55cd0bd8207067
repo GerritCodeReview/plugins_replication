@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2e0153f_62b1d60d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/GitUpdateProcessingTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-02-29T01:23:30Z",
+      "side": 1,
+      "message": "nit: wrap this line",
+      "revId": "d564ba821a9705b55d7cf79a5a55cd0bd8207067",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
