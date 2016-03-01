@@ -22,6 +22,30 @@
       "revId": "48cfb3e26fe6105955dc035c2770174ad63b84c1",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c2e0153f_02cf2a29",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-01T13:07:02Z",
+      "side": 1,
+      "message": "Agreed.  Will abandon again.",
+      "parentUuid": "a20c01ef_7915075e",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "48cfb3e26fe6105955dc035c2770174ad63b84c1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
