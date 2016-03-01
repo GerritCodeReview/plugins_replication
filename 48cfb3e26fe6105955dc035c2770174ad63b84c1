@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a20c01ef_7915075e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-01T13:00:41Z",
+      "side": 1,
+      "message": "In I0cb88a2b4, I changed the replication plugin to use the\nnew postEvent for generic Event type. That method will check\nif the ref represent a change and will fire it as a ChangeEvent otherwise as a RefEvent.\n\nEven if the replication plugin does not set any change attributes, prior this change visibility check was done as if it was a ChangeEvent for RefReplicatedEvent that represent a change.\n\nThis change introduce a behaviour change. Example, a RefReplicatedEvent of a draft change would be visible to anyone allowed to see the project instead of being visible only to the ones who can see the draft change.\n\nI would prefer to not change the behaviour but maybe you have arguments that will convince me.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "48cfb3e26fe6105955dc035c2770174ad63b84c1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
