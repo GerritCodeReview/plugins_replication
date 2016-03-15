@@ -14,6 +14,8 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.gerrit.common.EventDispatcher;
+import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.account.GroupIncludeCache;
@@ -31,6 +33,7 @@ public class DestinationFactory {
   private final GroupBackend groupBackend;
   private final ReplicationStateListener stateLog;
   private final GroupIncludeCache groupIncludeCache;
+  private final DynamicItem<EventDispatcher> eventDispatcher;
 
   @Inject
   public DestinationFactory(Injector injector,
@@ -39,7 +42,8 @@ public class DestinationFactory {
       GitRepositoryManager gitRepositoryManager,
       GroupBackend groupBackend,
       ReplicationStateListener stateLog,
-      GroupIncludeCache groupIncludeCache) {
+      GroupIncludeCache groupIncludeCache,
+      DynamicItem<EventDispatcher> eventDispatcher) {
     this.injector = injector;
     this.replicationUserFactory = replicationUserFactory;
     this.pluginUser = pluginUser;
@@ -47,10 +51,12 @@ public class DestinationFactory {
     this.groupBackend = groupBackend;
     this.stateLog = stateLog;
     this.groupIncludeCache = groupIncludeCache;
+    this.eventDispatcher = eventDispatcher;
   }
 
   Destination create(DestinationConfiguration config) {
     return new Destination(injector, config, replicationUserFactory, pluginUser,
-        gitRepositoryManager, groupBackend, stateLog, groupIncludeCache);
+        gitRepositoryManager, groupBackend, stateLog, groupIncludeCache,
+        eventDispatcher);
   }
 }
