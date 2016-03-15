@@ -46,6 +46,30 @@
       "revId": "eb11c16e18a9633e6c451de9f828dd4114fda36d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc3302f3_ec43cb8b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1013722
+      },
+      "writtenOn": "2016-03-15T15:27:49Z",
+      "side": 1,
+      "message": "Here are the changes that I mentioned in my other comment:\nhttps://gerrit-review.googlesource.com/#/q/status:open+topic:KillReplication",
+      "parentUuid": "3c259aa0_f68ba0da",
+      "range": {
+        "startLine": 243,
+        "startChar": 6,
+        "endLine": 243,
+        "endChar": 30
+      },
+      "revId": "eb11c16e18a9633e6c451de9f828dd4114fda36d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
