@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c259aa0_d688a4e0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T14:47:32Z",
+      "side": 1,
+      "message": "nit: wrap long lines",
+      "revId": "51d49bf81e5935a2b4c36ee0f940eb2d0e3abff7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c40f242_b02638fe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T14:47:32Z",
+      "side": 1,
+      "message": "nit: missing space after :",
+      "range": {
+        "startLine": 562,
+        "startChar": 20,
+        "endLine": 562,
+        "endChar": 21
+      },
+      "revId": "51d49bf81e5935a2b4c36ee0f940eb2d0e3abff7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
