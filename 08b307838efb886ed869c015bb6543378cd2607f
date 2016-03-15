@@ -1,0 +1,245 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c259aa0_f65e004a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T01:38:32Z",
+      "side": 1,
+      "message": "String concatenation is not necessary here.\n\nSame in the log messages below.",
+      "range": {
+        "startLine": 49,
+        "startChar": 31,
+        "endLine": 49,
+        "endChar": 34
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c259aa0_d65b0458",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T01:38:32Z",
+      "side": 1,
+      "message": "What happens to the out and err streams when an error occurs?",
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c259aa0_b658885c",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T01:38:32Z",
+      "side": 1,
+      "message": "projects",
+      "range": {
+        "startLine": 150,
+        "startChar": 15,
+        "endLine": 150,
+        "endChar": 22
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c259aa0_96558c26",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T01:38:32Z",
+      "side": 1,
+      "message": "references",
+      "range": {
+        "startLine": 150,
+        "startChar": 50,
+        "endLine": 150,
+        "endChar": 58
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c40f242_30b7e8ff",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T01:38:32Z",
+      "side": 1,
+      "message": "comma after this word",
+      "range": {
+        "startLine": 152,
+        "startChar": 40,
+        "endLine": 152,
+        "endChar": 48
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c259aa0_76dc30fe",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T01:38:32Z",
+      "side": 1,
+      "message": "NOTE",
+      "range": {
+        "startLine": 152,
+        "startChar": 1,
+        "endLine": 152,
+        "endChar": 5
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c259aa0_56e134ba",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T01:38:32Z",
+      "side": 1,
+      "message": "the delete-project",
+      "range": {
+        "startLine": 152,
+        "startChar": 49,
+        "endLine": 152,
+        "endChar": 63
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c40f242_10bce4dd",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T01:38:32Z",
+      "side": 1,
+      "message": "on the",
+      "range": {
+        "startLine": 153,
+        "startChar": 26,
+        "endLine": 153,
+        "endChar": 28
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c259aa0_36e6b8d4",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T01:38:32Z",
+      "side": 1,
+      "message": "why not just \"gerritUser\"?",
+      "range": {
+        "startLine": 155,
+        "startChar": 12,
+        "endLine": 155,
+        "endChar": 33
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c40f242_f0d04018",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T01:38:32Z",
+      "side": 1,
+      "message": "gerritPassword?",
+      "range": {
+        "startLine": 160,
+        "startChar": 12,
+        "endLine": 160,
+        "endChar": 37
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c40f242_d0cd3c80",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T01:38:32Z",
+      "side": 1,
+      "message": "Can this be defined in secure.config?",
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
