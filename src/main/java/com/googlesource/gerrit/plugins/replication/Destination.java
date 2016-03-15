@@ -238,6 +238,14 @@ public class Destination {
     return cnt;
   }
 
+  public void abortAll() {
+    synchronized (stateLock) {
+      pool.getQueue().clear();
+      inFlight.clear();
+      pending.clear();
+    }
+  }
+
   private static int getInt(
       RemoteConfig rc, Config cfg, String name, int defValue) {
     return cfg.getInt("remote", rc.getName(), name, defValue);
