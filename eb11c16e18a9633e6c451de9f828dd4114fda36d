@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c40f242_3013689f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-15T12:50:48Z",
+      "side": 1,
+      "message": "This will remove tasks from the queue but it won\u0027t cancel them, right?\n\nWas it your intention to cancel the running ones?",
+      "range": {
+        "startLine": 243,
+        "startChar": 6,
+        "endLine": 243,
+        "endChar": 30
+      },
+      "revId": "eb11c16e18a9633e6c451de9f828dd4114fda36d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
