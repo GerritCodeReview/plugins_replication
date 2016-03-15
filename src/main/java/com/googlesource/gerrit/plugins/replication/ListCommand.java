@@ -47,7 +47,7 @@ final class ListCommand extends SshCommand {
   protected void run() {
     for (Destination d : config.getDestinations(FilterType.ALL)) {
       if (matches(d.getRemoteConfig().getName())) {
-        printRemote(d, detail);
+        printRemote(d);
       }
     }
   }
@@ -68,7 +68,7 @@ final class ListCommand extends SshCommand {
     }
   }
 
-  private void printRemote(Destination d, boolean detail) {
+  private void printRemote(Destination d) {
     if (json) {
       JsonObject obj = new JsonObject();
       obj.addProperty("Remote", d.getRemoteConfig().getName());
