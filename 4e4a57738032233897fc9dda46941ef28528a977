@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c259aa0_f6a16071",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T10:06:04Z",
+      "side": 1,
+      "message": "Why are the \"\\n\" changed to \"%n\"?",
+      "range": {
+        "startLine": 48,
+        "startChar": 70,
+        "endLine": 48,
+        "endChar": 71
+      },
+      "revId": "4e4a57738032233897fc9dda46941ef28528a977",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c259aa0_d69e6429",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T10:06:04Z",
+      "side": 1,
+      "message": "references",
+      "range": {
+        "startLine": 150,
+        "startChar": 51,
+        "endLine": 150,
+        "endChar": 60
+      },
+      "revId": "4e4a57738032233897fc9dda46941ef28528a977",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c40f242_303a481d",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-15T10:06:04Z",
+      "side": 1,
+      "message": "this should be a tab",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 8
+      },
+      "revId": "4e4a57738032233897fc9dda46941ef28528a977",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
