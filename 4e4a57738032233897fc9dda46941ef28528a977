@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dc19de73_130cec1b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-15T10:13:29Z",
+      "side": 1,
+      "message": "In String.format %n is the platform-specific line separator.",
+      "parentUuid": "3c259aa0_f6a16071",
+      "range": {
+        "startLine": 48,
+        "startChar": 70,
+        "endLine": 48,
+        "endChar": 71
+      },
+      "revId": "4e4a57738032233897fc9dda46941ef28528a977",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c259aa0_d69e6429",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "f7207d84_84fec6c9",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-15T10:13:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c259aa0_d69e6429",
+      "range": {
+        "startLine": 150,
+        "startChar": 51,
+        "endLine": 150,
+        "endChar": 60
+      },
+      "revId": "4e4a57738032233897fc9dda46941ef28528a977",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c40f242_303a481d",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 8
@@ -59,6 +107,30 @@
       "writtenOn": "2016-03-15T10:06:04Z",
       "side": 1,
       "message": "this should be a tab",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 8
+      },
+      "revId": "4e4a57738032233897fc9dda46941ef28528a977",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7207d84_a403c2a6",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-15T10:13:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c40f242_303a481d",
       "range": {
         "startLine": 153,
         "startChar": 0,
