@@ -57,7 +57,7 @@ public abstract class PushResultProcessing {
     // Default doing nothing
   }
 
-  private static String resolveNodeName(URIish uri) {
+  static String resolveNodeName(URIish uri) {
     StringBuilder sb = new StringBuilder();
     if (uri.isRemote()) {
       sb.append(uri.getHost());
