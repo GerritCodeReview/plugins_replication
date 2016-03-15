@@ -71,7 +71,7 @@ final class ListCommand extends SshCommand {
   private void printRemote(Destination d, boolean detail) {
     if (json) {
       JsonObject obj = new JsonObject();
-      obj.addProperty("remote", d.getRemoteConfig().getName());
+      obj.addProperty("Remote", d.getRemoteConfig().getName());
       addProperty(obj, "Url", d.getUrls());
       if (detail) {
         addProperty(obj, "AdminUrl", d.getAdminUrls());
