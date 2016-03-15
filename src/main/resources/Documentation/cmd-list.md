@@ -3,7 +3,7 @@
 
 NAME
 ----
-@PLUGIN@ list - List specific remote destinations information
+@PLUGIN@ list - List remote destination information.
 
 SYNOPSIS
 --------
@@ -16,8 +16,7 @@ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list
 
 DESCRIPTION
 -----------
-List all remote destinations information, or only those whose
-name match the pattern given on the command line.
+Lists the name and URL for remote destinations.
 
 ACCESS
 ------
@@ -25,19 +24,17 @@ Caller must be a member of the privileged 'Administrators' group.
 
 SCRIPTING
 ---------
-This command is intended to be used in scripts. It is very useful
-for replication status check for administrators as well.
+This command is intended to be used in scripts.
 
 OPTIONS
 -------
 
 `--remote <PATTERN>`
-:	Only print destinations whose remote name contains
-	the substring `PATTERN`.
+:	Only print information for destinations whose remote name matches
+	the `PATTERN`.
 
 `--detail`
-:	Print remote detail information: Name, Url, AdminUrl,
-	AuthGroup and Project.
+:	Print additional detailed information: AdminUrl, AuthGroup and Project.
 
 `--json`
 :	Output in json format.

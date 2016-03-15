@@ -29,12 +29,12 @@ import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import org.kohsuke.args4j.Option;
 
 @RequiresCapability(GlobalCapability.ADMINISTRATE_SERVER)
-@CommandMetaData(name = "list", description = "List specific remote destinations information")
+@CommandMetaData(name = "list", description = "List remote destination information")
 final class ListCommand extends SshCommand {
   @Option(name = "--remote", metaVar = "PATTERN", usage = "pattern to match remote name on")
   private String remote;
 
-  @Option(name = "--detail", usage = "print remote destination detail information")
+  @Option(name = "--detail", usage = "output detailed information")
   private boolean detail;
 
   @Option(name = "--json", usage = "output in json format")
