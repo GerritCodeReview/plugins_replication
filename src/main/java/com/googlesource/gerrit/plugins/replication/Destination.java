@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Lists;
@@ -96,6 +97,17 @@ public class Destination {
 
   protected static enum RetryReason {
     TRANSPORT_ERROR, COLLISION, REPOSITORY_MISSING;
+  }
+
+  public static class QueueInfo {
+    public final Map<URIish, PushOne> pending;
+    public final Map<URIish, PushOne> inFlight;
+
+    public QueueInfo(Map<URIish, PushOne> pending,
+        Map<URIish, PushOne> inFlight) {
+      this.pending = ImmutableMap.copyOf(pending);
+      this.inFlight = ImmutableMap.copyOf(inFlight);
+    }
   }
 
   protected Destination(final Injector injector,
@@ -200,6 +212,12 @@ public class Destination {
       }
       builder.add(p);
       addRecursiveParents(p, builder, groupIncludeCache);
+    }
+  }
+
+  public QueueInfo getQueueInfo() {
+    synchronized (stateLock) {
+      return new QueueInfo(pending, inFlight);
     }
   }
 

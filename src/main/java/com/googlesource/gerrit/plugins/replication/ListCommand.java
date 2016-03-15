@@ -74,6 +74,9 @@ final class ListCommand extends SshCommand {
       obj.addProperty("Remote", d.getRemoteConfig().getName());
       addProperty(obj, "Url", d.getUrls());
       if (detail) {
+        Destination.QueueInfo q = d.getQueueInfo();
+        obj.addProperty("InFlight", q.inFlight.size());
+        obj.addProperty("Pending", q.pending.size());
         addProperty(obj, "AdminUrl", d.getAdminUrls());
         addProperty(obj, "AuthGroup", d.getAuthGroupNames());
         addProperty(obj, "Project", d.getProjects());
@@ -91,6 +94,14 @@ final class ListCommand extends SshCommand {
       }
 
       if (detail) {
+        Destination.QueueInfo q = d.getQueueInfo();
+        out.append("In Flight: ")
+          .append(q.inFlight.size())
+          .append("\n");
+        out.append("Pending: ")
+          .append(q.pending.size())
+          .append("\n");
+
         for (String adminUrl : d.getAdminUrls()) {
           out.append("AdminUrl: ")
             .append(adminUrl)
