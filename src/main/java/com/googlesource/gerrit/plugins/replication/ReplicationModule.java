@@ -66,6 +66,8 @@ class ReplicationModule extends AbstractModule {
 
     EventTypes.register(RefReplicatedEvent.TYPE, RefReplicatedEvent.class);
     EventTypes.register(RefReplicationDoneEvent.TYPE, RefReplicationDoneEvent.class);
+    EventTypes.register(
+        ReplicationScheduledEvent.TYPE, ReplicationScheduledEvent.class);
     bind(SshSessionFactory.class).toProvider(
         ReplicationSshSessionFactoryProvider.class);
   }
