@@ -14,14 +14,18 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;
+
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Lists;
+import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.extensions.config.FactoryModule;
 import com.google.gerrit.reviewdb.client.AccountGroup;
+import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.reviewdb.server.ReviewDb;
@@ -61,6 +65,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
@@ -76,6 +81,7 @@ public class Destination {
   private volatile WorkQueue.Executor pool;
   private final PerThreadRequestScope.Scoper threadScoper;
   private final DestinationConfiguration config;
+  private final EventDispatcher eventDispatcher;
 
   protected static enum RetryReason {
     TRANSPORT_ERROR, COLLISION, REPOSITORY_MISSING;
@@ -99,8 +105,10 @@ public class Destination {
       final GitRepositoryManager gitRepositoryManager,
       final GroupBackend groupBackend,
       final ReplicationStateListener stateLog,
-      final GroupIncludeCache groupIncludeCache) {
+      final GroupIncludeCache groupIncludeCache,
+      final EventDispatcher eventDispatcher) {
     config = cfg;
+    this.eventDispatcher = eventDispatcher;
     gitManager = gitRepositoryManager;
     this.stateLog = stateLog;
 
@@ -255,10 +263,13 @@ public class Destination {
       PushOne e = pending.get(uri);
       if (e == null) {
         e = opFactory.create(project, uri);
-        pool.schedule(e, config.getDelay(), TimeUnit.SECONDS);
+        e.addRef(ref);
+        scheduleTask(e, config.getDelay(), TimeUnit.SECONDS);
         pending.put(uri, e);
+      } else if (!e.getRefs().contains(ref)) {
+        e.addRef(ref);
+        postEvent(e, ref);
       }
-      e.addRef(ref);
       state.increasePushTaskCount(project.get(), ref);
       e.addState(ref, state);
       repLog.info("scheduled {}:{} => {} to run after {}s", project, ref,
@@ -345,13 +356,13 @@ public class Destination {
         pending.put(uri, pushOp);
         switch (reason) {
           case COLLISION:
-            pool.schedule(pushOp, config.getDelay(), TimeUnit.SECONDS);
+            scheduleTask(pushOp, config.getDelay(), TimeUnit.SECONDS);
             break;
           case TRANSPORT_ERROR:
           case REPOSITORY_MISSING:
           default:
             pushOp.setToRetry();
-            pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
+            scheduleTask(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
             break;
         }
       }
@@ -517,10 +528,31 @@ public class Destination {
     return config.getRemoteConfig().getName();
   }
 
+  private void scheduleTask(PushOne pushOp, int delay, TimeUnit unit) {
+    postEvent(pushOp);
+    pool.schedule(pushOp, delay, unit);
+  }
+
   private static boolean matches(URIish uri, String urlMatch) {
     if (urlMatch == null || urlMatch.equals("") || urlMatch.equals("*")) {
       return true;
     }
     return uri.toString().contains(urlMatch);
+  }
+
+  private void postEvent(PushOne pushOp) {
+    postEvent(pushOp, null);
+  }
+
+  private void postEvent(PushOne pushOp, String inputRef) {
+    Set<String> refs = inputRef == null
+        ? pushOp.getRefs() : ImmutableSet.of(inputRef);
+    Project.NameKey project = pushOp.getProjectNameKey();
+    String targetNode = resolveNodeName(pushOp.getURI());
+    for (String ref :refs) {
+      ReplicationScheduledEvent event =
+          new ReplicationScheduledEvent(project.get(), ref, targetNode);
+      eventDispatcher.postEvent(new Branch.NameKey(project, ref), event);
+    }
   }
 }

@@ -14,6 +14,9 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.common.FileUtil;
+
+import com.google.gerrit.common.EventDispatcher;
+
 import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.account.GroupIncludeCache;
@@ -47,6 +50,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private final WorkQueue workQueue;
   private final ReplicationStateListener stateLog;
   private final GroupIncludeCache groupIncludeCache;
+  private final EventDispatcher eventDispatcher;
 
   @Inject
   public AutoReloadConfigDecorator(Injector injector,
@@ -57,7 +61,8 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
       GroupBackend gb,
       WorkQueue workQueue,
       ReplicationStateListener stateLog,
-      GroupIncludeCache groupIncludeCache)
+      GroupIncludeCache groupIncludeCache,
+      EventDispatcher eventDispatcher)
       throws ConfigInvalidException, IOException {
     this.injector = injector;
     this.site = site;
@@ -66,6 +71,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     this.gitRepositoryManager = grm;
     this.groupBackend = gb;
     this.groupIncludeCache = groupIncludeCache;
+    this.eventDispatcher = eventDispatcher;
     this.currentConfig = loadConfig();
     this.currentConfigTs = getLastModified(currentConfig);
     this.workQueue = workQueue;
@@ -80,7 +86,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
       throws ConfigInvalidException, IOException {
     return new ReplicationFileBasedConfig(injector, site, remoteSiteUserFactory,
         pluginUser, gitRepositoryManager, groupBackend, stateLog,
-        groupIncludeCache);
+        groupIncludeCache, eventDispatcher);
   }
 
   private synchronized boolean isAutoReload() {
