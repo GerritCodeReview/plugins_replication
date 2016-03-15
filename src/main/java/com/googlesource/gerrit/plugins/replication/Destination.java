@@ -15,6 +15,8 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;
+import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.NON_EXISTING;
+import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.REJECTED_OTHER_REASON;
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
@@ -50,12 +52,15 @@ import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
 
+import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
+
 import org.apache.commons.io.FilenameUtils;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
 import org.slf4j.Logger;
 
@@ -271,7 +276,7 @@ public class Destination {
         pending.put(uri, e);
       } else if (!e.getRefs().contains(ref)) {
         e.addRef(ref);
-        postEvent(e, ref);
+        postReplicationScheduledEvent(e, ref);
       }
       state.increasePushTaskCount(project.get(), ref);
       e.addState(ref, state);
@@ -345,7 +350,6 @@ public class Destination {
           // when notifying it is starting (with pending lock protection),
           // it will see it was canceled and then it will do nothing with
           // pending list and it will not execute its run implementation.
-
           pendingPushOp.cancel();
           pending.remove(uri);
 
@@ -362,7 +366,15 @@ public class Destination {
             scheduleTask(pushOp, config.getDelay(), TimeUnit.SECONDS);
             break;
           case TRANSPORT_ERROR:
+            pushOp.setToRetry();
+            postReplicationFailedEvent(pushOp, REJECTED_OTHER_REASON);
+            scheduleTask(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
+            break;
           case REPOSITORY_MISSING:
+            pushOp.setToRetry();
+            postReplicationFailedEvent(pushOp, NON_EXISTING);
+            scheduleTask(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
+            break;
           default:
             pushOp.setToRetry();
             scheduleTask(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
@@ -531,7 +543,7 @@ public class Destination {
   }
 
   private void scheduleTask(PushOne pushOp, int delay, TimeUnit unit) {
-    postEvent(pushOp);
+    postReplicationScheduledEvent(pushOp);
     pool.schedule(pushOp, delay, unit);
   }
 
@@ -542,11 +554,11 @@ public class Destination {
     return uri.toString().contains(urlMatch);
   }
 
-  private void postEvent(PushOne pushOp) {
-    postEvent(pushOp, null);
+  private void postReplicationScheduledEvent(PushOne pushOp) {
+    postReplicationScheduledEvent(pushOp, null);
   }
 
-  private void postEvent(PushOne pushOp, String inputRef) {
+  private void postReplicationScheduledEvent(PushOne pushOp, String inputRef) {
     Set<String> refs = inputRef == null
         ? pushOp.getRefs() : ImmutableSet.of(inputRef);
     Project.NameKey project = pushOp.getProjectNameKey();
@@ -557,4 +569,17 @@ public class Destination {
       eventDispatcher.postEvent(new Branch.NameKey(project, ref), event);
     }
   }
+
+  private void postReplicationFailedEvent(PushOne pushOp,
+      RemoteRefUpdate.Status status) {
+    Project.NameKey project = pushOp.getProjectNameKey();
+    String targetNode = resolveNodeName(pushOp.getURI());
+    for (String ref : pushOp.getRefs()) {
+      RefReplicatedEvent event =
+          new RefReplicatedEvent(project.get(), ref, targetNode,
+              RefPushResult.FAILED, status);
+      eventDispatcher.postEvent(new Branch.NameKey(project, ref), event);
+    }
+  }
+
 }
