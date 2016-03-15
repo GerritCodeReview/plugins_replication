@@ -199,6 +199,14 @@ public class Destination {
     return cnt;
   }
 
+  public void abortAll() {
+    synchronized (stateLock) {
+      pool.shutdownNow();
+      inFlight.clear();
+      pending.clear();
+    }
+  }
+
   private boolean isVisible(final Project.NameKey project,
       ReplicationState... states) {
     try {
