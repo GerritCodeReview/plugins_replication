@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f7207d84_e43bfa7e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-15T09:33:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c259aa0_f65e004a",
+      "range": {
+        "startLine": 49,
+        "startChar": 31,
+        "endLine": 49,
+        "endChar": 34
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c259aa0_d65b0458",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
         "patchSetId": 7
@@ -36,6 +60,24 @@
       "writtenOn": "2016-03-15T01:38:32Z",
       "side": 1,
       "message": "What happens to the out and err streams when an error occurs?",
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc19de73_d3f43438",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-15T09:33:13Z",
+      "side": 1,
+      "message": "According to [1] the streams will be closed\n\n[1] http://download.eclipse.org/jgit/docs/jgit-2.0.0.201206130900-r/apidocs/org/eclipse/jgit/util/io/StreamCopyThread.html",
+      "parentUuid": "3c259aa0_d65b0458",
       "revId": "08b307838efb886ed869c015bb6543378cd2607f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -81,6 +123,54 @@
         "startChar": 50,
         "endLine": 150,
         "endChar": 58
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc19de73_f32610b1",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-15T09:33:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c259aa0_96558c26",
+      "range": {
+        "startLine": 150,
+        "startChar": 50,
+        "endLine": 150,
+        "endChar": 58
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7207d84_444bee03",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-15T09:33:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c259aa0_b658885c",
+      "range": {
+        "startLine": 150,
+        "startChar": 15,
+        "endLine": 150,
+        "endChar": 22
       },
       "revId": "08b307838efb886ed869c015bb6543378cd2607f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
@@ -157,6 +247,78 @@
     },
     {
       "key": {
+        "uuid": "f7207d84_6448ea06",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-15T09:33:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c259aa0_56e134ba",
+      "range": {
+        "startLine": 152,
+        "startChar": 49,
+        "endLine": 152,
+        "endChar": 63
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc19de73_b3209893",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-15T09:33:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c40f242_30b7e8ff",
+      "range": {
+        "startLine": 152,
+        "startChar": 40,
+        "endLine": 152,
+        "endChar": 48
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc19de73_d323149f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-15T09:33:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c259aa0_76dc30fe",
+      "range": {
+        "startLine": 152,
+        "startChar": 1,
+        "endLine": 152,
+        "endChar": 5
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c40f242_10bce4dd",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 7
@@ -180,6 +342,30 @@
     },
     {
       "key": {
+        "uuid": "dc19de73_931d9c55",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-15T09:33:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c40f242_10bce4dd",
+      "range": {
+        "startLine": 153,
+        "startChar": 26,
+        "endLine": 153,
+        "endChar": 28
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c259aa0_36e6b8d4",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 7
@@ -191,6 +377,30 @@
       "writtenOn": "2016-03-15T01:38:32Z",
       "side": 1,
       "message": "why not just \"gerritUser\"?",
+      "range": {
+        "startLine": 155,
+        "startChar": 12,
+        "endLine": 155,
+        "endChar": 33
+      },
+      "revId": "08b307838efb886ed869c015bb6543378cd2607f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7207d84_c44d1e14",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-15T09:33:13Z",
+      "side": 1,
+      "message": "Actually the whole section about replicateTo user/password is not implemented in this patch, so it will be removed.",
+      "parentUuid": "3c259aa0_36e6b8d4",
       "range": {
         "startLine": 155,
         "startChar": 12,
