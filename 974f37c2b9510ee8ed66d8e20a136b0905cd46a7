@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fc3302f3_6c823bf7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-15T16:00:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c259aa0_f674c0a0",
+      "range": {
+        "startLine": 193,
+        "startChar": 13,
+        "endLine": 194,
+        "endChar": 13
+      },
+      "revId": "974f37c2b9510ee8ed66d8e20a136b0905cd46a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c40f242_50870c05",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2016-03-15T15:07:00Z",
       "side": 1,
       "message": "Is this only checking the \"hidden\" flag of the project\u0027s setting?",
+      "range": {
+        "startLine": 197,
+        "startChar": 41,
+        "endLine": 197,
+        "endChar": 50
+      },
+      "revId": "974f37c2b9510ee8ed66d8e20a136b0905cd46a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc3302f3_4c877f05",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-15T16:00:07Z",
+      "side": 1,
+      "message": "no, it also checks if there is read access to this project",
+      "parentUuid": "7c40f242_50870c05",
       "range": {
         "startLine": 197,
         "startChar": 41,
