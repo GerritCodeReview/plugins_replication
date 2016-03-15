@@ -34,7 +34,8 @@ OPTIONS
 	the `PATTERN`.
 
 `--detail`
-:	Print additional detailed information: AdminUrl, AuthGroup and Project.
+:	Print additional detailed information: AdminUrl, AuthGroup, Project
+	and queue (pending and in-flight).
 
 `--json`
 :	Output in json format.
