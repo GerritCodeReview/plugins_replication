@@ -14,15 +14,19 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;
+
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Lists;
+import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.extensions.config.FactoryModule;
 import com.google.gerrit.reviewdb.client.AccountGroup;
+import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.reviewdb.server.ReviewDb;
@@ -76,6 +80,7 @@ public class Destination {
   private volatile WorkQueue.Executor pool;
   private final PerThreadRequestScope.Scoper threadScoper;
   private final DestinationConfiguration config;
+  private final EventDispatcher eventDispatcher;
 
   protected enum RetryReason {
     TRANSPORT_ERROR, COLLISION, REPOSITORY_MISSING;
@@ -99,8 +104,10 @@ public class Destination {
       GitRepositoryManager gitRepositoryManager,
       GroupBackend groupBackend,
       ReplicationStateListener stateLog,
-      GroupIncludeCache groupIncludeCache) {
+      GroupIncludeCache groupIncludeCache,
+      EventDispatcher eventDispatcher) {
     config = cfg;
+    this.eventDispatcher = eventDispatcher;
     gitManager = gitRepositoryManager;
     this.stateLog = stateLog;
 
@@ -258,10 +265,12 @@ public class Destination {
       PushOne e = pending.get(uri);
       if (e == null) {
         e = opFactory.create(project, uri);
+        addRef(e, ref);
         pool.schedule(e, config.getDelay(), TimeUnit.SECONDS);
         pending.put(uri, e);
+      } else if (!e.getRefs().contains(ref)) {
+        addRef(e, ref);
       }
-      e.addRef(ref);
       state.increasePushTaskCount(project.get(), ref);
       e.addState(ref, state);
       repLog.info("scheduled {}:{} => {} to run after {}s", project, ref,
@@ -269,6 +278,10 @@ public class Destination {
     }
   }
 
+  private void addRef(PushOne e, String ref) {
+    e.addRef(ref);
+    postEvent(e, ref);
+  }
   /**
    * It schedules again a PushOp instance.
    * <p>
@@ -524,5 +537,13 @@ public class Destination {
       return true;
     }
     return uri.toString().contains(urlMatch);
+  }
+
+  private void postEvent(PushOne pushOp, String ref) {
+    Project.NameKey project = pushOp.getProjectNameKey();
+    String targetNode = resolveNodeName(pushOp.getURI());
+    ReplicationScheduledEvent event =
+        new ReplicationScheduledEvent(project.get(), ref, targetNode);
+    eventDispatcher.postEvent(new Branch.NameKey(project, ref), event);
   }
 }
