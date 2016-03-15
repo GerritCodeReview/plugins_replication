@@ -28,8 +28,6 @@ import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 
 import org.kohsuke.args4j.Option;
 
-import java.util.List;
-
 @RequiresCapability(GlobalCapability.ADMINISTRATE_SERVER)
 @CommandMetaData(name = "list", description = "List specific remote destinations information")
 final class ListCommand extends SshCommand {
@@ -47,8 +45,7 @@ final class ListCommand extends SshCommand {
 
   @Override
   protected void run() {
-    List<Destination> dest = config.getDestinations(FilterType.ALL);
-    for (Destination d : dest) {
+    for (Destination d : config.getDestinations(FilterType.ALL)) {
       if (matches(d.getRemoteConfig().getName())) {
         printRemote(d, detail);
       }
