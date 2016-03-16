@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "bc6d0aef_daef85a3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1015513
+      },
+      "writtenOn": "2016-03-16T14:52:04Z",
+      "side": 1,
+      "message": "I believe it\u0027s not correct to return early by just checking config.replicateHiddenProjects(), as the project could be unreadable, too, in which case you\u0027d want to return \"false\".",
+      "parentUuid": "3c259aa0_f674c0a0",
+      "range": {
+        "startLine": 193,
+        "startChar": 13,
+        "endLine": 194,
+        "endChar": 13
+      },
+      "revId": "974f37c2b9510ee8ed66d8e20a136b0905cd46a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c40f242_50870c05",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 1
