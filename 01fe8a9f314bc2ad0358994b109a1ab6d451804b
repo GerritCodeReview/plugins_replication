@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c937619_7d0af744",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1015513
+      },
+      "writtenOn": "2016-03-16T14:55:22Z",
+      "side": 1,
+      "message": "Nit: Superfluous blank line.",
+      "revId": "01fe8a9f314bc2ad0358994b109a1ab6d451804b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c937619_1dff334e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1015513
+      },
+      "writtenOn": "2016-03-16T14:55:22Z",
+      "side": 1,
+      "message": "Nit: Still unrelated whitespace change.",
+      "revId": "01fe8a9f314bc2ad0358994b109a1ab6d451804b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
