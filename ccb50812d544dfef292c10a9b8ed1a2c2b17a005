@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fca1425f_fcffe977",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-16T16:42:51Z",
+      "side": 1,
+      "message": "Was the intention to post one single ReplicationScheduledEvent per ref that gets replicated, i.e one single ReplicationScheduledEvent that would have a corresponding RefReplicatedEvent?\n\nOr you want to post a ReplicationScheduledEvent every time a replication is scheduled/rescheduled and then we would have one or more ReplicationScheduledEvent corresponding to one RefReplicatedEvent?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "ccb50812d544dfef292c10a9b8ed1a2c2b17a005",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc9c7e2c_db023359",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-16T16:42:51Z",
+      "side": 1,
+      "message": "You cannot use the same type as RefReplicatedEvent, each event should have their own type.\n\nref-replication-scheduled?",
+      "range": {
+        "startLine": 22,
+        "startChar": 37,
+        "endLine": 22,
+        "endChar": 51
+      },
+      "revId": "ccb50812d544dfef292c10a9b8ed1a2c2b17a005",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fca1425f_7c143996",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-16T16:42:51Z",
+      "side": 1,
+      "message": "To be consistent with RefReplicatedEvent, this should be named targetNode",
+      "range": {
+        "startLine": 26,
+        "startChar": 22,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "ccb50812d544dfef292c10a9b8ed1a2c2b17a005",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc9c7e2c_bbf96794",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-16T16:42:51Z",
+      "side": 1,
+      "message": "remove blank line",
+      "revId": "ccb50812d544dfef292c10a9b8ed1a2c2b17a005",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc9c7e2c_9bfcab85",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-16T16:42:51Z",
+      "side": 1,
+      "message": "remove blank line",
+      "revId": "ccb50812d544dfef292c10a9b8ed1a2c2b17a005",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
