@@ -34,6 +34,24 @@
       "revId": "b3fc68d8d5ebba9cf65f171fa258252e5ab3052e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc6d0aef_9a582d5d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DefaultDestinationConfiguration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1015513
+      },
+      "writtenOn": "2016-03-16T14:30:29Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it still make sense to more the poolName here, as separating it from poolThreads seems a bit artificial?",
+      "parentUuid": "1c937619_3d18efb5",
+      "revId": "b3fc68d8d5ebba9cf65f171fa258252e5ab3052e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
