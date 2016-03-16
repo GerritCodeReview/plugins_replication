@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "fca1425f_9ce345ef",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-16T15:50:06Z",
+      "side": 1,
+      "message": "Gerrit doesn\u0027t use the platform-specific line ending. I think we should use \"\\n\" to be consistent.",
+      "parentUuid": "3c259aa0_96a8ec51",
+      "range": {
+        "startLine": 48,
+        "startChar": 70,
+        "endLine": 48,
+        "endChar": 71
+      },
+      "revId": "4e4a57738032233897fc9dda46941ef28528a977",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c259aa0_d69e6429",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 8
