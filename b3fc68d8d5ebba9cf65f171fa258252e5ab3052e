@@ -16,6 +16,24 @@
       "revId": "b3fc68d8d5ebba9cf65f171fa258252e5ab3052e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c937619_3d18efb5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DefaultDestinationConfiguration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-03-16T12:26:56Z",
+      "side": 1,
+      "message": "The reason is that the pool name is not configurable. It is derived from name.",
+      "parentUuid": "1c937619_9dca6365",
+      "revId": "b3fc68d8d5ebba9cf65f171fa258252e5ab3052e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
