@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "bc6d0aef_7ac2f955",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1015513
+      },
+      "writtenOn": "2016-03-16T09:50:21Z",
+      "side": 1,
+      "message": "\"are\"\n\nOr maybe better just say \"[...] projects do not get replicated\".",
+      "range": {
+        "startLine": 11,
+        "startChar": 9,
+        "endLine": 11,
+        "endChar": 12
+      },
+      "revId": "974f37c2b9510ee8ed66d8e20a136b0905cd46a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc6d0aef_1ab73dff",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1015513
+      },
+      "writtenOn": "2016-03-16T09:50:21Z",
+      "side": 1,
+      "message": "So you\u0027re basically \"lying\" here: If replicateHiddenProjects is enabled you report a hidden project as being visible, which is not true form a semantic point of view. While it\u0027s an easy work-around to the problem, I\u0027d prefer if we could move the logic to the called of isVisible() and replicate if the project is visible or replicateHiddenProjects is enabled.",
+      "range": {
+        "startLine": 190,
+        "startChar": 18,
+        "endLine": 190,
+        "endChar": 27
+      },
+      "revId": "974f37c2b9510ee8ed66d8e20a136b0905cd46a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c259aa0_f674c0a0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 1
