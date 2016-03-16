@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c937619_9df9036e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1015513
+      },
+      "writtenOn": "2016-03-16T14:52:04Z",
+      "side": 1,
+      "message": "You\u0027re changing the semantics of this methods, and as such I believe the method should be renamed. It\u0027s not purely checking anymore whether the project is visible. How about naming it \"isReplicable\"?",
+      "range": {
+        "startLine": 190,
+        "startChar": 18,
+        "endLine": 190,
+        "endChar": 27
+      },
+      "revId": "29c3bd8ddeec88fa1097d19870b00fb068a3c61b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc6d0aef_9af90d6e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1015513
+      },
+      "writtenOn": "2016-03-16T14:52:04Z",
+      "side": 1,
+      "message": "Again I\u0027m not convinced about the naming. Despite its name the variable does not indicate whether the project is not hidden (as it could be hidden, but replicating hidden projects is enabled). Also IMO having a \"not\" as part of the name is not a good idea as people tend to understand positve logic better.\n\nHow about defining this as\n\n    boolean excluded \u003d projectControl.isHidden() \u0026\u0026 !config.replicateHiddenProjects();\n    return projectControl.isReadable() \u0026\u0026 !excluded;",
+      "range": {
+        "startLine": 197,
+        "startChar": 18,
+        "endLine": 197,
+        "endChar": 27
+      },
+      "revId": "29c3bd8ddeec88fa1097d19870b00fb068a3c61b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
