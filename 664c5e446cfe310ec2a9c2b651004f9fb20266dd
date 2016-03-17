@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c08f263_50bd0c92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-17T16:36:41Z",
+      "side": 1,
+      "message": "This is misleading because it gives the false impression that the replication plugin now allows to dynamically change configuration options which is not what this commit is adding.\n\nThis commit allows whoever uses the replication plugin as a library or extend the replication plugin to change the implementation of the tread pool configuration (DestinationConfiguration)",
+      "range": {
+        "startLine": 9,
+        "startChar": 48,
+        "endLine": 10,
+        "endChar": 70
+      },
+      "revId": "664c5e446cfe310ec2a9c2b651004f9fb20266dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
