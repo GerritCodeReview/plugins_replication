@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c937619_9dcfc3ce",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1015513
+      },
+      "writtenOn": "2016-03-17T08:14:42Z",
+      "side": 1,
+      "message": "If you ever change the prefix string you would have to rename the variable, too, as it\u0027s named after the string it contains. Better keep the \"poolName\" name for the local variable.",
+      "range": {
+        "startLine": 188,
+        "startChar": 11,
+        "endLine": 188,
+        "endChar": 28
+      },
+      "revId": "09aac3e9bebc00b7f533280ec78f9b05a7e04211",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
