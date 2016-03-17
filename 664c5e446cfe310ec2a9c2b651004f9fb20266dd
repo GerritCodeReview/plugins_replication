@@ -22,6 +22,75 @@
       "revId": "664c5e446cfe310ec2a9c2b651004f9fb20266dd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c729620_25c2ee54",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-17T20:11:19Z",
+      "side": 1,
+      "message": "Why did you move partially the RemoteConfig usage in DestinationContiguration? Now we have 2 classes (Destination and DefaultDestinationConfiguration) that needs to use RemoteConfig.\n\nIf the goal of this commit is to extract configuration from Destination, we should do it completely so I expect we no longer need RemoteConfig argument in this class.",
+      "range": {
+        "startLine": 97,
+        "startChar": 6,
+        "endLine": 97,
+        "endChar": 27
+      },
+      "revId": "664c5e446cfe310ec2a9c2b651004f9fb20266dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c729620_e5ae16ad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-17T20:11:19Z",
+      "side": 1,
+      "message": "wrong license header",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 3
+      },
+      "revId": "664c5e446cfe310ec2a9c2b651004f9fb20266dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c729620_05bdf2dd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-17T20:11:19Z",
+      "side": 1,
+      "message": "I do not think we need an interface if we only have one implementation and do not plan to have a second one.\n\nRemove this interface and rename DefaultDestinationConfiguration to DestinationConfiguration.",
+      "range": {
+        "startLine": 8,
+        "startChar": 17,
+        "endLine": 8,
+        "endChar": 41
+      },
+      "revId": "664c5e446cfe310ec2a9c2b651004f9fb20266dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
