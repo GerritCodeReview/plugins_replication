@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c937619_1db5f344",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1015513
+      },
+      "writtenOn": "2016-03-17T08:23:06Z",
+      "side": 0,
+      "message": "Nit: You still remove this unrelated blank line :-)",
+      "revId": "3f06e5c6c0da6596873115c02a4f9b4288ec3aba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
