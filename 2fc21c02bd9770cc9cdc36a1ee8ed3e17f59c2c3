@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc6d0aef_daaea5f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1015513
+      },
+      "writtenOn": "2016-03-17T08:23:06Z",
+      "side": 1,
+      "message": "Nit: Superfluous space.",
+      "range": {
+        "startLine": 9,
+        "startChar": 40,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "2fc21c02bd9770cc9cdc36a1ee8ed3e17f59c2c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c937619_7dc0b79b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1015513
+      },
+      "writtenOn": "2016-03-17T08:23:06Z",
+      "side": 1,
+      "message": "Nit: No need for a hyphen here, \"retry\" is a real word :-)",
+      "range": {
+        "startLine": 10,
+        "startChar": 67,
+        "endLine": 10,
+        "endChar": 68
+      },
+      "revId": "2fc21c02bd9770cc9cdc36a1ee8ed3e17f59c2c3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
