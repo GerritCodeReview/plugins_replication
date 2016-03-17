@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c08f263_d00f3c4c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-17T15:28:06Z",
+      "side": 1,
+      "message": "I do not see where this class is used?\nAm I missing something, how this code get executed?",
+      "range": {
+        "startLine": 31,
+        "startChar": 13,
+        "endLine": 31,
+        "endChar": 25
+      },
+      "revId": "c58703e55adfb5e059d344ef01655ed5bd1797b9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
