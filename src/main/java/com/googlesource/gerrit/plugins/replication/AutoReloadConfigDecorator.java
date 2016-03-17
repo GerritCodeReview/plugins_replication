@@ -49,13 +49,16 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private final GroupIncludeCache groupIncludeCache;
 
   @Inject
-  public AutoReloadConfigDecorator(Injector injector, SitePaths site,
-      RemoteSiteUser.Factory ruf, PluginUser pu,
-      GitRepositoryManager grm, GroupBackend gb,
+  public AutoReloadConfigDecorator(Injector injector,
+      SitePaths site,
+      RemoteSiteUser.Factory ruf,
+      PluginUser pu,
+      GitRepositoryManager grm,
+      GroupBackend gb,
       WorkQueue workQueue,
       ReplicationStateListener stateLog,
-      GroupIncludeCache groupIncludeCache) throws ConfigInvalidException,
-      IOException {
+      GroupIncludeCache groupIncludeCache)
+      throws ConfigInvalidException, IOException {
     this.injector = injector;
     this.site = site;
     this.remoteSiteUserFactory = ruf;
