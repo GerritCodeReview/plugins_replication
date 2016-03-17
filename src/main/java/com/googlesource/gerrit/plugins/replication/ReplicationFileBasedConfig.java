@@ -60,12 +60,15 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private final GroupIncludeCache groupIncludeCache;
 
   @Inject
-  public ReplicationFileBasedConfig(final Injector injector, final SitePaths site,
-      final RemoteSiteUser.Factory ruf, final PluginUser pu,
-      final GitRepositoryManager grm,
-      final GroupBackend gb,
-      final ReplicationStateListener stateLog,
-      final GroupIncludeCache groupIncludeCache) throws ConfigInvalidException, IOException {
+  public ReplicationFileBasedConfig(Injector injector,
+      SitePaths site,
+      RemoteSiteUser.Factory ruf,
+      PluginUser pu,
+      GitRepositoryManager grm,
+      GroupBackend gb,
+      ReplicationStateListener stateLog,
+      GroupIncludeCache groupIncludeCache)
+      throws ConfigInvalidException, IOException {
     this.cfgPath = site.etc_dir.resolve("replication.config");
     this.groupIncludeCache = groupIncludeCache;
     this.injector = injector;
