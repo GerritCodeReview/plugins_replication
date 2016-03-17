@@ -115,20 +115,20 @@ class PushOne implements ProjectRunnable {
   private final ReplicationMetrics metrics;
 
   @Inject
-  PushOne(final GitRepositoryManager grm,
-      final SchemaFactory<ReviewDb> s,
-      final Destination p,
-      final RemoteConfig c,
-      final CredentialsFactory cpFactory,
-      final TagCache tc,
-      final PerThreadRequestScope.Scoper ts,
-      final ChangeCache cc,
-      final ReplicationQueue rq,
-      final IdGenerator ig,
-      final ReplicationStateListener sl,
-      final ReplicationMetrics m,
-      @Assisted final Project.NameKey d,
-      @Assisted final URIish u) {
+  PushOne(GitRepositoryManager grm,
+      SchemaFactory<ReviewDb> s,
+      Destination p,
+      RemoteConfig c,
+      CredentialsFactory cpFactory,
+      TagCache tc,
+      PerThreadRequestScope.Scoper ts,
+      ChangeCache cc,
+      ReplicationQueue rq,
+      IdGenerator ig,
+      ReplicationStateListener sl,
+      ReplicationMetrics m,
+      @Assisted Project.NameKey d,
+      @Assisted URIish u) {
     gitManager = grm;
     schema = s;
     pool = p;
@@ -306,7 +306,7 @@ class PushOne implements ProjectRunnable {
       // Tried to replicate to a remote via anonymous git:// but the repository
       // does not exist.  In this case NoRemoteRepositoryException is not
       // raised.
-      final String msg = e.getMessage();
+      String msg = e.getMessage();
       if (msg.contains("access denied") || msg.contains("no such repository")) {
         createRepository();
       } else {
@@ -357,7 +357,7 @@ class PushOne implements ProjectRunnable {
   private void createRepository() {
     if (pool.isCreateMissingRepos()) {
       try {
-        final Ref head = git.exactRef(Constants.HEAD);
+        Ref head = git.exactRef(Constants.HEAD);
         if (replicationQueue.createProject(projectName, head != null ? head.getName() : null)) {
           repLog.warn("Missing repository created; retry replication to " + uri);
           pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
