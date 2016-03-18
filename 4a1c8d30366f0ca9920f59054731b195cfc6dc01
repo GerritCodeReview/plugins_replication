@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1cd53633_edbc65e3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-18T15:36:25Z",
+      "side": 1,
+      "message": "shouldReplicate?",
+      "range": {
+        "startLine": 202,
+        "startChar": 18,
+        "endLine": 202,
+        "endChar": 30
+      },
+      "revId": "4a1c8d30366f0ca9920f59054731b195cfc6dc01",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fce3021d_6ca87ba4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-18T15:36:25Z",
+      "side": 1,
+      "message": "toBeReplicated doesn\u0027t actually represent what you are validating here.\n\nSince I couldn\u0027t come up with a variable name that represent:\n\nconfig.replicateHiddenProjects() || !projectControl.isHidden()\n\n\nI think we should remove the variable and add those conditions to the return:\nreturn projectControl.isReadable() \u0026\u0026 (!projectControl.isHidden()\n              || config.replicateHiddenProjects());\n\nThis is easier to read for me but I will let others comment on this.",
+      "range": {
+        "startLine": 209,
+        "startChar": 18,
+        "endLine": 209,
+        "endChar": 19
+      },
+      "revId": "4a1c8d30366f0ca9920f59054731b195cfc6dc01",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
