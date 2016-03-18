@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fce3021d_ac9d4381",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-18T15:16:45Z",
+      "side": 1,
+      "message": "You should depend on the provider, not the class implementing it.\n\nReplace by Provider\u003cSshSessionFactory\u003e",
+      "range": {
+        "startLine": 37,
+        "startChar": 25,
+        "endLine": 37,
+        "endChar": 61
+      },
+      "revId": "3ec94549a64d183430259e933207f2745e44be8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cd53633_8da281c5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-18T15:16:45Z",
+      "side": 1,
+      "message": "why did you change this?\n\nPut back Provider\u003cSshSessionFactory\u003e",
+      "range": {
+        "startLine": 83,
+        "startChar": 16,
+        "endLine": 83,
+        "endChar": 78
+      },
+      "revId": "3ec94549a64d183430259e933207f2745e44be8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fce3021d_cc988f93",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-18T15:16:45Z",
+      "side": 1,
+      "message": "This is only needed by GerritSshApi and SShHelper. Inject it to GerritSshApi instead and if you use guice to create SshHelper you will be able to remove it from this class.\n\nI know the replication plugin is not a first class citizen when it comes to guice usage but I would like to stop this bad habit of passing dependencies from an object to another.",
+      "range": {
+        "startLine": 86,
+        "startChar": 1,
+        "endLine": 86,
+        "endChar": 54
+      },
+      "revId": "3ec94549a64d183430259e933207f2745e44be8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cd53633_6da875a4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-18T15:16:45Z",
+      "side": 1,
+      "message": "Put back Provider\u003cSshSessionFactory\u003e",
+      "range": {
+        "startLine": 94,
+        "startChar": 7,
+        "endLine": 94,
+        "endChar": 42
+      },
+      "revId": "3ec94549a64d183430259e933207f2745e44be8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cd53633_4da5b9ca",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-18T15:16:45Z",
+      "side": 1,
+      "message": "This is way to many changes just to support another protocol.\n\nI am expecting to have one small change in createProject, deleteProject and updateHead methods. Another conditional handling the new protocol:\n\nif (isGerrit(replicateURI)) {\n  gerritAdmin.updateHead(replicateURI, newHead);\n}",
+      "range": {
+        "startLine": 162,
+        "startChar": 3,
+        "endLine": 170,
+        "endChar": 7
+      },
+      "revId": "3ec94549a64d183430259e933207f2745e44be8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fce3021d_8ca287c5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-18T15:16:45Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 176,
+        "startChar": 3,
+        "endLine": 184,
+        "endChar": 7
+      },
+      "revId": "3ec94549a64d183430259e933207f2745e44be8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
