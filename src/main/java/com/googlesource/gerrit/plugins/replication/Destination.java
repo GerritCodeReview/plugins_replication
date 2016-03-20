@@ -110,15 +110,15 @@ public class Destination {
     }
   }
 
-  protected Destination(final Injector injector,
-      final RemoteConfig rc,
-      final Config cfg,
-      final RemoteSiteUser.Factory replicationUserFactory,
-      final PluginUser pluginUser,
-      final GitRepositoryManager gitRepositoryManager,
-      final GroupBackend groupBackend,
-      final ReplicationStateListener stateLog,
-      final GroupIncludeCache groupIncludeCache) {
+  protected Destination(Injector injector,
+      RemoteConfig rc,
+      Config cfg,
+      RemoteSiteUser.Factory replicationUserFactory,
+      PluginUser pluginUser,
+      GitRepositoryManager gitRepositoryManager,
+      GroupBackend groupBackend,
+      ReplicationStateListener stateLog,
+      GroupIncludeCache groupIncludeCache) {
     remote = rc;
     gitManager = gitRepositoryManager;
     this.stateLog = stateLog;
@@ -267,8 +267,8 @@ public class Destination {
     return false;
   }
 
-  void schedule(final Project.NameKey project, final String ref,
-      final URIish uri, ReplicationState state) {
+  void schedule(Project.NameKey project, String ref, URIish uri,
+      ReplicationState state) {
     repLog.info("scheduling replication {}:{} => {}", project, ref, uri);
     if (!isVisible(project, state)) {
       return;
@@ -433,7 +433,7 @@ public class Destination {
     }
   }
 
-  boolean wouldPushProject(final Project.NameKey project) {
+  boolean wouldPushProject(Project.NameKey project) {
     if (!isVisible(project)) {
       return false;
     }
