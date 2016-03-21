@@ -264,7 +264,8 @@ class PushOne implements ProjectRunnable {
         }
       }).call();
     } catch (Exception e) {
-      throw Throwables.propagate(e);
+      Throwables.propagateIfPossible(e);
+      throw new RuntimeException(e);
     } finally {
       statesCleanUp();
     }
