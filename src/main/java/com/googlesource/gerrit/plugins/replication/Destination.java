@@ -66,6 +66,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Destination {
   private static final Logger repLog = ReplicationQueue.repLog;
+
   private final ReplicationStateListener stateLog;
   private final Object stateLock = new Object();
   private final Map<URIish, PushOne> pending = new HashMap<>();
@@ -93,13 +94,13 @@ public class Destination {
   }
 
   protected Destination(Injector injector,
-      DestinationConfiguration cfg,
       RemoteSiteUser.Factory replicationUserFactory,
       PluginUser pluginUser,
       GitRepositoryManager gitRepositoryManager,
       GroupBackend groupBackend,
       ReplicationStateListener stateLog,
-      GroupIncludeCache groupIncludeCache) {
+      GroupIncludeCache groupIncludeCache,
+      DestinationConfiguration cfg) {
     config = cfg;
     gitManager = gitRepositoryManager;
     this.stateLog = stateLog;

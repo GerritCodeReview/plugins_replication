@@ -14,14 +14,9 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.common.FileUtil;
-import com.google.gerrit.server.PluginUser;
-import com.google.gerrit.server.account.GroupBackend;
-import com.google.gerrit.server.account.GroupIncludeCache;
 import com.google.gerrit.server.config.SitePaths;
-import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Singleton;
 
 import org.eclipse.jgit.errors.ConfigInvalidException;
@@ -38,38 +33,20 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private ReplicationFileBasedConfig currentConfig;
   private long currentConfigTs;
 
-  private final Injector injector;
   private final SitePaths site;
-  private final RemoteSiteUser.Factory remoteSiteUserFactory;
-  private final PluginUser pluginUser;
-  private final GitRepositoryManager gitRepositoryManager;
-  private final GroupBackend groupBackend;
   private final WorkQueue workQueue;
-  private final ReplicationStateListener stateLog;
-  private final GroupIncludeCache groupIncludeCache;
+  private final DestinationFactory destinationFactory;
 
   @Inject
-  public AutoReloadConfigDecorator(Injector injector,
-      SitePaths site,
-      RemoteSiteUser.Factory ruf,
-      PluginUser pu,
-      GitRepositoryManager grm,
-      GroupBackend gb,
+  public AutoReloadConfigDecorator(SitePaths site,
       WorkQueue workQueue,
-      ReplicationStateListener stateLog,
-      GroupIncludeCache groupIncludeCache)
+      DestinationFactory destinationFactory)
       throws ConfigInvalidException, IOException {
-    this.injector = injector;
     this.site = site;
-    this.remoteSiteUserFactory = ruf;
-    this.pluginUser = pu;
-    this.gitRepositoryManager = grm;
-    this.groupBackend = gb;
-    this.groupIncludeCache = groupIncludeCache;
+    this.destinationFactory = destinationFactory;
     this.currentConfig = loadConfig();
     this.currentConfigTs = getLastModified(currentConfig);
     this.workQueue = workQueue;
-    this.stateLog = stateLog;
   }
 
   private static long getLastModified(ReplicationFileBasedConfig cfg) {
@@ -78,9 +55,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
 
   private ReplicationFileBasedConfig loadConfig()
       throws ConfigInvalidException, IOException {
-    return new ReplicationFileBasedConfig(injector, site, remoteSiteUserFactory,
-        pluginUser, gitRepositoryManager, groupBackend, stateLog,
-        groupIncludeCache);
+    return new ReplicationFileBasedConfig(site, destinationFactory);
   }
 
   private synchronized boolean isAutoReload() {
