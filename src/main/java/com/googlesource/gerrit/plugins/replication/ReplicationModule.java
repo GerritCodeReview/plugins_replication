@@ -35,6 +35,7 @@ import org.eclipse.jgit.transport.SshSessionFactory;
 class ReplicationModule extends AbstractModule {
   @Override
   protected void configure() {
+    bind(DestinationFactory.class).in(Scopes.SINGLETON);
     bind(ReplicationQueue.class).in(Scopes.SINGLETON);
 
     DynamicSet.bind(binder(), GitReferenceUpdatedListener.class)
