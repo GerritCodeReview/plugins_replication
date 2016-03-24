@@ -41,9 +41,11 @@ import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.PerRequestProjectControlCache;
 import com.google.gerrit.server.project.ProjectControl;
 import com.google.gerrit.server.util.RequestContext;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.Provides;
+import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
 
@@ -70,6 +72,10 @@ import java.util.concurrent.TimeUnit;
 public class Destination {
   private static final Logger repLog = ReplicationQueue.repLog;
   private final ReplicationStateListener stateLog;
+
+  public static interface Factory {
+    Destination create(RemoteConfig remoteCfg, Config cfg);
+  }
 
   private final int poolThreads;
   private final String poolName;
@@ -110,15 +116,16 @@ public class Destination {
     }
   }
 
+  @Inject
   protected Destination(Injector injector,
-      RemoteConfig rc,
-      Config cfg,
       RemoteSiteUser.Factory replicationUserFactory,
       PluginUser pluginUser,
       GitRepositoryManager gitRepositoryManager,
       GroupBackend groupBackend,
       ReplicationStateListener stateLog,
-      GroupIncludeCache groupIncludeCache) {
+      GroupIncludeCache groupIncludeCache,
+      @Assisted RemoteConfig rc,
+      @Assisted Config cfg) {
     remote = rc;
     gitManager = gitRepositoryManager;
     this.stateLog = stateLog;
