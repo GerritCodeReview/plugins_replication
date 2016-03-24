@@ -17,14 +17,9 @@ import static java.util.stream.Collectors.toList;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.gerrit.server.PluginUser;
-import com.google.gerrit.server.account.GroupBackend;
-import com.google.gerrit.server.account.GroupIncludeCache;
 import com.google.gerrit.server.config.SitePaths;
-import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Singleton;
 
 import org.eclipse.jgit.errors.ConfigInvalidException;
@@ -52,35 +47,15 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private Path cfgPath;
   private boolean replicateAllOnPluginStart;
   private boolean defaultForceUpdate;
-  private Injector injector;
-  private final RemoteSiteUser.Factory replicationUserFactory;
-  private final PluginUser pluginUser;
-  private final GitRepositoryManager gitRepositoryManager;
-  private final GroupBackend groupBackend;
   private final FileBasedConfig config;
-  private final ReplicationStateListener stateLog;
-  private final GroupIncludeCache groupIncludeCache;
 
   @Inject
-  public ReplicationFileBasedConfig(Injector injector,
-      SitePaths site,
-      RemoteSiteUser.Factory ruf,
-      PluginUser pu,
-      GitRepositoryManager grm,
-      GroupBackend gb,
-      ReplicationStateListener stateLog,
-      GroupIncludeCache groupIncludeCache)
+  public ReplicationFileBasedConfig(SitePaths site,
+      DestinationFactory destinationFactory)
       throws ConfigInvalidException, IOException {
     this.cfgPath = site.etc_dir.resolve("replication.config");
-    this.groupIncludeCache = groupIncludeCache;
-    this.injector = injector;
-    this.replicationUserFactory = ruf;
-    this.pluginUser = pu;
-    this.gitRepositoryManager = grm;
-    this.groupBackend = gb;
     this.config = new FileBasedConfig(cfgPath.toFile(), FS.DETECTED);
-    this.destinations = allDestinations();
-    this.stateLog = stateLog;
+    this.destinations = allDestinations(destinationFactory);
   }
 
   /*
@@ -110,7 +85,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
         .collect(toList());
   }
 
-  private List<Destination> allDestinations()
+  private List<Destination> allDestinations(DestinationFactory destinationFactory)
       throws ConfigInvalidException, IOException {
     if (!config.getFile().exists()) {
       log.warn("Config file " + config.getFile() + " does not exist; not replicating");
@@ -155,10 +130,8 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
             .setForceUpdate(defaultForceUpdate));
       }
 
-      Destination destination =
-          new Destination(injector, new DestinationConfiguration(c,
-              config), replicationUserFactory, pluginUser,
-              gitRepositoryManager, groupBackend, stateLog, groupIncludeCache);
+      Destination destination = destinationFactory.create(
+          new DestinationConfiguration(c, config));
 
       if (!destination.isSingleProjectMatch()) {
         for (URIish u : c.getURIs()) {
