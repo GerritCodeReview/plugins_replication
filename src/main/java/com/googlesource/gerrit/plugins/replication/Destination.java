@@ -43,6 +43,8 @@ import com.google.gerrit.server.util.RequestContext;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.Provides;
+import com.google.inject.assistedinject.Assisted;
+import com.google.inject.assistedinject.AssistedInject;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
 
@@ -66,6 +68,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Destination {
   private static final Logger repLog = ReplicationQueue.repLog;
+
   private final ReplicationStateListener stateLog;
   private final Object stateLock = new Object();
   private final Map<URIish, PushOne> pending = new HashMap<>();
@@ -81,6 +84,10 @@ public class Destination {
     TRANSPORT_ERROR, COLLISION, REPOSITORY_MISSING;
   }
 
+  public static interface Factory {
+    Destination create(DestinationConfiguration config);
+  }
+
   public static class QueueInfo {
     public final Map<URIish, PushOne> pending;
     public final Map<URIish, PushOne> inFlight;
@@ -92,14 +99,15 @@ public class Destination {
     }
   }
 
+  @AssistedInject
   protected Destination(Injector injector,
-      DestinationConfiguration cfg,
       RemoteSiteUser.Factory replicationUserFactory,
       PluginUser pluginUser,
       GitRepositoryManager gitRepositoryManager,
       GroupBackend groupBackend,
       ReplicationStateListener stateLog,
-      GroupIncludeCache groupIncludeCache) {
+      GroupIncludeCache groupIncludeCache,
+      @Assisted DestinationConfiguration cfg) {
     config = cfg;
     gitManager = gitRepositoryManager;
     this.stateLog = stateLog;
