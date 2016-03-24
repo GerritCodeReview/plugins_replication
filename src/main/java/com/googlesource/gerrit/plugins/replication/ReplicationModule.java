@@ -60,6 +60,7 @@ class ReplicationModule extends AbstractModule {
 
     install(new FactoryModuleBuilder().build(PushAll.Factory.class));
     install(new FactoryModuleBuilder().build(RemoteSiteUser.Factory.class));
+    install(new FactoryModuleBuilder().build(Destination.Factory.class));
 
     bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
     bind(ReplicationStateListener.class).to(ReplicationStateLogger.class);
