@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "913e7148_c0b87eec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-04-06T07:42:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fce3021d_ac9d4381",
+      "range": {
+        "startLine": 37,
+        "startChar": 25,
+        "endLine": 37,
+        "endChar": 61
+      },
+      "revId": "3ec94549a64d183430259e933207f2745e44be8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cd53633_8da281c5",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 12
@@ -36,6 +60,30 @@
       "writtenOn": "2016-03-18T15:16:45Z",
       "side": 1,
       "message": "why did you change this?\n\nPut back Provider\u003cSshSessionFactory\u003e",
+      "range": {
+        "startLine": 83,
+        "startChar": 16,
+        "endLine": 83,
+        "endChar": 78
+      },
+      "revId": "3ec94549a64d183430259e933207f2745e44be8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "913e7148_60ce5281",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-04-06T07:42:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cd53633_8da281c5",
       "range": {
         "startLine": 83,
         "startChar": 16,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "913e7148_c0ef1ecf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-04-06T07:42:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fce3021d_cc988f93",
+      "range": {
+        "startLine": 86,
+        "startChar": 1,
+        "endLine": 86,
+        "endChar": 54
+      },
+      "revId": "3ec94549a64d183430259e933207f2745e44be8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cd53633_6da875a4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 12
@@ -82,6 +154,30 @@
       "writtenOn": "2016-03-18T15:16:45Z",
       "side": 1,
       "message": "Put back Provider\u003cSshSessionFactory\u003e",
+      "range": {
+        "startLine": 94,
+        "startChar": 7,
+        "endLine": 94,
+        "endChar": 42
+      },
+      "revId": "3ec94549a64d183430259e933207f2745e44be8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b137f56a_a1ea1ec0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-04-06T07:42:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cd53633_6da875a4",
       "range": {
         "startLine": 94,
         "startChar": 7,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "913e7148_a0ea1ac0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-04-06T07:42:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cd53633_4da5b9ca",
+      "range": {
+        "startLine": 162,
+        "startChar": 3,
+        "endLine": 170,
+        "endChar": 7
+      },
+      "revId": "3ec94549a64d183430259e933207f2745e44be8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fce3021d_8ca287c5",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 12
@@ -128,6 +248,30 @@
       "writtenOn": "2016-03-18T15:16:45Z",
       "side": 1,
       "message": "same comment as above",
+      "range": {
+        "startLine": 176,
+        "startChar": 3,
+        "endLine": 184,
+        "endChar": 7
+      },
+      "revId": "3ec94549a64d183430259e933207f2745e44be8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b137f56a_81d27a1a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-04-06T07:42:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fce3021d_8ca287c5",
       "range": {
         "startLine": 176,
         "startChar": 3,
