@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.base.MoreObjects;
+import com.google.common.collect.ImmutableList;
 
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.transport.RemoteConfig;
@@ -23,27 +24,31 @@ class DestinationConfiguration {
   private final int delay;
   private final int retryDelay;
   private final int lockErrorMaxRetries;
-  private final String[] adminUrls;
+  private final ImmutableList<String> adminUrls;
   private final int poolThreads;
   private final boolean createMissingRepos;
   private final boolean replicatePermissions;
   private final boolean replicateProjectDeletions;
   private final String remoteNameStyle;
-  private final String[] urls;
-  private final String[] projects;
-  private final String[] authGroupNames;
+  private final ImmutableList<String> urls;
+  private final ImmutableList<String> projects;
+  private final ImmutableList<String> authGroupNames;
   private final RemoteConfig remoteConfig;
 
   DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
     String name = remoteConfig.getName();
-    urls = cfg.getStringList("remote", name, "url");
+    urls = ImmutableList.copyOf(
+        cfg.getStringList("remote", name, "url"));
     delay = Math.max(0, getInt(remoteConfig, cfg, "replicationdelay", 15));
-    projects = cfg.getStringList("remote", name, "projects");
-    adminUrls = cfg.getStringList("remote", name, "adminUrl");
+    projects = ImmutableList.copyOf(
+        cfg.getStringList("remote", name, "projects"));
+    adminUrls = ImmutableList.copyOf(
+        cfg.getStringList("remote", name, "adminUrl"));
     retryDelay = Math.max(0, getInt(remoteConfig, cfg, "replicationretry", 1));
     poolThreads = Math.max(0, getInt(remoteConfig, cfg, "threads", 1));
-    authGroupNames = cfg.getStringList("remote", name, "authGroup");
+    authGroupNames = ImmutableList.copyOf(
+        cfg.getStringList("remote", name, "authGroup"));
     lockErrorMaxRetries = cfg.getInt("replication", "lockErrorMaxRetries", 0);
 
     createMissingRepos =
@@ -72,19 +77,19 @@ class DestinationConfiguration {
     return lockErrorMaxRetries;
   }
 
-  public String[] getUrls() {
+  public ImmutableList<String> getUrls() {
     return urls;
   }
 
-  public String[] getAdminUrls() {
+  public ImmutableList<String> getAdminUrls() {
     return adminUrls;
   }
 
-  public String[] getProjects() {
+  public ImmutableList<String> getProjects() {
     return projects;
   }
 
-  public String[] getAuthGroupNames() {
+  public ImmutableList<String> getAuthGroupNames() {
     return authGroupNames;
   }
 

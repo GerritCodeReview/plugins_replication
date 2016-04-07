@@ -29,6 +29,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import org.kohsuke.args4j.Option;
 
 import java.util.Collection;
+import java.util.List;
 
 @RequiresCapability(GlobalCapability.ADMINISTRATE_SERVER)
 @CommandMetaData(name = "list", description = "List remote destination information")
@@ -60,8 +61,8 @@ final class ListCommand extends SshCommand {
         || name.matches(remote));
   }
 
-  private void addProperty(JsonObject obj, String key, String[] values) {
-    if (values.length > 0) {
+  private void addProperty(JsonObject obj, String key, List<String> values) {
+    if (!values.isEmpty()) {
       JsonArray list = new JsonArray();
       for (String v : values) {
         list.add(new JsonPrimitive(v));

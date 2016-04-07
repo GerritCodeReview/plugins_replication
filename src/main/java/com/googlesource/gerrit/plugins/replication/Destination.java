@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
@@ -57,7 +58,6 @@ import org.slf4j.Logger;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,7 +105,7 @@ public class Destination {
     this.stateLog = stateLog;
 
     final CurrentUser remoteUser;
-    if (cfg.getAuthGroupNames().length > 0) {
+    if (!cfg.getAuthGroupNames().isEmpty()) {
       ImmutableSet.Builder<AccountGroup.UUID> builder = ImmutableSet.builder();
       for (String name : cfg.getAuthGroupNames()) {
         GroupReference g = GroupBackends.findExactSuggestion(groupBackend, name);
@@ -390,19 +390,19 @@ public class Destination {
     }
 
     // by default push all projects
-    String[] projects = config.getProjects();
-    if (projects.length < 1) {
+    List<String> projects = config.getProjects();
+    if (projects.isEmpty()) {
       return true;
     }
 
-    return (new ReplicationFilter(Arrays.asList(projects))).matches(project);
+    return (new ReplicationFilter(projects)).matches(project);
   }
 
   boolean isSingleProjectMatch() {
-    String[] projects = config.getProjects();
-    boolean ret = (projects.length == 1);
+    List<String> projects = config.getProjects();
+    boolean ret = (projects.size() == 1);
     if (ret) {
-      String projectMatch = projects[0];
+      String projectMatch = projects.get(0);
       if (ReplicationFilter.getPatternType(projectMatch)
           != ReplicationFilter.PatternType.EXACT_MATCH) {
         // projectMatch is either regular expression, or wild-card.
@@ -493,22 +493,21 @@ public class Destination {
     }
   }
 
-  String[] getAdminUrls() {
+  ImmutableList<String> getAdminUrls() {
     return config.getAdminUrls();
   }
 
-  String[] getUrls() {
+  ImmutableList<String> getUrls() {
     return config.getUrls();
   }
 
-  String[] getAuthGroupNames() {
+  ImmutableList<String> getAuthGroupNames() {
     return config.getAuthGroupNames();
   }
 
-  String[] getProjects() {
+  ImmutableList<String> getProjects() {
     return config.getProjects();
   }
-
 
   int getLockErrorMaxRetries() {
     return config.getLockErrorMaxRetries();

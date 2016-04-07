@@ -52,7 +52,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 /** Manages automatic replication to remote repositories. */
@@ -195,11 +194,9 @@ public class ReplicationQueue implements
         continue;
       }
 
-      List<URIish> uriList = config.getURIs(projectName, "*");
-      String[] adminUrls = config.getAdminUrls();
       boolean adminURLUsed = false;
 
-      for (String url : adminUrls) {
+      for (String url : config.getAdminUrls()) {
         if (Strings.isNullOrEmpty(url)) {
           continue;
         }
@@ -233,7 +230,7 @@ public class ReplicationQueue implements
       }
 
       if (!adminURLUsed) {
-        for (URIish uri : uriList) {
+        for (URIish uri : config.getURIs(projectName, "*")) {
           uris.add(uri);
         }
       }
