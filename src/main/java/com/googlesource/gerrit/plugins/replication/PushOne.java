@@ -256,7 +256,7 @@ class PushOne implements ProjectRunnable {
   @Override
   public void run() {
     try {
-      threadScoper.scope(new Callable<Void>(){
+      threadScoper.scope(new Callable<Void>() {
         @Override
         public Void call() {
           runPushOperation();

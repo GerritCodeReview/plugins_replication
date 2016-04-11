@@ -452,7 +452,7 @@ public class Destination {
         String remoteNameStyle = config.getRemoteNameStyle();
         if (remoteNameStyle.equals("dash")) {
           name = name.replace("/", "-");
-        } else if(remoteNameStyle.equals("underscore")) {
+        } else if (remoteNameStyle.equals("underscore")) {
           name = name.replace("/", "_");
         } else if (remoteNameStyle.equals("basenameOnly")) {
           name = FilenameUtils.getBaseName(name);

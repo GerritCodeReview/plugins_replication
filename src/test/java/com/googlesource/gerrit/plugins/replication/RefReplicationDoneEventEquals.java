@@ -52,7 +52,7 @@ public class RefReplicationDoneEventEquals implements IArgumentMatcher {
     if (object1 == object2) {
       return true;
     }
-    if (object1 != null && !object1.equals(object2)){
+    if (object1 != null && !object1.equals(object2)) {
       return false;
     }
     return true;
