@@ -28,7 +28,7 @@ public interface ReplicationStateListener {
    * @param msg message description of the error
    * @param states replication states impacted
    */
-  public abstract void warn(String msg, ReplicationState... states);
+  void warn(String msg, ReplicationState... states);
 
   /**
    * Notify a fatal replication error.
@@ -39,7 +39,7 @@ public interface ReplicationStateListener {
    * @param msg message description of the error
    * @param states replication states impacted
    */
-  public abstract void error(String msg, ReplicationState... states);
+  void error(String msg, ReplicationState... states);
 
   /**
    * Notify a fatal replication error with the associated exception.
@@ -50,7 +50,7 @@ public interface ReplicationStateListener {
    * @param t exception that caused the replication to fail
    * @param states replication states impacted
    */
-  public abstract void error(String msg, Throwable t,
+  void error(String msg, Throwable t,
       ReplicationState... states);
 
 }
