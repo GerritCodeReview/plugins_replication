@@ -77,7 +77,7 @@ public class Destination {
   private final PerThreadRequestScope.Scoper threadScoper;
   private final DestinationConfiguration config;
 
-  protected static enum RetryReason {
+  protected enum RetryReason {
     TRANSPORT_ERROR, COLLISION, REPOSITORY_MISSING;
   }
 
