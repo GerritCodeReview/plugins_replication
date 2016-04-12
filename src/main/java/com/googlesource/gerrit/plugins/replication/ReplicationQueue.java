@@ -322,7 +322,7 @@ public class ReplicationQueue implements
     }
   }
 
-  public static void recursivelyDelete(File dir) throws IOException {
+  private static void recursivelyDelete(File dir) throws IOException {
     File[] contents = dir.listFiles();
     if (contents != null) {
       for (File d : contents) {
