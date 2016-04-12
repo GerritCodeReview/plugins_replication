@@ -46,6 +46,30 @@
       "revId": "aadec443e68bc503f4554fbfc75aa00c81e7ef24",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "abbea28e_a926fdf7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2016-04-12T06:50:50Z",
+      "side": 0,
+      "message": "OK.",
+      "parentUuid": "ebca5a38_ebe9519c",
+      "range": {
+        "startLine": 615,
+        "startChar": 4,
+        "endLine": 615,
+        "endChar": 10
+      },
+      "revId": "aadec443e68bc503f4554fbfc75aa00c81e7ef24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
