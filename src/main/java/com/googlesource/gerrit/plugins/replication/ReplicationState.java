@@ -37,7 +37,7 @@ public class ReplicationState {
     private int nodesToReplicateCount;
     private int replicatedNodesCount;
 
-    public RefReplicationStatus(String project, String ref) {
+    RefReplicationStatus(String project, String ref) {
       this.project = project;
       this.ref = ref;
     }

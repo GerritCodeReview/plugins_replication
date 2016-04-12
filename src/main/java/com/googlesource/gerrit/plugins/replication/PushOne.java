@@ -612,7 +612,7 @@ class PushOne implements ProjectRunnable {
   public static class LockFailureException extends TransportException {
     private static final long serialVersionUID = 1L;
 
-    public LockFailureException(URIish uri, String message) {
+    LockFailureException(URIish uri, String message) {
       super(uri, message);
     }
   }
