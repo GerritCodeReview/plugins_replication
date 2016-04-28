@@ -14,12 +14,11 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.easymock.EasyMock.createNiceMock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.resetToDefault;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
@@ -44,13 +43,13 @@ public class ReplicationStateTest {
 
   @Test
   public void shouldNotHavePushTask() {
-    assertFalse(replicationState.hasPushTask());
+    assertThat(replicationState.hasPushTask()).isFalse();
   }
 
   @Test
   public void shouldHavePushTask() {
     replicationState.increasePushTaskCount("someProject", "someRef");
-    assertTrue(replicationState.hasPushTask());
+    assertThat(replicationState.hasPushTask()).isTrue();
   }
 
   @Test

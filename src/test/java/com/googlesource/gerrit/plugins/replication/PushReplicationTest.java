@@ -14,31 +14,34 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.common.truth.Truth.assertThat;
 import static com.googlesource.gerrit.plugins.replication.Destination.encode;
 import static com.googlesource.gerrit.plugins.replication.Destination.needsUrlEncoding;
 
-import junit.framework.TestCase;
-
 import org.eclipse.jgit.transport.URIish;
+import org.junit.Test;
 
 import java.net.URISyntaxException;
 
-public class PushReplicationTest extends TestCase {
-  public void testNeedsUrlEncoding() throws URISyntaxException {
-    assertTrue(needsUrlEncoding(new URIish("http://host/path")));
-    assertTrue(needsUrlEncoding(new URIish("https://host/path")));
-    assertTrue(needsUrlEncoding(new URIish("amazon-s3://config/bucket/path")));
+public class PushReplicationTest {
 
-    assertFalse(needsUrlEncoding(new URIish("host:path")));
-    assertFalse(needsUrlEncoding(new URIish("user@host:path")));
-    assertFalse(needsUrlEncoding(new URIish("git://host/path")));
-    assertFalse(needsUrlEncoding(new URIish("ssh://host/path")));
+  @Test
+  public void testNeedsUrlEncoding() throws URISyntaxException {
+    assertThat(needsUrlEncoding(new URIish("http://host/path"))).isTrue();
+    assertThat(needsUrlEncoding(new URIish("https://host/path"))).isTrue();
+    assertThat(needsUrlEncoding(new URIish("amazon-s3://config/bucket/path"))).isTrue();
+
+    assertThat(needsUrlEncoding(new URIish("host:path"))).isFalse();
+    assertThat(needsUrlEncoding(new URIish("user@host:path"))).isFalse();
+    assertThat(needsUrlEncoding(new URIish("git://host/path"))).isFalse();
+    assertThat(needsUrlEncoding(new URIish("ssh://host/path"))).isFalse();
   }
 
+  @Test
   public void testUrlEncoding() {
-    assertEquals("foo/bar/thing", encode("foo/bar/thing"));
-    assertEquals("--%20All%20Projects%20--", encode("-- All Projects --"));
-    assertEquals("name/with%20a%20space", encode("name/with a space"));
-    assertEquals("name%0Awith-LF", encode("name\nwith-LF"));
+    assertThat(encode("foo/bar/thing")).isEqualTo("foo/bar/thing");
+    assertThat(encode("-- All Projects --")).isEqualTo("--%20All%20Projects%20--");
+    assertThat(encode("name/with a space")).isEqualTo("name/with%20a%20space");
+    assertThat(encode("name\nwith-LF")).isEqualTo("name%0Awith-LF");
   }
 }
