@@ -18,6 +18,7 @@ import static org.easymock.EasyMock.createNiceMock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.resetToDefault;
 import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -216,5 +217,12 @@ public class ReplicationStateTest {
         RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     replicationState.markAllPushTasksScheduled();
     verify(pushResultProcessingMock);
+  }
+
+  @Test
+  public void toStringStatus() throws Exception {
+    assertEquals("failed", RefPushResult.FAILED.toStatusString());
+    assertEquals("not-attempted", RefPushResult.NOT_ATTEMPTED.toStatusString());
+    assertEquals("succeeded", RefPushResult.SUCCEEDED.toStatusString());
   }
 }

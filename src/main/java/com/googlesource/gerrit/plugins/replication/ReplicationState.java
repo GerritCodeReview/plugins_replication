@@ -172,5 +172,9 @@ public class ReplicationState {
      * The ref was successfully replicated.
      */
     SUCCEEDED;
+
+    public String toStatusString() {
+      return name().toLowerCase().replace("_", "-");
+    }
   }
 }
