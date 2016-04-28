@@ -37,12 +37,8 @@ public class RefReplicatedEvent extends RefEvent {
     this.project = project;
     this.ref = ref;
     this.targetNode = targetNode;
-    this.status = toStatusString(status);
+    this.status = status.toString();
     this.refStatus = refStatus;
-  }
-
-  private String toStatusString(RefPushResult status) {
-    return status.name().toLowerCase().replace("_", "-");
   }
 
   @Override
