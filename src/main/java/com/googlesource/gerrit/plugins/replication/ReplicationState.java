@@ -159,7 +159,7 @@ public class ReplicationState {
 
   public enum RefPushResult {
     /**
-     * The ref is not replicated to slave.
+     * The ref was not successfully replicated.
      */
     FAILED,
 
@@ -169,7 +169,7 @@ public class ReplicationState {
     NOT_ATTEMPTED,
 
     /**
-     * ref was successfully replicated.
+     * The ref was successfully replicated.
      */
     SUCCEEDED;
   }
