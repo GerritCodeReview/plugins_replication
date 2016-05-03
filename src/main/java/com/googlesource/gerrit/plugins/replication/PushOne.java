@@ -19,8 +19,6 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
@@ -65,8 +63,10 @@ import org.eclipse.jgit.transport.URIish;
 import org.slf4j.MDC;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -418,7 +418,7 @@ class PushOne implements ProjectRunnable {
         // If we aren't mirroring, reduce the space we need to filter
         // to only the references we will update during this operation.
         //
-        Map<String, Ref> n = Maps.newHashMap();
+        Map<String, Ref> n = new HashMap<>();
         for (String src : delta) {
           Ref r = local.get(src);
           if (r != null) {
@@ -442,7 +442,7 @@ class PushOne implements ProjectRunnable {
 
   private List<RemoteRefUpdate> doPushAll(Transport tn, Map<String, Ref> local)
       throws NotSupportedException, TransportException, IOException {
-    List<RemoteRefUpdate> cmds = Lists.newArrayList();
+    List<RemoteRefUpdate> cmds = new ArrayList<>();
     boolean noPerms = !pool.isReplicatePermissions();
     Map<String, Ref> remote = listRemote(tn);
     for (Ref src : local.values()) {
@@ -476,7 +476,7 @@ class PushOne implements ProjectRunnable {
 
   private List<RemoteRefUpdate> doPushDelta(Map<String, Ref> local)
       throws IOException {
-    List<RemoteRefUpdate> cmds = Lists.newArrayList();
+    List<RemoteRefUpdate> cmds = new ArrayList<>();
     boolean noPerms = !pool.isReplicatePermissions();
     for (String src : delta) {
       RefSpec spec = matchSrc(src);

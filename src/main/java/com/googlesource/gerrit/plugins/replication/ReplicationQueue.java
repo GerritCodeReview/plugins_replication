@@ -15,7 +15,6 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.base.Strings;
-import com.google.common.collect.Sets;
 import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
@@ -52,6 +51,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 /** Manages automatic replication to remote repositories. */
@@ -188,7 +188,7 @@ public class ReplicationQueue implements
       return Collections.emptySet();
     }
 
-    Set<URIish> uris = Sets.newHashSet();
+    Set<URIish> uris = new HashSet<>();
     for (Destination config : this.config.getDestinations(filterType)) {
       if (!config.wouldPushProject(projectName)) {
         continue;
