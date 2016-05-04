@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d9bb78c_81cb7a62",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RefReplicatedEvent.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-05-04T21:24:14Z",
+      "side": 0,
+      "message": "This might not be used in the code, but it still gets included in the event data as far as I understand.\n\nIf you look at other members, for example targetNode, they are also \u0027unused\u0027 except in the test code.\n\nA better fix might be to update the test code to also reference refStatus.",
+      "range": {
+        "startLine": 41,
+        "startChar": 9,
+        "endLine": 41,
+        "endChar": 18
+      },
+      "revId": "a3f93741618e2bef903f9140dd15d66b5cc4f018",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
