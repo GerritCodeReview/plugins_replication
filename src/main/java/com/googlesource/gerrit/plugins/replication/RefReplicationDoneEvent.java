@@ -20,9 +20,9 @@ import com.google.gerrit.server.events.RefEvent;
 public class RefReplicationDoneEvent extends RefEvent {
   static final String TYPE = "ref-replication-done";
 
-  public final String project;
-  public final String ref;
-  public final int nodesCount;
+  final String project;
+  final String ref;
+  final int nodesCount;
 
   public RefReplicationDoneEvent(String project, String ref, int nodesCount) {
     super(TYPE);

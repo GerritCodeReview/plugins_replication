@@ -170,7 +170,7 @@ public abstract class PushResultProcessing {
     void onRefReplicatedToOneNode(String project, String ref, URIish uri,
         RefPushResult status, RemoteRefUpdate.Status refStatus) {
       postEvent(new RefReplicatedEvent(project, ref, resolveNodeName(uri),
-          status, refStatus));
+          status));
     }
 
     @Override

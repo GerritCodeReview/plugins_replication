@@ -66,7 +66,7 @@ public class GitUpdateProcessingTest extends TestCase {
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent("someProject", "refs/heads/master", "someHost",
-            RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
+            RefPushResult.SUCCEEDED);
     dispatcherMock.postEvent(RefReplicatedEventEquals.eqEvent(expectedEvent),
         anyObject(ReviewDb.class));
     expectLastCall().once();
@@ -82,7 +82,7 @@ public class GitUpdateProcessingTest extends TestCase {
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent("someProject", "refs/changes/01/1/1", "someHost",
-            RefPushResult.FAILED, RemoteRefUpdate.Status.REJECTED_NONFASTFORWARD);
+            RefPushResult.FAILED);
     dispatcherMock.postEvent(RefReplicatedEventEquals.eqEvent(expectedEvent),
         anyObject(ReviewDb.class));
     expectLastCall().once();
