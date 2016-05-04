@@ -25,11 +25,11 @@ import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
 public class RefReplicatedEvent extends RefEvent {
   static final String TYPE = "ref-replicated";
 
-  public final String project;
-  public final String ref;
-  public final String targetNode;
-  public final String status;
-  public final Status refStatus;
+  final String project;
+  final String ref;
+  final String targetNode;
+  final String status;
+  final Status refStatus;
 
   public RefReplicatedEvent(String project, String ref, String targetNode,
       RefPushResult status, RemoteRefUpdate.Status refStatus) {
