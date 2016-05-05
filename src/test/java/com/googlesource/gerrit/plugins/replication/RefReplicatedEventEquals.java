@@ -67,11 +67,11 @@ public class RefReplicatedEventEquals implements IArgumentMatcher {
     buffer.append(expected.getClass().getName());
     buffer.append(" with project \"");
     buffer.append(expected.project);
-    buffer.append(" and ref \"");
+    buffer.append("\" and ref \"");
     buffer.append(expected.ref);
-    buffer.append(" and targetNode \"");
+    buffer.append("\" and targetNode \"");
     buffer.append(expected.targetNode);
-    buffer.append(" and status \"");
+    buffer.append("\" and status \"");
     buffer.append(expected.status);
     buffer.append("\")");
   }
