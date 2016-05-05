@@ -82,6 +82,30 @@
     },
     {
       "key": {
+        "uuid": "ad987b90_22738e08",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2016-05-05T15:17:48Z",
+      "side": 1,
+      "message": "In fact, would remove the access modifier so this member becomes package-private. Now, I think this new TYPE should also be registered beside the others in ReplicationModule.",
+      "parentUuid": "add23be5_72931861",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 8
+      },
+      "revId": "e336ed5eb7f1cd26e697a31768b4fe71dcdc3638",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "add23be5_329d9069",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
         "patchSetId": 10
@@ -93,6 +117,30 @@
       "writtenOn": "2016-05-03T19:16:41Z",
       "side": 1,
       "message": "private",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 8
+      },
+      "revId": "e336ed5eb7f1cd26e697a31768b4fe71dcdc3638",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad987b90_0261aa2a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2016-05-05T15:17:48Z",
+      "side": 1,
+      "message": "Amending this comment here too: remove instead \u003d\u003e package-private. This proposal comes with this other one: would add unit tests for this whole new class, similarly to RefReplicatedEvent and/or RefReplicationDoneEvent.",
+      "parentUuid": "add23be5_329d9069",
       "range": {
         "startLine": 24,
         "startChar": 2,
@@ -128,6 +176,30 @@
     },
     {
       "key": {
+        "uuid": "ad987b90_e265a636",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2016-05-05T15:17:48Z",
+      "side": 1,
+      "message": "Same comment amend as above.",
+      "parentUuid": "ed7a73a9_14987478",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 8
+      },
+      "revId": "e336ed5eb7f1cd26e697a31768b4fe71dcdc3638",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "add23be5_12988c78",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
         "patchSetId": 10
@@ -139,6 +211,30 @@
       "writtenOn": "2016-05-03T19:16:41Z",
       "side": 1,
       "message": "Seems unnecessary in this specific class case.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "e336ed5eb7f1cd26e697a31768b4fe71dcdc3638",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8d9bb78c_c10ce285",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2016-05-05T15:17:48Z",
+      "side": 1,
+      "message": "Dropping this comment; would do as per above comments instead.",
+      "parentUuid": "add23be5_12988c78",
       "range": {
         "startLine": 26,
         "startChar": 0,
