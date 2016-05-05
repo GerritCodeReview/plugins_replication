@@ -48,6 +48,9 @@ public class RefReplicatedEventEquals implements IArgumentMatcher {
     if (!equals(expected.status, actualRefReplicatedEvent.status)) {
       return false;
     }
+    if (!equals(expected.refStatus, actualRefReplicatedEvent.refStatus)) {
+      return false;
+    }
     return true;
   }
 
@@ -73,6 +76,8 @@ public class RefReplicatedEventEquals implements IArgumentMatcher {
     buffer.append(expected.targetNode);
     buffer.append("\" and status \"");
     buffer.append(expected.status);
+    buffer.append("\" and refStatus \"");
+    buffer.append(expected.refStatus);
     buffer.append("\")");
   }
 }
