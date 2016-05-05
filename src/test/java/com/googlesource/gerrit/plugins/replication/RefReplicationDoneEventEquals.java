@@ -64,9 +64,9 @@ public class RefReplicationDoneEventEquals implements IArgumentMatcher {
     buffer.append(expected.getClass().getName());
     buffer.append(" with project \"");
     buffer.append(expected.project);
-    buffer.append(" and ref \"");
+    buffer.append("\" and ref \"");
     buffer.append(expected.ref);
-    buffer.append(" and nodesCount \"");
+    buffer.append("\" and nodesCount \"");
     buffer.append(expected.nodesCount);
     buffer.append("\")");
   }
