@@ -22,6 +22,30 @@
       "revId": "697c9c00c3745816c8277aeba3aa068ce4941c5a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad987b90_826c9a26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2016-05-05T14:14:16Z",
+      "side": 1,
+      "message": "Done; considering it as we speak.",
+      "parentUuid": "ad987b90_e2e006e0",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 62
+      },
+      "revId": "697c9c00c3745816c8277aeba3aa068ce4941c5a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
