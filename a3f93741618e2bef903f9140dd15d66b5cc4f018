@@ -22,6 +22,30 @@
       "revId": "a3f93741618e2bef903f9140dd15d66b5cc4f018",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad987b90_62699614",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RefReplicatedEvent.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2016-05-05T14:14:16Z",
+      "side": 0,
+      "message": "Done; being considered. Thx, good (important) point I overlooked.",
+      "parentUuid": "8d9bb78c_81cb7a62",
+      "range": {
+        "startLine": 41,
+        "startChar": 9,
+        "endLine": 41,
+        "endChar": 18
+      },
+      "revId": "a3f93741618e2bef903f9140dd15d66b5cc4f018",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
