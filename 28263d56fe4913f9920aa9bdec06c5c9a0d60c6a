@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2337cd6_6a18b764",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-05-14T01:45:37Z",
+      "side": 1,
+      "message": "Instead of Depends-On, please set both changes on the same topic.  (Something other than the generic \"replication-gh16\" which also includes other changes that don\u0027t necessarily need to be submitted together).\n\nIt would also be good to add a change that updates the plugin revision on core gerrit, also on the same topic name.",
+      "revId": "28263d56fe4913f9920aa9bdec06c5c9a0d60c6a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
