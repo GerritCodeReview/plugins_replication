@@ -70,6 +70,30 @@
       "revId": "eb11c16e18a9633e6c451de9f828dd4114fda36d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "523080cd_073816c2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-05-14T01:47:41Z",
+      "side": 1,
+      "message": "I\u0027m assuming that with the other change it\u0027s necessary to kill the replication by using the \"kill\" ssh command?\n\nMy intention with this was to add a specific command to abort replication without killing the entire task.",
+      "parentUuid": "fc3302f3_ec43cb8b",
+      "range": {
+        "startLine": 243,
+        "startChar": 6,
+        "endLine": 243,
+        "endChar": 30
+      },
+      "revId": "eb11c16e18a9633e6c451de9f828dd4114fda36d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
