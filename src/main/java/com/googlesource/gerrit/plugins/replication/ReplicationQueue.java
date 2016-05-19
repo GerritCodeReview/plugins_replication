@@ -113,7 +113,7 @@ public class ReplicationQueue implements
     int discarded = config.shutdown();
     if (discarded > 0) {
       repLog.warn(String.format(
-          "Cancelled %d replication events during shutdown", discarded));
+          "Canceled %d replication events during shutdown", discarded));
     }
   }
 

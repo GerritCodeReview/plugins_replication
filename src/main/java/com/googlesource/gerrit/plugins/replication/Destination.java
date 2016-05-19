@@ -269,6 +269,13 @@ public class Destination {
     }
   }
 
+  void pushWasCanceled(PushOne pushOp) {
+    synchronized (stateLock) {
+      URIish uri = pushOp.getURI();
+      pending.remove(uri);
+    }
+  }
+
   /**
    * It schedules again a PushOp instance.
    * <p>
@@ -334,8 +341,7 @@ public class Destination {
           // when notifying it is starting (with pending lock protection),
           // it will see it was canceled and then it will do nothing with
           // pending list and it will not execute its run implementation.
-
-          pendingPushOp.cancel();
+          pendingPushOp.canceledByReplication();
           pending.remove(uri);
 
           pushOp.addRefs(pendingPushOp.getRefs());
@@ -380,9 +386,9 @@ public class Destination {
     return true;
   }
 
-  void notifyFinished(PushOne op) {
+  PushOne notifyFinished(PushOne op) {
     synchronized (stateLock) {
-      inFlight.remove(op.getURI());
+      return inFlight.remove(op.getURI());
     }
   }
 

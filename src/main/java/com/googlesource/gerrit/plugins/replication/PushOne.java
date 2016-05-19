@@ -32,6 +32,7 @@ import com.google.gerrit.server.git.PerThreadRequestScope;
 import com.google.gerrit.server.git.ProjectRunnable;
 import com.google.gerrit.server.git.TagCache;
 import com.google.gerrit.server.git.VisibleRefFilter;
+import com.google.gerrit.server.git.WorkQueue.CanceledWhileRunning;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.ProjectControl;
 import com.google.gerrit.server.util.IdGenerator;
@@ -72,6 +73,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * A push to remote operation started by {@link GitReferenceUpdatedListener}.
@@ -79,7 +81,7 @@ import java.util.concurrent.Callable;
  * Instance members are protected by the lock within PushQueue. Callers must
  * take that lock to ensure they are working with a current view of the object.
  */
-class PushOne implements ProjectRunnable {
+class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final ReplicationStateListener stateLog;
   static final String ALL_REFS = "..all..";
   static final String ID_MDC_KEY = "pushOneId";
@@ -113,6 +115,7 @@ class PushOne implements ProjectRunnable {
   private final int id;
   private final long createdAt;
   private final ReplicationMetrics metrics;
+  private final AtomicBoolean canceledWhileRunning;
 
   @Inject
   PushOne(GitRepositoryManager grm,
@@ -146,6 +149,20 @@ class PushOne implements ProjectRunnable {
     stateLog = sl;
     createdAt = System.nanoTime();
     metrics = m;
+    canceledWhileRunning = new AtomicBoolean(false);
+  }
+
+  @Override
+  public void cancel() {
+    repLog.info("Replication {} was canceled", getURI());
+    canceledByReplication();
+    pool.pushWasCanceled(this);
+  }
+
+  @Override
+  public void setCanceledWhileRunning() {
+    repLog.info("Replication {} was canceled while being executed", getURI());
+    canceledWhileRunning.set(true);
   }
 
   @Override
@@ -182,7 +199,7 @@ class PushOne implements ProjectRunnable {
     retryCount++;
   }
 
-  void cancel() {
+  void canceledByReplication() {
     canceled = true;
   }
 
@@ -319,7 +336,6 @@ class PushOne implements ProjectRunnable {
       createRepository();
     } catch (NotSupportedException e) {
       stateLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
-
     } catch (TransportException e) {
       Throwable cause = e.getCause();
       if (cause instanceof JSchException
@@ -333,15 +349,23 @@ class PushOne implements ProjectRunnable {
 
         // The remote push operation should be retried.
         if (lockRetryCount <= maxLockRetries) {
-          pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
+          if (canceledWhileRunning.get()) {
+            logCanceledWhileRunningException(e);
+          } else {
+            pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
+          }
         } else {
           repLog.error("Giving up after " + lockRetryCount
               + " of this error during replication to " + e.getMessage());
         }
       } else {
-        repLog.error("Cannot replicate to " + uri, e);
-        // The remote push operation should be retried.
-        pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
+        if (canceledWhileRunning.get()) {
+          logCanceledWhileRunningException(e);
+        } else {
+          repLog.error("Cannot replicate to " + uri, e);
+          // The remote push operation should be retried.
+          pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
+        }
       }
     } catch (IOException e) {
       stateLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
@@ -353,6 +377,11 @@ class PushOne implements ProjectRunnable {
       }
       pool.notifyFinished(this);
     }
+  }
+
+  private void logCanceledWhileRunningException(TransportException e) {
+    repLog.info("Cannot replicate to " + uri + "."
+        + " It was canceled while running", e);
   }
 
   private void createRepository() {
