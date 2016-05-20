@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "57d4f27c_8715068c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-05-20T15:02:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed7a73a9_548eec37",
+      "revId": "e336ed5eb7f1cd26e697a31768b4fe71dcdc3638",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "add23be5_528e1438",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 10
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "77d1f68b_e883f3dd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-05-20T15:02:03Z",
+      "side": 1,
+      "message": "You\u0027re right, it shouldn\u0027t be here. Done.",
+      "parentUuid": "add23be5_528e1438",
+      "revId": "e336ed5eb7f1cd26e697a31768b4fe71dcdc3638",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a83309d6_6ae277b1",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 10
@@ -47,6 +83,30 @@
       "writtenOn": "2016-05-03T19:16:41Z",
       "side": 1,
       "message": "ref : refs (as per [1])\n\n[1] https://google.github.io/styleguide/javaguide.html#s4.6.2-horizontal-whitespace",
+      "range": {
+        "startLine": 554,
+        "startChar": 16,
+        "endLine": 554,
+        "endChar": 25
+      },
+      "revId": "e336ed5eb7f1cd26e697a31768b4fe71dcdc3638",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "57d9523d_7f48ef78",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-05-20T15:02:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a83309d6_6ae277b1",
       "range": {
         "startLine": 554,
         "startChar": 16,
@@ -106,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "57d4f27c_674612b5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-05-20T15:02:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad987b90_22738e08",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 8
+      },
+      "revId": "e336ed5eb7f1cd26e697a31768b4fe71dcdc3638",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "add23be5_329d9069",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
         "patchSetId": 10
@@ -141,6 +225,30 @@
       "side": 1,
       "message": "Amending this comment here too: remove instead \u003d\u003e package-private. This proposal comes with this other one: would add unit tests for this whole new class, similarly to RefReplicatedEvent and/or RefReplicationDoneEvent.",
       "parentUuid": "add23be5_329d9069",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 8
+      },
+      "revId": "e336ed5eb7f1cd26e697a31768b4fe71dcdc3638",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "57d4f27c_47430ea3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-05-20T15:02:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad987b90_0261aa2a",
       "range": {
         "startLine": 24,
         "startChar": 2,
@@ -200,6 +308,30 @@
     },
     {
       "key": {
+        "uuid": "77d1f68b_a879fbeb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-05-20T15:02:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad987b90_e265a636",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 8
+      },
+      "revId": "e336ed5eb7f1cd26e697a31768b4fe71dcdc3638",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "add23be5_12988c78",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
         "patchSetId": 10
@@ -235,6 +367,30 @@
       "side": 1,
       "message": "Dropping this comment; would do as per above comments instead.",
       "parentUuid": "add23be5_12988c78",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "e336ed5eb7f1cd26e697a31768b4fe71dcdc3638",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77d1f68b_887eb7cf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2016-05-20T15:02:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d9bb78c_c10ce285",
       "range": {
         "startLine": 26,
         "startChar": 0,
