@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc1f8b52_35fa3084",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-05-23T04:35:14Z",
+      "side": 1,
+      "message": "nit: indentation should be reduced since it\u0027s no longer inside a for-loop.",
+      "range": {
+        "startLine": 547,
+        "startChar": 0,
+        "endLine": 547,
+        "endChar": 10
+      },
+      "revId": "a6fc880dc1552366e90eebd6a312ec08d40b94d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
