@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "9c9a0f77_32907056",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2016-05-24T20:06:30Z",
+      "side": 1,
+      "message": "I think the second part of my above comment went unnoticed(?)",
+      "parentUuid": "57d4f27c_674612b5",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 8
+      },
+      "revId": "e336ed5eb7f1cd26e697a31768b4fe71dcdc3638",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "add23be5_329d9069",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
         "patchSetId": 10
@@ -249,6 +273,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "ad987b90_0261aa2a",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 8
+      },
+      "revId": "e336ed5eb7f1cd26e697a31768b4fe71dcdc3638",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ca417ba_108b642c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2016-05-24T20:06:30Z",
+      "side": 1,
+      "message": "Did the second part of my other comment (right above) go unnoticed as well?",
+      "parentUuid": "57d4f27c_47430ea3",
       "range": {
         "startLine": 24,
         "startChar": 2,
