@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5ca417ba_f0bc20c4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-05-25T01:50:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cb843a6_47164e9e",
+      "range": {
+        "startLine": 51,
+        "startChar": 16,
+        "endLine": 51,
+        "endChar": 47
+      },
+      "revId": "7a43548cc0ab24b107c8587f577a11fbfb9243c8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c9a0f77_128b6c2c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 12
@@ -36,6 +60,24 @@
       "writtenOn": "2016-05-24T20:06:30Z",
       "side": 1,
       "message": "Blank line missing.",
+      "revId": "7a43548cc0ab24b107c8587f577a11fbfb9243c8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ca417ba_90c59454",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-05-25T01:50:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c9a0f77_128b6c2c",
       "revId": "7a43548cc0ab24b107c8587f577a11fbfb9243c8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
