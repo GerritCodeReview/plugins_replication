@@ -483,6 +483,12 @@ class PushOne implements ProjectRunnable {
       if (spec != null) {
         // If the ref still exists locally, send it, otherwise delete it.
         Ref srcRef = local.get(src);
+
+        // Second try to ensure that the ref is truly not found locally
+        if (srcRef == null) {
+          srcRef = git.getRef(src);
+        }
+
         if (srcRef != null && canPushRef(src, noPerms)) {
           push(cmds, spec, srcRef);
         } else if (config.isMirror()) {
