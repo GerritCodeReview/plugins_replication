@@ -486,7 +486,7 @@ class PushOne implements ProjectRunnable {
 
         // Second try to ensure that the ref is truly not found locally
         if (srcRef == null) {
-          srcRef = git.getRef(src);
+          srcRef = git.exactRef(src);
         }
 
         if (srcRef != null && canPushRef(src, noPerms)) {
