@@ -48,13 +48,12 @@ public class ReplicationFilter {
   public boolean matches(NameKey name) {
     if (projectPatterns.isEmpty()) {
       return true;
-    } else {
-      String projectName = name.get();
+    }
+    String projectName = name.get();
 
-      for (String pattern : projectPatterns) {
-        if (matchesPattern(projectName, pattern)) {
-          return true;
-        }
+    for (String pattern : projectPatterns) {
+      if (matchesPattern(projectName, pattern)) {
+        return true;
       }
     }
     return false;
