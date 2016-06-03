@@ -26,10 +26,10 @@ import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.reviewdb.server.ReviewDb;
-import com.google.gerrit.server.git.ChangeCache;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
 import com.google.gerrit.server.git.ProjectRunnable;
+import com.google.gerrit.server.git.SearchingChangeCacheImpl;
 import com.google.gerrit.server.git.TagCache;
 import com.google.gerrit.server.git.VisibleRefFilter;
 import com.google.gerrit.server.project.NoSuchProjectException;
@@ -95,7 +95,7 @@ class PushOne implements ProjectRunnable {
   private final CredentialsProvider credentialsProvider;
   private final TagCache tagCache;
   private final PerThreadRequestScope.Scoper threadScoper;
-  private final ChangeCache changeCache;
+  private final SearchingChangeCacheImpl changeCache;
   private final ReplicationQueue replicationQueue;
 
   private final Project.NameKey projectName;
@@ -122,7 +122,7 @@ class PushOne implements ProjectRunnable {
       CredentialsFactory cpFactory,
       TagCache tc,
       PerThreadRequestScope.Scoper ts,
-      ChangeCache cc,
+      SearchingChangeCacheImpl cc,
       ReplicationQueue rq,
       IdGenerator ig,
       ReplicationStateListener sl,
