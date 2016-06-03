@@ -26,12 +26,13 @@ import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.reviewdb.server.ReviewDb;
-import com.google.gerrit.server.git.ChangeCache;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
 import com.google.gerrit.server.git.ProjectRunnable;
+import com.google.gerrit.server.git.SearchingChangeCacheImpl;
 import com.google.gerrit.server.git.TagCache;
 import com.google.gerrit.server.git.VisibleRefFilter;
+import com.google.gerrit.server.notedb.ChangeNotes;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.ProjectControl;
 import com.google.gerrit.server.util.IdGenerator;
@@ -95,7 +96,8 @@ class PushOne implements ProjectRunnable {
   private final CredentialsProvider credentialsProvider;
   private final TagCache tagCache;
   private final PerThreadRequestScope.Scoper threadScoper;
-  private final ChangeCache changeCache;
+  private final ChangeNotes.Factory changeNotesFactory;
+  private final SearchingChangeCacheImpl changeCache;
   private final ReplicationQueue replicationQueue;
 
   private final Project.NameKey projectName;
@@ -122,7 +124,8 @@ class PushOne implements ProjectRunnable {
       CredentialsFactory cpFactory,
       TagCache tc,
       PerThreadRequestScope.Scoper ts,
-      ChangeCache cc,
+      ChangeNotes.Factory nf,
+      SearchingChangeCacheImpl cc,
       ReplicationQueue rq,
       IdGenerator ig,
       ReplicationStateListener sl,
@@ -136,6 +139,7 @@ class PushOne implements ProjectRunnable {
     credentialsProvider = cpFactory.create(c.getName());
     tagCache = tc;
     threadScoper = ts;
+    changeNotesFactory = nf;
     changeCache = cc;
     replicationQueue = rq;
     projectName = d;
@@ -429,7 +433,8 @@ class PushOne implements ProjectRunnable {
       }
 
       try (ReviewDb db = schema.open()) {
-        local = new VisibleRefFilter(tagCache, changeCache, git, pc, db, true)
+        local = new VisibleRefFilter(
+                  tagCache, changeNotesFactory, changeCache, git, pc, db, true)
             .filter(local, true);
       } catch (OrmException e) {
         stateLog.error("Cannot read database to replicate to " + projectName, e, getStatesAsArray());
