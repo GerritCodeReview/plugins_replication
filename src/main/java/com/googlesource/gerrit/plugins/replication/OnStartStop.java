@@ -19,8 +19,6 @@ import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.extensions.systemstatus.ServerInformation;
-import com.google.gerrit.reviewdb.server.ReviewDb;
-import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
 
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
@@ -36,7 +34,6 @@ public class OnStartStop implements LifecycleListener {
   private final ReplicationQueue queue;
   private final ReplicationConfig config;
   private final DynamicItem<EventDispatcher> eventDispatcher;
-  private final SchemaFactory<ReviewDb> database;
 
   @Inject
   protected OnStartStop(
@@ -44,14 +41,12 @@ public class OnStartStop implements LifecycleListener {
       PushAll.Factory pushAll,
       ReplicationQueue queue,
       ReplicationConfig config,
-      DynamicItem<EventDispatcher> eventDispatcher,
-      SchemaFactory<ReviewDb> database) {
+      DynamicItem<EventDispatcher> eventDispatcher) {
     this.srvInfo = srvInfo;
     this.pushAll = pushAll;
     this.queue = queue;
     this.config = config;
     this.eventDispatcher = eventDispatcher;
-    this.database = database;
     this.pushAllFuture = Atomics.newReference();
   }
 
@@ -62,7 +57,7 @@ public class OnStartStop implements LifecycleListener {
     if (srvInfo.getState() == ServerInformation.State.STARTUP
         && config.isReplicateAllOnPluginStart()) {
       ReplicationState state = new ReplicationState(
-          new GitUpdateProcessing(eventDispatcher.get(), database));
+          new GitUpdateProcessing(eventDispatcher.get()));
       pushAllFuture.set(pushAll.create(
           null, ReplicationFilter.all(), state).schedule(30, TimeUnit.SECONDS));
     }

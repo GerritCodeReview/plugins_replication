@@ -15,10 +15,8 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.common.EventDispatcher;
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.events.RefEvent;
 import com.google.gwtorm.server.OrmException;
-import com.google.gwtorm.server.SchemaFactory;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
@@ -158,12 +156,9 @@ public abstract class PushResultProcessing {
     static final Logger log = LoggerFactory.getLogger(GitUpdateProcessing.class);
 
     private final EventDispatcher dispatcher;
-    private final SchemaFactory<ReviewDb> schema;
 
-    public GitUpdateProcessing(EventDispatcher dispatcher,
-        SchemaFactory<ReviewDb> schema) {
+    public GitUpdateProcessing(EventDispatcher dispatcher) {
       this.dispatcher = dispatcher;
-      this.schema = schema;
     }
 
     @Override
@@ -183,8 +178,8 @@ public abstract class PushResultProcessing {
     }
 
     private void postEvent(RefEvent event) {
-      try (ReviewDb db = schema.open()) {
-        dispatcher.postEvent(event, db);
+      try {
+        dispatcher.postEvent(event);
       } catch (OrmException e) {
         log.error("Cannot post event", e);
       }

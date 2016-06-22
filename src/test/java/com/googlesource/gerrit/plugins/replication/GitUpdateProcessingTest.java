@@ -14,7 +14,6 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import static org.easymock.EasyMock.anyObject;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.createNiceMock;
 import static org.easymock.EasyMock.expect;
@@ -59,7 +58,7 @@ public class GitUpdateProcessingTest extends TestCase {
     SchemaFactory<ReviewDb> schemaMock = createMock(SchemaFactory.class);
     expect(schemaMock.open()).andReturn(reviewDbMock).anyTimes();
     replay(schemaMock);
-    gitUpdateProcessing = new GitUpdateProcessing(dispatcherMock, schemaMock);
+    gitUpdateProcessing = new GitUpdateProcessing(dispatcherMock);
   }
 
   public void testHeadRefReplicated() throws URISyntaxException, OrmException {
@@ -67,8 +66,7 @@ public class GitUpdateProcessingTest extends TestCase {
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent("someProject", "refs/heads/master", "someHost",
             RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    dispatcherMock.postEvent(RefReplicatedEventEquals.eqEvent(expectedEvent),
-        anyObject(ReviewDb.class));
+    dispatcherMock.postEvent(RefReplicatedEventEquals.eqEvent(expectedEvent));
     expectLastCall().once();
     replay(dispatcherMock);
 
@@ -83,8 +81,7 @@ public class GitUpdateProcessingTest extends TestCase {
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent("someProject", "refs/changes/01/1/1", "someHost",
             RefPushResult.FAILED, RemoteRefUpdate.Status.REJECTED_NONFASTFORWARD);
-    dispatcherMock.postEvent(RefReplicatedEventEquals.eqEvent(expectedEvent),
-        anyObject(ReviewDb.class));
+    dispatcherMock.postEvent(RefReplicatedEventEquals.eqEvent(expectedEvent));
     expectLastCall().once();
     replay(dispatcherMock);
 
@@ -99,8 +96,7 @@ public class GitUpdateProcessingTest extends TestCase {
     RefReplicationDoneEvent expectedDoneEvent =
         new RefReplicationDoneEvent("someProject", "refs/heads/master", 5);
     dispatcherMock.postEvent(
-        RefReplicationDoneEventEquals.eqEvent(expectedDoneEvent),
-        anyObject(ReviewDb.class));
+        RefReplicationDoneEventEquals.eqEvent(expectedDoneEvent));
     expectLastCall().once();
     replay(dispatcherMock);
 

@@ -23,9 +23,7 @@ import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.git.WorkQueue;
-import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -80,7 +78,6 @@ public class ReplicationQueue implements
   }
 
   private final WorkQueue workQueue;
-  private final SchemaFactory<ReviewDb> database;
   private final DynamicItem<EventDispatcher> dispatcher;
   private final ReplicationConfig config;
   private final Provider<SshSessionFactory> sshSessionFactoryProvider;
@@ -89,12 +86,10 @@ public class ReplicationQueue implements
   @Inject
   ReplicationQueue(WorkQueue wq,
       ReplicationConfig rc,
-      SchemaFactory<ReviewDb> db,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListener sl,
       Provider<SshSessionFactory> sshSessionFactoryProvider) {
     workQueue = wq;
-    database = db;
     dispatcher = dis;
     config = rc;
     stateLog = sl;
@@ -137,7 +132,7 @@ public class ReplicationQueue implements
   @Override
   public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
     ReplicationState state =
-        new ReplicationState(new GitUpdateProcessing(dispatcher.get(), database));
+        new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
     if (!running) {
       stateLog.warn("Replication plugin did not finish startup before event", state);
       return;
