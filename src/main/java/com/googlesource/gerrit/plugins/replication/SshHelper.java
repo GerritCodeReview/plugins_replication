@@ -25,20 +25,20 @@ import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
 import org.eclipse.jgit.util.io.StreamCopyThread;
 
-class SshHelper {
+public class SshHelper {
   private final Provider<SshSessionFactory> sshSessionFactoryProvider;
   private final int commandTimeout;
   private final int connectionTimeout;
 
   @Inject
-  SshHelper(
+  protected SshHelper(
       ReplicationConfig replicationConfig, Provider<SshSessionFactory> sshSessionFactoryProvider) {
     this.sshSessionFactoryProvider = sshSessionFactoryProvider;
     this.commandTimeout = replicationConfig.getSshCommandTimeout();
     this.connectionTimeout = replicationConfig.getSshConnectionTimeout();
   }
 
-  int executeRemoteSsh(URIish uri, String cmd, OutputStream errStream) throws IOException {
+  public int executeRemoteSsh(URIish uri, String cmd, OutputStream errStream) throws IOException {
     RemoteSession ssh = connect(uri);
     Process proc = ssh.exec(cmd, commandTimeout);
     proc.getOutputStream().close();
@@ -57,7 +57,7 @@ class SshHelper {
     return proc.exitValue();
   }
 
-  OutputStream newErrorBufferStream() {
+  public OutputStream newErrorBufferStream() {
     return new OutputStream() {
       private final StringBuilder out = new StringBuilder();
       private final StringBuilder line = new StringBuilder();
@@ -86,7 +86,7 @@ class SshHelper {
     };
   }
 
-  RemoteSession connect(URIish uri) throws TransportException {
+  protected RemoteSession connect(URIish uri) throws TransportException {
     return sshSessionFactoryProvider.get().getSession(uri, null, FS.DETECTED, connectionTimeout);
   }
 }
