@@ -18,7 +18,7 @@ import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.events.RefEvent;
 
 public class RefReplicationDoneEvent extends RefEvent {
-  static final String TYPE = "ref-replication-done";
+  public static final String TYPE = "ref-replication-done";
 
   final String project;
   final String ref;

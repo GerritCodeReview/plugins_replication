@@ -26,7 +26,7 @@ import com.google.inject.Singleton;
  * state to the stderr console.
  */
 @Singleton
-class ReplicationStateLogger implements ReplicationStateListener {
+public class ReplicationStateLogger implements ReplicationStateListener {
 
   @Override
   public void warn(String msg, ReplicationState... states) {
