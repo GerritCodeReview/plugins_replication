@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d092ab0_e8f0d333",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2016-07-05T15:51:30Z",
+      "side": 1,
+      "message": "two",
+      "range": {
+        "startLine": 18,
+        "startChar": 44,
+        "endLine": 18,
+        "endChar": 46
+      },
+      "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddfd6ec1_25416e26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2016-07-05T15:51:30Z",
+      "side": 1,
+      "message": "Add a \"TEST PLAN:\" line above?",
+      "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddfd6ec1_053e72a8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2016-07-05T15:51:30Z",
+      "side": 1,
+      "message": "Multimap\u003cString, URIish\u003e ?",
+      "range": {
+        "startLine": 189,
+        "startChar": 10,
+        "endLine": 189,
+        "endChar": 34
+      },
+      "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddfd6ec1_c56e1ab0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2016-07-05T15:51:30Z",
+      "side": 1,
+      "message": "Since this pattern repeats several times, how about introducing an SSHClient (not sure about the name) and implement it for Gerrit and for a general git-over-ssh server?",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 42
+      },
+      "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddfd6ec1_a5631ec6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2016-07-05T15:51:30Z",
+      "side": 1,
+      "message": "what is the unit?",
+      "range": {
+        "startLine": 31,
+        "startChar": 27,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddfd6ec1_856822a3",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 17
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2016-07-05T15:51:30Z",
+      "side": 1,
+      "message": "Is this really only for Gerrit slaves?",
+      "range": {
+        "startLine": 145,
+        "startChar": 42,
+        "endLine": 145,
+        "endChar": 47
+      },
+      "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddfd6ec1_e56916aa",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 17
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2016-07-05T15:51:30Z",
+      "side": 1,
+      "message": "Since this is not really a \"gerrit:\" protocol but still SSH, how about keeping the \"ssh://\" URL as-is and introducing another configuration parameter:\n\n  [remote \"name\"]\n    isGerrit \u003d true",
+      "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
