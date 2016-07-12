@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dad49439_2de6edbb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-07-12T13:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d092ab0_e8f0d333",
+      "range": {
+        "startLine": 18,
+        "startChar": 44,
+        "endLine": 18,
+        "endChar": 46
+      },
+      "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ddfd6ec1_25416e26",
         "filename": "/COMMIT_MSG",
         "patchSetId": 17
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "dad49439_0de331ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-07-12T13:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddfd6ec1_25416e26",
+      "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ddfd6ec1_053e72a8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 17
@@ -53,6 +95,30 @@
       "writtenOn": "2016-07-05T15:51:30Z",
       "side": 1,
       "message": "Multimap\u003cString, URIish\u003e ?",
+      "range": {
+        "startLine": 189,
+        "startChar": 10,
+        "endLine": 189,
+        "endChar": 34
+      },
+      "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad49439_0d4a119a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-07-12T13:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddfd6ec1_053e72a8",
       "range": {
         "startLine": 189,
         "startChar": 10,
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "fad95870_4e67f338",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-07-12T13:04:23Z",
+      "side": 1,
+      "message": "this smells like a refactoring and it should be done in separate chage",
+      "parentUuid": "ddfd6ec1_c56e1ab0",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 42
+      },
+      "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ddfd6ec1_a5631ec6",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
         "patchSetId": 17
@@ -99,6 +189,30 @@
       "writtenOn": "2016-07-05T15:51:30Z",
       "side": 1,
       "message": "what is the unit?",
+      "range": {
+        "startLine": 31,
+        "startChar": 27,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad95870_ae7f77bf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-07-12T13:04:23Z",
+      "side": 1,
+      "message": "getSession expect timeout value in milliseconds. SSH_REMOTE_TIMEOUT is set to two minutes",
+      "parentUuid": "ddfd6ec1_a5631ec6",
       "range": {
         "startLine": 31,
         "startChar": 27,
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "fad95870_2e74a7df",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 17
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-07-12T13:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddfd6ec1_856822a3",
+      "range": {
+        "startLine": 145,
+        "startChar": 42,
+        "endLine": 145,
+        "endChar": 47
+      },
+      "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ddfd6ec1_e56916aa",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 17
@@ -145,6 +283,24 @@
       "writtenOn": "2016-07-05T15:51:30Z",
       "side": 1,
       "message": "Since this is not really a \"gerrit:\" protocol but still SSH, how about keeping the \"ssh://\" URL as-is and introducing another configuration parameter:\n\n  [remote \"name\"]\n    isGerrit \u003d true",
+      "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad49439_4dd939fc",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 17
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-07-12T13:04:23Z",
+      "side": 1,
+      "message": "I\u0027m not a huge fan of boolean flags. Right now protocol\u0027s imply how projects are created and removed plus how to change the HEAD reference. \n\nIMO keeping ssh:// and adding isGerrit is not the best solution. This will add a dependency between protocol and isGerrit flag plus will break consistency. Also setting things together would be \"harder\" since one need to set ssh:// protocol and add additional flag (compared to just changing \"ssh://\" to \"gerrit://\")",
+      "parentUuid": "ddfd6ec1_e56916aa",
       "revId": "1760ae0e6de684613cb1337c0feeb95059082a47",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
