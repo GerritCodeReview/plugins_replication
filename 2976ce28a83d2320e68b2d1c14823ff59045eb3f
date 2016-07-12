@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fad95870_0ee32bac",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1011624
+      },
+      "writtenOn": "2016-07-12T15:42:44Z",
+      "side": 1,
+      "message": "svn uses  \"svn+ssh\" as \u0027protocol\u0027,\nso maybe gerrit+ssh (it\u0027s a bit longer, but makes it clearer that ssh is still used as transport layer) would be an option?\n\nThis way also gerrit+http for using the rpc api would be open as a long term option.",
+      "revId": "2976ce28a83d2320e68b2d1c14823ff59045eb3f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
