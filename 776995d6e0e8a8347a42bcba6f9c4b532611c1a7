@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "caacc370_e52bb6e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-07-19T12:36:51Z",
+      "side": 1,
+      "message": "AFAIK another improvement would be to use \"Host localhost:29418\" instead of \"Host localhost\"",
+      "parentUuid": "caacc370_a5b05ed9",
+      "revId": "776995d6e0e8a8347a42bcba6f9c4b532611c1a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ad3d7eb_521b74d9",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
         "patchSetId": 19
@@ -100,6 +118,30 @@
       "writtenOn": "2016-07-19T11:49:27Z",
       "side": 1,
       "message": "uri.setScheme(\u0027ssh\u0027)?",
+      "range": {
+        "startLine": 87,
+        "startChar": 24,
+        "endLine": 87,
+        "endChar": 76
+      },
+      "revId": "776995d6e0e8a8347a42bcba6f9c4b532611c1a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "caacc370_c52ebaf7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-07-19T12:36:51Z",
+      "side": 1,
+      "message": "one can also do replace(\"gerrit\\\\+\", \"\"), but personally I would prefer to be more explicit here and keeps repace(\"gerrit\\\\+ssh://\", \"ssh://\").\n\nIf more of reviewers would like to change this then I\u0027m fine with it.",
+      "parentUuid": "6ad3d7eb_7220f804",
       "range": {
         "startLine": 87,
         "startChar": 24,
