@@ -34,6 +34,24 @@
       "revId": "2976ce28a83d2320e68b2d1c14823ff59045eb3f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ad3d7eb_32f350a3",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-07-19T11:03:42Z",
+      "side": 1,
+      "message": "I\u0027m also fine with \"gerrit+ssh\" will post new PS",
+      "parentUuid": "4aee1374_a13a7e18",
+      "revId": "2976ce28a83d2320e68b2d1c14823ff59045eb3f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
