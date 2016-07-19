@@ -172,6 +172,30 @@
     },
     {
       "key": {
+        "uuid": "caacc370_6507c672",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1011624
+      },
+      "writtenOn": "2016-07-19T13:05:23Z",
+      "side": 1,
+      "message": "Well, we only ever get here for the gerrit+ssh case, so why \nconvert to string, replace and create a new URIish by parsing the string again?",
+      "parentUuid": "caacc370_c52ebaf7",
+      "range": {
+        "startLine": 87,
+        "startChar": 24,
+        "endLine": 87,
+        "endChar": 76
+      },
+      "revId": "776995d6e0e8a8347a42bcba6f9c4b532611c1a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ad3d7eb_b20c2091",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
         "patchSetId": 19
