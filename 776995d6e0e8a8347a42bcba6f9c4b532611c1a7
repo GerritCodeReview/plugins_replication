@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "caacc370_85b3e2e5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1011624
+      },
+      "writtenOn": "2016-07-19T11:29:38Z",
+      "side": 1,
+      "message": "If I am not mistaken, then this will try to use port 22 unless a port is set. Is this a good defualt, or should it get mapped to 29418 ?",
+      "revId": "776995d6e0e8a8347a42bcba6f9c4b532611c1a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
