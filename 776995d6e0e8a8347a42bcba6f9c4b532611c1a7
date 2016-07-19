@@ -151,6 +151,64 @@
       "revId": "776995d6e0e8a8347a42bcba6f9c4b532611c1a7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "caacc370_4502ca63",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1011624
+      },
+      "writtenOn": "2016-07-19T12:57:29Z",
+      "side": 1,
+      "message": "Yes, pushUrls, but not adminUrls ?",
+      "parentUuid": "caacc370_45cdea61",
+      "revId": "776995d6e0e8a8347a42bcba6f9c4b532611c1a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ad3d7eb_b20c2091",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1011624
+      },
+      "writtenOn": "2016-07-19T12:57:29Z",
+      "side": 1,
+      "message": "I think this part only makes sense for the non-gerrit part. \nThe rawPath typically would be a (local) file path. Otherwise\ngetHost above should have triggered.",
+      "range": {
+        "startLine": 89,
+        "startChar": 3,
+        "endLine": 96,
+        "endChar": 5
+      },
+      "revId": "776995d6e0e8a8347a42bcba6f9c4b532611c1a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "caacc370_a535be42",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 19
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1011624
+      },
+      "writtenOn": "2016-07-19T12:57:29Z",
+      "side": 1,
+      "message": "this is missing the port (according to comment in GerritSshApi.java)",
+      "revId": "776995d6e0e8a8347a42bcba6f9c4b532611c1a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
