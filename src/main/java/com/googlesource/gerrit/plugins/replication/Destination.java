@@ -231,6 +231,27 @@ class Destination {
         cfg, "remote", rc.getName(), name, defValue, unit);
   }
 
+  private boolean isVisible(final Project.NameKey project, final String ref,
+      ReplicationState... states) {
+    try {
+      return threadScoper.scope(new Callable<Boolean>() {
+        @Override
+        public Boolean call() throws NoSuchProjectException {
+          ProjectControl projectControl = controlFor(project);
+          return projectControl.isVisible()
+              && (PushOne.ALL_REFS.equals(ref)
+                  || projectControl.controlForRef(ref).isVisible());
+        }
+      }).call();
+    } catch (NoSuchProjectException err) {
+      stateLog.error(String.format("source project %s not available", project),
+          err, states);
+    } catch (Exception e) {
+      throw Throwables.propagate(e);
+    }
+    return false;
+  }
+
   private boolean isVisible(final Project.NameKey project,
       ReplicationState... states) {
     try {
@@ -252,7 +273,7 @@ class Destination {
   void schedule(final Project.NameKey project, final String ref,
       final URIish uri, ReplicationState state) {
     repLog.info("scheduling replication {}:{} => {}", project, ref, uri);
-    if (!isVisible(project, state)) {
+    if (!isVisible(project, ref, state)) {
       return;
     }
 
