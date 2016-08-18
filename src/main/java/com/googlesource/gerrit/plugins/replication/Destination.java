@@ -199,15 +199,39 @@ public class Destination {
     return cnt;
   }
 
-  private boolean shouldReplicate(final Project.NameKey project,
+  private boolean shouldReplicate(ProjectControl projectControl) {
+    return projectControl.isReadable() && (!projectControl.isHidden()
+        || config.replicateHiddenProjects());
+  }
+
+  private boolean shouldReplicate(final Project.NameKey project, final String ref,
       ReplicationState... states) {
     try {
       return threadScoper.scope(new Callable<Boolean>() {
         @Override
         public Boolean call() throws NoSuchProjectException {
           ProjectControl projectControl = controlFor(project);
-          return projectControl.isReadable() && (!projectControl.isHidden()
-              || config.replicateHiddenProjects());
+          return shouldReplicate(projectControl)
+              && (PushOne.ALL_REFS.equals(ref)
+                  || projectControl.controlForRef(ref).isVisible());
+        }
+      }).call();
+    } catch (NoSuchProjectException err) {
+      stateLog.error(String.format("source project %s not available", project),
+          err, states);
+    } catch (Exception e) {
+      throw Throwables.propagate(e);
+    }
+    return false;
+  }
+
+  private boolean shouldReplicate(final Project.NameKey project,
+      ReplicationState... states) {
+    try {
+      return threadScoper.scope(new Callable<Boolean>() {
+        @Override
+        public Boolean call() throws NoSuchProjectException {
+          return shouldReplicate(controlFor(project));
         }
       }).call();
     } catch (NoSuchProjectException err) {
@@ -223,7 +247,7 @@ public class Destination {
   void schedule(Project.NameKey project, String ref, URIish uri,
       ReplicationState state) {
     repLog.info("scheduling replication {}:{} => {}", project, ref, uri);
-    if (!shouldReplicate(project, state)) {
+    if (!shouldReplicate(project, ref, state)) {
       return;
     }
 
