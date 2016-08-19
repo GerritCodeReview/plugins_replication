@@ -220,7 +220,8 @@ public class Destination {
       stateLog.error(String.format("source project %s not available", project),
           err, states);
     } catch (Exception e) {
-      throw Throwables.propagate(e);
+      Throwables.throwIfUnchecked(e);
+      throw new RuntimeException(e);
     }
     return false;
   }
@@ -238,7 +239,7 @@ public class Destination {
       stateLog.error(String.format("source project %s not available", project),
           err, states);
     } catch (Exception e) {
-      Throwables.propagateIfPossible(e);
+      Throwables.throwIfUnchecked(e);
       throw new RuntimeException(e);
     }
     return false;
