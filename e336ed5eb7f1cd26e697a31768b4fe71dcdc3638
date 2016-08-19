@@ -357,6 +357,30 @@
     },
     {
       "key": {
+        "uuid": "483d43bc_706fb02e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-08-19T16:27:50Z",
+      "side": 1,
+      "message": "I\u0027m not sure if tests are of much value.  Note that the existing tests don\u0027t really exercise the replication functionality very much (or at all).",
+      "parentUuid": "5ca417ba_d0bf1cb6",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 8
+      },
+      "revId": "e336ed5eb7f1cd26e697a31768b4fe71dcdc3638",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed7a73a9_14987478",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationScheduledEvent.java",
         "patchSetId": 10
