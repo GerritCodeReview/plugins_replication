@@ -39,7 +39,7 @@ Then reload the replication plugin to pick up the new configuration:
 ```
 
 To manually trigger replication at runtime, see
-SSH command [start](cmd-start.html).
+SSH command [start](cmd-start.md).
 
 File `replication.config`
 -------------------------

@@ -70,5 +70,5 @@ List destinations whose name contains mirror:
 SEE ALSO
 --------
 
-* [Replication Configuration](config.html)
+* [Replication Configuration](config.md)
 * [Access Control](../../../Documentation/access-control.html)

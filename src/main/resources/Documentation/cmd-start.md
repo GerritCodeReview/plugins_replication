@@ -134,5 +134,5 @@ Replicate projects whose path includes a folder named `vendor` to host slave1:
 SEE ALSO
 --------
 
-* [Replication Configuration](config.html)
+* [Replication Configuration](config.md)
 * [Access Control](../../../Documentation/access-control.html)
