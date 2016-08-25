@@ -285,7 +285,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
         }
       }).call();
     } catch (Exception e) {
-      Throwables.throwIfUnchecked(e);
+      Throwables.propagateIfPossible(e);
       throw new RuntimeException(e);
     } finally {
       statesCleanUp();
