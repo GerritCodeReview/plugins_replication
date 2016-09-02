@@ -4,7 +4,7 @@ Replication Configuration
 Enabling Replication
 --------------------
 
-If replicating over SSH (recommended), ensure the host key of the
+If replicating over SSH, ensure the host key of the
 remote system(s) is already in the Gerrit user's `~/.ssh/known_hosts`
 file.  The easiest way to add the host key is to connect once by hand
 with the command line:
