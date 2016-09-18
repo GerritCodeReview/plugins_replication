@@ -31,7 +31,6 @@ java_test(
   name = 'replication_tests',
   srcs = glob(['src/test/java/**/*.java']),
   labels = ['replication'],
-  source_under_test = [':replication__plugin'],
   deps = [
     ':replication__plugin',
     '//gerrit-acceptance-framework:lib',
