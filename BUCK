@@ -14,10 +14,6 @@ gerrit_plugin(
   deps = [
     ':commons-io',
   ],
-  provided_deps = [
-    '//lib:gson',
-    '//lib/log:log4j'
-  ],
 )
 
 maven_jar(
