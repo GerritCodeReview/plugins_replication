@@ -32,15 +32,15 @@ import com.google.gwtorm.server.StandardKeyEncoder;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 
-import junit.framework.TestCase;
-
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.net.URISyntaxException;
 
 @SuppressWarnings("unchecked")
-public class GitUpdateProcessingTest extends TestCase {
+public class GitUpdateProcessingTest {
   static {
     KeyUtil.setEncoderImpl(new StandardKeyEncoder());
   }
@@ -48,9 +48,8 @@ public class GitUpdateProcessingTest extends TestCase {
   private EventDispatcher dispatcherMock;
   private GitUpdateProcessing gitUpdateProcessing;
 
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
+  @Before
+  public void setUp() throws Exception {
     dispatcherMock = createMock(EventDispatcher.class);
     replay(dispatcherMock);
     ReviewDb reviewDbMock = createNiceMock(ReviewDb.class);
@@ -61,6 +60,7 @@ public class GitUpdateProcessingTest extends TestCase {
     gitUpdateProcessing = new GitUpdateProcessing(dispatcherMock);
   }
 
+  @Test
   public void testHeadRefReplicated() throws URISyntaxException, OrmException {
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
@@ -76,6 +76,7 @@ public class GitUpdateProcessingTest extends TestCase {
     verify(dispatcherMock);
   }
 
+  @Test
   public void testChangeRefReplicated() throws URISyntaxException, OrmException {
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
@@ -91,6 +92,7 @@ public class GitUpdateProcessingTest extends TestCase {
     verify(dispatcherMock);
   }
 
+  @Test
   public void testOnAllNodesReplicated() throws OrmException {
     reset(dispatcherMock);
     RefReplicationDoneEvent expectedDoneEvent =
