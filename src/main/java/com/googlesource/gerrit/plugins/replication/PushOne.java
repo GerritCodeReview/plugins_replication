@@ -21,6 +21,7 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.reviewdb.client.Project;
@@ -128,7 +129,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       TagCache tc,
       PerThreadRequestScope.Scoper ts,
       ChangeNotes.Factory nf,
-      SearchingChangeCacheImpl cc,
+      @Nullable SearchingChangeCacheImpl cc,
       ReplicationQueue rq,
       IdGenerator ig,
       ReplicationStateListener sl,
