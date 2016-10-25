@@ -13,8 +13,8 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.FluentIterable;
+import static java.util.stream.Collectors.toList;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.gerrit.server.PluginUser;
@@ -42,6 +42,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 @Singleton
 public class ReplicationFileBasedConfig implements ReplicationConfig {
@@ -89,39 +90,23 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
    */
   @Override
   public List<Destination> getDestinations(FilterType filterType) {
-    Predicate<Destination> filter;
+    Predicate<? super Destination> filter = null;
     switch (filterType) {
-      case PROJECT_CREATION :
-        filter = new Predicate<Destination>() {
-
-          @Override
-          public boolean apply(Destination dest) {
-            if (dest == null || !dest.isCreateMissingRepos()) {
-              return false;
-            }
-            return true;
-          }
-        };
+      case PROJECT_CREATION:
+        filter = dest -> dest != null && dest.isCreateMissingRepos();
         break;
-      case PROJECT_DELETION :
-        filter = new Predicate<Destination>() {
-
-          @Override
-          public boolean apply(Destination dest) {
-            if (dest == null || !dest.isReplicateProjectDeletions()) {
-              return false;
-            }
-            return true;
-          }
-        };
+      case PROJECT_DELETION:
+        filter = dest -> dest != null && dest.isReplicateProjectDeletions();
         break;
-      case ALL :
-        return destinations;
-      default :
-        return destinations;
+      case ALL:
+      default:
+        break;
     }
-    return FluentIterable.from(destinations).filter(filter).toList();
+    return filter != null
+        ? destinations.stream().filter(filter).collect(toList())
+        : destinations;
   }
+
   private List<Destination> allDestinations()
       throws ConfigInvalidException, IOException {
     if (!config.getFile().exists()) {
