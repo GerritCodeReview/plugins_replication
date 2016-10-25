@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c1ff5c6a_32bcd0a3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-10-25T10:42:46Z",
+      "side": 1,
+      "message": "Good catch. Done.",
+      "parentUuid": "01f9748d_6c14bbb7",
+      "range": {
+        "startLine": 96,
+        "startChar": 41,
+        "endLine": 96,
+        "endChar": 42
+      },
+      "revId": "8237e72eadecbda1cefc8f0ed1cd17eb9b6df471",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "218cb849_6d1935ec",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
         "patchSetId": 1
