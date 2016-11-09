@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b5d77d4_8575a23e",
+        "filename": "BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-11-09T19:46:06Z",
+      "side": 1,
+      "message": "Not needed: [1], it\u0027s on by default for java_tests rules (junit_tests is a wrapper around java_tests rule, written in Skylark that generates Test Suite).\n\n* [1] https://www.bazel.io/versions/master/docs/be/common-definitions.html#common.testonly",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 15
+      },
+      "revId": "bfe053efbdd2cbaa7019b721c66576b6c1fa758a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
