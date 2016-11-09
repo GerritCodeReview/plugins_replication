@@ -39,4 +39,5 @@ java_library(
     '//gerrit-acceptance-framework:lib',
     '//gerrit-plugin-api:lib',
   ],
+  testonly = 1,
 )
