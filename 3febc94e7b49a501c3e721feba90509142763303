@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0a51083_440dee1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-11-15T02:02:04Z",
+      "side": 1,
+      "message": "missing \".\" and maybe even the remaining part of the sentence?\n\nAssure that event is posted for every ref that is scheduled for replication.",
+      "revId": "3febc94e7b49a501c3e721feba90509142763303",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b031d818_a2e4fe21",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-11-15T02:02:04Z",
+      "side": 1,
+      "message": "maybe David can confirm but should we use \"is added\" here?\n\nAlso missing \".\" at the end of sentence.",
+      "range": {
+        "startLine": 10,
+        "startChar": 36,
+        "endLine": 10,
+        "endChar": 45
+      },
+      "revId": "3febc94e7b49a501c3e721feba90509142763303",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b031d818_e2de0656",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-11-15T02:02:04Z",
+      "side": 1,
+      "message": "I do not think you need to change all that, you end up adding the ref and posting the event in the if and in the else.\n\nJust revert the code the way it was and add postEvent(e, ref); right after e.addRef(ref);",
+      "range": {
+        "startLine": 294,
+        "startChar": 7,
+        "endLine": 299,
+        "endChar": 7
+      },
+      "revId": "3febc94e7b49a501c3e721feba90509142763303",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0a51083_a40702f7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-11-15T02:02:04Z",
+      "side": 1,
+      "message": "not needed if you apply my previous comment",
+      "range": {
+        "startLine": 314,
+        "startChar": 2,
+        "endLine": 316,
+        "endChar": 15
+      },
+      "revId": "3febc94e7b49a501c3e721feba90509142763303",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
