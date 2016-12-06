@@ -26,7 +26,7 @@ import java.net.URISyntaxException;
 public class PushReplicationTest {
 
   @Test
-  public void testNeedsUrlEncoding() throws URISyntaxException {
+  public void needsUrlEncoding() throws URISyntaxException {
     assertThat(needsUrlEncoding(new URIish("http://host/path"))).isTrue();
     assertThat(needsUrlEncoding(new URIish("https://host/path"))).isTrue();
     assertThat(needsUrlEncoding(new URIish("amazon-s3://config/bucket/path"))).isTrue();
@@ -38,7 +38,7 @@ public class PushReplicationTest {
   }
 
   @Test
-  public void testUrlEncoding() {
+  public void urlEncoding() {
     assertThat(encode("foo/bar/thing")).isEqualTo("foo/bar/thing");
     assertThat(encode("-- All Projects --")).isEqualTo("--%20All%20Projects%20--");
     assertThat(encode("name/with a space")).isEqualTo("name/with%20a%20space");
