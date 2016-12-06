@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2dc74f2e_51cb760a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushReplicationTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-12-06T09:18:58Z",
+      "side": 1,
+      "message": "this one was missed.",
+      "range": {
+        "startLine": 29,
+        "startChar": 14,
+        "endLine": 29,
+        "endChar": 18
+      },
+      "revId": "f9a49639a7b658353cf22b60cf8ccd1db97fef8a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
