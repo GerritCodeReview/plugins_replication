@@ -38,7 +38,7 @@ public class PushReplicationTest {
   }
 
   @Test
-  public void testUrlEncoding() {
+  public void urlEncoding() {
     assertThat(encode("foo/bar/thing")).isEqualTo("foo/bar/thing");
     assertThat(encode("-- All Projects --")).isEqualTo("--%20All%20Projects%20--");
     assertThat(encode("name/with a space")).isEqualTo("name/with%20a%20space");

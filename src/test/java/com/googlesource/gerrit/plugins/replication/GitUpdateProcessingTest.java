@@ -61,7 +61,7 @@ public class GitUpdateProcessingTest {
   }
 
   @Test
-  public void testHeadRefReplicated() throws URISyntaxException, OrmException {
+  public void headRefReplicated() throws URISyntaxException, OrmException {
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent("someProject", "refs/heads/master", "someHost",
@@ -77,7 +77,7 @@ public class GitUpdateProcessingTest {
   }
 
   @Test
-  public void testChangeRefReplicated() throws URISyntaxException, OrmException {
+  public void changeRefReplicated() throws URISyntaxException, OrmException {
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent("someProject", "refs/changes/01/1/1", "someHost",
@@ -93,7 +93,7 @@ public class GitUpdateProcessingTest {
   }
 
   @Test
-  public void testOnAllNodesReplicated() throws OrmException {
+  public void onAllNodesReplicated() throws OrmException {
     reset(dispatcherMock);
     RefReplicationDoneEvent expectedDoneEvent =
         new RefReplicationDoneEvent("someProject", "refs/heads/master", 5);
