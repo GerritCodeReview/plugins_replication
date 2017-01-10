@@ -16,13 +16,11 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-
-import org.eclipse.jgit.transport.RemoteRefUpdate;
-import org.eclipse.jgit.transport.URIish;
-
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.eclipse.jgit.transport.URIish;
 
 public class ReplicationState {
   private boolean allScheduled;
@@ -46,6 +44,7 @@ public class ReplicationState {
       return replicatedNodesCount == nodesToReplicateCount;
     }
   }
+
   private final Table<String, String, RefReplicationStatus> statusByProjectRef;
   private int totalPushTasksCount;
   private int finishedPushTasksCount;
@@ -69,10 +68,13 @@ public class ReplicationState {
     return totalPushTasksCount != 0;
   }
 
-  public void notifyRefReplicated(String project, String ref, URIish uri,
-      RefPushResult status, RemoteRefUpdate.Status refUpdateStatus) {
-    pushResultProcessing.onRefReplicatedToOneNode(project, ref, uri, status,
-        refUpdateStatus);
+  public void notifyRefReplicated(
+      String project,
+      String ref,
+      URIish uri,
+      RefPushResult status,
+      RemoteRefUpdate.Status refUpdateStatus) {
+    pushResultProcessing.onRefReplicatedToOneNode(project, ref, uri, status, refUpdateStatus);
 
     RefReplicationStatus completedRefStatus = null;
     boolean allPushTaksCompleted = false;
@@ -122,8 +124,7 @@ public class ReplicationState {
   }
 
   /**
-   * Some could be remaining if replication of a ref is completed before all
-   * tasks are scheduled.
+   * Some could be remaining if replication of a ref is completed before all tasks are scheduled.
    */
   private void fireRemainingOnRefReplicatedToAllNodes() {
     for (RefReplicationStatus refStatus : statusByProjectRef.values()) {
@@ -132,8 +133,8 @@ public class ReplicationState {
   }
 
   private void doRefPushTasksCompleted(RefReplicationStatus refStatus) {
-    pushResultProcessing.onRefReplicatedToAllNodes(refStatus.project,
-        refStatus.ref, refStatus.nodesToReplicateCount);
+    pushResultProcessing.onRefReplicatedToAllNodes(
+        refStatus.project, refStatus.ref, refStatus.nodesToReplicateCount);
   }
 
   private RefReplicationStatus getRefStatus(String project, String ref) {
@@ -158,19 +159,13 @@ public class ReplicationState {
   }
 
   public enum RefPushResult {
-    /**
-     * The ref was not successfully replicated.
-     */
+    /** The ref was not successfully replicated. */
     FAILED,
 
-    /**
-     * The ref is not configured to be replicated.
-     */
+    /** The ref is not configured to be replicated. */
     NOT_ATTEMPTED,
 
-    /**
-     * The ref was successfully replicated.
-     */
+    /** The ref was successfully replicated. */
     SUCCEEDED;
 
     @Override

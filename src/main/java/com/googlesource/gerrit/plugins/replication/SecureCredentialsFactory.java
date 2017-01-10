@@ -16,37 +16,32 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
-
+import java.io.IOException;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
-
-import java.io.IOException;
 
 /** Looks up a remote's password in secure.config. */
 class SecureCredentialsFactory implements CredentialsFactory {
   private final Config config;
 
   @Inject
-  SecureCredentialsFactory(SitePaths site)
-      throws ConfigInvalidException, IOException {
+  SecureCredentialsFactory(SitePaths site) throws ConfigInvalidException, IOException {
     config = load(site);
   }
 
-  private static Config load(SitePaths site)
-      throws ConfigInvalidException, IOException {
-    FileBasedConfig cfg =
-        new FileBasedConfig(site.secure_config.toFile(), FS.DETECTED);
+  private static Config load(SitePaths site) throws ConfigInvalidException, IOException {
+    FileBasedConfig cfg = new FileBasedConfig(site.secure_config.toFile(), FS.DETECTED);
     if (cfg.getFile().exists() && cfg.getFile().length() > 0) {
       try {
         cfg.load();
       } catch (ConfigInvalidException e) {
-        throw new ConfigInvalidException(String.format(
-            "Config file %s is invalid: %s", cfg.getFile(), e.getMessage()), e);
+        throw new ConfigInvalidException(
+            String.format("Config file %s is invalid: %s", cfg.getFile(), e.getMessage()), e);
       } catch (IOException e) {
-        throw new IOException(String.format(
-            "Cannot read %s: %s", cfg.getFile(), e.getMessage()), e);
+        throw new IOException(
+            String.format("Cannot read %s: %s", cfg.getFile(), e.getMessage()), e);
       }
     }
     return cfg;

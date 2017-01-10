@@ -18,23 +18,22 @@ import com.google.gerrit.extensions.annotations.RequiresCapability;
 import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
-
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.CommandProcessing;
-
-import org.kohsuke.args4j.Argument;
-import org.kohsuke.args4j.Option;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import org.kohsuke.args4j.Argument;
+import org.kohsuke.args4j.Option;
 
 @RequiresCapability(StartReplicationCapability.START_REPLICATION)
-@CommandMetaData(name = "start", description = "Start replication for specific project or all projects")
+@CommandMetaData(
+  name = "start",
+  description = "Start replication for specific project or all projects"
+)
 final class StartCommand extends SshCommand {
-  @Inject
-  private ReplicationStateLogger stateLog;
+  @Inject private ReplicationStateLogger stateLog;
 
   @Option(name = "--all", usage = "push all known projects")
   private boolean all;
@@ -42,15 +41,13 @@ final class StartCommand extends SshCommand {
   @Option(name = "--url", metaVar = "PATTERN", usage = "pattern to match URL on")
   private String urlMatch;
 
-  @Option(name = "--wait",
-      usage = "wait for replication to finish before exiting")
+  @Option(name = "--wait", usage = "wait for replication to finish before exiting")
   private boolean wait;
 
   @Argument(index = 0, multiValued = true, metaVar = "PATTERN", usage = "project name pattern")
   private List<String> projectPatterns = new ArrayList<>(2);
 
-  @Inject
-  private PushAll.Factory pushFactory;
+  @Inject private PushAll.Factory pushFactory;
 
   @Override
   protected void run() throws Failure {
@@ -76,7 +73,8 @@ final class StartCommand extends SshCommand {
         try {
           future.get();
         } catch (InterruptedException e) {
-          stateLog.error("Thread was interrupted while waiting for PushAll operation to finish", e, state);
+          stateLog.error(
+              "Thread was interrupted while waiting for PushAll operation to finish", e, state);
           return;
         } catch (ExecutionException e) {
           stateLog.error("An exception was thrown in PushAll operation", e, state);

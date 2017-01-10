@@ -18,10 +18,9 @@ import static com.google.common.truth.Truth.assertThat;
 import static com.googlesource.gerrit.plugins.replication.Destination.encode;
 import static com.googlesource.gerrit.plugins.replication.Destination.needsUrlEncoding;
 
+import java.net.URISyntaxException;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.Test;
-
-import java.net.URISyntaxException;
 
 public class PushReplicationTest {
 
