@@ -42,10 +42,19 @@ import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
-
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 import com.jcraft.jsch.JSchException;
-
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.jgit.errors.NoRemoteRepositoryException;
 import org.eclipse.jgit.errors.NotSupportedException;
 import org.eclipse.jgit.errors.RemoteRepositoryException;
@@ -65,23 +74,11 @@ import org.eclipse.jgit.transport.Transport;
 import org.eclipse.jgit.transport.URIish;
 import org.slf4j.MDC;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 /**
  * A push to remote operation started by {@link GitReferenceUpdatedListener}.
- * <p>
- * Instance members are protected by the lock within PushQueue. Callers must
- * take that lock to ensure they are working with a current view of the object.
+ *
+ * <p>Instance members are protected by the lock within PushQueue. Callers must take that lock to
+ * ensure they are working with a current view of the object.
  */
 class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final ReplicationStateListener stateLog;
@@ -111,8 +108,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private boolean retrying;
   private int retryCount;
   private boolean canceled;
-  private final Multimap<String,ReplicationState> stateMap =
-      LinkedListMultimap.create();
+  private final Multimap<String, ReplicationState> stateMap = LinkedListMultimap.create();
   private final int maxLockRetries;
   private int lockRetryCount;
   private final int id;
@@ -121,7 +117,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final AtomicBoolean canceledWhileRunning;
 
   @Inject
-  PushOne(GitRepositoryManager grm,
+  PushOne(
+      GitRepositoryManager grm,
       SchemaFactory<ReviewDb> s,
       Destination p,
       RemoteConfig c,
@@ -243,7 +240,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     stateMap.put(ref, state);
   }
 
-  Multimap<String,ReplicationState> getStates() {
+  Multimap<String, ReplicationState> getStates() {
     return stateMap;
   }
 
@@ -258,7 +255,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     return states.toArray(new ReplicationState[states.size()]);
   }
 
-  void addStates(Multimap<String,ReplicationState> states) {
+  void addStates(Multimap<String, ReplicationState> states) {
     stateMap.putAll(states);
   }
 
@@ -268,9 +265,11 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
   private void statesCleanUp() {
     if (!stateMap.isEmpty() && !isRetrying()) {
-      for (Map.Entry<String,ReplicationState> entry : stateMap.entries()) {
-        entry.getValue().notifyRefReplicated(projectName.get(), entry.getKey(), uri,
-            RefPushResult.FAILED, null);
+      for (Map.Entry<String, ReplicationState> entry : stateMap.entries()) {
+        entry
+            .getValue()
+            .notifyRefReplicated(
+                projectName.get(), entry.getKey(), uri, RefPushResult.FAILED, null);
       }
     }
   }
@@ -278,13 +277,16 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   @Override
   public void run() {
     try {
-      threadScoper.scope(new Callable<Void>() {
-        @Override
-        public Void call() {
-          runPushOperation();
-          return null;
-        }
-      }).call();
+      threadScoper
+          .scope(
+              new Callable<Void>() {
+                @Override
+                public Void call() {
+                  runPushOperation();
+                  return null;
+                }
+              })
+          .call();
     } catch (Exception e) {
       Throwables.throwIfUnchecked(e);
       throw new RuntimeException(e);
@@ -301,8 +303,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     MDC.put(ID_MDC_KEY, IdGenerator.format(id));
     if (!pool.requestRunway(this)) {
       if (!canceled) {
-        repLog.info("Rescheduling replication to " + uri
-            + " to avoid collision with an in-flight push.");
+        repLog.info(
+            "Rescheduling replication to " + uri + " to avoid collision with an in-flight push.");
         pool.reschedule(this, Destination.RetryReason.COLLISION);
       }
       return;
@@ -317,13 +319,20 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       git = gitManager.openRepository(projectName);
       runImpl();
       long elapsed = NANOSECONDS.toMillis(context.stop());
-      repLog.info("Replication to " + uri + " completed in "
-          + (elapsed) + "ms, "
-          + (delay) + "ms delay, " + retryCount + " retries");
+      repLog.info(
+          "Replication to "
+              + uri
+              + " completed in "
+              + (elapsed)
+              + "ms, "
+              + (delay)
+              + "ms delay, "
+              + retryCount
+              + " retries");
     } catch (RepositoryNotFoundException e) {
-      stateLog.error("Cannot replicate " + projectName
-          + "; Local repository error: "
-          + e.getMessage(), getStatesAsArray());
+      stateLog.error(
+          "Cannot replicate " + projectName + "; Local repository error: " + e.getMessage(),
+          getStatesAsArray());
 
     } catch (RemoteRepositoryException e) {
       // Tried to replicate to a remote via anonymous git:// but the repository
@@ -333,8 +342,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       if (msg.contains("access denied") || msg.contains("no such repository")) {
         createRepository();
       } else {
-        repLog.error("Cannot replicate " + projectName
-            + "; Remote repository error: " + msg);
+        repLog.error("Cannot replicate " + projectName + "; Remote repository error: " + msg);
       }
 
     } catch (NoRemoteRepositoryException e) {
@@ -343,8 +351,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       stateLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
     } catch (TransportException e) {
       Throwable cause = e.getCause();
-      if (cause instanceof JSchException
-          && cause.getMessage().startsWith("UnknownHostKey:")) {
+      if (cause instanceof JSchException && cause.getMessage().startsWith("UnknownHostKey:")) {
         repLog.error("Cannot replicate to " + uri + ": " + cause.getMessage());
       } else if (e instanceof LockFailureException) {
         lockRetryCount++;
@@ -360,8 +367,11 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
             pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
           }
         } else {
-          repLog.error("Giving up after " + lockRetryCount
-              + " of this error during replication to " + e.getMessage());
+          repLog.error(
+              "Giving up after "
+                  + lockRetryCount
+                  + " of this error during replication to "
+                  + e.getMessage());
         }
       } else {
         if (canceledWhileRunning.get()) {
@@ -385,8 +395,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   private void logCanceledWhileRunningException(TransportException e) {
-    repLog.info("Cannot replicate to " + uri + "."
-        + " It was canceled while running", e);
+    repLog.info("Cannot replicate to " + uri + "." + " It was canceled while running", e);
   }
 
   private void createRepository() {
@@ -397,13 +406,17 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
           repLog.warn("Missing repository created; retry replication to " + uri);
           pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
         } else {
-          repLog.warn("Missing repository could not be created when replicating " + uri +
-              ". You can only create missing repositories locally, over SSH or when " +
-              "using adminUrl in replication.config. See documentation for more information.");
+          repLog.warn(
+              "Missing repository could not be created when replicating "
+                  + uri
+                  + ". You can only create missing repositories locally, over SSH or when "
+                  + "using adminUrl in replication.config. See documentation for more information.");
         }
       } catch (IOException ioe) {
-        stateLog.error("Cannot replicate to " + uri + "; failed to create missing repository",
-            ioe, getStatesAsArray());
+        stateLog.error(
+            "Cannot replicate to " + uri + "; failed to create missing repository",
+            ioe,
+            getStatesAsArray());
       }
     } else {
       stateLog.error("Cannot replicate to " + uri + "; repository not found", getStatesAsArray());
@@ -437,8 +450,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     return tn.push(NullProgressMonitor.INSTANCE, todo);
   }
 
-  private List<RemoteRefUpdate> generateUpdates(Transport tn)
-      throws IOException {
+  private List<RemoteRefUpdate> generateUpdates(Transport tn) throws IOException {
     ProjectControl pc;
     try {
       pc = pool.controlFor(projectName);
@@ -463,11 +475,12 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       }
 
       try (ReviewDb db = schema.open()) {
-        local = new VisibleRefFilter(
-                  tagCache, changeNotesFactory, changeCache, git, pc, db, true)
-            .filter(local, true);
+        local =
+            new VisibleRefFilter(tagCache, changeNotesFactory, changeCache, git, pc, db, true)
+                .filter(local, true);
       } catch (OrmException e) {
-        stateLog.error("Cannot read database to replicate to " + projectName, e, getStatesAsArray());
+        stateLog.error(
+            "Cannot read database to replicate to " + projectName, e, getStatesAsArray());
         return Collections.emptyList();
       }
     }
@@ -509,8 +522,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     return cmds;
   }
 
-  private List<RemoteRefUpdate> doPushDelta(Map<String, Ref> local)
-      throws IOException {
+  private List<RemoteRefUpdate> doPushDelta(Map<String, Ref> local) throws IOException {
     List<RemoteRefUpdate> cmds = new ArrayList<>();
     boolean noPerms = !pool.isReplicatePermissions();
     for (String src : delta) {
@@ -535,8 +547,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   private boolean canPushRef(String ref, boolean noPerms) {
-    return !(noPerms && RefNames.REFS_CONFIG.equals(ref)) &&
-        !ref.startsWith(RefNames.REFS_CACHE_AUTOMERGE);
+    return !(noPerms && RefNames.REFS_CONFIG.equals(ref))
+        && !ref.startsWith(RefNames.REFS_CACHE_AUTOMERGE);
   }
 
   private Map<String, Ref> listRemote(Transport tn)
@@ -564,22 +576,19 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     return null;
   }
 
-  private void push(List<RemoteRefUpdate> cmds, RefSpec spec, Ref src)
-      throws IOException {
+  private void push(List<RemoteRefUpdate> cmds, RefSpec spec, Ref src) throws IOException {
     String dst = spec.getDestination();
     boolean force = spec.isForceUpdate();
     cmds.add(new RemoteRefUpdate(git, src, dst, force, null, null));
   }
 
-  private void delete(List<RemoteRefUpdate> cmds, RefSpec spec)
-      throws IOException {
+  private void delete(List<RemoteRefUpdate> cmds, RefSpec spec) throws IOException {
     String dst = spec.getDestination();
     boolean force = spec.isForceUpdate();
     cmds.add(new RemoteRefUpdate(git, (Ref) null, dst, force, null, null));
   }
 
-  private void updateStates(Collection<RemoteRefUpdate> refUpdates)
-      throws LockFailureException {
+  private void updateStates(Collection<RemoteRefUpdate> refUpdates) throws LockFailureException {
     Set<String> doneRefs = new HashSet<>();
     boolean anyRefFailed = false;
     RemoteRefUpdate.Status lastRefStatusError = RemoteRefUpdate.Status.OK;
@@ -604,8 +613,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
         case REJECTED_NODELETE:
         case REJECTED_NONFASTFORWARD:
         case REJECTED_REMOTE_CHANGED:
-          stateLog.error(String.format("Failed replicate of %s to %s: status %s",
-              u.getRemoteName(), uri, u.getStatus()), logStatesArray);
+          stateLog.error(
+              String.format(
+                  "Failed replicate of %s to %s: status %s", u.getRemoteName(), uri, u.getStatus()),
+              logStatesArray);
           pushStatus = RefPushResult.FAILED;
           anyRefFailed = true;
           lastRefStatusError = u.getStatus();
@@ -613,16 +624,22 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
         case REJECTED_OTHER_REASON:
           if ("non-fast-forward".equals(u.getMessage())) {
-            stateLog.error(String.format("Failed replicate of %s to %s"
-                + ", remote rejected non-fast-forward push."
-                + "  Check receive.denyNonFastForwards variable in config file"
-                + " of destination repository.", u.getRemoteName(), uri), logStatesArray);
+            stateLog.error(
+                String.format(
+                    "Failed replicate of %s to %s"
+                        + ", remote rejected non-fast-forward push."
+                        + "  Check receive.denyNonFastForwards variable in config file"
+                        + " of destination repository.",
+                    u.getRemoteName(), uri),
+                logStatesArray);
           } else if ("failed to lock".equals(u.getMessage())) {
             throw new LockFailureException(uri, u.getMessage());
           } else {
-            stateLog.error(String.format(
-                "Failed replicate of %s to %s, reason: %s",
-                u.getRemoteName(), uri, u.getMessage()), logStatesArray);
+            stateLog.error(
+                String.format(
+                    "Failed replicate of %s to %s, reason: %s",
+                    u.getRemoteName(), uri, u.getMessage()),
+                logStatesArray);
           }
           pushStatus = RefPushResult.FAILED;
           anyRefFailed = true;
@@ -631,20 +648,25 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       }
 
       for (ReplicationState rs : getStatesByRef(u.getSrcRef())) {
-        rs.notifyRefReplicated(projectName.get(), u.getSrcRef(),
-              uri, pushStatus, u.getStatus());
+        rs.notifyRefReplicated(projectName.get(), u.getSrcRef(), uri, pushStatus, u.getStatus());
       }
     }
 
     doneRefs.add(ALL_REFS);
     for (ReplicationState rs : getStatesByRef(ALL_REFS)) {
-      rs.notifyRefReplicated(projectName.get(), ALL_REFS, uri, anyRefFailed
-          ? RefPushResult.FAILED : RefPushResult.SUCCEEDED, lastRefStatusError);
+      rs.notifyRefReplicated(
+          projectName.get(),
+          ALL_REFS,
+          uri,
+          anyRefFailed ? RefPushResult.FAILED : RefPushResult.SUCCEEDED,
+          lastRefStatusError);
     }
     for (Map.Entry<String, ReplicationState> entry : stateMap.entries()) {
       if (!doneRefs.contains(entry.getKey())) {
-        entry.getValue().notifyRefReplicated(projectName.get(), entry.getKey(),
-            uri, RefPushResult.NOT_ATTEMPTED, null);
+        entry
+            .getValue()
+            .notifyRefReplicated(
+                projectName.get(), entry.getKey(), uri, RefPushResult.NOT_ATTEMPTED, null);
       }
     }
     stateMap.clear();

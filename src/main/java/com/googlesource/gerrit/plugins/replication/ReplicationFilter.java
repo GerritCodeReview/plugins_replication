@@ -16,17 +16,18 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.common.data.AccessSection;
 import com.google.gerrit.reviewdb.client.Project.NameKey;
-
 import java.util.Collections;
 import java.util.List;
 
 public class ReplicationFilter {
   public enum PatternType {
-    REGEX, WILDCARD, EXACT_MATCH;
+    REGEX,
+    WILDCARD,
+    EXACT_MATCH;
   }
 
   public static ReplicationFilter all() {
-    return new ReplicationFilter(Collections.<String> emptyList());
+    return new ReplicationFilter(Collections.<String>emptyList());
   }
 
   public static PatternType getPatternType(String pattern) {
@@ -66,8 +67,7 @@ public class ReplicationFilter {
         match = projectName.matches(pattern);
         break;
       case WILDCARD:
-        match =
-            projectName.startsWith(pattern.substring(0, pattern.length() - 1));
+        match = projectName.startsWith(pattern.substring(0, pattern.length() - 1));
         break;
       case EXACT_MATCH:
         match = projectName.equals(pattern);

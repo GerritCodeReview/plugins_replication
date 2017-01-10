@@ -23,13 +23,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.inject.Inject;
-
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
-
-import org.kohsuke.args4j.Option;
-
 import java.util.Collection;
 import java.util.List;
+import org.kohsuke.args4j.Option;
 
 @RequiresCapability(GlobalCapability.ADMINISTRATE_SERVER)
 @CommandMetaData(name = "list", description = "List remote destination information")
@@ -43,8 +40,7 @@ final class ListCommand extends SshCommand {
   @Option(name = "--json", usage = "output in json format")
   private boolean json;
 
-  @Inject
-  private ReplicationConfig config;
+  @Inject private ReplicationConfig config;
 
   @Override
   protected void run() {
@@ -56,9 +52,7 @@ final class ListCommand extends SshCommand {
   }
 
   private boolean matches(String name) {
-    return (Strings.isNullOrEmpty(remote)
-        || name.contains(remote)
-        || name.matches(remote));
+    return (Strings.isNullOrEmpty(remote) || name.contains(remote) || name.matches(remote));
   }
 
   private void addProperty(JsonObject obj, String key, List<String> values) {
@@ -73,14 +67,11 @@ final class ListCommand extends SshCommand {
 
   private void addQueueDetails(StringBuilder out, Collection<PushOne> values) {
     for (PushOne p : values) {
-      out.append("  ")
-        .append(p.toString())
-        .append("\n");
+      out.append("  ").append(p.toString()).append("\n");
     }
   }
 
-  private void addQueueDetails(JsonObject obj, String key,
-      Collection<PushOne> values) {
+  private void addQueueDetails(JsonObject obj, String key, Collection<PushOne> values) {
     if (values.size() > 0) {
       JsonArray list = new JsonArray();
       for (PushOne p : values) {
@@ -106,42 +97,28 @@ final class ListCommand extends SshCommand {
       stdout.print(obj.toString() + "\n");
     } else {
       StringBuilder out = new StringBuilder();
-      out.append("Remote: ")
-        .append(d.getRemoteConfigName())
-        .append("\n");
+      out.append("Remote: ").append(d.getRemoteConfigName()).append("\n");
       for (String url : d.getUrls()) {
-        out.append("Url: ")
-          .append(url)
-          .append("\n");
+        out.append("Url: ").append(url).append("\n");
       }
 
       if (detail) {
         for (String adminUrl : d.getAdminUrls()) {
-          out.append("AdminUrl: ")
-            .append(adminUrl)
-            .append("\n");
+          out.append("AdminUrl: ").append(adminUrl).append("\n");
         }
 
         for (String authGroup : d.getAuthGroupNames()) {
-          out.append("AuthGroup: ")
-            .append(authGroup)
-            .append("\n");
+          out.append("AuthGroup: ").append(authGroup).append("\n");
         }
 
         for (String project : d.getProjects()) {
-          out.append("Project: ")
-            .append(project)
-            .append("\n");
+          out.append("Project: ").append(project).append("\n");
         }
 
         Destination.QueueInfo q = d.getQueueInfo();
-        out.append("In Flight: ")
-          .append(q.inFlight.size())
-          .append("\n");
+        out.append("In Flight: ").append(q.inFlight.size()).append("\n");
         addQueueDetails(out, q.inFlight.values());
-        out.append("Pending: ")
-          .append(q.pending.size())
-          .append("\n");
+        out.append("Pending: ").append(q.pending.size()).append("\n");
         addQueueDetails(out, q.pending.values());
       }
       stdout.print(out.toString() + "\n");

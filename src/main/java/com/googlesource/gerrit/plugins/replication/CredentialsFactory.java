@@ -16,5 +16,4 @@ package com.googlesource.gerrit.plugins.replication;
 public interface CredentialsFactory {
 
   SecureCredentialsProvider create(String remoteName);
-
 }

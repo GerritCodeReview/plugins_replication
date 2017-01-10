@@ -20,9 +20,7 @@ import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.extensions.systemstatus.ServerInformation;
 import com.google.inject.Inject;
-
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
-
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -56,10 +54,9 @@ public class OnStartStop implements LifecycleListener {
 
     if (srvInfo.getState() == ServerInformation.State.STARTUP
         && config.isReplicateAllOnPluginStart()) {
-      ReplicationState state = new ReplicationState(
-          new GitUpdateProcessing(eventDispatcher.get()));
-      pushAllFuture.set(pushAll.create(
-          null, ReplicationFilter.all(), state).schedule(30, TimeUnit.SECONDS));
+      ReplicationState state = new ReplicationState(new GitUpdateProcessing(eventDispatcher.get()));
+      pushAllFuture.set(
+          pushAll.create(null, ReplicationFilter.all(), state).schedule(30, TimeUnit.SECONDS));
     }
   }
 

@@ -18,18 +18,15 @@ import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-
+import java.io.IOException;
+import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.util.List;
-
 @Singleton
 public class AutoReloadConfigDecorator implements ReplicationConfig {
-  private static final Logger log = LoggerFactory
-      .getLogger(AutoReloadConfigDecorator.class);
+  private static final Logger log = LoggerFactory.getLogger(AutoReloadConfigDecorator.class);
   private ReplicationFileBasedConfig currentConfig;
   private long currentConfigTs;
 
@@ -38,9 +35,8 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private final DestinationFactory destinationFactory;
 
   @Inject
-  public AutoReloadConfigDecorator(SitePaths site,
-      WorkQueue workQueue,
-      DestinationFactory destinationFactory)
+  public AutoReloadConfigDecorator(
+      SitePaths site, WorkQueue workQueue, DestinationFactory destinationFactory)
       throws ConfigInvalidException, IOException {
     this.site = site;
     this.destinationFactory = destinationFactory;
@@ -53,8 +49,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     return FileUtil.lastModified(cfg.getCfgPath());
   }
 
-  private ReplicationFileBasedConfig loadConfig()
-      throws ConfigInvalidException, IOException {
+  private ReplicationFileBasedConfig loadConfig() throws ConfigInvalidException, IOException {
     return new ReplicationFileBasedConfig(site, destinationFactory);
   }
 
@@ -79,16 +74,16 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
 
           this.currentConfig = newConfig;
           this.currentConfigTs = lastModified;
-          log.info("Configuration reloaded: "
-            + currentConfig.getDestinations(FilterType.ALL).size() + " destinations, "
-            + discarded + " replication events discarded");
-
+          log.info(
+              "Configuration reloaded: "
+                  + currentConfig.getDestinations(FilterType.ALL).size()
+                  + " destinations, "
+                  + discarded
+                  + " replication events discarded");
         }
       }
     } catch (Exception e) {
-      log.error(
-          "Cannot reload replication configuration: keeping existing settings",
-          e);
+      log.error("Cannot reload replication configuration: keeping existing settings", e);
       return;
     }
   }

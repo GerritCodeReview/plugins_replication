@@ -49,8 +49,7 @@ class SecureCredentialsProvider extends CredentialsProvider {
   }
 
   @Override
-  public boolean get(URIish uri, CredentialItem... items)
-      throws UnsupportedCredentialItem {
+  public boolean get(URIish uri, CredentialItem... items) throws UnsupportedCredentialItem {
     String username = uri.getUser();
     if (username == null) {
       username = cfgUser;

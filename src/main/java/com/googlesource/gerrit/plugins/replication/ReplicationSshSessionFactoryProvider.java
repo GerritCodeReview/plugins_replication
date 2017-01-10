@@ -15,7 +15,6 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.inject.Provider;
-
 import org.eclipse.jgit.transport.SshSessionFactory;
 
 class ReplicationSshSessionFactoryProvider implements Provider<SshSessionFactory> {

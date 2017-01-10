@@ -25,8 +25,7 @@ public class ReplicationScheduledEvent extends RefEvent {
   final String ref;
   final String targetNode;
 
-  public ReplicationScheduledEvent(String project, String ref,
-      String targetNode) {
+  public ReplicationScheduledEvent(String project, String ref, String targetNode) {
     super(TYPE);
     this.project = project;
     this.ref = ref;

@@ -14,7 +14,6 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.server.git.WorkQueue;
-
 import java.util.List;
 
 public interface ReplicationConfig {
@@ -36,5 +35,4 @@ public interface ReplicationConfig {
   int shutdown();
 
   void startup(WorkQueue workQueue);
-
 }

@@ -16,7 +16,6 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
-
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.transport.RemoteConfig;
 
@@ -39,29 +38,21 @@ class DestinationConfiguration {
   DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
     String name = remoteConfig.getName();
-    urls = ImmutableList.copyOf(
-        cfg.getStringList("remote", name, "url"));
+    urls = ImmutableList.copyOf(cfg.getStringList("remote", name, "url"));
     delay = Math.max(0, getInt(remoteConfig, cfg, "replicationdelay", 15));
-    projects = ImmutableList.copyOf(
-        cfg.getStringList("remote", name, "projects"));
-    adminUrls = ImmutableList.copyOf(
-        cfg.getStringList("remote", name, "adminUrl"));
+    projects = ImmutableList.copyOf(cfg.getStringList("remote", name, "projects"));
+    adminUrls = ImmutableList.copyOf(cfg.getStringList("remote", name, "adminUrl"));
     retryDelay = Math.max(0, getInt(remoteConfig, cfg, "replicationretry", 1));
     poolThreads = Math.max(0, getInt(remoteConfig, cfg, "threads", 1));
-    authGroupNames = ImmutableList.copyOf(
-        cfg.getStringList("remote", name, "authGroup"));
+    authGroupNames = ImmutableList.copyOf(cfg.getStringList("remote", name, "authGroup"));
     lockErrorMaxRetries = cfg.getInt("replication", "lockErrorMaxRetries", 0);
 
-    createMissingRepos =
-        cfg.getBoolean("remote", name, "createMissingRepositories", true);
-    replicatePermissions =
-        cfg.getBoolean("remote", name, "replicatePermissions", true);
-    replicateProjectDeletions =
-        cfg.getBoolean("remote", name, "replicateProjectDeletions", false);
-    replicateHiddenProjects =
-        cfg.getBoolean("remote", name, "replicateHiddenProjects", false);
-    remoteNameStyle = MoreObjects.firstNonNull(
-        cfg.getString("remote", name, "remoteNameStyle"), "slash");
+    createMissingRepos = cfg.getBoolean("remote", name, "createMissingRepositories", true);
+    replicatePermissions = cfg.getBoolean("remote", name, "replicatePermissions", true);
+    replicateProjectDeletions = cfg.getBoolean("remote", name, "replicateProjectDeletions", false);
+    replicateHiddenProjects = cfg.getBoolean("remote", name, "replicateHiddenProjects", false);
+    remoteNameStyle =
+        MoreObjects.firstNonNull(cfg.getString("remote", name, "remoteNameStyle"), "slash");
   }
 
   public int getDelay() {
@@ -120,8 +111,7 @@ class DestinationConfiguration {
     return remoteConfig;
   }
 
-  private static int getInt(
-      RemoteConfig rc, Config cfg, String name, int defValue) {
+  private static int getInt(RemoteConfig rc, Config cfg, String name, int defValue) {
     return cfg.getInt("remote", rc.getName(), name, defValue);
   }
 }

@@ -32,30 +32,34 @@ public class ReplicationMetrics {
   ReplicationMetrics(MetricMaker metricMaker) {
     Field<String> DEST_FIELD = Field.ofString("destination");
 
-    executionTime = metricMaker.newTimer(
-        "replication_latency",
-        new Description("Time spent pushing to remote destination.")
-          .setCumulative()
-          .setUnit(Description.Units.MILLISECONDS),
-        DEST_FIELD);
+    executionTime =
+        metricMaker.newTimer(
+            "replication_latency",
+            new Description("Time spent pushing to remote destination.")
+                .setCumulative()
+                .setUnit(Description.Units.MILLISECONDS),
+            DEST_FIELD);
 
-    executionDelay = metricMaker.newHistogram(
-        "replication_delay",
-        new Description("Time spent waiting before pushing to remote destination")
-          .setCumulative()
-          .setUnit(Description.Units.MILLISECONDS),
-        DEST_FIELD);
+    executionDelay =
+        metricMaker.newHistogram(
+            "replication_delay",
+            new Description("Time spent waiting before pushing to remote destination")
+                .setCumulative()
+                .setUnit(Description.Units.MILLISECONDS),
+            DEST_FIELD);
 
-    executionRetries = metricMaker.newHistogram(
-        "replication_retries",
-        new Description("Number of retries when pushing to remote destination")
-          .setCumulative()
-          .setUnit("retries"),
-        DEST_FIELD);
+    executionRetries =
+        metricMaker.newHistogram(
+            "replication_retries",
+            new Description("Number of retries when pushing to remote destination")
+                .setCumulative()
+                .setUnit("retries"),
+            DEST_FIELD);
   }
 
   /**
    * Start the replication latency timer for a destination.
+   *
    * @param name the destination name.
    * @return the timer context.
    */
@@ -65,6 +69,7 @@ public class ReplicationMetrics {
 
   /**
    * Record the replication delay and retry metrics for a destination.
+   *
    * @param name the destination name.
    * @param delay replication delay in milliseconds.
    * @param retries number of retries.
@@ -73,5 +78,4 @@ public class ReplicationMetrics {
     executionDelay.record(name, delay);
     executionRetries.record(name, retries);
   }
-
 }
