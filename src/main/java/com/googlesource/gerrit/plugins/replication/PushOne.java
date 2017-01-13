@@ -19,7 +19,7 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedListMultimap;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
@@ -111,7 +111,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private boolean retrying;
   private int retryCount;
   private boolean canceled;
-  private final Multimap<String,ReplicationState> stateMap =
+  private final ListMultimap<String,ReplicationState> stateMap =
       LinkedListMultimap.create();
   private final int maxLockRetries;
   private int lockRetryCount;
@@ -243,7 +243,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     stateMap.put(ref, state);
   }
 
-  Multimap<String,ReplicationState> getStates() {
+  ListMultimap<String,ReplicationState> getStates() {
     return stateMap;
   }
 
@@ -258,7 +258,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     return states.toArray(new ReplicationState[states.size()]);
   }
 
-  void addStates(Multimap<String,ReplicationState> states) {
+  void addStates(ListMultimap<String, ReplicationState> states) {
     stateMap.putAll(states);
   }
 
