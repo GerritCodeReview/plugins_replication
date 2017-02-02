@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30bd97ac_667581d9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationMetrics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "Feb 1, 2017 10:56:14 PM",
+      "side": 1,
+      "message": "Have you checked, if this was a common pattern across the whole code base for a reason?",
+      "revId": "39bf331502ec3f6d6143c99905f8d5565946ff41",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
