@@ -16,6 +16,24 @@
       "revId": "39bf331502ec3f6d6143c99905f8d5565946ff41",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b17c75d5_599a1066",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationMetrics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "Feb 1, 2017 11:33:21 PM",
+      "side": 1,
+      "message": "Most of them don\u0027t have accessor methods and are just accessed directly.  Have a look at RestApiMetrics for example.\n\nI don\u0027t know if there was a specific reason other than not bloating the classes with simple methods.",
+      "parentUuid": "30bd97ac_667581d9",
+      "revId": "39bf331502ec3f6d6143c99905f8d5565946ff41",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
