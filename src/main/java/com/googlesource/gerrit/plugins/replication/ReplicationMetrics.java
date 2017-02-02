@@ -24,9 +24,9 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class ReplicationMetrics {
-  Timer1<String> executionTime;
-  Histogram1<String> executionDelay;
-  Histogram1<String> executionRetries;
+  private final Timer1<String> executionTime;
+  private final Histogram1<String> executionDelay;
+  private final Histogram1<String> executionRetries;
 
   @Inject
   ReplicationMetrics(MetricMaker metricMaker) {
