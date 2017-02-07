@@ -29,7 +29,6 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
-
 import org.eclipse.jgit.transport.SshSessionFactory;
 
 class ReplicationModule extends AbstractModule {
@@ -38,26 +37,22 @@ class ReplicationModule extends AbstractModule {
     bind(DestinationFactory.class).in(Scopes.SINGLETON);
     bind(ReplicationQueue.class).in(Scopes.SINGLETON);
 
-    DynamicSet.bind(binder(), GitReferenceUpdatedListener.class)
-        .to(ReplicationQueue.class);
-    DynamicSet.bind(binder(), NewProjectCreatedListener.class)
-        .to(ReplicationQueue.class);
-    DynamicSet.bind(binder(), ProjectDeletedListener.class)
-        .to(ReplicationQueue.class);
-    DynamicSet.bind(binder(), HeadUpdatedListener.class)
-        .to(ReplicationQueue.class);
+    DynamicSet.bind(binder(), GitReferenceUpdatedListener.class).to(ReplicationQueue.class);
+    DynamicSet.bind(binder(), NewProjectCreatedListener.class).to(ReplicationQueue.class);
+    DynamicSet.bind(binder(), ProjectDeletedListener.class).to(ReplicationQueue.class);
+    DynamicSet.bind(binder(), HeadUpdatedListener.class).to(ReplicationQueue.class);
 
     bind(OnStartStop.class).in(Scopes.SINGLETON);
+    bind(LifecycleListener.class).annotatedWith(UniqueAnnotations.create()).to(OnStartStop.class);
     bind(LifecycleListener.class)
-      .annotatedWith(UniqueAnnotations.create())
-      .to(OnStartStop.class);
-    bind(LifecycleListener.class).annotatedWith(UniqueAnnotations.create()).to(
-        ReplicationLogFile.class);
-    bind(CredentialsFactory.class).to(
-        AutoReloadSecureCredentialsFactoryDecorator.class).in(Scopes.SINGLETON);
+        .annotatedWith(UniqueAnnotations.create())
+        .to(ReplicationLogFile.class);
+    bind(CredentialsFactory.class)
+        .to(AutoReloadSecureCredentialsFactoryDecorator.class)
+        .in(Scopes.SINGLETON);
     bind(CapabilityDefinition.class)
-      .annotatedWith(Exports.named(START_REPLICATION))
-      .to(StartReplicationCapability.class);
+        .annotatedWith(Exports.named(START_REPLICATION))
+        .to(StartReplicationCapability.class);
 
     install(new FactoryModuleBuilder().build(PushAll.Factory.class));
     install(new FactoryModuleBuilder().build(RemoteSiteUser.Factory.class));
@@ -67,9 +62,7 @@ class ReplicationModule extends AbstractModule {
 
     EventTypes.register(RefReplicatedEvent.TYPE, RefReplicatedEvent.class);
     EventTypes.register(RefReplicationDoneEvent.TYPE, RefReplicationDoneEvent.class);
-    EventTypes.register(
-        ReplicationScheduledEvent.TYPE, ReplicationScheduledEvent.class);
-    bind(SshSessionFactory.class).toProvider(
-        ReplicationSshSessionFactoryProvider.class);
+    EventTypes.register(ReplicationScheduledEvent.TYPE, ReplicationScheduledEvent.class);
+    bind(SshSessionFactory.class).toProvider(ReplicationSshSessionFactoryProvider.class);
   }
 }

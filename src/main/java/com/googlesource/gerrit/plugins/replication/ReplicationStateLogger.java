@@ -20,11 +20,10 @@ import com.google.inject.Singleton;
 
 /**
  * Wrapper around a Logger that also logs out the replication state.
- * <p>
- * When logging replication errors it is useful to know the current
- * replication state.  This utility class wraps the methods from Logger
- * and logs additional information about the replication state to the
- * stderr console.
+ *
+ * <p>When logging replication errors it is useful to know the current replication state. This
+ * utility class wraps the methods from Logger and logs additional information about the replication
+ * state to the stderr console.
  */
 @Singleton
 class ReplicationStateLogger implements ReplicationStateListener {

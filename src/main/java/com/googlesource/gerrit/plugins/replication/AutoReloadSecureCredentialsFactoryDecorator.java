@@ -18,19 +18,16 @@ import static com.google.gerrit.common.FileUtil.lastModified;
 
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
-
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.concurrent.atomic.AtomicReference;
-
-public class AutoReloadSecureCredentialsFactoryDecorator implements
-    CredentialsFactory {
-  private static final Logger log = LoggerFactory
-      .getLogger(AutoReloadSecureCredentialsFactoryDecorator.class);
+public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsFactory {
+  private static final Logger log =
+      LoggerFactory.getLogger(AutoReloadSecureCredentialsFactoryDecorator.class);
 
   private final AtomicReference<SecureCredentialsFactory> secureCredentialsFactory;
   private volatile long secureCredentialsFactoryLoadTs;
@@ -38,13 +35,12 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements
   private ReplicationFileBasedConfig config;
 
   @Inject
-  public AutoReloadSecureCredentialsFactoryDecorator(SitePaths site,
-      ReplicationFileBasedConfig config) throws ConfigInvalidException,
-      IOException {
+  public AutoReloadSecureCredentialsFactoryDecorator(
+      SitePaths site, ReplicationFileBasedConfig config)
+      throws ConfigInvalidException, IOException {
     this.site = site;
     this.config = config;
-    this.secureCredentialsFactory =
-        new AtomicReference<>(new SecureCredentialsFactory(site));
+    this.secureCredentialsFactory = new AtomicReference<>(new SecureCredentialsFactory(site));
     this.secureCredentialsFactoryLoadTs = getSecureConfigLastEditTs();
   }
 
@@ -59,21 +55,23 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements
   public SecureCredentialsProvider create(String remoteName) {
     try {
       if (needsReload()) {
-        secureCredentialsFactory.compareAndSet(secureCredentialsFactory.get(),
-            new SecureCredentialsFactory(site));
+        secureCredentialsFactory.compareAndSet(
+            secureCredentialsFactory.get(), new SecureCredentialsFactory(site));
         secureCredentialsFactoryLoadTs = getSecureConfigLastEditTs();
         log.info("secure.config reloaded as it was updated on the file system");
       }
     } catch (Exception e) {
-      log.error("Unexpected error while trying to reload "
-          + "secure.config: keeping existing credentials", e);
+      log.error(
+          "Unexpected error while trying to reload "
+              + "secure.config: keeping existing credentials",
+          e);
     }
 
     return secureCredentialsFactory.get().create(remoteName);
   }
 
   private boolean needsReload() {
-    return config.getConfig().getBoolean("gerrit", "autoReload", false) &&
-        getSecureConfigLastEditTs() != secureCredentialsFactoryLoadTs;
+    return config.getConfig().getBoolean("gerrit", "autoReload", false)
+        && getSecureConfigLastEditTs() != secureCredentialsFactoryLoadTs;
   }
 }

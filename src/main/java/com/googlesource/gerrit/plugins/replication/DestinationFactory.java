@@ -36,7 +36,8 @@ public class DestinationFactory {
   private final DynamicItem<EventDispatcher> eventDispatcher;
 
   @Inject
-  public DestinationFactory(Injector injector,
+  public DestinationFactory(
+      Injector injector,
       RemoteSiteUser.Factory replicationUserFactory,
       PluginUser pluginUser,
       GitRepositoryManager gitRepositoryManager,
@@ -55,8 +56,15 @@ public class DestinationFactory {
   }
 
   Destination create(DestinationConfiguration config) {
-    return new Destination(injector, config, replicationUserFactory, pluginUser,
-        gitRepositoryManager, groupBackend, stateLog, groupIncludeCache,
+    return new Destination(
+        injector,
+        config,
+        replicationUserFactory,
+        pluginUser,
+        gitRepositoryManager,
+        groupBackend,
+        stateLog,
+        groupIncludeCache,
         eventDispatcher);
   }
 }

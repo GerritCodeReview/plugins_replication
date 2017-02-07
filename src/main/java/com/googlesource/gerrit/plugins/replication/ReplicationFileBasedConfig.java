@@ -21,16 +21,6 @@ import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-
-import org.eclipse.jgit.errors.ConfigInvalidException;
-import org.eclipse.jgit.storage.file.FileBasedConfig;
-import org.eclipse.jgit.transport.RefSpec;
-import org.eclipse.jgit.transport.RemoteConfig;
-import org.eclipse.jgit.transport.URIish;
-import org.eclipse.jgit.util.FS;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
@@ -39,6 +29,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
+import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.storage.file.FileBasedConfig;
+import org.eclipse.jgit.transport.RefSpec;
+import org.eclipse.jgit.transport.RemoteConfig;
+import org.eclipse.jgit.transport.URIish;
+import org.eclipse.jgit.util.FS;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Singleton
 public class ReplicationFileBasedConfig implements ReplicationConfig {
@@ -50,8 +48,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private final FileBasedConfig config;
 
   @Inject
-  public ReplicationFileBasedConfig(SitePaths site,
-      DestinationFactory destinationFactory)
+  public ReplicationFileBasedConfig(SitePaths site, DestinationFactory destinationFactory)
       throws ConfigInvalidException, IOException {
     this.cfgPath = site.etc_dir.resolve("replication.config");
     this.config = new FileBasedConfig(cfgPath.toFile(), FS.DETECTED);
@@ -79,10 +76,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
         filter = dest -> true;
         break;
     }
-    return destinations.stream()
-        .filter(Objects::nonNull)
-        .filter(filter)
-        .collect(toList());
+    return destinations.stream().filter(Objects::nonNull).filter(filter).collect(toList());
   }
 
   private List<Destination> allDestinations(DestinationFactory destinationFactory)
@@ -99,18 +93,16 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     try {
       config.load();
     } catch (ConfigInvalidException e) {
-      throw new ConfigInvalidException(String.format(
-          "Config file %s is invalid: %s", config.getFile(), e.getMessage()), e);
+      throw new ConfigInvalidException(
+          String.format("Config file %s is invalid: %s", config.getFile(), e.getMessage()), e);
     } catch (IOException e) {
-      throw new IOException(String.format("Cannot read %s: %s", config.getFile(),
-          e.getMessage()), e);
+      throw new IOException(
+          String.format("Cannot read %s: %s", config.getFile(), e.getMessage()), e);
     }
 
-    replicateAllOnPluginStart =
-        config.getBoolean("gerrit", "replicateOnStartup", true);
+    replicateAllOnPluginStart = config.getBoolean("gerrit", "replicateOnStartup", true);
 
-    defaultForceUpdate =
-        config.getBoolean("gerrit", "defaultForceUpdate", false);
+    defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);
 
     ImmutableList.Builder<Destination> dest = ImmutableList.builder();
     for (RemoteConfig c : allRemotes(config)) {
@@ -126,19 +118,21 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
       }
 
       if (c.getPushRefSpecs().isEmpty()) {
-        c.addPushRefSpec(new RefSpec().setSourceDestination("refs/*", "refs/*")
-            .setForceUpdate(defaultForceUpdate));
+        c.addPushRefSpec(
+            new RefSpec()
+                .setSourceDestination("refs/*", "refs/*")
+                .setForceUpdate(defaultForceUpdate));
       }
 
-      Destination destination = destinationFactory.create(
-          new DestinationConfiguration(c, config));
+      Destination destination = destinationFactory.create(new DestinationConfiguration(c, config));
 
       if (!destination.isSingleProjectMatch()) {
         for (URIish u : c.getURIs()) {
           if (u.getPath() == null || !u.getPath().contains("${name}")) {
-            throw new ConfigInvalidException(String.format(
-                "remote.%s.url \"%s\" lacks ${name} placeholder in %s",
-                c.getName(), u, config.getFile()));
+            throw new ConfigInvalidException(
+                String.format(
+                    "remote.%s.url \"%s\" lacks ${name} placeholder in %s",
+                    c.getName(), u, config.getFile()));
           }
         }
       }
@@ -164,16 +158,15 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     return defaultForceUpdate;
   }
 
-  private static List<RemoteConfig> allRemotes(FileBasedConfig cfg)
-      throws ConfigInvalidException {
+  private static List<RemoteConfig> allRemotes(FileBasedConfig cfg) throws ConfigInvalidException {
     Set<String> names = cfg.getSubsections("remote");
     List<RemoteConfig> result = Lists.newArrayListWithCapacity(names.size());
     for (String name : names) {
       try {
         result.add(new RemoteConfig(cfg, name));
       } catch (URISyntaxException e) {
-        throw new ConfigInvalidException(String.format(
-            "remote %s has invalid URL in %s", name, cfg.getFile()));
+        throw new ConfigInvalidException(
+            String.format("remote %s has invalid URL in %s", name, cfg.getFile()));
       }
     }
     return result;

@@ -16,9 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.events.RefEvent;
-
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
-
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
 
@@ -31,8 +29,12 @@ public class RefReplicatedEvent extends RefEvent {
   final String status;
   final Status refStatus;
 
-  public RefReplicatedEvent(String project, String ref, String targetNode,
-      RefPushResult status, RemoteRefUpdate.Status refStatus) {
+  public RefReplicatedEvent(
+      String project,
+      String ref,
+      String targetNode,
+      RefPushResult status,
+      RemoteRefUpdate.Status refStatus) {
     super(TYPE);
     this.project = project;
     this.ref = ref;

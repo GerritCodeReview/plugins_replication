@@ -35,7 +35,7 @@ public class RefReplicatedEventEquals implements IArgumentMatcher {
     if (!(actual instanceof RefReplicatedEvent)) {
       return false;
     }
-    RefReplicatedEvent actualRefReplicatedEvent = (RefReplicatedEvent)actual;
+    RefReplicatedEvent actualRefReplicatedEvent = (RefReplicatedEvent) actual;
     if (!equals(expected.project, actualRefReplicatedEvent.project)) {
       return false;
     }

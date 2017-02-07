@@ -20,7 +20,6 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
-
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -28,9 +27,7 @@ public class PushAll implements Runnable {
   private final ReplicationStateListener stateLog;
 
   public interface Factory {
-    PushAll create(String urlMatch,
-        ReplicationFilter filter,
-        ReplicationState state);
+    PushAll create(String urlMatch, ReplicationFilter filter, ReplicationState state);
   }
 
   private final WorkQueue workQueue;
@@ -41,7 +38,8 @@ public class PushAll implements Runnable {
   private final ReplicationState state;
 
   @Inject
-  protected PushAll(WorkQueue wq,
+  protected PushAll(
+      WorkQueue wq,
       ProjectCache projectCache,
       ReplicationQueue rq,
       ReplicationStateListener stateLog,

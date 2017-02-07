@@ -28,16 +28,13 @@ import com.google.gwtorm.client.KeyUtil;
 import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
 import com.google.gwtorm.server.StandardKeyEncoder;
-
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
-
+import java.net.URISyntaxException;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.net.URISyntaxException;
 
 @SuppressWarnings("unchecked")
 public class GitUpdateProcessingTest {
@@ -64,15 +61,22 @@ public class GitUpdateProcessingTest {
   public void headRefReplicated() throws URISyntaxException, OrmException {
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
-        new RefReplicatedEvent("someProject", "refs/heads/master", "someHost",
-            RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
+        new RefReplicatedEvent(
+            "someProject",
+            "refs/heads/master",
+            "someHost",
+            RefPushResult.SUCCEEDED,
+            RemoteRefUpdate.Status.OK);
     dispatcherMock.postEvent(RefReplicatedEventEquals.eqEvent(expectedEvent));
     expectLastCall().once();
     replay(dispatcherMock);
 
-    gitUpdateProcessing.onRefReplicatedToOneNode("someProject",
-        "refs/heads/master", new URIish("git://someHost/someProject.git"),
-        RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
+    gitUpdateProcessing.onRefReplicatedToOneNode(
+        "someProject",
+        "refs/heads/master",
+        new URIish("git://someHost/someProject.git"),
+        RefPushResult.SUCCEEDED,
+        RemoteRefUpdate.Status.OK);
     verify(dispatcherMock);
   }
 
@@ -80,15 +84,22 @@ public class GitUpdateProcessingTest {
   public void changeRefReplicated() throws URISyntaxException, OrmException {
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
-        new RefReplicatedEvent("someProject", "refs/changes/01/1/1", "someHost",
-            RefPushResult.FAILED, RemoteRefUpdate.Status.REJECTED_NONFASTFORWARD);
+        new RefReplicatedEvent(
+            "someProject",
+            "refs/changes/01/1/1",
+            "someHost",
+            RefPushResult.FAILED,
+            RemoteRefUpdate.Status.REJECTED_NONFASTFORWARD);
     dispatcherMock.postEvent(RefReplicatedEventEquals.eqEvent(expectedEvent));
     expectLastCall().once();
     replay(dispatcherMock);
 
-    gitUpdateProcessing.onRefReplicatedToOneNode("someProject",
-        "refs/changes/01/1/1", new URIish("git://someHost/someProject.git"),
-        RefPushResult.FAILED, RemoteRefUpdate.Status.REJECTED_NONFASTFORWARD);
+    gitUpdateProcessing.onRefReplicatedToOneNode(
+        "someProject",
+        "refs/changes/01/1/1",
+        new URIish("git://someHost/someProject.git"),
+        RefPushResult.FAILED,
+        RemoteRefUpdate.Status.REJECTED_NONFASTFORWARD);
     verify(dispatcherMock);
   }
 
@@ -97,8 +108,7 @@ public class GitUpdateProcessingTest {
     reset(dispatcherMock);
     RefReplicationDoneEvent expectedDoneEvent =
         new RefReplicationDoneEvent("someProject", "refs/heads/master", 5);
-    dispatcherMock.postEvent(
-        RefReplicationDoneEventEquals.eqEvent(expectedDoneEvent));
+    dispatcherMock.postEvent(RefReplicationDoneEventEquals.eqEvent(expectedDoneEvent));
     expectLastCall().once();
     replay(dispatcherMock);
 
