@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c45085d0_75f3240d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/OnStartStop.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1011624
+      },
+      "writtenOn": "2017-02-14T09:49:27Z",
+      "side": 1,
+      "message": "maybe true here, as it is scheduled with a 30 seconds delay anyway? There is no real need to wait for another delay on startup I think.",
+      "revId": "128b4fda995a7f5990b2255a9389ef475ddc2671",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
