@@ -16,6 +16,24 @@
       "revId": "128b4fda995a7f5990b2255a9389ef475ddc2671",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53a07d89_bfffbe04",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/OnStartStop.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2017-02-14T15:37:18Z",
+      "side": 1,
+      "message": "If that behavior change is desired, it deserves its own change.",
+      "parentUuid": "c45085d0_75f3240d",
+      "revId": "128b4fda995a7f5990b2255a9389ef475ddc2671",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
