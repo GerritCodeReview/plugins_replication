@@ -20,6 +20,7 @@ import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.account.GroupIncludeCache;
 import com.google.gerrit.server.git.GitRepositoryManager;
+import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
@@ -30,6 +31,7 @@ public class DestinationFactory {
   private final RemoteSiteUser.Factory replicationUserFactory;
   private final PluginUser pluginUser;
   private final GitRepositoryManager gitRepositoryManager;
+  private final PermissionBackend permissionBackend;
   private final GroupBackend groupBackend;
   private final ReplicationStateListener stateLog;
   private final GroupIncludeCache groupIncludeCache;
@@ -41,6 +43,7 @@ public class DestinationFactory {
       RemoteSiteUser.Factory replicationUserFactory,
       PluginUser pluginUser,
       GitRepositoryManager gitRepositoryManager,
+      PermissionBackend permissionBackend,
       GroupBackend groupBackend,
       ReplicationStateListener stateLog,
       GroupIncludeCache groupIncludeCache,
@@ -49,6 +52,7 @@ public class DestinationFactory {
     this.replicationUserFactory = replicationUserFactory;
     this.pluginUser = pluginUser;
     this.gitRepositoryManager = gitRepositoryManager;
+    this.permissionBackend = permissionBackend;
     this.groupBackend = groupBackend;
     this.stateLog = stateLog;
     this.groupIncludeCache = groupIncludeCache;
@@ -62,6 +66,7 @@ public class DestinationFactory {
         replicationUserFactory,
         pluginUser,
         gitRepositoryManager,
+        permissionBackend,
         groupBackend,
         stateLog,
         groupIncludeCache,
