@@ -24,8 +24,10 @@ import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Lists;
 import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.common.data.GroupReference;
+import com.google.gerrit.extensions.client.ProjectState;
 import com.google.gerrit.extensions.config.FactoryModule;
 import com.google.gerrit.extensions.registration.DynamicItem;
+import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Project;
@@ -41,6 +43,9 @@ import com.google.gerrit.server.config.RequestScopedReviewDbProvider;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
 import com.google.gerrit.server.git.WorkQueue;
+import com.google.gerrit.server.permissions.PermissionBackend;
+import com.google.gerrit.server.permissions.PermissionBackendException;
+import com.google.gerrit.server.permissions.ProjectPermission;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.PerRequestProjectControlCache;
 import com.google.gerrit.server.project.ProjectControl;
@@ -76,6 +81,7 @@ public class Destination {
   private final PushOne.Factory opFactory;
   private final ProjectControl.Factory projectControlFactory;
   private final GitRepositoryManager gitManager;
+  private final PermissionBackend permissionBackend;
   private volatile WorkQueue.Executor pool;
   private final PerThreadRequestScope.Scoper threadScoper;
   private final DestinationConfiguration config;
@@ -103,6 +109,7 @@ public class Destination {
       RemoteSiteUser.Factory replicationUserFactory,
       PluginUser pluginUser,
       GitRepositoryManager gitRepositoryManager,
+      PermissionBackend permissionBackend,
       GroupBackend groupBackend,
       ReplicationStateListener stateLog,
       GroupIncludeCache groupIncludeCache,
@@ -110,6 +117,7 @@ public class Destination {
     config = cfg;
     this.eventDispatcher = eventDispatcher;
     gitManager = gitRepositoryManager;
+    this.permissionBackend = permissionBackend;
     this.stateLog = stateLog;
 
     final CurrentUser remoteUser;
@@ -210,9 +218,19 @@ public class Destination {
     return cnt;
   }
 
-  private boolean shouldReplicate(ProjectControl projectControl) {
-    return projectControl.isReadable()
-        && (!projectControl.isHidden() || config.replicateHiddenProjects());
+  private boolean shouldReplicate(ProjectControl ctl) throws PermissionBackendException {
+    if (!config.replicateHiddenProjects() && ctl.getProject().getState() == ProjectState.HIDDEN) {
+      return false;
+    }
+    try {
+      permissionBackend
+          .user(ctl.getUser())
+          .project(ctl.getProject().getNameKey())
+          .check(ProjectPermission.ACCESS);
+      return true;
+    } catch (AuthException e) {
+      return false;
+    }
   }
 
   private boolean shouldReplicate(
@@ -222,7 +240,7 @@ public class Destination {
           .scope(
               new Callable<Boolean>() {
                 @Override
-                public Boolean call() throws NoSuchProjectException {
+                public Boolean call() throws NoSuchProjectException, PermissionBackendException {
                   ProjectControl projectControl = controlFor(project);
                   return shouldReplicate(projectControl)
                       && (PushOne.ALL_REFS.equals(ref)
@@ -245,7 +263,7 @@ public class Destination {
           .scope(
               new Callable<Boolean>() {
                 @Override
-                public Boolean call() throws NoSuchProjectException {
+                public Boolean call() throws NoSuchProjectException, PermissionBackendException {
                   return shouldReplicate(controlFor(project));
                 }
               })
