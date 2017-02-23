@@ -23,6 +23,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
@@ -35,6 +36,9 @@ import com.google.gerrit.server.git.TagCache;
 import com.google.gerrit.server.git.VisibleRefFilter;
 import com.google.gerrit.server.git.WorkQueue.CanceledWhileRunning;
 import com.google.gerrit.server.notedb.ChangeNotes;
+import com.google.gerrit.server.permissions.PermissionBackend;
+import com.google.gerrit.server.permissions.PermissionBackendException;
+import com.google.gerrit.server.permissions.ProjectPermission;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.ProjectControl;
 import com.google.gerrit.server.util.IdGenerator;
@@ -90,6 +94,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   private final GitRepositoryManager gitManager;
+  private final PermissionBackend permissionBackend;
   private final SchemaFactory<ReviewDb> schema;
   private final Destination pool;
   private final RemoteConfig config;
@@ -120,6 +125,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   @Inject
   PushOne(
       GitRepositoryManager grm,
+      PermissionBackend permissionBackend,
       SchemaFactory<ReviewDb> s,
       Destination p,
       RemoteConfig c,
@@ -135,6 +141,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       @Assisted Project.NameKey d,
       @Assisted URIish u) {
     gitManager = grm;
+    this.permissionBackend = permissionBackend;
     schema = s;
     pool = p;
     config = c;
@@ -387,7 +394,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       }
     } catch (IOException e) {
       stateLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
-    } catch (RuntimeException | Error e) {
+    } catch (PermissionBackendException | RuntimeException | Error e) {
       stateLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
     } finally {
       if (git != null) {
@@ -426,7 +433,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     }
   }
 
-  private void runImpl() throws IOException {
+  private void runImpl() throws IOException, PermissionBackendException {
     PushResult res;
     try (Transport tn = Transport.open(git, uri)) {
       res = pushVia(tn);
@@ -435,7 +442,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   private PushResult pushVia(Transport tn)
-      throws IOException, NotSupportedException, TransportException {
+      throws IOException, NotSupportedException, TransportException, PermissionBackendException {
     tn.applyConfig(config);
     tn.setCredentialsProvider(credentialsProvider);
 
@@ -453,7 +460,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     return tn.push(NullProgressMonitor.INSTANCE, todo);
   }
 
-  private List<RemoteRefUpdate> generateUpdates(Transport tn) throws IOException {
+  private List<RemoteRefUpdate> generateUpdates(Transport tn)
+      throws IOException, PermissionBackendException {
     ProjectControl pc;
     try {
       pc = pool.controlFor(projectName);
@@ -462,7 +470,14 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     }
 
     Map<String, Ref> local = git.getAllRefs();
-    if (!pc.allRefsAreVisible()) {
+    boolean filter;
+    try {
+      permissionBackend.user(pc.getUser()).project(projectName).check(ProjectPermission.READ);
+      filter = false;
+    } catch (AuthException e) {
+      filter = true;
+    }
+    if (filter) {
       if (!pushAllRefs) {
         // If we aren't mirroring, reduce the space we need to filter
         // to only the references we will update during this operation.
