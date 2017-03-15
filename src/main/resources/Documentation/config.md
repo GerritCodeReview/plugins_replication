@@ -210,11 +210,24 @@ remote.NAME.replicationRetry
 
 	If a remote push operation fails because a remote server was
 	offline, all push operations to the same destination URL are
-	blocked, and the remote push is continuously retried.
+	blocked, and the remote push is continuously retried unless
+	the replicationMaxRetry value is set.
 
 	This is a Gerrit specific extension to the Git remote block.
 
 	By default, 1 minute.
+
+remote.NAME.replicationMaxRetry
+:	Maximum number of times to retry a push operation that previously
+	failed.
+
+	When a push operation reaches its maximum number of retries
+	the replication event is discarded from the queue and the remote
+	slave could be potentially misaligned.
+
+	This is a Gerrit specific extension to the Git remote block.
+
+	By default, max retry is disabled.
 
 remote.NAME.threads
 :	Number of worker threads to dedicate to pushing to the
