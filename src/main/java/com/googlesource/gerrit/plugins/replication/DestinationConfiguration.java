@@ -35,6 +35,7 @@ class DestinationConfiguration {
   private final ImmutableList<String> projects;
   private final ImmutableList<String> authGroupNames;
   private final RemoteConfig remoteConfig;
+  private final int maxRetries;
 
   DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
@@ -62,6 +63,9 @@ class DestinationConfiguration {
         cfg.getBoolean("remote", name, "replicateHiddenProjects", false);
     remoteNameStyle = MoreObjects.firstNonNull(
         cfg.getString("remote", name, "remoteNameStyle"), "slash");
+    maxRetries =
+        getInt(
+            remoteConfig, cfg, "replicationMaxRetries", cfg.getInt("replication", "maxRetries", 0));
   }
 
   public int getDelay() {
@@ -118,6 +122,10 @@ class DestinationConfiguration {
 
   public RemoteConfig getRemoteConfig() {
     return remoteConfig;
+  }
+
+  public int getMaxRetries() {
+    return maxRetries;
   }
 
   private static int getInt(
