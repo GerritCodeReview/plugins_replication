@@ -393,8 +393,9 @@ public class Destination {
           case TRANSPORT_ERROR:
           case REPOSITORY_MISSING:
           default:
-            pushOp.setToRetry();
-            pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
+            if (pushOp.setToRetry()) {
+              pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
+            }
             break;
         }
       }
@@ -552,6 +553,10 @@ public class Destination {
 
   String getRemoteConfigName() {
     return config.getRemoteConfig().getName();
+  }
+
+  public int getMaxRetries() {
+    return config.getMaxRetries();
   }
 
   private static boolean matches(URIish uri, String urlMatch) {
