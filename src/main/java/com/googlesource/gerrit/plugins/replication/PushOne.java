@@ -107,6 +107,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private Repository git;
   private boolean retrying;
   private int retryCount;
+  private final int maxRetries;
   private boolean canceled;
   private final ListMultimap<String, ReplicationState> stateMap = LinkedListMultimap.create();
   private final int maxLockRetries;
@@ -152,6 +153,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     createdAt = System.nanoTime();
     metrics = m;
     canceledWhileRunning = new AtomicBoolean(false);
+    maxRetries = p.getMaxRetries();
   }
 
   @Override
@@ -196,9 +198,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     return retrying;
   }
 
-  void setToRetry() {
+  boolean setToRetry() {
     retrying = true;
     retryCount++;
+    return retryCount <= maxRetries;
   }
 
   void canceledByReplication() {
