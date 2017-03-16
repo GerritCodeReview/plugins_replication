@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "45ec9f39_f6b98a64",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-03-16T22:06:34Z",
+      "side": 1,
+      "message": "Nope, better \u0027retries\u0027 as you suggested, because we have another \u0027lockErrorMaxRetries\u0027",
+      "parentUuid": "1e33e3b1_a4fdc23e",
+      "range": {
+        "startLine": 57,
+        "startChar": 58,
+        "endLine": 57,
+        "endChar": 63
+      },
+      "revId": "c989cf2d2ea797457f4968c4b0e66f1fb0ae0fed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "72bfd7c9_4f843aa1",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 2
@@ -166,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "251ff866_462c2b96",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-03-16T22:06:34Z",
+      "side": 1,
+      "message": "Retries.",
+      "parentUuid": "a3bf9ea3_c1702d7e",
+      "range": {
+        "startLine": 214,
+        "startChar": 19,
+        "endLine": 214,
+        "endChar": 24
+      },
+      "revId": "c989cf2d2ea797457f4968c4b0e66f1fb0ae0fed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8f3c2ff7_d500c2db",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 2
@@ -201,6 +249,30 @@
       "side": 1,
       "message": "RetryCount?",
       "parentUuid": "8f3c2ff7_d500c2db",
+      "range": {
+        "startLine": 220,
+        "startChar": 26,
+        "endLine": 220,
+        "endChar": 31
+      },
+      "revId": "c989cf2d2ea797457f4968c4b0e66f1fb0ae0fed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40e6f9d5_ca2370c0",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-03-16T22:06:34Z",
+      "side": 1,
+      "message": "Retries.",
+      "parentUuid": "c7030c52_705c29b6",
       "range": {
         "startLine": 220,
         "startChar": 26,
