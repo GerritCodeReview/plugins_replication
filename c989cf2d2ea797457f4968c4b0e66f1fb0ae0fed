@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1e33e3b1_a4fdc23e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-03-16T10:13:27Z",
+      "side": 1,
+      "message": "Or better RetryCount?",
+      "parentUuid": "babbea6c_a9ddf3cd",
+      "range": {
+        "startLine": 57,
+        "startChar": 58,
+        "endLine": 57,
+        "endChar": 63
+      },
+      "revId": "c989cf2d2ea797457f4968c4b0e66f1fb0ae0fed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "72bfd7c9_4f843aa1",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-03-16T10:09:15Z",
       "side": 1,
       "message": "Should be private final",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 110,
+        "endChar": 10
+      },
+      "revId": "c989cf2d2ea797457f4968c4b0e66f1fb0ae0fed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99f8458f_1d038f6b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-03-16T10:13:27Z",
+      "side": 1,
+      "message": "True, let me fix it.",
+      "parentUuid": "72bfd7c9_4f843aa1",
       "range": {
         "startLine": 110,
         "startChar": 2,
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "a3bf9ea3_c1702d7e",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-03-16T10:13:27Z",
+      "side": 1,
+      "message": "RetryCount?",
+      "parentUuid": "3d307ff8_a549c7fc",
+      "range": {
+        "startLine": 214,
+        "startChar": 19,
+        "endLine": 214,
+        "endChar": 24
+      },
+      "revId": "c989cf2d2ea797457f4968c4b0e66f1fb0ae0fed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8f3c2ff7_d500c2db",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 2
@@ -105,6 +177,30 @@
       "writtenOn": "2017-03-16T10:09:15Z",
       "side": 1,
       "message": "Retries",
+      "range": {
+        "startLine": 220,
+        "startChar": 26,
+        "endLine": 220,
+        "endChar": 31
+      },
+      "revId": "c989cf2d2ea797457f4968c4b0e66f1fb0ae0fed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7030c52_705c29b6",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-03-16T10:13:27Z",
+      "side": 1,
+      "message": "RetryCount?",
+      "parentUuid": "8f3c2ff7_d500c2db",
       "range": {
         "startLine": 220,
         "startChar": 26,
@@ -151,6 +247,54 @@
       "writtenOn": "2017-03-16T10:09:15Z",
       "side": 1,
       "message": "We don\u0027t typically refer to remotes as slave, rather just as \"remote\" or \"destination\".",
+      "range": {
+        "startLine": 226,
+        "startChar": 1,
+        "endLine": 226,
+        "endChar": 6
+      },
+      "revId": "c989cf2d2ea797457f4968c4b0e66f1fb0ae0fed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91b754f4_34e5c0ff",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-03-16T10:13:27Z",
+      "side": 1,
+      "message": "I believe so: it needs to be clear what means setting a max retry count. Typically people should not need this setting ... however when you have thousand of destinations (like us) you don\u0027t want your queue just jammed with retries.",
+      "parentUuid": "012a1ab2_05d8ef28",
+      "range": {
+        "startLine": 225,
+        "startChar": 50,
+        "endLine": 226,
+        "endChar": 39
+      },
+      "revId": "c989cf2d2ea797457f4968c4b0e66f1fb0ae0fed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58141747_b74ff32a",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-03-16T10:13:27Z",
+      "side": 1,
+      "message": "True, let me fix it.",
+      "parentUuid": "ec97bcfe_e3685563",
       "range": {
         "startLine": 226,
         "startChar": 1,
