@@ -233,10 +233,8 @@ public class ReplicationQueue
   private boolean createProject(URIish replicateURI, String head) {
     if (!replicateURI.isRemote()) {
       createLocally(replicateURI, head);
-      repLog.info("Created local repository: " + replicateURI);
     } else if (isSSH(replicateURI)) {
       createRemoteSsh(replicateURI, head);
-      repLog.info("Created remote repository: " + replicateURI);
     } else {
       repLog.warn(
           String.format(
@@ -258,6 +256,7 @@ public class ReplicationQueue
         u.disableRefLog();
         u.link(head);
       }
+      repLog.info("Created local repository: {}", uri);
     } catch (IOException e) {
       repLog.error(String.format("Error creating local repository %s:\n", uri.getPath()), e);
     }
@@ -272,6 +271,7 @@ public class ReplicationQueue
     OutputStream errStream = newErrorBufferStream();
     try {
       executeRemoteSsh(uri, cmd, errStream);
+      repLog.info("Created remote repository: {}", uri);
     } catch (IOException e) {
       repLog.error(
           String.format(
