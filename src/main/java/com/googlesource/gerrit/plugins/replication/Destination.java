@@ -395,6 +395,12 @@ public class Destination {
           default:
             if (pushOp.setToRetry()) {
               pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
+            } else {
+              pushOp.canceledByReplication();
+              pending.remove(uri);
+              stateLog.error(
+                  "Push to " + pushOp.getURI() + " cancelled after maximum number of retries",
+                  pushOp.getStatesAsArray());
             }
             break;
         }
