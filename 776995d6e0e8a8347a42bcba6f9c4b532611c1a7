@@ -267,6 +267,30 @@
     },
     {
       "key": {
+        "uuid": "18f24509_bb02b084",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2017-04-25T13:38:57Z",
+      "side": 1,
+      "message": "This is simply a fall back when one provided only a host name without protocol and port.",
+      "parentUuid": "50ec1c3c_bff3f7ef",
+      "range": {
+        "startLine": 89,
+        "startChar": 3,
+        "endLine": 96,
+        "endChar": 5
+      },
+      "revId": "776995d6e0e8a8347a42bcba6f9c4b532611c1a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "caacc370_a535be42",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 19
