@@ -15,6 +15,8 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;
+import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.NON_EXISTING;
+import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.REJECTED_OTHER_REASON;
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
@@ -55,12 +57,14 @@ import com.google.inject.Provider;
 import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
+import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FilenameUtils;
@@ -69,6 +73,7 @@ import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
 import org.slf4j.Logger;
 
@@ -338,7 +343,7 @@ public class Destination {
 
   private void addRef(PushOne e, String ref) {
     e.addRef(ref);
-    postEvent(e, ref);
+    postReplicationScheduledEvent(e, ref);
   }
 
   /**
@@ -413,11 +418,16 @@ public class Destination {
           case COLLISION:
             pool.schedule(pushOp, config.getDelay(), TimeUnit.SECONDS);
             break;
-          case TRANSPORT_ERROR:
           case REPOSITORY_MISSING:
+          case TRANSPORT_ERROR:
           default:
+            RemoteRefUpdate.Status status =
+                RetryReason.REPOSITORY_MISSING.equals(reason)
+                    ? NON_EXISTING
+                    : REJECTED_OTHER_REASON;
+            postReplicationFailedEvent(pushOp, status);
             if (pushOp.setToRetry()) {
-              pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
+              scheduleTask(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
             } else {
               pushOp.canceledByReplication();
               pending.remove(uri);
@@ -588,6 +598,11 @@ public class Destination {
     return config.getMaxRetries();
   }
 
+  private void scheduleTask(PushOne pushOp, int delay, TimeUnit unit) {
+    postReplicationScheduledEvent(pushOp);
+    pool.schedule(pushOp, delay, unit);
+  }
+
   private static boolean matches(URIish uri, String urlMatch) {
     if (urlMatch == null || urlMatch.equals("") || urlMatch.equals("*")) {
       return true;
@@ -595,10 +610,28 @@ public class Destination {
     return uri.toString().contains(urlMatch);
   }
 
-  private void postEvent(PushOne pushOp, String ref) {
+  private void postReplicationScheduledEvent(PushOne pushOp) {
+    postReplicationScheduledEvent(pushOp, null);
+  }
+
+  private void postReplicationScheduledEvent(PushOne pushOp, String inputRef) {
+    Set<String> refs = inputRef == null ? pushOp.getRefs() : ImmutableSet.of(inputRef);
     Project.NameKey project = pushOp.getProjectNameKey();
     String targetNode = resolveNodeName(pushOp.getURI());
-    ReplicationScheduledEvent event = new ReplicationScheduledEvent(project.get(), ref, targetNode);
-    eventDispatcher.get().postEvent(new Branch.NameKey(project, ref), event);
+    for (String ref : refs) {
+      ReplicationScheduledEvent event =
+          new ReplicationScheduledEvent(project.get(), ref, targetNode);
+      eventDispatcher.get().postEvent(new Branch.NameKey(project, ref), event);
+    }
+  }
+
+  private void postReplicationFailedEvent(PushOne pushOp, RemoteRefUpdate.Status status) {
+    Project.NameKey project = pushOp.getProjectNameKey();
+    String targetNode = resolveNodeName(pushOp.getURI());
+    for (String ref : pushOp.getRefs()) {
+      RefReplicatedEvent event =
+          new RefReplicatedEvent(project.get(), ref, targetNode, RefPushResult.FAILED, status);
+      eventDispatcher.get().postEvent(new Branch.NameKey(project, ref), event);
+    }
   }
 }
