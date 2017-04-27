@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe11e9c4_5b39356e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-04-27T22:10:53Z",
+      "side": 1,
+      "message": "Why not the REST API? As we rely on the fact that there\u0027s Gerrit on the other side, we don\u0027t need SSH anymore and we can rely on something more stable and reliable.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 7
+      },
+      "revId": "36912f915cc3c70ab0d6106e6db1b1940f84ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71807f43_d06df833",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-04-27T22:10:53Z",
+      "side": 1,
+      "message": "This pattern is repeated as-is multiple times: can we DRY out?",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 19
+      },
+      "revId": "36912f915cc3c70ab0d6106e6db1b1940f84ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b920f5e_b09cd6a6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-04-27T22:10:53Z",
+      "side": 1,
+      "message": "This relies on the delete project plugin, isn\u0027t it? So the requirement isn\u0027t only Gerrit but Gerrit + delete-project. Are we sure that the delete-project plugin works fine with a Gerrit slave?",
+      "range": {
+        "startLine": 54,
+        "startChar": 18,
+        "endLine": 54,
+        "endChar": 31
+      },
+      "revId": "36912f915cc3c70ab0d6106e6db1b1940f84ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fd23976_600e57fe",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 21
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-04-27T22:10:53Z",
+      "side": 1,
+      "message": "Do we really need to tell that there\u0027s Gerrit on the other side?\nWe could automatically understand this by either getting the welcome message or just ask the remote version.",
+      "range": {
+        "startLine": 159,
+        "startChar": 2,
+        "endLine": 159,
+        "endChar": 12
+      },
+      "revId": "36912f915cc3c70ab0d6106e6db1b1940f84ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
