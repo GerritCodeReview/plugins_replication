@@ -22,6 +22,30 @@
       "revId": "ec7d75a0be9e861abab5f0c9894001e0657bca58",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1c18eb_aa67eee7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2017-04-27T12:55:13Z",
+      "side": 1,
+      "message": "Collisions are recoverable and non-fatal. Also note that next schedule happens here in seconds and not minutes, so marking it as a failure and accompanying it with a new ReplicationScheduleEvent seems to be overkill to me.",
+      "parentUuid": "ac093037_412a60fe",
+      "range": {
+        "startLine": 419,
+        "startChar": 12,
+        "endLine": 419,
+        "endChar": 71
+      },
+      "revId": "ec7d75a0be9e861abab5f0c9894001e0657bca58",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
