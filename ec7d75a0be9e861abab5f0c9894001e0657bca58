@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac093037_412a60fe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2017-04-27T09:36:52Z",
+      "side": 1,
+      "message": "Why we do not want event for rescheduling because of collision?",
+      "range": {
+        "startLine": 419,
+        "startChar": 12,
+        "endLine": 419,
+        "endChar": 71
+      },
+      "revId": "ec7d75a0be9e861abab5f0c9894001e0657bca58",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
