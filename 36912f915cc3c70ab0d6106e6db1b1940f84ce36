@@ -115,6 +115,30 @@
       "revId": "36912f915cc3c70ab0d6106e6db1b1940f84ce36",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48a66900_2b8ea11a",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 21
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-04-27T22:59:42Z",
+      "side": 1,
+      "message": "+1 in following EGit\u0027s footprints :-)",
+      "parentUuid": "dabc6258_9534e73e",
+      "range": {
+        "startLine": 159,
+        "startChar": 2,
+        "endLine": 159,
+        "endChar": 12
+      },
+      "revId": "36912f915cc3c70ab0d6106e6db1b1940f84ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
