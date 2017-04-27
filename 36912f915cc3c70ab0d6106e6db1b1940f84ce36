@@ -91,6 +91,30 @@
       "revId": "36912f915cc3c70ab0d6106e6db1b1940f84ce36",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dabc6258_9534e73e",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 21
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2017-04-27T22:57:45Z",
+      "side": 1,
+      "message": "in EGit we use the get version REST API endpoint to detect if a git server is a Gerrit server or not, see\nhttps://git.eclipse.org/c/egit/egit.git/tree/org.eclipse.egit.core/src/org/eclipse/egit/core/op/ConfigureGerritAfterCloneTask.java#n135\nthis works very well",
+      "parentUuid": "2fd23976_600e57fe",
+      "range": {
+        "startLine": 159,
+        "startChar": 2,
+        "endLine": 159,
+        "endChar": 12
+      },
+      "revId": "36912f915cc3c70ab0d6106e6db1b1940f84ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
