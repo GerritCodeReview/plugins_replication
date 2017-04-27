@@ -25,7 +25,6 @@ import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.io.File;
@@ -35,17 +34,12 @@ import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.RefUpdate;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.transport.RemoteSession;
-import org.eclipse.jgit.transport.SshSessionFactory;
 import org.eclipse.jgit.transport.URIish;
-import org.eclipse.jgit.util.FS;
 import org.eclipse.jgit.util.QuotedString;
-import org.eclipse.jgit.util.io.StreamCopyThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +52,6 @@ public class ReplicationQueue
         HeadUpdatedListener {
   static final String REPLICATION_LOG_NAME = "replication_log";
   static final Logger repLog = LoggerFactory.getLogger(REPLICATION_LOG_NAME);
-  private static final int SSH_REMOTE_TIMEOUT = 120 * 1000;
 
   private final ReplicationStateListener stateLog;
 
@@ -74,24 +67,24 @@ public class ReplicationQueue
     return null;
   }
 
+  private final SshHelper sshHelper;
   private final WorkQueue workQueue;
   private final DynamicItem<EventDispatcher> dispatcher;
   private final ReplicationConfig config;
-  private final Provider<SshSessionFactory> sshSessionFactoryProvider;
   private volatile boolean running;
 
   @Inject
   ReplicationQueue(
       WorkQueue wq,
+      SshHelper sh,
       ReplicationConfig rc,
       DynamicItem<EventDispatcher> dis,
-      ReplicationStateListener sl,
-      Provider<SshSessionFactory> sshSessionFactoryProvider) {
+      ReplicationStateListener sl) {
     workQueue = wq;
     dispatcher = dis;
     config = rc;
     stateLog = sl;
-    this.sshSessionFactoryProvider = sshSessionFactoryProvider;
+    sshHelper = sh;
   }
 
   @Override
@@ -273,9 +266,9 @@ public class ReplicationQueue
     if (head != null) {
       cmd = cmd + " && git symbolic-ref HEAD " + QuotedString.BOURNE.quote(head);
     }
-    OutputStream errStream = newErrorBufferStream();
+    OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
-      executeRemoteSsh(uri, cmd, errStream);
+      sshHelper.executeRemoteSsh(uri, cmd, errStream);
     } catch (IOException e) {
       repLog.error(
           String.format(
@@ -334,9 +327,9 @@ public class ReplicationQueue
   private void deleteRemoteSsh(URIish uri) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd = "rm -rf " + quotedPath;
-    OutputStream errStream = newErrorBufferStream();
+    OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
-      executeRemoteSsh(uri, cmd, errStream);
+      sshHelper.executeRemoteSsh(uri, cmd, errStream);
     } catch (IOException e) {
       repLog.error(
           String.format(
@@ -368,9 +361,9 @@ public class ReplicationQueue
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd =
         "cd " + quotedPath + " && git symbolic-ref HEAD " + QuotedString.BOURNE.quote(newHead);
-    OutputStream errStream = newErrorBufferStream();
+    OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
-      executeRemoteSsh(uri, cmd, errStream);
+      sshHelper.executeRemoteSsh(uri, cmd, errStream);
     } catch (IOException e) {
       repLog.error(
           String.format(
@@ -393,57 +386,6 @@ public class ReplicationQueue
       repLog.error(
           String.format("Failed to update HEAD of repository %s to %s", uri.getPath(), newHead), e);
     }
-  }
-
-  private void executeRemoteSsh(URIish uri, String cmd, OutputStream errStream) throws IOException {
-    RemoteSession ssh = connect(uri);
-    Process proc = ssh.exec(cmd, 0);
-    proc.getOutputStream().close();
-    StreamCopyThread out = new StreamCopyThread(proc.getInputStream(), errStream);
-    StreamCopyThread err = new StreamCopyThread(proc.getErrorStream(), errStream);
-    out.start();
-    err.start();
-    try {
-      proc.waitFor();
-      out.halt();
-      err.halt();
-    } catch (InterruptedException interrupted) {
-      // Don't wait, drop out immediately.
-    }
-    ssh.disconnect();
-  }
-
-  private RemoteSession connect(URIish uri) throws TransportException {
-    return sshSessionFactoryProvider.get().getSession(uri, null, FS.DETECTED, SSH_REMOTE_TIMEOUT);
-  }
-
-  private static OutputStream newErrorBufferStream() {
-    return new OutputStream() {
-      private final StringBuilder out = new StringBuilder();
-      private final StringBuilder line = new StringBuilder();
-
-      @Override
-      public synchronized String toString() {
-        while (out.length() > 0 && out.charAt(out.length() - 1) == '\n') {
-          out.setLength(out.length() - 1);
-        }
-        return out.toString();
-      }
-
-      @Override
-      public synchronized void write(final int b) {
-        if (b == '\r') {
-          return;
-        }
-
-        line.append((char) b);
-
-        if (b == '\n') {
-          out.append(line);
-          line.setLength(0);
-        }
-      }
-    };
   }
 
   private static boolean isSSH(URIish uri) {
