@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d8f94dd8_d31d6f13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 22
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2017-04-28T10:37:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "feeb8cb0_408cbbaa",
+      "range": {
+        "startLine": 37,
+        "startChar": 16,
+        "endLine": 37,
+        "endChar": 22
+      },
+      "revId": "7439b5f9169a120f3cc2071b34d97069d5914e79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a6ebacf_581ce823",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 22
@@ -36,6 +60,30 @@
       "writtenOn": "2017-04-28T10:35:45Z",
       "side": 1,
       "message": "nit:trailing space",
+      "range": {
+        "startLine": 164,
+        "startChar": 50,
+        "endLine": 164,
+        "endChar": 51
+      },
+      "revId": "7439b5f9169a120f3cc2071b34d97069d5914e79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45aac201_ad29dbfb",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2017-04-28T10:37:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a6ebacf_581ce823",
       "range": {
         "startLine": 164,
         "startChar": 50,
