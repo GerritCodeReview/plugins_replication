@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "1c64009b_2b9480c9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2017-04-28T11:43:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f453d1ca_60b7ef9e",
+      "range": {
+        "startLine": 64,
+        "startChar": 54,
+        "endLine": 64,
+        "endChar": 56
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f94369e_0bc778cb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2017-04-28T11:43:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6ea5ede_15d37236",
+      "range": {
+        "startLine": 64,
+        "startChar": 86,
+        "endLine": 64,
+        "endChar": 96
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9653e481_d3a6dcb4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 23
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4d177290_6c4a55d8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2017-04-28T11:43:31Z",
+      "side": 1,
+      "message": "moved it back where it was",
+      "parentUuid": "9653e481_d3a6dcb4",
+      "range": {
+        "startLine": 178,
+        "startChar": 4,
+        "endLine": 180,
+        "endChar": 5
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f7628713_a8ee66b1",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
         "patchSetId": 23
@@ -82,6 +154,30 @@
       "writtenOn": "2017-04-28T10:48:52Z",
       "side": 1,
       "message": "as discussed, this can be removed which will make this change smaller",
+      "range": {
+        "startLine": 91,
+        "startChar": 24,
+        "endLine": 91,
+        "endChar": 42
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49885643_decc9c5b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2017-04-28T11:43:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7628713_a8ee66b1",
       "range": {
         "startLine": 91,
         "startChar": 24,
