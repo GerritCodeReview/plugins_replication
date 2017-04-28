@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f453d1ca_60b7ef9e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-04-28T10:46:01Z",
+      "side": 1,
+      "message": "add semicolon after",
+      "range": {
+        "startLine": 64,
+        "startChar": 54,
+        "endLine": 64,
+        "endChar": 56
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a6ea5ede_15d37236",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-04-28T10:46:01Z",
+      "side": 1,
+      "message": "operation",
+      "range": {
+        "startLine": 64,
+        "startChar": 86,
+        "endLine": 64,
+        "endChar": 96
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
