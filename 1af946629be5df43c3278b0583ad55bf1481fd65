@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab4f528c_53b203b5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2017-04-28T09:11:18Z",
+      "side": 1,
+      "message": "I think the RemoteRefUpdated should be REJECTED_OTHER_REASON in both cases. NON_EXISTING is from the ref perspective which make no sense here because the entire project is missing.",
+      "range": {
+        "startLine": 424,
+        "startChar": 13,
+        "endLine": 427,
+        "endChar": 44
+      },
+      "revId": "1af946629be5df43c3278b0583ad55bf1481fd65",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
