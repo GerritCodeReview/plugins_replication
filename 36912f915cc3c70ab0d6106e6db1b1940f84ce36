@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "edc326d9_68043208",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-04-28T06:40:51Z",
+      "side": 1,
+      "message": "Can you define \"we\" and \"us\"?\n\nEveryone knows that JSch isn\u0027t that stable, scalable and reliable; that\u0027s why in Gerrit the suggestion of using replication on Git/SSH has been removed.\n\nIt is better for Gerrit\u0027s users to have a reliable Git/HTTP replication, including when there is Gerrit on the other side :-)",
+      "parentUuid": "0244579a_195b0275",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 7
+      },
+      "revId": "36912f915cc3c70ab0d6106e6db1b1940f84ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "71807f43_d06df833",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
         "patchSetId": 21
@@ -107,6 +131,30 @@
       "side": 1,
       "message": "That true, to provide same feature set as file/ssh protocol we require delete project plugin to be installed on the slave. Will update the commit message and documentation",
       "parentUuid": "3b920f5e_b09cd6a6",
+      "range": {
+        "startLine": 54,
+        "startChar": 18,
+        "endLine": 54,
+        "endChar": 31
+      },
+      "revId": "36912f915cc3c70ab0d6106e6db1b1940f84ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff4f8f9d_c59b3ecc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-04-28T06:40:51Z",
+      "side": 1,
+      "message": "Can automatically discover this and avoid to go this path? The error log would just become too croweded otherwise.",
+      "parentUuid": "330016e6_82a279e5",
       "range": {
         "startLine": 54,
         "startChar": 18,
@@ -202,6 +250,30 @@
       "side": 1,
       "message": "I\u0027m not sure about the autodiscovery. It adds another \"dimension\" that makes things bit complicated. Replication plugin is not a \"user facing\" feature. It is meant for Gerrit admins that should know what type of service do they run on the other side (is it gerrit or not). Maybe they would prefer to use one option over another.\n\nThis is nice idea but IMO out of the scope of this change.",
       "parentUuid": "2fd23976_600e57fe",
+      "range": {
+        "startLine": 159,
+        "startChar": 2,
+        "endLine": 159,
+        "endChar": 12
+      },
+      "revId": "36912f915cc3c70ab0d6106e6db1b1940f84ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47ecdb4d_86e31daf",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 21
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-04-28T06:40:51Z",
+      "side": 1,
+      "message": "Could it well be a follow-up change, agreed.",
+      "parentUuid": "6db91646_6d1ccb7e",
       "range": {
         "startLine": 159,
         "startChar": 2,
