@@ -201,7 +201,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   boolean setToRetry() {
     retrying = true;
     retryCount++;
-    return retryCount <= maxRetries;
+    return maxRetries == 0 || retryCount <= maxRetries;
   }
 
   void canceledByReplication() {
