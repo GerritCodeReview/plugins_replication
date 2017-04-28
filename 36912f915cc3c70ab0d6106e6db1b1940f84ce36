@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "70599db1_7e49de66",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2017-04-28T09:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71807f43_d06df833",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 19
+      },
+      "revId": "36912f915cc3c70ab0d6106e6db1b1940f84ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3b920f5e_b09cd6a6",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
         "patchSetId": 21
@@ -203,6 +227,30 @@
       "side": 1,
       "message": "Can automatically discover this and avoid to go this path? The error log would just become too croweded otherwise.",
       "parentUuid": "330016e6_82a279e5",
+      "range": {
+        "startLine": 54,
+        "startChar": 18,
+        "endLine": 54,
+        "endChar": 31
+      },
+      "revId": "36912f915cc3c70ab0d6106e6db1b1940f84ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b298f99_374163a7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2017-04-28T09:45:12Z",
+      "side": 1,
+      "message": "It is not easy to get this information right now. Probably it would require additional refactoring. For now will relay on the return code, but later on we should improve how we detect this corner case",
+      "parentUuid": "ff4f8f9d_c59b3ecc",
       "range": {
         "startLine": 54,
         "startChar": 18,
