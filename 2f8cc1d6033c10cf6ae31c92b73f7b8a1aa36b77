@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "038388c4_542e2385",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-04-28T09:06:58Z",
+      "side": 1,
+      "message": "nit: put the constructor parameter and the initialization in the same order as declared in the class.",
+      "revId": "2f8cc1d6033c10cf6ae31c92b73f7b8a1aa36b77",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
