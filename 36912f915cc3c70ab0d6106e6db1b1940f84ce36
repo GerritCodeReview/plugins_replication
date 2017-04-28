@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "afc49e6b_4f80643c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2017-04-28T07:47:25Z",
+      "side": 1,
+      "message": "That is true as well: we have the same problem even now. That\u0027s why I was hoping this change would have improved the situation :-)\n\nBut you are right, it is not going to be worse than what is today :-(",
+      "parentUuid": "2d4d718c_4c2134ee",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 7
+      },
+      "revId": "36912f915cc3c70ab0d6106e6db1b1940f84ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "71807f43_d06df833",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
         "patchSetId": 21
