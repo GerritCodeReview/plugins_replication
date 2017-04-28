@@ -2,6 +2,63 @@
   "comments": [
     {
       "key": {
+        "uuid": "b7dce5a8_51c6c9ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-04-28T11:56:45Z",
+      "side": 1,
+      "message": "Use consistently \"key pair\" or \"key-pair\"",
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49f25d9a_0f169c9d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-04-28T11:56:45Z",
+      "side": 1,
+      "message": "Also mentiond here that the second Gerrit instance has to listen on the 29419 port for incoming SSH connections.",
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6231190c_cb292bdf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-04-28T11:56:45Z",
+      "side": 1,
+      "message": "Use Project.NameKey instead of just String? It makes it harder to pass String parameters in a wrong order.\n\nAlso in other places.",
+      "range": {
+        "startLine": 39,
+        "startChar": 65,
+        "endLine": 39,
+        "endChar": 83
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f453d1ca_60b7ef9e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
         "patchSetId": 23
@@ -96,6 +153,190 @@
     },
     {
       "key": {
+        "uuid": "201301e9_34aa6fe1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-04-28T11:56:45Z",
+      "side": 1,
+      "message": "The String.replace replaces *all* occurrences. Yes, it is very unlikely to have one more occurrence of gerrit+ssh:// in the string but our code should be more precise and only remove the gerrit+ prefix if it exists.",
+      "range": {
+        "startLine": 92,
+        "startChar": 39,
+        "endLine": 92,
+        "endChar": 46
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6132d6a8_c6b32655",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-04-28T11:56:45Z",
+      "side": 1,
+      "message": "why is this needed? Note that String.replace doesn\u0027t expect a regex here but just a CharSequence.",
+      "range": {
+        "startLine": 92,
+        "startChar": 54,
+        "endLine": 92,
+        "endChar": 57
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b379a9a_a3f7dcaf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-04-28T11:56:45Z",
+      "side": 1,
+      "message": "Use SshAddressModule.DEFAULT_PORT ?",
+      "range": {
+        "startLine": 100,
+        "startChar": 30,
+        "endLine": 100,
+        "endChar": 35
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a666466e_a0641184",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-04-28T11:56:45Z",
+      "side": 1,
+      "message": "Give a name to this constant?",
+      "range": {
+        "startLine": 113,
+        "startChar": 11,
+        "endLine": 113,
+        "endChar": 13
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddc5e934_5bc46966",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-04-28T11:56:45Z",
+      "side": 1,
+      "message": "unnecessary string concatenation",
+      "range": {
+        "startLine": 119,
+        "startChar": 48,
+        "endLine": 119,
+        "endChar": 53
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "48712f7a_ad631f4b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-04-28T11:56:45Z",
+      "side": 1,
+      "message": "optional: the logging api already supports string formatting using {} as parameter placeholder. Instead of embedding String.format use:\n\n  log.error(\"Error {} remote repository at {}: ...\", mst, uri, e, ...)",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 11
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "167b399b_c4bb2413",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-04-28T11:56:45Z",
+      "side": 1,
+      "message": "inline?",
+      "range": {
+        "startLine": 419,
+        "startChar": 12,
+        "endLine": 419,
+        "endChar": 22
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cbc469d2_8b47941c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-04-28T11:56:45Z",
+      "side": 1,
+      "message": "I see that other parameter names here are quite short and cryptic but I don\u0027t see how \"ag\" matches GerritSshApi? \"ga\" would at least follow the order of letters from GerritSshApi and gerritAdmin.",
+      "range": {
+        "startLine": 81,
+        "startChar": 19,
+        "endLine": 81,
+        "endChar": 21
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9653e481_d3a6dcb4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 23
@@ -183,6 +424,29 @@
         "startChar": 24,
         "endLine": 91,
         "endChar": 42
+      },
+      "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4256adf4_84a879eb",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 23
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-04-28T11:56:45Z",
+      "side": 1,
+      "message": "slave or the \"other\" Gerrit?\n\nAFAIK, a slave Gerrit will not accept any receive-pack command and cannot be used as a replication target.",
+      "range": {
+        "startLine": 166,
+        "startChar": 33,
+        "endLine": 166,
+        "endChar": 38
       },
       "revId": "9959074a892c884a86bd2a0923f102566c936bd0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
