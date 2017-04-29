@@ -21,29 +21,22 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Sets;
-import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
 import com.google.gerrit.server.git.ProjectRunnable;
-import com.google.gerrit.server.git.SearchingChangeCacheImpl;
-import com.google.gerrit.server.git.TagCache;
 import com.google.gerrit.server.git.VisibleRefFilter;
 import com.google.gerrit.server.git.WorkQueue.CanceledWhileRunning;
-import com.google.gerrit.server.notedb.ChangeNotes;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.permissions.ProjectPermission;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.ProjectControl;
 import com.google.gerrit.server.util.IdGenerator;
-import com.google.gwtorm.server.OrmException;
-import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
@@ -95,14 +88,11 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
   private final GitRepositoryManager gitManager;
   private final PermissionBackend permissionBackend;
-  private final SchemaFactory<ReviewDb> schema;
   private final Destination pool;
   private final RemoteConfig config;
   private final CredentialsProvider credentialsProvider;
-  private final TagCache tagCache;
   private final PerThreadRequestScope.Scoper threadScoper;
-  private final ChangeNotes.Factory changeNotesFactory;
-  private final SearchingChangeCacheImpl changeCache;
+  private final VisibleRefFilter.Factory refFilterFactory;
   private final ReplicationQueue replicationQueue;
 
   private final Project.NameKey projectName;
@@ -126,14 +116,11 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   PushOne(
       GitRepositoryManager grm,
       PermissionBackend permissionBackend,
-      SchemaFactory<ReviewDb> s,
       Destination p,
       RemoteConfig c,
+      VisibleRefFilter.Factory rff,
       CredentialsFactory cpFactory,
-      TagCache tc,
       PerThreadRequestScope.Scoper ts,
-      ChangeNotes.Factory nf,
-      @Nullable SearchingChangeCacheImpl cc,
       ReplicationQueue rq,
       IdGenerator ig,
       ReplicationStateListener sl,
@@ -142,14 +129,11 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       @Assisted URIish u) {
     gitManager = grm;
     this.permissionBackend = permissionBackend;
-    schema = s;
     pool = p;
     config = c;
+    refFilterFactory = rff;
     credentialsProvider = cpFactory.create(c.getName());
-    tagCache = tc;
     threadScoper = ts;
-    changeNotesFactory = nf;
-    changeCache = cc;
     replicationQueue = rq;
     projectName = d;
     uri = u;
@@ -493,16 +477,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
         }
         local = n;
       }
-
-      try (ReviewDb db = schema.open()) {
-        local =
-            new VisibleRefFilter(tagCache, changeNotesFactory, changeCache, git, pc, db, true)
-                .filter(local, true);
-      } catch (OrmException e) {
-        stateLog.error(
-            "Cannot read database to replicate to " + projectName, e, getStatesAsArray());
-        return Collections.emptyList();
-      }
+      local = refFilterFactory.create(pc.getProjectState(), git).filter(local, true);
     }
 
     return pushAllRefs ? doPushAll(tn, local) : doPushDelta(local);
