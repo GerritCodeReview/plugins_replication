@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6ae6c7c_9c86482d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-05-18T05:39:46Z",
+      "side": 1,
+      "message": "Why do we use head.getTarget().getName() here, but only head.getName() at line 419?",
+      "range": {
+        "startLine": 429,
+        "startChar": 40,
+        "endLine": 429,
+        "endChar": 66
+      },
+      "revId": "39931febcc44cb7a32e66c4da9429ca7b6af1e14",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
