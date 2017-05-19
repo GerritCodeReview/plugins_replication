@@ -407,7 +407,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   private void logCanceledWhileRunningException(TransportException e) {
-    repLog.info("Cannot replicate to " + uri + "." + " It was canceled while running", e);
+    repLog.info("Cannot replicate to " + uri + ". It was canceled while running", e);
   }
 
   private void createRepository() {
