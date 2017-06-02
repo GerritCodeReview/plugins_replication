@@ -108,13 +108,13 @@ replication.maxRetries
 :	Maximum number of times to retry a push operation that previously
 	failed.
 
-	When a push operation reaches its maximum number of retries
+	When a push operation reaches its maximum number of retries,
 	the replication event is discarded from the queue and the remote
-	destinations could be out of sync.
+	destinations may remain out of sync.
 
 	Can be overridden at remote-level by setting replicationMaxRetries.
 
-	By default, push are retried indefinitely.
+	By default, pushes are retried indefinitely.
 
 remote.NAME.url
 :	Address of the remote server to push to.  Multiple URLs may be
