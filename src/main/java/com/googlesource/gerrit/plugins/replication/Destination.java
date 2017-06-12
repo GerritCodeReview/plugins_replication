@@ -66,6 +66,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FilenameUtils;
 import org.eclipse.jgit.lib.Constants;
@@ -87,7 +88,7 @@ public class Destination {
   private final ProjectControl.Factory projectControlFactory;
   private final GitRepositoryManager gitManager;
   private final PermissionBackend permissionBackend;
-  private volatile WorkQueue.Executor pool;
+  private volatile ScheduledThreadPoolExecutor pool;
   private final PerThreadRequestScope.Scoper threadScoper;
   private final DestinationConfiguration config;
   private final DynamicItem<EventDispatcher> eventDispatcher;
