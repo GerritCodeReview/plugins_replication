@@ -217,7 +217,6 @@ public class Destination {
         repLog.warn(String.format("Cancelling replication event %s", r));
       }
       cnt = pool.shutdownNow().size();
-      pool.unregisterWorkQueue();
       pool = null;
     }
     return cnt;
