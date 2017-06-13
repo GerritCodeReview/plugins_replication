@@ -22,6 +22,30 @@
       "revId": "0a713a8b2c8ed2657535803ef044af080493147a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80f4b52e_bda0b266",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-06-13T11:25:01Z",
+      "side": 1,
+      "message": "This plugin does not have any tests that actually test the replication functionality.",
+      "parentUuid": "ecfacbde_dd2a1e12",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 9
+      },
+      "revId": "0a713a8b2c8ed2657535803ef044af080493147a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
