@@ -70,6 +70,30 @@
       "revId": "0a713a8b2c8ed2657535803ef044af080493147a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3b08495_c7779320",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-06-13T11:31:33Z",
+      "side": 1,
+      "message": "Seeing Hugo as the change owner I assumed this was the high-availability plugin... therefore I commented on test coverage.\n\nI withdraw my previous comment 😊",
+      "parentUuid": "09932c0d_45fcaa45",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 9
+      },
+      "revId": "0a713a8b2c8ed2657535803ef044af080493147a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
