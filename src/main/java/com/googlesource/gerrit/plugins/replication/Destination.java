@@ -239,7 +239,7 @@ public class Destination {
   }
 
   private boolean shouldReplicate(
-      final Project.NameKey project, final String ref, ReplicationState... states) {
+      final Project.NameKey project, String ref, ReplicationState... states) {
     try {
       return threadScoper
           .scope(
@@ -262,7 +262,7 @@ public class Destination {
     return false;
   }
 
-  private boolean shouldReplicate(final Project.NameKey project, ReplicationState... states) {
+  private boolean shouldReplicate(Project.NameKey project, ReplicationState... states) {
     try {
       return threadScoper
           .scope(

@@ -68,7 +68,7 @@ class SshHelper {
       }
 
       @Override
-      public synchronized void write(final int b) {
+      public synchronized void write(int b) {
         if (b == '\r') {
           return;
         }

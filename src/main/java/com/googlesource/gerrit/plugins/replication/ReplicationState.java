@@ -150,11 +150,11 @@ public class ReplicationState {
     allPushTasksFinished.await();
   }
 
-  public void writeStdOut(final String message) {
+  public void writeStdOut(String message) {
     pushResultProcessing.writeStdOut(message);
   }
 
-  public void writeStdErr(final String message) {
+  public void writeStdErr(String message) {
     pushResultProcessing.writeStdErr(message);
   }
 

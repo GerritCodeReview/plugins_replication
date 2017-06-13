@@ -97,7 +97,7 @@ final class StartCommand extends SshCommand {
     }
   }
 
-  public void writeStdOutSync(final String message) {
+  public void writeStdOutSync(String message) {
     if (wait) {
       synchronized (stdout) {
         stdout.println(message);
@@ -106,7 +106,7 @@ final class StartCommand extends SshCommand {
     }
   }
 
-  public void writeStdErrSync(final String message) {
+  public void writeStdErrSync(String message) {
     if (wait) {
       synchronized (stderr) {
         stderr.println(message);

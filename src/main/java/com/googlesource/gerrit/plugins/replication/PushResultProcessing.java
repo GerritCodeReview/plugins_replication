@@ -43,7 +43,7 @@ public abstract class PushResultProcessing {
    *
    * @param message message text.
    */
-  void writeStdOut(final String message) {
+  void writeStdOut(String message) {
     // Default doing nothing
   }
 
@@ -52,7 +52,7 @@ public abstract class PushResultProcessing {
    *
    * @param message message text.
    */
-  void writeStdErr(final String message) {
+  void writeStdErr(String message) {
     // Default doing nothing
   }
 
@@ -141,7 +141,7 @@ public abstract class PushResultProcessing {
     }
 
     @Override
-    void writeStdOut(final String message) {
+    void writeStdOut(String message) {
       StartCommand command = sshCommand.get();
       if (command != null) {
         command.writeStdOutSync(message);
@@ -149,7 +149,7 @@ public abstract class PushResultProcessing {
     }
 
     @Override
-    void writeStdErr(final String message) {
+    void writeStdErr(String message) {
       StartCommand command = sshCommand.get();
       if (command != null) {
         command.writeStdErrSync(message);
