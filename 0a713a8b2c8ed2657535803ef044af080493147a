@@ -46,6 +46,30 @@
       "revId": "0a713a8b2c8ed2657535803ef044af080493147a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09932c0d_45fcaa45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-06-13T11:25:42Z",
+      "side": 1,
+      "message": "Also, note this is a backport of a fix that was submitted already on one of the newer branches.",
+      "parentUuid": "80f4b52e_bda0b266",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 9
+      },
+      "revId": "0a713a8b2c8ed2657535803ef044af080493147a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
