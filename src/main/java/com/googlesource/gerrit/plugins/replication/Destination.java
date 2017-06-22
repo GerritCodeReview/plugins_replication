@@ -66,6 +66,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FilenameUtils;
@@ -88,7 +89,7 @@ public class Destination {
   private final ProjectControl.Factory projectControlFactory;
   private final GitRepositoryManager gitManager;
   private final PermissionBackend permissionBackend;
-  private volatile ScheduledThreadPoolExecutor pool;
+  private volatile ScheduledExecutorService pool;
   private final PerThreadRequestScope.Scoper threadScoper;
   private final DestinationConfiguration config;
   private final DynamicItem<EventDispatcher> eventDispatcher;
@@ -214,9 +215,8 @@ public class Destination {
   public int shutdown() {
     int cnt = 0;
     if (pool != null) {
-      for (Runnable r : pool.getQueue()) {
-        repLog.warn(String.format("Cancelling replication event %s", r));
-      }
+      repLog.warn(String.format("Cancelling replication events"));
+
       cnt = pool.shutdownNow().size();
       pool = null;
     }
