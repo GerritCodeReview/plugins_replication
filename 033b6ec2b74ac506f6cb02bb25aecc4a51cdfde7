@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "82863e61_e950b6aa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-06-23T23:38:15Z",
+      "side": 1,
+      "message": "Because this, and the followup, are both cherry-picked from a different branch.  Both commits have different authors.\n\nIt\u0027s cleaner to keep them separate rather than squash them.",
+      "parentUuid": "5ae3990e_c9674107",
+      "revId": "033b6ec2b74ac506f6cb02bb25aecc4a51cdfde7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bfefc974_5fcb2fb3",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
