@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5ae3990e_c9674107",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-06-23T22:10:25Z",
+      "side": 1,
+      "message": "As Hugo pointed out in his follow-up change, this code will return false when maxRetries is zero. Any reason why this is not fixed in this change but in Hugo\u0027s follow-up change?",
+      "revId": "033b6ec2b74ac506f6cb02bb25aecc4a51cdfde7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bfefc974_5fcb2fb3",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
