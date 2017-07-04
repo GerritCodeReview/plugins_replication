@@ -295,13 +295,14 @@ public class Destination {
       if (e == null) {
         e = opFactory.create(project, uri);
         addRef(e, ref);
+        e.addState(ref, state);
         pool.schedule(e, config.getDelay(), TimeUnit.SECONDS);
         pending.put(uri, e);
       } else if (!e.getRefs().contains(ref)) {
         addRef(e, ref);
+        e.addState(ref, state);
       }
       state.increasePushTaskCount(project.get(), ref);
-      e.addState(ref, state);
       repLog.info("scheduled {}:{} => {} to run after {}s", project, ref, e, config.getDelay());
     }
   }
