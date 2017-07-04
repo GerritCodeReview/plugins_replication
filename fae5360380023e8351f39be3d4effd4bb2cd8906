@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf7b9519_a5003268",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-07-04T15:07:56Z",
+      "side": 0,
+      "message": "Hmm... obviously this was also executed in the \"else if\" case.",
+      "revId": "fae5360380023e8351f39be3d4effd4bb2cd8906",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
