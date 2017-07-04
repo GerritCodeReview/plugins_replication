@@ -21,6 +21,7 @@ import org.eclipse.jgit.transport.RemoteConfig;
 
 class DestinationConfiguration {
   private final int delay;
+  private final int rescheduleDelay;
   private final int retryDelay;
   private final int lockErrorMaxRetries;
   private final ImmutableList<String> adminUrls;
@@ -41,6 +42,7 @@ class DestinationConfiguration {
     String name = remoteConfig.getName();
     urls = ImmutableList.copyOf(cfg.getStringList("remote", name, "url"));
     delay = Math.max(0, getInt(remoteConfig, cfg, "replicationdelay", 15));
+    rescheduleDelay = Math.max(3, getInt(remoteConfig, cfg, "replicationrescheduledelay", 15));
     projects = ImmutableList.copyOf(cfg.getStringList("remote", name, "projects"));
     adminUrls = ImmutableList.copyOf(cfg.getStringList("remote", name, "adminUrl"));
     retryDelay = Math.max(0, getInt(remoteConfig, cfg, "replicationretry", 1));
@@ -61,6 +63,10 @@ class DestinationConfiguration {
 
   public int getDelay() {
     return delay;
+  }
+
+  public int getRescheduleDelay() {
+    return rescheduleDelay;
   }
 
   public int getRetryDelay() {
