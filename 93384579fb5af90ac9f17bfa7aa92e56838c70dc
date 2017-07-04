@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "432f992e_0ec18c1a",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-07-04T17:04:08Z",
+      "side": 1,
+      "message": "use tabs for indentation",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 240,
+        "endChar": 21
+      },
+      "revId": "93384579fb5af90ac9f17bfa7aa92e56838c70dc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
