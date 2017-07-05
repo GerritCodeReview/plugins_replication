@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eebab08b_52606493",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2017-07-05T11:25:42Z",
+      "side": 1,
+      "message": "According to DestinationConfiguration line 45, the default is 15.",
+      "range": {
+        "startLine": 228,
+        "startChar": 13,
+        "endLine": 228,
+        "endChar": 14
+      },
+      "revId": "cf0fb67f6387da8c1d7f02d191510f44b55298b5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
