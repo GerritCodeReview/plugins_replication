@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "c54cce90_1ce2eb24",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-07-05T07:39:16Z",
+      "side": 1,
+      "message": "Actually I was thinking about naming this \"rescheduleDelay\". From the name format and length it\nwould match better the \"replicationDelay\" (line 222) and \"replicationRetry\" line (242).\n\nWhat do you think?",
+      "range": {
+        "startLine": 231,
+        "startChar": 12,
+        "endLine": 231,
+        "endChar": 38
+      },
+      "revId": "93384579fb5af90ac9f17bfa7aa92e56838c70dc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "432f992e_0ec18c1a",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 2
