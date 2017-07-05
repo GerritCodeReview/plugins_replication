@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1e1393b2_a3160ca4",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-07-05T07:48:17Z",
+      "side": 1,
+      "message": "Yes, that sounds better.",
+      "parentUuid": "c54cce90_1ce2eb24",
+      "range": {
+        "startLine": 231,
+        "startChar": 12,
+        "endLine": 231,
+        "endChar": 38
+      },
+      "revId": "93384579fb5af90ac9f17bfa7aa92e56838c70dc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "432f992e_0ec18c1a",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 2
