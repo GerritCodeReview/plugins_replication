@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71fe4d41_74274027",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2017-07-10T06:17:24Z",
+      "side": 1,
+      "message": "it used to be replicationdelay does that make sense to either write init step that assigns replicationDelay to rescheduleDelay provided that first one is bigger than 0 or maybe follow rescheduleDelay if it is set and again bigger than 0? In current state it changes existing behaviour and not everyone has 0 there :)",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 83
+      },
+      "revId": "7d6e8b9a1cd2a01af5fff0ce30da0021997febf5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
