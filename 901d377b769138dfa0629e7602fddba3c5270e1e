@@ -72,6 +72,54 @@
     },
     {
       "key": {
+        "uuid": "af9567fa_972b3e12",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Init.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-07-12T09:11:51Z",
+      "side": 1,
+      "message": "Agreed, will do as you proposed.",
+      "parentUuid": "73b2b4b3_525396f7",
+      "range": {
+        "startLine": 58,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 14
+      },
+      "revId": "901d377b769138dfa0629e7602fddba3c5270e1e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d4677dd9_cd838160",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Init.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2017-07-12T09:11:51Z",
+      "side": 1,
+      "message": "\u003e it probably makes sense to have condition like\n\u003e   replicationDelay \u003e 0\n\u003e in other case 3 will be assumed, right?\n\nIsn\u0027t this condition tested in the line 58?\n\n\u003e \n\u003e btw: I would do that only in case when rescheduleDelay is not already set - it really doesn\u0027t make sense to keep changing it when one already set it...\n\nLook at the lines 52-53.",
+      "parentUuid": "e06c04ec_1b5f40c3",
+      "range": {
+        "startLine": 58,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 14
+      },
+      "revId": "901d377b769138dfa0629e7602fddba3c5270e1e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd153a29_851205e3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Init.java",
         "patchSetId": 6
