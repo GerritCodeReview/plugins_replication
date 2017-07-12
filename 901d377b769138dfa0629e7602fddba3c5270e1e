@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "e06c04ec_1b5f40c3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Init.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2017-07-12T08:52:13Z",
+      "side": 1,
+      "message": "it probably makes sense to have condition like\n  replicationDelay \u003e 0\nin other case 3 will be assumed, right?\n\nbtw: I would do that only in case when rescheduleDelay is not already set - it really doesn\u0027t make sense to keep changing it when one already set it...",
+      "parentUuid": "73b2b4b3_525396f7",
+      "range": {
+        "startLine": 58,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 14
+      },
+      "revId": "901d377b769138dfa0629e7602fddba3c5270e1e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd153a29_851205e3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Init.java",
         "patchSetId": 6
