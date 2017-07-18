@@ -228,6 +228,17 @@ remote.NAME.replicationDelay
 
 	By default, 15 seconds.
 
+remote.NAME.rescheduleDelay
+:	Delay when rescheduling a push operation due to an in-flight push
+	running for the same project.
+
+	Cannot be set to a value lower than 3 seconds to avoid a tight loop
+	of schedule/run which could cause 1K+ retries per second.
+
+	A configured value lower than 3 seconds will be rounded to 3 seconds.
+
+	By default, 3 seconds.
+
 remote.NAME.replicationRetry
 :	Time to wait before scheduling a remote push operation previously
 	failed due to an offline remote server.
