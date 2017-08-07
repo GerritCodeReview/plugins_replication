@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.server.events.RefEvent;
+import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gwtorm.server.OrmException;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 import java.lang.ref.WeakReference;
@@ -187,7 +188,7 @@ public abstract class PushResultProcessing {
     private void postEvent(RefEvent event) {
       try {
         dispatcher.postEvent(event);
-      } catch (OrmException e) {
+      } catch (OrmException | PermissionBackendException e) {
         log.error("Cannot post event", e);
       }
     }
