@@ -48,6 +48,7 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.permissions.ProjectPermission;
+import com.google.gerrit.server.permissions.RefPermission;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.PerRequestProjectControlCache;
 import com.google.gerrit.server.project.ProjectControl;
@@ -126,7 +127,7 @@ public class Destination {
     this.permissionBackend = permissionBackend;
     this.stateLog = stateLog;
 
-    final CurrentUser remoteUser;
+    CurrentUser remoteUser;
     if (!cfg.getAuthGroupNames().isEmpty()) {
       ImmutableSet.Builder<AccountGroup.UUID> builder = ImmutableSet.builder();
       for (String name : cfg.getAuthGroupNames()) {
@@ -246,9 +247,22 @@ public class Destination {
                 @Override
                 public Boolean call() throws NoSuchProjectException, PermissionBackendException {
                   ProjectControl projectControl = controlFor(project);
-                  return shouldReplicate(projectControl)
-                      && (PushOne.ALL_REFS.equals(ref)
-                          || projectControl.controlForRef(ref).isVisible());
+                  if (!shouldReplicate(projectControl)) {
+                    return false;
+                  }
+                  if (PushOne.ALL_REFS.equals(ref)) {
+                    return true;
+                  }
+                  try {
+                    permissionBackend
+                        .user(projectControl.getUser())
+                        .project(project)
+                        .ref(ref)
+                        .check(RefPermission.READ);
+                  } catch (AuthException e) {
+                    return false;
+                  }
+                  return true;
                 }
               })
           .call();
@@ -616,7 +630,11 @@ public class Destination {
     for (String ref : refs) {
       ReplicationScheduledEvent event =
           new ReplicationScheduledEvent(project.get(), ref, targetNode);
-      eventDispatcher.get().postEvent(new Branch.NameKey(project, ref), event);
+      try {
+        eventDispatcher.get().postEvent(new Branch.NameKey(project, ref), event);
+      } catch (PermissionBackendException e) {
+        repLog.error("error posting event", e);
+      }
     }
   }
 
@@ -626,7 +644,11 @@ public class Destination {
     for (String ref : pushOp.getRefs()) {
       RefReplicatedEvent event =
           new RefReplicatedEvent(project.get(), ref, targetNode, RefPushResult.FAILED, status);
-      eventDispatcher.get().postEvent(new Branch.NameKey(project, ref), event);
+      try {
+        eventDispatcher.get().postEvent(new Branch.NameKey(project, ref), event);
+      } catch (PermissionBackendException e) {
+        repLog.error("error posting event", e);
+      }
     }
   }
 }
