@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab67836a_8412225b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1010008
+      },
+      "writtenOn": "2017-08-16T12:38:08Z",
+      "side": 1,
+      "message": "I think this should be check, because shouldReplicate is called by schedule, which actually schedules replication if it is allowed.\n\nDigging a little deeper, it looks like shouldReplicate is also called by wouldPushProject, which is used by ReplicationQueue to determine whether to call schedule. This feels a bit more like a \"test\" use case. But that would require much more work to split up the shouldReplicate/wouldPushProject paths, so I think we should use test to be safe.\n\n(This suggests another potential API change: test(Permission, boolean strict))",
+      "range": {
+        "startLine": 256,
+        "startChar": 31,
+        "endLine": 256,
+        "endChar": 35
+      },
+      "revId": "084c09c1f82f2879c73bbfd1746a5659ac481a3c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
