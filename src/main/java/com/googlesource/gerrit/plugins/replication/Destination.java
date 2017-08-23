@@ -340,9 +340,9 @@ public class Destination {
         pending.put(uri, e);
       } else if (!e.getRefs().contains(ref)) {
         addRef(e, ref);
+        e.addState(ref, state);
       }
       state.increasePushTaskCount(project.get(), ref);
-      e.addState(ref, state);
       repLog.info("scheduled {}:{} => {} to run after {}s", project, ref, e, config.getDelay());
     }
   }
@@ -429,7 +429,7 @@ public class Destination {
         pending.put(uri, pushOp);
         switch (reason) {
           case COLLISION:
-            pool.schedule(pushOp, config.getDelay(), TimeUnit.SECONDS);
+            pool.schedule(pushOp, config.getRescheduleDelay(), TimeUnit.SECONDS);
             break;
           case TRANSPORT_ERROR:
           case REPOSITORY_MISSING:

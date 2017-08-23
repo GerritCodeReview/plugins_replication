@@ -108,13 +108,13 @@ replication.maxRetries
 :	Maximum number of times to retry a push operation that previously
 	failed.
 
-	When a push operation reaches its maximum number of retries
+	When a push operation reaches its maximum number of retries,
 	the replication event is discarded from the queue and the remote
-	destinations could be out of sync.
+	destinations may remain out of sync.
 
 	Can be overridden at remote-level by setting replicationMaxRetries.
 
-	By default, push are retried indefinitely.
+	By default, pushes are retried indefinitely.
 
 remote.NAME.url
 :	Address of the remote server to push to.  Multiple URLs may be
@@ -227,6 +227,17 @@ remote.NAME.replicationDelay
 	This is a Gerrit specific extension to the Git remote block.
 
 	By default, 15 seconds.
+
+remote.NAME.rescheduleDelay
+:	Delay when rescheduling a push operation due to an in-flight push
+	running for the same project.
+
+	Cannot be set to a value lower than 3 seconds to avoid a tight loop
+	of schedule/run which could cause 1K+ retries per second.
+
+	A configured value lower than 3 seconds will be rounded to 3 seconds.
+
+	By default, 3 seconds.
 
 remote.NAME.replicationRetry
 :	Time to wait before scheduling a remote push operation previously
