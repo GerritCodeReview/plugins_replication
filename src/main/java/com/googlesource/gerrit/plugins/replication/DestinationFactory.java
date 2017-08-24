@@ -14,11 +14,11 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.account.GroupIncludeCache;
+import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.inject.Inject;
