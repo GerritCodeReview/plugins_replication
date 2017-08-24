@@ -22,8 +22,8 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 
-import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.reviewdb.server.ReviewDb;
+import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gwtorm.client.KeyUtil;
 import com.google.gwtorm.server.OrmException;
