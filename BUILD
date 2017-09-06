@@ -8,6 +8,7 @@ gerrit_plugin(
         "Implementation-Title: Replication plugin",
         "Implementation-URL: https://gerrit-review.googlesource.com/#/admin/projects/plugins/replication",
         "Gerrit-PluginName: replication",
+        "Gerrit-InitStep: com.googlesource.gerrit.plugins.replication.Init",
         "Gerrit-Module: com.googlesource.gerrit.plugins.replication.ReplicationModule",
         "Gerrit-SshModule: com.googlesource.gerrit.plugins.replication.SshModule",
     ],
