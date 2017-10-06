@@ -16,3 +16,15 @@ configuration is not recommended.  It is also possible to specify a
 local path as replication target. This makes e.g. sense if a network
 share is mounted to which the repositories should be replicated.
 
+Replication of account data (NoteDb)
+------------------------------------
+
+To replicate the account data in NoteDb the following branches from the
+`All-Users` repository must be replicated:
+
+* `refs/users/*` (user branches)
+* `refs/meta/external-ids` (external IDs)
+* `refs/starred-changes/*` (star labels)
+* `refs/sequences/accounts` (account sequence numbers, not needed for Gerrit
+  slaves)
+
