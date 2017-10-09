@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6d3a9b2_10f6a0c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1026112
+      },
+      "writtenOn": "2017-10-09T13:33:08Z",
+      "side": 1,
+      "message": "Is this a standard Git footer? If not maybe something like\n\n  Cherry-Picked-From: 93ab1609a4ba32e9466ff0649317b84a211285ad\n\nwould be better.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 68
+      },
+      "revId": "8bc97a106a46a0f32350396e74769af11ec7b98e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
