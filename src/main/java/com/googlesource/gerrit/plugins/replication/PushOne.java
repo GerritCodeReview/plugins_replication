@@ -28,6 +28,7 @@ import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
+import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
 import com.google.gerrit.server.git.ProjectRunnable;
@@ -36,10 +37,11 @@ import com.google.gerrit.server.git.WorkQueue.CanceledWhileRunning;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.permissions.ProjectPermission;
-import com.google.gerrit.server.project.NoSuchProjectException;
-import com.google.gerrit.server.project.ProjectControl;
+import com.google.gerrit.server.project.ProjectCache;
+import com.google.gerrit.server.project.ProjectState;
 import com.google.gerrit.server.util.IdGenerator;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 import com.jcraft.jsch.JSchException;
@@ -112,6 +114,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final int id;
   private final long createdAt;
   private final ReplicationMetrics metrics;
+  private final ProjectCache projectCache;
+  private final Provider<CurrentUser> userProvider;
   private final AtomicBoolean canceledWhileRunning;
 
   @Inject
@@ -127,6 +131,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       IdGenerator ig,
       ReplicationStateListener sl,
       ReplicationMetrics m,
+      ProjectCache pc,
+      Provider<CurrentUser> up,
       @Assisted Project.NameKey d,
       @Assisted URIish u) {
     gitManager = grm;
@@ -145,6 +151,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     stateLog = sl;
     createdAt = System.nanoTime();
     metrics = m;
+    projectCache = pc;
+    userProvider = up;
     canceledWhileRunning = new AtomicBoolean(false);
     maxRetries = p.getMaxRetries();
   }
@@ -468,17 +476,15 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
   private List<RemoteRefUpdate> generateUpdates(Transport tn)
       throws IOException, PermissionBackendException {
-    ProjectControl pc;
-    try {
-      pc = pool.controlFor(projectName);
-    } catch (NoSuchProjectException e) {
+    ProjectState projectState = projectCache.checkedGet(projectName);
+    if (projectState == null) {
       return Collections.emptyList();
     }
 
     Map<String, Ref> local = git.getAllRefs();
     boolean filter;
     try {
-      permissionBackend.user(pc.getUser()).project(projectName).check(ProjectPermission.READ);
+      permissionBackend.user(userProvider).project(projectName).check(ProjectPermission.READ);
       filter = false;
     } catch (AuthException e) {
       filter = true;
@@ -497,7 +503,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
         }
         local = n;
       }
-      local = refFilterFactory.create(pc.getProjectState(), git).filter(local, true);
+      local = refFilterFactory.create(projectState, git).filter(local, true);
     }
 
     return pushAllRefs ? doPushAll(tn, local) : doPushDelta(local);
