@@ -295,7 +295,16 @@ public class Destination {
               new Callable<Boolean>() {
                 @Override
                 public Boolean call() throws NoSuchProjectException, PermissionBackendException {
-                  return shouldReplicate(project);
+                  ProjectState projectState;
+                  try {
+                    projectState = projectCache.checkedGet(project);
+                  } catch (IOException e) {
+                    return false;
+                  }
+                  if (projectState == null) {
+                    throw new NoSuchProjectException(project);
+                  }
+                  return shouldReplicate(projectState, userProvider.get());
                 }
               })
           .call();
