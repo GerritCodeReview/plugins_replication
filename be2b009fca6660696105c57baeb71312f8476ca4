@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a825d54a_ed2c1377",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-11-01T23:12:09Z",
+      "side": 1,
+      "message": "Can this be done inside the threadScoper, like it is in the method above (starting at L246)?",
+      "range": {
+        "startLine": 293,
+        "startChar": 6,
+        "endLine": 302,
+        "endChar": 63
+      },
+      "revId": "be2b009fca6660696105c57baeb71312f8476ca4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
