@@ -290,15 +290,16 @@ public class Destination {
 
   private boolean shouldReplicate(Project.NameKey project, ReplicationState... states) {
     try {
-      return threadScoper
-          .scope(
-              new Callable<Boolean>() {
-                @Override
-                public Boolean call() throws NoSuchProjectException, PermissionBackendException {
-                  return shouldReplicate(project);
-                }
-              })
-          .call();
+      ProjectState projectState;
+      try {
+        projectState = projectCache.checkedGet(project);
+      } catch (IOException e) {
+        return false;
+      }
+      if (projectState == null) {
+        throw new NoSuchProjectException(project);
+      }
+      return shouldReplicate(projectState, userProvider.get());
     } catch (NoSuchProjectException err) {
       stateLog.error(String.format("source project %s not available", project), err, states);
     } catch (Exception e) {
