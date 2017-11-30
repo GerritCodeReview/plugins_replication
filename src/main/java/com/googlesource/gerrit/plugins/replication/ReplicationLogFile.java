@@ -18,7 +18,9 @@ import com.google.gerrit.extensions.systemstatus.ServerInformation;
 import com.google.gerrit.server.util.PluginLogFile;
 import com.google.gerrit.server.util.SystemLog;
 import com.google.inject.Inject;
-import org.apache.log4j.PatternLayout;
+import java.io.Serializable;
+import org.apache.logging.log4j.core.Layout;
+import org.apache.logging.log4j.core.layout.PatternLayout;
 
 public class ReplicationLogFile extends PluginLogFile {
 
@@ -28,6 +30,16 @@ public class ReplicationLogFile extends PluginLogFile {
         systemLog,
         serverInfo,
         ReplicationQueue.REPLICATION_LOG_NAME,
-        new PatternLayout("[%d] %m%n"));
+        PatternLayout.newBuilder()
+            .withPattern("[%d] %m%n")
+            .withPatternSelector(null)
+            .withConfiguration(null)
+            .withRegexReplacement(null)
+            .withCharset(null)
+            .withAlwaysWriteExceptions(false)
+            .withNoConsoleNoAnsi(false)
+            .withHeader(null)
+            .withFooter(null)
+            .build());
   }
 }
