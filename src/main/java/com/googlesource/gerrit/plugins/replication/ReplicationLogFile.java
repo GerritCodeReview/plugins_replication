@@ -18,9 +18,11 @@ import com.google.gerrit.extensions.systemstatus.ServerInformation;
 import com.google.gerrit.server.util.PluginLogFile;
 import com.google.gerrit.server.util.SystemLog;
 import com.google.inject.Inject;
-import org.apache.log4j.PatternLayout;
+import ch.qos.logback.classic.PatternLayout;
 
 public class ReplicationLogFile extends PluginLogFile {
+
+  private LoggerContext loggerContext = new LoggerContext();
 
   @Inject
   public ReplicationLogFile(SystemLog systemLog, ServerInformation serverInfo) {
@@ -28,6 +30,6 @@ public class ReplicationLogFile extends PluginLogFile {
         systemLog,
         serverInfo,
         ReplicationQueue.REPLICATION_LOG_NAME,
-        new PatternLayout("[%d] [%X{" + PushOne.ID_MDC_KEY + "}] %m%n"));
+        new PatternLayout().setContext(loggerContext).setPattern("[%d] [%X{" + PushOne.ID_MDC_KEY + "}] %m%n").start());
   }
 }
