@@ -260,6 +260,9 @@ public class Destination {
                   if (projectState == null) {
                     throw new NoSuchProjectException(project);
                   }
+                  if (!projectState.statePermitsRead()) {
+                    return false;
+                  }
                   if (!shouldReplicate(projectState, userProvider.get())) {
                     return false;
                   }
