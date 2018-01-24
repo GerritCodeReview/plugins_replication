@@ -14,7 +14,7 @@ gerrit_plugin(
     ],
     resources = glob(["src/main/resources/**/*"]),
     deps = [
-        "//lib:commons-io",
+        "//lib/commons:io",
     ],
 )
 
