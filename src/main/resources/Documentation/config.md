@@ -355,6 +355,10 @@ remote.NAME.remoteNameStyle
 	match the project name. So the above example would not match
 	`foo/bar2`, while `^foo/(bar|baz).*` would.
 
+	Projects may be excluded from replication by using a regular
+	expression with inverse match. `^(?:(?!PATTERN).)*$` will
+	exclude any project that matches.
+
 	Values that are not regular expressions and end in `*` are
 	treated as wildcard matches. Wildcards match projects whose
 	name agrees from the beginning until the trailing `*`. So
