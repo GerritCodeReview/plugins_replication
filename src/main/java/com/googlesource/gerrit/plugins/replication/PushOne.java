@@ -32,9 +32,9 @@ import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
 import com.google.gerrit.server.git.ProjectRunnable;
-import com.google.gerrit.server.git.VisibleRefFilter;
 import com.google.gerrit.server.git.WorkQueue.CanceledWhileRunning;
 import com.google.gerrit.server.permissions.PermissionBackend;
+import com.google.gerrit.server.permissions.PermissionBackend.RefFilterOptions;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.permissions.ProjectPermission;
 import com.google.gerrit.server.project.ProjectCache;
@@ -96,7 +96,6 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final RemoteConfig config;
   private final CredentialsProvider credentialsProvider;
   private final PerThreadRequestScope.Scoper threadScoper;
-  private final VisibleRefFilter.Factory refFilterFactory;
   private final ReplicationQueue replicationQueue;
 
   private final Project.NameKey projectName;
@@ -124,7 +123,6 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       PermissionBackend permissionBackend,
       Destination p,
       RemoteConfig c,
-      VisibleRefFilter.Factory rff,
       CredentialsFactory cpFactory,
       PerThreadRequestScope.Scoper ts,
       ReplicationQueue rq,
@@ -139,7 +137,6 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     this.permissionBackend = permissionBackend;
     pool = p;
     config = c;
-    refFilterFactory = rff;
     credentialsProvider = cpFactory.create(c.getName());
     threadScoper = ts;
     replicationQueue = rq;
@@ -483,8 +480,9 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
     Map<String, Ref> local = git.getAllRefs();
     boolean filter;
+    PermissionBackend.ForProject forProject = permissionBackend.user(userProvider).project(projectName);
     try {
-      permissionBackend.user(userProvider).project(projectName).check(ProjectPermission.READ);
+      forProject.check(ProjectPermission.READ);
       filter = false;
     } catch (AuthException e) {
       filter = true;
@@ -503,7 +501,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
         }
         local = n;
       }
-      local = refFilterFactory.create(projectState, git).filter(local, true);
+      local = forProject.filter(local, git, RefFilterOptions.builder().setFilterMeta(true).build());
     }
 
     return pushAllRefs ? doPushAll(tn, local) : doPushDelta(local);
