@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0746990d_e43dc231",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1059595
+      },
+      "writtenOn": "2018-02-14T14:41:10Z",
+      "side": 1,
+      "message": "My first thought was to have sshHelper.executeRemoteSsh return void and throw an IOException on non zero exit values instead. But since that would have (a bit) larger impact I wanted to get some feedback before investing time on that.\n\nThis solution is cheaper and lower risk, I\u0027ll gladly make the other change instead if you think it is a good idea.",
+      "range": {
+        "startLine": 279,
+        "startChar": 21,
+        "endLine": 279,
+        "endChar": 47
+      },
+      "revId": "b61bb79f62986af26aecc8f5fafdf5b32b6dd6d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
