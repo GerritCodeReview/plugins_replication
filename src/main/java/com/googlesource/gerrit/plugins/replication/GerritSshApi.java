@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.ssh.SshAddressesModule;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.replication.SshHelper.RemoteCmdFailedException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
@@ -56,18 +57,21 @@ public class GerritSshApi {
     if (!withoutDeleteProjectPlugin.contains(uri)) {
       OutputStream errStream = sshHelper.newErrorBufferStream();
       String cmd = "deleteproject delete --yes-really-delete --force " + projectName.get();
-      int exitCode = -1;
+      int exitCode = 0;
       try {
-        exitCode = execute(uri, cmd, errStream);
+        execute(uri, cmd, errStream);
       } catch (IOException e) {
         logError("deleting", uri, errStream, cmd, e);
+        if (e instanceof RemoteCmdFailedException) {
+          exitCode = ((RemoteCmdFailedException) e).exitValue;
+          if (exitCode == 1) {
+            log.info(
+                "DeleteProject plugin is not installed on {}; will not try to forward this operation to that host");
+            withoutDeleteProjectPlugin.add(uri);
+            return true;
+          }
+        }
         return false;
-      }
-      if (exitCode == 1) {
-        log.info(
-            "DeleteProject plugin is not installed on {}; will not try to forward this operation to that host");
-        withoutDeleteProjectPlugin.add(uri);
-        return true;
       }
     }
     return true;
@@ -106,14 +110,13 @@ public class GerritSshApi {
     return sshUri;
   }
 
-  private int execute(URIish uri, String cmd, OutputStream errStream) throws IOException {
+  private void execute(URIish uri, String cmd, OutputStream errStream) throws IOException {
     try {
       URIish sshUri = toSshUri(uri);
-      return sshHelper.executeRemoteSsh(sshUri, cmd, errStream);
+      sshHelper.executeRemoteSsh(sshUri, cmd, errStream);
     } catch (URISyntaxException e) {
       log.error(String.format("Cannot convert %s to SSH uri", uri), e);
     }
-    return SSH_COMMAND_FAILED;
   }
 
   public void logError(String msg, URIish uri, OutputStream errStream, String cmd, IOException e) {

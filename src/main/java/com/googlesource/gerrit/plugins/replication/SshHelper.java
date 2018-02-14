@@ -35,7 +35,7 @@ class SshHelper {
     this.sshSessionFactoryProvider = sshSessionFactoryProvider;
   }
 
-  int executeRemoteSsh(URIish uri, String cmd, OutputStream errStream) throws IOException {
+  void executeRemoteSsh(URIish uri, String cmd, OutputStream errStream) throws IOException {
     RemoteSession ssh = connect(uri);
     Process proc = ssh.exec(cmd, 0);
     proc.getOutputStream().close();
@@ -51,7 +51,10 @@ class SshHelper {
       // Don't wait, drop out immediately.
     }
     ssh.disconnect();
-    return proc.exitValue();
+    int exitValue = proc.exitValue();
+    if (exitValue != 0) {
+      throw new RemoteCmdFailedException(cmd, exitValue);
+    }
   }
 
   OutputStream newErrorBufferStream() {
@@ -85,5 +88,16 @@ class SshHelper {
 
   RemoteSession connect(URIish uri) throws TransportException {
     return sshSessionFactoryProvider.get().getSession(uri, null, FS.DETECTED, SSH_REMOTE_TIMEOUT);
+  }
+
+  static class RemoteCmdFailedException extends IOException {
+    final String cmd;
+    final int exitValue;
+
+    RemoteCmdFailedException(String cmd, int exitValue) {
+      super(String.format("Cmd %s failed with exit value: %d", cmd, exitValue));
+      this.cmd = cmd;
+      this.exitValue = exitValue;
+    }
   }
 }
