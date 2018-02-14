@@ -276,7 +276,15 @@ public class ReplicationQueue
     }
     OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
-      sshHelper.executeRemoteSsh(uri, cmd, errStream);
+      int exitCode = sshHelper.executeRemoteSsh(uri, cmd, errStream);
+      if (exitCode != 0) {
+        repLog.error(
+            String.format(
+                "Remote command failed when creating remote repository at %s:\n"
+                    + "  Command: %s\n"
+                    + "  Output: %s",
+                uri, cmd, errStream));
+      }
     } catch (IOException e) {
       repLog.error(
           String.format(
@@ -340,7 +348,15 @@ public class ReplicationQueue
     String cmd = "rm -rf " + quotedPath;
     OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
-      sshHelper.executeRemoteSsh(uri, cmd, errStream);
+      int exitCode = sshHelper.executeRemoteSsh(uri, cmd, errStream);
+      if (exitCode != 0) {
+        repLog.error(
+            String.format(
+                "Remote command failed when deleting repository at %s:\n"
+                    + "  Command: %s\n"
+                    + "  Output: %s",
+                uri, cmd, errStream));
+      }
     } catch (IOException e) {
       repLog.error(
           String.format(
@@ -376,7 +392,15 @@ public class ReplicationQueue
         "cd " + quotedPath + " && git symbolic-ref HEAD " + QuotedString.BOURNE.quote(newHead);
     OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
-      sshHelper.executeRemoteSsh(uri, cmd, errStream);
+      int exitCode = sshHelper.executeRemoteSsh(uri, cmd, errStream);
+      if (exitCode != 0) {
+        repLog.error(
+            String.format(
+                "Remote command failed when updating HEAD at %s to %s:\n"
+                    + "  Command: %s\n"
+                    + "  Output: %s",
+                uri, newHead, cmd, errStream));
+      }
     } catch (IOException e) {
       repLog.error(
           String.format(
