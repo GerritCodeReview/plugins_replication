@@ -22,6 +22,30 @@
       "revId": "eb596f3da43351c5f0c5ea8c8efdf23a9f5ebb5b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f795840c_92888169",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1059595
+      },
+      "writtenOn": "2018-02-15T12:25:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "548d4eac_1fe81fd4",
+      "range": {
+        "startLine": 97,
+        "startChar": 3,
+        "endLine": 99,
+        "endChar": 33
+      },
+      "revId": "eb596f3da43351c5f0c5ea8c8efdf23a9f5ebb5b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
