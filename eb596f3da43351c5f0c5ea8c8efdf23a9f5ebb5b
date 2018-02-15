@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "548d4eac_1fe81fd4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2018-02-15T07:30:09Z",
+      "side": 1,
+      "message": "Don\u0027t we want some info about the command in the Exception message?",
+      "range": {
+        "startLine": 97,
+        "startChar": 3,
+        "endLine": 99,
+        "endChar": 33
+      },
+      "revId": "eb596f3da43351c5f0c5ea8c8efdf23a9f5ebb5b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
