@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79777931_d9dc7f48",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-02-15T18:23:31Z",
+      "side": 1,
+      "message": "Don\u0027t we get a warning in Eclipse when you do not declare a serialVersionUID field?",
+      "range": {
+        "startLine": 93,
+        "startChar": 2,
+        "endLine": 93,
+        "endChar": 61
+      },
+      "revId": "7e765090f9afbaf74c2de6e7bbe22dd5f3196f54",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
