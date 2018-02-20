@@ -225,7 +225,7 @@ public class Destination {
     return cnt;
   }
 
-  private boolean shouldReplicate(ProjectState projectState, CurrentUser user)
+  private boolean shouldReplicate(ProjectState projectState)
       throws PermissionBackendException {
     if (!config.replicateHiddenProjects()
         && projectState.getProject().getState()
@@ -234,7 +234,7 @@ public class Destination {
     }
     try {
       permissionBackend
-          .user(user)
+          .currentUser()
           .project(projectState.getNameKey())
           .check(ProjectPermission.ACCESS);
       return true;
@@ -263,7 +263,7 @@ public class Destination {
                   if (!projectState.statePermitsRead()) {
                     return false;
                   }
-                  if (!shouldReplicate(projectState, userProvider.get())) {
+                  if (!shouldReplicate(projectState)) {
                     return false;
                   }
                   if (PushOne.ALL_REFS.equals(ref)) {
@@ -307,7 +307,7 @@ public class Destination {
                   if (projectState == null) {
                     throw new NoSuchProjectException(project);
                   }
-                  return shouldReplicate(projectState, userProvider.get());
+                  return shouldReplicate(projectState);
                 }
               })
           .call();
