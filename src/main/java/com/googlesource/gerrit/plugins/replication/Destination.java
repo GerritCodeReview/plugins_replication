@@ -87,7 +87,6 @@ public class Destination {
   private final PushOne.Factory opFactory;
   private final GitRepositoryManager gitManager;
   private final PermissionBackend permissionBackend;
-  private final Provider<CurrentUser> userProvider;
   private final ProjectCache projectCache;
   private volatile ScheduledExecutorService pool;
   private final PerThreadRequestScope.Scoper threadScoper;
@@ -117,7 +116,6 @@ public class Destination {
       PluginUser pluginUser,
       GitRepositoryManager gitRepositoryManager,
       PermissionBackend permissionBackend,
-      Provider<CurrentUser> userProvider,
       ProjectCache projectCache,
       GroupBackend groupBackend,
       ReplicationStateListener stateLog,
@@ -127,7 +125,6 @@ public class Destination {
     this.eventDispatcher = eventDispatcher;
     gitManager = gitRepositoryManager;
     this.permissionBackend = permissionBackend;
-    this.userProvider = userProvider;
     this.projectCache = projectCache;
     this.stateLog = stateLog;
 
@@ -225,8 +222,7 @@ public class Destination {
     return cnt;
   }
 
-  private boolean shouldReplicate(ProjectState projectState)
-      throws PermissionBackendException {
+  private boolean shouldReplicate(ProjectState projectState) throws PermissionBackendException {
     if (!config.replicateHiddenProjects()
         && projectState.getProject().getState()
             == com.google.gerrit.extensions.client.ProjectState.HIDDEN) {
@@ -271,7 +267,7 @@ public class Destination {
                   }
                   try {
                     permissionBackend
-                        .user(userProvider)
+                        .currentUser()
                         .project(project)
                         .ref(ref)
                         .check(RefPermission.READ);

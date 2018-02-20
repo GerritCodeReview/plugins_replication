@@ -15,7 +15,6 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.extensions.registration.DynamicItem;
-import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.account.GroupIncludeCache;
@@ -25,7 +24,6 @@ import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
@@ -35,7 +33,6 @@ public class DestinationFactory {
   private final PluginUser pluginUser;
   private final GitRepositoryManager gitRepositoryManager;
   private final PermissionBackend permissionBackend;
-  private final Provider<CurrentUser> userProvider;
   private final ProjectCache projectCache;
   private final GroupBackend groupBackend;
   private final ReplicationStateListener stateLog;
@@ -49,7 +46,6 @@ public class DestinationFactory {
       PluginUser pluginUser,
       GitRepositoryManager gitRepositoryManager,
       PermissionBackend permissionBackend,
-      Provider<CurrentUser> userProvider,
       ProjectCache projectCache,
       GroupBackend groupBackend,
       ReplicationStateListener stateLog,
@@ -60,7 +56,6 @@ public class DestinationFactory {
     this.pluginUser = pluginUser;
     this.gitRepositoryManager = gitRepositoryManager;
     this.permissionBackend = permissionBackend;
-    this.userProvider = userProvider;
     this.projectCache = projectCache;
     this.groupBackend = groupBackend;
     this.stateLog = stateLog;
@@ -76,7 +71,6 @@ public class DestinationFactory {
         pluginUser,
         gitRepositoryManager,
         permissionBackend,
-        userProvider,
         projectCache,
         groupBackend,
         stateLog,
