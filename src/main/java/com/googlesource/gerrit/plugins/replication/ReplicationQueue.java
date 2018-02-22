@@ -250,7 +250,7 @@ public class ReplicationQueue
     try (Repository repo = new FileRepository(uri.getPath())) {
       repo.create(true /* bare */);
 
-      if (head != null) {
+      if (head != null && head.startsWith(Constants.R_REFS)) {
         RefUpdate u = repo.updateRef(Constants.HEAD);
         u.disableRefLog();
         u.link(head);
