@@ -288,10 +288,8 @@ public class ReplicationQueue
   private void deleteProject(URIish replicateURI) {
     if (!replicateURI.isRemote()) {
       deleteLocally(replicateURI);
-      repLog.info("Deleted local repository: {}", replicateURI);
     } else if (isSSH(replicateURI)) {
       deleteRemoteSsh(replicateURI);
-      repLog.info("Deleted remote repository: {}", replicateURI);
     } else {
       repLog.warn(
           "Cannot delete project on remote site {}. "
@@ -304,6 +302,7 @@ public class ReplicationQueue
   private static void deleteLocally(URIish uri) {
     try {
       recursivelyDelete(new File(uri.getPath()));
+      repLog.info("Deleted local repository: {}", uri);
     } catch (IOException e) {
       repLog.error("Error deleting local repository {}:\n", uri.getPath(), e);
     }
@@ -333,6 +332,7 @@ public class ReplicationQueue
     OutputStream errStream = newErrorBufferStream();
     try {
       executeRemoteSsh(uri, cmd, errStream);
+      repLog.info("Deleted remote repository: {}", uri);
     } catch (IOException e) {
       repLog.error(
           "Error deleting remote repository at {}:\n"
