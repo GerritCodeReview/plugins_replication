@@ -401,7 +401,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     if (pool.isCreateMissingRepos()) {
       try {
         Ref head = git.exactRef(Constants.HEAD);
-        if (replicationQueue.createProject(projectName, head != null ? head.getName() : null)) {
+        if (replicationQueue.createProject(projectName, head != null ? getName(head) : null)) {
           repLog.warn("Missing repository created; retry replication to {}", uri);
           pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
         } else {
@@ -420,6 +420,14 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     } else {
       stateLog.error("Cannot replicate to " + uri + "; repository not found", getStatesAsArray());
     }
+  }
+
+  private String getName(Ref ref) {
+    Ref target = ref;
+    while (target.isSymbolic()) {
+      target = target.getTarget();
+    }
+    return target.getName();
   }
 
   private void runImpl() throws IOException {
