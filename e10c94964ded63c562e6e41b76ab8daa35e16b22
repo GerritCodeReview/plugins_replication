@@ -22,6 +22,30 @@
       "revId": "e10c94964ded63c562e6e41b76ab8daa35e16b22",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7499343_87f40022",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2018-02-22T02:36:42Z",
+      "side": 1,
+      "message": "No, we do not. Done.",
+      "parentUuid": "6b9e33ae_b52dc4f5",
+      "range": {
+        "startLine": 328,
+        "startChar": 10,
+        "endLine": 329,
+        "endChar": 17
+      },
+      "revId": "e10c94964ded63c562e6e41b76ab8daa35e16b22",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
