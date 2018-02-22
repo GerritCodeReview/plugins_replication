@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e33775a1_13fa6e29",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-02-22T16:46:28Z",
+      "side": 1,
+      "message": "[optiona] not related to this change but we normally use e.getMessage() instead of implicit call to toString()",
+      "range": {
+        "startLine": 87,
+        "startChar": 10,
+        "endLine": 87,
+        "endChar": 11
+      },
+      "revId": "37b22d0433159050be7e884b84666cf470cbeca4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
