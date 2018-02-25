@@ -101,7 +101,7 @@ public class ReplicationQueue
     running = false;
     int discarded = config.shutdown();
     if (discarded > 0) {
-      repLog.warn(String.format("Canceled %d replication events during shutdown", discarded));
+      repLog.warn("Canceled {} replication events during shutdown", discarded);
     }
   }
 
@@ -194,7 +194,7 @@ public class ReplicationQueue
         try {
           uri = new URIish(url);
         } catch (URISyntaxException e) {
-          repLog.warn(String.format("adminURL '%s' is invalid: %s", url, e.getMessage()));
+          repLog.warn("adminURL '{}' is invalid: {}", url, e.getMessage());
           continue;
         }
 
@@ -202,13 +202,13 @@ public class ReplicationQueue
           String path =
               replaceName(uri.getPath(), projectName.get(), config.isSingleProjectMatch());
           if (path == null) {
-            repLog.warn(String.format("adminURL %s does not contain ${name}", uri));
+            repLog.warn("adminURL {} does not contain ${name}", uri);
             continue;
           }
 
           uri = uri.setPath(path);
           if (!isSSH(uri)) {
-            repLog.warn(String.format("adminURL '%s' is invalid: only SSH is supported", uri));
+            repLog.warn("adminURL '{}' is invalid: only SSH is supported", uri);
             continue;
           }
         }
@@ -238,17 +238,14 @@ public class ReplicationQueue
       gerritAdmin.createProject(replicateURI, projectName, head);
     } else if (!replicateURI.isRemote()) {
       createLocally(replicateURI, head);
-      repLog.info("Created local repository: " + replicateURI);
     } else if (isSSH(replicateURI)) {
       createRemoteSsh(replicateURI, head);
-      repLog.info("Created remote repository: " + replicateURI);
     } else {
       repLog.warn(
-          String.format(
-              "Cannot create new project on remote site %s."
-                  + " Only local paths and SSH URLs are supported"
-                  + " for remote repository creation",
-              replicateURI));
+          "Cannot create new project on remote site {}."
+              + " Only local paths and SSH URLs are supported"
+              + " for remote repository creation",
+          replicateURI);
       return false;
     }
     return true;
@@ -258,13 +255,14 @@ public class ReplicationQueue
     try (Repository repo = new FileRepository(uri.getPath())) {
       repo.create(true /* bare */);
 
-      if (head != null) {
+      if (head != null && head.startsWith(Constants.R_REFS)) {
         RefUpdate u = repo.updateRef(Constants.HEAD);
         u.disableRefLog();
         u.link(head);
       }
+      repLog.info("Created local repository: {}", uri);
     } catch (IOException e) {
-      repLog.error(String.format("Error creating local repository %s:\n", uri.getPath()), e);
+      repLog.error("Error creating local repository {}:\n", uri.getPath(), e);
     }
   }
 
@@ -277,14 +275,17 @@ public class ReplicationQueue
     OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
       sshHelper.executeRemoteSsh(uri, cmd, errStream);
+      repLog.info("Created remote repository: {}", uri);
     } catch (IOException e) {
       repLog.error(
-          String.format(
-              "Error creating remote repository at %s:\n"
-                  + "  Exception: %s\n"
-                  + "  Command: %s\n"
-                  + "  Output: %s",
-              uri, e, cmd, errStream),
+          "Error creating remote repository at {}:\n"
+              + "  Exception: {}\n"
+              + "  Command: {}\n"
+              + "  Output: {}",
+          uri,
+          e,
+          cmd,
+          errStream,
           e);
     }
   }
@@ -295,25 +296,23 @@ public class ReplicationQueue
       repLog.info("Deleted remote repository: " + replicateURI);
     } else if (!replicateURI.isRemote()) {
       deleteLocally(replicateURI);
-      repLog.info("Deleted local repository: " + replicateURI);
     } else if (isSSH(replicateURI)) {
       deleteRemoteSsh(replicateURI);
-      repLog.info("Deleted remote repository: " + replicateURI);
     } else {
       repLog.warn(
-          String.format(
-              "Cannot delete project on remote site %s."
-                  + " Only local paths and SSH URLs are supported"
-                  + " for remote repository deletion",
-              replicateURI));
+          "Cannot delete project on remote site {}. "
+              + "Only local paths and SSH URLs are supported"
+              + " for remote repository deletion",
+          replicateURI);
     }
   }
 
   private static void deleteLocally(URIish uri) {
     try {
       recursivelyDelete(new File(uri.getPath()));
+      repLog.info("Deleted local repository: {}", uri);
     } catch (IOException e) {
-      repLog.error(String.format("Error deleting local repository %s:\n", uri.getPath()), e);
+      repLog.error("Error deleting local repository {}:\n", uri.getPath(), e);
     }
   }
 
@@ -341,14 +340,17 @@ public class ReplicationQueue
     OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
       sshHelper.executeRemoteSsh(uri, cmd, errStream);
+      repLog.info("Deleted remote repository: {}", uri);
     } catch (IOException e) {
       repLog.error(
-          String.format(
-              "Error deleting remote repository at %s:\n"
-                  + "  Exception: %s\n"
-                  + "  Command: %s\n"
-                  + "  Output: %s",
-              uri, e, cmd, errStream),
+          "Error deleting remote repository at {}:\n"
+              + "  Exception: {}\n"
+              + "  Command: {}\n"
+              + "  Output: {}",
+          uri,
+          e,
+          cmd,
+          errStream,
           e);
     }
   }
@@ -362,11 +364,10 @@ public class ReplicationQueue
       updateHeadRemoteSsh(replicateURI, newHead);
     } else {
       repLog.warn(
-          String.format(
-              "Cannot update HEAD of project on remote site %s."
-                  + " Only local paths and SSH URLs are supported"
-                  + " for remote HEAD update.",
-              replicateURI));
+          "Cannot update HEAD of project on remote site {}."
+              + " Only local paths and SSH URLs are supported"
+              + " for remote HEAD update.",
+          replicateURI);
     }
   }
 
@@ -379,12 +380,15 @@ public class ReplicationQueue
       sshHelper.executeRemoteSsh(uri, cmd, errStream);
     } catch (IOException e) {
       repLog.error(
-          String.format(
-              "Error updating HEAD of remote repository at %s to %s:\n"
-                  + "  Exception: %s\n"
-                  + "  Command: %s\n"
-                  + "  Output: %s",
-              uri, newHead, e, cmd, errStream),
+          "Error updating HEAD of remote repository at {} to {}:\n"
+              + "  Exception: {}\n"
+              + "  Command: {}\n"
+              + "  Output: {}",
+          uri,
+          newHead,
+          e,
+          cmd,
+          errStream,
           e);
     }
   }
@@ -396,8 +400,7 @@ public class ReplicationQueue
         u.link(newHead);
       }
     } catch (IOException e) {
-      repLog.error(
-          String.format("Failed to update HEAD of repository %s to %s", uri.getPath(), newHead), e);
+      repLog.error("Failed to update HEAD of repository {} to {}", uri.getPath(), newHead, e);
     }
   }
 
