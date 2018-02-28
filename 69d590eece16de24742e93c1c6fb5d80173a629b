@@ -105,6 +105,24 @@
       "revId": "69d590eece16de24742e93c1c6fb5d80173a629b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8863bc4_c801381d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-02-28T14:52:33Z",
+      "side": 1,
+      "message": "I checked how the replications get (re)scheduled and if replications for the same project are serialized. Turns out that they are somewhat serialized.\n\nAssume there is an in-flight push to the project Foo and a new change C1 for the same project is uploaded. Replication of C1 gets scheduled but, since there is an in-flight push, it will not run. Instead it will be rescheduled to be run later. This, later to run replication task, gets\nan ID\u003d12345\n\nIn the meantime, yet another change C2 for the project Foo is uploaded. Replication of C2 gets scheduled and, because there is a waiting replication task with ID\u003d12345 for the same project Foo, replication of C2 gets assigned to the same task.\n\nWhen the in-flight push is done, the replication task 12345 will be started and it will replicate both C1 and C2 in one push. This is the reason why replications for the same project\nare not fully serialized.\n\nHowever, as we see from the above example, replication of C1 and C2 had to wait for the\ncurrent in-flight push to finish, although currently running push was not updating neither\nof C1 and C2. Pushing of C1 and C2 *could* have been done in parallel to the other push.\nThis is why replications are \"somewhat\" serialized.\n\nFor repositories with excessive number of refs (\u003e500K) one replication could take few minutes.\nThe above described serialization behavior may cause latencies longer than\ntechnically necessary.",
+      "parentUuid": "e70cf8c1_472b4e84",
+      "revId": "69d590eece16de24742e93c1c6fb5d80173a629b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
