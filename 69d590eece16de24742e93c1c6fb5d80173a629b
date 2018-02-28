@@ -123,6 +123,24 @@
       "revId": "69d590eece16de24742e93c1c6fb5d80173a629b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b591c240_830a1cae",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2018-02-28T18:02:41Z",
+      "side": 1,
+      "message": "The above \"serialization\" is by design, it goes along with the idea of a replication delay.  Preventing parallelism within a project and the replication delay are ideas that help reduce the overall amount of push jobs by combining multiple closely timed jobs and thus reducing much of the per job push replication overhead.  This overhead is particularly large when there are lots of refs, so it tends to be even more important then.",
+      "parentUuid": "a8863bc4_c801381d",
+      "revId": "69d590eece16de24742e93c1c6fb5d80173a629b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }

@@ -34,6 +34,24 @@
       "revId": "3fffd16403c1d3a4d6f0b13e9f33f4f78df1f6b4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e8ed219_382ad729",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2018-02-28T18:02:41Z",
+      "side": 1,
+      "message": "Gotcha, sorry to confuse things.",
+      "parentUuid": "cf31c955_15f9a327",
+      "revId": "3fffd16403c1d3a4d6f0b13e9f33f4f78df1f6b4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
