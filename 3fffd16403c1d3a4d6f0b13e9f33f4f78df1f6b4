@@ -16,6 +16,24 @@
       "revId": "3fffd16403c1d3a4d6f0b13e9f33f4f78df1f6b4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf31c955_15f9a327",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-02-28T16:37:12Z",
+      "side": 1,
+      "message": "\u003e  I feel it will be hard to review it.\n\nThis change is already reviewed and submitted :-)\n\nI commented on it today, because I found your question about serializing replications for one project and, at the same time, I was investigating a slow replication from master to a slave in our production environment and tried to understand if this change contributes to the latency.",
+      "parentUuid": "29e486ec_2a004fa4",
+      "revId": "3fffd16403c1d3a4d6f0b13e9f33f4f78df1f6b4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
