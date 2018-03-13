@@ -23,6 +23,7 @@ import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.server.extensions.events.PluginEvent;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -78,6 +79,7 @@ public class ReplicationQueue
   private final DynamicItem<EventDispatcher> dispatcher;
   private final ReplicationConfig config;
   private final Provider<SshSessionFactory> sshSessionFactoryProvider;
+  private final PluginEvent pluginEvent;
   private volatile boolean running;
 
   @Inject
@@ -86,11 +88,13 @@ public class ReplicationQueue
       ReplicationConfig rc,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListener sl,
-      Provider<SshSessionFactory> sshSessionFactoryProvider) {
+      Provider<SshSessionFactory> sshSessionFactoryProvider,
+      PluginEvent pe) {
     workQueue = wq;
     dispatcher = dis;
     config = rc;
     stateLog = sl;
+    pluginEvent = pe;
     this.sshSessionFactoryProvider = sshSessionFactoryProvider;
   }
 
@@ -243,6 +247,7 @@ public class ReplicationQueue
           replicateURI);
       return false;
     }
+    pluginEvent.fire("replication", "project-created", replicateURI.toString());
     return true;
   }
 
@@ -285,7 +290,7 @@ public class ReplicationQueue
     }
   }
 
-  private void deleteProject(URIish replicateURI) {
+  private boolean deleteProject(URIish replicateURI) {
     if (!replicateURI.isRemote()) {
       deleteLocally(replicateURI);
     } else if (isSSH(replicateURI)) {
@@ -296,7 +301,10 @@ public class ReplicationQueue
               + "Only local paths and SSH URLs are supported"
               + " for remote repository deletion",
           replicateURI);
+      return false;
     }
+    pluginEvent.fire("replication", "project-deleted", replicateURI.toString());
+    return true;
   }
 
   private static void deleteLocally(URIish uri) {
