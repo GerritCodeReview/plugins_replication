@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "4a3ba735_2441c999",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-03-14T23:26:31Z",
+      "side": 1,
+      "message": "Not really related to this change but this change is highlighting the issue. The replication plugin still uses the old way to fire event (using the EventDispatcher) for replication all events prior to this change:\n-RefReplicatedEvent\n-RefReplicationDoneEvent\n-ReplicationScheduledEvent\n\nThis change is adding 2 new events that are fired the new way. These events are not defined the way the others are, i.e. classes extending com.google.gerrit.server.events.Event.\n\nI know that we started a transition towards a new way of firing events so maybe having 2 different ways of firing events is ok during that transition. I just wanted to hear others on this.",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 83,
+        "endChar": 40
+      },
+      "revId": "b48ed07b6e4772af31aba53811f9d2d8de8ad5ea",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b112c586_bf49cf8d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 2
