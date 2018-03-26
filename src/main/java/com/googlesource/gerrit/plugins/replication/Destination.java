@@ -225,18 +225,21 @@ public class Destination {
     return cnt;
   }
 
-  private boolean shouldReplicate(ProjectState projectState, CurrentUser user)
+  private boolean shouldReplicate(ProjectState state, CurrentUser user)
       throws PermissionBackendException {
     if (!config.replicateHiddenProjects()
-        && projectState.getProject().getState()
+        && state.getProject().getState()
             == com.google.gerrit.extensions.client.ProjectState.HIDDEN) {
       return false;
     }
+
+    // Hidden projects(permitsRead = false) should only be accessible by the project owners.
+    // READ_CONFIG is checked here because it's only allowed to project owners(ACCESS may also
+    // be allowed for other users).
+    ProjectPermission permissionToCheck =
+        state.statePermitsRead() ? ProjectPermission.ACCESS : ProjectPermission.READ_CONFIG;
     try {
-      permissionBackend
-          .user(user)
-          .project(projectState.getNameKey())
-          .check(ProjectPermission.ACCESS);
+      permissionBackend.user(user).project(state.getNameKey()).check(permissionToCheck);
       return true;
     } catch (AuthException e) {
       return false;
