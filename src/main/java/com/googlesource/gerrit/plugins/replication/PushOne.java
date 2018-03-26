@@ -25,6 +25,7 @@ import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.extensions.restapi.AuthException;
+import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
@@ -482,9 +483,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     boolean filter;
     PermissionBackend.ForProject forProject = permissionBackend.user(userProvider).project(projectName);
     try {
+      projectState.checkStatePermitsRead();
       forProject.check(ProjectPermission.READ);
       filter = false;
-    } catch (AuthException e) {
+    } catch (AuthException | ResourceConflictException e) {
       filter = true;
     }
     if (filter) {
