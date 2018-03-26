@@ -480,7 +480,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
     Map<String, Ref> local = git.getAllRefs();
     boolean filter;
-    PermissionBackend.ForProject forProject = permissionBackend.user(userProvider).project(projectName);
+    PermissionBackend.ForProject forProject = permissionBackend.currentUser().project(projectName);
     try {
       forProject.check(ProjectPermission.READ);
       filter = false;
