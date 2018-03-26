@@ -271,7 +271,7 @@ public class Destination {
                   }
                   try {
                     permissionBackend
-                        .user(userProvider)
+                        .user(userProvider.get())
                         .project(project)
                         .ref(ref)
                         .check(RefPermission.READ);
