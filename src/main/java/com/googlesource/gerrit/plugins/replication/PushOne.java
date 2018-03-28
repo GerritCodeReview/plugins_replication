@@ -29,7 +29,6 @@ import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
-import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
 import com.google.gerrit.server.git.ProjectRunnable;
@@ -42,7 +41,6 @@ import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectState;
 import com.google.gerrit.server.util.IdGenerator;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 import com.jcraft.jsch.JSchException;
@@ -115,7 +113,6 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final long createdAt;
   private final ReplicationMetrics metrics;
   private final ProjectCache projectCache;
-  private final Provider<CurrentUser> userProvider;
   private final AtomicBoolean canceledWhileRunning;
 
   @Inject
@@ -131,7 +128,6 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       ReplicationStateListener sl,
       ReplicationMetrics m,
       ProjectCache pc,
-      Provider<CurrentUser> up,
       @Assisted Project.NameKey d,
       @Assisted URIish u) {
     gitManager = grm;
@@ -150,7 +146,6 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     createdAt = System.nanoTime();
     metrics = m;
     projectCache = pc;
-    userProvider = up;
     canceledWhileRunning = new AtomicBoolean(false);
     maxRetries = p.getMaxRetries();
   }
