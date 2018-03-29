@@ -82,11 +82,11 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private List<Destination> allDestinations(DestinationFactory destinationFactory)
       throws ConfigInvalidException, IOException {
     if (!config.getFile().exists()) {
-      log.warn("Config file " + config.getFile() + " does not exist; not replicating");
+      log.warn("Config file {} does not exist; not replicating", config.getFile());
       return Collections.emptyList();
     }
     if (config.getFile().length() == 0) {
-      log.info("Config file " + config.getFile() + " is empty; not replicating");
+      log.info("Config file {} is empty; not replicating", config.getFile());
       return Collections.emptyList();
     }
 

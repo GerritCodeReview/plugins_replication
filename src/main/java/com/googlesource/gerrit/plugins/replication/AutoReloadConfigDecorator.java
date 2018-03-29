@@ -75,11 +75,9 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
           this.currentConfig = newConfig;
           this.currentConfigTs = lastModified;
           log.info(
-              "Configuration reloaded: "
-                  + currentConfig.getDestinations(FilterType.ALL).size()
-                  + " destinations, "
-                  + discarded
-                  + " replication events discarded");
+              "Configuration reloaded: {} destinations, {} replication events discarded",
+              currentConfig.getDestinations(FilterType.ALL).size(),
+              discarded);
         }
       }
     } catch (Exception e) {

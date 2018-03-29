@@ -21,9 +21,7 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Sets;
-import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
-import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.metrics.Timer1;
@@ -214,10 +212,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     if (ALL_REFS.equals(ref)) {
       delta.clear();
       pushAllRefs = true;
-      repLog.trace("Added all refs for replication to " + uri);
+      repLog.trace("Added all refs for replication to {}", uri);
     } else if (!pushAllRefs) {
       delta.add(ref);
-      repLog.trace("Added ref " + ref + " for replication to " + uri);
+      repLog.trace("Added ref {} for replication to {}", ref, uri);
     }
   }
 
@@ -301,13 +299,13 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     if (!pool.requestRunway(this)) {
       if (!canceled) {
         repLog.info(
-            "Rescheduling replication to " + uri + " to avoid collision with an in-flight push.");
+            "Rescheduling replication to {} to avoid collision with an in-flight push.", uri);
         pool.reschedule(this, Destination.RetryReason.COLLISION);
       }
       return;
     }
 
-    repLog.info("Replication to " + uri + " started...");
+    repLog.info("Replication to {} started...", uri);
     Timer1.Context context = metrics.start(config.getName());
     try {
       long startedAt = context.getStartTime();
@@ -317,15 +315,11 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       runImpl();
       long elapsed = NANOSECONDS.toMillis(context.stop());
       repLog.info(
-          "Replication to "
-              + uri
-              + " completed in "
-              + (elapsed)
-              + "ms, "
-              + (delay)
-              + "ms delay, "
-              + retryCount
-              + " retries");
+          "Replication to {} completed in {}ms, {}ms delay, {} retries",
+          uri,
+          elapsed,
+          delay,
+          retryCount);
     } catch (RepositoryNotFoundException e) {
       stateLog.error(
           "Cannot replicate " + projectName + "; Local repository error: " + e.getMessage(),
@@ -341,7 +335,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
           || msg.contains("Git repository not found")) {
         createRepository();
       } else {
-        repLog.error("Cannot replicate " + projectName + "; Remote repository error: " + msg);
+        repLog.error("Cannot replicate {}; Remote repository error: {}", projectName, msg);
       }
 
     } catch (NoRemoteRepositoryException e) {
@@ -351,12 +345,12 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     } catch (TransportException e) {
       Throwable cause = e.getCause();
       if (cause instanceof JSchException && cause.getMessage().startsWith("UnknownHostKey:")) {
-        repLog.error("Cannot replicate to " + uri + ": " + cause.getMessage());
+        repLog.error("Cannot replicate to {}: {}", uri, cause.getMessage());
       } else if (e instanceof LockFailureException) {
         lockRetryCount++;
         // The LockFailureException message contains both URI and reason
         // for this failure.
-        repLog.error("Cannot replicate to " + e.getMessage());
+        repLog.error("Cannot replicate to {}: {}", uri, e.getMessage());
 
         // The remote push operation should be retried.
         if (lockRetryCount <= maxLockRetries) {
@@ -367,16 +361,16 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
           }
         } else {
           repLog.error(
-              "Giving up after "
-                  + lockRetryCount
-                  + " of this error during replication to "
-                  + e.getMessage());
+              "Giving up after {} occurrences of this error: {} during replication to {}",
+              lockRetryCount,
+              e.getMessage(),
+              uri);
         }
       } else {
         if (canceledWhileRunning.get()) {
           logCanceledWhileRunningException(e);
         } else {
-          repLog.error("Cannot replicate to " + uri, e);
+          repLog.error("Cannot replicate to {}", uri, e);
           // The remote push operation should be retried.
           pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
         }
@@ -394,40 +388,22 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   private void logCanceledWhileRunningException(TransportException e) {
-    repLog.info("Cannot replicate to " + uri + ". It was canceled while running", e);
+    repLog.info("Cannot replicate to {}. It was canceled while running", uri, e);
   }
 
   private void createRepository() {
     if (pool.isCreateMissingRepos()) {
       try {
         Ref head = git.exactRef(Constants.HEAD);
-        if (replicationQueue.createProject(projectName, head != null ? head.getName() : null)) {
-          NewProjectCreatedListener.Event event =
-              new NewProjectCreatedListener.Event() {
-                @Override
-                public String getProjectName() {
-                  return projectName.get();
-                }
-
-                @Override
-                public String getHeadName() {
-                  return head != null ? head.getTarget().getName() : null;
-                }
-
-                @Override
-                public NotifyHandling getNotify() {
-                  return NotifyHandling.NONE;
-                }
-              };
-          replicationQueue.onNewProjectCreated(event);
-          repLog.warn("Missing repository created; retry replication to " + uri);
+        if (replicationQueue.createProject(projectName, head != null ? getName(head) : null)) {
+          repLog.warn("Missing repository created; retry replication to {}", uri);
           pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
         } else {
           repLog.warn(
-              "Missing repository could not be created when replicating "
-                  + uri
-                  + ". You can only create missing repositories locally, over SSH or when "
-                  + "using adminUrl in replication.config. See documentation for more information.");
+              "Missing repository could not be created when replicating {}. "
+                  + "You can only create missing repositories locally, over SSH or when "
+                  + "using adminUrl in replication.config. See documentation for more information.",
+              uri);
         }
       } catch (IOException ioe) {
         stateLog.error(
@@ -438,6 +414,14 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     } else {
       stateLog.error("Cannot replicate to " + uri + "; repository not found", getStatesAsArray());
     }
+  }
+
+  private String getName(Ref ref) {
+    Ref target = ref;
+    while (target.isSymbolic()) {
+      target = target.getTarget();
+    }
+    return target.getName();
   }
 
   private void runImpl() throws IOException, PermissionBackendException {
@@ -462,7 +446,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       return new PushResult();
     }
 
-    repLog.info("Push to " + uri + " references: " + todo);
+    repLog.info("Push to {} references: {}", uri, todo);
 
     return tn.push(NullProgressMonitor.INSTANCE, todo);
   }

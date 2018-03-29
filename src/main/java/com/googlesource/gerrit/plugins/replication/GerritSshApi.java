@@ -80,10 +80,13 @@ public class GerritSshApi {
       execute(uri, cmd, errStream);
     } catch (IOException e) {
       log.error(
-          String.format(
-              "Error updating HEAD of remote repository at %s to %s:\n"
-                  + "  Exception: %s\n  Command: %s\n  Output: %s",
-              uri, newHead, e, cmd, errStream),
+          "Error updating HEAD of remote repository at {} to {}:\n"
+              + "  Exception: {}\n  Command: {}\n  Output: {}",
+          uri,
+          newHead,
+          e,
+          cmd,
+          errStream,
           e);
       return false;
     }
@@ -111,7 +114,7 @@ public class GerritSshApi {
       URIish sshUri = toSshUri(uri);
       return sshHelper.executeRemoteSsh(sshUri, cmd, errStream);
     } catch (URISyntaxException e) {
-      log.error(String.format("Cannot convert %s to SSH uri", uri), e);
+      log.error("Cannot convert {} to SSH uri", uri, e);
     }
     return SSH_COMMAND_FAILED;
   }

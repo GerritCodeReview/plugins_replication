@@ -140,7 +140,7 @@ public class Destination {
           builder.add(g.getUUID());
           addRecursiveParents(g.getUUID(), builder, groupIncludeCache);
         } else {
-          repLog.warn(String.format("Group \"%s\" not recognized, removing from authGroup", name));
+          repLog.warn("Group \"{}\" not recognized, removing from authGroup", name);
         }
       }
       remoteUser = replicationUserFactory.create(new ListGroupMembership(builder.build()));
@@ -217,7 +217,7 @@ public class Destination {
   public int shutdown() {
     int cnt = 0;
     if (pool != null) {
-      repLog.warn(String.format("Cancelling replication events"));
+      repLog.warn("Cancelling replication events");
 
       cnt = pool.shutdownNow().size();
       pool = null;
@@ -576,8 +576,7 @@ public class Destination {
         } else if (remoteNameStyle.equals("basenameOnly")) {
           name = FilenameUtils.getBaseName(name);
         } else if (!remoteNameStyle.equals("slash")) {
-          repLog.debug(
-              String.format("Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle));
+          repLog.debug("Unknown remoteNameStyle: {}, falling back to slash", remoteNameStyle);
         }
         String replacedPath =
             ReplicationQueue.replaceName(uri.getPath(), name, isSingleProjectMatch());
