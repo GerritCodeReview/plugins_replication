@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.gerrit.reviewdb.client.RefNames.isMetaConfigRef;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
@@ -563,8 +564,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   private boolean canPushRef(String ref, boolean noPerms) {
-    return !(noPerms && RefNames.REFS_CONFIG.equals(ref))
-        && !ref.startsWith(RefNames.REFS_CACHE_AUTOMERGE);
+    return !(noPerms && isMetaConfigRef(ref)) && !ref.startsWith(RefNames.REFS_CACHE_AUTOMERGE);
   }
 
   private Map<String, Ref> listRemote(Transport tn)

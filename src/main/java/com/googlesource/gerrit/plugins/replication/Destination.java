@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.gerrit.reviewdb.client.RefNames.isMetaConfigRef;
 import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.NON_EXISTING;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.REJECTED_OTHER_REASON;
@@ -31,7 +32,6 @@ import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.PluginUser;
@@ -340,9 +340,7 @@ public class Destination {
         try (Repository git = gitManager.openRepository(project)) {
           try {
             Ref head = git.exactRef(Constants.HEAD);
-            if (head != null
-                && head.isSymbolic()
-                && RefNames.REFS_CONFIG.equals(head.getLeaf().getName())) {
+            if (head != null && head.isSymbolic() && isMetaConfigRef(head.getLeaf().getName())) {
               return;
             }
           } catch (IOException err) {
@@ -534,7 +532,7 @@ public class Destination {
   }
 
   boolean wouldPushRef(String ref) {
-    if (!config.replicatePermissions() && RefNames.REFS_CONFIG.equals(ref)) {
+    if (!config.replicatePermissions() && isMetaConfigRef(ref)) {
       return false;
     }
     for (RefSpec s : config.getRemoteConfig().getPushRefSpecs()) {
