@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7670c580_a4e94675",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1026112
+      },
+      "writtenOn": "2018-03-29T08:25:10Z",
+      "side": 1,
+      "message": "I don\u0027t think this is ever called because we run a state.statePermitsRead() check in l.266 - but this isn\u0027t an issue of this change :)",
+      "revId": "9b08f324462e62872ac071175e16e7553ba76e2b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a25f8515_7b028a0c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1026112
+      },
+      "writtenOn": "2018-03-29T08:25:10Z",
+      "side": 1,
+      "message": "statePermitsRead will always return true (see my earlier comment)\n\nHaving this check to maintain the current behavior is OK anyway IMHO.",
+      "revId": "9b08f324462e62872ac071175e16e7553ba76e2b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
