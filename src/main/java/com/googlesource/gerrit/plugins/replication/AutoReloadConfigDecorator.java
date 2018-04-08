@@ -14,7 +14,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.common.FileUtil;
-import com.google.gerrit.server.config.SitePaths;
+import com.google.gerrit.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

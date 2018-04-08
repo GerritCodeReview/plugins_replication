@@ -18,10 +18,10 @@ import static com.googlesource.gerrit.plugins.replication.DestinationConfigurati
 import static com.googlesource.gerrit.plugins.replication.DestinationConfiguration.DEFAULT_RESCHEDULE_DELAY;
 
 import com.google.common.base.Strings;
+import com.google.gerrit.config.SitePaths;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.pgm.init.api.ConsoleUI;
 import com.google.gerrit.pgm.init.api.InitStep;
-import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import java.io.File;
 import org.eclipse.jgit.storage.file.FileBasedConfig;

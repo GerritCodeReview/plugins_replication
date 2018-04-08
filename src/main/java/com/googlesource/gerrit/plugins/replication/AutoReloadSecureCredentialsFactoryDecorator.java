@@ -16,7 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.gerrit.common.FileUtil.lastModified;
 
-import com.google.gerrit.server.config.SitePaths;
+import com.google.gerrit.config.SitePaths;
 import com.google.inject.Inject;
 import java.io.IOException;
 import java.nio.file.Files;
