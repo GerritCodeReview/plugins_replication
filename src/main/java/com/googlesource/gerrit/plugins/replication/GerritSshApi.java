@@ -96,7 +96,7 @@ public class GerritSshApi {
   private URIish toSshUri(URIish uri) throws URISyntaxException {
     String uriStr = uri.toString();
     if (uri.getHost() != null && uriStr.startsWith(GERRIT_ADMIN_PROTOCOL_PREFIX)) {
-      return new URIish(uriStr.substring(0, GERRIT_ADMIN_PROTOCOL_PREFIX.length()));
+      return new URIish(uriStr.substring(GERRIT_ADMIN_PROTOCOL_PREFIX.length()));
     }
     String rawPath = uri.getRawPath();
     if (!rawPath.endsWith("/")) {
