@@ -50,8 +50,6 @@ public class OnStartStop implements LifecycleListener {
 
   @Override
   public void start() {
-    queue.start();
-
     if (srvInfo.getState() == ServerInformation.State.STARTUP
         && config.isReplicateAllOnPluginStart()) {
       ReplicationState state = new ReplicationState(new GitUpdateProcessing(eventDispatcher.get()));
@@ -68,6 +66,5 @@ public class OnStartStop implements LifecycleListener {
     if (f != null) {
       f.cancel(true);
     }
-    queue.stop();
   }
 }
