@@ -36,6 +36,9 @@ class ReplicationModule extends AbstractModule {
   protected void configure() {
     bind(DestinationFactory.class).in(Scopes.SINGLETON);
     bind(ReplicationQueue.class).in(Scopes.SINGLETON);
+    bind(LifecycleListener.class)
+        .annotatedWith(UniqueAnnotations.create())
+        .to(ReplicationQueue.class);
 
     DynamicSet.bind(binder(), GitReferenceUpdatedListener.class).to(ReplicationQueue.class);
     DynamicSet.bind(binder(), NewProjectCreatedListener.class).to(ReplicationQueue.class);
