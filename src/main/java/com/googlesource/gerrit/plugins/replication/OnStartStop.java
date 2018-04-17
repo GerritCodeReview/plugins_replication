@@ -29,7 +29,6 @@ public class OnStartStop implements LifecycleListener {
   private final AtomicReference<Future<?>> pushAllFuture;
   private final ServerInformation srvInfo;
   private final PushAll.Factory pushAll;
-  private final ReplicationQueue queue;
   private final ReplicationConfig config;
   private final DynamicItem<EventDispatcher> eventDispatcher;
 
@@ -37,12 +36,10 @@ public class OnStartStop implements LifecycleListener {
   protected OnStartStop(
       ServerInformation srvInfo,
       PushAll.Factory pushAll,
-      ReplicationQueue queue,
       ReplicationConfig config,
       DynamicItem<EventDispatcher> eventDispatcher) {
     this.srvInfo = srvInfo;
     this.pushAll = pushAll;
-    this.queue = queue;
     this.config = config;
     this.eventDispatcher = eventDispatcher;
     this.pushAllFuture = Atomics.newReference();
@@ -50,8 +47,6 @@ public class OnStartStop implements LifecycleListener {
 
   @Override
   public void start() {
-    queue.start();
-
     if (srvInfo.getState() == ServerInformation.State.STARTUP
         && config.isReplicateAllOnPluginStart()) {
       ReplicationState state = new ReplicationState(new GitUpdateProcessing(eventDispatcher.get()));
@@ -68,6 +63,5 @@ public class OnStartStop implements LifecycleListener {
     if (f != null) {
       f.cancel(true);
     }
-    queue.stop();
   }
 }
