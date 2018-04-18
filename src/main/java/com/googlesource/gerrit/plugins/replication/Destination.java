@@ -49,8 +49,7 @@ import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.permissions.ProjectPermission;
 import com.google.gerrit.server.permissions.RefPermission;
 import com.google.gerrit.server.project.NoSuchProjectException;
-import com.google.gerrit.server.project.ProjectCache;
-import com.google.gerrit.server.project.ProjectState;
+import com.google.gerrit.server.project.ProjectAccessor;
 import com.google.gerrit.server.util.RequestContext;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
@@ -88,7 +87,7 @@ public class Destination {
   private final GitRepositoryManager gitManager;
   private final PermissionBackend permissionBackend;
   private final Provider<CurrentUser> userProvider;
-  private final ProjectCache projectCache;
+  private final ProjectAccessor.Factory projectAccessorFactory;
   private volatile ScheduledExecutorService pool;
   private final PerThreadRequestScope.Scoper threadScoper;
   private final DestinationConfiguration config;
@@ -118,7 +117,7 @@ public class Destination {
       GitRepositoryManager gitRepositoryManager,
       PermissionBackend permissionBackend,
       Provider<CurrentUser> userProvider,
-      ProjectCache projectCache,
+      ProjectAccessor.Factory projectAccessorFactory,
       GroupBackend groupBackend,
       ReplicationStateListener stateLog,
       GroupIncludeCache groupIncludeCache,
@@ -128,7 +127,7 @@ public class Destination {
     gitManager = gitRepositoryManager;
     this.permissionBackend = permissionBackend;
     this.userProvider = userProvider;
-    this.projectCache = projectCache;
+    this.projectAccessorFactory = projectAccessorFactory;
     this.stateLog = stateLog;
 
     CurrentUser remoteUser;
@@ -225,10 +224,10 @@ public class Destination {
     return cnt;
   }
 
-  private boolean shouldReplicate(ProjectState state, CurrentUser user)
+  private boolean shouldReplicate(ProjectAccessor accessor, CurrentUser user)
       throws PermissionBackendException {
     if (!config.replicateHiddenProjects()
-        && state.getProject().getState()
+        && accessor.getProject().getState()
             == com.google.gerrit.extensions.client.ProjectState.HIDDEN) {
       return false;
     }
@@ -237,9 +236,9 @@ public class Destination {
     // READ_CONFIG is checked here because it's only allowed to project owners(ACCESS may also
     // be allowed for other users).
     ProjectPermission permissionToCheck =
-        state.statePermitsRead() ? ProjectPermission.ACCESS : ProjectPermission.READ_CONFIG;
+        accessor.statePermitsRead() ? ProjectPermission.ACCESS : ProjectPermission.READ_CONFIG;
     try {
-      permissionBackend.user(user).project(state.getNameKey()).check(permissionToCheck);
+      permissionBackend.user(user).project(accessor.getNameKey()).check(permissionToCheck);
       return true;
     } catch (AuthException e) {
       return false;
@@ -254,19 +253,16 @@ public class Destination {
               new Callable<Boolean>() {
                 @Override
                 public Boolean call() throws NoSuchProjectException, PermissionBackendException {
-                  ProjectState projectState;
+                  ProjectAccessor projectAccessor;
                   try {
-                    projectState = projectCache.checkedGet(project);
+                    projectAccessor = projectAccessorFactory.create(project);
                   } catch (IOException e) {
                     return false;
                   }
-                  if (projectState == null) {
-                    throw new NoSuchProjectException(project);
-                  }
-                  if (!projectState.statePermitsRead()) {
+                  if (!projectAccessor.statePermitsRead()) {
                     return false;
                   }
-                  if (!shouldReplicate(projectState, userProvider.get())) {
+                  if (!shouldReplicate(projectAccessor, userProvider.get())) {
                     return false;
                   }
                   if (PushOne.ALL_REFS.equals(ref)) {
@@ -301,16 +297,13 @@ public class Destination {
               new Callable<Boolean>() {
                 @Override
                 public Boolean call() throws NoSuchProjectException, PermissionBackendException {
-                  ProjectState projectState;
+                  ProjectAccessor projectAccessor;
                   try {
-                    projectState = projectCache.checkedGet(project);
+                    projectAccessor = projectAccessorFactory.create(project);
                   } catch (IOException e) {
                     return false;
                   }
-                  if (projectState == null) {
-                    throw new NoSuchProjectException(project);
-                  }
-                  return shouldReplicate(projectState, userProvider.get());
+                  return shouldReplicate(projectAccessor, userProvider.get());
                 }
               })
           .call();

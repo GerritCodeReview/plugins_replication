@@ -22,7 +22,7 @@ import com.google.gerrit.server.account.GroupIncludeCache;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.permissions.PermissionBackend;
-import com.google.gerrit.server.project.ProjectCache;
+import com.google.gerrit.server.project.ProjectAccessor;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
@@ -36,7 +36,7 @@ public class DestinationFactory {
   private final GitRepositoryManager gitRepositoryManager;
   private final PermissionBackend permissionBackend;
   private final Provider<CurrentUser> userProvider;
-  private final ProjectCache projectCache;
+  private final ProjectAccessor.Factory projectAccessorFactory;
   private final GroupBackend groupBackend;
   private final ReplicationStateListener stateLog;
   private final GroupIncludeCache groupIncludeCache;
@@ -50,7 +50,7 @@ public class DestinationFactory {
       GitRepositoryManager gitRepositoryManager,
       PermissionBackend permissionBackend,
       Provider<CurrentUser> userProvider,
-      ProjectCache projectCache,
+      ProjectAccessor.Factory projectAccessorFactory,
       GroupBackend groupBackend,
       ReplicationStateListener stateLog,
       GroupIncludeCache groupIncludeCache,
@@ -61,7 +61,7 @@ public class DestinationFactory {
     this.gitRepositoryManager = gitRepositoryManager;
     this.permissionBackend = permissionBackend;
     this.userProvider = userProvider;
-    this.projectCache = projectCache;
+    this.projectAccessorFactory = projectAccessorFactory;
     this.groupBackend = groupBackend;
     this.stateLog = stateLog;
     this.groupIncludeCache = groupIncludeCache;
@@ -77,7 +77,7 @@ public class DestinationFactory {
         gitRepositoryManager,
         permissionBackend,
         userProvider,
-        projectCache,
+        projectAccessorFactory,
         groupBackend,
         stateLog,
         groupIncludeCache,

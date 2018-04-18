@@ -36,8 +36,8 @@ import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackend.RefFilterOptions;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.permissions.ProjectPermission;
-import com.google.gerrit.server.project.ProjectCache;
-import com.google.gerrit.server.project.ProjectState;
+import com.google.gerrit.server.project.NoSuchProjectException;
+import com.google.gerrit.server.project.ProjectAccessor;
 import com.google.gerrit.server.util.IdGenerator;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
@@ -111,7 +111,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final int id;
   private final long createdAt;
   private final ReplicationMetrics metrics;
-  private final ProjectCache projectCache;
+  private final ProjectAccessor.Factory projectAccessorFactory;
   private final AtomicBoolean canceledWhileRunning;
 
   @Inject
@@ -126,7 +126,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       IdGenerator ig,
       ReplicationStateListener sl,
       ReplicationMetrics m,
-      ProjectCache pc,
+      ProjectAccessor.Factory paf,
       @Assisted Project.NameKey d,
       @Assisted URIish u) {
     gitManager = grm;
@@ -144,7 +144,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     stateLog = sl;
     createdAt = System.nanoTime();
     metrics = m;
-    projectCache = pc;
+    projectAccessorFactory = paf;
     canceledWhileRunning = new AtomicBoolean(false);
     maxRetries = p.getMaxRetries();
   }
@@ -454,8 +454,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
   private List<RemoteRefUpdate> generateUpdates(Transport tn)
       throws IOException, PermissionBackendException {
-    ProjectState projectState = projectCache.checkedGet(projectName);
-    if (projectState == null) {
+    ProjectAccessor projectAccessor;
+    try {
+      projectAccessor = projectAccessorFactory.create(projectName);
+    } catch (NoSuchProjectException e) {
       return Collections.emptyList();
     }
 
@@ -463,7 +465,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     boolean filter;
     PermissionBackend.ForProject forProject = permissionBackend.currentUser().project(projectName);
     try {
-      projectState.checkStatePermitsRead();
+      projectAccessor.checkStatePermitsRead();
       forProject.check(ProjectPermission.READ);
       filter = false;
     } catch (AuthException | ResourceConflictException e) {
