@@ -55,11 +55,11 @@ public class ReplicationStateTest {
   public void shouldFireOneReplicationEventWhenNothingToReplicate() {
     resetToDefault(pushResultProcessingMock);
 
-    //expected event
+    // expected event
     pushResultProcessingMock.onAllRefsReplicatedToAllNodes(0);
     replay(pushResultProcessingMock);
 
-    //actual test
+    // actual test
     replicationState.markAllPushTasksScheduled();
     verify(pushResultProcessingMock);
   }
@@ -69,14 +69,14 @@ public class ReplicationStateTest {
     resetToDefault(pushResultProcessingMock);
     URIish uri = new URIish("git://someHost/someRepo.git");
 
-    //expected events
+    // expected events
     pushResultProcessingMock.onRefReplicatedToOneNode(
         "someProject", "someRef", uri, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock.onRefReplicatedToAllNodes("someProject", "someRef", 1);
     pushResultProcessingMock.onAllRefsReplicatedToAllNodes(1);
     replay(pushResultProcessingMock);
 
-    //actual test
+    // actual test
     replicationState.increasePushTaskCount("someProject", "someRef");
     replicationState.markAllPushTasksScheduled();
     replicationState.notifyRefReplicated(
@@ -90,7 +90,7 @@ public class ReplicationStateTest {
     URIish uri1 = new URIish("git://someHost1/someRepo.git");
     URIish uri2 = new URIish("git://someHost2/someRepo.git");
 
-    //expected events
+    // expected events
     pushResultProcessingMock.onRefReplicatedToOneNode(
         "someProject", "someRef", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock.onRefReplicatedToOneNode(
@@ -99,7 +99,7 @@ public class ReplicationStateTest {
     pushResultProcessingMock.onAllRefsReplicatedToAllNodes(2);
     replay(pushResultProcessingMock);
 
-    //actual test
+    // actual test
     replicationState.increasePushTaskCount("someProject", "someRef");
     replicationState.increasePushTaskCount("someProject", "someRef");
     replicationState.markAllPushTasksScheduled();
@@ -118,7 +118,7 @@ public class ReplicationStateTest {
     URIish uri2 = new URIish("git://host2/someRepo.git");
     URIish uri3 = new URIish("git://host3/someRepo.git");
 
-    //expected events
+    // expected events
     pushResultProcessingMock.onRefReplicatedToOneNode(
         "someProject", "ref1", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock.onRefReplicatedToOneNode(
@@ -134,7 +134,7 @@ public class ReplicationStateTest {
     pushResultProcessingMock.onAllRefsReplicatedToAllNodes(5);
     replay(pushResultProcessingMock);
 
-    //actual test
+    // actual test
     replicationState.increasePushTaskCount("someProject", "ref1");
     replicationState.increasePushTaskCount("someProject", "ref1");
     replicationState.increasePushTaskCount("someProject", "ref1");
@@ -159,7 +159,7 @@ public class ReplicationStateTest {
     resetToDefault(pushResultProcessingMock);
     URIish uri = new URIish("git://host1/someRepo.git");
 
-    //expected events
+    // expected events
     pushResultProcessingMock.onRefReplicatedToOneNode(
         "project1", "ref1", uri, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock.onRefReplicatedToOneNode(
@@ -169,7 +169,7 @@ public class ReplicationStateTest {
     pushResultProcessingMock.onAllRefsReplicatedToAllNodes(2);
     replay(pushResultProcessingMock);
 
-    //actual test
+    // actual test
     replicationState.increasePushTaskCount("project1", "ref1");
     replicationState.increasePushTaskCount("project2", "ref2");
     replicationState.markAllPushTasksScheduled();
@@ -186,7 +186,7 @@ public class ReplicationStateTest {
     resetToDefault(pushResultProcessingMock);
     URIish uri1 = new URIish("git://host1/someRepo.git");
 
-    //expected events
+    // expected events
     pushResultProcessingMock.onRefReplicatedToOneNode(
         "someProject", "ref1", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     pushResultProcessingMock.onRefReplicatedToOneNode(
@@ -196,7 +196,7 @@ public class ReplicationStateTest {
     pushResultProcessingMock.onAllRefsReplicatedToAllNodes(2);
     replay(pushResultProcessingMock);
 
-    //actual test
+    // actual test
     replicationState.increasePushTaskCount("someProject", "ref1");
     replicationState.increasePushTaskCount("someProject", "ref2");
     replicationState.notifyRefReplicated(
