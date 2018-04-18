@@ -42,6 +42,7 @@ import org.slf4j.LoggerFactory;
 public class ReplicationFileBasedConfig implements ReplicationConfig {
   static final Logger log = LoggerFactory.getLogger(ReplicationFileBasedConfig.class);
   private List<Destination> destinations;
+  private final SitePaths site;
   private Path cfgPath;
   private boolean replicateAllOnPluginStart;
   private boolean defaultForceUpdate;
@@ -50,6 +51,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   @Inject
   public ReplicationFileBasedConfig(SitePaths site, DestinationFactory destinationFactory)
       throws ConfigInvalidException, IOException {
+    this.site = site;
     this.cfgPath = site.etc_dir.resolve("replication.config");
     this.config = new FileBasedConfig(cfgPath.toFile(), FS.DETECTED);
     this.destinations = allDestinations(destinationFactory);
@@ -178,6 +180,11 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   @Override
   public boolean isEmpty() {
     return destinations.isEmpty();
+  }
+
+  @Override
+  public Path getEventsDirectory() {
+    return site.resolve(config.getString("replication", null, "eventsDirectory"));
   }
 
   Path getCfgPath() {
