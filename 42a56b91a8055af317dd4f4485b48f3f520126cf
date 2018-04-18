@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d59179a0_5d035e8d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/OnStartStop.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-04-18T14:34:25Z",
+      "side": 1,
+      "message": "This refactoring to use a factory could be in a separate change",
+      "revId": "42a56b91a8055af317dd4f4485b48f3f520126cf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61a518f4_ae8947c2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-04-18T14:34:25Z",
+      "side": 1,
+      "message": "I think we should use @PluginData as default when directory is not configured.\n\nhttps://gerrit-review.googlesource.com/Documentation/dev-plugins.html#data-directory",
+      "range": {
+        "startLine": 185,
+        "startChar": 2,
+        "endLine": 188,
+        "endChar": 3
+      },
+      "revId": "42a56b91a8055af317dd4f4485b48f3f520126cf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
