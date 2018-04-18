@@ -52,13 +52,15 @@ final class StartCommand extends SshCommand {
 
   @Inject private PushAll.Factory pushFactory;
 
+  @Inject private ReplicationState.Factory replicationStateFactory;
+
   @Override
   protected void run() throws Failure {
     if (all && projectPatterns.size() > 0) {
       throw new UnloggedFailure(1, "error: cannot combine --all and PROJECT");
     }
 
-    ReplicationState state = new ReplicationState(new CommandProcessing(this));
+    ReplicationState state = replicationStateFactory.create(new CommandProcessing(this));
     Future<?> future = null;
 
     ReplicationFilter projectFilter;

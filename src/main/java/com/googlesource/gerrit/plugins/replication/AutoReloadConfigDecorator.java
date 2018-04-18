@@ -19,6 +19,7 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.slf4j.Logger;
@@ -99,6 +100,11 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   @Override
   public synchronized boolean isEmpty() {
     return currentConfig.isEmpty();
+  }
+
+  @Override
+  public Path getEventsDirectory() {
+    return currentConfig.getEventsDirectory();
   }
 
   @Override

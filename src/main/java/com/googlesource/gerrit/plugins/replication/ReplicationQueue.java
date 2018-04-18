@@ -14,7 +14,10 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.common.base.Strings;
+import com.google.common.hash.Hashing;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
@@ -23,7 +26,9 @@ import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.events.EventDispatcher;
+import com.google.gerrit.server.extensions.events.GitReferenceUpdated;
 import com.google.gerrit.server.git.WorkQueue;
+import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
@@ -31,11 +36,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.RefUpdate;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.URIish;
@@ -52,6 +61,7 @@ public class ReplicationQueue
         HeadUpdatedListener {
   static final String REPLICATION_LOG_NAME = "replication_log";
   static final Logger repLog = LoggerFactory.getLogger(REPLICATION_LOG_NAME);
+  private static Gson GSON = new Gson();
 
   private final ReplicationStateListener stateLog;
 
@@ -72,6 +82,7 @@ public class ReplicationQueue
   private final DynamicItem<EventDispatcher> dispatcher;
   private final ReplicationConfig config;
   private final GerritSshApi gerritAdmin;
+  private final ReplicationState.Factory replicationStateFactory;
   private volatile boolean running;
 
   @Inject
@@ -81,19 +92,22 @@ public class ReplicationQueue
       GerritSshApi ga,
       ReplicationConfig rc,
       DynamicItem<EventDispatcher> dis,
-      ReplicationStateListener sl) {
+      ReplicationStateListener sl,
+      ReplicationState.Factory rsf) {
     workQueue = wq;
     sshHelper = sh;
     dispatcher = dis;
     config = rc;
     stateLog = sl;
     gerritAdmin = ga;
+    replicationStateFactory = rsf;
   }
 
   @Override
   public void start() {
     config.startup(workQueue);
     running = true;
+    firePendingEvents();
   }
 
   @Override
@@ -127,7 +141,8 @@ public class ReplicationQueue
 
   @Override
   public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
-    ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
+    ReplicationState state =
+        replicationStateFactory.create(new GitUpdateProcessing(dispatcher.get()));
     if (!running) {
       stateLog.warn("Replication plugin did not finish startup before event", state);
       return;
@@ -136,12 +151,46 @@ public class ReplicationQueue
     Project.NameKey project = new Project.NameKey(event.getProjectName());
     for (Destination cfg : config.getDestinations(FilterType.ALL)) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(event.getRefName())) {
+        String eventKey = persist(event);
+        state.setEventKey(eventKey);
         for (URIish uri : cfg.getURIs(project, null)) {
           cfg.schedule(project, event.getRefName(), uri, state);
         }
       }
     }
     state.markAllPushTasksScheduled();
+  }
+
+  private void firePendingEvents() {
+    try (DirectoryStream<Path> events = Files.newDirectoryStream(config.getEventsDirectory())) {
+      for (Path e : events) {
+        if (Files.isRegularFile(e)) {
+          repLog.info("Firing pending event {}", e);
+          String eventJson = new String(Files.readAllBytes(e), UTF_8);
+          GitReferenceUpdatedListener.Event event =
+              GSON.fromJson(eventJson, GitReferenceUpdated.Event.class);
+          onGitReferenceUpdated(event);
+          Files.delete(e);
+        }
+      }
+    } catch (IOException e) {
+      repLog.error("Error when firing pending events", e);
+    }
+  }
+
+  private String persist(GitReferenceUpdatedListener.Event event) {
+    String eventKey = sha1(event).name();
+    try {
+      Files.write(
+          config.getEventsDirectory().resolve(eventKey), GSON.toJson(event).getBytes(UTF_8));
+    } catch (IOException e) {
+      repLog.warn("Couldn't persist event {}", event);
+    }
+    return eventKey;
+  }
+
+  private ObjectId sha1(GitReferenceUpdatedListener.Event event) {
+    return ObjectId.fromRaw(Hashing.sha1().hashString(event.toString(), UTF_8).asBytes());
   }
 
   @Override

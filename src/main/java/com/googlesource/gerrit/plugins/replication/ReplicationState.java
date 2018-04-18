@@ -16,15 +16,27 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import com.google.inject.assistedinject.Assisted;
+import com.google.inject.assistedinject.AssistedInject;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
+import org.slf4j.Logger;
 
 public class ReplicationState {
+  private static final Logger repLog = ReplicationQueue.repLog;
+
+  public interface Factory {
+    ReplicationState create(PushResultProcessing processing);
+  }
+
   private boolean allScheduled;
   private final PushResultProcessing pushResultProcessing;
+  private final ReplicationConfig config;
 
   private final Lock countingLock = new ReentrantLock();
   private final CountDownLatch allPushTasksFinished = new CountDownLatch(1);
@@ -49,7 +61,11 @@ public class ReplicationState {
   private int totalPushTasksCount;
   private int finishedPushTasksCount;
 
-  public ReplicationState(PushResultProcessing processing) {
+  private String eventKey;
+
+  @AssistedInject
+  ReplicationState(ReplicationConfig config, @Assisted PushResultProcessing processing) {
+    this.config = config;
     pushResultProcessing = processing;
     statusByProjectRef = HashBasedTable.create();
   }
@@ -74,6 +90,7 @@ public class ReplicationState {
       URIish uri,
       RefPushResult status,
       RemoteRefUpdate.Status refUpdateStatus) {
+    deleteEvent();
     pushResultProcessing.onRefReplicatedToOneNode(project, ref, uri, status, refUpdateStatus);
 
     RefReplicationStatus completedRefStatus = null;
@@ -100,6 +117,16 @@ public class ReplicationState {
 
     if (allPushTaksCompleted) {
       doAllPushTasksCompleted();
+    }
+  }
+
+  private void deleteEvent() {
+    if (eventKey != null) {
+      try {
+        Files.delete(config.getEventsDirectory().resolve(eventKey));
+      } catch (IOException e) {
+        repLog.error("Error while deleting event {}", eventKey);
+      }
     }
   }
 
@@ -172,5 +199,9 @@ public class ReplicationState {
     public String toString() {
       return name().toLowerCase().replace("_", "-");
     }
+  }
+
+  public void setEventKey(String eventKey) {
+    this.eventKey = eventKey;
   }
 }
