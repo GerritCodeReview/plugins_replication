@@ -14,11 +14,13 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.common.FileUtil;
+import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.slf4j.Logger;
@@ -33,13 +35,18 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private final SitePaths site;
   private final WorkQueue workQueue;
   private final DestinationFactory destinationFactory;
+  private final Path pluginDataDir;
 
   @Inject
   public AutoReloadConfigDecorator(
-      SitePaths site, WorkQueue workQueue, DestinationFactory destinationFactory)
+      SitePaths site,
+      WorkQueue workQueue,
+      DestinationFactory destinationFactory,
+      @PluginData Path pluginDataDir)
       throws ConfigInvalidException, IOException {
     this.site = site;
     this.destinationFactory = destinationFactory;
+    this.pluginDataDir = pluginDataDir;
     this.currentConfig = loadConfig();
     this.currentConfigTs = getLastModified(currentConfig);
     this.workQueue = workQueue;
@@ -50,7 +57,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   }
 
   private ReplicationFileBasedConfig loadConfig() throws ConfigInvalidException, IOException {
-    return new ReplicationFileBasedConfig(site, destinationFactory);
+    return new ReplicationFileBasedConfig(site, destinationFactory, pluginDataDir);
   }
 
   private synchronized boolean isAutoReload() {
@@ -99,6 +106,11 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   @Override
   public synchronized boolean isEmpty() {
     return currentConfig.isEmpty();
+  }
+
+  @Override
+  public Path getEventsDirectory() {
+    return currentConfig.getEventsDirectory();
   }
 
   @Override
