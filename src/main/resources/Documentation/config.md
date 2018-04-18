@@ -124,6 +124,17 @@ replication.maxRetries
 
 	By default, pushes are retried indefinitely.
 
+replication.eventsDirectory
+: Directory where replication events are persisted
+
+	When scheduling a replication, the replication event is persisted
+	under this directory. When the replication is done, the event is deleted.
+	If plugin is stopped before all scheduled replications are done, the
+	persisted events will not be deleted. When the plugin is started again,
+	it will trigger all replications found under this directory.
+
+	When not set, defaults to the plugin's data directory.
+
 remote.NAME.url
 :	Address of the remote server to push to.  Multiple URLs may be
 	specified within a single remote block, listing different

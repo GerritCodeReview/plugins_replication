@@ -17,8 +17,10 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toList;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.ConfigUtil;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
@@ -47,19 +49,24 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private static final int DEFAULT_SSH_CONNECTION_TIMEOUT_MS = 2 * 60 * 1000; // 2 minutes
 
   private List<Destination> destinations;
+  private final SitePaths site;
   private Path cfgPath;
   private boolean replicateAllOnPluginStart;
   private boolean defaultForceUpdate;
   private int sshCommandTimeout;
   private int sshConnectionTimeout = DEFAULT_SSH_CONNECTION_TIMEOUT_MS;
   private final FileBasedConfig config;
+  private final Path pluginDataDir;
 
   @Inject
-  public ReplicationFileBasedConfig(SitePaths site, DestinationFactory destinationFactory)
+  public ReplicationFileBasedConfig(
+      SitePaths site, DestinationFactory destinationFactory, @PluginData Path pluginDataDir)
       throws ConfigInvalidException, IOException {
+    this.site = site;
     this.cfgPath = site.etc_dir.resolve("replication.config");
     this.config = new FileBasedConfig(cfgPath.toFile(), FS.DETECTED);
     this.destinations = allDestinations(destinationFactory);
+    this.pluginDataDir = pluginDataDir;
   }
 
   /*
@@ -197,6 +204,15 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   @Override
   public boolean isEmpty() {
     return destinations.isEmpty();
+  }
+
+  @Override
+  public Path getEventsDirectory() {
+    String eventsDirectory = config.getString("replication", null, "eventsDirectory");
+    if (!Strings.isNullOrEmpty(eventsDirectory)) {
+      return site.resolve(eventsDirectory);
+    }
+    return pluginDataDir;
   }
 
   Path getCfgPath() {

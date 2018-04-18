@@ -52,6 +52,7 @@ final class StartCommand extends SshCommand {
   @Inject private PushAll.Factory pushFactory;
 
   private final Object lock = new Object();
+  @Inject private ReplicationState.Factory replicationStateFactory;
 
   @Override
   protected void run() throws Failure {
@@ -59,7 +60,7 @@ final class StartCommand extends SshCommand {
       throw new UnloggedFailure(1, "error: cannot combine --all and PROJECT");
     }
 
-    ReplicationState state = new ReplicationState(new CommandProcessing(this));
+    ReplicationState state = replicationStateFactory.create(new CommandProcessing(this));
     Future<?> future = null;
 
     ReplicationFilter projectFilter;

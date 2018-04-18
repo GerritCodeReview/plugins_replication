@@ -14,6 +14,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.server.git.WorkQueue;
+import java.nio.file.Path;
 import java.util.List;
 
 public interface ReplicationConfig {
@@ -31,6 +32,8 @@ public interface ReplicationConfig {
   boolean isDefaultForceUpdate();
 
   boolean isEmpty();
+
+  Path getEventsDirectory();
 
   int shutdown();
 
