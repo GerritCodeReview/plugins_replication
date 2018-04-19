@@ -65,7 +65,7 @@ remote section appears in the file.
 
 gerrit.replicateOnStartup
 :	If true, replicates to all remotes on startup to ensure they
-	are in-sync with this server.  By default, true.
+	are in-sync with this server.  By default, false.
 
 gerrit.autoReload
 :	If true, automatically reloads replication destinations and settings

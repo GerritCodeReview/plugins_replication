@@ -114,7 +114,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
           String.format("Cannot read %s: %s", config.getFile(), e.getMessage()), e);
     }
 
-    replicateAllOnPluginStart = config.getBoolean("gerrit", "replicateOnStartup", true);
+    replicateAllOnPluginStart = config.getBoolean("gerrit", "replicateOnStartup", false);
 
     defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);
 
