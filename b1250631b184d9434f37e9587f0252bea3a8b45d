@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "0d034c92_7a66bfcd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventsStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-04-19T14:42:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc8622f4_2b5681be",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 63
+      },
+      "revId": "b1250631b184d9434f37e9587f0252bea3a8b45d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f59482f0_187d99b8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 5
@@ -95,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "5ff7a1e3_a19ec4e1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-04-19T14:42:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18a70ed8_aae0663d",
+      "range": {
+        "startLine": 199,
+        "startChar": 11,
+        "endLine": 199,
+        "endChar": 15
+      },
+      "revId": "b1250631b184d9434f37e9587f0252bea3a8b45d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e5b79782_f5ff7a02",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 5
@@ -106,6 +154,30 @@
       "writtenOn": "2018-04-19T14:33:32Z",
       "side": 1,
       "message": "replication",
+      "range": {
+        "startLine": 120,
+        "startChar": 18,
+        "endLine": 120,
+        "endChar": 30
+      },
+      "revId": "b1250631b184d9434f37e9587f0252bea3a8b45d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b9b7a61_b6aa3de6",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-04-19T14:42:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5b79782_f5ff7a02",
       "range": {
         "startLine": 120,
         "startChar": 18,
