@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "18a70ed8_aae0663d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-04-19T14:38:45Z",
+      "side": 1,
+      "message": "This should be removed. I used this to better understand how ReplicationState instances are used.",
+      "parentUuid": "f59482f0_187d99b8",
+      "range": {
+        "startLine": 199,
+        "startChar": 11,
+        "endLine": 199,
+        "endChar": 15
+      },
+      "revId": "b1250631b184d9434f37e9587f0252bea3a8b45d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e5b79782_f5ff7a02",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 5
