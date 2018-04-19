@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ee1966f_b9970692",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-04-19T14:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "644e3c7f_ac5494be",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "b1250631b184d9434f37e9587f0252bea3a8b45d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc8622f4_2b5681be",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventsStorage.java",
         "patchSetId": 5
