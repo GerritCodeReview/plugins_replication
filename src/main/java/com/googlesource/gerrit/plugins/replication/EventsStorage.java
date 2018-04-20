@@ -96,6 +96,7 @@ public class EventsStorage {
     return result;
   }
 
+  @SuppressWarnings("deprecation")
   private ObjectId sha1(String s) {
     return ObjectId.fromRaw(Hashing.sha1().hashString(s, UTF_8).asBytes());
   }
