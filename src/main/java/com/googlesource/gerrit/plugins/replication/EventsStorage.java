@@ -54,7 +54,7 @@ public class EventsStorage {
     r.project = project;
     r.ref = ref;
 
-    String json = GSON.toJson(r);
+    String json = GSON.toJson(r) + "\n";
     String eventKey = sha1(json).name();
     Path file = refUpdates().resolve(eventKey);
 
