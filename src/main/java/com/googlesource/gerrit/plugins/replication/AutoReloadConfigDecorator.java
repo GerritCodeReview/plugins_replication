@@ -13,6 +13,7 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.FileUtil;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
@@ -23,12 +24,11 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Singleton
 public class AutoReloadConfigDecorator implements ReplicationConfig {
-  private static final Logger log = LoggerFactory.getLogger(AutoReloadConfigDecorator.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+
   private ReplicationFileBasedConfig currentConfig;
   private long currentConfigTs;
 
@@ -81,14 +81,14 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
 
           this.currentConfig = newConfig;
           this.currentConfigTs = lastModified;
-          log.info(
-              "Configuration reloaded: {} destinations, {} replication events discarded",
-              currentConfig.getDestinations(FilterType.ALL).size(),
-              discarded);
+          logger.atInfo().log(
+              "Configuration reloaded: %d destinations, %d replication events discarded",
+              currentConfig.getDestinations(FilterType.ALL).size(), discarded);
         }
       }
     } catch (Exception e) {
-      log.error("Cannot reload replication configuration: keeping existing settings", e);
+      logger.atSevere().withCause(e).log(
+          "Cannot reload replication configuration: keeping existing settings");
       return;
     }
   }

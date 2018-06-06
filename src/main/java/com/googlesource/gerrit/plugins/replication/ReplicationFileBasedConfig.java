@@ -18,6 +18,7 @@ import static java.util.stream.Collectors.toList;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
@@ -37,12 +38,11 @@ import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Singleton
 public class ReplicationFileBasedConfig implements ReplicationConfig {
-  private static final Logger log = LoggerFactory.getLogger(ReplicationFileBasedConfig.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+
   private List<Destination> destinations;
   private final SitePaths site;
   private Path cfgPath;
@@ -89,11 +89,11 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private List<Destination> allDestinations(DestinationFactory destinationFactory)
       throws ConfigInvalidException, IOException {
     if (!config.getFile().exists()) {
-      log.warn("Config file {} does not exist; not replicating", config.getFile());
+      logger.atWarning().log("Config file %s does not exist; not replicating", config.getFile());
       return Collections.emptyList();
     }
     if (config.getFile().length() == 0) {
-      log.info("Config file {} is empty; not replicating", config.getFile());
+      logger.atInfo().log("Config file %s is empty; not replicating", config.getFile());
       return Collections.emptyList();
     }
 
