@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher A0D0EF51 1528275166 +0200\nnonce ADrMV7a2whoC6ERVUuhoo2UpkFyvNiGzvVtgJPDmnDk1A2mHwXSsT9ENYMz/L4pPrnxoP5mmyVIo\n\n0000000000000000000000000000000000000000 0c5772cbb16fbe2d477034c76b66d362db82081d refs/for/master\n-----BEGIN PGP SIGNATURE-----\n\niQEzBAABCgAdFiEEjcOJ9ZBmQPrFqZA3UbX9l6DQ71EFAlsXoN4ACgkQUbX9l6DQ\n71H7Xwf+IsvuGkGr7NyvJzaQtrVs58A4pylB2sciP9aGoWEVdctAQj5B9rvKlr5i\nZzf8L5eMsIwpwdB0ZL4bahnqVtNSi+pK6mmL3m6kf5h0Lj12kd2jum//CvsknMBp\nuYdHO7TtpgzBR8+/lW1v/t7ymUGxfQaHj4FOm3uD7xp4zBQtGKR8zIDYgzfwkl38\nAtEPyN8Ei75UzSjEINc7OeLSUdp9mTAupdzEal1z89bHq0uXn0z/Cg5cxFzaeRxX\n4yCnoyeuVxWzgzq3cgqNWm5xNTL+A4E6xJ90qPVc1wEps5LrepP14rFK7tGxiCcy\n2SmkIgAMOZYKBc+/pnV+Dc5oTiixZQ\u003d\u003d\n\u003d0sXl\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8278e43_64fd4ffb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-06-06T10:13:36Z",
+      "side": 1,
+      "message": "Was this formatted with gjf version 1.6?",
+      "revId": "0c5772cbb16fbe2d477034c76b66d362db82081d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
 }
