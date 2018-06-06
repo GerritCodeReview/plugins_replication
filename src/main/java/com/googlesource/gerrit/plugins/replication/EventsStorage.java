@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.common.hash.Hashing;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
@@ -28,12 +29,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.jgit.lib.ObjectId;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Singleton
 public class EventsStorage {
-  private static final Logger log = LoggerFactory.getLogger(EventsStorage.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   public static class ReplicateRefUpdate {
     public String project;
@@ -65,7 +64,7 @@ public class EventsStorage {
     try {
       Files.write(file, json.getBytes(UTF_8));
     } catch (IOException e) {
-      log.warn("Couldn't persist event {}", json);
+      logger.atWarning().log("Couldn't persist event %s", json);
     }
     return eventKey;
   }
@@ -75,7 +74,7 @@ public class EventsStorage {
       try {
         Files.delete(refUpdates().resolve(eventKey));
       } catch (IOException e) {
-        log.error("Error while deleting event {}", eventKey);
+        logger.atSevere().log("Error while deleting event %s", eventKey);
       }
     }
   }
@@ -91,7 +90,7 @@ public class EventsStorage {
         }
       }
     } catch (IOException e) {
-      log.error("Error when firing pending events", e);
+      logger.atSevere().withCause(e).log("Error when firing pending events");
     }
     return result;
   }

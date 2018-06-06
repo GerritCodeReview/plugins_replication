@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.ssh.SshAddressesModule;
 import com.google.inject.Inject;
@@ -23,12 +24,11 @@ import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.jgit.transport.URIish;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class GerritSshApi {
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+
   static int SSH_COMMAND_FAILED = -1;
-  private static final Logger log = LoggerFactory.getLogger(GerritSshApi.class);
   private static String GERRIT_ADMIN_PROTOCOL_PREFIX = "gerrit+";
 
   private final SshHelper sshHelper;
@@ -64,8 +64,11 @@ public class GerritSshApi {
         return false;
       }
       if (exitCode == 1) {
-        log.info(
-            "DeleteProject plugin is not installed on {}; will not try to forward this operation to that host");
+        logger
+            .atInfo()
+            .log(
+                "DeleteProject plugin is not installed on %s;"
+                    + " will not try to forward this operation to that host");
         withoutDeleteProjectPlugin.add(uri);
         return true;
       }
@@ -79,15 +82,13 @@ public class GerritSshApi {
     try {
       execute(uri, cmd, errStream);
     } catch (IOException e) {
-      log.error(
-          "Error updating HEAD of remote repository at {} to {}:\n"
-              + "  Exception: {}\n  Command: {}\n  Output: {}",
-          uri,
-          newHead,
-          e,
-          cmd,
-          errStream,
-          e);
+      logger
+          .atSevere()
+          .withCause(e)
+          .log(
+              "Error updating HEAD of remote repository at %s to %s:\n"
+                  + "  Exception: %s\n  Command: %s\n  Output: %s",
+              uri, newHead, e, cmd, errStream);
       return false;
     }
     return true;
@@ -114,19 +115,17 @@ public class GerritSshApi {
       URIish sshUri = toSshUri(uri);
       return sshHelper.executeRemoteSsh(sshUri, cmd, errStream);
     } catch (URISyntaxException e) {
-      log.error("Cannot convert {} to SSH uri", uri, e);
+      logger.atSevere().withCause(e).log("Cannot convert %s to SSH uri", uri);
     }
     return SSH_COMMAND_FAILED;
   }
 
   public void logError(String msg, URIish uri, OutputStream errStream, String cmd, IOException e) {
-    log.error(
-        "Error {} remote repository at {}:\n  Exception: {}\n  Command: {}\n  Output: {}",
-        msg,
-        uri,
-        e,
-        cmd,
-        errStream,
-        e);
+    logger
+        .atSevere()
+        .withCause(e)
+        .log(
+            "Error %s remote repository at %s:\n  Exception: %s\n  Command: %s\n  Output: %s",
+            msg, uri, e, cmd, errStream);
   }
 }

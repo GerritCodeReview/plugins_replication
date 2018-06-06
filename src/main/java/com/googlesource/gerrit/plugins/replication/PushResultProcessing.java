@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.events.RefEvent;
 import com.google.gerrit.server.permissions.PermissionBackendException;
@@ -23,8 +24,6 @@ import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class PushResultProcessing {
 
@@ -159,7 +158,7 @@ public abstract class PushResultProcessing {
   }
 
   public static class GitUpdateProcessing extends PushResultProcessing {
-    private static final Logger log = LoggerFactory.getLogger(GitUpdateProcessing.class);
+    private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
     private final EventDispatcher dispatcher;
 
@@ -189,7 +188,7 @@ public abstract class PushResultProcessing {
       try {
         dispatcher.postEvent(event);
       } catch (OrmException | PermissionBackendException e) {
-        log.error("Cannot post event", e);
+        logger.atSevere().withCause(e).log("Cannot post event");
       }
     }
   }

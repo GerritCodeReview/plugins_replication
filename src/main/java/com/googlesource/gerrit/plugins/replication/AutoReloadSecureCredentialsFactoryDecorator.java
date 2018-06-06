@@ -16,18 +16,16 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.gerrit.common.FileUtil.lastModified;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.jgit.errors.ConfigInvalidException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsFactory {
-  private static final Logger log =
-      LoggerFactory.getLogger(AutoReloadSecureCredentialsFactoryDecorator.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final AtomicReference<SecureCredentialsFactory> secureCredentialsFactory;
   private volatile long secureCredentialsFactoryLoadTs;
@@ -58,13 +56,15 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsF
         secureCredentialsFactory.compareAndSet(
             secureCredentialsFactory.get(), new SecureCredentialsFactory(site));
         secureCredentialsFactoryLoadTs = getSecureConfigLastEditTs();
-        log.info("secure.config reloaded as it was updated on the file system");
+        logger.atInfo().log("secure.config reloaded as it was updated on the file system");
       }
     } catch (Exception e) {
-      log.error(
-          "Unexpected error while trying to reload "
-              + "secure.config: keeping existing credentials",
-          e);
+      logger
+          .atSevere()
+          .withCause(e)
+          .log(
+              "Unexpected error while trying to reload "
+                  + "secure.config: keeping existing credentials");
     }
 
     return secureCredentialsFactory.get().create(remoteName);
