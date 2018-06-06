@@ -29,9 +29,8 @@ import org.kohsuke.args4j.Option;
 
 @RequiresCapability(StartReplicationCapability.START_REPLICATION)
 @CommandMetaData(
-  name = "start",
-  description = "Start replication for specific project or all projects"
-)
+    name = "start",
+    description = "Start replication for specific project or all projects")
 final class StartCommand extends SshCommand {
   @Inject private ReplicationStateLogger stateLog;
 
