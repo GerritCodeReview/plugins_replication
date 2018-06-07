@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
 
 @Singleton
 public class ReplicationFileBasedConfig implements ReplicationConfig {
-  static final Logger log = LoggerFactory.getLogger(ReplicationFileBasedConfig.class);
+  private static final Logger log = LoggerFactory.getLogger(ReplicationFileBasedConfig.class);
   private List<Destination> destinations;
   private final SitePaths site;
   private Path cfgPath;

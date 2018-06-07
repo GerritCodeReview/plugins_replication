@@ -159,7 +159,7 @@ public abstract class PushResultProcessing {
   }
 
   public static class GitUpdateProcessing extends PushResultProcessing {
-    static final Logger log = LoggerFactory.getLogger(GitUpdateProcessing.class);
+    private static final Logger log = LoggerFactory.getLogger(GitUpdateProcessing.class);
 
     private final EventDispatcher dispatcher;
 
