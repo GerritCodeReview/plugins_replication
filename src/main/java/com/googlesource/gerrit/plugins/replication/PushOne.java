@@ -31,6 +31,7 @@ import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
 import com.google.gerrit.server.git.ProjectRunnable;
 import com.google.gerrit.server.git.WorkQueue.CanceledWhileRunning;
+import com.google.gerrit.server.ioutil.HexFormat;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackend.RefFilterOptions;
 import com.google.gerrit.server.permissions.PermissionBackendException;
@@ -178,7 +179,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
   @Override
   public String toString() {
-    String print = "[" + IdGenerator.format(id) + "] push " + uri;
+    String print = "[" + HexFormat.fromInt(id) + "] push " + uri;
 
     if (retryCount > 0) {
       print = "(retry " + retryCount + ") " + print;
@@ -295,7 +296,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     // we start replication (instead a new instance, with the same URI, is
     // created and scheduled for a future point in time.)
     //
-    MDC.put(ID_MDC_KEY, IdGenerator.format(id));
+    MDC.put(ID_MDC_KEY, HexFormat.fromInt(id));
     if (!pool.requestRunway(this)) {
       if (!canceled) {
         repLog.info(
