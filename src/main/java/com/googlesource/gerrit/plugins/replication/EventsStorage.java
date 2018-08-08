@@ -74,7 +74,7 @@ public class EventsStorage {
       try {
         Files.delete(refUpdates().resolve(eventKey));
       } catch (IOException e) {
-        logger.atSevere().log("Error while deleting event %s", eventKey);
+        logger.atSevere().withCause(e).log("Error while deleting event %s", eventKey);
       }
     }
   }
