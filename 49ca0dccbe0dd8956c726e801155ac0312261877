@@ -119,6 +119,30 @@
       "revId": "49ca0dccbe0dd8956c726e801155ac0312261877",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2f47c98_02b5d7ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-09-05T15:44:33Z",
+      "side": 1,
+      "message": "\"to each destination\" is what I meant",
+      "parentUuid": "2a2f5443_4acf5bdc",
+      "range": {
+        "startLine": 11,
+        "startChar": 10,
+        "endLine": 11,
+        "endChar": 30
+      },
+      "revId": "49ca0dccbe0dd8956c726e801155ac0312261877",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
