@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "794f395b_2c924127",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-09-05T02:14:28Z",
+      "side": 1,
+      "message": "\"only after\"?",
+      "range": {
+        "startLine": 7,
+        "startChar": 18,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "49ca0dccbe0dd8956c726e801155ac0312261877",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "80c63873_190f36e3",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -13,6 +36,30 @@
       "writtenOn": "2018-09-04T23:37:52Z",
       "side": 1,
       "message": "should this be \"to each destination\"?",
+      "range": {
+        "startLine": 11,
+        "startChar": 10,
+        "endLine": 11,
+        "endChar": 30
+      },
+      "revId": "49ca0dccbe0dd8956c726e801155ac0312261877",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15f65128_51947b42",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-09-05T02:14:28Z",
+      "side": 1,
+      "message": "or \"to the first destination\"?",
+      "parentUuid": "80c63873_190f36e3",
       "range": {
         "startLine": 11,
         "startChar": 10,
