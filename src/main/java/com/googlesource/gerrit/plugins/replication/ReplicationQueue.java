@@ -14,6 +14,9 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerrit;
+import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isSSH;
+
 import com.google.common.base.Strings;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
@@ -27,19 +30,12 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
-import org.eclipse.jgit.internal.storage.file.FileRepository;
-import org.eclipse.jgit.lib.Constants;
-import org.eclipse.jgit.lib.RefUpdate;
-import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.URIish;
-import org.eclipse.jgit.util.QuotedString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,10 +64,9 @@ public class ReplicationQueue
   }
 
   private final WorkQueue workQueue;
-  private final SshHelper sshHelper;
   private final DynamicItem<EventDispatcher> dispatcher;
   private final ReplicationConfig config;
-  private final GerritSshApi gerritAdmin;
+  private final AdminApiFactory adminApiFactory;
   private final ReplicationState.Factory replicationStateFactory;
   private final EventsStorage eventsStorage;
   private volatile boolean running;
@@ -79,19 +74,17 @@ public class ReplicationQueue
   @Inject
   ReplicationQueue(
       WorkQueue wq,
-      SshHelper sh,
-      GerritSshApi ga,
+      AdminApiFactory aaf,
       ReplicationConfig rc,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListener sl,
       ReplicationState.Factory rsf,
       EventsStorage es) {
     workQueue = wq;
-    sshHelper = sh;
     dispatcher = dis;
     config = rc;
     stateLog = sl;
-    gerritAdmin = ga;
+    adminApiFactory = aaf;
     replicationStateFactory = rsf;
     eventsStorage = es;
   }
@@ -255,192 +248,41 @@ public class ReplicationQueue
   }
 
   private boolean createProject(URIish replicateURI, Project.NameKey projectName, String head) {
-    if (isGerrit(replicateURI)) {
-      gerritAdmin.createProject(replicateURI, projectName, head);
-    } else if (!replicateURI.isRemote()) {
-      createLocally(replicateURI, head);
-    } else if (isSSH(replicateURI)) {
-      createRemoteSsh(replicateURI, head);
-    } else {
-      repLog.warn(
-          "Cannot create new project on remote site {}."
-              + " Only local paths and SSH URLs are supported"
-              + " for remote repository creation",
-          replicateURI);
-      return false;
-    }
-    return true;
-  }
-
-  private static void createLocally(URIish uri, String head) {
-    try (Repository repo = new FileRepository(uri.getPath())) {
-      repo.create(true /* bare */);
-
-      if (head != null && head.startsWith(Constants.R_REFS)) {
-        RefUpdate u = repo.updateRef(Constants.HEAD);
-        u.disableRefLog();
-        u.link(head);
-      }
-      repLog.info("Created local repository: {}", uri);
-    } catch (IOException e) {
-      repLog.error("Error creating local repository {}:\n", uri.getPath(), e);
-    }
-  }
-
-  private void createRemoteSsh(URIish uri, String head) {
-    String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
-    String cmd = "mkdir -p " + quotedPath + " && cd " + quotedPath + " && git init --bare";
-    if (head != null) {
-      cmd = cmd + " && git symbolic-ref HEAD " + QuotedString.BOURNE.quote(head);
-    }
-    OutputStream errStream = sshHelper.newErrorBufferStream();
-    try {
-      sshHelper.executeRemoteSsh(uri, cmd, errStream);
-      repLog.info("Created remote repository: {}", uri);
-    } catch (IOException e) {
-      repLog.error(
-          "Error creating remote repository at {}:\n"
-              + "  Exception: {}\n"
-              + "  Command: {}\n"
-              + "  Output: {}",
-          uri,
-          e,
-          cmd,
-          errStream,
-          e);
-    }
-  }
-
-  private void deleteProject(URIish replicateURI, Project.NameKey projectName) {
-    if (isGerrit(replicateURI)) {
-      gerritAdmin.deleteProject(replicateURI, projectName);
-      repLog.info("Deleted remote repository: " + replicateURI);
-    } else if (!replicateURI.isRemote()) {
-      deleteLocally(replicateURI);
-    } else if (isSSH(replicateURI)) {
-      deleteRemoteSsh(replicateURI);
-    } else {
-      repLog.warn(
-          "Cannot delete project on remote site {}. "
-              + "Only local paths and SSH URLs are supported"
-              + " for remote repository deletion",
-          replicateURI);
-    }
-  }
-
-  private static void deleteLocally(URIish uri) {
-    try {
-      recursivelyDelete(new File(uri.getPath()));
-      repLog.info("Deleted local repository: {}", uri);
-    } catch (IOException e) {
-      repLog.error("Error deleting local repository {}:\n", uri.getPath(), e);
-    }
-  }
-
-  private static void recursivelyDelete(File dir) throws IOException {
-    File[] contents = dir.listFiles();
-    if (contents != null) {
-      for (File d : contents) {
-        if (d.isDirectory()) {
-          recursivelyDelete(d);
-        } else {
-          if (!d.delete()) {
-            throw new IOException("Failed to delete: " + d.getAbsolutePath());
-          }
-        }
-      }
-    }
-    if (!dir.delete()) {
-      throw new IOException("Failed to delete: " + dir.getAbsolutePath());
-    }
-  }
-
-  private void deleteRemoteSsh(URIish uri) {
-    String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
-    String cmd = "rm -rf " + quotedPath;
-    OutputStream errStream = sshHelper.newErrorBufferStream();
-    try {
-      sshHelper.executeRemoteSsh(uri, cmd, errStream);
-      repLog.info("Deleted remote repository: {}", uri);
-    } catch (IOException e) {
-      repLog.error(
-          "Error deleting remote repository at {}:\n"
-              + "  Exception: {}\n"
-              + "  Command: {}\n"
-              + "  Output: {}",
-          uri,
-          e,
-          cmd,
-          errStream,
-          e);
-    }
-  }
-
-  private void updateHead(URIish replicateURI, Project.NameKey projectName, String newHead) {
-    if (isGerrit(replicateURI)) {
-      gerritAdmin.updateHead(replicateURI, projectName, newHead);
-    } else if (!replicateURI.isRemote()) {
-      updateHeadLocally(replicateURI, newHead);
-    } else if (isSSH(replicateURI)) {
-      updateHeadRemoteSsh(replicateURI, newHead);
-    } else {
-      repLog.warn(
-          "Cannot update HEAD of project on remote site {}."
-              + " Only local paths and SSH URLs are supported"
-              + " for remote HEAD update.",
-          replicateURI);
-    }
-  }
-
-  private void updateHeadRemoteSsh(URIish uri, String newHead) {
-    String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
-    String cmd =
-        "cd " + quotedPath + " && git symbolic-ref HEAD " + QuotedString.BOURNE.quote(newHead);
-    OutputStream errStream = sshHelper.newErrorBufferStream();
-    try {
-      sshHelper.executeRemoteSsh(uri, cmd, errStream);
-    } catch (IOException e) {
-      repLog.error(
-          "Error updating HEAD of remote repository at {} to {}:\n"
-              + "  Exception: {}\n"
-              + "  Command: {}\n"
-              + "  Output: {}",
-          uri,
-          newHead,
-          e,
-          cmd,
-          errStream,
-          e);
-    }
-  }
-
-  private static void updateHeadLocally(URIish uri, String newHead) {
-    try (Repository repo = new FileRepository(uri.getPath())) {
-      if (newHead != null) {
-        RefUpdate u = repo.updateRef(Constants.HEAD);
-        u.link(newHead);
-      }
-    } catch (IOException e) {
-      repLog.error("Failed to update HEAD of repository {} to {}", uri.getPath(), newHead, e);
-    }
-  }
-
-  private static boolean isSSH(URIish uri) {
-    String scheme = uri.getScheme();
-    if (!uri.isRemote()) {
-      return false;
-    }
-    if (scheme != null && scheme.toLowerCase().contains("ssh")) {
+    Optional<AdminApi> adminApi = adminApiFactory.create(replicateURI);
+    if (adminApi.isPresent()) {
+      adminApi.get().createProject(projectName, head);
       return true;
     }
-    if (scheme == null && uri.getHost() != null && uri.getPath() != null) {
-      return true;
-    }
+
+    warnCannotPerform("create new project", replicateURI);
     return false;
   }
 
-  private static boolean isGerrit(URIish uri) {
-    String scheme = uri.getScheme();
-    return scheme != null && scheme.toLowerCase().equals("gerrit+ssh");
+  private void deleteProject(URIish replicateURI, Project.NameKey projectName) {
+    Optional<AdminApi> adminApi = adminApiFactory.create(replicateURI);
+    if (adminApi.isPresent()) {
+      adminApi.get().deleteProject(projectName);
+      return;
+    }
+
+    warnCannotPerform("delete project", replicateURI);
+  }
+
+  private void updateHead(URIish replicateURI, Project.NameKey projectName, String newHead) {
+    Optional<AdminApi> adminApi = adminApiFactory.create(replicateURI);
+    if (adminApi.isPresent()) {
+      adminApi.get().updateHead(projectName, newHead);
+      return;
+    }
+
+    warnCannotPerform("update HEAD of project", replicateURI);
+  }
+
+  private void warnCannotPerform(String op, URIish uri) {
+    repLog.warn(
+        "Cannot {} on remote site {}."
+            + "Only local paths and SSH URLs are supported for this operation",
+        op,
+        uri);
   }
 }
