@@ -17,7 +17,6 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.ssh.SshAddressesModule;
-import com.google.inject.Inject;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
@@ -25,34 +24,35 @@ import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.jgit.transport.URIish;
 
-public class GerritSshApi {
+public class GerritSshApi implements AdminApi {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   static int SSH_COMMAND_FAILED = -1;
   private static String GERRIT_ADMIN_PROTOCOL_PREFIX = "gerrit+";
 
   private final SshHelper sshHelper;
+  private final URIish uri;
 
   private final Set<URIish> withoutDeleteProjectPlugin = new HashSet<>();
 
-  @Inject
-  protected GerritSshApi(SshHelper sshHelper) {
+  protected GerritSshApi(SshHelper sshHelper, URIish uri) {
     this.sshHelper = sshHelper;
+    this.uri = uri;
   }
 
-  protected boolean createProject(URIish uri, Project.NameKey projectName, String head) {
+  @Override
+  public void createProject(Project.NameKey projectName, String head) {
     OutputStream errStream = sshHelper.newErrorBufferStream();
     String cmd = "gerrit create-project --branch " + head + " " + projectName.get();
     try {
       execute(uri, cmd, errStream);
     } catch (IOException e) {
       logError("creating", uri, errStream, cmd, e);
-      return false;
     }
-    return true;
   }
 
-  protected boolean deleteProject(URIish uri, Project.NameKey projectName) {
+  @Override
+  public void deleteProject(Project.NameKey projectName) {
     if (!withoutDeleteProjectPlugin.contains(uri)) {
       OutputStream errStream = sshHelper.newErrorBufferStream();
       String cmd = "deleteproject delete --yes-really-delete --force " + projectName.get();
@@ -61,20 +61,18 @@ public class GerritSshApi {
         exitCode = execute(uri, cmd, errStream);
       } catch (IOException e) {
         logError("deleting", uri, errStream, cmd, e);
-        return false;
       }
       if (exitCode == 1) {
         logger.atInfo().log(
             "DeleteProject plugin is not installed on %s;"
                 + " will not try to forward this operation to that host");
         withoutDeleteProjectPlugin.add(uri);
-        return true;
       }
     }
-    return true;
   }
 
-  protected boolean updateHead(URIish uri, Project.NameKey projectName, String newHead) {
+  @Override
+  public void updateHead(Project.NameKey projectName, String newHead) {
     OutputStream errStream = sshHelper.newErrorBufferStream();
     String cmd = "gerrit set-head " + projectName.get() + " --new-head " + newHead;
     try {
@@ -84,9 +82,7 @@ public class GerritSshApi {
           "Error updating HEAD of remote repository at %s to %s:\n"
               + "  Exception: %s\n  Command: %s\n  Output: %s",
           uri, newHead, e, cmd, errStream);
-      return false;
     }
-    return true;
   }
 
   private URIish toSshUri(URIish uri) throws URISyntaxException {
