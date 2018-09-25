@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e8139ea_31c11d64",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AdminApiFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-09-25T10:32:52Z",
+      "side": 1,
+      "message": "Nit: The else-clause is redundant.",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 5
+      },
+      "revId": "818c3475bd68436280d90071d33e29781142aa5a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
