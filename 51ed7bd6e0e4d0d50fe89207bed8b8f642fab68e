@@ -117,6 +117,30 @@
       "revId": "51ed7bd6e0e4d0d50fe89207bed8b8f642fab68e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40b58618_5caba65e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-09-25T08:25:13Z",
+      "side": 1,
+      "message": "Done\n\nThe result is a bit suboptimal as in the original text the operation name appeared two\ntimes in different form (\"create new project\" and \"remote repository creation\").\nNow the second form is replaced by just \"this operation\".",
+      "parentUuid": "c81ee9d0_214666ae",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 261,
+        "endChar": 22
+      },
+      "revId": "51ed7bd6e0e4d0d50fe89207bed8b8f642fab68e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
