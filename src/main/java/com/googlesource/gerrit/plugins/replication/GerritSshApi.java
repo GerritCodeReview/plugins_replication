@@ -41,14 +41,16 @@ public class GerritSshApi implements AdminApi {
   }
 
   @Override
-  public void createProject(Project.NameKey projectName, String head) {
+  public boolean createProject(Project.NameKey projectName, String head) {
     OutputStream errStream = sshHelper.newErrorBufferStream();
     String cmd = "gerrit create-project --branch " + head + " " + projectName.get();
     try {
       execute(uri, cmd, errStream);
     } catch (IOException e) {
       logError("creating", uri, errStream, cmd, e);
+      return false;
     }
+    return true;
   }
 
   @Override
