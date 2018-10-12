@@ -409,7 +409,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     if (pool.isCreateMissingRepos()) {
       try {
         Ref head = git.exactRef(Constants.HEAD);
-        if (replicationQueue.createProject(projectName, head != null ? getName(head) : null)) {
+        if (replicationQueue.createProject(
+            config.getName(), projectName, head != null ? getName(head) : null)) {
           repLog.warn("Missing repository created; retry replication to {}", uri);
           pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
         } else {

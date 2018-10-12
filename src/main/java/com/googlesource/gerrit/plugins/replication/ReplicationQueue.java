@@ -18,6 +18,7 @@ import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerr
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isSSH;
 
 import com.google.common.base.Strings;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
@@ -161,7 +162,7 @@ public class ReplicationQueue
   @Override
   public void onProjectDeleted(ProjectDeletedListener.Event event) {
     Project.NameKey projectName = new Project.NameKey(event.getProjectName());
-    for (URIish uri : getURIs(projectName, FilterType.PROJECT_DELETION)) {
+    for (URIish uri : getURIs(null, projectName, FilterType.PROJECT_DELETION)) {
       deleteProject(uri, projectName);
     }
   }
@@ -169,12 +170,13 @@ public class ReplicationQueue
   @Override
   public void onHeadUpdated(HeadUpdatedListener.Event event) {
     Project.NameKey project = new Project.NameKey(event.getProjectName());
-    for (URIish uri : getURIs(project, FilterType.ALL)) {
+    for (URIish uri : getURIs(null, project, FilterType.ALL)) {
       updateHead(uri, project, event.getNewHeadName());
     }
   }
 
-  private Set<URIish> getURIs(Project.NameKey projectName, FilterType filterType) {
+  private Set<URIish> getURIs(
+      @Nullable String remoteName, Project.NameKey projectName, FilterType filterType) {
     if (config.getDestinations(filterType).isEmpty()) {
       return Collections.emptySet();
     }
@@ -186,6 +188,10 @@ public class ReplicationQueue
     Set<URIish> uris = new HashSet<>();
     for (Destination config : this.config.getDestinations(filterType)) {
       if (!config.wouldPushProject(projectName)) {
+        continue;
+      }
+
+      if (remoteName != null && !config.getRemoteConfigName().equals(remoteName)) {
         continue;
       }
 
@@ -231,9 +237,9 @@ public class ReplicationQueue
     return uris;
   }
 
-  public boolean createProject(Project.NameKey project, String head) {
+  public boolean createProject(String remoteName, Project.NameKey project, String head) {
     boolean success = true;
-    for (URIish uri : getURIs(project, FilterType.PROJECT_CREATION)) {
+    for (URIish uri : getURIs(remoteName, project, FilterType.PROJECT_CREATION)) {
       success &= createProject(uri, project, head);
     }
     return success;
