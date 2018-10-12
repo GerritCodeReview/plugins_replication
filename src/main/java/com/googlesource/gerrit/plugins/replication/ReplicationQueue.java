@@ -159,7 +159,7 @@ public class ReplicationQueue
   @Override
   public void onProjectDeleted(ProjectDeletedListener.Event event) {
     Project.NameKey projectName = new Project.NameKey(event.getProjectName());
-    for (URIish uri : getURIs(projectName, FilterType.PROJECT_DELETION)) {
+    for (URIish uri : getURIs(Optional.empty(), projectName, FilterType.PROJECT_DELETION)) {
       deleteProject(uri, projectName);
     }
   }
@@ -167,12 +167,13 @@ public class ReplicationQueue
   @Override
   public void onHeadUpdated(HeadUpdatedListener.Event event) {
     Project.NameKey project = new Project.NameKey(event.getProjectName());
-    for (URIish uri : getURIs(project, FilterType.ALL)) {
+    for (URIish uri : getURIs(Optional.empty(), project, FilterType.ALL)) {
       updateHead(uri, project, event.getNewHeadName());
     }
   }
 
-  private Set<URIish> getURIs(Project.NameKey projectName, FilterType filterType) {
+  private Set<URIish> getURIs(
+      Optional<String> remoteName, Project.NameKey projectName, FilterType filterType) {
     if (config.getDestinations(filterType).isEmpty()) {
       return Collections.emptySet();
     }
@@ -184,6 +185,10 @@ public class ReplicationQueue
     Set<URIish> uris = new HashSet<>();
     for (Destination config : this.config.getDestinations(filterType)) {
       if (!config.wouldPushProject(projectName)) {
+        continue;
+      }
+
+      if (remoteName.isPresent() && !config.getRemoteConfigName().equals(remoteName.get())) {
         continue;
       }
 
@@ -229,9 +234,9 @@ public class ReplicationQueue
     return uris;
   }
 
-  public boolean createProject(Project.NameKey project, String head) {
+  public boolean createProject(String remoteName, Project.NameKey project, String head) {
     boolean success = true;
-    for (URIish uri : getURIs(project, FilterType.PROJECT_CREATION)) {
+    for (URIish uri : getURIs(Optional.of(remoteName), project, FilterType.PROJECT_CREATION)) {
       success &= createProject(uri, project, head);
     }
     return success;
