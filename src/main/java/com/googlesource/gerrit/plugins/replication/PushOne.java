@@ -413,11 +413,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
           repLog.warn("Missing repository created; retry replication to {}", uri);
           pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
         } else {
-          repLog.warn(
-              "Missing repository could not be created when replicating {}. "
-                  + "You can only create missing repositories locally, over SSH or when "
-                  + "using adminUrl in replication.config. See documentation for more information.",
-              uri);
+          repLog.warn("Missing repository could not be created when replicating {}", uri);
         }
       } catch (IOException ioe) {
         stateLog.error(
