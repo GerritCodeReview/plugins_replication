@@ -21,7 +21,6 @@ import com.google.common.base.Strings;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
-import com.google.gerrit.extensions.events.NewProjectCreatedListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.reviewdb.client.Project;
@@ -43,7 +42,6 @@ import org.slf4j.LoggerFactory;
 public class ReplicationQueue
     implements LifecycleListener,
         GitReferenceUpdatedListener,
-        NewProjectCreatedListener,
         ProjectDeletedListener,
         HeadUpdatedListener {
   static final String REPLICATION_LOG_NAME = "replication_log";
@@ -157,14 +155,6 @@ public class ReplicationQueue
     for (EventsStorage.ReplicateRefUpdate e : eventsStorage.list()) {
       repLog.info("Firing pending event {}", e);
       onGitReferenceUpdated(e.project, e.ref);
-    }
-  }
-
-  @Override
-  public void onNewProjectCreated(NewProjectCreatedListener.Event event) {
-    Project.NameKey projectName = new Project.NameKey(event.getProjectName());
-    for (URIish uri : getURIs(projectName, FilterType.PROJECT_CREATION)) {
-      createProject(uri, projectName, event.getHeadName());
     }
   }
 
