@@ -251,8 +251,7 @@ public class ReplicationQueue
 
   private boolean createProject(URIish replicateURI, Project.NameKey projectName, String head) {
     Optional<AdminApi> adminApi = adminApiFactory.create(replicateURI);
-    if (adminApi.isPresent()) {
-      adminApi.get().createProject(projectName, head);
+    if (adminApi.isPresent() && adminApi.get().createProject(projectName, head)) {
       return true;
     }
 
@@ -281,10 +280,6 @@ public class ReplicationQueue
   }
 
   private void warnCannotPerform(String op, URIish uri) {
-    repLog.warn(
-        "Cannot {} on remote site {}."
-            + "Only local paths and SSH URLs are supported for this operation",
-        op,
-        uri);
+    repLog.warn("Cannot {} on remote site {}.", op, uri);
   }
 }
