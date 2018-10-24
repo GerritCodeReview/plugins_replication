@@ -16,7 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
-import com.google.gerrit.reviewdb.client.Project.NameKey;
+import com.google.gerrit.reviewdb.client.Project;
 import java.io.File;
 import java.io.IOException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
@@ -34,7 +34,7 @@ public class LocalFS implements AdminApi {
   }
 
   @Override
-  public void createProject(NameKey project, String head) {
+  public void createProject(Project.NameKey project, String head) {
     try (Repository repo = new FileRepository(uri.getPath())) {
       repo.create(true /* bare */);
 
@@ -50,7 +50,7 @@ public class LocalFS implements AdminApi {
   }
 
   @Override
-  public void deleteProject(NameKey project) {
+  public void deleteProject(Project.NameKey project) {
     try {
       recursivelyDelete(new File(uri.getPath()));
       repLog.info("Deleted local repository: {}", uri);
@@ -60,7 +60,7 @@ public class LocalFS implements AdminApi {
   }
 
   @Override
-  public void updateHead(NameKey project, String newHead) {
+  public void updateHead(Project.NameKey project, String newHead) {
     try (Repository repo = new FileRepository(uri.getPath())) {
       if (newHead != null) {
         RefUpdate u = repo.updateRef(Constants.HEAD);
