@@ -15,7 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.common.data.AccessSection;
-import com.google.gerrit.reviewdb.client.Project.NameKey;
+import com.google.gerrit.reviewdb.client.Project;
 import java.util.Collections;
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class ReplicationFilter {
     projectPatterns = patterns;
   }
 
-  public boolean matches(NameKey name) {
+  public boolean matches(Project.NameKey name) {
     if (projectPatterns.isEmpty()) {
       return true;
     }

@@ -16,7 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
-import com.google.gerrit.reviewdb.client.Project.NameKey;
+import com.google.gerrit.reviewdb.client.Project;
 import java.io.IOException;
 import java.io.OutputStream;
 import org.eclipse.jgit.transport.URIish;
@@ -33,7 +33,7 @@ public class RemoteSsh implements AdminApi {
   }
 
   @Override
-  public void createProject(NameKey project, String head) {
+  public void createProject(Project.NameKey project, String head) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd = "mkdir -p " + quotedPath + " && cd " + quotedPath + " && git init --bare";
     if (head != null) {
@@ -58,7 +58,7 @@ public class RemoteSsh implements AdminApi {
   }
 
   @Override
-  public void deleteProject(NameKey project) {
+  public void deleteProject(Project.NameKey project) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd = "rm -rf " + quotedPath;
     OutputStream errStream = sshHelper.newErrorBufferStream();
@@ -80,7 +80,7 @@ public class RemoteSsh implements AdminApi {
   }
 
   @Override
-  public void updateHead(NameKey project, String newHead) {
+  public void updateHead(Project.NameKey project, String newHead) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd =
         "cd " + quotedPath + " && git symbolic-ref HEAD " + QuotedString.BOURNE.quote(newHead);
