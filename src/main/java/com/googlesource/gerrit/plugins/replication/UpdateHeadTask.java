@@ -16,16 +16,17 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
-import java.util.Optional;
-
-import org.eclipse.jgit.transport.URIish;
-
 import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.server.ioutil.HexFormat;
+import com.google.gerrit.server.util.IdGenerator;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import java.util.Optional;
+import org.eclipse.jgit.transport.URIish;
 
 public class UpdateHeadTask implements Runnable {
   private final AdminApiFactory adminApiFactory;
+  private final int id;
   private final URIish replicateURI;
   private final Project.NameKey project;
   private final String newHead;
@@ -35,11 +36,14 @@ public class UpdateHeadTask implements Runnable {
   }
 
   @Inject
-  UpdateHeadTask(AdminApiFactory adminApiFactory,
+  UpdateHeadTask(
+      AdminApiFactory adminApiFactory,
+      IdGenerator ig,
       @Assisted URIish replicateURI,
       @Assisted Project.NameKey project,
       @Assisted String newHead) {
     this.adminApiFactory = adminApiFactory;
+    this.id = ig.next();
     this.replicateURI = replicateURI;
     this.project = project;
     this.newHead = newHead;
@@ -54,5 +58,12 @@ public class UpdateHeadTask implements Runnable {
     }
 
     repLog.warn("Cannot update HEAD of project {} on remote site {}.", project, replicateURI);
+  }
+
+  @Override
+  public String toString() {
+    return String.format(
+        "[%s] update-head of %s at %s to %s",
+        HexFormat.fromInt(id), project.get(), replicateURI, newHead);
   }
 }

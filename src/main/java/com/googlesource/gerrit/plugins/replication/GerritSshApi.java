@@ -28,7 +28,7 @@ public class GerritSshApi implements AdminApi {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   static int SSH_COMMAND_FAILED = -1;
-  private static String GERRIT_ADMIN_PROTOCOL_PREFIX = "gerrit+";
+  static String GERRIT_ADMIN_PROTOCOL_PREFIX = "gerrit+";
 
   private final SshHelper sshHelper;
   private final URIish uri;

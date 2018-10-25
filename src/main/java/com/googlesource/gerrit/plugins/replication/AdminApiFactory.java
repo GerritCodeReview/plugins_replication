@@ -23,10 +23,12 @@ import org.eclipse.jgit.transport.URIish;
 public class AdminApiFactory {
 
   private final SshHelper sshHelper;
+  private final GerritRestApi.Factory gerritRestApiFactory;
 
   @Inject
-  AdminApiFactory(SshHelper sshHelper) {
+  AdminApiFactory(SshHelper sshHelper, GerritRestApi.Factory gerritRestApiFactory) {
     this.sshHelper = sshHelper;
+    this.gerritRestApiFactory = gerritRestApiFactory;
   }
 
   public Optional<AdminApi> create(URIish uri) {
@@ -36,6 +38,8 @@ public class AdminApiFactory {
       return Optional.of(new LocalFS(uri));
     } else if (isSSH(uri)) {
       return Optional.of(new RemoteSsh(sshHelper, uri));
+    } else if (isGerritHttp(uri)) {
+      return Optional.of(gerritRestApiFactory.create(uri));
     }
     return Optional.empty();
   }
@@ -57,5 +61,10 @@ public class AdminApiFactory {
       return true;
     }
     return false;
+  }
+
+  public static boolean isGerritHttp(URIish uri) {
+    String scheme = uri.getScheme();
+    return scheme != null && scheme.toLowerCase().contains("gerrit+http");
   }
 }
