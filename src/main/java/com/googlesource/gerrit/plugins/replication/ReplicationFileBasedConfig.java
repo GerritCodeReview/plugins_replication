@@ -14,6 +14,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerrit;
+import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerritHttp;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isSSH;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static java.util.stream.Collectors.toList;
@@ -190,7 +191,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
           continue;
         }
 
-        if (!isGerrit(uri)) {
+        if (!isGerrit(uri) && !isGerritHttp(uri)) {
           String path =
               replaceName(uri.getPath(), projectName.get(), config.isSingleProjectMatch());
           if (path == null) {
@@ -200,7 +201,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
 
           uri = uri.setPath(path);
           if (!isSSH(uri)) {
-            repLog.warn("adminURL '{}' is invalid: only SSH is supported", uri);
+            repLog.warn("adminURL '{}' is invalid: only SSH and HTTP are supported", uri);
             continue;
           }
         }
