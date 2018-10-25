@@ -56,6 +56,7 @@ import com.google.gerrit.server.util.RequestContext;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.Provides;
+import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
@@ -70,6 +71,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -166,6 +168,10 @@ public class Destination {
                 install(new FactoryModuleBuilder().build(DeleteProjectTask.Factory.class));
                 install(new FactoryModuleBuilder().build(UpdateHeadTask.Factory.class));
                 bind(AdminApiFactory.class);
+                install(new FactoryModuleBuilder().build(GerritRestApi.Factory.class));
+                bind(CloseableHttpClient.class)
+                    .toProvider(HttpClientProvider.class)
+                    .in(Scopes.SINGLETON);
               }
 
               @Provides
