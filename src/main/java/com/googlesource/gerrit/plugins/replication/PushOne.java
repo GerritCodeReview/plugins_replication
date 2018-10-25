@@ -414,7 +414,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   private boolean createProject(Project.NameKey project, String head) {
-    return createProjectFactory.create(project, head).call();
+    return createProjectFactory.create(project, head).create();
   }
 
   private String getName(Ref ref) {

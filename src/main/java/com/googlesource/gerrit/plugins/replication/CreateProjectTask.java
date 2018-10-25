@@ -22,11 +22,10 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.util.Optional;
-import java.util.concurrent.Callable;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.URIish;
 
-public class CreateProjectTask implements Callable<Boolean> {
+public class CreateProjectTask {
   interface Factory {
     CreateProjectTask create(Project.NameKey project, String head);
   }
@@ -51,8 +50,7 @@ public class CreateProjectTask implements Callable<Boolean> {
     this.head = head;
   }
 
-  @Override
-  public Boolean call() {
+  public boolean create() {
     return replicationConfig
         .getURIs(Optional.of(config.getName()), project, FilterType.PROJECT_CREATION)
         .values()
