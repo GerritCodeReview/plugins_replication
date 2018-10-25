@@ -17,6 +17,8 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
 import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.server.ioutil.HexFormat;
+import com.google.gerrit.server.util.IdGenerator;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.util.Optional;
@@ -28,15 +30,18 @@ public class DeleteProjectTask implements Runnable {
   }
 
   private final AdminApiFactory adminApiFactory;
+  private final int id;
   private final URIish replicateURI;
   private final Project.NameKey project;
 
   @Inject
   DeleteProjectTask(
       AdminApiFactory adminApiFactory,
+      IdGenerator ig,
       @Assisted URIish replicateURI,
       @Assisted Project.NameKey project) {
     this.adminApiFactory = adminApiFactory;
+    this.id = ig.next();
     this.replicateURI = replicateURI;
     this.project = project;
   }
@@ -50,5 +55,11 @@ public class DeleteProjectTask implements Runnable {
     }
 
     repLog.warn("Cannot delete project {} on remote site {}.", project, replicateURI);
+  }
+
+  @Override
+  public String toString() {
+    return String.format(
+        "[%s] delete-project %s at %s", HexFormat.fromInt(id), project.get(), replicateURI);
   }
 }
