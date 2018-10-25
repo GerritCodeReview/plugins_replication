@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;
+import static com.googlesource.gerrit.plugins.replication.ReplicationFileBasedConfig.replaceName;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.NON_EXISTING;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.REJECTED_OTHER_REASON;
 
@@ -93,6 +94,8 @@ public class Destination {
   private final Map<URIish, PushOne> pending = new HashMap<>();
   private final Map<URIish, PushOne> inFlight = new HashMap<>();
   private final PushOne.Factory opFactory;
+  private final DeleteProjectTask.Factory deleteProjectFactory;
+  private final UpdateHeadTask.Factory updateHeadFactory;
   private final GitRepositoryManager gitManager;
   private final PermissionBackend permissionBackend;
   private final Provider<CurrentUser> userProvider;
@@ -166,6 +169,10 @@ public class Destination {
                 bind(Destination.class).toInstance(Destination.this);
                 bind(RemoteConfig.class).toInstance(config.getRemoteConfig());
                 install(new FactoryModuleBuilder().build(PushOne.Factory.class));
+                install(new FactoryModuleBuilder().build(CreateProjectTask.Factory.class));
+                install(new FactoryModuleBuilder().build(DeleteProjectTask.Factory.class));
+                install(new FactoryModuleBuilder().build(UpdateHeadTask.Factory.class));
+                bind(AdminApiFactory.class);
               }
 
               @Provides
@@ -194,6 +201,8 @@ public class Destination {
             });
 
     opFactory = child.getInstance(PushOne.Factory.class);
+    deleteProjectFactory = child.getInstance(DeleteProjectTask.Factory.class);
+    updateHeadFactory = child.getInstance(UpdateHeadTask.Factory.class);
     threadScoper = child.getInstance(PerThreadRequestScope.Scoper.class);
   }
 
@@ -418,6 +427,14 @@ public class Destination {
     }
   }
 
+  void scheduleDeleteProject(URIish uri, Project.NameKey project) {
+    pool.schedule(deleteProjectFactory.create(uri, project), 0, TimeUnit.SECONDS);
+  }
+
+  void scheduleUpdateHead(URIish uri, Project.NameKey project, String newHead) {
+    pool.schedule(updateHeadFactory.create(uri, project, newHead), 0, TimeUnit.SECONDS);
+  }
+
   private void addRef(PushOne e, String ref) {
     e.addRef(ref);
     postReplicationScheduledEvent(e, ref);
@@ -614,8 +631,7 @@ public class Destination {
         } else if (!remoteNameStyle.equals("slash")) {
           repLog.debug("Unknown remoteNameStyle: {}, falling back to slash", remoteNameStyle);
         }
-        String replacedPath =
-            ReplicationQueue.replaceName(uri.getPath(), name, isSingleProjectMatch());
+        String replacedPath = replaceName(uri.getPath(), name, isSingleProjectMatch());
         if (replacedPath != null) {
           uri = uri.setPath(replacedPath);
           r.add(uri);

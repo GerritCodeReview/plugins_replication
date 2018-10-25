@@ -13,9 +13,11 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.collect.Multimap;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.FileUtil;
 import com.google.gerrit.extensions.annotations.PluginData;
+import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
@@ -24,7 +26,9 @@ import com.google.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.transport.URIish;
 
 @Singleton
 public class AutoReloadConfigDecorator implements ReplicationConfig {
@@ -72,6 +76,13 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   public synchronized List<Destination> getDestinations(FilterType filterType) {
     reloadIfNeeded();
     return currentConfig.getDestinations(filterType);
+  }
+
+  @Override
+  public synchronized Multimap<Destination, URIish> getURIs(
+      Optional<String> remoteName, Project.NameKey projectName, FilterType filterType) {
+    reloadIfNeeded();
+    return currentConfig.getURIs(remoteName, projectName, filterType);
   }
 
   private void reloadIfNeeded() {

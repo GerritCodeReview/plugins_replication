@@ -13,13 +13,21 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerrit;
+import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isSSH;
+import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.SetMultimap;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginData;
+import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
@@ -30,6 +38,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import org.eclipse.jgit.errors.ConfigInvalidException;
@@ -147,6 +156,77 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
       dest.add(destination);
     }
     return dest.build();
+  }
+
+  @Override
+  public Multimap<Destination, URIish> getURIs(
+      Optional<String> remoteName, Project.NameKey projectName, FilterType filterType) {
+    if (getDestinations(filterType).isEmpty()) {
+      return ImmutableMultimap.of();
+    }
+
+    SetMultimap<Destination, URIish> uris = HashMultimap.create();
+    for (Destination config : getDestinations(filterType)) {
+      if (!config.wouldPushProject(projectName)) {
+        continue;
+      }
+
+      if (remoteName.isPresent() && !config.getRemoteConfigName().equals(remoteName.get())) {
+        continue;
+      }
+
+      boolean adminURLUsed = false;
+
+      for (String url : config.getAdminUrls()) {
+        if (Strings.isNullOrEmpty(url)) {
+          continue;
+        }
+
+        URIish uri;
+        try {
+          uri = new URIish(url);
+        } catch (URISyntaxException e) {
+          repLog.warn("adminURL '{}' is invalid: {}", url, e.getMessage());
+          continue;
+        }
+
+        if (!isGerrit(uri)) {
+          String path =
+              replaceName(uri.getPath(), projectName.get(), config.isSingleProjectMatch());
+          if (path == null) {
+            repLog.warn("adminURL {} does not contain ${name}", uri);
+            continue;
+          }
+
+          uri = uri.setPath(path);
+          if (!isSSH(uri)) {
+            repLog.warn("adminURL '{}' is invalid: only SSH is supported", uri);
+            continue;
+          }
+        }
+        uris.put(config, uri);
+        adminURLUsed = true;
+      }
+
+      if (!adminURLUsed) {
+        for (URIish uri : config.getURIs(projectName, "*")) {
+          uris.put(config, uri);
+        }
+      }
+    }
+    return uris;
+  }
+
+  static String replaceName(String in, String name, boolean keyIsOptional) {
+    String key = "${name}";
+    int n = in.indexOf(key);
+    if (0 <= n) {
+      return in.substring(0, n) + name + in.substring(n + key.length());
+    }
+    if (keyIsOptional) {
+      return in;
+    }
+    return null;
   }
 
   /* (non-Javadoc)
