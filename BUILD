@@ -1,5 +1,5 @@
 load("//tools/bzl:junit.bzl", "junit_tests")
-load("//tools/bzl:plugin.bzl", "gerrit_plugin", "PLUGIN_DEPS", "PLUGIN_TEST_DEPS")
+load("//tools/bzl:plugin.bzl", "PLUGIN_DEPS", "PLUGIN_TEST_DEPS", "gerrit_plugin")
 
 gerrit_plugin(
     name = "replication",
