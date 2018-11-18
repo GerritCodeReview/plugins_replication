@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3160454_699cbd3b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AdminApi.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2018-11-18T21:14:09Z",
+      "side": 1,
+      "message": "also return boolean in the other two methods ?",
+      "revId": "fc485684be3b63e3e0a27983b8504e6020417111",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
