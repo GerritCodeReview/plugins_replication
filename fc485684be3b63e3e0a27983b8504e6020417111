@@ -16,6 +16,24 @@
       "revId": "fc485684be3b63e3e0a27983b8504e6020417111",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "894f07ca_23f2553e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AdminApi.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-11-20T10:39:52Z",
+      "side": 1,
+      "message": "Operation status for the delete-project and update-head operations was not handled\neven before this change. I agree that this looks asymmetric and needs to be improved\nbut this change is actually not introducing this issue. It only makes it more obvious :-)",
+      "parentUuid": "a3160454_699cbd3b",
+      "revId": "fc485684be3b63e3e0a27983b8504e6020417111",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
