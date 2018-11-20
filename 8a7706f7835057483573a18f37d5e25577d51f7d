@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "5d8825cc_b6f00fbd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/CreateProjectTask.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-11-20T10:40:00Z",
+      "side": 1,
+      "message": "This is not necessary as instances of this task are never submitted to the replication queue. Instead they are created and executed from the PushOne (which itself is executed from the\nreplication queue).",
+      "range": {
+        "startLine": 29,
+        "startChar": 30,
+        "endLine": 29,
+        "endChar": 59
+      },
+      "revId": "8a7706f7835057483573a18f37d5e25577d51f7d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "47d56bbf_1ab1361b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DeleteProjectTask.java",
         "patchSetId": 1
@@ -19,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "b177601d_6e2e17a3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DeleteProjectTask.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-11-20T10:40:00Z",
+      "side": 1,
+      "message": "See my comment in [1]\n\n[1] https://gerrit-review.googlesource.com/c/plugins/replication/+/199897/2/src/main/java/com/googlesource/gerrit/plugins/replication/AdminApi.java#22",
+      "parentUuid": "47d56bbf_1ab1361b",
+      "revId": "8a7706f7835057483573a18f37d5e25577d51f7d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ac80b026_45e38551",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UpdateHeadTask.java",
         "patchSetId": 1
@@ -30,6 +71,24 @@
       "writtenOn": "2018-11-18T21:09:40Z",
       "side": 1,
       "message": "why isn\u0027t this symmetric with createProjectTask and returns Boolean ?",
+      "revId": "8a7706f7835057483573a18f37d5e25577d51f7d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe9824c2_22ab5ee2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UpdateHeadTask.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-11-20T10:40:00Z",
+      "side": 1,
+      "message": "See my comment in [1]\n\n[12] https://gerrit-review.googlesource.com/c/plugins/replication/+/199897/2/src/main/java/com/googlesource/gerrit/plugins/replication/AdminApi.java#22",
+      "parentUuid": "ac80b026_45e38551",
       "revId": "8a7706f7835057483573a18f37d5e25577d51f7d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
