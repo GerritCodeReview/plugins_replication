@@ -45,6 +45,30 @@
       "revId": "f84655c08661fb27ac018b84ad0594958013c8fe",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b57d3d1_81aa7a13",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-11-22T12:32:21Z",
+      "side": 1,
+      "message": "I agree on using @Nullable instead. However, before I fix it, notice that in the follow-up\nchange this method is moved to the ReplicationConfig interface where using Optional makes\nsense? Do you think it is worth fixing this at this intermediate state in the change series?",
+      "parentUuid": "69aaa9b7_39232f96",
+      "range": {
+        "startLine": 176,
+        "startChar": 6,
+        "endLine": 176,
+        "endChar": 23
+      },
+      "revId": "f84655c08661fb27ac018b84ad0594958013c8fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
