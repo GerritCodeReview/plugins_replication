@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fa21bac_1d9c212d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-22T05:18:04Z",
+      "side": 1,
+      "message": "Long line?",
+      "revId": "63b074bbf48ad75812e2201e58f056cd22dbf92d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "261aad4c_211b61ed",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/CreateProjectTask.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-22T05:18:04Z",
+      "side": 1,
+      "message": "Include the project name in the log?",
+      "revId": "63b074bbf48ad75812e2201e58f056cd22dbf92d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e32a7d9_5e8c8665",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DeleteProjectTask.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-22T05:18:04Z",
+      "side": 1,
+      "message": "Include the project name?",
+      "revId": "63b074bbf48ad75812e2201e58f056cd22dbf92d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5d58714_15f46c3e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-22T05:18:04Z",
+      "side": 1,
+      "message": "Long line?",
+      "revId": "63b074bbf48ad75812e2201e58f056cd22dbf92d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98a24786_c1f8fdf8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UpdateHeadTask.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-22T05:18:04Z",
+      "side": 1,
+      "message": "Include the project name?",
+      "revId": "63b074bbf48ad75812e2201e58f056cd22dbf92d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
