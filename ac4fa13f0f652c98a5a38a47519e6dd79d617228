@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "a681bac6_47be7ba2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/HttpClientProvider.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2018-11-22T22:32:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be603e6b_d5c86aeb",
+      "range": {
+        "startLine": 97,
+        "startChar": 29,
+        "endLine": 97,
+        "endChar": 46
+      },
+      "revId": "ac4fa13f0f652c98a5a38a47519e6dd79d617228",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ed4c67f_2868c7bc",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 4
