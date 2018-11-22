@@ -34,6 +34,24 @@
       "revId": "a0900c5ec65b7422c16a14b2cada3d472ae0a27d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c866b205_5d27cde0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/HttpClientProvider.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-11-22T14:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38679959_35fa7abd",
+      "revId": "a0900c5ec65b7422c16a14b2cada3d472ae0a27d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
