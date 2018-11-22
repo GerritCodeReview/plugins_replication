@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "649fc2ff_da545ac1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DeleteProjectTask.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2018-11-22T22:31:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e911832c_39245259",
+      "revId": "0ca2e2cb6b9895bfcadc2ea6ca9c2afa8b0a948c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c07cac13_95b622a6",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritRestApi.java",
         "patchSetId": 1

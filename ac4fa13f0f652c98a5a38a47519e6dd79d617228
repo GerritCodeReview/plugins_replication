@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09e2ad24_bf98b74a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritRestApi.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2018-11-22T22:31:19Z",
+      "side": 1,
+      "message": "I think this new REST API deserves documentation in a way like the core\u0027s REST API documentation [1]\n\n[1] https://gerrit-review.googlesource.com/Documentation/rest-api.html",
+      "revId": "ac4fa13f0f652c98a5a38a47519e6dd79d617228",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be603e6b_d5c86aeb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/HttpClientProvider.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2018-11-22T22:31:19Z",
+      "side": 1,
+      "message": "This throws FileNotFoundException if the keyStore file does not exist and repository creation fails silently.\nIn this case we should try to use the default SSLContext.",
+      "range": {
+        "startLine": 97,
+        "startChar": 29,
+        "endLine": 97,
+        "endChar": 46
+      },
+      "revId": "ac4fa13f0f652c98a5a38a47519e6dd79d617228",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ed4c67f_2868c7bc",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2018-11-22T22:31:19Z",
+      "side": 1,
+      "message": "I noticed that I have to give the url with prefix /a to ensure authentication whereas this is done implicitly when defining adminUrl using gerrit+http scheme. It would be nice if I can also use the gerrit+http or gerrit+https scheme to configure url. In addition you may consider, if one of these urls is missing, to fallback to the other one. I.e. if url \u003d gerrit+http://host:8080/ and adminUrl is not given we could imply the following resolved urls\n\nurl \u003d http://host:8080/a/\nadminUrl \u003d http://host:8080/a/\n\nor if adminUrl \u003d gerrit+https://host:8443/ and url is not given we could imply the following resolved urls\n\nurl \u003d https://host:8443/a/\nadminUrl \u003d https://host:8443/a/",
+      "revId": "ac4fa13f0f652c98a5a38a47519e6dd79d617228",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9abe6953_5aea1a23",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2018-11-22T22:31:19Z",
+      "side": 1,
+      "message": "this is rendered as a single line, was that intended ?\nOr did you want to render each URL on a new line ?",
+      "revId": "ac4fa13f0f652c98a5a38a47519e6dd79d617228",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
