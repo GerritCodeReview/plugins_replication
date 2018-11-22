@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "77c546b0_bd9e7b85",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DeleteProjectTask.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2018-11-22T16:19:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b177601d_6e2e17a3",
+      "revId": "8a7706f7835057483573a18f37d5e25577d51f7d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac80b026_45e38551",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UpdateHeadTask.java",
         "patchSetId": 1
@@ -116,6 +134,24 @@
       "revId": "8a7706f7835057483573a18f37d5e25577d51f7d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59d7eefd_06c29de2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UpdateHeadTask.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2018-11-22T16:19:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fe9824c2_22ab5ee2",
+      "revId": "8a7706f7835057483573a18f37d5e25577d51f7d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
