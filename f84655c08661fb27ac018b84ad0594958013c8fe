@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a2089ec_7e4863bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-22T05:14:15Z",
+      "side": 1,
+      "message": "cause",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 10
+      },
+      "revId": "f84655c08661fb27ac018b84ad0594958013c8fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69aaa9b7_39232f96",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-22T05:14:15Z",
+      "side": 1,
+      "message": "Is it worth using Optional for this?  For a public API maybe it has benefit, but this is a private method.\n\nJust use a String annotated as @Nullable and pass null instead of Optional.empty()?",
+      "range": {
+        "startLine": 176,
+        "startChar": 6,
+        "endLine": 176,
+        "endChar": 23
+      },
+      "revId": "f84655c08661fb27ac018b84ad0594958013c8fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
