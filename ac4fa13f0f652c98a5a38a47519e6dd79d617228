@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0abcf544_f6a353f5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritRestApi.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-11-23T14:29:26Z",
+      "side": 1,
+      "message": "This class does not implement any REST API for the replication plugin, it just uses\nREST API of the (remote) Gerrit server to implement admin operations: create project,\ndelte project, update HEAD",
+      "parentUuid": "09e2ad24_bf98b74a",
+      "revId": "ac4fa13f0f652c98a5a38a47519e6dd79d617228",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "be603e6b_d5c86aeb",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/HttpClientProvider.java",
         "patchSetId": 4
@@ -83,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "2b6eab5f_88dbcc15",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-11-23T14:29:26Z",
+      "side": 1,
+      "message": "Good observation and proposal(s) but I believe this should be addressed in a follow-up change. For example, \"gerrit+ssh\" protocol is already supported but doesn\u0027t support the proposed\nconfiguration style:\n\n  url \u003d gerrit+ssh://replica.my.org/\n\nInstead, it can only be used as an admin URL.\nTherefore, let\u0027s first get the basic functionality in and then improve the usability.",
+      "parentUuid": "1ed4c67f_2868c7bc",
+      "revId": "ac4fa13f0f652c98a5a38a47519e6dd79d617228",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9abe6953_5aea1a23",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 4
@@ -97,6 +133,24 @@
       "revId": "ac4fa13f0f652c98a5a38a47519e6dd79d617228",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc946859_fdba2a6b",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2018-11-23T14:29:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9abe6953_5aea1a23",
+      "revId": "ac4fa13f0f652c98a5a38a47519e6dd79d617228",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
