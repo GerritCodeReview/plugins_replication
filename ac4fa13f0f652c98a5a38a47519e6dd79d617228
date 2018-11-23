@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "a9ce8402_483eb7d6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritRestApi.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2018-11-23T16:41:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0abcf544_f6a353f5",
+      "revId": "ac4fa13f0f652c98a5a38a47519e6dd79d617228",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "be603e6b_d5c86aeb",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/HttpClientProvider.java",
         "patchSetId": 4
@@ -119,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "fa04ae7f_fb2085d8",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2018-11-23T16:41:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2b6eab5f_88dbcc15",
+      "revId": "ac4fa13f0f652c98a5a38a47519e6dd79d617228",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9abe6953_5aea1a23",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 4
@@ -148,6 +184,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "9abe6953_5aea1a23",
+      "revId": "ac4fa13f0f652c98a5a38a47519e6dd79d617228",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "114e6ba7_82718de4",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2018-11-23T16:41:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "dc946859_fdba2a6b",
       "revId": "ac4fa13f0f652c98a5a38a47519e6dd79d617228",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
