@@ -117,6 +117,30 @@
       "revId": "f84655c08661fb27ac018b84ad0594958013c8fe",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9471a316_d1cc81ad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-26T00:48:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "feef974d_47e8db1e",
+      "range": {
+        "startLine": 176,
+        "startChar": 6,
+        "endLine": 176,
+        "endChar": 23
+      },
+      "revId": "f84655c08661fb27ac018b84ad0594958013c8fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
