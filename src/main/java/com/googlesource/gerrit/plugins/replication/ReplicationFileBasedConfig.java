@@ -131,7 +131,13 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
                 .setForceUpdate(defaultForceUpdate));
       }
 
-      Destination destination = destinationFactory.create(new DestinationConfiguration(c, config));
+      Destination destination;
+      try {
+        destination = destinationFactory.create(new DestinationConfiguration(c, config));
+      } catch (Exception e) {
+        logger.atSevere().log("Failed to load destination '%s': %s", c.getName(), e.getMessage());
+        continue;
+      }
 
       if (!destination.isSingleProjectMatch()) {
         for (URIish u : c.getURIs()) {
