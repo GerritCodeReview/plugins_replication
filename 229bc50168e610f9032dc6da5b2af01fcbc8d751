@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "2c7ce1da_139eb89f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-11-28T15:07:36Z",
+      "side": 1,
+      "message": "instance",
+      "range": {
+        "startLine": 9,
+        "startChar": 27,
+        "endLine": 9,
+        "endChar": 35
+      },
+      "revId": "229bc50168e610f9032dc6da5b2af01fcbc8d751",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8321ba1_e4cb8a03",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-11-28T15:07:36Z",
+      "side": 1,
+      "message": "Missing dot at the end of the statement. Why would the plugin be reloaded? Someone would have to trigger the reload manually?\n\nI think this is all unfortunate. I\u0027m inclined to re-visit the swap of the order of bindings of index module and plugins module as discussed in the change I87da6ac63:\n\n* 1. Start index module, but don\u0027t start online reindexing\n* 2. Start Plugin module and load all plugins\n* 3. Gerrit the whole world is up and running event\n* 4. Online reindexing can be started (if needed)",
+      "range": {
+        "startLine": 24,
+        "startChar": 14,
+        "endLine": 25,
+        "endChar": 55
+      },
+      "revId": "229bc50168e610f9032dc6da5b2af01fcbc8d751",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "21bcffb7_804d5134",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
