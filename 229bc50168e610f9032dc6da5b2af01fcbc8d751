@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "b11d9f2a_b33e220b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-28T23:22:35Z",
+      "side": 1,
+      "message": "\u003e Someone would have to trigger the reload manually?\n\nYes, it would need to be manually triggered by the \"plugin reload\" command.  I was considering adding more information into the log message to make this clearer.\n\n\u003e I\u0027m inclined to re-visit the swap of the order of bindings of index module and plugins module \n\n+1",
+      "parentUuid": "1aef28c6_d0f1e63d",
+      "range": {
+        "startLine": 24,
+        "startChar": 14,
+        "endLine": 25,
+        "endChar": 55
+      },
+      "revId": "229bc50168e610f9032dc6da5b2af01fcbc8d751",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21bcffb7_804d5134",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
