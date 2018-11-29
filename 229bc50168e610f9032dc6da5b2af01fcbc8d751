@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "18f7a1bd_d1cc4758",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-29T00:27:09Z",
+      "side": 1,
+      "message": "\u003e Are you going to push this on stable-2.16?\n\nMaybe it would be better to push to stable-2.15\n\nWe have already run into this issue with internal plugins on 2.15.x and had to do workarounds.",
+      "parentUuid": "b11d9f2a_b33e220b",
+      "range": {
+        "startLine": 24,
+        "startChar": 14,
+        "endLine": 25,
+        "endChar": 55
+      },
+      "revId": "229bc50168e610f9032dc6da5b2af01fcbc8d751",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21bcffb7_804d5134",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
