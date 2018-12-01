@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b93e4abf_89610726",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2018-12-01T02:25:30Z",
+      "side": 1,
+      "message": "As previously mentioned ([1] below), should we log such an instruction message, or a more precise message -about the expected next admin step? -Based on the Exception (sub)type maybe?\n\n[1] \u0027Yes, it would need to be manually triggered by the \"plugin reload\" command.  I was considering adding more information into the log message to make this clearer.\u0027\n\nBasically wondering if we could derive the exact message to log, based on the type of the actual /catched Exception object instance. If we systematically log a message about expecting a manual plugin reload (post-bootstrap), then that admin instruction might not address the specific destination loading issue.",
+      "range": {
+        "startLine": 137,
+        "startChar": 15,
+        "endLine": 138,
+        "endChar": 57
+      },
+      "revId": "7f4ff2c3d2854e6256c894f58e6fb70567b1f08d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
