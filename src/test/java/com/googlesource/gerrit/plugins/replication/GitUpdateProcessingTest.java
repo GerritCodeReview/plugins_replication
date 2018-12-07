@@ -25,8 +25,6 @@ import static org.easymock.EasyMock.verify;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.permissions.PermissionBackendException;
-import com.google.gwtorm.client.KeyUtil;
-import com.google.gwtorm.client.StandardKeyEncoder;
 import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
@@ -39,10 +37,6 @@ import org.junit.Test;
 
 @SuppressWarnings("unchecked")
 public class GitUpdateProcessingTest {
-  static {
-    KeyUtil.setEncoderImpl(new StandardKeyEncoder());
-  }
-
   private EventDispatcher dispatcherMock;
   private GitUpdateProcessing gitUpdateProcessing;
 
