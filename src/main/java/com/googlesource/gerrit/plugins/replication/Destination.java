@@ -33,14 +33,12 @@ import com.google.gerrit.reviewdb.client.AccountGroup;
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.PluginUser;
 import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.account.GroupBackends;
 import com.google.gerrit.server.account.GroupIncludeCache;
 import com.google.gerrit.server.account.ListGroupMembership;
-import com.google.gerrit.server.config.RequestScopedReviewDbProvider;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
@@ -176,18 +174,12 @@ public class Destination {
 
               @Provides
               public PerThreadRequestScope.Scoper provideScoper(
-                  final PerThreadRequestScope.Propagator propagator,
-                  final Provider<RequestScopedReviewDbProvider> dbProvider) {
+                  final PerThreadRequestScope.Propagator propagator) {
                 final RequestContext requestContext =
                     new RequestContext() {
                       @Override
                       public CurrentUser getUser() {
                         return remoteUser;
-                      }
-
-                      @Override
-                      public Provider<ReviewDb> getReviewDbProvider() {
-                        return dbProvider.get();
                       }
                     };
                 return new PerThreadRequestScope.Scoper() {
