@@ -15,10 +15,10 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.exceptions.OrmException;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.events.RefEvent;
 import com.google.gerrit.server.permissions.PermissionBackendException;
-import com.google.gwtorm.server.OrmException;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicBoolean;
