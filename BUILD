@@ -31,7 +31,7 @@ junit_tests(
 
 java_library(
     name = "replication_util",
-    testonly = 1,
+    testonly = True,
     srcs = glob(
         ["src/test/java/**/*.java"],
         exclude = ["src/test/java/**/*Test.java"],
