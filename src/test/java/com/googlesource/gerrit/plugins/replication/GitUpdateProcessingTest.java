@@ -31,7 +31,6 @@ import org.eclipse.jgit.transport.URIish;
 import org.junit.Before;
 import org.junit.Test;
 
-@SuppressWarnings("unchecked")
 public class GitUpdateProcessingTest {
   private EventDispatcher dispatcherMock;
   private GitUpdateProcessing gitUpdateProcessing;
