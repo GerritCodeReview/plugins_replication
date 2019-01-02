@@ -52,7 +52,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.jgit.errors.NoRemoteRepositoryException;
 import org.eclipse.jgit.errors.NotSupportedException;
@@ -275,12 +274,9 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     try {
       threadScoper
           .scope(
-              new Callable<Void>() {
-                @Override
-                public Void call() {
-                  runPushOperation();
-                  return null;
-                }
+              () -> {
+                runPushOperation();
+                return null;
               })
           .call();
     } catch (Exception e) {

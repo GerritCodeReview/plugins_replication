@@ -175,13 +175,7 @@ public class Destination {
               @Provides
               public PerThreadRequestScope.Scoper provideScoper(
                   final PerThreadRequestScope.Propagator propagator) {
-                final RequestContext requestContext =
-                    new RequestContext() {
-                      @Override
-                      public CurrentUser getUser() {
-                        return remoteUser;
-                      }
-                    };
+                final RequestContext requestContext = () -> remoteUser;
                 return new PerThreadRequestScope.Scoper() {
                   @Override
                   public <T> Callable<T> scope(Callable<T> callable) {
@@ -258,38 +252,35 @@ public class Destination {
     try {
       return threadScoper
           .scope(
-              new Callable<Boolean>() {
-                @Override
-                public Boolean call() throws NoSuchProjectException, PermissionBackendException {
-                  ProjectState projectState;
-                  try {
-                    projectState = projectCache.checkedGet(project);
-                  } catch (IOException e) {
-                    return false;
-                  }
-                  if (projectState == null) {
-                    throw new NoSuchProjectException(project);
-                  }
-                  if (!projectState.statePermitsRead()) {
-                    return false;
-                  }
-                  if (!shouldReplicate(projectState, userProvider.get())) {
-                    return false;
-                  }
-                  if (PushOne.ALL_REFS.equals(ref)) {
-                    return true;
-                  }
-                  try {
-                    permissionBackend
-                        .user(userProvider.get())
-                        .project(project)
-                        .ref(ref)
-                        .check(RefPermission.READ);
-                  } catch (AuthException e) {
-                    return false;
-                  }
+              () -> {
+                ProjectState projectState;
+                try {
+                  projectState = projectCache.checkedGet(project);
+                } catch (IOException e) {
+                  return false;
+                }
+                if (projectState == null) {
+                  throw new NoSuchProjectException(project);
+                }
+                if (!projectState.statePermitsRead()) {
+                  return false;
+                }
+                if (!shouldReplicate(projectState, userProvider.get())) {
+                  return false;
+                }
+                if (PushOne.ALL_REFS.equals(ref)) {
                   return true;
                 }
+                try {
+                  permissionBackend
+                      .user(userProvider.get())
+                      .project(project)
+                      .ref(ref)
+                      .check(RefPermission.READ);
+                } catch (AuthException e) {
+                  return false;
+                }
+                return true;
               })
           .call();
     } catch (NoSuchProjectException err) {
@@ -305,20 +296,17 @@ public class Destination {
     try {
       return threadScoper
           .scope(
-              new Callable<Boolean>() {
-                @Override
-                public Boolean call() throws NoSuchProjectException, PermissionBackendException {
-                  ProjectState projectState;
-                  try {
-                    projectState = projectCache.checkedGet(project);
-                  } catch (IOException e) {
-                    return false;
-                  }
-                  if (projectState == null) {
-                    throw new NoSuchProjectException(project);
-                  }
-                  return shouldReplicate(projectState, userProvider.get());
+              () -> {
+                ProjectState projectState;
+                try {
+                  projectState = projectCache.checkedGet(project);
+                } catch (IOException e) {
+                  return false;
                 }
+                if (projectState == null) {
+                  throw new NoSuchProjectException(project);
+                }
+                return shouldReplicate(projectState, userProvider.get());
               })
           .call();
     } catch (NoSuchProjectException err) {
