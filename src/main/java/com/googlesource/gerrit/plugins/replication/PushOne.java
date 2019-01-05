@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
+import static java.util.stream.Collectors.toMap;
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedListMultimap;
@@ -459,7 +460,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       return Collections.emptyList();
     }
 
-    Map<String, Ref> local = git.getAllRefs();
+    Map<String, Ref> local =
+        git.getRefDatabase().getRefs().stream().collect(toMap(Ref::getName, r -> r));
     boolean filter;
     PermissionBackend.ForProject forProject = permissionBackend.currentUser().project(projectName);
     try {
