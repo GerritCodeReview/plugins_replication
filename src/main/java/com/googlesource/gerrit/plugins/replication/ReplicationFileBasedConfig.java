@@ -219,4 +219,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
       cfg.start(workQueue);
     }
   }
+
+  @Override
+  public void setReloadListener(ConfigurationReloadListener reloadListener) {}
 }
