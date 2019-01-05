@@ -45,7 +45,8 @@ public class ReplicationQueue
         GitReferenceUpdatedListener,
         NewProjectCreatedListener,
         ProjectDeletedListener,
-        HeadUpdatedListener {
+        HeadUpdatedListener,
+        ConfigurationReloadListener {
   static final String REPLICATION_LOG_NAME = "replication_log";
   static final Logger repLog = LoggerFactory.getLogger(REPLICATION_LOG_NAME);
 
@@ -87,6 +88,10 @@ public class ReplicationQueue
     adminApiFactory = aaf;
     replicationStateFactory = rsf;
     eventsStorage = es;
+
+    /* Keep this as the last action of the constructor, otherwise this instance could be
+    invoked with a half-initialized state */
+    config.setReloadListener(this);
   }
 
   @Override
@@ -284,5 +289,15 @@ public class ReplicationQueue
             + "Only local paths and SSH URLs are supported for this operation",
         op,
         uri);
+  }
+
+  @Override
+  public void beforeReload() {
+    stop();
+  }
+
+  @Override
+  public void afterReload() {
+    start();
   }
 }

@@ -38,4 +38,6 @@ public interface ReplicationConfig {
   int shutdown();
 
   void startup(WorkQueue workQueue);
+
+  void setReloadListener(ConfigurationReloadListener reloadListener);
 }
