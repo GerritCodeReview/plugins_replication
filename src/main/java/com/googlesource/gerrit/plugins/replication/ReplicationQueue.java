@@ -91,9 +91,11 @@ public class ReplicationQueue
 
   @Override
   public void start() {
-    config.startup(workQueue);
-    running = true;
-    firePendingEvents();
+    if (!running) {
+      config.startup(workQueue);
+      running = true;
+      firePendingEvents();
+    }
   }
 
   @Override
