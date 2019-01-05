@@ -33,14 +33,14 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private long currentConfigTs;
 
   private final SitePaths site;
-  private final WorkQueue workQueue;
+  private final ReplicationQueue replicationQueue;
   private final DestinationFactory destinationFactory;
   private final Path pluginDataDir;
 
   @Inject
   public AutoReloadConfigDecorator(
       SitePaths site,
-      WorkQueue workQueue,
+      ReplicationQueue replicationQueue,
       DestinationFactory destinationFactory,
       @PluginData Path pluginDataDir)
       throws ConfigInvalidException, IOException {
@@ -49,7 +49,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     this.pluginDataDir = pluginDataDir;
     this.currentConfig = loadConfig();
     this.currentConfigTs = getLastModified(currentConfig);
-    this.workQueue = workQueue;
+    this.replicationQueue = replicationQueue;
   }
 
   private static long getLastModified(ReplicationFileBasedConfig cfg) {
@@ -75,15 +75,13 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
       if (isAutoReload()) {
         long lastModified = getLastModified(currentConfig);
         if (lastModified > currentConfigTs) {
-          ReplicationFileBasedConfig newConfig = loadConfig();
-          newConfig.startup(workQueue);
-          int discarded = currentConfig.shutdown();
-
-          this.currentConfig = newConfig;
-          this.currentConfigTs = lastModified;
+          replicationQueue.stop();
+          currentConfig = loadConfig();
+          replicationQueue.start();
+          currentConfigTs = lastModified;
           logger.atInfo().log(
-              "Configuration reloaded: %d destinations, %d replication events discarded",
-              currentConfig.getDestinations(FilterType.ALL).size(), discarded);
+              "Configuration reloaded: %d destinations",
+              currentConfig.getDestinations(FilterType.ALL).size());
         }
       }
     } catch (Exception e) {
