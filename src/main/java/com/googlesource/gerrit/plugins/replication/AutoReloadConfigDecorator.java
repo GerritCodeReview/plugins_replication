@@ -23,6 +23,7 @@ import com.google.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 
 @Singleton
@@ -33,23 +34,20 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private long currentConfigTs;
 
   private final SitePaths site;
-  private final WorkQueue workQueue;
   private final DestinationFactory destinationFactory;
   private final Path pluginDataDir;
 
+  private Optional<ConfigurationReloadListener> reloadListener = Optional.empty();
+
   @Inject
   public AutoReloadConfigDecorator(
-      SitePaths site,
-      WorkQueue workQueue,
-      DestinationFactory destinationFactory,
-      @PluginData Path pluginDataDir)
+      SitePaths site, DestinationFactory destinationFactory, @PluginData Path pluginDataDir)
       throws ConfigInvalidException, IOException {
     this.site = site;
     this.destinationFactory = destinationFactory;
     this.pluginDataDir = pluginDataDir;
     this.currentConfig = loadConfig();
     this.currentConfigTs = getLastModified(currentConfig);
-    this.workQueue = workQueue;
   }
 
   private static long getLastModified(ReplicationFileBasedConfig cfg) {
@@ -75,15 +73,13 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
       if (isAutoReload()) {
         long lastModified = getLastModified(currentConfig);
         if (lastModified > currentConfigTs) {
-          ReplicationFileBasedConfig newConfig = loadConfig();
-          newConfig.startup(workQueue);
-          int discarded = currentConfig.shutdown();
-
-          this.currentConfig = newConfig;
-          this.currentConfigTs = lastModified;
+          reloadListener.ifPresent(l -> l.beforeReload());
+          currentConfig = loadConfig();
+          currentConfigTs = lastModified;
+          reloadListener.ifPresent(l -> l.afterReload());
           logger.atInfo().log(
-              "Configuration reloaded: %d destinations, %d replication events discarded",
-              currentConfig.getDestinations(FilterType.ALL).size(), discarded);
+              "Configuration reloaded: %d destinations",
+              currentConfig.getDestinations(FilterType.ALL).size());
         }
       }
     } catch (Exception e) {
@@ -121,5 +117,10 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   @Override
   public synchronized void startup(WorkQueue workQueue) {
     currentConfig.startup(workQueue);
+  }
+
+  @Override
+  public void setReloadListener(ConfigurationReloadListener listener) {
+    reloadListener = Optional.ofNullable(listener);
   }
 }
