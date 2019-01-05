@@ -19,6 +19,7 @@ import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -31,17 +32,20 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
 
   private ReplicationFileBasedConfig currentConfig;
   private long currentConfigTs;
+  private long LastFailedConfigTs;
 
   private final SitePaths site;
-  private final WorkQueue workQueue;
   private final DestinationFactory destinationFactory;
   private final Path pluginDataDir;
+  // Use Provider<> instead of injecting the ReplicationQueue because of circular dependency with
+  // ReplicationConfig
+  private final Provider<ReplicationQueue> replicationQueue;
 
   @Inject
   public AutoReloadConfigDecorator(
       SitePaths site,
-      WorkQueue workQueue,
       DestinationFactory destinationFactory,
+      Provider<ReplicationQueue> replicationQueue,
       @PluginData Path pluginDataDir)
       throws ConfigInvalidException, IOException {
     this.site = site;
@@ -49,7 +53,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     this.pluginDataDir = pluginDataDir;
     this.currentConfig = loadConfig();
     this.currentConfigTs = getLastModified(currentConfig);
-    this.workQueue = workQueue;
+    this.replicationQueue = replicationQueue;
   }
 
   private static long getLastModified(ReplicationFileBasedConfig cfg) {
@@ -71,25 +75,27 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   }
 
   private void reloadIfNeeded() {
-    try {
-      if (isAutoReload()) {
-        long lastModified = getLastModified(currentConfig);
-        if (lastModified > currentConfigTs) {
-          ReplicationFileBasedConfig newConfig = loadConfig();
-          newConfig.startup(workQueue);
-          int discarded = currentConfig.shutdown();
-
-          this.currentConfig = newConfig;
-          this.currentConfigTs = lastModified;
+    if (isAutoReload()) {
+      ReplicationQueue queue = replicationQueue.get();
+      long lastModified = getLastModified(currentConfig);
+      try {
+        if (lastModified > currentConfigTs && lastModified > LastFailedConfigTs) {
+          queue.stop();
+          currentConfig = loadConfig();
+          currentConfigTs = lastModified;
+          LastFailedConfigTs = 0;
           logger.atInfo().log(
-              "Configuration reloaded: %d destinations, %d replication events discarded",
-              currentConfig.getDestinations(FilterType.ALL).size(), discarded);
+              "Configuration reloaded: %d destinations",
+              currentConfig.getDestinations(FilterType.ALL).size());
         }
+      } catch (Exception e) {
+        logger.atSevere().withCause(e).log(
+            "Cannot reload replication configuration: keeping existing settings");
+        LastFailedConfigTs = lastModified;
+        return;
+      } finally {
+        queue.start();
       }
-    } catch (Exception e) {
-      logger.atSevere().withCause(e).log(
-          "Cannot reload replication configuration: keeping existing settings");
-      return;
     }
   }
 
