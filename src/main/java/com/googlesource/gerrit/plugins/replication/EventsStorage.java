@@ -37,6 +37,11 @@ public class EventsStorage {
   public static class ReplicateRefUpdate {
     public String project;
     public String ref;
+
+    @Override
+    public String toString() {
+      return "ref-update " + project + ":" + ref;
+    }
   }
 
   private static Gson GSON = new Gson();
