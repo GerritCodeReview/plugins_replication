@@ -23,6 +23,30 @@
       "revId": "cd04d179b6d385968d76465470b04bb7d97bbc41",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6a97c02_8628d70e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-01-06T00:33:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9719e5df_e0b6ad6a",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 41
+      },
+      "revId": "cd04d179b6d385968d76465470b04bb7d97bbc41",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
