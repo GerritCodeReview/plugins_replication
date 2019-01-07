@@ -218,8 +218,6 @@ public class Destination {
   public int shutdown() {
     int cnt = 0;
     if (pool != null) {
-      repLog.warn("Cancelling replication events");
-
       cnt = pool.shutdownNow().size();
       pool = null;
     }
