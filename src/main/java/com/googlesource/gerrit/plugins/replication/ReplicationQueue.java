@@ -136,7 +136,8 @@ public class ReplicationQueue
   @Override
   public void onProjectDeleted(ProjectDeletedListener.Event event) {
     Project.NameKey p = new Project.NameKey(event.getProjectName());
-    config.getURIs(Optional.empty(), p, FilterType.PROJECT_DELETION)
+    config
+        .getURIs(Optional.empty(), p, FilterType.PROJECT_DELETION)
         .entries()
         .stream()
         .forEach(e -> e.getKey().scheduleDeleteProject(e.getValue(), p));
