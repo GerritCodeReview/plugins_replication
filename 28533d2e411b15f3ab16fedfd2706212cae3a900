@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7000b6e2_ad1fce62",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-01-08T20:31:49Z",
+      "side": 1,
+      "message": "relying",
+      "range": {
+        "startLine": 11,
+        "startChar": 11,
+        "endLine": 11,
+        "endChar": 19
+      },
+      "revId": "28533d2e411b15f3ab16fedfd2706212cae3a900",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ac1a43b_516ccc98",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-01-08T20:31:49Z",
+      "side": 1,
+      "message": "Call it replicationQueueProvider?",
+      "range": {
+        "startLine": 39,
+        "startChar": 43,
+        "endLine": 39,
+        "endChar": 59
+      },
+      "revId": "28533d2e411b15f3ab16fedfd2706212cae3a900",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28a18680_5b2de4a0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-01-08T20:31:49Z",
+      "side": 1,
+      "message": "Optional: Add a comment, as for why we use here a provider and not inject ReplicationQueue directly: e.g.: Use provider because of circular dependency.",
+      "revId": "28533d2e411b15f3ab16fedfd2706212cae3a900",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a318dbe_dac6faa7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-01-08T20:31:49Z",
+      "side": 1,
+      "message": "replicationQueue instance is bound in singleton scope. The class itself is not annotated with the @Singleton annotation, so that I had to check how it is bound to realize it is singleton:\n\n  bind(ReplicationQueue.class).in(Scopes.SINGLETON);\n\nSo that multiple call to resolve the provider with: replicationQueue.get().stop(), as here and below on line 82 replicationQueue.get().start(); guarantee to return the same instance. Nevertheless using a local variable for resolved replicationQueue here, we could avoid asking Guice to resolve the provider again:\n\n  ReplicationQueue replicationQueue \u003d replicationQueueProvider.get();\n  replicationQueue.stop();\n  [...]\n  replicationQueue.start();",
+      "range": {
+        "startLine": 79,
+        "startChar": 10,
+        "endLine": 79,
+        "endChar": 39
+      },
+      "revId": "28533d2e411b15f3ab16fedfd2706212cae3a900",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
