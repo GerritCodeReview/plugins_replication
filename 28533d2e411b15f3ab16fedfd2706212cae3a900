@@ -197,6 +197,30 @@
     },
     {
       "key": {
+        "uuid": "e625890a_874067ba",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-01-09T22:43:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea9786f_93e214df",
+      "range": {
+        "startLine": 79,
+        "startChar": 10,
+        "endLine": 79,
+        "endChar": 39
+      },
+      "revId": "28533d2e411b15f3ab16fedfd2706212cae3a900",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06e6a805_d3b7bc40",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
         "patchSetId": 8
@@ -218,6 +242,30 @@
       "revId": "28533d2e411b15f3ab16fedfd2706212cae3a900",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0779a296_8434a046",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-01-09T22:43:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06e6a805_d3b7bc40",
+      "range": {
+        "startLine": 82,
+        "startChar": 10,
+        "endLine": 82,
+        "endChar": 41
+      },
+      "revId": "28533d2e411b15f3ab16fedfd2706212cae3a900",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
