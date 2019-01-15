@@ -17,7 +17,6 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.reviewdb.client.Project.NameKey;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
@@ -33,7 +32,7 @@ public class CreateProjectTask {
   private final RemoteConfig config;
   private final ReplicationConfig replicationConfig;
   private final AdminApiFactory adminApiFactory;
-  private final NameKey project;
+  private final Project.NameKey project;
   private final String head;
 
   @Inject

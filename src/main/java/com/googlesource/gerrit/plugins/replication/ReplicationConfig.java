@@ -14,7 +14,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.Multimap;
-import com.google.gerrit.reviewdb.client.Project.NameKey;
+import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.git.WorkQueue;
 import java.nio.file.Path;
 import java.util.List;
@@ -32,7 +32,7 @@ public interface ReplicationConfig {
   List<Destination> getDestinations(FilterType filterType);
 
   Multimap<Destination, URIish> getURIs(
-      Optional<String> remoteName, NameKey projectName, FilterType filterType);
+      Optional<String> remoteName, Project.NameKey projectName, FilterType filterType);
 
   boolean isReplicateAllOnPluginStart();
 
