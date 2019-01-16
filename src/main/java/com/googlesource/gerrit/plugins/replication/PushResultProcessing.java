@@ -15,7 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.flogger.FluentLogger;
-import com.google.gerrit.exceptions.OrmException;
+import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.events.RefEvent;
 import com.google.gerrit.server.permissions.PermissionBackendException;
@@ -187,7 +187,7 @@ public abstract class PushResultProcessing {
     private void postEvent(RefEvent event) {
       try {
         dispatcher.postEvent(event);
-      } catch (OrmException | PermissionBackendException e) {
+      } catch (StorageException | PermissionBackendException e) {
         logger.atSevere().withCause(e).log("Cannot post event");
       }
     }
