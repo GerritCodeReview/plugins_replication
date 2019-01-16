@@ -15,10 +15,10 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.events.RefEvent;
 import com.google.gerrit.server.permissions.PermissionBackendException;
-import com.google.gwtorm.server.OrmException;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -187,7 +187,7 @@ public abstract class PushResultProcessing {
     private void postEvent(RefEvent event) {
       try {
         dispatcher.postEvent(event);
-      } catch (OrmException | PermissionBackendException e) {
+      } catch (StorageException | PermissionBackendException e) {
         logger.atSevere().withCause(e).log("Cannot post event");
       }
     }
