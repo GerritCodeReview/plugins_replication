@@ -20,7 +20,6 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 
-import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
@@ -43,8 +42,7 @@ public class GitUpdateProcessingTest {
   }
 
   @Test
-  public void headRefReplicated()
-      throws URISyntaxException, StorageException, PermissionBackendException {
+  public void headRefReplicated() throws URISyntaxException, PermissionBackendException {
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent(
@@ -67,8 +65,7 @@ public class GitUpdateProcessingTest {
   }
 
   @Test
-  public void changeRefReplicated()
-      throws URISyntaxException, StorageException, PermissionBackendException {
+  public void changeRefReplicated() throws URISyntaxException, PermissionBackendException {
     reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent(
@@ -91,7 +88,7 @@ public class GitUpdateProcessingTest {
   }
 
   @Test
-  public void onAllNodesReplicated() throws StorageException, PermissionBackendException {
+  public void onAllNodesReplicated() throws PermissionBackendException {
     reset(dispatcherMock);
     RefReplicationDoneEvent expectedDoneEvent =
         new RefReplicationDoneEvent("someProject", "refs/heads/master", 5);
