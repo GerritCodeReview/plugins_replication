@@ -138,20 +138,14 @@ public class ReplicationQueue
   @Override
   public void onProjectDeleted(ProjectDeletedListener.Event event) {
     Project.NameKey p = new Project.NameKey(event.getProjectName());
-    config
-        .getURIs(Optional.empty(), p, FilterType.PROJECT_DELETION)
-        .entries()
-        .stream()
+    config.getURIs(Optional.empty(), p, FilterType.PROJECT_DELETION).entries().stream()
         .forEach(e -> e.getKey().scheduleDeleteProject(e.getValue(), p));
   }
 
   @Override
   public void onHeadUpdated(HeadUpdatedListener.Event event) {
     Project.NameKey p = new Project.NameKey(event.getProjectName());
-    config
-        .getURIs(Optional.empty(), p, FilterType.ALL)
-        .entries()
-        .stream()
+    config.getURIs(Optional.empty(), p, FilterType.ALL).entries().stream()
         .forEach(e -> e.getKey().scheduleUpdateHead(e.getValue(), p, event.getNewHeadName()));
   }
 }
