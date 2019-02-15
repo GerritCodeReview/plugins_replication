@@ -77,6 +77,10 @@ gerrit.defaultForceUpdate
 :	If true, the default push refspec will be set to use forced
 	update to the remote when no refspec is given.  By default, false.
 
+gerrit.maxRefsToLog
+:	Number of refs, that are pushed during replication, to be logged.
+	For printing all refs to the logs, use a value of 0. By default, 0.
+
 replication.lockErrorMaxRetries
 :	Number of times to retry a replication operation if a lock
 	error is detected.

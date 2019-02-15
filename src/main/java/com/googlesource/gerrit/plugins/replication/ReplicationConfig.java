@@ -38,6 +38,8 @@ public interface ReplicationConfig {
 
   boolean isDefaultForceUpdate();
 
+  int getMaxRefsToLog();
+
   boolean isEmpty();
 
   Path getEventsDirectory();

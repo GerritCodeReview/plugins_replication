@@ -83,7 +83,6 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final ReplicationStateListener stateLog;
   static final String ALL_REFS = "..all..";
   static final String ID_MDC_KEY = "pushOneId";
-  static final int MAX_REFS_TO_LOG = 1000;
 
   interface Factory {
     PushOne create(Project.NameKey d, URIish u);
@@ -93,6 +92,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final PermissionBackend permissionBackend;
   private final Destination pool;
   private final RemoteConfig config;
+  private final ReplicationConfig replConfig;
   private final CredentialsProvider credentialsProvider;
   private final PerThreadRequestScope.Scoper threadScoper;
 
@@ -121,6 +121,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       PermissionBackend permissionBackend,
       Destination p,
       RemoteConfig c,
+      ReplicationConfig rc,
       CredentialsFactory cpFactory,
       PerThreadRequestScope.Scoper ts,
       IdGenerator ig,
@@ -134,6 +135,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     this.permissionBackend = permissionBackend;
     pool = p;
     config = c;
+    replConfig = rc;
     credentialsProvider = cpFactory.create(c.getName());
     threadScoper = ts;
     projectName = d;
@@ -446,8 +448,16 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       return new PushResult();
     }
 
-    repLog.info(
-        "Push to {} references: {}", uri, todo.subList(0, Math.min(todo.size(), MAX_REFS_TO_LOG)));
+    if (todo.size() <= replConfig.getMaxRefsToLog() || replConfig.getMaxRefsToLog() <= 0) {
+      repLog.info("Push to {} references: {}", uri, todo);
+    } else {
+      repLog.info(
+          "Push to {} references (first {} of {} listed): {}",
+          uri,
+          replConfig.getMaxRefsToLog(),
+          todo.size(),
+          todo.subList(0, replConfig.getMaxRefsToLog()));
+    }
 
     return tn.push(NullProgressMonitor.INSTANCE, todo);
   }

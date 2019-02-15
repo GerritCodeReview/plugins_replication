@@ -121,6 +121,11 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   }
 
   @Override
+  public synchronized int getMaxRefsToLog() {
+    return currentConfig.getMaxRefsToLog();
+  }
+
+  @Override
   public synchronized boolean isEmpty() {
     return currentConfig.isEmpty();
   }
