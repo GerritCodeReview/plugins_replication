@@ -83,6 +83,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final ReplicationStateListener stateLog;
   static final String ALL_REFS = "..all..";
   static final String ID_MDC_KEY = "pushOneId";
+  static final int MAX_REFS_TO_LOG = 1000;
 
   interface Factory {
     PushOne create(Project.NameKey d, URIish u);
@@ -445,7 +446,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       return new PushResult();
     }
 
-    repLog.info("Push to {} references: {}", uri, todo);
+    repLog.info(
+        "Push to {} references: {}", uri, todo.subList(0, Math.min(todo.size(), MAX_REFS_TO_LOG)));
 
     return tn.push(NullProgressMonitor.INSTANCE, todo);
   }
