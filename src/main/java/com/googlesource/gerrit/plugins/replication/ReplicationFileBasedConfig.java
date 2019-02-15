@@ -58,6 +58,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private Path cfgPath;
   private boolean replicateAllOnPluginStart;
   private boolean defaultForceUpdate;
+  private int maxRefsToLog;
   private final FileBasedConfig config;
   private final Path pluginDataDir;
 
@@ -120,6 +121,8 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     replicateAllOnPluginStart = config.getBoolean("gerrit", "replicateOnStartup", false);
 
     defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);
+
+    maxRefsToLog = config.getInt("gerrit", "maxRefsToLog", 0);
 
     ImmutableList.Builder<Destination> dest = ImmutableList.builder();
     for (RemoteConfig c : allRemotes(config)) {
@@ -244,6 +247,11 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   @Override
   public boolean isDefaultForceUpdate() {
     return defaultForceUpdate;
+  }
+
+  @Override
+  public int getMaxRefsToLog() {
+    return maxRefsToLog;
   }
 
   private static List<RemoteConfig> allRemotes(FileBasedConfig cfg) throws ConfigInvalidException {
