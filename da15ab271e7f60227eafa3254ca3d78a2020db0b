@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f5be18b_6fd61ca0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-02-18T09:11:50Z",
+      "side": 1,
+      "message": "I agree with David that this should go into the first change.",
+      "range": {
+        "startLine": 455,
+        "startChar": 33,
+        "endLine": 455,
+        "endChar": 56
+      },
+      "revId": "da15ab271e7f60227eafa3254ca3d78a2020db0b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
