@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "71da5cb8_3b49bc8a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-02-19T16:52:38Z",
+      "side": 1,
+      "message": "Swap the order of tests. It is more intuitive to first check if a limit is set and only in that case compare the todo size with the limit.\n\nFurther, according to the documentation which is part of this change, only zero means no limit. Negative values are unused.",
+      "revId": "da15ab271e7f60227eafa3254ca3d78a2020db0b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6f5be18b_6fd61ca0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 2
