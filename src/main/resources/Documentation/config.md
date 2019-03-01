@@ -301,7 +301,7 @@ remote.NAME.createMissingRepositories
 	If the remote site was not available at the moment when a new
 	project was created, it will be created if during the replication
 	of a ref it is found to be missing.
-	
+
 	If false, repositories are never created automatically on this
 	remote.
 
@@ -401,7 +401,7 @@ remote.NAME.password
 File `~/.ssh/config`
 --------------------
 
-If present, Gerrit reads and caches `~/.ssh/config` at startup, and
+Gerrit reads and caches the `~/.ssh/config` at startup, and
 supports most SSH configuration options.  For example:
 
 ```
@@ -413,6 +413,15 @@ supports most SSH configuration options.  For example:
     User mirror-updater
     IdentityFile ~/.ssh/id_pubmirror
     PreferredAuthentications publickey
+```
+
+*IdentityFile* and *PreferredAuthentications* must be defined for all the hosts.
+Here an example of the minimum `~/.ssh/config` needed:
+
+```
+Host *
+   IdentityFile ~/.ssh/id_rsa
+   PreferredAuthentications publickey
 ```
 
 Supported options:
