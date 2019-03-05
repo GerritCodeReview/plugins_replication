@@ -22,6 +22,30 @@
       "revId": "da5e30bb2a47e800fc94dbc3f49a67c1ef74ade1",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "baa8603a_8f996677",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2019-03-05T11:46:17Z",
+      "side": 1,
+      "message": "I\u0027m getting a client exception (\"com.jcraft.jsch.JSchException: invalid privatekey\") which prevents the replication whenever I\u0027m not using a PEM key.\n\n\u003e Also, is this talking about the remote host\u0027s host key?  Or the local user\u0027s key?  In the former case it\u0027s not always going to be feasible to regenerate the remote host key (i.e. if replicating to a host that you don\u0027t own, like github).\n\nI\u0027m referring to the local user\u0027s key.",
+      "parentUuid": "e35ebb26_82801ada",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 0
+      },
+      "revId": "da5e30bb2a47e800fc94dbc3f49a67c1ef74ade1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
