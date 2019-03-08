@@ -39,7 +39,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private long lastFailedConfigTs;
 
   private final SitePaths site;
-  private final DestinationFactory destinationFactory;
+  private final Destination.Factory destinationFactory;
   private final Path pluginDataDir;
   // Use Provider<> instead of injecting the ReplicationQueue because of circular dependency with
   // ReplicationConfig
@@ -48,7 +48,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   @Inject
   public AutoReloadConfigDecorator(
       SitePaths site,
-      DestinationFactory destinationFactory,
+      Destination.Factory destinationFactory,
       Provider<ReplicationQueue> replicationQueue,
       @PluginData Path pluginDataDir)
       throws ConfigInvalidException, IOException {

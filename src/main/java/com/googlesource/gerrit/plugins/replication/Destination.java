@@ -55,6 +55,7 @@ import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.Provides;
 import com.google.inject.Scopes;
+import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
@@ -81,6 +82,11 @@ import org.slf4j.Logger;
 
 public class Destination {
   private static final Logger repLog = ReplicationQueue.repLog;
+
+  public interface Factory {
+    Destination create(DestinationConfiguration config);
+  }
+
   private final ReplicationStateListener stateLog;
   private final Object stateLock = new Object();
   private final Map<URIish, PushOne> pending = new HashMap<>();
@@ -115,7 +121,7 @@ public class Destination {
 
   protected Destination(
       Injector injector,
-      DestinationConfiguration cfg,
+      @Assisted DestinationConfiguration cfg,
       RemoteSiteUser.Factory replicationUserFactory,
       PluginUser pluginUser,
       GitRepositoryManager gitRepositoryManager,
