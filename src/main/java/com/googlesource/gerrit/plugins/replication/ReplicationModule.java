@@ -34,7 +34,7 @@ import org.eclipse.jgit.transport.SshSessionFactory;
 class ReplicationModule extends AbstractModule {
   @Override
   protected void configure() {
-    bind(DestinationFactory.class).in(Scopes.SINGLETON);
+    install(new FactoryModuleBuilder().build(Destination.Factory.class));
     bind(ReplicationQueue.class).in(Scopes.SINGLETON);
     bind(LifecycleListener.class)
         .annotatedWith(UniqueAnnotations.create())

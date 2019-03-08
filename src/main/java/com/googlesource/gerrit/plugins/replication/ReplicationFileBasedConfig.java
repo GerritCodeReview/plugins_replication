@@ -53,7 +53,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
 
   @Inject
   public ReplicationFileBasedConfig(
-      SitePaths site, DestinationFactory destinationFactory, @PluginData Path pluginDataDir)
+      SitePaths site, Destination.Factory destinationFactory, @PluginData Path pluginDataDir)
       throws ConfigInvalidException, IOException {
     this.site = site;
     this.cfgPath = site.etc_dir.resolve("replication.config");
@@ -86,7 +86,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     return destinations.stream().filter(Objects::nonNull).filter(filter).collect(toList());
   }
 
-  private List<Destination> allDestinations(DestinationFactory destinationFactory)
+  private List<Destination> allDestinations(Destination.Factory destinationFactory)
       throws ConfigInvalidException, IOException {
     if (!config.getFile().exists()) {
       logger.atWarning().log("Config file %s does not exist; not replicating", config.getFile());
