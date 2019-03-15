@@ -77,12 +77,4 @@ class SecureCredentialsProvider extends CredentialsProvider {
     }
     return true;
   }
-
-  public String getUser() {
-    return cfgUser;
-  }
-
-  public String getPass() {
-    return cfgPass;
-  }
 }

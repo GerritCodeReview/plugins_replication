@@ -33,6 +33,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicHeader;
+import org.eclipse.jgit.transport.CredentialItem;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.URIish;
 
@@ -101,11 +102,21 @@ public class GerritRestApi implements AdminApi {
 
   private HttpClientContext getContext() {
     HttpClientContext ctx = HttpClientContext.create();
-    CredentialsProvider cp = new BasicCredentialsProvider();
-    SecureCredentialsProvider scp = credentials.create(remoteConfig.getName());
-    cp.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(scp.getUser(), scp.getPass()));
-    ctx.setCredentialsProvider(cp);
+    ctx.setCredentialsProvider(adapt(credentials.create(remoteConfig.getName())));
     return ctx;
+  }
+
+  private CredentialsProvider adapt(org.eclipse.jgit.transport.CredentialsProvider cp) {
+    CredentialItem.Username user = new CredentialItem.Username();
+    CredentialItem.Password pass = new CredentialItem.Password();
+    if (cp.supports(user, pass) && cp.get(uri, user, pass)) {
+      CredentialsProvider adapted = new BasicCredentialsProvider();
+      adapted.setCredentials(
+          AuthScope.ANY,
+          new UsernamePasswordCredentials(user.getValue(), new String(pass.getValue())));
+      return adapted;
+    }
+    return null;
   }
 
   private static String toHttpUri(URIish uri) {
