@@ -13,7 +13,9 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
+import org.eclipse.jgit.transport.CredentialsProvider;
+
 public interface CredentialsFactory {
 
-  SecureCredentialsProvider create(String remoteName);
+  CredentialsProvider create(String remoteName);
 }

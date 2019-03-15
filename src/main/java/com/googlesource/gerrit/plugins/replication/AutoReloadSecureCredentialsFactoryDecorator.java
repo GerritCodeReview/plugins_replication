@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.transport.CredentialsProvider;
 
 public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsFactory {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
@@ -50,7 +51,7 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsF
   }
 
   @Override
-  public SecureCredentialsProvider create(String remoteName) {
+  public CredentialsProvider create(String remoteName) {
     try {
       if (needsReload()) {
         secureCredentialsFactory.compareAndSet(
