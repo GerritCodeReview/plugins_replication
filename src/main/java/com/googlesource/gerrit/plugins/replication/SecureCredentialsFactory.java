@@ -20,6 +20,8 @@ import java.io.IOException;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
+import org.eclipse.jgit.transport.CredentialsProvider;
+import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.eclipse.jgit.util.FS;
 
 /** Looks up a remote's password in secure.config. */
@@ -48,9 +50,9 @@ class SecureCredentialsFactory implements CredentialsFactory {
   }
 
   @Override
-  public SecureCredentialsProvider create(String remoteName) {
+  public CredentialsProvider create(String remoteName) {
     String user = config.getString("remote", remoteName, "username");
     String pass = config.getString("remote", remoteName, "password");
-    return new SecureCredentialsProvider(user, pass);
+    return new UsernamePasswordCredentialsProvider(user, pass);
   }
 }
