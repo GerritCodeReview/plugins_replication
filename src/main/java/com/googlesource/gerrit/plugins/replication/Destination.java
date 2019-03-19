@@ -51,10 +51,12 @@ import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectState;
 import com.google.gerrit.server.util.RequestContext;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.Provides;
 import com.google.inject.Scopes;
+import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
@@ -81,6 +83,11 @@ import org.slf4j.Logger;
 
 public class Destination {
   private static final Logger repLog = ReplicationQueue.repLog;
+
+  public interface Factory {
+    Destination create(DestinationConfiguration config);
+  }
+
   private final ReplicationStateListener stateLog;
   private final Object stateLock = new Object();
   private final Map<URIish, PushOne> pending = new HashMap<>();
@@ -113,9 +120,9 @@ public class Destination {
     }
   }
 
+  @Inject
   protected Destination(
       Injector injector,
-      DestinationConfiguration cfg,
       RemoteSiteUser.Factory replicationUserFactory,
       PluginUser pluginUser,
       GitRepositoryManager gitRepositoryManager,
@@ -125,15 +132,15 @@ public class Destination {
       GroupBackend groupBackend,
       ReplicationStateListener stateLog,
       GroupIncludeCache groupIncludeCache,
-      DynamicItem<EventDispatcher> eventDispatcher) {
-    config = cfg;
+      DynamicItem<EventDispatcher> eventDispatcher,
+      @Assisted DestinationConfiguration cfg) {
     this.eventDispatcher = eventDispatcher;
     gitManager = gitRepositoryManager;
     this.permissionBackend = permissionBackend;
     this.userProvider = userProvider;
     this.projectCache = projectCache;
     this.stateLog = stateLog;
-
+    config = cfg;
     CurrentUser remoteUser;
     if (!cfg.getAuthGroupNames().isEmpty()) {
       ImmutableSet.Builder<AccountGroup.UUID> builder = ImmutableSet.builder();
