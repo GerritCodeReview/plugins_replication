@@ -25,7 +25,7 @@ import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
 import org.eclipse.jgit.util.io.StreamCopyThread;
 
-class SshHelper {
+public class SshHelper {
   private static final int SSH_REMOTE_TIMEOUT = 120 * 1000; // 2 minutes = 120 * 1000ms
 
   private final Provider<SshSessionFactory> sshSessionFactoryProvider;
@@ -35,7 +35,7 @@ class SshHelper {
     this.sshSessionFactoryProvider = sshSessionFactoryProvider;
   }
 
-  int executeRemoteSsh(URIish uri, String cmd, OutputStream errStream) throws IOException {
+  public int executeRemoteSsh(URIish uri, String cmd, OutputStream errStream) throws IOException {
     RemoteSession ssh = connect(uri);
     Process proc = ssh.exec(cmd, 0);
     proc.getOutputStream().close();
@@ -54,7 +54,7 @@ class SshHelper {
     return proc.exitValue();
   }
 
-  OutputStream newErrorBufferStream() {
+  public OutputStream newErrorBufferStream() {
     return new OutputStream() {
       private final StringBuilder out = new StringBuilder();
       private final StringBuilder line = new StringBuilder();
