@@ -23,7 +23,7 @@ import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 
 /** Looks up a remote's password in secure.config. */
-class SecureCredentialsFactory implements CredentialsFactory {
+public class SecureCredentialsFactory implements CredentialsFactory {
   private final Config config;
 
   @Inject
