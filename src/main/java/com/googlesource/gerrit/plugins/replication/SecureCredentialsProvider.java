@@ -20,7 +20,7 @@ import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.URIish;
 
 /** Looks up a remote's password in secure.config. */
-class SecureCredentialsProvider extends CredentialsProvider {
+public class SecureCredentialsProvider extends CredentialsProvider {
   private final String cfgUser;
   private final String cfgPass;
 
