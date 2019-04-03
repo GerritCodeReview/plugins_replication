@@ -35,6 +35,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ScheduledExecutorService;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.transport.URIish;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,43 +67,47 @@ public class ReplicationQueue
 
   private final WorkQueue workQueue;
   private final DynamicItem<EventDispatcher> dispatcher;
-  private final ReplicationConfig config;
   private final AdminApiFactory adminApiFactory;
   private final ReplicationState.Factory replicationStateFactory;
   private final EventsStorage eventsStorage;
+  private final DestinationsCollection destinations;
   private volatile boolean running;
 
   @Inject
   ReplicationQueue(
       WorkQueue wq,
       AdminApiFactory aaf,
-      ReplicationConfig rc,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListeners sl,
       ReplicationState.Factory rsf,
-      EventsStorage es) {
+      EventsStorage es,
+      DestinationsCollection ds) {
     workQueue = wq;
     dispatcher = dis;
-    config = rc;
     stateLog = sl;
     adminApiFactory = aaf;
     replicationStateFactory = rsf;
     eventsStorage = es;
+    destinations = ds;
   }
 
   @Override
   public void start() {
     if (!running) {
-      config.startup(workQueue);
-      running = true;
-      firePendingEvents();
+      try {
+        destinations.startup();
+        firePendingEvents();
+        running = true;
+      } catch (ConfigInvalidException e) {
+        repLog.error("Unable to load destinations", e);
+      }
     }
   }
 
   @Override
   public void stop() {
     running = false;
-    int discarded = config.shutdown();
+    int discarded = destinations.shutdown();
     if (discarded > 0) {
       repLog.warn("Canceled {} replication events during shutdown", discarded);
     }
@@ -118,7 +124,7 @@ public class ReplicationQueue
       return;
     }
 
-    for (Destination cfg : config.getDestinations(FilterType.ALL)) {
+    for (Destination cfg : destinations.getAll(FilterType.ALL)) {
       if (cfg.wouldPushProject(project)) {
         for (URIish uri : cfg.getURIs(project, urlMatch)) {
           cfg.schedule(project, PushOne.ALL_REFS, uri, state, now);
@@ -141,7 +147,7 @@ public class ReplicationQueue
     }
 
     Project.NameKey project = new Project.NameKey(projectName);
-    for (Destination cfg : config.getDestinations(FilterType.ALL)) {
+    for (Destination cfg : destinations.getAll(FilterType.ALL)) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
         String eventKey = eventsStorage.persist(projectName, refName);
         state.setEventKey(eventKey);
@@ -185,7 +191,7 @@ public class ReplicationQueue
   }
 
   private Set<URIish> getURIs(Project.NameKey projectName, FilterType filterType) {
-    if (config.getDestinations(filterType).isEmpty()) {
+    if (destinations.getAll(filterType).isEmpty()) {
       return Collections.emptySet();
     }
     if (!running) {
@@ -194,7 +200,7 @@ public class ReplicationQueue
     }
 
     Set<URIish> uris = new HashSet<>();
-    for (Destination config : this.config.getDestinations(filterType)) {
+    for (Destination config : destinations.getAll(filterType)) {
       if (!config.wouldPushProject(projectName)) {
         continue;
       }
@@ -286,5 +292,9 @@ public class ReplicationQueue
             + "Only local paths and SSH URLs are supported for this operation",
         op,
         uri);
+  }
+
+  public ScheduledExecutorService createQueue(int poolThreads, String poolName) {
+    return workQueue.createQueue(poolThreads, poolName);
   }
 }
