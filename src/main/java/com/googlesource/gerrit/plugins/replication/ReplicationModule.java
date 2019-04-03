@@ -35,6 +35,7 @@ class ReplicationModule extends AbstractModule {
   @Override
   protected void configure() {
     bind(DestinationFactory.class).in(Scopes.SINGLETON);
+    bind(Destinations.class).in(Scopes.SINGLETON);
     bind(ReplicationQueue.class).in(Scopes.SINGLETON);
     bind(LifecycleListener.class)
         .annotatedWith(UniqueAnnotations.create())
