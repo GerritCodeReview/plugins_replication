@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06cfa340_bc7f3ed6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-04-03T15:34:08Z",
+      "side": 0,
+      "message": "Using @Singleton might be a problem in a context where multiple injectors are used as they will end up building different objects anyway.\n\nPerhaps the intention of the author was to make sure the singleton was the same for multiple injectors.",
+      "revId": "7062d253e1992235eeb06f71e00591a52de26857",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
