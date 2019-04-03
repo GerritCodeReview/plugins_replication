@@ -16,6 +16,24 @@
       "revId": "7062d253e1992235eeb06f71e00591a52de26857",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9535387f_f070ac03",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-03T15:57:03Z",
+      "side": 0,
+      "message": "That\u0027s right, if we leave only the singleton annotation then different modules will have different instances, which is unexpected.\n\nLet me instead remove the @Singleton annotation from the class and just keep this one in the module. Good catch.",
+      "parentUuid": "06cfa340_bc7f3ed6",
+      "revId": "7062d253e1992235eeb06f71e00591a52de26857",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
