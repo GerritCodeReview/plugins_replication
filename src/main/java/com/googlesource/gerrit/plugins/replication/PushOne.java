@@ -124,7 +124,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       PerThreadRequestScope.Scoper ts,
       ReplicationQueue rq,
       IdGenerator ig,
-      ReplicationStateListener sl,
+      GlobalReplicationStateListener sl,
       ReplicationMetrics m,
       ProjectCache pc,
       @Assisted Project.NameKey d,
