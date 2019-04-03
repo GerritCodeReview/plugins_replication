@@ -37,7 +37,7 @@ public class DestinationFactory {
   private final Provider<CurrentUser> userProvider;
   private final ProjectCache projectCache;
   private final GroupBackend groupBackend;
-  private final ReplicationStateListener stateLog;
+  private final ReplicationStateListeners stateLog;
   private final GroupIncludeCache groupIncludeCache;
   private final DynamicItem<EventDispatcher> eventDispatcher;
 
@@ -50,7 +50,7 @@ public class DestinationFactory {
       Provider<CurrentUser> userProvider,
       ProjectCache projectCache,
       GroupBackend groupBackend,
-      ReplicationStateListener stateLog,
+      ReplicationStateListeners stateLog,
       GroupIncludeCache groupIncludeCache,
       DynamicItem<EventDispatcher> eventDispatcher) {
     this.injector = injector;
