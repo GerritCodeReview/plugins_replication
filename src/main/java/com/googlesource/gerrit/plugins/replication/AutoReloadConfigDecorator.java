@@ -17,14 +17,13 @@ import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.FileUtil;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
-import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.lib.Config;
 
 @Singleton
 public class AutoReloadConfigDecorator implements ReplicationConfig {
@@ -35,7 +34,6 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private long lastFailedConfigTs;
 
   private final SitePaths site;
-  private final DestinationFactory destinationFactory;
   private final Path pluginDataDir;
   // Use Provider<> instead of injecting the ReplicationQueue because of circular dependency with
   // ReplicationConfig
@@ -43,13 +41,9 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
 
   @Inject
   public AutoReloadConfigDecorator(
-      SitePaths site,
-      DestinationFactory destinationFactory,
-      Provider<ReplicationQueue> replicationQueue,
-      @PluginData Path pluginDataDir)
+      SitePaths site, Provider<ReplicationQueue> replicationQueue, @PluginData Path pluginDataDir)
       throws ConfigInvalidException, IOException {
     this.site = site;
-    this.destinationFactory = destinationFactory;
     this.pluginDataDir = pluginDataDir;
     this.currentConfig = loadConfig();
     this.currentConfigTs = getLastModified(currentConfig);
@@ -61,7 +55,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   }
 
   private ReplicationFileBasedConfig loadConfig() throws ConfigInvalidException, IOException {
-    return new ReplicationFileBasedConfig(site, destinationFactory, pluginDataDir);
+    return new ReplicationFileBasedConfig(site, pluginDataDir);
   }
 
   private synchronized boolean isAutoReload() {
@@ -69,12 +63,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   }
 
   @Override
-  public synchronized List<Destination> getDestinations(FilterType filterType) {
-    reloadIfNeeded();
-    return currentConfig.getDestinations(filterType);
-  }
-
-  private void reloadIfNeeded() {
+  public synchronized boolean reloadIfNeeded() {
     if (isAutoReload()) {
       ReplicationQueue queue = replicationQueue.get();
       long lastModified = getLastModified(currentConfig);
@@ -84,19 +73,18 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
           currentConfig = loadConfig();
           currentConfigTs = lastModified;
           lastFailedConfigTs = 0;
-          logger.atInfo().log(
-              "Configuration reloaded: %d destinations",
-              currentConfig.getDestinations(FilterType.ALL).size());
+
+          return true;
         }
       } catch (Exception e) {
         logger.atSevere().withCause(e).log(
             "Cannot reload replication configuration: keeping existing settings");
         lastFailedConfigTs = lastModified;
-        return;
       } finally {
         queue.start();
       }
     }
+    return false;
   }
 
   @Override
@@ -110,22 +98,12 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   }
 
   @Override
-  public synchronized boolean isEmpty() {
-    return currentConfig.isEmpty();
-  }
-
-  @Override
   public Path getEventsDirectory() {
     return currentConfig.getEventsDirectory();
   }
 
   @Override
-  public synchronized int shutdown() {
-    return currentConfig.shutdown();
-  }
-
-  @Override
-  public synchronized void startup(WorkQueue workQueue) {
-    currentConfig.startup(workQueue);
+  public Config getConfig() {
+    return currentConfig.getConfig();
   }
 }
