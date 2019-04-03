@@ -13,9 +13,8 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.gerrit.server.git.WorkQueue;
 import java.nio.file.Path;
-import java.util.List;
+import org.eclipse.jgit.lib.Config;
 
 public interface ReplicationConfig {
 
@@ -25,17 +24,13 @@ public interface ReplicationConfig {
     ALL
   }
 
-  List<Destination> getDestinations(FilterType filterType);
-
   boolean isReplicateAllOnPluginStart();
 
   boolean isDefaultForceUpdate();
 
-  boolean isEmpty();
-
   Path getEventsDirectory();
 
-  int shutdown();
+  boolean reloadIfNeeded();
 
-  void startup(WorkQueue workQueue);
+  Config getConfig();
 }
