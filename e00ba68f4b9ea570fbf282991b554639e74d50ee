@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "111d2147_c72c4394",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationSshSessionFactoryProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-03T08:53:43Z",
+      "side": 1,
+      "message": "There are no reasons for making this public for the pull-replication plugin.",
+      "range": {
+        "startLine": 20,
+        "startChar": 13,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "e00ba68f4b9ea570fbf282991b554639e74d50ee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2229f9f8_9d2ba6c0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-03T08:53:43Z",
+      "side": 1,
+      "message": "This isn\u0027t needed to be publish either: there is no need for the pull-replication plugin to use any explicit ssh commands on the remote server.",
+      "range": {
+        "startLine": 28,
+        "startChar": 13,
+        "endLine": 28,
+        "endChar": 22
+      },
+      "revId": "e00ba68f4b9ea570fbf282991b554639e74d50ee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
