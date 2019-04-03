@@ -119,7 +119,7 @@ public class Destination {
       Provider<CurrentUser> userProvider,
       ProjectCache projectCache,
       GroupBackend groupBackend,
-      ReplicationStateListener stateLog,
+      GlobalReplicationStateListener stateLog,
       GroupIncludeCache groupIncludeCache,
       DynamicItem<EventDispatcher> eventDispatcher) {
     config = cfg;

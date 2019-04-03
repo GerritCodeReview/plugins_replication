@@ -61,7 +61,8 @@ class ReplicationModule extends AbstractModule {
     install(new FactoryModuleBuilder().build(ReplicationState.Factory.class));
 
     bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
-    bind(ReplicationStateListener.class).to(ReplicationStateLogger.class);
+    DynamicSet.setOf(binder(), ReplicationStateListener.class);
+    DynamicSet.bind(binder(), ReplicationStateListener.class).to(ReplicationStateLogger.class);
 
     EventTypes.register(RefReplicatedEvent.TYPE, RefReplicatedEvent.class);
     EventTypes.register(RefReplicationDoneEvent.TYPE, RefReplicationDoneEvent.class);
