@@ -31,7 +31,6 @@ import com.google.inject.Singleton;
 @Singleton
 public class DestinationFactory {
   private final Injector injector;
-  private final RemoteSiteUser.Factory replicationUserFactory;
   private final PluginUser pluginUser;
   private final GitRepositoryManager gitRepositoryManager;
   private final PermissionBackend permissionBackend;
@@ -45,7 +44,6 @@ public class DestinationFactory {
   @Inject
   public DestinationFactory(
       Injector injector,
-      RemoteSiteUser.Factory replicationUserFactory,
       PluginUser pluginUser,
       GitRepositoryManager gitRepositoryManager,
       PermissionBackend permissionBackend,
@@ -56,7 +54,6 @@ public class DestinationFactory {
       GroupIncludeCache groupIncludeCache,
       DynamicItem<EventDispatcher> eventDispatcher) {
     this.injector = injector;
-    this.replicationUserFactory = replicationUserFactory;
     this.pluginUser = pluginUser;
     this.gitRepositoryManager = gitRepositoryManager;
     this.permissionBackend = permissionBackend;
@@ -72,7 +69,6 @@ public class DestinationFactory {
     return new Destination(
         injector,
         config,
-        replicationUserFactory,
         pluginUser,
         gitRepositoryManager,
         permissionBackend,
