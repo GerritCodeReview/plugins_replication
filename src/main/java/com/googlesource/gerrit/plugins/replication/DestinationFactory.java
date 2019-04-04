@@ -26,7 +26,9 @@ import com.google.gerrit.server.project.ProjectCache;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
+@Singleton
 public class DestinationFactory {
   private final Injector injector;
   private final PluginUser pluginUser;
