@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1393938_44a970ca",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destinations.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-04-04T13:31:00Z",
+      "side": 1,
+      "message": "this documentation should be removed/updated",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 5
+      },
+      "revId": "c32970b9579571883724ecf36cabc56bc82fc826",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
