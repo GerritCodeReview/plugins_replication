@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "f4909cc7_75c092bc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destinations.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-04-05T09:34:06Z",
+      "side": 1,
+      "message": "In that case I would prefer DestinationsCollection",
+      "parentUuid": "96a56085_aa92f0a7",
+      "range": {
+        "startLine": 36,
+        "startChar": 13,
+        "endLine": 36,
+        "endChar": 25
+      },
+      "revId": "c32970b9579571883724ecf36cabc56bc82fc826",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a1393938_44a970ca",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destinations.java",
         "patchSetId": 3
