@@ -22,6 +22,30 @@
       "revId": "20845ba7e73265491860061973405667cdf25d22",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6a49a83_e10f5923",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-09T09:27:18Z",
+      "side": 1,
+      "message": "Resolved by initializing the allDestinations variable to an empty list.",
+      "parentUuid": "80f9c7c7_da1c32c9",
+      "range": {
+        "startLine": 79,
+        "startChar": 11,
+        "endLine": 79,
+        "endChar": 26
+      },
+      "revId": "20845ba7e73265491860061973405667cdf25d22",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
