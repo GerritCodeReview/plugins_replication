@@ -53,7 +53,7 @@ public class ReplicationQueue
       WorkQueue wq,
       ReplicationConfig rc,
       DynamicItem<EventDispatcher> dis,
-      ReplicationStateListener sl,
+      ReplicationStateListeners sl,
       ReplicationState.Factory rsf,
       EventsStorage es) {
     workQueue = wq;

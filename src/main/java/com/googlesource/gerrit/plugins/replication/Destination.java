@@ -123,14 +123,13 @@ public class Destination {
   @Inject
   protected Destination(
       Injector injector,
-      RemoteSiteUser.Factory replicationUserFactory,
       PluginUser pluginUser,
       GitRepositoryManager gitRepositoryManager,
       PermissionBackend permissionBackend,
       Provider<CurrentUser> userProvider,
       ProjectCache projectCache,
       GroupBackend groupBackend,
-      ReplicationStateListener stateLog,
+      ReplicationStateListeners stateLog,
       GroupIncludeCache groupIncludeCache,
       DynamicItem<EventDispatcher> eventDispatcher,
       @Assisted DestinationConfiguration cfg) {
@@ -153,7 +152,7 @@ public class Destination {
           repLog.warn("Group \"{}\" not recognized, removing from authGroup", name);
         }
       }
-      remoteUser = replicationUserFactory.create(new ListGroupMembership(builder.build()));
+      remoteUser = new RemoteSiteUser(new ListGroupMembership(builder.build()));
     } else {
       remoteUser = pluginUser;
     }

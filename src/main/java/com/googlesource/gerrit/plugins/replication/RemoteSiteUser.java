@@ -16,18 +16,11 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.account.GroupMembership;
-import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
 
 public class RemoteSiteUser extends CurrentUser {
-  public interface Factory {
-    RemoteSiteUser create(@Assisted GroupMembership authGroups);
-  }
-
   private final GroupMembership effectiveGroups;
 
-  @Inject
-  RemoteSiteUser(@Assisted GroupMembership authGroups) {
+  public RemoteSiteUser(GroupMembership authGroups) {
     effectiveGroups = authGroups;
   }
 

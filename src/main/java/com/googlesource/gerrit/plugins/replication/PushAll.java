@@ -43,7 +43,7 @@ public class PushAll implements Runnable {
       WorkQueue wq,
       ProjectCache projectCache,
       ReplicationQueue rq,
-      ReplicationStateListener stateLog,
+      ReplicationStateListeners stateLog,
       @Assisted @Nullable String urlMatch,
       @Assisted ReplicationFilter filter,
       @Assisted ReplicationState state,
