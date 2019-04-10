@@ -156,6 +156,24 @@
     },
     {
       "key": {
+        "uuid": "1a6fbc01_b677bb60",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-04-10T14:49:53Z",
+      "side": 1,
+      "message": "\u003e Is it a concern or a regression you believe this refactoring is introducing?\n\nActually no.\n\n\u003e It wasn\u0027t synchronized before, that\u0027s the reason why I am not introducing it here also.\n\nI see... it worked (and likely still works) because the callers take care about the synchronization, just see all the synchronizations in the AutoReloadConfigDecorator.\n\n\u003e \n\u003e It is assigned only once during load(), which is done only once in this singleton. Are you concerned about some concurrently during load()?\n\nIt is also assigned during the reload but it doesn\u0027t really matter.\n\nMy concern was about the visibility of the update of the allDestinations variable\nto the other threads. This class, as-is, is NOT thread safe. It\u0027s thread safety\nis ensured by the callers taking care about thread synchronization. This is not\nnice and is hard to read and follow. Singletons should ensure their own\nthread safety rather than expecting callers to do so.\n\nHowever, since you are not introducing a regression with this change I think we should\ntry to address my concerns in new change(s), not here.",
+      "parentUuid": "4c1cc995_2a9bbbde",
+      "revId": "ba1b0decc15bf4a07bca6c4c8edd947b83a2fe18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d938a9d0_857c2756",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
         "patchSetId": 6
