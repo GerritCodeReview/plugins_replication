@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84042a13_8388e13e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-04-10T09:17:33Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be necessary, if the isEmpty() method is removed from this class.",
+      "range": {
+        "startLine": 43,
+        "startChar": 44,
+        "endLine": 43,
+        "endChar": 69
+      },
+      "revId": "ba1b0decc15bf4a07bca6c4c8edd947b83a2fe18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bef3d56_3c47eb43",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-04-10T09:17:33Z",
+      "side": 1,
+      "message": "Shouldn\u0027t access to this field be synchronized?\nI think it should be because:\n* it is not an immutable final set from constructor\n* writing into this field and reading the field will likely happen from different threads",
+      "revId": "ba1b0decc15bf4a07bca6c4c8edd947b83a2fe18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d938a9d0_857c2756",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-04-10T09:17:33Z",
+      "side": 1,
+      "message": "IMHO, this is unnecessary convenience.\nOne can always check if the result of the getAll() is an empty list.",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 3
+      },
+      "revId": "ba1b0decc15bf4a07bca6c4c8edd947b83a2fe18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
