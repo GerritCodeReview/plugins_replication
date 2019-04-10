@@ -102,6 +102,24 @@
     },
     {
       "key": {
+        "uuid": "2fda5c1a_18280979",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-10T14:18:13Z",
+      "side": 1,
+      "message": "See your comment below: \"this shouldn\u0027t be necessary, if the isEmpty() method is removed from this class\".\nThe isEmpty() method isn\u0027t there anymore.",
+      "parentUuid": "960e6524_b5cbbd7f",
+      "revId": "ba1b0decc15bf4a07bca6c4c8edd947b83a2fe18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d938a9d0_857c2756",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
         "patchSetId": 6
@@ -146,6 +164,30 @@
       "revId": "ba1b0decc15bf4a07bca6c4c8edd947b83a2fe18",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b9143c2_899b0a32",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-10T14:18:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36f40723_03284cd5",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 3
+      },
+      "revId": "ba1b0decc15bf4a07bca6c4c8edd947b83a2fe18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
