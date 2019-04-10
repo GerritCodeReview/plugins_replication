@@ -62,6 +62,30 @@
       "revId": "ba1b0decc15bf4a07bca6c4c8edd947b83a2fe18",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36f40723_03284cd5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-10T09:21:01Z",
+      "side": 1,
+      "message": "Point taken, I just wanted to keep compatibility to what it was there before. Let me check if anyone is actually calling it and then it can be removed.",
+      "parentUuid": "d938a9d0_857c2756",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 3
+      },
+      "revId": "ba1b0decc15bf4a07bca6c4c8edd947b83a2fe18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
