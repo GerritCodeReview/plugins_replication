@@ -103,9 +103,4 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   public Config getConfig() {
     return config;
   }
-
-  @Override
-  public boolean reloadIfNeeded() {
-    return false;
-  }
 }

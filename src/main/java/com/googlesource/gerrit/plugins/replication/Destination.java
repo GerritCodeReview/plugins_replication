@@ -43,7 +43,6 @@ import com.google.gerrit.server.config.RequestScopedReviewDbProvider;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
-import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.permissions.ProjectPermission;
@@ -215,9 +214,9 @@ public class Destination {
     }
   }
 
-  public void start(WorkQueue workQueue) {
+  public void start(ReplicationQueue replicationQueue) {
     String poolName = "ReplicateTo-" + config.getRemoteConfig().getName();
-    pool = workQueue.createQueue(config.getPoolThreads(), poolName);
+    pool = replicationQueue.createQueue(config.getPoolThreads(), poolName);
   }
 
   public int shutdown() {

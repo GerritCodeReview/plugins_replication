@@ -1,4 +1,4 @@
-// Copyright (C) 2013 The Android Open Source Project
+// Copyright (C) 2019 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,22 +14,18 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import java.nio.file.Path;
-import org.eclipse.jgit.lib.Config;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 
-public interface ReplicationConfig {
+/** Listener of the configuration loading events. */
+public interface ReplicationConfigListener {
 
-  enum FilterType {
-    PROJECT_CREATION,
-    PROJECT_DELETION,
-    ALL
-  }
+  /** Invoked just before replication.config is about to be loaded. */
+  void beforeLoad();
 
-  boolean isReplicateAllOnPluginStart();
-
-  boolean isDefaultForceUpdate();
-
-  Path getEventsDirectory();
-
-  Config getConfig();
+  /**
+   * Invoked just after replication.config is loaded into memory.
+   *
+   * @throws ConfigInvalidException if the loaded configuration is not valid
+   */
+  void afterLoad(ReplicationConfig replicationConfig) throws ConfigInvalidException;
 }
