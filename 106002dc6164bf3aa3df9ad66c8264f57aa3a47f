@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "14bb72f6_ab81b336",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-11T11:51:48Z",
+      "side": 1,
+      "message": "The problem is now addressed:\n- Stop the replication queue\n- Reload the destinations\n- Start the replication queue again\n\n@Tony can you please re-check?",
+      "parentUuid": "5ec6d926_2289714b",
+      "revId": "106002dc6164bf3aa3df9ad66c8264f57aa3a47f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9713f1bb_099f0301",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
         "patchSetId": 8
