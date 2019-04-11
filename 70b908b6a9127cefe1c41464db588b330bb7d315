@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2520ef7a_7ea1637b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-11T23:17:34Z",
+      "side": 1,
+      "message": "This is still \"smelly\" because this apparent noop in reality is causing the \"side-effect\" of reloading the configuration when needed.\n\nHow would you trigger the reload without having necessarily to assume the implementation of the replicationConfig?",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 34
+      },
+      "revId": "70b908b6a9127cefe1c41464db588b330bb7d315",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cf27c61_402a547d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-11T23:17:34Z",
+      "side": 1,
+      "message": "This is a bit defensive, I am not really 100% sure it is needed.",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 5
+      },
+      "revId": "70b908b6a9127cefe1c41464db588b330bb7d315",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14cb2095_bc275d75",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-11T23:17:34Z",
+      "side": 1,
+      "message": "I believe I should do start() again with the old config.\nHowever, the start() with the old configuration *should* not fail in practice, but may fail because of the method signature.\n\nWhat would you suggest to do? Just swallow it?",
+      "revId": "70b908b6a9127cefe1c41464db588b330bb7d315",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a57eacfc_c80600e5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-11T23:17:34Z",
+      "side": 1,
+      "message": "To be moved to L185 for improved readability.",
+      "revId": "70b908b6a9127cefe1c41464db588b330bb7d315",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bbf66ff_ea9df219",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-11T23:17:34Z",
+      "side": 1,
+      "message": "unneeded",
+      "revId": "70b908b6a9127cefe1c41464db588b330bb7d315",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
