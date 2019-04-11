@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "718a6c38_4e6a3575",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-04-11T12:50:33Z",
+      "side": 1,
+      "message": "Yep this works as expected now, thanks Luca",
+      "parentUuid": "14bb72f6_ab81b336",
+      "revId": "106002dc6164bf3aa3df9ad66c8264f57aa3a47f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9713f1bb_099f0301",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
         "patchSetId": 8
