@@ -105,6 +105,24 @@
       "revId": "106002dc6164bf3aa3df9ad66c8264f57aa3a47f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b64737d_791b781f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-04-11T12:56:08Z",
+      "side": 1,
+      "message": "I agree with your mantra :-)\n\nHowever, this refactoring extended the API of this interface which made some existing\ncode look weird (like I wrote in my previous comment).\n\nThe auto-reload mechanism needs definitely to be tackled. The AutoReloadConfigDecorator\nwas IMHO not the best way to implement it. Among other things it depends on the\nother concrete class implementing the ReplicationConfig interface (ReplicationFileBasedConfig).\nFurther, auto-reload logic should be factored out and only provide a mean to (re)load the configuration and notify listeners when the configuration changes. We could also tackle\nthis topic during the hackathon.",
+      "parentUuid": "b6b7d4ec_1d060bad",
+      "revId": "106002dc6164bf3aa3df9ad66c8264f57aa3a47f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
