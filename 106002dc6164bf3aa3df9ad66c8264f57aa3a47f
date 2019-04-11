@@ -34,6 +34,23 @@
       "revId": "106002dc6164bf3aa3df9ad66c8264f57aa3a47f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9713f1bb_099f0301",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-04-11T11:18:19Z",
+      "side": 1,
+      "message": "Based on the last comment from Antonio, I wonder if this method needs to be\nexposed by this interface.\nWhy do we have the AutoReloadConfigDecorator? Because it knows when the reload is needed\nand does that automatically, as its internal implementation detail.\nWhat does it mean to expose reloadIfNeeded from the AutoReloadConfigDecorator?\n\nCan we remove this method from this interface and let each ReplicationConfig implementation\nhandle reloads as their implementation detail?",
+      "revId": "106002dc6164bf3aa3df9ad66c8264f57aa3a47f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
