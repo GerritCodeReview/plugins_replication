@@ -123,6 +123,24 @@
       "revId": "106002dc6164bf3aa3df9ad66c8264f57aa3a47f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b2f74cb_f906da2f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-11T13:02:10Z",
+      "side": 1,
+      "message": "\u003e I agree with your mantra :-)\n\u003e \n\u003e However, this refactoring extended the API of this interface which made some existing\n\u003e code look weird (like I wrote in my previous comment).\n\nFair enough, let\u0027s see if I can limit the further modifications on this change and improve a bit the situation.\n \n\u003e The auto-reload mechanism needs definitely to be tackled. The AutoReloadConfigDecorator\n\u003e was IMHO not the best way to implement it. Among other things it depends on the\n\u003e other concrete class implementing the ReplicationConfig interface (ReplicationFileBasedConfig).\n\u003e Further, auto-reload logic should be factored out and only provide a mean to (re)load the configuration and notify listeners when the configuration changes. We could also tackle\n\u003e this topic during the hackathon.\n\nYes, the auto-reload mechanism needs a complete revamp: before if could do his job by simply decorating the config because the config was doing *everything* :-)\nThe design is a bit rusted though. and needs re-thinking where the config is one thing and the startup/shutdown is another thing.",
+      "parentUuid": "7b64737d_791b781f",
+      "revId": "106002dc6164bf3aa3df9ad66c8264f57aa3a47f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
