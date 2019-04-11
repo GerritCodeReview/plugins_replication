@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb1ddf0b_abbfb32b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-04-11T10:09:04Z",
+      "side": 1,
+      "message": "Is there any reason why we explicitly call load() here?\n\nreloadIfNeeded() _already_ causes the configuration to be reloaded down the stack when DestinationsCollection.startup() method is invoked at L94.\n\nCalling load() explicitly here in getAll() method causes a new set of Destination objects to be created, which, haven\u0027t been started() and therefore have no poll queue available.\n\nBecause of this when the configuration is reloaded you\u0027ll get a NPE. An example here below:\n\n10:53 $ ssh -p 29777 admin@localhost replication start --all --wait\nError: Cannot enumerate known projects\nNothing to replicate\n\n[2019-04-11 10:53:50,903] [] Cannot enumerate known projects\njava.lang.NullPointerException\n\tat com.googlesource.gerrit.plugins.replication.Destination.schedule(Destination.java:372)\n\tat com.googlesource.gerrit.plugins.replication.ReplicationQueue.scheduleFullSync(ReplicationQueue.java:129)\n\tat com.googlesource.gerrit.plugins.replication.PushAll.run(PushAll.java:70)\n\tat com.google.gerrit.server.logging.LoggingContextAwareRunnable.run(LoggingContextAwareRunnable.java:83)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat com.google.gerrit.server.git.WorkQueue$Task.run(WorkQueue.java:646)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748) \n\n\nUnless I am missing something, I think the implementation of getAll() could simply boil down to:\n\n  public List\u003cSource\u003e getAll() {\n    replicationConfig.reloadIfNeeded();\n    return sources.stream().filter(Objects::nonNull).collect(toList());\n  }\n\nthoughts?",
+      "revId": "106002dc6164bf3aa3df9ad66c8264f57aa3a47f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
