@@ -30,7 +30,7 @@ public interface ReplicationConfig {
 
   Path getEventsDirectory();
 
-  boolean reloadIfNeeded();
-
   Config getConfig();
+
+  String getETag();
 }

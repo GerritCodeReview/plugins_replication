@@ -14,10 +14,10 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.flogger.FluentLogger;
-import com.google.gerrit.common.FileUtil;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -27,54 +27,29 @@ import org.eclipse.jgit.lib.Config;
 @Singleton
 public class AutoReloadConfigDecorator implements ReplicationConfig {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+  private static final String EMPTY_ETAG = "";
 
-  private ReplicationFileBasedConfig currentConfig;
-  private long currentConfigTs;
-  private long lastFailedConfigTs;
+  private ReplicationConfig currentConfig;
+  private String currentConfigEtag;
+  private String lastFailedConfigEtag;
 
   private final SitePaths site;
   private final Path pluginDataDir;
+  private final Provider<ReplicationConfigListener> configListener;
 
   @Inject
-  public AutoReloadConfigDecorator(SitePaths site, @PluginData Path pluginDataDir)
+  public AutoReloadConfigDecorator(
+      SitePaths site,
+      @PluginData Path pluginDataDir,
+      Provider<ReplicationConfigListener> configListener)
       throws ConfigInvalidException, IOException {
     this.site = site;
     this.pluginDataDir = pluginDataDir;
+    configListener.get().beforeLoad();
     this.currentConfig = loadConfig();
-    this.currentConfigTs = getLastModified(currentConfig);
-  }
-
-  private static long getLastModified(ReplicationFileBasedConfig cfg) {
-    return FileUtil.lastModified(cfg.getCfgPath());
-  }
-
-  private ReplicationFileBasedConfig loadConfig() throws ConfigInvalidException, IOException {
-    return new ReplicationFileBasedConfig(site, pluginDataDir);
-  }
-
-  private synchronized boolean isAutoReload() {
-    return currentConfig.getConfig().getBoolean("gerrit", "autoReload", false);
-  }
-
-  @Override
-  public synchronized boolean reloadIfNeeded() {
-    if (isAutoReload()) {
-      long lastModified = getLastModified(currentConfig);
-      try {
-        if (lastModified > currentConfigTs && lastModified > lastFailedConfigTs) {
-          currentConfig = loadConfig();
-          currentConfigTs = lastModified;
-          lastFailedConfigTs = 0;
-
-          return true;
-        }
-      } catch (Exception e) {
-        logger.atSevere().withCause(e).log(
-            "Cannot reload replication configuration: keeping existing settings");
-        lastFailedConfigTs = lastModified;
-      }
-    }
-    return false;
+    configListener.get().afterLoad(this);
+    this.currentConfigEtag = currentConfig.getETag();
+    this.configListener = configListener;
   }
 
   @Override
@@ -94,6 +69,41 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
 
   @Override
   public Config getConfig() {
+    reloadIfNeeded();
     return currentConfig.getConfig();
+  }
+
+  private synchronized void reloadIfNeeded() {
+    if (isAutoReload()) {
+      String currentEtag = currentConfigEtag;
+      ReplicationConfig lastConfig = currentConfig;
+      try {
+        if (!currentEtag.equals(currentConfigEtag) && !currentEtag.equals(lastFailedConfigEtag)) {
+          configListener.get().beforeLoad();
+          currentConfig = loadConfig();
+          currentConfigEtag = currentEtag;
+          lastFailedConfigEtag = EMPTY_ETAG;
+          configListener.get().afterLoad(this);
+        }
+      } catch (Exception e) {
+        logger.atSevere().withCause(e).log(
+            "Cannot reload replication configuration: keeping existing settings");
+        currentConfig = lastConfig;
+        lastFailedConfigEtag = currentEtag;
+      }
+    }
+  }
+
+  private ReplicationFileBasedConfig loadConfig() throws ConfigInvalidException, IOException {
+    return new ReplicationFileBasedConfig(site, pluginDataDir);
+  }
+
+  private synchronized boolean isAutoReload() {
+    return currentConfig.getConfig().getBoolean("gerrit", "autoReload", false);
+  }
+
+  @Override
+  public String getETag() {
+    return currentConfigEtag;
   }
 }

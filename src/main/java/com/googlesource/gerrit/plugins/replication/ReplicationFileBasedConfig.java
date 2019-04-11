@@ -36,6 +36,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private boolean defaultForceUpdate;
   private final FileBasedConfig config;
   private final Path pluginDataDir;
+  private final String configETag;
 
   @Inject
   public ReplicationFileBasedConfig(SitePaths site, @PluginData Path pluginDataDir)
@@ -43,6 +44,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     this.site = site;
     this.cfgPath = site.etc_dir.resolve("replication.config");
     this.config = new FileBasedConfig(cfgPath.toFile(), FS.DETECTED);
+    this.configETag = String.format("T%d" + config.getFile().lastModified());
     this.pluginDataDir = pluginDataDir;
     load();
   }
@@ -105,7 +107,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   }
 
   @Override
-  public boolean reloadIfNeeded() {
-    return false;
+  public String getETag() {
+    return configETag;
   }
 }
