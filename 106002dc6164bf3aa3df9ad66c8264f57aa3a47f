@@ -51,6 +51,24 @@
       "revId": "106002dc6164bf3aa3df9ad66c8264f57aa3a47f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6b7d4ec_1d060bad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-11T11:46:44Z",
+      "side": 1,
+      "message": "yes, I believe that is a good point.\n\nThe question is: do we want to make this refactoring even bigger? Or can we then tackles the auto-reload mechanism and put the right methods in the right place there as a separate rectoring follow-up?\n\nMy mantra with code-reviews is always: 1 change \u003d 1 thing \u003d 1 benefit, as much as possible.",
+      "parentUuid": "9713f1bb_099f0301",
+      "revId": "106002dc6164bf3aa3df9ad66c8264f57aa3a47f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
