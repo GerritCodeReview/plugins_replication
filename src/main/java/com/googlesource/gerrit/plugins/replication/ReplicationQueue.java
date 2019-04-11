@@ -35,6 +35,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ScheduledExecutorService;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.transport.URIish;
 import org.slf4j.Logger;
@@ -94,7 +95,7 @@ public class ReplicationQueue
   public void start() {
     if (!running) {
       try {
-        destinations.startup(workQueue);
+        destinations.startup();
         firePendingEvents();
         running = true;
       } catch (ConfigInvalidException e) {
@@ -291,5 +292,9 @@ public class ReplicationQueue
             + "Only local paths and SSH URLs are supported for this operation",
         op,
         uri);
+  }
+
+  public ScheduledExecutorService createQueue(int poolThreads, String poolName) {
+    return workQueue.createQueue(poolThreads, poolName);
   }
 }

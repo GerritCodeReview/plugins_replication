@@ -14,22 +14,18 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import java.nio.file.Path;
-import org.eclipse.jgit.lib.Config;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 
-public interface ReplicationConfig {
+/** Listener of the configuration loading events. */
+public interface ReplicationConfigListener {
 
-  enum FilterType {
-    PROJECT_CREATION,
-    PROJECT_DELETION,
-    ALL
-  }
+  /** Invoked just before replication.config is about to be loaded. */
+  void beforeLoad();
 
-  boolean isReplicateAllOnPluginStart();
-
-  boolean isDefaultForceUpdate();
-
-  Path getEventsDirectory();
-
-  Config getConfig();
+  /**
+   * Invoked just after replication.config is loaded into memory.
+   *
+   * @throws ConfigInvalidException if the loaded configuration is not valid
+   */
+  void afterLoad(ReplicationConfig replicationConfig) throws ConfigInvalidException;
 }
