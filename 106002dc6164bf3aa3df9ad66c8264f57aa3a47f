@@ -141,6 +141,24 @@
       "revId": "106002dc6164bf3aa3df9ad66c8264f57aa3a47f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d8449f7_b77b03b6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-04-11T23:19:06Z",
+      "side": 1,
+      "message": "This is addressed in the follow-up change. Will put the two into the same topic, so that we are sure that will both be merged or none of them.\n\nIt would make sense though to address the second aspect in a separate change, because is then more focussed in decoupling the reload from the DestinationsCollection and ReplicationConfig interface.",
+      "parentUuid": "1b2f74cb_f906da2f",
+      "revId": "106002dc6164bf3aa3df9ad66c8264f57aa3a47f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
