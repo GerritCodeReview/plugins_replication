@@ -96,6 +96,29 @@
       "revId": "70b908b6a9127cefe1c41464db588b330bb7d315",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66085706_f185a905",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-04-12T06:03:41Z",
+      "side": 1,
+      "message": "2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "70b908b6a9127cefe1c41464db588b330bb7d315",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
