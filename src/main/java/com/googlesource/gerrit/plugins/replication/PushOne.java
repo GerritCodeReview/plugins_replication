@@ -427,7 +427,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
   private void runImpl() throws IOException, PermissionBackendException {
     PushResult res;
-    try (Transport tn = Transport.open(git, uri)) {
+    try (Transport tn = gitManager.openTransport(git, uri)) {
       res = pushVia(tn);
     }
     updateStates(res.getRemoteUpdates());
