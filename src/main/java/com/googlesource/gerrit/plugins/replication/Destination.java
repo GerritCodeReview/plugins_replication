@@ -661,7 +661,7 @@ public class Destination {
       ReplicationScheduledEvent event =
           new ReplicationScheduledEvent(project.get(), ref, targetNode);
       try {
-        eventDispatcher.get().postEvent(new Branch.NameKey(project, ref), event);
+        eventDispatcher.get().postEvent(Branch.nameKey(project, ref), event);
       } catch (PermissionBackendException e) {
         repLog.error("error posting event", e);
       }
@@ -675,7 +675,7 @@ public class Destination {
       RefReplicatedEvent event =
           new RefReplicatedEvent(project.get(), ref, targetNode, RefPushResult.FAILED, status);
       try {
-        eventDispatcher.get().postEvent(new Branch.NameKey(project, ref), event);
+        eventDispatcher.get().postEvent(Branch.nameKey(project, ref), event);
       } catch (PermissionBackendException e) {
         repLog.error("error posting event", e);
       }
