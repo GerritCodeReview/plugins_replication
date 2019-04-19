@@ -115,7 +115,7 @@ public class ReplicationQueue
       return;
     }
 
-    Project.NameKey project = new Project.NameKey(projectName);
+    Project.NameKey project = Project.nameKey(projectName);
     for (Destination cfg : config.getDestinations(FilterType.ALL)) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
         String eventKey = eventsStorage.persist(projectName, refName);
@@ -137,14 +137,14 @@ public class ReplicationQueue
 
   @Override
   public void onProjectDeleted(ProjectDeletedListener.Event event) {
-    Project.NameKey p = new Project.NameKey(event.getProjectName());
+    Project.NameKey p = Project.nameKey(event.getProjectName());
     config.getURIs(Optional.empty(), p, FilterType.PROJECT_DELETION).entries().stream()
         .forEach(e -> e.getKey().scheduleDeleteProject(e.getValue(), p));
   }
 
   @Override
   public void onHeadUpdated(HeadUpdatedListener.Event event) {
-    Project.NameKey p = new Project.NameKey(event.getProjectName());
+    Project.NameKey p = Project.nameKey(event.getProjectName());
     config.getURIs(Optional.empty(), p, FilterType.ALL).entries().stream()
         .forEach(e -> e.getKey().scheduleUpdateHead(e.getValue(), p, event.getNewHeadName()));
   }

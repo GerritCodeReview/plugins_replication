@@ -33,7 +33,7 @@ public class RefReplicationDoneEvent extends RefEvent {
 
   @Override
   public Project.NameKey getProjectNameKey() {
-    return new Project.NameKey(project);
+    return Project.nameKey(project);
   }
 
   @Override

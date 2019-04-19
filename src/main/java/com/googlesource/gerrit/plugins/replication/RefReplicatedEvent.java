@@ -45,7 +45,7 @@ public class RefReplicatedEvent extends RefEvent {
 
   @Override
   public Project.NameKey getProjectNameKey() {
-    return new Project.NameKey(project);
+    return Project.nameKey(project);
   }
 
   @Override
