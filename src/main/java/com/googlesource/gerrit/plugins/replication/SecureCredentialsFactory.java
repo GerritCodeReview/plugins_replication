@@ -17,6 +17,8 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import java.io.IOException;
+import java.util.Objects;
+
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
@@ -50,7 +52,7 @@ class SecureCredentialsFactory implements CredentialsFactory {
   @Override
   public SecureCredentialsProvider create(String remoteName) {
     String user = config.getString("remote", remoteName, "username");
-    String pass = config.getString("remote", remoteName, "password");
+    String pass = Objects.toString(config.getString("remote", remoteName, "password"),"");
     return new SecureCredentialsProvider(user, pass);
   }
 }
