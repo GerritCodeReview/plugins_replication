@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee16d57c_4a10c4a6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-05-10T14:39:05Z",
+      "side": 1,
+      "message": "The auto-reload logic still depends on the concrete ReplicationFileBasedConfig class.\nIMHO, this should be just the interface type ReplicationConfig.\n\nWe have Gerrit deployments where we generate ReplicationConfig by querying an external\nsystem for users who subscribed to a service named \"disaster recovery\". We don\u0027t even\npersist such generated config in the replication.config... in this case we don\u0027t even\nuse the ReplicationFileBasedConfig class.\n\nTo support use-case like ours and to further separate concerns I would propose to\nhandle reloadIfNeeded logic by comparing the content (or its SHA1) instead of comparing\ntimestamps from the file system. This way the AutoReloadConfigDecorator wouldn\u0027t need\nto depend on any concrete ReplicationConfig implementation and we can support many\nimplementations of the ReplicationConfig interface.",
+      "revId": "dcaab30945060f523b4e858c6eda1137f8d2de0a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
