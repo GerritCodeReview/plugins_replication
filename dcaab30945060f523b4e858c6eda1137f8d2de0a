@@ -16,6 +16,24 @@
       "revId": "dcaab30945060f523b4e858c6eda1137f8d2de0a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cdf03bf_02f684df",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-05-10T21:54:12Z",
+      "side": 1,
+      "message": "\u003e The auto-reload logic still depends on the concrete ReplicationFileBasedConfig class.\n\u003e IMHO, this should be just the interface type ReplicationConfig.\n\u003e \n\u003e We have Gerrit deployments where we generate ReplicationConfig by querying an external\n\u003e system for users who subscribed to a service named \"disaster recovery\". We don\u0027t even\n\u003e persist such generated config in the replication.config... in this case we don\u0027t even\n\u003e use the ReplicationFileBasedConfig class.\n\u003e \n\u003e To support use-case like ours and to further separate concerns I would propose to\n\u003e handle reloadIfNeeded logic by comparing the content (or its SHA1)\n\nWhat about an ETag? It will then be up to the ReplicationConfig implementation to implement the value based on what is best for its backend.\n\nThat would work for your use-case also, correct?\n\n\u003e instead of comparing\n\u003e timestamps from the file system.\n\nYes, we know also that timestamps from the filesystem aren\u0027t reliable anyway, as JGit is teaching us :-)\n\n\u003e This way the AutoReloadConfigDecorator wouldn\u0027t need\n\u003e to depend on any concrete ReplicationConfig implementation and we can support many\n\u003e implementations of the ReplicationConfig interface.\n\nSounds really good, let me rework in this direction.\nAnd yes, I\u0027d be glad to finalize these reviews next week in Munich, we need to work together on multi-site and the mandatory plugins anyway, so we can sneak this in our agenda.",
+      "parentUuid": "ee16d57c_4a10c4a6",
+      "revId": "dcaab30945060f523b4e858c6eda1137f8d2de0a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
