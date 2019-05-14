@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef75d486_25bd4e64",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-05-14T22:00:47Z",
+      "side": 1,
+      "message": "Introducing this method and keeping the AutoReloadConfigDecorator implementation\nof this interface is what makes this change being an inconsistent intermediate\nstep. My current opinion is that we need to squash this and the follow-up\nchange into one.",
+      "revId": "ab82f39b61afea57d76f6ffb2c433a37d33f3ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
