@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c43243ab_fb11d74b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-05-15T15:45:40Z",
+      "side": 1,
+      "message": "No, we didn\u0027t write a misleading log telling that there was an in-flight push when actually\nthe operation was canceled. See the line 306 in the PushOne:\n\n  if (!canceled) {\n     write the log...\n  }\n\nSo the log was never written when the push operation was canceled, and this aspect doesn\u0027t\nchange with this change. However, I can make this code even more explicit by having something like:\n\n  return RunwayStatus.canceled()\n\nso that the RunwayStatus provides the canceled flag. Don\u0027t know if this is worth the effort?\nWDYT?",
+      "parentUuid": "d594a6fb_cc02e129",
+      "range": {
+        "startLine": 494,
+        "startChar": 15,
+        "endLine": 494,
+        "endChar": 34
+      },
+      "revId": "dc7febc2d05ab28632c9614aa6dd20f948eadc9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6e0b7591_7ee68393",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2019-05-15T14:06:58Z",
       "side": 1,
       "message": "If the inFLightId isn\u0027t there, the message is misleading. Can we provide a different message in that case? WDYT?",
+      "range": {
+        "startLine": 310,
+        "startChar": 13,
+        "endLine": 310,
+        "endChar": 92
+      },
+      "revId": "dc7febc2d05ab28632c9614aa6dd20f948eadc9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "823ba6e4_a59025d7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-05-15T15:45:40Z",
+      "side": 1,
+      "message": "We are here only if the canceled flag is false, so the inFlightId should never be zero.\nHowever, the \"canceled\" flag is not contained in the RunwayStatus but in the PushOne \nso I had to deal with the inFlightId \u003d\u003d 0 case here just for the sake of completeness.\nAs I wrote in the other comment, we could make this more explicit by including the\ncanceled flag in the RunwayStatus?",
+      "parentUuid": "6e0b7591_7ee68393",
       "range": {
         "startLine": 310,
         "startChar": 13,
