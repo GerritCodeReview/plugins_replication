@@ -59,6 +59,23 @@
     },
     {
       "key": {
+        "uuid": "ffe05391_58ca0cbf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-05-15T10:57:04Z",
+      "side": 1,
+      "message": "It is ugly that we have to call replicationConfig.getConfig in order to ensure\nthat auto reloading works. Before this change the AutoReloadConfigDecorator\nencapsulated the logic of auto reloading, including the destinations.\nThis change tries to decouple the recomputing of the destination from\nthe internals of the AutoReloadConfigDecorator, but it actually still knows\nthe internals of this particular ReplicationConfig implementation and it actively\nparticipates in its implementation by performing this call. This is not a\nproper decoupling.\n\nIf we agree on decoupling configuration auto reloading from how the destinations\nare created, then let\u0027s try to do it in such a way that implementations of these\ntwo concepts do not depend on each other.\n\nI believe that the proposed listener concept is a good idea. Maybe we can consider\nusing guava\u0027s EventBus instead of having an explicit listener interface and see\nwhich approach we like better? Whatever approach we use, the DestinationsCollection\nclass should only know that it will get notified when the configuration changes.\nThis class should never pro-actively call getConfig in order to trigger refreshing\nof the potentially changed configuration.\n\nThe auto reloading of the configuration should probably be a task which is scheduled\nto run periodically (every 1 minute for example). When it detects a changed configuration\n(by looking at the Etag) it will notify the listeners.",
+      "revId": "ccff76ac1f6c66f9654796d8d70d6306313b612c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5b71411a_bc9a5c97",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
         "patchSetId": 1
