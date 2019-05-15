@@ -251,6 +251,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     return states.toArray(new ReplicationState[states.size()]);
   }
 
+  public int getId() {
+    return id;
+  }
+
   void addStates(ListMultimap<String, ReplicationState> states) {
     stateMap.putAll(states);
   }
@@ -297,10 +301,13 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     // created and scheduled for a future point in time.)
     //
     MDC.put(ID_MDC_KEY, HexFormat.fromInt(id));
-    if (!pool.requestRunway(this)) {
-      if (!canceled) {
+    RunwayStatus status = pool.requestRunway(this);
+    if (!status.isAllowed()) {
+      if (!status.isCanceled()) {
         repLog.info(
-            "Rescheduling replication to {} to avoid collision with an in-flight push.", uri);
+            "Rescheduling replication to {} to avoid collision with the in-flight push [{}].",
+            uri,
+            HexFormat.fromInt(status.getInFlightPushId()));
         pool.reschedule(this, Destination.RetryReason.COLLISION);
       }
       return;
