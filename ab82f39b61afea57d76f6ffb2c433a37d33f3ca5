@@ -16,6 +16,24 @@
       "revId": "ab82f39b61afea57d76f6ffb2c433a37d33f3ca5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fca1c38d_a47d82fd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-05-15T04:53:11Z",
+      "side": 1,
+      "message": "Let me create another change that is the result of squashing them together, to check how big and problematic would be.\n\nIf it\u0027s not big or too long to review, I can then abandon this series.",
+      "parentUuid": "ef75d486_25bd4e64",
+      "revId": "ab82f39b61afea57d76f6ffb2c433a37d33f3ca5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
