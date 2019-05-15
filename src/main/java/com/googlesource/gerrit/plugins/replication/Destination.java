@@ -482,18 +482,19 @@ public class Destination {
     }
   }
 
-  boolean requestRunway(PushOne op) {
+  RunwayStatus requestRunway(PushOne op) {
     synchronized (stateLock) {
       if (op.wasCanceled()) {
-        return false;
+        return RunwayStatus.deny();
       }
       pending.remove(op.getURI());
-      if (inFlight.containsKey(op.getURI())) {
-        return false;
+      PushOne inFlightOp = inFlight.get(op.getURI());
+      if (inFlightOp != null) {
+        return RunwayStatus.deny(inFlightOp.getId());
       }
       inFlight.put(op.getURI(), op);
     }
-    return true;
+    return RunwayStatus.allow();
   }
 
   void notifyFinished(PushOne op) {
