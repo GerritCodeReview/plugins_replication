@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d594a6fb_cc02e129",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-05-15T14:06:58Z",
+      "side": 1,
+      "message": "This is not mentioned in the commit message, and it was indeed a misleading log. We were telling the user that there was an in-flight push but, actually, it wasn\u0027t the case.",
+      "range": {
+        "startLine": 494,
+        "startChar": 15,
+        "endLine": 494,
+        "endChar": 34
+      },
+      "revId": "dc7febc2d05ab28632c9614aa6dd20f948eadc9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e0b7591_7ee68393",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-05-15T14:06:58Z",
+      "side": 1,
+      "message": "If the inFLightId isn\u0027t there, the message is misleading. Can we provide a different message in that case? WDYT?",
+      "range": {
+        "startLine": 310,
+        "startChar": 13,
+        "endLine": 310,
+        "endChar": 92
+      },
+      "revId": "dc7febc2d05ab28632c9614aa6dd20f948eadc9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
