@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "113f5a2b_dc1cb246",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-05-15T10:36:53Z",
+      "side": 1,
+      "message": "This condition is always false as currentEtag is the same instance\nas the currentConfigEtag (line 78).",
+      "range": {
+        "startLine": 81,
+        "startChar": 12,
+        "endLine": 81,
+        "endChar": 50
+      },
+      "revId": "ccff76ac1f6c66f9654796d8d70d6306313b612c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "679ec66d_425e9e81",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-05-15T10:36:53Z",
+      "side": 1,
+      "message": "This class is (bound as) singleton but it is not thread safe.\nFirst, it is not immutable as destinations are recomputed when the configuration changes.\nHowever, the update the the allDestinations is not properly published to other threads.\nFurther, there is also a race when two references get updated concurrently:\n\n  T1: ReplicationQueue.onGitReferenceUpdated(\"refs/heads/foo\") \u003e DestinationsCollection.getAll()\n  T2: ReplicationQueue.onGitReferenceUpdated(\"refs/heads/bar\") \u003e DestinationsCollection.getAll()\n\nBoth T1 and T2 may end up recomputing the destinations.",
+      "revId": "ccff76ac1f6c66f9654796d8d70d6306313b612c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "758ad7b5_fc0b2336",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-05-15T10:36:53Z",
+      "side": 1,
+      "message": "This never changes its value",
+      "revId": "ccff76ac1f6c66f9654796d8d70d6306313b612c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b71411a_bc9a5c97",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-05-15T10:36:53Z",
+      "side": 1,
+      "message": "Consider the following recursive call:\n\n  (START) DestinationsCollection.startup()\n  92: loadDestinations(ReplicationConfig.getConfig())\n  92: ReplicationConfig.getConfig()   \u003e\u003e\u003e AutoReloadConfigDecorator\n  72: AutoReloadConfigDecorator.reloadIfNeeded()\n  86: configListener.get().afterLoad() \u003e\u003e\u003e DestinationsCollection.afterLoad()\n  129: DestinationsCollection.startup()  \u003e\u003e\u003e (START)\n\nSo the startup method will end up calling itself and since the started flag is never updated\nthis will end up into an infinite recursion.",
+      "revId": "ccff76ac1f6c66f9654796d8d70d6306313b612c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
