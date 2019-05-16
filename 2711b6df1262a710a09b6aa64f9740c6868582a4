@@ -45,6 +45,29 @@
       "revId": "2711b6df1262a710a09b6aa64f9740c6868582a4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9cb9bb5_282f6ce8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-05-16T08:38:17Z",
+      "side": 1,
+      "message": "It is possible to use method reference here:\n\n  this::reloadIfNeeded",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 152,
+        "endChar": 30
+      },
+      "revId": "2711b6df1262a710a09b6aa64f9740c6868582a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
