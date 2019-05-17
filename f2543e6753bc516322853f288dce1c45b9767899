@@ -46,6 +46,30 @@
       "revId": "f2543e6753bc516322853f288dce1c45b9767899",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc3c43e2_a8dcfcf5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-05-17T05:49:59Z",
+      "side": 1,
+      "message": "+2 we definitely have too many configuration parameters: I would add new ones *only when* someone really need it.\nGood defaults are always better than thousands of parameters.",
+      "parentUuid": "3cc9cb5f_38562cd3",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 11,
+        "endChar": 49
+      },
+      "revId": "f2543e6753bc516322853f288dce1c45b9767899",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
