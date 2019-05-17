@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8cd19d2b_ff345d6b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-05-17T09:32:44Z",
+      "side": 1,
+      "message": "Yes, I saw the caller and it is fine now. However, we are still missing one log on that condition which isn\u0027t normal and should be traced.\n\nWill put another comment on that line and resolving this one. Thanks.",
+      "parentUuid": "c43243ab_fb11d74b",
+      "range": {
+        "startLine": 494,
+        "startChar": 15,
+        "endLine": 494,
+        "endChar": 34
+      },
+      "revId": "dc7febc2d05ab28632c9614aa6dd20f948eadc9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e0b7591_7ee68393",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
@@ -93,6 +117,30 @@
       "revId": "dc7febc2d05ab28632c9614aa6dd20f948eadc9d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c515340_07bc185a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-05-17T09:32:44Z",
+      "side": 1,
+      "message": "Sounds good now. We\u0027re missing the log on the else{} path. Will add one comment in PS4.",
+      "parentUuid": "823ba6e4_a59025d7",
+      "range": {
+        "startLine": 310,
+        "startChar": 13,
+        "endLine": 310,
+        "endChar": 92
+      },
+      "revId": "dc7febc2d05ab28632c9614aa6dd20f948eadc9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
