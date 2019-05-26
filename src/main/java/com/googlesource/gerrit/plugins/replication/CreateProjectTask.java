@@ -16,7 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
-import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.entities.Project;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
