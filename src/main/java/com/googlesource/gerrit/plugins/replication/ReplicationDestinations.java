@@ -15,7 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.Multimap;
-import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.WorkQueue;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.util.List;
