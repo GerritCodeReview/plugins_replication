@@ -170,8 +170,10 @@ public class ReplicationQueue
 
   private void firePendingEvents() {
     for (EventsStorage.ReplicateRefUpdate e : eventsStorage.list()) {
-      repLog.info("Firing pending event {}", e);
-      onGitReferenceUpdated(e.project, e.ref);
+      if (e != null) {
+        repLog.info("Firing pending event {}", e);
+        onGitReferenceUpdated(e.project, e.ref);
+      }
     }
   }
 
