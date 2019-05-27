@@ -51,6 +51,8 @@ final class StartCommand extends SshCommand {
 
   @Inject private PushAll.Factory pushFactory;
 
+  private final Object lock = new Object();
+
   @Override
   protected void run() throws Failure {
     if (all && projectPatterns.size() > 0) {
@@ -98,7 +100,7 @@ final class StartCommand extends SshCommand {
 
   public void writeStdOutSync(String message) {
     if (wait) {
-      synchronized (stdout) {
+      synchronized (lock) {
         stdout.println(message);
         stdout.flush();
       }
@@ -107,7 +109,7 @@ final class StartCommand extends SshCommand {
 
   public void writeStdErrSync(String message) {
     if (wait) {
-      synchronized (stderr) {
+      synchronized (lock) {
         stderr.println(message);
         stderr.flush();
       }
