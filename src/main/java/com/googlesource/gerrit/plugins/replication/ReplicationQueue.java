@@ -170,8 +170,12 @@ public class ReplicationQueue
 
   private void firePendingEvents() {
     for (EventsStorage.ReplicateRefUpdate e : eventsStorage.list()) {
-      repLog.info("Firing pending event {}", e);
-      onGitReferenceUpdated(e.project, e.ref);
+      if (e == null) {
+        repLog.warn("Encountered null replication event in EventsStorage");
+      } else {
+        repLog.info("Firing pending event {}", e);
+        onGitReferenceUpdated(e.project, e.ref);
+      }
     }
   }
 
