@@ -17,6 +17,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.FileUtil;
 import com.google.gerrit.extensions.annotations.PluginData;
+import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
@@ -27,12 +28,16 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.transport.URIish;
 
 @Singleton
 public class AutoReloadConfigDecorator implements ReplicationConfig {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+  private static final long RELOAD_DELAY = 120;
+  private static final long RELOAD_INTERVAL = 60;
 
   private ReplicationFileBasedConfig currentConfig;
   private long currentConfigTs;
@@ -44,13 +49,16 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   // Use Provider<> instead of injecting the ReplicationQueue because of circular dependency with
   // ReplicationConfig
   private final Provider<ReplicationQueue> replicationQueue;
+  private final ScheduledExecutorService autoReloadExecutor;
 
   @Inject
   public AutoReloadConfigDecorator(
       SitePaths site,
       Destination.Factory destinationFactory,
       Provider<ReplicationQueue> replicationQueue,
-      @PluginData Path pluginDataDir)
+      @PluginData Path pluginDataDir,
+      @PluginName String pluginName,
+      WorkQueue workQueue)
       throws ConfigInvalidException, IOException {
     this.site = site;
     this.destinationFactory = destinationFactory;
@@ -58,6 +66,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     this.currentConfig = loadConfig();
     this.currentConfigTs = getLastModified(currentConfig);
     this.replicationQueue = replicationQueue;
+    this.autoReloadExecutor = workQueue.createQueue(1, pluginName + "_auto-reload-config");
   }
 
   private static long getLastModified(ReplicationFileBasedConfig cfg) {
@@ -74,18 +83,16 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
 
   @Override
   public synchronized List<Destination> getDestinations(FilterType filterType) {
-    reloadIfNeeded();
     return currentConfig.getDestinations(filterType);
   }
 
   @Override
   public synchronized Multimap<Destination, URIish> getURIs(
       Optional<String> remoteName, Project.NameKey projectName, FilterType filterType) {
-    reloadIfNeeded();
     return currentConfig.getURIs(remoteName, projectName, filterType);
   }
 
-  private void reloadIfNeeded() {
+  private synchronized void reloadIfNeeded() {
     if (isAutoReload()) {
       ReplicationQueue queue = replicationQueue.get();
       long lastModified = getLastModified(currentConfig);
@@ -143,5 +150,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   @Override
   public synchronized void startup(WorkQueue workQueue) {
     currentConfig.startup(workQueue);
+    autoReloadExecutor.scheduleAtFixedRate(
+        this::reloadIfNeeded, RELOAD_DELAY, RELOAD_INTERVAL, TimeUnit.SECONDS);
   }
 }

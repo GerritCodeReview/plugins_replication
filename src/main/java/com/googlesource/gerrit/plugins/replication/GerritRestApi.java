@@ -125,8 +125,8 @@ public class GerritRestApi implements AdminApi {
       u = u.substring(GERRIT_ADMIN_PROTOCOL_PREFIX.length());
     }
     if (u.endsWith("/")) {
-      return u;
+      return u.substring(0, u.length() - 1);
     }
-    return u + "/";
+    return u;
   }
 }
