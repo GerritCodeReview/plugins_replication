@@ -40,11 +40,11 @@ final class ListCommand extends SshCommand {
   @Option(name = "--json", usage = "output in json format")
   private boolean json;
 
-  @Inject private ReplicationConfig config;
+  @Inject private ReplicationDestinations destinations;
 
   @Override
   protected void run() {
-    for (Destination d : config.getDestinations(FilterType.ALL)) {
+    for (Destination d : destinations.getAll(FilterType.ALL)) {
       if (matches(d.getRemoteConfigName())) {
         printRemote(d);
       }
