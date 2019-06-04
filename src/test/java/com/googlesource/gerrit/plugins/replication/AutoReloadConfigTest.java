@@ -190,7 +190,7 @@ public class AutoReloadConfigTest {
             "replication",
             workQueueMock);
 
-    assertThat(autoReloadConfig.getDestinations(FilterType.ALL)).isNotEmpty();
+    assertThat(autoReloadConfig.getAll(FilterType.ALL)).isNotEmpty();
   }
 
   @Test
@@ -210,7 +210,7 @@ public class AutoReloadConfigTest {
             workQueueMock);
     autoReloadConfig.startup(workQueueMock);
 
-    assertThat(autoReloadConfig.getDestinations(FilterType.ALL)).hasSize(1);
+    assertThat(autoReloadConfig.getAll(FilterType.ALL)).hasSize(1);
 
     TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
 
@@ -218,7 +218,7 @@ public class AutoReloadConfigTest {
     replicationConfig.save();
     executorService.refreshCommand.run();
 
-    assertThat(autoReloadConfig.getDestinations(FilterType.ALL)).hasSize(2);
+    assertThat(autoReloadConfig.getAll(FilterType.ALL)).hasSize(2);
   }
 
   @Test
@@ -238,7 +238,7 @@ public class AutoReloadConfigTest {
             workQueueMock);
     autoReloadConfig.startup(workQueueMock);
 
-    assertThat(autoReloadConfig.getDestinations(FilterType.ALL)).hasSize(1);
+    assertThat(autoReloadConfig.getAll(FilterType.ALL)).hasSize(1);
 
     TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
 
@@ -246,7 +246,7 @@ public class AutoReloadConfigTest {
     replicationConfig.save();
     executorService.refreshCommand.run();
 
-    assertThat(autoReloadConfig.getDestinations(FilterType.ALL)).hasSize(1);
+    assertThat(autoReloadConfig.getAll(FilterType.ALL)).hasSize(1);
   }
 
   private FileBasedConfig newReplicationConfig() {
