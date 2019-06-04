@@ -50,7 +50,7 @@ import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
 
 @Singleton
-public class ReplicationFileBasedConfig implements ReplicationConfig {
+public class ReplicationFileBasedConfig implements ReplicationConfig, ReplicationDestinations {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private List<Destination> destinations;
@@ -80,7 +80,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
    * (com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType)
    */
   @Override
-  public List<Destination> getDestinations(FilterType filterType) {
+  public List<Destination> getAll(FilterType filterType) {
     Predicate<? super Destination> filter;
     switch (filterType) {
       case PROJECT_CREATION:
@@ -165,12 +165,12 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   @Override
   public Multimap<Destination, URIish> getURIs(
       Optional<String> remoteName, Project.NameKey projectName, FilterType filterType) {
-    if (getDestinations(filterType).isEmpty()) {
+    if (getAll(filterType).isEmpty()) {
       return ImmutableMultimap.of();
     }
 
     SetMultimap<Destination, URIish> uris = HashMultimap.create();
-    for (Destination config : getDestinations(filterType)) {
+    for (Destination config : getAll(filterType)) {
       if (!config.wouldPushProject(projectName)) {
         continue;
       }
