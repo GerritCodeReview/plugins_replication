@@ -43,6 +43,7 @@ public class ReplicationQueue
 
   private final WorkQueue workQueue;
   private final DynamicItem<EventDispatcher> dispatcher;
+  private final ReplicationDestinations destinations;
   private final ReplicationConfig config;
   private final ReplicationState.Factory replicationStateFactory;
   private final EventsStorage eventsStorage;
@@ -51,6 +52,7 @@ public class ReplicationQueue
   @Inject
   ReplicationQueue(
       WorkQueue wq,
+      ReplicationDestinations rd,
       ReplicationConfig rc,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListeners sl,
@@ -58,6 +60,7 @@ public class ReplicationQueue
       EventsStorage es) {
     workQueue = wq;
     dispatcher = dis;
+    destinations = rd;
     config = rc;
     stateLog = sl;
     replicationStateFactory = rsf;
@@ -67,7 +70,7 @@ public class ReplicationQueue
   @Override
   public void start() {
     if (!running) {
-      config.startup(workQueue);
+      destinations.startup(workQueue);
       running = true;
       firePendingEvents();
     }
@@ -76,7 +79,7 @@ public class ReplicationQueue
   @Override
   public void stop() {
     running = false;
-    int discarded = config.shutdown();
+    int discarded = destinations.shutdown();
     if (discarded > 0) {
       repLog.warn("Canceled {} replication events during shutdown", discarded);
     }
@@ -93,7 +96,7 @@ public class ReplicationQueue
       return;
     }
 
-    for (Destination cfg : config.getDestinations(FilterType.ALL)) {
+    for (Destination cfg : destinations.getDestinations(FilterType.ALL)) {
       if (cfg.wouldPushProject(project)) {
         for (URIish uri : cfg.getURIs(project, urlMatch)) {
           cfg.schedule(project, PushOne.ALL_REFS, uri, state, now);
@@ -116,7 +119,7 @@ public class ReplicationQueue
     }
 
     Project.NameKey project = new Project.NameKey(projectName);
-    for (Destination cfg : config.getDestinations(FilterType.ALL)) {
+    for (Destination cfg : destinations.getDestinations(FilterType.ALL)) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
         String eventKey = eventsStorage.persist(projectName, refName);
         state.setEventKey(eventKey);

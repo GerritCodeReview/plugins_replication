@@ -34,7 +34,7 @@ import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.transport.URIish;
 
 @Singleton
-public class AutoReloadConfigDecorator implements ReplicationConfig {
+public class AutoReloadConfigDecorator implements ReplicationConfig, ReplicationDestinations {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private static final long RELOAD_DELAY = 120;
   private static final long RELOAD_INTERVAL = 60;

@@ -50,7 +50,7 @@ import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
 
 @Singleton
-public class ReplicationFileBasedConfig implements ReplicationConfig {
+public class ReplicationFileBasedConfig implements ReplicationConfig, ReplicationDestinations {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private List<Destination> destinations;
