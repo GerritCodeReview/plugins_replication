@@ -175,7 +175,7 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
             "replication",
             workQueueMock);
 
-    List<Destination> destinations = autoReloadConfig.getDestinations(FilterType.ALL);
+    List<Destination> destinations = autoReloadConfig.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
     assertThatIsDestination(destinations.get(0), remoteName, remoteUrl);
   }
@@ -199,7 +199,7 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
             workQueueMock);
     autoReloadConfig.startup(workQueueMock);
 
-    List<Destination> destinations = autoReloadConfig.getDestinations(FilterType.ALL);
+    List<Destination> destinations = autoReloadConfig.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
     assertThatIsDestination(destinations.get(0), remoteName1, remoteUrl1);
 
@@ -211,7 +211,7 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     replicationConfig.save();
     executorService.refreshCommand.run();
 
-    destinations = autoReloadConfig.getDestinations(FilterType.ALL);
+    destinations = autoReloadConfig.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(2);
     assertThatContainsDestination(destinations, remoteName1, remoteUrl1);
     assertThatContainsDestination(destinations, remoteName2, remoteUrl2);
@@ -236,7 +236,7 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
             workQueueMock);
     autoReloadConfig.startup(workQueueMock);
 
-    List<Destination> destinations = autoReloadConfig.getDestinations(FilterType.ALL);
+    List<Destination> destinations = autoReloadConfig.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
     assertThatIsDestination(destinations.get(0), remoteName1, remoteUrl1);
 
@@ -246,6 +246,6 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     replicationConfig.save();
     executorService.refreshCommand.run();
 
-    assertThat(autoReloadConfig.getDestinations(FilterType.ALL)).isEqualTo(destinations);
+    assertThat(autoReloadConfig.getAll(FilterType.ALL)).isEqualTo(destinations);
   }
 }
