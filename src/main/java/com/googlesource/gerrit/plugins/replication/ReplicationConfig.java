@@ -11,40 +11,61 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.Multimap;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.server.git.WorkQueue;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Optional;
 import org.eclipse.jgit.transport.URIish;
 
+/** Configuration of all the replication end points. */
 public interface ReplicationConfig {
 
+  /** Filter for accessing replication projects. */
   enum FilterType {
     PROJECT_CREATION,
     PROJECT_DELETION,
     ALL
   }
 
-  List<Destination> getDestinations(FilterType filterType);
-
+  /**
+   * Return all the URIs associated to a project and a filter criteria.
+   *
+   * @param remoteName name of the replication end or empty if selecting all ends.
+   * @param projectName name of the project or empty if getting all projects
+   * @param filterType type of filter criteria for selecting projects
+   * @return the multi-map of destinations and the associated replication URIs
+   */
   Multimap<Destination, URIish> getURIs(
       Optional<String> remoteName, Project.NameKey projectName, FilterType filterType);
 
+  /**
+   * Replicate all projects at the plugin start.
+   *
+   * @return true if the plugin is configured to replication all projects at start.
+   */
   boolean isReplicateAllOnPluginStart();
 
+  /**
+   * Forced push by default to the replication ends.
+   *
+   * @return true if forced push is the default, false otherwise.
+   */
   boolean isDefaultForceUpdate();
 
+  /**
+   * Maximum number of refs to trace on replication_log.
+   *
+   * @return the maximum number of refs to log.
+   */
   int getMaxRefsToLog();
 
-  boolean isEmpty();
-
+  /**
+   * Location where the replication events are persisted.
+   *
+   * @return path of the replication persistence directory.
+   */
   Path getEventsDirectory();
-
-  int shutdown();
-
-  void startup(WorkQueue workQueue);
 }
