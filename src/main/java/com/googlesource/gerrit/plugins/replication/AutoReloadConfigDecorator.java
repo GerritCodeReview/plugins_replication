@@ -36,7 +36,7 @@ import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.transport.URIish;
 
 @Singleton
-public class AutoReloadConfigDecorator implements ReplicationConfig {
+public class AutoReloadConfigDecorator implements ReplicationConfig, ReplicationDestinations {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private static final long RELOAD_DELAY = 120;
   private static final long RELOAD_INTERVAL = 60;
@@ -85,8 +85,8 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   }
 
   @Override
-  public synchronized List<Destination> getDestinations(FilterType filterType) {
-    return currentConfig.getDestinations(filterType);
+  public synchronized List<Destination> getAll(FilterType filterType) {
+    return currentConfig.getAll(filterType);
   }
 
   @Override
@@ -121,7 +121,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
           lastFailedConfigTs = 0;
           logger.atInfo().log(
               "Configuration reloaded: %d destinations",
-              currentConfig.getDestinations(FilterType.ALL).size());
+              currentConfig.getAll(FilterType.ALL).size());
         }
       } catch (Exception e) {
         logger.atSevere().withCause(e).log(
