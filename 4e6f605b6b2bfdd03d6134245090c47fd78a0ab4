@@ -36,6 +36,69 @@
     },
     {
       "key": {
+        "uuid": "95b438d2_bdc6dd6f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-05T12:30:21Z",
+      "side": 1,
+      "message": "This parameter is not an Optional so the meaning of empty here is not clear.\nDid you mean null instead of empty?",
+      "range": {
+        "startLine": 37,
+        "startChar": 47,
+        "endLine": 37,
+        "endChar": 52
+      },
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a443449b_45763bbd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-05T12:30:21Z",
+      "side": 1,
+      "message": "Can this one also be \"empty\" i.e. null?",
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89a065bc_6dc0bf35",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-05T12:30:21Z",
+      "side": 1,
+      "message": "optional: Whether to replicate\n\nI also would be fine with removing this line completely as it doesn\u0027t add\nanything useful to the line 47",
+      "range": {
+        "startLine": 45,
+        "startChar": 5,
+        "endLine": 45,
+        "endChar": 14
+      },
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b01b9d2d_d68ac3f2",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
         "patchSetId": 2
@@ -75,6 +138,86 @@
         "startChar": 12,
         "endLine": 52,
         "endChar": 16
+      },
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8245ebbc_36c3fa78",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-05T12:30:21Z",
+      "side": 1,
+      "message": "Do we need to repeat the same thing twice (line 59 and 61)?",
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "476a1c37_53bf7a7b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-05T12:30:21Z",
+      "side": 1,
+      "message": "same here...",
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b180486_c08341cc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationDestinations.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-05T12:30:21Z",
+      "side": 1,
+      "message": "get or getAll\n\nThe \"destination\" part of the name is redundant as the interface is named ReplicationDestinations",
+      "range": {
+        "startLine": 30,
+        "startChar": 20,
+        "endLine": 30,
+        "endChar": 35
+      },
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbb674c5_88092114",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationDestinations.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-05T12:30:21Z",
+      "side": 1,
+      "message": "optional: Unless you insist on keeping the method sorted by their name, the startup should be\ndefined above the shutdown.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 36
       },
       "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
