@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "10f318d4_1c0dff22",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-05T22:02:26Z",
+      "side": 1,
+      "message": "Good catch, let me add that.",
+      "parentUuid": "f8dde176_d0ac0b32",
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2126bfb_ba55061e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5582efd5_ad58af21",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-05T22:02:26Z",
+      "side": 1,
+      "message": "Yes, it\u0027s needed at L47. Will amend to destinations.",
+      "parentUuid": "d2126bfb_ba55061e",
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "eefd81cf_7016e12c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-05T22:02:26Z",
+      "side": 1,
+      "message": "You are right, the parameter is mandatory. Will amend the description.",
+      "parentUuid": "95b438d2_bdc6dd6f",
+      "range": {
+        "startLine": 37,
+        "startChar": 47,
+        "endLine": 37,
+        "endChar": 52
+      },
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a443449b_45763bbd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
         "patchSetId": 2
@@ -73,6 +133,24 @@
       "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4af35787_3ec6e18b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-05T22:02:26Z",
+      "side": 1,
+      "message": "Nope, this is mandatory. If you don\u0027t want to filter, then you use the ALL value, but it must always be passed as a parameter.",
+      "parentUuid": "a443449b_45763bbd",
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "a3401f93_08bd4476",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-05T22:02:26Z",
+      "side": 1,
+      "message": "True, it is redundant. However, I\u0027m not sure if that is still a valid JavaDoc without at least one headline.",
+      "parentUuid": "89a065bc_6dc0bf35",
+      "range": {
+        "startLine": 45,
+        "startChar": 5,
+        "endLine": 45,
+        "endChar": 14
+      },
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b01b9d2d_d68ac3f2",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
         "patchSetId": 2
@@ -119,6 +221,30 @@
       "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c68795d8_88edc94e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-05T22:02:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b01b9d2d_d68ac3f2",
+      "range": {
+        "startLine": 47,
+        "startChar": 49,
+        "endLine": 47,
+        "endChar": 60
+      },
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +271,30 @@
     },
     {
       "key": {
+        "uuid": "a4a20f8a_2adf9a38",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-05T22:02:26Z",
+      "side": 1,
+      "message": "You would be amazed by knowing that the description is actually correct :-)\nI should change the config value, but that would break backward compatibility.\n\nYes, the defaultForceUpdate config is about a forced push to the replicas.",
+      "parentUuid": "61eab114_3b2c0f45",
+      "range": {
+        "startLine": 52,
+        "startChar": 12,
+        "endLine": 52,
+        "endChar": 16
+      },
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8245ebbc_36c3fa78",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
         "patchSetId": 2
@@ -162,6 +312,24 @@
     },
     {
       "key": {
+        "uuid": "d10ede58_54e26e4e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-05T22:02:26Z",
+      "side": 1,
+      "message": "Yes, if we actually explain a bit more about the property and what it represents. Will make the headline more useful.",
+      "parentUuid": "8245ebbc_36c3fa78",
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "476a1c37_53bf7a7b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
         "patchSetId": 2
@@ -176,6 +344,24 @@
       "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "613097cb_ce9052f8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-05T22:02:26Z",
+      "side": 1,
+      "message": "Same as above.",
+      "parentUuid": "476a1c37_53bf7a7b",
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -202,6 +388,30 @@
     },
     {
       "key": {
+        "uuid": "ecbafba8_1a019aef",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationDestinations.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-05T22:02:26Z",
+      "side": 1,
+      "message": "I would prefer getAll(). Will amend it now.",
+      "parentUuid": "2b180486_c08341cc",
+      "range": {
+        "startLine": 30,
+        "startChar": 20,
+        "endLine": 30,
+        "endChar": 35
+      },
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cbb674c5_88092114",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationDestinations.java",
         "patchSetId": 2
@@ -222,6 +432,30 @@
       "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b43c8588_eb51b51e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationDestinations.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-05T22:02:26Z",
+      "side": 1,
+      "message": "Yes, makes sense to first start and then stop ;-)",
+      "parentUuid": "cbb674c5_88092114",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 36
+      },
+      "revId": "4e6f605b6b2bfdd03d6134245090c47fd78a0ab4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
