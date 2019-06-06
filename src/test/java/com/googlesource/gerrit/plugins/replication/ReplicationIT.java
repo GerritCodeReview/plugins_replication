@@ -29,6 +29,7 @@ import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.config.SitePaths;
+import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Key;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
@@ -53,7 +54,7 @@ import org.junit.Test;
 @UseLocalDisk
 @TestPlugin(
     name = "replication",
-    sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
+    sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationIT$TestReplicationModule")
 public class ReplicationIT extends LightweightPluginDaemonTest {
   private static final Optional<String> ALL_PROJECTS = Optional.empty();
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
@@ -67,6 +68,24 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   private Path storagePath;
   private FileBasedConfig config;
   private ReplicationTasksStorage tasksStorage;
+
+  public static class TestReplicationModule extends AbstractModule {
+    @Inject private SitePaths sitePaths;
+
+    @Override
+    protected void configure() {
+      FileBasedConfig cfg =
+          new FileBasedConfig(
+              sitePaths.etc_dir.resolve("replication.config").toFile(), FS.DETECTED);
+      cfg.setBoolean("gerrit", null, "autoReload", true);
+      try {
+        cfg.save();
+      } catch (IOException e) {
+        throw new RuntimeException("Cannot save config file: " + cfg);
+      }
+      install(new ReplicationModule(sitePaths));
+    }
+  }
 
   @Override
   public void setUpTestPlugin() throws Exception {
