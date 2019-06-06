@@ -16,6 +16,8 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.StartReplicationCapability.START_REPLICATION;
 
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.eventbus.EventBus;
 import com.google.gerrit.extensions.annotations.Exports;
 import com.google.gerrit.extensions.config.CapabilityDefinition;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
@@ -23,14 +25,38 @@ import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
+import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.events.EventTypes;
 import com.google.inject.AbstractModule;
+import com.google.inject.Inject;
+import com.google.inject.ProvisionException;
 import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.transport.SshSessionFactory;
+import org.eclipse.jgit.util.FS;
 
 class ReplicationModule extends AbstractModule {
+  private final Path cfgPath;
+  private final boolean forceAutoReload;
+
+  @Inject
+  public ReplicationModule(SitePaths site) {
+    cfgPath = site.etc_dir.resolve("replication.config");
+    forceAutoReload = false;
+  }
+
+  @VisibleForTesting
+  public ReplicationModule(SitePaths site, boolean forceAutoReload) {
+    cfgPath = site.etc_dir.resolve("replication.config");
+    this.forceAutoReload = forceAutoReload;
+  }
+
   @Override
   protected void configure() {
     install(new FactoryModuleBuilder().build(Destination.Factory.class));
@@ -57,8 +83,15 @@ class ReplicationModule extends AbstractModule {
 
     install(new FactoryModuleBuilder().build(PushAll.Factory.class));
 
-    bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
-    bind(ReplicationDestinations.class).to(AutoReloadConfigDecorator.class);
+    bind(EventBus.class).in(Scopes.SINGLETON);
+    if (getReplicationConfig().getBoolean("gerrit", "autoReload", false) || forceAutoReload) {
+      bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
+      bind(ReplicationDestinations.class).to(AutoReloadConfigDecorator.class);
+    } else {
+      bind(ReplicationConfig.class).to(ReplicationFileBasedConfig.class);
+      bind(ReplicationDestinations.class).to(ReplicationFileBasedConfig.class);
+    }
+
     DynamicSet.setOf(binder(), ReplicationStateListener.class);
     DynamicSet.bind(binder(), ReplicationStateListener.class).to(ReplicationStateLogger.class);
 
@@ -68,5 +101,16 @@ class ReplicationModule extends AbstractModule {
     bind(SshSessionFactory.class).toProvider(ReplicationSshSessionFactoryProvider.class);
 
     bind(TransportFactory.class).to(TransportFactoryImpl.class).in(Scopes.SINGLETON);
+  }
+
+  private FileBasedConfig getReplicationConfig() {
+    File replicationConfigFile = cfgPath.toFile();
+    FileBasedConfig config = new FileBasedConfig(replicationConfigFile, FS.DETECTED);
+    try {
+      config.load();
+    } catch (IOException | ConfigInvalidException e) {
+      throw new ProvisionException("Unable to load " + replicationConfigFile.getAbsolutePath(), e);
+    }
+    return config;
   }
 }
