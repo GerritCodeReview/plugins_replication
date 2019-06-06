@@ -20,14 +20,12 @@ import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.googlesource.gerrit.plugins.replication.Destination.Factory;
 import java.nio.file.Path;
 
 public class AutoReloadRunnable implements Runnable {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final SitePaths site;
-  private final Factory destinationFactory;
   private final Path pluginDataDir;
   private final EventBus eventBus;
   private final Provider<ReplicationQueue> replicationQueue;
@@ -40,7 +38,6 @@ public class AutoReloadRunnable implements Runnable {
   public AutoReloadRunnable(
       ReplicationFileBasedConfig config,
       SitePaths site,
-      Destination.Factory destinationFactory,
       @PluginData Path pluginDataDir,
       EventBus eventBus,
       Provider<ReplicationQueue> replicationQueue) {
@@ -48,7 +45,6 @@ public class AutoReloadRunnable implements Runnable {
     this.loadedConfigVersion = config.getVersion();
     this.lastFailedConfigVersion = "";
     this.site = site;
-    this.destinationFactory = destinationFactory;
     this.pluginDataDir = pluginDataDir;
     this.eventBus = eventBus;
     this.replicationQueue = replicationQueue;
@@ -58,8 +54,7 @@ public class AutoReloadRunnable implements Runnable {
   public synchronized void run() {
     String pendingConfigVersion = loadedConfig.getVersion();
     ReplicationQueue queue = replicationQueue.get();
-    if (!loadedConfig.isShuttingDown()
-        && !pendingConfigVersion.equals(loadedConfigVersion)
+    if (!pendingConfigVersion.equals(loadedConfigVersion)
         && !pendingConfigVersion.equals(lastFailedConfigVersion)
         && queue.isRunning()
         && !queue.isReplaying()) {
@@ -70,7 +65,7 @@ public class AutoReloadRunnable implements Runnable {
   synchronized void reload() {
     String pendingConfigVersion = loadedConfig.getVersion();
     try {
-      loadedConfig = new ReplicationFileBasedConfig(site, destinationFactory, pluginDataDir);
+      loadedConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
       loadedConfigVersion = loadedConfig.getVersion();
       lastFailedConfigVersion = "";
       eventBus.post(loadedConfig);
