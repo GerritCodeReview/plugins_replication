@@ -308,4 +308,9 @@ public class ReplicationFileBasedConfig implements ReplicationConfig, Replicatio
       cfg.start(workQueue);
     }
   }
+
+  @Override
+  public String getVersion() {
+    return Long.toString(config.getFile().lastModified());
+  }
 }
