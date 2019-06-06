@@ -23,14 +23,30 @@ import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
+import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.events.EventTypes;
 import com.google.inject.AbstractModule;
+import com.google.inject.Inject;
+import com.google.inject.ProvisionException;
 import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.transport.SshSessionFactory;
+import org.eclipse.jgit.util.FS;
 
 class ReplicationModule extends AbstractModule {
+  private final Path cfgPath;
+
+  @Inject
+  public ReplicationModule(SitePaths site) {
+    this.cfgPath = site.etc_dir.resolve("replication.config");
+  }
+
   @Override
   protected void configure() {
     install(new FactoryModuleBuilder().build(Destination.Factory.class));
@@ -58,8 +74,15 @@ class ReplicationModule extends AbstractModule {
     install(new FactoryModuleBuilder().build(PushAll.Factory.class));
     install(new FactoryModuleBuilder().build(ReplicationState.Factory.class));
 
-    bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
-    bind(ReplicationDestinations.class).to(AutoReloadConfigDecorator.class);
+    if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
+      bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
+      bind(ReplicationDestinations.class).to(AutoReloadConfigDecorator.class);
+      bind(ReplicationConfigListener.class).to(AutoReloadConfigDecorator.class);
+    } else {
+      bind(ReplicationConfig.class).to(ReplicationFileBasedConfig.class);
+      bind(ReplicationDestinations.class).to(ReplicationFileBasedConfig.class);
+    }
+
     DynamicSet.setOf(binder(), ReplicationStateListener.class);
     DynamicSet.bind(binder(), ReplicationStateListener.class).to(ReplicationStateLogger.class);
 
@@ -67,5 +90,16 @@ class ReplicationModule extends AbstractModule {
     EventTypes.register(RefReplicationDoneEvent.TYPE, RefReplicationDoneEvent.class);
     EventTypes.register(ReplicationScheduledEvent.TYPE, ReplicationScheduledEvent.class);
     bind(SshSessionFactory.class).toProvider(ReplicationSshSessionFactoryProvider.class);
+  }
+
+  private FileBasedConfig getReplicationConfig() {
+    File replicationConfigFile = this.cfgPath.toFile();
+    FileBasedConfig config = new FileBasedConfig(replicationConfigFile, FS.DETECTED);
+    try {
+      config.load();
+    } catch (IOException | ConfigInvalidException e) {
+      throw new ProvisionException("Unable to load " + replicationConfigFile.getAbsolutePath(), e);
+    }
+    return config;
   }
 }
