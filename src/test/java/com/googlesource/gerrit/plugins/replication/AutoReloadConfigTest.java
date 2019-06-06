@@ -51,6 +51,7 @@ public class AutoReloadConfigTest {
   private SitePaths sitePaths;
   private Path pluginDataPath;
   private Destination destinationMock;
+  private ReplicationFileBasedConfig replicationFileBasedConfig;
   private FakeExecutorService executorService = new FakeExecutorService();
   private EventBus eventBus = new EventBus();
 
@@ -153,6 +154,8 @@ public class AutoReloadConfigTest {
     sitePaths = new SitePaths(createTempPath("site"));
 
     setupMocks();
+
+    replicationFileBasedConfig = newReplicationFileBasedConfig();
   }
 
   private void setupMocks() {
@@ -183,7 +186,7 @@ public class AutoReloadConfigTest {
     replicationConfig.setString("remote", "foo", "url", "ssh://git@git.somewhere.com/${name}");
     replicationConfig.save();
 
-    assertThat(newAutoReloadConfig().getAll(FilterType.ALL)).isNotEmpty();
+    assertThat(newDestinationsCollections().getAll(FilterType.ALL)).isNotEmpty();
   }
 
   @Test
@@ -194,9 +197,9 @@ public class AutoReloadConfigTest {
     replicationConfig.save();
 
     AutoReloadConfigDecorator autoReloadConfig = newAutoReloadConfig();
-    autoReloadConfig.startup(workQueueMock);
+    DestinationsCollection destinations = newDestinationsCollections();
 
-    assertThat(autoReloadConfig.getAll(FilterType.ALL)).hasSize(1);
+    assertThat(destinations.getAll(FilterType.ALL)).hasSize(1);
 
     TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
 
@@ -204,7 +207,7 @@ public class AutoReloadConfigTest {
     replicationConfig.save();
     executorService.refreshCommand.run();
 
-    assertThat(autoReloadConfig.getAll(FilterType.ALL)).hasSize(2);
+    assertThat(destinations.getAll(FilterType.ALL)).hasSize(2);
   }
 
   @Test
@@ -214,10 +217,8 @@ public class AutoReloadConfigTest {
     replicationConfig.setString("remote", "foo", "url", "ssh://git@git.foo.com/${name}");
     replicationConfig.save();
 
-    ReplicationFileBasedConfig replicationFileBasedConfig =
-        new ReplicationFileBasedConfig(sitePaths, destinationFactoryMock, pluginDataPath);
-
-    assertThat(replicationFileBasedConfig.getAll(FilterType.ALL)).hasSize(1);
+    DestinationsCollection destinations = newDestinationsCollections();
+    assertThat(destinations.getAll(FilterType.ALL)).hasSize(1);
 
     TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
 
@@ -225,32 +226,37 @@ public class AutoReloadConfigTest {
     replicationConfig.save();
     executorService.refreshCommand.run();
 
-    assertThat(replicationFileBasedConfig.getAll(FilterType.ALL)).hasSize(1);
+    assertThat(destinations.getAll(FilterType.ALL)).hasSize(1);
   }
 
-  private AutoReloadConfigDecorator newAutoReloadConfig()
-      throws ConfigInvalidException, IOException {
-    ReplicationFileBasedConfig replicationFileBasedConfig =
-        new ReplicationFileBasedConfig(sitePaths, destinationFactoryMock, pluginDataPath);
+  private AutoReloadConfigDecorator newAutoReloadConfig() {
     AutoReloadRunnable autoReloadRunnable =
-        new AutoReloadRunnable(
-            replicationFileBasedConfig,
-            sitePaths,
-            destinationFactoryMock,
-            pluginDataPath,
-            eventBus);
-    return new AutoReloadConfigDecorator(
-        Providers.of(replicationQueueMock),
-        "replication",
-        workQueueMock,
-        replicationFileBasedConfig,
-        autoReloadRunnable,
-        eventBus);
+        new AutoReloadRunnable(replicationFileBasedConfig, sitePaths, pluginDataPath, eventBus);
+    AutoReloadConfigDecorator configDecorator =
+        new AutoReloadConfigDecorator(
+            "replication", workQueueMock, replicationFileBasedConfig, autoReloadRunnable, eventBus);
+    configDecorator.start();
+    return configDecorator;
+  }
+
+  private ReplicationFileBasedConfig newReplicationFileBasedConfig() {
+    return new ReplicationFileBasedConfig(sitePaths, pluginDataPath);
   }
 
   private FileBasedConfig newReplicationConfig() {
     FileBasedConfig replicationConfig =
         new FileBasedConfig(sitePaths.etc_dir.resolve("replication.config").toFile(), FS.DETECTED);
     return replicationConfig;
+  }
+
+  private DestinationsCollection newDestinationsCollections() throws ConfigInvalidException {
+    DestinationsCollection destinations =
+        new DestinationsCollection(
+            destinationFactoryMock,
+            Providers.of(replicationQueueMock),
+            replicationFileBasedConfig,
+            eventBus);
+    destinations.startup(workQueueMock);
+    return destinations;
   }
 }
