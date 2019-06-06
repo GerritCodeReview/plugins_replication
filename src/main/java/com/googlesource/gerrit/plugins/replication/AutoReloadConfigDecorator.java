@@ -15,142 +15,114 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.Multimap;
 import com.google.common.flogger.FluentLogger;
-import com.google.gerrit.common.FileUtil;
-import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.transport.URIish;
 
 @Singleton
-public class AutoReloadConfigDecorator implements ReplicationConfig, ReplicationDestinations {
+public class AutoReloadConfigDecorator
+    implements ReplicationConfig, ReplicationDestinations, ReplicationConfigListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private static final long RELOAD_DELAY = 120;
   private static final long RELOAD_INTERVAL = 60;
 
-  private ReplicationFileBasedConfig currentConfig;
-  private long currentConfigTs;
-  private long lastFailedConfigTs;
+  private ReplicationFileBasedConfig replicationConfig;
 
-  private final SitePaths site;
-  private final Destination.Factory destinationFactory;
-  private final Path pluginDataDir;
-  // Use Provider<> instead of injecting the ReplicationQueue because of circular dependency with
+  // Use Provider<> instead of injecting the ReplicationQueue because of
+  // circular dependency with
   // ReplicationConfig
   private final Provider<ReplicationQueue> replicationQueue;
   private final ScheduledExecutorService autoReloadExecutor;
+  private AutoReloadRunnable reloadRunner;
+  private ScheduledFuture<?> scheduledReloadRunner;
 
   @Inject
   public AutoReloadConfigDecorator(
-      SitePaths site,
-      Destination.Factory destinationFactory,
       Provider<ReplicationQueue> replicationQueue,
-      @PluginData Path pluginDataDir,
       @PluginName String pluginName,
-      WorkQueue workQueue)
-      throws ConfigInvalidException, IOException {
-    this.site = site;
-    this.destinationFactory = destinationFactory;
-    this.pluginDataDir = pluginDataDir;
-    this.currentConfig = loadConfig();
-    this.currentConfigTs = getLastModified(currentConfig);
+      WorkQueue workQueue,
+      ReplicationFileBasedConfig replicationConfig,
+      AutoReloadRunnable reloadRunner) {
+    this.replicationConfig = replicationConfig;
     this.replicationQueue = replicationQueue;
     this.autoReloadExecutor = workQueue.createQueue(1, pluginName + "_auto-reload-config");
-  }
-
-  private static long getLastModified(ReplicationFileBasedConfig cfg) {
-    return FileUtil.lastModified(cfg.getCfgPath());
-  }
-
-  private ReplicationFileBasedConfig loadConfig() throws ConfigInvalidException, IOException {
-    return new ReplicationFileBasedConfig(site, destinationFactory, pluginDataDir);
-  }
-
-  private synchronized boolean isAutoReload() {
-    return currentConfig.getConfig().getBoolean("gerrit", "autoReload", false);
+    this.reloadRunner = reloadRunner;
   }
 
   @Override
   public synchronized List<Destination> getAll(FilterType filterType) {
-    return currentConfig.getAll(filterType);
+    return replicationConfig.getAll(filterType);
   }
 
   @Override
   public synchronized Multimap<Destination, URIish> getURIs(
       Optional<String> remoteName, Project.NameKey projectName, FilterType filterType) {
-    return currentConfig.getURIs(remoteName, projectName, filterType);
-  }
-
-  private synchronized void reloadIfNeeded() {
-    if (isAutoReload()) {
-      ReplicationQueue queue = replicationQueue.get();
-      long lastModified = getLastModified(currentConfig);
-      try {
-        if (lastModified > currentConfigTs && lastModified > lastFailedConfigTs) {
-          queue.stop();
-          currentConfig = loadConfig();
-          currentConfigTs = lastModified;
-          lastFailedConfigTs = 0;
-          logger.atInfo().log(
-              "Configuration reloaded: %d destinations",
-              currentConfig.getAll(FilterType.ALL).size());
-        }
-      } catch (Exception e) {
-        logger.atSevere().withCause(e).log(
-            "Cannot reload replication configuration: keeping existing settings");
-        lastFailedConfigTs = lastModified;
-        return;
-      } finally {
-        queue.start();
-      }
-    }
+    return replicationConfig.getURIs(remoteName, projectName, filterType);
   }
 
   @Override
   public synchronized boolean isReplicateAllOnPluginStart() {
-    return currentConfig.isReplicateAllOnPluginStart();
+    return replicationConfig.isReplicateAllOnPluginStart();
   }
 
   @Override
   public synchronized boolean isDefaultForceUpdate() {
-    return currentConfig.isDefaultForceUpdate();
+    return replicationConfig.isDefaultForceUpdate();
   }
 
   @Override
   public synchronized int getMaxRefsToLog() {
-    return currentConfig.getMaxRefsToLog();
+    return replicationConfig.getMaxRefsToLog();
   }
 
   @Override
   public synchronized boolean isEmpty() {
-    return currentConfig.isEmpty();
+    return replicationConfig.isEmpty();
   }
 
   @Override
   public Path getEventsDirectory() {
-    return currentConfig.getEventsDirectory();
+    return replicationConfig.getEventsDirectory();
   }
 
   @Override
   public synchronized int shutdown() {
-    return currentConfig.shutdown();
+    scheduledReloadRunner.cancel(true);
+    return replicationConfig.shutdown();
   }
 
   @Override
   public synchronized void startup(WorkQueue workQueue) {
-    currentConfig.startup(workQueue);
-    autoReloadExecutor.scheduleAtFixedRate(
-        this::reloadIfNeeded, RELOAD_DELAY, RELOAD_INTERVAL, TimeUnit.SECONDS);
+    replicationConfig.startup(workQueue);
+    scheduledReloadRunner =
+        autoReloadExecutor.scheduleAtFixedRate(
+            reloadRunner, RELOAD_DELAY, RELOAD_INTERVAL, TimeUnit.SECONDS);
+  }
+
+  @Override
+  public String getVersion() {
+    return replicationConfig.getVersion();
+  }
+
+  @Override
+  public void onReload(ReplicationFileBasedConfig oldConfig, ReplicationFileBasedConfig newConfig) {
+    try {
+      replicationQueue.get().stop();
+      replicationConfig = newConfig;
+      logger.atInfo().log(
+          "Configuration reloaded: %d destinations", newConfig.getAll(FilterType.ALL).size());
+    } finally {
+      replicationQueue.get().start();
+    }
   }
 }
