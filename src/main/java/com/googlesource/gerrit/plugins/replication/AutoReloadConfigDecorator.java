@@ -14,63 +14,40 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.Multimap;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginName;
-import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import org.eclipse.jgit.transport.URIish;
 
 @Singleton
-public class AutoReloadConfigDecorator implements ReplicationConfig, ReplicationDestinations {
-  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleListener {
   private static final long RELOAD_DELAY = 120;
   private static final long RELOAD_INTERVAL = 60;
 
   private volatile ReplicationFileBasedConfig currentConfig;
 
-  // Use Provider<> instead of injecting the ReplicationQueue because of
-  // circular dependency with ReplicationConfig
-  private final Provider<ReplicationQueue> replicationQueue;
   private final ScheduledExecutorService autoReloadExecutor;
   private ScheduledFuture<?> autoReloadRunnable;
   private final AutoReloadRunnable reloadRunner;
 
   @Inject
   public AutoReloadConfigDecorator(
-      Provider<ReplicationQueue> replicationQueue,
       @PluginName String pluginName,
       WorkQueue workQueue,
       ReplicationFileBasedConfig replicationConfig,
       AutoReloadRunnable reloadRunner,
       EventBus eventBus) {
     this.currentConfig = replicationConfig;
-    this.replicationQueue = replicationQueue;
     this.autoReloadExecutor = workQueue.createQueue(1, pluginName + "_auto-reload-config");
     this.reloadRunner = reloadRunner;
     eventBus.register(this);
-  }
-
-  @Override
-  public synchronized List<Destination> getAll(FilterType filterType) {
-    return currentConfig.getAll(filterType);
-  }
-
-  @Override
-  public synchronized Multimap<Destination, URIish> getURIs(
-      Optional<String> remoteName, Project.NameKey projectName, FilterType filterType) {
-    return currentConfig.getURIs(remoteName, projectName, filterType);
   }
 
   @VisibleForTesting
@@ -94,11 +71,6 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, Replication
   }
 
   @Override
-  public synchronized boolean isEmpty() {
-    return currentConfig.isEmpty();
-  }
-
-  @Override
   public Path getEventsDirectory() {
     return currentConfig.getEventsDirectory();
   }
@@ -117,24 +89,21 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, Replication
    * prevent them at: https://en.wikipedia.org/wiki/Deadlock
    */
   @Override
-  public int shutdown() {
-    stopAutoReload();
-    return currentConfig.shutdown();
-  }
-
-  private synchronized void stopAutoReload() {
-    if (autoReloadRunnable != null) {
-      autoReloadRunnable.cancel(false);
-      autoReloadRunnable = null;
-    }
-  }
-
-  @Override
-  public synchronized void startup(WorkQueue workQueue) {
-    currentConfig.startup(workQueue);
+  public synchronized void start() {
     autoReloadRunnable =
         autoReloadExecutor.scheduleAtFixedRate(
             reloadRunner, RELOAD_DELAY, RELOAD_INTERVAL, TimeUnit.SECONDS);
+  }
+
+  @Override
+  public synchronized void stop() {
+    if (autoReloadRunnable != null) {
+      if (!autoReloadRunnable.cancel(true)) {
+        throw new IllegalStateException(
+            "Unable to cancel replication reload task: cannot guarantee orderly shutdown");
+      }
+      autoReloadRunnable = null;
+    }
   }
 
   @Override
@@ -144,14 +113,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, Replication
 
   @Subscribe
   public void onReload(ReplicationFileBasedConfig newConfig) {
-    try {
-      replicationQueue.get().stop();
-      currentConfig = newConfig;
-      logger.atInfo().log(
-          "Configuration reloaded: %d destinations", newConfig.getAll(FilterType.ALL).size());
-    } finally {
-      replicationQueue.get().start();
-    }
+    currentConfig = newConfig;
   }
 
   @Override
