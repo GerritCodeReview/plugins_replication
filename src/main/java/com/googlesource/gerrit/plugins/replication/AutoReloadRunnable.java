@@ -16,36 +16,33 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginData;
+import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.googlesource.gerrit.plugins.replication.Destination.Factory;
 import java.nio.file.Path;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 
 public class AutoReloadRunnable implements Runnable {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  private Provider<ReplicationConfigListener> configListener;
+  private DynamicSet<ReplicationConfigListener> configListeners;
   private ReplicationFileBasedConfig config;
   private String configVersion;
   private String lastFailedConfigVersion;
   private SitePaths site;
-  private Factory destinationFactory;
   private Path pluginDataDir;
 
   @Inject
   public AutoReloadRunnable(
-      Provider<ReplicationConfigListener> configListener,
+      DynamicSet<ReplicationConfigListener> configListeners,
       ReplicationFileBasedConfig config,
       SitePaths site,
-      Destination.Factory destinationFactory,
       @PluginData Path pluginDataDir) {
-    this.configListener = configListener;
+    this.configListeners = configListeners;
     this.config = config;
     this.configVersion = config.getVersion();
     this.lastFailedConfigVersion = "";
     this.site = site;
-    this.destinationFactory = destinationFactory;
     this.pluginDataDir = pluginDataDir;
   }
 
@@ -54,10 +51,9 @@ public class AutoReloadRunnable implements Runnable {
     String lastVersion = config.getVersion();
     try {
       if (!lastVersion.equals(configVersion) && !lastVersion.equals(lastFailedConfigVersion)) {
-        configListener.get().beforeReload(config);
-        ReplicationFileBasedConfig newConfig =
-            new ReplicationFileBasedConfig(site, destinationFactory, pluginDataDir);
-        configListener.get().afterReload(newConfig);
+        fireBeforeLoad(config);
+        ReplicationFileBasedConfig newConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
+        fireAfterLoad(newConfig);
         config = newConfig;
         configVersion = newConfig.getVersion();
         lastFailedConfigVersion = "";
@@ -66,6 +62,16 @@ public class AutoReloadRunnable implements Runnable {
       logger.atSevere().withCause(e).log(
           "Cannot reload replication configuration: keeping existing settings");
       lastFailedConfigVersion = lastVersion;
+    }
+  }
+
+  private void fireBeforeLoad(ReplicationFileBasedConfig oldConfig) {
+    configListeners.forEach(listener -> listener.beforeReload(oldConfig));
+  }
+
+  private void fireAfterLoad(ReplicationFileBasedConfig newConfig) throws ConfigInvalidException {
+    for (ReplicationConfigListener listener : configListeners) {
+      listener.afterReload(newConfig);
     }
   }
 }
