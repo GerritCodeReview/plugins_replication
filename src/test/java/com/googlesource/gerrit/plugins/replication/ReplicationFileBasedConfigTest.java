@@ -19,7 +19,6 @@ import static com.google.common.truth.Truth.assertThat;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.io.IOException;
 import java.util.List;
-import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.junit.Test;
 
@@ -37,8 +36,10 @@ public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
     config.setString("remote", remoteName, "url", remoteUrl);
     config.save();
 
-    ReplicationFileBasedConfig replicationConfig = newReplicationFileBasedConfig();
-    List<Destination> destinations = replicationConfig.getAll(FilterType.ALL);
+    DestinationsCollection destinationsCollections =
+        newDestinationsCollections(newReplicationFileBasedConfig());
+    destinationsCollections.startup(workQueueMock);
+    List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
 
     assertThatIsDestination(destinations.get(0), remoteName, remoteUrl);
@@ -55,18 +56,19 @@ public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
     config.setString("remote", remoteName2, "url", remoteUrl2);
     config.save();
 
-    ReplicationFileBasedConfig replicationConfig = newReplicationFileBasedConfig();
-    List<Destination> destinations = replicationConfig.getAll(FilterType.ALL);
+    DestinationsCollection destinationsCollections =
+        newDestinationsCollections(newReplicationFileBasedConfig());
+    destinationsCollections.startup(workQueueMock);
+    List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(2);
 
     assertThatIsDestination(destinations.get(0), remoteName1, remoteUrl1);
     assertThatIsDestination(destinations.get(1), remoteName2, remoteUrl2);
   }
 
-  private ReplicationFileBasedConfig newReplicationFileBasedConfig()
-      throws ConfigInvalidException, IOException {
+  private ReplicationFileBasedConfig newReplicationFileBasedConfig() {
     ReplicationFileBasedConfig replicationConfig =
-        new ReplicationFileBasedConfig(sitePaths, destinationFactoryMock, pluginDataPath);
+        new ReplicationFileBasedConfig(sitePaths, pluginDataPath);
     return replicationConfig;
   }
 }
