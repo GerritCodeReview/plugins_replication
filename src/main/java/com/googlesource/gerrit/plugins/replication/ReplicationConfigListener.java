@@ -14,6 +14,8 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import org.eclipse.jgit.errors.ConfigInvalidException;
+
 /** Listener of the configuration events. */
 public interface ReplicationConfigListener {
 
@@ -21,6 +23,7 @@ public interface ReplicationConfigListener {
    * Invoked when replication.config has been reloaded.
    *
    * @param newConfig new replication config
+   * @throws ConfigInvalidException if the new configuration is not valid.
    */
-  void onReload(ReplicationFileBasedConfig newConfig);
+  void onReload(ReplicationFileBasedConfig newConfig) throws ConfigInvalidException;
 }
