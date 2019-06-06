@@ -31,7 +31,7 @@ public class CreateProjectTask {
   }
 
   private final RemoteConfig config;
-  private final ReplicationDestinations replicationDestinations;
+  private final DestinationsCollection destinations;
   private final DynamicItem<AdminApiFactory> adminApiFactory;
   private final Project.NameKey project;
   private final String head;
@@ -39,21 +39,20 @@ public class CreateProjectTask {
   @Inject
   CreateProjectTask(
       RemoteConfig config,
-      ReplicationDestinations replicationDestinations,
+      DestinationsCollection destinations,
       DynamicItem<AdminApiFactory> adminApiFactory,
       @Assisted Project.NameKey project,
       @Assisted String head) {
     this.config = config;
-    this.replicationDestinations = replicationDestinations;
+    this.destinations = destinations;
     this.adminApiFactory = adminApiFactory;
     this.project = project;
     this.head = head;
   }
 
   public boolean create() {
-    return replicationDestinations
-        .getURIs(Optional.of(config.getName()), project, FilterType.PROJECT_CREATION).values()
-        .stream()
+    return destinations.getURIs(Optional.of(config.getName()), project, FilterType.PROJECT_CREATION)
+        .values().stream()
         .map(u -> createProject(u, project, head))
         .reduce(true, (a, b) -> a && b);
   }
