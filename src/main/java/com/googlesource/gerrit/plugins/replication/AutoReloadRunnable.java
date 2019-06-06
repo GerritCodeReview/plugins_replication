@@ -19,7 +19,6 @@ import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
-import com.googlesource.gerrit.plugins.replication.Destination.Factory;
 import java.nio.file.Path;
 
 public class AutoReloadRunnable implements Runnable {
@@ -29,7 +28,6 @@ public class AutoReloadRunnable implements Runnable {
   private String loadedConfigVersion;
   private String lastFailedConfigVersion;
   private SitePaths site;
-  private Factory destinationFactory;
   private Path pluginDataDir;
   private final EventBus eventBus;
 
@@ -37,14 +35,12 @@ public class AutoReloadRunnable implements Runnable {
   public AutoReloadRunnable(
       ReplicationFileBasedConfig config,
       SitePaths site,
-      Destination.Factory destinationFactory,
       @PluginData Path pluginDataDir,
       EventBus eventBus) {
     this.loadedConfig = config;
     this.loadedConfigVersion = config.getVersion();
     this.lastFailedConfigVersion = "";
     this.site = site;
-    this.destinationFactory = destinationFactory;
     this.pluginDataDir = pluginDataDir;
     this.eventBus = eventBus;
   }
@@ -55,8 +51,7 @@ public class AutoReloadRunnable implements Runnable {
     try {
       if (!pendingConfigVersion.equals(loadedConfigVersion)
           && !pendingConfigVersion.equals(lastFailedConfigVersion)) {
-        ReplicationFileBasedConfig newConfig =
-            new ReplicationFileBasedConfig(site, destinationFactory, pluginDataDir);
+        ReplicationFileBasedConfig newConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
         loadedConfig = newConfig;
         loadedConfigVersion = newConfig.getVersion();
         lastFailedConfigVersion = "";
