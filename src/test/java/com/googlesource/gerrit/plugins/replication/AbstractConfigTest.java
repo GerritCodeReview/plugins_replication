@@ -17,16 +17,21 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.truth.Truth.assertThat;
 import static java.nio.file.Files.createTempDirectory;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import com.google.common.eventbus.EventBus;
 import com.google.gerrit.server.config.SitePaths;
+import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.util.Providers;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 import org.junit.Before;
@@ -40,6 +45,11 @@ public abstract class AbstractConfigTest {
   protected final SitePaths sitePaths;
   protected final Destination.Factory destinationFactoryMock;
   protected final Path pluginDataPath;
+  protected ReplicationQueue replicationQueueMock;
+  protected WorkQueue workQueueMock;
+  protected EventBus eventBus = new EventBus();
+  protected AutoReloadConfigDecoratorTest.FakeExecutorService executorService =
+      new AutoReloadConfigDecoratorTest.FakeExecutorService();
 
   static class FakeDestination extends Destination {
     public final DestinationConfiguration config;
@@ -74,6 +84,12 @@ public abstract class AbstractConfigTest {
                 return new FakeDestination((DestinationConfiguration) invocation.getArguments()[0]);
               }
             });
+
+    replicationQueueMock = mock(ReplicationQueue.class);
+    when(replicationQueueMock.isRunning()).thenReturn(Boolean.TRUE);
+
+    workQueueMock = mock(WorkQueue.class);
+    when(workQueueMock.createQueue(anyInt(), any(String.class))).thenReturn(executorService);
   }
 
   protected static Path createTempPath(String prefix) throws IOException {
@@ -105,5 +121,14 @@ public abstract class AbstractConfigTest {
     assertThat(matchingDestinations).isNotEmpty();
 
     assertThatIsDestination(matchingDestinations.get(0), remoteName, remoteUrls);
+  }
+
+  protected DestinationsCollection newDestinationsCollections(
+      ReplicationFileBasedConfig replicationFileBasedConfig) throws ConfigInvalidException {
+    return new DestinationsCollection(
+        destinationFactoryMock,
+        Providers.of(replicationQueueMock),
+        replicationFileBasedConfig,
+        eventBus);
   }
 }

@@ -267,7 +267,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     setReplicationDestination(remoteName, "replica", ALL_PROJECTS);
 
     Result pushResult = createChange();
-    shutdownConfig();
+    shutdownDestinations();
 
     pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
@@ -293,7 +293,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     reloadConfig();
 
     Result pushResult = createChange();
-    shutdownConfig();
+    shutdownDestinations();
 
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
@@ -351,8 +351,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).reload();
   }
 
-  private void shutdownConfig() {
-    plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).shutdown();
+  private void shutdownDestinations() {
+    plugin.getSysInjector().getInstance(DestinationsCollection.class).shutdown();
   }
 
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
