@@ -74,13 +74,16 @@ class ReplicationModule extends AbstractModule {
     install(new FactoryModuleBuilder().build(PushAll.Factory.class));
     install(new FactoryModuleBuilder().build(ReplicationState.Factory.class));
 
+    bind(ReplicationDestinations.class).to(DestinationsCollection.class);
+    DynamicSet.setOf(binder(), ReplicationConfigListener.class);
+    DynamicSet.bind(binder(), ReplicationConfigListener.class).to(DestinationsCollection.class);
+
     if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
       bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
-      bind(ReplicationDestinations.class).to(AutoReloadConfigDecorator.class);
-      bind(ReplicationConfigListener.class).to(AutoReloadConfigDecorator.class);
+      DynamicSet.bind(binder(), ReplicationConfigListener.class)
+          .to(AutoReloadConfigDecorator.class);
     } else {
       bind(ReplicationConfig.class).to(ReplicationFileBasedConfig.class);
-      bind(ReplicationDestinations.class).to(ReplicationFileBasedConfig.class);
     }
 
     DynamicSet.setOf(binder(), ReplicationStateListener.class);
