@@ -1,6 +1,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.easymock.EasyMock.anyInt;
 import static org.easymock.EasyMock.anyObject;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.createNiceMock;
@@ -9,14 +10,18 @@ import static org.easymock.EasyMock.getCurrentArguments;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 
+import com.google.common.eventbus.EventBus;
 import com.google.gerrit.server.config.SitePaths;
+import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.util.Providers;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.easymock.IAnswer;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 import org.junit.Before;
@@ -28,6 +33,10 @@ public abstract class AbstractConfigTest {
   protected final SitePaths sitePaths;
   protected final Destination.Factory destinationFactoryMock;
   protected final Path pluginDataPath;
+  protected ReplicationQueue replicationQueueMock;
+  protected WorkQueue workQueueMock;
+  protected EventBus eventBus = new EventBus();
+  protected FakeExecutorService executorService = new FakeExecutorService();
 
   static class FakeDestination extends Destination {
     public final DestinationConfiguration config;
@@ -66,6 +75,13 @@ public abstract class AbstractConfigTest {
             })
         .anyTimes();
     replay(destinationFactoryMock);
+
+    replicationQueueMock = createNiceMock(ReplicationQueue.class);
+    replay(replicationQueueMock);
+
+    workQueueMock = createNiceMock(WorkQueue.class);
+    expect(workQueueMock.createQueue(anyInt(), anyObject(String.class))).andReturn(executorService);
+    replay(workQueueMock);
   }
 
   protected static Path createTempPath(String prefix) throws IOException {
@@ -97,5 +113,14 @@ public abstract class AbstractConfigTest {
     assertThat(matchingDestinations).isNotEmpty();
 
     assertThatIsDestination(matchingDestinations.get(0), remoteName, remoteUrls);
+  }
+
+  protected DestinationsCollection newDestinationsCollections(
+      ReplicationFileBasedConfig replicationFileBasedConfig) throws ConfigInvalidException {
+    return new DestinationsCollection(
+        destinationFactoryMock,
+        Providers.of(replicationQueueMock),
+        replicationFileBasedConfig,
+        eventBus);
   }
 }
