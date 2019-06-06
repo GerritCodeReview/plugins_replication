@@ -44,7 +44,6 @@ public class ReplicationQueue
   private final WorkQueue workQueue;
   private final DynamicItem<EventDispatcher> dispatcher;
   private final ReplicationDestinations destinations;
-  private final ReplicationConfig config;
   private final ReplicationState.Factory replicationStateFactory;
   private final EventsStorage eventsStorage;
   private volatile boolean running;
@@ -53,7 +52,6 @@ public class ReplicationQueue
   ReplicationQueue(
       WorkQueue wq,
       ReplicationDestinations rd,
-      ReplicationConfig rc,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListeners sl,
       ReplicationState.Factory rsf,
@@ -61,7 +59,6 @@ public class ReplicationQueue
     workQueue = wq;
     dispatcher = dis;
     destinations = rd;
-    config = rc;
     stateLog = sl;
     replicationStateFactory = rsf;
     eventsStorage = es;
