@@ -22,6 +22,7 @@ import static org.easymock.EasyMock.createNiceMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 
+import com.google.common.eventbus.EventBus;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.util.Providers;
@@ -37,13 +38,13 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 import org.junit.Before;
 import org.junit.Test;
 
 public class AutoReloadConfigTest {
-  private AutoReloadConfigDecorator autoReloadConfig;
   private Destination.Factory destinationFactoryMock;
   private ReplicationQueue replicationQueueMock;
   private WorkQueue workQueueMock;
@@ -51,9 +52,10 @@ public class AutoReloadConfigTest {
   private Path pluginDataPath;
   private Destination destinationMock;
   private FakeExecutorService executorService = new FakeExecutorService();
+  private EventBus eventBus = new EventBus();
 
   public class FakeExecutorService implements ScheduledExecutorService {
-    public Runnable refreshCommand;
+    public Runnable refreshCommand = () -> {};
 
     @Override
     public void shutdown() {}
@@ -181,16 +183,7 @@ public class AutoReloadConfigTest {
     replicationConfig.setString("remote", "foo", "url", "ssh://git@git.somewhere.com/${name}");
     replicationConfig.save();
 
-    autoReloadConfig =
-        new AutoReloadConfigDecorator(
-            sitePaths,
-            destinationFactoryMock,
-            Providers.of(replicationQueueMock),
-            pluginDataPath,
-            "replication",
-            workQueueMock);
-
-    assertThat(autoReloadConfig.getAll(FilterType.ALL)).isNotEmpty();
+    assertThat(newAutoReloadConfig().getAll(FilterType.ALL)).isNotEmpty();
   }
 
   @Test
@@ -200,14 +193,7 @@ public class AutoReloadConfigTest {
     replicationConfig.setString("remote", "foo", "url", "ssh://git@git.foo.com/${name}");
     replicationConfig.save();
 
-    autoReloadConfig =
-        new AutoReloadConfigDecorator(
-            sitePaths,
-            destinationFactoryMock,
-            Providers.of(replicationQueueMock),
-            pluginDataPath,
-            "replication",
-            workQueueMock);
+    AutoReloadConfigDecorator autoReloadConfig = newAutoReloadConfig();
     autoReloadConfig.startup(workQueueMock);
 
     assertThat(autoReloadConfig.getAll(FilterType.ALL)).hasSize(1);
@@ -228,17 +214,10 @@ public class AutoReloadConfigTest {
     replicationConfig.setString("remote", "foo", "url", "ssh://git@git.foo.com/${name}");
     replicationConfig.save();
 
-    autoReloadConfig =
-        new AutoReloadConfigDecorator(
-            sitePaths,
-            destinationFactoryMock,
-            Providers.of(replicationQueueMock),
-            pluginDataPath,
-            "replication",
-            workQueueMock);
-    autoReloadConfig.startup(workQueueMock);
+    ReplicationFileBasedConfig replicationFileBasedConfig =
+        new ReplicationFileBasedConfig(sitePaths, destinationFactoryMock, pluginDataPath);
 
-    assertThat(autoReloadConfig.getAll(FilterType.ALL)).hasSize(1);
+    assertThat(replicationFileBasedConfig.getAll(FilterType.ALL)).hasSize(1);
 
     TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
 
@@ -246,7 +225,27 @@ public class AutoReloadConfigTest {
     replicationConfig.save();
     executorService.refreshCommand.run();
 
-    assertThat(autoReloadConfig.getAll(FilterType.ALL)).hasSize(1);
+    assertThat(replicationFileBasedConfig.getAll(FilterType.ALL)).hasSize(1);
+  }
+
+  private AutoReloadConfigDecorator newAutoReloadConfig()
+      throws ConfigInvalidException, IOException {
+    ReplicationFileBasedConfig replicationFileBasedConfig =
+        new ReplicationFileBasedConfig(sitePaths, destinationFactoryMock, pluginDataPath);
+    AutoReloadRunnable autoReloadRunnable =
+        new AutoReloadRunnable(
+            replicationFileBasedConfig,
+            sitePaths,
+            destinationFactoryMock,
+            pluginDataPath,
+            eventBus);
+    return new AutoReloadConfigDecorator(
+        Providers.of(replicationQueueMock),
+        "replication",
+        workQueueMock,
+        replicationFileBasedConfig,
+        autoReloadRunnable,
+        eventBus);
   }
 
   private FileBasedConfig newReplicationConfig() {
