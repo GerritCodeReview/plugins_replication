@@ -15,37 +15,17 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.easymock.EasyMock.anyInt;
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.createNiceMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
 
-import com.google.common.eventbus.EventBus;
-import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.util.Providers;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.junit.Before;
 import org.junit.Test;
 
 public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
-  private ReplicationQueue replicationQueueMock;
-  private WorkQueue workQueueMock;
-  private FakeExecutorService executorService = new FakeExecutorService();
-  private EventBus eventBus = new EventBus();
-
   public class FakeExecutorService implements ScheduledExecutorService {
     public Runnable refreshCommand = () -> {};
 
@@ -139,6 +119,8 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     }
   }
 
+  ReplicationFileBasedConfig replicationFileBasedConfig;
+
   public AutoReloadConfigDecoratorTest() throws IOException {
     super();
   }
@@ -148,30 +130,7 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
   public void setup() {
     super.setup();
 
-    setupMocks();
-  }
-
-  private void setupMocks() {
-    replicationQueueMock = createNiceMock(ReplicationQueue.class);
-    expect(replicationQueueMock.isRunning()).andReturn(true);
-    replay(replicationQueueMock);
-
-    workQueueMock = createNiceMock(WorkQueue.class);
-    expect(workQueueMock.createQueue(anyInt(), anyObject(String.class))).andReturn(executorService);
-    replay(workQueueMock);
-  }
-
-  @Test
-  public void shouldLoadNotEmptyInitialReplicationConfig() throws Exception {
-    FileBasedConfig replicationConfig = newReplicationConfig();
-    String remoteName = "foo";
-    String remoteUrl = "ssh://git@git.somewhere.com/${name}";
-    replicationConfig.setString("remote", remoteName, "url", remoteUrl);
-    replicationConfig.save();
-
-    List<Destination> destinations = newAutoReloadConfig().getAll(FilterType.ALL);
-    assertThat(destinations).hasSize(1);
-    assertThatIsDestination(destinations.get(0), remoteName, remoteUrl);
+    replicationFileBasedConfig = newReplicationFileBasedConfig();
   }
 
   @Test
@@ -183,10 +142,12 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     replicationConfig.setString("remote", remoteName1, "url", remoteUrl1);
     replicationConfig.save();
 
-    AutoReloadConfigDecorator autoReloadConfig = newAutoReloadConfig();
-    autoReloadConfig.startup(workQueueMock);
+    newAutoReloadConfig().start();
 
-    List<Destination> destinations = autoReloadConfig.getAll(FilterType.ALL);
+    DestinationsCollection destinationsCollections =
+        newDestinationsCollections(replicationFileBasedConfig);
+    destinationsCollections.startup(workQueueMock);
+    List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
     assertThatIsDestination(destinations.get(0), remoteName1, remoteUrl1);
 
@@ -198,7 +159,7 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     replicationConfig.save();
     executorService.refreshCommand.run();
 
-    destinations = autoReloadConfig.getAll(FilterType.ALL);
+    destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(2);
     assertThatContainsDestination(destinations, remoteName1, remoteUrl1);
     assertThatContainsDestination(destinations, remoteName2, remoteUrl2);
@@ -213,10 +174,10 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     replicationConfig.setString("remote", remoteName1, "url", remoteUrl1);
     replicationConfig.save();
 
-    ReplicationFileBasedConfig replicationFileBasedConfig =
-        new ReplicationFileBasedConfig(sitePaths, destinationFactoryMock, pluginDataPath);
-
-    List<Destination> destinations = replicationFileBasedConfig.getAll(FilterType.ALL);
+    DestinationsCollection destinationsCollections =
+        newDestinationsCollections(replicationFileBasedConfig);
+    destinationsCollections.startup(workQueueMock);
+    List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
     assertThatIsDestination(destinations.get(0), remoteName1, remoteUrl1);
 
@@ -226,27 +187,22 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     replicationConfig.save();
     executorService.refreshCommand.run();
 
-    assertThat(replicationFileBasedConfig.getAll(FilterType.ALL)).isEqualTo(destinations);
+    assertThat(destinationsCollections.getAll(FilterType.ALL)).isEqualTo(destinations);
   }
 
-  private AutoReloadConfigDecorator newAutoReloadConfig()
-      throws ConfigInvalidException, IOException {
-    ReplicationFileBasedConfig replicationFileBasedConfig =
-        new ReplicationFileBasedConfig(sitePaths, destinationFactoryMock, pluginDataPath);
+  private AutoReloadConfigDecorator newAutoReloadConfig() {
     AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
             replicationFileBasedConfig,
             sitePaths,
-            destinationFactoryMock,
             pluginDataPath,
             eventBus,
             Providers.of(replicationQueueMock));
     return new AutoReloadConfigDecorator(
-        Providers.of(replicationQueueMock),
-        "replication",
-        workQueueMock,
-        replicationFileBasedConfig,
-        autoReloadRunnable,
-        eventBus);
+        "replication", workQueueMock, replicationFileBasedConfig, autoReloadRunnable, eventBus);
+  }
+
+  private ReplicationFileBasedConfig newReplicationFileBasedConfig() {
+    return new ReplicationFileBasedConfig(sitePaths, pluginDataPath);
   }
 }
