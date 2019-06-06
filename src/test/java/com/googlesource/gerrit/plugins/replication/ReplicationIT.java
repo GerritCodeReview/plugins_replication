@@ -324,6 +324,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     config.setStringList("remote", remoteName, "url", replicaUrls);
     config.setInt("remote", remoteName, "replicationDelay", TEST_REPLICATION_DELAY);
     project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
+    config.setBoolean("gerrit", null, "autoReload", true);
     config.save();
   }
 
@@ -332,7 +333,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   private void reloadConfig() {
-    plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).forceReload();
+    plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).reload();
   }
 
   private void shutdownConfig() {

@@ -67,6 +67,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig, Replicatio
   private int sshConnectionTimeout = DEFAULT_SSH_CONNECTION_TIMEOUT_MS;
   private final FileBasedConfig config;
   private final Path pluginDataDir;
+  private volatile boolean shuttingDown;
 
   @Inject
   public ReplicationFileBasedConfig(
@@ -309,6 +310,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig, Replicatio
 
   @Override
   public int shutdown() {
+    shuttingDown = true;
     int discarded = 0;
     for (Destination cfg : destinations) {
       try {
@@ -365,6 +367,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig, Replicatio
 
   @Override
   public void startup(WorkQueue workQueue) {
+    shuttingDown = false;
     for (Destination cfg : destinations) {
       cfg.start(workQueue);
     }
@@ -378,5 +381,14 @@ public class ReplicationFileBasedConfig implements ReplicationConfig, Replicatio
   @Override
   public int getSshCommandTimeout() {
     return sshCommandTimeout;
+  }
+
+  @Override
+  public String getVersion() {
+    return Long.toString(config.getFile().lastModified());
+  }
+
+  boolean isShuttingDown() {
+    return shuttingDown;
   }
 }
