@@ -58,4 +58,12 @@ public interface ReplicationConfig {
    * @return path to store persisted events.
    */
   Path getEventsDirectory();
+
+  /**
+   * Current logical version string of the current configuration loaded in memory, depending on the
+   * actual implementation of the configuration on the persistent storage.
+   *
+   * @return current logical version number.
+   */
+  String getVersion();
 }
