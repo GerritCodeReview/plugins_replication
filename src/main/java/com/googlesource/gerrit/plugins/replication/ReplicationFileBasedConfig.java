@@ -336,4 +336,8 @@ public class ReplicationFileBasedConfig implements ReplicationConfig, Replicatio
   public int getSshCommandTimeout() {
     return sshCommandTimeout;
   }
+
+  public String getVersion() {
+    return Long.toString(config.getFile().lastModified());
+  }
 }
