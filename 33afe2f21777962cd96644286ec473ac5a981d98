@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "00778c49_6f9a697c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-06-07T16:48:16Z",
+      "side": 1,
+      "message": "nit: this is only declared in the interface, but is never thrown by this method",
+      "range": {
+        "startLine": 124,
+        "startChar": 62,
+        "endLine": 124,
+        "endChar": 91
+      },
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f9c4cb1_6e50f4dd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-06-07T16:48:16Z",
+      "side": 1,
+      "message": "This is only triggered before the replication.config is about to be *re*loaded. It is not called the first time the configuration is loaded.\nI think the name should be more consistent to what the method does.\n\nSame applies to afterLoad",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 56
+      },
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
