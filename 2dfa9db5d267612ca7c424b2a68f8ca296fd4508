@@ -22,6 +22,30 @@
       "revId": "2dfa9db5d267612ca7c424b2a68f8ca296fd4508",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d7b1ddb_9d799b42",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1065251
+      },
+      "writtenOn": "2019-06-10T08:04:56Z",
+      "side": 1,
+      "message": "This change is an attempt to intercept the references being pushed by the replication plugin and be able to inject logic at that point. \nIn my specific case, the multi-site plugin would like to stop the replication from happening for some of the references if they are out of sync with the global ref database.\n\nThe only way I\u0027ve managed to do this was by shifting the responsibility of opening the JGIT Transport to the GitRepositoryManager, where I was then able to inject the new logic by wrapping the GitRepositoryManager in the multi-site plugin.\n\nIf this change is too controversial, any ideas on how to achieve the above logic differently?",
+      "parentUuid": "47b727a7_0e7202f2",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 10
+      },
+      "revId": "2dfa9db5d267612ca7c424b2a68f8ca296fd4508",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
