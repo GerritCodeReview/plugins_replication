@@ -155,6 +155,30 @@
     },
     {
       "key": {
+        "uuid": "16ad0aaf_bc09b703",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T19:13:53Z",
+      "side": 1,
+      "message": "I could move to a separate change, however, it won\u0027t be clear why it is needed without the code in this change.\n\nWith regards to EventBus, I believe is a good idea and it would deserve a follow-up change for that.\nIt would be nice also to introduce in Gerrit and making it pluggable.\n\nIt has already been discussed and agreed in the conferences that Gerrit needs an event-bus and should not necessarily be inside the Gerrit JVM and potentially externalizable.\n\nOnce that interface is in place, it is definitely a good idea to reuse it here also.\n\nWDYT?",
+      "parentUuid": "f15e2256_02673f0d",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 96
+      },
+      "revId": "0788c3c41c014359d8f2c2927a7cbabc75fb7f01",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5db3a8c7_5eabe3b8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 5
@@ -169,6 +193,24 @@
       "revId": "0788c3c41c014359d8f2c2927a7cbabc75fb7f01",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e6c1b0a_9d255b24",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T19:13:53Z",
+      "side": 1,
+      "message": "Yes, for the same reason that the Provider\u003cReplicationQueue\u003e is needed in the ReplicationDestination.\n\nHaving a Provider\u003c\u003e allows resolving the circular dependency in Guice.",
+      "parentUuid": "5db3a8c7_5eabe3b8",
+      "revId": "0788c3c41c014359d8f2c2927a7cbabc75fb7f01",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
