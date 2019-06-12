@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffea2686_947bf061",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T23:46:40Z",
+      "side": 1,
+      "message": "This method doesn\u0027t exist. It is introduced by Change-Id: Id84d725e that is even WIP.\nUntil that change is merged, this one isn\u0027t even building.",
+      "range": {
+        "startLine": 437,
+        "startChar": 24,
+        "endLine": 437,
+        "endChar": 48
+      },
+      "revId": "dbb58755cc497f439fb83ea25a095ff3eeb825af",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
