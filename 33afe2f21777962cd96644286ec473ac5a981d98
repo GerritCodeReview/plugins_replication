@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0380bd5a_a68ac1bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-12T09:11:02Z",
+      "side": 1,
+      "message": "by decomposing it into",
+      "range": {
+        "startLine": 9,
+        "startChar": 55,
+        "endLine": 9,
+        "endChar": 59
+      },
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "00778c49_6f9a697c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
         "patchSetId": 3
@@ -25,6 +48,23 @@
     },
     {
       "key": {
+        "uuid": "006afa7f_8b1cb1dc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-12T09:11:02Z",
+      "side": 1,
+      "message": "Isn\u0027t lastVersion always equal to the configVersion? When entering the run method for the first time the configVersion is set to config.getVersion() from the line 45.\n\nIf the config changes (line 61) the configVersion also changes (line 62), so we can use just configVersion here.\n\nFurther, why have configVersion variable at all when we can always use config.getVersion()?",
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9f9c4cb1_6e50f4dd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
         "patchSetId": 3
@@ -42,6 +82,63 @@
         "endLine": 27,
         "endChar": 56
       },
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e000a0f_5dc0692a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-12T09:11:02Z",
+      "side": 1,
+      "message": "Maybe not a topic of this change but this looks like too concrete type for the replication config. Now that we are splitting the detection that the configuration changed from\nthe usage of the replication configuration, we could also abstract out how the replication\nconfiguration is stored and (re)loaded.",
+      "range": {
+        "startLine": 35,
+        "startChar": 17,
+        "endLine": 35,
+        "endChar": 43
+      },
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82c42f4e_aa7ab0c3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-12T09:11:02Z",
+      "side": 1,
+      "message": "Why before/after methods? Why assume that all listeners have to be implemented that way?\n\nI propose just one method:\n\n  void onReload(ReplicationFileBasedConfig oldConfig, ReplicationFileBasedConfig newConfig)\n\nIMHO, this would be a much better interface as it leave more freedom to the listener implementations.",
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e13e76e4_55b7486c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-12T09:11:02Z",
+      "side": 1,
+      "message": "optional: sha1 hash of the content is probably a better candidate as it would prevent unnecessary (re)load and restart of destinations when only the last modified changes but\nthe content remains identical.",
       "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
