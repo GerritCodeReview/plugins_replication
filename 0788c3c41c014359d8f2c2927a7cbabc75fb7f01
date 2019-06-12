@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "3d909534_57345d0b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T19:07:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aacfdef5_b86875e2",
+      "range": {
+        "startLine": 57,
+        "startChar": 2,
+        "endLine": 57,
+        "endChar": 36
+      },
+      "revId": "0788c3c41c014359d8f2c2927a7cbabc75fb7f01",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d02ff46_6ae1ffca",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
         "patchSetId": 5
@@ -87,6 +111,24 @@
       "revId": "0788c3c41c014359d8f2c2927a7cbabc75fb7f01",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "353a5db4_9905121a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T19:07:35Z",
+      "side": 1,
+      "message": "This Provider\u003c\u003e is purely to workaround on the Guice circular dependencies issue.",
+      "parentUuid": "4d02ff46_6ae1ffca",
+      "revId": "0788c3c41c014359d8f2c2927a7cbabc75fb7f01",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
