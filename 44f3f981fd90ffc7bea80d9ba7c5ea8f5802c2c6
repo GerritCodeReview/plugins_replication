@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "78b67d17_75ff2d2c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T16:57:27Z",
+      "side": 1,
+      "message": "In the pull-replication plugin, they will be a source rather than a destination.",
+      "parentUuid": "713ced42_158b80d8",
+      "revId": "44f3f981fd90ffc7bea80d9ba7c5ea8f5802c2c6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "501f896d_cef75ef7",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationDestinations.java",
         "patchSetId": 5
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "654b0a08_fd6ca68c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationDestinations.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T16:57:27Z",
+      "side": 1,
+      "message": "Yes, they can be configured but not active because the configuration hasn\u0027t been reloaded.",
+      "parentUuid": "501f896d_cef75ef7",
+      "range": {
+        "startLine": 25,
+        "startChar": 31,
+        "endLine": 25,
+        "endChar": 37
+      },
+      "revId": "44f3f981fd90ffc7bea80d9ba7c5ea8f5802c2c6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d1a41863_2a2258b3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationDestinations.java",
         "patchSetId": 5
@@ -53,6 +95,30 @@
       "writtenOn": "2019-06-12T08:25:35Z",
       "side": 1,
       "message": "same question...",
+      "range": {
+        "startLine": 40,
+        "startChar": 13,
+        "endLine": 40,
+        "endChar": 29
+      },
+      "revId": "44f3f981fd90ffc7bea80d9ba7c5ea8f5802c2c6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5189a181_dd40c0bc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationDestinations.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T16:57:27Z",
+      "side": 1,
+      "message": "Same answer :-)",
+      "parentUuid": "d1a41863_2a2258b3",
       "range": {
         "startLine": 40,
         "startChar": 13,
