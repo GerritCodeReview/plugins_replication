@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cbdda218_f97fe685",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T17:20:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0380bd5a_a68ac1bf",
+      "range": {
+        "startLine": 9,
+        "startChar": 55,
+        "endLine": 9,
+        "endChar": 59
+      },
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "00778c49_6f9a697c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
         "patchSetId": 3
@@ -65,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "b3daaef1_8e595e94",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T17:20:50Z",
+      "side": 1,
+      "message": "Because you don\u0027t know up-front who is going to be the implementation of that listener and, if the implementer has a dependency on AutoReloadRunnable, then you\u0027ll have a circular dependency.\n\nThat is actually the case for the AutoReload dectorator ;-)",
+      "parentUuid": "a6fb3dde_052e9d80",
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "006afa7f_8b1cb1dc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 3
@@ -82,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "68801753_9a204f15",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T17:20:50Z",
+      "side": 1,
+      "message": "\u003e Isn\u0027t lastVersion always equal to the configVersion? When entering the run method for the first time the configVersion is set to config.getVersion() from the line 45.\n\nconfig.getVersion() get the version of the config from the filesystem, whilst configVersion is the version when the Runner was created or the last time the configuration was reloaded.\n\nPossibly config.getVersion() should be renamed config.getLatestVersion()?\n\n\u003e If the config changes (line 61) the configVersion also changes (line 62), so we can use just configVersion here.\n\u003e \n\u003e Further, why have configVersion variable at all when we can always use config.getVersion()?\n\nNope, we need to remember the version of when the config was loaded and check with the one on the filesystem.",
+      "parentUuid": "006afa7f_8b1cb1dc",
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9f9c4cb1_6e50f4dd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
         "patchSetId": 3
@@ -93,6 +153,30 @@
       "writtenOn": "2019-06-07T16:48:16Z",
       "side": 1,
       "message": "This is only triggered before the replication.config is about to be *re*loaded. It is not called the first time the configuration is loaded.\nI think the name should be more consistent to what the method does.\n\nSame applies to afterLoad",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 56
+      },
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7c3221c_f623f185",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T17:20:50Z",
+      "side": 1,
+      "message": "True, should be called beforeReload()",
+      "parentUuid": "9f9c4cb1_6e50f4dd",
       "range": {
         "startLine": 23,
         "startChar": 1,
@@ -145,6 +229,48 @@
     },
     {
       "key": {
+        "uuid": "90f237e8_c7dfa0ee",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T17:20:50Z",
+      "side": 1,
+      "message": "Yes, but for making this change as small as possible I avoided to put too much meat on the barbecue :-)\n\nIt can be addressed in a follow-up change in the series IMHO.",
+      "parentUuid": "5e000a0f_5dc0692a",
+      "range": {
+        "startLine": 35,
+        "startChar": 17,
+        "endLine": 35,
+        "endChar": 43
+      },
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "832c7ea0_ddf53aa4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T17:20:50Z",
+      "side": 1,
+      "message": "The idea was that \"before\" could potentially prevent the reload to happen, whilst the \"after\" can\u0027t do anything about it and is just informed of what happened.\n\nNot sure if I could implement the same logic with the onReload()",
+      "parentUuid": "82c42f4e_aa7ab0c3",
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e13e76e4_55b7486c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
         "patchSetId": 3
@@ -159,6 +285,24 @@
       "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "719b5c0f_f9d6c6eb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T17:20:50Z",
+      "side": 1,
+      "message": "True, however, I wanted to keep the existing logic for now: before this change, a touch of the replication config was causing the reload.\n\nI typically never mix refactoring with a change in functionality :-)",
+      "parentUuid": "e13e76e4_55b7486c",
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
