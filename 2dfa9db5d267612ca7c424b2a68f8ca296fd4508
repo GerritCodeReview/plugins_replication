@@ -46,6 +46,30 @@
       "revId": "2dfa9db5d267612ca7c424b2a68f8ca296fd4508",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1901122_0bb8294f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-12T19:15:53Z",
+      "side": 1,
+      "message": "I believe it is useful if you specify the reasons for this change in the commit message.",
+      "parentUuid": "9d7b1ddb_9d799b42",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 10
+      },
+      "revId": "2dfa9db5d267612ca7c424b2a68f8ca296fd4508",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
