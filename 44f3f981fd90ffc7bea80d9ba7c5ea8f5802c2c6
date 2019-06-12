@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "713ced42_158b80d8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-12T08:25:35Z",
+      "side": 1,
+      "message": "What is a replication end point if it is not a destination?",
+      "revId": "44f3f981fd90ffc7bea80d9ba7c5ea8f5802c2c6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "501f896d_cef75ef7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationDestinations.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-12T08:25:35Z",
+      "side": 1,
+      "message": "Can we have inactive destinations?",
+      "range": {
+        "startLine": 25,
+        "startChar": 31,
+        "endLine": 25,
+        "endChar": 37
+      },
+      "revId": "44f3f981fd90ffc7bea80d9ba7c5ea8f5802c2c6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1a41863_2a2258b3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationDestinations.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-12T08:25:35Z",
+      "side": 1,
+      "message": "same question...",
+      "range": {
+        "startLine": 40,
+        "startChar": 13,
+        "endLine": 40,
+        "endChar": 29
+      },
+      "revId": "44f3f981fd90ffc7bea80d9ba7c5ea8f5802c2c6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
