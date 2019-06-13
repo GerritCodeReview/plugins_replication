@@ -22,6 +22,30 @@
       "revId": "f1b750571ac3da98d6dc5c91747573595e3c341f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40cc23b2_abace4a3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-13T18:43:39Z",
+      "side": 1,
+      "message": "\u003e I think we have a race condition here and in general we have a race condition with\n\u003e the versioning (getVersion) of the replication.config. The replication.config file may\n\u003e get changed (by someone updating it in the file system) just between 61 and 62.\n\u003e In that case we would set the loadedConfigVersion to the new version but in the loadedConfig\n\u003e we would have the old version.\n\nTrue, that is an existing issue also in the current code:\nhttps://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java#103\n\nCan you raise an issue so that we can address it separately?\n\n\u003e In general, the content of the replication.config is not read at the moment when the ReplicationFileBasedConfig instance is created. Instead, the caller has to perform:\n\u003e \n\u003e   loadedConfig.getConfig().load()\n\nGood catch, let me fix that in the next PS.\n\n\u003e to trigger the loading of the content. In the code how it looks now this will happen\n\u003e in the onReload method... but we can consider this to just be a lucky accident here.\n\u003e \n\u003e Unless we can atomically load the content and set the loaded version, we will likely run into\n\u003e sporadic issues where the new configuration is not (re)loaded.\n\nYes, true, exactly as it happens today. Did you have that issue in production or in a test environment?",
+      "parentUuid": "9ef83788_43c170b0",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 53
+      },
+      "revId": "f1b750571ac3da98d6dc5c91747573595e3c341f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
