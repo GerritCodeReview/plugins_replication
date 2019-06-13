@@ -46,6 +46,30 @@
       "revId": "f1b750571ac3da98d6dc5c91747573595e3c341f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0002ec16_1349609a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-13T18:51:24Z",
+      "side": 1,
+      "message": "\u003e \u003e In general, the content of the replication.config is not read at the moment when the ReplicationFileBasedConfig instance is created. Instead, the caller has to perform:\n\u003e \u003e \n\u003e \u003e   loadedConfig.getConfig().load()\n\u003e \n\u003e Good catch, let me fix that in the next PS.\n\nI am confused, the ReplicationFileBasedConfig() calls allDestinations() that calls config.load(): am I missing anything?",
+      "parentUuid": "40cc23b2_abace4a3",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 53
+      },
+      "revId": "f1b750571ac3da98d6dc5c91747573595e3c341f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
