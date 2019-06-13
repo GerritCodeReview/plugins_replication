@@ -132,6 +132,24 @@
     },
     {
       "key": {
+        "uuid": "e6c7bcec_21710783",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-13T09:28:11Z",
+      "side": 1,
+      "message": "No more comments, I assume this is fine :-)",
+      "parentUuid": "b3daaef1_8e595e94",
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "006afa7f_8b1cb1dc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 3
@@ -179,6 +197,24 @@
       "side": 1,
       "message": "Then the naming of the variables needs to be improved. Maybe:\n\n  config \u003e loadedConfig\n  configVersion \u003e loadedConfigVersion\n  lastVersion \u003e pendingConfigVersion",
       "parentUuid": "68801753_9a204f15",
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08363a42_d444e3b6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-13T09:28:11Z",
+      "side": 1,
+      "message": "Yes, agreed. Let me apply your suggestions, thanks for the feedback.",
+      "parentUuid": "d107b465_f5f42b79",
       "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -351,6 +387,24 @@
       "side": 1,
       "message": "\u003e The idea was that \"before\" could potentially prevent the reload to happen, whilst the \"after\" can\u0027t do anything about it and is just informed of what happened.\n\nWhy then afterReload declares a thrown exception and beforeReload not?\n\n\u003e Not sure if I could implement the same logic with the onReload()\n\nLook at the (currently) only implementation of this interface which is the AutoReloadConfigDecorator and assume we change it to:\n\n  void onReload(oldCfg, newCfg) {\n    beforeReload(oldCfg);\n    afterReload(newCfg);\n  }\n\nIt would still do the same thing but this is still not the main point of this discussion.\n\nImagine we want a really smart reload which restarts only those destination which really changed! Assume we have 10 destinations and the replication.config is changed so that\nonly one destination is affected by the change. A smart implementation would keep the 9\nunaffected destinations running and only restart the changed one. However, to find out\nwhich destinations have changed we need both the old and the new config. This is possible\nwith the onReload method:\n\n  void onReload(oldCfg, newCfg) {\n    changedDestinations \u003d compare(oldCfg, newCfg);\n    restart(changedDestinations);\n  }\n\nWith the beforeReload/afterReload we cannot do that unless we do nothing in the beforeReload\nand just store the oldCfg, then wait for the afterReload call and only then proceed with\nthe restart logic.",
       "parentUuid": "832c7ea0_ddf53aa4",
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63141676_5b038ce5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-13T09:28:11Z",
+      "side": 1,
+      "message": "\u003e Imagine we want a really smart reload which restarts only those destination which really changed! Assume we have 10 destinations and the replication.config is changed so that\n\u003e only one destination is affected by the change. A smart implementation would keep the 9\n\u003e unaffected destinations running and only restart the changed one. However, to find out\n\u003e which destinations have changed we need both the old and the new config. This is possible\n\u003e with the onReload method:\n\u003e \n\u003e   void onReload(oldCfg, newCfg) {\n\u003e     changedDestinations \u003d compare(oldCfg, newCfg);\n\u003e     restart(changedDestinations);\n\u003e   }\n\n\nThat\u0027s a very good point. Actually, we have a huge number of destinations on GerritHub.io and having that logic would *minimize the disruption* of the replication.config reloads.\n\nI\u0027ll take your suggestion and change the interface.",
+      "parentUuid": "50647a40_b95d1004",
       "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
