@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ef83788_43c170b0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-13T13:11:27Z",
+      "side": 1,
+      "message": "I think we have a race condition here and in general we have a race condition with\nthe versioning (getVersion) of the replication.config. The replication.config file may\nget changed (by someone updating it in the file system) just between 61 and 62.\nIn that case we would set the loadedConfigVersion to the new version but in the loadedConfig\nwe would have the old version.\n\nIn general, the content of the replication.config is not read at the moment when the ReplicationFileBasedConfig instance is created. Instead, the caller has to perform:\n\n  loadedConfig.getConfig().load()\n\nto trigger the loading of the content. In the code how it looks now this will happen\nin the onReload method... but we can consider this to just be a lucky accident here.\n\nUnless we can atomically load the content and set the loaded version, we will likely run into\nsporadic issues where the new configuration is not (re)loaded.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 53
+      },
+      "revId": "f1b750571ac3da98d6dc5c91747573595e3c341f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
