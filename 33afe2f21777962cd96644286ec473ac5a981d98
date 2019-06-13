@@ -167,6 +167,24 @@
     },
     {
       "key": {
+        "uuid": "d107b465_f5f42b79",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-13T09:07:58Z",
+      "side": 1,
+      "message": "Then the naming of the variables needs to be improved. Maybe:\n\n  config \u003e loadedConfig\n  configVersion \u003e loadedConfigVersion\n  lastVersion \u003e pendingConfigVersion",
+      "parentUuid": "68801753_9a204f15",
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9f9c4cb1_6e50f4dd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
         "patchSetId": 3
@@ -315,6 +333,24 @@
       "side": 1,
       "message": "The idea was that \"before\" could potentially prevent the reload to happen, whilst the \"after\" can\u0027t do anything about it and is just informed of what happened.\n\nNot sure if I could implement the same logic with the onReload()",
       "parentUuid": "82c42f4e_aa7ab0c3",
+      "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50647a40_b95d1004",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-13T09:07:58Z",
+      "side": 1,
+      "message": "\u003e The idea was that \"before\" could potentially prevent the reload to happen, whilst the \"after\" can\u0027t do anything about it and is just informed of what happened.\n\nWhy then afterReload declares a thrown exception and beforeReload not?\n\n\u003e Not sure if I could implement the same logic with the onReload()\n\nLook at the (currently) only implementation of this interface which is the AutoReloadConfigDecorator and assume we change it to:\n\n  void onReload(oldCfg, newCfg) {\n    beforeReload(oldCfg);\n    afterReload(newCfg);\n  }\n\nIt would still do the same thing but this is still not the main point of this discussion.\n\nImagine we want a really smart reload which restarts only those destination which really changed! Assume we have 10 destinations and the replication.config is changed so that\nonly one destination is affected by the change. A smart implementation would keep the 9\nunaffected destinations running and only restart the changed one. However, to find out\nwhich destinations have changed we need both the old and the new config. This is possible\nwith the onReload method:\n\n  void onReload(oldCfg, newCfg) {\n    changedDestinations \u003d compare(oldCfg, newCfg);\n    restart(changedDestinations);\n  }\n\nWith the beforeReload/afterReload we cannot do that unless we do nothing in the beforeReload\nand just store the oldCfg, then wait for the afterReload call and only then proceed with\nthe restart logic.",
+      "parentUuid": "832c7ea0_ddf53aa4",
       "revId": "33afe2f21777962cd96644286ec473ac5a981d98",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
