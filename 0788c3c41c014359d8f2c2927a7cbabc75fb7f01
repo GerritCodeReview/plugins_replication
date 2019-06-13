@@ -179,6 +179,30 @@
     },
     {
       "key": {
+        "uuid": "6b086159_2b337be2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-13T09:16:24Z",
+      "side": 1,
+      "message": "\u003e I could move to a separate change, however, it won\u0027t be clear why it is needed without the code in this change.\n\nYou could mention it in the commit message ;-)\n\n\u003e \n\u003e With regards to EventBus, I believe is a good idea and it would deserve a follow-up change for that.\n\u003e It would be nice also to introduce in Gerrit and making it pluggable.\n\u003e \n\u003e It has already been discussed and agreed in the conferences that Gerrit needs an event-bus and should not necessarily be inside the Gerrit JVM and potentially externalizable.\n\nThese are really two completely different topics. Guava\u0027s EventBus [1] is not a general-purpose publish-subscribe system, nor is it intended for interprocess communication.  It is designed exclusively to replace traditional Java in-process event distribution using explicit registration.\n\nWith the Guava EventBus we would decouple event producer(s), the AutoReloadRunnable,\nfrom the listeners. The AutoReloadRunnable wouldn\u0027t need to be explicitly aware of the\ncollection of listeners. It would just publish an event like:\n\n  EventBus.post(new ReplicationConfigChanged(oldCfg, newCfg));\n\nThe other advantages of the EventBus over explicit listener registration are discussed in [1].\n\n[1] https://github.com/google/guava/wiki/EventBusExplained\n\n\u003e \n\u003e Once that interface is in place, it is definitely a good idea to reuse it here also.\n\u003e \n\u003e WDYT?",
+      "parentUuid": "16ad0aaf_bc09b703",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 96
+      },
+      "revId": "0788c3c41c014359d8f2c2927a7cbabc75fb7f01",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5db3a8c7_5eabe3b8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 5
