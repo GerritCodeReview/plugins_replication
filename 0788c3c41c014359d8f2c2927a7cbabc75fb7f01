@@ -227,6 +227,30 @@
     },
     {
       "key": {
+        "uuid": "c13316d5_6ab924e4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-13T13:58:49Z",
+      "side": 1,
+      "message": "\u003e \n\u003e EventBus is a pub/sub where the publisher is unaware of what the subscriber is doing. Here the publisher needs to abort the reload if one of the listeners thinks that the new configuration isn\u0027t good.\n\nHow would that work with the current design? You do not know what listeners will do\nas we notify them that the configuration has changed. If we have more than one listener\nthen some of them may reach on the reloaded configuration and already mutate some of\ntheir state or trigger destination restarts etc... and then the next listener may\ndecide that the configuration is invalid. Then we stop invoking the rest of the listeners?!\nSo we may end up with a subset of listeners looking at the new configuration and another\nsubset looking at the old configuration.\n\nI think that once we start notifying the listeners that the configuration has changed\nwe cannot rollback. Therefore, any validation of the new configuration needs to happen\nbefore we start notifying the listeners which may mutate the state.\n\nDo we really need the concept of the validation listeners? I don\u0027t know. Depends on what\nyou wanted to validate. Maybe it is enough to start with the hardcoded validation code \nin the AutoReloadRunnable and only extend the validation concept if it turns out to be really\nnecessary?\n\nAnyway, you are refactoring the existing code and you do not need to introduce concepts\nwhich we didn\u0027t have before (like validation listeners)?\n\n\u003e \n\u003e However, for Gerrit in general, EventBus is interesting indeed.\n\u003e \n\u003e \u003e \n\u003e \u003e The other advantages of the EventBus over explicit listener registration are discussed in [1].\n\u003e \u003e \n\u003e \u003e [1] https://github.com/google/guava/wiki/EventBusExplained\n\u003e \u003e \n\u003e \n\u003e I\u0027ve looked at the documentation and I believe it is not useful in this case. However, if you find a way to make the listener report back exceptions to the event generator, just let me know and I\u0027ll look into it :-)",
+      "parentUuid": "f9d96267_dc53b05a",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 96
+      },
+      "revId": "0788c3c41c014359d8f2c2927a7cbabc75fb7f01",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5db3a8c7_5eabe3b8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 5
