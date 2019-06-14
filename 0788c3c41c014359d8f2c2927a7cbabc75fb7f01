@@ -299,6 +299,30 @@
     },
     {
       "key": {
+        "uuid": "38099ca8_7d4ad46d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-14T11:53:22Z",
+      "side": 1,
+      "message": "\u003e This wouldn\u0027t resolve the issue. Just look at how the before was implemented just before\n\u003e we switched to onReload:\n\u003e \n\u003e https://gerrit-review.googlesource.com/c/plugins/replication/+/227181/8/src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java#182\n\u003e \n\u003e It stopped all destinations. If a next listener would reject the (new) configuration\n\u003e and we do not call afterLoad, the destinations would remain stopped. No more replication.\n\nRight, that needs to be implemented correctly as we want the replication to start again with the OLD configuration in that case.\n \n\u003e Further, the beforeLoad method only has access to the old configuration, so it cannot\n\u003e validate the new configuration.\n\nSure, that needs to be addressed.\n \n\u003e Considering what I wrote above this can lead to completely stall replication.\n\u003e before/after is too vague. When someone implements a (new) listener how does she\n\u003e know what to do in the before and what to do in the after method? \n\nThe before should be called \"validateNewConfiguration\" and then after can keep on being onReload().\n\nWe could use the EventBus for the onReload() because it\u0027s a fire-and-forget but not for the validateNewConfiguration.\n\n\u003e IMHO, we need to address the following issues:\n\u003e * configuration validation before performing any mutation\n\u003e * the concept of multiple listeners\n\nYes, those are two different concerns.\n\n\u003e \n\u003e The listeners should likely have a more explicit API than just before/after load.\n\u003e Maybe something like:\n\u003e \n\u003e   interface ReplicationConfigListener {\n\u003e     void validate(ReplicationFileBasedConfig oldCfg, ReplicationFileBasedConfig newCfg) throws InvalidConfigException;\n\u003e     void reload(ReplicationFileBasedConfig oldCfg, ReplicationFileBasedConfig newCfg);\n\u003e   }\n\nCool, that is similar to one I had in mind.\n\n\u003e I am undecided if the reload method should be part of this interface or not. We only\n\u003e need to know about listeners when we call the validate method so that we can handle the\n\u003e exception and cancel the reload. Afterward, we could just post an event and let the subscribers\n\u003e do whatever they want to adjust to the new configuration.\n\nWe should have two interfaces: ReplicationConfigValidator and ReplicationConfigListener.\nYou may want to implement only the listener and not the validator.\n \n\u003e Ideally this should be addressed in a separate change which only focuses on this\n\u003e already complex enough topic. This discussion here shows that we are discussing an\n\u003e important topic as a side story of this change.\n\nSure, let\u0027s add one specific follow-up change for that and I\u0027ll resolve this thread.",
+      "parentUuid": "e9f4bced_a994b846",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 96
+      },
+      "revId": "0788c3c41c014359d8f2c2927a7cbabc75fb7f01",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5db3a8c7_5eabe3b8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 5
