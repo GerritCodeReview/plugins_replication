@@ -94,6 +94,30 @@
       "revId": "f1b750571ac3da98d6dc5c91747573595e3c341f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ceb5379_3b7a3ca3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-14T11:48:02Z",
+      "side": 1,
+      "message": "\u003e Oh yes this is true but only until you look at the follow-up change which removes\n\u003e that call from the constructor ;-)\n\u003e A part of the confusion is that I obviously looked from the tip of the your change series.\n\nGotcha, I will look at the follow-up change and close the issue on this one.\n\n\u003e In general the issue of replication.config versioning remains... it shouldn\u0027t depend\n\u003e on an implicit assumption or even pure luck that the allDestinations() gets called from\n\u003e the ReplicationFileBasedConfig constructor.\n\u003e \n\u003e \n\u003e \u003e True, that is an existing issue also in the current code:\n\u003e \u003e https://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java#103\n\u003e \n\u003e This issue actually exists since [1]\n\u003e \n\u003e \u003e Can you raise an issue so that we can address it separately?\n\u003e \n\u003e Yes see [2]\n\u003e \n\u003e [1] https://gerrit-review.googlesource.com/c/plugins/replication/+/49820\n\u003e [2] https://crbug.com/gerrit/11025\n\nCool, will mark then this conversation as resolved and follow-up the issue [2] in a separate change, which is independent of this series and should be merged ASAP as it is a current bug in the version of the code.",
+      "parentUuid": "9655f727_d4de5078",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 53
+      },
+      "revId": "f1b750571ac3da98d6dc5c91747573595e3c341f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
