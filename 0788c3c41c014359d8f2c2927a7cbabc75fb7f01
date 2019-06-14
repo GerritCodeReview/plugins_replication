@@ -323,6 +323,30 @@
     },
     {
       "key": {
+        "uuid": "97d82fe1_0a210c92",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-14T13:06:11Z",
+      "side": 1,
+      "message": "\u003e The before should be called \"validateNewConfiguration\" and then after can keep on being onReload().\n\nYes.\n\n\u003e \n\u003e We could use the EventBus for the onReload() because it\u0027s a fire-and-forget but not for the validateNewConfiguration.\n\nYes.\n\nOnce the validation is done we just fire the event. At that point we anyway cannot\ndo anything useful if one of the listeners (or subscribers in the EventBus terminology)\nruns into an error.\n\n\u003e \n\u003e \u003e IMHO, we need to address the following issues:\n\u003e \u003e * configuration validation before performing any mutation\n\u003e \u003e * the concept of multiple listeners\n\u003e \n\u003e Yes, those are two different concerns.\n\u003e \n\u003e \u003e \n\u003e \u003e The listeners should likely have a more explicit API than just before/after load.\n\u003e \u003e Maybe something like:\n\u003e \u003e \n\u003e \u003e   interface ReplicationConfigListener {\n\u003e \u003e     void validate(ReplicationFileBasedConfig oldCfg, ReplicationFileBasedConfig newCfg) throws InvalidConfigException;\n\u003e \u003e     void reload(ReplicationFileBasedConfig oldCfg, ReplicationFileBasedConfig newCfg);\n\u003e \u003e   }\n\u003e \n\u003e Cool, that is similar to one I had in mind.\n\u003e \n\u003e \u003e I am undecided if the reload method should be part of this interface or not. We only\n\u003e \u003e need to know about listeners when we call the validate method so that we can handle the\n\u003e \u003e exception and cancel the reload. Afterward, we could just post an event and let the subscribers\n\u003e \u003e do whatever they want to adjust to the new configuration.\n\u003e \n\u003e We should have two interfaces: ReplicationConfigValidator and ReplicationConfigListener.\n\u003e You may want to implement only the listener and not the validator.\n\nWe do not need the second interface if we agreed on firing event using the EventBus.",
+      "parentUuid": "38099ca8_7d4ad46d",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 96
+      },
+      "revId": "0788c3c41c014359d8f2c2927a7cbabc75fb7f01",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5db3a8c7_5eabe3b8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 5
