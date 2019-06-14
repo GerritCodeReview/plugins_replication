@@ -275,6 +275,30 @@
     },
     {
       "key": {
+        "uuid": "e9f4bced_a994b846",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-14T09:25:20Z",
+      "side": 1,
+      "message": "\u003e \u003e How would that work with the current design? You do not know what listeners will do\n\u003e \u003e as we notify them that the configuration has changed. If we have more than one listener\n\u003e \u003e then some of them may reach on the reloaded configuration and already mutate some of\n\u003e \u003e their state or trigger destination restarts etc... and then the next listener may\n\u003e \u003e decide that the configuration is invalid. Then we stop invoking the rest of the listeners?!\n\u003e \u003e So we may end up with a subset of listeners looking at the new configuration and another\n\u003e \u003e subset looking at the old configuration.\n\u003e \n\u003e True, the only listener that actually can fail is the DestinationsCollection, but you are right, it is an issue at the moment.\n\u003e \n\u003e We need to go back to the two methods: before and after.\n\nThis wouldn\u0027t resolve the issue. Just look at how the before was implemented just before\nwe switched to onReload:\n\nhttps://gerrit-review.googlesource.com/c/plugins/replication/+/227181/8/src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java#182\n\nIt stopped all destinations. If a next listener would reject the (new) configuration\nand we do not call afterLoad, the destinations would remain stopped. No more replication.\n\nFurther, the beforeLoad method only has access to the old configuration, so it cannot\nvalidate the new configuration.\n\n\u003e If one of the listeners fails at the before step, nobody will get the after step.\n\nConsidering what I wrote above this can lead to completely stall replication.\nbefore/after is too vague. When someone implements a (new) listener how does she\nknow what to do in the before and what to do in the after method? \n\n\u003e \n\u003e Or do you see other way to solve the issue?\n\nIMHO, we need to address the following issues:\n* configuration validation before performing any mutation\n* the concept of multiple listeners\n\nThe listeners should likely have a more explicit API than just before/after load.\nMaybe something like:\n\n  interface ReplicationConfigListener {\n    void validate(ReplicationFileBasedConfig oldCfg, ReplicationFileBasedConfig newCfg) throws InvalidConfigException;\n    void reload(ReplicationFileBasedConfig oldCfg, ReplicationFileBasedConfig newCfg);\n  }\n\nI am undecided if the reload method should be part of this interface or not. We only\nneed to know about listeners when we call the validate method so that we can handle the\nexception and cancel the reload. Afterwards, we could just post an event and let the subscribers\ndo whatever they want to adjust to the new configuration.\n\nIdeally this should be addressed in a separate change which only focuses on this\nalready complex enough topic. This discussion here shows that we are discussing an\nimportant topic as a side story of this change.",
+      "parentUuid": "62405494_f3c549c4",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 96
+      },
+      "revId": "0788c3c41c014359d8f2c2927a7cbabc75fb7f01",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5db3a8c7_5eabe3b8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 5
