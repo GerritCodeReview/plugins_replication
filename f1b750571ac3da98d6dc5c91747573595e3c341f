@@ -70,6 +70,30 @@
       "revId": "f1b750571ac3da98d6dc5c91747573595e3c341f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9655f727_d4de5078",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-14T09:25:33Z",
+      "side": 1,
+      "message": "Oh yes this is true but only until you look at the follow-up change which removes\nthat call from the constructor ;-)\nA part of the confusion is that I obviously looked from the tip of the your change series.\n\nIn general the issue of replication.config versioning remains... it shouldn\u0027t depend\non an implicit assumption or even pure luck that the allDestinations() gets called from\nthe ReplicationFileBasedConfig constructor.\n\n\n\u003e True, that is an existing issue also in the current code:\n\u003e https://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java#103\n\nThis issue actually exists since [1]\n\n\u003e Can you raise an issue so that we can address it separately?\n\nYes see [2]\n\n[1] https://gerrit-review.googlesource.com/c/plugins/replication/+/49820\n[2] https://crbug.com/gerrit/11025",
+      "parentUuid": "0002ec16_1349609a",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 53
+      },
+      "revId": "f1b750571ac3da98d6dc5c91747573595e3c341f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
