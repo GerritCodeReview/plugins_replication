@@ -93,8 +93,8 @@ public class ReplicationQueue
   public void start() {
     if (!running) {
       config.startup(workQueue);
-      running = true;
       firePendingEvents();
+      running = true;
     }
   }
 
@@ -129,16 +129,23 @@ public class ReplicationQueue
 
   @Override
   public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
+    if (!running) {
+      ReplicationState state =
+          replicationStateFactory.create(new GitUpdateProcessing(dispatcher.get()));
+      stateLog.warn("Replication plugin did not finish startup before event", state);
+      return;
+    }
+
     onGitReferenceUpdated(event.getProjectName(), event.getRefName());
+  }
+
+  public boolean isRunning() {
+    return running;
   }
 
   private void onGitReferenceUpdated(String projectName, String refName) {
     ReplicationState state =
         replicationStateFactory.create(new GitUpdateProcessing(dispatcher.get()));
-    if (!running) {
-      stateLog.warn("Replication plugin did not finish startup before event", state);
-      return;
-    }
 
     Project.NameKey project = new Project.NameKey(projectName);
     for (Destination cfg : config.getDestinations(FilterType.ALL)) {
