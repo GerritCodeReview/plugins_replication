@@ -77,6 +77,10 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private void reloadIfNeeded() {
     if (isAutoReload()) {
       ReplicationQueue queue = replicationQueue.get();
+      if (!queue.isRunning()) {
+        return;
+      }
+
       long lastModified = getLastModified(currentConfig);
       try {
         if (lastModified > currentConfigTs && lastModified > lastFailedConfigTs) {
