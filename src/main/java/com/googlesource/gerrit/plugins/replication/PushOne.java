@@ -389,10 +389,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     } catch (PermissionBackendException | RuntimeException | Error e) {
       stateLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
     } finally {
+      pool.notifyFinished(this);
       if (git != null) {
         git.close();
       }
-      pool.notifyFinished(this);
     }
   }
 
