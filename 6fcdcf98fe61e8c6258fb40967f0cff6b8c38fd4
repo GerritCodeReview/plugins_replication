@@ -16,6 +16,24 @@
       "revId": "6fcdcf98fe61e8c6258fb40967f0cff6b8c38fd4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8424ff00_f5cc5ee6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-06-21T11:19:52Z",
+      "side": 1,
+      "message": "You can ask this question for almost any other finally block in the Gerrit code and plugin code ;-)\n\nWe have here graceful handling of a canceled task (the canceledWhileRunning variable).\nOtherwise, we do not interrupt push tasks using Thread.interrupt(). The only remaining\ncase when the finally block may not get executed is when the JVM crashes... but we cannot\ncode defensively against that event :-)",
+      "parentUuid": "b392f90d_031f4aaa",
+      "revId": "6fcdcf98fe61e8c6258fb40967f0cff6b8c38fd4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
