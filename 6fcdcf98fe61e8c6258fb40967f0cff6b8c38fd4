@@ -34,6 +34,24 @@
       "revId": "6fcdcf98fe61e8c6258fb40967f0cff6b8c38fd4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6762943_4e5d0ef5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-06-21T11:53:42Z",
+      "side": 1,
+      "message": "I believe this fix is good :-) we can\u0027t do more than that.",
+      "parentUuid": "8424ff00_f5cc5ee6",
+      "revId": "6fcdcf98fe61e8c6258fb40967f0cff6b8c38fd4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
