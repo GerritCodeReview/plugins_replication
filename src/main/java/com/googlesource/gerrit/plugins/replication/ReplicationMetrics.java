@@ -30,7 +30,7 @@ public class ReplicationMetrics {
 
   @Inject
   ReplicationMetrics(MetricMaker metricMaker) {
-    Field<String> DEST_FIELD = Field.ofString("destination");
+    Field<String> DEST_FIELD = Field.ofString().name("destination").build();
 
     executionTime =
         metricMaker.newTimer(
