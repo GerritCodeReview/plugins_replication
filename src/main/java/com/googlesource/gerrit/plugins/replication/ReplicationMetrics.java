@@ -14,11 +14,13 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.Field;
 import com.google.gerrit.metrics.Histogram1;
 import com.google.gerrit.metrics.MetricMaker;
 import com.google.gerrit.metrics.Timer1;
+import com.google.gerrit.server.logging.PluginMetadata;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -29,8 +31,15 @@ public class ReplicationMetrics {
   private final Histogram1<String> executionRetries;
 
   @Inject
-  ReplicationMetrics(MetricMaker metricMaker) {
-    Field<String> DEST_FIELD = Field.ofString("destination").build();
+  ReplicationMetrics(@PluginName String pluginName, MetricMaker metricMaker) {
+    Field<String> DEST_FIELD =
+        Field.ofString(
+                "destination",
+                (metadataBuilder, fieldValue) ->
+                    metadataBuilder
+                        .pluginName(pluginName)
+                        .addPluginMetadata(PluginMetadata.create("destination", fieldValue)))
+            .build();
 
     executionTime =
         metricMaker.newTimer(
