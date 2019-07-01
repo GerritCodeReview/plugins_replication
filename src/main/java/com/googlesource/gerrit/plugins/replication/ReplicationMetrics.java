@@ -63,7 +63,7 @@ public class ReplicationMetrics {
    * @param name the destination name.
    * @return the timer context.
    */
-  Timer1.Context start(String name) {
+  Timer1.Context<String> start(String name) {
     return executionTime.start(name);
   }
 
