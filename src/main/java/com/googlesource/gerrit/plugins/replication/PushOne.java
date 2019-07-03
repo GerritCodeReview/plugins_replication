@@ -301,7 +301,9 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     MDC.put(ID_MDC_KEY, IdGenerator.format(id));
     RunwayStatus status = pool.requestRunway(this);
     if (!status.isAllowed()) {
-      if (!status.isCanceled()) {
+      if (status.isCanceled()) {
+        repLog.info("PushOp for replication to {} was canceled and thus won't be rescheduled", uri);
+      } else {
         repLog.info(
             "Rescheduling replication to {} to avoid collision with the in-flight push [{}].",
             uri,
