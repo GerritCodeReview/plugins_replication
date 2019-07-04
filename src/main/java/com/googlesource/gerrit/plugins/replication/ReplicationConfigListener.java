@@ -22,10 +22,17 @@ public interface ReplicationConfigListener {
   /**
    * Invoked when replication.config is about to be reloaded.
    *
-   * @param oldConfig old replication config
-   * @param newConfig new replication config
+   * @param configurationChangeEvent an event representing a change of configuration
    * @throws ConfigInvalidException if the new configuration is not valid.
    */
-  void onReload(ReplicationFileBasedConfig oldConfig, ReplicationFileBasedConfig newConfig)
+  void onReload(ConfigurationChangeEvent configurationChangeEvent) throws ConfigInvalidException;
+
+  /**
+   * validate the new replication.config
+   *
+   * @param configurationChangeEvent an event representing a change of configuration
+   * @throws ConfigInvalidException if the new configuration is not valid.
+   */
+  void validateConfig(ConfigurationChangeEvent configurationChangeEvent)
       throws ConfigInvalidException;
 }
