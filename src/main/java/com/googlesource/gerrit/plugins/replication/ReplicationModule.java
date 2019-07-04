@@ -23,6 +23,7 @@ import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
+import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.events.EventTypes;
@@ -76,6 +77,8 @@ class ReplicationModule extends AbstractModule {
 
     bind(EventBus.class).in(Scopes.SINGLETON);
     bind(ReplicationDestinations.class).to(DestinationsCollection.class);
+    DynamicItem.itemOf(binder(), ReplicationConfigValidator.class);
+    DynamicItem.bind(binder(), ReplicationConfigValidator.class).to(DestinationsCollection.class);
 
     if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
       bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
