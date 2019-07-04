@@ -14,12 +14,14 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.eventbus.EventBus;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import java.nio.file.Path;
+import java.util.function.Supplier;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 
 public class AutoReloadRunnable implements Runnable {
@@ -31,6 +33,12 @@ public class AutoReloadRunnable implements Runnable {
   private String lastFailedConfigVersion;
   private SitePaths site;
   private Path pluginDataDir;
+  private Supplier<EventBus> onReloadEventBusSupplier =
+      () -> {
+        EventBus onReloadEventBus = new EventBus();
+        configListeners.forEach(onReloadEventBus::register);
+        return onReloadEventBus;
+      };
 
   @Inject
   public AutoReloadRunnable(
@@ -53,10 +61,16 @@ public class AutoReloadRunnable implements Runnable {
       if (!pendingConfigVersion.equals(loadedConfigVersion)
           && !pendingConfigVersion.equals(lastFailedConfigVersion)) {
         ReplicationFileBasedConfig newConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
-        fireOnReload(loadedConfig, newConfig);
+        final ConfigurationChangeEvent configurationChangeEvent =
+            ConfigurationChangeEvent.create(loadedConfig, newConfig);
+
+        fireValidations(configurationChangeEvent);
+
         loadedConfig = newConfig;
         loadedConfigVersion = newConfig.getVersion();
         lastFailedConfigVersion = "";
+
+        onReloadEventBusSupplier.get().post(configurationChangeEvent);
       }
     } catch (Exception e) {
       logger.atSevere().withCause(e).log(
@@ -65,11 +79,10 @@ public class AutoReloadRunnable implements Runnable {
     }
   }
 
-  private void fireOnReload(
-      ReplicationFileBasedConfig oldConfig, ReplicationFileBasedConfig newConfig)
+  private void fireValidations(ConfigurationChangeEvent configurationChangeEvent)
       throws ConfigInvalidException {
     for (ReplicationConfigListener listener : configListeners) {
-      listener.onReload(oldConfig, newConfig);
+      listener.validateConfig(configurationChangeEvent);
     }
   }
 }
