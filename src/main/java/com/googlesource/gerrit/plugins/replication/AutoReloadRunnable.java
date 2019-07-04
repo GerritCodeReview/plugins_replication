@@ -17,10 +17,12 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.eventbus.EventBus;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginData;
+import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.nio.file.Path;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 
 public class AutoReloadRunnable implements Runnable {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
@@ -29,6 +31,7 @@ public class AutoReloadRunnable implements Runnable {
   private final Path pluginDataDir;
   private final EventBus eventBus;
   private final Provider<ReplicationQueue> replicationQueue;
+  private final DynamicSet<ReplicationConfigValidator> configValidators;
 
   private ReplicationFileBasedConfig loadedConfig;
   private String loadedConfigVersion;
@@ -36,6 +39,7 @@ public class AutoReloadRunnable implements Runnable {
 
   @Inject
   public AutoReloadRunnable(
+      DynamicSet<ReplicationConfigValidator> configValidators,
       ReplicationFileBasedConfig config,
       SitePaths site,
       @PluginData Path pluginDataDir,
@@ -48,6 +52,7 @@ public class AutoReloadRunnable implements Runnable {
     this.pluginDataDir = pluginDataDir;
     this.eventBus = eventBus;
     this.replicationQueue = replicationQueue;
+    this.configValidators = configValidators;
   }
 
   @Override
@@ -67,14 +72,23 @@ public class AutoReloadRunnable implements Runnable {
   synchronized void reload() {
     String pendingConfigVersion = loadedConfig.getVersion();
     try {
-      loadedConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
-      loadedConfigVersion = loadedConfig.getVersion();
+      ReplicationFileBasedConfig newConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
+      invokeValidators(newConfig);
+      loadedConfig = newConfig;
+      loadedConfigVersion = newConfig.getVersion();
       lastFailedConfigVersion = "";
       eventBus.post(loadedConfig);
     } catch (Exception e) {
       logger.atSevere().withCause(e).log(
           "Cannot reload replication configuration: keeping existing settings");
       lastFailedConfigVersion = pendingConfigVersion;
+    }
+  }
+
+  private void invokeValidators(ReplicationFileBasedConfig newConfig)
+      throws ConfigInvalidException {
+    for (ReplicationConfigValidator validator : configValidators) {
+      validator.validateConfig(newConfig);
     }
   }
 }
