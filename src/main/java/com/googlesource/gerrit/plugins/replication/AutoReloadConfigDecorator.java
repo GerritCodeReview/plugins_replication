@@ -13,6 +13,7 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.eventbus.Subscribe;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.git.WorkQueue;
@@ -84,7 +85,11 @@ public class AutoReloadConfigDecorator
   }
 
   @Override
-  public void onReload(ReplicationFileBasedConfig oldConfig, ReplicationFileBasedConfig newConfig) {
-    replicationConfig = newConfig;
+  @Subscribe
+  public void onReload(ConfigurationChangeEvent configurationChangeEvent) {
+    replicationConfig = configurationChangeEvent.newConfig();
   }
+
+  @Override
+  public void validateConfig(ConfigurationChangeEvent configurationChangeEvent) {}
 }

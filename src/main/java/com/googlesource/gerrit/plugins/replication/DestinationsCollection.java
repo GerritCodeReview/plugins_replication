@@ -27,6 +27,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
+import com.google.common.eventbus.Subscribe;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.git.WorkQueue;
@@ -67,7 +68,7 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
     this.destinationFactory = destinationFactory;
     this.replicationQueue = replicationQueue;
     this.replicationConfig = config;
-    this.destinations = allDestinations(destinationFactory);
+    this.destinations = allDestinations(destinationFactory, replicationConfig);
   }
 
   @Override
@@ -178,52 +179,57 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
   }
 
   @Override
-  public void onReload(ReplicationFileBasedConfig oldConfig, ReplicationFileBasedConfig newConfig)
+  @Subscribe
+  public void onReload(ConfigurationChangeEvent configurationChangeEvent)
       throws ConfigInvalidException {
     try {
       replicationQueue.get().stop();
-      replicationConfig = newConfig;
-      destinations = allDestinations(destinationFactory);
+      replicationConfig = configurationChangeEvent.newConfig();
+      destinations = allDestinations(destinationFactory, replicationConfig);
       logger.atInfo().log("Configuration reloaded: %d destinations", getAll(FilterType.ALL).size());
     } finally {
       replicationQueue.get().start();
     }
   }
 
-  private List<Destination> allDestinations(Destination.Factory destinationFactory)
+  @Override
+  public void validateConfig(ConfigurationChangeEvent configurationChangeEvent)
       throws ConfigInvalidException {
-    if (!replicationConfig.getConfig().getFile().exists()) {
+    allDestinations(destinationFactory, configurationChangeEvent.newConfig());
+  }
+
+  private List<Destination> allDestinations(
+      Destination.Factory destinationFactory, ReplicationFileBasedConfig configuration)
+      throws ConfigInvalidException {
+    if (!configuration.getConfig().getFile().exists()) {
       logger.atWarning().log(
-          "Config file %s does not exist; not replicating",
-          replicationConfig.getConfig().getFile());
+          "Config file %s does not exist; not replicating", configuration.getConfig().getFile());
       return Collections.emptyList();
     }
-    if (replicationConfig.getConfig().getFile().length() == 0) {
+    if (configuration.getConfig().getFile().length() == 0) {
       logger.atInfo().log(
-          "Config file %s is empty; not replicating", replicationConfig.getConfig().getFile());
+          "Config file %s is empty; not replicating", configuration.getConfig().getFile());
       return Collections.emptyList();
     }
 
     try {
-      replicationConfig.getConfig().load();
+      configuration.getConfig().load();
     } catch (ConfigInvalidException e) {
       throw new ConfigInvalidException(
           String.format(
-              "Config file %s is invalid: %s",
-              replicationConfig.getConfig().getFile(), e.getMessage()),
+              "Config file %s is invalid: %s", configuration.getConfig().getFile(), e.getMessage()),
           e);
     } catch (IOException e) {
       throw new ConfigInvalidException(
-          String.format(
-              "Cannot read %s: %s", replicationConfig.getConfig().getFile(), e.getMessage()),
+          String.format("Cannot read %s: %s", configuration.getConfig().getFile(), e.getMessage()),
           e);
     }
 
     boolean defaultForceUpdate =
-        replicationConfig.getConfig().getBoolean("gerrit", "defaultForceUpdate", false);
+        configuration.getConfig().getBoolean("gerrit", "defaultForceUpdate", false);
 
     ImmutableList.Builder<Destination> dest = ImmutableList.builder();
-    for (RemoteConfig c : allRemotes(replicationConfig.getConfig())) {
+    for (RemoteConfig c : allRemotes(configuration.getConfig())) {
       if (c.getURIs().isEmpty()) {
         continue;
       }
@@ -243,7 +249,7 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
       }
 
       Destination destination =
-          destinationFactory.create(new DestinationConfiguration(c, replicationConfig.getConfig()));
+          destinationFactory.create(new DestinationConfiguration(c, configuration.getConfig()));
 
       if (!destination.isSingleProjectMatch()) {
         for (URIish u : c.getURIs()) {
@@ -251,7 +257,7 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
             throw new ConfigInvalidException(
                 String.format(
                     "remote.%s.url \"%s\" lacks ${name} placeholder in %s",
-                    c.getName(), u, replicationConfig.getConfig().getFile()));
+                    c.getName(), u, configuration.getConfig().getFile()));
           }
         }
       }
