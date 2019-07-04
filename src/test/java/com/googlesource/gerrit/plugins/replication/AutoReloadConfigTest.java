@@ -23,6 +23,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 
 import com.google.common.eventbus.EventBus;
+import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.util.Providers;
@@ -52,6 +53,7 @@ public class AutoReloadConfigTest {
   private Path pluginDataPath;
   private Destination destinationMock;
   private ReplicationFileBasedConfig replicationFileBasedConfig;
+  private DynamicSet<ReplicationConfigValidator> configValidators;
   private FakeExecutorService executorService = new FakeExecutorService();
   private EventBus eventBus = new EventBus();
 
@@ -152,6 +154,7 @@ public class AutoReloadConfigTest {
   public void setup() throws IOException {
     pluginDataPath = createTempPath("data");
     sitePaths = new SitePaths(createTempPath("site"));
+    configValidators = new DynamicSet<>();
 
     setupMocks();
 
@@ -231,7 +234,8 @@ public class AutoReloadConfigTest {
 
   private AutoReloadConfigDecorator newAutoReloadConfig() {
     AutoReloadRunnable autoReloadRunnable =
-        new AutoReloadRunnable(replicationFileBasedConfig, sitePaths, pluginDataPath, eventBus);
+        new AutoReloadRunnable(
+            configValidators, replicationFileBasedConfig, sitePaths, pluginDataPath, eventBus);
     AutoReloadConfigDecorator configDecorator =
         new AutoReloadConfigDecorator(
             "replication", workQueueMock, replicationFileBasedConfig, autoReloadRunnable, eventBus);
