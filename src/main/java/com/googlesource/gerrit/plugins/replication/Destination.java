@@ -607,21 +607,7 @@ public class Destination {
   }
 
   boolean isSingleProjectMatch() {
-    List<String> projects = config.getProjects();
-    boolean ret = (projects.size() == 1);
-    if (ret) {
-      String projectMatch = projects.get(0);
-      if (ReplicationFilter.getPatternType(projectMatch)
-          != ReplicationFilter.PatternType.EXACT_MATCH) {
-        // projectMatch is either regular expression, or wild-card.
-        //
-        // Even though they might refer to a single project now, they need not
-        // after new projects have been created. Hence, we do not treat them as
-        // matching a single project.
-        ret = false;
-      }
-    }
-    return ret;
+    return config.isSingleProjectMatch();
   }
 
   boolean wouldPushRef(String ref) {
@@ -666,7 +652,7 @@ public class Destination {
         } else if (!remoteNameStyle.equals("slash")) {
           repLog.debug("Unknown remoteNameStyle: {}, falling back to slash", remoteNameStyle);
         }
-        String replacedPath = replaceName(uri.getPath(), name, isSingleProjectMatch());
+        String replacedPath = replaceName(uri.getPath(), name, config.isSingleProjectMatch());
         if (replacedPath != null) {
           uri = uri.setPath(replacedPath);
           r.add(uri);

@@ -21,6 +21,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.junit.Before;
 import org.junit.Test;
@@ -97,9 +98,10 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     assertThat(destinationsCollections.getAll(FilterType.ALL)).isEqualTo(destinations);
   }
 
-  private AutoReloadConfigDecorator newAutoReloadConfig() {
+  private AutoReloadConfigDecorator newAutoReloadConfig() throws ConfigInvalidException {
     AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
+            newDestinationsCollections(replicationFileBasedConfig),
             replicationFileBasedConfig,
             sitePaths,
             pluginDataPath,
