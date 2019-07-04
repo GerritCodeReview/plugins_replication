@@ -26,7 +26,8 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 @Singleton
-public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleListener {
+public class AutoReloadConfigDecorator
+    implements ReplicationConfig, ReplicationConfigValidator, LifecycleListener {
   private static final long RELOAD_DELAY = 120;
   private static final long RELOAD_INTERVAL = 60;
 
@@ -90,4 +91,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleLi
   public void onReload(ReplicationFileBasedConfig newConfig) {
     replicationConfig = newConfig;
   }
+
+  @Override
+  public void validateConfig(ConfigurationChangeEvent configurationChangeEvent) {}
 }
