@@ -27,6 +27,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
+import com.google.common.eventbus.Subscribe;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.git.WorkQueue;
@@ -67,7 +68,7 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
     this.destinationFactory = destinationFactory;
     this.replicationQueue = replicationQueue;
     this.replicationConfig = config;
-    this.destinations = allDestinations(destinationFactory);
+    this.destinations = allDestinations(destinationFactory, replicationConfig);
   }
 
   @Override
@@ -178,19 +179,27 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
   }
 
   @Override
-  public void onReload(ReplicationFileBasedConfig oldConfig, ReplicationFileBasedConfig newConfig)
+  @Subscribe
+  public void reload(ConfigurationChangeEvent configurationChangeEvent)
       throws ConfigInvalidException {
     try {
       replicationQueue.get().stop();
-      replicationConfig = newConfig;
-      destinations = allDestinations(destinationFactory);
+      replicationConfig = configurationChangeEvent.newConfig;
+      destinations = allDestinations(destinationFactory, replicationConfig);
       logger.atInfo().log("Configuration reloaded: %d destinations", getAll(FilterType.ALL).size());
     } finally {
       replicationQueue.get().start();
     }
   }
 
-  private List<Destination> allDestinations(Destination.Factory destinationFactory)
+  @Override
+  public void validateNewConfig(ConfigurationChangeEvent configurationChangeEvent)
+      throws ConfigInvalidException {
+    allDestinations(destinationFactory, configurationChangeEvent.newConfig);
+  }
+
+  private List<Destination> allDestinations(
+      Destination.Factory destinationFactory, ReplicationFileBasedConfig replicationConfig)
       throws ConfigInvalidException {
     if (!replicationConfig.getConfig().getFile().exists()) {
       logger.atWarning().log(

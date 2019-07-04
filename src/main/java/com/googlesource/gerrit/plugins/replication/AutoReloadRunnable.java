@@ -19,6 +19,7 @@ import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import java.nio.file.Path;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 
@@ -28,6 +29,7 @@ public class AutoReloadRunnable implements Runnable {
   private DynamicSet<ReplicationConfigListener> configListeners;
   private ReplicationFileBasedConfig loadedConfig;
   private String loadedConfigVersion;
+  private Provider<EventBusConfigurationChange> eventBusConfigurationChangeProvider;
   private String lastFailedConfigVersion;
   private SitePaths site;
   private Path pluginDataDir;
@@ -37,10 +39,12 @@ public class AutoReloadRunnable implements Runnable {
       DynamicSet<ReplicationConfigListener> configListeners,
       ReplicationFileBasedConfig config,
       SitePaths site,
+      Provider<EventBusConfigurationChange> eventBusConfigurationChangeProvider,
       @PluginData Path pluginDataDir) {
     this.configListeners = configListeners;
     this.loadedConfig = config;
     this.loadedConfigVersion = config.getVersion();
+    this.eventBusConfigurationChangeProvider = eventBusConfigurationChangeProvider;
     this.lastFailedConfigVersion = "";
     this.site = site;
     this.pluginDataDir = pluginDataDir;
@@ -53,7 +57,12 @@ public class AutoReloadRunnable implements Runnable {
       if (!pendingConfigVersion.equals(loadedConfigVersion)
           && !pendingConfigVersion.equals(lastFailedConfigVersion)) {
         ReplicationFileBasedConfig newConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
-        fireOnReload(loadedConfig, newConfig);
+        final ConfigurationChangeEvent configurationChangeEvent =
+            new ConfigurationChangeEvent(loadedConfig, newConfig);
+
+        fireValidations(configurationChangeEvent);
+        eventBusConfigurationChangeProvider.get().fireAndForget(configurationChangeEvent);
+
         loadedConfig = newConfig;
         loadedConfigVersion = newConfig.getVersion();
         lastFailedConfigVersion = "";
@@ -65,11 +74,10 @@ public class AutoReloadRunnable implements Runnable {
     }
   }
 
-  private void fireOnReload(
-      ReplicationFileBasedConfig oldConfig, ReplicationFileBasedConfig newConfig)
+  private void fireValidations(ConfigurationChangeEvent configurationChangeEvent)
       throws ConfigInvalidException {
     for (ReplicationConfigListener listener : configListeners) {
-      listener.onReload(oldConfig, newConfig);
+      listener.validateNewConfig(configurationChangeEvent);
     }
   }
 }
