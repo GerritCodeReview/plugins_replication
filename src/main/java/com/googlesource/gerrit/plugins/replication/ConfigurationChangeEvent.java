@@ -14,18 +14,17 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import org.eclipse.jgit.errors.ConfigInvalidException;
+import com.google.auto.value.AutoValue;
 
-/** Listener of the configuration events. */
-public interface ReplicationConfigListener {
+@AutoValue
+abstract class ConfigurationChangeEvent {
 
-  /**
-   * Invoked when replication.config is about to be reloaded.
-   *
-   * @param oldConfig old replication config
-   * @param newConfig new replication config
-   * @throws ConfigInvalidException if the new configuration is not valid.
-   */
-  void onReload(ReplicationFileBasedConfig oldConfig, ReplicationFileBasedConfig newConfig)
-      throws ConfigInvalidException;
+  public abstract ReplicationFileBasedConfig oldConfig();
+
+  public abstract ReplicationFileBasedConfig newConfig();
+
+  static ConfigurationChangeEvent create(
+      ReplicationFileBasedConfig oldConfig, ReplicationFileBasedConfig newConfig) {
+    return new AutoValue_ConfigurationChangeEvent(oldConfig, newConfig);
+  }
 }

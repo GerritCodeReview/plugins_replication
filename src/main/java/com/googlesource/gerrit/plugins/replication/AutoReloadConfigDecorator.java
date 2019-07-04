@@ -13,6 +13,7 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.eventbus.Subscribe;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.git.WorkQueue;
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 @Singleton
 public class AutoReloadConfigDecorator
-    implements ReplicationConfig, ReplicationConfigListener, LifecycleListener {
+    implements ReplicationConfig, ReplicationConfigValidator, LifecycleListener {
   private static final long RELOAD_DELAY = 120;
   private static final long RELOAD_INTERVAL = 60;
 
@@ -83,8 +84,11 @@ public class AutoReloadConfigDecorator
     return replicationConfig.getVersion();
   }
 
-  @Override
-  public void onReload(ReplicationFileBasedConfig oldConfig, ReplicationFileBasedConfig newConfig) {
-    replicationConfig = newConfig;
+  @Subscribe
+  public void onReload(ConfigurationChangeEvent configurationChangeEvent) {
+    replicationConfig = configurationChangeEvent.newConfig();
   }
+
+  @Override
+  public void validateConfig(ConfigurationChangeEvent configurationChangeEvent) {}
 }
