@@ -14,27 +14,30 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.eventbus.EventBus;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import java.nio.file.Path;
+import java.util.function.Supplier;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 
 public class AutoReloadRunnable implements Runnable {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  private DynamicSet<ReplicationConfigListener> configListeners;
+  private DynamicSet<ReplicationConfigValidator> configListeners;
   private ReplicationFileBasedConfig loadedConfig;
   private String loadedConfigVersion;
   private String lastFailedConfigVersion;
   private SitePaths site;
   private Path pluginDataDir;
+  private Supplier<EventBus> onReloadEventBusSupplier;
 
   @Inject
   public AutoReloadRunnable(
-      DynamicSet<ReplicationConfigListener> configListeners,
+      DynamicSet<ReplicationConfigValidator> configListeners,
       ReplicationFileBasedConfig config,
       SitePaths site,
       @PluginData Path pluginDataDir) {
@@ -44,6 +47,12 @@ public class AutoReloadRunnable implements Runnable {
     this.lastFailedConfigVersion = "";
     this.site = site;
     this.pluginDataDir = pluginDataDir;
+    this.onReloadEventBusSupplier =
+        () -> {
+          EventBus onReloadEventBus = new EventBus();
+          configListeners.forEach(onReloadEventBus::register);
+          return onReloadEventBus;
+        };
   }
 
   @Override
@@ -53,10 +62,16 @@ public class AutoReloadRunnable implements Runnable {
       if (!pendingConfigVersion.equals(loadedConfigVersion)
           && !pendingConfigVersion.equals(lastFailedConfigVersion)) {
         ReplicationFileBasedConfig newConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
+
+        final ConfigurationChangeEvent configurationChangeEvent =
+            ConfigurationChangeEvent.create(loadedConfig, newConfig);
+
+        fireValidations(configurationChangeEvent);
+
         loadedConfig = newConfig;
         loadedConfigVersion = newConfig.getVersion();
         lastFailedConfigVersion = "";
-        fireOnReload(newConfig);
+        onReloadEventBusSupplier.get().post(configurationChangeEvent);
       }
     } catch (Exception e) {
       logger.atSevere().withCause(e).log(
@@ -65,9 +80,10 @@ public class AutoReloadRunnable implements Runnable {
     }
   }
 
-  private void fireOnReload(ReplicationFileBasedConfig newConfig) throws ConfigInvalidException {
-    for (ReplicationConfigListener listener : configListeners) {
-      listener.onReload(newConfig);
+  private void fireValidations(ConfigurationChangeEvent configurationChangeEvent)
+      throws ConfigInvalidException {
+    for (ReplicationConfigValidator listener : configListeners) {
+      listener.validateConfig(configurationChangeEvent);
     }
   }
 }
