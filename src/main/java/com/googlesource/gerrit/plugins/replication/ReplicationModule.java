@@ -70,5 +70,7 @@ class ReplicationModule extends AbstractModule {
     bind(SshSessionFactory.class).toProvider(ReplicationSshSessionFactoryProvider.class);
 
     bind(AdminApiFactory.class);
+
+    bind(TransportFactory.class).to(TransportFactoryImpl.class).in(Scopes.SINGLETON);
   }
 }
