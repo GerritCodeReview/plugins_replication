@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a14c477f_bfec400a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T21:40:06Z",
+      "side": 1,
+      "message": "True, but actually it was explicitly requested by Saša during the review process. Because @Tony\u0027s change address *that* comment using the Guava EventBus, I believe we could, for this change, get rid of the oldConfig parameter.",
+      "parentUuid": "855f489a_5a7f1603",
+      "range": {
+        "startLine": 118,
+        "startChar": 23,
+        "endLine": 118,
+        "endChar": 59
+      },
+      "revId": "f1b750571ac3da98d6dc5c91747573595e3c341f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "be7289de_659c0d5e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
         "patchSetId": 10
@@ -45,6 +69,30 @@
       "revId": "f1b750571ac3da98d6dc5c91747573595e3c341f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "291194c6_557c20d2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T21:40:06Z",
+      "side": 1,
+      "message": "the \u0027getAll\u0027 method existed already and isn\u0027t part of the scope of this change.\nI agree that the method name isn\u0027t super-readable, however, we should not \"fix all the problems we see\" in a single change, otherwise, it would become too big and risky IMHO.",
+      "parentUuid": "be7289de_659c0d5e",
+      "range": {
+        "startLine": 123,
+        "startChar": 63,
+        "endLine": 123,
+        "endChar": 85
+      },
+      "revId": "f1b750571ac3da98d6dc5c91747573595e3c341f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
