@@ -342,6 +342,24 @@
     },
     {
       "key": {
+        "uuid": "1436a636_3f5b0bf5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventBusConfigurationChange.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-05T13:34:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42dbda55_5b039eb4",
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8933c75b_e593b62d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
         "patchSetId": 1
