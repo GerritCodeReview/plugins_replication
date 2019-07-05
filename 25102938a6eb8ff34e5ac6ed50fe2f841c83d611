@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "991c59dc_3e6cb671",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-05T13:23:29Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c8914520_6dd510ae",
+      "range": {
+        "startLine": 89,
+        "startChar": 14,
+        "endLine": 89,
+        "endChar": 20
+      },
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "141848d2_306740d2",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "2697425d_766ab65d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-05T13:23:29Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "141848d2_306740d2",
+      "range": {
+        "startLine": 94,
+        "startChar": 14,
+        "endLine": 94,
+        "endChar": 31
+      },
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c30b539_52175a18",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 1
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "a6134561_80899d17",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-05T13:23:29Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4c30b539_52175a18",
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29370955_018e4867",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 1
@@ -76,6 +142,30 @@
       "writtenOn": "2019-07-05T09:27:39Z",
       "side": 1,
       "message": "boolean",
+      "range": {
+        "startLine": 77,
+        "startChar": 10,
+        "endLine": 77,
+        "endChar": 14
+      },
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edecff88_e0106ae9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-05T13:23:29Z",
+      "side": 1,
+      "message": "The result of the overall validation is signalled by the absence of side effect exceptions,\nwhy do we need a boolean?",
+      "parentUuid": "29370955_018e4867",
       "range": {
         "startLine": 77,
         "startChar": 10,
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "a8d99ba5_a6b5661d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-05T13:23:29Z",
+      "side": 1,
+      "message": "This is short-circuiting already: first validation that fails will throw an exception, which will interrupt the loop",
+      "parentUuid": "6f9d4c83_ebb1f434",
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ab369d88_b7656cf5",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigurationChangeEvent.java",
         "patchSetId": 1
@@ -125,6 +233,30 @@
       "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87606759_a8a32668",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigurationChangeEvent.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-05T13:23:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab369d88_b7656cf5",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 37
+      },
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -151,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "de4bd81b_34f15913",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-05T13:23:29Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ac2dcd07_8d02f51f",
+      "range": {
+        "startLine": 202,
+        "startChar": 73,
+        "endLine": 202,
+        "endChar": 90
+      },
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ffb0301_96663ff4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventBusConfigurationChange.java",
         "patchSetId": 1
@@ -168,6 +324,24 @@
     },
     {
       "key": {
+        "uuid": "42dbda55_5b039eb4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventBusConfigurationChange.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-05T13:23:29Z",
+      "side": 1,
+      "message": "I created this class to avoid registering the ReplicationConfigListeners to the evenBus during the construction of AutoreloadRunnable, as this creates a circular dependency between AutoReloadConfigDecorator and ReplicationConfigListener:\n\n1) Found a circular dependency involving com.googlesource.gerrit.plugins.replication.ReplicationConfigListener, and circular dependencies are disabled.\n  at com.googlesource.gerrit.plugins.replication.AutoReloadConfigDecorator.class(AutoReloadConfigDecorator.java:44)\n\nI can achieve the same result by instantiating a supplier, so I will do that and remove the EventBusConfigurationChange altogether",
+      "parentUuid": "8ffb0301_96663ff4",
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8933c75b_e593b62d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
         "patchSetId": 1
@@ -179,6 +353,24 @@
       "writtenOn": "2019-07-05T09:27:39Z",
       "side": 1,
       "message": "There are actually two separate interfaces:\n- ReplicationConfigListener, which is invoked via EventBus\n- ReplicationConfigValidator\n\nI would keep them separate instead of having a unique one with two meanings. WDYT?",
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32e61383_22fde4f0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-05T13:23:29Z",
+      "side": 1,
+      "message": "The reason I kept these together is that you and Saša seem to have agreed for this approach after a lengthy discussion:\nhttps://gerrit-review.googlesource.com/c/plugins/replication/+/227181/5/src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java#79\n\nQuoting: `We do not need the second interface if we agreed on firing event using the EventBus.`\n\nHave I misinterpreted your decision?",
+      "parentUuid": "8933c75b_e593b62d",
       "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -205,6 +397,30 @@
       "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afec7d8e_e91e43b9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-05T13:23:29Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b9aefcea_55005f00",
+      "range": {
+        "startLine": 28,
+        "startChar": 7,
+        "endLine": 28,
+        "endChar": 13
+      },
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
