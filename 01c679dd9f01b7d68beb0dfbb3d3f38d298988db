@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "144a4ea3_899e1297",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-05T22:27:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5fd0e02e_42908836",
+      "range": {
+        "startLine": 20,
+        "startChar": 17,
+        "endLine": 20,
+        "endChar": 42
+      },
+      "revId": "01c679dd9f01b7d68beb0dfbb3d3f38d298988db",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38fd5df2_607715cc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
         "patchSetId": 7
@@ -68,6 +92,30 @@
       "revId": "01c679dd9f01b7d68beb0dfbb3d3f38d298988db",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "280fddbc_b584a078",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-05T22:27:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "38fd5df2_607715cc",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 97
+      },
+      "revId": "01c679dd9f01b7d68beb0dfbb3d3f38d298988db",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
