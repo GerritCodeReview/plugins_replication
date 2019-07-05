@@ -22,6 +22,7 @@ import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Sets;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.metrics.Timer1;
@@ -112,6 +113,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final long createdAt;
   private final ReplicationMetrics metrics;
   private final ProjectCache projectCache;
+  private final DynamicItem<ReplicationPushFilter> replicationPushFilter;
   private final AtomicBoolean canceledWhileRunning;
 
   @Inject
@@ -127,6 +129,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       ReplicationStateListeners sl,
       ReplicationMetrics m,
       ProjectCache pc,
+      DynamicItem<ReplicationPushFilter> replicationPushFilter,
       @Assisted Project.NameKey d,
       @Assisted URIish u) {
     gitManager = grm;
@@ -145,6 +148,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     createdAt = System.nanoTime();
     metrics = m;
     projectCache = pc;
+    this.replicationPushFilter = replicationPushFilter;
     canceledWhileRunning = new AtomicBoolean(false);
     maxRetries = p.getMaxRetries();
   }
@@ -495,7 +499,15 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       local = forProject.filter(local, git, RefFilterOptions.builder().setFilterMeta(true).build());
     }
 
-    return pushAllRefs ? doPushAll(tn, local) : doPushDelta(local);
+    List<RemoteRefUpdate> remoteUpdatesList =
+        pushAllRefs ? doPushAll(tn, local) : doPushDelta(local);
+
+    ReplicationPushFilter pushFilter = replicationPushFilter.get();
+    if (pushFilter == null) {
+      return remoteUpdatesList;
+    }
+
+    return pushFilter.filter(projectName.get(), remoteUpdatesList);
   }
 
   private List<RemoteRefUpdate> doPushAll(Transport tn, Map<String, Ref> local)
