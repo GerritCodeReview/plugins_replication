@@ -1,0 +1,210 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8914520_6dd510ae",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T09:27:39Z",
+      "side": 1,
+      "message": "This is still an event listener and not an action, correct? If this is stays as event listener, I would keep the old name `onReload`",
+      "range": {
+        "startLine": 89,
+        "startChar": 14,
+        "endLine": 89,
+        "endChar": 20
+      },
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "141848d2_306740d2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T09:27:39Z",
+      "side": 1,
+      "message": "validateConfig?",
+      "range": {
+        "startLine": 94,
+        "startChar": 14,
+        "endLine": 94,
+        "endChar": 31
+      },
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c30b539_52175a18",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T09:27:39Z",
+      "side": 1,
+      "message": "This should happen *after* the configuration has been set as loaded IMHO. Possibly after L68",
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29370955_018e4867",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T09:27:39Z",
+      "side": 1,
+      "message": "boolean",
+      "range": {
+        "startLine": 77,
+        "startChar": 10,
+        "endLine": 77,
+        "endChar": 14
+      },
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f9d4c83_ebb1f434",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T09:27:39Z",
+      "side": 1,
+      "message": "We should short-circuit if any of the validators say that the configuration isn\u0027t good.",
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab369d88_b7656cf5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigurationChangeEvent.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T09:27:39Z",
+      "side": 1,
+      "message": "Why not using autovalues?",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 37
+      },
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac2dcd07_8d02f51f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T09:27:39Z",
+      "side": 1,
+      "message": "The parameter name is hiding the field name, which could mislead the reader. Can you choose a different name?",
+      "range": {
+        "startLine": 202,
+        "startChar": 73,
+        "endLine": 202,
+        "endChar": 90
+      },
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ffb0301_96663ff4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventBusConfigurationChange.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T09:27:39Z",
+      "side": 1,
+      "message": "This class doesn\u0027t really add much to the EventBus: do we really need it?",
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8933c75b_e593b62d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T09:27:39Z",
+      "side": 1,
+      "message": "There are actually two separate interfaces:\n- ReplicationConfigListener, which is invoked via EventBus\n- ReplicationConfigValidator\n\nI would keep them separate instead of having a unique one with two meanings. WDYT?",
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9aefcea_55005f00",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T09:27:39Z",
+      "side": 1,
+      "message": "I would keep onReload()",
+      "range": {
+        "startLine": 28,
+        "startChar": 7,
+        "endLine": 28,
+        "endChar": 13
+      },
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
