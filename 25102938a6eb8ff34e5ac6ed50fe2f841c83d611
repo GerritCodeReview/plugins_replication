@@ -178,6 +178,30 @@
     },
     {
       "key": {
+        "uuid": "845794a3_dbc42de0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T15:58:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "edecff88_e0106ae9",
+      "range": {
+        "startLine": 77,
+        "startChar": 10,
+        "endLine": 77,
+        "endChar": 14
+      },
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6f9d4c83_ebb1f434",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 1
@@ -210,6 +234,24 @@
       "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60967e58_4f111b72",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T15:58:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a8d99ba5_a6b5661d",
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -392,6 +434,24 @@
       "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc1a91a7_165a8917",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T15:58:47Z",
+      "side": 1,
+      "message": "I re-read the EventBus and you are right: we do not need the second interface. Basically, the event definition *IS* the interface.",
+      "parentUuid": "32e61383_22fde4f0",
+      "revId": "25102938a6eb8ff34e5ac6ed50fe2f841c83d611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {

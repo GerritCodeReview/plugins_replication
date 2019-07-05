@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5fd0e02e_42908836",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T15:58:47Z",
+      "side": 1,
+      "message": "Now should be called ReplicationConfigValidator, because the event listener is implemented using EventBus.",
+      "range": {
+        "startLine": 20,
+        "startChar": 17,
+        "endLine": 20,
+        "endChar": 42
+      },
+      "revId": "01c679dd9f01b7d68beb0dfbb3d3f38d298988db",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38fd5df2_607715cc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T15:58:47Z",
+      "side": 1,
+      "message": "This does not need anymore to be in the interface, as it isn\u0027t required to implement the onReload() to receive the ConfigurationChangeEvent, thanks to EventBus.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 97
+      },
+      "revId": "01c679dd9f01b7d68beb0dfbb3d3f38d298988db",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
