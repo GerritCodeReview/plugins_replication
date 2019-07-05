@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "21262670_3d05264d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-05T22:22:27Z",
+      "side": 1,
+      "message": "This part can be anticipated to the very first change, avoiding to introduce the reload listener altogether.\n\nThis change can thus become \"Introduce validation listener\"",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 10
+      },
+      "revId": "01c679dd9f01b7d68beb0dfbb3d3f38d298988db",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5fd0e02e_42908836",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
         "patchSetId": 7
