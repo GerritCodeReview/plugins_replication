@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "091f1b21_e4b07ffb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-06T20:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21262670_3d05264d",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 10
+      },
+      "revId": "01c679dd9f01b7d68beb0dfbb3d3f38d298988db",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5fd0e02e_42908836",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
         "patchSetId": 7
