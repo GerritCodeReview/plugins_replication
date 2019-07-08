@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae560b01_bf3e21f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-08T23:09:29Z",
+      "side": 1,
+      "message": "This needs a bit more explanation on the situation that this change is helping to prevent.\nCan you explain a bit more how a split-brain can be caused by replication? How can this change help out?",
+      "range": {
+        "startLine": 10,
+        "startChar": 38,
+        "endLine": 10,
+        "endChar": 64
+      },
+      "revId": "de6dd390efc74a034dafb546f3fd2572fa0dd422",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07c22a71_fb03506d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-08T23:09:29Z",
+      "side": 1,
+      "message": "Would be best IMHO to avoid the two return points.\n\nWhat about:\n  remoteUpdatesList \u003d pushFilter \u003d\u003d null ? remoteUpdateList : pushFilter.filter(projectName.get(), remoteUpdatesList);\n\n  return remoteUpdatesList;",
+      "revId": "de6dd390efc74a034dafb546f3fd2572fa0dd422",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e81b561f_17279c77",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-08T23:09:29Z",
+      "side": 1,
+      "message": "More explanation on the context:\n\n- Why we need to have the replication.jar linked into $GERRIT_SITE/lib\n- What are the impacts on the ability to reload the replication plugin\n- How can other plugins leverage that extension point",
+      "revId": "de6dd390efc74a034dafb546f3fd2572fa0dd422",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
