@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c6c8aa1_a171f838",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-07-08T00:05:33Z",
+      "side": 1,
+      "message": "static import?",
+      "range": {
+        "startLine": 175,
+        "startChar": 11,
+        "endLine": 175,
+        "endChar": 50
+      },
+      "revId": "5ccee1eb1b6b43e5065059ef361cbc4aeefe83c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29ab18aa_52d17fc5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-07-08T00:05:33Z",
+      "side": 1,
+      "message": "Make the assertion more precise?  I.e. assert that it contains exactly one entry with the \"foo\" remote that was set at L181?",
+      "range": {
+        "startLine": 193,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 78
+      },
+      "revId": "5ccee1eb1b6b43e5065059ef361cbc4aeefe83c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c105f9eb_0de98678",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-07-08T00:05:33Z",
+      "side": 1,
+      "message": "Same here.  Assert the exact contents.",
+      "range": {
+        "startLine": 221,
+        "startChar": 4,
+        "endLine": 222,
+        "endChar": 3
+      },
+      "revId": "5ccee1eb1b6b43e5065059ef361cbc4aeefe83c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c5a3b46_1d1fcdda",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-07-08T00:05:33Z",
+      "side": 1,
+      "message": "Assert the exact contents.  In this case it\u0027s useful to explicitly assert that it only contains the one that was set on L228.",
+      "range": {
+        "startLine": 249,
+        "startChar": 4,
+        "endLine": 249,
+        "endChar": 76
+      },
+      "revId": "5ccee1eb1b6b43e5065059ef361cbc4aeefe83c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
