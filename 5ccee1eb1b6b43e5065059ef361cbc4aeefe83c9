@@ -170,6 +170,30 @@
     },
     {
       "key": {
+        "uuid": "6c748fd6_62bae643",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-08T22:33:29Z",
+      "side": 1,
+      "message": "I have changed a bit the mocking of the Destination, so that I can have access to its configuration: I am now able to verify that the proper name and URLs are loaded, as you suggested.",
+      "parentUuid": "913a42ea_a60c7d98",
+      "range": {
+        "startLine": 193,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 78
+      },
+      "revId": "5ccee1eb1b6b43e5065059ef361cbc4aeefe83c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c105f9eb_0de98678",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigTest.java",
         "patchSetId": 1
@@ -230,6 +254,30 @@
       "side": 1,
       "message": "Explained.",
       "parentUuid": "a181e5a2_fcfc2b0b",
+      "range": {
+        "startLine": 221,
+        "startChar": 4,
+        "endLine": 222,
+        "endChar": 3
+      },
+      "revId": "5ccee1eb1b6b43e5065059ef361cbc4aeefe83c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27de47e4_bcd2d902",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-08T22:33:29Z",
+      "side": 1,
+      "message": "Amended as suggested.",
+      "parentUuid": "bc7eaaf0_930ba1e3",
       "range": {
         "startLine": 221,
         "startChar": 4,
@@ -350,6 +398,30 @@
       "side": 1,
       "message": "I\u0027ve clarified the scope of the test in the commit message. Will address the actual loading of the configuration in a separate change.",
       "parentUuid": "d2bdd680_0af72b89",
+      "range": {
+        "startLine": 249,
+        "startChar": 4,
+        "endLine": 249,
+        "endChar": 76
+      },
+      "revId": "5ccee1eb1b6b43e5065059ef361cbc4aeefe83c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b48de94a_565bc2dc",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-08T22:33:29Z",
+      "side": 1,
+      "message": "I\u0027ve extended the scope of the testing and I can now assert also the remote name and the associated URL.",
+      "parentUuid": "3f974d60_f8372930",
       "range": {
         "startLine": 249,
         "startChar": 4,
