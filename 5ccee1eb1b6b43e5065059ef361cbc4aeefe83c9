@@ -122,6 +122,30 @@
     },
     {
       "key": {
+        "uuid": "60cf8a62_46c6f692",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-08T12:40:25Z",
+      "side": 1,
+      "message": "\u003e Are the values not coming from the replicationConfig variable?\n\nNope, they are mocked. This unit-test is only checking that the decorator is working, not that the configuration is loading all the values. The above replication config variable is only used to write the configuration file, that\u0027s it.",
+      "parentUuid": "b439b42c_ab4e42a9",
+      "range": {
+        "startLine": 193,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 78
+      },
+      "revId": "5ccee1eb1b6b43e5065059ef361cbc4aeefe83c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c105f9eb_0de98678",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigTest.java",
         "patchSetId": 1
@@ -230,6 +254,30 @@
       "side": 1,
       "message": "In this case we expect the config to have not changed, so asserting it has size 1 doesn\u0027t prove that it is still returning the same value.",
       "parentUuid": "f27a7884_1025602a",
+      "range": {
+        "startLine": 249,
+        "startChar": 4,
+        "endLine": 249,
+        "endChar": 76
+      },
+      "revId": "5ccee1eb1b6b43e5065059ef361cbc4aeefe83c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2bdd680_0af72b89",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-08T12:40:25Z",
+      "side": 1,
+      "message": "\u003e In this case we expect the config to have not changed, so asserting it has size 1 doesn\u0027t prove that it is still returning the same value.\n\nTrue, but it isn\u0027t the responsibility of the AutoReloadConfigDecorator to load the configuration, but just triggering the loading of it.\n\nI believe your comments are correct but relate to an acceptance test, not to a unit-mocked test.\n\nI could add all that logic to the mocks, but then the tests is testing itself and not the real code. Does that make sense?",
+      "parentUuid": "6c66aee1_2c2a0653",
       "range": {
         "startLine": 249,
         "startChar": 4,
