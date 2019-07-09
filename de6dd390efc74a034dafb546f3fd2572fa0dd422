@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "40b19ae0_8eda605b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-09T10:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae560b01_bf3e21f3",
+      "range": {
+        "startLine": 10,
+        "startChar": 38,
+        "endLine": 10,
+        "endChar": 64
+      },
+      "revId": "de6dd390efc74a034dafb546f3fd2572fa0dd422",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07c22a71_fb03506d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 4
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "109ddbb0_cfbc7c87",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-09T10:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07c22a71_fb03506d",
+      "revId": "de6dd390efc74a034dafb546f3fd2572fa0dd422",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e81b561f_17279c77",
         "filename": "src/main/resources/Documentation/extension-point.md",
         "patchSetId": 4
@@ -56,6 +98,24 @@
       "revId": "de6dd390efc74a034dafb546f3fd2572fa0dd422",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75948f47_12ae0323",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-09T10:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e81b561f_17279c77",
+      "revId": "de6dd390efc74a034dafb546f3fd2572fa0dd422",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
