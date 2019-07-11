@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "185e65be_dc2fef43",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-11T07:50:26Z",
+      "side": 1,
+      "message": "This could be confusing for the reader as he may not know the context of:\n\n1. Why would you need an extension point\n2. What is a library module\n3. How is this relevant to this plugin.\n\nI would introduce the new functionality by saying that other plugins may want to extend the behavior of the replication plugin by implementing its extension points and then you will explain why you can\u0027t do it without having first to add the plugin as a symlink into /lib and install the extra libModule",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 57
+      },
+      "revId": "619dae4b536ffe1f5d2fec3ed4234a66fda905e4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffec8ac6_a692845a",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-11T07:50:26Z",
+      "side": 1,
+      "message": "No, the plugin will remain a plugin, however, you need a link to /lib and add one extra module in the libModule section.",
+      "range": {
+        "startLine": 5,
+        "startChar": 84,
+        "endLine": 5,
+        "endChar": 124
+      },
+      "revId": "619dae4b536ffe1f5d2fec3ed4234a66fda905e4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8eed54f_194deb99",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-11T07:50:26Z",
+      "side": 1,
+      "message": "nit: empty space at the end",
+      "range": {
+        "startLine": 10,
+        "startChar": 203,
+        "endLine": 10,
+        "endChar": 204
+      },
+      "revId": "619dae4b536ffe1f5d2fec3ed4234a66fda905e4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "427252c0_5ca612c9",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-11T07:50:26Z",
+      "side": 1,
+      "message": "We should mention also that the plugins that want to implement the extension point need to add the replication plugin as a dependency.",
+      "revId": "619dae4b536ffe1f5d2fec3ed4234a66fda905e4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
