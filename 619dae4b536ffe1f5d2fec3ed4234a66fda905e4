@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "dde8374b_5369d453",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-11T22:03:55Z",
+      "side": 1,
+      "message": "I believe we should raise an issue and describe exactly what\u0027s the problem with the replication plugin that we are trying to solve.",
+      "revId": "619dae4b536ffe1f5d2fec3ed4234a66fda905e4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "185e65be_dc2fef43",
         "filename": "src/main/resources/Documentation/extension-point.md",
         "patchSetId": 5
