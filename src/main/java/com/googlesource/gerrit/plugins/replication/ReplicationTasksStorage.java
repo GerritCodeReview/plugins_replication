@@ -29,18 +29,28 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.transport.URIish;
 
 @Singleton
-public class EventsStorage {
+public class ReplicationTasksStorage {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   public static class ReplicateRefUpdate {
-    public String project;
-    public String ref;
+    public final String project;
+    public final String ref;
+    public final String uri;
+    public final String remote;
+    
+    public ReplicateRefUpdate (String project, String ref, URIish uri, String remote) {
+    	this.project = project;
+    	this.ref = ref;
+    	this.uri = uri.toASCIIString();
+    	this.remote = remote;
+    }
 
     @Override
     public String toString() {
-      return "ref-update " + project + ":" + ref;
+      return "ref-update " + project + ":" + ref + " uri:" + uri + " remote:" + remote;
     }
   }
 
@@ -49,38 +59,38 @@ public class EventsStorage {
   private final Path refUpdates;
 
   @Inject
-  EventsStorage(ReplicationConfig config) {
+  ReplicationTasksStorage(ReplicationConfig config) {
     refUpdates = config.getEventsDirectory().resolve("ref-updates");
   }
 
-  public String persist(String project, String ref) {
-    ReplicateRefUpdate r = new ReplicateRefUpdate();
-    r.project = project;
-    r.ref = ref;
-
+  public String persist(ReplicateRefUpdate r) {
     String json = GSON.toJson(r) + "\n";
     String eventKey = sha1(json).name();
-    Path file = refUpdates().resolve(eventKey);
+    Path path = refUpdates().resolve(eventKey);
 
-    if (Files.exists(file)) {
+    if (Files.exists(path)) {
       return eventKey;
     }
 
     try {
-      Files.write(file, json.getBytes(UTF_8));
+      logger.atFine().log("CREATE %s (%s)", path, r);
+      Files.write(path, json.getBytes(UTF_8));
     } catch (IOException e) {
-      logger.atWarning().log("Couldn't persist event %s", json);
+      logger.atWarning().withCause(e).log("Couldn't persist event %s", json);
     }
     return eventKey;
   }
 
-  public void delete(String eventKey) {
-    if (eventKey != null) {
-      try {
-        Files.delete(refUpdates().resolve(eventKey));
-      } catch (IOException e) {
-        logger.atSevere().withCause(e).log("Error while deleting event %s", eventKey);
-      }
+  public void delete(ReplicateRefUpdate r) {
+    String taskJson = GSON.toJson(r) + "\n";
+    String taskKey = sha1(taskJson).name();
+    Path path = refUpdates().resolve(taskKey);
+    
+    try {
+      logger.atFine().log("DELETE %s (%s)", path, r);
+      Files.delete(refUpdates().resolve(taskKey));
+    } catch (IOException e) {
+      logger.atSevere().withCause(e).log("Error while deleting event %s", taskKey);
     }
   }
 
@@ -91,7 +101,6 @@ public class EventsStorage {
         if (Files.isRegularFile(e)) {
           String json = new String(Files.readAllBytes(e), UTF_8);
           result.add(GSON.fromJson(json, ReplicateRefUpdate.class));
-          Files.delete(e);
         }
       }
     } catch (IOException e) {
