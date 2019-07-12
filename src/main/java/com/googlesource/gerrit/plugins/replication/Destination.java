@@ -102,6 +102,7 @@ public class Destination {
   private final PerThreadRequestScope.Scoper threadScoper;
   private final DestinationConfiguration config;
   private final DynamicItem<EventDispatcher> eventDispatcher;
+  private final ReplicationTasksStorage replicationTasksStorage;
 
   protected enum RetryReason {
     TRANSPORT_ERROR,
@@ -131,6 +132,7 @@ public class Destination {
       ReplicationStateListeners stateLog,
       GroupIncludeCache groupIncludeCache,
       DynamicItem<EventDispatcher> eventDispatcher,
+      ReplicationTasksStorage rts,
       @Assisted DestinationConfiguration cfg) {
     this.eventDispatcher = eventDispatcher;
     gitManager = gitRepositoryManager;
@@ -138,6 +140,7 @@ public class Destination {
     this.userProvider = userProvider;
     this.projectCache = projectCache;
     this.stateLog = stateLog;
+    this.replicationTasksStorage = rts;
     config = cfg;
     CurrentUser remoteUser;
     if (!cfg.getAuthGroupNames().isEmpty()) {
@@ -388,21 +391,22 @@ public class Destination {
     }
 
     synchronized (stateLock) {
-      PushOne e = getPendingPush(uri);
-      if (e == null) {
-        e = opFactory.create(project, uri);
-        addRef(e, ref);
-        e.addState(ref, state);
+      PushOne task = getPendingPush(uri);
+      if (task == null) {
+        task = opFactory.create(project, uri);
+        addRef(task, ref);
+        task.addState(ref, state);
         @SuppressWarnings("unused")
         ScheduledFuture<?> ignored =
-            pool.schedule(e, now ? 0 : config.getDelay(), TimeUnit.SECONDS);
-        pending.put(uri, e);
-      } else if (!e.getRefs().contains(ref)) {
-        addRef(e, ref);
-        e.addState(ref, state);
+            pool.schedule(task, now ? 0 : config.getDelay(), TimeUnit.SECONDS);
+        pending.put(uri, task);
+        replicationTasksStorage.persist(project.get(), ref, task.getURI(), getRemoteConfigName());
+      } else if (!task.getRefs().contains(ref)) {
+        addRef(task, ref);
+        task.addState(ref, state);
       }
       state.increasePushTaskCount(project.get(), ref);
-      repLog.info("scheduled {}:{} => {} to run after {}s", project, ref, e, config.getDelay());
+      repLog.info("scheduled {}:{} => {} to run after {}s", project, ref, task, config.getDelay());
     }
   }
 
@@ -541,10 +545,26 @@ public class Destination {
     return RunwayStatus.allowed();
   }
 
-  void notifyFinished(PushOne op) {
+  void notifyFinished(PushOne task) {
     synchronized (stateLock) {
-      inFlight.remove(op.getURI());
+      inFlight.remove(task.getURI());
+      if (!task.wasCanceled()) {
+        for (String ref : task.getRefs()) {
+          if (!refHasPendingPush(task.getURI(), ref)) {
+            replicationTasksStorage.delete(
+                task.getProjectNameKey().get(), ref, task.getURI(), getRemoteConfigName());
+          }
+        }
+      }
     }
+  }
+
+  private boolean refHasPendingPush(URIish opUri, String ref) {
+    return pushContainsRef(pending.get(opUri), ref) || pushContainsRef(inFlight.get(opUri), ref);
+  }
+
+  private boolean pushContainsRef(PushOne op, String ref) {
+    return op != null && op.getRefs().contains(ref);
   }
 
   boolean wouldPushProject(Project.NameKey project) {
