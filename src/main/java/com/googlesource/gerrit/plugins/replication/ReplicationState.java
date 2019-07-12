@@ -31,7 +31,6 @@ public class ReplicationState {
   }
 
   private boolean allScheduled;
-  private final EventsStorage eventsStorage;
   private final PushResultProcessing pushResultProcessing;
 
   private final Lock countingLock = new ReentrantLock();
@@ -57,11 +56,8 @@ public class ReplicationState {
   private int totalPushTasksCount;
   private int finishedPushTasksCount;
 
-  private String eventKey;
-
   @AssistedInject
-  ReplicationState(EventsStorage storage, @Assisted PushResultProcessing processing) {
-    eventsStorage = storage;
+  ReplicationState(@Assisted PushResultProcessing processing) {
     pushResultProcessing = processing;
     statusByProjectRef = HashBasedTable.create();
   }
@@ -86,7 +82,6 @@ public class ReplicationState {
       URIish uri,
       RefPushResult status,
       RemoteRefUpdate.Status refUpdateStatus) {
-    deleteEvent();
     pushResultProcessing.onRefReplicatedToOneNode(project, ref, uri, status, refUpdateStatus);
 
     RefReplicationStatus completedRefStatus = null;
@@ -113,12 +108,6 @@ public class ReplicationState {
 
     if (allPushTaksCompleted) {
       doAllPushTasksCompleted();
-    }
-  }
-
-  private void deleteEvent() {
-    if (eventKey != null) {
-      eventsStorage.delete(eventKey);
     }
   }
 
@@ -191,9 +180,5 @@ public class ReplicationState {
     public String toString() {
       return name().toLowerCase().replace("_", "-");
     }
-  }
-
-  public void setEventKey(String eventKey) {
-    this.eventKey = eventKey;
   }
 }
