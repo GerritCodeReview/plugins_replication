@@ -33,6 +33,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import org.eclipse.jgit.transport.URIish;
@@ -151,9 +152,8 @@ public class ReplicationQueue
     Project.NameKey project = new Project.NameKey(projectName);
     for (Destination cfg : config.getDestinations(FilterType.ALL)) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
-        String eventKey = eventsStorage.persist(projectName, refName);
-        state.setEventKey(eventKey);
         for (URIish uri : cfg.getURIs(project, null)) {
+          eventsStorage.persist(projectName, refName, uri, cfg.getRemoteConfigName());
           cfg.schedule(project, refName, uri, state);
         }
       }
@@ -162,11 +162,16 @@ public class ReplicationQueue
   }
 
   private void firePendingEvents() {
-    replaying = true;
     try {
+      Set<String> eventsReplayed = new HashSet<>();
+      replaying = true;
       for (EventsStorage.ReplicateRefUpdate e : eventsStorage.list()) {
-        repLog.info("Firing pending event {}", e);
-        onGitReferenceUpdated(e.project, e.ref);
+        String eventKey = String.format("%s:%s", e.project, e.ref);
+        if (!eventsReplayed.contains(eventKey)) {
+          repLog.info("Firing pending event {}", eventKey);
+          onGitReferenceUpdated(e.project, e.ref);
+          eventsReplayed.add(eventKey);
+        }
       }
     } finally {
       replaying = false;

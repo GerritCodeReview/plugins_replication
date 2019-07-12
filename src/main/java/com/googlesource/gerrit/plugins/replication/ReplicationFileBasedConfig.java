@@ -205,15 +205,6 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     return destinations.isEmpty();
   }
 
-  @Override
-  public Path getEventsDirectory() {
-    String eventsDirectory = config.getString("replication", null, "eventsDirectory");
-    if (!Strings.isNullOrEmpty(eventsDirectory)) {
-      return site.resolve(eventsDirectory);
-    }
-    return pluginDataDir;
-  }
-
   Path getCfgPath() {
     return cfgPath;
   }
