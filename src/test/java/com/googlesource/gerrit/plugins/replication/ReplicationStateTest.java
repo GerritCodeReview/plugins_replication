@@ -40,7 +40,7 @@ public class ReplicationStateTest {
     replay(pushResultProcessingMock);
     eventsStorage = createNiceMock(EventsStorage.class);
     replay(eventsStorage);
-    replicationState = new ReplicationState(eventsStorage, pushResultProcessingMock);
+    replicationState = new ReplicationState(pushResultProcessingMock);
   }
 
   @Test
