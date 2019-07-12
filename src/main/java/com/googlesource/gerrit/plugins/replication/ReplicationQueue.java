@@ -66,8 +66,7 @@ public class ReplicationQueue
   private final DynamicItem<EventDispatcher> dispatcher;
   private final ReplicationConfig config;
   private final AdminApiFactory adminApiFactory;
-  private final ReplicationState.Factory replicationStateFactory;
-  private final EventsStorage eventsStorage;
+  private final ReplicationTasksStorage replicationTasksStorage;
   private volatile boolean running;
   private volatile boolean replaying;
 
@@ -78,15 +77,13 @@ public class ReplicationQueue
       ReplicationConfig rc,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListeners sl,
-      ReplicationState.Factory rsf,
-      EventsStorage es) {
+      ReplicationTasksStorage rts) {
     workQueue = wq;
     dispatcher = dis;
     config = rc;
     stateLog = sl;
     adminApiFactory = aaf;
-    replicationStateFactory = rsf;
-    eventsStorage = es;
+    replicationTasksStorage = rts;
   }
 
   @Override
@@ -141,8 +138,7 @@ public class ReplicationQueue
   }
 
   private void onGitReferenceUpdated(String projectName, String refName) {
-    ReplicationState state =
-        replicationStateFactory.create(new GitUpdateProcessing(dispatcher.get()));
+    ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
     if (!running) {
       stateLog.warn("Replication plugin did not finish startup before event", state);
       return;
@@ -151,9 +147,8 @@ public class ReplicationQueue
     Project.NameKey project = new Project.NameKey(projectName);
     for (Destination cfg : config.getDestinations(FilterType.ALL)) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
-        String eventKey = eventsStorage.persist(projectName, refName);
-        state.setEventKey(eventKey);
         for (URIish uri : cfg.getURIs(project, null)) {
+          replicationTasksStorage.persist(projectName, refName, uri, cfg.getRemoteConfigName());
           cfg.schedule(project, refName, uri, state);
         }
       }
@@ -162,11 +157,16 @@ public class ReplicationQueue
   }
 
   private void firePendingEvents() {
-    replaying = true;
     try {
-      for (EventsStorage.ReplicateRefUpdate e : eventsStorage.list()) {
-        repLog.info("Firing pending event {}", e);
-        onGitReferenceUpdated(e.project, e.ref);
+      Set<String> tasksReplayed = new HashSet<>();
+      replaying = true;
+      for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.list()) {
+        String taskKey = String.format("%s:%s", t.project, t.ref);
+        if (!tasksReplayed.contains(taskKey)) {
+          repLog.info("Firing pending task {}", taskKey);
+          onGitReferenceUpdated(t.project, t.ref);
+          tasksReplayed.add(taskKey);
+        }
       }
     } finally {
       replaying = false;
