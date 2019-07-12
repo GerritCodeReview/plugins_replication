@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "68b5a557_da74de56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-12T18:26:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0972f60f_c87593e8",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "9ae48462b8862a3054698490fff34d9f2409a200",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e009134_30c6c237",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 16
@@ -71,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "4653d7fa_5c9a56ac",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-12T18:26:13Z",
+      "side": 1,
+      "message": "Not needed indeed.",
+      "parentUuid": "e039da72_9f1ec138",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 14
+      },
+      "revId": "9ae48462b8862a3054698490fff34d9f2409a200",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e57fa41_009993bd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-12T18:26:13Z",
+      "side": 1,
+      "message": "Yes, agreed. Thus we do not really need a ConfigurationChangeEvent, isn\u0027t it? Just the new configuration would be more than enough.",
+      "parentUuid": "4e009134_30c6c237",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 38
+      },
+      "revId": "9ae48462b8862a3054698490fff34d9f2409a200",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "205f9c2b_95e953f4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 16
@@ -82,6 +154,24 @@
       "writtenOn": "2019-07-12T15:30:28Z",
       "side": 1,
       "message": "I do not understand why validators get access to both the old and new config (via the\nConfigurationChangedEvent) but then we just post the new config to the event bus?\nWe discussed the possibility to diff the old and new config and restart only those affected\ndestinations. However, if we only get the new config we cannot do that!",
+      "revId": "9ae48462b8862a3054698490fff34d9f2409a200",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b89efe2f_97b33989",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-12T18:26:13Z",
+      "side": 1,
+      "message": "\u003e I do not understand why validators get access to both the old and new config (via the\n\u003e ConfigurationChangedEvent) but then we just post the new config to the event bus?\n\nAgreed, as this was done in the very first change.\n\n\u003e We discussed the possibility to diff the old and new config and restart only those affected\n\u003e destinations. However, if we only get the new config we cannot do that!\n\nNope, you can still do that, by calculating the difference between the current (already stored) and the new config.",
+      "parentUuid": "205f9c2b_95e953f4",
       "revId": "9ae48462b8862a3054698490fff34d9f2409a200",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
