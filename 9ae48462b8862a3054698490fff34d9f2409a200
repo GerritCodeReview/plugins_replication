@@ -264,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "8871163a_b9a06695",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigurationChangeEvent.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-12T18:37:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55b24b1a_99155b45",
+      "revId": "9ae48462b8862a3054698490fff34d9f2409a200",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b5c5d9c_7f0e1810",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigurationChangeEvent.java",
         "patchSetId": 16
@@ -284,6 +302,30 @@
       "revId": "9ae48462b8862a3054698490fff34d9f2409a200",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "335e1a7c_fc391c82",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigurationChangeEvent.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-12T18:37:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b5c5d9c_7f0e1810",
+      "range": {
+        "startLine": 20,
+        "startChar": 28,
+        "endLine": 20,
+        "endChar": 34
+      },
+      "revId": "9ae48462b8862a3054698490fff34d9f2409a200",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
