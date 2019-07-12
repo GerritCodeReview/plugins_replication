@@ -103,6 +103,7 @@ public class Destination {
   private final PerThreadRequestScope.Scoper threadScoper;
   private final DestinationConfiguration config;
   private final DynamicItem<EventDispatcher> eventDispatcher;
+  private final EventsStorage eventsStorage;
 
   protected enum RetryReason {
     TRANSPORT_ERROR,
@@ -132,6 +133,7 @@ public class Destination {
       ReplicationStateListeners stateLog,
       GroupIncludeCache groupIncludeCache,
       DynamicItem<EventDispatcher> eventDispatcher,
+      EventsStorage es,
       @Assisted DestinationConfiguration cfg) {
     this.eventDispatcher = eventDispatcher;
     gitManager = gitRepositoryManager;
@@ -139,6 +141,7 @@ public class Destination {
     this.userProvider = userProvider;
     this.projectCache = projectCache;
     this.stateLog = stateLog;
+    this.eventsStorage = es;
     config = cfg;
     CurrentUser remoteUser;
     if (!cfg.getAuthGroupNames().isEmpty()) {
@@ -366,6 +369,7 @@ public class Destination {
         e.addState(ref, state);
         pool.schedule(e, now ? 0 : config.getDelay(), TimeUnit.SECONDS);
         pending.put(uri, e);
+        eventsStorage.persist(project.get(), ref, e.getURI());
       } else if (!e.getRefs().contains(ref)) {
         addRef(e, ref);
         e.addState(ref, state);
@@ -509,7 +513,20 @@ public class Destination {
   void notifyFinished(PushOne op) {
     synchronized (stateLock) {
       inFlight.remove(op.getURI());
+      for (String ref : op.getRefs()) {
+        if (!refHasPendingPush(op.getURI(), ref)) {
+          eventsStorage.delete(op.getProjectNameKey().get(), ref, op.getURI());
+        }
+      }
     }
+  }
+
+  private boolean refHasPendingPush(URIish opUri, String ref) {
+    return pushContainsRef(pending.get(opUri), ref) || pushContainsRef(inFlight.get(opUri), ref);
+  }
+
+  private boolean pushContainsRef(PushOne op, String ref) {
+    return op != null && op.getRefs().contains(ref);
   }
 
   boolean wouldPushProject(Project.NameKey project) {
