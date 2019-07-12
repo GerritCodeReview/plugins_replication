@@ -29,18 +29,21 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.transport.URIish;
 
 @Singleton
-public class EventsStorage {
+public class ReplicationTasksStorage {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   public static class ReplicateRefUpdate {
     public String project;
     public String ref;
+    public String uri;
+    public String remote;
 
     @Override
     public String toString() {
-      return "ref-update " + project + ":" + ref;
+      return "ref-update " + project + ":" + ref + " uri:" + uri + " remote:" + remote;
     }
   }
 
@@ -49,14 +52,16 @@ public class EventsStorage {
   private final Path refUpdates;
 
   @Inject
-  EventsStorage(ReplicationConfig config) {
+  ReplicationTasksStorage(ReplicationConfig config) {
     refUpdates = config.getEventsDirectory().resolve("ref-updates");
   }
 
-  public String persist(String project, String ref) {
+  public String persist(String project, String ref, URIish uri, String remote) {
     ReplicateRefUpdate r = new ReplicateRefUpdate();
     r.project = project;
     r.ref = ref;
+    r.uri = uri.toASCIIString();
+    r.remote = remote;
 
     String json = GSON.toJson(r) + "\n";
     String eventKey = sha1(json).name();
@@ -67,6 +72,7 @@ public class EventsStorage {
     }
 
     try {
+      logger.atFiner().log("CREATE %s:%s => %s", project, ref, uri);
       Files.write(file, json.getBytes(UTF_8));
     } catch (IOException e) {
       logger.atWarning().log("Couldn't persist event %s", json);
@@ -74,13 +80,20 @@ public class EventsStorage {
     return eventKey;
   }
 
-  public void delete(String eventKey) {
-    if (eventKey != null) {
-      try {
-        Files.delete(refUpdates().resolve(eventKey));
-      } catch (IOException e) {
-        logger.atSevere().withCause(e).log("Error while deleting event %s", eventKey);
-      }
+  public void delete(String project, String ref, URIish uri, String remote) {
+    ReplicateRefUpdate r = new ReplicateRefUpdate();
+    r.project = project;
+    r.ref = ref;
+    r.uri = uri.toASCIIString();
+    r.remote = remote;
+
+    String eventJson = GSON.toJson(r) + "\n";
+    String eventKey = sha1(eventJson).name();
+    try {
+      logger.atFiner().log("DELETE %s:%s => %s", project, ref, uri);
+      Files.delete(refUpdates().resolve(eventKey));
+    } catch (IOException e) {
+      logger.atSevere().withCause(e).log("Error while deleting event %s", eventKey);
     }
   }
 
