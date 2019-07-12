@@ -178,6 +178,23 @@
     },
     {
       "key": {
+        "uuid": "55b24b1a_99155b45",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigurationChangeEvent.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-12T18:27:30Z",
+      "side": 1,
+      "message": "The whole class can go: the new config can be directly sent through event bus.",
+      "revId": "9ae48462b8862a3054698490fff34d9f2409a200",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1b5c5d9c_7f0e1810",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigurationChangeEvent.java",
         "patchSetId": 16
