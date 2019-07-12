@@ -30,6 +30,7 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
+import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
@@ -66,8 +67,7 @@ public class ReplicationQueue
   private final DynamicItem<EventDispatcher> dispatcher;
   private final ReplicationConfig config;
   private final DynamicItem<AdminApiFactory> adminApiFactory;
-  private final ReplicationState.Factory replicationStateFactory;
-  private final EventsStorage eventsStorage;
+  private final ReplicationTasksStorage replicationTasksStorage;
   private volatile boolean running;
   private volatile boolean replaying;
 
@@ -78,15 +78,13 @@ public class ReplicationQueue
       ReplicationConfig rc,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListeners sl,
-      ReplicationState.Factory rsf,
-      EventsStorage es) {
+      ReplicationTasksStorage rts) {
     workQueue = wq;
     dispatcher = dis;
     config = rc;
     stateLog = sl;
     adminApiFactory = aaf;
-    replicationStateFactory = rsf;
-    eventsStorage = es;
+    replicationTasksStorage = rts;
   }
 
   @Override
@@ -141,8 +139,7 @@ public class ReplicationQueue
   }
 
   private void onGitReferenceUpdated(String projectName, String refName) {
-    ReplicationState state =
-        replicationStateFactory.create(new GitUpdateProcessing(dispatcher.get()));
+    ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
     if (!running) {
       stateLog.warn("Replication plugin did not finish startup before event", state);
       return;
@@ -151,9 +148,9 @@ public class ReplicationQueue
     Project.NameKey project = new Project.NameKey(projectName);
     for (Destination cfg : config.getDestinations(FilterType.ALL)) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
-        String eventKey = eventsStorage.persist(projectName, refName);
-        state.setEventKey(eventKey);
         for (URIish uri : cfg.getURIs(project, null)) {
+          replicationTasksStorage.persist(
+              new ReplicateRefUpdate(projectName, refName, uri, cfg.getRemoteConfigName()));
           cfg.schedule(project, refName, uri, state);
         }
       }
@@ -162,11 +159,16 @@ public class ReplicationQueue
   }
 
   private void firePendingEvents() {
-    replaying = true;
     try {
-      for (EventsStorage.ReplicateRefUpdate e : eventsStorage.list()) {
-        repLog.info("Firing pending event {}", e);
-        onGitReferenceUpdated(e.project, e.ref);
+      Set<String> eventsReplayed = new HashSet<>();
+      replaying = true;
+      for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.list()) {
+        String eventKey = String.format("%s:%s", t.project, t.ref);
+        if (!eventsReplayed.contains(eventKey)) {
+          repLog.info("Firing pending task {}", eventKey);
+          onGitReferenceUpdated(t.project, t.ref);
+          eventsReplayed.add(eventKey);
+        }
       }
     } finally {
       replaying = false;
