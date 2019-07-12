@@ -28,12 +28,17 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
+import java.nio.file.Path;
 import org.eclipse.jgit.transport.SshSessionFactory;
 
 class ReplicationModule extends AbstractModule {
   @Override
   protected void configure() {
     install(new FactoryModuleBuilder().build(Destination.Factory.class));
+    bind(Path.class)
+        .annotatedWith(EventsDirectory.class)
+        .toProvider(EventsDirectoryProvider.class)
+        .in(Scopes.SINGLETON);
     bind(ReplicationQueue.class).in(Scopes.SINGLETON);
     bind(LifecycleListener.class)
         .annotatedWith(UniqueAnnotations.create())
