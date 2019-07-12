@@ -144,11 +144,6 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   }
 
   @Override
-  public Path getEventsDirectory() {
-    return currentConfig.getEventsDirectory();
-  }
-
-  @Override
   public synchronized int shutdown() {
     if (autoReloadRunnable != null) {
       autoReloadRunnable.cancel(false);
