@@ -16,8 +16,6 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import com.google.inject.assistedinject.Assisted;
-import com.google.inject.assistedinject.AssistedInject;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -26,12 +24,7 @@ import org.eclipse.jgit.transport.URIish;
 
 public class ReplicationState {
 
-  public interface Factory {
-    ReplicationState create(PushResultProcessing processing);
-  }
-
   private boolean allScheduled;
-  private final EventsStorage eventsStorage;
   private final PushResultProcessing pushResultProcessing;
 
   private final Lock countingLock = new ReentrantLock();
@@ -57,11 +50,7 @@ public class ReplicationState {
   private int totalPushTasksCount;
   private int finishedPushTasksCount;
 
-  private String eventKey;
-
-  @AssistedInject
-  ReplicationState(EventsStorage storage, @Assisted PushResultProcessing processing) {
-    eventsStorage = storage;
+  ReplicationState(PushResultProcessing processing) {
     pushResultProcessing = processing;
     statusByProjectRef = HashBasedTable.create();
   }
@@ -86,7 +75,6 @@ public class ReplicationState {
       URIish uri,
       RefPushResult status,
       RemoteRefUpdate.Status refUpdateStatus) {
-    deleteEvent();
     pushResultProcessing.onRefReplicatedToOneNode(project, ref, uri, status, refUpdateStatus);
 
     RefReplicationStatus completedRefStatus = null;
@@ -113,12 +101,6 @@ public class ReplicationState {
 
     if (allPushTaksCompleted) {
       doAllPushTasksCompleted();
-    }
-  }
-
-  private void deleteEvent() {
-    if (eventKey != null) {
-      eventsStorage.delete(eventKey);
     }
   }
 
@@ -191,9 +173,5 @@ public class ReplicationState {
     public String toString() {
       return name().toLowerCase().replace("_", "-");
     }
-  }
-
-  public void setEventKey(String eventKey) {
-    this.eventKey = eventKey;
   }
 }
