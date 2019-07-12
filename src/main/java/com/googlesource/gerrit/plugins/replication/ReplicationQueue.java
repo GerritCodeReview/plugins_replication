@@ -118,9 +118,8 @@ public class ReplicationQueue
     Project.NameKey project = new Project.NameKey(projectName);
     for (Destination cfg : config.getDestinations(FilterType.ALL)) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
-        String eventKey = eventsStorage.persist(projectName, refName);
-        state.setEventKey(eventKey);
         for (URIish uri : cfg.getURIs(project, null)) {
+          eventsStorage.persist(projectName, refName, uri);
           cfg.schedule(project, refName, uri, state);
         }
       }
