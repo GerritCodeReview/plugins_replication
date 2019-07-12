@@ -16,7 +16,6 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.collect.Multimap;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.git.WorkQueue;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import org.eclipse.jgit.transport.URIish;
@@ -41,8 +40,6 @@ public interface ReplicationConfig {
   int getMaxRefsToLog();
 
   boolean isEmpty();
-
-  Path getEventsDirectory();
 
   int shutdown();
 
