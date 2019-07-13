@@ -224,10 +224,18 @@ public class Destination {
   public int shutdown() {
     int cnt = 0;
     if (pool != null) {
+      cancelPushOps(pending);
+      pending.clear();
       cnt = pool.shutdownNow().size();
       pool = null;
     }
     return cnt;
+  }
+
+  private void cancelPushOps(Map<URIish, PushOne> opsMap) {
+    for (PushOne pushOne : ImmutableList.copyOf(opsMap.values())) {
+      pushOne.cancel();
+    }
   }
 
   private boolean shouldReplicate(ProjectState state, CurrentUser user)
@@ -336,7 +344,7 @@ public class Destination {
     if (!config.replicatePermissions()) {
       PushOne e;
       synchronized (stateLock) {
-        e = pending.get(uri);
+        e = getPendingPush(uri);
       }
       if (e == null) {
         try (Repository git = gitManager.openRepository(project)) {
@@ -359,7 +367,7 @@ public class Destination {
     }
 
     synchronized (stateLock) {
-      PushOne e = pending.get(uri);
+      PushOne e = getPendingPush(uri);
       if (e == null) {
         e = opFactory.create(project, uri);
         addRef(e, ref);
@@ -373,6 +381,14 @@ public class Destination {
       state.increasePushTaskCount(project.get(), ref);
       repLog.info("scheduled {}:{} => {} to run after {}s", project, ref, e, config.getDelay());
     }
+  }
+
+  private PushOne getPendingPush(URIish uri) {
+    PushOne e = pending.get(uri);
+    if (e != null && !e.wasCanceled()) {
+      return e;
+    }
+    return null;
   }
 
   void pushWasCanceled(PushOne pushOp) {
@@ -419,7 +435,7 @@ public class Destination {
   void reschedule(PushOne pushOp, RetryReason reason) {
     synchronized (stateLock) {
       URIish uri = pushOp.getURI();
-      PushOne pendingPushOp = pending.get(uri);
+      PushOne pendingPushOp = getPendingPush(uri);
 
       if (pendingPushOp != null) {
         // There is one PushOp instance already pending to same URI.
