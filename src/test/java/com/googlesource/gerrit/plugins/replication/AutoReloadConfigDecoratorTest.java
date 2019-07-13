@@ -151,6 +151,7 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
 
   private void setupMocks() {
     replicationQueueMock = createNiceMock(ReplicationQueue.class);
+    expect(replicationQueueMock.isRunning()).andReturn(true).anyTimes();
     replay(replicationQueueMock);
 
     workQueueMock = createNiceMock(WorkQueue.class);
