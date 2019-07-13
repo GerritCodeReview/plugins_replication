@@ -69,6 +69,7 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 import org.apache.commons.io.FilenameUtils;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
@@ -217,10 +218,30 @@ public class Destination {
     if (pool != null) {
       repLog.warn("Cancelling replication events");
 
+      foreachPushOp(
+          pending,
+          push -> {
+            push.cancel();
+            return null;
+          });
+      pending.clear();
+      foreachPushOp(
+          inFlight,
+          push -> {
+            push.setCanceledWhileRunning();
+            return null;
+          });
+      inFlight.clear();
       cnt = pool.shutdownNow().size();
       pool = null;
     }
     return cnt;
+  }
+
+  private void foreachPushOp(Map<URIish, PushOne> opsMap, Function<PushOne, Void> pushOneFunction) {
+    for (PushOne pushOne : ImmutableList.copyOf(opsMap.values())) {
+      pushOneFunction.apply(pushOne);
+    }
   }
 
   private boolean shouldReplicate(ProjectControl ctl) throws PermissionBackendException {
@@ -309,7 +330,7 @@ public class Destination {
     if (!config.replicatePermissions()) {
       PushOne e;
       synchronized (stateLock) {
-        e = pending.get(uri);
+        e = getPendingPush(uri);
       }
       if (e == null) {
         try (Repository git = gitManager.openRepository(project)) {
@@ -332,7 +353,7 @@ public class Destination {
     }
 
     synchronized (stateLock) {
-      PushOne e = pending.get(uri);
+      PushOne e = getPendingPush(uri);
       if (e == null) {
         e = opFactory.create(project, uri);
         addRef(e, ref);
@@ -346,6 +367,14 @@ public class Destination {
       state.increasePushTaskCount(project.get(), ref);
       repLog.info("scheduled {}:{} => {} to run after {}s", project, ref, e, config.getDelay());
     }
+  }
+
+  private PushOne getPendingPush(URIish uri) {
+    PushOne e = pending.get(uri);
+    if (e != null && !e.wasCanceled()) {
+      return e;
+    }
+    return null;
   }
 
   void pushWasCanceled(PushOne pushOp) {
@@ -384,7 +413,7 @@ public class Destination {
   void reschedule(PushOne pushOp, RetryReason reason) {
     synchronized (stateLock) {
       URIish uri = pushOp.getURI();
-      PushOne pendingPushOp = pending.get(uri);
+      PushOne pendingPushOp = getPendingPush(uri);
 
       if (pendingPushOp != null) {
         // There is one PushOp instance already pending to same URI.
