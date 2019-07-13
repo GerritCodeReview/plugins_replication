@@ -224,10 +224,18 @@ public class Destination {
   public int shutdown() {
     int cnt = 0;
     if (pool != null) {
+      cancelPushOps(pending);
+      cancelPushOps(inFlight);
       cnt = pool.shutdownNow().size();
       pool = null;
     }
     return cnt;
+  }
+
+  private void cancelPushOps(Map<URIish, PushOne> opsMap) {
+    for (PushOne pushOne : ImmutableList.copyOf(opsMap.values())) {
+      pushOne.cancel();
+    }
   }
 
   private boolean shouldReplicate(ProjectState state, CurrentUser user)
