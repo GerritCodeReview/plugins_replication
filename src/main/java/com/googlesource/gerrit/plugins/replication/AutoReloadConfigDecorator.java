@@ -29,6 +29,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.transport.URIish;
@@ -50,6 +51,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   // ReplicationConfig
   private final Provider<ReplicationQueue> replicationQueue;
   private final ScheduledExecutorService autoReloadExecutor;
+  private volatile ScheduledFuture<?> autoReloadRunnable;
 
   @Inject
   public AutoReloadConfigDecorator(
@@ -144,13 +146,18 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
 
   @Override
   public synchronized int shutdown() {
+    if (autoReloadRunnable != null) {
+      autoReloadRunnable.cancel(false);
+      autoReloadRunnable = null;
+    }
     return currentConfig.shutdown();
   }
 
   @Override
   public synchronized void startup(WorkQueue workQueue) {
     currentConfig.startup(workQueue);
-    autoReloadExecutor.scheduleAtFixedRate(
-        this::reloadIfNeeded, RELOAD_DELAY, RELOAD_INTERVAL, TimeUnit.SECONDS);
+    autoReloadRunnable =
+        autoReloadExecutor.scheduleAtFixedRate(
+            this::reloadIfNeeded, RELOAD_DELAY, RELOAD_INTERVAL, TimeUnit.SECONDS);
   }
 }
