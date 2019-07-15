@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aefb44ac_c3cfaac9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-07-15T14:02:47Z",
+      "side": 1,
+      "message": "Before this change we really stored the git-ref-updated events\nand not the replication events.\n\nReplication tasks are generated based on the git-ref-updated events and the replication.config.",
+      "range": {
+        "startLine": 7,
+        "startChar": 19,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "996412055d10f6d89e2377d6f66261a5824fb99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62547e76_b9a155b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-07-15T14:02:47Z",
+      "side": 1,
+      "message": "We should also align the semantics. This change proposes to store the replication tasks... which means that the EventsStorage should\nalso be renamed to ReplicationTaskStorage or something similar.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 78
+      },
+      "revId": "996412055d10f6d89e2377d6f66261a5824fb99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c70fbd9_2452a520",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-07-15T14:02:47Z",
+      "side": 1,
+      "message": "Replication events were already persisted from the GitReferenceUpdateListener implementation,\nwhich is the ReplicationQueue.onGitReferenceUpdated.\n\nWhy do we need to persist events also from here?",
+      "revId": "996412055d10f6d89e2377d6f66261a5824fb99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e86aaa3_fa20681f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventsDirectoryProvider.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-07-15T14:02:47Z",
+      "side": 1,
+      "message": "Introducing this provider is unrelated and unnecessary for the purpose of this change.\nPlease keep this change minimal and move this into another change.",
+      "revId": "996412055d10f6d89e2377d6f66261a5824fb99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba554419_b3ab115e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventsStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-07-15T14:02:47Z",
+      "side": 1,
+      "message": "I don\u0027t like that these refactorings are combined with this change. What should\nhave been just one line delta:\n\n  + r.uri \u003d uri.toASCIIString();\n\nIs now 12 changed lines. If this is necessary then please do it before or after this change.",
+      "revId": "996412055d10f6d89e2377d6f66261a5824fb99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e8c4741_fa151856",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventsStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-07-15T14:02:47Z",
+      "side": 1,
+      "message": "What are there leading/trailing stars good for? :-)",
+      "range": {
+        "startLine": 68,
+        "startChar": 28,
+        "endLine": 68,
+        "endChar": 38
+      },
+      "revId": "996412055d10f6d89e2377d6f66261a5824fb99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c27b0d64_c640e869",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventsStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-07-15T14:02:47Z",
+      "side": 1,
+      "message": "In the base version we expected the event key here and I believe this was a good design:\n* the caller doesn\u0027t have to know how event key is built (which components)\n* the persist method returns the eventKey and the caller was supposed to keep it and use\nfor calling the delete method\n\nIn this change, the return value of the persist is ignored.",
+      "range": {
+        "startLine": 76,
+        "startChar": 21,
+        "endLine": 76,
+        "endChar": 59
+      },
+      "revId": "996412055d10f6d89e2377d6f66261a5824fb99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
