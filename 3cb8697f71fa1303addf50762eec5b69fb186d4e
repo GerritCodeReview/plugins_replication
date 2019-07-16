@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c4e60eb_0f75c625",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-16T21:14:02Z",
+      "side": 1,
+      "message": "replication refs-filtering before push",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "3cb8697f71fa1303addf50762eec5b69fb186d4e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "021e9021_1bc39be8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-16T21:14:02Z",
+      "side": 1,
+      "message": "refs before being pushed for replication",
+      "range": {
+        "startLine": 9,
+        "startChar": 26,
+        "endLine": 9,
+        "endChar": 68
+      },
+      "revId": "3cb8697f71fa1303addf50762eec5b69fb186d4e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "850d6fa6_a91da9d8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-16T21:14:02Z",
+      "side": 1,
+      "message": "printStackTrace? A leftover of some debugging session?",
+      "range": {
+        "startLine": 398,
+        "startChar": 6,
+        "endLine": 398,
+        "endChar": 26
+      },
+      "revId": "3cb8697f71fa1303addf50762eec5b69fb186d4e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "888c72a7_d212c518",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationPushFilter.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-16T21:14:02Z",
+      "side": 1,
+      "message": "Newline and then leave an empty one between the header and the body.",
+      "range": {
+        "startLine": 22,
+        "startChar": 89,
+        "endLine": 22,
+        "endChar": 90
+      },
+      "revId": "3cb8697f71fa1303addf50762eec5b69fb186d4e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3a09d28_0f8a7eae",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-16T21:14:02Z",
+      "side": 1,
+      "message": "This isn\u0027t Java code, as the \u003c\u003e would be highlighted as a syntax error. Can we make it more real?",
+      "range": {
+        "startLine": 38,
+        "startChar": 60,
+        "endLine": 38,
+        "endChar": 97
+      },
+      "revId": "3cb8697f71fa1303addf50762eec5b69fb186d4e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
