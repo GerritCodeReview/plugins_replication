@@ -16,6 +16,24 @@
       "revId": "55d0ed2a5b57cebbbb19dd584bbfbb1ac8176e4f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dabdc93_27d66b20",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecoratorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-16T19:48:57Z",
+      "side": 1,
+      "message": "Not needed on this branch.",
+      "parentUuid": "44120a05_881fae3a",
+      "revId": "55d0ed2a5b57cebbbb19dd584bbfbb1ac8176e4f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
