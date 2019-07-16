@@ -46,6 +46,30 @@
       "revId": "da258918e757360022f78f57ec02ba3f1a7add92",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4145e581_4110a073",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-07-16T15:48:38Z",
+      "side": 1,
+      "message": "\u003e \u003e I don\u0027t see these two commits in stable-2.15 when I try to reproduce this merge locally.\n\u003e \n\u003e But I do see them in the merge-list. Have you fetched your local stable-2.15?\n\nMy mistake, I was looking at another project; sorry.\n\n\u003e \u003e They\u0027re not listed as [1] either.\n\u003e \u003e \n\u003e \u003e [1] https://gerrit-review.googlesource.com/q/project:plugins/replication+status:open\n\u003e \n\u003e This is a link of open changes, the two commits are merged already onto stable-2.15.\n\nSure.\n\n\u003e \u003e Also, how about including [2] in this very merge\u0027s base?\n\u003e \u003e \n\u003e \u003e [2] https://gerrit-review.googlesource.com/c/plugins/replication/+/231392\n\u003e \n\u003e This change isn\u0027t merged or approved yet.\n\nIf [2] is still duly needed, then I think it would make sense to include it in this base, even (especially) if still under review. But up to you to decide.",
+      "parentUuid": "b312992e_19cfc90d",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 0
+      },
+      "revId": "da258918e757360022f78f57ec02ba3f1a7add92",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
