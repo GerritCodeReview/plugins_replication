@@ -151,14 +151,17 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
   @Override
   public void cancel() {
-    repLog.info("Replication {} was canceled", getURI());
+    repLog.info("Replication [{}] to {} was canceled", IdGenerator.format(id), getURI());
     canceledByReplication();
     pool.pushWasCanceled(this);
   }
 
   @Override
   public void setCanceledWhileRunning() {
-    repLog.info("Replication {} was canceled while being executed", getURI());
+    repLog.info(
+        "Replication [{}] to {} was canceled while being executed",
+        IdGenerator.format(id),
+        getURI());
     canceledWhileRunning.set(true);
   }
 
@@ -202,7 +205,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   boolean wasCanceled() {
-    return canceled;
+    return canceled || canceledWhileRunning.get();
   }
 
   URIish getURI() {
