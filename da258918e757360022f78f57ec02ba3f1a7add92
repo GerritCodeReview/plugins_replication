@@ -94,6 +94,30 @@
       "revId": "da258918e757360022f78f57ec02ba3f1a7add92",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e155a611_d9445a0f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-07-16T20:45:38Z",
+      "side": 1,
+      "message": "\u003e \u003e \u003e \u003e [2] https://gerrit-review.googlesource.com/c/plugins/replication/+/231392\n\u003e \u003e \u003e \n\u003e \u003e \u003e This change isn\u0027t merged or approved yet.\n\u003e \u003e \n\u003e \u003e If [2] is still duly needed, then I think it would make sense to include it in this base, even (especially) if still under review. But up to you to decide.\n\u003e \n\u003e I agree with you, are you willing to help to review and getting it submitted?\n\u003e More than happy to get [2] finalised and then re-merge this one.\n\n[2]\u0027s review in (further) progress.",
+      "parentUuid": "32590289_0aa7bee3",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 0
+      },
+      "revId": "da258918e757360022f78f57ec02ba3f1a7add92",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
