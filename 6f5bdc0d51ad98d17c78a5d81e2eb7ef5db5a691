@@ -46,6 +46,30 @@
       "revId": "6f5bdc0d51ad98d17c78a5d81e2eb7ef5db5a691",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "821c5f03_d3cdeed6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-17T10:26:15Z",
+      "side": 1,
+      "message": "\u003e We are extending the replication plugin and part of the additional functionality is executing remote ssh commands on the destination(s).  Because we\u0027re extending in a package that is not com.googlesource.gerrit.plugins.replication this class is not visible.\n\nGotcha, then possibly the name \"Helper\" isn\u0027t appropriate anymore? It isn\u0027t actually just an internal helper class but rather exposing a way to execute remote SSH commands by other plugins that are willing to enrich the replication plugin functionality, which makes sense to me.\n\n\u003e I\u0027ll see if we can get around this by moving our classes to the same package.  Then maybe this whole change is not needed.\n\nThat would be a hack anyway. Now that the use-case is clear, it makes sense to make it public and rename it (?) or just documenting what\u0027s the intended purpose?",
+      "parentUuid": "f35495bc_0bb555db",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 6
+      },
+      "revId": "6f5bdc0d51ad98d17c78a5d81e2eb7ef5db5a691",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
