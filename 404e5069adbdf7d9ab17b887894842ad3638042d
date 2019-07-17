@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96b59661_92c860e1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-17T08:11:22Z",
+      "side": 1,
+      "message": "Rather than ignoring it, can we record the scheduled handle, so that we can cancel it if needed? At the moment we just do not track them and so it\u0027s more difficult to cancel in-flight stuff.",
+      "range": {
+        "startLine": 363,
+        "startChar": 8,
+        "endLine": 363,
+        "endChar": 36
+      },
+      "revId": "404e5069adbdf7d9ab17b887894842ad3638042d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
