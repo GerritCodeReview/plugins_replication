@@ -22,6 +22,30 @@
       "revId": "6f5bdc0d51ad98d17c78a5d81e2eb7ef5db5a691",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f35495bc_0bb555db",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-07-17T09:38:31Z",
+      "side": 1,
+      "message": "We are extending the replication plugin and part of the additional functionality is executing remote ssh commands on the destination(s).  Because we\u0027re extending in a package that is not com.googlesource.gerrit.plugins.replication this class is not visible.\n\nI\u0027ll see if we can get around this by moving our classes to the same package.  Then maybe this whole change is not needed.",
+      "parentUuid": "31f6c938_485a9607",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 6
+      },
+      "revId": "6f5bdc0d51ad98d17c78a5d81e2eb7ef5db5a691",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
