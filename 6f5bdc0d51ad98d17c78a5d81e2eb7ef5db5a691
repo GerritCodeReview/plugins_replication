@@ -94,6 +94,30 @@
       "revId": "6f5bdc0d51ad98d17c78a5d81e2eb7ef5db5a691",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcb395a9_6fee5413",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-17T11:50:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8c3d0688_4a6bb92b",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 6
+      },
+      "revId": "6f5bdc0d51ad98d17c78a5d81e2eb7ef5db5a691",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
