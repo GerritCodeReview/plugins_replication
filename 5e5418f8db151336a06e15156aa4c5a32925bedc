@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69dabe12_93f688c9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-17T08:16:05Z",
+      "side": 1,
+      "message": "Before the default (and hardcoded) value was 2 minutes: we should keep that value as the default for people that upgrade the code without setting any value in here.",
+      "range": {
+        "startLine": 117,
+        "startChar": 68,
+        "endLine": 117,
+        "endChar": 79
+      },
+      "revId": "5e5418f8db151336a06e15156aa4c5a32925bedc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
