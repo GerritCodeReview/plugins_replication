@@ -225,24 +225,35 @@ public class Destination {
   public int shutdown() {
     int cnt = 0;
     if (pool != null) {
-      repLog.warn("Cancelling replication events");
+      synchronized (stateLock) {
+        int numPending = pending.size();
+        int numInFlight = inFlight.size();
 
-      foreachPushOp(
-          pending,
-          push -> {
-            push.cancel();
-            return null;
-          });
-      pending.clear();
-      foreachPushOp(
-          inFlight,
-          push -> {
-            push.setCanceledWhileRunning();
-            return null;
-          });
-      inFlight.clear();
-      cnt = pool.shutdownNow().size();
-      pool = null;
+        if (numPending > 0 || numInFlight > 0) {
+          repLog.warn(
+              "Cancelling replication events (pending={}, inFlight={}) for destination {}",
+              numPending,
+              numInFlight,
+              getRemoteConfigName());
+
+          foreachPushOp(
+              pending,
+              push -> {
+                push.cancel();
+                return null;
+              });
+          pending.clear();
+          foreachPushOp(
+              inFlight,
+              push -> {
+                push.setCanceledWhileRunning();
+                return null;
+              });
+          inFlight.clear();
+        }
+        cnt = pool.shutdownNow().size();
+        pool = null;
+      }
     }
     return cnt;
   }
