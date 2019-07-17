@@ -70,6 +70,30 @@
       "revId": "6f5bdc0d51ad98d17c78a5d81e2eb7ef5db5a691",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c3d0688_4a6bb92b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-07-17T11:19:50Z",
+      "side": 1,
+      "message": "If we\u0027re going to rename it, I\u0027d rather do that in a separate change.  And that might be better on master.\n\nI\u0027ve added a minimal Javadoc in the follow up change: https://gerrit-review.googlesource.com/c/plugins/replication/+/231592",
+      "parentUuid": "821c5f03_d3cdeed6",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 6
+      },
+      "revId": "6f5bdc0d51ad98d17c78a5d81e2eb7ef5db5a691",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
