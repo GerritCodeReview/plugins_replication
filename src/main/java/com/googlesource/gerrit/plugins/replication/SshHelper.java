@@ -25,6 +25,7 @@ import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
 import org.eclipse.jgit.util.io.StreamCopyThread;
 
+/** Utility class that provides SSH access to remote URIs. */
 public class SshHelper {
   private final Provider<SshSessionFactory> sshSessionFactoryProvider;
   private final int commandTimeout;
