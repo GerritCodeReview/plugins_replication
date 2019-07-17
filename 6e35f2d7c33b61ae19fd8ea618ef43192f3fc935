@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abc36c0b_aa7c1d26",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-17T10:22:54Z",
+      "side": 1,
+      "message": "We should make it consistent with the wording above:\n  By default",
+      "range": {
+        "startLine": 82,
+        "startChar": 32,
+        "endLine": 82,
+        "endChar": 56
+      },
+      "revId": "6e35f2d7c33b61ae19fd8ea618ef43192f3fc935",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e41cea85_a434e643",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-17T10:22:54Z",
+      "side": 1,
+      "message": "By default",
+      "range": {
+        "startLine": 87,
+        "startChar": 39,
+        "endLine": 87,
+        "endChar": 59
+      },
+      "revId": "6e35f2d7c33b61ae19fd8ea618ef43192f3fc935",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
