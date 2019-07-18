@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c3e8713_4bc62fae",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-07-18T08:08:01Z",
+      "side": 1,
+      "message": "Is this assignment really needed? You are saying in the commit message, that if replication config does not exist or is invalid, there is no active replication any way.",
+      "range": {
+        "startLine": 54,
+        "startChar": 35,
+        "endLine": 54,
+        "endChar": 70
+      },
+      "revId": "0df288afccb53b7abbe4f2ee90f68c80e9dcd2c7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
