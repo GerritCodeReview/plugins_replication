@@ -13,7 +13,7 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
-import static java.util.concurrent.TimeUnit.MINUTES;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toList;
 
@@ -44,12 +44,14 @@ import org.slf4j.LoggerFactory;
 @Singleton
 public class ReplicationFileBasedConfig implements ReplicationConfig {
   private static final Logger log = LoggerFactory.getLogger(ReplicationFileBasedConfig.class);
+  private static final int DEFAULT_SSH_CONNECTION_TIMEOUT_MS = 2 * 60 * 1000; // 2 minutes
+
   private List<Destination> destinations;
   private Path cfgPath;
   private boolean replicateAllOnPluginStart;
   private boolean defaultForceUpdate;
   private int sshCommandTimeout;
-  private int sshConnectionTimeout;
+  private int sshConnectionTimeout = DEFAULT_SSH_CONNECTION_TIMEOUT_MS;
   private final FileBasedConfig config;
 
   @Inject
@@ -113,8 +115,13 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
         (int) ConfigUtil.getTimeUnit(config, "gerrit", null, "sshCommandTimeout", 0, SECONDS);
     sshConnectionTimeout =
         (int)
-            SECONDS.toMillis(
-                ConfigUtil.getTimeUnit(config, "gerrit", null, "sshConnectionTimeout", 2, MINUTES));
+            ConfigUtil.getTimeUnit(
+                config,
+                "gerrit",
+                null,
+                "sshConnectionTimeout",
+                DEFAULT_SSH_CONNECTION_TIMEOUT_MS,
+                MILLISECONDS);
 
     ImmutableList.Builder<Destination> dest = ImmutableList.builder();
     for (RemoteConfig c : allRemotes(config)) {
