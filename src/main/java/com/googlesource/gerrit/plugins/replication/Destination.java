@@ -71,6 +71,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import org.apache.commons.io.FilenameUtils;
@@ -407,7 +408,9 @@ public class Destination {
         e = opFactory.create(project, uri);
         addRef(e, ref);
         e.addState(ref, state);
-        pool.schedule(e, now ? 0 : config.getDelay(), TimeUnit.SECONDS);
+        @SuppressWarnings("unused")
+        ScheduledFuture<?> ignored =
+            pool.schedule(e, now ? 0 : config.getDelay(), TimeUnit.SECONDS);
         pending.put(uri, e);
       } else if (!e.getRefs().contains(ref)) {
         addRef(e, ref);
@@ -516,7 +519,9 @@ public class Destination {
         pending.put(uri, pushOp);
         switch (reason) {
           case COLLISION:
-            pool.schedule(pushOp, config.getRescheduleDelay(), TimeUnit.SECONDS);
+            @SuppressWarnings("unused")
+            ScheduledFuture<?> ignored =
+                pool.schedule(pushOp, config.getRescheduleDelay(), TimeUnit.SECONDS);
             break;
           case TRANSPORT_ERROR:
           case REPOSITORY_MISSING:
@@ -528,7 +533,9 @@ public class Destination {
             postReplicationFailedEvent(pushOp, status);
             if (pushOp.setToRetry()) {
               postReplicationScheduledEvent(pushOp);
-              pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
+              @SuppressWarnings("unused")
+              ScheduledFuture<?> ignored2 =
+                  pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
             } else {
               pushOp.canceledByReplication();
               pending.remove(uri);
