@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
+import static java.util.concurrent.TimeUnit.MINUTES;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.io.IOException;
@@ -61,6 +62,24 @@ public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
 
     assertThatIsDestination(destinations.get(0), remoteName1, remoteUrl1);
     assertThatIsDestination(destinations.get(1), remoteName2, remoteUrl2);
+  }
+
+  @Test
+  public void shouldReturnDefaultSshTimeoutsWhenNotSet() throws Exception {
+    ReplicationFileBasedConfig replicationConfig = newReplicationFileBasedConfig();
+    assertThat(replicationConfig.getSshConnectionTimeout()).isEqualTo(MINUTES.toMillis(2));
+    assertThat(replicationConfig.getSshCommandTimeout()).isEqualTo(0);
+  }
+
+  @Test
+  public void shouldReturnConfiguredSshTimeouts() throws Exception {
+    FileBasedConfig config = newReplicationConfig();
+    config.setString("gerrit", null, "sshConnectionTimeout", "4 m");
+    config.setString("gerrit", null, "sshCommandTimeout", "20 s");
+    config.save();
+    ReplicationFileBasedConfig replicationConfig = newReplicationFileBasedConfig();
+    assertThat(replicationConfig.getSshConnectionTimeout()).isEqualTo(MINUTES.toMillis(4));
+    assertThat(replicationConfig.getSshCommandTimeout()).isEqualTo(20);
   }
 
   private ReplicationFileBasedConfig newReplicationFileBasedConfig()
