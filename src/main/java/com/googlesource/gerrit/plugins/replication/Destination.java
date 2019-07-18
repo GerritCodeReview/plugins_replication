@@ -465,11 +465,11 @@ public class Destination {
       if (op.wasCanceled()) {
         return RunwayStatus.canceled();
       }
+      pending.remove(op.getURI());
       PushOne inFlightOp = inFlight.get(op.getURI());
       if (inFlightOp != null) {
         return RunwayStatus.denied(inFlightOp.getId());
       }
-      pending.remove(op.getURI());
       inFlight.put(op.getURI(), op);
     }
     return RunwayStatus.allowed();
