@@ -16,6 +16,24 @@
       "revId": "e780ae61cbbba3f88558a3620065d1fcdc0768c8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bf004ae_455dcc34",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-18T14:52:07Z",
+      "side": 1,
+      "message": "Checking the logs, effectively I see sometimes PushOps that were supposed to be pending but were instead cancelled.",
+      "parentUuid": "3d31d9d7_b883e216",
+      "revId": "e780ae61cbbba3f88558a3620065d1fcdc0768c8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }

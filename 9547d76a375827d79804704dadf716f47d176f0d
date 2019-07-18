@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdb7b6dd_d5b3ac4f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-18T14:52:07Z",
+      "side": 0,
+      "message": "This innocent \"apparent\" bug was, in reality, intentional: the requestRunway was a \"removeFromPendingAndTryToTakeoff\".\n\nThe assumption throughout the code was that this method wasn\u0027t just a request, but was really *always* considering the PushOp to have been served in some way.\n\nThis fix created a situation where the PushOp gets added to itself because is found in pending and could have generated as a consequence a flood of refs accumulations.",
+      "range": {
+        "startLine": 468,
+        "startChar": 6,
+        "endLine": 468,
+        "endChar": 34
+      },
+      "revId": "9547d76a375827d79804704dadf716f47d176f0d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
