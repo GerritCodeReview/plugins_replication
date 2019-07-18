@@ -22,6 +22,53 @@
       "revId": "8ac41f7dfc00e6a8406e0cb557417426894d2ba3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21bdb7c4_49f22635",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-18T14:58:43Z",
+      "side": 1,
+      "message": "Let me add them :-)",
+      "parentUuid": "4ae5f861_c93520bb",
+      "range": {
+        "startLine": 11,
+        "startChar": 114,
+        "endLine": 11,
+        "endChar": 148
+      },
+      "revId": "8ac41f7dfc00e6a8406e0cb557417426894d2ba3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2592e229_7672d045",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-18T14:58:43Z",
+      "side": 1,
+      "message": "The caller of this method \"assumes\" that the call to requestRunway() would remove it from the pending list. NOT removing it would result in the same PushOp to find again when rescheduling it and doubling the size of its refs.\n\nIf the reschedule happens multiple times, the refs list would increase exponentially.",
+      "range": {
+        "startLine": 468,
+        "startChar": 6,
+        "endLine": 468,
+        "endChar": 34
+      },
+      "revId": "8ac41f7dfc00e6a8406e0cb557417426894d2ba3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
