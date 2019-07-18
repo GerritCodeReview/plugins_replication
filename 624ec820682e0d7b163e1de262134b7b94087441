@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "5be53822_e203fb05",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-07-18T03:32:06Z",
+      "side": 1,
+      "message": "This is also wrong.  It should convert from MINUTES since that\u0027s what is used as the time unit in the getTimeUnit call.",
+      "range": {
+        "startLine": 116,
+        "startChar": 12,
+        "endLine": 116,
+        "endChar": 19
+      },
+      "revId": "624ec820682e0d7b163e1de262134b7b94087441",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4dd8350f_551b0971",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
         "patchSetId": 4
