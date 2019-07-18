@@ -22,6 +22,30 @@
       "revId": "0df288afccb53b7abbe4f2ee90f68c80e9dcd2c7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "798d4a75_d739ea09",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-07-18T10:07:48Z",
+      "side": 1,
+      "message": "It\u0027s not really necessary, but I prefer to have it so that readers are aware it is supposed to have a default. I don\u0027t think it has any negative side effects.",
+      "parentUuid": "5c3e8713_4bc62fae",
+      "range": {
+        "startLine": 54,
+        "startChar": 35,
+        "endLine": 54,
+        "endChar": 70
+      },
+      "revId": "0df288afccb53b7abbe4f2ee90f68c80e9dcd2c7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
