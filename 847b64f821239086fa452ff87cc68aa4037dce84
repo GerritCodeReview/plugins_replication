@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "065f6b19_c0255b27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-07-18T23:29:04Z",
+      "side": 1,
+      "message": "The context should be included in the commit message rather than referring to comments elsewhere.",
+      "range": {
+        "startLine": 11,
+        "startChar": 114,
+        "endLine": 11,
+        "endChar": 148
+      },
+      "revId": "847b64f821239086fa452ff87cc68aa4037dce84",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bb81226_24026bc5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-07-18T23:29:04Z",
+      "side": 1,
+      "message": "Please wrap long lines.",
+      "range": {
+        "startLine": 11,
+        "startChar": 65,
+        "endLine": 11,
+        "endChar": 81
+      },
+      "revId": "847b64f821239086fa452ff87cc68aa4037dce84",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
