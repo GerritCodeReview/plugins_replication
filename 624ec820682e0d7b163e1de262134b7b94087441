@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4dd8350f_551b0971",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-07-18T02:27:12Z",
+      "side": 1,
+      "message": "This doesn\u0027t work as expected when the replication.config file doesn\u0027t exist, or exists but is empty or has invalid content.  In those cases this method either returns early (L91 and L95) or throws an exception (L101 and L104) before reaching this line and thus sshConnectionTimeout is 0 (the default initial value for int) rather than 2 minutes.\n\nIt works for sshCommandTimeout because its default of 0 matches the default initial value, and for defaultForceUpdate because the default initial value for boolean is false.\n\nThe same problem exists for replicateOnStartup.  The default is supposed to be true, but if there is no configuration it ends up defaulting to false.  This is not serious though, since if there is no configuration it means there\u0027s nothing to replicate anyway.",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 0
+      },
+      "revId": "624ec820682e0d7b163e1de262134b7b94087441",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
