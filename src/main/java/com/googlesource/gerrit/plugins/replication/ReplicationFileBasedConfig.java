@@ -31,6 +31,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
@@ -44,12 +45,16 @@ import org.slf4j.LoggerFactory;
 @Singleton
 public class ReplicationFileBasedConfig implements ReplicationConfig {
   private static final Logger log = LoggerFactory.getLogger(ReplicationFileBasedConfig.class);
+  private static final int DEFAULT_SSH_CONNECTION_TIMEOUT = 2;
+  private static final TimeUnit DEFAULT_SSH_CONNECTION_TIMEOUT_UNIT = MINUTES;
+
   private List<Destination> destinations;
   private Path cfgPath;
   private boolean replicateAllOnPluginStart;
   private boolean defaultForceUpdate;
   private int sshCommandTimeout;
-  private int sshConnectionTimeout;
+  private int sshConnectionTimeout =
+      (int) DEFAULT_SSH_CONNECTION_TIMEOUT_UNIT.toMillis(DEFAULT_SSH_CONNECTION_TIMEOUT);
   private final FileBasedConfig config;
 
   @Inject
@@ -113,8 +118,14 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
         (int) ConfigUtil.getTimeUnit(config, "gerrit", null, "sshCommandTimeout", 0, SECONDS);
     sshConnectionTimeout =
         (int)
-            SECONDS.toMillis(
-                ConfigUtil.getTimeUnit(config, "gerrit", null, "sshConnectionTimeout", 2, MINUTES));
+            DEFAULT_SSH_CONNECTION_TIMEOUT_UNIT.toMillis(
+                ConfigUtil.getTimeUnit(
+                    config,
+                    "gerrit",
+                    null,
+                    "sshConnectionTimeout",
+                    DEFAULT_SSH_CONNECTION_TIMEOUT,
+                    DEFAULT_SSH_CONNECTION_TIMEOUT_UNIT));
 
     ImmutableList.Builder<Destination> dest = ImmutableList.builder();
     for (RemoteConfig c : allRemotes(config)) {
