@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
+import static java.nio.file.Files.createTempDirectory;
 import static org.easymock.EasyMock.anyObject;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.createNiceMock;
@@ -83,7 +84,7 @@ public abstract class AbstractConfigTest {
   }
 
   protected static Path createTempPath(String prefix) throws IOException {
-    return java.nio.file.Files.createTempDirectory(prefix);
+    return createTempDirectory(prefix);
   }
 
   protected FileBasedConfig newReplicationConfig() {
