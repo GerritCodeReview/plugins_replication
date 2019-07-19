@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f52970af_78b4eedf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-19T13:13:30Z",
+      "side": 1,
+      "message": "This will allow us to inject mock from test",
+      "parentUuid": "a831a833_3a5bd01f",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74b1116a_fea99a71",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2019-07-19T09:54:48Z",
       "side": 1,
       "message": "as above, can you explain why we need this?",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e40d5655_270cdaa6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-19T13:13:30Z",
+      "side": 1,
+      "message": "it will allow us to inject mocked version",
+      "parentUuid": "74b1116a_fea99a71",
       "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "151f23f9_2b320e5e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/TransportFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-19T13:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c543ed4a_6c9abf42",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d8bae336_41b7551f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/TransportFactoryImpl.java",
         "patchSetId": 12
@@ -79,6 +139,30 @@
       "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31073c94_073edc12",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/TransportFactoryImpl.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-19T13:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8bae336_41b7551f",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "2f955765_3e3b63ee",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-19T13:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2c85c4c_9fbcd809",
+      "range": {
+        "startLine": 4,
+        "startChar": 50,
+        "endLine": 4,
+        "endChar": 79
+      },
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c19cb047_c054de66",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
         "patchSetId": 12
@@ -119,6 +227,24 @@
       "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "587cadfb_e2e64430",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-19T13:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c19cb047_c054de66",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -139,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "8fb7fcfa_b67277bd",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-19T13:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6db504f3_62a347c2",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f6ece79_f258b277",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
         "patchSetId": 12
@@ -153,6 +297,24 @@
       "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e499f5c7_040be1e6",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-19T13:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f6ece79_f258b277",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -179,6 +341,30 @@
     },
     {
       "key": {
+        "uuid": "af68d370_5e32fc1d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-19T13:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8123b8d0_d57c679b",
+      "range": {
+        "startLine": 402,
+        "startChar": 48,
+        "endLine": 402,
+        "endChar": 75
+      },
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "11151f0f_74e88b54",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
         "patchSetId": 12
@@ -199,6 +385,30 @@
       "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a1223fe_3800514d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-19T13:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11151f0f_74e88b54",
+      "range": {
+        "startLine": 443,
+        "startChar": 1,
+        "endLine": 452,
+        "endChar": 5
+      },
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -225,6 +435,30 @@
     },
     {
       "key": {
+        "uuid": "0714e74e_14572a2f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-19T13:13:30Z",
+      "side": 1,
+      "message": "If you mean using equals on RemoteRefUpdate I\u0027m not sure we can use it because we are not overriding default one so we are going to compare refs and they are different. And I\u0027m not sure that we can override equals and hashCode in RemoteRefUpdate just for test. We can use toString but I thought that this is a code smell and it\u0027s going to be pointed out in the code review :) @Luca @Tiago WDYT?",
+      "parentUuid": "7fda9c6d_db5ffe5f",
+      "range": {
+        "startLine": 459,
+        "startChar": 1,
+        "endLine": 468,
+        "endChar": 5
+      },
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e054891a_f1067145",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
         "patchSetId": 12
@@ -239,6 +473,24 @@
       "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "480b54cf_a348b323",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-19T13:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e054891a_f1067145",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
