@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "5cce2220_e7402ba2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-19T13:49:54Z",
+      "side": 1,
+      "message": "I am still failing to get this, sorry man :)\nCan you expand this a bit more?\nCan\u0027t we just inject Transport instead of TransportFactory?",
+      "parentUuid": "f52970af_78b4eedf",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74b1116a_fea99a71",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
         "patchSetId": 12
