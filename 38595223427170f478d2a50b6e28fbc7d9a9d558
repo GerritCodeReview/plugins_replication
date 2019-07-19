@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "71a210c8_1b0451fe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-19T14:00:25Z",
+      "side": 1,
+      "message": "Transport is an abstract class and we are using static a method `open`. Because it\u0027s abstract and it\u0027s coming from jgit it\u0027s hard to use with guice. Plus `open` method is creating Transport instance based on remote uri param that\u0027s why we are not able to generate it in init phase we have to resolved it in runtime",
+      "parentUuid": "5cce2220_e7402ba2",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74b1116a_fea99a71",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
         "patchSetId": 12
