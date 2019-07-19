@@ -1,0 +1,244 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a831a833_3a5bd01f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-19T09:54:48Z",
+      "side": 1,
+      "message": "I am trying to understand the reason for injecting transportFactory now.\nDoesn\u0027t that just delegate to Transport anyway?",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74b1116a_fea99a71",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-19T09:54:48Z",
+      "side": 1,
+      "message": "as above, can you explain why we need this?",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c543ed4a_6c9abf42",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/TransportFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-19T09:54:48Z",
+      "side": 1,
+      "message": "2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8bae336_41b7551f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/TransportFactoryImpl.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-19T09:54:48Z",
+      "side": 1,
+      "message": "2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2c85c4c_9fbcd809",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-19T09:54:48Z",
+      "side": 1,
+      "message": "What about:\n...to allow to influence the behaviour...",
+      "range": {
+        "startLine": 4,
+        "startChar": 50,
+        "endLine": 4,
+        "endChar": 79
+      },
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c19cb047_c054de66",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-19T09:54:48Z",
+      "side": 1,
+      "message": "All these variables could be private",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6db504f3_62a347c2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-19T09:54:48Z",
+      "side": 1,
+      "message": "This is not used",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f6ece79_f258b277",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-19T09:54:48Z",
+      "side": 1,
+      "message": "isCallFinished.get() is already a boolean, no need to compare it with truth",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8123b8d0_d57c679b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-19T09:54:48Z",
+      "side": 1,
+      "message": "RepositoryNotFoundException is also IOException and thus can be removed",
+      "range": {
+        "startLine": 402,
+        "startChar": 48,
+        "endLine": 402,
+        "endChar": 75
+      },
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11151f0f_74e88b54",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-19T09:54:48Z",
+      "side": 1,
+      "message": "Could use expression lambda here, a bit more compact:\n\n      return refs.stream()\n          .allMatch(\n              ref -\u003e expectedRemoteRefs\n                  .stream()\n                  .anyMatch(expectedRef -\u003e compare(ref, expectedRef))\n          );",
+      "range": {
+        "startLine": 443,
+        "startChar": 1,
+        "endLine": 452,
+        "endChar": 5
+      },
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fda9c6d_db5ffe5f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-19T09:54:48Z",
+      "side": 1,
+      "message": "do we need this? can\u0027t we just use object comparison?\nOr even toString[1]\n\n[1]https://github.com/eclipse/jgit/blob/master/org.eclipse.jgit/src/org/eclipse/jgit/transport/RemoteRefUpdate.java#L514",
+      "range": {
+        "startLine": 459,
+        "startChar": 1,
+        "endLine": 468,
+        "endChar": 5
+      },
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e054891a_f1067145",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-19T09:54:48Z",
+      "side": 1,
+      "message": "Is this not the same as: return Objects.equals(obj, expectedObj);",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
