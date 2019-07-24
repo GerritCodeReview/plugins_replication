@@ -288,6 +288,17 @@ remote.NAME.replicationMaxRetries
 
 	By default, use replication.maxRetries.
 
+remote.NAME.drainQueueAttempts
+:	Maximum number of attempts to drain the replication event queue before
+	stopping the plugin.
+
+	When stoppping the plugin, the shutdown will be delayed trying to drain
+	the event queue.
+
+	The total dealay is "drainQueueAttempts" * "replicationDelay" seconds.
+
+	When not set, the queue is not drained.
+
 remote.NAME.threads
 :	Number of worker threads to dedicate to pushing to the
 	repositories described by this remote.  Each thread can push
