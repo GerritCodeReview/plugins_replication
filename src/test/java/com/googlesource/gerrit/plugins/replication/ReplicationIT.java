@@ -47,6 +47,8 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 import org.junit.Test;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 
 @UseLocalDisk
 @TestPlugin(
@@ -218,6 +220,66 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
       Ref targetProjectHead = getRef(repo, Constants.HEAD);
       assertThat(targetProjectHead).isNotNull();
       assertThat(targetProjectHead.getTarget().getName()).isEqualTo(newHead);
+    }
+  }
+
+  @Rule public ExpectedException exception = ExpectedException.none();
+  @Test
+  public void shouldNotDrainTheQueueWhenReloading() throws Exception {
+    // Setup repo to replicate
+    String testPrefix = "dontDrainQueue";
+    Project.NameKey targetProject = createProject(testPrefix + "projectreplica");
+    setReplicationDestination(testPrefix + "remote", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    // Setup long replication delay
+    int REPLICATION_DELAY = 2;
+    config.setInt("remote", testPrefix + "remote", "replicationDelay", REPLICATION_DELAY);
+    config.setInt("remote", testPrefix + "remote", "timeout", REPLICATION_DELAY * 2);
+    config.save();
+    reloadConfig();
+
+    Result pushResult = createChange();
+    reloadConfig();
+
+    RevCommit sourceCommit = pushResult.getCommit();
+    String sourceRef = pushResult.getPatchSet().getRefName();
+
+    exception.expect(InterruptedException.class);
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+        waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
+    }
+  }
+
+  @Test
+  public void shouldDrainTheQueueWhenReloading() throws Exception {
+    // Setup repo to replicate
+    String testPrefix = "drainQueue";
+    Project.NameKey targetProject = createProject(testPrefix + "projectreplica");
+    setReplicationDestination(testPrefix + "remote", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    // Setup long replication delay and draining policy
+    int REPLICATION_DELAY = 2;
+    int DRAIN_QUEUE_ATTEMPTS = 3;
+    config.setInt("remote", testPrefix + "remote", "drainQueueAttempts", DRAIN_QUEUE_ATTEMPTS);
+    config.setInt("remote", testPrefix + "remote", "replicationDelay", REPLICATION_DELAY);
+    // Make sure timeout is longer than the time needed to drain the queue
+    config.setInt("remote", testPrefix + "remote", "timeout", REPLICATION_DELAY * DRAIN_QUEUE_ATTEMPTS * 2);
+    config.save();
+    reloadConfig();
+
+    Result pushResult = createChange();
+    reloadConfig();
+
+    RevCommit sourceCommit = pushResult.getCommit();
+    String sourceRef = pushResult.getPatchSet().getRefName();
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+        waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
+        Ref targetBranchRef = getRef(repo, sourceRef);
+        assertThat(targetBranchRef).isNotNull();
+        assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
     }
   }
 
