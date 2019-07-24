@@ -75,6 +75,9 @@ public class ReplicationState {
       URIish uri,
       RefPushResult status,
       RemoteRefUpdate.Status refUpdateStatus) {
+    if (refUpdateStatus == RemoteRefUpdate.Status.UP_TO_DATE) {
+      return;
+    }
     pushResultProcessing.onRefReplicatedToOneNode(project, ref, uri, status, refUpdateStatus);
 
     RefReplicationStatus completedRefStatus = null;
