@@ -75,6 +75,10 @@ public class ReplicationState {
       URIish uri,
       RefPushResult status,
       RemoteRefUpdate.Status refUpdateStatus) {
+    //XXX I know this is wrong, but I was trying to figure out why an UP_TO_DATE ref is replicated
+    if (refUpdateStatus == RemoteRefUpdate.Status.UP_TO_DATE) {
+        return;
+    }
     pushResultProcessing.onRefReplicatedToOneNode(project, ref, uri, status, refUpdateStatus);
 
     RefReplicationStatus completedRefStatus = null;
