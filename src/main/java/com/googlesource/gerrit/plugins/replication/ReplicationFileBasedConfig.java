@@ -25,6 +25,7 @@ import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.ConfigUtil;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.IOException;
@@ -222,9 +223,50 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   public int shutdown() {
     int discarded = 0;
     for (Destination cfg : destinations) {
-      discarded += cfg.shutdown();
+      try {
+        drainReplicationEvents(cfg);
+      } catch (EventQueueNotEmptyException e) {
+        logger.atWarning().log("Event queue not empty: %s", e.getMessage());
+      } finally {
+        discarded += cfg.shutdown();
+      }
     }
     return discarded;
+  }
+
+  @VisibleForTesting
+  void drainReplicationEvents(Destination destination) throws EventQueueNotEmptyException {
+    int drainQueueAttempts = destination.getDrainQueueAttempts();
+    if (drainQueueAttempts == 0) {
+      return;
+    }
+    int pending = destination.getQueueInfo().pending.size();
+    int inFlight = destination.getQueueInfo().inFlight.size();
+
+    while ((inFlight > 0 || pending > 0) && drainQueueAttempts > 0) {
+      try {
+        logger.atInfo().log(
+            "Draining replication events, postpone shutdown. Events left: inFlight %d, pending %d",
+            inFlight, pending);
+        Thread.sleep(destination.getReplicationDelay());
+      } catch (Exception e) {
+        // Nothing to catch
+      }
+      pending = destination.getQueueInfo().pending.size();
+      inFlight = destination.getQueueInfo().inFlight.size();
+      drainQueueAttempts--;
+    }
+
+    if (pending > 0 || inFlight > 0) {
+      throw new EventQueueNotEmptyException(
+          String.format("Event queue not empty. Pending: %d - InFlight: %d", pending, inFlight));
+    }
+  }
+
+  public class EventQueueNotEmptyException extends Exception {
+    public EventQueueNotEmptyException(String errorMessage) {
+      super(errorMessage);
+    }
   }
 
   FileBasedConfig getConfig() {
