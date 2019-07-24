@@ -22,10 +22,12 @@ import org.eclipse.jgit.transport.RemoteConfig;
 class DestinationConfiguration {
   static final int DEFAULT_REPLICATION_DELAY = 15;
   static final int DEFAULT_RESCHEDULE_DELAY = 3;
+  static final int DEFAULT_DRAIN_QUEUE_ATTEMPTS = 0;
 
   private final int delay;
   private final int rescheduleDelay;
   private final int retryDelay;
+  private final int drainQueueAttempts;
   private final int lockErrorMaxRetries;
   private final ImmutableList<String> adminUrls;
   private final int poolThreads;
@@ -50,6 +52,8 @@ class DestinationConfiguration {
     projects = ImmutableList.copyOf(cfg.getStringList("remote", name, "projects"));
     adminUrls = ImmutableList.copyOf(cfg.getStringList("remote", name, "adminUrl"));
     retryDelay = Math.max(0, getInt(remoteConfig, cfg, "replicationretry", 1));
+    drainQueueAttempts =
+        Math.max(0, getInt(remoteConfig, cfg, "drainQueueAttempts", DEFAULT_DRAIN_QUEUE_ATTEMPTS));
     poolThreads = Math.max(0, getInt(remoteConfig, cfg, "threads", 1));
     authGroupNames = ImmutableList.copyOf(cfg.getStringList("remote", name, "authGroup"));
     lockErrorMaxRetries = cfg.getInt("replication", "lockErrorMaxRetries", 0);
@@ -75,6 +79,10 @@ class DestinationConfiguration {
 
   public int getRetryDelay() {
     return retryDelay;
+  }
+
+  public int getDrainQueueAttempts() {
+    return drainQueueAttempts;
   }
 
   public int getPoolThreads() {
