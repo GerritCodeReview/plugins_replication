@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3a146d2_e1438c85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-24T13:24:32Z",
+      "side": 1,
+      "message": "Not true: even with a simple master you can have missed replication events after a Gerrit restart.\n\nIn theory, the replication status persistence should have solved the problem: however, it never worked and just contributed to have more exceptions in the error_log.\n\nSo, I would *strongly* agree to have this also in stable-2.15, which is the oldest maintained Gerrit version.",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 50
+      },
+      "revId": "2d3d6c3e7dcadbe369e4f35a3f98ead6ad84d1c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "938a60e4_fdcff67a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-07-24T13:24:32Z",
+      "side": 1,
+      "message": "wrap long lines.",
+      "revId": "2d3d6c3e7dcadbe369e4f35a3f98ead6ad84d1c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
