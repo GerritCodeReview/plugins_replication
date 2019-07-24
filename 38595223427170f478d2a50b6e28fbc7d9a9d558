@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "aca285eb_05e1f092",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-07-24T10:57:16Z",
+      "side": 1,
+      "message": "Makes sense, thanks @marcin, sorry for taking so long to catch up :)",
+      "parentUuid": "71a210c8_1b0451fe",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74b1116a_fea99a71",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
         "patchSetId": 12
