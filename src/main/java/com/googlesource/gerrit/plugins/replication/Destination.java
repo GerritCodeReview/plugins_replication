@@ -702,6 +702,14 @@ public class Destination {
     return config.getMaxRetries();
   }
 
+  public int getDrainQueueAttempts() {
+    return config.getDrainQueueAttempts();
+  }
+
+  public int getReplicationDelaySeconds() {
+    return config.getDelay() * 1000;
+  }
+
   private static boolean matches(URIish uri, String urlMatch) {
     if (urlMatch == null || urlMatch.equals("") || urlMatch.equals("*")) {
       return true;
