@@ -204,6 +204,24 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   public int shutdown() {
     int discarded = 0;
     for (Destination cfg : destinations) {
+      //XXX Add configuration to disable/enable
+      int pending = cfg.getQueueInfo().pending.size();
+      int inFlight = cfg.getQueueInfo().inFlight.size();
+      //XXX Making maxWaitingCycles a configuration
+      int maxWaitingCycles = 5;
+      while ((inFlight > 0 || pending > 0) && maxWaitingCycles > 0) {
+        try {
+          logger.atInfo().log("Draining events queue, waiting to shutdown (inFlight %d, pending %d)", inFlight, pending);
+          //XXX Keep replicating events...need to find out how :/
+          Thread.sleep(1000);
+        } catch (Exception e) {
+          //Nothing to catch
+        }
+        pending = cfg.getQueueInfo().pending.size();
+        inFlight = cfg.getQueueInfo().inFlight.size();
+        maxWaitingCycles--;
+      }
+
       discarded += cfg.shutdown();
     }
     return discarded;
