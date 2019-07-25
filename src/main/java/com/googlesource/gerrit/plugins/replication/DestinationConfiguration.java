@@ -22,6 +22,7 @@ import org.eclipse.jgit.transport.RemoteConfig;
 public class DestinationConfiguration {
   static final int DEFAULT_REPLICATION_DELAY = 15;
   static final int DEFAULT_RESCHEDULE_DELAY = 3;
+  private static final int DEFAULT_SLOW_LATENCY_THRESHOLD = 60;
 
   private final int delay;
   private final int rescheduleDelay;
@@ -39,6 +40,7 @@ public class DestinationConfiguration {
   private final ImmutableList<String> authGroupNames;
   private final RemoteConfig remoteConfig;
   private final int maxRetries;
+  private final int slowLatencyThreshold;
 
   protected DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
@@ -63,6 +65,9 @@ public class DestinationConfiguration {
     maxRetries =
         getInt(
             remoteConfig, cfg, "replicationMaxRetries", cfg.getInt("replication", "maxRetries", 0));
+
+    slowLatencyThreshold =
+        getInt(remoteConfig, cfg, "slowLatencyThreshold", DEFAULT_SLOW_LATENCY_THRESHOLD);
   }
 
   public int getDelay() {
@@ -131,5 +136,9 @@ public class DestinationConfiguration {
 
   private static int getInt(RemoteConfig rc, Config cfg, String name, int defValue) {
     return cfg.getInt("remote", rc.getName(), name, defValue);
+  }
+
+  public int getSlowLatencyThreshold() {
+    return slowLatencyThreshold;
   }
 }
