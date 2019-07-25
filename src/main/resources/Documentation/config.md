@@ -405,6 +405,15 @@ remote.NAME.remoteNameStyle
 	By default, replicates without matching, i.e. replicates
 	everything to all remotes.
 
+remote.NAME.slowLatencyThreshold
+:	the time duration after which the replication of a project to this
+	destination will be considered "slow". A slow project replication
+	will cause additional metrics to be exposed for further investigation.
+	See [metrics.md](metrics.md) for further details.
+
+	default: 1 minute
+
+
 File `secure.config`
 --------------------
 
