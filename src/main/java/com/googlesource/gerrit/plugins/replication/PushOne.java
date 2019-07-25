@@ -26,6 +26,7 @@ import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.metrics.Timer1;
+import com.google.gerrit.metrics.Timer2;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.server.git.GitRepositoryManager;
@@ -329,14 +330,17 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     }
 
     repLog.info("Replication to {} started...", uri);
-    Timer1.Context context = metrics.start(config.getName());
+    Timer1.Context destinationContext = metrics.start(config.getName());
     try {
-      long startedAt = context.getStartTime();
+      long startedAt = destinationContext.getStartTime();
       long delay = NANOSECONDS.toMillis(startedAt - createdAt);
       metrics.record(config.getName(), delay, retryCount);
+      metrics.recordProject(config.getName(), projectName.get(), delay, retryCount);
       git = gitManager.openRepository(projectName);
+      Timer2.Context projectContext = metrics.startProject(config.getName(), projectName.get());
       runImpl();
-      long elapsed = NANOSECONDS.toMillis(context.stop());
+      projectContext.stop();
+      long elapsed = NANOSECONDS.toMillis(destinationContext.stop());
       repLog.info(
           "Replication to {} completed in {}ms, {}ms delay, {} retries",
           uri,
