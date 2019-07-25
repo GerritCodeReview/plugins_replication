@@ -16,13 +16,17 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
+import com.google.gerrit.server.config.ConfigUtil;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.transport.RemoteConfig;
+
+import java.util.concurrent.TimeUnit;
 
 public class DestinationConfiguration {
   static final int DEFAULT_REPLICATION_DELAY = 15;
   static final int DEFAULT_RESCHEDULE_DELAY = 3;
   static final int DEFAULT_DRAIN_QUEUE_ATTEMPTS = 0;
+  private static final int DEFAULT_SLOW_LATENCY_THRESHOLD_SECS = 900;
 
   private final int delay;
   private final int rescheduleDelay;
@@ -41,6 +45,7 @@ public class DestinationConfiguration {
   private final ImmutableList<String> authGroupNames;
   private final RemoteConfig remoteConfig;
   private final int maxRetries;
+  private final int slowLatencyThreshold;
 
   protected DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
@@ -67,6 +72,9 @@ public class DestinationConfiguration {
     maxRetries =
         getInt(
             remoteConfig, cfg, "replicationMaxRetries", cfg.getInt("replication", "maxRetries", 0));
+
+    slowLatencyThreshold = (int) ConfigUtil.getTimeUnit(
+        cfg, "remote", remoteConfig.getName(), "slowLatencyThreshold", DEFAULT_SLOW_LATENCY_THRESHOLD_SECS, TimeUnit.SECONDS);
   }
 
   public int getDelay() {
@@ -139,5 +147,9 @@ public class DestinationConfiguration {
 
   private static int getInt(RemoteConfig rc, Config cfg, String name, int defValue) {
     return cfg.getInt("remote", rc.getName(), name, defValue);
+  }
+
+  public int getSlowLatencyThreshold() {
+    return slowLatencyThreshold;
   }
 }
