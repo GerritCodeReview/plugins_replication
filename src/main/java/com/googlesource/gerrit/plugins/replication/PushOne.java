@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toMap;
 
 import com.google.common.base.Throwables;
@@ -329,14 +330,19 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     }
 
     repLog.info("Replication to {} started...", uri);
-    Timer1.Context<String> context = metrics.start(config.getName());
+    Timer1.Context destinationContext = metrics.start(config.getName());
     try {
-      long startedAt = context.getStartTime();
+      long startedAt = destinationContext.getStartTime();
       long delay = NANOSECONDS.toMillis(startedAt - createdAt);
       metrics.record(config.getName(), delay, retryCount);
       git = gitManager.openRepository(projectName);
       runImpl();
-      long elapsed = NANOSECONDS.toMillis(context.stop());
+      long elapsed = NANOSECONDS.toMillis(destinationContext.stop());
+
+      if (elapsed > SECONDS.toMillis(pool.getSlowLatencyThreshold())) {
+        metrics.recordSlowProjectReplication(
+            config.getName(), projectName.get(), pool.getSlowLatencyThreshold(), elapsed);
+      }
       repLog.info(
           "Replication to {} completed in {}ms, {}ms delay, {} retries",
           uri,

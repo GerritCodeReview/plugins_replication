@@ -18,6 +18,7 @@ import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.Field;
 import com.google.gerrit.metrics.Histogram1;
+import com.google.gerrit.metrics.Histogram3;
 import com.google.gerrit.metrics.MetricMaker;
 import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.server.logging.PluginMetadata;
@@ -29,6 +30,7 @@ public class ReplicationMetrics {
   private final Timer1<String> executionTime;
   private final Histogram1<String> executionDelay;
   private final Histogram1<String> executionRetries;
+  private final Histogram3<Integer, String, String> slowProjectReplicationLatency;
 
   @Inject
   ReplicationMetrics(@PluginName String pluginName, MetricMaker metricMaker) {
@@ -39,6 +41,25 @@ public class ReplicationMetrics {
                     metadataBuilder
                         .pluginName(pluginName)
                         .addPluginMetadata(PluginMetadata.create("destination", fieldValue)))
+            .build();
+
+    Field<String> PROJECT_FIELD =
+        Field.ofString(
+                "project",
+                (metadataBuilder, fieldValue) ->
+                    metadataBuilder
+                        .pluginName(pluginName)
+                        .addPluginMetadata(PluginMetadata.create("project", fieldValue)))
+            .build();
+
+    Field<Integer> SLOW_THRESHOLD_FIELD =
+        Field.ofInteger(
+                "slow_threshold",
+                (metadataBuilder, fieldValue) ->
+                    metadataBuilder
+                        .pluginName(pluginName)
+                        .addPluginMetadata(
+                            PluginMetadata.create("slow_threshold", fieldValue.toString())))
             .build();
 
     executionTime =
@@ -64,6 +85,17 @@ public class ReplicationMetrics {
                 .setCumulative()
                 .setUnit("retries"),
             DEST_FIELD);
+
+    slowProjectReplicationLatency =
+        metricMaker.newHistogram(
+            "latency_slower_than_threshold" + "",
+            new Description(
+                    "latency for project to destination, where latency was slower than threshold")
+                .setCumulative()
+                .setUnit(Description.Units.MILLISECONDS),
+            SLOW_THRESHOLD_FIELD,
+            PROJECT_FIELD,
+            DEST_FIELD);
   }
 
   /**
@@ -86,5 +118,18 @@ public class ReplicationMetrics {
   void record(String name, long delay, long retries) {
     executionDelay.record(name, delay);
     executionRetries.record(name, retries);
+  }
+
+  /**
+   * Record replication latency for project to destination, where latency was slower than threshold
+   *
+   * @param destinationName the destination name.
+   * @param projectName the project name.
+   * @param slowThreshold replication initialDelay in milliseconds.
+   * @param latency number of retries.
+   */
+  void recordSlowProjectReplication(
+      String destinationName, String projectName, Integer slowThreshold, long latency) {
+    slowProjectReplicationLatency.record(slowThreshold, destinationName, projectName, latency);
   }
 }
