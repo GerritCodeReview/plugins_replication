@@ -126,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "7f323c76_33e2e0bb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-25T21:46:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e40d5655_270cdaa6",
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c543ed4a_6c9abf42",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/TransportFactory.java",
         "patchSetId": 12
@@ -510,6 +528,30 @@
       "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e7df5b1_1916b6db",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-07-25T21:46:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0714e74e_14572a2f",
+      "range": {
+        "startLine": 459,
+        "startChar": 1,
+        "endLine": 468,
+        "endChar": 5
+      },
+      "revId": "38595223427170f478d2a50b6e28fbc7d9a9d558",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
