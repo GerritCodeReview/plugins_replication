@@ -18,8 +18,10 @@ import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.Field;
 import com.google.gerrit.metrics.Histogram1;
+import com.google.gerrit.metrics.Histogram2;
 import com.google.gerrit.metrics.MetricMaker;
 import com.google.gerrit.metrics.Timer1;
+import com.google.gerrit.metrics.Timer2;
 import com.google.gerrit.server.logging.PluginMetadata;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -29,6 +31,9 @@ public class ReplicationMetrics {
   private final Timer1<String> executionTime;
   private final Histogram1<String> executionDelay;
   private final Histogram1<String> executionRetries;
+  private final Timer2<String, String> projectExecutionTime;
+  private final Histogram2<String, String> projectExecutionDelay;
+  private final Histogram2<String, String> projectExecutionRetries;
 
   @Inject
   ReplicationMetrics(@PluginName String pluginName, MetricMaker metricMaker) {
@@ -39,6 +44,15 @@ public class ReplicationMetrics {
                     metadataBuilder
                         .pluginName(pluginName)
                         .addPluginMetadata(PluginMetadata.create("destination", fieldValue)))
+            .build();
+
+    Field<String> PROJECT_FIELD =
+        Field.ofString(
+                "project",
+                (metadataBuilder, fieldValue) ->
+                    metadataBuilder
+                        .pluginName(pluginName)
+                        .addPluginMetadata(PluginMetadata.create("project", fieldValue)))
             .build();
 
     executionTime =
@@ -64,6 +78,33 @@ public class ReplicationMetrics {
                 .setCumulative()
                 .setUnit("retries"),
             DEST_FIELD);
+
+    projectExecutionTime =
+        metricMaker.newTimer(
+            "project_replication_latency",
+            new Description("Time spent pushing project to remote destination.")
+                .setCumulative()
+                .setUnit(Description.Units.MILLISECONDS),
+            DEST_FIELD,
+            PROJECT_FIELD);
+
+    projectExecutionDelay =
+        metricMaker.newHistogram(
+            "project_replication_delay",
+            new Description("Time spent waiting before pushing project to remote destination")
+                .setCumulative()
+                .setUnit(Description.Units.MILLISECONDS),
+            DEST_FIELD,
+            PROJECT_FIELD);
+
+    projectExecutionRetries =
+        metricMaker.newHistogram(
+            "project_replication_retries",
+            new Description("Number of retries when pushing project to remote destination")
+                .setCumulative()
+                .setUnit("retries"),
+            DEST_FIELD,
+            PROJECT_FIELD);
   }
 
   /**
@@ -86,5 +127,29 @@ public class ReplicationMetrics {
   void record(String name, long delay, long retries) {
     executionDelay.record(name, delay);
     executionRetries.record(name, retries);
+  }
+
+  /**
+   * Start the replication latency timer for a project to destination.
+   *
+   * @param destinationName the destination name.
+   * @param projectName the project name.
+   * @return the timer context.
+   */
+  Timer2.Context startProject(String destinationName, String projectName) {
+    return projectExecutionTime.start(destinationName, projectName);
+  }
+
+  /**
+   * Record the replication delay and retry metrics for a project to destination.
+   *
+   * @param destinationName the destination name.
+   * @param projectName the project name.
+   * @param delay replication delay in milliseconds.
+   * @param retries number of retries.
+   */
+  void recordProject(String destinationName, String projectName, long delay, long retries) {
+    projectExecutionDelay.record(destinationName, projectName, delay);
+    projectExecutionRetries.record(destinationName, projectName, retries);
   }
 }
