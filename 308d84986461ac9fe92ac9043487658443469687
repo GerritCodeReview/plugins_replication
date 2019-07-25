@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50d03409_6426a553",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2019-07-25T17:42:05Z",
+      "side": 1,
+      "message": "What if we move the project timer initialisation with the destination one (L322)? So they will be all in one place.",
+      "revId": "308d84986461ac9fe92ac9043487658443469687",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
