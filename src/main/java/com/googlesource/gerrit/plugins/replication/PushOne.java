@@ -329,14 +329,18 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     }
 
     repLog.info("Replication to {} started...", uri);
-    Timer1.Context context = metrics.start(config.getName());
+    Timer1.Context destinationContext = metrics.start(config.getName());
     try {
-      long startedAt = context.getStartTime();
+      String destinationProject = String.format("%s_%s", config.getName(), projectName.get());
+      long startedAt = destinationContext.getStartTime();
       long delay = NANOSECONDS.toMillis(startedAt - createdAt);
       metrics.record(config.getName(), delay, retryCount);
+      metrics.record(destinationProject, delay, retryCount);
       git = gitManager.openRepository(projectName);
+      Timer1.Context projectContext = metrics.start(destinationProject);
       runImpl();
-      long elapsed = NANOSECONDS.toMillis(context.stop());
+      projectContext.stop();
+      long elapsed = NANOSECONDS.toMillis(destinationContext.stop());
       repLog.info(
           "Replication to {} completed in {}ms, {}ms delay, {} retries",
           uri,
