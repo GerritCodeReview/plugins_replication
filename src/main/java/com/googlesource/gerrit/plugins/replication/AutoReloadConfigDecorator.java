@@ -160,4 +160,14 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
         autoReloadExecutor.scheduleAtFixedRate(
             this::reloadIfNeeded, RELOAD_DELAY, RELOAD_INTERVAL, TimeUnit.SECONDS);
   }
+
+  @Override
+  public synchronized int getSshConnectionTimeout() {
+    return currentConfig.getSshConnectionTimeout();
+  }
+
+  @Override
+  public synchronized int getSshCommandTimeout() {
+    return currentConfig.getSshCommandTimeout();
+  }
 }

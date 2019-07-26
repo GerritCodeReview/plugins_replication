@@ -69,6 +69,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import org.apache.commons.io.FilenameUtils;
@@ -398,7 +399,9 @@ public class Destination {
         e = opFactory.create(project, uri);
         addRef(e, ref);
         e.addState(ref, state);
-        pool.schedule(e, now ? 0 : config.getDelay(), TimeUnit.SECONDS);
+        @SuppressWarnings("unused")
+        ScheduledFuture<?> ignored =
+            pool.schedule(e, now ? 0 : config.getDelay(), TimeUnit.SECONDS);
         pending.put(uri, e);
       } else if (!e.getRefs().contains(ref)) {
         addRef(e, ref);
@@ -425,11 +428,15 @@ public class Destination {
   }
 
   void scheduleDeleteProject(URIish uri, Project.NameKey project) {
-    pool.schedule(deleteProjectFactory.create(uri, project), 0, TimeUnit.SECONDS);
+    @SuppressWarnings("unused")
+    ScheduledFuture<?> ignored =
+        pool.schedule(deleteProjectFactory.create(uri, project), 0, TimeUnit.SECONDS);
   }
 
   void scheduleUpdateHead(URIish uri, Project.NameKey project, String newHead) {
-    pool.schedule(updateHeadFactory.create(uri, project, newHead), 0, TimeUnit.SECONDS);
+    @SuppressWarnings("unused")
+    ScheduledFuture<?> ignored =
+        pool.schedule(updateHeadFactory.create(uri, project, newHead), 0, TimeUnit.SECONDS);
   }
 
   private void addRef(PushOne e, String ref) {
@@ -507,7 +514,9 @@ public class Destination {
         pending.put(uri, pushOp);
         switch (reason) {
           case COLLISION:
-            pool.schedule(pushOp, config.getRescheduleDelay(), TimeUnit.SECONDS);
+            @SuppressWarnings("unused")
+            ScheduledFuture<?> ignored =
+                pool.schedule(pushOp, config.getRescheduleDelay(), TimeUnit.SECONDS);
             break;
           case TRANSPORT_ERROR:
           case REPOSITORY_MISSING:
@@ -519,7 +528,9 @@ public class Destination {
             postReplicationFailedEvent(pushOp, status);
             if (pushOp.setToRetry()) {
               postReplicationScheduledEvent(pushOp);
-              pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
+              @SuppressWarnings("unused")
+              ScheduledFuture<?> ignored2 =
+                  pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
             } else {
               pushOp.canceledByReplication();
               pending.remove(uri);
@@ -538,11 +549,11 @@ public class Destination {
       if (op.wasCanceled()) {
         return RunwayStatus.canceled();
       }
+      pending.remove(op.getURI());
       PushOne inFlightOp = inFlight.get(op.getURI());
       if (inFlightOp != null) {
         return RunwayStatus.denied(inFlightOp.getId());
       }
-      pending.remove(op.getURI());
       inFlight.put(op.getURI(), op);
     }
     return RunwayStatus.allowed();
