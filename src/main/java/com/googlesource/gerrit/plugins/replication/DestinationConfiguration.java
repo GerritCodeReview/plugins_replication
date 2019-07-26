@@ -19,7 +19,7 @@ import com.google.common.collect.ImmutableList;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.transport.RemoteConfig;
 
-class DestinationConfiguration {
+public class DestinationConfiguration {
   static final int DEFAULT_REPLICATION_DELAY = 15;
   static final int DEFAULT_RESCHEDULE_DELAY = 3;
 
@@ -40,7 +40,7 @@ class DestinationConfiguration {
   private final RemoteConfig remoteConfig;
   private final int maxRetries;
 
-  DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
+  protected DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
     String name = remoteConfig.getName();
     urls = ImmutableList.copyOf(cfg.getStringList("remote", name, "url"));

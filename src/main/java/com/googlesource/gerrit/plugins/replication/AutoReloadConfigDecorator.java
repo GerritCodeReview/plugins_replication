@@ -97,9 +97,13 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private synchronized void reloadIfNeeded() {
     if (isAutoReload()) {
       ReplicationQueue queue = replicationQueue.get();
+
       long lastModified = getLastModified(currentConfig);
       try {
-        if (lastModified > currentConfigTs && lastModified > lastFailedConfigTs) {
+        if (lastModified > currentConfigTs
+            && lastModified > lastFailedConfigTs
+            && queue.isRunning()
+            && !queue.isReplaying()) {
           queue.stop();
           currentConfig = loadConfig();
           currentConfigTs = lastModified;
@@ -159,5 +163,15 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     autoReloadRunnable =
         autoReloadExecutor.scheduleAtFixedRate(
             this::reloadIfNeeded, RELOAD_DELAY, RELOAD_INTERVAL, TimeUnit.SECONDS);
+  }
+
+  @Override
+  public synchronized int getSshConnectionTimeout() {
+    return currentConfig.getSshConnectionTimeout();
+  }
+
+  @Override
+  public synchronized int getSshCommandTimeout() {
+    return currentConfig.getSshCommandTimeout();
   }
 }
