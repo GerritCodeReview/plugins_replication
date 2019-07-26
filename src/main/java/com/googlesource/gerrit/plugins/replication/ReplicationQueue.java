@@ -47,6 +47,7 @@ public class ReplicationQueue
   private final ReplicationState.Factory replicationStateFactory;
   private final EventsStorage eventsStorage;
   private volatile boolean running;
+  private volatile boolean replaying;
 
   @Inject
   ReplicationQueue(
@@ -80,6 +81,14 @@ public class ReplicationQueue
     if (discarded > 0) {
       repLog.warn("Canceled {} replication events during shutdown", discarded);
     }
+  }
+
+  public boolean isRunning() {
+    return running;
+  }
+
+  public boolean isReplaying() {
+    return replaying;
   }
 
   void scheduleFullSync(Project.NameKey project, String urlMatch, ReplicationState state) {
@@ -129,9 +138,14 @@ public class ReplicationQueue
   }
 
   private void firePendingEvents() {
-    for (EventsStorage.ReplicateRefUpdate e : eventsStorage.list()) {
-      repLog.info("Firing pending event {}", e);
-      onGitReferenceUpdated(e.project, e.ref);
+    replaying = true;
+    try {
+      for (EventsStorage.ReplicateRefUpdate e : eventsStorage.list()) {
+        repLog.info("Firing pending event {}", e);
+        onGitReferenceUpdated(e.project, e.ref);
+      }
+    } finally {
+      replaying = false;
     }
   }
 

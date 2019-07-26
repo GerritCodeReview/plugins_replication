@@ -86,6 +86,14 @@ gerrit.maxRefsToLog
 :	Number of refs, that are pushed during replication, to be logged.
 	For printing all refs to the logs, use a value of 0. By default, 0.
 
+gerrit.sshCommandTimeout
+:	Timeout for SSH command execution. If 0, there is no timeout and
+	the client waits indefinitely. By default, 0.
+
+gerrit.sshConnectionTimeout
+:	Timeout for SSH connections. If 0, there is no timeout and
+        the client waits indefinitely. By default, 2 minutes.
+
 replication.lockErrorMaxRetries
 :	Number of times to retry a replication operation if a lock
 	error is detected.
