@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59d17e4d_7adb7d56",
+        "filename": "BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-07-30T18:46:35Z",
+      "side": 1,
+      "message": "In-tree plugin build fails with this that \"could not be resolved\" -locally.",
+      "range": {
+        "startLine": 1,
+        "startChar": 6,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "ae3fdcd6df46a6b5076c2860b2a76ea3f0cee4a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
