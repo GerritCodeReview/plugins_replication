@@ -345,7 +345,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       String msg = e.getMessage();
       if (msg.contains("access denied")
           || msg.contains("no such repository")
-          || msg.contains("Git repository not found")) {
+          || msg.contains("Git repository not found")
+          || msg.contains("unavailable")) {
         createRepository();
       } else {
         repLog.error("Cannot replicate {}; Remote repository error: {}", projectName, msg);
