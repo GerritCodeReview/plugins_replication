@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "86372610_23d3eb40",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-08-05T14:24:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1268c4_4daf867a",
+      "range": {
+        "startLine": 4,
+        "startChar": 59,
+        "endLine": 4,
+        "endChar": 71
+      },
+      "revId": "ad6b017bcdcec0b06c5561aefc2bdb8a41b11fe2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a819f02_ec2e8955",
         "filename": "src/main/resources/Documentation/extension-point.md",
         "patchSetId": 13
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "c7b22598_19261514",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-08-05T14:24:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a819f02_ec2e8955",
+      "range": {
+        "startLine": 38,
+        "startChar": 60,
+        "endLine": 38,
+        "endChar": 69
+      },
+      "revId": "ad6b017bcdcec0b06c5561aefc2bdb8a41b11fe2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "37307338_a7eb7bf7",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
         "patchSetId": 13
@@ -68,6 +116,30 @@
       "revId": "ad6b017bcdcec0b06c5561aefc2bdb8a41b11fe2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d7a4afb_8f3be970",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-08-05T14:24:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37307338_a7eb7bf7",
+      "range": {
+        "startLine": 317,
+        "startChar": 0,
+        "endLine": 319,
+        "endChar": 5
+      },
+      "revId": "ad6b017bcdcec0b06c5561aefc2bdb8a41b11fe2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
