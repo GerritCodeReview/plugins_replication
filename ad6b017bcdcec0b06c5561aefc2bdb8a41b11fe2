@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba1268c4_4daf867a",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-05T12:09:31Z",
+      "side": 1,
+      "message": "influencing",
+      "range": {
+        "startLine": 4,
+        "startChar": 59,
+        "endLine": 4,
+        "endChar": 71
+      },
+      "revId": "ad6b017bcdcec0b06c5561aefc2bdb8a41b11fe2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a819f02_ec2e8955",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-05T12:09:31Z",
+      "side": 1,
+      "message": "Multisite? Even if we use this feature in the multi-site plugin, referencing it in the replication plugin is confusing IMHO.",
+      "range": {
+        "startLine": 38,
+        "startChar": 60,
+        "endLine": 38,
+        "endChar": 69
+      },
+      "revId": "ad6b017bcdcec0b06c5561aefc2bdb8a41b11fe2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37307338_a7eb7bf7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-05T12:09:31Z",
+      "side": 1,
+      "message": "Infinite loop? We would potentially cause Gerrit builds to wait for ever.",
+      "range": {
+        "startLine": 317,
+        "startChar": 0,
+        "endLine": 319,
+        "endChar": 5
+      },
+      "revId": "ad6b017bcdcec0b06c5561aefc2bdb8a41b11fe2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
