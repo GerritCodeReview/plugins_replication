@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0de60b06_910dd121",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-13T07:03:05Z",
+      "side": 1,
+      "message": "It isn\u0027t obvious that this relates to the publishing of the metrics.\nWhat about metricsReportingLatecy?",
+      "range": {
+        "startLine": 70,
+        "startChar": 35,
+        "endLine": 70,
+        "endChar": 55
+      },
+      "revId": "2b4648aaa8ebc6456d003a2995845f78d26c9fe1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdf30615_fce61dc5",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-13T07:03:05Z",
+      "side": 1,
+      "message": "Fix alignment, use tabs instead of spaces.",
+      "revId": "2b4648aaa8ebc6456d003a2995845f78d26c9fe1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1466a4fb_211335f6",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-13T07:03:05Z",
+      "side": 1,
+      "message": "Can we use the Gerrit time format instead? (see the rest of Gerrit configs where a time is requested, which includes the time units)",
+      "range": {
+        "startLine": 401,
+        "startChar": 8,
+        "endLine": 401,
+        "endChar": 25
+      },
+      "revId": "2b4648aaa8ebc6456d003a2995845f78d26c9fe1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
