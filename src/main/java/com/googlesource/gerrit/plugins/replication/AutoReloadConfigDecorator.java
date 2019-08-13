@@ -51,6 +51,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   // ReplicationConfig
   private final Provider<ReplicationQueue> replicationQueue;
   private final ScheduledExecutorService autoReloadExecutor;
+  private ScheduledFuture<?> autoReloadRunnable;
 
   @Inject
   public AutoReloadConfigDecorator(
@@ -96,9 +97,13 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private synchronized void reloadIfNeeded() {
     if (isAutoReload()) {
       ReplicationQueue queue = replicationQueue.get();
+
       long lastModified = getLastModified(currentConfig);
       try {
-        if (lastModified > currentConfigTs && lastModified > lastFailedConfigTs) {
+        if (lastModified > currentConfigTs
+            && lastModified > lastFailedConfigTs
+            && queue.isRunning()
+            && !queue.isReplaying()) {
           queue.stop();
           currentConfig = loadConfig();
           currentConfigTs = lastModified;
@@ -145,6 +150,10 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
 
   @Override
   public synchronized int shutdown() {
+    if (autoReloadRunnable != null) {
+      autoReloadRunnable.cancel(false);
+      autoReloadRunnable = null;
+    }
     return currentConfig.shutdown();
   }
 
@@ -152,8 +161,18 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   @Override
   public synchronized void startup(WorkQueue workQueue) {
     currentConfig.startup(workQueue);
-    ScheduledFuture<?> ignoredHere =
+    autoReloadRunnable =
         autoReloadExecutor.scheduleAtFixedRate(
             this::reloadIfNeeded, RELOAD_DELAY, RELOAD_INTERVAL, TimeUnit.SECONDS);
+  }
+
+  @Override
+  public synchronized int getSshConnectionTimeout() {
+    return currentConfig.getSshConnectionTimeout();
+  }
+
+  @Override
+  public synchronized int getSshCommandTimeout() {
+    return currentConfig.getSshCommandTimeout();
   }
 }
