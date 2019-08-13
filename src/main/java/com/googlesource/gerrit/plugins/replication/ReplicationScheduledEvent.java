@@ -18,11 +18,11 @@ import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.events.RefEvent;
 
 public class ReplicationScheduledEvent extends RefEvent {
-  static final String TYPE = "ref-replication-scheduled";
+  public static final String TYPE = "ref-replication-scheduled";
 
-  final String project;
-  final String ref;
-  final String targetNode;
+  public final String project;
+  public final String ref;
+  public final String targetNode;
 
   public ReplicationScheduledEvent(String project, String ref, String targetNode) {
     super(TYPE);

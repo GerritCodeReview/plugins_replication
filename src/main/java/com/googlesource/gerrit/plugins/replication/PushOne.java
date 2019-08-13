@@ -23,6 +23,7 @@ import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Sets;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.metrics.Timer1;
@@ -114,6 +115,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final ProjectCache projectCache;
   private final CreateProjectTask.Factory createProjectFactory;
   private final AtomicBoolean canceledWhileRunning;
+  private final TransportFactory transportFactory;
+  private DynamicItem<ReplicationPushFilter> replicationPushFilter;
 
   @Inject
   PushOne(
@@ -129,6 +132,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       ReplicationMetrics m,
       ProjectCache pc,
       CreateProjectTask.Factory cpf,
+      TransportFactory tf,
       @Assisted Project.NameKey d,
       @Assisted URIish u) {
     gitManager = grm;
@@ -150,18 +154,27 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     createProjectFactory = cpf;
     canceledWhileRunning = new AtomicBoolean(false);
     maxRetries = p.getMaxRetries();
+    transportFactory = tf;
+  }
+
+  @Inject(optional = true)
+  public void setReplicationPushFilter(DynamicItem<ReplicationPushFilter> replicationPushFilter) {
+    this.replicationPushFilter = replicationPushFilter;
   }
 
   @Override
   public void cancel() {
-    repLog.info("Replication {} was canceled", getURI());
+    repLog.info("Replication [{}] to {} was canceled", HexFormat.fromInt(id), getURI());
     canceledByReplication();
     pool.pushWasCanceled(this);
   }
 
   @Override
   public void setCanceledWhileRunning() {
-    repLog.info("Replication {} was canceled while being executed", getURI());
+    repLog.info(
+        "Replication [{}] to {} was canceled while being executed",
+        HexFormat.fromInt(id),
+        getURI());
     canceledWhileRunning.set(true);
   }
 
@@ -205,7 +218,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   boolean wasCanceled() {
-    return canceled;
+    return canceled || canceledWhileRunning.get();
   }
 
   URIish getURI() {
@@ -437,7 +450,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
   private void runImpl() throws IOException, PermissionBackendException {
     PushResult res;
-    try (Transport tn = Transport.open(git, uri)) {
+    try (Transport tn = transportFactory.open(git, uri)) {
       res = pushVia(tn);
     }
     updateStates(res.getRemoteUpdates());
@@ -506,7 +519,12 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       local = forProject.filter(local, git, RefFilterOptions.builder().setFilterMeta(true).build());
     }
 
-    return pushAllRefs ? doPushAll(tn, local) : doPushDelta(local);
+    List<RemoteRefUpdate> remoteUpdatesList =
+        pushAllRefs ? doPushAll(tn, local) : doPushDelta(local);
+
+    return replicationPushFilter == null || replicationPushFilter.get() == null
+        ? remoteUpdatesList
+        : replicationPushFilter.get().filter(projectName.get(), remoteUpdatesList);
   }
 
   private List<RemoteRefUpdate> doPushAll(Transport tn, Map<String, Ref> local)

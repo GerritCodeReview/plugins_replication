@@ -17,6 +17,8 @@ import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerr
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerritHttp;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isSSH;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.base.Strings;
@@ -29,6 +31,7 @@ import com.google.common.collect.SetMultimap;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.server.config.ConfigUtil;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
@@ -52,6 +55,7 @@ import org.eclipse.jgit.util.FS;
 @Singleton
 public class ReplicationFileBasedConfig implements ReplicationConfig {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+  private static final int DEFAULT_SSH_CONNECTION_TIMEOUT_MS = 2 * 60 * 1000; // 2 minutes
 
   private List<Destination> destinations;
   private final SitePaths site;
@@ -59,6 +63,8 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private boolean replicateAllOnPluginStart;
   private boolean defaultForceUpdate;
   private int maxRefsToLog;
+  private int sshCommandTimeout;
+  private int sshConnectionTimeout = DEFAULT_SSH_CONNECTION_TIMEOUT_MS;
   private final FileBasedConfig config;
   private final Path pluginDataDir;
 
@@ -123,6 +129,18 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);
 
     maxRefsToLog = config.getInt("gerrit", "maxRefsToLog", 0);
+
+    sshCommandTimeout =
+        (int) ConfigUtil.getTimeUnit(config, "gerrit", null, "sshCommandTimeout", 0, SECONDS);
+    sshConnectionTimeout =
+        (int)
+            ConfigUtil.getTimeUnit(
+                config,
+                "gerrit",
+                null,
+                "sshConnectionTimeout",
+                DEFAULT_SSH_CONNECTION_TIMEOUT_MS,
+                MILLISECONDS);
 
     ImmutableList.Builder<Destination> dest = ImmutableList.builder();
     for (RemoteConfig c : allRemotes(config)) {
@@ -307,5 +325,15 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     for (Destination cfg : destinations) {
       cfg.start(workQueue);
     }
+  }
+
+  @Override
+  public int getSshConnectionTimeout() {
+    return sshConnectionTimeout;
+  }
+
+  @Override
+  public int getSshCommandTimeout() {
+    return sshCommandTimeout;
   }
 }
