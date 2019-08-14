@@ -26,6 +26,30 @@
     },
     {
       "key": {
+        "uuid": "a0879f9e_e4aaaece",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 22
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-14T21:53:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be5bfe57_622539f5",
+      "range": {
+        "startLine": 17,
+        "startChar": 64,
+        "endLine": 17,
+        "endChar": 70
+      },
+      "revId": "486196f1e1bd80392ae03b1e868a750a5ecfe401",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "60ff349c_e0aff82b",
         "filename": "/COMMIT_MSG",
         "patchSetId": 22
@@ -47,6 +71,30 @@
       "revId": "486196f1e1bd80392ae03b1e868a750a5ecfe401",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73006bec_44c00d7e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 22
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-14T21:53:40Z",
+      "side": 1,
+      "message": "Yeah: this change is part of a topic related to this refactoring. For making the review easier, it is just broken down into different commits, but they will all be merged as a whole.",
+      "parentUuid": "60ff349c_e0aff82b",
+      "range": {
+        "startLine": 30,
+        "startChar": 28,
+        "endLine": 30,
+        "endChar": 51
+      },
+      "revId": "486196f1e1bd80392ae03b1e868a750a5ecfe401",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -74,6 +122,30 @@
     },
     {
       "key": {
+        "uuid": "fdc89d01_7c07fa2e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-14T21:53:40Z",
+      "side": 1,
+      "message": "Not really: the loadConfig.getVersion() reads the *current* version (on disk) of the configuration that is loaded in memory.\n\nThe localConfigVersion is the version of the config at the time that was loaded.",
+      "parentUuid": "e9d00752_ac022dac",
+      "range": {
+        "startLine": 57,
+        "startChar": 10,
+        "endLine": 57,
+        "endChar": 59
+      },
+      "revId": "486196f1e1bd80392ae03b1e868a750a5ecfe401",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4a2946f_e962a85a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 22
@@ -95,6 +167,30 @@
       "revId": "486196f1e1bd80392ae03b1e868a750a5ecfe401",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "085bc967_aecf7ab1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-14T21:53:40Z",
+      "side": 1,
+      "message": "agreed. Let me get rid of it.",
+      "parentUuid": "b4a2946f_e962a85a",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 44
+      },
+      "revId": "486196f1e1bd80392ae03b1e868a750a5ecfe401",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +218,30 @@
     },
     {
       "key": {
+        "uuid": "035dd160_3bd6da78",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-14T21:53:40Z",
+      "side": 1,
+      "message": "Nope, because of loadedConfig.getVersion() returning the current version on the filesystem rather than the version when the file was first loaded.",
+      "parentUuid": "4c675dbc_adf36215",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 27
+      },
+      "revId": "486196f1e1bd80392ae03b1e868a750a5ecfe401",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27996270_d8db9d80",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
         "patchSetId": 22
@@ -146,6 +266,30 @@
     },
     {
       "key": {
+        "uuid": "de316806_2b2e78cd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-14T21:53:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27996270_d8db9d80",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 16
+      },
+      "revId": "486196f1e1bd80392ae03b1e868a750a5ecfe401",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28a4ef40_17d62fbe",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
         "patchSetId": 22
@@ -167,6 +311,30 @@
       "revId": "486196f1e1bd80392ae03b1e868a750a5ecfe401",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53624421_3b8e87c8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-14T21:53:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28a4ef40_17d62fbe",
+      "range": {
+        "startLine": 97,
+        "startChar": 33,
+        "endLine": 97,
+        "endChar": 45
+      },
+      "revId": "486196f1e1bd80392ae03b1e868a750a5ecfe401",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
