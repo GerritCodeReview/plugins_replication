@@ -16,6 +16,24 @@
       "revId": "dbae24ce1cb6a0f5e3c361bf96f7bc53c842aa7f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1006b1b9_c87f07b5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-15T08:19:11Z",
+      "side": 1,
+      "message": "Oops, missed that point. It has been deleted now.",
+      "parentUuid": "309e6987_845e5f35",
+      "revId": "dbae24ce1cb6a0f5e3c361bf96f7bc53c842aa7f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }

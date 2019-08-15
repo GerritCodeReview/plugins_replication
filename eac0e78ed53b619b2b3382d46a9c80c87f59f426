@@ -94,6 +94,30 @@
       "revId": "eac0e78ed53b619b2b3382d46a9c80c87f59f426",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3fa73f1_c4e0d20d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 22
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-15T08:19:11Z",
+      "side": 1,
+      "message": "Ah, I thought you were referring to the next change. Yes, you are right, I moved that part in the predecessor, so this part of the commit message can go. Well spotted.",
+      "parentUuid": "71c3bf36_87935851",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "eac0e78ed53b619b2b3382d46a9c80c87f59f426",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
