@@ -70,6 +70,30 @@
       "revId": "eac0e78ed53b619b2b3382d46a9c80c87f59f426",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71c3bf36_87935851",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 22
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-15T08:14:32Z",
+      "side": 1,
+      "message": "Isn\u0027t notification already implemented in the predecessor change using EventBus?",
+      "parentUuid": "6624faf2_4c6973d0",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "eac0e78ed53b619b2b3382d46a9c80c87f59f426",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
