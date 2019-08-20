@@ -157,7 +157,6 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     return currentConfig.shutdown();
   }
 
-  @SuppressWarnings("unused")
   @Override
   public synchronized void startup(WorkQueue workQueue) {
     currentConfig.startup(workQueue);
