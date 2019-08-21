@@ -54,7 +54,7 @@ public class GerritSshApi implements AdminApi {
   }
 
   @Override
-  public void deleteProject(Project.NameKey projectName) {
+  public boolean deleteProject(Project.NameKey projectName) {
     if (!withoutDeleteProjectPlugin.contains(uri)) {
       OutputStream errStream = sshHelper.newErrorBufferStream();
       String cmd = "deleteproject delete --yes-really-delete --force " + projectName.get();
@@ -63,6 +63,7 @@ public class GerritSshApi implements AdminApi {
         exitCode = execute(uri, cmd, errStream);
       } catch (IOException e) {
         logError("deleting", uri, errStream, cmd, e);
+        return false;
       }
       if (exitCode == 1) {
         logger.atInfo().log(
@@ -71,17 +72,20 @@ public class GerritSshApi implements AdminApi {
         withoutDeleteProjectPlugin.add(uri);
       }
     }
+    return true;
   }
 
   @Override
-  public void updateHead(Project.NameKey projectName, String newHead) {
+  public boolean updateHead(Project.NameKey projectName, String newHead) {
     OutputStream errStream = sshHelper.newErrorBufferStream();
     String cmd = "gerrit set-head " + projectName.get() + " --new-head " + newHead;
     try {
       execute(uri, cmd, errStream);
     } catch (IOException e) {
       logError("updating HEAD of", uri, errStream, cmd, e);
+      return false;
     }
+    return true;
   }
 
   private URIish toSshUri(URIish uri) throws URISyntaxException {
