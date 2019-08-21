@@ -19,37 +19,49 @@ import com.google.inject.Singleton;
 import java.util.Optional;
 import org.eclipse.jgit.transport.URIish;
 
-@Singleton
-public class AdminApiFactory {
+/** Factory for creating an {@link AdminApi} instance for a remote URI. */
+public interface AdminApiFactory {
+  /**
+   * Create an {@link AdminApi} for the given remote URI.
+   *
+   * @param uri the remote URI.
+   * @return An API for the given remote URI, or {@code Optional.empty} if there is no appropriate
+   *     API for the URI.
+   */
+  Optional<AdminApi> create(URIish uri);
 
-  private final SshHelper sshHelper;
-  private final GerritRestApi.Factory gerritRestApiFactory;
+  @Singleton
+  static class DefaultAdminApiFactory implements AdminApiFactory {
+    protected final SshHelper sshHelper;
+    private final GerritRestApi.Factory gerritRestApiFactory;
 
-  @Inject
-  AdminApiFactory(SshHelper sshHelper, GerritRestApi.Factory gerritRestApiFactory) {
-    this.sshHelper = sshHelper;
-    this.gerritRestApiFactory = gerritRestApiFactory;
-  }
-
-  public Optional<AdminApi> create(URIish uri) {
-    if (isGerrit(uri)) {
-      return Optional.of(new GerritSshApi(sshHelper, uri));
-    } else if (!uri.isRemote()) {
-      return Optional.of(new LocalFS(uri));
-    } else if (isSSH(uri)) {
-      return Optional.of(new RemoteSsh(sshHelper, uri));
-    } else if (isGerritHttp(uri)) {
-      return Optional.of(gerritRestApiFactory.create(uri));
+    @Inject
+    public DefaultAdminApiFactory(SshHelper sshHelper, GerritRestApi.Factory gerritRestApiFactory) {
+      this.sshHelper = sshHelper;
+      this.gerritRestApiFactory = gerritRestApiFactory;
     }
-    return Optional.empty();
+
+    @Override
+    public Optional<AdminApi> create(URIish uri) {
+      if (isGerrit(uri)) {
+        return Optional.of(new GerritSshApi(sshHelper, uri));
+      } else if (!uri.isRemote()) {
+        return Optional.of(new LocalFS(uri));
+      } else if (isSSH(uri)) {
+        return Optional.of(new RemoteSsh(sshHelper, uri));
+      } else if (isGerritHttp(uri)) {
+        return Optional.of(gerritRestApiFactory.create(uri));
+      }
+      return Optional.empty();
+    }
   }
 
-  public static boolean isGerrit(URIish uri) {
+  static boolean isGerrit(URIish uri) {
     String scheme = uri.getScheme();
     return scheme != null && scheme.toLowerCase().equals("gerrit+ssh");
   }
 
-  public static boolean isSSH(URIish uri) {
+  static boolean isSSH(URIish uri) {
     if (!uri.isRemote()) {
       return false;
     }
