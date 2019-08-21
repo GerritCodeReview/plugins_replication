@@ -30,8 +30,8 @@ public class GerritSshApi implements AdminApi {
   static int SSH_COMMAND_FAILED = -1;
   private static String GERRIT_ADMIN_PROTOCOL_PREFIX = "gerrit+";
 
-  private final SshHelper sshHelper;
-  private final URIish uri;
+  protected final SshHelper sshHelper;
+  protected final URIish uri;
 
   private final Set<URIish> withoutDeleteProjectPlugin = new HashSet<>();
 
