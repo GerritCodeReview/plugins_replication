@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73996613_38b75cd9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AdminApiFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-21T06:07:29Z",
+      "side": 1,
+      "message": "This is intended to be used by other plugins as an external API, it should have its JavaDoc as documentation IMHO.",
+      "revId": "91c2e587ad57b9457361694f64b301026e004add",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
