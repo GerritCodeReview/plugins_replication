@@ -173,7 +173,11 @@ public class Destination {
                 install(new FactoryModuleBuilder().build(CreateProjectTask.Factory.class));
                 install(new FactoryModuleBuilder().build(DeleteProjectTask.Factory.class));
                 install(new FactoryModuleBuilder().build(UpdateHeadTask.Factory.class));
-                bind(AdminApiFactory.class);
+
+                DynamicItem.itemOf(binder(), AdminApiFactory.class);
+                DynamicItem.bind(binder(), AdminApiFactory.class)
+                    .to(AdminApiFactory.DefaultAdminApiFactory.class);
+
                 install(new FactoryModuleBuilder().build(GerritRestApi.Factory.class));
                 bind(CloseableHttpClient.class)
                     .toProvider(HttpClientProvider.class)

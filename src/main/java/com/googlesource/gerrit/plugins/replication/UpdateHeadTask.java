@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
+import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.ioutil.HexFormat;
 import com.google.gerrit.server.util.IdGenerator;
@@ -25,7 +26,7 @@ import java.util.Optional;
 import org.eclipse.jgit.transport.URIish;
 
 public class UpdateHeadTask implements Runnable {
-  private final AdminApiFactory adminApiFactory;
+  private final DynamicItem<AdminApiFactory> adminApiFactory;
   private final int id;
   private final URIish replicateURI;
   private final Project.NameKey project;
@@ -37,7 +38,7 @@ public class UpdateHeadTask implements Runnable {
 
   @Inject
   UpdateHeadTask(
-      AdminApiFactory adminApiFactory,
+      DynamicItem<AdminApiFactory> adminApiFactory,
       IdGenerator ig,
       @Assisted URIish replicateURI,
       @Assisted Project.NameKey project,
@@ -51,7 +52,7 @@ public class UpdateHeadTask implements Runnable {
 
   @Override
   public void run() {
-    Optional<AdminApi> adminApi = adminApiFactory.create(replicateURI);
+    Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI);
     if (adminApi.isPresent()) {
       adminApi.get().updateHead(project, newHead);
       return;
