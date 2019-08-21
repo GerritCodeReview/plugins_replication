@@ -80,10 +80,7 @@ public class GerritSshApi implements AdminApi {
     try {
       execute(uri, cmd, errStream);
     } catch (IOException e) {
-      logger.atSevere().withCause(e).log(
-          "Error updating HEAD of remote repository at %s to %s:\n"
-              + "  Exception: %s\n  Command: %s\n  Output: %s",
-          uri, newHead, e, cmd, errStream);
+      logError("updating HEAD of", uri, errStream, cmd, e);
     }
   }
 
