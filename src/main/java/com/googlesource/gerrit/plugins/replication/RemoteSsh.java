@@ -60,7 +60,7 @@ public class RemoteSsh implements AdminApi {
   }
 
   @Override
-  public void deleteProject(Project.NameKey project) {
+  public boolean deleteProject(Project.NameKey project) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd = "rm -rf " + quotedPath;
     OutputStream errStream = sshHelper.newErrorBufferStream();
@@ -78,11 +78,13 @@ public class RemoteSsh implements AdminApi {
           cmd,
           errStream,
           e);
+      return false;
     }
+    return true;
   }
 
   @Override
-  public void updateHead(Project.NameKey project, String newHead) {
+  public boolean updateHead(Project.NameKey project, String newHead) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd =
         "cd " + quotedPath + " && git symbolic-ref HEAD " + QuotedString.BOURNE.quote(newHead);
@@ -101,6 +103,8 @@ public class RemoteSsh implements AdminApi {
           cmd,
           errStream,
           e);
+      return false;
     }
+    return true;
   }
 }
