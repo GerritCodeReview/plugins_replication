@@ -22,6 +22,7 @@ import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
+import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.events.EventTypes;
 import com.google.inject.AbstractModule;
@@ -67,7 +68,9 @@ class ReplicationModule extends AbstractModule {
     EventTypes.register(ReplicationScheduledEvent.TYPE, ReplicationScheduledEvent.class);
     bind(SshSessionFactory.class).toProvider(ReplicationSshSessionFactoryProvider.class);
 
-    bind(AdminApiFactory.class);
+    DynamicItem.itemOf(binder(), AdminApiFactory.class);
+    DynamicItem.bind(binder(), AdminApiFactory.class)
+        .to(AdminApiFactory.DefaultAdminApiFactory.class);
 
     bind(TransportFactory.class).to(TransportFactoryImpl.class).in(Scopes.SINGLETON);
   }

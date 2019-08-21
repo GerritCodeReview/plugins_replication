@@ -65,7 +65,7 @@ public class ReplicationQueue
   private final WorkQueue workQueue;
   private final DynamicItem<EventDispatcher> dispatcher;
   private final ReplicationConfig config;
-  private final AdminApiFactory adminApiFactory;
+  private final DynamicItem<AdminApiFactory> adminApiFactory;
   private final ReplicationState.Factory replicationStateFactory;
   private final EventsStorage eventsStorage;
   private volatile boolean running;
@@ -74,7 +74,7 @@ public class ReplicationQueue
   @Inject
   ReplicationQueue(
       WorkQueue wq,
-      AdminApiFactory aaf,
+      DynamicItem<AdminApiFactory> aaf,
       ReplicationConfig rc,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListeners sl,
@@ -260,7 +260,7 @@ public class ReplicationQueue
   }
 
   private boolean createProject(URIish replicateURI, Project.NameKey projectName, String head) {
-    Optional<AdminApi> adminApi = adminApiFactory.create(replicateURI);
+    Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI);
     if (adminApi.isPresent() && adminApi.get().createProject(projectName, head)) {
       return true;
     }
@@ -270,7 +270,7 @@ public class ReplicationQueue
   }
 
   private void deleteProject(URIish replicateURI, Project.NameKey projectName) {
-    Optional<AdminApi> adminApi = adminApiFactory.create(replicateURI);
+    Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI);
     if (adminApi.isPresent()) {
       adminApi.get().deleteProject(projectName);
       return;
@@ -280,7 +280,7 @@ public class ReplicationQueue
   }
 
   private void updateHead(URIish replicateURI, Project.NameKey projectName, String newHead) {
-    Optional<AdminApi> adminApi = adminApiFactory.create(replicateURI);
+    Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI);
     if (adminApi.isPresent()) {
       adminApi.get().updateHead(projectName, newHead);
       return;
