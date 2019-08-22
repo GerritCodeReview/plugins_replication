@@ -16,6 +16,24 @@
       "revId": "91c2e587ad57b9457361694f64b301026e004add",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5860786_e4302d8f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AdminApiFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-08-22T06:32:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73996613_38b75cd9",
+      "revId": "91c2e587ad57b9457361694f64b301026e004add",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
