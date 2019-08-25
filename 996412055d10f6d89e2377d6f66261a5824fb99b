@@ -298,6 +298,30 @@
     },
     {
       "key": {
+        "uuid": "e15a1af2_84e57918",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventsStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-25T12:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62bad0c7_4a64f716",
+      "range": {
+        "startLine": 68,
+        "startChar": 28,
+        "endLine": 68,
+        "endChar": 38
+      },
+      "revId": "996412055d10f6d89e2377d6f66261a5824fb99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c27b0d64_c640e869",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventsStorage.java",
         "patchSetId": 6
