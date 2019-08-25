@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "254108c0_0c7f9a26",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T13:33:15Z",
+      "side": 1,
+      "message": "rename this to t(ask) ?",
+      "range": {
+        "startLine": 394,
+        "startChar": 14,
+        "endLine": 394,
+        "endChar": 15
+      },
+      "revId": "3b5d6ee2639f3b18e2926ebc1149d61739fac920",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6af36369_907630b7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T13:33:15Z",
+      "side": 1,
+      "message": "task ?",
+      "range": {
+        "startLine": 548,
+        "startChar": 30,
+        "endLine": 548,
+        "endChar": 32
+      },
+      "revId": "3b5d6ee2639f3b18e2926ebc1149d61739fac920",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f301b33_28306760",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T13:33:15Z",
+      "side": 1,
+      "message": "taskJson ?",
+      "range": {
+        "startLine": 90,
+        "startChar": 11,
+        "endLine": 90,
+        "endChar": 20
+      },
+      "revId": "3b5d6ee2639f3b18e2926ebc1149d61739fac920",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ac8e834_46b06c72",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T13:33:15Z",
+      "side": 1,
+      "message": "taskKey ?",
+      "range": {
+        "startLine": 91,
+        "startChar": 11,
+        "endLine": 91,
+        "endChar": 19
+      },
+      "revId": "3b5d6ee2639f3b18e2926ebc1149d61739fac920",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
