@@ -13,6 +13,7 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.FileUtil;
 import com.google.gerrit.extensions.annotations.PluginData;
@@ -75,15 +76,25 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   }
 
   private void reloadIfNeeded() {
-    if (isAutoReload()) {
+    reload(false);
+  }
+
+  @VisibleForTesting
+  public void forceReload() {
+    reload(true);
+  }
+
+  private void reload(boolean force) {
+    if (force || isAutoReload()) {
       ReplicationQueue queue = replicationQueue.get();
 
       long lastModified = getLastModified(currentConfig);
       try {
-        if (lastModified > currentConfigTs
-            && lastModified > lastFailedConfigTs
-            && queue.isRunning()
-            && !queue.isReplaying()) {
+        if (force
+            || (lastModified > currentConfigTs
+                && lastModified > lastFailedConfigTs
+                && queue.isRunning()
+                && !queue.isReplaying())) {
           queue.stop();
           currentConfig = loadConfig();
           currentConfigTs = lastModified;
