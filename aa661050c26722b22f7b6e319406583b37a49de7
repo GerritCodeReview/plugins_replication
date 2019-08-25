@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5642bb48_5eb32d3a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T12:48:38Z",
+      "side": 1,
+      "message": "triggering",
+      "range": {
+        "startLine": 12,
+        "startChar": 16,
+        "endLine": 12,
+        "endChar": 36
+      },
+      "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c97c31e_3d67d67b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T12:48:38Z",
+      "side": 1,
+      "message": "task",
+      "range": {
+        "startLine": 15,
+        "startChar": 12,
+        "endLine": 15,
+        "endChar": 17
+      },
+      "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a165ff9_fc773731",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T12:48:38Z",
+      "side": 1,
+      "message": "I would rename this to replicationTaskStorage since now we are storing replication tasks and no longer events",
+      "range": {
+        "startLine": 105,
+        "startChar": 40,
+        "endLine": 105,
+        "endChar": 53
+      },
+      "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b186e105_10ed402c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T12:48:38Z",
+      "side": 1,
+      "message": "change name as well here ? e.g. rts or ts",
+      "range": {
+        "startLine": 135,
+        "startChar": 30,
+        "endLine": 135,
+        "endChar": 32
+      },
+      "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50f8ceef_b2181e46",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T12:48:38Z",
+      "side": 1,
+      "message": "So the persist method translates the PushOne event to potentially multiple replication tasks ? Maybe this method should be named differently, I\u0027d expect a persist method to simply persist 1-1 the objects passed to it, this method has the side effect to generate 1 or multiple replication tasks from a single event. Maybe we should add another method \"Set\u003ctask\u003e tasks(event)\" to compute the replication tasks to spawn for the event and then call persist on this set of tasks.",
+      "range": {
+        "startLine": 403,
+        "startChar": 22,
+        "endLine": 403,
+        "endChar": 29
+      },
+      "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9db2d842_1fb705f6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T12:48:38Z",
+      "side": 1,
+      "message": "see comment above, this is a similar translation from a single event to multiple tasks to be deleted",
+      "range": {
+        "startLine": 554,
+        "startChar": 26,
+        "endLine": 554,
+        "endChar": 32
+      },
+      "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0166bc17_440a1c25",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T12:48:38Z",
+      "side": 1,
+      "message": "replicationTasksStorage or taskStorage",
+      "range": {
+        "startLine": 70,
+        "startChar": 40,
+        "endLine": 70,
+        "endChar": 53
+      },
+      "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75c37d6c_bff9f251",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T12:48:38Z",
+      "side": 1,
+      "message": "find a better name",
+      "range": {
+        "startLine": 82,
+        "startChar": 30,
+        "endLine": 82,
+        "endChar": 32
+      },
+      "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69b16219_db96ff3c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T12:48:38Z",
+      "side": 1,
+      "message": "tasksReplayed",
+      "range": {
+        "startLine": 165,
+        "startChar": 18,
+        "endLine": 165,
+        "endChar": 32
+      },
+      "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a41f444_2d6d583f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T12:48:38Z",
+      "side": 1,
+      "message": "t",
+      "range": {
+        "startLine": 167,
+        "startChar": 54,
+        "endLine": 167,
+        "endChar": 55
+      },
+      "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3f62627_ec7ed1a0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T12:48:38Z",
+      "side": 1,
+      "message": "taskKey",
+      "range": {
+        "startLine": 168,
+        "startChar": 15,
+        "endLine": 168,
+        "endChar": 23
+      },
+      "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74d47d28_65226766",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2019-08-25T12:48:38Z",
+      "side": 1,
+      "message": "replication task",
+      "range": {
+        "startLine": 170,
+        "startChar": 38,
+        "endLine": 170,
+        "endChar": 43
+      },
+      "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
