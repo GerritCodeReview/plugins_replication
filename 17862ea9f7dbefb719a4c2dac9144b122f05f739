@@ -117,6 +117,30 @@
       "revId": "17862ea9f7dbefb719a4c2dac9144b122f05f739",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "514fa95b_2f8eb268",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-26T09:20:09Z",
+      "side": 1,
+      "message": "Yep, I\u0027m already posting a separate change on stable-2.16.",
+      "parentUuid": "53ed9da1_0636bb32",
+      "range": {
+        "startLine": 104,
+        "startChar": 35,
+        "endLine": 104,
+        "endChar": 43
+      },
+      "revId": "17862ea9f7dbefb719a4c2dac9144b122f05f739",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
