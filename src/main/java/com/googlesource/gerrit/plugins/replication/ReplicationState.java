@@ -86,6 +86,7 @@ public class ReplicationState {
       URIish uri,
       RefPushResult status,
       RemoteRefUpdate.Status refUpdateStatus) {
+    deleteEvent();
     pushResultProcessing.onRefReplicatedToOneNode(project, ref, uri, status, refUpdateStatus);
 
     RefReplicationStatus completedRefStatus = null;
@@ -112,6 +113,12 @@ public class ReplicationState {
 
     if (allPushTaksCompleted) {
       doAllPushTasksCompleted();
+    }
+  }
+
+  private void deleteEvent() {
+    if (eventKey != null) {
+      eventsStorage.delete(eventKey);
     }
   }
 
@@ -145,15 +152,8 @@ public class ReplicationState {
   }
 
   private void doRefPushTasksCompleted(RefReplicationStatus refStatus) {
-    deleteEvent();
     pushResultProcessing.onRefReplicatedToAllNodes(
         refStatus.project, refStatus.ref, refStatus.nodesToReplicateCount);
-  }
-
-  private void deleteEvent() {
-    if (eventKey != null) {
-      eventsStorage.delete(eventKey);
-    }
   }
 
   private RefReplicationStatus getRefStatus(String project, String ref) {

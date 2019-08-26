@@ -20,7 +20,10 @@ gerrit_plugin(
 
 junit_tests(
     name = "replication_tests",
-    srcs = glob(["src/test/java/**/*Test.java"]),
+    srcs = glob([
+        "src/test/java/**/*Test.java",
+        "src/test/java/**/*IT.java",
+    ]),
     tags = ["replication"],
     visibility = ["//visibility:public"],
     deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
