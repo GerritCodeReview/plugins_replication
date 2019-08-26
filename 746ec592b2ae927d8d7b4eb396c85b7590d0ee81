@@ -2,6 +2,207 @@
   "comments": [
     {
       "key": {
+        "uuid": "75ba65fa_43385c33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 32
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-26T13:17:16Z",
+      "side": 1,
+      "message": "This change fixes",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 5
+      },
+      "revId": "746ec592b2ae927d8d7b4eb396c85b7590d0ee81",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9519a9a_07fc3a7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 32
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-26T13:17:16Z",
+      "side": 1,
+      "message": "what is meant by this?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 29
+      },
+      "revId": "746ec592b2ae927d8d7b4eb396c85b7590d0ee81",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a4f88c0_18077d35",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 32
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-26T13:17:16Z",
+      "side": 1,
+      "message": "replication tasks",
+      "range": {
+        "startLine": 22,
+        "startChar": 37,
+        "endLine": 22,
+        "endChar": 43
+      },
+      "revId": "746ec592b2ae927d8d7b4eb396c85b7590d0ee81",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cf5d85d_650738bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 32
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-26T13:17:16Z",
+      "side": 1,
+      "message": "This paragraph can be removed as this is already mentioned and discussed above.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 7
+      },
+      "revId": "746ec592b2ae927d8d7b4eb396c85b7590d0ee81",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d36447b9_e61f2c40",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-26T13:17:16Z",
+      "side": 1,
+      "message": "If I follow the code well both 151 and 152 statements will reach the ReplicationTasksStorage.persist method for each task. The call from 151 is obvious.\nThe line 152 will call:\n\n  ReplicationTasksStorage.persist\n  Destination.schedule:403\n  Destination.schedule:358\n  ReplicationQueue:152\n  \nCan we avoid persisting each task twice?",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 53
+      },
+      "revId": "746ec592b2ae927d8d7b4eb396c85b7590d0ee81",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c6761e2_5b72ecbd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-26T13:17:16Z",
+      "side": 1,
+      "message": "Tasks",
+      "range": {
+        "startLine": 159,
+        "startChar": 26,
+        "endLine": 159,
+        "endChar": 32
+      },
+      "revId": "746ec592b2ae927d8d7b4eb396c85b7590d0ee81",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8c57aa4_b40b70d1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-26T13:17:16Z",
+      "side": 1,
+      "message": "Why is this needed? Isn\u0027t every task key representing one unique push operation?\nWhy do we limit to project+ref here?",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 47
+      },
+      "revId": "746ec592b2ae927d8d7b4eb396c85b7590d0ee81",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1320c4ec_8d678d24",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-26T13:17:16Z",
+      "side": 1,
+      "message": "Before this change we only persisted events (project + ref). When scheduling replication\ntasks we looked at the current replication.config and based on that configuration created\nthe tasks. All of the tasks were created based on the same config snapshot.\n\nNow we persist the uri and the remote name additionally. However, we do not persist other\nproperties from the configuration snapshot like: \"push\", \"adminUrl\", etc...\nAssuming replication.config gets changed while a set of replication tasks are being processed\nit may happen that some of the tasks are processed with the old configuration snapshot\nand some of them are processed with the new configuration snapshot. For example, we may\nadd a new push key:\n\n  [remote \"foo\"]\n     url \u003d foo_1\n     url \u003d foo_2\n     push \u003d refs/heads/*:refs/heads/*\n     push \u003d refs/foo/*:refs/foo/*       \u003c\u003c\u003c NEW\n\nIt may happen that we apply the newly added push only when pushing to foo_2 if the configuration\nis reloaded after the push to foo_1 is finished and before push to foo_2 is scheduled.\n\nThis may or may not be an issue (I don\u0027t have a strong opinion on that yet) but this needs\nto be mentioned and discussed in the commit message and also in the config.md.",
+      "revId": "746ec592b2ae927d8d7b4eb396c85b7590d0ee81",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e35ab6f9_c76b8e95",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-26T13:17:16Z",
+      "side": 1,
+      "message": "Should this quadruple rather be replaced with one parameter of ReplicationRefUpdate type?\nsame for the delete method (line 83)",
+      "range": {
+        "startLine": 59,
+        "startChar": 24,
+        "endLine": 59,
+        "endChar": 77
+      },
+      "revId": "746ec592b2ae927d8d7b4eb396c85b7590d0ee81",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b0dd2b6a_5782b01b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 32
@@ -47,6 +248,23 @@
       "revId": "746ec592b2ae927d8d7b4eb396c85b7590d0ee81",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d307fee4_0d2e9f3c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-26T13:17:16Z",
+      "side": 1,
+      "message": "I don\u0027t know why we deleted it from here but now with the replication tasks it makes even less\nsense to delete the task from here. A task should only be deleted once it is done.",
+      "revId": "746ec592b2ae927d8d7b4eb396c85b7590d0ee81",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     },
     {
       "key": {
