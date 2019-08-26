@@ -488,6 +488,24 @@
     },
     {
       "key": {
+        "uuid": "9c7ce42d_e1b33332",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-26T14:47:02Z",
+      "side": 1,
+      "message": "Answering to myself, I think that I am wrong here :-)\nEven before we could have different effects when replication plugin gets restarted before\nall pushes for one event are finished.",
+      "parentUuid": "25604d95_0c4dbd11",
+      "revId": "746ec592b2ae927d8d7b4eb396c85b7590d0ee81",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e35ab6f9_c76b8e95",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 32
