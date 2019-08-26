@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3313b506_3cb495bd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-08-26T11:57:33Z",
+      "side": 1,
+      "message": "to be honest I explicitly choose a generic name to decouple the tagging of \"slow latency\" from the usage that is made of it: the documentation explains that if latency is tagged as slow, then an additional metric is exported, but it might not be the only use of it.\n\nI am happy to rename it if you think we should make this a single-purpose flag.",
+      "parentUuid": "0de60b06_910dd121",
+      "range": {
+        "startLine": 70,
+        "startChar": 35,
+        "endLine": 70,
+        "endChar": 55
+      },
+      "revId": "2b4648aaa8ebc6456d003a2995845f78d26c9fe1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fdf30615_fce61dc5",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 7
