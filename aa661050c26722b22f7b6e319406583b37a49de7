@@ -219,6 +219,30 @@
     },
     {
       "key": {
+        "uuid": "72b865ab_6735f1ff",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-26T13:50:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b186e105_10ed402c",
+      "range": {
+        "startLine": 135,
+        "startChar": 30,
+        "endLine": 135,
+        "endChar": 32
+      },
+      "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50f8ceef_b2181e46",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 18
@@ -264,6 +288,30 @@
       "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bcd62a3_3e355ea5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-26T13:50:58Z",
+      "side": 1,
+      "message": "I\u0027ve removed this call altogether, as it was redundant anyway.",
+      "parentUuid": "93a00fcb_3edd46b4",
+      "range": {
+        "startLine": 403,
+        "startChar": 22,
+        "endLine": 403,
+        "endChar": 29
+      },
+      "revId": "aa661050c26722b22f7b6e319406583b37a49de7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
