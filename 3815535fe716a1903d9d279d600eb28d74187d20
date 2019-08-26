@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f64813c0_2631a934",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-08-26T00:07:12Z",
+      "side": 1,
+      "message": "Change this to \"see issue 11172\" and put the Bug: line in the footer as usual so it\u0027s indexed for the tr: and bug: search operators.",
+      "range": {
+        "startLine": 11,
+        "startChar": 55,
+        "endLine": 11,
+        "endChar": 67
+      },
+      "revId": "3815535fe716a1903d9d279d600eb28d74187d20",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
