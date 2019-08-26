@@ -99,7 +99,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private Ref getRef(Repository repo, String branchName) {
     try {
-      return repo.getRefDatabase().getRef(branchName);
+      return repo.getRefDatabase().exactRef(branchName);
     } catch (IOException e) {
       e.printStackTrace();
       return null;
