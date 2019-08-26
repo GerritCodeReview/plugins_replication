@@ -30,8 +30,8 @@ public class GerritSshApi implements AdminApi {
   static int SSH_COMMAND_FAILED = -1;
   static String GERRIT_ADMIN_PROTOCOL_PREFIX = "gerrit+";
 
-  private final SshHelper sshHelper;
-  private final URIish uri;
+  protected final SshHelper sshHelper;
+  protected final URIish uri;
 
   private final Set<URIish> withoutDeleteProjectPlugin = new HashSet<>();
 
@@ -80,10 +80,7 @@ public class GerritSshApi implements AdminApi {
     try {
       execute(uri, cmd, errStream);
     } catch (IOException e) {
-      logger.atSevere().withCause(e).log(
-          "Error updating HEAD of remote repository at %s to %s:\n"
-              + "  Exception: %s\n  Command: %s\n  Output: %s",
-          uri, newHead, e, cmd, errStream);
+      logError("updating HEAD of", uri, errStream, cmd, e);
     }
   }
 
