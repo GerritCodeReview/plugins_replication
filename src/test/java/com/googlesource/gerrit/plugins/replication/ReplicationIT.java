@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.google.common.base.Stopwatch;
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
@@ -43,6 +44,7 @@ import org.junit.Test;
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
 public class ReplicationIT extends LightweightPluginDaemonTest {
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private static final int TEST_REPLICATION_DELAY = 1;
   private static final Duration TEST_TIMEMOUT = Duration.ofSeconds(TEST_REPLICATION_DELAY * 10);
 
@@ -82,11 +84,13 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().getRefName();
 
-    waitUntil(() -> getRef(getRepo(targetProject), sourceRef) != null);
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
 
-    Ref targetBranchRef = getRef(getRepo(targetProject), sourceRef);
-    assertThat(targetBranchRef).isNotNull();
-    assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
+      Ref targetBranchRef = getRef(repo, sourceRef);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
+    }
   }
 
   @Test
@@ -100,28 +104,25 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     input.revision = master;
     gApi.projects().name(targetProject.get()).branch(newBranch).create(input);
 
-    waitUntil(() -> getRef(getRepo(targetProject), newBranch) != null);
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, newBranch) != null);
 
-    Ref targetBranchRef = getRef(getRepo(targetProject), newBranch);
-    Ref masterRef = getRef(getRepo(targetProject), master);
-    assertThat(targetBranchRef).isNotNull();
-    assertThat(targetBranchRef.getObjectId()).isEqualTo(masterRef.getObjectId());
-  }
-
-  private Repository getRepo(Project.NameKey targetProject) {
-    try {
-      return repoManager.openRepository(targetProject);
-    } catch (Exception e) {
-      e.printStackTrace();
-      return null;
+      Ref targetBranchRef = getRef(repo, newBranch);
+      Ref masterRef = getRef(repo, master);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(masterRef.getObjectId());
     }
   }
 
-  private Ref getRef(Repository repo, String branchName) {
+  private Ref getRef(Repository repo, String branchName) throws Exception {
+    return repo.getRefDatabase().exactRef(branchName);
+  }
+
+  private Ref checkedGetRef(Repository repo, String branchName) {
     try {
       return repo.getRefDatabase().exactRef(branchName);
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (Exception e) {
+      logger.atSevere().withCause(e).log("failed to get ref %s in repo %s", branchName, repo);
       return null;
     }
   }
