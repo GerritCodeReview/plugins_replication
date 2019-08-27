@@ -72,7 +72,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   @Test
-  public void shouldReplicateNewBranch() throws Exception {
+  public void shouldReplicateNewChangeRef() throws Exception {
     setReplicationDestination("foo", "replica");
 
     Project.NameKey targetProject = createProject("projectreplica");
