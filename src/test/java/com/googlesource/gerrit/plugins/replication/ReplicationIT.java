@@ -21,6 +21,7 @@ import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
+import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.config.SitePaths;
@@ -86,6 +87,25 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     Ref targetBranchRef = getRef(getRepo(targetProject), sourceRef);
     assertThat(targetBranchRef).isNotNull();
     assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
+  }
+
+  @Test
+  public void shouldReplicateNewBranch() throws Exception {
+    setReplicationDestination("foo", "replica");
+
+    Project.NameKey targetProject = createProject("projectreplica");
+    String newBranch = "refs/heads/mybranch";
+    String master = "refs/heads/master";
+    BranchInput input = new BranchInput();
+    input.revision = master;
+    gApi.projects().name(targetProject.get()).branch(newBranch).create(input);
+
+    waitUntil(() -> getRef(getRepo(targetProject), newBranch) != null);
+
+    Ref targetBranchRef = getRef(getRepo(targetProject), newBranch);
+    Ref masterRef = getRef(getRepo(targetProject), master);
+    assertThat(targetBranchRef).isNotNull();
+    assertThat(targetBranchRef.getObjectId()).isEqualTo(masterRef.getObjectId());
   }
 
   private Repository getRepo(Project.NameKey targetProject) {
