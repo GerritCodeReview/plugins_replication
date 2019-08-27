@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9fbc2db_a131871e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-27T13:28:13Z",
+      "side": 1,
+      "message": "nits: Looks like you were in a hurry today morning :-)",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 26
+      },
+      "revId": "8b2723f23d0ed3c39dba0e3c231fbc09196f3671",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "167d590d_f2826ea3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-27T13:28:13Z",
+      "side": 1,
+      "message": "This variable rename is unnecessary in the context of this change.\nI will revert it.",
+      "revId": "8b2723f23d0ed3c39dba0e3c231fbc09196f3671",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af336490_ef355e89",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-27T13:28:13Z",
+      "side": 1,
+      "message": "The ReplicateRefUpdate doesn\u0027t implement the toString() method, therefore the output of this log\nwill be useless. Either log as in the previous PS and unpack r here (preferred) or implement the toString() method.",
+      "revId": "8b2723f23d0ed3c39dba0e3c231fbc09196f3671",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b8742f8_19fc16ba",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-27T13:28:13Z",
+      "side": 1,
+      "message": "Use also variable name \u0027file\u0027 here to be consistent with the (reverted) variable name at line 69.",
+      "range": {
+        "startLine": 87,
+        "startChar": 9,
+        "endLine": 87,
+        "endChar": 13
+      },
+      "revId": "8b2723f23d0ed3c39dba0e3c231fbc09196f3671",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d575c3ed_5a41f3f8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-27T13:28:13Z",
+      "side": 1,
+      "message": "trailing spaces",
+      "revId": "8b2723f23d0ed3c39dba0e3c231fbc09196f3671",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "544272d3_d25be60e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-27T13:28:13Z",
+      "side": 1,
+      "message": "Same comment as in the line 76",
+      "revId": "8b2723f23d0ed3c39dba0e3c231fbc09196f3671",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b4f5dee_cd053c19",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-08-27T13:28:13Z",
+      "side": 1,
+      "message": "Reuse the path variable from the line 87",
+      "range": {
+        "startLine": 91,
+        "startChar": 19,
+        "endLine": 91,
+        "endChar": 48
+      },
+      "revId": "8b2723f23d0ed3c39dba0e3c231fbc09196f3671",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
