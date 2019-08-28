@@ -128,7 +128,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     String master = "refs/heads/master";
     BranchInput input = new BranchInput();
     input.revision = master;
-    gApi.projects().name(targetProject.get()).branch(newBranch).create(input);
+    gApi.projects().name(project.get()).branch(newBranch).create(input);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newBranch) != null);
