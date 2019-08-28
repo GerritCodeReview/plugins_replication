@@ -75,18 +75,20 @@ public class GerritRestApi implements AdminApi {
   }
 
   @Override
-  public void deleteProject(Project.NameKey project) {
+  public boolean deleteProject(Project.NameKey project) {
     repLog.info("Deleting project {} on {}", project, uri);
     String url = String.format("%s/a/projects/%s", toHttpUri(uri), Url.encode(project.get()));
     try {
       httpClient.execute(new HttpDelete(url), new HttpResponseHandler(), getContext());
+      return true;
     } catch (IOException e) {
       repLog.error("Couldn't perform project deletion on {}", uri, e);
     }
+    return false;
   }
 
   @Override
-  public void updateHead(Project.NameKey project, String newHead) {
+  public boolean updateHead(Project.NameKey project, String newHead) {
     repLog.info("Updating head of {} on {}", project, uri);
     String url = String.format("%s/a/projects/%s/HEAD", toHttpUri(uri), Url.encode(project.get()));
     try {
@@ -95,9 +97,11 @@ public class GerritRestApi implements AdminApi {
           new StringEntity(String.format("{\"ref\": \"%s\"}", newHead), Charsets.UTF_8.name()));
       req.addHeader(new BasicHeader("Content-Type", "application/json"));
       httpClient.execute(req, new HttpResponseHandler(), getContext());
+      return true;
     } catch (IOException e) {
       repLog.error("Couldn't perform update head on {}", uri, e);
     }
+    return false;
   }
 
   private HttpClientContext getContext() {
