@@ -49,6 +49,29 @@
     },
     {
       "key": {
+        "uuid": "16e8ccbd_bedf23fe",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AbstractConfigTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-28T19:03:26Z",
+      "side": 1,
+      "message": "This should have not been removed :-(",
+      "range": {
+        "startLine": 51,
+        "startChar": 82,
+        "endLine": 51,
+        "endChar": 88
+      },
+      "revId": "08df0a6b2341e29b919965bcc729449e9f73c975",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a5b683f_ea1bd52c",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 8
