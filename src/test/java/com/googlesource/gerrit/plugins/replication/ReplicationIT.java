@@ -169,7 +169,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   @Test
-  public void shouldCreateIndividualResplicationTasksForEveryRemoteUrlPair() throws Exception {
+  public void shouldCreateIndividualReplicationTasksForEveryRemoteUrlPair() throws Exception {
     List<String> replicaSuffixes = Arrays.asList("replica1", "replica2");
     createProject("projectreplica1");
     createProject("projectreplica2");
