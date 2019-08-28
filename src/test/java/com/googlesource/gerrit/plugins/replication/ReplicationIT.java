@@ -258,6 +258,36 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   @Test
+  public void shouldReplicateBranchDeletion() throws Exception {
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    Project.NameKey targetProject = createProject("projectreplica");
+    String branchToDelete = "refs/heads/mybranch";
+    String master = "refs/heads/master";
+    BranchInput input = new BranchInput();
+    input.revision = master;
+    gApi.projects().name(project.get()).branch(branchToDelete).create(input);
+
+    assertThat(listReplicationTasks("refs/heads/(mybranch|master)")).hasSize(2);
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, branchToDelete) != null);
+    }
+
+    gApi.projects().name(project.get()).branch(branchToDelete).delete();
+
+    assertThat(listReplicationTasks("refs/heads/mybranch")).hasSize(1);
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, branchToDelete) == null);
+
+      Ref targetBranchRef = getRef(repo, branchToDelete);
+      assertThat(targetBranchRef).isNull();
+    }
+  }
+
+  @Test
   public void shouldNotDrainTheQueueWhenReloading() throws Exception {
     // Setup repo to replicate
     Project.NameKey targetProject = createTestProject("projectreplica");
