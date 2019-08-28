@@ -1,7 +1,7 @@
 @PLUGIN@ extension points
 ==============
 
-The replication plugin exposes an extension point to allow influencing the behaviour of the replication events from another plugin or a script.
+The replication plugin exposes an extension point to allow influencing its behaviour from another plugin or a script.
 Extension points can be defined from the replication plugin only when it is loaded as [libModule](/config-gerrit.html#gerrit.installModule) and
 implemented by another plugin by declaring a `provided` dependency from the replication plugin.
 
@@ -35,5 +35,19 @@ Example:
   Example:
 
   ```
-  DynamicItem.bind(binder(),ReplicationPushFilter.class).to(ReplicationPushFilterImpl.class);
+  DynamicItem.bind(binder(), ReplicationPushFilter.class).to(ReplicationPushFilterImpl.class);
+  ```
+
+* `com.googlesource.gerrit.plugins.replication.AdminApiFactory`
+
+  Create an instance of `AdminApi` for a given remote URL. The default implementation
+  provides API instances for local FS, remote SSH, and remote Gerrit.
+
+  Only one factory at a time is supported. The implementation needs to be bound as a
+  `DynamicItem`.
+
+  Example:
+
+  ```
+  DynamicItem.bind(binder(), AdminApiFactory.class).to(AdminApiFactoryImpl.class);
   ```
