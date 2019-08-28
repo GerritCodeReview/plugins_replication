@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
+import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -185,6 +186,28 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     createChange();
 
     assertThat(storagePath.toFile().list()).hasLength(4);
+  }
+
+  @Test
+  public void shouldReplicateHeadUpdate() throws Exception {
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    Project.NameKey targetProject = createProject("projectreplica");
+    String newHead = "refs/heads/newhead";
+    String master = "refs/heads/master";
+    BranchInput input = new BranchInput();
+    input.revision = master;
+    gApi.projects().name(project.get()).branch(newHead).create(input);
+    gApi.projects().name(project.get()).head(newHead);
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, newHead) != null);
+
+      Ref targetProjectHead = getRef(repo, Constants.HEAD);
+      assertThat(targetProjectHead).isNotNull();
+      assertThat(targetProjectHead.getTarget().getName()).isEqualTo(newHead);
+    }
   }
 
   private Ref getRef(Repository repo, String branchName) throws IOException {
