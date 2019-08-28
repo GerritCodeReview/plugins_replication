@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "52470c9f_12c31844",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-28T14:27:37Z",
+      "side": 1,
+      "message": "Yes, it was in stable-2.16. That has been fixed now and will re-do the merge.",
+      "parentUuid": "5a7baae0_6d0ba147",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 6
+      },
+      "revId": "08df0a6b2341e29b919965bcc729449e9f73c975",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a5b683f_ea1bd52c",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 8
