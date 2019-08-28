@@ -143,11 +143,12 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     assertThat(listReplicationTasks("refs/heads/(mybranch|master)")).hasSize(2);
 
-    try (Repository repo = repoManager.openRepository(targetProject)) {
+    try (Repository repo = repoManager.openRepository(targetProject);
+    		Repository sourceRepo = repoManager.openRepository(project)) {
       waitUntil(() -> checkedGetRef(repo, newBranch) != null);
 
+      Ref masterRef = getRef(sourceRepo, master);
       Ref targetBranchRef = getRef(repo, newBranch);
-      Ref masterRef = getRef(repo, master);
       assertThat(targetBranchRef).isNotNull();
       assertThat(targetBranchRef.getObjectId()).isEqualTo(masterRef.getObjectId());
     }
