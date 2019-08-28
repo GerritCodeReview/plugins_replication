@@ -16,6 +16,24 @@
       "revId": "236d9a6468c6e91f3d5135413adbf06071770625",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80b45f16_5e297f31",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-08-28T05:21:37Z",
+      "side": 1,
+      "message": "It didn\u0027t return false before Sasa\u0027s refactoring.  I would prefer to change it in a follow up if it\u0027s needed.",
+      "parentUuid": "12146bbc_e3a6be93",
+      "revId": "236d9a6468c6e91f3d5135413adbf06071770625",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
