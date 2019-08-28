@@ -28,16 +28,24 @@ import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.config.SitePaths;
+import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.google.inject.Key;
+import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
+import java.util.regex.Pattern;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -60,6 +68,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   private Path gitPath;
   private Path storagePath;
   private FileBasedConfig config;
+  private Gson GSON = new Gson();
 
   @Override
   public void setUpTestPlugin() throws Exception {
@@ -68,9 +77,9 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     config =
         new FileBasedConfig(sitePaths.etc_dir.resolve("replication.config").toFile(), FS.DETECTED);
     setReplicationDestination(
-        "remote1",
-        "suffix1",
-        Optional.of("not-used-project")); // Simulates a full replication.config initialization
+        "remote1", "suffix1", Optional.of("not-used-project")); // Simulates a full
+    // replication.config
+    // initialization
     config.save();
 
     super.setUpTestPlugin();
@@ -83,11 +92,11 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   public void shouldReplicateNewProject() throws Exception {
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
+    waitForEmptyTasks();
 
     Project.NameKey sourceProject = createProject("foo");
 
-    String[] replicationTasks = storagePath.toFile().list();
-    assertThat(replicationTasks).hasLength(2); // refs/heads/master and /refs/meta/config
+    assertThat(listReplicationTasks("refs/meta/config")).hasSize(1);
 
     waitUntil(() -> gitPath.resolve(sourceProject + "replica.git").toFile().isDirectory());
 
@@ -101,13 +110,13 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
+    waitForEmptyTasks();
 
     Result pushResult = createChange();
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().getRefName();
 
-    String[] replicationTasks = storagePath.toFile().list();
-    assertThat(replicationTasks).hasLength(1);
+    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(1);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
@@ -122,6 +131,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   public void shouldReplicateNewBranch() throws Exception {
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
+    waitForEmptyTasks();
 
     Project.NameKey targetProject = createProject("projectreplica");
     String newBranch = "refs/heads/mybranch";
@@ -129,6 +139,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     BranchInput input = new BranchInput();
     input.revision = master;
     gApi.projects().name(targetProject.get()).branch(newBranch).create(input);
+
+    assertThat(listReplicationTasks("refs/heads/(mybranch|master)")).hasSize(2);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newBranch) != null);
@@ -148,13 +160,13 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     setReplicationDestination("foo1", "replica1", ALL_PROJECTS);
     setReplicationDestination("foo2", "replica2", ALL_PROJECTS);
     reloadConfig();
+    waitForEmptyTasks();
 
     Result pushResult = createChange();
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().getRefName();
 
-    String[] replicationTasks = storagePath.toFile().list();
-    assertThat(replicationTasks).hasLength(2);
+    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(2);
 
     try (Repository repo1 = repoManager.openRepository(targetProject1);
         Repository repo2 = repoManager.openRepository(targetProject2)) {
@@ -181,10 +193,11 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
     setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
     reloadConfig();
+    waitForEmptyTasks();
 
     createChange();
 
-    assertThat(storagePath.toFile().list()).hasLength(4);
+    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
   }
 
   private Ref getRef(Repository repo, String branchName) throws IOException {
@@ -228,5 +241,41 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private void reloadConfig() {
     plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).forceReload();
+  }
+
+  private void waitForEmptyTasks() throws InterruptedException {
+    waitUntil(
+        () -> {
+          try {
+            return listReplicationTasks(".*").size() == 0;
+          } catch (Exception e) {
+            logger.atSevere().withCause(e).log("Failed to list replication tasks");
+            throw new IllegalStateException(e);
+          }
+        });
+  }
+
+  private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) throws IOException {
+    Pattern refmaskPattern = Pattern.compile(refRegex);
+    List<ReplicateRefUpdate> tasks = new ArrayList<>();
+    try (DirectoryStream<Path> files = Files.newDirectoryStream(storagePath)) {
+      for (Path path : files) {
+        ReplicateRefUpdate task = readTask(path);
+        if (refmaskPattern.matcher(task.ref).matches()) {
+          tasks.add(readTask(path));
+        }
+      }
+    }
+
+    return tasks;
+  }
+
+  private ReplicateRefUpdate readTask(Path file) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(file.toFile()))) {
+      return GSON.fromJson(reader, ReplicateRefUpdate.class);
+    } catch (Exception e) {
+      logger.atSevere().withCause(e).log("failed to read replication task %s", file);
+      throw new IllegalStateException(e);
+    }
   }
 }
