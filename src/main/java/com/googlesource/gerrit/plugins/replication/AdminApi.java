@@ -19,7 +19,7 @@ import com.google.gerrit.reviewdb.client.Project;
 public interface AdminApi {
   public boolean createProject(Project.NameKey project, String head);
 
-  public void deleteProject(Project.NameKey project);
+  public boolean deleteProject(Project.NameKey project);
 
-  public void updateHead(Project.NameKey project, String newHead);
+  public boolean updateHead(Project.NameKey project, String newHead);
 }

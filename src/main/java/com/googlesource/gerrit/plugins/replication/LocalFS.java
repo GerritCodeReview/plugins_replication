@@ -52,17 +52,19 @@ public class LocalFS implements AdminApi {
   }
 
   @Override
-  public void deleteProject(Project.NameKey project) {
+  public boolean deleteProject(Project.NameKey project) {
     try {
       recursivelyDelete(new File(uri.getPath()));
       repLog.info("Deleted local repository: {}", uri);
     } catch (IOException e) {
       repLog.error("Error deleting local repository {}:\n", uri.getPath(), e);
+      return false;
     }
+    return true;
   }
 
   @Override
-  public void updateHead(Project.NameKey project, String newHead) {
+  public boolean updateHead(Project.NameKey project, String newHead) {
     try (Repository repo = new FileRepository(uri.getPath())) {
       if (newHead != null) {
         RefUpdate u = repo.updateRef(Constants.HEAD);
@@ -70,7 +72,9 @@ public class LocalFS implements AdminApi {
       }
     } catch (IOException e) {
       repLog.error("Failed to update HEAD of repository {} to {}", uri.getPath(), newHead, e);
+      return false;
     }
+    return true;
   }
 
   private static void recursivelyDelete(File dir) throws IOException {

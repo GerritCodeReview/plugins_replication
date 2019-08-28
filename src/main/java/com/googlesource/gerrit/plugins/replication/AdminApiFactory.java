@@ -33,6 +33,7 @@ public interface AdminApiFactory {
   @Singleton
   static class DefaultAdminApiFactory implements AdminApiFactory {
     protected final SshHelper sshHelper;
+
     private final GerritRestApi.Factory gerritRestApiFactory;
 
     @Inject
