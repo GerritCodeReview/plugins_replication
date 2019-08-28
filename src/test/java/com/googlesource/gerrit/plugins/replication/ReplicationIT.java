@@ -109,11 +109,13 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     String[] replicationTasks = storagePath.toFile().list();
     assertThat(replicationTasks).hasLength(1);
 
-    waitUntil(() -> getRef(getRepo(targetProject), sourceRef) != null);
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
 
-    Ref targetBranchRef = getRef(getRepo(targetProject), sourceRef);
-    assertThat(targetBranchRef).isNotNull();
-    assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
+      Ref targetBranchRef = getRef(repo, sourceRef);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
+    }
   }
 
   @Test
@@ -154,18 +156,20 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     String[] replicationTasks = storagePath.toFile().list();
     assertThat(replicationTasks).hasLength(2);
 
-    waitUntil(
-        () ->
-            (getRef(getRepo(targetProject1), sourceRef) != null
-                && getRef(getRepo(targetProject2), sourceRef) != null));
+    try (Repository repo1 = repoManager.openRepository(targetProject1);
+        Repository repo2 = repoManager.openRepository(targetProject2)) {
+      waitUntil(
+          () ->
+              (checkedGetRef(repo1, sourceRef) != null && checkedGetRef(repo2, sourceRef) != null));
 
-    Ref targetBranchRef1 = getRef(getRepo(targetProject1), sourceRef);
-    assertThat(targetBranchRef1).isNotNull();
-    assertThat(targetBranchRef1.getObjectId()).isEqualTo(sourceCommit.getId());
+      Ref targetBranchRef1 = getRef(repo1, sourceRef);
+      assertThat(targetBranchRef1).isNotNull();
+      assertThat(targetBranchRef1.getObjectId()).isEqualTo(sourceCommit.getId());
 
-    Ref targetBranchRef2 = getRef(getRepo(targetProject2), sourceRef);
-    assertThat(targetBranchRef2).isNotNull();
-    assertThat(targetBranchRef2.getObjectId()).isEqualTo(sourceCommit.getId());
+      Ref targetBranchRef2 = getRef(repo2, sourceRef);
+      assertThat(targetBranchRef2).isNotNull();
+      assertThat(targetBranchRef2.getObjectId()).isEqualTo(sourceCommit.getId());
+    }
   }
 
   @Test
@@ -183,23 +187,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     assertThat(storagePath.toFile().list()).hasLength(4);
   }
 
-  private Repository getRepo(Project.NameKey targetProject) {
-    try {
-      return repoManager.openRepository(targetProject);
-    } catch (Exception e) {
-      logger.atSevere().withCause(e).log(
-          "Unable to open repository associated with project %s", targetProject);
-      return null;
-    }
-  }
-
-  private Ref getRef(Repository repo, String branchName) {
-    try {
-      return repo.getRefDatabase().exactRef(branchName);
-    } catch (IOException e) {
-      e.printStackTrace();
-      return null;
-    }
+  private Ref getRef(Repository repo, String branchName) throws IOException {
+    return repo.getRefDatabase().exactRef(branchName);
   }
 
   private Ref checkedGetRef(Repository repo, String branchName) {
