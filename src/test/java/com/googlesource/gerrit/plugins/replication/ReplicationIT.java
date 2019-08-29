@@ -59,8 +59,8 @@ import org.junit.Test;
 public class ReplicationIT extends LightweightPluginDaemonTest {
   private static final Optional<String> ALL_PROJECTS = Optional.empty();
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-  private static final int TEST_REPLICATION_DELAY = 5;
-  private static final Duration TEST_TIMEOUT = Duration.ofSeconds(TEST_REPLICATION_DELAY * 10);
+  private static final int TEST_REPLICATION_DELAY = 1;
+  private static final Duration TEST_TIMEOUT = Duration.ofSeconds(TEST_REPLICATION_DELAY * 2);
 
   @Inject private SitePaths sitePaths;
   private Path pluginDataDir;

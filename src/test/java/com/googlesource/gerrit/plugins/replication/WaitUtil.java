@@ -14,7 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 import com.google.common.base.Stopwatch;
 import java.time.Duration;
@@ -28,7 +28,7 @@ public class WaitUtil {
       if (stopwatch.elapsed().compareTo(timeout) > 0) {
         throw new InterruptedException();
       }
-      SECONDS.sleep(1);
+      MILLISECONDS.sleep(50);
     }
   }
 }
