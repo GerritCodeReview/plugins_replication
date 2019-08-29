@@ -62,7 +62,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   private static final Optional<String> ALL_PROJECTS = Optional.empty();
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private static final int TEST_REPLICATION_DELAY = 5;
-  private static final Duration TEST_TIMEMOUT = Duration.ofSeconds(TEST_REPLICATION_DELAY * 10);
+  private static final Duration TEST_TIMEOUT = Duration.ofSeconds(TEST_REPLICATION_DELAY * 10);
 
   @Inject private SitePaths sitePaths;
   private Path pluginDataDir;
@@ -258,7 +258,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private void waitUntil(Supplier<Boolean> waitCondition) throws InterruptedException {
     Stopwatch stopwatch = Stopwatch.createStarted();
-    while (!waitCondition.get() && stopwatch.elapsed().compareTo(TEST_TIMEMOUT) < 0) {
+    while (!waitCondition.get() && stopwatch.elapsed().compareTo(TEST_TIMEOUT) < 0) {
       TimeUnit.SECONDS.sleep(1);
     }
   }
