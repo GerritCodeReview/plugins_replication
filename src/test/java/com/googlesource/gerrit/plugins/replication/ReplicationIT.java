@@ -17,7 +17,6 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.truth.Truth.assertThat;
 import static java.util.stream.Collectors.toList;
 
-import com.google.common.base.Stopwatch;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.PushOneCommit.Result;
@@ -44,7 +43,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import org.eclipse.jgit.lib.Constants;
@@ -62,8 +60,8 @@ import org.junit.Test;
 public class ReplicationIT extends LightweightPluginDaemonTest {
   private static final Optional<String> ALL_PROJECTS = Optional.empty();
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-  private static final int TEST_REPLICATION_DELAY = 5;
-  private static final Duration TEST_TIMEMOUT = Duration.ofSeconds(TEST_REPLICATION_DELAY * 10);
+  private static final int TEST_REPLICATION_DELAY = 1;
+  private static final Duration TEST_TIMEOUT = Duration.ofSeconds(TEST_REPLICATION_DELAY * 2);
 
   @Inject private SitePaths sitePaths;
   @Inject private ProjectOperations projectOperations;
@@ -263,10 +261,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   private void waitUntil(Supplier<Boolean> waitCondition) throws InterruptedException {
-    Stopwatch stopwatch = Stopwatch.createStarted();
-    while (!waitCondition.get() && stopwatch.elapsed().compareTo(TEST_TIMEMOUT) < 0) {
-      TimeUnit.SECONDS.sleep(1);
-    }
+    WaitUtil.waitUntil(waitCondition, TEST_TIMEOUT);
   }
 
   private void reloadConfig() {
