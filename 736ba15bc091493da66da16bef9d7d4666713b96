@@ -22,6 +22,30 @@
       "revId": "736ba15bc091493da66da16bef9d7d4666713b96",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb93a859_48c7150f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-30T12:09:02Z",
+      "side": 1,
+      "message": "Done (P.S. I wish I had the \"Apply Fix\" button that Patrick implemented a few years ago :-(",
+      "parentUuid": "f674ac14_2f5f5679",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 106,
+        "endChar": 11
+      },
+      "revId": "736ba15bc091493da66da16bef9d7d4666713b96",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
