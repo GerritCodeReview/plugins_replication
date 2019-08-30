@@ -16,6 +16,24 @@
       "revId": "bfc9e0f05d1da46118723d846e9e450455d89b74",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70acdd9c_a06b040b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-08-30T12:25:44Z",
+      "side": 1,
+      "message": "This is an integration test, so it would be best to use the real injections and not another subclass IMHO. But yes, I agree with you to do in a follow-up change with the refactoring.",
+      "parentUuid": "29b73204_49940ff9",
+      "revId": "bfc9e0f05d1da46118723d846e9e450455d89b74",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
