@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f674ac14_2f5f5679",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-08-30T10:45:02Z",
+      "side": 1,
+      "message": "Add a new method:\n\n  private boolean projectExists(Project.NameKey name) {\n    try (Repository r \u003d repoManager.openRepository(name)) {\n      return true;\n    } catch (Exception e) {\n      return false;\n    }\n  }\n\nand then this line can be just:\n\n waitUntil(() -\u003e projectExists(new Project.NameKey(sourceProject + \"replica.git\")));",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 106,
+        "endChar": 11
+      },
+      "revId": "736ba15bc091493da66da16bef9d7d4666713b96",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
