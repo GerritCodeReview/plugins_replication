@@ -22,6 +22,30 @@
       "revId": "ae3fdcd6df46a6b5076c2860b2a76ea3f0cee4a9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46e180d9_653ed8f7",
+        "filename": "BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-08-30T06:10:33Z",
+      "side": 1,
+      "message": "What Bazel version are you using? Can you try with Bazel 0.29.0?",
+      "parentUuid": "59d17e4d_7adb7d56",
+      "range": {
+        "startLine": 1,
+        "startChar": 6,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "ae3fdcd6df46a6b5076c2860b2a76ea3f0cee4a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
