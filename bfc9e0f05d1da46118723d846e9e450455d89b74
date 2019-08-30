@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29b73204_49940ff9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-08-30T12:03:22Z",
+      "side": 1,
+      "message": "It would be better to make a derived class that overrides the delete method, as Sasa suggested on the earlier patch set, but when I was trying to do it locally it\u0027s not as trivial as it seems.  Lets do it like this for now, so we can eliminate the flakiness, and then improve it later.",
+      "revId": "bfc9e0f05d1da46118723d846e9e450455d89b74",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
