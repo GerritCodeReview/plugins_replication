@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.flogger.FluentLogger;
 import com.google.common.hash.Hashing;
 import com.google.gson.Gson;
@@ -34,6 +35,8 @@ import org.eclipse.jgit.transport.URIish;
 @Singleton
 public class ReplicationTasksStorage {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+
+  private boolean disableDeleteForTesting;
 
   public static class ReplicateRefUpdate {
     public final String project;
@@ -81,10 +84,20 @@ public class ReplicationTasksStorage {
     return eventKey;
   }
 
+  @VisibleForTesting
+  public void disableDeleteForTesting(boolean deleteDisabled) {
+    this.disableDeleteForTesting = deleteDisabled;
+  }
+
   public void delete(ReplicateRefUpdate r) {
     String taskJson = GSON.toJson(r) + "\n";
     String taskKey = sha1(taskJson).name();
     Path file = refUpdates().resolve(taskKey);
+
+    if (disableDeleteForTesting) {
+      logger.atFine().log("DELETE %s (%s:%s => %s) DISABLED", file, r.project, r.ref, r.uri);
+      return;
+    }
 
     try {
       logger.atFine().log("DELETE %s (%s:%s => %s)", file, r.project, r.ref, r.uri);
