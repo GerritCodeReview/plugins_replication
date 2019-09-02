@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
+import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
@@ -31,7 +32,7 @@ public class CreateProjectTask {
 
   private final RemoteConfig config;
   private final ReplicationConfig replicationConfig;
-  private final AdminApiFactory adminApiFactory;
+  private final DynamicItem<AdminApiFactory> adminApiFactory;
   private final Project.NameKey project;
   private final String head;
 
@@ -39,7 +40,7 @@ public class CreateProjectTask {
   CreateProjectTask(
       RemoteConfig config,
       ReplicationConfig replicationConfig,
-      AdminApiFactory adminApiFactory,
+      DynamicItem<AdminApiFactory> adminApiFactory,
       @Assisted Project.NameKey project,
       @Assisted String head) {
     this.config = config;
@@ -58,7 +59,7 @@ public class CreateProjectTask {
   }
 
   private boolean createProject(URIish replicateURI, Project.NameKey projectName, String head) {
-    Optional<AdminApi> adminApi = adminApiFactory.create(replicateURI);
+    Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI);
     if (adminApi.isPresent() && adminApi.get().createProject(projectName, head)) {
       return true;
     }

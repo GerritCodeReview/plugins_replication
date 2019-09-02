@@ -1,4 +1,4 @@
-// Copyright (C) 2018 The Android Open Source Project
+// Copyright (C) 2019 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,12 +14,21 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.gerrit.reviewdb.client.Project;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
-public interface AdminApi {
-  public boolean createProject(Project.NameKey project, String head);
+import com.google.common.base.Stopwatch;
+import java.time.Duration;
+import java.util.function.Supplier;
 
-  public boolean deleteProject(Project.NameKey project);
-
-  public boolean updateHead(Project.NameKey project, String newHead);
+public class WaitUtil {
+  public static void waitUntil(Supplier<Boolean> waitCondition, Duration timeout)
+      throws InterruptedException {
+    Stopwatch stopwatch = Stopwatch.createStarted();
+    while (!waitCondition.get()) {
+      if (stopwatch.elapsed().compareTo(timeout) > 0) {
+        throw new InterruptedException();
+      }
+      MILLISECONDS.sleep(50);
+    }
+  }
 }
