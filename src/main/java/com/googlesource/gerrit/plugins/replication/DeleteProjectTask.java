@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
+import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.ioutil.HexFormat;
 import com.google.gerrit.server.util.IdGenerator;
@@ -29,14 +30,14 @@ public class DeleteProjectTask implements Runnable {
     DeleteProjectTask create(URIish replicateURI, Project.NameKey project);
   }
 
-  private final AdminApiFactory adminApiFactory;
+  private final DynamicItem<AdminApiFactory> adminApiFactory;
   private final int id;
   private final URIish replicateURI;
   private final Project.NameKey project;
 
   @Inject
   DeleteProjectTask(
-      AdminApiFactory adminApiFactory,
+      DynamicItem<AdminApiFactory> adminApiFactory,
       IdGenerator ig,
       @Assisted URIish replicateURI,
       @Assisted Project.NameKey project) {
@@ -48,7 +49,7 @@ public class DeleteProjectTask implements Runnable {
 
   @Override
   public void run() {
-    Optional<AdminApi> adminApi = adminApiFactory.create(replicateURI);
+    Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI);
     if (adminApi.isPresent()) {
       adminApi.get().deleteProject(project);
       return;
