@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerrit;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isSSH;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
@@ -117,7 +118,8 @@ public class ReplicationQueue
     scheduleFullSync(project, urlMatch, state, false);
   }
 
-  void scheduleFullSync(
+  @VisibleForTesting
+  public void scheduleFullSync(
       Project.NameKey project, String urlMatch, ReplicationState state, boolean now) {
     if (!running) {
       stateLog.warn("Replication plugin did not finish startup before event", state);
@@ -128,6 +130,9 @@ public class ReplicationQueue
       if (cfg.wouldPushProject(project)) {
         for (URIish uri : cfg.getURIs(project, urlMatch)) {
           cfg.schedule(project, PushOne.ALL_REFS, uri, state, now);
+          replicationTasksStorage.persist(
+              new ReplicateRefUpdate(
+                  project.get(), PushOne.ALL_REFS, uri, cfg.getRemoteConfigName()));
         }
       }
     }
