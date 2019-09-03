@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e96c27cd_e2b874c2",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-03T21:39:41Z",
+      "side": 1,
+      "message": "This default seems too low and it would risk to blow-up the metrics payload.\nA typical production system may easily have replications that normally take 10-15 mins.",
+      "range": {
+        "startLine": 414,
+        "startChar": 1,
+        "endLine": 414,
+        "endChar": 18
+      },
+      "revId": "921f9e6bf4b7f9345b18a7d2270008564cd89b3c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
