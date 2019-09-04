@@ -16,6 +16,24 @@
       "revId": "d6453c6344e5cf6c24e29f8606a7258abfbe02a0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5d66b89_cabed448",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-09-04T23:18:46Z",
+      "side": 1,
+      "message": "Done.\n\nNote: the test passes with both \u0027replica\u0027 and \u0027projectreplica\u0027.",
+      "parentUuid": "276f7705_884e8ed7",
+      "revId": "d6453c6344e5cf6c24e29f8606a7258abfbe02a0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
