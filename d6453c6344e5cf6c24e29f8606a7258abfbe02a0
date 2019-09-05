@@ -34,6 +34,24 @@
       "revId": "d6453c6344e5cf6c24e29f8606a7258abfbe02a0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1752c0f8_27fcb886",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-05T09:05:06Z",
+      "side": 1,
+      "message": "Thanks for the fix.\n\nThinking aloud, I should post a fix on stable-2.16 so that the project creation is going to be independent of the version of Gerrit branch, otherwise, all the future merges will be tricky.",
+      "parentUuid": "d5d66b89_cabed448",
+      "revId": "d6453c6344e5cf6c24e29f8606a7258abfbe02a0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
