@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
@@ -95,7 +96,8 @@ public class ReplicationQueue
     scheduleFullSync(project, urlMatch, state, false);
   }
 
-  void scheduleFullSync(
+  @VisibleForTesting
+  public void scheduleFullSync(
       Project.NameKey project, String urlMatch, ReplicationState state, boolean now) {
     if (!running) {
       stateLog.warn("Replication plugin did not finish startup before event", state);
@@ -106,6 +108,9 @@ public class ReplicationQueue
       if (cfg.wouldPushProject(project)) {
         for (URIish uri : cfg.getURIs(project, urlMatch)) {
           cfg.schedule(project, PushOne.ALL_REFS, uri, state, now);
+          replicationTasksStorage.persist(
+              new ReplicateRefUpdate(
+                  project.get(), PushOne.ALL_REFS, uri, cfg.getRemoteConfigName()));
         }
       }
     }

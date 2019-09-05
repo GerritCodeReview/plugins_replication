@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
 import static java.util.stream.Collectors.toList;
+import static org.easymock.EasyMock.createNiceMock;
 
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
@@ -203,6 +204,22 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
     setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
+  }
+
+  @Test
+  public void shouldCreateOneReplicationTaskWhenSchedulingRepoFullSync() throws Exception {
+    projectOperations.newProject().name("replica").create();
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    PushResultProcessing pushResultProcessingMock = createNiceMock(PushResultProcessing.class);
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, null, new ReplicationState(pushResultProcessingMock), true);
+
+    assertThat(listReplicationTasks(".*all.*")).hasSize(1);
   }
 
   @Test
