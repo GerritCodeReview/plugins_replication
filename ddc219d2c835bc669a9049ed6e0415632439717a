@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f11cbd51_53f8716c",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-06T23:04:48Z",
+      "side": 1,
+      "message": "This should be in the global settings, in the [replication] stanza. Does it make sense to have different draining settings per remote?",
+      "range": {
+        "startLine": 291,
+        "startChar": 12,
+        "endLine": 291,
+        "endChar": 30
+      },
+      "revId": "ddc219d2c835bc669a9049ed6e0415632439717a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34777e39_98e7aa80",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-06T23:04:48Z",
+      "side": 1,
+      "message": "You should mention also the consequence: \"and the pending replication events are cancelled\".",
+      "range": {
+        "startLine": 300,
+        "startChar": 15,
+        "endLine": 300,
+        "endChar": 40
+      },
+      "revId": "ddc219d2c835bc669a9049ed6e0415632439717a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
