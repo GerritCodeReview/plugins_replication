@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "32aae007_74e59616",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2019-09-07T05:17:54Z",
+      "side": 1,
+      "message": "I think it goes along with the replicationDelay, in fact, they are correlated in the code (the total delay time is \"drainQueueAttempts\" * \"replicationDelay\").\n\nAlso, it would allow more fine-grained tuning of the remote.\n\nThat\u0027s why I thought it should go here. If you feel strong about it I don\u0027t mind moving it in the main section of the configuration.",
+      "parentUuid": "f11cbd51_53f8716c",
+      "range": {
+        "startLine": 291,
+        "startChar": 12,
+        "endLine": 291,
+        "endChar": 30
+      },
+      "revId": "ddc219d2c835bc669a9049ed6e0415632439717a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "34777e39_98e7aa80",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 18
@@ -45,6 +69,30 @@
       "revId": "ddc219d2c835bc669a9049ed6e0415632439717a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3636ce36_5f210183",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2019-09-07T05:17:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34777e39_98e7aa80",
+      "range": {
+        "startLine": 300,
+        "startChar": 15,
+        "endLine": 300,
+        "endChar": 40
+      },
+      "revId": "ddc219d2c835bc669a9049ed6e0415632439717a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
