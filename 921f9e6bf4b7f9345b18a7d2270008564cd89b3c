@@ -22,6 +22,30 @@
       "revId": "921f9e6bf4b7f9345b18a7d2270008564cd89b3c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acec2280_12306611",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-08T20:59:43Z",
+      "side": 1,
+      "message": "On GerritHub.io we have for the month of August:\n- slowest ever: 2800 sec (46 mins)\n- slowest 1000 entries: all over 120 sec (2 mins)\n\nI would confirm to raise the default to at least 10 mins.",
+      "parentUuid": "e96c27cd_e2b874c2",
+      "range": {
+        "startLine": 414,
+        "startChar": 1,
+        "endLine": 414,
+        "endChar": 18
+      },
+      "revId": "921f9e6bf4b7f9345b18a7d2270008564cd89b3c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
