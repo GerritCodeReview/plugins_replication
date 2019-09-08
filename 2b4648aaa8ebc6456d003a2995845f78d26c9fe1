@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "84641cd5_15a33ac3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-09-08T21:03:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3313b506_3cb495bd",
+      "range": {
+        "startLine": 70,
+        "startChar": 35,
+        "endLine": 70,
+        "endChar": 55
+      },
+      "revId": "2b4648aaa8ebc6456d003a2995845f78d26c9fe1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fdf30615_fce61dc5",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 7
