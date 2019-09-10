@@ -245,6 +245,50 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     }
   }
 
+  @Test
+  public void shouldNotDrainTheQueueWhenReloading() throws Exception {
+    // Setup repo to replicate
+    Project.NameKey targetProject = createProject("projectreplica");
+    String remoteName = "doNotDrainQueue";
+    setReplicationDestination(remoteName, "replica", ALL_PROJECTS);
+
+    Result pushResult = createChange();
+    shutdownConfig();
+
+    pushResult.getCommit();
+    String sourceRef = pushResult.getPatchSet().getRefName();
+
+    exception.expect(InterruptedException.class);
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
+    }
+  }
+
+  @Test
+  public void shouldDrainTheQueueWhenReloading() throws Exception {
+    // Setup repo to replicate
+    Project.NameKey targetProject = createProject("projectreplica");
+    String remoteName = "drainQueue";
+    setReplicationDestination(remoteName, "replica", ALL_PROJECTS);
+
+    config.setInt("remote", remoteName, "drainQueueAttempts", 2);
+    config.save();
+    reloadConfig();
+
+    Result pushResult = createChange();
+    shutdownConfig();
+
+    RevCommit sourceCommit = pushResult.getCommit();
+    String sourceRef = pushResult.getPatchSet().getRefName();
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
+      Ref targetBranchRef = getRef(repo, sourceRef);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
+    }
+  }
+
   private Ref getRef(Repository repo, String branchName) throws IOException {
     return repo.getRefDatabase().exactRef(branchName);
   }
@@ -283,6 +327,10 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private void reloadConfig() {
     plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).forceReload();
+  }
+
+  private void shutdownConfig() {
+    plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).shutdown();
   }
 
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
