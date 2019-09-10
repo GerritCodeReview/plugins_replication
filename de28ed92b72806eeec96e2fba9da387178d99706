@@ -263,6 +263,30 @@
       "revId": "de28ed92b72806eeec96e2fba9da387178d99706",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8d1a294_af6ac752",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-10T11:49:37Z",
+      "side": 1,
+      "message": "In rate-limiter it was done like this: [1].\n\nAnd then global plugin configuration is specified per-test method base:\n\n  @Test\n  @UseLocalDisk\n  @GlobalPluginConfig(\n      pluginName \u003d \"rate-limiter\",\n      name \u003d \"group.limitGroup.uploadpackperhour\",\n      value \u003d \"1\")\n  @GlobalPluginConfig(\n      pluginName \u003d \"rate-limiter\",\n      name \u003d \"configuration.uploadpackLimitExceededMsg\",\n      value \u003d \"Custom message: Limit exceeded ${rateLimit} requests/hour\")\n  [...]\n\n* [1] https://gerrit.googlesource.com/plugins/rate-limiter/+/125f5f8a0b62af92c1eead64db3de9affd8563e1/src/test/java/com/googlesource/gerrit/plugins/ratelimiter/RateLimitUploadPackIT.java#34",
+      "parentUuid": "0f229403_d1335dfe",
+      "range": {
+        "startLine": 77,
+        "startChar": 47,
+        "endLine": 77,
+        "endChar": 51
+      },
+      "revId": "de28ed92b72806eeec96e2fba9da387178d99706",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
