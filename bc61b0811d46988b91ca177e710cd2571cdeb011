@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93b3162b_2a90f217",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-10T15:43:03Z",
+      "side": 1,
+      "message": "getReplicationDelaySeconds?",
+      "range": {
+        "startLine": 709,
+        "startChar": 13,
+        "endLine": 709,
+        "endChar": 32
+      },
+      "revId": "bc61b0811d46988b91ca177e710cd2571cdeb011",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e649c574_5f1d1dde",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-10T15:43:03Z",
+      "side": 1,
+      "message": "The comment isn\u0027t needed anymore, when the method name is more appropriate ;-)",
+      "revId": "bc61b0811d46988b91ca177e710cd2571cdeb011",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40e2f951_459639eb",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 20
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-10T15:43:03Z",
+      "side": 1,
+      "message": "Missing default value: \"By default, do not drain replication events\".",
+      "revId": "bc61b0811d46988b91ca177e710cd2571cdeb011",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
