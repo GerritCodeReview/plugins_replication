@@ -45,6 +45,30 @@
       "revId": "2d7c8112437450b36bbd1d68f6dbf85928d8a3d0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96b81bbb_86b94e62",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-10T17:18:48Z",
+      "side": 1,
+      "message": "\u003e This doesn\u0027t really need to be in its own method, it could be inlined at L78.\n\nI believe that reducing the nesting was the main reason why it should stay separate. Increases also readability without increasing complexity.\n\n\u003e Also the name prefix \"fire\" would imply it\u0027s causing some event to be fired, which is not the case.  If there is a good reason to keep this as a separate method then it should be named something like \"invokeValidators\".\n\nAgreed, it should be renamed.",
+      "parentUuid": "f3ac2380_1262025d",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 96,
+        "endChar": 3
+      },
+      "revId": "2d7c8112437450b36bbd1d68f6dbf85928d8a3d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
