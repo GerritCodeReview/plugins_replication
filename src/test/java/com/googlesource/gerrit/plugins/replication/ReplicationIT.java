@@ -47,9 +47,7 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 @UseLocalDisk
 @TestPlugin(
@@ -240,8 +238,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     }
   }
 
-  @Rule public ExpectedException exception = ExpectedException.none();
-
   @Test
   public void shouldNotDrainTheQueueWhenReloading() throws Exception {
     // Setup repo to replicate
@@ -259,7 +255,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     Result pushResult = createChange();
     reloadConfig();
 
-    RevCommit sourceCommit = pushResult.getCommit();
+    pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().getRefName();
 
     exception.expect(InterruptedException.class);
