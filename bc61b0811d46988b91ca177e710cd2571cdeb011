@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "16c2f12f_cf6c4903",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2019-09-10T16:05:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93b3162b_2a90f217",
+      "range": {
+        "startLine": 709,
+        "startChar": 13,
+        "endLine": 709,
+        "endChar": 32
+      },
+      "revId": "bc61b0811d46988b91ca177e710cd2571cdeb011",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e649c574_5f1d1dde",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 20
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "7222a0d1_226e30de",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2019-09-10T16:05:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e649c574_5f1d1dde",
+      "revId": "bc61b0811d46988b91ca177e710cd2571cdeb011",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "40e2f951_459639eb",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 20
@@ -56,6 +98,24 @@
       "revId": "bc61b0811d46988b91ca177e710cd2571cdeb011",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f02c90c1_4ebc50fb",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 20
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2019-09-10T16:05:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40e2f951_459639eb",
+      "revId": "bc61b0811d46988b91ca177e710cd2571cdeb011",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
