@@ -248,7 +248,8 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
             inFlight, pending);
         Thread.sleep(destination.getReplicationDelaySeconds());
       } catch (InterruptedException ie) {
-        logger.atWarning().withCause(ie).log("Wait for replication events to drain has been interrupted");
+        logger.atWarning().withCause(ie).log(
+            "Wait for replication events to drain has been interrupted");
       }
       pending = destination.getQueueInfo().pending.size();
       inFlight = destination.getQueueInfo().inFlight.size();
