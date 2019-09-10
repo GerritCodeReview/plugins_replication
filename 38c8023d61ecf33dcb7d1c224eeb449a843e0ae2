@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6978d1c_53fcb8c5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-09-10T01:14:23Z",
+      "side": 1,
+      "message": "unwrap this line to the previous line",
+      "range": {
+        "startLine": 45,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 22
+      },
+      "revId": "38c8023d61ecf33dcb7d1c224eeb449a843e0ae2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90438e8e_1f580eca",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-09-10T01:14:23Z",
+      "side": 1,
+      "message": "Is it worth putting a size() method on the config class so that it\u0027s not necessary to do it here?",
+      "range": {
+        "startLine": 135,
+        "startChar": 53,
+        "endLine": 135,
+        "endChar": 92
+      },
+      "revId": "38c8023d61ecf33dcb7d1c224eeb449a843e0ae2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
