@@ -239,6 +239,30 @@
       "revId": "de28ed92b72806eeec96e2fba9da387178d99706",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f229403_d1335dfe",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-10T11:26:44Z",
+      "side": 1,
+      "message": "Ok, I see. We don\u0027t have any class annotation to populate plugin specific config file per declaration, something that we do support in gerrit core? So what if you populate replication.config with gerrit.autoReload \u003d true here, in confifgure(), prior to calling regular  install(new ReplicationModule(sitePaths)); Would it work then? You would still need a custom Module for the test set up, but you could remove additional ctor in production code.",
+      "parentUuid": "b2d6f3e7_5f7e1b9b",
+      "range": {
+        "startLine": 77,
+        "startChar": 47,
+        "endLine": 77,
+        "endChar": 51
+      },
+      "revId": "de28ed92b72806eeec96e2fba9da387178d99706",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
