@@ -87,7 +87,7 @@ public class PushOneTest {
   private IdGenerator idGeneratorMock;
   private ReplicationStateListeners replicationStateListenersMock;
   private ReplicationMetrics replicationMetricsMock;
-  private Timer1.Context timerContextMock;
+  private Timer1.Context<String> timerContextMock;
   private ProjectCache projectCacheMock;
   private TransportFactory transportFactoryMock;
   private Transport transportMock;
@@ -127,6 +127,7 @@ public class PushOneTest {
     setupMocks();
   }
 
+  @SuppressWarnings("unchecked")
   private void setupMocks() throws Exception {
     FileBasedConfig config = new FileBasedConfig(new Config(), new File("/foo"), FS.DETECTED);
     config.setString("remote", "Replication", "push", "foo");
