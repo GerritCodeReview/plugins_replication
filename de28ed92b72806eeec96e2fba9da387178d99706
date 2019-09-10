@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "631ea2bc_073a9498",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-10T10:52:21Z",
+      "side": 1,
+      "message": "Should ths be final and be moved in the upper section?",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 54
+      },
+      "revId": "de28ed92b72806eeec96e2fba9da387178d99706",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37db3490_193b8721",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-10T10:52:21Z",
+      "side": 1,
+      "message": "Shouldn\u0027t be neccessary.",
+      "range": {
+        "startLine": 46,
+        "startChar": 2,
+        "endLine": 46,
+        "endChar": 40
+      },
+      "revId": "de28ed92b72806eeec96e2fba9da387178d99706",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fbf44c3_30ef3163",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-10T10:52:21Z",
+      "side": 1,
+      "message": "Can be avoided, if \"gerrit.autoReload\" is set from Test set up.",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 58,
+        "endChar": 3
+      },
+      "revId": "de28ed92b72806eeec96e2fba9da387178d99706",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4da8b23_1ecc110f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-10T10:52:21Z",
+      "side": 1,
+      "message": "This change shouldn\u0027t be necessary, see comment below.",
+      "range": {
+        "startLine": 57,
+        "startChar": 74,
+        "endLine": 57,
+        "endChar": 97
+      },
+      "revId": "de28ed92b72806eeec96e2fba9da387178d99706",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d59ad99_c1230b10",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-10T10:52:21Z",
+      "side": 1,
+      "message": "Why this has to be passed through new test-only ctor? This can be set through config file (on line 87 beow condifguration file already used):\n\n  config.setBoolean(\"gerrit\", \"autoReload\", true);",
+      "range": {
+        "startLine": 77,
+        "startChar": 47,
+        "endLine": 77,
+        "endChar": 51
+      },
+      "revId": "de28ed92b72806eeec96e2fba9da387178d99706",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
