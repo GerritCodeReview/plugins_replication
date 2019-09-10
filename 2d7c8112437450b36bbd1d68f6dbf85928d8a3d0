@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9024bf6_ee4a6d24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 26
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-09-10T01:20:51Z",
+      "side": 1,
+      "message": "replication config validation listener",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "2d7c8112437450b36bbd1d68f6dbf85928d8a3d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3ac2380_1262025d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-09-10T01:20:51Z",
+      "side": 1,
+      "message": "This doesn\u0027t really need to be in its own method, it could be inlined at L78.\n\nAlso the name prefix \"fire\" would imply it\u0027s causing some event to be fired, which is not the case.  If there is a good reason to keep this as a separate method then it should be named something like \"invokeValidators\".",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 96,
+        "endChar": 3
+      },
+      "revId": "2d7c8112437450b36bbd1d68f6dbf85928d8a3d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
