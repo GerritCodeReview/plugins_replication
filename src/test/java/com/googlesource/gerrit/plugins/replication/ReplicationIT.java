@@ -245,15 +245,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     String remoteName = "doNotDrainQueue";
     setReplicationDestination(remoteName, "replica", ALL_PROJECTS);
 
-    // Setup long replication delay
-    int REPLICATION_DELAY = 3;
-    config.setInt("remote", remoteName, "replicationDelay", REPLICATION_DELAY);
-    config.setInt("remote", remoteName, "timeout", REPLICATION_DELAY * 2);
-    config.save();
-    reloadConfig();
-
     Result pushResult = createChange();
-    reloadConfig();
+    shutdownConfig();
 
     pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().getRefName();
@@ -271,18 +264,12 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     String remoteName = "drainQueue";
     setReplicationDestination(remoteName, "replica", ALL_PROJECTS);
 
-    // Setup long replication delay and draining policy
-    int REPLICATION_DELAY = 3;
-    int DRAIN_QUEUE_ATTEMPTS = 5;
-    config.setInt("remote", remoteName, "drainQueueAttempts", DRAIN_QUEUE_ATTEMPTS);
-    config.setInt("remote", remoteName, "replicationDelay", REPLICATION_DELAY);
-    // Make sure timeout is longer than the time needed to drain the queue
-    config.setInt("remote", remoteName, "timeout", REPLICATION_DELAY * DRAIN_QUEUE_ATTEMPTS * 2);
+    config.setInt("remote", remoteName, "drainQueueAttempts", 2);
     config.save();
     reloadConfig();
 
     Result pushResult = createChange();
-    reloadConfig();
+    shutdownConfig();
 
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().getRefName();
@@ -333,6 +320,10 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private void reloadConfig() {
     plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).forceReload();
+  }
+
+  private void shutdownConfig() {
+    plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).shutdown();
   }
 
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
