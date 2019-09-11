@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.gerrit.testing.GerritJUnit.assertThrows;
 import static java.util.stream.Collectors.toList;
 import static org.easymock.EasyMock.createNiceMock;
 
@@ -245,6 +246,55 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     }
   }
 
+  @Test
+  public void shouldNotDrainTheQueueWhenReloading() throws Exception {
+    // Setup repo to replicate
+    Project.NameKey targetProject =
+        projectOperations.newProject().name(project + "replica").create();
+    String remoteName = "doNotDrainQueue";
+    setReplicationDestination(remoteName, "replica", ALL_PROJECTS);
+
+    Result pushResult = createChange();
+    shutdownConfig();
+
+    pushResult.getCommit();
+    String sourceRef = pushResult.getPatchSet().refName();
+
+    assertThrows(
+        InterruptedException.class,
+        () -> {
+          try (Repository repo = repoManager.openRepository(targetProject)) {
+            waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
+          }
+        });
+  }
+
+  @Test
+  public void shouldDrainTheQueueWhenReloading() throws Exception {
+    // Setup repo to replicate
+    Project.NameKey targetProject =
+        projectOperations.newProject().name(project + "replica").create();
+    String remoteName = "drainQueue";
+    setReplicationDestination(remoteName, "replica", ALL_PROJECTS);
+
+    config.setInt("remote", remoteName, "drainQueueAttempts", 2);
+    config.save();
+    reloadConfig();
+
+    Result pushResult = createChange();
+    shutdownConfig();
+
+    RevCommit sourceCommit = pushResult.getCommit();
+    String sourceRef = pushResult.getPatchSet().refName();
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
+      Ref targetBranchRef = getRef(repo, sourceRef);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
+    }
+  }
+
   private Ref getRef(Repository repo, String branchName) throws IOException {
     return repo.getRefDatabase().exactRef(branchName);
   }
@@ -283,6 +333,10 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private void reloadConfig() {
     plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).forceReload();
+  }
+
+  private void shutdownConfig() {
+    plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).shutdown();
   }
 
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
