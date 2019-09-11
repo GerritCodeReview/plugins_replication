@@ -41,7 +41,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private static final long RELOAD_DELAY = 120;
   private static final long RELOAD_INTERVAL = 60;
 
-  private ReplicationFileBasedConfig currentConfig;
+  private volatile ReplicationFileBasedConfig currentConfig;
   private long currentConfigTs;
   private long lastFailedConfigTs;
 
@@ -159,13 +159,30 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     return currentConfig.getEventsDirectory();
   }
 
+  /* shutdown() cannot be set as a synchronized method because
+   * it may need to wait for pending events to complete.
+   *
+   * Use a retry logic and shutdown all the configurations potentially
+   * reloaded during the drain period.
+   *
+   * P.S. Having a synchronized shutdown() method may lead to deadlock
+   * during the drain period.
+   */
   @Override
-  public synchronized int shutdown() {
+  public int shutdown() {
     if (autoReloadRunnable != null) {
       autoReloadRunnable.cancel(false);
       autoReloadRunnable = null;
     }
-    return currentConfig.shutdown();
+
+    int eventsDropped = 0;
+    ReplicationFileBasedConfig config;
+    do {
+      config = currentConfig;
+      eventsDropped += config.shutdown();
+    } while (config != currentConfig);
+
+    return eventsDropped;
   }
 
   @Override
