@@ -70,6 +70,30 @@
       "revId": "1c9d04812abbdd0c7ca28f63629fef5e617801cd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46b3f9f7_73d3dc1e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-11T21:47:58Z",
+      "side": 1,
+      "message": "\u003e yep, makes sense and this conversation is now traceable too.\n\u003e I am happy with this change\n\nI\u0027ve made the code safer and simpler in PS5, can you check?",
+      "parentUuid": "c908ee07_d650e97a",
+      "range": {
+        "startLine": 137,
+        "startChar": 1,
+        "endLine": 145,
+        "endChar": 5
+      },
+      "revId": "1c9d04812abbdd0c7ca28f63629fef5e617801cd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
