@@ -263,6 +263,8 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   }
 
   public static class EventQueueNotEmptyException extends Exception {
+    private static final long serialVersionUID = 1L;
+
     public EventQueueNotEmptyException(String errorMessage) {
       super(errorMessage);
     }
