@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4af3c314_c8d909fc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-09-11T17:15:39Z",
+      "side": 1,
+      "message": "I think I understand the fix to follow this change, but I am not sure if this description explains well enough what\u0027s the issue with the shutdown. Perhaps we can find a way to reword it so that is more clear?\n\n- \"...because it may need to wait for pending events to complete.\"\nWhy is this a problem? is it because the potential deadlocking? if so, we could coalesce the two sentences (the P.S. at the bottom) and explain who is causing the concurrency and why that might occur.\n\n- This do/while could potentially go on endlessly. Do we have any timeout to prevent this? Should we make it explicit in the comment/signature of this method?\n\n- Configuration changing during shutdown is kind of an edge case isn\u0027t?\nWe could add a log line to facilitate understanding when that happens.",
+      "range": {
+        "startLine": 137,
+        "startChar": 1,
+        "endLine": 145,
+        "endChar": 5
+      },
+      "revId": "1c9d04812abbdd0c7ca28f63629fef5e617801cd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
