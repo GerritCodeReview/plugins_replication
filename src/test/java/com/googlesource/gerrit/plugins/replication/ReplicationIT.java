@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.gerrit.testing.GerritJUnit.assertThrows;
 import static java.util.stream.Collectors.toList;
 import static org.easymock.EasyMock.createNiceMock;
 
@@ -259,10 +260,13 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().getRefName();
 
-    exception.expect(InterruptedException.class);
-    try (Repository repo = repoManager.openRepository(targetProject)) {
-      waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
-    }
+    assertThrows(
+        InterruptedException.class,
+        () -> {
+          try (Repository repo = repoManager.openRepository(targetProject)) {
+            waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
+          }
+        });
   }
 
   @Test
