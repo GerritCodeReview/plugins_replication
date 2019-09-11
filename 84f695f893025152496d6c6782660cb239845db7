@@ -16,6 +16,24 @@
       "revId": "84f695f893025152496d6c6782660cb239845db7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90b03165_f2564e41",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-09-11T04:41:47Z",
+      "side": 1,
+      "message": "It seem to be passing on CI, but fails consistently for me locally.",
+      "parentUuid": "2c80790b_aedd235e",
+      "revId": "84f695f893025152496d6c6782660cb239845db7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
