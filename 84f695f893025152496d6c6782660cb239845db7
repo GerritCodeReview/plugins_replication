@@ -34,6 +34,24 @@
       "revId": "84f695f893025152496d6c6782660cb239845db7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6f6b6ed_406fb70d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-11T05:46:04Z",
+      "side": 1,
+      "message": "I believe it is flaky :-(\nLet me dig into it today.",
+      "parentUuid": "90b03165_f2564e41",
+      "revId": "84f695f893025152496d6c6782660cb239845db7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
