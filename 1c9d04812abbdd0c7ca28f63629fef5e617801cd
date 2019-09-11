@@ -46,6 +46,30 @@
       "revId": "1c9d04812abbdd0c7ca28f63629fef5e617801cd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c908ee07_d650e97a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-09-11T21:44:57Z",
+      "side": 1,
+      "message": "yep, makes sense and this conversation is now traceable too.\nI am happy with this change",
+      "parentUuid": "d02cb844_d2907153",
+      "range": {
+        "startLine": 137,
+        "startChar": 1,
+        "endLine": 145,
+        "endChar": 5
+      },
+      "revId": "1c9d04812abbdd0c7ca28f63629fef5e617801cd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
