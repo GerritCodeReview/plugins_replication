@@ -22,6 +22,30 @@
       "revId": "32d755ac6a4af46d408256cefae5c6338f7c49e4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2ed296e_bf8244ba",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-11T07:10:36Z",
+      "side": 1,
+      "message": "Note, that even if we support on target type, then from test framework generated \u003cgerrit_site\u003e/etc/replication.config with this content:\n\n  @GlobalPluginConfig(\n    pluginName \u003d \"replication\",\n    name \u003d \"gerrit.autoReload\",\n    value \u003d \"true\")\n\nWould be overridden with the invocation to setReplicationDestination() (it is not merging, but always overriding the config file.)",
+      "parentUuid": "7d97d40c_ec9d4142",
+      "range": {
+        "startLine": 72,
+        "startChar": 2,
+        "endLine": 88,
+        "endChar": 3
+      },
+      "revId": "32d755ac6a4af46d408256cefae5c6338f7c49e4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
