@@ -41,7 +41,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private static final long RELOAD_DELAY = 120;
   private static final long RELOAD_INTERVAL = 60;
 
-  private ReplicationFileBasedConfig currentConfig;
+  private volatile ReplicationFileBasedConfig currentConfig;
   private long currentConfigTs;
   private long lastFailedConfigTs;
 
@@ -53,6 +53,8 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   private final Provider<ReplicationQueue> replicationQueue;
   private final ScheduledExecutorService autoReloadExecutor;
   private ScheduledFuture<?> autoReloadRunnable;
+
+  private volatile boolean shuttingDown;
 
   @Inject
   public AutoReloadConfigDecorator(
@@ -111,7 +113,8 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
       long lastModified = getLastModified(currentConfig);
       try {
         if (force
-            || (lastModified > currentConfigTs
+            || (!shuttingDown
+                && lastModified > currentConfigTs
                 && lastModified > lastFailedConfigTs
                 && queue.isRunning()
                 && !queue.isReplaying())) {
@@ -159,8 +162,22 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
     return currentConfig.getEventsDirectory();
   }
 
+  /* shutdown() cannot be set as a synchronized method because
+   * it may need to wait for pending events to complete;
+   * e.g. when enabling the drain of replication events before
+   * shutdown.
+   *
+   * As a rule of thumb for synchronized methods, because they
+   * implicitly define a critical section and associated lock,
+   * they should never hold waiting for another resource, otherwise
+   * the risk of deadlock is very high.
+   *
+   * See more background about deadlocks, what they are and how to
+   * prevent them at: https://en.wikipedia.org/wiki/Deadlock
+   */
   @Override
-  public synchronized int shutdown() {
+  public int shutdown() {
+    this.shuttingDown = true;
     if (autoReloadRunnable != null) {
       autoReloadRunnable.cancel(false);
       autoReloadRunnable = null;
@@ -170,6 +187,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
 
   @Override
   public synchronized void startup(WorkQueue workQueue) {
+    shuttingDown = false;
     currentConfig.startup(workQueue);
     autoReloadRunnable =
         autoReloadExecutor.scheduleAtFixedRate(
