@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d97d40c_ec9d4142",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-11T07:07:18Z",
+      "side": 1,
+      "message": "Back to the discussion from yesterday, I cannot reproduce the behavior your described, that all this test specific module is really needed.\n\nI removed it altogether, restored the original production module @TestPlugin annotation:\n\n  @UseLocalDisk\n  @TestPlugin(\n    name \u003d \"replication\",\n    sysModule \u003d \n  \"com.googlesource.gerrit.plugins.replication.ReplicationModule\")\n\nand only added one single line:\n\n  config.setBoolean(\"gerrit\", null, \"autoReload\", true);\n\nin setReplicationDestination() method, so that this line is not getting overridden, and the test seems to work, see [1]. Can you reproduce this?\n\nhttp://paste.openstack.org/show/775017",
+      "range": {
+        "startLine": 72,
+        "startChar": 2,
+        "endLine": 88,
+        "endChar": 3
+      },
+      "revId": "32d755ac6a4af46d408256cefae5c6338f7c49e4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
