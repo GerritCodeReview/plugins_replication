@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4570775d_076a82ba",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-13T11:27:39Z",
+      "side": 1,
+      "message": "Why is \"volatile\" removed here? How do we ensure that updates on currentConfig made\nfrom one thread are visible to other threads?",
+      "revId": "4f5df93e65242051311e418fbe6bc6009f5bd3cc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40cf48c8_79dc2a8b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-13T11:27:39Z",
+      "side": 1,
+      "message": "final",
+      "revId": "4f5df93e65242051311e418fbe6bc6009f5bd3cc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac9f1747_f9f4a239",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-13T11:27:39Z",
+      "side": 1,
+      "message": "Why is this not synchronized and the startup method is?",
+      "revId": "4f5df93e65242051311e418fbe6bc6009f5bd3cc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "537804dc_ab88f5fe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-13T11:27:39Z",
+      "side": 1,
+      "message": "Instead of combining the forceReload with other criteria here, which makes the whole\nif-condition more complex, do the following:\n\n* let the reload method just perform reload, unconditionally\n* from the forceReload method just call the reload (no need to pass a flag)\n* move the rest of the if-condition (the normal reload check) to the run method",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 41
+      },
+      "revId": "4f5df93e65242051311e418fbe6bc6009f5bd3cc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
