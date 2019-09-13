@@ -58,13 +58,15 @@ public class AutoReloadRunnable implements Runnable {
   public synchronized void run() {
     String pendingConfigVersion = loadedConfig.getVersion();
     ReplicationQueue queue = replicationQueue.get();
-    if (!loadedConfig.isShuttingDown()
-        && !pendingConfigVersion.equals(loadedConfigVersion)
-        && !pendingConfigVersion.equals(lastFailedConfigVersion)
-        && queue.isRunning()
-        && !queue.isReplaying()) {
-      reload();
+    if (loadedConfig.isShuttingDown()
+        || pendingConfigVersion.equals(loadedConfigVersion)
+        || pendingConfigVersion.equals(lastFailedConfigVersion)
+        || !queue.isRunning()
+        || queue.isReplaying()) {
+      return;
     }
+
+    reload();
   }
 
   synchronized void reload() {
