@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1fce828d_7dfea982",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 38
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-13T15:41:50Z",
+      "side": 1,
+      "message": "I believe this is more readable and more aligned with the rest of the style of synchronising the instance.\n\nMoving forward, we should change the replication plugin to make it more event-driven using a generic broker, rather than having this complex concurrency issues, sync and risks of deadlocks :-(\n\nNext Hackathon?\n\nP.S. Are you coming? or at least attending remotely?",
+      "parentUuid": "889e12d1_48153e71",
+      "revId": "72489ee33f2e30711a8911c3bd979f37ea0078c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c9c1e14_2a210f05",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 38
@@ -63,6 +81,30 @@
       "revId": "72489ee33f2e30711a8911c3bd979f37ea0078c2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1587124_6f22ecbf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 38
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-13T15:41:50Z",
+      "side": 1,
+      "message": "Done with Change-Id: Idc83b0fc86",
+      "parentUuid": "70513fdb_0582ffc6",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 65,
+        "endChar": 31
+      },
+      "revId": "72489ee33f2e30711a8911c3bd979f37ea0078c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
