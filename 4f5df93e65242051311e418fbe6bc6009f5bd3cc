@@ -127,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "9df4997e_147b217f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-13T14:43:29Z",
+      "side": 1,
+      "message": "\u003e It is described in the comment above.\n\u003e Making it synchronised would potentially cause deadlock.\n\nThis sound quite theoretical... do we know any code path that will actually cause a dead-lock\nin this case?\n\nStrictly, this code is incorrect without synchronizing the access to the autoReloadRunnable.\nRemember that an update to a variable done from one thread may never be visible to the other thread(s) when access to that variable (both read and write) is not synchronized.\n\nCan we at least synchronize the block 121-124?",
+      "parentUuid": "3721a0ca_ee34dfb7",
+      "revId": "4f5df93e65242051311e418fbe6bc6009f5bd3cc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "537804dc_ab88f5fe",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 36
