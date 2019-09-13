@@ -38,6 +38,24 @@
     },
     {
       "key": {
+        "uuid": "6ccf0345_928a6deb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-13T12:21:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1cfed43_deb88ac9",
+      "revId": "4f5df93e65242051311e418fbe6bc6009f5bd3cc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "40cf48c8_79dc2a8b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
         "patchSetId": 36
@@ -91,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "3721a0ca_ee34dfb7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-13T12:21:45Z",
+      "side": 1,
+      "message": "It is described in the comment above.\nMaking it synchronised would potentially cause deadlock.",
+      "parentUuid": "ac9f1747_f9f4a239",
+      "revId": "4f5df93e65242051311e418fbe6bc6009f5bd3cc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "537804dc_ab88f5fe",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 36
@@ -136,6 +172,30 @@
       "revId": "4f5df93e65242051311e418fbe6bc6009f5bd3cc",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c506e182_b577485d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-13T12:21:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7f0ac7c_6162edb1",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 41
+      },
+      "revId": "4f5df93e65242051311e418fbe6bc6009f5bd3cc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
