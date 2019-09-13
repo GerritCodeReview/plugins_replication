@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "889e12d1_48153e71",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 38
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-13T15:16:15Z",
+      "side": 1,
+      "message": "This could have stayed inside the shutdown method... just that block could have been synchronized. But anyway I am giving +2",
+      "revId": "72489ee33f2e30711a8911c3bd979f37ea0078c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c9c1e14_2a210f05",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 38
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-13T15:16:15Z",
+      "side": 1,
+      "message": "Would this condition be easier to read if inverted?\n\n  if (loadedConfig.isShuttingDown()\n      || pendingConfigVersion.equals(loadedConfigVersion)\n      || ... ) {\n    return;\n  }\n  reload();",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 65,
+        "endChar": 31
+      },
+      "revId": "72489ee33f2e30711a8911c3bd979f37ea0078c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
