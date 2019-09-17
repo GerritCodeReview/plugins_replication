@@ -45,6 +45,30 @@
       "revId": "f8e2eb8c109a4530fa4f85909e97f69fee6ae2cc",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "376b98c7_83aa5d25",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 41
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-17T10:10:09Z",
+      "side": 1,
+      "message": "Correct, it was in the section of ReplicationFileBasedConfig that has become DestinationsCollection, which is exactly what this change is about.\n\nHowever, the shuttingDown was simply volatile and NOT synchronised.\nWill keep it volatile in this change and do the synchronised version in a follow-up change as suggested.",
+      "parentUuid": "f42e7ecb_e496ea6f",
+      "range": {
+        "startLine": 200,
+        "startChar": 4,
+        "endLine": 202,
+        "endChar": 5
+      },
+      "revId": "f8e2eb8c109a4530fa4f85909e97f69fee6ae2cc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
