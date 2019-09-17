@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d661fd2d_6fe4d031",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 42
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-17T11:05:47Z",
+      "side": 0,
+      "message": "Yes, before starting the shutdown process this thread is cancelled. If the thread fails to cancel, then the shutdown is aborted.\n\nThis condition (isShuttingDown) will then always be false.",
+      "parentUuid": "405bdb02_e4b22ee6",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 37
+      },
+      "revId": "1862fe1a0b98c1d49b121afaf7984bcec5e6136a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22d29679_d83c6d27",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecoratorTest.java",
         "patchSetId": 42
@@ -36,6 +60,24 @@
       "writtenOn": "2019-09-17T10:40:35Z",
       "side": 0,
       "message": "FakeExecutorService class extraction could be done independently of this change.",
+      "revId": "1862fe1a0b98c1d49b121afaf7984bcec5e6136a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46954da4_a6e5ce2c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecoratorTest.java",
+        "patchSetId": 42
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-17T11:05:47Z",
+      "side": 0,
+      "message": "True, will do in a follow-up change.",
+      "parentUuid": "22d29679_d83c6d27",
       "revId": "1862fe1a0b98c1d49b121afaf7984bcec5e6136a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -77,6 +119,30 @@
       "side": 0,
       "message": "I mean why this test was removed?",
       "parentUuid": "8e06ab39_6a825fce",
+      "range": {
+        "startLine": 165,
+        "startChar": 14,
+        "endLine": 165,
+        "endChar": 56
+      },
+      "revId": "1862fe1a0b98c1d49b121afaf7984bcec5e6136a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28e01740_4a43ab9e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecoratorTest.java",
+        "patchSetId": 42
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-17T11:05:47Z",
+      "side": 0,
+      "message": "This test suite is about the auto-reload config decorator, whilst this test doesn\u0027t refer to it anymore.",
+      "parentUuid": "c0aaa086_7cc90103",
       "range": {
         "startLine": 165,
         "startChar": 14,

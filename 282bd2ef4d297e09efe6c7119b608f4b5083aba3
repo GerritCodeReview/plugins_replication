@@ -22,6 +22,30 @@
       "revId": "282bd2ef4d297e09efe6c7119b608f4b5083aba3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e936adc7_9a5dfcaa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 42
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-17T11:05:47Z",
+      "side": 1,
+      "message": "The decoupling has created circular Guice dependencies: without the Provider\u003c\u003e here it won\u0027t work.",
+      "parentUuid": "774e2232_27bfa113",
+      "range": {
+        "startLine": 51,
+        "startChar": 16,
+        "endLine": 51,
+        "endChar": 49
+      },
+      "revId": "282bd2ef4d297e09efe6c7119b608f4b5083aba3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
