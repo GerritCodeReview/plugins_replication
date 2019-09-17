@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf2e49f6_b6408324",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 44
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-17T12:16:33Z",
+      "side": 1,
+      "message": "Maybe I am missing something (or I forgot something we already discussed) but the newly introduced DestinationsCollection actually\ndepends on a specific ReplicationConfig implementation, namely ReplicationFileBasedConfig?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 61
+      },
+      "revId": "f293da48bc6827d07367c7ddbf2ac5cf02a2d9fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08b61719_55fa4268",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 44
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-17T12:16:33Z",
+      "side": 1,
+      "message": "Would it be possible to keep the same order of fields here and in the constructor?",
+      "revId": "f293da48bc6827d07367c7ddbf2ac5cf02a2d9fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a5d07f7_71cdd507",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 44
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-17T12:16:33Z",
+      "side": 1,
+      "message": "This write access to the destinations and the replicationConfig variables is not synchronized.\nHowever, the DestinationCollection singleton will surely be used from multiple threads so\nit needs to be thread-safe.",
+      "revId": "f293da48bc6827d07367c7ddbf2ac5cf02a2d9fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b9f97dd_39881557",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 44
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-17T12:16:33Z",
+      "side": 1,
+      "message": "I think we do not use comments like these in Gerrit\u0027s source code?",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 5
+      },
+      "revId": "f293da48bc6827d07367c7ddbf2ac5cf02a2d9fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fed7491e_ce13351e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 44
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-17T12:16:33Z",
+      "side": 1,
+      "message": "remove?",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 5
+      },
+      "revId": "f293da48bc6827d07367c7ddbf2ac5cf02a2d9fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfa8ccb3_ce02b40d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 44
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-17T12:16:33Z",
+      "side": 1,
+      "message": "remove?",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 5
+      },
+      "revId": "f293da48bc6827d07367c7ddbf2ac5cf02a2d9fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95064240_440debbc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 44
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-17T12:16:33Z",
+      "side": 1,
+      "message": "Should this be a javadoc comment?",
+      "revId": "f293da48bc6827d07367c7ddbf2ac5cf02a2d9fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a00a97e3_e93a90c4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 44
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-17T12:16:33Z",
+      "side": 1,
+      "message": "This access to destinations is also not synchronized",
+      "revId": "f293da48bc6827d07367c7ddbf2ac5cf02a2d9fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
