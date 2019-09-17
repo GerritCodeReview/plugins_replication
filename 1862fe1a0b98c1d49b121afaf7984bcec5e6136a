@@ -62,6 +62,30 @@
       "revId": "1862fe1a0b98c1d49b121afaf7984bcec5e6136a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0aaa086_7cc90103",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecoratorTest.java",
+        "patchSetId": 42
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-17T10:41:42Z",
+      "side": 0,
+      "message": "I mean why this test was removed?",
+      "parentUuid": "8e06ab39_6a825fce",
+      "range": {
+        "startLine": 165,
+        "startChar": 14,
+        "endLine": 165,
+        "endChar": 56
+      },
+      "revId": "1862fe1a0b98c1d49b121afaf7984bcec5e6136a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
