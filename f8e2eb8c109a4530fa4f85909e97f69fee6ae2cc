@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "409e9efa_278c1340",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 41
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-17T10:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe670ca7_bb82f842",
+      "range": {
+        "startLine": 14,
+        "startChar": 43,
+        "endLine": 14,
+        "endChar": 47
+      },
+      "revId": "f8e2eb8c109a4530fa4f85909e97f69fee6ae2cc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f42e7ecb_e496ea6f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
         "patchSetId": 41
@@ -69,6 +93,30 @@
       "revId": "f8e2eb8c109a4530fa4f85909e97f69fee6ae2cc",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2bdad1a_c25aed40",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 41
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-17T10:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "376b98c7_83aa5d25",
+      "range": {
+        "startLine": 200,
+        "startChar": 4,
+        "endLine": 202,
+        "endChar": 5
+      },
+      "revId": "f8e2eb8c109a4530fa4f85909e97f69fee6ae2cc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }

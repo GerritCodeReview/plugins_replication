@@ -16,6 +16,24 @@
       "revId": "49d825e365f3e649f4a3bc86106a2a7798cd3f63",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1772d461_f715c070",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigListener.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-17T10:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a762692a_b90aef89",
+      "revId": "49d825e365f3e649f4a3bc86106a2a7798cd3f63",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
