@@ -330,7 +330,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     }
 
     repLog.info("Replication to {} started...", uri);
-    Timer1.Context destinationContext = metrics.start(config.getName());
+    Timer1.Context<String> destinationContext = metrics.start(config.getName());
     try {
       long startedAt = destinationContext.getStartTime();
       long delay = NANOSECONDS.toMillis(startedAt - createdAt);
