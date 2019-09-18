@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0bc1fd39_7eb5eb21",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 49
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-18T15:05:06Z",
+      "side": 1,
+      "message": "As it was pointed out in another comment, both attributes are accessed from different threads. Why destinations is marked as volatile and replicationConfig not? Both mutation operations that happen on line 243 and 244 below are synchonized. \n\nShouldn\u0027t replicationConfig consistently use volatile modifier, or alternatively, volatile modifier should be removed for destinations?",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 50
+      },
+      "revId": "b3267d537b038080e777ea80740b6ba8d5365ac9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "940383c7_75d0fe85",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
         "patchSetId": 49
