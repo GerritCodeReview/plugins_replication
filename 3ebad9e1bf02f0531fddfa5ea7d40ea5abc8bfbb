@@ -94,6 +94,30 @@
       "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c1cb873_9fc23296",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 40
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-18T16:31:22Z",
+      "side": 1,
+      "message": "Checking all callers to the allDestinations method, I still believe that destinations are\ncreated more often than necessary:\n* from the constructor of the DestinationsCollection\n* from the DestinationsCollection.onReload method\n* from the DestinationsCollection.validateConfig\n\nI haven\u0027t debugged it yet but it looks like when replication.config changes all destinations\nwill be created at least twice during the configuration reload. Considering that this is\na relatively expensive operation, it would make sense to extract the validation logic\nand try to perform the validation without actually having to create Destination objects.",
+      "parentUuid": "5907b990_08229708",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 51
+      },
+      "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
