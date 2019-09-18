@@ -74,6 +74,30 @@
     },
     {
       "key": {
+        "uuid": "79f65611_7c952b67",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 44
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-18T13:57:17Z",
+      "side": 1,
+      "message": "I have updated the commit message as you spotted: what is code is doing is using the ReplicationFileBasedConfig and not the interface.",
+      "parentUuid": "9f783384_dee174ad",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 61
+      },
+      "revId": "f293da48bc6827d07367c7ddbf2ac5cf02a2d9fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08b61719_55fa4268",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
         "patchSetId": 44
@@ -158,6 +182,24 @@
       "side": 1,
       "message": "I am referring to exactly this place (line 82). The write to the destinations field\nis not safely published (to other threads), unless my understanding of JMM is wrong about\nthis. See [1] for more details on this topic. It may also be that something changed\nin the JMM (regarding the safe publishing) in recent years and that I am not aware of it.\nIn case you have references to any information which proves that my understanding of JMM\nis outdated please post it here.\n\nHaving said that, making ReplicationFileBasedConfig volatile would finish this discussion :-)\n\n[1] https://stackoverflow.com/a/16788488/11304233",
       "parentUuid": "3bba73b0_c795fe27",
+      "revId": "f293da48bc6827d07367c7ddbf2ac5cf02a2d9fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee9a9cb_e033f9e9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 44
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-18T13:57:17Z",
+      "side": 1,
+      "message": "\u003e I am referring to exactly this place (line 82). The write to the destinations field\n\u003e is not safely published (to other threads), unless my understanding of JMM is wrong about\n\u003e this.\n\nThe destinations instance variable is volatile and the creation is done only once because this class is annotated as a Singleton.\n\n\u003e See [1] for more details on this topic. It may also be that something changed\n\u003e in the JMM (regarding the safe publishing) in recent years and that I am not aware of it.\n\u003e In case you have references to any information which proves that my understanding of JMM\n\u003e is outdated please post it here.\n\nIn [1] there is this statement:\n\"For volatile variables, writes are guaranteed to be immediately visible to all threads. This is the case whether or not the write was done in a constructor.\"\n\nThe volatile variable is thus published to be immediately visible to all threads.\n\n\u003e Having said that, making ReplicationFileBasedConfig volatile would finish this discussion :-)\n\u003e \n\u003e [1] https://stackoverflow.com/a/16788488/11304233\n\nI have done it in P49 already :-)",
+      "parentUuid": "206df76f_6a091e7e",
       "revId": "f293da48bc6827d07367c7ddbf2ac5cf02a2d9fe",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
