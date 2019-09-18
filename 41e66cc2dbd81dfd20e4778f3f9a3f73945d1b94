@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e32d2cd1_d608ca57",
+        "filename": "BUILD",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-18T10:14:48Z",
+      "side": 1,
+      "message": "Would it make sense to add a TODO here, that all tests should be run on Java 11 and newer, when EasyMock is upgraded to 4.x, or tests are adapted to use Mockito?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "41e66cc2dbd81dfd20e4778f3f9a3f73945d1b94",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
