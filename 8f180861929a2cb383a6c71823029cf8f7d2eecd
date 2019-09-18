@@ -22,6 +22,30 @@
       "revId": "8f180861929a2cb383a6c71823029cf8f7d2eecd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58f10ccc_8151e879",
+        "filename": "BUILD",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-18T10:08:29Z",
+      "side": 1,
+      "message": "Yeah, unfortunately, but what should we do? We have exactly 4 options:\n\n* 1. Bump EasyMock to 4.x \u003d\u003e would take years, according to comment on your change, that was rejected\n* 2. Re-write the tests to use Mockito \u003d\u003e would take years\n* 3. Postpone Java 11 based Gerrit until 1. or 2. is resolved \u003d\u003e would take years\n* 4. Disable the non working tests \u003d\u003e that\u0027s what this change is doing",
+      "parentUuid": "7d8dfeba_ea4d2ec4",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "8f180861929a2cb383a6c71823029cf8f7d2eecd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
