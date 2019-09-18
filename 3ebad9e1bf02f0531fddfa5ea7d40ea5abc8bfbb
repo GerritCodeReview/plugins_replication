@@ -118,6 +118,30 @@
       "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1586f72b_bb8017b6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 40
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-18T17:01:51Z",
+      "side": 1,
+      "message": "I would also add that we could be smarter, then just wiping out all destinations and re-creating them all from scratch on each and every re-load operation. We could do some kind of diffing of current and new configurations. Or, we could support in place patching, by providing a patch file with one single new or changed destination.\n\nSay we have 10K destinations on huge gerrit site. Now, we add one single new destination. With this change at least 10K * 2 + 2 destinations are going to be created. What is the run time implication of this would be?",
+      "parentUuid": "8c1cb873_9fc23296",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 51
+      },
+      "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
