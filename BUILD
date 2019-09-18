@@ -19,12 +19,21 @@ gerrit_plugin(
     ],
 )
 
+POST_JAVA8_TESTS = [
+    "src/test/java/com/googlesource/gerrit/plugins/replication/WaitUtilTest.java",
+    "src/test/java/com/googlesource/gerrit/plugins/replication/PushReplicationTest.java",
+]
+
 junit_tests(
     name = "replication_tests",
-    srcs = glob([
-        "src/test/java/**/*Test.java",
-        "src/test/java/**/*IT.java",
-    ]),
+    srcs = select({
+        "//:java11": POST_JAVA8_TESTS,
+        "//:java_next": POST_JAVA8_TESTS,
+        "//conditions:default": glob([
+            "src/test/java/**/*Test.java",
+            "src/test/java/**/*IT.java",
+        ]),
+    }),
     tags = ["replication"],
     visibility = ["//visibility:public"],
     deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
