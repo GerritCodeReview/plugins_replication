@@ -22,6 +22,53 @@
       "revId": "ff8062f1dc2fe304863e3f943fd55d974e1f6844",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "136878a8_868a83ea",
+        "filename": "BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-18T08:52:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47614995_59c33fb6",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "ff8062f1dc2fe304863e3f943fd55d974e1f6844",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d0ab1de_72361191",
+        "filename": "BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-18T08:52:21Z",
+      "side": 1,
+      "message": "This should be removed as it depends on the base class, that depends on EasyMock.",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 100
+      },
+      "revId": "ff8062f1dc2fe304863e3f943fd55d974e1f6844",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
