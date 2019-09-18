@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "692a2415_a8a0093b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 40
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-18T14:13:25Z",
+      "side": 1,
+      "message": "Isn\u0027t we are doing here way too much, and we create allDestination, that we don\u0027t use, but ionly inteested in a side effect? We only want to check the validity of the new config file content. Wouldn\u0027t this be enough:\n\n    try {\n      configuration.getConfig().load();\n    } catch (ConfigInvalidException e) {\n      throw new ConfigInvalidException(\n          String.format(\n              \"Config file %s is invalid: %s\", configuration.getConfig().getFile(), e.getMessage()),\n          e);\n    }\n\nThat way we wouldn\u0027t need to change the signatur of allDestinations()-method and pass different instances of ReplicationFileBasedConfig: in one case instance variable replicationConfig inline 82 above and in another case a new config passed from AutoReloadRunnable#reload() method.",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 51
+      },
+      "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
