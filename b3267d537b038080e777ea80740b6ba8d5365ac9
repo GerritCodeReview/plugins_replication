@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "849fbf15_70f1bdbe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 49
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-18T15:07:35Z",
+      "side": 1,
+      "message": "Good catch, yes. replicationConfig should be volatile as well.",
+      "parentUuid": "0bc1fd39_7eb5eb21",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 50
+      },
+      "revId": "b3267d537b038080e777ea80740b6ba8d5365ac9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "940383c7_75d0fe85",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
         "patchSetId": 49
