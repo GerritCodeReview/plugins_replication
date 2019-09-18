@@ -224,6 +224,24 @@
     },
     {
       "key": {
+        "uuid": "a93edef3_caa54cc4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 44
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-18T15:10:43Z",
+      "side": 1,
+      "message": "\u003e Oh sorry... I meant replicationConfig, not destinations.\n\u003e Let\u0027s continue in the latest PS.\n\nGotcha, yes you are right. DavidO found it already and it\u0027s fixed in PS50.",
+      "parentUuid": "9b10e167_182cb160",
+      "revId": "f293da48bc6827d07367c7ddbf2ac5cf02a2d9fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b9f97dd_39881557",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
         "patchSetId": 44
