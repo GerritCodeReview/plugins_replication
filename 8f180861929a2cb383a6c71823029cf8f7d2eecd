@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7a3e31a6_1d62fcce",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-09-18T10:10:12Z",
+      "side": 1,
+      "message": "Remove the blank line",
+      "revId": "8f180861929a2cb383a6c71823029cf8f7d2eecd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7d8dfeba_ea4d2ec4",
         "filename": "BUILD",
         "patchSetId": 5
