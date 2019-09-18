@@ -22,6 +22,30 @@
       "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "047230c6_728a9dd6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 40
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-18T15:38:54Z",
+      "side": 1,
+      "message": "This is good point, creation of all destinations (see the line 307) and also see\nwhat happens in the Destinations constructor, seems really too much.\n\nOn the other side, I think we want to check more that just syntax correctness of the new\nconfiguration. I think that Luca wants to make sure that the destinations are properly\nconfigured i.e. all required properties are present and valid.\n\nTherefore, I believe that the validation checks should be extracted out of allDestinations\nso that the validation can be performed without actually creating destinations.",
+      "parentUuid": "692a2415_a8a0093b",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 51
+      },
+      "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
