@@ -22,6 +22,30 @@
       "revId": "b3267d537b038080e777ea80740b6ba8d5365ac9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b599318_faa57a97",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 49
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-18T14:37:49Z",
+      "side": 1,
+      "message": "\u003e It was like this in patch set 41, see: [1]\n\u003e \n\u003e     synchronized (this) {\n\u003e       shuttingDown \u003d true;\n\u003e     }\n\u003e \n\u003e and I asked why it was changed here and you answered: \"Will keep it volatile in this change and do the synchronised version in a follow-up change [...]\". Would you add a follow-up change to this seris, of it is not needed any more?\n\u003e \n\u003e * [1] https://gerrit-review.googlesource.com/c/plugins/replication/+/227181/41/src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java#202\n\nYes, I will definitely follow-up once this is agreed and merged.",
+      "parentUuid": "940383c7_75d0fe85",
+      "range": {
+        "startLine": 191,
+        "startChar": 4,
+        "endLine": 191,
+        "endChar": 24
+      },
+      "revId": "b3267d537b038080e777ea80740b6ba8d5365ac9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
