@@ -19,12 +19,23 @@ gerrit_plugin(
     ],
 )
 
+# TODO(davido): Enable all tests on Java 11 and newer, when EasyMock is upgraded
+# to 4.x, or tests are adapted to use Mockito.
+POST_JAVA8_TESTS = [
+    "src/test/java/com/googlesource/gerrit/plugins/replication/PushReplicationTest.java",
+    "src/test/java/com/googlesource/gerrit/plugins/replication/WaitUtilTest.java",
+]
+
 junit_tests(
     name = "replication_tests",
-    srcs = glob([
-        "src/test/java/**/*Test.java",
-        "src/test/java/**/*IT.java",
-    ]),
+    srcs = select({
+        "//:java11": POST_JAVA8_TESTS,
+        "//:java_next": POST_JAVA8_TESTS,
+        "//conditions:default": glob([
+            "src/test/java/**/*Test.java",
+            "src/test/java/**/*IT.java",
+        ]),
+    }),
     tags = ["replication"],
     visibility = ["//visibility:public"],
     deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
