@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36157fa9_bbd0be3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 50
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-18T15:19:30Z",
+      "side": 1,
+      "message": "I am still puzzled trying to follow what you wrote here :-)\n\nIsn\u0027t ReplicationFileBasedConfig a (concrete) class which implements the ReplicationConfig interface? What do we enable other implementation of a concrete class? I though the idea was to enable\nother implementations of the ReplicationConfig interface?",
+      "range": {
+        "startLine": 13,
+        "startChar": 8,
+        "endLine": 13,
+        "endChar": 70
+      },
+      "revId": "4f145d276757564c7186bdadeb67f9f258d126f6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
