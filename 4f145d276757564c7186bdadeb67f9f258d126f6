@@ -22,6 +22,30 @@
       "revId": "4f145d276757564c7186bdadeb67f9f258d126f6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3eb66455_a6030ca3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 50
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-18T15:25:56Z",
+      "side": 1,
+      "message": "\u003e I am still puzzled trying to follow what you wrote here :-)\n\u003e \n\u003e Isn\u0027t ReplicationFileBasedConfig a (concrete) class which implements the ReplicationConfig interface? What do we enable other implementation of a concrete class? I though the idea was to enable\n\u003e other implementations of the ReplicationConfig interface?\n\nThe focus of this change is to de-couple the logic of managing the destinations from the logic of reading the configuration. The change is already *very* big and I wouldn\u0027t increase the scope (and review time) even further.\n\nFor the pull-replication plugin, this refactoring is enough.\nFor other use-cases, we can go further and completely decouple the configuration from being a file.\n\nWill swap \u0027implementations\u0027 with \u0027subclasses\u0027, so that the ambiguity is removed.",
+      "parentUuid": "36157fa9_bbd0be3f",
+      "range": {
+        "startLine": 13,
+        "startChar": 8,
+        "endLine": 13,
+        "endChar": 70
+      },
+      "revId": "4f145d276757564c7186bdadeb67f9f258d126f6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
