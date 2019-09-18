@@ -1,4 +1,5 @@
-load("@rules_java//java:defs.bzl", "java_library")
+x_load("@rules_java//java:defs.bzl", "java_library")
+
 load("//tools/bzl:junit.bzl", "junit_tests")
 load("//tools/bzl:plugin.bzl", "PLUGIN_DEPS", "PLUGIN_TEST_DEPS", "gerrit_plugin")
 
@@ -19,12 +20,22 @@ gerrit_plugin(
     ],
 )
 
+POST_JAVA8_TESTS = [
+    "src/test/java/com/googlesource/gerrit/plugins/replication/WaitUtilTest.java",
+    "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfigTest.java",
+    "src/test/java/com/googlesource/gerrit/plugins/replication/PushReplicationTest.java",
+]
+
 junit_tests(
     name = "replication_tests",
-    srcs = glob([
-        "src/test/java/**/*Test.java",
-        "src/test/java/**/*IT.java",
-    ]),
+    srcs = select({
+        "//:java11": POST_JAVA8_TESTS,
+        "//:java_next": POST_JAVA8_TESTS,
+        "//conditions:default": glob([
+            "src/test/java/**/*Test.java",
+            "src/test/java/**/*IT.java",
+        ]),
+    }),
     tags = ["replication"],
     visibility = ["//visibility:public"],
     deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
