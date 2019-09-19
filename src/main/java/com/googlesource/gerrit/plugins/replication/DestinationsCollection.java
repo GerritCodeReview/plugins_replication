@@ -59,7 +59,7 @@ public class DestinationsCollection implements ReplicationDestinations {
   private final Provider<ReplicationQueue> replicationQueue;
   private volatile ReplicationFileBasedConfig replicationConfig;
   private volatile List<Destination> destinations;
-  private volatile boolean shuttingDown;
+  private boolean shuttingDown;
 
   public static class EventQueueNotEmptyException extends Exception {
     private static final long serialVersionUID = 1L;
@@ -188,7 +188,9 @@ public class DestinationsCollection implements ReplicationDestinations {
    */
   @Override
   public int shutdown() {
-    shuttingDown = true;
+    synchronized (this) {
+      shuttingDown = true;
+    }
 
     int discarded = 0;
     for (Destination cfg : destinations) {
