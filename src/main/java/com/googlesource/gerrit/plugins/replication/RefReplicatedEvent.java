@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.events.RefEvent;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
+import java.util.Objects;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
 
@@ -51,5 +52,34 @@ public class RefReplicatedEvent extends RefEvent {
   @Override
   public String getRefName() {
     return ref;
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (!(other instanceof RefReplicatedEvent)) {
+      return false;
+    }
+    RefReplicatedEvent event = (RefReplicatedEvent) other;
+    if (!Objects.equals(event.project, this.project)) {
+      return false;
+    }
+    if (!Objects.equals(event.ref, this.ref)) {
+      return false;
+    }
+    if (!Objects.equals(event.targetNode, this.targetNode)) {
+      return false;
+    }
+    if (!Objects.equals(event.status, this.status)) {
+      return false;
+    }
+    if (!Objects.equals(event.refStatus, this.refStatus)) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    return super.hashCode();
   }
 }
