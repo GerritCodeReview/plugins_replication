@@ -22,6 +22,30 @@
       "revId": "eb75eae49e2b45c6fb35ac540d580275ed6e67cc",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b48ef721_ed04c8a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-09-19T06:25:55Z",
+      "side": 1,
+      "message": "Gah.  I\u0027d rather not change this as it\u0027ll mean having to redo all the subsequent merges.",
+      "parentUuid": "4ce330f6_49cc528e",
+      "range": {
+        "startLine": 12,
+        "startChar": 3,
+        "endLine": 12,
+        "endChar": 12
+      },
+      "revId": "eb75eae49e2b45c6fb35ac540d580275ed6e67cc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
