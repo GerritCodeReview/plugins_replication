@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "1d0d13fd_40841bab",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/GitUpdateProcessingTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-19T06:13:35Z",
+      "side": 0,
+      "message": "There is no replacement for that in Mockito? mock(EventDispatcher.class) on line 38 above is enough?",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 26
+      },
+      "revId": "c529049176d07239ce083ed2f8a87235ea64e4d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19150fd7_f59c1e79",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-19T06:13:35Z",
+      "side": 0,
+      "message": "What is the replacement for never called test in Mockito? Is this never() call on line 222 below?",
+      "range": {
+        "startLine": 245,
+        "startChar": 4,
+        "endLine": 250,
+        "endChar": 0
+      },
+      "revId": "c529049176d07239ce083ed2f8a87235ea64e4d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22e3e8ba_6208e3f3",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/RefReplicatedEventEquals.java",
         "patchSetId": 1
@@ -31,6 +77,29 @@
       "side": 0,
       "message": "I\u0027ve updated the commit message.\n\nI don\u0027t know if easymock can do argument matching without these, and I don\u0027t think it\u0027s worth attempting to do it in a separate change.",
       "parentUuid": "22e3e8ba_6208e3f3",
+      "revId": "c529049176d07239ce083ed2f8a87235ea64e4d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a8a68a0_ff8f42d6",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStateTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-19T06:13:35Z",
+      "side": 0,
+      "message": "Is this not needed, because mock(PushResultProcessing.class) on line 36 does the job?",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 45
+      },
       "revId": "c529049176d07239ce083ed2f8a87235ea64e4d2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
