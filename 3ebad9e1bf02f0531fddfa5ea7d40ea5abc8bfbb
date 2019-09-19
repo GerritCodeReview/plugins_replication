@@ -142,6 +142,30 @@
       "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebc5b3eb_db3497c9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 40
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-09-19T09:07:29Z",
+      "side": 1,
+      "message": "Thanks for your feedbacks Saša and David.\nI appreciate both your points, but I think there\u0027e room for discussion about some of those subjects:\n\n\u003e I haven\u0027t debugged it yet but it looks like when replication.config changes all destinations\n\u003e will be created at least twice during the configuration reload. Considering that this is\n\u003e a relatively expensive operation, it would make sense to extract the validation logic\n\u003e and try to perform the validation without actually having to create Destination objects.\n\nYes I agree. however looking deeper you\u0027ll notice how the expensive operation is not really the creation of the destinations, but the _validation_ of the configuration itself, which happens during the creation of DestinationConfiguration objects.\nIn that process we check the syntax is correct, mandatory sections exists, remotes are valid, name placeholders are correct, etc.\n\nEven if we extracted this logic elsewhere, the creation of those DestinationConfiguration objects will still need to occur twice:\n- Once, in the validateConfig() to validate the configuration\n- Once, in allDestinations() to get the destinationConfiguration to build new destinations upon.\n\nas such:\n\n  @Override\n  public void validateConfig(ReplicationFileBasedConfig newConfig) throws ConfigInvalidException {\n    buildConfigurations(newConfig);\n  }\n\n  public List\u003cDestinationConfiguration\u003e buildConfigurations(ReplicationFileBasedConfig configuration) throws ConfigInvalidException {\n   //... all validation checks here\n   return List\u003cDestinationConfiguration\u003e\n  }\n\nNow, to build Destinations, destinationCollections() should either call buildConfigurations() again, or be passed one [2].\n\n[1]\n  destinationCollections(Destination.Factory destinationFactory, ReplicationFileBasedConfig configuration) {\n     buildConfigurations(newConfig);\n     // build destinations, trivially\n  }\n\n[2]\n  destinationCollections(Destination.Factory destinationFactory, List\u003cDestinationConfiguration\u003e destinationConfigurations) {\n    // build destinations, trivially\n  }\n\nIn both cases, validation process will occur twice.\n\n\nAn alternative is that validateConfig would mutate DestinationCollection by storing the new, valid list of DestinationConfiguration, so that onReload() can just build on that, without having to recompute all validations. This would allow only one validation to happen.\nHaving said that, I would argue that validateConfig() should not perform any side effect at all.\n\n\n\n\u003e we could be smarter, then just wiping out all destinations and re-creating them all from scratch on each and every re-load operation.\n\nI agree the reload could be smarter, but this logic is beyond the simple introduction of validation. I am happy to work on this on a follow up change.\n\n\u003e Now, we add one single new destination. With this change at least 10K * 2 + 2 destinations are going to be created. What is the run time implication of this would be?\n\nSee above, I think the expensiveness of the operation is related to the validation of the destinations, not their creation.",
+      "parentUuid": "1586f72b_bb8017b6",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 51
+      },
+      "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
