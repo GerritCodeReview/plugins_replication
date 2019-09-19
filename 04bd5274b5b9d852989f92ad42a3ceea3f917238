@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcc13f4f_6afb9134",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-19T12:18:19Z",
+      "side": 1,
+      "message": "It\u0027s still used here, and seems to be needed, so that the buidl failure on the CI is justified:\n\n  plugins/replication/src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java:262: error: cannot find symbol\n            replicationQueueMock,\n            ^\n  symbol:   variable replicationQueueMock\n  location: class PushOneTest",
+      "range": {
+        "startLine": 262,
+        "startChar": 12,
+        "endLine": 262,
+        "endChar": 32
+      },
+      "revId": "04bd5274b5b9d852989f92ad42a3ceea3f917238",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
