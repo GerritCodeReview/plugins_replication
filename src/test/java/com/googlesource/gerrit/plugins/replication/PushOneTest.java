@@ -14,14 +14,13 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import static com.googlesource.gerrit.plugins.replication.RemoteRefUpdateCollectionMatcher.eqRemoteRef;
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.createNiceMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.getCurrentArguments;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
 import static org.eclipse.jgit.lib.Ref.Storage.NEW;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gerrit.extensions.registration.DynamicItem;
@@ -45,8 +44,6 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import junit.framework.AssertionFailedError;
-import org.easymock.IAnswer;
 import org.eclipse.jgit.errors.NotSupportedException;
 import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.lib.Config;
@@ -68,6 +65,8 @@ import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 public class PushOneTest {
   private static final int TEST_PUSH_TIMEOUT_SECS = 10;
@@ -135,8 +134,8 @@ public class PushOneTest {
     setupRepositoryMock(config);
     setupGitRepoManagerMock();
 
-    projectStateMock = createNiceMock(ProjectState.class);
-    forProjectMock = createNiceMock(ForProject.class);
+    projectStateMock = mock(ProjectState.class);
+    forProjectMock = mock(ForProject.class);
     setupWithUserMock();
     setupPermissionBackedMock();
 
@@ -145,46 +144,22 @@ public class PushOneTest {
     setupRefSpecMock();
     setupRemoteConfigMock();
 
-    credentialsFactory = createNiceMock(CredentialsFactory.class);
+    credentialsFactory = mock(CredentialsFactory.class);
 
     setupFetchConnectionMock();
     setupPushConnectionMock();
     setupRequestScopeMock();
-    idGeneratorMock = createNiceMock(IdGenerator.class);
-    replicationStateListenersMock = createNiceMock(ReplicationStateListeners.class);
+    idGeneratorMock = mock(IdGenerator.class);
+    replicationStateListenersMock = mock(ReplicationStateListeners.class);
 
-    timerContextMock = createNiceMock(Timer1.Context.class);
+    timerContextMock = mock(Timer1.Context.class);
     setupReplicationMetricsMock();
 
     setupTransportMock();
 
     setupProjectCacheMock();
 
-    replicationConfigMock = createNiceMock(ReplicationConfig.class);
-
-    replay(
-        gitRepositoryManagerMock,
-        refUpdateMock,
-        repositoryMock,
-        permissionBackendMock,
-        destinationMock,
-        remoteConfigMock,
-        credentialsFactory,
-        threadRequestScoperMock,
-        idGeneratorMock,
-        replicationStateListenersMock,
-        replicationMetricsMock,
-        projectCacheMock,
-        timerContextMock,
-        transportFactoryMock,
-        projectStateMock,
-        withUserMock,
-        forProjectMock,
-        fetchConnection,
-        pushConnection,
-        refSpecMock,
-        refDatabaseMock,
-        replicationConfigMock);
+    replicationConfigMock = mock(ReplicationConfig.class);
   }
 
   @Test
@@ -213,10 +188,7 @@ public class PushOneTest {
 
     PushResult pushResult = new PushResult();
 
-    expect(transportMock.push(anyObject(), eqRemoteRef(expectedUpdates)))
-        .andReturn(pushResult)
-        .once();
-    replay(transportMock);
+    when(transportMock.push(any(), eq(expectedUpdates))).thenReturn(pushResult);
 
     PushOne pushOne = createPushOne(replicationPushFilter);
 
@@ -224,8 +196,6 @@ public class PushOneTest {
     pushOne.run();
 
     isCallFinished.await(TEST_PUSH_TIMEOUT_SECS, TimeUnit.SECONDS);
-
-    verify(transportMock);
   }
 
   @Test
@@ -242,12 +212,6 @@ public class PushOneTest {
               }
             });
 
-    // easymock way to check if method was never called
-    expect(transportMock.push(anyObject(), anyObject()))
-        .andThrow(new AssertionFailedError())
-        .anyTimes();
-    replay(transportMock);
-
     PushOne pushOne = createPushOne(replicationPushFilter);
 
     pushOne.addRef(PushOne.ALL_REFS);
@@ -255,7 +219,7 @@ public class PushOneTest {
 
     isCallFinished.await(10, TimeUnit.SECONDS);
 
-    verify(transportMock);
+    verify(transportMock, never()).push(any(), any());
   }
 
   private PushOne createPushOne(DynamicItem<ReplicationPushFilter> replicationPushFilter) {
@@ -282,31 +246,32 @@ public class PushOneTest {
   }
 
   private void setupProjectCacheMock() throws IOException {
-    projectCacheMock = createNiceMock(ProjectCache.class);
-    expect(projectCacheMock.checkedGet(projectNameKey)).andReturn(projectStateMock);
+    projectCacheMock = mock(ProjectCache.class);
+    when(projectCacheMock.checkedGet(projectNameKey)).thenReturn(projectStateMock);
   }
 
   private void setupTransportMock() throws NotSupportedException, TransportException {
-    transportMock = createNiceMock(Transport.class);
-    expect(transportMock.openFetch()).andReturn(fetchConnection);
-    transportFactoryMock = createNiceMock(TransportFactory.class);
-    expect(transportFactoryMock.open(repositoryMock, urish)).andReturn(transportMock).anyTimes();
+    transportMock = mock(Transport.class);
+    when(transportMock.openFetch()).thenReturn(fetchConnection);
+    transportFactoryMock = mock(TransportFactory.class);
+    when(transportFactoryMock.open(repositoryMock, urish)).thenReturn(transportMock);
   }
 
   private void setupReplicationMetricsMock() {
-    replicationMetricsMock = createNiceMock(ReplicationMetrics.class);
-    expect(replicationMetricsMock.start(anyObject())).andReturn(timerContextMock);
+    replicationMetricsMock = mock(ReplicationMetrics.class);
+    when(replicationMetricsMock.start(any())).thenReturn(timerContextMock);
   }
 
   private void setupRequestScopeMock() {
-    threadRequestScoperMock = createNiceMock(PerThreadRequestScope.Scoper.class);
-    expect(threadRequestScoperMock.scope(anyObject()))
-        .andAnswer(
-            new IAnswer<Callable<Object>>() {
+    threadRequestScoperMock = mock(PerThreadRequestScope.Scoper.class);
+    when(threadRequestScoperMock.scope(any()))
+        .thenAnswer(
+            new Answer<Callable<Object>>() {
               @SuppressWarnings("unchecked")
               @Override
-              public Callable<Object> answer() throws Throwable {
-                Callable<Object> originalCall = (Callable<Object>) getCurrentArguments()[0];
+              public Callable<Object> answer(InvocationOnMock invocation) throws Throwable {
+                Object[] args = invocation.getArguments();
+                Callable<Object> originalCall = (Callable<Object>) args[0];
                 return new Callable<Object>() {
 
                   @Override
@@ -317,66 +282,64 @@ public class PushOneTest {
                   }
                 };
               }
-            })
-        .anyTimes();
+            });
   }
 
   private void setupPushConnectionMock() {
-    pushConnection = createNiceMock(PushConnection.class);
-    expect(pushConnection.getRefsMap()).andReturn(remoteRefs);
+    pushConnection = mock(PushConnection.class);
+    when(pushConnection.getRefsMap()).thenReturn(remoteRefs);
   }
 
   private void setupFetchConnectionMock() {
-    fetchConnection = createNiceMock(FetchConnection.class);
-    expect(fetchConnection.getRefsMap()).andReturn(remoteRefs);
+    fetchConnection = mock(FetchConnection.class);
+    when(fetchConnection.getRefsMap()).thenReturn(remoteRefs);
   }
 
   private void setupRemoteConfigMock() {
-    remoteConfigMock = createNiceMock(RemoteConfig.class);
-    expect(remoteConfigMock.getPushRefSpecs()).andReturn(ImmutableList.of(refSpecMock));
+    remoteConfigMock = mock(RemoteConfig.class);
+    when(remoteConfigMock.getPushRefSpecs()).thenReturn(ImmutableList.of(refSpecMock));
   }
 
   private void setupRefSpecMock() {
-    refSpecMock = createNiceMock(RefSpec.class);
-    expect(refSpecMock.matchSource(anyObject(String.class))).andReturn(true);
-    expect(refSpecMock.expandFromSource(anyObject(String.class))).andReturn(refSpecMock);
-    expect(refSpecMock.getDestination()).andReturn("fooProject").anyTimes();
-    expect(refSpecMock.isForceUpdate()).andReturn(false).anyTimes();
+    refSpecMock = mock(RefSpec.class);
+    when(refSpecMock.matchSource(any(String.class))).thenReturn(true);
+    when(refSpecMock.expandFromSource(any(String.class))).thenReturn(refSpecMock);
+    when(refSpecMock.getDestination()).thenReturn("fooProject");
+    when(refSpecMock.isForceUpdate()).thenReturn(false);
   }
 
   private void setupDestinationMock() {
-    destinationMock = createNiceMock(Destination.class);
-    expect(destinationMock.requestRunway(anyObject())).andReturn(RunwayStatus.allowed());
+    destinationMock = mock(Destination.class);
+    when(destinationMock.requestRunway(any())).thenReturn(RunwayStatus.allowed());
   }
 
   private void setupPermissionBackedMock() {
-    permissionBackendMock = createNiceMock(PermissionBackend.class);
-    expect(permissionBackendMock.currentUser()).andReturn(withUserMock);
+    permissionBackendMock = mock(PermissionBackend.class);
+    when(permissionBackendMock.currentUser()).thenReturn(withUserMock);
   }
 
   private void setupWithUserMock() {
-    withUserMock = createNiceMock(WithUser.class);
-    expect(withUserMock.project(projectNameKey)).andReturn(forProjectMock);
+    withUserMock = mock(WithUser.class);
+    when(withUserMock.project(projectNameKey)).thenReturn(forProjectMock);
   }
 
   private void setupGitRepoManagerMock() throws IOException {
-    gitRepositoryManagerMock = createNiceMock(GitRepositoryManager.class);
-    expect(gitRepositoryManagerMock.openRepository(projectNameKey)).andReturn(repositoryMock);
+    gitRepositoryManagerMock = mock(GitRepositoryManager.class);
+    when(gitRepositoryManagerMock.openRepository(projectNameKey)).thenReturn(repositoryMock);
   }
 
   private void setupRepositoryMock(FileBasedConfig config) throws IOException {
-    repositoryMock = createNiceMock(Repository.class);
-    refDatabaseMock = createNiceMock(RefDatabase.class);
-    expect(repositoryMock.getConfig()).andReturn(config).anyTimes();
-    expect(repositoryMock.getRefDatabase()).andReturn(refDatabaseMock);
-    expect(refDatabaseMock.getRefs()).andReturn(localRefs);
-    expect(repositoryMock.updateRef("fooProject")).andReturn(refUpdateMock);
+    repositoryMock = mock(Repository.class);
+    refDatabaseMock = mock(RefDatabase.class);
+    when(repositoryMock.getConfig()).thenReturn(config);
+    when(repositoryMock.getRefDatabase()).thenReturn(refDatabaseMock);
+    when(refDatabaseMock.getRefs()).thenReturn(localRefs);
+    when(repositoryMock.updateRef("fooProject")).thenReturn(refUpdateMock);
   }
 
   private void setupRefUpdateMock() {
-    refUpdateMock = createNiceMock(RefUpdate.class);
-    expect(refUpdateMock.getOldObjectId())
-        .andReturn(ObjectId.fromString("0000000000000000000000000000000000000001"))
-        .anyTimes();
+    refUpdateMock = mock(RefUpdate.class);
+    when(refUpdateMock.getOldObjectId())
+        .thenReturn(ObjectId.fromString("0000000000000000000000000000000000000001"));
   }
 }

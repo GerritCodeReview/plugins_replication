@@ -16,13 +16,9 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
 import static java.nio.file.Files.createTempDirectory;
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.createNiceMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.getCurrentArguments;
-import static org.easymock.EasyMock.isA;
-import static org.easymock.EasyMock.replay;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Injector;
@@ -31,11 +27,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.easymock.IAnswer;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 @Ignore
 public abstract class AbstractConfigTest {
@@ -53,11 +50,9 @@ public abstract class AbstractConfigTest {
     }
 
     private static Injector injectorMock() {
-      Injector injector = createNiceMock(Injector.class);
-      Injector childInjectorMock = createNiceMock(Injector.class);
-      expect(injector.createChildInjector((Module) anyObject())).andReturn(childInjectorMock);
-      replay(childInjectorMock);
-      replay(injector);
+      Injector injector = mock(Injector.class);
+      Injector childInjectorMock = mock(Injector.class);
+      when(injector.createChildInjector(any(Module.class))).thenReturn(childInjectorMock);
       return injector;
     }
   }
@@ -66,21 +61,20 @@ public abstract class AbstractConfigTest {
     sitePath = createTempPath("site");
     sitePaths = new SitePaths(sitePath);
     pluginDataPath = createTempPath("data");
-    destinationFactoryMock = createMock(Destination.Factory.class);
+    destinationFactoryMock = mock(Destination.Factory.class);
   }
 
   @Before
   public void setup() {
-    expect(destinationFactoryMock.create(isA(DestinationConfiguration.class)))
-        .andAnswer(
-            new IAnswer<Destination>() {
+    when(destinationFactoryMock.create(any(DestinationConfiguration.class)))
+        .thenAnswer(
+            new Answer<Destination>() {
               @Override
-              public Destination answer() throws Throwable {
-                return new FakeDestination((DestinationConfiguration) getCurrentArguments()[0]);
+              public Destination answer(InvocationOnMock invocation) throws Throwable {
+                Object[] args = invocation.getArguments();
+                return new FakeDestination((DestinationConfiguration) args[0]);
               }
-            })
-        .anyTimes();
-    replay(destinationFactoryMock);
+            });
   }
 
   protected static Path createTempPath(String prefix) throws IOException {

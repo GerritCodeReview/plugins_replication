@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.events.RefEvent;
+import java.util.Objects;
 
 public class RefReplicationDoneEvent extends RefEvent {
   public static final String TYPE = "ref-replication-done";
@@ -39,5 +40,29 @@ public class RefReplicationDoneEvent extends RefEvent {
   @Override
   public String getRefName() {
     return ref;
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (!(other instanceof RefReplicationDoneEvent)) {
+      return false;
+    }
+
+    RefReplicationDoneEvent event = (RefReplicationDoneEvent) other;
+    if (!Objects.equals(event.project, this.project)) {
+      return false;
+    }
+    if (!Objects.equals(event.ref, this.ref)) {
+      return false;
+    }
+    if (event.nodesCount != this.nodesCount) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    return super.hashCode();
   }
 }
