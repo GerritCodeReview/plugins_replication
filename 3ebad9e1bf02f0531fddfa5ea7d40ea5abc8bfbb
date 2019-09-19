@@ -190,6 +190,30 @@
       "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "feefec1c_9ac547f3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 40
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-19T09:53:35Z",
+      "side": 1,
+      "message": "How many *times a second* are we expecting to reload the configuration?\nThe reload itself would imply the a replay of events that may take many many minutes, if not hours.\nWhilst is reloading, we do not accept further reloads.\n\nI do agree with the issue of validating the configuration twice, however, it can be easily addressed as a follow-up change and just making it differential:\n- Understand what has changed\n- Apply the differences\n\nWDYT?",
+      "parentUuid": "14e0b184_811f395d",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 51
+      },
+      "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
