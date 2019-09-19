@@ -166,6 +166,30 @@
       "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14e0b184_811f395d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 40
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-19T09:48:38Z",
+      "side": 1,
+      "message": "So may be listener approach and do-it-twice is bad idea in the first place (Unless we implemented a smarter re-load approach like patching of only small chunks of config or build a difference between old a new config and applying them on current destinations list)?\n\nWhat about a new plan: We support commit/rollback operation (like in the database). If commit of the new config version failed  to recover from an attempt to reload invalid configuration, so something like that:\n\n* AutoReloadRunnable detects new config version, store the valid config instance in local instance variable and post an event to reload the configuration.\n* DestinationsCollection that subscribed to this event, got the event and attempts to load new config and replace the destinations list instance. If it was OK, then commit event is posted, otherwise rollback event is posted. Note, that the current, a valid destinations instance is not mutated in case reload process failed!\n* AutoReloadRunnable got rollback event: new config version is discarded, and old one is restored as the current one.\n* AutoReloadRunnable got commit event: old config version is discared, new one is promoted to the current one.",
+      "parentUuid": "ebc5b3eb_db3497c9",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 51
+      },
+      "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
