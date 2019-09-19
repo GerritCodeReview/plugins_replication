@@ -188,7 +188,9 @@ public class DestinationsCollection implements ReplicationDestinations {
    */
   @Override
   public int shutdown() {
-    shuttingDown = true;
+    synchronized (this) {
+      shuttingDown = true;
+    }
 
     int discarded = 0;
     for (Destination cfg : destinations) {
