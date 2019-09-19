@@ -14,11 +14,10 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expectLastCall;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.reset;
-import static org.easymock.EasyMock.verify;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.permissions.PermissionBackendException;
@@ -36,14 +35,12 @@ public class GitUpdateProcessingTest {
 
   @Before
   public void setUp() throws Exception {
-    dispatcherMock = createMock(EventDispatcher.class);
-    replay(dispatcherMock);
+    dispatcherMock = mock(EventDispatcher.class);
     gitUpdateProcessing = new GitUpdateProcessing(dispatcherMock);
   }
 
   @Test
   public void headRefReplicated() throws URISyntaxException, PermissionBackendException {
-    reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent(
             "someProject",
@@ -51,9 +48,6 @@ public class GitUpdateProcessingTest {
             "someHost",
             RefPushResult.SUCCEEDED,
             RemoteRefUpdate.Status.OK);
-    dispatcherMock.postEvent(RefReplicatedEventEquals.eqEvent(expectedEvent));
-    expectLastCall().once();
-    replay(dispatcherMock);
 
     gitUpdateProcessing.onRefReplicatedToOneNode(
         "someProject",
@@ -61,12 +55,11 @@ public class GitUpdateProcessingTest {
         new URIish("git://someHost/someProject.git"),
         RefPushResult.SUCCEEDED,
         RemoteRefUpdate.Status.OK);
-    verify(dispatcherMock);
+    verify(dispatcherMock, times(1)).postEvent(eq(expectedEvent));
   }
 
   @Test
   public void changeRefReplicated() throws URISyntaxException, PermissionBackendException {
-    reset(dispatcherMock);
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent(
             "someProject",
@@ -74,9 +67,6 @@ public class GitUpdateProcessingTest {
             "someHost",
             RefPushResult.FAILED,
             RemoteRefUpdate.Status.REJECTED_NONFASTFORWARD);
-    dispatcherMock.postEvent(RefReplicatedEventEquals.eqEvent(expectedEvent));
-    expectLastCall().once();
-    replay(dispatcherMock);
 
     gitUpdateProcessing.onRefReplicatedToOneNode(
         "someProject",
@@ -84,19 +74,15 @@ public class GitUpdateProcessingTest {
         new URIish("git://someHost/someProject.git"),
         RefPushResult.FAILED,
         RemoteRefUpdate.Status.REJECTED_NONFASTFORWARD);
-    verify(dispatcherMock);
+    verify(dispatcherMock, times(1)).postEvent(eq(expectedEvent));
   }
 
   @Test
   public void onAllNodesReplicated() throws PermissionBackendException {
-    reset(dispatcherMock);
     RefReplicationDoneEvent expectedDoneEvent =
         new RefReplicationDoneEvent("someProject", "refs/heads/master", 5);
-    dispatcherMock.postEvent(RefReplicationDoneEventEquals.eqEvent(expectedDoneEvent));
-    expectLastCall().once();
-    replay(dispatcherMock);
 
     gitUpdateProcessing.onRefReplicatedToAllNodes("someProject", "refs/heads/master", 5);
-    verify(dispatcherMock);
+    verify(dispatcherMock, times(1)).postEvent(eq(expectedDoneEvent));
   }
 }
