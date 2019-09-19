@@ -32,14 +32,11 @@ public class ReplicationStateTest {
 
   private ReplicationState replicationState;
   private PushResultProcessing pushResultProcessingMock;
-  private ReplicationTasksStorage eventsStorage;
 
   @Before
   public void setUp() throws Exception {
     pushResultProcessingMock = createNiceMock(PushResultProcessing.class);
     replay(pushResultProcessingMock);
-    eventsStorage = createNiceMock(ReplicationTasksStorage.class);
-    replay(eventsStorage);
     replicationState = new ReplicationState(pushResultProcessingMock);
   }
 
