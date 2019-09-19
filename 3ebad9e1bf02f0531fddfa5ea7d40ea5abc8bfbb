@@ -286,6 +286,30 @@
       "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db1ae7c2_6c53975a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 40
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-19T15:13:41Z",
+      "side": 1,
+      "message": "This extra validation for our production system would take an extra 15s, which is significant as they are all CPU time at 100% :-(\n(still ONE CPU out of 32 though)\n\nI agree that we should look at alternatives.",
+      "parentUuid": "2e4e8f0b_efef4c9b",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 51
+      },
+      "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
