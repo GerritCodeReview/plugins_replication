@@ -238,6 +238,30 @@
       "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7635956_2f5a3a89",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 40
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-19T10:46:02Z",
+      "side": 1,
+      "message": "To further clarify my suggestion and compare it with the approach used in this change. This change is doing:\n\n* instantiate new config instance\n* preserve the old one\n* invoke validate, that is effectively trying to create new instances of Destination and validate them\n* when it failed, then the old config is preserved and the operation is reload cancelled\n\nMy suggestion is to re-use pub/sub and de-coupling concept that was added in this series further, and do exactly the same as described above, but in two different places:\n\n* AutoReloadRunnable: create new config instance\n* publish event to DestinationsCollection to try the reload\n* Complete re-load or cancel in AutoReloadRunnable\n\nCould it work?\n\nWhat also would help here, is to get some numbers: how often re-load usually takes place (new projects added, new slaves added, etc) and how long would it take to re-load say 1K/10K Destinations? Can you post some numbers form GerritForge?",
+      "parentUuid": "ff7f473d_2f97a480",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 51
+      },
+      "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
