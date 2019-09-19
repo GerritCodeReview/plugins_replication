@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee980f96_ee31dd28",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnableTest.java",
+        "patchSetId": 41
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-09-19T07:33:29Z",
+      "side": 1,
+      "message": "This is unused and causes a warning in Eclipse.",
+      "range": {
+        "startLine": 117,
+        "startChar": 52,
+        "endLine": 117,
+        "endChar": 61
+      },
+      "revId": "47e3fafa535b4b189ff088dbbf0dcdcd4f5cd66f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
