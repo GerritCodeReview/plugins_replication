@@ -262,6 +262,30 @@
       "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e4e8f0b_efef4c9b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 40
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-09-19T11:27:00Z",
+      "side": 1,
+      "message": "\u003e publish event to DestinationsCollection to try the reload\n\nCan you specify what this event actually is?\n\nI think part of the problem here is that onReload(ReplicationFileBasedConfig newConfig) takes the new low-level configuration: transforming that configuration to a list of Destination requires computation and validation (i.e. parsing that can go wrong), despite the fact that validateConfig might have run already.\n\nIf we assume that onReload should only get \"valid\" configuration (otherwise is not even called), then perhaps that onReload() interface is wrong it should rather received a list of already-validated DestinationConfiguration instead.",
+      "parentUuid": "a7635956_2f5a3a89",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 51
+      },
+      "revId": "3ebad9e1bf02f0531fddfa5ea7d40ea5abc8bfbb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
