@@ -17,10 +17,9 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
 import com.google.gerrit.server.config.ConfigUtil;
+import java.util.concurrent.TimeUnit;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.transport.RemoteConfig;
-
-import java.util.concurrent.TimeUnit;
 
 public class DestinationConfiguration {
   static final int DEFAULT_REPLICATION_DELAY = 15;
@@ -73,8 +72,15 @@ public class DestinationConfiguration {
         getInt(
             remoteConfig, cfg, "replicationMaxRetries", cfg.getInt("replication", "maxRetries", 0));
 
-    slowLatencyThreshold = (int) ConfigUtil.getTimeUnit(
-        cfg, "remote", remoteConfig.getName(), "slowLatencyThreshold", DEFAULT_SLOW_LATENCY_THRESHOLD_SECS, TimeUnit.SECONDS);
+    slowLatencyThreshold =
+        (int)
+            ConfigUtil.getTimeUnit(
+                cfg,
+                "remote",
+                remoteConfig.getName(),
+                "slowLatencyThreshold",
+                DEFAULT_SLOW_LATENCY_THRESHOLD_SECS,
+                TimeUnit.SECONDS);
   }
 
   public int getDelay() {
