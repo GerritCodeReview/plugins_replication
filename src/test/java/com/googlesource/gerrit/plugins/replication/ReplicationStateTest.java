@@ -15,11 +15,9 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.easymock.EasyMock.createNiceMock;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.resetToDefault;
-import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 import java.net.URISyntaxException;
@@ -35,8 +33,7 @@ public class ReplicationStateTest {
 
   @Before
   public void setUp() throws Exception {
-    pushResultProcessingMock = createNiceMock(PushResultProcessing.class);
-    replay(pushResultProcessingMock);
+    pushResultProcessingMock = mock(PushResultProcessing.class);
     replicationState = new ReplicationState(pushResultProcessingMock);
   }
 
@@ -53,51 +50,35 @@ public class ReplicationStateTest {
 
   @Test
   public void shouldFireOneReplicationEventWhenNothingToReplicate() {
-    resetToDefault(pushResultProcessingMock);
-
-    // expected event
-    pushResultProcessingMock.onAllRefsReplicatedToAllNodes(0);
-    replay(pushResultProcessingMock);
-
     // actual test
     replicationState.markAllPushTasksScheduled();
-    verify(pushResultProcessingMock);
+
+    // expected event
+    verify(pushResultProcessingMock).onAllRefsReplicatedToAllNodes(0);
   }
 
   @Test
   public void shouldFireEventsForReplicationOfOneRefToOneNode() throws URISyntaxException {
-    resetToDefault(pushResultProcessingMock);
     URIish uri = new URIish("git://someHost/someRepo.git");
-
-    // expected events
-    pushResultProcessingMock.onRefReplicatedToOneNode(
-        "someProject", "someRef", uri, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    pushResultProcessingMock.onRefReplicatedToAllNodes("someProject", "someRef", 1);
-    pushResultProcessingMock.onAllRefsReplicatedToAllNodes(1);
-    replay(pushResultProcessingMock);
 
     // actual test
     replicationState.increasePushTaskCount("someProject", "someRef");
     replicationState.markAllPushTasksScheduled();
     replicationState.notifyRefReplicated(
         "someProject", "someRef", uri, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    verify(pushResultProcessingMock);
+
+    // expected events
+    verify(pushResultProcessingMock)
+        .onRefReplicatedToOneNode(
+            "someProject", "someRef", uri, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
+    verify(pushResultProcessingMock).onRefReplicatedToAllNodes("someProject", "someRef", 1);
+    verify(pushResultProcessingMock).onAllRefsReplicatedToAllNodes(1);
   }
 
   @Test
   public void shouldFireEventsForReplicationOfOneRefToMultipleNodes() throws URISyntaxException {
-    resetToDefault(pushResultProcessingMock);
     URIish uri1 = new URIish("git://someHost1/someRepo.git");
     URIish uri2 = new URIish("git://someHost2/someRepo.git");
-
-    // expected events
-    pushResultProcessingMock.onRefReplicatedToOneNode(
-        "someProject", "someRef", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    pushResultProcessingMock.onRefReplicatedToOneNode(
-        "someProject", "someRef", uri2, RefPushResult.FAILED, RemoteRefUpdate.Status.NON_EXISTING);
-    pushResultProcessingMock.onRefReplicatedToAllNodes("someProject", "someRef", 2);
-    pushResultProcessingMock.onAllRefsReplicatedToAllNodes(2);
-    replay(pushResultProcessingMock);
 
     // actual test
     replicationState.increasePushTaskCount("someProject", "someRef");
@@ -107,32 +88,28 @@ public class ReplicationStateTest {
         "someProject", "someRef", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     replicationState.notifyRefReplicated(
         "someProject", "someRef", uri2, RefPushResult.FAILED, RemoteRefUpdate.Status.NON_EXISTING);
-    verify(pushResultProcessingMock);
+
+    // expected events
+    verify(pushResultProcessingMock)
+        .onRefReplicatedToOneNode(
+            "someProject", "someRef", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
+    verify(pushResultProcessingMock)
+        .onRefReplicatedToOneNode(
+            "someProject",
+            "someRef",
+            uri2,
+            RefPushResult.FAILED,
+            RemoteRefUpdate.Status.NON_EXISTING);
+    verify(pushResultProcessingMock).onRefReplicatedToAllNodes("someProject", "someRef", 2);
+    verify(pushResultProcessingMock).onAllRefsReplicatedToAllNodes(2);
   }
 
   @Test
   public void shouldFireEventsForReplicationOfMultipleRefsToMultipleNodes()
       throws URISyntaxException {
-    resetToDefault(pushResultProcessingMock);
     URIish uri1 = new URIish("git://host1/someRepo.git");
     URIish uri2 = new URIish("git://host2/someRepo.git");
     URIish uri3 = new URIish("git://host3/someRepo.git");
-
-    // expected events
-    pushResultProcessingMock.onRefReplicatedToOneNode(
-        "someProject", "ref1", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    pushResultProcessingMock.onRefReplicatedToOneNode(
-        "someProject", "ref1", uri2, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    pushResultProcessingMock.onRefReplicatedToOneNode(
-        "someProject", "ref1", uri3, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    pushResultProcessingMock.onRefReplicatedToOneNode(
-        "someProject", "ref2", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    pushResultProcessingMock.onRefReplicatedToOneNode(
-        "someProject", "ref2", uri2, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    pushResultProcessingMock.onRefReplicatedToAllNodes("someProject", "ref1", 3);
-    pushResultProcessingMock.onRefReplicatedToAllNodes("someProject", "ref2", 2);
-    pushResultProcessingMock.onAllRefsReplicatedToAllNodes(5);
-    replay(pushResultProcessingMock);
 
     // actual test
     replicationState.increasePushTaskCount("someProject", "ref1");
@@ -151,23 +128,31 @@ public class ReplicationStateTest {
         "someProject", "ref2", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     replicationState.notifyRefReplicated(
         "someProject", "ref2", uri2, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    verify(pushResultProcessingMock);
+
+    // expected events
+    verify(pushResultProcessingMock)
+        .onRefReplicatedToOneNode(
+            "someProject", "ref1", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
+    verify(pushResultProcessingMock)
+        .onRefReplicatedToOneNode(
+            "someProject", "ref1", uri2, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
+    verify(pushResultProcessingMock)
+        .onRefReplicatedToOneNode(
+            "someProject", "ref1", uri3, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
+    verify(pushResultProcessingMock)
+        .onRefReplicatedToOneNode(
+            "someProject", "ref2", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
+    verify(pushResultProcessingMock)
+        .onRefReplicatedToOneNode(
+            "someProject", "ref2", uri2, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
+    verify(pushResultProcessingMock).onRefReplicatedToAllNodes("someProject", "ref1", 3);
+    verify(pushResultProcessingMock).onRefReplicatedToAllNodes("someProject", "ref2", 2);
+    verify(pushResultProcessingMock).onAllRefsReplicatedToAllNodes(5);
   }
 
   @Test
   public void shouldFireEventsForReplicationSameRefDifferentProjects() throws URISyntaxException {
-    resetToDefault(pushResultProcessingMock);
     URIish uri = new URIish("git://host1/someRepo.git");
-
-    // expected events
-    pushResultProcessingMock.onRefReplicatedToOneNode(
-        "project1", "ref1", uri, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    pushResultProcessingMock.onRefReplicatedToOneNode(
-        "project2", "ref2", uri, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    pushResultProcessingMock.onRefReplicatedToAllNodes("project1", "ref1", 1);
-    pushResultProcessingMock.onRefReplicatedToAllNodes("project2", "ref2", 1);
-    pushResultProcessingMock.onAllRefsReplicatedToAllNodes(2);
-    replay(pushResultProcessingMock);
 
     // actual test
     replicationState.increasePushTaskCount("project1", "ref1");
@@ -177,24 +162,23 @@ public class ReplicationStateTest {
         "project1", "ref1", uri, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     replicationState.notifyRefReplicated(
         "project2", "ref2", uri, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    verify(pushResultProcessingMock);
+
+    // expected events
+    verify(pushResultProcessingMock)
+        .onRefReplicatedToOneNode(
+            "project1", "ref1", uri, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
+    verify(pushResultProcessingMock)
+        .onRefReplicatedToOneNode(
+            "project2", "ref2", uri, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
+    verify(pushResultProcessingMock).onRefReplicatedToAllNodes("project1", "ref1", 1);
+    verify(pushResultProcessingMock).onRefReplicatedToAllNodes("project2", "ref2", 1);
+    verify(pushResultProcessingMock).onAllRefsReplicatedToAllNodes(2);
   }
 
   @Test
   public void shouldFireEventsWhenSomeReplicationCompleteBeforeAllTasksAreScheduled()
       throws URISyntaxException {
-    resetToDefault(pushResultProcessingMock);
     URIish uri1 = new URIish("git://host1/someRepo.git");
-
-    // expected events
-    pushResultProcessingMock.onRefReplicatedToOneNode(
-        "someProject", "ref1", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    pushResultProcessingMock.onRefReplicatedToOneNode(
-        "someProject", "ref2", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
-    pushResultProcessingMock.onRefReplicatedToAllNodes("someProject", "ref1", 1);
-    pushResultProcessingMock.onRefReplicatedToAllNodes("someProject", "ref2", 1);
-    pushResultProcessingMock.onAllRefsReplicatedToAllNodes(2);
-    replay(pushResultProcessingMock);
 
     // actual test
     replicationState.increasePushTaskCount("someProject", "ref1");
@@ -204,7 +188,17 @@ public class ReplicationStateTest {
     replicationState.notifyRefReplicated(
         "someProject", "ref2", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
     replicationState.markAllPushTasksScheduled();
-    verify(pushResultProcessingMock);
+
+    // expected events
+    verify(pushResultProcessingMock)
+        .onRefReplicatedToOneNode(
+            "someProject", "ref1", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
+    verify(pushResultProcessingMock)
+        .onRefReplicatedToOneNode(
+            "someProject", "ref2", uri1, RefPushResult.SUCCEEDED, RemoteRefUpdate.Status.OK);
+    verify(pushResultProcessingMock).onRefReplicatedToAllNodes("someProject", "ref1", 1);
+    verify(pushResultProcessingMock).onRefReplicatedToAllNodes("someProject", "ref2", 1);
+    verify(pushResultProcessingMock).onAllRefsReplicatedToAllNodes(2);
   }
 
   @Test

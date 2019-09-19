@@ -15,11 +15,10 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.easymock.EasyMock.anyInt;
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.createNiceMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import com.google.common.eventbus.EventBus;
 import com.google.gerrit.server.git.WorkQueue;
@@ -152,13 +151,11 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
   }
 
   private void setupMocks() {
-    replicationQueueMock = createNiceMock(ReplicationQueue.class);
-    expect(replicationQueueMock.isRunning()).andReturn(true);
-    replay(replicationQueueMock);
+    replicationQueueMock = mock(ReplicationQueue.class);
+    when(replicationQueueMock.isRunning()).thenReturn(true);
 
-    workQueueMock = createNiceMock(WorkQueue.class);
-    expect(workQueueMock.createQueue(anyInt(), anyObject(String.class))).andReturn(executorService);
-    replay(workQueueMock);
+    workQueueMock = mock(WorkQueue.class);
+    when(workQueueMock.createQueue(anyInt(), any(String.class))).thenReturn(executorService);
   }
 
   @Test
