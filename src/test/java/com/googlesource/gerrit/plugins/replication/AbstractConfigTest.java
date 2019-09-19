@@ -48,8 +48,7 @@ public abstract class AbstractConfigTest {
   protected ReplicationQueue replicationQueueMock;
   protected WorkQueue workQueueMock;
   protected EventBus eventBus = new EventBus();
-  protected AutoReloadConfigDecoratorTest.FakeExecutorService executorService =
-      new AutoReloadConfigDecoratorTest.FakeExecutorService();
+  protected FakeExecutorService executorService = new FakeExecutorService();
 
   static class FakeDestination extends Destination {
     public final DestinationConfiguration config;
