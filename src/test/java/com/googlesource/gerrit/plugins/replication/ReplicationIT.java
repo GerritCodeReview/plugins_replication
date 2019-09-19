@@ -17,7 +17,6 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.gerrit.testing.GerritJUnit.assertThrows;
 import static java.util.stream.Collectors.toList;
-import static org.easymock.EasyMock.createNiceMock;
 
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
@@ -48,6 +47,8 @@ import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
 import org.junit.Test;
 
@@ -95,7 +96,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
 
-    Project.NameKey sourceProject = projectOperations.newProject().name("foo").create();
+    Project.NameKey sourceProject = createTestProject("foo");
 
     assertThat(listReplicationTasks("refs/meta/config")).hasSize(1);
 
@@ -107,8 +108,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   @Test
   public void shouldReplicateNewChangeRef() throws Exception {
-    Project.NameKey targetProject =
-        projectOperations.newProject().name(project + "replica").create();
+    Project.NameKey targetProject = createTestProject(project + "replica");
 
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
@@ -133,8 +133,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
 
-    Project.NameKey targetProject =
-        projectOperations.newProject().name(project + "replica").create();
+    Project.NameKey targetProject = createTestProject(project + "replica");
     String newBranch = "refs/heads/mybranch";
     String master = "refs/heads/master";
     BranchInput input = new BranchInput();
@@ -156,10 +155,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   @Test
   public void shouldReplicateNewBranchToTwoRemotes() throws Exception {
-    Project.NameKey targetProject1 =
-        projectOperations.newProject().name(project + "replica1").create();
-    Project.NameKey targetProject2 =
-        projectOperations.newProject().name(project + "replica2").create();
+    Project.NameKey targetProject1 = createTestProject(project + "replica1");
+    Project.NameKey targetProject2 = createTestProject(project + "replica2");
 
     setReplicationDestination("foo1", "replica1", ALL_PROJECTS);
     setReplicationDestination("foo2", "replica2", ALL_PROJECTS);
@@ -190,8 +187,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   @Test
   public void shouldCreateIndividualReplicationTasksForEveryRemoteUrlPair() throws Exception {
     List<String> replicaSuffixes = Arrays.asList("replica1", "replica2");
-    projectOperations.newProject().name(project + "replica1").create();
-    projectOperations.newProject().name(project + "replica2").create();
+    createTestProject(project + "replica1");
+    createTestProject(project + "replica2");
 
     setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
     setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
@@ -209,16 +206,33 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   @Test
   public void shouldCreateOneReplicationTaskWhenSchedulingRepoFullSync() throws Exception {
-    projectOperations.newProject().name("replica").create();
+    PushResultProcessing pushResultProcessing =
+        new PushResultProcessing() {
+
+          @Override
+          void onRefReplicatedToOneNode(
+              String project,
+              String ref,
+              URIish uri,
+              ReplicationState.RefPushResult status,
+              RemoteRefUpdate.Status refStatus) {}
+
+          @Override
+          void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {}
+
+          @Override
+          void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {}
+        };
+
+    createTestProject("replica");
 
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
 
-    PushResultProcessing pushResultProcessingMock = createNiceMock(PushResultProcessing.class);
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, new ReplicationState(pushResultProcessingMock), true);
+        .scheduleFullSync(project, null, new ReplicationState(pushResultProcessing), true);
 
     assertThat(listReplicationTasks(".*all.*")).hasSize(1);
   }
@@ -228,8 +242,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
 
-    Project.NameKey targetProject =
-        projectOperations.newProject().name(project + "replica").create();
+    Project.NameKey targetProject = createTestProject(project + "replica");
     String newHead = "refs/heads/newhead";
     String master = "refs/heads/master";
     BranchInput input = new BranchInput();
@@ -249,8 +262,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   @Test
   public void shouldNotDrainTheQueueWhenReloading() throws Exception {
     // Setup repo to replicate
-    Project.NameKey targetProject =
-        projectOperations.newProject().name(project + "replica").create();
+    Project.NameKey targetProject = createTestProject(project + "replica");
     String remoteName = "doNotDrainQueue";
     setReplicationDestination(remoteName, "replica", ALL_PROJECTS);
 
@@ -272,8 +284,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   @Test
   public void shouldDrainTheQueueWhenReloading() throws Exception {
     // Setup repo to replicate
-    Project.NameKey targetProject =
-        projectOperations.newProject().name(project + "replica").create();
+    Project.NameKey targetProject = createTestProject(project + "replica");
     String remoteName = "drainQueue";
     setReplicationDestination(remoteName, "replica", ALL_PROJECTS);
 
@@ -293,6 +304,10 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
       assertThat(targetBranchRef).isNotNull();
       assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
     }
+  }
+
+  private Project.NameKey createTestProject(String name) throws Exception {
+    return projectOperations.newProject().name(name).create();
   }
 
   private Ref getRef(Repository repo, String branchName) throws IOException {

@@ -83,7 +83,6 @@ public class PushOneTest {
   private RefSpec refSpecMock;
   private CredentialsFactory credentialsFactory;
   private PerThreadRequestScope.Scoper threadRequestScoperMock;
-  private ReplicationQueue replicationQueueMock;
   private IdGenerator idGeneratorMock;
   private ReplicationStateListeners replicationStateListenersMock;
   private ReplicationMetrics replicationMetricsMock;
@@ -150,7 +149,6 @@ public class PushOneTest {
     setupFetchConnectionMock();
     setupPushConnectionMock();
     setupRequestScopeMock();
-    replicationQueueMock = createNiceMock(ReplicationQueue.class);
     idGeneratorMock = createNiceMock(IdGenerator.class);
     replicationStateListenersMock = createNiceMock(ReplicationStateListeners.class);
 
@@ -172,7 +170,6 @@ public class PushOneTest {
         remoteConfigMock,
         credentialsFactory,
         threadRequestScoperMock,
-        replicationQueueMock,
         idGeneratorMock,
         replicationStateListenersMock,
         replicationMetricsMock,
