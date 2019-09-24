@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efc4602_34877c65",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-24T14:27:30Z",
+      "side": 1,
+      "message": "Use:\n\n Objects.hash(projectName, refName);\n\nObjects.hash already provides the best-practice hashCode implementation.",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 20
+      },
+      "revId": "cdae3482425dbb7589c46a1cb1ff7f59fa26a567",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f64678b_cdd25347",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-24T14:27:30Z",
+      "side": 1,
+      "message": "Use Objects.equals it covers the null checks and is the standard idiom used in Gerrit\u0027s source code:\n\n  return (obj instanceof ReferenceUpdatedEvent)\n      \u0026\u0026 Objects.equals(projectName, ((ReferenceUpdatedEvent) obj).projectName)\n      \u0026\u0026 Objects.equals(refName, ((ReferenceUpdatedEvent) obj).refName);",
+      "range": {
+        "startLine": 351,
+        "startChar": 0,
+        "endLine": 361,
+        "endChar": 18
+      },
+      "revId": "cdae3482425dbb7589c46a1cb1ff7f59fa26a567",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
