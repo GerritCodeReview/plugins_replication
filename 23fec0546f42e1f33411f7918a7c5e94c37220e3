@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8f9949dd_d36452c8",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T10:30:24Z",
+      "side": 1,
+      "message": "Ok I\u0027ve created separate class and we are going to combine them on stable-2.16",
+      "parentUuid": "c4709c67_604331b3",
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35946178_b13fa88a",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 5
@@ -87,6 +105,24 @@
       "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79399745_5e18b0d4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T10:30:24Z",
+      "side": 1,
+      "message": "Ok I\u0027ve created separate class and we are going to combine them on stable-2.16",
+      "parentUuid": "017a4a1c_721d8bf3",
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -172,6 +208,30 @@
     },
     {
       "key": {
+        "uuid": "de376003_465f0c66",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T10:30:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfd08c53_8208cf71",
+      "range": {
+        "startLine": 71,
+        "startChar": 36,
+        "endLine": 71,
+        "endChar": 53
+      },
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "faf16e90_42efb859",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 5
@@ -216,6 +276,30 @@
       "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26dd20f5_6d9cd2a6",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T10:30:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b017822_0d85db35",
+      "range": {
+        "startLine": 111,
+        "startChar": 55,
+        "endLine": 111,
+        "endChar": 79
+      },
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
