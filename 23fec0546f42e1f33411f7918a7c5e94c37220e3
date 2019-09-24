@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "154bdcec_b530dc00",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T10:12:12Z",
+      "side": 1,
+      "message": "I wanted to merge it together it\u0027s just one test and it can use all the setup from ReplicationIt from stable-2.16(tbh I\u0027ve started with writing this test there)",
+      "parentUuid": "4574f405_939eefc2",
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35946178_b13fa88a",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2019-09-24T09:40:34Z",
       "side": 1,
       "message": "nit: normally the logger is declared before anything else. Just check the Gerrit\u0027s code base.",
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "017a4a1c_721d8bf3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T10:12:12Z",
+      "side": 1,
+      "message": "Yes I agree but :) again this is code which I\u0027ve copied from stable-2.16 so to keep minimal change I\u0027ve just added my test trying to keep all the setup as it was to make merge as simple as possible. But I\u0027m fine with doing this clean up here resolve it during the merge. WDYT?",
+      "parentUuid": "35946178_b13fa88a",
       "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5a0fc14f_832a1385",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T10:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcef5a31_6fe6721c",
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcb948bc_70966d3d",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 5
@@ -64,6 +118,30 @@
       "writtenOn": "2019-09-24T09:40:34Z",
       "side": 1,
       "message": "createProject\n\nand then remove the createTestProject method as it is only used from here and is a one-liner",
+      "range": {
+        "startLine": 71,
+        "startChar": 36,
+        "endLine": 71,
+        "endChar": 53
+      },
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfd08c53_8208cf71",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T10:12:12Z",
+      "side": 1,
+      "message": "same as above this is what we have in stable-2.16",
+      "parentUuid": "fcb948bc_70966d3d",
       "range": {
         "startLine": 71,
         "startChar": 36,
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "9b017822_0d85db35",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T10:12:12Z",
+      "side": 1,
+      "message": "same as above this the code which we have in stable-2.16 happy to refactor it. WDYT?",
+      "parentUuid": "faf16e90_42efb859",
+      "range": {
+        "startLine": 111,
+        "startChar": 55,
+        "endLine": 111,
+        "endChar": 79
+      },
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d48c9f50_312ef21b",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 5
@@ -113,6 +215,24 @@
       "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82a804b1_e063c757",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T10:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d48c9f50_312ef21b",
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
