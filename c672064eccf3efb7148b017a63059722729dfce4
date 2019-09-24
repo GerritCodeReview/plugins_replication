@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "fc5d1de6_cde969b9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-24T15:14:22Z",
+      "side": 1,
+      "message": "\u003e I agree but this code will not compile without refactoring. We have to keep projectName/refName pair instead of Event. We can do it in two ways by keeping concatenated string or by introducing this small class.\n\nThat is a good reason for *NOT* following the general rule :-)",
+      "parentUuid": "c004e945_a099b818",
+      "range": {
+        "startLine": 324,
+        "startChar": 23,
+        "endLine": 324,
+        "endChar": 44
+      },
+      "revId": "c672064eccf3efb7148b017a63059722729dfce4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35b1baa5_5c99925a",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationQueueIT.java",
         "patchSetId": 2
