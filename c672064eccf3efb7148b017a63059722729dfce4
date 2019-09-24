@@ -16,6 +16,24 @@
       "revId": "c672064eccf3efb7148b017a63059722729dfce4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6331df05_ce2d00c4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T14:50:27Z",
+      "side": 1,
+      "message": "You are right AutoValue would work here, I wanted to just make it mergeable and later do the proper refactoring. But if you are fine with that I can replace it with autovalue version. WDYT?",
+      "parentUuid": "b49e4b36_f53f5869",
+      "revId": "c672064eccf3efb7148b017a63059722729dfce4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
