@@ -81,6 +81,86 @@
       "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5afb6e3a_40fb78b9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-24T08:50:00Z",
+      "side": 1,
+      "message": "I see that that order of the fields here and in the constructor are not identical\nbut would still propose to move this line between below 77 or 78. Another reason\nis that this value is not injected and we normally first declare injected fields and\nthen the other fields.",
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9ac2ae9_4efa88fc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-24T08:50:00Z",
+      "side": 1,
+      "message": "replication",
+      "range": {
+        "startLine": 138,
+        "startChar": 67,
+        "endLine": 138,
+        "endChar": 83
+      },
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bba4ee7_0d88659a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-24T08:50:00Z",
+      "side": 1,
+      "message": "postponed",
+      "range": {
+        "startLine": 138,
+        "startChar": 87,
+        "endLine": 138,
+        "endChar": 95
+      },
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "587ab5fc_fca9ed0d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-24T08:50:00Z",
+      "side": 1,
+      "message": "The fireBeforeStartupEvents method is called when this queue is up and running.\nHowever, here we call the onGitReferenceUpdated method which is a public method and\ncontains a check for the running flag. Once we are here we do not need this check again, right?\n\nFurther, because of this call you need to keep the whole GitReferenceUpdatedListener.Event objects in the beforeStartupEventsQueue and then here you need to collect the projections\nof the events onto the projectname:refname plane in order to avoid scheduling twice for the\nsame eventKey. The part of the onGitReferenceUpdated method only really needs the\n(projectname, refname) in order to schedule the replication. Therefore, we can keep\njust this pair in the beforeStartupEventsQueue (actually it should then become a Set in\norder to automatically filter out duplicates) and then we do not need the eventsReplayed\nhere any more.",
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
