@@ -34,6 +34,23 @@
       "revId": "c672064eccf3efb7148b017a63059722729dfce4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35b1baa5_5c99925a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationQueueIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-24T14:54:35Z",
+      "side": 1,
+      "message": "This should be done as a follow-up change after the merge.",
+      "revId": "c672064eccf3efb7148b017a63059722729dfce4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
