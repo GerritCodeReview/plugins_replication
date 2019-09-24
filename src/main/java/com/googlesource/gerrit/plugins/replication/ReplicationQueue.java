@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Queues;
 import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
@@ -33,6 +34,7 @@ import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Queue;
 import java.util.Set;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Constants;
@@ -73,6 +75,7 @@ public class ReplicationQueue
   private final ReplicationConfig config;
   private final GerritSshApi gerritAdmin;
   private volatile boolean running;
+  private final Queue<GitReferenceUpdatedListener.Event> beforeStartupEventsQueue;
 
   @Inject
   ReplicationQueue(
@@ -88,12 +91,14 @@ public class ReplicationQueue
     config = rc;
     stateLog = sl;
     gerritAdmin = ga;
+    beforeStartupEventsQueue = Queues.newConcurrentLinkedQueue();
   }
 
   @Override
   public void start() {
     config.startup(workQueue);
     running = true;
+    fireBeforeStartupEvents();
   }
 
   @Override
@@ -129,7 +134,10 @@ public class ReplicationQueue
   public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
     ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
     if (!running) {
-      stateLog.warn("Replication plugin did not finish startup before event", state);
+      stateLog.warn(
+          "Replication plugin did not finish startup before event, event replication is postponed",
+          state);
+      beforeStartupEventsQueue.add(event);
       return;
     }
 
@@ -165,6 +173,18 @@ public class ReplicationQueue
     Project.NameKey project = new Project.NameKey(event.getProjectName());
     for (URIish uri : getURIs(project, FilterType.ALL)) {
       updateHead(uri, project, event.getNewHeadName());
+    }
+  }
+
+  private void fireBeforeStartupEvents() {
+    Set<String> eventsReplayed = new HashSet<>();
+    for (GitReferenceUpdatedListener.Event event : beforeStartupEventsQueue) {
+      String eventKey = String.format("%s:%s", event.getProjectName(), event.getRefName());
+      if (!eventsReplayed.contains(eventKey)) {
+        repLog.info("Firing pending task {}", event);
+        onGitReferenceUpdated(event);
+        eventsReplayed.add(eventKey);
+      }
     }
   }
 
