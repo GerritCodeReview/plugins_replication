@@ -18,7 +18,9 @@ import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerr
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isSSH;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Objects;
 import com.google.common.base.Strings;
+import com.google.common.collect.Queues;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
@@ -36,6 +38,7 @@ import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.Queue;
 import java.util.Set;
 import org.eclipse.jgit.transport.URIish;
 import org.slf4j.Logger;
@@ -71,6 +74,7 @@ public class ReplicationQueue
   private final ReplicationTasksStorage replicationTasksStorage;
   private volatile boolean running;
   private volatile boolean replaying;
+  private final Queue<ReferenceUpdatedEvent> beforeStartupEventsQueue;
 
   @Inject
   ReplicationQueue(
@@ -86,6 +90,7 @@ public class ReplicationQueue
     stateLog = sl;
     adminApiFactory = aaf;
     replicationTasksStorage = rts;
+    beforeStartupEventsQueue = Queues.newConcurrentLinkedQueue();
   }
 
   @Override
@@ -94,6 +99,7 @@ public class ReplicationQueue
       config.startup(workQueue);
       running = true;
       firePendingEvents();
+      fireBeforeStartupEvents();
     }
   }
 
@@ -146,7 +152,10 @@ public class ReplicationQueue
   private void onGitReferenceUpdated(String projectName, String refName) {
     ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
     if (!running) {
-      stateLog.warn("Replication plugin did not finish startup before event", state);
+      stateLog.warn(
+          "Replication plugin did not finish startup before event, event replication is postponed",
+          state);
+      beforeStartupEventsQueue.add(new ReferenceUpdatedEvent(projectName, refName));
       return;
     }
 
@@ -193,6 +202,18 @@ public class ReplicationQueue
     Project.NameKey project = new Project.NameKey(event.getProjectName());
     for (URIish uri : getURIs(null, project, FilterType.ALL)) {
       updateHead(uri, project, event.getNewHeadName());
+    }
+  }
+
+  private void fireBeforeStartupEvents() {
+    Set<String> eventsReplayed = new HashSet<>();
+    for (ReferenceUpdatedEvent event : beforeStartupEventsQueue) {
+      String eventKey = String.format("%s:%s", event.getProjectName(), event.getRefName());
+      if (!eventsReplayed.contains(eventKey)) {
+        repLog.info("Firing pending task {}", event);
+        onGitReferenceUpdated(event.getProjectName(), event.getRefName());
+        eventsReplayed.add(eventKey);
+      }
     }
   }
 
@@ -298,5 +319,35 @@ public class ReplicationQueue
 
   private void warnCannotPerform(String op, URIish uri) {
     repLog.warn("Cannot {} on remote site {}.", op, uri);
+  }
+
+  private static class ReferenceUpdatedEvent {
+    private String projectName;
+    private String refName;
+
+    public ReferenceUpdatedEvent(String projectName, String refName) {
+      this.projectName = projectName;
+      this.refName = refName;
+    }
+
+    public String getProjectName() {
+      return projectName;
+    }
+
+    public String getRefName() {
+      return refName;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hashCode(projectName, refName);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      return (obj instanceof ReferenceUpdatedEvent)
+          && Objects.equal(projectName, ((ReferenceUpdatedEvent) obj).projectName)
+          && Objects.equal(refName, ((ReferenceUpdatedEvent) obj).refName);
+    }
   }
 }
