@@ -119,6 +119,52 @@
     },
     {
       "key": {
+        "uuid": "fbda0d80_d101d788",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-24T09:22:15Z",
+      "side": 1,
+      "message": "Why is this a queue? It should rather be a Set IMHO.\nIf the startup takes 30 secs and you receive 5 identical ref-update events on the same repo/ref, then you should only trigger 1 ref-update event.",
+      "range": {
+        "startLine": 74,
+        "startChar": 16,
+        "endLine": 74,
+        "endChar": 21
+      },
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a980f07_dcf4ab65",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-24T09:22:15Z",
+      "side": 1,
+      "message": "Why should be a concurrent linked queue? What type of concurrency are you expecting?",
+      "range": {
+        "startLine": 94,
+        "startChar": 38,
+        "endLine": 94,
+        "endChar": 62
+      },
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a9ac2ae9_4efa88fc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 3
@@ -281,6 +327,24 @@
       "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "366f7366_8bf0ca20",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-24T09:22:15Z",
+      "side": 1,
+      "message": "I would avoid refactoring the code in a stable branch: we should keep a consistent approach and to bug-fixing on stable branches and refactoring on master.\n\nWorst case, refactoring should be done on the latest stable (stable-3.0) to avoid all the potential merging issues upstream.",
+      "parentUuid": "aa8366bd_0ff75232",
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
