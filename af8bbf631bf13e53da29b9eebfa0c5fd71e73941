@@ -101,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "6beee71e_6dca021c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T09:07:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5afb6e3a_40fb78b9",
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a9ac2ae9_4efa88fc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 3
@@ -147,6 +165,54 @@
     },
     {
       "key": {
+        "uuid": "57e005ed_886f9836",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T09:07:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9ac2ae9_4efa88fc",
+      "range": {
+        "startLine": 138,
+        "startChar": 67,
+        "endLine": 138,
+        "endChar": 83
+      },
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97a65bb4_99fea897",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T09:07:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bba4ee7_0d88659a",
+      "range": {
+        "startLine": 138,
+        "startChar": 87,
+        "endLine": 138,
+        "endChar": 95
+      },
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "587ab5fc_fca9ed0d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 3
@@ -158,6 +224,24 @@
       "writtenOn": "2019-09-24T08:50:00Z",
       "side": 1,
       "message": "The fireBeforeStartupEvents method is called when this queue is up and running.\nHowever, here we call the onGitReferenceUpdated method which is a public method and\ncontains a check for the running flag. Once we are here we do not need this check again, right?\n\nFurther, because of this call you need to keep the whole GitReferenceUpdatedListener.Event objects in the beforeStartupEventsQueue and then here you need to collect the projections\nof the events onto the projectname:refname plane in order to avoid scheduling twice for the\nsame eventKey. The part of the onGitReferenceUpdated method only really needs the\n(projectname, refname) in order to schedule the replication. Therefore, we can keep\njust this pair in the beforeStartupEventsQueue (actually it should then become a Set in\norder to automatically filter out duplicates) and then we do not need the eventsReplayed\nhere any more.",
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97119e07_b125c6e9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T09:07:39Z",
+      "side": 1,
+      "message": "Yes you are right I saw that already in stable-2.16 for draining queue. I wanted to keep my change minimal that\u0027s why I\u0027ve decided to not change signature of onGitReferenceUpdated(currently it accepts Event object). If you are fine with doing some refactoring I\u0027m happy to do that but have in mind that it\u0027s already done in stable-2.16 so merge will be more complex and probably my refactoring will be discarded anyway.",
+      "parentUuid": "587ab5fc_fca9ed0d",
       "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
