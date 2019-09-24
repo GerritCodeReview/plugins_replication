@@ -263,6 +263,24 @@
       "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f7aeb76_a84183f1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T09:18:48Z",
+      "side": 1,
+      "message": "Sounds great to me :)",
+      "parentUuid": "aa8366bd_0ff75232",
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
