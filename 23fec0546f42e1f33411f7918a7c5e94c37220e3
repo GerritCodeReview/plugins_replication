@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4574f405_939eefc2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-24T10:00:03Z",
+      "side": 1,
+      "message": "The name would at 100% conflict with the merging upstream: can you give a different file name?",
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35946178_b13fa88a",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 5

@@ -214,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "414f9b00_f02a6a06",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-24T10:00:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c5b72203_90f7308b",
+      "range": {
+        "startLine": 74,
+        "startChar": 16,
+        "endLine": 74,
+        "endChar": 21
+      },
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a980f07_dcf4ab65",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 3
@@ -297,6 +321,30 @@
       "side": 1,
       "message": "What\u0027s the benefit of using synchronized block instead of concurrent queue?",
       "parentUuid": "ee2caab6_c7a59352",
+      "range": {
+        "startLine": 94,
+        "startChar": 38,
+        "endLine": 94,
+        "endChar": 62
+      },
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a30a174_455d8ee0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-24T10:00:03Z",
+      "side": 1,
+      "message": "synchronized() makes sense if you make it a Set: you need to scan for existing items and thus block the whole set.\n\nIf you keep it as a queue, no need to synchronize it. However, you need to convert the queue into a Set, de-duplicate and then replay.",
+      "parentUuid": "80bd0eff_9dd57eb7",
       "range": {
         "startLine": 94,
         "startChar": 38,
