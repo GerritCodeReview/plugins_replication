@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35946178_b13fa88a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-24T09:40:34Z",
+      "side": 1,
+      "message": "nit: normally the logger is declared before anything else. Just check the Gerrit\u0027s code base.",
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcef5a31_6fe6721c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-24T09:40:34Z",
+      "side": 1,
+      "message": "Is this necessary?\nThe setReplicationDestination will anyway save the configuration (again).",
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcb948bc_70966d3d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-24T09:40:34Z",
+      "side": 1,
+      "message": "createProject\n\nand then remove the createTestProject method as it is only used from here and is a one-liner",
+      "range": {
+        "startLine": 71,
+        "startChar": 36,
+        "endLine": 71,
+        "endChar": 53
+      },
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faf16e90_42efb859",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-24T09:40:34Z",
+      "side": 1,
+      "message": "Following all the callers of this method, the only value that it ever passed here is Optional.empty().\nRemove this parameter and, consequently, remove it from the line 106, remove the line 120\nand remove the ALL_PROJECTS constant.",
+      "range": {
+        "startLine": 111,
+        "startChar": 55,
+        "endLine": 111,
+        "endChar": 79
+      },
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d48c9f50_312ef21b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-24T09:40:34Z",
+      "side": 1,
+      "message": "There is nothing wrong with this line but it is the only place in the\nGerrit+core-plugins code where this idiom is used. All other places use:\n\n  Thread.sleep(...);\n\nIf you want to stay with the code as-is then at lease import the TimeUnit or MILLISECONDS\nand remove the package name from this line.",
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}

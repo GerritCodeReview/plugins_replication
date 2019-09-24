@@ -142,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "d3146114_f33e81e6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-24T09:40:34Z",
+      "side": 1,
+      "message": "Luca see my comment about that below (line 185)",
+      "parentUuid": "fbda0d80_d101d788",
+      "range": {
+        "startLine": 74,
+        "startChar": 16,
+        "endLine": 74,
+        "endChar": 21
+      },
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a980f07_dcf4ab65",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 3
@@ -153,6 +177,30 @@
       "writtenOn": "2019-09-24T09:22:15Z",
       "side": 1,
       "message": "Why should be a concurrent linked queue? What type of concurrency are you expecting?",
+      "range": {
+        "startLine": 94,
+        "startChar": 38,
+        "endLine": 94,
+        "endChar": 62
+      },
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e16d821_c9cd1b0e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-24T09:40:34Z",
+      "side": 1,
+      "message": "\u003e Why should be a concurrent linked queue? What type of concurrency are you expecting?\n\nfor example: two concurrent requests updating two git refs. In this case we would have\ntwo concurrent calls to the onGitReferenceUpdated method which will both update the beforeStartupEventsQueue",
+      "parentUuid": "0a980f07_dcf4ab65",
       "range": {
         "startLine": 94,
         "startChar": 38,
