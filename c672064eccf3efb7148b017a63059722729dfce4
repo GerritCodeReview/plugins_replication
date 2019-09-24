@@ -37,6 +37,29 @@
     },
     {
       "key": {
+        "uuid": "38aed701_f63ca686",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-24T14:56:02Z",
+      "side": 1,
+      "message": "Is this class strictly needed for the merge? Can this be done in a follow-up change and put into the same topic?\n\nWe should not introduce any refactoring or improvement as part of the merge, unless is absolutely needed.",
+      "range": {
+        "startLine": 324,
+        "startChar": 23,
+        "endLine": 324,
+        "endChar": 44
+      },
+      "revId": "c672064eccf3efb7148b017a63059722729dfce4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35b1baa5_5c99925a",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationQueueIT.java",
         "patchSetId": 2
