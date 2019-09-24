@@ -285,6 +285,30 @@
     },
     {
       "key": {
+        "uuid": "80bd0eff_9dd57eb7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T09:53:49Z",
+      "side": 1,
+      "message": "What\u0027s the benefit of using synchronized block instead of concurrent queue?",
+      "parentUuid": "ee2caab6_c7a59352",
+      "range": {
+        "startLine": 94,
+        "startChar": 38,
+        "endLine": 94,
+        "endChar": 62
+      },
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a9ac2ae9_4efa88fc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 3
