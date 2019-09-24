@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "c5b72203_90f7308b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T09:48:58Z",
+      "side": 1,
+      "message": "Without refactoring we have to keep GitReferenceUpdatedListener.Event and this class doesn\u0027t override equals and hashcode so using set is pointless for now.  Implementing it as a queue is just a simplest and most elegant way. To make sure that we are not triggering multiple events for the same repo I\u0027m using similar concept as in draining queue in stable-2.16, I have a set where I keep \"project name\":\"ref name pair\". In stable-2.16 we already have refactoring which enables us to keep this pair instead of Event instance.",
+      "parentUuid": "fbda0d80_d101d788",
+      "range": {
+        "startLine": 74,
+        "startChar": 16,
+        "endLine": 74,
+        "endChar": 21
+      },
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a980f07_dcf4ab65",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 3
@@ -438,6 +462,24 @@
       "side": 1,
       "message": "I would avoid refactoring the code in a stable branch: we should keep a consistent approach and to bug-fixing on stable branches and refactoring on master.\n\nWorst case, refactoring should be done on the latest stable (stable-3.0) to avoid all the potential merging issues upstream.",
       "parentUuid": "aa8366bd_0ff75232",
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c070b683_df34a0de",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T09:48:58Z",
+      "side": 1,
+      "message": "Yes and a lot of work mentioned before is done together with fixing the issue for draining events",
+      "parentUuid": "366f7366_8bf0ca20",
       "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
