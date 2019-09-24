@@ -381,6 +381,30 @@
     },
     {
       "key": {
+        "uuid": "eaf2bae9_32f85b2a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-24T12:24:26Z",
+      "side": 1,
+      "message": "OK, let fix and merge this up to stable-3.0: then we\u0027ll need to tidy this up a bit.",
+      "parentUuid": "fdae3705_39d87e08",
+      "range": {
+        "startLine": 94,
+        "startChar": 38,
+        "endLine": 94,
+        "endChar": 62
+      },
+      "revId": "af8bbf631bf13e53da29b9eebfa0c5fd71e73941",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a9ac2ae9_4efa88fc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 3
