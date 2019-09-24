@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "c4709c67_604331b3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-24T10:13:57Z",
+      "side": 1,
+      "message": "Hmm but you are right maybe it\u0027s easier to create separate test class here and then combine it on stable-2.16. WDYT?",
+      "parentUuid": "154bdcec_b530dc00",
+      "revId": "23fec0546f42e1f33411f7918a7c5e94c37220e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35946178_b13fa88a",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 5
