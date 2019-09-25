@@ -14,8 +14,8 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.auto.value.AutoValue;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Objects;
 import com.google.common.collect.Queues;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
@@ -133,7 +133,7 @@ public class ReplicationQueue
       stateLog.warn(
           "Replication plugin did not finish startup before event, event replication is postponed",
           state);
-      beforeStartupEventsQueue.add(new ReferenceUpdatedEvent(projectName, refName));
+      beforeStartupEventsQueue.add(ReferenceUpdatedEvent.create(projectName, refName));
       return;
     }
 
@@ -185,42 +185,24 @@ public class ReplicationQueue
   private void fireBeforeStartupEvents() {
     Set<String> eventsReplayed = new HashSet<>();
     for (ReferenceUpdatedEvent event : beforeStartupEventsQueue) {
-      String eventKey = String.format("%s:%s", event.getProjectName(), event.getRefName());
+      String eventKey = String.format("%s:%s", event.projectName(), event.refName());
       if (!eventsReplayed.contains(eventKey)) {
         repLog.info("Firing pending task {}", event);
-        onGitReferenceUpdated(event.getProjectName(), event.getRefName());
+        onGitReferenceUpdated(event.projectName(), event.refName());
         eventsReplayed.add(eventKey);
       }
     }
   }
 
-  private static class ReferenceUpdatedEvent {
-    private String projectName;
-    private String refName;
+  @AutoValue
+  abstract static class ReferenceUpdatedEvent {
 
-    public ReferenceUpdatedEvent(String projectName, String refName) {
-      this.projectName = projectName;
-      this.refName = refName;
+    static ReferenceUpdatedEvent create(String projectName, String refName) {
+      return new AutoValue_ReplicationQueue_ReferenceUpdatedEvent(projectName, refName);
     }
 
-    public String getProjectName() {
-      return projectName;
-    }
+    public abstract String projectName();
 
-    public String getRefName() {
-      return refName;
-    }
-
-    @Override
-    public int hashCode() {
-      return Objects.hashCode(projectName, refName);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-      return (obj instanceof ReferenceUpdatedEvent)
-          && Objects.equal(projectName, ((ReferenceUpdatedEvent) obj).projectName)
-          && Objects.equal(refName, ((ReferenceUpdatedEvent) obj).refName);
-    }
+    public abstract String refName();
   }
 }
