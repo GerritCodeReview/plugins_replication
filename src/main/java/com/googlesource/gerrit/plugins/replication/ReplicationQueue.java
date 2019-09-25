@@ -16,7 +16,6 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.Queues;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
@@ -30,8 +29,9 @@ import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdat
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Optional;
-import java.util.Queue;
 import java.util.Set;
 import org.eclipse.jgit.transport.URIish;
 import org.slf4j.Logger;
@@ -54,7 +54,7 @@ public class ReplicationQueue
   private final ReplicationTasksStorage replicationTasksStorage;
   private volatile boolean running;
   private volatile boolean replaying;
-  private final Queue<ReferenceUpdatedEvent> beforeStartupEventsQueue;
+  private final Set<ReferenceUpdatedEvent> beforeStartupEventsSet;
 
   @Inject
   ReplicationQueue(
@@ -68,7 +68,7 @@ public class ReplicationQueue
     config = rc;
     stateLog = sl;
     replicationTasksStorage = rts;
-    beforeStartupEventsQueue = Queues.newConcurrentLinkedQueue();
+    beforeStartupEventsSet = new LinkedHashSet<>();
   }
 
   @Override
@@ -133,10 +133,16 @@ public class ReplicationQueue
       stateLog.warn(
           "Replication plugin did not finish startup before event, event replication is postponed",
           state);
-      beforeStartupEventsQueue.add(ReferenceUpdatedEvent.create(projectName, refName));
+      synchronized (beforeStartupEventsSet) {
+        beforeStartupEventsSet.add(ReferenceUpdatedEvent.create(projectName, refName));
+      }
       return;
     }
 
+    scheduleReferenceUpdate(projectName, refName, state);
+  }
+
+  private void scheduleReferenceUpdate(String projectName, String refName, ReplicationState state) {
     Project.NameKey project = new Project.NameKey(projectName);
     for (Destination cfg : config.getDestinations(FilterType.ALL)) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
@@ -159,7 +165,8 @@ public class ReplicationQueue
         String eventKey = String.format("%s:%s", t.project, t.ref);
         if (!eventsReplayed.contains(eventKey)) {
           repLog.info("Firing pending task {}", eventKey);
-          onGitReferenceUpdated(t.project, t.ref);
+          ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
+          scheduleReferenceUpdate(t.project, t.ref, state);
           eventsReplayed.add(eventKey);
         }
       }
@@ -183,13 +190,14 @@ public class ReplicationQueue
   }
 
   private void fireBeforeStartupEvents() {
-    Set<String> eventsReplayed = new HashSet<>();
-    for (ReferenceUpdatedEvent event : beforeStartupEventsQueue) {
-      String eventKey = String.format("%s:%s", event.projectName(), event.refName());
-      if (!eventsReplayed.contains(eventKey)) {
+    synchronized (beforeStartupEventsSet) {
+      for (Iterator<ReferenceUpdatedEvent> eventsIter = beforeStartupEventsSet.iterator();
+          eventsIter.hasNext(); ) {
+        ReferenceUpdatedEvent event = eventsIter.next();
         repLog.info("Firing pending task {}", event);
-        onGitReferenceUpdated(event.projectName(), event.refName());
-        eventsReplayed.add(eventKey);
+        ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
+        scheduleReferenceUpdate(event.projectName(), event.refName(), state);
+        eventsIter.remove();
       }
     }
   }
