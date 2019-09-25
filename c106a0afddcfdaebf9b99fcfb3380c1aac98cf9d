@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70ede0de_9474ba27",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-25T20:18:18Z",
+      "side": 1,
+      "message": "Needs to be synchronized.",
+      "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24814dae_c39774a0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-25T20:18:18Z",
+      "side": 1,
+      "message": "We do we need this?",
+      "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
