@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9e268f70_3365b5d9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-25T21:25:59Z",
+      "side": 1,
+      "message": "It\u0027s a synchronized set so all the operations are thread safe we need to use synchronized block only for iteration:\nhttps://docs.oracle.com/javase/7/docs/api/java/util/Collections.html#synchronizedSet(java.util.Set)\n\nMore detailed explanation:\nhttps://www.baeldung.com/java-synchronized-collections\n\nSynchronized collections achieve thread-safety through intrinsic locking, and the entire collections are locked. Intrinsic locking is implemented via synchronized blocks within the wrapped collection\u0027s methods.\n\nAs we might expect, synchronized collections assure data consistency/integrity in multi-threaded environments. However, they might come with a penalty in performance, as only one single thread can access the collection at a time (a.k.a. synchronized access).",
+      "parentUuid": "70ede0de_9474ba27",
+      "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "24814dae_c39774a0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2019-09-25T20:18:18Z",
       "side": 1,
       "message": "We do we need this?",
+      "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e86ca3b_af35f798",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-09-25T21:25:59Z",
+      "side": 1,
+      "message": "we have to remove events from the Set when we schedule them, we can do it in that way or after iteration we can do beforeStartupEventsSet.clean(). Second option is all or nothing, currently we are removing events one by one when they are processed",
+      "parentUuid": "24814dae_c39774a0",
       "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
