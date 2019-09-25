@@ -306,6 +306,36 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     }
   }
 
+  @Test
+  public void shouldNotDropEventsWhenStarting() throws Exception {
+    Project.NameKey targetProject = createTestProject(project + "replica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    replicationQueueStop();
+    Result pushResult = createChange();
+    replicationQueueStart();
+
+    RevCommit sourceCommit = pushResult.getCommit();
+    String sourceRef = pushResult.getPatchSet().getRefName();
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
+      Ref targetBranchRef = getRef(repo, sourceRef);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
+    }
+  }
+
+  private void replicationQueueStart() {
+    plugin.getSysInjector().getInstance(ReplicationQueue.class).start();
+  }
+
+  private void replicationQueueStop() {
+    plugin.getSysInjector().getInstance(ReplicationQueue.class).stop();
+  }
+
   private Project.NameKey createTestProject(String name) throws Exception {
     return projectOperations.newProject().name(name).create();
   }
