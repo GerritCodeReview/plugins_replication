@@ -16,7 +16,6 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.Queues;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
@@ -30,8 +29,9 @@ import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdat
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Optional;
-import java.util.Queue;
 import java.util.Set;
 import org.eclipse.jgit.transport.URIish;
 import org.slf4j.Logger;
@@ -54,7 +54,7 @@ public class ReplicationQueue
   private final ReplicationTasksStorage replicationTasksStorage;
   private volatile boolean running;
   private volatile boolean replaying;
-  private final Queue<ReferenceUpdatedEvent> beforeStartupEventsQueue;
+  private final Set<ReferenceUpdatedEvent> beforeStartupEventsSet;
 
   @Inject
   ReplicationQueue(
@@ -68,9 +68,29 @@ public class ReplicationQueue
     config = rc;
     stateLog = sl;
     replicationTasksStorage = rts;
-    beforeStartupEventsQueue = Queues.newConcurrentLinkedQueue();
+    beforeStartupEventsSet = new LinkedHashSet<>();
   }
 
+  /**
+   * During the startup replication queue is in the following states:
+   *
+   * <p>1. Not running - queue is not scheduling any replication tasks, all events coming to the
+   * queue are going to be persisted in memory and replayed when queue is in the 'Replaying and
+   * running' state.
+   *
+   * <p>2. Replaying and running - in this state queue is accepting new events but it is also
+   * replaying two types of objects:
+   *
+   * <ul>
+   *   <li>Replication task persisted on disk - this is a non blocking operation, new events coming
+   *       to the queue during the replay are scheduled in real-time.
+   *   <li>Events stored in memory during the 'Not running' state - this is a blocking operation.
+   *       New events scheduling will wait until this replay is finished.
+   * </ul>
+   *
+   * <p>3. Running - all events are replayed, queue is up to date, scheduling of new events is in
+   * real-time.
+   */
   @Override
   public void start() {
     if (!running) {
@@ -129,14 +149,20 @@ public class ReplicationQueue
 
   private void onGitReferenceUpdated(String projectName, String refName) {
     ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
-    if (!running) {
-      stateLog.warn(
-          "Replication plugin did not finish startup before event, event replication is postponed",
-          state);
-      beforeStartupEventsQueue.add(ReferenceUpdatedEvent.create(projectName, refName));
-      return;
+    synchronized (beforeStartupEventsSet) {
+      if (!running) {
+        stateLog.warn(
+            "Replication plugin did not finish startup before event, event replication is postponed",
+            state);
+        beforeStartupEventsSet.add(ReferenceUpdatedEvent.create(projectName, refName));
+        return;
+      }
     }
 
+    scheduleReferenceUpdate(projectName, refName, state);
+  }
+
+  private void scheduleReferenceUpdate(String projectName, String refName, ReplicationState state) {
     Project.NameKey project = new Project.NameKey(projectName);
     for (Destination cfg : config.getDestinations(FilterType.ALL)) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
@@ -159,7 +185,8 @@ public class ReplicationQueue
         String eventKey = String.format("%s:%s", t.project, t.ref);
         if (!eventsReplayed.contains(eventKey)) {
           repLog.info("Firing pending task {}", eventKey);
-          onGitReferenceUpdated(t.project, t.ref);
+          ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
+          scheduleReferenceUpdate(t.project, t.ref, state);
           eventsReplayed.add(eventKey);
         }
       }
@@ -183,13 +210,14 @@ public class ReplicationQueue
   }
 
   private void fireBeforeStartupEvents() {
-    Set<String> eventsReplayed = new HashSet<>();
-    for (ReferenceUpdatedEvent event : beforeStartupEventsQueue) {
-      String eventKey = String.format("%s:%s", event.projectName(), event.refName());
-      if (!eventsReplayed.contains(eventKey)) {
+    synchronized (beforeStartupEventsSet) {
+      for (Iterator<ReferenceUpdatedEvent> eventsIter = beforeStartupEventsSet.iterator();
+          eventsIter.hasNext(); ) {
+        ReferenceUpdatedEvent event = eventsIter.next();
         repLog.info("Firing pending task {}", event);
-        onGitReferenceUpdated(event.projectName(), event.refName());
-        eventsReplayed.add(eventKey);
+        ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
+        scheduleReferenceUpdate(event.projectName(), event.refName(), state);
+        eventsIter.remove();
       }
     }
   }
