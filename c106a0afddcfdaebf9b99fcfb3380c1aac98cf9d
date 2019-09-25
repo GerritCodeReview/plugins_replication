@@ -37,6 +37,47 @@
     },
     {
       "key": {
+        "uuid": "8502e449_57ef71cb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-25T21:36:16Z",
+      "side": 1,
+      "message": "Thanks for the detailed explanation, however, I believe you wanted to make sure that you don\u0027t fire events at the same time that you\u0027re receiving them.\n\nThe running variable isn\u0027t protected any synchronization, so that makes technically possible that you are adding and replaying events at the same time.\n\nBest to be safe than sorry, and use a traditional synchronized on the variable IMHO.",
+      "parentUuid": "9e268f70_3365b5d9",
+      "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cf13369_d60fcfcb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-25T21:36:16Z",
+      "side": 1,
+      "message": "This is blocking on the collection object, however, it would require that you are putting a synchronizad(beforeStartupEventsSet) also at L137",
+      "range": {
+        "startLine": 187,
+        "startChar": 4,
+        "endLine": 187,
+        "endChar": 41
+      },
+      "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "24814dae_c39774a0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 2
@@ -69,6 +110,24 @@
       "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4706245e_08064450",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-25T21:36:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4e86ca3b_af35f798",
+      "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
