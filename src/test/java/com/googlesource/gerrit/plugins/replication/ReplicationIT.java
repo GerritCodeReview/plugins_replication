@@ -306,8 +306,26 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     }
   }
 
-  private Project.NameKey createTestProject(String name) throws Exception {
-    return projectOperations.newProject().name(name).create();
+  @Test
+  public void shouldNotDropEventsWhenStarting() throws Exception {
+    Project.NameKey targetProject = createTestProject(project + "replica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    replicationQueueStop();
+    Result pushResult = createChange();
+    replicationQueueStart();
+
+    RevCommit sourceCommit = pushResult.getCommit();
+    String sourceRef = pushResult.getPatchSet().refName();
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
+      Ref targetBranchRef = getRef(repo, sourceRef);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
+    }
   }
 
   private Ref getRef(Repository repo, String branchName) throws IOException {
@@ -348,11 +366,35 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   private void reloadConfig() {
-    plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).reload();
+    getAutoReloadConfigDecoratorInstance().reload();
   }
 
   private void shutdownDestinations() {
-    plugin.getSysInjector().getInstance(DestinationsCollection.class).shutdown();
+    getInstance(DestinationsCollection.class).shutdown();
+  }
+
+  private void replicationQueueStart() {
+    getReplicationQueueInstance().start();
+  }
+
+  private void replicationQueueStop() {
+    getReplicationQueueInstance().stop();
+  }
+
+  private AutoReloadConfigDecorator getAutoReloadConfigDecoratorInstance() {
+    return getInstance(AutoReloadConfigDecorator.class);
+  }
+
+  private ReplicationQueue getReplicationQueueInstance() {
+    return getInstance(ReplicationQueue.class);
+  }
+
+  private <T> T getInstance(Class<T> classObj) {
+    return plugin.getSysInjector().getInstance(classObj);
+  }
+
+  private Project.NameKey createTestProject(String name) throws Exception {
+    return projectOperations.newProject().name(name).create();
   }
 
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
