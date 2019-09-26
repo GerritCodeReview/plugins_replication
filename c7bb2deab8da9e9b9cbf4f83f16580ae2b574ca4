@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "feed925b_b1e6023a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-26T12:58:30Z",
+      "side": 1,
+      "message": "It was also possible in stable-2.1x just we agreed not to do that\nrefactoring in the old releases. I would avoid mentioning branch\nname here.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 13
+      },
+      "revId": "c7bb2deab8da9e9b9cbf4f83f16580ae2b574ca4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41b3be24_19f88b03",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-26T12:58:30Z",
+      "side": 1,
+      "message": "If we create a thread safe set here:\n\n  new Collections.newSetFromMap(new ConcurrentHashMap\u003c\u003e())\n\nthen we do not need to synchronize access to the set and we get much better concurrency\nas described in [1]\n\n[1] https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html",
+      "range": {
+        "startLine": 71,
+        "startChar": 29,
+        "endLine": 71,
+        "endChar": 50
+      },
+      "revId": "c7bb2deab8da9e9b9cbf4f83f16580ae2b574ca4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a01b991_bda4975a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-09-26T12:58:30Z",
+      "side": 1,
+      "message": "As discussed in another review and if already doing a proper refactoring, then we do\nnot want to call the onGitReferenceUpdated form here, because we know that\nrunning \u003d\u003d true at this point and we do not need that part of the onGitReferenceUpdated\nmethod which checks for the running flag and populates the beforeStartupEventsSet...\n\nI propose to extract a new method out of the onGitReferenceUpdated method which just\nschedules the replication without testing the running flag.",
+      "revId": "c7bb2deab8da9e9b9cbf4f83f16580ae2b574ca4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
