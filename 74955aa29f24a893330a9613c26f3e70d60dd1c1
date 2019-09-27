@@ -22,6 +22,53 @@
       "revId": "74955aa29f24a893330a9613c26f3e70d60dd1c1",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "632f5ff2_62fa0053",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-27T10:23:05Z",
+      "side": 1,
+      "message": "I believe the discussion isn\u0027t related to this change. Can you post a separate change for that?",
+      "parentUuid": "08cd7d28_97bc6aa9",
+      "range": {
+        "startLine": 131,
+        "startChar": 3,
+        "endLine": 131,
+        "endChar": 93
+      },
+      "revId": "74955aa29f24a893330a9613c26f3e70d60dd1c1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76702f8d_04a5c30f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-27T10:23:05Z",
+      "side": 1,
+      "message": "I believe this should go before L132.\n\nYou may have entered the if() when the queue wasn\u0027t running but then you started replaying.\n\nWhen you exit the synchronized, you should check if you should either queue or just schedule the ref-update.\n\nIf you are just adding to the set but the replay has finished, those events would never picked up.",
+      "range": {
+        "startLine": 136,
+        "startChar": 6,
+        "endLine": 136,
+        "endChar": 45
+      },
+      "revId": "74955aa29f24a893330a9613c26f3e70d60dd1c1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
