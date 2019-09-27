@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5117c2d_698e07f3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 42
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-27T13:31:56Z",
+      "side": 1,
+      "message": "That makes a lot of sense: the configuration has been already validated. There was no reasons to throw a ConfigInvalidException after all.",
+      "range": {
+        "startLine": 237,
+        "startChar": 6,
+        "endLine": 237,
+        "endChar": 35
+      },
+      "revId": "1be3f9532fc29fbe57bf623399d0f9f9f9df633b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
