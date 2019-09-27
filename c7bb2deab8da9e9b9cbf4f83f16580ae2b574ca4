@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "df29b2e6_f8154bb6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-27T10:35:26Z",
+      "side": 1,
+      "message": "See my other comment on the synchronized block: this isn\u0027t only to make a thread-safe addition to the set but also to make sure that we do not even start add stuff if we are in the middle of replaying.",
+      "parentUuid": "b4e633f2_cefccbf3",
+      "range": {
+        "startLine": 71,
+        "startChar": 29,
+        "endLine": 71,
+        "endChar": 50
+      },
+      "revId": "c7bb2deab8da9e9b9cbf4f83f16580ae2b574ca4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a01b991_bda4975a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 3
