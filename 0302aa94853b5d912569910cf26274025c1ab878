@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30c55177_e5facc3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-09-30T23:04:44Z",
+      "side": 1,
+      "message": "Very neat",
+      "range": {
+        "startLine": 15,
+        "startChar": 22,
+        "endLine": 17,
+        "endChar": 14
+      },
+      "revId": "0302aa94853b5d912569910cf26274025c1ab878",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
