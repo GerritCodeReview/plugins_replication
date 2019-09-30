@@ -77,6 +77,7 @@ public class ReplicationQueue
     if (!running) {
       destinations.get().startup(workQueue);
       running = true;
+      replicationTasksStorage.abortRunning();
       firePendingEvents();
       fireBeforeStartupEvents();
     }

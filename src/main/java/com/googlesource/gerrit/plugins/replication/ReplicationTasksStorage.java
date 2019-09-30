@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.jgit.lib.ObjectId;
@@ -59,17 +60,20 @@ public class ReplicationTasksStorage {
 
   private static Gson GSON = new Gson();
 
-  private final Path refUpdates;
+  private final Path runningUpdates;
+  private final Path waitingUpdates;
 
   @Inject
   ReplicationTasksStorage(ReplicationConfig config) {
-    refUpdates = config.getEventsDirectory().resolve("ref-updates");
+    Path refUpdates = config.getEventsDirectory().resolve("ref-updates");
+    runningUpdates = refUpdates.resolve("running");
+    waitingUpdates = refUpdates.resolve("waiting");
   }
 
   public String persist(ReplicateRefUpdate r) {
     String json = GSON.toJson(r) + "\n";
     String eventKey = sha1(json).name();
-    Path file = refUpdates().resolve(eventKey);
+    Path file = waitingUpdates().resolve(eventKey);
 
     if (Files.exists(file)) {
       return eventKey;
@@ -89,10 +93,41 @@ public class ReplicationTasksStorage {
     this.disableDeleteForTesting = deleteDisabled;
   }
 
+  public void startRunning(ReplicateRefUpdate r) {
+    mark(r, true);
+  }
+
+  public void abortRunning() {
+    ArrayList<ReplicateRefUpdate> result = new ArrayList<>();
+    list(result, runningUpdates());
+    for (ReplicateRefUpdate r : result) {
+      mark(r, false);
+    }
+  }
+
+  private void mark(ReplicateRefUpdate r, boolean toRunning) {
+    String taskJson = GSON.toJson(r) + "\n";
+    String taskKey = sha1(taskJson).name();
+    Path from = waitingUpdates().resolve(taskKey);
+    Path to = runningUpdates().resolve(taskKey);
+    if (!toRunning) {
+      Path swap = from;
+      from = to;
+      to = swap;
+    }
+
+    try {
+      logger.atFine().log("RENAME %s to %s (%s:%s => %s)", from, to, r.project, r.ref, r.uri);
+      Files.move(from, to, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+    } catch (IOException e) {
+      logger.atSevere().withCause(e).log("Error while renaming event %s", taskKey);
+    }
+  }
+
   public void delete(ReplicateRefUpdate r) {
     String taskJson = GSON.toJson(r) + "\n";
     String taskKey = sha1(taskJson).name();
-    Path file = refUpdates().resolve(taskKey);
+    Path file = runningUpdates().resolve(taskKey);
 
     if (disableDeleteForTesting) {
       logger.atFine().log("DELETE %s (%s:%s => %s) DISABLED", file, r.project, r.ref, r.uri);
@@ -108,18 +143,23 @@ public class ReplicationTasksStorage {
   }
 
   public List<ReplicateRefUpdate> list() {
-    ArrayList<ReplicateRefUpdate> result = new ArrayList<>();
-    try (DirectoryStream<Path> events = Files.newDirectoryStream(refUpdates())) {
+    ArrayList<ReplicateRefUpdate> results = new ArrayList<>();
+    list(results, waitingUpdates());
+    list(results, runningUpdates());
+    return results;
+  }
+
+  private void list(ArrayList<ReplicateRefUpdate> results, Path tasks) {
+    try (DirectoryStream<Path> events = Files.newDirectoryStream(tasks)) {
       for (Path e : events) {
         if (Files.isRegularFile(e)) {
           String json = new String(Files.readAllBytes(e), UTF_8);
-          result.add(GSON.fromJson(json, ReplicateRefUpdate.class));
+          results.add(GSON.fromJson(json, ReplicateRefUpdate.class));
         }
       }
     } catch (IOException e) {
-      logger.atSevere().withCause(e).log("Error when firing pending events");
+      logger.atSevere().withCause(e).log("Error when listing pending events");
     }
-    return result;
   }
 
   @SuppressWarnings("deprecation")
@@ -127,11 +167,19 @@ public class ReplicationTasksStorage {
     return ObjectId.fromRaw(Hashing.sha1().hashString(s, UTF_8).asBytes());
   }
 
-  private Path refUpdates() {
+  private Path runningUpdates() {
     try {
-      return Files.createDirectories(refUpdates);
+      return Files.createDirectories(runningUpdates);
     } catch (IOException e) {
-      throw new ProvisionException(String.format("Couldn't create %s", refUpdates), e);
+      throw new ProvisionException(String.format("Couldn't create %s", runningUpdates), e);
+    }
+  }
+
+  private Path waitingUpdates() {
+    try {
+      return Files.createDirectories(waitingUpdates);
+    } catch (IOException e) {
+      throw new ProvisionException(String.format("Couldn't create %s", waitingUpdates), e);
     }
   }
 }
