@@ -522,6 +522,7 @@ public class Destination {
         pending.put(uri, pushOp);
         switch (reason) {
           case COLLISION:
+            persistAbortRunning(pushOp);
             @SuppressWarnings("unused")
             ScheduledFuture<?> ignored =
                 pool.schedule(pushOp, config.getRescheduleDelay(), TimeUnit.SECONDS);
@@ -536,6 +537,7 @@ public class Destination {
             postReplicationFailedEvent(pushOp, status);
             if (pushOp.setToRetry()) {
               postReplicationScheduledEvent(pushOp);
+              persistAbortRunning(pushOp);
               @SuppressWarnings("unused")
               ScheduledFuture<?> ignored2 =
                   pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
@@ -562,6 +564,7 @@ public class Destination {
       if (inFlightOp != null) {
         return RunwayStatus.denied(inFlightOp.getId());
       }
+      persistStartRunning(op);
       inFlight.put(op.getURI(), op);
     }
     return RunwayStatus.allowed();
@@ -571,17 +574,31 @@ public class Destination {
     synchronized (stateLock) {
       inFlight.remove(task.getURI());
       if (!task.wasCanceled()) {
-        for (String ref : task.getRefs()) {
-          if (!refHasPendingPush(task.getURI(), ref)) {
-            replicationTasksStorage
-                .get()
-                .delete(
-                    new ReplicateRefUpdate(
-                        task.getProjectNameKey().get(), ref, task.getURI(), getRemoteConfigName()));
-          }
-        }
+        persistDelete(task);
       }
     }
+  }
+
+  private void persistStartRunning(PushOne task) {
+    for (String ref : task.getRefs()) {
+      replicationTasksStorage.get().startRunning(getReplicateRefUpdate(task, ref));
+    }
+  }
+
+  private void persistAbortRunning(PushOne task) {
+    for (String ref : task.getRefs()) {
+      replicationTasksStorage.get().abortRunning(getReplicateRefUpdate(task, ref));
+    }
+  }
+
+  private void persistDelete(PushOne task) {
+    for (String ref : task.getRefs()) {
+      replicationTasksStorage.get().delete(getReplicateRefUpdate(task, ref));
+    }
+  }
+
+  private ReplicateRefUpdate getReplicateRefUpdate(PushOne task, String ref) {
+    return new ReplicateRefUpdate(task.getProjectNameKey().get(), ref, task.getURI(), getRemoteConfigName());
   }
 
   private boolean refHasPendingPush(URIish opUri, String ref) {
