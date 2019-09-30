@@ -562,6 +562,13 @@ public class Destination {
       if (inFlightOp != null) {
         return RunwayStatus.denied(inFlightOp.getId());
       }
+      for (String ref : op.getRefs()) {
+        replicationTasksStorage
+            .get()
+            .startRunning(
+                new ReplicateRefUpdate(
+                    op.getProjectNameKey().get(), ref, op.getURI(), getRemoteConfigName()));
+      }
       inFlight.put(op.getURI(), op);
     }
     return RunwayStatus.allowed();
@@ -572,13 +579,11 @@ public class Destination {
       inFlight.remove(task.getURI());
       if (!task.wasCanceled()) {
         for (String ref : task.getRefs()) {
-          if (!refHasPendingPush(task.getURI(), ref)) {
-            replicationTasksStorage
-                .get()
-                .delete(
-                    new ReplicateRefUpdate(
-                        task.getProjectNameKey().get(), ref, task.getURI(), getRemoteConfigName()));
-          }
+          replicationTasksStorage
+              .get()
+              .delete(
+                  new ReplicateRefUpdate(
+                      task.getProjectNameKey().get(), ref, task.getURI(), getRemoteConfigName()));
         }
       }
     }
