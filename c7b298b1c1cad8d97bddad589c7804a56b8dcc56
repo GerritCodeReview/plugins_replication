@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "3429ffa7_b00f5de5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 47
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-01T08:59:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "68c18588_0fa8e5df",
+      "range": {
+        "startLine": 159,
+        "startChar": 1,
+        "endLine": 175,
+        "endChar": 3
+      },
+      "revId": "c7b298b1c1cad8d97bddad589c7804a56b8dcc56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b05b202_1681680b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
         "patchSetId": 47
