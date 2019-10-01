@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7333e9ad_55a56e41",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-10-01T13:52:01Z",
+      "side": 1,
+      "message": "Can we document here the state transitions which happen during the start i.e.:\n\n  NOT_RUNNING \u003e REPLYING (and RUNNING) \u003e RUNNING\n\nespecially the \"replying and running\" state needs to be explained and differentiated\nfrom the pure running state IMHO.\n\nI feel like we will not be able to follow this code a couple of months from now.",
+      "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "70ede0de_9474ba27",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 2
@@ -70,6 +87,41 @@
       "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "895bcfdc_14fa1d8f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-10-01T13:52:01Z",
+      "side": 1,
+      "message": "\u003e The running variable isn\u0027t protected any synchronization, so that makes technically possible that you are adding and replaying events at the same time.\n\nThe code and dependencies look quite convoluted to me. My understanding it that:\n\n  replying \u003d true\n\ncan only happen when:\n\n  running \u003d true\n\nbecause firePendingEvents, where replying is set to true, is called after running is set\nto true (lines 79-80). Adding events can only happen when running \u003d false, but at this\ntime the replying is also false.",
+      "parentUuid": "c4c6d86d_3a7af3a1",
+      "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f727277_a3efebb1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-10-01T13:52:01Z",
+      "side": 1,
+      "message": "Why is this logic not a part of the firePendingEvents? We need to replay all events,\nthe persisted ones and those which happened just before the queue started fully i.e.\nuntil running was false. Why not keep everything within the same try-finally block\nwhich handles the replying flag?",
+      "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     },
     {
       "key": {
