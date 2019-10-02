@@ -46,8 +46,9 @@ import org.eclipse.jgit.transport.URIish;
  * task:
  *
  * <p><code>
- *   .../running/<sha1>    running replication tasks
- *   .../waiting/<sha1>    outstanding replication tasks
+ *   .../building/<tmp_name>  new replication tasks under construction
+ *   .../running/<sha1>       running replication tasks
+ *   .../waiting/<sha1>       outstanding replication tasks
  * </code>
  *
  * <p>Tasks are moved atomically via a rename between those directories to indicate the current
@@ -84,18 +85,20 @@ public class ReplicationTasksStorage {
 
   private static Gson GSON = new Gson();
 
+  private final Path buildingUpdates;
   private final Path runningUpdates;
   private final Path waitingUpdates;
 
   @Inject
   ReplicationTasksStorage(ReplicationConfig config) {
     Path refUpdates = config.getEventsDirectory().resolve("ref-updates");
+    buildingUpdates = refUpdates.resolve("building");
     runningUpdates = refUpdates.resolve("running");
     waitingUpdates = refUpdates.resolve("waiting");
   }
 
-  public String persist(ReplicateRefUpdate r) {
-    return new Task(r).persist();
+  public String create(ReplicateRefUpdate r) {
+    return new Task(r).create();
   }
 
   @VisibleForTesting
@@ -175,16 +178,19 @@ public class ReplicationTasksStorage {
       waiting = createDir(waitingUpdates).resolve(taskKey);
     }
 
-    public String persist() {
+    public String create() {
       if (Files.exists(waiting)) {
         return taskKey;
       }
 
       try {
-        logger.atFine().log("CREATE %s %s", waiting, updateLog());
-        Files.write(waiting, json.getBytes(UTF_8));
+        Path tmp = Files.createTempFile(createDir(buildingUpdates), taskKey, null);
+        logger.atFine().log("CREATE %s %s", tmp, updateLog());
+        Files.write(tmp, json.getBytes(UTF_8));
+        logger.atFine().log("RENAME %s %s %s", tmp, waiting, updateLog());
+        rename(tmp, waiting);
       } catch (IOException e) {
-        logger.atWarning().withCause(e).log("Couldn't persist task %s", json);
+        logger.atWarning().withCause(e).log("Couldn't create task %s", json);
       }
       return taskKey;
     }
