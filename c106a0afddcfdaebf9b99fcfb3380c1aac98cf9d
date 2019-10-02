@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f0979999_0f0f6e02",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-10-02T12:24:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7333e9ad_55a56e41",
+      "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70ede0de_9474ba27",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 2
@@ -119,6 +137,24 @@
       "writtenOn": "2019-10-01T13:52:01Z",
       "side": 1,
       "message": "Why is this logic not a part of the firePendingEvents? We need to replay all events,\nthe persisted ones and those which happened just before the queue started fully i.e.\nuntil running was false. Why not keep everything within the same try-finally block\nwhich handles the replying flag?",
+      "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7372814_6f83a7df",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-10-02T12:24:05Z",
+      "side": 1,
+      "message": "I\u0027m not sure if we want to mix two types of events, those two methods have two different behaviour one is blocking and one is not. I agree that we could have one single method which is calling both firePendingEvents and fireBeforeStartupEvents to make sure that we are always doing full replay but I would do it in a following change",
+      "parentUuid": "3f727277_a3efebb1",
       "revId": "c106a0afddcfdaebf9b99fcfb3380c1aac98cf9d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
