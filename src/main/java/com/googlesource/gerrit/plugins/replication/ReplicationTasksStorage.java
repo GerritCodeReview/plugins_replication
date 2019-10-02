@@ -67,21 +67,7 @@ public class ReplicationTasksStorage {
   }
 
   public String persist(ReplicateRefUpdate r) {
-    String json = GSON.toJson(r) + "\n";
-    String eventKey = sha1(json).name();
-    Path file = refUpdates().resolve(eventKey);
-
-    if (Files.exists(file)) {
-      return eventKey;
-    }
-
-    try {
-      logger.atFine().log("CREATE %s (%s:%s => %s)", file, r.project, r.ref, r.uri);
-      Files.write(file, json.getBytes(UTF_8));
-    } catch (IOException e) {
-      logger.atWarning().withCause(e).log("Couldn't persist event %s", json);
-    }
-    return eventKey;
+    return new Task(r).persist();
   }
 
   @VisibleForTesting
@@ -90,21 +76,7 @@ public class ReplicationTasksStorage {
   }
 
   public void delete(ReplicateRefUpdate r) {
-    String taskJson = GSON.toJson(r) + "\n";
-    String taskKey = sha1(taskJson).name();
-    Path file = refUpdates().resolve(taskKey);
-
-    if (disableDeleteForTesting) {
-      logger.atFine().log("DELETE %s (%s:%s => %s) DISABLED", file, r.project, r.ref, r.uri);
-      return;
-    }
-
-    try {
-      logger.atFine().log("DELETE %s (%s:%s => %s)", file, r.project, r.ref, r.uri);
-      Files.delete(file);
-    } catch (IOException e) {
-      logger.atSevere().withCause(e).log("Error while deleting event %s", taskKey);
-    }
+    new Task(r).delete();
   }
 
   public List<ReplicateRefUpdate> list() {
@@ -117,7 +89,7 @@ public class ReplicationTasksStorage {
         }
       }
     } catch (IOException e) {
-      logger.atSevere().withCause(e).log("Error when firing pending events");
+      logger.atSevere().withCause(e).log("Error when firing pending tasks");
     }
     return result;
   }
@@ -132,6 +104,52 @@ public class ReplicationTasksStorage {
       return Files.createDirectories(refUpdates);
     } catch (IOException e) {
       throw new ProvisionException(String.format("Couldn't create %s", refUpdates), e);
+    }
+  }
+
+  private class Task {
+    public final ReplicateRefUpdate update;
+    public final String json;
+    public final String taskKey;
+    public final Path file;
+
+    public Task(ReplicateRefUpdate update) {
+      this.update = update;
+      json = GSON.toJson(update) + "\n";
+      taskKey = sha1(json).name();
+      file = refUpdates().resolve(taskKey);
+    }
+
+    public String persist() {
+      if (Files.exists(file)) {
+        return taskKey;
+      }
+
+      try {
+        logger.atFine().log("CREATE %s %s", file, updateLog());
+        Files.write(file, json.getBytes(UTF_8));
+      } catch (IOException e) {
+        logger.atWarning().withCause(e).log("Couldn't persist task %s", json);
+      }
+      return taskKey;
+    }
+
+    public void delete() {
+      if (disableDeleteForTesting) {
+        logger.atFine().log("DELETE %s %s DISABLED", file, updateLog());
+        return;
+      }
+
+      try {
+        logger.atFine().log("DELETE %s %s", file, updateLog());
+        Files.delete(file);
+      } catch (IOException e) {
+        logger.atSevere().withCause(e).log("Error while deleting task %s", taskKey);
+      }
+    }
+
+    private String updateLog() {
+      return String.format("(%s:%s => %s)", update.project, update.ref, update.uri);
     }
   }
 }
