@@ -16,6 +16,29 @@
       "revId": "0810293fe6c3546ac3de43674f0fb7ea099ccf38",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f75b6b47_8a949bf1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2019-10-04T18:05:06Z",
+      "side": 1,
+      "message": "Maybe: s/startRunning/start/  (and s/abortRunning/abort/ below?)\n\nAnd same on 83/87?",
+      "range": {
+        "startLine": 172,
+        "startChar": 16,
+        "endLine": 172,
+        "endChar": 29
+      },
+      "revId": "0810293fe6c3546ac3de43674f0fb7ea099ccf38",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
