@@ -77,6 +77,7 @@ public class ReplicationQueue
     if (!running) {
       destinations.get().startup(workQueue);
       running = true;
+      replicationTasksStorage.abortAll();
       firePendingEvents();
       fireBeforeStartupEvents();
     }
@@ -156,7 +157,7 @@ public class ReplicationQueue
     try {
       Set<String> eventsReplayed = new HashSet<>();
       replaying = true;
-      for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.list()) {
+      for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.listWaiting()) {
         String eventKey = String.format("%s:%s", t.project, t.ref);
         if (!eventsReplayed.contains(eventKey)) {
           repLog.info("Firing pending task {}", eventKey);
