@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0413092d_f8acc9de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-07T19:05:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27f88953_36520bbb",
+      "revId": "0810293fe6c3546ac3de43674f0fb7ea099ccf38",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f75b6b47_8a949bf1",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 4
@@ -39,6 +57,30 @@
       "revId": "0810293fe6c3546ac3de43674f0fb7ea099ccf38",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ff0859b_fe40ded6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-07T19:05:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f75b6b47_8a949bf1",
+      "range": {
+        "startLine": 172,
+        "startChar": 16,
+        "endLine": 172,
+        "endChar": 29
+      },
+      "revId": "0810293fe6c3546ac3de43674f0fb7ea099ccf38",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
