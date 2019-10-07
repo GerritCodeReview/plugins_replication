@@ -22,6 +22,30 @@
       "revId": "ec0ca8cbb2b74b85f00511f7b86abba0665358ef",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ea517a7_a9e0c76c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-07T23:49:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2ccd7c1_580e54c0",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 1
+      },
+      "revId": "ec0ca8cbb2b74b85f00511f7b86abba0665358ef",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
