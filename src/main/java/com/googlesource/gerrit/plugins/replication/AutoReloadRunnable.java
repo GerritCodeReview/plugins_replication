@@ -21,6 +21,7 @@ import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.nio.file.Path;
+import java.util.List;
 
 public class AutoReloadRunnable implements Runnable {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
@@ -29,6 +30,7 @@ public class AutoReloadRunnable implements Runnable {
   private final Path pluginDataDir;
   private final EventBus eventBus;
   private final Provider<ReplicationQueue> replicationQueue;
+  private final ReplicationConfigValidator configValidator;
 
   private ReplicationFileBasedConfig loadedConfig;
   private String loadedConfigVersion;
@@ -36,6 +38,7 @@ public class AutoReloadRunnable implements Runnable {
 
   @Inject
   public AutoReloadRunnable(
+      ReplicationConfigValidator configValidator,
       ReplicationFileBasedConfig config,
       SitePaths site,
       @PluginData Path pluginDataDir,
@@ -48,6 +51,7 @@ public class AutoReloadRunnable implements Runnable {
     this.pluginDataDir = pluginDataDir;
     this.eventBus = eventBus;
     this.replicationQueue = replicationQueue;
+    this.configValidator = configValidator;
   }
 
   @Override
@@ -67,10 +71,13 @@ public class AutoReloadRunnable implements Runnable {
   synchronized void reload() {
     String pendingConfigVersion = loadedConfig.getVersion();
     try {
-      loadedConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
-      loadedConfigVersion = loadedConfig.getVersion();
+      ReplicationFileBasedConfig newConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
+      final List<DestinationConfiguration> newValidDestinations =
+          configValidator.validateConfig(newConfig);
+      loadedConfig = newConfig;
+      loadedConfigVersion = newConfig.getVersion();
       lastFailedConfigVersion = "";
-      eventBus.post(loadedConfig);
+      eventBus.post(newValidDestinations);
     } catch (Exception e) {
       logger.atSevere().withCause(e).log(
           "Cannot reload replication configuration: keeping existing settings");
