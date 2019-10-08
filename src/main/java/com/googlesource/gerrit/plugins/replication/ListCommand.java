@@ -40,7 +40,7 @@ final class ListCommand extends SshCommand {
   @Option(name = "--json", usage = "output in json format")
   private boolean json;
 
-  @Inject private ReplicationDestinations destinations;
+  @Inject private DestinationsCollection destinations;
 
   @Override
   protected void run() {
@@ -90,7 +90,7 @@ final class ListCommand extends SshCommand {
         addProperty(obj, "AdminUrl", d.getAdminUrls());
         addProperty(obj, "AuthGroup", d.getAuthGroupNames());
         addProperty(obj, "Project", d.getProjects());
-        Destination.QueueInfo q = d.getQueueInfo();
+        ReplicationEndpoint.QueueInfo q = d.getQueueInfo();
         addQueueDetails(obj, "InFlight", q.inFlight.values());
         addQueueDetails(obj, "Pending", q.pending.values());
       }

@@ -44,6 +44,7 @@ import com.google.gerrit.server.project.ProjectState;
 import com.google.gerrit.server.util.IdGenerator;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import com.google.inject.name.Named;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 import com.jcraft.jsch.JSchException;
 import java.io.IOException;
@@ -125,7 +126,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       PermissionBackend permissionBackend,
       Destination p,
       RemoteConfig c,
-      ReplicationConfig rc,
+      @Named(DestinationConfiguration.NAME) ReplicationConfig rc,
       CredentialsFactory cpFactory,
       PerThreadRequestScope.Scoper ts,
       IdGenerator ig,

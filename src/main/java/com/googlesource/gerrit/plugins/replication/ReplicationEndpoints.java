@@ -23,39 +23,39 @@ import java.util.Optional;
 import org.eclipse.jgit.transport.URIish;
 
 /** Git destinations currently active for replication. */
-public interface ReplicationDestinations {
+public interface ReplicationEndpoints<T extends ReplicationEndpoint> {
 
   /**
    * Return all the URIs associated to a project and a filter criteria.
    *
-   * @param remoteName name of the replication end or empty if selecting all ends.
+   * @param remoteName name of the replication end or empty if selecting all remotes.
    * @param projectName name of the project
    * @param filterType type of filter criteria for selecting projects
    * @return the multi-map of destinations and the associated replication URIs
    */
-  Multimap<Destination, URIish> getURIs(
+  Multimap<T, URIish> getURIs(
       Optional<String> remoteName, Project.NameKey projectName, FilterType filterType);
 
   /**
    * List of currently active replication destinations.
    *
    * @param filterType type project filtering
-   * @return the list of active destinations
+   * @return the list of active endpoints
    */
-  List<Destination> getAll(FilterType filterType);
+  List<T> getAll(FilterType filterType);
 
-  /** @return true if there are no destinations, false otherwise. */
+  /** @return true if there are no endpoints, false otherwise. */
   boolean isEmpty();
 
   /**
-   * Start replicating to all destinations.
+   * Start replicating all endpoints.
    *
    * @param workQueue execution queue for scheduling the replication events.
    */
   void startup(WorkQueue workQueue);
 
   /**
-   * Stop the replication to all destinations.
+   * Stop the replication of all endpoints.
    *
    * @return number of events cancelled during shutdown.
    */

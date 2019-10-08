@@ -52,7 +52,9 @@ import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.URIish;
 
 @Singleton
-public class DestinationsCollection implements ReplicationDestinations, ReplicationConfigValidator {
+public class DestinationsCollection
+    implements ReplicationEndpoints<Destination>,
+        ReplicationConfigValidator<DestinationConfiguration> {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final Factory destinationFactory;
@@ -90,7 +92,7 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
 
     SetMultimap<Destination, URIish> uris = HashMultimap.create();
     for (Destination config : getAll(filterType)) {
-      if (!config.wouldPushProject(projectName)) {
+      if (!config.wouldReplicateProject(projectName)) {
         continue;
       }
 

@@ -51,7 +51,8 @@ public class ReplicationQueue
 
   private final WorkQueue workQueue;
   private final DynamicItem<EventDispatcher> dispatcher;
-  private final Provider<ReplicationDestinations> destinations; // For Guice circular dependency
+  private final Provider<ReplicationEndpoints<Destination>>
+      destinations; // For Guice circular dependency
   private final ReplicationTasksStorage replicationTasksStorage;
   private volatile boolean running;
   private volatile boolean replaying;
@@ -60,7 +61,7 @@ public class ReplicationQueue
   @Inject
   ReplicationQueue(
       WorkQueue wq,
-      Provider<ReplicationDestinations> rd,
+      Provider<ReplicationEndpoints<Destination>> rd,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListeners sl,
       ReplicationTasksStorage rts) {
@@ -112,7 +113,7 @@ public class ReplicationQueue
     }
 
     for (Destination cfg : destinations.get().getAll(FilterType.ALL)) {
-      if (cfg.wouldPushProject(project)) {
+      if (cfg.wouldReplicateProject(project)) {
         for (URIish uri : cfg.getURIs(project, urlMatch)) {
           cfg.schedule(project, PushOne.ALL_REFS, uri, state, now);
           replicationTasksStorage.persist(
@@ -140,7 +141,7 @@ public class ReplicationQueue
 
     Project.NameKey project = Project.nameKey(projectName);
     for (Destination cfg : destinations.get().getAll(FilterType.ALL)) {
-      if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
+      if (cfg.wouldReplicateProject(project) && cfg.wouldReplicateRef(refName)) {
         for (URIish uri : cfg.getURIs(project, null)) {
           replicationTasksStorage.persist(
               new ReplicateRefUpdate(projectName, refName, uri, cfg.getRemoteConfigName()));
