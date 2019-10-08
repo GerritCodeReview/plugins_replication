@@ -103,14 +103,16 @@ public class AutoReloadRunnableTest {
     }
   }
 
-  private static class TestValidConfigurationListener implements ReplicationConfigValidator {
+  private static class TestValidConfigurationListener
+      implements ReplicationConfigValidator<DestinationConfiguration> {
     @Override
     public List<DestinationConfiguration> validateConfig(ReplicationFileBasedConfig newConfig) {
       return Collections.emptyList();
     }
   }
 
-  private static class TestInvalidConfigurationListener implements ReplicationConfigValidator {
+  private static class TestInvalidConfigurationListener
+      implements ReplicationConfigValidator<DestinationConfiguration> {
     @Override
     public List<DestinationConfiguration> validateConfig(
         ReplicationFileBasedConfig configurationChangeEvent) throws ConfigInvalidException {

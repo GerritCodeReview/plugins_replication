@@ -17,12 +17,11 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
 import com.google.gerrit.server.config.ConfigUtil;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.transport.RemoteConfig;
 
-public class DestinationConfiguration {
+public class DestinationConfiguration implements RemoteConfiguration {
   static final int DEFAULT_REPLICATION_DELAY = 15;
   static final int DEFAULT_RESCHEDULE_DELAY = 3;
   static final int DEFAULT_DRAIN_QUEUE_ATTEMPTS = 0;
@@ -84,14 +83,17 @@ public class DestinationConfiguration {
                 TimeUnit.SECONDS);
   }
 
+  @Override
   public int getDelay() {
     return delay;
   }
 
+  @Override
   public int getRescheduleDelay() {
     return rescheduleDelay;
   }
 
+  @Override
   public int getRetryDelay() {
     return retryDelay;
   }
@@ -100,81 +102,72 @@ public class DestinationConfiguration {
     return drainQueueAttempts;
   }
 
-  public int getPoolThreads() {
+  int getPoolThreads() {
     return poolThreads;
   }
 
-  public int getLockErrorMaxRetries() {
+  int getLockErrorMaxRetries() {
     return lockErrorMaxRetries;
   }
 
+  @Override
   public ImmutableList<String> getUrls() {
     return urls;
   }
 
+  @Override
   public ImmutableList<String> getAdminUrls() {
     return adminUrls;
   }
 
+  @Override
   public ImmutableList<String> getProjects() {
     return projects;
   }
 
+  @Override
   public ImmutableList<String> getAuthGroupNames() {
     return authGroupNames;
   }
 
+  @Override
   public String getRemoteNameStyle() {
     return remoteNameStyle;
   }
 
+  @Override
   public boolean replicatePermissions() {
     return replicatePermissions;
   }
 
-  public boolean createMissingRepos() {
+  boolean createMissingRepos() {
     return createMissingRepos;
   }
 
-  public boolean replicateProjectDeletions() {
+  boolean replicateProjectDeletions() {
     return replicateProjectDeletions;
   }
 
-  public boolean replicateHiddenProjects() {
+  boolean replicateHiddenProjects() {
     return replicateHiddenProjects;
   }
 
+  @Override
   public RemoteConfig getRemoteConfig() {
     return remoteConfig;
   }
 
+  @Override
   public int getMaxRetries() {
     return maxRetries;
   }
 
-  private static int getInt(RemoteConfig rc, Config cfg, String name, int defValue) {
-    return cfg.getInt("remote", rc.getName(), name, defValue);
-  }
-
-  boolean isSingleProjectMatch() {
-    List<String> projects = getProjects();
-    boolean ret = (projects.size() == 1);
-    if (ret) {
-      String projectMatch = projects.get(0);
-      if (ReplicationFilter.getPatternType(projectMatch)
-          != ReplicationFilter.PatternType.EXACT_MATCH) {
-        // projectMatch is either regular expression, or wild-card.
-        //
-        // Even though they might refer to a single project now, they need not
-        // after new projects have been created. Hence, we do not treat them as
-        // matching a single project.
-        ret = false;
-      }
-    }
-    return ret;
-  }
-
+  @Override
   public int getSlowLatencyThreshold() {
     return slowLatencyThreshold;
+  }
+
+  private static int getInt(RemoteConfig rc, Config cfg, String name, int defValue) {
+    return cfg.getInt("remote", rc.getName(), name, defValue);
   }
 }
