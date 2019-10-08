@@ -40,7 +40,7 @@ final class ListCommand extends SshCommand {
   @Option(name = "--json", usage = "output in json format")
   private boolean json;
 
-  @Inject private ReplicationDestinations destinations;
+  @Inject private DestinationsCollection destinations;
 
   @Override
   protected void run() {

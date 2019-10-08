@@ -84,7 +84,7 @@ import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
 import org.slf4j.Logger;
 
-public class Destination {
+public class Destination implements ReplicationEndpoint {
   private static final Logger repLog = ReplicationQueue.repLog;
 
   public interface Factory {
@@ -220,7 +220,7 @@ public class Destination {
     }
   }
 
-  public QueueInfo getQueueInfo() {
+  QueueInfo getQueueInfo() {
     synchronized (stateLock) {
       return new QueueInfo(pending, inFlight);
     }
@@ -365,11 +365,13 @@ public class Destination {
     return false;
   }
 
-  void schedule(Project.NameKey project, String ref, URIish uri, ReplicationState state) {
+  @Override
+  public void schedule(Project.NameKey project, String ref, URIish uri, ReplicationState state) {
     schedule(project, ref, uri, state, false);
   }
 
-  void schedule(
+  @Override
+  public void schedule(
       Project.NameKey project, String ref, URIish uri, ReplicationState state, boolean now) {
     repLog.info("scheduling replication {}:{} => {}", project, ref, uri);
     if (!shouldReplicate(project, ref, state)) {
@@ -592,7 +594,8 @@ public class Destination {
     return op != null && op.getRefs().contains(ref);
   }
 
-  boolean wouldPushProject(Project.NameKey project) {
+  @Override
+  public boolean wouldReplicateProject(Project.NameKey project) {
     if (!shouldReplicate(project)) {
       return false;
     }
@@ -610,7 +613,8 @@ public class Destination {
     return config.isSingleProjectMatch();
   }
 
-  boolean wouldPushRef(String ref) {
+  @Override
+  public boolean wouldReplicateRef(String ref) {
     if (!config.replicatePermissions() && RefNames.REFS_CONFIG.equals(ref)) {
       return false;
     }
@@ -634,7 +638,8 @@ public class Destination {
     return config.replicateProjectDeletions();
   }
 
-  List<URIish> getURIs(Project.NameKey project, String urlMatch) {
+  @Override
+  public List<URIish> getURIs(Project.NameKey project, String urlMatch) {
     List<URIish> r = Lists.newArrayListWithCapacity(config.getRemoteConfig().getURIs().size());
     for (URIish uri : config.getRemoteConfig().getURIs()) {
       if (matches(uri, urlMatch)) {
@@ -681,19 +686,23 @@ public class Destination {
     }
   }
 
-  ImmutableList<String> getAdminUrls() {
+  @Override
+  public ImmutableList<String> getAdminUrls() {
     return config.getAdminUrls();
   }
 
-  ImmutableList<String> getUrls() {
+  @Override
+  public ImmutableList<String> getUrls() {
     return config.getUrls();
   }
 
-  ImmutableList<String> getAuthGroupNames() {
+  @Override
+  public ImmutableList<String> getAuthGroupNames() {
     return config.getAuthGroupNames();
   }
 
-  ImmutableList<String> getProjects() {
+  @Override
+  public ImmutableList<String> getProjects() {
     return config.getProjects();
   }
 
@@ -701,7 +710,8 @@ public class Destination {
     return config.getLockErrorMaxRetries();
   }
 
-  String getRemoteConfigName() {
+  @Override
+  public String getRemoteConfigName() {
     return config.getRemoteConfig().getName();
   }
 
