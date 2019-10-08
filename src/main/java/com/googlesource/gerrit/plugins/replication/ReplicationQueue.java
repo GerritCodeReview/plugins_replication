@@ -177,6 +177,28 @@ public class ReplicationQueue
     }
   }
 
+  private void pruneCompleted() {
+    // Queue tasks have wrappers around them so use the toString() value, which will
+    // include the unique task id, to identify them despite their wrappers.
+    Set<String> prunable = new HashSet<>();
+    for (Destination destination : destinations.get().getAll(FilterType.ALL)) {
+      prunable.addAll(destination.getPrunable());
+    }
+
+    for (WorkQueue.Task<?> task : workQueue.getTasks()) {
+      WorkQueue.Task.State state = task.getState();
+      if (state == WorkQueue.Task.State.SLEEPING || state == WorkQueue.Task.State.READY) {
+        if (task instanceof WorkQueue.ProjectTask) {
+          WorkQueue.ProjectTask pt = (WorkQueue.ProjectTask) task;
+          if (prunable.contains(task.toString())) {
+            repLog.error("Pruning externally completed task:" + task);
+            task.cancel(false);
+          }
+        }
+      }
+    }
+  }
+
   @Override
   public void onProjectDeleted(ProjectDeletedListener.Event event) {
     Project.NameKey p = Project.nameKey(event.getProjectName());
@@ -237,6 +259,7 @@ public class ReplicationQueue
       }
       try {
         firePendingEvents();
+        pruneCompleted();
       } catch (Exception e) {
         repLog.error("error distributing tasks", e);
       }
