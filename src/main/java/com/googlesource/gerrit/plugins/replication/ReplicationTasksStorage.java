@@ -178,6 +178,10 @@ public class ReplicationTasksStorage {
     }
   }
 
+  public boolean isWaiting(PushOne push) {
+    return push.getRefs().stream().map(ref -> new Task(push, ref)).anyMatch(Task::isWaiting);
+  }
+
   public void finish(PushOne push) {
     UriLock lock = new UriLock(push);
     for (ReplicateRefUpdate r : list(lock.runningDir)) {
@@ -276,6 +280,10 @@ public class ReplicationTasksStorage {
       this(new UriLock(r), r.ref);
     }
 
+    public Task(PushOne push, String ref) {
+      this(new UriLock(push), ref);
+    }
+
     public Task(UriLock lock, String ref) {
       update = new ReplicateRefUpdate(lock.update, ref);
       json = GSON.toJson(update) + "\n";
@@ -309,6 +317,10 @@ public class ReplicationTasksStorage {
 
     public void reset() {
       rename(running, waiting);
+    }
+
+    public boolean isWaiting() {
+      return Files.exists(waiting);
     }
 
     public void finish() {
