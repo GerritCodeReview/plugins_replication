@@ -17,15 +17,14 @@ package com.googlesource.gerrit.plugins.replication;
 import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 
-public interface ReplicationConfigValidator {
+public interface ReplicationConfigValidator<T extends RemoteConfiguration> {
 
   /**
    * validate the new replication.config
    *
    * @param newConfig new configuration detected
-   * @return List of validated {@link DestinationConfiguration}
+   * @return List of validated {@link T}
    * @throws ConfigInvalidException if the new configuration is not valid.
    */
-  List<DestinationConfiguration> validateConfig(ReplicationFileBasedConfig newConfig)
-      throws ConfigInvalidException;
+  List<T> validateConfig(ReplicationFileBasedConfig newConfig) throws ConfigInvalidException;
 }

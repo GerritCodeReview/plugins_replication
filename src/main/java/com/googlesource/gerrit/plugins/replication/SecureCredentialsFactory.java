@@ -26,11 +26,11 @@ import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.eclipse.jgit.util.FS;
 
 /** Looks up a remote's password in secure.config. */
-class SecureCredentialsFactory implements CredentialsFactory {
+public class SecureCredentialsFactory implements CredentialsFactory {
   private final Config config;
 
   @Inject
-  SecureCredentialsFactory(SitePaths site) throws ConfigInvalidException, IOException {
+  public SecureCredentialsFactory(SitePaths site) throws ConfigInvalidException, IOException {
     config = load(site);
   }
 

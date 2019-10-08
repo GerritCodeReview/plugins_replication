@@ -31,6 +31,7 @@ import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Key;
+import com.google.inject.TypeLiteral;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -381,8 +382,10 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     getReplicationQueueInstance().stop();
   }
 
-  private AutoReloadConfigDecorator getAutoReloadConfigDecoratorInstance() {
-    return getInstance(AutoReloadConfigDecorator.class);
+  private AutoReloadConfigDecorator<DestinationConfiguration>
+      getAutoReloadConfigDecoratorInstance() {
+    return getInstance(
+        Key.get(new TypeLiteral<AutoReloadConfigDecorator<DestinationConfiguration>>() {}));
   }
 
   private ReplicationQueue getReplicationQueueInstance() {
@@ -391,6 +394,10 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private <T> T getInstance(Class<T> classObj) {
     return plugin.getSysInjector().getInstance(classObj);
+  }
+
+  private <T> T getInstance(Key<T> keyObj) {
+    return plugin.getSysInjector().getInstance(keyObj);
   }
 
   private Project.NameKey createTestProject(String name) throws Exception {

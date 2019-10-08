@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.google.inject.ProvisionException;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -62,7 +63,7 @@ public class ReplicationTasksStorage {
   private final Path refUpdates;
 
   @Inject
-  ReplicationTasksStorage(ReplicationConfig config) {
+  ReplicationTasksStorage(@Named(DestinationConfiguration.NAME) ReplicationConfig config) {
     refUpdates = config.getEventsDirectory().resolve("ref-updates");
   }
 

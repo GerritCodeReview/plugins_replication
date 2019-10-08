@@ -21,7 +21,6 @@ import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.REJECTED_OTHER_R
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Lists;
@@ -84,7 +83,7 @@ import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
 import org.slf4j.Logger;
 
-public class Destination {
+public class Destination implements ReplicationEndpoint {
   private static final Logger repLog = ReplicationQueue.repLog;
 
   public interface Factory {
@@ -112,16 +111,6 @@ public class Destination {
     TRANSPORT_ERROR,
     COLLISION,
     REPOSITORY_MISSING;
-  }
-
-  public static class QueueInfo {
-    public final Map<URIish, PushOne> pending;
-    public final Map<URIish, PushOne> inFlight;
-
-    public QueueInfo(Map<URIish, PushOne> pending, Map<URIish, PushOne> inFlight) {
-      this.pending = ImmutableMap.copyOf(pending);
-      this.inFlight = ImmutableMap.copyOf(inFlight);
-    }
   }
 
   @Inject
@@ -220,9 +209,10 @@ public class Destination {
     }
   }
 
+  @Override
   public QueueInfo getQueueInfo() {
     synchronized (stateLock) {
-      return new QueueInfo(pending, inFlight);
+      return new QueueInfo<>(pending, inFlight);
     }
   }
 
@@ -365,11 +355,13 @@ public class Destination {
     return false;
   }
 
-  void schedule(Project.NameKey project, String ref, URIish uri, ReplicationState state) {
+  @Override
+  public void schedule(Project.NameKey project, String ref, URIish uri, ReplicationState state) {
     schedule(project, ref, uri, state, false);
   }
 
-  void schedule(
+  @Override
+  public void schedule(
       Project.NameKey project, String ref, URIish uri, ReplicationState state, boolean now) {
     repLog.info("scheduling replication {}:{} => {}", project, ref, uri);
     if (!shouldReplicate(project, ref, state)) {
@@ -592,7 +584,8 @@ public class Destination {
     return op != null && op.getRefs().contains(ref);
   }
 
-  boolean wouldPushProject(Project.NameKey project) {
+  @Override
+  public boolean wouldReplicateProject(Project.NameKey project) {
     if (!shouldReplicate(project)) {
       return false;
     }
@@ -610,7 +603,8 @@ public class Destination {
     return config.isSingleProjectMatch();
   }
 
-  boolean wouldPushRef(String ref) {
+  @Override
+  public boolean wouldReplicateRef(String ref) {
     if (!config.replicatePermissions() && RefNames.REFS_CONFIG.equals(ref)) {
       return false;
     }
@@ -634,7 +628,8 @@ public class Destination {
     return config.replicateProjectDeletions();
   }
 
-  List<URIish> getURIs(Project.NameKey project, String urlMatch) {
+  @Override
+  public List<URIish> getURIs(Project.NameKey project, String urlMatch) {
     List<URIish> r = Lists.newArrayListWithCapacity(config.getRemoteConfig().getURIs().size());
     for (URIish uri : config.getRemoteConfig().getURIs()) {
       if (matches(uri, urlMatch)) {
@@ -681,19 +676,23 @@ public class Destination {
     }
   }
 
-  ImmutableList<String> getAdminUrls() {
+  @Override
+  public ImmutableList<String> getAdminUrls() {
     return config.getAdminUrls();
   }
 
-  ImmutableList<String> getUrls() {
+  @Override
+  public ImmutableList<String> getUrls() {
     return config.getUrls();
   }
 
-  ImmutableList<String> getAuthGroupNames() {
+  @Override
+  public ImmutableList<String> getAuthGroupNames() {
     return config.getAuthGroupNames();
   }
 
-  ImmutableList<String> getProjects() {
+  @Override
+  public ImmutableList<String> getProjects() {
     return config.getProjects();
   }
 
@@ -701,7 +700,8 @@ public class Destination {
     return config.getLockErrorMaxRetries();
   }
 
-  String getRemoteConfigName() {
+  @Override
+  public String getRemoteConfigName() {
     return config.getRemoteConfig().getName();
   }
 
