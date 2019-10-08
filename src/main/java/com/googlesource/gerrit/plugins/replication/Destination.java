@@ -64,6 +64,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -576,6 +577,17 @@ public class Destination {
       replicationTasksStorage.get().finish(op);
       inFlight.remove(op.getURI());
     }
+  }
+
+  public Set<String> getPrunable() {
+    Set<String> prunable = new HashSet<>();
+    for (PushOne push : pending.values()) {
+      if (!replicationTasksStorage.get().isWaiting(push)) {
+        repLog.error("No longer isWaiting, can prune " + push.getURI());
+        prunable.add(push.toString());
+      }
+    }
+    return prunable;
   }
 
   private boolean refHasPendingPush(URIish opUri, String ref) {
