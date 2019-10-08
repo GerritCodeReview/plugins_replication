@@ -30,8 +30,10 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.ProvisionException;
 import com.google.inject.Scopes;
+import com.google.inject.TypeLiteral;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
+import com.google.inject.name.Names;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -40,7 +42,7 @@ import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.transport.SshSessionFactory;
 import org.eclipse.jgit.util.FS;
 
-class ReplicationModule extends AbstractModule {
+public class ReplicationModule extends AbstractModule {
   private final Path cfgPath;
 
   @Inject
@@ -75,16 +77,21 @@ class ReplicationModule extends AbstractModule {
     install(new FactoryModuleBuilder().build(PushAll.Factory.class));
 
     bind(EventBus.class).in(Scopes.SINGLETON);
-    bind(ReplicationDestinations.class).to(DestinationsCollection.class);
-    bind(ReplicationConfigValidator.class).to(DestinationsCollection.class);
+    bind(new TypeLiteral<ReplicationEndpoints<Destination>>() {}).to(DestinationsCollection.class);
+    bind(new TypeLiteral<ReplicationConfigValidator<DestinationConfiguration>>() {})
+        .to(DestinationsCollection.class);
 
     if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
-      bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
+      bind(ReplicationConfig.class)
+          .annotatedWith(Names.named(DestinationConfiguration.NAME))
+          .to(new TypeLiteral<AutoReloadConfigDecorator<DestinationConfiguration>>() {});
       bind(LifecycleListener.class)
           .annotatedWith(UniqueAnnotations.create())
-          .to(AutoReloadConfigDecorator.class);
+          .to(new TypeLiteral<AutoReloadConfigDecorator<DestinationConfiguration>>() {});
     } else {
-      bind(ReplicationConfig.class).to(ReplicationFileBasedConfig.class);
+      bind(ReplicationConfig.class)
+          .annotatedWith(Names.named(DestinationConfiguration.NAME))
+          .to(ReplicationFileBasedConfig.class);
     }
 
     DynamicSet.setOf(binder(), ReplicationStateListener.class);

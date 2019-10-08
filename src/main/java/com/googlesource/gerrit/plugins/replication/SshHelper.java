@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.name.Named;
 import java.io.IOException;
 import java.io.OutputStream;
 import org.eclipse.jgit.errors.TransportException;
@@ -33,7 +34,8 @@ public class SshHelper {
 
   @Inject
   protected SshHelper(
-      ReplicationConfig replicationConfig, Provider<SshSessionFactory> sshSessionFactoryProvider) {
+      @Named(DestinationConfiguration.NAME) ReplicationConfig replicationConfig,
+      Provider<SshSessionFactory> sshSessionFactoryProvider) {
     this.sshSessionFactoryProvider = sshSessionFactoryProvider;
     this.commandTimeout = replicationConfig.getSshCommandTimeout();
     this.connectionTimeout = replicationConfig.getSshConnectionTimeout();
