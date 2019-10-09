@@ -2,6 +2,247 @@
   "comments": [
     {
       "key": {
+        "uuid": "ec39302a_aae8c1bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "tightly",
+      "range": {
+        "startLine": 9,
+        "startChar": 15,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b502e54_24924d59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "Allow",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 18
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecc8a30e_9f88f2f1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "Should this a generic type also?",
+      "range": {
+        "startLine": 213,
+        "startChar": 9,
+        "endLine": 213,
+        "endChar": 18
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91b355de_e38ffd25",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "Why do we need to repeat the class name as a public constant?",
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c565d2c_2292871e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/OnStartStop.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "This isn\u0027t mentioned in the commit message: why do we need to introduce a named binding?",
+      "range": {
+        "startLine": 40,
+        "startChar": 6,
+        "endLine": 40,
+        "endChar": 43
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4b772f1_34e600ec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "Why do we need a named binding?",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 129,
+        "endChar": 43
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23dd74ec_7ebf53d3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "JavaDocs missing, as this becomes a public interface.",
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbb20d82_308ab836",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "Look like implementation-specific settings, rather than configuration of the destination.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 31
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4489a463_ead809fd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "Is this strictly necessary as part of the interface?",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 3
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92509075_8e421976",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigValidator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "This wouldn\u0027t link to anything.",
+      "range": {
+        "startLine": 26,
+        "startChar": 31,
+        "endLine": 26,
+        "endChar": 40
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93360723_5fbee69d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationEndpoint.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "This class doesn\u0027t look like part of an interface but rather the implementation details of the push replication mechanism.",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 26,
+        "endChar": 21
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43371b83_ec92f08b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationEndpoint.java",
         "patchSetId": 3
@@ -42,6 +283,145 @@
         "startChar": 4,
         "endLine": 28,
         "endChar": 41
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b528fec5_460c709c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationEndpoint.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "I agree with Ponch: this should stay as part of the current push replication mechanism. Interface should just define the API and NOT include any reference of how the implementation would look like.",
+      "parentUuid": "6ad50f59_001c5313",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 41
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "533d84c4_127982e9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationEndpoint.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "Do we need this method?",
+      "range": {
+        "startLine": 36,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 27
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9cb6540_6d4693d1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "Why this needs to be public?",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 7
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ff2fd45_16049ff0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "Why is this extra named annotation needed?",
+      "range": {
+        "startLine": 86,
+        "startChar": 10,
+        "endLine": 86,
+        "endChar": 68
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1757136_e428d4f9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "range": {
+        "startLine": 66,
+        "startChar": 26,
+        "endLine": 66,
+        "endChar": 63
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "daddff54_85e61001",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "range": {
+        "startLine": 37,
+        "startChar": 6,
+        "endLine": 37,
+        "endChar": 44
       },
       "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",

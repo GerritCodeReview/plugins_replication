@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1609ba79_7eb86625",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 0,
+      "message": "Why this removal? It doesn\u0027t look related to what is described in the commit message.",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 0
+      },
+      "revId": "8570a5d231705aa9d8ed63d23c162fd0d7352fd4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4472b9f_39fa7194",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-09T21:40:06Z",
+      "side": 0,
+      "message": "Why has this been removed?",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 3
+      },
+      "revId": "8570a5d231705aa9d8ed63d23c162fd0d7352fd4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
