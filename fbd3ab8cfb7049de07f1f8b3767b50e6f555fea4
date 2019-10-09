@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "57c286b4_a6952836",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2019-10-09T23:02:21Z",
+      "side": 1,
+      "message": "No, the message as-is reads as grammatically correct English. \u0027this\u0027 refers to the abort action.",
+      "parentUuid": "15c737e4_06ab09c9",
+      "range": {
+        "startLine": 26,
+        "startChar": 24,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "fbd3ab8cfb7049de07f1f8b3767b50e6f555fea4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3db9b083_52d5bc66",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -59,6 +83,30 @@
       "writtenOn": "2019-10-09T22:01:16Z",
       "side": 1,
       "message": "help ensuring",
+      "range": {
+        "startLine": 27,
+        "startChar": 17,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "fbd3ab8cfb7049de07f1f8b3767b50e6f555fea4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28df1011_2b8a4f00",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2019-10-09T23:02:21Z",
+      "side": 1,
+      "message": "I think the text as-is reads correctly.",
+      "parentUuid": "3db9b083_52d5bc66",
       "range": {
         "startLine": 27,
         "startChar": 17,
