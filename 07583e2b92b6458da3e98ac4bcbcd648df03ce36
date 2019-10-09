@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43371b83_ec92f08b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationEndpoint.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2019-10-09T16:14:02Z",
+      "side": 1,
+      "message": "Will the concept of pending and inFlight changes make sense for \"pull\" or we need a further abstraction for this?",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 41
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
