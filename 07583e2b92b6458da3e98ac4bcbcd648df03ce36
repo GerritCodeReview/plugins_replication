@@ -111,6 +111,30 @@
     },
     {
       "key": {
+        "uuid": "daa2bf9f_db112576",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/OnStartStop.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-10T13:44:09Z",
+      "side": 1,
+      "message": "See my other comments",
+      "parentUuid": "9c565d2c_2292871e",
+      "range": {
+        "startLine": 40,
+        "startChar": 6,
+        "endLine": 40,
+        "endChar": 43
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e4b772f1_34e600ec",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
@@ -122,6 +146,30 @@
       "writtenOn": "2019-10-09T21:40:06Z",
       "side": 1,
       "message": "Why do we need a named binding?",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 129,
+        "endChar": 43
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "268bd527_94e73534",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-10T13:44:09Z",
+      "side": 1,
+      "message": "See my other comments",
+      "parentUuid": "e4b772f1_34e600ec",
       "range": {
         "startLine": 129,
         "startChar": 6,
@@ -151,6 +199,24 @@
     },
     {
       "key": {
+        "uuid": "ac38b4ff_8a82f0ab",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-10T13:44:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "23dd74ec_7ebf53d3",
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fbb20d82_308ab836",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
         "patchSetId": 3
@@ -174,6 +240,30 @@
     },
     {
       "key": {
+        "uuid": "8aa84eb4_597374c3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-10T13:44:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fbb20d82_308ab836",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 31
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4489a463_ead809fd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
         "patchSetId": 3
@@ -185,6 +275,30 @@
       "writtenOn": "2019-10-09T21:40:06Z",
       "side": 1,
       "message": "Is this strictly necessary as part of the interface?",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 3
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb781869_1216edda",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-10T13:44:09Z",
+      "side": 1,
+      "message": "Replication always happens in the context of a project, whether is pull or push replication, so I believe this method should be part of this interface and because it is going to be the same to both source and destination, so I thought about having it as a default in the interface, rather than duplicating the code.",
+      "parentUuid": "4489a463_ead809fd",
       "range": {
         "startLine": 56,
         "startChar": 0,
@@ -220,6 +334,30 @@
     },
     {
       "key": {
+        "uuid": "c1609886_47e620f9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigValidator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-10T13:44:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "92509075_8e421976",
+      "range": {
+        "startLine": 26,
+        "startChar": 31,
+        "endLine": 26,
+        "endChar": 40
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93360723_5fbee69d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationEndpoint.java",
         "patchSetId": 3
@@ -240,6 +378,30 @@
       "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9216ffe3_6d3d5260",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationEndpoint.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-10T13:44:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "93360723_5fbee69d",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 26,
+        "endChar": 21
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -314,6 +476,30 @@
     },
     {
       "key": {
+        "uuid": "60385d3c_57e4b7ce",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationEndpoint.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-10T13:44:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b528fec5_460c709c",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 41
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "533d84c4_127982e9",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationEndpoint.java",
         "patchSetId": 3
@@ -334,6 +520,30 @@
       "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ba2faeb_3dc2356f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationEndpoint.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-10T13:44:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "533d84c4_127982e9",
+      "range": {
+        "startLine": 36,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 27
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -360,6 +570,30 @@
     },
     {
       "key": {
+        "uuid": "49776d26_714e9073",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-10T13:44:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d9cb6540_6d4693d1",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 7
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ff2fd45_16049ff0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
         "patchSetId": 3
@@ -371,6 +605,30 @@
       "writtenOn": "2019-10-09T21:40:06Z",
       "side": 1,
       "message": "Why is this extra named annotation needed?",
+      "range": {
+        "startLine": 86,
+        "startChar": 10,
+        "endLine": 86,
+        "endChar": 68
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "529e3304_9993d806",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-10T13:44:09Z",
+      "side": 1,
+      "message": "See my other comments regarding scoping of ReplicationConfig binding",
+      "parentUuid": "4ff2fd45_16049ff0",
       "range": {
         "startLine": 86,
         "startChar": 10,
@@ -406,6 +664,30 @@
     },
     {
       "key": {
+        "uuid": "9265e6f9_0dce51af",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-10T13:44:09Z",
+      "side": 1,
+      "message": "See my comment above: this is needed to accomodate pull-replication and to scope this binding only to DestinationConfiguration. I\u0027ll split this in a follow up change",
+      "parentUuid": "f1757136_e428d4f9",
+      "range": {
+        "startLine": 66,
+        "startChar": 26,
+        "endLine": 66,
+        "endChar": 63
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "daddff54_85e61001",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
         "patchSetId": 3
@@ -417,6 +699,30 @@
       "writtenOn": "2019-10-09T21:40:06Z",
       "side": 1,
       "message": "Why is this needed?",
+      "range": {
+        "startLine": 37,
+        "startChar": 6,
+        "endLine": 37,
+        "endChar": 44
+      },
+      "revId": "07583e2b92b6458da3e98ac4bcbcd648df03ce36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "426cb5f9_37e51164",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SshHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-10T13:44:09Z",
+      "side": 1,
+      "message": "ReplicationConfig is an interface, which can be bound to either AutoReloadConfigDecorator\u003cDestinationConfig\u003e or ReplicationFileBasedConfig.\n\nHowever, with the introduction of pull-replication, the _same_ interface will need to be bound also to AutoReloadConfigDecorator\u003cSourceConfig\u003e.\n\nIn order to allow this we need to tell guice which of the bindings we want it to inject, hence the scoping with a name.\n\nI agree though, this is not strictly needed in this change, so I\u0027ll split it out a a separate one to be reviewed in isolation.",
+      "parentUuid": "daddff54_85e61001",
       "range": {
         "startLine": 37,
         "startChar": 6,
