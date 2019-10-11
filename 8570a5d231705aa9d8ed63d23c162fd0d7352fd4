@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b7ac42a4_65292e9e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-11T15:15:11Z",
+      "side": 0,
+      "message": "This was moved in the ReplicationEndpoint interface.\nBut one of the points raise was that this is an actual implementation and not an API, so I have moved it back here.",
+      "parentUuid": "1609ba79_7eb86625",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 0
+      },
+      "revId": "8570a5d231705aa9d8ed63d23c162fd0d7352fd4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4472b9f_39fa7194",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "8570a5d231705aa9d8ed63d23c162fd0d7352fd4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd705423_52de3ec9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-11T15:15:11Z",
+      "side": 0,
+      "message": "This has not been removed, but moved to the RemoteConfiguration interface instead.",
+      "parentUuid": "a4472b9f_39fa7194",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 3
+      },
+      "revId": "8570a5d231705aa9d8ed63d23c162fd0d7352fd4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
