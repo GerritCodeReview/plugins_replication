@@ -26,7 +26,9 @@ import com.google.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.jgit.lib.ObjectId;
@@ -44,6 +46,10 @@ public class ReplicationTasksStorage {
     public final String uri;
     public final String remote;
 
+    public ReplicateRefUpdate(PushOne push, String ref) {
+      this(push.getProjectNameKey().get(), ref, push.getURI(), push.getRemoteName());
+    }
+
     public ReplicateRefUpdate(String project, String ref, URIish uri, String remote) {
       this.project = project;
       this.ref = ref;
@@ -59,11 +65,14 @@ public class ReplicationTasksStorage {
 
   private static Gson GSON = new Gson();
 
-  private final Path refUpdates;
+  private final Path runningUpdates;
+  private final Path waitingUpdates;
 
   @Inject
   ReplicationTasksStorage(ReplicationConfig config) {
-    refUpdates = config.getEventsDirectory().resolve("ref-updates");
+    Path refUpdates = config.getEventsDirectory().resolve("ref-updates");
+    runningUpdates = refUpdates.resolve("running");
+    waitingUpdates = refUpdates.resolve("waiting");
   }
 
   public String persist(ReplicateRefUpdate r) {
@@ -75,13 +84,37 @@ public class ReplicationTasksStorage {
     this.disableDeleteForTesting = deleteDisabled;
   }
 
-  public void delete(ReplicateRefUpdate r) {
-    new Task(r).delete();
+  public void start(PushOne push) {
+    for (String ref : push.getRefs()) {
+      new Task(new ReplicateRefUpdate(push, ref)).start();
+    }
   }
 
-  public List<ReplicateRefUpdate> list() {
+  public void abort(PushOne push) {
+    for (String ref : push.getRefs()) {
+      new Task(new ReplicateRefUpdate(push, ref)).abort();
+    }
+  }
+
+  public void abortAll() {
+    for (ReplicateRefUpdate r : list(createDir(runningUpdates))) {
+      new Task(r).abort();
+    }
+  }
+
+  public void finish(PushOne push) {
+    for (String ref : push.getRefs()) {
+      new Task(new ReplicateRefUpdate(push, ref)).finish();
+    }
+  }
+
+  public List<ReplicateRefUpdate> listWaiting() {
+    return list(createDir(waitingUpdates));
+  }
+
+  private List<ReplicateRefUpdate> list(Path tasks) {
     List<ReplicateRefUpdate> results = new ArrayList<>();
-    try (DirectoryStream<Path> events = Files.newDirectoryStream(refUpdates())) {
+    try (DirectoryStream<Path> events = Files.newDirectoryStream(tasks)) {
       for (Path e : events) {
         if (Files.isRegularFile(e)) {
           String json = new String(Files.readAllBytes(e), UTF_8);
@@ -89,7 +122,7 @@ public class ReplicationTasksStorage {
         }
       }
     } catch (IOException e) {
-      logger.atSevere().withCause(e).log("Error when firing pending tasks");
+      logger.atSevere().withCause(e).log("Error while listing tasks");
     }
     return results;
   }
@@ -99,11 +132,11 @@ public class ReplicationTasksStorage {
     return ObjectId.fromRaw(Hashing.sha1().hashString(s, UTF_8).asBytes());
   }
 
-  private Path refUpdates() {
+  private static Path createDir(Path dir) {
     try {
-      return Files.createDirectories(refUpdates);
+      return Files.createDirectories(dir);
     } catch (IOException e) {
-      throw new ProvisionException(String.format("Couldn't create %s", refUpdates), e);
+      throw new ProvisionException(String.format("Couldn't create %s", dir), e);
     }
   }
 
@@ -111,41 +144,61 @@ public class ReplicationTasksStorage {
     public final ReplicateRefUpdate update;
     public final String json;
     public final String taskKey;
-    public final Path file;
+    public final Path running;
+    public final Path waiting;
 
     public Task(ReplicateRefUpdate update) {
       this.update = update;
       json = GSON.toJson(update) + "\n";
       String key = update.project + "\n" + update.ref + "\n" + update.uri + "\n" + update.remote;
       taskKey = sha1(key).name();
-      file = refUpdates().resolve(taskKey);
+      running = createDir(runningUpdates).resolve(taskKey);
+      waiting = createDir(waitingUpdates).resolve(taskKey);
     }
 
     public String persist() {
-      if (Files.exists(file)) {
+      if (Files.exists(waiting)) {
         return taskKey;
       }
 
       try {
-        logger.atFine().log("CREATE %s %s", file, updateLog());
-        Files.write(file, json.getBytes(UTF_8));
+        logger.atFine().log("CREATE %s %s", waiting, updateLog());
+        Files.write(waiting, json.getBytes(UTF_8));
       } catch (IOException e) {
         logger.atWarning().withCause(e).log("Couldn't persist task %s", json);
       }
       return taskKey;
     }
 
-    public void delete() {
+    public void start() {
+      rename(waiting, running);
+    }
+
+    public void abort() {
+      rename(running, waiting);
+    }
+
+    public void finish() {
       if (disableDeleteForTesting) {
-        logger.atFine().log("DELETE %s %s DISABLED", file, updateLog());
+        logger.atFine().log("DELETE %s %s DISABLED", running, updateLog());
         return;
       }
 
       try {
-        logger.atFine().log("DELETE %s %s", file, updateLog());
-        Files.delete(file);
+        logger.atFine().log("DELETE %s %s", running, updateLog());
+        Files.delete(running);
+      } catch (NoSuchFileException e) { // expected after an abortRunning()
       } catch (IOException e) {
         logger.atSevere().withCause(e).log("Error while deleting task %s", taskKey);
+      }
+    }
+
+    private void rename(Path from, Path to) {
+      try {
+        logger.atFine().log("RENAME %s to %s %s", from, to, updateLog());
+        Files.move(from, to, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+      } catch (IOException e) {
+        logger.atSevere().withCause(e).log("Error while renaming task %s", taskKey);
       }
     }
 
