@@ -76,6 +76,11 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   }
 
   @Override
+  public int getDistributionInterval() {
+    return config.getInt("replication", "distributionInterval", 0);
+  }
+
+  @Override
   public int getMaxRefsToLog() {
     return maxRefsToLog;
   }
