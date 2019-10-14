@@ -98,16 +98,17 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     assertThat(destinationsCollections.getAll(FilterType.ALL)).isEqualTo(destinations);
   }
 
-  private AutoReloadConfigDecorator newAutoReloadConfig() throws ConfigInvalidException {
-    AutoReloadRunnable autoReloadRunnable =
-        new AutoReloadRunnable(
+  private AutoReloadConfigDecorator<DestinationConfiguration, ReplicationQueue>
+      newAutoReloadConfig() throws ConfigInvalidException {
+    AutoReloadRunnable<DestinationConfiguration, ReplicationQueue> autoReloadRunnable =
+        new AutoReloadRunnable<>(
             newDestinationsCollections(replicationFileBasedConfig),
             replicationFileBasedConfig,
             sitePaths,
             pluginDataPath,
             eventBus,
             Providers.of(replicationQueueMock));
-    return new AutoReloadConfigDecorator(
+    return new AutoReloadConfigDecorator<>(
         "replication", workQueueMock, replicationFileBasedConfig, autoReloadRunnable, eventBus);
   }
 

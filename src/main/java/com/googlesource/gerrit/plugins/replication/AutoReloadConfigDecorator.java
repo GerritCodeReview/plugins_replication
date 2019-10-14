@@ -27,7 +27,8 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 @Singleton
-public class AutoReloadConfigDecorator<T extends RemoteConfiguration>
+public class AutoReloadConfigDecorator<
+        T extends RemoteConfiguration, R extends ReplicationQueueInterface>
     implements ReplicationConfig, LifecycleListener {
   private static final long RELOAD_DELAY = 120;
   private static final long RELOAD_INTERVAL = 60;
@@ -36,14 +37,14 @@ public class AutoReloadConfigDecorator<T extends RemoteConfiguration>
 
   private final ScheduledExecutorService autoReloadExecutor;
   private ScheduledFuture<?> autoReloadRunnable;
-  private final AutoReloadRunnable<T> reloadRunner;
+  private final AutoReloadRunnable<T, R> reloadRunner;
 
   @Inject
   public AutoReloadConfigDecorator(
       @PluginName String pluginName,
       WorkQueue workQueue,
       ReplicationFileBasedConfig replicationConfig,
-      AutoReloadRunnable<T> reloadRunner,
+      AutoReloadRunnable<T, R> reloadRunner,
       EventBus eventBus) {
     this.currentConfig = replicationConfig;
     this.autoReloadExecutor = workQueue.createQueue(1, pluginName + "_auto-reload-config");
