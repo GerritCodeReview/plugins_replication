@@ -382,10 +382,12 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     getReplicationQueueInstance().stop();
   }
 
-  private AutoReloadConfigDecorator<DestinationConfiguration>
+  private AutoReloadConfigDecorator<DestinationConfiguration, ReplicationQueue>
       getAutoReloadConfigDecoratorInstance() {
     return getInstance(
-        Key.get(new TypeLiteral<AutoReloadConfigDecorator<DestinationConfiguration>>() {}));
+        Key.get(
+            new TypeLiteral<
+                AutoReloadConfigDecorator<DestinationConfiguration, ReplicationQueue>>() {}));
   }
 
   private ReplicationQueue getReplicationQueueInstance() {

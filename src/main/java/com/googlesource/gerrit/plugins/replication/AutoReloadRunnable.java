@@ -23,13 +23,14 @@ import com.google.inject.Provider;
 import java.nio.file.Path;
 import java.util.List;
 
-public class AutoReloadRunnable<T extends RemoteConfiguration> implements Runnable {
+public class AutoReloadRunnable<T extends RemoteConfiguration, R extends ReplicationQueueInterface>
+    implements Runnable {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final SitePaths site;
   private final Path pluginDataDir;
   private final EventBus eventBus;
-  private final Provider<ReplicationQueue> replicationQueue;
+  private final Provider<R> replicationQueue;
   private final ReplicationConfigValidator<T> configValidator;
 
   private ReplicationFileBasedConfig loadedConfig;
@@ -43,7 +44,7 @@ public class AutoReloadRunnable<T extends RemoteConfiguration> implements Runnab
       SitePaths site,
       @PluginData Path pluginDataDir,
       EventBus eventBus,
-      Provider<ReplicationQueue> replicationQueue) {
+      Provider<R> replicationQueue) {
     this.loadedConfig = config;
     this.loadedConfigVersion = config.getVersion();
     this.lastFailedConfigVersion = "";
@@ -57,7 +58,7 @@ public class AutoReloadRunnable<T extends RemoteConfiguration> implements Runnab
   @Override
   public synchronized void run() {
     String pendingConfigVersion = loadedConfig.getVersion();
-    ReplicationQueue queue = replicationQueue.get();
+    R queue = replicationQueue.get();
     if (pendingConfigVersion.equals(loadedConfigVersion)
         || pendingConfigVersion.equals(lastFailedConfigVersion)
         || !queue.isRunning()

@@ -41,6 +41,7 @@ import org.slf4j.LoggerFactory;
 /** Manages automatic replication to remote repositories. */
 public class ReplicationQueue
     implements LifecycleListener,
+        ReplicationQueueInterface,
         GitReferenceUpdatedListener,
         ProjectDeletedListener,
         HeadUpdatedListener {
@@ -92,10 +93,12 @@ public class ReplicationQueue
     }
   }
 
+  @Override
   public boolean isRunning() {
     return running;
   }
 
+  @Override
   public boolean isReplaying() {
     return replaying;
   }
