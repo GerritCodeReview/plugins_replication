@@ -132,8 +132,6 @@ public class ReplicationQueue
     for (Destination cfg : destinations.get().getAll(FilterType.ALL)) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
         for (URIish uri : cfg.getURIs(project, urlMatch)) {
-          replicationTasksStorage.persist(
-              new ReplicateRefUpdate(project.get(), refName, uri, cfg.getRemoteConfigName()));
           cfg.schedule(project, refName, uri, state, now);
         }
       }
