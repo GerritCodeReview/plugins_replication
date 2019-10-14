@@ -29,7 +29,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
-import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Queue;
@@ -137,8 +136,6 @@ public class ReplicationQueue
     for (Destination cfg : destinations.get().getAll(FilterType.ALL)) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
         for (URIish uri : cfg.getURIs(project, urlMatch)) {
-          replicationTasksStorage.persist(
-              new ReplicateRefUpdate(project.get(), refName, uri, cfg.getRemoteConfigName()));
           cfg.schedule(project, refName, uri, state, now);
         }
       }

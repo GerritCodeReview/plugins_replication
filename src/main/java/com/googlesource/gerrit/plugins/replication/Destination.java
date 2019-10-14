@@ -401,6 +401,10 @@ public class Destination {
       }
     }
 
+    replicationTasksStorage
+        .get()
+        .persist(new ReplicateRefUpdate(project.get(), ref, uri, getRemoteConfigName()));
+
     synchronized (stateLock) {
       PushOne task = getPendingPush(uri);
       if (task == null) {
