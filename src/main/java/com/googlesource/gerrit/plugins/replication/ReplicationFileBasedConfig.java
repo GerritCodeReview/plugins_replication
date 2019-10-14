@@ -47,7 +47,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     this.pluginDataDir = pluginDataDir;
   }
 
-  static String replaceName(String in, String name, boolean keyIsOptional) {
+  public static String replaceName(String in, String name, boolean keyIsOptional) {
     String key = "${name}";
     int n = in.indexOf(key);
     if (0 <= n) {
@@ -93,7 +93,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     return cfgPath;
   }
 
-  FileBasedConfig getConfig() {
+  public FileBasedConfig getConfig() {
     return config;
   }
 
