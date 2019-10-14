@@ -66,6 +66,11 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleLi
   }
 
   @Override
+  public int getDistributionInterval() {
+    return currentConfig.getDistributionInterval();
+  }
+
+  @Override
   public synchronized int getMaxRefsToLog() {
     return currentConfig.getMaxRefsToLog();
   }

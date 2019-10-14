@@ -30,6 +30,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private Path cfgPath;
   private boolean replicateAllOnPluginStart;
   private boolean defaultForceUpdate;
+
   private int maxRefsToLog;
   private int sshCommandTimeout;
   private int sshConnectionTimeout = DEFAULT_SSH_CONNECTION_TIMEOUT_MS;
@@ -73,6 +74,11 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   @Override
   public boolean isDefaultForceUpdate() {
     return defaultForceUpdate;
+  }
+
+  @Override
+  public int getDistributionInterval() {
+    return config.getInt("replication", "distributionInterval", 0);
   }
 
   @Override
