@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerrit;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerritHttp;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isSSH;
+import static com.googlesource.gerrit.plugins.replication.ReplicationFileBasedConfig.replaceName;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static java.util.stream.Collectors.toList;
 
@@ -344,17 +345,5 @@ public class DestinationsCollection
       }
     }
     return result;
-  }
-
-  static String replaceName(String in, String name, boolean keyIsOptional) {
-    String key = "${name}";
-    int n = in.indexOf(key);
-    if (0 <= n) {
-      return in.substring(0, n) + name + in.substring(n + key.length());
-    }
-    if (keyIsOptional) {
-      return in;
-    }
-    return null;
   }
 }
