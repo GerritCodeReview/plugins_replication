@@ -99,9 +99,14 @@ public class ReplicationQueue
     if (!running) {
       config.startup(workQueue);
       running = true;
-      Thread t = new Thread(this::firePendingEvents, "firePendingEvents");
-      t.setDaemon(true);
-      t.start();
+//<<<<<<< HEAD
+//      Thread t = new Thread(this::firePendingEvents, "firePendingEvents");
+//      t.setDaemon(true);
+//      t.start();
+//=======
+      replicationTasksStorage.resetAll();
+      firePendingEvents();
+//>>>>>>> 48ff6f3... Fix potential loss of persisted replication task
       fireBeforeStartupEvents();
     }
   }
@@ -205,17 +210,29 @@ public class ReplicationQueue
   }
 
   private void firePendingEvents() {
+    replaying = true;
     try {
+      Set<String> eventsReplayed = new HashSet<>();
       replaying = true;
-      for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.list()) {
-        if (t == null) {
-          repLog.warn("Encountered null replication event in ReplicationTasksStorage");
-          continue;
-        }
-        try {
+      // <<<<<<< HEAD
+      //      for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.list()) {
+      //        if (t == null) {
+      //          repLog.warn("Encountered null replication event in ReplicationTasksStorage");
+      //          continue;
+      //        }
+      //        try {
+      //          fire(new URIish(t.uri), new Project.NameKey(t.project), t.ref);
+      //        } catch (URISyntaxException e) {
+      //          repLog.error("Encountered malformed URI for persisted event %s", t);
+      // =======
+      for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.listWaiting()) {
+        String eventKey = String.format("%s:%s", t.project, t.ref);
+        if (!eventsReplayed.contains(eventKey)) {
+          repLog.info("Firing pending task {}", eventKey);
           fire(new URIish(t.uri), new Project.NameKey(t.project), t.ref);
-        } catch (URISyntaxException e) {
-          repLog.error("Encountered malformed URI for persisted event %s", t);
+          //          fire(t.project, t.ref);
+          eventsReplayed.add(eventKey);
+          // >>>>>>> 48ff6f3... Fix potential loss of persisted replication task
         }
       }
     } catch (Throwable e) {
