@@ -52,6 +52,24 @@
       "revId": "f27105a1a39254e6b18e5d2d97f88e98f736ecd5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f567b7f_924201a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-15T14:01:10Z",
+      "side": 1,
+      "message": "I agree with this, I don\u0027t like postponing them either, I could take our leave this change. I was fiddling with the code and wanted to see where I could put this call with the least chance of it being missed, but it does delay things. I personally don\u0027t care about missing it on shutdown because until we persist updates before they are made (pre hook instead of post hook), then there will always be a gap and I don\u0027t plan to rely on this to eliminate \"startup replication\". If we ever did have a pre hook that recorded updates before they happened, then this would likely be the right place to fire that the updates did happen and that replication can now proceed.",
+      "parentUuid": "ad7cb244_7b03f53b",
+      "revId": "f27105a1a39254e6b18e5d2d97f88e98f736ecd5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
