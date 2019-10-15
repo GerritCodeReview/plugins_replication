@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1ff3efd_22d224b7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-10-15T12:54:25Z",
+      "side": 1,
+      "message": "While this works it looks more like a workaround than a proper solution.\nThe call stack is:\n\n  firePendingEvents \u003e onGitReferenceUpdated \u003e wouldPushRef\n\nHowever, pushing all refs is actually never triggered as a result of processing a ref-updated\nevent. Therefore, it also shouldn\u0027t be replayed using this mechanism. Having said that,\nI believe that this is an issue introduced in [1] and not in this change.\n\nIMHO, replaying of the push-all tasks shouldn\u0027t (ab)use the onGitReferenceUpdated code path.\n\n[1] https://gerrit-review.googlesource.com/c/plugins/replication/+/235592",
+      "revId": "3ddf835c203565dbd415f468e0d40eac1b815c63",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
