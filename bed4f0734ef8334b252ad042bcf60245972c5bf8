@@ -45,6 +45,30 @@
       "revId": "bed4f0734ef8334b252ad042bcf60245972c5bf8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd6041e0_4dc943e5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-15T13:46:40Z",
+      "side": 1,
+      "message": "I think create() fits better with the action being persisted. persist() is action of making something permanent, not necessarily a creation, so persist could be used to describe any of the actions, i.e. \"persist the abort\", \"persist the running state\"...\n\nSince I am improving the \"create\" path, it seemed like a good time to improve the naming also.",
+      "parentUuid": "d0175836_6fc1d88a",
+      "range": {
+        "startLine": 168,
+        "startChar": 18,
+        "endLine": 168,
+        "endChar": 24
+      },
+      "revId": "bed4f0734ef8334b252ad042bcf60245972c5bf8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
