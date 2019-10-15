@@ -55,7 +55,8 @@ public class AutoReloadRunnableTest {
 
   @Test
   public void configurationIsReloadedWhenValidationSucceeds() {
-    ReplicationConfigValidator validator = new TestValidConfigurationListener();
+    ReplicationConfigValidator<DestinationConfiguration> validator =
+        new TestValidConfigurationListener();
 
     attemptAutoReload(validator);
 
@@ -64,16 +65,17 @@ public class AutoReloadRunnableTest {
 
   @Test
   public void configurationIsNotReloadedWhenValidationFails() {
-    ReplicationConfigValidator validator = new TestInvalidConfigurationListener();
+    ReplicationConfigValidator<DestinationConfiguration> validator =
+        new TestInvalidConfigurationListener();
 
     attemptAutoReload(validator);
 
     assertThat(onReloadSubscriber.reloaded).isFalse();
   }
 
-  private void attemptAutoReload(ReplicationConfigValidator validator) {
-    final AutoReloadRunnable autoReloadRunnable =
-        new AutoReloadRunnable(
+  private void attemptAutoReload(ReplicationConfigValidator<DestinationConfiguration> validator) {
+    final AutoReloadRunnable<DestinationConfiguration> autoReloadRunnable =
+        new AutoReloadRunnable<>(
             validator,
             newVersionConfig(),
             sitePaths,
@@ -103,14 +105,16 @@ public class AutoReloadRunnableTest {
     }
   }
 
-  private static class TestValidConfigurationListener implements ReplicationConfigValidator {
+  private static class TestValidConfigurationListener
+      implements ReplicationConfigValidator<DestinationConfiguration> {
     @Override
     public List<DestinationConfiguration> validateConfig(ReplicationFileBasedConfig newConfig) {
       return Collections.emptyList();
     }
   }
 
-  private static class TestInvalidConfigurationListener implements ReplicationConfigValidator {
+  private static class TestInvalidConfigurationListener
+      implements ReplicationConfigValidator<DestinationConfiguration> {
     @Override
     public List<DestinationConfiguration> validateConfig(
         ReplicationFileBasedConfig configurationChangeEvent) throws ConfigInvalidException {

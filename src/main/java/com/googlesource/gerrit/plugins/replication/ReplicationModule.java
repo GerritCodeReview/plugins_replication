@@ -30,6 +30,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.ProvisionException;
 import com.google.inject.Scopes;
+import com.google.inject.TypeLiteral;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
 import java.io.File;
@@ -76,13 +77,15 @@ class ReplicationModule extends AbstractModule {
 
     bind(EventBus.class).in(Scopes.SINGLETON);
     bind(ReplicationDestinations.class).to(DestinationsCollection.class);
-    bind(ReplicationConfigValidator.class).to(DestinationsCollection.class);
+    bind(new TypeLiteral<ReplicationConfigValidator<DestinationConfiguration>>() {})
+        .to(DestinationsCollection.class);
 
     if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
-      bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
+      bind(ReplicationConfig.class)
+          .to(new TypeLiteral<AutoReloadConfigDecorator<DestinationConfiguration>>() {});
       bind(LifecycleListener.class)
           .annotatedWith(UniqueAnnotations.create())
-          .to(AutoReloadConfigDecorator.class);
+          .to(new TypeLiteral<AutoReloadConfigDecorator<DestinationConfiguration>>() {});
     } else {
       bind(ReplicationConfig.class).to(ReplicationFileBasedConfig.class);
     }

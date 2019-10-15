@@ -53,7 +53,8 @@ import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.URIish;
 
 @Singleton
-public class DestinationsCollection implements ReplicationDestinations, ReplicationConfigValidator {
+public class DestinationsCollection
+    implements ReplicationDestinations, ReplicationConfigValidator<DestinationConfiguration> {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final Factory destinationFactory;
