@@ -232,7 +232,7 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
   }
 
   @Subscribe
-  public synchronized void onReload(List<DestinationConfiguration> destinationConfigurations) {
+  public synchronized void onReload(List<RemoteConfiguration> remoteConfigurations) {
     if (shuttingDown) {
       logger.atWarning().log("Shutting down: configuration reload ignored");
       return;
@@ -240,7 +240,7 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
 
     try {
       replicationQueue.get().stop();
-      destinations = allDestinations(destinationFactory, destinationConfigurations);
+      destinations = allDestinations(destinationFactory, remoteConfigurations);
       logger.atInfo().log("Configuration reloaded: %d destinations", getAll(FilterType.ALL).size());
     } finally {
       replicationQueue.get().start();
@@ -248,7 +248,7 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
   }
 
   @Override
-  public List<DestinationConfiguration> validateConfig(ReplicationFileBasedConfig replicationConfig)
+  public List<RemoteConfiguration> validateConfig(ReplicationFileBasedConfig replicationConfig)
       throws ConfigInvalidException {
     if (!replicationConfig.getConfig().getFile().exists()) {
       logger.atWarning().log(
@@ -280,7 +280,7 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
     boolean defaultForceUpdate =
         replicationConfig.getConfig().getBoolean("gerrit", "defaultForceUpdate", false);
 
-    ImmutableList.Builder<DestinationConfiguration> confs = ImmutableList.builder();
+    ImmutableList.Builder<RemoteConfiguration> confs = ImmutableList.builder();
     for (RemoteConfig c : allRemotes(replicationConfig.getConfig())) {
       if (c.getURIs().isEmpty()) {
         continue;
@@ -321,12 +321,11 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
   }
 
   private List<Destination> allDestinations(
-      Destination.Factory destinationFactory,
-      List<DestinationConfiguration> destinationConfigurations) {
+      Destination.Factory destinationFactory, List<RemoteConfiguration> remoteConfigurations) {
 
     ImmutableList.Builder<Destination> dest = ImmutableList.builder();
-    for (DestinationConfiguration c : destinationConfigurations) {
-      dest.add(destinationFactory.create(c));
+    for (RemoteConfiguration c : remoteConfigurations) {
+      dest.add(destinationFactory.create((DestinationConfiguration) c));
     }
     return dest.build();
   }

@@ -23,9 +23,9 @@ public interface ReplicationConfigValidator {
    * validate the new replication.config
    *
    * @param newConfig new configuration detected
-   * @return List of validated {@link DestinationConfiguration}
+   * @return List of validated {@link RemoteConfiguration}
    * @throws ConfigInvalidException if the new configuration is not valid.
    */
-  List<DestinationConfiguration> validateConfig(ReplicationFileBasedConfig newConfig)
+  List<RemoteConfiguration> validateConfig(ReplicationFileBasedConfig newConfig)
       throws ConfigInvalidException;
 }
