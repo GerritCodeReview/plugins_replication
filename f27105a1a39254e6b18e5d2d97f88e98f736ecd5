@@ -34,6 +34,24 @@
       "revId": "f27105a1a39254e6b18e5d2d97f88e98f736ecd5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad7cb244_7b03f53b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-10-15T13:33:16Z",
+      "side": 1,
+      "message": "IIRC, when I initially implemented the persistence of the replication tasks the idea was to persist them as soon as possible\nin order to minimize the risk of losing them (in the case the plugin gets reloaded or Gerrit restarted). Your arguments for postponing\nthe persistence are in some way justified, but postponing the\npersistence also (slightly) increases the probability of losing replication tasks, those that would actually run.",
+      "parentUuid": "51281711_79d7a47c",
+      "revId": "f27105a1a39254e6b18e5d2d97f88e98f736ecd5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
