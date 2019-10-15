@@ -70,6 +70,24 @@
       "revId": "3ddf835c203565dbd415f468e0d40eac1b815c63",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83ab56e3_b466a719",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-10-15T14:06:17Z",
+      "side": 1,
+      "message": "It is not strictly related to this fix. My comment is more related to the topic this change\nis trying to address: replaying of the pending \"..all..\" tasks.\n\nAnyway, the \"..all..\" is not really a ref. It is used to describe a special case of the\nPushOne implementation which pushes all refs. Why would we even call wouldPushRef(ALL_REFS)\nwhen it the result is always true?",
+      "parentUuid": "3a714e04_339d7c72",
+      "revId": "3ddf835c203565dbd415f468e0d40eac1b815c63",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
