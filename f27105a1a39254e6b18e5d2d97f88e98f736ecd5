@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06c21224_f5ba2991",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-10-15T13:12:19Z",
+      "side": 1,
+      "message": "To fail or to be skipped?\n\nMy understanding of the existing code was that ReplicationTasksStorage.delete is called unconditionally from\nthe finally block in the PushOne.runPushOperation (via the Destination.notifyFinished). And this happens also in the case\nof (some) errors.",
+      "revId": "f27105a1a39254e6b18e5d2d97f88e98f736ecd5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
