@@ -372,7 +372,7 @@ public class Destination {
   void schedule(
       Project.NameKey project, String ref, URIish uri, ReplicationState state, boolean now) {
     repLog.info("scheduling replication {}:{} => {}", project, ref, uri);
-    if (!shouldReplicate(project, ref, state)) {
+    if (!wouldPushProject(project) || !wouldPushRef(ref) || !shouldReplicate(project, ref, state)) {
       return;
     }
 
