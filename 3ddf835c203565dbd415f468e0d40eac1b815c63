@@ -124,6 +124,24 @@
       "revId": "3ddf835c203565dbd415f468e0d40eac1b815c63",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02d3681d_b491919b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-15T16:56:15Z",
+      "side": 1,
+      "message": "\u003e I still find it wrong that ReplicationQueue.firePendingEvents\n\u003e replays both ref-updated and push-all tasks using the onGitReferenceUpdated call.\n\nI agree with this, and I have proposed am independent fix, see https://gerrit-review.googlesource.com/c/plugins/replication/+/240894/4/src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java\n\n\u003e The decision to schedule a pending push-all task should be made already at that place without\n\u003e a need to match \"..all..\" against the replication configuration (in order to satisfy the\n\u003e current encapsulation).\n\nThis part I don\u0027t understand, maybe you can upload a change for this proposal?\n\nTo be clear, this change is not about making the decision to schedule the original push-all, that doesn\u0027t call wouldPushRef() yet, which I think is a mistake since it implements policy outside of the encapsulation layer this method is meant to provide. This change is about making the decision whether to run an already persisted task (which happens to be a push-all for a project) on restart.\n\nI hope that we can evolve things incrementally and evaluate each change on its own whether it improves things, and approve changes that improve things even if they don\u0027t solve every known design problem as long as each change doesn\u0027t take a step in the wrong direction. I believe this change fixes a bug in this method, no matter where this method is used. So while the design as to where the decision to push-all is currently made may not be ideal, I believe this fix is correct regardless of that and I hope you can evaluate it within that scope and approve it if you think it is correct within that scope. I also welcome suggestions for ways to improve the design in future changes beyond this.",
+      "parentUuid": "c74767b4_61ac725d",
+      "revId": "3ddf835c203565dbd415f468e0d40eac1b815c63",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
