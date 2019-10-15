@@ -34,6 +34,24 @@
       "revId": "3ddf835c203565dbd415f468e0d40eac1b815c63",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a083fb5_0553ad19",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-10-15T13:25:29Z",
+      "side": 1,
+      "message": "What I don\u0027t like is not related to naming but on using the onGitReferenceUpdated\nmethod to replay something that wasn\u0027t triggered by a ref-updated event.\nIMHO a proper fix would be to replay the \u0027..all..\u0027 events using a different code path.",
+      "parentUuid": "70db3545_a4652aa6",
+      "revId": "3ddf835c203565dbd415f468e0d40eac1b815c63",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
