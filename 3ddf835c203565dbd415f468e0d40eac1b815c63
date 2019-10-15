@@ -16,6 +16,24 @@
       "revId": "3ddf835c203565dbd415f468e0d40eac1b815c63",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70db3545_a4652aa6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-15T13:18:50Z",
+      "side": 1,
+      "message": "While I agree with you, that\u0027s an existing naming problem, and I don\u0027t think this fix is related. The naming is improved in the next change where it is related.",
+      "parentUuid": "e1ff3efd_22d224b7",
+      "revId": "3ddf835c203565dbd415f468e0d40eac1b815c63",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
