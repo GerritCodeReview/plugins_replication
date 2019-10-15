@@ -52,6 +52,24 @@
       "revId": "3ddf835c203565dbd415f468e0d40eac1b815c63",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a714e04_339d7c72",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-15T13:50:57Z",
+      "side": 1,
+      "message": "I don\u0027t understand your comment, and is it related to this fix? This fix has nothing to do with the outside callers, this method is broken and this change fixes it right?",
+      "parentUuid": "3a083fb5_0553ad19",
+      "revId": "3ddf835c203565dbd415f468e0d40eac1b815c63",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
