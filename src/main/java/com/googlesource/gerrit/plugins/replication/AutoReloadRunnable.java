@@ -72,7 +72,7 @@ public class AutoReloadRunnable implements Runnable {
     String pendingConfigVersion = loadedConfig.getVersion();
     try {
       ReplicationFileBasedConfig newConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
-      final List<DestinationConfiguration> newValidDestinations =
+      final List<RemoteConfiguration> newValidDestinations =
           configValidator.validateConfig(newConfig);
       loadedConfig = newConfig;
       loadedConfigVersion = newConfig.getVersion();
