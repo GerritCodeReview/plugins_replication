@@ -211,6 +211,30 @@
       "revId": "fbd3ab8cfb7049de07f1f8b3767b50e6f555fea4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75b8dab0_7c094141",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-16T16:44:13Z",
+      "side": 1,
+      "message": "I like it, done. I went with reset(), and if we ever have other states, then we could consider resetToWaiting(), but I think for now reset does a good job of describing things and it stays simple.",
+      "parentUuid": "2375b805_c8018d6c",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 176,
+        "endChar": 21
+      },
+      "revId": "fbd3ab8cfb7049de07f1f8b3767b50e6f555fea4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
