@@ -614,6 +614,9 @@ public class Destination {
     if (!config.replicatePermissions() && RefNames.REFS_CONFIG.equals(ref)) {
       return false;
     }
+    if (PushOne.ALL_REFS.equals(ref)) {
+      return true;
+    }
     for (RefSpec s : config.getRemoteConfig().getPushRefSpecs()) {
       if (s.matchSource(ref)) {
         return true;
