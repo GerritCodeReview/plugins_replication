@@ -160,6 +160,24 @@
       "revId": "3ddf835c203565dbd415f468e0d40eac1b815c63",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37ef05fe_f7562210",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2019-10-16T08:42:29Z",
+      "side": 1,
+      "message": "I was thinking over it again and my conclusion is the following:\n\n1 we can accept this change as-is as it doesn\u0027t make things worse and it fixes one small issue\n\n2 replaying replication tasks should NOT lead to any calls to Destination.wouldPushRef.\nThis (and other) checks were done when the replication tasks were initially created.\nTherefore, when replaying we only need to reschedule the pending tasks without (repeating)\nany checks. This is basically a design issue which needs to be fixed in a follow-up change.\n\n3 And, sure, I agree with all of your general remarks about the code-review process.",
+      "parentUuid": "62819dc4_1cb8a9a0",
+      "revId": "3ddf835c203565dbd415f468e0d40eac1b815c63",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
