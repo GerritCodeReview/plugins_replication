@@ -188,6 +188,29 @@
       "revId": "fbd3ab8cfb7049de07f1f8b3767b50e6f555fea4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2375b805_c8018d6c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-10-16T12:47:31Z",
+      "side": 1,
+      "message": "abort on the Task has the connotation of the Task being purged, removed, deleted.\nWould \"reset\" be a better verb? Or something more descriptive like \u0027[set|reset]ToWaiting\u0027\nGiven that the states are waiting \u003c-\u003e running -\u003e finished.",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 176,
+        "endChar": 21
+      },
+      "revId": "fbd3ab8cfb7049de07f1f8b3767b50e6f555fea4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
