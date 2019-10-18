@@ -286,6 +286,11 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
         continue;
       }
 
+      if (!c.getFetchRefSpecs().isEmpty()) {
+        repLog.info("Ignore '{}' endpoint: not a 'push' target", c.getName());
+        continue;
+      }
+
       // If destination for push is not set assume equal to source.
       for (RefSpec ref : c.getPushRefSpecs()) {
         if (ref.getDestination() == null) {
