@@ -116,7 +116,8 @@ public class ReplicationTasksStorage {
     public Task(ReplicateRefUpdate update) {
       this.update = update;
       json = GSON.toJson(update) + "\n";
-      taskKey = sha1(json).name();
+      String key = update.project + "\n" + update.ref + "\n" + update.uri + "\n" + update.remote;
+      taskKey = sha1(key).name();
       file = refUpdates().resolve(taskKey);
     }
 
