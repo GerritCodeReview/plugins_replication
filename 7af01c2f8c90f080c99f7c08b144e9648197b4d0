@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b4da2c6_b671f012",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-23T18:52:08Z",
+      "side": 1,
+      "message": "No need to code the storage type in the name, beforeStartupEvents should do.",
+      "range": {
+        "startLine": 57,
+        "startChar": 43,
+        "endLine": 57,
+        "endChar": 65
+      },
+      "revId": "7af01c2f8c90f080c99f7c08b144e9648197b4d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6caf418_c7d6d050",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-23T18:52:08Z",
+      "side": 1,
+      "message": "Aren\u0027t they also being persisted here? Which begs the question, why do we need to store them in memory also if we are just going to dump the whole persisted store into memory after startup anyway?",
+      "revId": "7af01c2f8c90f080c99f7c08b144e9648197b4d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
