@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ba6577ea_10b26629",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-23T18:55:30Z",
+      "side": 1,
+      "message": "s/newBranch/branchToDelete/ ?",
+      "range": {
+        "startLine": 233,
+        "startChar": 11,
+        "endLine": 233,
+        "endChar": 21
+      },
+      "revId": "18327d1d5533e442c5ca297e2263c3f2f9d58a52",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c881cd3c_feef95d3",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 1
