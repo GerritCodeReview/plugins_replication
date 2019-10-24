@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "726b21d6_39a6b627",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-24T10:28:24Z",
+      "side": 1,
+      "message": "This variable is never assigned,\nPerhaps it should be assigned in the constructor and getDistributionInterval() should just return the value.",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 33,
+        "endChar": 35
+      },
+      "revId": "fbb975ffcd06f514700f4b9e28fa96055a85455e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93464bbf_23784d69",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-24T10:28:24Z",
+      "side": 1,
+      "message": "nit: since this is an interval we could be read as ConfigUtil.getTimeUnit().\nHaving said that, I appreciate seconds might be the only needed granularity here, so not too bothered about this :)",
+      "revId": "fbb975ffcd06f514700f4b9e28fa96055a85455e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "526e0c1a_cd41729c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 2
@@ -13,6 +53,98 @@
       "writtenOn": "2019-10-24T01:57:59Z",
       "side": 1,
       "message": "Should this be final and initialized in the constructor, rather than in the start() method?",
+      "revId": "fbb975ffcd06f514700f4b9e28fa96055a85455e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f701c99f_d89df738",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-24T10:28:24Z",
+      "side": 1,
+      "message": "nit: could be final",
+      "range": {
+        "startLine": 224,
+        "startChar": 6,
+        "endLine": 224,
+        "endChar": 9
+      },
+      "revId": "fbb975ffcd06f514700f4b9e28fa96055a85455e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2baac790_567bcef8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-24T10:28:24Z",
+      "side": 1,
+      "message": "nit: there\u0027s already an overloaded createQueue method that uses default priority, so this could just be:\n\nwq.createQueue(1, \"Replication Distribution\", false);",
+      "range": {
+        "startLine": 226,
+        "startChar": 19,
+        "endLine": 226,
+        "endChar": 94
+      },
+      "revId": "fbb975ffcd06f514700f4b9e28fa96055a85455e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5274a12_decb8d35",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-24T10:28:24Z",
+      "side": 1,
+      "message": "typo: writing",
+      "range": {
+        "startLine": 105,
+        "startChar": 45,
+        "endLine": 105,
+        "endChar": 53
+      },
+      "revId": "fbb975ffcd06f514700f4b9e28fa96055a85455e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f948f474_ffaa53fc",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-24T10:28:24Z",
+      "side": 1,
+      "message": "What\u0027s the rationale behind the division by 5.\nCould we possibly make it explicit in the documentation?",
+      "range": {
+        "startLine": 107,
+        "startChar": 15,
+        "endLine": 107,
+        "endChar": 70
+      },
       "revId": "fbb975ffcd06f514700f4b9e28fa96055a85455e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
