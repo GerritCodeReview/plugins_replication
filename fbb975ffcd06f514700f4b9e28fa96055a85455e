@@ -59,6 +59,29 @@
     },
     {
       "key": {
+        "uuid": "f49518fb_914be078",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2019-10-24T10:34:13Z",
+      "side": 1,
+      "message": "if I understand this correctly this means \"we are firing a pending replication, that was already persisted and thus we should not persist it anymore\".\n\nif so, suggestion: how about we pass the \"shouldPersist\" argument here and act on that, rather than checking the negated \"firingPending\" instead?\nI think it will represent more accurately the semantics of what\u0027s happening.",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 27
+      },
+      "revId": "fbb975ffcd06f514700f4b9e28fa96055a85455e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f701c99f_d89df738",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 2
