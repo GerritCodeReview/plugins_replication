@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "526e0c1a_cd41729c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-10-24T01:57:59Z",
+      "side": 1,
+      "message": "Should this be final and initialized in the constructor, rather than in the start() method?",
+      "revId": "fbb975ffcd06f514700f4b9e28fa96055a85455e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
