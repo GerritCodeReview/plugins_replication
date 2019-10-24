@@ -117,6 +117,30 @@
       "revId": "18327d1d5533e442c5ca297e2263c3f2f9d58a52",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "692c9e17_e3ffaf7a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-24T23:39:07Z",
+      "side": 1,
+      "message": "What does it find?",
+      "parentUuid": "42aaa32c_d949a1b0",
+      "range": {
+        "startLine": 251,
+        "startChar": 6,
+        "endLine": 251,
+        "endChar": 43
+      },
+      "revId": "18327d1d5533e442c5ca297e2263c3f2f9d58a52",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
