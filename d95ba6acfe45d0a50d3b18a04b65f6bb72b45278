@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "49d9efde_d7d80eff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-24T21:50:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d290421b_a3ebda6d",
+      "range": {
+        "startLine": 11,
+        "startChar": 63,
+        "endLine": 11,
+        "endChar": 65
+      },
+      "revId": "d95ba6acfe45d0a50d3b18a04b65f6bb72b45278",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41c68375_f7f907f2",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "0b4b2b23_1747d6eb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-24T21:50:58Z",
+      "side": 1,
+      "message": "This code was left over from an older version and not needed, removed.",
+      "parentUuid": "41c68375_f7f907f2",
+      "range": {
+        "startLine": 319,
+        "startChar": 4,
+        "endLine": 321,
+        "endChar": 5
+      },
+      "revId": "d95ba6acfe45d0a50d3b18a04b65f6bb72b45278",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "406497b3_9b61760c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2019-10-24T01:54:05Z",
       "side": 1,
       "message": "Optional: use toStringBuilder",
+      "range": {
+        "startLine": 87,
+        "startChar": 6,
+        "endLine": 87,
+        "endChar": 75
+      },
+      "revId": "d95ba6acfe45d0a50d3b18a04b65f6bb72b45278",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87e98c4f_d3b9bc6c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-24T21:50:58Z",
+      "side": 1,
+      "message": "I don\u0027t think that would improve either the readability or the performance of this?",
+      "parentUuid": "406497b3_9b61760c",
       "range": {
         "startLine": 87,
         "startChar": 6,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "0cc721d1_8d8c17b4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-24T21:50:58Z",
+      "side": 1,
+      "message": "Done, although perhaps we should remove the word entirely as it provides little value?",
+      "parentUuid": "3be9781d_cb5b9db1",
+      "range": {
+        "startLine": 149,
+        "startChar": 48,
+        "endLine": 149,
+        "endChar": 52
+      },
+      "revId": "d95ba6acfe45d0a50d3b18a04b65f6bb72b45278",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2807b3a2_bb6ddab5",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 2
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "189bc8d8_17c63a9e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-24T21:50:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2807b3a2_bb6ddab5",
+      "range": {
+        "startLine": 172,
+        "startChar": 48,
+        "endLine": 172,
+        "endChar": 52
+      },
+      "revId": "d95ba6acfe45d0a50d3b18a04b65f6bb72b45278",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a64485f_03c8540c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "d95ba6acfe45d0a50d3b18a04b65f6bb72b45278",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c9fba64_7334b20a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-24T21:50:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a64485f_03c8540c",
+      "range": {
+        "startLine": 237,
+        "startChar": 50,
+        "endLine": 237,
+        "endChar": 54
+      },
+      "revId": "d95ba6acfe45d0a50d3b18a04b65f6bb72b45278",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
