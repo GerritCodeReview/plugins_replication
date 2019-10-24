@@ -29,7 +29,7 @@ public class AutoReloadRunnable implements Runnable {
   private final SitePaths site;
   private final Path pluginDataDir;
   private final EventBus eventBus;
-  private final Provider<ReplicationQueue> replicationQueue;
+  private final Provider<ObservableQueue> queueObserverProvider;
   private final ReplicationConfigValidator configValidator;
 
   private ReplicationFileBasedConfig loadedConfig;
@@ -43,21 +43,21 @@ public class AutoReloadRunnable implements Runnable {
       SitePaths site,
       @PluginData Path pluginDataDir,
       EventBus eventBus,
-      Provider<ReplicationQueue> replicationQueue) {
+      Provider<ObservableQueue> queueObserverProvider) {
     this.loadedConfig = config;
     this.loadedConfigVersion = config.getVersion();
     this.lastFailedConfigVersion = "";
     this.site = site;
     this.pluginDataDir = pluginDataDir;
     this.eventBus = eventBus;
-    this.replicationQueue = replicationQueue;
+    this.queueObserverProvider = queueObserverProvider;
     this.configValidator = configValidator;
   }
 
   @Override
   public synchronized void run() {
     String pendingConfigVersion = loadedConfig.getVersion();
-    ReplicationQueue queue = replicationQueue.get();
+    ObservableQueue queue = queueObserverProvider.get();
     if (pendingConfigVersion.equals(loadedConfigVersion)
         || pendingConfigVersion.equals(lastFailedConfigVersion)
         || !queue.isRunning()
