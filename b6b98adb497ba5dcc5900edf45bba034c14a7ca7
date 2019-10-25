@@ -218,6 +218,48 @@
     },
     {
       "key": {
+        "uuid": "dae050a1_1367fc9e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-25T00:43:53Z",
+      "side": 1,
+      "message": "I\u0027ve tried to explain it better in the comment now, PTAL.",
+      "parentUuid": "957f6578_2087f7af",
+      "revId": "b6b98adb497ba5dcc5900edf45bba034c14a7ca7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ae7d52b_9c23529b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-25T00:43:53Z",
+      "side": 1,
+      "message": "I\u0027ve tried to explain it better in the comment now, PTAL.",
+      "parentUuid": "f13f19ec_d31facd0",
+      "range": {
+        "startLine": 193,
+        "startChar": 32,
+        "endLine": 193,
+        "endChar": 47
+      },
+      "revId": "b6b98adb497ba5dcc5900edf45bba034c14a7ca7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d5952bd5_cf4a9a09",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 2
