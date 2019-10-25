@@ -46,6 +46,30 @@
       "revId": "ed82d93362d0f77bf9402ceefd10802775772ba2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8b768ad_ee865726",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-25T15:04:39Z",
+      "side": 1,
+      "message": "Why don\u0027t we create an \"invisible\" temporary subdirectory (\".tmp\") so that we are sure that are on the same filesystem?\n\nIt would account for just +1 on the normal listing and will satisfy the atomicity.",
+      "parentUuid": "330a24e0_b84a057e",
+      "range": {
+        "startLine": 167,
+        "startChar": 19,
+        "endLine": 167,
+        "endChar": 82
+      },
+      "revId": "ed82d93362d0f77bf9402ceefd10802775772ba2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
