@@ -94,6 +94,30 @@
       "revId": "ed82d93362d0f77bf9402ceefd10802775772ba2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16a95832_da99df7d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-25T15:09:36Z",
+      "side": 1,
+      "message": "Someone could move the invisible .tmp just as easily as they could move the current \"building\" directory. FYI, the same issue exist in the previous change in this series (running/waiting dirs).",
+      "parentUuid": "69e8df5f_b5887614",
+      "range": {
+        "startLine": 167,
+        "startChar": 19,
+        "endLine": 167,
+        "endChar": 82
+      },
+      "revId": "ed82d93362d0f77bf9402ceefd10802775772ba2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
