@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87bc2f6d_f1f25be3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-10-25T08:43:13Z",
+      "side": 1,
+      "message": "The exception shouldn\u0027t be swallowed as it may hide potential loss of persistent replication tasks. Can we understand somehow that a resetAll() was called and ignore the exception only in that case?",
+      "revId": "695802f9268b17053f72d1d6a9fad37acac5b445",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
