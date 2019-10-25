@@ -22,6 +22,30 @@
       "revId": "ed82d93362d0f77bf9402ceefd10802775772ba2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "330a24e0_b84a057e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-25T15:01:31Z",
+      "side": 1,
+      "message": "This is a good concern. If we want to keep atomic moves in the same directory, we will need to use extensions instead of directories to categorize things such as temporary, waiting, running... This is safer way to ensure the same filesystem, however it does suffer from the downside of increasing the size of directory listings (x factor of 3 likely). Is this something we are willing to live with?",
+      "parentUuid": "29dfc557_a6d60b09",
+      "range": {
+        "startLine": 167,
+        "startChar": 19,
+        "endLine": 167,
+        "endChar": 82
+      },
+      "revId": "ed82d93362d0f77bf9402ceefd10802775772ba2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
