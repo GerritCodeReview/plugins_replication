@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9e12efe2_7ed2fcda",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-25T00:42:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbbe2218_c34915ef",
+      "range": {
+        "startLine": 7,
+        "startChar": 18,
+        "endLine": 7,
+        "endChar": 22
+      },
+      "revId": "b6b98adb497ba5dcc5900edf45bba034c14a7ca7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4da826e2_e52d4ebf",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "b6b98adb497ba5dcc5900edf45bba034c14a7ca7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9235fed2_2acf4cd5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-25T00:42:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4da826e2_e52d4ebf",
+      "range": {
+        "startLine": 11,
+        "startChar": 19,
+        "endLine": 11,
+        "endChar": 23
+      },
+      "revId": "b6b98adb497ba5dcc5900edf45bba034c14a7ca7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "56efe521_134358ec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-25T00:42:06Z",
+      "side": 1,
+      "message": "Good point, I made it a debug for now since with more than 2 nodes it should happen more often than not.",
+      "parentUuid": "1011c84c_b9004ac0",
+      "range": {
+        "startLine": 586,
+        "startChar": 15,
+        "endLine": 586,
+        "endChar": 20
+      },
+      "revId": "b6b98adb497ba5dcc5900edf45bba034c14a7ca7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ff74a2f_b6f46fcd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 2
@@ -85,6 +157,24 @@
       "revId": "b6b98adb497ba5dcc5900edf45bba034c14a7ca7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ca7aff2_6fed163a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-25T00:42:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ff74a2f_b6f46fcd",
+      "revId": "b6b98adb497ba5dcc5900edf45bba034c14a7ca7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
