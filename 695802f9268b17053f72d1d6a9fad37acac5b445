@@ -16,6 +16,24 @@
       "revId": "695802f9268b17053f72d1d6a9fad37acac5b445",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a64e6269_18c66a7b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-25T15:26:15Z",
+      "side": 1,
+      "message": "To be fair, this can probably be removed for now since this should never happen with a single master. If we add support for multi-master, then we can add something like this then (however at that point, I don\u0027t believe we will have a way to detect that another node has run resetAll).",
+      "parentUuid": "87bc2f6d_f1f25be3",
+      "revId": "695802f9268b17053f72d1d6a9fad37acac5b445",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
