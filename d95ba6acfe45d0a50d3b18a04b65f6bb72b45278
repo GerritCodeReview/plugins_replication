@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "2e2ef821_3cfe2c37",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-25T00:21:07Z",
+      "side": 1,
+      "message": "I\u0027m sorry, I missread this. For now I am just doing the same as the code this was copied from (line 62).",
+      "parentUuid": "87e98c4f_d3b9bc6c",
+      "range": {
+        "startLine": 87,
+        "startChar": 6,
+        "endLine": 87,
+        "endChar": 75
+      },
+      "revId": "d95ba6acfe45d0a50d3b18a04b65f6bb72b45278",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3be9781d_cb5b9db1",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 2
