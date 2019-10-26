@@ -39,6 +39,24 @@
       "revId": "7af01c2f8c90f080c99f7c08b144e9648197b4d0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfc75455_8633b0e1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-10-26T03:13:58Z",
+      "side": 1,
+      "message": "Those events are not in persisted store. This code was implemented in that way that during the startup it was accepting new events and just dropping them. We want to keep them in memory and execute when queue is up and running.",
+      "parentUuid": "f6caf418_c7d6d050",
+      "revId": "7af01c2f8c90f080c99f7c08b144e9648197b4d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
