@@ -75,6 +75,24 @@
       "revId": "7af01c2f8c90f080c99f7c08b144e9648197b4d0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e3f0d3c_531b98fd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2019-10-26T03:48:01Z",
+      "side": 1,
+      "message": "There is no need for that, they are going to replayed almost immediately, persisting is a much more resource consuming operation and it will be just overkill. Plus we are storing events for different reason. When queue is shutting down we want to make sure that we are not loosing any events. In this case we know that queue is already up and it will be ready in a moment.",
+      "parentUuid": "df5bbb41_3667f483",
+      "revId": "7af01c2f8c90f080c99f7c08b144e9648197b4d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
