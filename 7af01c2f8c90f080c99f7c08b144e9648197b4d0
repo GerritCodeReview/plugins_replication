@@ -57,6 +57,24 @@
       "revId": "7af01c2f8c90f080c99f7c08b144e9648197b4d0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df5bbb41_3667f483",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-26T03:30:25Z",
+      "side": 1,
+      "message": "What is the reason to not persist the events right away?",
+      "parentUuid": "dfc75455_8633b0e1",
+      "revId": "7af01c2f8c90f080c99f7c08b144e9648197b4d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
