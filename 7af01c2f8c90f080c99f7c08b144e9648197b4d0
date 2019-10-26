@@ -93,6 +93,24 @@
       "revId": "7af01c2f8c90f080c99f7c08b144e9648197b4d0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2ec13b1_8498569f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-26T04:42:56Z",
+      "side": 1,
+      "message": "Storing events is not just for shutting down, you never want to lose them. This queue is probably a miss-feature now. With a persistent store, this memory queue provides extra complexity in the code without no gain. Worse, it allows Gerrit to build up unlimited and unthrottled debt. This debt  introduces the extra risk of dropping tasks if the server shutsdown before the queue is empty. Are there any downsides to eliminating it?",
+      "parentUuid": "7e3f0d3c_531b98fd",
+      "revId": "7af01c2f8c90f080c99f7c08b144e9648197b4d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
