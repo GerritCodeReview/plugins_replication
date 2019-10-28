@@ -190,18 +190,6 @@ public class ReplicationTasksStorage {
     return list(createDir(waitingUpdates));
   }
 
-  private List<ReplicateRefUpdate> listSubs(Path parent) {
-    List<ReplicateRefUpdate> results = new ArrayList<>();
-    try (DirectoryStream<Path> dirs = Files.newDirectoryStream(parent)) {
-      for (Path dir : dirs) {
-        results.addAll(list(dir));
-      }
-    } catch (IOException e) {
-      logger.atSevere().withCause(e).log("Error while listing tasks");
-    }
-    return results;
-  }
-
   private List<ReplicateRefUpdate> list(Path tasks) {
     List<ReplicateRefUpdate> results = new ArrayList<>();
     try (DirectoryStream<Path> events = Files.newDirectoryStream(tasks)) {
