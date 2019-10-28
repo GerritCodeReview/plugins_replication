@@ -322,6 +322,30 @@
       "revId": "b6b98adb497ba5dcc5900edf45bba034c14a7ca7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc3c9e6b_9169d62b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2019-10-28T22:22:58Z",
+      "side": 1,
+      "message": "I am not very familiar with lambda\u0027s, I am assuming that I would want to use something like forEach(), but that does not seem to allow me to shortcut the evaluation?",
+      "parentUuid": "d5952bd5_cf4a9a09",
+      "range": {
+        "startLine": 154,
+        "startChar": 4,
+        "endLine": 159,
+        "endChar": 17
+      },
+      "revId": "b6b98adb497ba5dcc5900edf45bba034c14a7ca7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
