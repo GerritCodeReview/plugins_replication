@@ -576,14 +576,6 @@ public class Destination {
     }
   }
 
-  private boolean refHasPendingPush(URIish opUri, String ref) {
-    return pushContainsRef(pending.get(opUri), ref) || pushContainsRef(inFlight.get(opUri), ref);
-  }
-
-  private boolean pushContainsRef(PushOne op, String ref) {
-    return op != null && op.getRefs().contains(ref);
-  }
-
   boolean wouldPushProject(Project.NameKey project) {
     if (!shouldReplicate(project)) {
       return false;
