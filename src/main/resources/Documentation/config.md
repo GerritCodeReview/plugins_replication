@@ -70,7 +70,13 @@ remote section appears in the file.
 
 gerrit.replicateOnStartup
 :	If true, replicates to all remotes on startup to ensure they
-	are in-sync with this server.  By default, false.
+	are in-sync with this server. By default, false. Note that it is possible
+	to overrule this option for specific projects that will be always replicated
+	on startup with `gerrit.replicateProjectsOnStartup`.
+
+gerrit.replicateProjectsOnStartup
+:	List of projects that are always replicated on startup. For those projects
+	option `gerrit.replicateOnStartup` has no effect.
 
 gerrit.autoReload
 :	If true, automatically reloads replication destinations and settings
