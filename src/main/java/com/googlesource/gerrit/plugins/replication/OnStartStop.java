@@ -47,13 +47,21 @@ public class OnStartStop implements LifecycleListener {
 
   @Override
   public void start() {
-    if (srvInfo.getState() == ServerInformation.State.STARTUP
-        && config.isReplicateAllOnPluginStart()) {
-      ReplicationState state = new ReplicationState(new GitUpdateProcessing(eventDispatcher.get()));
-      pushAllFuture.set(
-          pushAll
-              .create(null, ReplicationFilter.all(), state, false)
-              .schedule(30, TimeUnit.SECONDS));
+    if (srvInfo.getState() == ServerInformation.State.STARTUP) {
+      ReplicationFilter replicationFilter = null;
+      if (config.isReplicateAllOnPluginStart()) {
+        replicationFilter = ReplicationFilter.all();
+      }
+      else if (!config.getProjectsAlwaysReplicatedOnPluginStart().isEmpty()) {
+        replicationFilter = new ReplicationFilter(config.getProjectsAlwaysReplicatedOnPluginStart());
+      }
+      if (replicationFilter != null) {
+        ReplicationState state = new ReplicationState(new GitUpdateProcessing(eventDispatcher.get()));
+        pushAllFuture.set(
+            pushAll
+            .create(null, replicationFilter, state, false)
+            .schedule(30, TimeUnit.SECONDS));
+      }
     }
   }
 
