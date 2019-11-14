@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
+import java.util.Arrays;
+import java.util.List;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 
@@ -38,6 +40,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private int sshConnectionTimeout = DEFAULT_SSH_CONNECTION_TIMEOUT_MS;
   private final FileBasedConfig config;
   private final Path pluginDataDir;
+  private final List<String> projectsAlwaysReplicatedOnPluginStart;
 
   @Inject
   public ReplicationFileBasedConfig(SitePaths site, @PluginData Path pluginDataDir) {
@@ -52,6 +55,8 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
       repLog.atSevere().withCause(e).log("Cannot read %s: %s", cfgPath, e.getMessage());
     }
     this.replicateAllOnPluginStart = config.getBoolean("gerrit", "replicateOnStartup", false);
+    this.projectsAlwaysReplicatedOnPluginStart =
+        Arrays.asList(config.getStringList("gerrit", null, "replicateProjectsOnStartup"));
     this.defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);
     this.maxRefsToLog = config.getInt("gerrit", "maxRefsToLog", 0);
     this.pluginDataDir = pluginDataDir;
@@ -126,5 +131,10 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   @Override
   public int getSshCommandTimeout() {
     return sshCommandTimeout;
+  }
+
+  @Override
+  public List<String> getProjectsAlwaysReplicatedOnPluginStart() {
+    return projectsAlwaysReplicatedOnPluginStart;
   }
 }
