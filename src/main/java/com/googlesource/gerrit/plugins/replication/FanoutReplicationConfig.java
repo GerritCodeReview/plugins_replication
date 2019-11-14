@@ -27,6 +27,7 @@ import com.google.inject.Inject;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -183,5 +184,10 @@ public class FanoutReplicationConfig implements ReplicationConfig {
   @Override
   public Config getConfig() {
     return config;
+  }
+
+  @Override
+  public List<String> getProjectsAlwaysReplicatedOnPluginStart() {
+    return replicationConfig.getProjectsAlwaysReplicatedOnPluginStart();
   }
 }

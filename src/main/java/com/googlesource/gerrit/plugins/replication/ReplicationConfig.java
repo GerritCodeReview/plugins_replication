@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import java.nio.file.Path;
 import org.eclipse.jgit.lib.Config;
+import java.util.List;
 
 /** Configuration of all the replication end points. */
 public interface ReplicationConfig {
@@ -34,6 +35,12 @@ public interface ReplicationConfig {
    * @return true if replication at plugin start, false otherwise.
    */
   boolean isReplicateAllOnPluginStart();
+
+  /**
+   * Returns the current list of projects that have to be always replicated on startup, even if the
+   * above <code>isReplicateAllOnPluginStart()</code> returns true
+   */
+  List<String> getProjectsAlwaysReplicatedOnPluginStart();
 
   /**
    * Returns the default behaviour of the replication plugin when pushing to remote replication
