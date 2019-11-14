@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdf16944_c707bba1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-11-14T23:29:16Z",
+      "side": 1,
+      "message": "replicateOnStartup",
+      "range": {
+        "startLine": 11,
+        "startChar": 35,
+        "endLine": 11,
+        "endChar": 58
+      },
+      "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b93203c_25e74852",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/OnStartStop.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-11-14T23:29:16Z",
+      "side": 1,
+      "message": "Run google-java-format",
+      "range": {
+        "startLine": 54,
+        "startChar": 6,
+        "endLine": 55,
+        "endChar": 13
+      },
+      "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40208397_c1d5e312",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-11-14T23:29:16Z",
+      "side": 1,
+      "message": "projects",
+      "range": {
+        "startLine": 39,
+        "startChar": 33,
+        "endLine": 39,
+        "endChar": 40
+      },
+      "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8c2cc4c_7f4bd56d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-11-14T23:29:16Z",
+      "side": 1,
+      "message": "replicated",
+      "range": {
+        "startLine": 39,
+        "startChar": 64,
+        "endLine": 39,
+        "endChar": 73
+      },
+      "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "257566c1_285ce325",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-11-14T23:29:16Z",
+      "side": 1,
+      "message": "Static imports should be a the top.  Google-java-format will fix this",
+      "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71894d2a_11a8d060",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-11-14T23:29:16Z",
+      "side": 1,
+      "message": "This is redundant; it\u0027s already a List",
+      "range": {
+        "startLine": 53,
+        "startChar": 89,
+        "endLine": 54,
+        "endChar": 27
+      },
+      "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36f96459_795f7fdc",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-11-14T23:29:16Z",
+      "side": 1,
+      "message": "use tabs",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 8
+      },
+      "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
