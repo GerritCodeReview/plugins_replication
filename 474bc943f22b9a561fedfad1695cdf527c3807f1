@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f29614c8_0efb8185",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-11-15T18:09:13Z",
+      "side": 1,
+      "message": "Add some more context here about why we\u0027re doing this.  I.e. to be able to enforce that All-Projects is always replicated, to make sure permissions etc get replicated to remotes.",
+      "revId": "474bc943f22b9a561fedfad1695cdf527c3807f1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
