@@ -22,6 +22,30 @@
       "revId": "84d508247c619b9e1871d7ce47517334bb0240c1",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efb7df45_2073671f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-12-05T02:19:52Z",
+      "side": 1,
+      "message": "It was like this in the original commit that is cherry-picked. It\u0027s a minor typo and I\u0027d rather not fix it, thus causing an extra CI cycle.",
+      "parentUuid": "fbb9f668_a894a357",
+      "range": {
+        "startLine": 9,
+        "startChar": 54,
+        "endLine": 9,
+        "endChar": 59
+      },
+      "revId": "84d508247c619b9e1871d7ce47517334bb0240c1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
