@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9a6760e_4c54d07f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-12-06T19:44:01Z",
+      "side": 1,
+      "message": "Would wrap this line to \u003c\u003d 72 chars (based on guideline).",
+      "revId": "c23ad251279ad92694217772930c97970da3fc18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2e6c6f7_a220cf4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-12-06T19:44:01Z",
+      "side": 1,
+      "message": "failing",
+      "range": {
+        "startLine": 11,
+        "startChar": 96,
+        "endLine": 11,
+        "endChar": 100
+      },
+      "revId": "c23ad251279ad92694217772930c97970da3fc18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38177be5_4ffcb73e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-12-06T19:44:01Z",
+      "side": 1,
+      "message": "I\u0027d still set this timeout to more than just this value or TEST_REPLICATION_DELAY plus (just) one second. I propose to not revert this change then, as otherwise the timeout is I think too close to TEST_REPLICATION_DELAY. It needs to be more than just a second away/later after replication. I preferred the idea of multiplying by 4 instead of 2 (times 1 second).",
+      "range": {
+        "startLine": 63,
+        "startChar": 66,
+        "endLine": 63,
+        "endChar": 92
+      },
+      "revId": "c23ad251279ad92694217772930c97970da3fc18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
