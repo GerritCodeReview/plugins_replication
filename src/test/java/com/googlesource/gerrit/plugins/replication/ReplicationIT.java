@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -403,7 +404,10 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage.listWaiting().stream()
+    return Stream.concat(
+            tasksStorage.listWaiting().stream(),
+            Stream.concat(
+                tasksStorage.listBuilding().stream(), tasksStorage.listRunning().stream()))
         .filter(task -> refmaskPattern.matcher(task.ref).matches())
         .collect(toList());
   }
