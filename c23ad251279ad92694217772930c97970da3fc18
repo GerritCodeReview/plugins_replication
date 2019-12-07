@@ -42,6 +42,48 @@
     },
     {
       "key": {
+        "uuid": "c29d1ca7_8cd2bf0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-12-07T00:25:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9a6760e_4c54d07f",
+      "revId": "c23ad251279ad92694217772930c97970da3fc18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca4c9144_d8a146c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-12-07T00:25:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2e6c6f7_a220cf4a",
+      "range": {
+        "startLine": 11,
+        "startChar": 96,
+        "endLine": 11,
+        "endChar": 100
+      },
+      "revId": "c23ad251279ad92694217772930c97970da3fc18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38177be5_4ffcb73e",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 2
