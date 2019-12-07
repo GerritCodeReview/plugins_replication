@@ -194,6 +194,16 @@ public class ReplicationTasksStorage {
     return list(createDir(waitingUpdates));
   }
 
+  @VisibleForTesting
+  public List<ReplicateRefUpdate> listRunning() {
+    return list(createDir(runningUpdates));
+  }
+
+  @VisibleForTesting
+  public List<ReplicateRefUpdate> listBuilding() {
+    return list(createDir(buildingUpdates));
+  }
+
   private List<ReplicateRefUpdate> list(Path tasks) {
     List<ReplicateRefUpdate> results = new ArrayList<>();
     try (DirectoryStream<Path> events = Files.newDirectoryStream(tasks)) {

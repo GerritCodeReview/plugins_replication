@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -60,7 +61,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   private static final Optional<String> ALL_PROJECTS = Optional.empty();
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private static final int TEST_REPLICATION_DELAY = 1;
-  private static final Duration TEST_TIMEOUT = Duration.ofSeconds(TEST_REPLICATION_DELAY * 4);
+  private static final Duration TEST_TIMEOUT = Duration.ofSeconds(TEST_REPLICATION_DELAY * 2);
 
   @Inject private SitePaths sitePaths;
   @Inject private ProjectOperations projectOperations;
@@ -98,7 +99,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     Project.NameKey sourceProject = createTestProject("foo");
 
-    assertReplicationTaskCount("refs/meta/config", 1);
+    assertThat(listReplicationTasks("refs/meta/config")).hasSize(1);
 
     waitUntil(() -> projectExists(Project.nameKey(sourceProject + "replica.git")));
 
@@ -117,7 +118,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
 
-    assertReplicationTaskCount("refs/changes/\\d*/\\d*/\\d*", 1);
+    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(1);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
@@ -140,7 +141,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     input.revision = master;
     gApi.projects().name(project.get()).branch(newBranch).create(input);
 
-    assertReplicationTaskCount("refs/heads/(mybranch|master)", 2);
+    assertThat(listReplicationTasks("refs/heads/(mybranch|master)")).hasSize(2);
 
     try (Repository repo = repoManager.openRepository(targetProject);
         Repository sourceRepo = repoManager.openRepository(project)) {
@@ -166,7 +167,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
 
-    assertReplicationTaskCount("refs/changes/\\d*/\\d*/\\d*", 2);
+    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(2);
 
     try (Repository repo1 = repoManager.openRepository(targetProject1);
         Repository repo2 = repoManager.openRepository(targetProject2)) {
@@ -198,7 +199,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     createChange();
 
-    assertReplicationTaskCount("refs/changes/\\d*/\\d*/\\d*", 4);
+    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
 
     setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
     setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
@@ -234,7 +235,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, null, new ReplicationState(pushResultProcessing), true);
 
-    assertReplicationTaskCount(".*all.*", 1);
+    assertThat(listReplicationTasks(".*all.*")).hasSize(1);
   }
 
   @Test
@@ -397,13 +398,12 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     return projectOperations.newProject().name(name).create();
   }
 
-  private void assertReplicationTaskCount(String refRegex, int expectedCount) throws Exception {
-    waitUntil(() -> listReplicationTasks(refRegex).size() == expectedCount);
-  }
-
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage.listWaiting().stream()
+    return Stream.concat(
+            tasksStorage.listWaiting().stream(),
+            Stream.concat(
+                tasksStorage.listBuilding().stream(), tasksStorage.listRunning().stream()))
         .filter(task -> refmaskPattern.matcher(task.ref).matches())
         .collect(toList());
   }
