@@ -113,19 +113,20 @@ public class ReplicationTasksStorage {
 
   private static Gson GSON = new Gson();
 
+  private final Path refUpdates;
   private final Path buildingUpdates;
   private final Path runningUpdates;
   private final Path waitingUpdates;
 
   @Inject
   ReplicationTasksStorage(ReplicationConfig config) {
-    Path refUpdates = config.getEventsDirectory().resolve("ref-updates");
+    refUpdates = config.getEventsDirectory().resolve("ref-updates");
     buildingUpdates = refUpdates.resolve("building");
     runningUpdates = refUpdates.resolve("running");
     waitingUpdates = refUpdates.resolve("waiting");
   }
 
-  public String create(ReplicateRefUpdate r) {
+  public synchronized String create(ReplicateRefUpdate r) {
     return new Task(r).create();
   }
 
@@ -134,7 +135,7 @@ public class ReplicationTasksStorage {
     this.disableDeleteForTesting = deleteDisabled;
   }
 
-  public boolean start(PushOne push) {
+  public synchronized boolean start(PushOne push) {
     UriLock lock = new UriLock(push);
     if (!lock.acquire()) {
       return false;
@@ -151,7 +152,7 @@ public class ReplicationTasksStorage {
     return started;
   }
 
-  public void reset(PushOne push) {
+  public synchronized void reset(PushOne push) {
     UriLock lock = new UriLock(push);
     for (String ref : push.getRefs()) {
       new Task(lock, ref).reset();
@@ -159,7 +160,7 @@ public class ReplicationTasksStorage {
     lock.release();
   }
 
-  public void resetAll() {
+  public synchronized void resetAll() {
     try (DirectoryStream<Path> dirs = Files.newDirectoryStream(createDir(runningUpdates))) {
       for (Path dir : dirs) {
         UriLock lock = null;
@@ -190,18 +191,23 @@ public class ReplicationTasksStorage {
     lock.release();
   }
 
-  public List<ReplicateRefUpdate> listWaiting() {
+  public synchronized List<ReplicateRefUpdate> listWaiting() {
     return list(createDir(waitingUpdates));
   }
 
   @VisibleForTesting
-  public List<ReplicateRefUpdate> listRunning() {
+  public synchronized List<ReplicateRefUpdate> listRunning() {
     return list(createDir(runningUpdates));
   }
 
   @VisibleForTesting
-  public List<ReplicateRefUpdate> listBuilding() {
+  public synchronized List<ReplicateRefUpdate> listBuilding() {
     return list(createDir(buildingUpdates));
+  }
+
+  @VisibleForTesting
+  public synchronized List<ReplicateRefUpdate> list() {
+    return list(createDir(refUpdates));
   }
 
   private List<ReplicateRefUpdate> list(Path tasks) {
@@ -211,6 +217,8 @@ public class ReplicationTasksStorage {
         if (Files.isRegularFile(e)) {
           String json = new String(Files.readAllBytes(e), UTF_8);
           results.add(GSON.fromJson(json, ReplicateRefUpdate.class));
+        } else if (Files.isDirectory(e)) {
+          results.addAll(list(e));
         }
       }
     } catch (IOException e) {
