@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ae75c917_481e486a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-12-10T07:37:00Z",
+      "side": 1,
+      "message": "Yep, the same task found two times, in waiting and running.\nAlso, the opposite:\n1) list waiting (task was in running)\n2) task move from running back to waiting\n3) list running (task was in waiting)\n\nResult: nothing was found, but the task was first in running and then in waiting.",
+      "parentUuid": "c9f31ad2_87601e96",
+      "range": {
+        "startLine": 9,
+        "startChar": 65,
+        "endLine": 11,
+        "endChar": 29
+      },
+      "revId": "0d91ffd189297f511c93d40a864978b5774805c1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc6cd4a0_e13de508",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "cceedc78_000e1430",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-12-10T07:37:00Z",
+      "side": 1,
+      "message": "As a rule of thumb I synchronized all the operations that are changing the state of the ReplicationTasksStorage.",
+      "parentUuid": "dc6cd4a0_e13de508",
+      "range": {
+        "startLine": 101,
+        "startChar": 9,
+        "endLine": 101,
+        "endChar": 21
+      },
+      "revId": "0d91ffd189297f511c93d40a864978b5774805c1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3725171e_8c03620f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2019-12-09T23:49:01Z",
       "side": 1,
       "message": "how does synchronizing these individual methods help synchronization between them?",
+      "range": {
+        "startLine": 134,
+        "startChar": 9,
+        "endLine": 134,
+        "endChar": 21
+      },
+      "revId": "0d91ffd189297f511c93d40a864978b5774805c1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "720e717a_8ae6eb6f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2019-12-10T07:37:00Z",
+      "side": 1,
+      "message": "Only one method at a time can be executed, so you will never have concurrency between the listing and the mutation of the storage.",
+      "parentUuid": "3725171e_8c03620f",
       "range": {
         "startLine": 134,
         "startChar": 9,
