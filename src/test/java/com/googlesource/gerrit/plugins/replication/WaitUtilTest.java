@@ -14,8 +14,8 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import static com.google.gerrit.testing.GerritJUnit.assertThrows;
 import static com.googlesource.gerrit.plugins.replication.WaitUtil.waitUntil;
+import static org.junit.Assert.assertThrows;
 
 import java.time.Duration;
 import org.junit.Test;
