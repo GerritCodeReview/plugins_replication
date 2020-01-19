@@ -277,7 +277,7 @@ public class Destination {
       throws PermissionBackendException {
     if (!config.replicateHiddenProjects()
         && state.getProject().getState()
-            == com.google.gerrit.extensions.client.ProjectState.HIDDEN) {
+            == com.google.gerrit.extensions.types.ProjectState.HIDDEN) {
       return false;
     }
 
