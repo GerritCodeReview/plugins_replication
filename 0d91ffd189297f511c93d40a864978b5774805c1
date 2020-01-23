@@ -140,6 +140,30 @@
       "revId": "0d91ffd189297f511c93d40a864978b5774805c1",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "361b7fb6_6a888ac1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2020-01-23T20:56:52Z",
+      "side": 1,
+      "message": "This is based on the assumption of a single server, this will not be the case with a multi-master setup. Adding these synchronized methods will likely just cover up a real problem that will now appear with a MM setup. It would be better to fix the code base to handle the storage being modified by other threads than to add synchronized to these methods. Depending on the exact problem, this likely means making the code base ignore certain errors under the assumption that it is OK for files to be moved and directories to be removed behind a threads back.",
+      "parentUuid": "720e717a_8ae6eb6f",
+      "range": {
+        "startLine": 134,
+        "startChar": 9,
+        "endLine": 134,
+        "endChar": 21
+      },
+      "revId": "0d91ffd189297f511c93d40a864978b5774805c1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
