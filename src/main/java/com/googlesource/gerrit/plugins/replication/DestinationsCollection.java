@@ -345,7 +345,7 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
         result.add(new RemoteConfig(cfg, name));
       } catch (URISyntaxException e) {
         throw new ConfigInvalidException(
-            String.format("remote %s has invalid URL in %s", name, cfg.getFile()));
+            String.format("remote %s has invalid URL in %s", name, cfg.getFile()), e);
       }
     }
     return result;
