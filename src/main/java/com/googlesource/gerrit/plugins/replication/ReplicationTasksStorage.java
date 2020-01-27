@@ -47,16 +47,19 @@ import org.eclipse.jgit.transport.URIish;
  * task:
  *
  * <p><code>
- *   .../building/<tmp_name>             new replication tasks under construction
- *   .../running/<uri_sha1>/             lock for URI
- *   .../running/<uri_sha1>/<task_sha1>  running replication tasks
- *   .../waiting/<task_sha1>             outstanding replication tasks
+ *   .../building/<tmp_name>                       new replication tasks under construction
+ *   .../running/<uri_sha1>/                       lock for URI
+ *   .../running/<uri_sha1>/<task_sha1>            running replication tasks
+ *   .../waiting/<task_sha1_NN_shard>/<task_sha1>  outstanding replication tasks
  * </code>
  *
  * <p>The URI lock is acquired by creating the directory and released by removing it.
  *
  * <p>Tasks are moved atomically via a rename between those directories to indicate the current
  * state of each task.
+ *
+ * <p>Note: The .../waiting/<task_sha1_NN_shard> directories are never removed. This helps prevent
+ * failures when moving tasks to and from the shard directories from different hosts concurrently.
  */
 @Singleton
 public class ReplicationTasksStorage {
@@ -308,7 +311,7 @@ public class ReplicationTasksStorage {
       String key = update.project + "\n" + update.ref + "\n" + update.uri + "\n" + update.remote;
       taskKey = sha1(key).name();
       running = lock.runningDir.resolve(taskKey);
-      waiting = createDir(waitingUpdates).resolve(taskKey);
+      waiting = createDir(waitingUpdates.resolve(taskKey.substring(0, 2))).resolve(taskKey);
     }
 
     public String create() {
