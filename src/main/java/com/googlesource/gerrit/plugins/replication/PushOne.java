@@ -61,6 +61,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 import org.eclipse.jgit.errors.NoRemoteRepositoryException;
 import org.eclipse.jgit.errors.NotSupportedException;
 import org.eclipse.jgit.errors.RemoteRepositoryException;
@@ -212,12 +213,38 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
   @Override
   public String toString() {
-    String print = "[" + HexFormat.fromInt(id) + "] push " + uri;
+    String print =
+        "[" + HexFormat.fromInt(id) + "] push " + uri + " " + getLimitedSpaceJoinedRefs();
 
     if (retryCount > 0) {
       print = "(retry " + retryCount + ") " + print;
     }
     return print;
+  }
+
+ /**
+   * Returns a space separated string of refs limited to the maxRefsToShow config option.
+   *
+   * <ul>
+   *   <li>Refs will not be limited when maxRefsToShow config is set to zero.
+   *   <li>By default output will be limited to two refs.
+   * </ul>
+   *
+   * The default value of two is chosen because whenever a new patchset is created there are two
+   * refs(change ref and meta ref).
+   */
+   protected String getLimitedSpaceJoinedRefs() {
+    Set<String> refs = getRefs();
+    int maxRefsToShow = replConfig.getMaxRefsToShow();
+    if (maxRefsToShow == 0) {
+      maxRefsToShow = refs.size();
+    }
+    String refsString = refs.stream().limit(maxRefsToShow).collect(Collectors.joining(" "));
+    int refsToHide = refs.size() - maxRefsToShow;
+    if (refsToHide > 0) {
+      refsString += " (+" + refsToHide + ")";
+    }
+    return "[" + refsString + "]";
   }
 
   boolean isRetrying() {
