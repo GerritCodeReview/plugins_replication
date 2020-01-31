@@ -77,6 +77,11 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleLi
   }
 
   @Override
+  public int getMaxRefsToShow() {
+    return currentConfig.getMaxRefsToShow();
+  }
+
+  @Override
   public Path getEventsDirectory() {
     return currentConfig.getEventsDirectory();
   }

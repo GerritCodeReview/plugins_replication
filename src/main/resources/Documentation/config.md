@@ -86,6 +86,12 @@ gerrit.maxRefsToLog
 :	Number of refs, that are pushed during replication, to be logged.
 	For printing all refs to the logs, use a value of 0. By default, 0.
 
+gerrit.maxRefsToShow
+:	Number of refs, that are pushed during replication, to be shown
+	in the show-queue output. To show all refs, use a value of 0.
+	By default, 2, because whenever new patchset is created there
+	are two refs (change ref and meta ref).
+
 gerrit.sshCommandTimeout
 :	Timeout for SSH command execution. If 0, there is no timeout and
 	the client waits indefinitely. By default, 0.
