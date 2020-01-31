@@ -196,7 +196,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
   @Override
   public String toString() {
-    String print = "[" + HexFormat.fromInt(id) + "] push " + uri;
+    String print = "[" + HexFormat.fromInt(id) + "] push " + uri + " " + getRefs().toString();
 
     if (retryCount > 0) {
       print = "(retry " + retryCount + ") " + print;
