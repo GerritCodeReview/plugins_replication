@@ -137,6 +137,11 @@ public class FanoutReplicationConfig implements ReplicationConfig {
   }
 
   @Override
+  public int getMaxRefsToShow() {
+    return replicationConfig.getMaxRefsToShow();
+  }
+
+  @Override
   public Path getEventsDirectory() {
     return replicationConfig.getEventsDirectory();
   }
