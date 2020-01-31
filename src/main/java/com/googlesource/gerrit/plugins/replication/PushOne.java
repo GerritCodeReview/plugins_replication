@@ -61,6 +61,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 import org.eclipse.jgit.errors.NoRemoteRepositoryException;
 import org.eclipse.jgit.errors.NotSupportedException;
 import org.eclipse.jgit.errors.RemoteRepositoryException;
@@ -212,12 +213,36 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
   @Override
   public String toString() {
-    String print = "[" + HexFormat.fromInt(id) + "] push " + uri;
-
+    String print =
+        "[" + HexFormat.fromInt(id) + "] push " + uri + " " + getTruncatedRefs();
     if (retryCount > 0) {
       print = "(retry " + retryCount + ") " + print;
     }
     return print;
+  }
+
+  /**
+   * Returns the truncated refs when number of refs is more than maxRefsToShow config
+   *
+   * <ul>
+   *   <li>Refs will not be truncated when maxRefsToShow config is set to zero.
+   *   <li>By default output will be truncated to two refs.
+   * </ul>
+   *
+   * The default value of two is chosen because whenever new patchset is created there are two
+   * refs(change ref and meta ref).
+   *
+   * @return String containing truncated refs
+   */
+  protected String getTruncatedRefs() {
+    Set<String> refs = getRefs();
+    int maxRefsToShow = replConfig.getMaxRefsToShow();
+    int remainingRefs = refs.size() - maxRefsToShow;
+    if (maxRefsToShow == 0 || remainingRefs <= 0) {
+      return refs.toString();
+    }
+    refs = refs.stream().limit(maxRefsToShow).collect(Collectors.toSet());
+    return refs.toString() + " + " + remainingRefs + " more ref(s)";
   }
 
   boolean isRetrying() {
