@@ -34,6 +34,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private boolean replicateAllOnPluginStart;
   private boolean defaultForceUpdate;
   private int maxRefsToLog;
+  private final int maxRefsToShow;
   private int sshCommandTimeout;
   private int sshConnectionTimeout = DEFAULT_SSH_CONNECTION_TIMEOUT_MS;
   private final FileBasedConfig config;
@@ -54,6 +55,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     this.replicateAllOnPluginStart = config.getBoolean("gerrit", "replicateOnStartup", false);
     this.defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);
     this.maxRefsToLog = config.getInt("gerrit", "maxRefsToLog", 0);
+    this.maxRefsToShow= config.getInt("gerrit", "maxRefsToShow", 2);
     this.pluginDataDir = pluginDataDir;
   }
 
@@ -93,6 +95,11 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   @Override
   public int getMaxRefsToLog() {
     return maxRefsToLog;
+  }
+
+  @Override
+  public int getMaxRefsToShow() {
+    return maxRefsToShow;
   }
 
   @Override
