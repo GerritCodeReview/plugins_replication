@@ -60,6 +60,13 @@ public interface ReplicationConfig {
   int getMaxRefsToLog();
 
   /**
+  * Returns the maximum number of replicating refs to show in the show-queue output
+  *
+  * @return maximum number of refs to show, 2 by default.
+  */
+  int getMaxRefsToShow();
+
+  /**
    * Configured location where the replication events are stored on the filesystem for being resumed
    * and kept across restarts.
    *
