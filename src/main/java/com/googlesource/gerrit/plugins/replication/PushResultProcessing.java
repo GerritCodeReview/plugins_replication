@@ -85,46 +85,12 @@ public abstract class PushResultProcessing {
         URIish uri,
         RefPushResult status,
         RemoteRefUpdate.Status refStatus) {
-      StringBuilder sb = new StringBuilder();
-      sb.append("Replicate ");
-      sb.append(project);
-      sb.append(" ref ");
-      sb.append(ref);
-      sb.append(" to ");
-      sb.append(resolveNodeName(uri));
-      sb.append(", ");
-      switch (status) {
-        case SUCCEEDED:
-          sb.append("Succeeded!");
-          break;
-        case FAILED:
-          sb.append("FAILED!");
-          hasError.compareAndSet(false, true);
-          break;
-        case NOT_ATTEMPTED:
-          sb.append("NOT ATTEMPTED!");
-          break;
-        default:
-          sb.append("UNKNOWN RESULT!");
-          break;
-      }
-      sb.append(" (");
-      sb.append(refStatus.toString());
-      sb.append(")");
-      writeStdOut(sb.toString());
+      WriteHelper.onRefReplicatedToOneNode(hasError, project, ref, uri, status, refStatus);
     }
 
     @Override
     void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {
-      StringBuilder sb = new StringBuilder();
-      sb.append("Replication of ");
-      sb.append(project);
-      sb.append(" ref ");
-      sb.append(ref);
-      sb.append(" completed to ");
-      sb.append(nodesCount);
-      sb.append(" nodes, ");
-      writeStdOut(sb.toString());
+      WriteHelper.onRefReplicatedToAllNodes(project, ref, nodesCount);
     }
 
     @Override
@@ -190,6 +156,57 @@ public abstract class PushResultProcessing {
       } catch (StorageException | PermissionBackendException e) {
         logger.atSevere().withCause(e).log("Cannot post event");
       }
+    }
+  }
+
+  static class WriteHelper {
+
+    static String onRefReplicatedToOneNode(
+        AtomicBoolean hasError,
+        String project,
+        String ref,
+        URIish uri,
+        RefPushResult status,
+        RemoteRefUpdate.Status refStatus) {
+      StringBuilder sb = new StringBuilder();
+      sb.append("Replicate ");
+      sb.append(project);
+      sb.append(" ref ");
+      sb.append(ref);
+      sb.append(" to ");
+      sb.append(resolveNodeName(uri));
+      sb.append(", ");
+      switch (status) {
+        case SUCCEEDED:
+          sb.append("Succeeded!");
+          break;
+        case FAILED:
+          sb.append("FAILED!");
+          hasError.compareAndSet(false, true);
+          break;
+        case NOT_ATTEMPTED:
+          sb.append("NOT ATTEMPTED!");
+          break;
+        default:
+          sb.append("UNKNOWN RESULT!");
+          break;
+      }
+      sb.append(" (");
+      sb.append(refStatus.toString());
+      sb.append(")");
+      return sb.toString();
+    }
+
+    static String onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {
+      StringBuilder sb = new StringBuilder();
+      sb.append("Replication of ");
+      sb.append(project);
+      sb.append(" ref ");
+      sb.append(ref);
+      sb.append(" completed to ");
+      sb.append(nodesCount);
+      sb.append(" nodes, ");
+      return sb.toString();
     }
   }
 }
