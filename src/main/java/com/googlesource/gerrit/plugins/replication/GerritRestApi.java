@@ -79,12 +79,13 @@ public class GerritRestApi implements AdminApi {
     repLog.info("Deleting project {} on {}", project, uri);
     String url = String.format("%s/a/projects/%s", toHttpUri(uri), Url.encode(project.get()));
     try {
-      httpClient.execute(new HttpDelete(url), new HttpResponseHandler(), getContext());
-      return true;
+      return httpClient
+          .execute(new HttpDelete(url), new HttpResponseHandler(), getContext())
+          .isSuccessful();
     } catch (IOException e) {
       repLog.error("Couldn't perform project deletion on {}", uri, e);
+      return false;
     }
-    return false;
   }
 
   @Override
@@ -96,12 +97,11 @@ public class GerritRestApi implements AdminApi {
       req.setEntity(
           new StringEntity(String.format("{\"ref\": \"%s\"}", newHead), Charsets.UTF_8.name()));
       req.addHeader(new BasicHeader("Content-Type", "application/json"));
-      httpClient.execute(req, new HttpResponseHandler(), getContext());
-      return true;
+      return httpClient.execute(req, new HttpResponseHandler(), getContext()).isSuccessful();
     } catch (IOException e) {
       repLog.error("Couldn't perform update head on {}", uri, e);
+      return false;
     }
-    return false;
   }
 
   private HttpClientContext getContext() {
