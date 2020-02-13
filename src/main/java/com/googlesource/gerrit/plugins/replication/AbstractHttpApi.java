@@ -1,0 +1,114 @@
+// Copyright (C) 2020 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package com.googlesource.gerrit.plugins.replication;
+
+import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
+
+import com.google.gerrit.entities.Project;
+import com.google.inject.assistedinject.Assisted;
+import java.io.IOException;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.eclipse.jgit.transport.CredentialItem;
+import org.eclipse.jgit.transport.RemoteConfig;
+import org.eclipse.jgit.transport.URIish;
+
+abstract class AbstractHttpApi implements AdminApi {
+
+  private final CredentialsFactory credentials;
+  private final CloseableHttpClient httpClient;
+  private final RemoteConfig remoteConfig;
+  private final URIish uri;
+
+  protected AbstractHttpApi(
+      CredentialsFactory credentials,
+      CloseableHttpClient httpClient,
+      RemoteConfig remoteConfig,
+      @Assisted URIish uri) {
+    this.credentials = credentials;
+    this.httpClient = httpClient;
+    this.remoteConfig = remoteConfig;
+    this.uri = uri;
+  }
+
+  protected abstract HttpUriRequest newCreateProjectRequest(Project.NameKey project, URIish uri);
+
+  protected abstract HttpUriRequest newDeleteProjectRequest(Project.NameKey project, URIish uri);
+
+  protected abstract HttpUriRequest newUpdateHeadRequest(
+      Project.NameKey project, String newHead, URIish uri);
+
+  @Override
+  public boolean createProject(Project.NameKey project, String head) {
+    repLog.info("Creating project {} on {}", project, uri);
+    try {
+      return execute(newCreateProjectRequest(project, uri));
+    } catch (IOException e) {
+      repLog.error("Couldn't perform project creation on {}", uri, e);
+      return false;
+    }
+  }
+
+  @Override
+  public boolean deleteProject(Project.NameKey project) {
+    repLog.info("Deleting project {} on {}", project, uri);
+    try {
+      return execute(newDeleteProjectRequest(project, uri));
+    } catch (IOException e) {
+      repLog.error("Couldn't perform project deletion on {}", uri, e);
+      return false;
+    }
+  }
+
+  @Override
+  public boolean updateHead(Project.NameKey project, String newHead) {
+    repLog.info("Updating head of {} on {}", project, uri);
+    try {
+      return execute(newUpdateHeadRequest(project, newHead, uri));
+    } catch (IOException e) {
+      repLog.error("Couldn't perform update head on {}", uri, e);
+      return false;
+    }
+  }
+
+  private boolean execute(HttpUriRequest req) throws ClientProtocolException, IOException {
+    return httpClient.execute(req, new HttpResponseHandler(), getContext()).isSuccessful();
+  }
+
+  private HttpClientContext getContext() {
+    HttpClientContext ctx = HttpClientContext.create();
+    ctx.setCredentialsProvider(adapt(credentials.create(remoteConfig.getName())));
+    return ctx;
+  }
+
+  private CredentialsProvider adapt(org.eclipse.jgit.transport.CredentialsProvider cp) {
+    CredentialItem.Username user = new CredentialItem.Username();
+    CredentialItem.Password pass = new CredentialItem.Password();
+    if (cp.supports(user, pass) && cp.get(uri, user, pass)) {
+      CredentialsProvider adapted = new BasicCredentialsProvider();
+      adapted.setCredentials(
+          AuthScope.ANY,
+          new UsernamePasswordCredentials(user.getValue(), new String(pass.getValue())));
+      return adapted;
+    }
+    return null;
+  }
+}
