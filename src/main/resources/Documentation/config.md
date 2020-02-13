@@ -217,6 +217,13 @@ remote.NAME.adminUrl
 	link:https://gerrit-review.googlesource.com/admin/projects/plugins/delete-project delete-project[delete-project]
 	plugin must be installed on the other Gerrit.
 
+  It is also possible to use a generic http adminUrl. For example:
+
+  `http://replica1.my.org/admin/${name}`
+
+  In this case replication will perform a `PUT` request on this URL to create
+  a missing project and `DELETE` request to perform project deletion.
+
 remote.NAME.receivepack
 :	Path of the `git-receive-pack` executable on the remote
 	system, if using the SSH transport.

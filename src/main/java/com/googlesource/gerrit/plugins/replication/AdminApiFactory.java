@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.googlesource.gerrit.plugins.replication.GenericHttp.Factory;
 import java.util.Optional;
 import org.eclipse.jgit.transport.URIish;
 
@@ -34,11 +35,16 @@ public interface AdminApiFactory {
   static class DefaultAdminApiFactory implements AdminApiFactory {
     protected final SshHelper sshHelper;
     private final GerritRestApi.Factory gerritRestApiFactory;
+    private final Factory genericHttpFactory;
 
     @Inject
-    public DefaultAdminApiFactory(SshHelper sshHelper, GerritRestApi.Factory gerritRestApiFactory) {
+    public DefaultAdminApiFactory(
+        SshHelper sshHelper,
+        GerritRestApi.Factory gerritRestApiFactory,
+        GenericHttp.Factory genericHttpFactory) {
       this.sshHelper = sshHelper;
       this.gerritRestApiFactory = gerritRestApiFactory;
+      this.genericHttpFactory = genericHttpFactory;
     }
 
     @Override
@@ -51,6 +57,8 @@ public interface AdminApiFactory {
         return Optional.of(new RemoteSsh(sshHelper, uri));
       } else if (isGerritHttp(uri)) {
         return Optional.of(gerritRestApiFactory.create(uri));
+      } else if (isGenericHttp(uri)) {
+        return Optional.of(genericHttpFactory.create(uri));
       }
       return Optional.empty();
     }
@@ -78,5 +86,10 @@ public interface AdminApiFactory {
   public static boolean isGerritHttp(URIish uri) {
     String scheme = uri.getScheme();
     return scheme != null && scheme.toLowerCase().contains("gerrit+http");
+  }
+
+  static boolean isGenericHttp(URIish uri) {
+    String scheme = uri.getScheme();
+    return scheme != null && scheme.toLowerCase().startsWith("http");
   }
 }
