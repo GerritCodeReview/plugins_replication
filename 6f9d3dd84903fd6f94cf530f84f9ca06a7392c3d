@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c71f6776_95fabb7c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritRestApi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-02-15T05:27:17Z",
+      "side": 1,
+      "message": "Don\u0027t explicitly import NameKey.  Import only Project and then refer to Project.NameKey in the code below.",
+      "range": {
+        "startLine": 20,
+        "startChar": 34,
+        "endLine": 20,
+        "endChar": 50
+      },
+      "revId": "6f9d3dd84903fd6f94cf530f84f9ca06a7392c3d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
