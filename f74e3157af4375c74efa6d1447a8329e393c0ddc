@@ -16,6 +16,24 @@
       "revId": "f74e3157af4375c74efa6d1447a8329e393c0ddc",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75aa3092_140505af",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-02-18T14:40:36Z",
+      "side": 1,
+      "message": "\u003e That would not work, because the HTTP credentials for executing the REST-API could be (and often they are) different from the ones used for the Git/HTTP protocol.\n\nWhen we replicate to a remote foo over the HTTP we use the credentials stored in the\nsecure.config under the [remote \"foo\"]:\n\n  [remote \"foo\"]\n    username \u003d foo_replicator\n    password \u003d ...\n\nActually, as this change is implemented, both GerritRestApi and GenericHttp\nclasses use the same credentials from the secure.config.\n\nI don\u0027t really understand what do you see here as a problem? Let me clarify a bit more:\nthe idea here is that we run two CGI scripts in the apache server receiving pushes\nform the replication plugin: the standard \"git-http-backend\" script and a new (which\nI may contribute) \"admin-ops\" script responsible for executing admin operations.\nBoth endpoints would be protected with the same .htpasswd file storing the username/password\nwhich we would store in the secure.config at the Gerrit master side.\nSince this apache server is fully dedicated to receiving pushes from Gerrit master and\nexecuting admin operations (create-project, delete-project) it makes perfect sense\nthat both endpoints use the same credentials.",
+      "parentUuid": "fed030b1_e9fa6513",
+      "revId": "f74e3157af4375c74efa6d1447a8329e393c0ddc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
