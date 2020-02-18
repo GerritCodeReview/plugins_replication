@@ -34,6 +34,24 @@
       "revId": "f74e3157af4375c74efa6d1447a8329e393c0ddc",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ae306fe_ff621cfc",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-02-18T21:04:36Z",
+      "side": 1,
+      "message": "Ah, gotcha. I thought that this change was related to the use-case where there is Gerrit on the other side and thus you were reusing the Gerrit REST-API for creating or deleting the project.\n\nOf course, if it is instead a custom-made solution where you can decide what to do, then you can simply decide to use the same credentials for both.\n\nThanks for clarifying.",
+      "parentUuid": "75aa3092_140505af",
+      "revId": "f74e3157af4375c74efa6d1447a8329e393c0ddc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
