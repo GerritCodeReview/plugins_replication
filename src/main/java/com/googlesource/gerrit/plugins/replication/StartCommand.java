@@ -55,7 +55,7 @@ final class StartCommand extends SshCommand {
 
   @Override
   protected void run() throws Failure {
-    if (all && projectPatterns.size() > 0) {
+    if (all && !projectPatterns.isEmpty()) {
       throw new UnloggedFailure(1, "error: cannot combine --all and PROJECT");
     }
 
