@@ -46,6 +46,30 @@
       "revId": "be0e0da8e82544ab3944674d8b59eda0aefb9206",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b6b5e12_0589c333",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-02-20T04:23:20Z",
+      "side": 1,
+      "message": "Please add the logging, i.e.\n\n if (e \u003d\u003d null) {\n   repLog.warn(...);\n   return;\n }\n repLog.info(\"Firing ...\");\n inGitReferenceUpdated(...);",
+      "parentUuid": "70b227b3_3c277e67",
+      "range": {
+        "startLine": 173,
+        "startChar": 6,
+        "endLine": 176,
+        "endChar": 7
+      },
+      "revId": "be0e0da8e82544ab3944674d8b59eda0aefb9206",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
