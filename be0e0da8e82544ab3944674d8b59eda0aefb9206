@@ -70,6 +70,30 @@
       "revId": "be0e0da8e82544ab3944674d8b59eda0aefb9206",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7223cc5e_c91de829",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-02-20T04:24:00Z",
+      "side": 1,
+      "message": "Also please update the commit message with the context, i.e. your answer to my question about how null gets here.",
+      "parentUuid": "8b6b5e12_0589c333",
+      "range": {
+        "startLine": 173,
+        "startChar": 6,
+        "endLine": 176,
+        "endChar": 7
+      },
+      "revId": "be0e0da8e82544ab3944674d8b59eda0aefb9206",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
