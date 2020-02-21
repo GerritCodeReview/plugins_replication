@@ -72,7 +72,7 @@ final class ListCommand extends SshCommand {
   }
 
   private void addQueueDetails(JsonObject obj, String key, Collection<PushOne> values) {
-    if (values.size() > 0) {
+    if (!values.isEmpty()) {
       JsonArray list = new JsonArray();
       for (PushOne p : values) {
         list.add(new JsonPrimitive(p.toString()));

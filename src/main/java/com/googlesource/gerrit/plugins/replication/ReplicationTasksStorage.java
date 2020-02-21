@@ -83,7 +83,7 @@ public class ReplicationTasksStorage {
     }
   }
 
-  private static Gson GSON = new Gson();
+  private static final Gson GSON = new Gson();
 
   private final Path refUpdates;
   private final Path buildingUpdates;
