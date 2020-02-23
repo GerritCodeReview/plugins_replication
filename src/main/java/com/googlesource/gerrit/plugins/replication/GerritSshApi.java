@@ -27,8 +27,8 @@ import org.eclipse.jgit.transport.URIish;
 public class GerritSshApi implements AdminApi {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  static int SSH_COMMAND_FAILED = -1;
-  static String GERRIT_ADMIN_PROTOCOL_PREFIX = "gerrit+";
+  static final int SSH_COMMAND_FAILED = -1;
+  static final String GERRIT_ADMIN_PROTOCOL_PREFIX = "gerrit+";
 
   protected final SshHelper sshHelper;
   protected final URIish uri;
