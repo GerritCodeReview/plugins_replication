@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e568bcb5_fbaed490",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-02-27T13:23:36Z",
+      "side": 1,
+      "message": "Does this need to be documented somewhere? Where is this new method used from?",
+      "revId": "6cdf9a0211259684c9a9ddb6b28ddaac1410d09e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d79a91f_47697508",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-02-27T13:23:36Z",
+      "side": 1,
+      "message": "Where is this used from?",
+      "revId": "6cdf9a0211259684c9a9ddb6b28ddaac1410d09e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
