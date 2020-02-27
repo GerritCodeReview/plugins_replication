@@ -33,6 +33,24 @@
       "revId": "6cdf9a0211259684c9a9ddb6b28ddaac1410d09e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6d2d43d_bb186d9b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-02-27T13:52:04Z",
+      "side": 1,
+      "message": "DavidP mentioned \"but it\u0027s the teamforge replication that\u0027s based upon this\".\n\nIt should have a @UsedAt() annotation then, fair point.",
+      "parentUuid": "4d79a91f_47697508",
+      "revId": "6cdf9a0211259684c9a9ddb6b28ddaac1410d09e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
