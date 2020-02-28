@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "946e70c0_aa2350b3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Constants.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-02-28T19:15:07Z",
+      "side": 1,
+      "message": "I would propose to use SC_BAD_REQUEST_MSG to be consistent with other messages.",
+      "range": {
+        "startLine": 19,
+        "startChar": 22,
+        "endLine": 19,
+        "endChar": 41
+      },
+      "revId": "f77acb827fac2782be66d625c2df6a770d9c7914",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a21be2e_331b590c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-02-28T19:15:07Z",
+      "side": 1,
+      "message": "This two lines keep being repeated. Is it possible to extract them out as a method?",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 46
+      },
+      "revId": "f77acb827fac2782be66d625c2df6a770d9c7914",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01974917_e068d73a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-02-28T19:15:07Z",
+      "side": 1,
+      "message": "I would introduce some spaces to improve readability.",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 35
+      },
+      "revId": "f77acb827fac2782be66d625c2df6a770d9c7914",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da55f845_4f803104",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-02-28T19:15:07Z",
+      "side": 1,
+      "message": "Depending on the previous comment this line might needs to be removed to stay consistent.",
+      "revId": "f77acb827fac2782be66d625c2df6a770d9c7914",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19fb2a4f_a6e2edd6",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-02-28T19:15:07Z",
+      "side": 1,
+      "message": "Depending on how ReplicationHttpTest.java got addressed, this will have to go through refactoring.",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 62
+      },
+      "revId": "f77acb827fac2782be66d625c2df6a770d9c7914",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
