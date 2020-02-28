@@ -48,12 +48,12 @@ public class OnStartStop implements LifecycleListener {
   @Override
   public void start() {
     if (srvInfo.getState() == ServerInformation.State.STARTUP
-        && config.isReplicateAllOnPluginStart()) {
+            && config.isReplicateAllOnPluginStart()) {
       ReplicationState state = new ReplicationState(new GitUpdateProcessing(eventDispatcher.get()));
       pushAllFuture.set(
-          pushAll
-              .create(null, ReplicationFilter.all(), state, false)
-              .schedule(30, TimeUnit.SECONDS));
+              pushAll
+                      .create(null, ReplicationFilter.all(), state, false)
+                      .schedule(30, TimeUnit.SECONDS));
     }
   }
 

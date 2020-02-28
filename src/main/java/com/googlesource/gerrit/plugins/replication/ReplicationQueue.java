@@ -72,6 +72,7 @@ public class ReplicationQueue
   private final ReplicationConfig config;
   private final DynamicItem<AdminApiFactory> adminApiFactory;
   private final ReplicationTasksStorage replicationTasksStorage;
+
   private volatile boolean running;
   private volatile boolean replaying;
   private final Queue<ReferenceUpdatedEvent> beforeStartupEventsQueue;
