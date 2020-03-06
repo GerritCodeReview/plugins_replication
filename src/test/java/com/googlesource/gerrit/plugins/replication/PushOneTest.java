@@ -41,6 +41,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -245,9 +246,9 @@ public class PushOneTest {
     return push;
   }
 
-  private void setupProjectCacheMock() throws IOException {
+  private void setupProjectCacheMock() {
     projectCacheMock = mock(ProjectCache.class);
-    when(projectCacheMock.checkedGet(projectNameKey)).thenReturn(projectStateMock);
+    when(projectCacheMock.get(projectNameKey)).thenReturn(Optional.of(projectStateMock));
   }
 
   private void setupTransportMock() throws NotSupportedException, TransportException {

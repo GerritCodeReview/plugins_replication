@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.gerrit.server.project.ProjectCache.noSuchProject;
 import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;
 import static com.googlesource.gerrit.plugins.replication.ReplicationFileBasedConfig.replaceName;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.NON_EXISTING;
@@ -30,6 +31,7 @@ import com.google.gerrit.entities.AccountGroup;
 import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.entities.RefNames;
+import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.extensions.config.FactoryModule;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.extensions.restapi.AuthException;
@@ -302,12 +304,9 @@ public class Destination {
               () -> {
                 ProjectState projectState;
                 try {
-                  projectState = projectCache.checkedGet(project);
-                } catch (IOException e) {
+                  projectState = projectCache.get(project).orElseThrow(noSuchProject(project));
+                } catch (StorageException e) {
                   return false;
-                }
-                if (projectState == null) {
-                  throw new NoSuchProjectException(project);
                 }
                 if (!projectState.statePermitsRead()) {
                   return false;
@@ -346,12 +345,9 @@ public class Destination {
               () -> {
                 ProjectState projectState;
                 try {
-                  projectState = projectCache.checkedGet(project);
-                } catch (IOException e) {
+                  projectState = projectCache.get(project).orElseThrow(noSuchProject(project));
+                } catch (StorageException e) {
                   return false;
-                }
-                if (projectState == null) {
-                  throw new NoSuchProjectException(project);
                 }
                 return shouldReplicate(projectState, userProvider.get());
               })
