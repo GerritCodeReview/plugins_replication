@@ -46,6 +46,30 @@
       "revId": "aaff48d82be18d99f50feab6d869cb9c98874f29",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7e141a0_5d5b7573",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-03-06T08:57:56Z",
+      "side": 1,
+      "message": "I\u0027ve sent a PR: https://github.com/google/flogger/pull/138\n\nCan you help to get some attention on it?",
+      "parentUuid": "8ef5e66b_2a303792",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 64
+      },
+      "revId": "aaff48d82be18d99f50feab6d869cb9c98874f29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
