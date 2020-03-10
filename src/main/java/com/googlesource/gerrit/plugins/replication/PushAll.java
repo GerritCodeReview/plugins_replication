@@ -21,6 +21,7 @@ import com.google.gerrit.server.project.ProjectCache;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class PushAll implements Runnable {
@@ -30,7 +31,7 @@ public class PushAll implements Runnable {
     PushAll create(String urlMatch, ReplicationFilter filter, ReplicationState state, boolean now);
   }
 
-  private final WorkQueue workQueue;
+  private final ScheduledThreadPoolExecutor executor;
   private final ProjectCache projectCache;
   private final ReplicationQueue replication;
   private final String urlMatch;
@@ -48,7 +49,6 @@ public class PushAll implements Runnable {
       @Assisted ReplicationFilter filter,
       @Assisted ReplicationState state,
       @Assisted boolean now) {
-    this.workQueue = wq;
     this.projectCache = projectCache;
     this.replication = rq;
     this.stateLog = stateLog;
@@ -56,10 +56,11 @@ public class PushAll implements Runnable {
     this.filter = filter;
     this.state = state;
     this.now = now;
+    executor = wq.createQueue(1, "Replicate All Projects");
   }
 
   Future<?> schedule(long delay, TimeUnit unit) {
-    return workQueue.getDefaultQueue().schedule(this, delay, unit);
+    return executor.schedule(this, delay, unit);
   }
 
   @Override
