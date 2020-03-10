@@ -87,7 +87,7 @@ public class ReplicationQueue
       destinations.get().startup(workQueue);
       running = true;
       replicationTasksStorage.resetAll();
-      firePendingEvents();
+      firePersistedAsNew();
       fireBeforeStartupEvents();
       distributor = new Distributor(workQueue);
     }
@@ -125,12 +125,18 @@ public class ReplicationQueue
 
   @Override
   public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
-    fire(event.getProjectName(), event.getRefName(), false);
+    fireNew(event.getProjectName(), event.getRefName());
   }
 
-  private void fire(String projectName, String refName, boolean isPersisted) {
+  private void fireNew(String projectName, String refName) {
     ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
-    fire(Project.nameKey(projectName), null, refName, state, false, isPersisted);
+    fire(Project.nameKey(projectName), null, refName, state, false, false);
+    state.markAllPushTasksScheduled();
+  }
+
+  private void firePersisted(ReplicateRefUpdate update, String urlMatch) {
+    ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
+    fire(Project.nameKey(update.project), urlMatch, update.ref, state, false, true);
     state.markAllPushTasksScheduled();
   }
 
@@ -162,7 +168,7 @@ public class ReplicationQueue
     }
   }
 
-  private void firePendingEvents() {
+  private void firePersistedAsNew() {
     replaying = true;
     try {
       Set<String> eventsReplayed = new HashSet<>();
@@ -171,12 +177,19 @@ public class ReplicationQueue
         String eventKey = String.format("%s:%s", t.project, t.ref);
         if (!eventsReplayed.contains(eventKey)) {
           repLog.info("Firing pending task {}", eventKey);
-          fire(t.project, t.ref, true);
+          fireNew(t.project, t.ref);
           eventsReplayed.add(eventKey);
         }
       }
     } finally {
       replaying = false;
+    }
+  }
+
+  private void firePersisted() {
+    for (ReplicateRefUpdate t : replicationTasksStorage.listWaiting()) {
+      repLog.info("Firing persisted task {}", t);
+      firePersisted(t, t.uri);
     }
   }
 
@@ -224,7 +237,7 @@ public class ReplicationQueue
       String eventKey = String.format("%s:%s", event.projectName(), event.refName());
       if (!eventsReplayed.contains(eventKey)) {
         repLog.info("Firing pending task {}", event);
-        fire(event.projectName(), event.refName(), false);
+        fireNew(event.projectName(), event.refName());
         eventsReplayed.add(eventKey);
       }
     }
@@ -262,7 +275,7 @@ public class ReplicationQueue
         return;
       }
       try {
-        firePendingEvents();
+        firePersisted();
         pruneCompleted();
       } catch (Exception e) {
         repLog.error("error distributing tasks", e);
