@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "437ca9ba_8ead5089",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationQueueIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-03-11T02:05:12Z",
+      "side": 0,
+      "message": "Note: this usage of %s was incorrect for the slf4j logger; it should have been {}.  There\u0027s no point fixing it separately though.",
+      "range": {
+        "startLine": 95,
+        "startChar": 38,
+        "endLine": 95,
+        "endChar": 40
+      },
+      "revId": "e5b9b1752b27024439ca96e8e89f59d6058f2380",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
