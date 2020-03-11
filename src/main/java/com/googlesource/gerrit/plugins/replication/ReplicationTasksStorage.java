@@ -24,6 +24,7 @@ import com.google.inject.Inject;
 import com.google.inject.ProvisionException;
 import com.google.inject.Singleton;
 import java.io.IOException;
+import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -158,7 +159,12 @@ public class ReplicationTasksStorage {
           String json = new String(Files.readAllBytes(e), UTF_8);
           results.add(GSON.fromJson(json, ReplicateRefUpdate.class));
         } else if (Files.isDirectory(e)) {
-          results.addAll(list(e));
+          try {
+            results.addAll(list(e));
+          } catch (DirectoryIteratorException d) {
+            // iterating over the sub-directories is expected to have dirs disappear
+            Nfs.throwIfNotStaleFileHandle(d.getCause());
+          }
         }
       }
     } catch (IOException e) {
