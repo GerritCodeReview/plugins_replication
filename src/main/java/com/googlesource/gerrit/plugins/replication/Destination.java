@@ -628,31 +628,32 @@ public class Destination {
 
   List<URIish> getURIs(Project.NameKey project, String urlMatch) {
     List<URIish> r = Lists.newArrayListWithCapacity(config.getRemoteConfig().getURIs().size());
-    for (URIish uri : config.getRemoteConfig().getURIs()) {
-      if (matches(uri, urlMatch)) {
-        String name = project.get();
-        if (needsUrlEncoding(uri)) {
-          name = encode(name);
-        }
-        String remoteNameStyle = config.getRemoteNameStyle();
-        if (remoteNameStyle.equals("dash")) {
-          name = name.replace("/", "-");
-        } else if (remoteNameStyle.equals("underscore")) {
-          name = name.replace("/", "_");
-        } else if (remoteNameStyle.equals("basenameOnly")) {
-          name = FilenameUtils.getBaseName(name);
-        } else if (!remoteNameStyle.equals("slash")) {
-          repLog.debug("Unknown remoteNameStyle: {}, falling back to slash", remoteNameStyle);
-        }
-        String replacedPath =
-            ReplicationQueue.replaceName(uri.getPath(), name, isSingleProjectMatch());
-        if (replacedPath != null) {
-          uri = uri.setPath(replacedPath);
-          r.add(uri);
-        }
+    for (URIish configUri : config.getRemoteConfig().getURIs()) {
+      URIish uri = getURI(configUri, project);
+      if (matches(configUri, urlMatch) || matches(uri, urlMatch)) {
+        r.add(uri);
       }
     }
     return r;
+  }
+
+  URIish getURI(URIish template, Project.NameKey project) {
+    String name = project.get();
+    if (needsUrlEncoding(template)) {
+      name = encode(name);
+    }
+    String remoteNameStyle = config.getRemoteNameStyle();
+    if (remoteNameStyle.equals("dash")) {
+      name = name.replace("/", "-");
+    } else if (remoteNameStyle.equals("underscore")) {
+      name = name.replace("/", "_");
+    } else if (remoteNameStyle.equals("basenameOnly")) {
+      name = FilenameUtils.getBaseName(name);
+    } else if (!remoteNameStyle.equals("slash")) {
+      repLog.debug("Unknown remoteNameStyle: {}, falling back to slash", remoteNameStyle);
+    }
+    String replacedPath = ReplicationQueue.replaceName(template.getPath(), name, isSingleProjectMatch());
+    return (replacedPath != null) ? template.setPath(replacedPath) : template;
   }
 
   static boolean needsUrlEncoding(URIish uri) {
