@@ -168,11 +168,16 @@ public class ReplicationTasksStorage {
     try (DirectoryStream<Path> dirs = Files.newDirectoryStream(createDir(runningUpdates))) {
       for (Path dir : dirs) {
         UriLock lock = null;
-        for (ReplicateRefUpdate u : list(dir)) {
-          if (lock == null) {
-            lock = new UriLock(u);
+        try {
+          for (ReplicateRefUpdate u : list(dir)) {
+            if (lock == null) {
+              lock = new UriLock(u);
+            }
+            new Task(u).reset();
           }
-          new Task(u).reset();
+        } catch (DirectoryIteratorException d) {
+          // iterating over the sub-directories is expected to have dirs disappear
+          Nfs.throwIfNotStaleFileHandle(d.getCause());
         }
         if (lock != null) {
           lock.release();
