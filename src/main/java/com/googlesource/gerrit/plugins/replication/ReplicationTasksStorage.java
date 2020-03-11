@@ -24,6 +24,7 @@ import com.google.inject.Inject;
 import com.google.inject.ProvisionException;
 import com.google.inject.Singleton;
 import java.io.IOException;
+import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -167,11 +168,16 @@ public class ReplicationTasksStorage {
     try (DirectoryStream<Path> dirs = Files.newDirectoryStream(createDir(runningUpdates))) {
       for (Path dir : dirs) {
         UriLock lock = null;
-        for (ReplicateRefUpdate u : list(dir)) {
-          if (lock == null) {
-            lock = new UriLock(u);
+        try {
+          for (ReplicateRefUpdate u : list(dir)) {
+            if (lock == null) {
+              lock = new UriLock(u);
+            }
+            new Task(u).reset();
           }
-          new Task(u).reset();
+        } catch (DirectoryIteratorException d) {
+          // iterating over the sub-directories is expected to have dirs disappear
+          Nfs.throwIfNotStaleFileHandle(d.getCause());
         }
         if (lock != null) {
           lock.release();
@@ -221,7 +227,12 @@ public class ReplicationTasksStorage {
           String json = new String(Files.readAllBytes(e), UTF_8);
           results.add(GSON.fromJson(json, ReplicateRefUpdate.class));
         } else if (Files.isDirectory(e)) {
-          results.addAll(list(e));
+          try {
+            results.addAll(list(e));
+          } catch (DirectoryIteratorException d) {
+            // iterating over the sub-directories is expected to have dirs disappear
+            Nfs.throwIfNotStaleFileHandle(d.getCause());
+          }
         }
       }
     } catch (IOException e) {
