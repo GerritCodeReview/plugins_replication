@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8321be5a_a50c368f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Constants.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-03-11T19:18:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "946e70c0_aa2350b3",
+      "range": {
+        "startLine": 19,
+        "startChar": 22,
+        "endLine": 19,
+        "endChar": 41
+      },
+      "revId": "f77acb827fac2782be66d625c2df6a770d9c7914",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a21be2e_331b590c",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "f77acb827fac2782be66d625c2df6a770d9c7914",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0907941c_1b706148",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-03-11T19:18:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a21be2e_331b590c",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 46
+      },
+      "revId": "f77acb827fac2782be66d625c2df6a770d9c7914",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "3812ed44_0b5e3bb3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-03-11T19:18:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01974917_e068d73a",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 35
+      },
+      "revId": "f77acb827fac2782be66d625c2df6a770d9c7914",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da55f845_4f803104",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
         "patchSetId": 1
@@ -88,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "f9476bce_35e05280",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-03-11T19:18:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da55f845_4f803104",
+      "revId": "f77acb827fac2782be66d625c2df6a770d9c7914",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19fb2a4f_a6e2edd6",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
         "patchSetId": 1
@@ -99,6 +189,30 @@
       "writtenOn": "2020-02-28T19:15:07Z",
       "side": 1,
       "message": "Depending on how ReplicationHttpTest.java got addressed, this will have to go through refactoring.",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 62
+      },
+      "revId": "f77acb827fac2782be66d625c2df6a770d9c7914",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe5df91e_ca9824a5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-03-11T19:18:40Z",
+      "side": 1,
+      "message": "Not sure I understand this comment. More spaces maybe ? I was following the format used in unit tests for the highavailability plugin.",
+      "parentUuid": "19fb2a4f_a6e2edd6",
       "range": {
         "startLine": 71,
         "startChar": 4,
