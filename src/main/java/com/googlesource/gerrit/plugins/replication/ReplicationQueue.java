@@ -31,6 +31,7 @@ import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.UsedAt;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.git.WorkQueue;
+import com.google.gerrit.util.logging.NamedFluentLogger;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
@@ -42,8 +43,6 @@ import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
 import org.eclipse.jgit.transport.URIish;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /** Manages automatic replication to remote repositories. */
 public class ReplicationQueue
@@ -52,7 +51,7 @@ public class ReplicationQueue
         ProjectDeletedListener,
         HeadUpdatedListener {
   static final String REPLICATION_LOG_NAME = "replication_log";
-  static final Logger repLog = LoggerFactory.getLogger(REPLICATION_LOG_NAME);
+  static final NamedFluentLogger repLog = NamedFluentLogger.forName(REPLICATION_LOG_NAME);
 
   private final ReplicationStateListener stateLog;
 
@@ -109,7 +108,7 @@ public class ReplicationQueue
     running = false;
     int discarded = config.shutdown();
     if (discarded > 0) {
-      repLog.warn("Canceled {} replication events during shutdown", discarded);
+      repLog.atWarning().log("Canceled %d replication events during shutdown", discarded);
     }
   }
 
@@ -199,7 +198,7 @@ public class ReplicationQueue
       for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.list()) {
         String eventKey = String.format("%s:%s", t.project, t.ref);
         if (!eventsReplayed.contains(eventKey)) {
-          repLog.info("Firing pending task {}", eventKey);
+          repLog.atInfo().log("Firing pending task %s", eventKey);
           onGitReferenceUpdated(t.project, t.ref);
           eventsReplayed.add(eventKey);
         }
@@ -230,7 +229,7 @@ public class ReplicationQueue
     for (ReferenceUpdatedEvent event : beforeStartupEventsQueue) {
       String eventKey = String.format("%s:%s", event.getProjectName(), event.getRefName());
       if (!eventsReplayed.contains(eventKey)) {
-        repLog.info("Firing pending task {}", event);
+        repLog.atInfo().log("Firing pending task %s", event);
         onGitReferenceUpdated(event.getProjectName(), event.getRefName());
         eventsReplayed.add(eventKey);
       }
@@ -243,7 +242,7 @@ public class ReplicationQueue
       return Collections.emptySet();
     }
     if (!running) {
-      repLog.error("Replication plugin did not finish startup before event");
+      repLog.atSevere().log("Replication plugin did not finish startup before event");
       return Collections.emptySet();
     }
 
@@ -268,7 +267,7 @@ public class ReplicationQueue
         try {
           uri = new URIish(url);
         } catch (URISyntaxException e) {
-          repLog.warn("adminURL '{}' is invalid: {}", url, e.getMessage());
+          repLog.atWarning().log("adminURL '%s' is invalid: %s", url, e.getMessage());
           continue;
         }
 
@@ -276,13 +275,13 @@ public class ReplicationQueue
           String path =
               replaceName(uri.getPath(), projectName.get(), config.isSingleProjectMatch());
           if (path == null) {
-            repLog.warn("adminURL {} does not contain ${name}", uri);
+            repLog.atWarning().log("adminURL %s does not contain ${name}", uri);
             continue;
           }
 
           uri = uri.setPath(path);
           if (!isSSH(uri)) {
-            repLog.warn("adminURL '{}' is invalid: only SSH is supported", uri);
+            repLog.atWarning().log("adminURL '%s' is invalid: only SSH is supported", uri);
             continue;
           }
         }
@@ -338,7 +337,7 @@ public class ReplicationQueue
   }
 
   private void warnCannotPerform(String op, URIish uri) {
-    repLog.warn("Cannot {} on remote site {}.", op, uri);
+    repLog.atWarning().log("Cannot %s on remote site %s.", op, uri);
   }
 
   private static class ReferenceUpdatedEvent {

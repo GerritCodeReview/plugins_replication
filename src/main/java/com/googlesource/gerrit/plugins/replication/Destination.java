@@ -52,6 +52,7 @@ import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectState;
 import com.google.gerrit.server.util.RequestContext;
+import com.google.gerrit.util.logging.NamedFluentLogger;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
@@ -81,10 +82,9 @@ import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
-import org.slf4j.Logger;
 
 public class Destination {
-  private static final Logger repLog = ReplicationQueue.repLog;
+  private static final NamedFluentLogger repLog = ReplicationQueue.repLog;
 
   public interface Factory {
     Destination create(DestinationConfiguration config);
@@ -152,7 +152,7 @@ public class Destination {
           builder.add(g.getUUID());
           addRecursiveParents(g.getUUID(), builder, groupIncludeCache);
         } else {
-          repLog.warn("Group \"{}\" not recognized, removing from authGroup", name);
+          repLog.atWarning().log("Group \"%s\" not recognized, removing from authGroup", name);
         }
       }
       remoteUser = new RemoteSiteUser(new ListGroupMembership(builder.build()));
@@ -229,7 +229,7 @@ public class Destination {
   public int shutdown() {
     int cnt = 0;
     if (pool != null) {
-      repLog.warn("Cancelling replication events");
+      repLog.atWarning().log("Cancelling replication events");
 
       foreachPushOp(
           pending,
@@ -361,7 +361,7 @@ public class Destination {
 
   void schedule(
       Project.NameKey project, String ref, URIish uri, ReplicationState state, boolean now) {
-    repLog.info("scheduling replication {}:{} => {}", project, ref, uri);
+    repLog.atInfo().log("scheduling replication %s:%s => %s", project, ref, uri);
     if (!shouldReplicate(project, ref, state)) {
       return;
     }
@@ -406,7 +406,8 @@ public class Destination {
         task.addState(ref, state);
       }
       state.increasePushTaskCount(project.get(), ref);
-      repLog.info("scheduled {}:{} => {} to run after {}s", project, ref, task, config.getDelay());
+      repLog.atInfo().log(
+          "scheduled %s:%s => %s to run after %ds", project, ref, task, config.getDelay());
     }
   }
 
@@ -642,7 +643,8 @@ public class Destination {
         } else if (remoteNameStyle.equals("basenameOnly")) {
           name = FilenameUtils.getBaseName(name);
         } else if (!remoteNameStyle.equals("slash")) {
-          repLog.debug("Unknown remoteNameStyle: {}, falling back to slash", remoteNameStyle);
+          repLog.atFine().log(
+              "Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
         }
         String replacedPath =
             ReplicationQueue.replaceName(uri.getPath(), name, isSingleProjectMatch());
@@ -731,7 +733,7 @@ public class Destination {
       try {
         eventDispatcher.get().postEvent(new Branch.NameKey(project, ref), event);
       } catch (PermissionBackendException e) {
-        repLog.error("error posting event", e);
+        repLog.atSevere().withCause(e).log("error posting event");
       }
     }
   }
@@ -745,7 +747,7 @@ public class Destination {
       try {
         eventDispatcher.get().postEvent(new Branch.NameKey(project, ref), event);
       } catch (PermissionBackendException e) {
-        repLog.error("error posting event", e);
+        repLog.atSevere().withCause(e).log("error posting event");
       }
     }
   }
