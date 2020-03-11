@@ -236,6 +236,85 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   @Test
+  public void shouldMatchTemplatedURL() throws Exception {
+    PushResultProcessing pushResultProcessing =
+        new PushResultProcessing() {
+
+          @Override
+          void onRefReplicatedToOneNode(
+              String project,
+              String ref,
+              URIish uri,
+              ReplicationState.RefPushResult status,
+              RemoteRefUpdate.Status refStatus) {}
+
+          @Override
+          void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {}
+
+          @Override
+          void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {}
+        };
+
+    createTestProject("projectreplica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    String urlMatch = gitPath.resolve("${name}" + "replica" + ".git").toString();
+    String expectedURI = gitPath.resolve(project + "replica" + ".git").toString();
+
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, urlMatch, new ReplicationState(pushResultProcessing), true);
+
+    assertThat(listReplicationTasks(".*all.*")).hasSize(1);
+    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
+      assertThat(task.uri).isEqualTo(expectedURI);
+    }
+  }
+
+  @Test
+  public void shouldMatchRealURL() throws Exception {
+    PushResultProcessing pushResultProcessing =
+        new PushResultProcessing() {
+
+          @Override
+          void onRefReplicatedToOneNode(
+              String project,
+              String ref,
+              URIish uri,
+              ReplicationState.RefPushResult status,
+              RemoteRefUpdate.Status refStatus) {}
+
+          @Override
+          void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {}
+
+          @Override
+          void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {}
+        };
+
+    createTestProject("projectreplica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    String urlMatch = gitPath.resolve(project + "replica" + ".git").toString();
+    String expectedURI = urlMatch;
+
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, urlMatch, new ReplicationState(pushResultProcessing), true);
+
+    assertThat(listReplicationTasks(".*")).hasSize(1);
+    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
+      assertThat(task.uri).isEqualTo(expectedURI);
+    }
+    assertThat(tasksStorage.list()).isNotEmpty();
+  }
+
+  @Test
   public void shouldReplicateHeadUpdate() throws Exception {
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
