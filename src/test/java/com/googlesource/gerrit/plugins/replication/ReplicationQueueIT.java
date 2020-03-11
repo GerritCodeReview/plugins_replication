@@ -18,6 +18,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.base.Stopwatch;
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
@@ -38,15 +39,13 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @UseLocalDisk
 @TestPlugin(
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
 public class ReplicationQueueIT extends LightweightPluginDaemonTest {
-  private static final Logger logger = LoggerFactory.getLogger(ReplicationQueueIT.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private static final int TEST_REPLICATION_DELAY = 1;
   private static final Duration TEST_TIMEOUT = Duration.ofSeconds(TEST_REPLICATION_DELAY * 2);
@@ -92,7 +91,7 @@ public class ReplicationQueueIT extends LightweightPluginDaemonTest {
     try {
       return repo.getRefDatabase().exactRef(branchName);
     } catch (Exception e) {
-      logger.error("failed to get ref %s in repo %s", branchName, repo);
+      logger.atSevere().withCause(e).log("failed to get ref %s in repo %s", branchName, repo);
       return null;
     }
   }
