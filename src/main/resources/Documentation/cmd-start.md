@@ -97,10 +97,10 @@ OPTIONS
 :	Schedule replication for all projects.
 
 `--url <PATTERN>`
-:	Replicate only to replication destinations whose URL contains
-	the substring `PATTERN`.  This can be useful to replicate
-	only to a previously down node, which has been brought back
-	online.
+:	Replicate only to replication destinations whose configuration
+	URL contains the substring `PATTERN`, or whose expanded project
+	URL contains `PATTERN`. This can be useful to replicate only to
+	a previously down node, which has been brought back online.
 
 EXAMPLES
 --------
@@ -134,6 +134,12 @@ Replicate projects whose path includes a folder named `vendor` to host slave1:
 
 ```
   $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --url slave1 ^(|.*/)vendor(|/.*)
+```
+
+Replicate to only one specific destination URL:
+
+```
+  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --url https://example.com/tools/gerrit.git
 ```
 
 SEE ALSO
