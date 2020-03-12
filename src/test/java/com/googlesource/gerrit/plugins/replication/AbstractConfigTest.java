@@ -50,7 +50,7 @@ public abstract class AbstractConfigTest {
   protected EventBus eventBus = new EventBus();
   protected FakeExecutorService executorService = new FakeExecutorService();
   protected ConfigParser configParser;
-  protected ReplicationFileBasedConfigProvider replicationConfigProvider;
+  protected ReplicationConfigProvider replicationConfigProvider;
 
   static class FakeDestination extends Destination {
     public final DestinationConfiguration config;
@@ -74,7 +74,7 @@ public abstract class AbstractConfigTest {
     pluginDataPath = createTempPath("data");
     destinationFactoryMock = mock(Destination.Factory.class);
     configParser = new ConfigParser();
-    replicationConfigProvider = new ReplicationFileBasedConfigProvider(sitePaths, pluginDataPath);
+    replicationConfigProvider = new ReplicationConfigProvider(sitePaths, pluginDataPath);
   }
 
   @Before
