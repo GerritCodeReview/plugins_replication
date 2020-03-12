@@ -432,6 +432,17 @@ remote.NAME.slowLatencyThreshold
 
 	default: 15 minutes
 
+Directory `replication.config.d`
+--------------------
+The optional directory `$site_path/replication.config.d` contains a Git-style
+config files that controls the replication settings for the replication
+plugin. Files stored in this directory are addition to standard 
+`replication.config` file.
+
+The files are composed of one or more `remote` sections, each remote
+section provides common configuration settings for one or more
+destination URLs. Form more details how to setup `remote` sections please
+refer to `replication.config` section. 
 
 File `secure.config`
 --------------------
