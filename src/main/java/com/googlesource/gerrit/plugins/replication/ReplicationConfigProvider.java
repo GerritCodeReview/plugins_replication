@@ -18,20 +18,32 @@ import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 
-public class ReplicationFileBasedConfigProvider implements Provider<ReplicationConfig> {
+public class ReplicationConfigProvider implements Provider<ReplicationConfig> {
   SitePaths site;
   Path pluginDataDir;
 
   @Inject
-  public ReplicationFileBasedConfigProvider(SitePaths site, @PluginData Path pluginDataDir) {
+  public ReplicationConfigProvider(SitePaths site, @PluginData Path pluginDataDir) {
     this.site = site;
     this.pluginDataDir = pluginDataDir;
   }
 
   @Override
   public ReplicationConfig get() {
+    if (Files.exists(site.etc_dir.resolve("replication.remotes.d"))) {
+      try {
+        return new FanoutReplicationConfig(site, pluginDataDir);
+      } catch (IOException | ConfigInvalidException e) {
+        throw new IllegalStateException(
+            String.format("Cannot read fanout config: %s", e.getMessage()), e);
+      }
+    }
+
     return new ReplicationFileBasedConfig(site, pluginDataDir);
   }
 }
