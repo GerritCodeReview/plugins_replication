@@ -80,8 +80,8 @@ public class AutoReloadRunnableTest {
     autoReloadRunnable.run();
   }
 
-  private ReplicationFileBasedConfigProvider newVersionConfigProvider() {
-    return new ReplicationFileBasedConfigProvider(sitePaths, sitePaths.data_dir) {
+  private ReplicationConfigProvider newVersionConfigProvider() {
+    return new ReplicationConfigProvider(sitePaths, sitePaths.data_dir) {
       @Override
       public ReplicationConfig get() {
         return new ReplicationFileBasedConfig(site, pluginDataDir) {
