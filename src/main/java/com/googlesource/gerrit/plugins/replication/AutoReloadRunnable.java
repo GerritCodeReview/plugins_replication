@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.eventbus.EventBus;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginData;
@@ -22,6 +23,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.nio.file.Path;
 import java.util.List;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 
 public class AutoReloadRunnable implements Runnable {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
@@ -33,6 +35,7 @@ public class AutoReloadRunnable implements Runnable {
   private final ReplicationConfigValidator configValidator;
 
   private ReplicationFileBasedConfig loadedConfig;
+  private DynamicReplicationFileBasedConfigs loadedDynamicConfig;
   private String loadedConfigVersion;
   private String lastFailedConfigVersion;
 
@@ -40,11 +43,13 @@ public class AutoReloadRunnable implements Runnable {
   public AutoReloadRunnable(
       ReplicationConfigValidator configValidator,
       ReplicationFileBasedConfig config,
+      DynamicReplicationFileBasedConfigs dynamicConfig,
       SitePaths site,
       @PluginData Path pluginDataDir,
       EventBus eventBus,
       Provider<ObservableQueue> queueObserverProvider) {
     this.loadedConfig = config;
+    this.loadedDynamicConfig = dynamicConfig;
     this.loadedConfigVersion = config.getVersion();
     this.lastFailedConfigVersion = "";
     this.site = site;
@@ -56,7 +61,7 @@ public class AutoReloadRunnable implements Runnable {
 
   @Override
   public synchronized void run() {
-    String pendingConfigVersion = loadedConfig.getVersion();
+    String pendingConfigVersion = latestConfigVersion(loadedConfig, loadedDynamicConfig);
     ObservableQueue queue = queueObserverProvider.get();
     if (pendingConfigVersion.equals(loadedConfigVersion)
         || pendingConfigVersion.equals(lastFailedConfigVersion)
@@ -69,13 +74,17 @@ public class AutoReloadRunnable implements Runnable {
   }
 
   synchronized void reload() {
-    String pendingConfigVersion = loadedConfig.getVersion();
+    String pendingConfigVersion = latestConfigVersion(loadedConfig, loadedDynamicConfig);
     try {
       ReplicationFileBasedConfig newConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
-      final List<RemoteConfiguration> newValidDestinations =
-          configValidator.validateConfig(newConfig);
+      DynamicReplicationFileBasedConfigs newDynamicConfig =
+          new DynamicReplicationFileBasedConfigs(site);
+      List<RemoteConfiguration> newValidDestinations =
+          buildRemoteConfigurations(newConfig, newDynamicConfig);
+
       loadedConfig = newConfig;
-      loadedConfigVersion = newConfig.getVersion();
+      loadedDynamicConfig = newDynamicConfig;
+      loadedConfigVersion = latestConfigVersion(newConfig, newDynamicConfig);
       lastFailedConfigVersion = "";
       eventBus.post(newValidDestinations);
     } catch (Exception e) {
@@ -83,5 +92,24 @@ public class AutoReloadRunnable implements Runnable {
           "Cannot reload replication configuration: keeping existing settings");
       lastFailedConfigVersion = pendingConfigVersion;
     }
+  }
+
+  private String latestConfigVersion(
+      ReplicationFileBasedConfig config, DynamicReplicationFileBasedConfigs dynamicConfig) {
+    Long staticConfigVersion = Long.valueOf(config.getVersion());
+    Long dynamicConfigVersion = Long.valueOf(dynamicConfig.getVersion());
+    return Long.toString(Math.max(staticConfigVersion, dynamicConfigVersion));
+  }
+
+  private List<RemoteConfiguration> buildRemoteConfigurations(
+      ReplicationFileBasedConfig replicationConfig,
+      DynamicReplicationFileBasedConfigs dynamicReplicationConfigs)
+      throws ConfigInvalidException {
+    ImmutableList.Builder<RemoteConfiguration> remoteConfigurationsBuilder =
+        ImmutableList.builder();
+    remoteConfigurationsBuilder.addAll(configValidator.validateConfig(replicationConfig));
+    remoteConfigurationsBuilder.addAll(
+        configValidator.validateDynamicConfigs(dynamicReplicationConfigs, replicationConfig));
+    return remoteConfigurationsBuilder.build();
   }
 }
