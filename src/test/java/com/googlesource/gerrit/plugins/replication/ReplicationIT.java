@@ -19,6 +19,8 @@ import static com.google.gerrit.testing.GerritJUnit.assertThrows;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.common.io.MoreFiles;
+import com.google.common.io.RecursiveDeleteOption;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
@@ -50,6 +52,7 @@ import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
+import org.junit.After;
 import org.junit.Test;
 
 @UseLocalDisk
@@ -80,6 +83,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         "remote1",
         "suffix1",
         Optional.of("not-used-project")); // Simulates a full replication.config initialization
+    setAutoReload();
     config.save();
 
     super.setUpTestPlugin();
@@ -89,6 +93,14 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
     cleanupReplicationTasks();
     tasksStorage.disableDeleteForTesting(true);
+  }
+
+  @After
+  public void cleanUp() throws IOException {
+    if (Files.exists(sitePaths.etc_dir.resolve("replication.remotes.d"))) {
+      MoreFiles.deleteRecursively(
+          sitePaths.etc_dir.resolve("replication.remotes.d"), RecursiveDeleteOption.ALLOW_INSECURE);
+    }
   }
 
   @Test
@@ -150,6 +162,52 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
       Ref targetBranchRef = getRef(repo, newBranch);
       assertThat(targetBranchRef).isNotNull();
       assertThat(targetBranchRef.getObjectId()).isEqualTo(masterRef.getObjectId());
+    }
+  }
+
+  @Test
+  public void shouldReplicateNewBranchToTwoRemotesWithFanoutConfig() throws Exception {
+    Project.NameKey targetProject1 = createTestProject(project + "replica1");
+    Project.NameKey targetProject2 = createTestProject(project + "replica2");
+
+    config =
+        new FileBasedConfig(sitePaths.etc_dir.resolve("replication.config").toFile(), FS.DETECTED);
+    setAutoReload();
+    config.save();
+
+    FileBasedConfig remoteConfig =
+        new FileBasedConfig(
+            sitePaths.etc_dir.resolve("replication.remotes.d/foo1.config").toFile(), FS.DETECTED);
+    setReplicationDestination(remoteConfig, null, "replica1", ALL_PROJECTS);
+    remoteConfig.save();
+
+    remoteConfig =
+        new FileBasedConfig(
+            sitePaths.etc_dir.resolve("replication.remotes.d/foo2.config").toFile(), FS.DETECTED);
+    setReplicationDestination(remoteConfig, null, "replica2", ALL_PROJECTS);
+    remoteConfig.save();
+
+    reloadConfig();
+
+    Result pushResult = createChange();
+    RevCommit sourceCommit = pushResult.getCommit();
+    String sourceRef = pushResult.getPatchSet().refName();
+
+    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(2);
+
+    try (Repository repo1 = repoManager.openRepository(targetProject1);
+        Repository repo2 = repoManager.openRepository(targetProject2)) {
+      waitUntil(
+          () ->
+              (checkedGetRef(repo1, sourceRef) != null && checkedGetRef(repo2, sourceRef) != null));
+
+      Ref targetBranchRef1 = getRef(repo1, sourceRef);
+      assertThat(targetBranchRef1).isNotNull();
+      assertThat(targetBranchRef1.getObjectId()).isEqualTo(sourceCommit.getId());
+
+      Ref targetBranchRef2 = getRef(repo2, sourceRef);
+      assertThat(targetBranchRef2).isNotNull();
+      assertThat(targetBranchRef2.getObjectId()).isEqualTo(sourceCommit.getId());
     }
   }
 
@@ -290,8 +348,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     config.setInt("remote", remoteName, "drainQueueAttempts", 2);
     config.save();
-    reloadConfig();
 
+    reloadConfig();
     Result pushResult = createChange();
     shutdownDestinations();
 
@@ -347,7 +405,27 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   private void setReplicationDestination(
-      String remoteName, List<String> replicaSuffixes, Optional<String> project)
+      String remoteName, List<String> replicaSuffixes, Optional<String> allProjects)
+      throws IOException {
+    setReplicationDestination(config, remoteName, replicaSuffixes, allProjects);
+  }
+
+  private void setReplicationDestination(
+      FileBasedConfig config, String remoteName, String replicaSuffix, Optional<String> project)
+      throws IOException {
+    setReplicationDestination(config, remoteName, Arrays.asList(replicaSuffix), project);
+  }
+
+  private void setAutoReload() throws IOException {
+    config.setBoolean("gerrit", null, "autoReload", true);
+    config.save();
+  }
+
+  private void setReplicationDestination(
+      FileBasedConfig config,
+      String remoteName,
+      List<String> replicaSuffixes,
+      Optional<String> project)
       throws IOException {
 
     List<String> replicaUrls =
@@ -357,7 +435,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     config.setStringList("remote", remoteName, "url", replicaUrls);
     config.setInt("remote", remoteName, "replicationDelay", TEST_REPLICATION_DELAY);
     project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
-    config.setBoolean("gerrit", null, "autoReload", true);
+
     config.save();
   }
 

@@ -98,8 +98,12 @@ public abstract class AbstractConfigTest {
   }
 
   protected FileBasedConfig newReplicationConfig() {
+    return newReplicationConfig("replication.config");
+  }
+
+  protected FileBasedConfig newReplicationConfig(String path) {
     FileBasedConfig replicationConfig =
-        new FileBasedConfig(sitePaths.etc_dir.resolve("replication.config").toFile(), FS.DETECTED);
+        new FileBasedConfig(sitePaths.etc_dir.resolve(path).toFile(), FS.DETECTED);
     return replicationConfig;
   }
 

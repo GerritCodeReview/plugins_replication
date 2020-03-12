@@ -21,7 +21,6 @@ import static org.mockito.Mockito.when;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.google.gerrit.server.config.SitePaths;
-import com.google.inject.Provider;
 import com.google.inject.util.Providers;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -81,8 +80,8 @@ public class AutoReloadRunnableTest {
     autoReloadRunnable.run();
   }
 
-  private Provider<ReplicationConfig> newVersionConfigProvider() {
-    return new Provider<ReplicationConfig>() {
+  private ReplicationConfigProvider newVersionConfigProvider() {
+    return new ReplicationConfigProvider(sitePaths, sitePaths.data_dir) {
       @Override
       public ReplicationConfig get() {
         return new ReplicationFileBasedConfig(sitePaths, sitePaths.data_dir) {

@@ -48,7 +48,7 @@ public class AutoReloadRunnable implements Runnable {
 
   @Override
   public synchronized void run() {
-    String pendingConfigVersion = loadedConfig.getVersion();
+    String pendingConfigVersion = replicationConfigProvider.get().getVersion();
     ObservableQueue queue = queueObserverProvider.get();
     if (pendingConfigVersion.equals(loadedConfigVersion)
         || pendingConfigVersion.equals(lastFailedConfigVersion)

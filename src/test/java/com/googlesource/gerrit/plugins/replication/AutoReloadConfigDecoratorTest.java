@@ -16,7 +16,6 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.google.inject.Provider;
 import com.google.inject.util.Providers;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.io.IOException;
@@ -66,6 +65,76 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
   }
 
   @Test
+  public void shouldAutoReloadAndSwitchFromReplicationConfigToFanoutReplicationConfig()
+      throws Exception {
+    FileBasedConfig fileConfig = newReplicationConfig();
+    fileConfig.setBoolean("gerrit", null, "autoReload", true);
+    String remoteName1 = "foo";
+    String remoteUrl1 = "ssh://git@git.foo.com/${name}";
+    fileConfig.setString("remote", remoteName1, "url", remoteUrl1);
+    fileConfig.save();
+
+    replicationConfig = newReplicationFileBasedConfig();
+
+    newAutoReloadConfig().start();
+
+    DestinationsCollection destinationsCollections = newDestinationsCollections(replicationConfig);
+    destinationsCollections.startup(workQueueMock);
+    List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
+    assertThat(destinations).hasSize(1);
+    assertThatIsDestination(destinations.get(0), remoteName1, remoteUrl1);
+
+    TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
+
+    String remoteName2 = "bar";
+    String remoteUrl2 = "ssh://git@git.bar.com/${name}";
+    FileBasedConfig replicationConfig =
+        newReplicationConfig("replication.remotes.d/" + remoteName2 + ".config");
+    replicationConfig.setString("remote", null, "url", remoteUrl2);
+    replicationConfig.save();
+
+    executorService.refreshCommand.run();
+
+    destinations = destinationsCollections.getAll(FilterType.ALL);
+    assertThat(destinations).hasSize(1);
+    assertThatContainsDestination(destinations, remoteName2, remoteUrl2);
+  }
+
+  @Test
+  public void shouldAutoReloadDynamicReplicationConfig() throws Exception {
+    String remoteName1 = "foo";
+    String remoteUrl1 = "ssh://git@git.foo.com/${name}";
+    FileBasedConfig remoteConfig =
+        newReplicationConfig("replication.remotes.d/" + remoteName1 + ".config");
+    remoteConfig.setString("remote", null, "url", remoteUrl1);
+    remoteConfig.save();
+
+    replicationConfig = new FanoutReplicationConfig(sitePaths, pluginDataPath);
+
+    newAutoReloadConfig().start();
+
+    DestinationsCollection destinationsCollections = newDestinationsCollections(replicationConfig);
+    destinationsCollections.startup(workQueueMock);
+    List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
+    assertThat(destinations).hasSize(1);
+    assertThatContainsDestination(destinations, remoteName1, remoteUrl1);
+
+    TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
+
+    String remoteName2 = "foobar";
+    String remoteUrl2 = "ssh://git@git.foobar.com/${name}";
+    remoteConfig = newReplicationConfig("replication.remotes.d/" + remoteName2 + ".config");
+    remoteConfig.setString("remote", null, "url", remoteUrl2);
+    remoteConfig.save();
+    executorService.refreshCommand.run();
+
+    destinations = destinationsCollections.getAll(FilterType.ALL);
+    assertThat(destinations).hasSize(2);
+    assertThatContainsDestination(destinations, remoteName1, remoteUrl1);
+    assertThatContainsDestination(destinations, remoteName2, remoteUrl2);
+  }
+
+  @Test
   public void shouldNotAutoReloadReplicationConfigIfDisabled() throws Exception {
     String remoteName1 = "foo";
     String remoteUrl1 = "ssh://git@git.foo.com/${name}";
@@ -95,13 +164,7 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
             configParser,
-            new Provider<ReplicationConfig>() {
-
-              @Override
-              public ReplicationConfig get() {
-                return newReplicationFileBasedConfig();
-              }
-            },
+            new ReplicationConfigProvider(sitePaths, pluginDataPath),
             eventBus,
             Providers.of(replicationQueueMock));
     return new AutoReloadConfigDecorator(
