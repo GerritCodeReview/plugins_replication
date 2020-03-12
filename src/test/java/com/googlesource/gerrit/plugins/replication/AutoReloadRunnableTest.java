@@ -54,7 +54,7 @@ public class AutoReloadRunnableTest {
   }
 
   @Test
-  public void configurationIsReloadedWhenParsingSucceeds() {
+  public void configurationIsReloadedWhenParsingSucceeds() throws IOException {
     ReplicationConfigParser parser = new TestValidConfigurationListener();
 
     attemptAutoReload(parser);
@@ -63,7 +63,7 @@ public class AutoReloadRunnableTest {
   }
 
   @Test
-  public void configurationIsNotReloadedWhenParsingFails() {
+  public void configurationIsNotReloadedWhenParsingFails() throws IOException {
     ReplicationConfigParser parser = new TestInvalidConfigurationListener();
 
     attemptAutoReload(parser);
@@ -71,10 +71,15 @@ public class AutoReloadRunnableTest {
     assertThat(onReloadSubscriber.reloaded).isFalse();
   }
 
-  private void attemptAutoReload(ReplicationConfigParser validator) {
+  private void attemptAutoReload(ReplicationConfigParser validator) throws IOException {
     final AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
-            validator, newVersionConfigProvider(), eventBus, Providers.of(replicationQueueMock));
+            validator,
+            newVersionConfigProvider(),
+            new DynamicReplicationFileBasedConfigs(sitePaths),
+            sitePaths,
+            eventBus,
+            Providers.of(replicationQueueMock));
 
     autoReloadRunnable.run();
   }
@@ -108,6 +113,13 @@ public class AutoReloadRunnableTest {
     public List<RemoteConfiguration> parse(ReplicationConfig newConfig) {
       return Collections.emptyList();
     }
+
+    @Override
+    public List<RemoteConfiguration> parseDynamicConfigs(
+        DynamicReplicationFileBasedConfigs newReplicationConfigs,
+        ReplicationConfig staticReplicationConfig) {
+      return Collections.emptyList();
+    }
   }
 
   private static class TestInvalidConfigurationListener extends ReplicationConfigParser {
@@ -115,6 +127,13 @@ public class AutoReloadRunnableTest {
     public List<RemoteConfiguration> parse(ReplicationConfig configurationChangeEvent)
         throws ConfigInvalidException {
       throw new ConfigInvalidException("expected test failure");
+    }
+
+    @Override
+    public List<RemoteConfiguration> parseDynamicConfigs(
+        DynamicReplicationFileBasedConfigs newReplicationConfigs,
+        ReplicationConfig staticReplicationConfig) {
+      return Collections.emptyList();
     }
   }
 }

@@ -37,7 +37,8 @@ public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
     config.save();
 
     DestinationsCollection destinationsCollections =
-        newDestinationsCollections(replicationConfigProvider.get());
+        newDestinationsCollections(
+        		replicationConfigProvider.get(), newDynamicReplicationFileBasedConfig());
     destinationsCollections.startup(workQueueMock);
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
@@ -57,7 +58,8 @@ public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
     config.save();
 
     DestinationsCollection destinationsCollections =
-        newDestinationsCollections(replicationConfigProvider.get());
+        newDestinationsCollections(
+        		replicationConfigProvider.get(), newDynamicReplicationFileBasedConfig());
     destinationsCollections.startup(workQueueMock);
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(2);

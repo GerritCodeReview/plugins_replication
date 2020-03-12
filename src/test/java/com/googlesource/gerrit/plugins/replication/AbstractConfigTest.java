@@ -105,6 +105,14 @@ public abstract class AbstractConfigTest {
     return replicationConfig;
   }
 
+  protected FileBasedConfig newDynamicReplicationConfig(String configFileName) {
+    FileBasedConfig replicationConfig =
+        new FileBasedConfig(
+            sitePaths.etc_dir.resolve("replication.config.d/" + configFileName).toFile(),
+            FS.DETECTED);
+    return replicationConfig;
+  }
+
   protected void assertThatIsDestination(
       Destination destination, String remoteName, String... remoteUrls) {
     DestinationConfiguration destinationConfig = ((FakeDestination) destination).config;
@@ -126,13 +134,29 @@ public abstract class AbstractConfigTest {
     assertThatIsDestination(matchingDestinations.get(0), remoteName, remoteUrls);
   }
 
-  protected DestinationsCollection newDestinationsCollections(ReplicationConfig replicationConfig)
+  protected DestinationsCollection newDestinationsCollections(
+		  ReplicationConfig replicationConfig,
+      DynamicReplicationFileBasedConfigs dynamicReplicationFileBasedConfig)
       throws ConfigInvalidException {
     return new DestinationsCollection(
         destinationFactoryMock,
         Providers.of(replicationQueueMock),
         replicationConfig,
         replicationConfigParser,
+        dynamicReplicationFileBasedConfig,
         eventBus);
+  }
+
+  protected ReplicationFileBasedConfig newReplicationFileBasedConfig() {
+    ReplicationFileBasedConfig replicationConfig =
+        new ReplicationFileBasedConfig(sitePaths, pluginDataPath);
+    return replicationConfig;
+  }
+
+  protected DynamicReplicationFileBasedConfigs newDynamicReplicationFileBasedConfig()
+      throws IOException {
+    DynamicReplicationFileBasedConfigs replicationConfig =
+        new DynamicReplicationFileBasedConfigs(sitePaths);
+    return replicationConfig;
   }
 }
