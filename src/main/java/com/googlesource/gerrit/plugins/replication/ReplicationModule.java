@@ -34,6 +34,7 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
@@ -41,10 +42,12 @@ import org.eclipse.jgit.transport.SshSessionFactory;
 import org.eclipse.jgit.util.FS;
 
 class ReplicationModule extends AbstractModule {
+  private final SitePaths site;
   private final Path cfgPath;
 
   @Inject
   public ReplicationModule(SitePaths site) {
+    this.site = site;
     cfgPath = site.etc_dir.resolve("replication.config");
   }
 
@@ -82,13 +85,13 @@ class ReplicationModule extends AbstractModule {
     if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
       bind(ReplicationConfig.class)
           .annotatedWith(MainReplicationConfig.class)
-          .to(ReplicationFileBasedConfig.class);
+          .to(getReplicationConfigClass());
       bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class).in(Scopes.SINGLETON);
       bind(LifecycleListener.class)
           .annotatedWith(UniqueAnnotations.create())
           .to(AutoReloadConfigDecorator.class);
     } else {
-      bind(ReplicationConfig.class).to(ReplicationFileBasedConfig.class).in(Scopes.SINGLETON);
+      bind(ReplicationConfig.class).to(getReplicationConfigClass()).in(Scopes.SINGLETON);
     }
 
     DynamicSet.setOf(binder(), ReplicationStateListener.class);
@@ -111,5 +114,12 @@ class ReplicationModule extends AbstractModule {
       throw new ProvisionException("Unable to load " + replicationConfigFile.getAbsolutePath(), e);
     }
     return config;
+  }
+
+  private Class<? extends ReplicationConfig> getReplicationConfigClass() {
+    if (Files.exists(site.etc_dir.resolve("replication"))) {
+      return FanoutReplicationConfig.class;
+    }
+    return ReplicationFileBasedConfig.class;
   }
 }
