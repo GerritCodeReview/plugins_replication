@@ -46,6 +46,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.transport.RefSpec;
@@ -74,12 +75,27 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
       Destination.Factory destinationFactory,
       Provider<ReplicationQueue> replicationQueue,
       ReplicationFileBasedConfig replicationConfig,
+      DynamicReplicationFileBasedConfigs dynamicReplicationConfigs,
       EventBus eventBus)
       throws ConfigInvalidException {
     this.destinationFactory = destinationFactory;
     this.replicationQueue = replicationQueue;
-    this.destinations = allDestinations(destinationFactory, validateConfig(replicationConfig));
+    List<RemoteConfiguration> allRemoteConfigurations =
+        buildRemoteConfigurations(replicationConfig, dynamicReplicationConfigs);
+    this.destinations = allDestinations(destinationFactory, allRemoteConfigurations);
     eventBus.register(this);
+  }
+
+  private List<RemoteConfiguration> buildRemoteConfigurations(
+      ReplicationFileBasedConfig replicationConfig,
+      DynamicReplicationFileBasedConfigs dynamicReplicationConfigs)
+      throws ConfigInvalidException {
+    ImmutableList.Builder<RemoteConfiguration> remoteConfigurationsBuilder =
+        ImmutableList.builder();
+    remoteConfigurationsBuilder.addAll(validateConfig(replicationConfig));
+    remoteConfigurationsBuilder.addAll(
+        validateDynamicConfigs(dynamicReplicationConfigs, replicationConfig));
+    return remoteConfigurationsBuilder.build();
   }
 
   @Override
@@ -262,26 +278,58 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
       return Collections.emptyList();
     }
 
-    try {
-      replicationConfig.getConfig().load();
-    } catch (ConfigInvalidException e) {
-      throw new ConfigInvalidException(
-          String.format(
-              "Config file %s is invalid: %s",
-              replicationConfig.getConfig().getFile(), e.getMessage()),
-          e);
-    } catch (IOException e) {
-      throw new ConfigInvalidException(
-          String.format(
-              "Cannot read %s: %s", replicationConfig.getConfig().getFile(), e.getMessage()),
-          e);
-    }
-
     boolean defaultForceUpdate =
         replicationConfig.getConfig().getBoolean("gerrit", "defaultForceUpdate", false);
 
+    return replicationConfigToRemoteConfigurations(
+        replicationConfig.getConfig(), defaultForceUpdate);
+  }
+
+  @Override
+  public List<RemoteConfiguration> validateDynamicConfigs(
+      DynamicReplicationFileBasedConfigs replicationConfigs,
+      ReplicationFileBasedConfig staticReplicationConfig)
+      throws ConfigInvalidException {
+    if (replicationConfigs.getConfigs().isEmpty()) {
+      return Collections.emptyList();
+    }
+
+    boolean defaultForceUpdate =
+        staticReplicationConfig.getConfig().getBoolean("gerrit", "defaultForceUpdate", false);
+    try {
+      return replicationConfigs.getConfigs().stream()
+          .flatMap(
+              replicationConfig -> {
+                try {
+                  return replicationConfigToRemoteConfigurations(
+                      replicationConfig, defaultForceUpdate)
+                      .stream();
+                } catch (ConfigInvalidException e) {
+                  throw new IllegalStateException(e.getMessage(), e);
+                }
+              })
+          .collect(Collectors.toList());
+    } catch (IllegalStateException e) {
+      throw new ConfigInvalidException(e.getMessage());
+    }
+  }
+
+  private List<RemoteConfiguration> replicationConfigToRemoteConfigurations(
+      FileBasedConfig replicationConfig, Boolean defaultForceUpdate) throws ConfigInvalidException {
+    try {
+      replicationConfig.load();
+    } catch (ConfigInvalidException e) {
+      throw new ConfigInvalidException(
+          String.format(
+              "Config file %s is invalid: %s", replicationConfig.getFile(), e.getMessage()),
+          e);
+    } catch (IOException e) {
+      throw new ConfigInvalidException(
+          String.format("Cannot read %s: %s", replicationConfig.getFile(), e.getMessage()), e);
+    }
+
     ImmutableList.Builder<RemoteConfiguration> confs = ImmutableList.builder();
-    for (RemoteConfig c : allRemotes(replicationConfig.getConfig())) {
+    for (RemoteConfig c : allRemotes(replicationConfig)) {
       if (c.getURIs().isEmpty()) {
         continue;
       }
@@ -301,7 +349,7 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
       }
 
       DestinationConfiguration destinationConfiguration =
-          new DestinationConfiguration(c, replicationConfig.getConfig());
+          new DestinationConfiguration(c, replicationConfig);
 
       if (!destinationConfiguration.isSingleProjectMatch()) {
         for (URIish u : c.getURIs()) {
@@ -309,7 +357,7 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
             throw new ConfigInvalidException(
                 String.format(
                     "remote.%s.url \"%s\" lacks ${name} placeholder in %s",
-                    c.getName(), u, replicationConfig.getConfig().getFile()));
+                    c.getName(), u, replicationConfig.getFile()));
           }
         }
       }

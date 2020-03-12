@@ -28,4 +28,16 @@ public interface ReplicationConfigValidator {
    */
   List<RemoteConfiguration> validateConfig(ReplicationFileBasedConfig newConfig)
       throws ConfigInvalidException;
+
+  /**
+   * validate all new *.config files from replication.config.d
+   *
+   * @param newConfig new configurations detected
+   * @return List of validated {@link RemoteConfiguration}
+   * @throws ConfigInvalidException if the new configuration is not valid.
+   */
+  List<RemoteConfiguration> validateDynamicConfigs(
+      DynamicReplicationFileBasedConfigs newReplicationConfigs,
+      ReplicationFileBasedConfig staticReplicationConfig)
+      throws ConfigInvalidException;
 }
