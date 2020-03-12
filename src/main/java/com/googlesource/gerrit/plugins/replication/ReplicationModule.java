@@ -78,7 +78,7 @@ class ReplicationModule extends AbstractModule {
     bind(EventBus.class).in(Scopes.SINGLETON);
     bind(ReplicationDestinations.class).to(DestinationsCollection.class);
     bind(ConfigParser.class).in(Scopes.SINGLETON);
-    bind(ReplicationFileBasedConfigProvider.class).in(Scopes.SINGLETON);
+    bind(ReplicationConfigProvider.class).in(Scopes.SINGLETON);
 
     if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
       bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class).in(Scopes.SINGLETON);
@@ -87,7 +87,7 @@ class ReplicationModule extends AbstractModule {
           .to(AutoReloadConfigDecorator.class);
     } else {
       bind(ReplicationConfig.class)
-          .toProvider(ReplicationFileBasedConfigProvider.class)
+          .toProvider(ReplicationConfigProvider.class)
           .in(Scopes.SINGLETON);
     }
 

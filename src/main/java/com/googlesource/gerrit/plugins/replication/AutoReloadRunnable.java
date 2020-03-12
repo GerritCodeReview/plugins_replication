@@ -27,14 +27,14 @@ public class AutoReloadRunnable implements Runnable {
   private final Provider<ObservableQueue> queueObserverProvider;
   private final ConfigParser configParser;
   private ReplicationConfig loadedConfig;
-  private ReplicationFileBasedConfigProvider replicationConfigProvider;
+  private ReplicationConfigProvider replicationConfigProvider;
   private String loadedConfigVersion;
   private String lastFailedConfigVersion;
 
   @Inject
   public AutoReloadRunnable(
       ConfigParser configParser,
-      ReplicationFileBasedConfigProvider replicationConfigProvider,
+      ReplicationConfigProvider replicationConfigProvider,
       EventBus eventBus,
       Provider<ObservableQueue> queueObserverProvider) {
     this.replicationConfigProvider = replicationConfigProvider;
