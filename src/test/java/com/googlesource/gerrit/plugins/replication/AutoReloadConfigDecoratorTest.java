@@ -21,7 +21,6 @@ import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.junit.Before;
 import org.junit.Test;
@@ -72,6 +71,81 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     assertThatContainsDestination(destinations, remoteName2, remoteUrl2);
   }
 
+  //  @Test
+  //  public void shouldAutoReloadWhenNewDynamicReplicationConfig() throws Exception {
+  //    FileBasedConfig fileConfig = newReplicationConfig();
+  //    fileConfig.setBoolean("gerrit", null, "autoReload", true);
+  //    String remoteName1 = "foo";
+  //    String remoteUrl1 = "ssh://git@git.foo.com/${name}";
+  //    fileConfig.setString("remote", remoteName1, "url", remoteUrl1);
+  //    fileConfig.save();
+  //
+  //    newAutoReloadConfig().start();
+  //
+  //    DestinationsCollection destinationsCollections =
+  //        newDestinationsCollections(replicationConfig, dynamicReplicationFileBasedConfig);
+  //    destinationsCollections.startup(workQueueMock);
+  //    List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
+  //    assertThat(destinations).hasSize(1);
+  //    assertThatIsDestination(destinations.get(0), remoteName1, remoteUrl1);
+  //
+  //    TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
+  //
+  //    String remoteName2 = "bar";
+  //    String remoteUrl2 = "ssh://git@git.bar.com/${name}";
+  //    FileBasedConfig dynamicReplicationConfig = newDynamicReplicationConfig("dynamic.config");
+  //    dynamicReplicationConfig.setString("remote", remoteName2, "url", remoteUrl2);
+  //    dynamicReplicationConfig.save();
+  //    executorService.refreshCommand.run();
+  //
+  //    destinations = destinationsCollections.getAll(FilterType.ALL);
+  //    assertThat(destinations).hasSize(2);
+  //    assertThatContainsDestination(destinations, remoteName1, remoteUrl1);
+  //    assertThatContainsDestination(destinations, remoteName2, remoteUrl2);
+  //  }
+  //
+  //  @Test
+  //  public void shouldAutoReloadDynamicReplicationConfig() throws Exception {
+  //    FileBasedConfig fileConfig = newReplicationConfig();
+  //    fileConfig.setBoolean("gerrit", null, "autoReload", true);
+  //    String remoteName1 = "foo";
+  //    String remoteUrl1 = "ssh://git@git.foo.com/${name}";
+  //    fileConfig.setString("remote", remoteName1, "url", remoteUrl1);
+  //    fileConfig.save();
+  //
+  //    FileBasedConfig dynamicReplicationConfig = newDynamicReplicationConfig("dynamic.config");
+  //    dynamicReplicationConfig.setBoolean("gerrit", null, "autoReload", true);
+  //    String remoteName2 = "bar";
+  //    String remoteUrl2 = "ssh://git@git.bar.com/${name}";
+  //    dynamicReplicationConfig.setString("remote", remoteName2, "url", remoteUrl2);
+  //    dynamicReplicationConfig.save();
+  //
+  //    newAutoReloadConfig().start();
+  //
+  //    DestinationsCollection destinationsCollections =
+  //        newDestinationsCollections(
+  //            replicationConfig, new DynamicReplicationFileBasedConfigs(sitePaths));
+  //    destinationsCollections.startup(workQueueMock);
+  //    List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
+  //    assertThat(destinations).hasSize(2);
+  //    assertThatContainsDestination(destinations, remoteName1, remoteUrl1);
+  //    assertThatContainsDestination(destinations, remoteName2, remoteUrl2);
+  //
+  //    TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
+  //
+  //    String remoteName3 = "foobar";
+  //    String remoteUrl3 = "ssh://git@git.foobar.com/${name}";
+  //    dynamicReplicationConfig.setString("remote", remoteName3, "url", remoteUrl3);
+  //    dynamicReplicationConfig.save();
+  //    executorService.refreshCommand.run();
+  //
+  //    destinations = destinationsCollections.getAll(FilterType.ALL);
+  //    assertThat(destinations).hasSize(3);
+  //    assertThatContainsDestination(destinations, remoteName1, remoteUrl1);
+  //    assertThatContainsDestination(destinations, remoteName2, remoteUrl2);
+  //    assertThatContainsDestination(destinations, remoteName3, remoteUrl3);
+  //  }
+
   @Test
   public void shouldNotAutoReloadReplicationConfigIfDisabled() throws Exception {
     String remoteName1 = "foo";
@@ -97,7 +171,7 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     assertThat(destinationsCollections.getAll(FilterType.ALL)).isEqualTo(destinations);
   }
 
-  private AutoReloadConfigDecorator newAutoReloadConfig() throws ConfigInvalidException {
+  private AutoReloadConfigDecorator newAutoReloadConfig() {
     AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
             replicationConfigParser,

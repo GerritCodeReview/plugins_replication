@@ -53,6 +53,7 @@ public class DestinationsCollection implements ReplicationDestinations {
   private final Provider<ReplicationQueue> replicationQueue;
   private volatile List<Destination> destinations;
   private boolean shuttingDown;
+  private ReplicationConfigParser replicationConfigParser;
 
   public static class EventQueueNotEmptyException extends Exception {
     private static final long serialVersionUID = 1L;

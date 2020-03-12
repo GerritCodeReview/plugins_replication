@@ -22,10 +22,13 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
+import org.eclipse.jgit.transport.RemoteConfig;
 
 @Singleton
 public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleListener {
@@ -117,5 +120,10 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleLi
   @Override
   public Config getConfig() {
     return currentConfig.getConfig();
+  }
+
+  @Override
+  public List<RemoteConfig> getRemoteConfigs() throws ConfigInvalidException {
+    return currentConfig.getRemoteConfigs();
   }
 }

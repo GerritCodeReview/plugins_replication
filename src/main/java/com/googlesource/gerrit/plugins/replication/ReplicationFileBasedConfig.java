@@ -14,10 +14,17 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Set;
+import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
+import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.util.FS;
 
 public class ReplicationFileBasedConfig implements ReplicationConfig {
@@ -107,5 +114,20 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   @Override
   public int getSshCommandTimeout() {
     return sshCommandTimeout;
+  }
+
+  @Override
+  public List<RemoteConfig> getRemoteConfigs() throws ConfigInvalidException {
+    Config cfg = getConfig();
+    Set<String> names = cfg.getSubsections("remote");
+    List<RemoteConfig> result = Lists.newArrayListWithCapacity(names.size());
+    for (String name : names) {
+      try {
+        result.add(new RemoteConfig(cfg, name));
+      } catch (URISyntaxException e) {
+        throw new ConfigInvalidException(String.format("remote %s has invalid URL", name), e);
+      }
+    }
+    return result;
   }
 }

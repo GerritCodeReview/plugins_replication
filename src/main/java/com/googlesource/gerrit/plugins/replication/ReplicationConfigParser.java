@@ -15,14 +15,10 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import com.google.common.flogger.FluentLogger;
-import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import org.eclipse.jgit.errors.ConfigInvalidException;
-import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.URIish;
@@ -40,7 +36,7 @@ public class ReplicationConfigParser {
    */
   List<RemoteConfiguration> parse(ReplicationConfig replicationConfig)
       throws ConfigInvalidException {
-    List<RemoteConfig> remoteConfigs = allRemotes(replicationConfig.getConfig());
+    List<RemoteConfig> remoteConfigs = replicationConfig.getRemoteConfigs();
 
     if (remoteConfigs.isEmpty()) {
       logger.atWarning().log("Replication config does not exist or it's empty; not replicating");
@@ -51,7 +47,7 @@ public class ReplicationConfigParser {
         replicationConfig.getConfig().getBoolean("gerrit", "defaultForceUpdate", false);
 
     ImmutableList.Builder<RemoteConfiguration> confs = ImmutableList.builder();
-    for (RemoteConfig c : allRemotes(replicationConfig.getConfig())) {
+    for (RemoteConfig c : remoteConfigs) {
       if (c.getURIs().isEmpty()) {
         continue;
       }
@@ -86,18 +82,5 @@ public class ReplicationConfigParser {
     }
 
     return confs.build();
-  }
-
-  private static List<RemoteConfig> allRemotes(Config cfg) throws ConfigInvalidException {
-    Set<String> names = cfg.getSubsections("remote");
-    List<RemoteConfig> result = Lists.newArrayListWithCapacity(names.size());
-    for (String name : names) {
-      try {
-        result.add(new RemoteConfig(cfg, name));
-      } catch (URISyntaxException e) {
-        throw new ConfigInvalidException(String.format("remote %s has invalid URL", name), e);
-      }
-    }
-    return result;
   }
 }

@@ -15,7 +15,10 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import java.nio.file.Path;
+import java.util.List;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
+import org.eclipse.jgit.transport.RemoteConfig;
 
 /** Configuration of all the replication end points. */
 public interface ReplicationConfig {
@@ -73,4 +76,6 @@ public interface ReplicationConfig {
   String getVersion();
 
   Config getConfig();
+
+  List<RemoteConfig> getRemoteConfigs() throws ConfigInvalidException;
 }

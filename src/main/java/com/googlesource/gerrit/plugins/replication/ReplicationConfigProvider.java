@@ -19,6 +19,7 @@ import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 
@@ -34,6 +35,16 @@ public class ReplicationConfigProvider implements Provider<ReplicationConfig> {
 
   @Override
   public ReplicationConfig get() {
+    if (Files.exists(site.etc_dir.resolve("replication.remotes.d"))) {
+      try {
+        ReplicationFanoutConfig config = new ReplicationFanoutConfig(site, pluginDataDir);
+        return config;
+      } catch (IOException e) {
+        throw new IllegalStateException(
+            String.format("Cannot read fanout config: %s", e.getMessage()), e);
+      }
+    }
+
     ReplicationFileBasedConfig config = new ReplicationFileBasedConfig(site, pluginDataDir);
     try {
       config.getConfig().load();
