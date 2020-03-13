@@ -16,6 +16,24 @@
       "revId": "a5406f577fd25805b8d02ae8c4ab205c2390c7ea",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a0797cc_e2b99f77",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 49
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-13T15:04:40Z",
+      "side": 1,
+      "message": "How can the test be passing then?",
+      "parentUuid": "f100698e_1481e7ad",
+      "revId": "a5406f577fd25805b8d02ae8c4ab205c2390c7ea",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
