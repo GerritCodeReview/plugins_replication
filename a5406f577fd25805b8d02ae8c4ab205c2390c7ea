@@ -124,6 +124,24 @@
       "revId": "a5406f577fd25805b8d02ae8c4ab205c2390c7ea",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54506b34_85286440",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 49
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-13T15:52:02Z",
+      "side": 1,
+      "message": "\u003e Any changes in other sections are not reloaded.\n\n@Saša I believe you are right, only the remotes are reloaded and not the other changes.\nIs there already a bug raised on this? If not, we should raise it.",
+      "parentUuid": "2c8f4faf_6fa3492b",
+      "revId": "a5406f577fd25805b8d02ae8c4ab205c2390c7ea",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
