@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "732ce75c_e055e353",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-03-13T08:50:01Z",
+      "side": 1,
+      "message": "shall we rename this staticConfig?",
+      "range": {
+        "startLine": 98,
+        "startChar": 33,
+        "endLine": 98,
+        "endChar": 39
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41c5a150_ff67bbb6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-03-13T08:50:01Z",
+      "side": 1,
+      "message": "Shall we rename this class to \"Static....\" ?",
+      "range": {
+        "startLine": 98,
+        "startChar": 6,
+        "endLine": 98,
+        "endChar": 32
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5465b1f1_4515519d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DynamicReplicationFileBasedConfigs.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-03-13T08:50:01Z",
+      "side": 1,
+      "message": "ISn\u0027t 0 enough?",
+      "range": {
+        "startLine": 61,
+        "startChar": 28,
+        "endLine": 61,
+        "endChar": 43
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6853548_3c3df149",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-03-13T08:50:01Z",
+      "side": 1,
+      "message": "Might be worthy adding, here or in another part of the documentation, an example on how the static and dynamic configuration get merged",
+      "range": {
+        "startLine": 435,
+        "startChar": 0,
+        "endLine": 435,
+        "endChar": 32
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "734ca16e_27ce7f0f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-03-13T08:50:01Z",
+      "side": 1,
+      "message": "remove the \"a\" ?",
+      "range": {
+        "startLine": 437,
+        "startChar": 57,
+        "endLine": 438,
+        "endChar": 12
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d612fb3_4a629827",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-03-13T08:50:01Z",
+      "side": 1,
+      "message": "addition to the standard",
+      "range": {
+        "startLine": 439,
+        "startChar": 43,
+        "endLine": 439,
+        "endChar": 63
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "501c2538_1029eccc",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-03-13T08:50:01Z",
+      "side": 1,
+      "message": ", \u003d\u003e . I think short periods will make the sentence more readable",
+      "range": {
+        "startLine": 442,
+        "startChar": 55,
+        "endLine": 442,
+        "endChar": 56
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45ff6180_764bfc3f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-03-13T08:50:01Z",
+      "side": 1,
+      "message": "For",
+      "range": {
+        "startLine": 444,
+        "startChar": 18,
+        "endLine": 444,
+        "endChar": 22
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7c5e41e_9bc63c2d",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-03-13T08:50:01Z",
+      "side": 1,
+      "message": "to the `replication.config` (maybe add an anchor to it?)",
+      "range": {
+        "startLine": 445,
+        "startChar": 6,
+        "endLine": 445,
+        "endChar": 29
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6dcd3679_14815b88",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecoratorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-03-13T08:50:01Z",
+      "side": 1,
+      "message": "What about shouldAutoReloadDynamicReplicationConfig \u003d\u003e shouldAutoReloadWhenUpdationDynamicReplicationConfig ?\n\nI think it will distinguish better from the previous test shouldAutoReloadWhenNewDynamicReplicationConfig",
+      "range": {
+        "startLine": 115,
+        "startChar": 14,
+        "endLine": 115,
+        "endChar": 54
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
