@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f100698e_1481e7ad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 49
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-13T14:58:01Z",
+      "side": 1,
+      "message": "I believe that this either broke the AutoReloadConfigDecorator.onReload method [1]\nor forgot to remove that method (and its @Subscribe annotation)?!\n\nMethod [1] is subscribed to ReplicationFileBasedConfig event but with this change\nthere is no place in the replication plugin which posts this type of event.\n\n[1] https://gerrit.googlesource.com/plugins/replication/+/a5406f577fd25805b8d02ae8c4ab205c2390c7ea/src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java#101",
+      "revId": "a5406f577fd25805b8d02ae8c4ab205c2390c7ea",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
