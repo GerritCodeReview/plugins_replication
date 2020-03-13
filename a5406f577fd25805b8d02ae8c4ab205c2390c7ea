@@ -106,6 +106,24 @@
       "revId": "a5406f577fd25805b8d02ae8c4ab205c2390c7ea",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c8f4faf_6fa3492b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 49
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-03-13T15:44:29Z",
+      "side": 1,
+      "message": "\u003e \u003e I think that\u0027s an existing issue. See https://gerrit-review.googlesource.com/c/plugins/replication/+/257432\n\u003e \n\u003e Oh, this is yet another issue that you are fixing in that change.\n\u003e However, I am talking about auto-reload-ing of the repication.config after the plugin already\n\u003e started. The AutoReloadConfigDecorator.onReload is never called and thus the\n\u003e AutoReloadconfigDecorator.currentConfig is never updated.\n\u003e Instead, the DestinationsCollection.onReload is invoked but it only reloads the \"remote\"\n\u003e sections. Any changes in other sections are not reloaded.\n\nGot it, thanks. Yeah, I just uploaded a few changes to the 2.16/3.1/master branches that clean up a few things. We\u0027ve managed to backport the master branch to work with out 2.7 core fork so we\u0027re running that in production and it turned up a few issues. But, I guess it\u0027s cool we\u0027re probably one of the only folks in the world running master replication?\n\nWe don\u0027t reload replication to pick up config changes, so we wouldn\u0027t see that issue.",
+      "parentUuid": "43963967_80391289",
+      "revId": "a5406f577fd25805b8d02ae8c4ab205c2390c7ea",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
