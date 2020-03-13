@@ -34,6 +34,24 @@
       "revId": "993be01621f49cb8f055a218207c15bd45d83c41",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfdac0bc_23501db5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-03-13T17:30:26Z",
+      "side": 1,
+      "message": "There\u0027s a show-queue capability required, so that\u0027s probably sufficient since any project activity already shows up in there. I don\u0027t think this is more of a security concern than what already exists.",
+      "parentUuid": "b8fce4ed_9cea8524",
+      "revId": "993be01621f49cb8f055a218207c15bd45d83c41",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
