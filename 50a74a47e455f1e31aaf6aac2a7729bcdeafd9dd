@@ -65,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "00c12f2b_e0926793",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-13T10:05:41Z",
+      "side": 1,
+      "message": "+1 for that question\n\nIf something is named \"dynamic\" then there has to be a good reason\nfor that 😊\n\nBtw, what happens with the auto-reload functionality for the replication.config with this change?",
+      "parentUuid": "b96efcf5_4fbd6092",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 7
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "732ce75c_e055e353",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 2
@@ -104,6 +128,29 @@
         "startChar": 6,
         "endLine": 98,
         "endChar": 32
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "966e55ac_cecc31a5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DynamicReplicationFileBasedConfigs.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-13T10:05:41Z",
+      "side": 1,
+      "message": "I would prefer not to name this dynamic",
+      "range": {
+        "startLine": 32,
+        "startChar": 13,
+        "endLine": 32,
+        "endChar": 20
       },
       "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
