@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f09a171b_50be6a63",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-13T09:45:57Z",
+      "side": 1,
+      "message": "Because only the remotes can be added in the extra configs, can we just call replication.remote.d?",
+      "range": {
+        "startLine": 10,
+        "startChar": 24,
+        "endLine": 10,
+        "endChar": 48
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8924e8fc_01dcf022",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -13,6 +36,29 @@
       "writtenOn": "2020-03-13T09:21:27Z",
       "side": 1,
       "message": "Please add a bit more motivation and details in the commit message:\n* what are the main benefits (besides splitting a large file into smaller ones)\n* how does it help with reloading and restarting destinations?\n* how exactly auto reloading works when having multiple config files",
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b96efcf5_4fbd6092",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-13T09:45:57Z",
+      "side": 1,
+      "message": "Does that mean that the files added to the dynamic remotes will be always reloaded, regardless of the auto-reload config?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 7
+      },
       "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -135,6 +181,30 @@
     },
     {
       "key": {
+        "uuid": "4e9316d0_157e9ba3",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-13T09:45:57Z",
+      "side": 1,
+      "message": "Yes, it is important to document how the different configs are merged together.",
+      "parentUuid": "0d4d377f_4f5faf24",
+      "range": {
+        "startLine": 435,
+        "startChar": 0,
+        "endLine": 435,
+        "endChar": 32
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "734ca16e_27ce7f0f",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 2
@@ -215,6 +285,24 @@
       "writtenOn": "2020-03-13T09:21:27Z",
       "side": 1,
       "message": "Does that mean that only remote sections are allowed in the replication.config.d/*.config\nfiles? What happens if there is another section in such a file especially if it is\na section which is allowed in the replication.config file?",
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cf4bd8e_c40c0983",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-13T09:45:57Z",
+      "side": 1,
+      "message": "Limiting to the remotes makes sense, because it would allow to limit the reload actions associated with them changing.\n\nShould they be called then replication.remote.d?",
+      "parentUuid": "1ac0e4e3_2df42ca6",
       "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
