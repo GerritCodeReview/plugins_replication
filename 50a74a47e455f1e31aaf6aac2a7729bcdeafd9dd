@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "a64216ec_c80ff1e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-13T10:59:16Z",
+      "side": 1,
+      "message": "\u003e Or replication.remotes.d\n\u003e \n\u003e We can think about the new layout as just a way to split a monolithic replication.config into several files:\n\u003e * the \"global\" configuration is in the replication.config\n\u003e * remote sections are stored in replication.remotes.d/*.config files\n\u003e \n\u003e Additional design questions which IMHO are necessary to clarify:\n\u003e \n\u003e 1. Shall it be allowed to have multiple remotes in one config file\n\u003e or shall we limit it to one remote only per file?\n\nThat\u0027s an interesting idea, actually.\n\n\u003e \n\u003e There is an advantage in the latter approach: we can use the config file name as the remote name and thus avoid the question about conflicting remote names in different config files. For example:\n\u003e \n\u003e   File replication.remotes.d/foo.config\n\u003e   [remote]\n\u003e       projects \u003d A\n\u003e       projects \u003d B\n\u003e       url \u003d https://foo.org/git/${name}.git\n\u003e \n\u003e   File replication.remotes.d/bar.config\n\u003e   [remote]\n\u003e       projects \u003d C\n\u003e       projects \u003d D\n\u003e       url \u003d https://bar.org/git/${name}.git\n\nTrue, if you have the same remote in two different files, then you can\u0027t control anymore who\u0027s overriding who.\n\n\u003e \n\u003e Effectively the two above files are merged, without conflicts,\n\u003e into:\n\u003e \n\u003e   [remote \"foo\"]\n\u003e       projects \u003d A\n\u003e       projects \u003d B\n\u003e       url \u003d https://foo.org/git/${name}.git\n\u003e \n\u003e   [remote \"bar\"]\n\u003e       projects \u003d C\n\u003e       projects \u003d D\n\u003e       url \u003d https://bar.org/git/${name}.git\n\nYep, that sounds nice.\n\n\u003e 2. Shall we encapsulate the new config file(s) layout rather in \n\u003e a new implementation of the ReplicationConfig?\n\nThat would be preferable IMHO, so that we limit also the potential regressions.\nIf you don\u0027t have any replication.remotes.d, there is no reason to have a different\nclass for loading the configuration.\n\nEven if this is the latest version (v3.1) it is still a stable branch, we need to be careful of not introducing regressions.\n\n\u003e If we introduce a ReplicationFanoutConfig to represent the\n\u003e new layout of the replication config then the rest of the plugin\n\u003e code can remain unchanged and continue relying on the ReplicationConfig interface?\n\nYep.\n\n\u003e By encapsulating the new configuration layout in a new implementation of the ReplicationConfig we avoid increasing\n\u003e the code complexity as the rest of the replication plugin doesn\u0027t\n\u003e need to know about the new layout. This way we also keep it\n\u003e possible to implement something even more dynamic in the future\n\u003e without having to change the rest of the replication plugin code.\n\nYep, agreed.",
+      "parentUuid": "90ae8237_63678462",
+      "range": {
+        "startLine": 10,
+        "startChar": 24,
+        "endLine": 10,
+        "endChar": 48
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8924e8fc_01dcf022",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
