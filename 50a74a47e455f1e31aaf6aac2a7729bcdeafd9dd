@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "90ae8237_63678462",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-13T10:48:33Z",
+      "side": 1,
+      "message": "Or replication.remotes.d\n\nWe can think about the new layout as just a way to split a monolithic replication.config into several files:\n* the \"global\" configuration is in the replication.config\n* remote sections are stored in replication.remotes.d/*.config files\n\nAdditional design questions which IMHO are necessary to clarify:\n\n1. Shall it be allowed to have multiple remotes in one config file\nor shall we limit it to one remote only per file?\n\nThere is an advantage in the latter approach: we can use the config file name as the remote name and thus avoid the question about conflicting remote names in different config files. For example:\n\n  File replication.remotes.d/foo.config\n  [remote]\n      projects \u003d A\n      projects \u003d B\n      url \u003d https://foo.org/git/${name}.git\n\n  File replication.remotes.d/bar.config\n  [remote]\n      projects \u003d C\n      projects \u003d D\n      url \u003d https://bar.org/git/${name}.git\n\nEffectively the two above files are merged, without conflicts,\ninto:\n\n  [remote \"foo\"]\n      projects \u003d A\n      projects \u003d B\n      url \u003d https://foo.org/git/${name}.git\n\n  [remote \"bar\"]\n      projects \u003d C\n      projects \u003d D\n      url \u003d https://bar.org/git/${name}.git\n\n2. Shall we encapsulate the new config file(s) layout rather in \na new implementation of the ReplicationConfig?\n\nCurrently we use ReplicationFileBasedConfig to encapsulate\nthe replication configuration stored in a single file: replication.config\n\nThe rest of the replication plugin uses the ReplicationConfig\nAPI to create destinations etc... (this assumption seems not to\nreally hold as I see dependencies to the implementation class\nrather than to the interface but we likely can and should fix that).\n\nIf we introduce a ReplicationFanoutConfig to represent the\nnew layout of the replication config then the rest of the plugin\ncode can remain unchanged and continue relying on the ReplicationConfig interface?\n\nBy encapsulating the new configuration layout in a new implementation of the ReplicationConfig we avoid increasing\nthe code complexity as the rest of the replication plugin doesn\u0027t\nneed to know about the new layout. This way we also keep it\npossible to implement something even more dynamic in the future\nwithout having to change the rest of the replication plugin code.",
+      "parentUuid": "f09a171b_50be6a63",
+      "range": {
+        "startLine": 10,
+        "startChar": 24,
+        "endLine": 10,
+        "endChar": 48
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8924e8fc_01dcf022",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -129,6 +153,23 @@
         "endLine": 98,
         "endChar": 32
       },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30ec2272_c3056b21",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-13T10:48:33Z",
+      "side": 1,
+      "message": "See my comment in the commit message. IMHO, introducing a new config storage layout\nshouldn\u0027t require any changes here.\n\nWe should rather encapsulate the new storage layout in a new implementation\nof the ReplicationConfig.\n\nI see that ReplicationFileBasedConfig is used here and not the interface ReplicationConfig.\nI don\u0027t know why but it seems like we should first fix that and stop injecting\nconcrete implementation class where we can use the interface.",
       "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
