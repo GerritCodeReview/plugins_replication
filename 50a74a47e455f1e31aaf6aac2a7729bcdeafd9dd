@@ -158,6 +158,30 @@
     },
     {
       "key": {
+        "uuid": "21016a26_d1f31f14",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DynamicReplicationFileBasedConfigs.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-13T10:06:56Z",
+      "side": 1,
+      "message": "Sorry, I published this comment too early... I meant: don\u0027t name\nit dynamic unless something makes it really dynamic (like it is always\nauto-reloading)",
+      "parentUuid": "966e55ac_cecc31a5",
+      "range": {
+        "startLine": 32,
+        "startChar": 13,
+        "endLine": 32,
+        "endChar": 20
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5465b1f1_4515519d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DynamicReplicationFileBasedConfigs.java",
         "patchSetId": 2
