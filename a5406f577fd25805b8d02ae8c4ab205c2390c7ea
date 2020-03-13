@@ -88,6 +88,24 @@
       "revId": "a5406f577fd25805b8d02ae8c4ab205c2390c7ea",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43963967_80391289",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 49
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-13T15:40:53Z",
+      "side": 1,
+      "message": "\u003e I think that\u0027s an existing issue. See https://gerrit-review.googlesource.com/c/plugins/replication/+/257432\n\nOh, this is yet another issue that you are fixing in that change.\nHowever, I am talking about auto-reload-ing of the repication.config after the plugin already\nstarted. The AutoReloadConfigDecorator.onReload is never called and thus the\nAutoReloadconfigDecorator.currentConfig is never updated.\nInstead, the DestinationsCollection.onReload is invoked but it only reloads the \"remote\"\nsections. Any changes in other sections are not reloaded.",
+      "parentUuid": "820961aa_8ae6f4a9",
+      "revId": "a5406f577fd25805b8d02ae8c4ab205c2390c7ea",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
