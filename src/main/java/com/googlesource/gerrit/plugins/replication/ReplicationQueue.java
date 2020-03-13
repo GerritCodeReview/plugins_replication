@@ -23,6 +23,7 @@ import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.server.UsedAt;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
@@ -139,15 +140,34 @@ public class ReplicationQueue
 
     Project.NameKey project = new Project.NameKey(projectName);
     for (Destination cfg : config.getDestinations(FilterType.ALL)) {
-      if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
-        for (URIish uri : cfg.getURIs(project, null)) {
-          replicationTasksStorage.persist(
-              new ReplicateRefUpdate(projectName, refName, uri, cfg.getRemoteConfigName()));
-          cfg.schedule(project, refName, uri, state);
-        }
-      }
+      pushReference(cfg, project, refName, state);
     }
     state.markAllPushTasksScheduled();
+  }
+
+  @UsedAt(UsedAt.Project.COLLABNET)
+  public void pushReference(Destination cfg, Project.NameKey project, String refName) {
+    pushReference(cfg, project, refName, null);
+  }
+
+  private void pushReference(
+      Destination cfg, Project.NameKey project, String refName, ReplicationState state) {
+    boolean withoutState = state == null;
+    if (withoutState) {
+      state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
+    }
+
+    if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
+      for (URIish uri : cfg.getURIs(project, null)) {
+        replicationTasksStorage.persist(
+            new ReplicateRefUpdate(project.get(), refName, uri, cfg.getRemoteConfigName()));
+        cfg.schedule(project, refName, uri, state);
+      }
+    }
+
+    if (withoutState) {
+      state.markAllPushTasksScheduled();
+    }
   }
 
   private void firePendingEvents() {
