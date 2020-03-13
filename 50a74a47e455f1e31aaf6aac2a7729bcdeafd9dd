@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8924e8fc_01dcf022",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-13T09:21:27Z",
+      "side": 1,
+      "message": "Please add a bit more motivation and details in the commit message:\n* what are the main benefits (besides splitting a large file into smaller ones)\n* how does it help with reloading and restarting destinations?\n* how exactly auto reloading works when having multiple config files",
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "732ce75c_e055e353",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 2
@@ -94,6 +111,30 @@
     },
     {
       "key": {
+        "uuid": "0d4d377f_4f5faf24",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-13T09:21:27Z",
+      "side": 1,
+      "message": "+1\n\nespecially how a possible conflict, remote with the same name present in multiple places,\nis handled?",
+      "parentUuid": "a6853548_3c3df149",
+      "range": {
+        "startLine": 435,
+        "startChar": 0,
+        "endLine": 435,
+        "endChar": 32
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "734ca16e_27ce7f0f",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 2
@@ -163,6 +204,23 @@
     },
     {
       "key": {
+        "uuid": "1ac0e4e3_2df42ca6",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-13T09:21:27Z",
+      "side": 1,
+      "message": "Does that mean that only remote sections are allowed in the replication.config.d/*.config\nfiles? What happens if there is another section in such a file especially if it is\na section which is allowed in the replication.config file?",
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "45ff6180_764bfc3f",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 2
@@ -203,6 +261,23 @@
         "endLine": 445,
         "endChar": 29
       },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e340c3ef_ce135d78",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-13T09:21:27Z",
+      "side": 1,
+      "message": "nit: remove trailing space",
       "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
