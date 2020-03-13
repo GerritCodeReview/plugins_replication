@@ -52,6 +52,24 @@
       "revId": "a5406f577fd25805b8d02ae8c4ab205c2390c7ea",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "239e1034_1d9debdd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 49
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-13T15:24:35Z",
+      "side": 1,
+      "message": "With this change only \"[remote ...]\" sections are reload-able. Any configuration changes\ndone in other sections ([gerrit] and [replication]) are not reload-able because\nthe AutoReloadConfigDecorator is never notified when replication configuration gets changed.",
+      "parentUuid": "e8597b7f_63e91b27",
+      "revId": "a5406f577fd25805b8d02ae8c4ab205c2390c7ea",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
