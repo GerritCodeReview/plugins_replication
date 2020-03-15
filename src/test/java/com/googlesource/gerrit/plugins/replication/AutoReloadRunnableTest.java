@@ -21,6 +21,7 @@ import static org.mockito.Mockito.when;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.google.gerrit.server.config.SitePaths;
+import com.google.inject.Provider;
 import com.google.inject.util.Providers;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -75,21 +76,21 @@ public class AutoReloadRunnableTest {
   private void attemptAutoReload(ConfigParser validator) {
     final AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
-            validator,
-            newVersionConfig(),
-            sitePaths,
-            sitePaths.data_dir,
-            eventBus,
-            Providers.of(replicationQueueMock));
+            validator, newVersionConfigProvider(), eventBus, Providers.of(replicationQueueMock));
 
     autoReloadRunnable.run();
   }
 
-  private ReplicationFileBasedConfig newVersionConfig() {
-    return new ReplicationFileBasedConfig(sitePaths, sitePaths.data_dir) {
+  private Provider<ReplicationConfig> newVersionConfigProvider() {
+    return new Provider<ReplicationConfig>() {
       @Override
-      public String getVersion() {
-        return String.format("%s", System.nanoTime());
+      public ReplicationConfig get() {
+        return new ReplicationFileBasedConfig(sitePaths, sitePaths.data_dir) {
+          @Override
+          public String getVersion() {
+            return String.format("%s", System.nanoTime());
+          }
+        };
       }
     };
   }

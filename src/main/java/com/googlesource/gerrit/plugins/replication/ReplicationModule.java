@@ -80,12 +80,15 @@ class ReplicationModule extends AbstractModule {
     bind(ConfigParser.class).in(Scopes.SINGLETON);
 
     if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
-      bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class);
+      bind(ReplicationConfig.class)
+          .annotatedWith(MainReplicationConfig.class)
+          .to(ReplicationFileBasedConfig.class);
+      bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class).in(Scopes.SINGLETON);
       bind(LifecycleListener.class)
           .annotatedWith(UniqueAnnotations.create())
           .to(AutoReloadConfigDecorator.class);
     } else {
-      bind(ReplicationConfig.class).to(ReplicationFileBasedConfig.class);
+      bind(ReplicationConfig.class).to(ReplicationFileBasedConfig.class).in(Scopes.SINGLETON);
     }
 
     DynamicSet.setOf(binder(), ReplicationStateListener.class);

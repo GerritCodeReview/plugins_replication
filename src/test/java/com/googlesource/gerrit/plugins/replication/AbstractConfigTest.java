@@ -124,13 +124,17 @@ public abstract class AbstractConfigTest {
     assertThatIsDestination(matchingDestinations.get(0), remoteName, remoteUrls);
   }
 
-  protected DestinationsCollection newDestinationsCollections(
-      ReplicationFileBasedConfig replicationFileBasedConfig) throws ConfigInvalidException {
+  protected DestinationsCollection newDestinationsCollections(ReplicationConfig replicationConfig)
+      throws ConfigInvalidException {
     return new DestinationsCollection(
         destinationFactoryMock,
         Providers.of(replicationQueueMock),
-        replicationFileBasedConfig,
+        replicationConfig,
         configParser,
         eventBus);
+  }
+
+  protected ReplicationConfig newReplicationFileBasedConfig() {
+    return new ReplicationFileBasedConfig(sitePaths, pluginDataPath);
   }
 }
