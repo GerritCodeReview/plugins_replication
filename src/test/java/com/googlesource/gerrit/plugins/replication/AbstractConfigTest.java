@@ -50,6 +50,7 @@ public abstract class AbstractConfigTest {
   protected EventBus eventBus = new EventBus();
   protected FakeExecutorService executorService = new FakeExecutorService();
   protected ConfigParser configParser;
+  protected ReplicationFileBasedConfigProvider replicationConfigProvider;
 
   static class FakeDestination extends Destination {
     public final DestinationConfiguration config;
@@ -73,6 +74,7 @@ public abstract class AbstractConfigTest {
     pluginDataPath = createTempPath("data");
     destinationFactoryMock = mock(Destination.Factory.class);
     configParser = new ConfigParser();
+    replicationConfigProvider = new ReplicationFileBasedConfigProvider(sitePaths, pluginDataPath);
   }
 
   @Before
@@ -124,12 +126,12 @@ public abstract class AbstractConfigTest {
     assertThatIsDestination(matchingDestinations.get(0), remoteName, remoteUrls);
   }
 
-  protected DestinationsCollection newDestinationsCollections(
-      ReplicationFileBasedConfig replicationFileBasedConfig) throws ConfigInvalidException {
+  protected DestinationsCollection newDestinationsCollections(ReplicationConfig replicationConfig)
+      throws ConfigInvalidException {
     return new DestinationsCollection(
         destinationFactoryMock,
         Providers.of(replicationQueueMock),
-        replicationFileBasedConfig,
+        replicationConfig,
         configParser,
         eventBus);
   }
