@@ -54,7 +54,7 @@ public class AutoReloadRunnableTest {
   }
 
   @Test
-  public void configurationIsReloadedWhenValidationSucceeds() {
+  public void configurationIsReloadedWhenValidationSucceeds() throws ConfigInvalidException {
     ReplicationConfigValidator validator = new TestValidConfigurationListener();
 
     attemptAutoReload(validator);
@@ -63,7 +63,7 @@ public class AutoReloadRunnableTest {
   }
 
   @Test
-  public void configurationIsNotReloadedWhenValidationFails() {
+  public void configurationIsNotReloadedWhenValidationFails() throws ConfigInvalidException {
     ReplicationConfigValidator validator = new TestInvalidConfigurationListener();
 
     attemptAutoReload(validator);
@@ -71,24 +71,25 @@ public class AutoReloadRunnableTest {
     assertThat(onReloadSubscriber.reloaded).isFalse();
   }
 
-  private void attemptAutoReload(ReplicationConfigValidator validator) {
+  private void attemptAutoReload(ReplicationConfigValidator validator)
+      throws ConfigInvalidException {
     final AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
-            validator,
-            newVersionConfig(),
-            sitePaths,
-            sitePaths.data_dir,
-            eventBus,
-            Providers.of(replicationQueueMock));
+            validator, newVersionConfigProvider(), eventBus, Providers.of(replicationQueueMock));
 
     autoReloadRunnable.run();
   }
 
-  private ReplicationFileBasedConfig newVersionConfig() {
-    return new ReplicationFileBasedConfig(sitePaths, sitePaths.data_dir) {
+  private ReplicationConfigProvider newVersionConfigProvider() {
+    return new ReplicationConfigProvider(sitePaths, sitePaths.data_dir) {
       @Override
-      public String getVersion() {
-        return String.format("%s", System.nanoTime());
+      public ReplicationConfig get() {
+        return new ReplicationFileBasedConfig(site, pluginDataDir) {
+          @Override
+          public String getVersion() {
+            return String.format("%s", System.nanoTime());
+          }
+        };
       }
     };
   }
@@ -103,17 +104,17 @@ public class AutoReloadRunnableTest {
     }
   }
 
-  private static class TestValidConfigurationListener implements ReplicationConfigValidator {
+  private static class TestValidConfigurationListener extends ReplicationConfigValidator {
     @Override
-    public List<RemoteConfiguration> validateConfig(ReplicationFileBasedConfig newConfig) {
+    public List<RemoteConfiguration> validateConfig(ReplicationConfig newConfig) {
       return Collections.emptyList();
     }
   }
 
-  private static class TestInvalidConfigurationListener implements ReplicationConfigValidator {
+  private static class TestInvalidConfigurationListener extends ReplicationConfigValidator {
     @Override
-    public List<RemoteConfiguration> validateConfig(
-        ReplicationFileBasedConfig configurationChangeEvent) throws ConfigInvalidException {
+    public List<RemoteConfiguration> validateConfig(ReplicationConfig configurationChangeEvent)
+        throws ConfigInvalidException {
       throw new ConfigInvalidException("expected test failure");
     }
   }
