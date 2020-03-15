@@ -21,13 +21,12 @@ import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.junit.Before;
 import org.junit.Test;
 
 public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
-  ReplicationFileBasedConfig replicationFileBasedConfig;
+  ReplicationConfig replicationConfig;
 
   public AutoReloadConfigDecoratorTest() throws IOException {
     super();
@@ -37,23 +36,22 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
   @Before
   public void setup() {
     super.setup();
-
-    replicationFileBasedConfig = newReplicationFileBasedConfig();
+    replicationConfig = newReplicationFileBasedConfig();
   }
 
   @Test
   public void shouldAutoReloadReplicationConfig() throws Exception {
-    FileBasedConfig replicationConfig = newReplicationConfig();
-    replicationConfig.setBoolean("gerrit", null, "autoReload", true);
+    FileBasedConfig fileConfig = newReplicationConfig();
+    fileConfig.setBoolean("gerrit", null, "autoReload", true);
     String remoteName1 = "foo";
     String remoteUrl1 = "ssh://git@git.foo.com/${name}";
-    replicationConfig.setString("remote", remoteName1, "url", remoteUrl1);
-    replicationConfig.save();
+    fileConfig.setString("remote", remoteName1, "url", remoteUrl1);
+    fileConfig.save();
 
     newAutoReloadConfig().start();
 
     DestinationsCollection destinationsCollections =
-        newDestinationsCollections(replicationFileBasedConfig);
+        newDestinationsCollections(replicationConfigProvider.get());
     destinationsCollections.startup(workQueueMock);
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
@@ -63,8 +61,8 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
 
     String remoteName2 = "bar";
     String remoteUrl2 = "ssh://git@git.bar.com/${name}";
-    replicationConfig.setString("remote", remoteName2, "url", remoteUrl2);
-    replicationConfig.save();
+    fileConfig.setString("remote", remoteName2, "url", remoteUrl2);
+    fileConfig.save();
     executorService.refreshCommand.run();
 
     destinations = destinationsCollections.getAll(FilterType.ALL);
@@ -77,13 +75,13 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
   public void shouldNotAutoReloadReplicationConfigIfDisabled() throws Exception {
     String remoteName1 = "foo";
     String remoteUrl1 = "ssh://git@git.foo.com/${name}";
-    FileBasedConfig replicationConfig = newReplicationConfig();
-    replicationConfig.setBoolean("gerrit", null, "autoReload", false);
-    replicationConfig.setString("remote", remoteName1, "url", remoteUrl1);
-    replicationConfig.save();
+    FileBasedConfig fileConfig = newReplicationConfig();
+    fileConfig.setBoolean("gerrit", null, "autoReload", false);
+    fileConfig.setString("remote", remoteName1, "url", remoteUrl1);
+    fileConfig.save();
 
     DestinationsCollection destinationsCollections =
-        newDestinationsCollections(replicationFileBasedConfig);
+        newDestinationsCollections(replicationConfigProvider.get());
     destinationsCollections.startup(workQueueMock);
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
@@ -91,27 +89,22 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
 
     TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
 
-    replicationConfig.setString("remote", "bar", "url", "ssh://git@git.bar.com/${name}");
-    replicationConfig.save();
+    fileConfig.setString("remote", "bar", "url", "ssh://git@git.bar.com/${name}");
+    fileConfig.save();
     executorService.refreshCommand.run();
 
     assertThat(destinationsCollections.getAll(FilterType.ALL)).isEqualTo(destinations);
   }
 
-  private AutoReloadConfigDecorator newAutoReloadConfig() throws ConfigInvalidException {
+  private AutoReloadConfigDecorator newAutoReloadConfig() {
     AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
-            configParser,
-            replicationFileBasedConfig,
-            sitePaths,
-            pluginDataPath,
-            eventBus,
-            Providers.of(replicationQueueMock));
+            configParser, replicationConfigProvider, eventBus, Providers.of(replicationQueueMock));
     return new AutoReloadConfigDecorator(
-        "replication", workQueueMock, replicationFileBasedConfig, autoReloadRunnable, eventBus);
+        "replication", workQueueMock, replicationConfigProvider, autoReloadRunnable, eventBus);
   }
 
-  private ReplicationFileBasedConfig newReplicationFileBasedConfig() {
-    return new ReplicationFileBasedConfig(sitePaths, pluginDataPath);
+  private ReplicationConfig newReplicationFileBasedConfig() {
+    return replicationConfigProvider.get();
   }
 }
