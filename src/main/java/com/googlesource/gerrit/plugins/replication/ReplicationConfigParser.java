@@ -17,13 +17,12 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.flogger.FluentLogger;
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.jgit.errors.ConfigInvalidException;
-import org.eclipse.jgit.storage.file.FileBasedConfig;
+import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.URIish;
@@ -39,33 +38,13 @@ public class ReplicationConfigParser {
    * @return List of parsed {@link RemoteConfiguration}
    * @throws ConfigInvalidException if the new configuration is not valid.
    */
-  List<RemoteConfiguration> parse(ReplicationFileBasedConfig replicationConfig)
+  List<RemoteConfiguration> parse(ReplicationConfig replicationConfig)
       throws ConfigInvalidException {
-    if (!replicationConfig.getConfig().getFile().exists()) {
-      logger.atWarning().log(
-          "Config file %s does not exist; not replicating",
-          replicationConfig.getConfig().getFile());
-      return Collections.emptyList();
-    }
-    if (replicationConfig.getConfig().getFile().length() == 0) {
-      logger.atInfo().log(
-          "Config file %s is empty; not replicating", replicationConfig.getConfig().getFile());
-      return Collections.emptyList();
-    }
+    List<RemoteConfig> remoteConfigs = allRemotes(replicationConfig.getConfig());
 
-    try {
-      replicationConfig.getConfig().load();
-    } catch (ConfigInvalidException e) {
-      throw new ConfigInvalidException(
-          String.format(
-              "Config file %s is invalid: %s",
-              replicationConfig.getConfig().getFile(), e.getMessage()),
-          e);
-    } catch (IOException e) {
-      throw new ConfigInvalidException(
-          String.format(
-              "Cannot read %s: %s", replicationConfig.getConfig().getFile(), e.getMessage()),
-          e);
+    if (remoteConfigs.isEmpty()) {
+      logger.atWarning().log("Replication config does not exist or it's empty; not replicating");
+      return Collections.emptyList();
     }
 
     boolean defaultForceUpdate =
@@ -98,9 +77,7 @@ public class ReplicationConfigParser {
         for (URIish u : c.getURIs()) {
           if (u.getPath() == null || !u.getPath().contains("${name}")) {
             throw new ConfigInvalidException(
-                String.format(
-                    "remote.%s.url \"%s\" lacks ${name} placeholder in %s",
-                    c.getName(), u, replicationConfig.getConfig().getFile()));
+                String.format("remote.%s.url \"%s\" lacks ${name} placeholder", c.getName(), u));
           }
         }
       }
@@ -111,15 +88,14 @@ public class ReplicationConfigParser {
     return confs.build();
   }
 
-  private static List<RemoteConfig> allRemotes(FileBasedConfig cfg) throws ConfigInvalidException {
+  private static List<RemoteConfig> allRemotes(Config cfg) throws ConfigInvalidException {
     Set<String> names = cfg.getSubsections("remote");
     List<RemoteConfig> result = Lists.newArrayListWithCapacity(names.size());
     for (String name : names) {
       try {
         result.add(new RemoteConfig(cfg, name));
       } catch (URISyntaxException e) {
-        throw new ConfigInvalidException(
-            String.format("remote %s has invalid URL in %s", name, cfg.getFile()), e);
+        throw new ConfigInvalidException(String.format("remote %s has invalid URL", name), e);
       }
     }
     return result;

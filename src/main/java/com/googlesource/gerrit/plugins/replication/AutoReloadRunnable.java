@@ -16,39 +16,31 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.flogger.FluentLogger;
-import com.google.gerrit.extensions.annotations.PluginData;
-import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.nio.file.Path;
 import java.util.List;
 
 public class AutoReloadRunnable implements Runnable {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  private final SitePaths site;
-  private final Path pluginDataDir;
   private final EventBus eventBus;
   private final Provider<ObservableQueue> queueObserverProvider;
   private final ReplicationConfigParser configParser;
-
-  private ReplicationFileBasedConfig loadedConfig;
+  private ReplicationConfig loadedConfig;
+  private ReplicationConfigProvider replicationConfigProvider;
   private String loadedConfigVersion;
   private String lastFailedConfigVersion;
 
   @Inject
   public AutoReloadRunnable(
-      ReplicationConfigParser configParser,
-      ReplicationFileBasedConfig config,
-      SitePaths site,
-      @PluginData Path pluginDataDir,
+	  ReplicationConfigParser configParser,
+      ReplicationConfigProvider replicationConfigProvider,
       EventBus eventBus,
       Provider<ObservableQueue> queueObserverProvider) {
-    this.loadedConfig = config;
-    this.loadedConfigVersion = config.getVersion();
+    this.replicationConfigProvider = replicationConfigProvider;
+    this.loadedConfig = replicationConfigProvider.get();
+    this.loadedConfigVersion = loadedConfig.getVersion();
     this.lastFailedConfigVersion = "";
-    this.site = site;
-    this.pluginDataDir = pluginDataDir;
     this.eventBus = eventBus;
     this.queueObserverProvider = queueObserverProvider;
     this.configParser = configParser;
@@ -71,7 +63,7 @@ public class AutoReloadRunnable implements Runnable {
   synchronized void reload() {
     String pendingConfigVersion = loadedConfig.getVersion();
     try {
-      ReplicationFileBasedConfig newConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
+      ReplicationConfig newConfig = replicationConfigProvider.get();
       final List<RemoteConfiguration> newValidDestinations = configParser.parse(newConfig);
       loadedConfig = newConfig;
       loadedConfigVersion = newConfig.getVersion();
