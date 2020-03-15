@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import java.nio.file.Path;
+import org.eclipse.jgit.lib.Config;
 
 /** Configuration of all the replication end points. */
 public interface ReplicationConfig {
@@ -70,4 +71,6 @@ public interface ReplicationConfig {
    * @return current logical version number.
    */
   String getVersion();
+
+  Config getConfig();
 }
