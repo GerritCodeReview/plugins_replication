@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f32a3efb_5dcf2269",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-15T17:56:13Z",
+      "side": 0,
+      "message": "This class was breaking single responsibility principle. Because it was mixing ReplicationDestination and ReplicationConfigValidator when I started using ReplicationConfiguration I had cyclic dependency in AutoReloadRunnable because of that. That\u0027s why I\u0027ve decided to split it to DestinationCollection and ReplicationConfigValidator",
+      "range": {
+        "startLine": 56,
+        "startChar": 72,
+        "endLine": 56,
+        "endChar": 98
+      },
+      "revId": "fac45f033a80cd0187bc9d1d4ed12c11882d3721",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
