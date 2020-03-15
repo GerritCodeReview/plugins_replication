@@ -74,21 +74,21 @@ public class AutoReloadRunnableTest {
   private void attemptAutoReload(ReplicationConfigParser validator) {
     final AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
-            validator,
-            newVersionConfig(),
-            sitePaths,
-            sitePaths.data_dir,
-            eventBus,
-            Providers.of(replicationQueueMock));
+            validator, newVersionConfigProvider(), eventBus, Providers.of(replicationQueueMock));
 
     autoReloadRunnable.run();
   }
 
-  private ReplicationFileBasedConfig newVersionConfig() {
-    return new ReplicationFileBasedConfig(sitePaths, sitePaths.data_dir) {
+  private ReplicationConfigProvider newVersionConfigProvider() {
+    return new ReplicationConfigProvider(sitePaths, sitePaths.data_dir) {
       @Override
-      public String getVersion() {
-        return String.format("%s", System.nanoTime());
+      public ReplicationConfig get() {
+        return new ReplicationFileBasedConfig(site, pluginDataDir) {
+          @Override
+          public String getVersion() {
+            return String.format("%s", System.nanoTime());
+          }
+        };
       }
     };
   }
@@ -105,14 +105,14 @@ public class AutoReloadRunnableTest {
 
   private static class TestValidConfigurationListener extends ReplicationConfigParser {
     @Override
-    public List<RemoteConfiguration> parse(ReplicationFileBasedConfig newConfig) {
+    public List<RemoteConfiguration> parse(ReplicationConfig newConfig) {
       return Collections.emptyList();
     }
   }
 
   private static class TestInvalidConfigurationListener extends ReplicationConfigParser {
     @Override
-    public List<RemoteConfiguration> parse(ReplicationFileBasedConfig configurationChangeEvent)
+    public List<RemoteConfiguration> parse(ReplicationConfig configurationChangeEvent)
         throws ConfigInvalidException {
       throw new ConfigInvalidException("expected test failure");
     }

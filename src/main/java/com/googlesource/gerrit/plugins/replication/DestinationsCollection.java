@@ -66,7 +66,7 @@ public class DestinationsCollection implements ReplicationDestinations {
   public DestinationsCollection(
       Destination.Factory destinationFactory,
       Provider<ReplicationQueue> replicationQueue,
-      ReplicationFileBasedConfig replicationConfig,
+      ReplicationConfig replicationConfig,
       ReplicationConfigParser replicationConfigParser,
       EventBus eventBus)
       throws ConfigInvalidException {

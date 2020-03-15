@@ -31,11 +31,10 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsF
   private final AtomicReference<SecureCredentialsFactory> secureCredentialsFactory;
   private volatile long secureCredentialsFactoryLoadTs;
   private final SitePaths site;
-  private ReplicationFileBasedConfig config;
+  private ReplicationConfig config;
 
   @Inject
-  public AutoReloadSecureCredentialsFactoryDecorator(
-      SitePaths site, ReplicationFileBasedConfig config)
+  public AutoReloadSecureCredentialsFactoryDecorator(SitePaths site, ReplicationConfig config)
       throws ConfigInvalidException, IOException {
     this.site = site;
     this.config = config;
