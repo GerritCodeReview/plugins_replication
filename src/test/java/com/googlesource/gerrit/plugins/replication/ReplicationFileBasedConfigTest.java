@@ -65,10 +65,4 @@ public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
     assertThatIsDestination(destinations.get(0), remoteName1, remoteUrl1);
     assertThatIsDestination(destinations.get(1), remoteName2, remoteUrl2);
   }
-
-  private ReplicationFileBasedConfig newReplicationFileBasedConfig() {
-    ReplicationFileBasedConfig replicationConfig =
-        new ReplicationFileBasedConfig(sitePaths, pluginDataPath);
-    return replicationConfig;
-  }
 }
