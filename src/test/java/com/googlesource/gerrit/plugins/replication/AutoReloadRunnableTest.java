@@ -75,21 +75,21 @@ public class AutoReloadRunnableTest {
   private void attemptAutoReload(ConfigParser validator) {
     final AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
-            validator,
-            newVersionConfig(),
-            sitePaths,
-            sitePaths.data_dir,
-            eventBus,
-            Providers.of(replicationQueueMock));
+            validator, newVersionConfigProvider(), eventBus, Providers.of(replicationQueueMock));
 
     autoReloadRunnable.run();
   }
 
-  private ReplicationFileBasedConfig newVersionConfig() {
-    return new ReplicationFileBasedConfig(sitePaths, sitePaths.data_dir) {
+  private ReplicationFileBasedConfigProvider newVersionConfigProvider() {
+    return new ReplicationFileBasedConfigProvider(sitePaths, sitePaths.data_dir) {
       @Override
-      public String getVersion() {
-        return String.format("%s", System.nanoTime());
+      public ReplicationConfig get() {
+        return new ReplicationFileBasedConfig(site, pluginDataDir) {
+          @Override
+          public String getVersion() {
+            return String.format("%s", System.nanoTime());
+          }
+        };
       }
     };
   }

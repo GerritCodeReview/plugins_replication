@@ -18,8 +18,6 @@ import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLo
 import com.google.common.base.Strings;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.Path;
 import org.eclipse.jgit.errors.ConfigInvalidException;
@@ -27,7 +25,6 @@ import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 
-@Singleton
 public class ReplicationFileBasedConfig implements ReplicationConfig {
   private static final int DEFAULT_SSH_CONNECTION_TIMEOUT_MS = 2 * 60 * 1000; // 2 minutes
 
@@ -41,7 +38,6 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private final FileBasedConfig config;
   private final Path pluginDataDir;
 
-  @Inject
   public ReplicationFileBasedConfig(SitePaths site, @PluginData Path pluginDataDir) {
     this.site = site;
     this.cfgPath = site.etc_dir.resolve("replication.config");
@@ -105,6 +101,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     return cfgPath;
   }
 
+  @Override
   public Config getConfig() {
     return config;
   }
