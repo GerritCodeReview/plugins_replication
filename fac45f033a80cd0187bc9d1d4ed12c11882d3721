@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d592cd76_33cac279",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-15T20:29:51Z",
+      "side": 0,
+      "message": "Is this related to the change?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 10
+      },
+      "revId": "fac45f033a80cd0187bc9d1d4ed12c11882d3721",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f32a3efb_5dcf2269",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
         "patchSetId": 1
@@ -13,6 +36,30 @@
       "writtenOn": "2020-03-15T17:56:13Z",
       "side": 0,
       "message": "This class was breaking single responsibility principle. Because it was mixing ReplicationDestination and ReplicationConfigValidator when I started using ReplicationConfiguration I had cyclic dependency in AutoReloadRunnable because of that. That\u0027s why I\u0027ve decided to split it to DestinationCollection and ReplicationConfigValidator",
+      "range": {
+        "startLine": 56,
+        "startChar": 72,
+        "endLine": 56,
+        "endChar": 98
+      },
+      "revId": "fac45f033a80cd0187bc9d1d4ed12c11882d3721",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df0b2760_1091f7b7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-15T20:29:51Z",
+      "side": 0,
+      "message": "Can this be put into a separate change?",
+      "parentUuid": "f32a3efb_5dcf2269",
       "range": {
         "startLine": 56,
         "startChar": 72,
