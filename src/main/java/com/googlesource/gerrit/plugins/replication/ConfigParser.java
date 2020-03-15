@@ -17,14 +17,12 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.flogger.FluentLogger;
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
-import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.URIish;
@@ -40,25 +38,11 @@ public class ConfigParser {
    * @return List of parsed {@link RemoteConfiguration}
    * @throws ConfigInvalidException if the new configuration is not valid.
    */
-  public List<RemoteConfiguration> parseRemotes(FileBasedConfig config)
-      throws ConfigInvalidException {
-    if (!config.getFile().exists()) {
-      logger.atWarning().log("Config file %s does not exist; not replicating", config);
-      return Collections.emptyList();
-    }
-    if (config.getFile().length() == 0) {
-      logger.atInfo().log("Config file %s is empty; not replicating", config);
-      return Collections.emptyList();
-    }
+  public List<RemoteConfiguration> parseRemotes(Config config) throws ConfigInvalidException {
 
-    try {
-      config.load();
-    } catch (ConfigInvalidException e) {
-      throw new ConfigInvalidException(
-          String.format("Config file %s is invalid: %s", config.toString(), e.getMessage()), e);
-    } catch (IOException e) {
-      throw new ConfigInvalidException(
-          String.format("Cannot read %s: %s", config, e.getMessage()), e);
+    if (config.getSections().isEmpty()) {
+      logger.atWarning().log("Replication config does not exist or it's empty; not replicating");
+      return Collections.emptyList();
     }
 
     boolean defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);

@@ -66,7 +66,7 @@ public class DestinationsCollection implements ReplicationDestinations {
   public DestinationsCollection(
       Destination.Factory destinationFactory,
       Provider<ReplicationQueue> replicationQueue,
-      ReplicationFileBasedConfig replicationConfig,
+      ReplicationConfig replicationConfig,
       ConfigParser configParser,
       EventBus eventBus)
       throws ConfigInvalidException {
@@ -74,7 +74,8 @@ public class DestinationsCollection implements ReplicationDestinations {
     this.replicationQueue = replicationQueue;
     this.destinations =
         allDestinations(
-            destinationFactory, configParser.parseRemotes(replicationConfig.getConfig()));
+            destinationFactory,
+            configParser.parseRemotes(replicationConfig.getConfig()));
     eventBus.register(this);
   }
 
