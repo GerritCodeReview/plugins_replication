@@ -37,7 +37,7 @@ public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
     config.save();
 
     DestinationsCollection destinationsCollections =
-        newDestinationsCollections(newReplicationFileBasedConfig());
+        newDestinationsCollections(replicationConfigProvider.get());
     destinationsCollections.startup(workQueueMock);
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
@@ -57,18 +57,12 @@ public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
     config.save();
 
     DestinationsCollection destinationsCollections =
-        newDestinationsCollections(newReplicationFileBasedConfig());
+        newDestinationsCollections(replicationConfigProvider.get());
     destinationsCollections.startup(workQueueMock);
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(2);
 
     assertThatIsDestination(destinations.get(0), remoteName1, remoteUrl1);
     assertThatIsDestination(destinations.get(1), remoteName2, remoteUrl2);
-  }
-
-  private ReplicationFileBasedConfig newReplicationFileBasedConfig() {
-    ReplicationFileBasedConfig replicationConfig =
-        new ReplicationFileBasedConfig(sitePaths, pluginDataPath);
-    return replicationConfig;
   }
 }
