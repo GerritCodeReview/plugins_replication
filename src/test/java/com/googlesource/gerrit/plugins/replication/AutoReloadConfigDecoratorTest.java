@@ -101,7 +101,7 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
   private AutoReloadConfigDecorator newAutoReloadConfig() throws ConfigInvalidException {
     AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
-            newDestinationsCollections(replicationFileBasedConfig),
+            configParser,
             replicationFileBasedConfig,
             sitePaths,
             pluginDataPath,
