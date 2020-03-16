@@ -49,6 +49,7 @@ public abstract class AbstractConfigTest {
   protected WorkQueue workQueueMock;
   protected EventBus eventBus = new EventBus();
   protected FakeExecutorService executorService = new FakeExecutorService();
+  protected ConfigParser replicationConfigParser;
 
   static class FakeDestination extends Destination {
     public final DestinationConfiguration config;
@@ -71,6 +72,7 @@ public abstract class AbstractConfigTest {
     sitePaths = new SitePaths(sitePath);
     pluginDataPath = createTempPath("data");
     destinationFactoryMock = mock(Destination.Factory.class);
+    replicationConfigParser = new ConfigParser();
   }
 
   @Before
@@ -128,6 +130,7 @@ public abstract class AbstractConfigTest {
         destinationFactoryMock,
         Providers.of(replicationQueueMock),
         replicationFileBasedConfig,
+        replicationConfigParser,
         eventBus);
   }
 }

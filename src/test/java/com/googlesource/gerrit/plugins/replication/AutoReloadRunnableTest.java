@@ -28,6 +28,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,24 +55,24 @@ public class AutoReloadRunnableTest {
   }
 
   @Test
-  public void configurationIsReloadedWhenValidationSucceeds() {
-    ReplicationConfigValidator validator = new TestValidConfigurationListener();
+  public void configurationIsReloadedWhenParsingSucceeds() {
+    ConfigParser parser = new TestValidConfigurationListener();
 
-    attemptAutoReload(validator);
+    attemptAutoReload(parser);
 
     assertThat(onReloadSubscriber.reloaded).isTrue();
   }
 
   @Test
-  public void configurationIsNotReloadedWhenValidationFails() {
-    ReplicationConfigValidator validator = new TestInvalidConfigurationListener();
+  public void configurationIsNotReloadedWhenParsingFails() {
+    ConfigParser parser = new TestInvalidConfigurationListener();
 
-    attemptAutoReload(validator);
+    attemptAutoReload(parser);
 
     assertThat(onReloadSubscriber.reloaded).isFalse();
   }
 
-  private void attemptAutoReload(ReplicationConfigValidator validator) {
+  private void attemptAutoReload(ConfigParser validator) {
     final AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
             validator,
@@ -103,17 +104,17 @@ public class AutoReloadRunnableTest {
     }
   }
 
-  private static class TestValidConfigurationListener implements ReplicationConfigValidator {
+  private static class TestValidConfigurationListener extends ConfigParser {
     @Override
-    public List<RemoteConfiguration> validateConfig(ReplicationFileBasedConfig newConfig) {
+    public List<RemoteConfiguration> parse(FileBasedConfig newConfig) {
       return Collections.emptyList();
     }
   }
 
-  private static class TestInvalidConfigurationListener implements ReplicationConfigValidator {
+  private static class TestInvalidConfigurationListener extends ConfigParser {
     @Override
-    public List<RemoteConfiguration> validateConfig(
-        ReplicationFileBasedConfig configurationChangeEvent) throws ConfigInvalidException {
+    public List<RemoteConfiguration> parse(FileBasedConfig configurationChangeEvent)
+        throws ConfigInvalidException {
       throw new ConfigInvalidException("expected test failure");
     }
   }
