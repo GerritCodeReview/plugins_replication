@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c5c57be8_2afcdc81",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-16T11:48:53Z",
+      "side": 1,
+      "message": "Maybe I went to far with this change but my idea is that is returning ReplicationConfig not ReplicationFileBaseConfig so code which is using this class doesn\u0027t have to know what type of ReplicationConfig it\u0027s returning. Plus in the following change this provider will return ReplicationFileBasedConfign or RepiliationFanaoutConfig based od the directory structure",
+      "parentUuid": "db052079_b2c1fb3e",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "c034df170199986ddc441fe7d183fa0710fee7d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5992789a_5d7dc645",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigValidator.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2020-03-15T20:29:51Z",
       "side": 1,
       "message": "This should be called RemotesConfigParser, because it takes a ReplicationConfig and provides as an output the list of RemoteConfig.",
+      "range": {
+        "startLine": 30,
+        "startChar": 13,
+        "endLine": 30,
+        "endChar": 39
+      },
+      "revId": "c034df170199986ddc441fe7d183fa0710fee7d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c85e9abc_870de634",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigValidator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-16T11:48:53Z",
+      "side": 1,
+      "message": "Yes RemotesConfigParser is a better name I didn\u0027t want to change original names to not introduce to many changes",
+      "parentUuid": "5992789a_5d7dc645",
       "range": {
         "startLine": 30,
         "startChar": 13,

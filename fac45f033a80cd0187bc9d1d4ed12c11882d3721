@@ -69,6 +69,30 @@
       "revId": "fac45f033a80cd0187bc9d1d4ed12c11882d3721",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca5130e0_e162c024",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-16T11:48:53Z",
+      "side": 0,
+      "message": "Yes you are right. I just thought that it will be hard to justify as a separate change. I will split it now",
+      "parentUuid": "df0b2760_1091f7b7",
+      "range": {
+        "startLine": 56,
+        "startChar": 72,
+        "endLine": 56,
+        "endChar": 98
+      },
+      "revId": "fac45f033a80cd0187bc9d1d4ed12c11882d3721",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
