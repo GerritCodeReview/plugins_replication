@@ -54,24 +54,24 @@ public class AutoReloadRunnableTest {
   }
 
   @Test
-  public void configurationIsReloadedWhenValidationSucceeds() {
-    ReplicationConfigValidator validator = new TestValidConfigurationListener();
+  public void configurationIsReloadedWhenParsingSucceeds() {
+    ReplicationConfigParser parser = new TestValidConfigurationListener();
 
-    attemptAutoReload(validator);
+    attemptAutoReload(parser);
 
     assertThat(onReloadSubscriber.reloaded).isTrue();
   }
 
   @Test
-  public void configurationIsNotReloadedWhenValidationFails() {
-    ReplicationConfigValidator validator = new TestInvalidConfigurationListener();
+  public void configurationIsNotReloadedWhenParsingFails() {
+    ReplicationConfigParser parser = new TestInvalidConfigurationListener();
 
-    attemptAutoReload(validator);
+    attemptAutoReload(parser);
 
     assertThat(onReloadSubscriber.reloaded).isFalse();
   }
 
-  private void attemptAutoReload(ReplicationConfigValidator validator) {
+  private void attemptAutoReload(ReplicationConfigParser validator) {
     final AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
             validator,
@@ -103,16 +103,16 @@ public class AutoReloadRunnableTest {
     }
   }
 
-  private static class TestValidConfigurationListener implements ReplicationConfigValidator {
+  private static class TestValidConfigurationListener extends ReplicationConfigParser {
     @Override
-    public List<RemoteConfiguration> validateConfig(ReplicationFileBasedConfig newConfig) {
+    public List<RemoteConfiguration> parse(ReplicationFileBasedConfig newConfig) {
       return Collections.emptyList();
     }
   }
 
-  private static class TestInvalidConfigurationListener implements ReplicationConfigValidator {
+  private static class TestInvalidConfigurationListener extends ReplicationConfigParser {
     @Override
-    public List<RemoteConfiguration> validateConfig(
+    public List<RemoteConfiguration> parse(
         ReplicationFileBasedConfig configurationChangeEvent) throws ConfigInvalidException {
       throw new ConfigInvalidException("expected test failure");
     }
