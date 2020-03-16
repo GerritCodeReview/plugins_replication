@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "5d835a8b_b12abcdb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigValidator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-16T13:24:44Z",
+      "side": 1,
+      "message": "Done in previous change",
+      "parentUuid": "c85e9abc_870de634",
+      "range": {
+        "startLine": 30,
+        "startChar": 13,
+        "endLine": 30,
+        "endChar": 39
+      },
+      "revId": "c034df170199986ddc441fe7d183fa0710fee7d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da8f787a_eb2db50a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigValidator.java",
         "patchSetId": 1
