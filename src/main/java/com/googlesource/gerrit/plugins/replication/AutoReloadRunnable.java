@@ -30,7 +30,7 @@ public class AutoReloadRunnable implements Runnable {
   private final Path pluginDataDir;
   private final EventBus eventBus;
   private final Provider<ObservableQueue> queueObserverProvider;
-  private final ReplicationConfigValidator configValidator;
+  private final ReplicationConfigParser configParser;
 
   private ReplicationFileBasedConfig loadedConfig;
   private String loadedConfigVersion;
@@ -38,7 +38,7 @@ public class AutoReloadRunnable implements Runnable {
 
   @Inject
   public AutoReloadRunnable(
-      ReplicationConfigValidator configValidator,
+      ReplicationConfigParser configParser,
       ReplicationFileBasedConfig config,
       SitePaths site,
       @PluginData Path pluginDataDir,
@@ -51,7 +51,7 @@ public class AutoReloadRunnable implements Runnable {
     this.pluginDataDir = pluginDataDir;
     this.eventBus = eventBus;
     this.queueObserverProvider = queueObserverProvider;
-    this.configValidator = configValidator;
+    this.configParser = configParser;
   }
 
   @Override
@@ -72,8 +72,7 @@ public class AutoReloadRunnable implements Runnable {
     String pendingConfigVersion = loadedConfig.getVersion();
     try {
       ReplicationFileBasedConfig newConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
-      final List<RemoteConfiguration> newValidDestinations =
-          configValidator.validateConfig(newConfig);
+      final List<RemoteConfiguration> newValidDestinations = configParser.parse(newConfig);
       loadedConfig = newConfig;
       loadedConfigVersion = newConfig.getVersion();
       lastFailedConfigVersion = "";
