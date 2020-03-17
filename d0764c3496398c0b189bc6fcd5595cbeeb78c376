@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae1d8273_bcf0ef70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-17T20:08:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "285d445f_de3a1693",
+      "revId": "d0764c3496398c0b189bc6fcd5595cbeeb78c376",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8cc23d87_90bce750",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
         "patchSetId": 3
@@ -99,6 +117,48 @@
     },
     {
       "key": {
+        "uuid": "b99e29f6_6ebc20cf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-17T20:08:23Z",
+      "side": 1,
+      "message": "Unfortunately ReplicationFileBasedConfig.getConfig is returning FileBasedConfig instead of Config. We relay on FileBasedConfig implementation in few places for example in line 57. I believe code which is loading the configuration and checking underlying files is out of scope of this method but this is how it was design. This functionality is moved to ReplicationConfigProvider is following change and there we can change to Config here we can use FileBasedConfig",
+      "parentUuid": "be0567b6_30905296",
+      "range": {
+        "startLine": 42,
+        "startChar": 34,
+        "endLine": 42,
+        "endChar": 78
+      },
+      "revId": "d0764c3496398c0b189bc6fcd5595cbeeb78c376",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "547feab3_644dd068",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-17T20:08:23Z",
+      "side": 1,
+      "message": "In general we should try to avoid using static methods they are making writing tests more complicated because static methods cannot be easily mocked or stubbed. I agree instance without members is a code smell maybe we should move parse functionality to ReplicationConfig in following change?",
+      "parentUuid": "f79bad18_b9e91789",
+      "revId": "d0764c3496398c0b189bc6fcd5595cbeeb78c376",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f3950369_2efd1c6f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
         "patchSetId": 3
@@ -119,6 +179,30 @@
       "revId": "d0764c3496398c0b189bc6fcd5595cbeeb78c376",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef2525ae_98a52cb8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-17T20:08:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3950369_2efd1c6f",
+      "range": {
+        "startLine": 114,
+        "startChar": 47,
+        "endLine": 114,
+        "endChar": 62
+      },
+      "revId": "d0764c3496398c0b189bc6fcd5595cbeeb78c376",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
