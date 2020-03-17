@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "81e4e3d7_a2328ce6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-17T13:24:28Z",
+      "side": 1,
+      "message": "IMHO, what Luca wrote makes sense. We will be injecting Provider\u003cReplicationConfig\u003e which\nis implementation neutral. A concrete implementation can and should have a more concrete\nname which closely resembles what it does (unless it is *the* implementation and there will\nbe no other implementations and then it is justified to use a generic name).",
+      "parentUuid": "812fa5d8_1de75bbd",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "c034df170199986ddc441fe7d183fa0710fee7d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5992789a_5d7dc645",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigValidator.java",
         "patchSetId": 1
