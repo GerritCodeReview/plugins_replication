@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "812fa5d8_1de75bbd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-17T13:05:26Z",
+      "side": 1,
+      "message": "The name of the class should say what you should expect from the class to do, the name of the interface is what the class is by contract doing and the interface of the objects it exposes.\n\nSo, the name of the class should by ReplicationFileBasedConfigProvider because this is what I am expecting the class to do, the name of the interface is Provider\u003cReplicationConfig\u003e because it will respect the interface of providing a generic ReplicationConfig.\n\nFor example, another class providing a DB-backed configuration would be named as:\n  ReplicationDatabaseConfigProvider implements Provider\u003cReplicationConfig\u003e\n\nMakes sense?",
+      "parentUuid": "c5c57be8_2afcdc81",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "c034df170199986ddc441fe7d183fa0710fee7d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5992789a_5d7dc645",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigValidator.java",
         "patchSetId": 1
@@ -131,6 +155,30 @@
       "writtenOn": "2020-03-15T17:56:13Z",
       "side": 1,
       "message": "Should this be a part of ReplicationConfig interface?",
+      "range": {
+        "startLine": 90,
+        "startChar": 36,
+        "endLine": 90,
+        "endChar": 46
+      },
+      "revId": "c034df170199986ddc441fe7d183fa0710fee7d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "888c46b2_4c4f06d3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigValidator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-17T13:05:26Z",
+      "side": 1,
+      "message": "There was actually a discussion with Tony on this. In theory, yes. In practice, by separating the extraction from the validation you would then get the remotes twice, with a subsequent performance degradation.\n\nI believe that we are fine for now to leave it here.",
+      "parentUuid": "da8f787a_eb2db50a",
       "range": {
         "startLine": 90,
         "startChar": 36,
