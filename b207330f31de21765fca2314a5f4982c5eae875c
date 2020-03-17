@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e28e8457_e692abab",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-17T08:58:41Z",
+      "side": 1,
+      "message": "I expected that this method will move here and this is OK, for this change.\n\nAs a remark and reminder for further discussion, we may want to get rid of the notion that ReplicationConfig provides\na (JGit) Config object. This assumption, kind of, imposes usage of Git config file(s) for replication\nconfig persistence. However, we may want to get rid of that assumption in the future and\nallow storing replication config in a completely different format.\n\nTherefore, in the future we should consider hiding all implementation details of replication\nconfiguration persistence, behind the ReplicationConfig interface i.e. instead of returning\na JGit\u0027s Config object we should have dedicated methods for each part of the replication\nconfiguration.",
+      "revId": "b207330f31de21765fca2314a5f4982c5eae875c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
