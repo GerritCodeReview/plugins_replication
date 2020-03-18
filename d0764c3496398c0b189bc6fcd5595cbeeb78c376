@@ -225,6 +225,30 @@
     },
     {
       "key": {
+        "uuid": "1d21b9e4_38610d5f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-18T16:34:26Z",
+      "side": 1,
+      "message": "\u003e If we expect Config object then it is responsibility of the caller to ensure that\n\u003e a passed FileBasedConfig is loaded.\nI agree that\u0027s why originally this change was a part of following change. In following change config is loaded in ReplicationFileBasedConfigProvider. In this change there is no good place to load the config. I was thinking about constructor of ReplicationFileBasedConfig but I believe there was a good reason why it wasn\u0027t done like that in first place.",
+      "parentUuid": "060a0e50_85ddaaeb",
+      "range": {
+        "startLine": 42,
+        "startChar": 34,
+        "endLine": 42,
+        "endChar": 78
+      },
+      "revId": "d0764c3496398c0b189bc6fcd5595cbeeb78c376",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f3950369_2efd1c6f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
         "patchSetId": 3
