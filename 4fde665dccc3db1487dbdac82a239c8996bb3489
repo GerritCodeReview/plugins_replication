@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "281e992c_bf84d553",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-18T18:13:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cce31d9c_3740e818",
+      "range": {
+        "startLine": 10,
+        "startChar": 45,
+        "endLine": 10,
+        "endChar": 68
+      },
+      "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ecc7fa90_0bd7e8fb",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigParser.java",
         "patchSetId": 4
@@ -39,6 +63,24 @@
       "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfcddb61_af4221d5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigParser.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-18T18:13:21Z",
+      "side": 1,
+      "message": "Singleton scope added in ReplicationModule",
+      "parentUuid": "ecc7fa90_0bd7e8fb",
+      "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -62,6 +104,30 @@
       "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5a987d4_2d90d220",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigParser.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-18T18:13:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "726d1d7e_ede96ea7",
+      "range": {
+        "startLine": 43,
+        "startChar": 35,
+        "endLine": 43,
+        "endChar": 40
+      },
+      "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +171,48 @@
     },
     {
       "key": {
+        "uuid": "c6e52791_0f49d9e8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-18T18:13:21Z",
+      "side": 1,
+      "message": "Singleton scope added in ReplicationModule",
+      "parentUuid": "a1ab372a_b090edb0",
+      "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "acf9d6f2_fbd19a82",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-18T18:13:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4da24923_b4df7fbd",
+      "range": {
+        "startLine": 70,
+        "startChar": 19,
+        "endLine": 70,
+        "endChar": 42
+      },
+      "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cc8f0e86_40c94bc8",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AbstractConfigTest.java",
         "patchSetId": 4
@@ -125,6 +233,30 @@
       "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f2964d8_18a5a7cb",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AbstractConfigTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-18T18:13:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc8f0e86_40c94bc8",
+      "range": {
+        "startLine": 52,
+        "startChar": 25,
+        "endLine": 52,
+        "endChar": 48
+      },
+      "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
