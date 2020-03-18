@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4957919b_48f72bc6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-18T16:14:21Z",
+      "side": 1,
+      "message": "Yes I was trying all those options. AutoReloadConfigDecorator is implementing ReplicationConfig so if I use ReplicationConfig here I\u0027m getting circular dependency(and that\u0027s why original code was based on ReplicationFileBasedConfig) with Provider\u003cReplicationConfig\u003e it\u0027s the same, I believe guice is registering provider for AutoReloadConfigDecorator and I\u0027m getting circular dependency with Provider\u003cReplicationConfig\u003e. This was one of the reasons I\u0027ve named ReplicationFileBasedConfigProvider as ReplicationConfigProvider in the first place.",
+      "parentUuid": "6e85bd39_70518077",
+      "revId": "f719368cbfc7d9b1dd5c5c27f715fd36f41678fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "81886e92_b9a1bc25",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 5
