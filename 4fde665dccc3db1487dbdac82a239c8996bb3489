@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cce31d9c_3740e818",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-18T15:42:10Z",
+      "side": 1,
+      "message": "ConfigParser",
+      "range": {
+        "startLine": 10,
+        "startChar": 45,
+        "endLine": 10,
+        "endChar": 68
+      },
+      "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecc7fa90_0bd7e8fb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigParser.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-18T15:42:10Z",
+      "side": 1,
+      "message": "@Singleton",
+      "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "726d1d7e_ede96ea7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigParser.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-18T15:42:10Z",
+      "side": 1,
+      "message": "parseRemotes\n\nThis name applies already in this change",
+      "range": {
+        "startLine": 43,
+        "startChar": 35,
+        "endLine": 43,
+        "endChar": 40
+      },
+      "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1ab372a_b090edb0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-18T15:42:10Z",
+      "side": 1,
+      "message": "If ConfigParser instance will be injected then mark that class as @Singleton.\nWe don\u0027t need multiple instances of that class.",
+      "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4da24923_b4df7fbd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-18T15:42:10Z",
+      "side": 1,
+      "message": "configParser",
+      "range": {
+        "startLine": 70,
+        "startChar": 19,
+        "endLine": 70,
+        "endChar": 42
+      },
+      "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc8f0e86_40c94bc8",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AbstractConfigTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-18T15:42:10Z",
+      "side": 1,
+      "message": "configParser",
+      "range": {
+        "startLine": 52,
+        "startChar": 25,
+        "endLine": 52,
+        "endChar": 48
+      },
+      "revId": "4fde665dccc3db1487dbdac82a239c8996bb3489",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}

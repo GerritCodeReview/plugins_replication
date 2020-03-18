@@ -201,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "060a0e50_85ddaaeb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-18T15:42:10Z",
+      "side": 1,
+      "message": "\u003e Unfortunately ReplicationFileBasedConfig.getConfig is returning FileBasedConfig instead of Config.\n\nFileBasedConfig is a subtype of Config?! Therefore passing a FileBasedConfig where Config\nis expected is allowed.\n\n\u003e We relay on FileBasedConfig implementation in few places for example in line 57.\nIf we expect Config object then it is responsibility of the caller to ensure that\na passed FileBasedConfig is loaded.",
+      "parentUuid": "b99e29f6_6ebc20cf",
+      "range": {
+        "startLine": 42,
+        "startChar": 34,
+        "endLine": 42,
+        "endChar": 78
+      },
+      "revId": "d0764c3496398c0b189bc6fcd5595cbeeb78c376",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f3950369_2efd1c6f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
         "patchSetId": 3
