@@ -60,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "9c281c8b_168d34ef",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-18T13:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "073b8605_7dbdf8a4",
+      "range": {
+        "startLine": 41,
+        "startChar": 28,
+        "endLine": 41,
+        "endChar": 33
+      },
+      "revId": "b207330f31de21765fca2314a5f4982c5eae875c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec96613e_5c54ef05",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
         "patchSetId": 4
@@ -80,6 +104,30 @@
       "revId": "b207330f31de21765fca2314a5f4982c5eae875c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf87cebd_3785fdaa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-18T13:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec96613e_5c54ef05",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 81
+      },
+      "revId": "b207330f31de21765fca2314a5f4982c5eae875c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -106,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "59fcb789_70cb911e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigProvider.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-18T13:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84937f28_968c4904",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "b207330f31de21765fca2314a5f4982c5eae875c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "948d1179_6fe26ef3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
         "patchSetId": 4
@@ -117,6 +189,30 @@
       "writtenOn": "2020-03-17T12:59:48Z",
       "side": 1,
       "message": "Config",
+      "range": {
+        "startLine": 93,
+        "startChar": 9,
+        "endLine": 93,
+        "endChar": 24
+      },
+      "revId": "b207330f31de21765fca2314a5f4982c5eae875c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "169aba08_8517fd76",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-18T13:01:22Z",
+      "side": 1,
+      "message": "I agree this should be Config but ReplicationFileBasedConfigProvider is using FileBasedConfig.load method. To avoid that we should move loading functionality to this class but I believe this should be done in a separate change. WDYT?",
+      "parentUuid": "948d1179_6fe26ef3",
       "range": {
         "startLine": 93,
         "startChar": 9,
