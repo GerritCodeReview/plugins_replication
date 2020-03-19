@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "b4179cef_f3c459c4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-19T12:16:29Z",
+      "side": 1,
+      "message": "@Named annotation solved the circular dependency. I have feeling that the name can be more expressive 😊 but I cannot figure out better one WDYT?",
+      "parentUuid": "a5929d60_2f07ccc7",
+      "revId": "f719368cbfc7d9b1dd5c5c27f715fd36f41678fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "81886e92_b9a1bc25",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 5
