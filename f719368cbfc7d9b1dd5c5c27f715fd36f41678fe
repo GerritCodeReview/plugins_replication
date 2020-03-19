@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "959ad2ae_1c110240",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-19T15:28:11Z",
+      "side": 1,
+      "message": "Will answer in the latest patch-set",
+      "parentUuid": "b4179cef_f3c459c4",
+      "revId": "f719368cbfc7d9b1dd5c5c27f715fd36f41678fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "81886e92_b9a1bc25",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 5
