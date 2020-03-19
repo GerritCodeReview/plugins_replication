@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "09365dff_baf1c793",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-19T20:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "959ad2ae_1c110240",
+      "revId": "f719368cbfc7d9b1dd5c5c27f715fd36f41678fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "81886e92_b9a1bc25",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 5
@@ -129,6 +147,30 @@
       "revId": "f719368cbfc7d9b1dd5c5c27f715fd36f41678fe",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be1538d7_16de9672",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-19T20:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81886e92_b9a1bc25",
+      "range": {
+        "startLine": 37,
+        "startChar": 6,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "f719368cbfc7d9b1dd5c5c27f715fd36f41678fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
