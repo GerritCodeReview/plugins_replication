@@ -222,6 +222,30 @@
       "revId": "b207330f31de21765fca2314a5f4982c5eae875c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a89062ab_c6ec9b93",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-23T17:28:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "169aba08_8517fd76",
+      "range": {
+        "startLine": 93,
+        "startChar": 9,
+        "endLine": 93,
+        "endChar": 24
+      },
+      "revId": "b207330f31de21765fca2314a5f4982c5eae875c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
