@@ -273,6 +273,30 @@
     },
     {
       "key": {
+        "uuid": "4cefda81_a0ea9f0e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-23T12:38:24Z",
+      "side": 1,
+      "message": "This change [1] fixes the loading of FileBasedConfig in the ReplicationFileBasedConfig.\nIf we submit [1] and rebased your changes on [1] then we don\u0027t need to pass FileBasedConfig\nhere and care about loading it here. And the validation for an empty config can be\ndone here in the way like you did in the follow-up change.\n\n\n[1] https://gerrit-review.googlesource.com/c/plugins/replication/+/257432",
+      "parentUuid": "adc8c4ef_f2505936",
+      "range": {
+        "startLine": 42,
+        "startChar": 34,
+        "endLine": 42,
+        "endChar": 78
+      },
+      "revId": "d0764c3496398c0b189bc6fcd5595cbeeb78c376",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f3950369_2efd1c6f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
         "patchSetId": 3
