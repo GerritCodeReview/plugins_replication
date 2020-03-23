@@ -16,6 +16,24 @@
       "revId": "d311aee10a765d4a86b946804090095587674adc",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "208b82d6_ac837da5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-23T23:03:52Z",
+      "side": 1,
+      "message": "I would remove it and merge the change.",
+      "parentUuid": "67d66056_1cce7866",
+      "revId": "d311aee10a765d4a86b946804090095587674adc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
