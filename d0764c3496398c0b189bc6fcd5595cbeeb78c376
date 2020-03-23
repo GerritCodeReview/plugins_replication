@@ -297,6 +297,30 @@
     },
     {
       "key": {
+        "uuid": "7ffb3eec_d31a3cae",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-23T12:45:09Z",
+      "side": 1,
+      "message": "Cool! As I mentioned the fix you are pointing to is loading the config in constructor. I will rebase it now.",
+      "parentUuid": "4cefda81_a0ea9f0e",
+      "range": {
+        "startLine": 42,
+        "startChar": 34,
+        "endLine": 42,
+        "endChar": 78
+      },
+      "revId": "d0764c3496398c0b189bc6fcd5595cbeeb78c376",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f3950369_2efd1c6f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigParser.java",
         "patchSetId": 3
