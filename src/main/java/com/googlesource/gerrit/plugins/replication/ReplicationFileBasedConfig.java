@@ -13,12 +13,17 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
+
 import com.google.common.base.Strings;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.io.IOException;
 import java.nio.file.Path;
+import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 
@@ -41,6 +46,13 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     this.site = site;
     this.cfgPath = site.etc_dir.resolve("replication.config");
     this.config = new FileBasedConfig(cfgPath.toFile(), FS.DETECTED);
+    try {
+      config.load();
+    } catch (ConfigInvalidException e) {
+      repLog.error(String.format("Config file %s is invalid: %s", cfgPath, e.getMessage()), e);
+    } catch (IOException e) {
+      repLog.error(String.format("Cannot read %s: %s", cfgPath, e.getMessage()), e);
+    }
     this.replicateAllOnPluginStart = config.getBoolean("gerrit", "replicateOnStartup", false);
     this.defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);
     this.maxRefsToLog = config.getInt("gerrit", "maxRefsToLog", 0);
@@ -98,7 +110,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     return cfgPath;
   }
 
-  public FileBasedConfig getConfig() {
+  public Config getConfig() {
     return config;
   }
 
