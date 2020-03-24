@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66ca1d29_ddff8bbe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-03-24T13:12:14Z",
+      "side": 1,
+      "message": "We should really set-up CI for the plugins ASAP. May be we could at very least set-up verification for Core Plugins, using GerritForge infrastructure? If Zuul and GCP setup take a bit longer?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "8d70ac4f611e7853a701a4e015f2d2ca053d956d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
