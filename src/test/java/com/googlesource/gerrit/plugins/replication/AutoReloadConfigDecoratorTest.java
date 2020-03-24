@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
-import org.junit.Before;
 import org.junit.Test;
 
 public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
@@ -30,14 +29,6 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
 
   public AutoReloadConfigDecoratorTest() throws IOException {
     super();
-  }
-
-  @Override
-  @Before
-  public void setup() {
-    super.setup();
-
-    replicationFileBasedConfig = newReplicationFileBasedConfig();
   }
 
   @Test
@@ -48,6 +39,8 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     String remoteUrl1 = "ssh://git@git.foo.com/${name}";
     replicationConfig.setString("remote", remoteName1, "url", remoteUrl1);
     replicationConfig.save();
+
+    replicationFileBasedConfig = newReplicationFileBasedConfig();
 
     newAutoReloadConfig().start();
 
@@ -80,6 +73,8 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     replicationConfig.setBoolean("gerrit", null, "autoReload", false);
     replicationConfig.setString("remote", remoteName1, "url", remoteUrl1);
     replicationConfig.save();
+
+    replicationFileBasedConfig = newReplicationFileBasedConfig();
 
     DestinationsCollection destinationsCollections =
         newDestinationsCollections(replicationFileBasedConfig);
