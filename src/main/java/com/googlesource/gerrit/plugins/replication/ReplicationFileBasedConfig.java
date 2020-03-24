@@ -23,7 +23,6 @@ import com.google.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.Path;
 import org.eclipse.jgit.errors.ConfigInvalidException;
-import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 
@@ -105,7 +104,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     return cfgPath;
   }
 
-  public Config getConfig() {
+  public FileBasedConfig getConfig() {
     return config;
   }
 
