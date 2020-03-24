@@ -27,6 +27,10 @@ import org.junit.Test;
 
 public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
   ReplicationFileBasedConfig replicationFileBasedConfig;
+  FileBasedConfig replicationConfig;
+
+  String remoteName1 = "foo";
+  String remoteUrl1 = "ssh://git@git.foo.com/${name}";
 
   public AutoReloadConfigDecoratorTest() throws IOException {
     super();
@@ -36,18 +40,20 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
   @Before
   public void setup() {
     super.setup();
+    replicationConfig = newReplicationConfig();
+    replicationConfig.setBoolean("gerrit", null, "autoReload", false);
+    replicationConfig.setString("remote", remoteName1, "url", remoteUrl1);
+    try {
+      replicationConfig.save();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
 
     replicationFileBasedConfig = newReplicationFileBasedConfig();
   }
 
   @Test
   public void shouldAutoReloadReplicationConfig() throws Exception {
-    FileBasedConfig replicationConfig = newReplicationConfig();
-    replicationConfig.setBoolean("gerrit", null, "autoReload", true);
-    String remoteName1 = "foo";
-    String remoteUrl1 = "ssh://git@git.foo.com/${name}";
-    replicationConfig.setString("remote", remoteName1, "url", remoteUrl1);
-    replicationConfig.save();
 
     newAutoReloadConfig().start();
 
@@ -74,12 +80,6 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
 
   @Test
   public void shouldNotAutoReloadReplicationConfigIfDisabled() throws Exception {
-    String remoteName1 = "foo";
-    String remoteUrl1 = "ssh://git@git.foo.com/${name}";
-    FileBasedConfig replicationConfig = newReplicationConfig();
-    replicationConfig.setBoolean("gerrit", null, "autoReload", false);
-    replicationConfig.setString("remote", remoteName1, "url", remoteUrl1);
-    replicationConfig.save();
 
     DestinationsCollection destinationsCollections =
         newDestinationsCollections(replicationFileBasedConfig);
