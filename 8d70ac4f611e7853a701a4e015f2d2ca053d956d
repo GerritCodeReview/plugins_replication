@@ -22,6 +22,30 @@
       "revId": "8d70ac4f611e7853a701a4e015f2d2ca053d956d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19b4d8cc_32e7bd80",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2020-03-24T13:17:47Z",
+      "side": 1,
+      "message": "If the zuul implementation will still take time, I can probably look into it tomorrow. I will create a multibranch-pipeline for all core plugins that will run the same scripts that we use right now for the plugin release builds.",
+      "parentUuid": "66ca1d29_ddff8bbe",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "8d70ac4f611e7853a701a4e015f2d2ca053d956d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
