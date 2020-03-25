@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "05a8ddd9_4f7f17cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-25T16:29:56Z",
+      "side": 1,
+      "message": "Is this already a part of this change? Where is that code which restarts only modified remotes?",
+      "range": {
+        "startLine": 12,
+        "startChar": 15,
+        "endLine": 13,
+        "endChar": 16
+      },
+      "revId": "212a36d4b10b046a77f20c11df8349f06584c02e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "109a7050_abdb6231",
         "filename": "/COMMIT_MSG",
         "patchSetId": 14
