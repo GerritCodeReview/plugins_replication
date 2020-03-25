@@ -1,0 +1,389 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7180e0cb_ceb0b7b4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "private final",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 9
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bb5df16_e6b4ff8b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "private final",
+      "range": {
+        "startLine": 36,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9b6a47b_d3f04f10",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "Unused variable",
+      "range": {
+        "startLine": 37,
+        "startChar": 15,
+        "endLine": 37,
+        "endChar": 39
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49deb5aa_5eb62246",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "static variables should be defined at the beginning, as in the rest of the Gerrit code.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 78
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc579478_cc0d3199",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "import static com.google.common.io.Files.getFileExtension, so that the full package and class name can be omitted here and would make the line more readable.",
+      "range": {
+        "startLine": 55,
+        "startChar": 22,
+        "endLine": 55,
+        "endChar": 65
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b273d36_6f9cfa33",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "Should we really abort the loading of ALL remotes in this case? I would prefer to display an error in the logs but then continue loading the other remotes.",
+      "range": {
+        "startLine": 62,
+        "startChar": 18,
+        "endLine": 62,
+        "endChar": 53
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8803bf7_287b3230",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigProvider.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "I believe this could be done at Guice module level, checking if the directory exists and binding the FanoutReplicationConfig vs. ReplicationFileBasedConfig.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 70
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f35a224d_a573f36f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "nit: space at end of line.",
+      "range": {
+        "startLine": 440,
+        "startChar": 8,
+        "endLine": 440,
+        "endChar": 9
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35b239d6_35db8ef5",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "nit: remove space at end of the line",
+      "range": {
+        "startLine": 464,
+        "startChar": 0,
+        "endLine": 464,
+        "endChar": 1
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab41f5dc_8989b719",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "nit: remove space at end of the line",
+      "range": {
+        "startLine": 469,
+        "startChar": 0,
+        "endLine": 469,
+        "endChar": 1
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44380874_b0da4989",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "nit: remove space at end of the line",
+      "range": {
+        "startLine": 470,
+        "startChar": 0,
+        "endLine": 470,
+        "endChar": 1
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bec760cd_3eb856ee",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "nit: remove space at end of the line",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 472,
+        "endChar": 2
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61043585_705935a2",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "nit: remove space at end of the line",
+      "range": {
+        "startLine": 484,
+        "startChar": 0,
+        "endLine": 484,
+        "endChar": 2
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b498a4e5_518c1e98",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "nit: remove space at end of the line",
+      "range": {
+        "startLine": 494,
+        "startChar": 0,
+        "endLine": 494,
+        "endChar": 4
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9e544f1_93efd1ab",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecoratorTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "Why a wholly commented out test? Is this change still WIP?",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 0
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cae5e7ee_5fb67e43",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "leftover?",
+      "range": {
+        "startLine": 301,
+        "startChar": 4,
+        "endLine": 301,
+        "endChar": 23
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa444da3_eead8afa",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-25T00:46:04Z",
+      "side": 1,
+      "message": "Is this related?",
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
