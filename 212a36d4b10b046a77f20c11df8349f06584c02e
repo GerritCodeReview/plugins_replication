@@ -45,6 +45,30 @@
       "revId": "212a36d4b10b046a77f20c11df8349f06584c02e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27c1dee9_afb982a8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-25T16:24:58Z",
+      "side": 1,
+      "message": "IMHO, switching between different ReplicationConfig implementations without plugin restart\nis not an important feature. Most of the time, Gerrit admins will stick to one particular\nimplementation. Auto reloading is important but switching to different implementation is\nsomething that justifies a plugin restart.",
+      "parentUuid": "e04d609f_56d36f97",
+      "range": {
+        "startLine": 51,
+        "startChar": 34,
+        "endLine": 51,
+        "endChar": 65
+      },
+      "revId": "212a36d4b10b046a77f20c11df8349f06584c02e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
