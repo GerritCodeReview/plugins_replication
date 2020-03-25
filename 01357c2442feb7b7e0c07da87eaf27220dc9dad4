@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3243659d_0df9a6e8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-25T13:15:50Z",
+      "side": 0,
+      "message": "Why is this annotation here removed and *partially* replaced with in(Scopes.SINGLETON) in the\nReplicationModule? Continuing this comment in the ReplicationModule...",
+      "revId": "01357c2442feb7b7e0c07da87eaf27220dc9dad4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
