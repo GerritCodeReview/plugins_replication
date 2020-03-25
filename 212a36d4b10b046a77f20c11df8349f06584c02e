@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "109a7050_abdb6231",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-25T15:43:33Z",
+      "side": 1,
+      "message": "For correctness, it would also be possible to achieve the same\nwith the \"traditional\" monolithic replication.config. When we\ndetect that it changed, instead of restarting all remotes, we \ncould diff the old and new version, find which remotes have changed\nand restart only the changed remotes. I discussed this with Luca in Munich.\n\nWhat the fanout replication configuration actually provides here\nis just an easy diff computation. If a file with single remote\nchanges then we can easily \"compute\" the diff between the old and new replication configuration.\n\nNote that the intention of this comment is not do diminish the\nimportance of this change. I like this change.\n\nThe suggestion is that the design should, if possible, introduce\na notion of the diff between two replication configuration versions. We can implement that diff easily for the fanout\nversion and we can for now not implement it for the traditional\nmonolithic replication.config. When the diff computation is\nnot provided we reload all remotes. When the diff computation is\navailable then we restart only the changed remotes. This concept\nwill also be useful in the future if we come up with yet another\nreplication configuration implementation.",
+      "range": {
+        "startLine": 12,
+        "startChar": 15,
+        "endLine": 15,
+        "endChar": 33
+      },
+      "revId": "212a36d4b10b046a77f20c11df8349f06584c02e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e04d609f_56d36f97",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
         "patchSetId": 14
