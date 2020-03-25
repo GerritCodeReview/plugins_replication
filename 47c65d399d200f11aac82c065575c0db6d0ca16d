@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fc64a6c0_4187bec9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T14:11:57Z",
+      "side": 1,
+      "message": "I had to remove @Singleton annotation because of how Guice works. If the class is marked as a singleton even Provider\u003cReplicationConfig\u003e is returning the same instance. Please have in mind that in AutoReloadRunnable line 66 we have to get new instance when we have new configuration version. That\u0027s why for auto reload we cannot mark ReplicationFileBasedConfig as a singleton but we should mark AutoReloadConfigDecorator instead.",
+      "parentUuid": "cd6ffe04_d9c2bca3",
+      "revId": "47c65d399d200f11aac82c065575c0db6d0ca16d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7824fd40_b10f7dc0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/VanillaReplicationConfig.java",
         "patchSetId": 14
