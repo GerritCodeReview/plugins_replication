@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bfa8ff38_195e8482",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7180e0cb_ceb0b7b4",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 9
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1bb5df16_e6b4ff8b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 13
@@ -45,6 +69,30 @@
       "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36e441ac_4cf83e72",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bb5df16_e6b4ff8b",
+      "range": {
+        "startLine": 36,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "5e7fb417_6805b780",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9b6a47b_d3f04f10",
+      "range": {
+        "startLine": 37,
+        "startChar": 15,
+        "endLine": 37,
+        "endChar": 39
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49deb5aa_5eb62246",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 13
@@ -91,6 +163,30 @@
       "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7223136b_c0794c5d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49deb5aa_5eb62246",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 78
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "6f93eac0_906c811e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc579478_cc0d3199",
+      "range": {
+        "startLine": 55,
+        "startChar": 22,
+        "endLine": 55,
+        "endChar": 65
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b273d36_6f9cfa33",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 13
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "149e3824_e62113a5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b273d36_6f9cfa33",
+      "range": {
+        "startLine": 62,
+        "startChar": 18,
+        "endLine": 62,
+        "endChar": 53
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f8803bf7_287b3230",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigProvider.java",
         "patchSetId": 13
@@ -151,6 +295,30 @@
       "writtenOn": "2020-03-25T00:46:04Z",
       "side": 1,
       "message": "I believe this could be done at Guice module level, checking if the directory exists and binding the FanoutReplicationConfig vs. ReplicationFileBasedConfig.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 70
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e382445_aec1e274",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigProvider.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Yes we can do that at Guice module level. My idea was that we can switch to FanoutReplicationConfig without restart that\u0027s why I have custom provider which is checking which ReplicationConfig should be created. There is one concert with my approach I\u0027ve already mentioned about it in a separate comment. I happy to remove the provider if we are fine with restart when we are switching from old to new structure,",
+      "parentUuid": "f8803bf7_287b3230",
       "range": {
         "startLine": 38,
         "startChar": 0,
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "4049116a_aee6cec6",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f35a224d_a573f36f",
+      "range": {
+        "startLine": 440,
+        "startChar": 8,
+        "endLine": 440,
+        "endChar": 9
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35b239d6_35db8ef5",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 13
@@ -206,6 +398,30 @@
       "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "968cb2eb_b74da901",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35b239d6_35db8ef5",
+      "range": {
+        "startLine": 464,
+        "startChar": 0,
+        "endLine": 464,
+        "endChar": 1
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -232,6 +448,30 @@
     },
     {
       "key": {
+        "uuid": "26167830_606acdac",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab41f5dc_8989b719",
+      "range": {
+        "startLine": 469,
+        "startChar": 0,
+        "endLine": 469,
+        "endChar": 1
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44380874_b0da4989",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 13
@@ -252,6 +492,30 @@
       "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6811b7f8_de1350f6",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44380874_b0da4989",
+      "range": {
+        "startLine": 470,
+        "startChar": 0,
+        "endLine": 470,
+        "endChar": 1
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -278,6 +542,30 @@
     },
     {
       "key": {
+        "uuid": "43d7d49c_36e5f9d1",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bec760cd_3eb856ee",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 472,
+        "endChar": 2
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61043585_705935a2",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 13
@@ -298,6 +586,30 @@
       "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d0b73c3_534142d9",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61043585_705935a2",
+      "range": {
+        "startLine": 484,
+        "startChar": 0,
+        "endLine": 484,
+        "endChar": 2
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -324,6 +636,30 @@
     },
     {
       "key": {
+        "uuid": "55c0d07d_c4ca140c",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b498a4e5_518c1e98",
+      "range": {
+        "startLine": 494,
+        "startChar": 0,
+        "endLine": 494,
+        "endChar": 4
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e9e544f1_93efd1ab",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecoratorTest.java",
         "patchSetId": 13
@@ -344,6 +680,30 @@
       "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a483032_47eb6689",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecoratorTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9e544f1_93efd1ab",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 0
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -370,6 +730,30 @@
     },
     {
       "key": {
+        "uuid": "1fcad99e_50f9228b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cae5e7ee_5fb67e43",
+      "range": {
+        "startLine": 301,
+        "startChar": 4,
+        "endLine": 301,
+        "endChar": 23
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa444da3_eead8afa",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 13
@@ -384,6 +768,24 @@
       "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7009c0d0_0734bca1",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa444da3_eead8afa",
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }

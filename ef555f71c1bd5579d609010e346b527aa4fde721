@@ -22,6 +22,30 @@
       "revId": "ef555f71c1bd5579d609010e346b527aa4fde721",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cbea4ab_95e07a7f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-25T13:10:08Z",
+      "side": 0,
+      "message": "in new format we can have only remote section in config file. But this param was set for every replication destination so it was making remote.replications.d/* files invalid. It should be set once globally in replication.config file",
+      "parentUuid": "180226b1_0632779c",
+      "range": {
+        "startLine": 360,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 58
+      },
+      "revId": "ef555f71c1bd5579d609010e346b527aa4fde721",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
