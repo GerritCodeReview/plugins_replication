@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "761b4ee5_c29dad91",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-26T21:41:36Z",
+      "side": 1,
+      "message": "I did not see this part into the code: are you planning to implement it in a follow-up change? If yes, you should remove it from the commit message.",
+      "range": {
+        "startLine": 12,
+        "startChar": 15,
+        "endLine": 15,
+        "endChar": 33
+      },
+      "revId": "8985694c0a6c040b371ebe7f69101212a9135f67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bd03d48_c6490270",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-26T21:41:36Z",
+      "side": 1,
+      "message": "This should be `path`",
+      "range": {
+        "startLine": 116,
+        "startChar": 67,
+        "endLine": 116,
+        "endChar": 70
+      },
+      "revId": "8985694c0a6c040b371ebe7f69101212a9135f67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c5fa5bf_bec4374a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfigTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-26T21:41:36Z",
+      "side": 1,
+      "message": "Config",
+      "range": {
+        "startLine": 50,
+        "startChar": 51,
+        "endLine": 50,
+        "endChar": 55
+      },
+      "revId": "8985694c0a6c040b371ebe7f69101212a9135f67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0185257_7ce91e47",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfigTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-26T21:41:36Z",
+      "side": 1,
+      "message": "shouldIgnoreNonConfigFiles",
+      "range": {
+        "startLine": 91,
+        "startChar": 14,
+        "endLine": 91,
+        "endChar": 55
+      },
+      "revId": "8985694c0a6c040b371ebe7f69101212a9135f67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26186933_392375c4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfigTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-26T21:41:36Z",
+      "side": 1,
+      "message": "ConfigInvalidException",
+      "range": {
+        "startLine": 113,
+        "startChar": 25,
+        "endLine": 113,
+        "endChar": 34
+      },
+      "revId": "8985694c0a6c040b371ebe7f69101212a9135f67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6122e440_efd96f47",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfigTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-03-26T21:41:36Z",
+      "side": 1,
+      "message": "UrlIsMissingName",
+      "range": {
+        "startLine": 113,
+        "startChar": 38,
+        "endLine": 113,
+        "endChar": 48
+      },
+      "revId": "8985694c0a6c040b371ebe7f69101212a9135f67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
