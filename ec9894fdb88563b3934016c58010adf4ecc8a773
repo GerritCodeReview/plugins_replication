@@ -331,6 +331,30 @@
     },
     {
       "key": {
+        "uuid": "d72dbc78_b350c2ea",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigProvider.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-26T17:48:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e382445_aec1e274",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 70
+      },
+      "revId": "ec9894fdb88563b3934016c58010adf4ecc8a773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f35a224d_a573f36f",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 13
