@@ -92,6 +92,30 @@
       "revId": "212a36d4b10b046a77f20c11df8349f06584c02e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3ced902_17cad447",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-26T15:42:41Z",
+      "side": 1,
+      "message": "Ok in that case we don\u0027t need that provider. I will refactor the code",
+      "parentUuid": "27c1dee9_afb982a8",
+      "range": {
+        "startLine": 51,
+        "startChar": 34,
+        "endLine": 51,
+        "endChar": 65
+      },
+      "revId": "212a36d4b10b046a77f20c11df8349f06584c02e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
