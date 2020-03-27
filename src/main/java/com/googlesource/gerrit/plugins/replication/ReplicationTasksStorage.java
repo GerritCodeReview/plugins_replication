@@ -292,7 +292,6 @@ public class ReplicationTasksStorage {
 
   private class Task {
     public final ReplicateRefUpdate update;
-    public final String json;
     public final String taskKey;
     public final Path running;
     public final Path waiting;
@@ -307,7 +306,6 @@ public class ReplicationTasksStorage {
 
     public Task(UriLock lock, String ref) {
       update = new ReplicateRefUpdate(lock.update, ref);
-      json = GSON.toJson(update) + "\n";
       String key = update.project + "\n" + update.ref + "\n" + update.uri + "\n" + update.remote;
       taskKey = sha1(key).name();
       running = lock.runningDir.resolve(taskKey);
@@ -319,6 +317,7 @@ public class ReplicationTasksStorage {
         return taskKey;
       }
 
+      String json = GSON.toJson(update) + "\n";
       try {
         Path tmp = Files.createTempFile(createDir(buildingUpdates), taskKey, null);
         logger.atFine().log("CREATE %s %s", tmp, updateLog());
