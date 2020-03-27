@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28b002ca_81ab3d4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-27T10:56:53Z",
+      "side": 1,
+      "message": "If this is mentioned in the commit message then please also describe why do we want to store it in a source control. Otherwise,\nremove this part from the commit message.",
+      "range": {
+        "startLine": 12,
+        "startChar": 15,
+        "endLine": 13,
+        "endChar": 66
+      },
+      "revId": "a0526f74c49887bf639bf7daa47a3bf58214053a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "685d7742_b387fda9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-27T10:56:53Z",
+      "side": 1,
+      "message": "Usage of this. is not necessary here. Either remove it, or use also for other instance\nmembers (config)",
+      "revId": "a0526f74c49887bf639bf7daa47a3bf58214053a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d59fe51e_2722dece",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-27T10:56:53Z",
+      "side": 1,
+      "message": "This will walk with depth infinity which means that all subdirectories of the replication.remotes.d will also be walked into and any *.config file found will be\nconsidered as a remote. If this is intentional then it has to be documented.\nIf this is not intentional then limit the walk depth to one.",
+      "range": {
+        "startLine": 49,
+        "startChar": 36,
+        "endLine": 49,
+        "endChar": 40
+      },
+      "revId": "a0526f74c49887bf639bf7daa47a3bf58214053a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4352ba6d_481fb469",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-27T10:56:53Z",
+      "side": 1,
+      "message": "Move these two lines outside of the try-with-resources block.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 49
+      },
+      "revId": "a0526f74c49887bf639bf7daa47a3bf58214053a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18e00061_3c6ba7cd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-27T10:56:53Z",
+      "side": 1,
+      "message": "removeRemotesFromConfig\n\nbecause the parameter is not a ReplicaitonConfig but just a config\n\nEven better name:\n\n  removeRemotes\n\nBecause form the parameter we see the type and don\u0027t need to repeat it in the method name.",
+      "range": {
+        "startLine": 69,
+        "startChar": 15,
+        "endLine": 69,
+        "endChar": 49
+      },
+      "revId": "a0526f74c49887bf639bf7daa47a3bf58214053a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a603bd28_682b1465",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-27T10:56:53Z",
+      "side": 1,
+      "message": "isValid\n\nBoolean methods are typically named as is... or has...",
+      "range": {
+        "startLine": 93,
+        "startChar": 18,
+        "endLine": 93,
+        "endChar": 38
+      },
+      "revId": "a0526f74c49887bf639bf7daa47a3bf58214053a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eb9fd72_fc8f4658",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-27T10:56:53Z",
+      "side": 1,
+      "message": "must",
+      "range": {
+        "startLine": 96,
+        "startChar": 52,
+        "endLine": 96,
+        "endChar": 55
+      },
+      "revId": "a0526f74c49887bf639bf7daa47a3bf58214053a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c33852d_119ba66f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-27T10:56:53Z",
+      "side": 1,
+      "message": "only one",
+      "range": {
+        "startLine": 96,
+        "startChar": 64,
+        "endLine": 96,
+        "endChar": 68
+      },
+      "revId": "a0526f74c49887bf639bf7daa47a3bf58214053a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2d8b2b6_8861f610",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-27T10:56:53Z",
+      "side": 1,
+      "message": "optional: It is the caller who decides to ignore it, not this method. I propose that we here\njust log that the config is invalid and the reason why it is invalid.",
+      "range": {
+        "startLine": 96,
+        "startChar": 85,
+        "endLine": 96,
+        "endChar": 110
+      },
+      "revId": "a0526f74c49887bf639bf7daa47a3bf58214053a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
