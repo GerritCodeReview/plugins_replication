@@ -22,6 +22,30 @@
       "revId": "e63f79e972de09f0753d05027b2ce85d691fc9c6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21689320_537da3f5",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-03-27T22:05:13Z",
+      "side": 1,
+      "message": "Whatever directory ends up being used, it should probably be added as a convention here first to get \"buy-in\" from core: https://gerrit-review.googlesource.com/Documentation/dev-plugins.html#simple-configuration",
+      "parentUuid": "8b0811d0_6658aa27",
+      "range": {
+        "startLine": 435,
+        "startChar": 11,
+        "endLine": 435,
+        "endChar": 22
+      },
+      "revId": "e63f79e972de09f0753d05027b2ce85d691fc9c6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
