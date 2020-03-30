@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "a1e2f8a8_6b195364",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-30T13:56:17Z",
+      "side": 1,
+      "message": "I meant usage of \"this.\" to reference the instance member variable, not the usage of the variable itself",
+      "parentUuid": "4006c18c_7e05a5fa",
+      "revId": "a0526f74c49887bf639bf7daa47a3bf58214053a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d59fe51e_2722dece",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 16
