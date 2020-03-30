@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8784f3f2_2633b714",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-03-30T18:12:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0849250a_cac88907",
+      "range": {
+        "startLine": 7,
+        "startChar": 25,
+        "endLine": 7,
+        "endChar": 37
+      },
+      "revId": "a48cf30f552b5cc91cb3eb369ea81eaae2dd3628",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4418ba6f_033a69c5",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "5eeccce4_4f8b2855",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-03-30T18:12:40Z",
+      "side": 1,
+      "message": "It actually was the scheduling based on jstacks I was taking during it.",
+      "parentUuid": "4418ba6f_033a69c5",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "a48cf30f552b5cc91cb3eb369ea81eaae2dd3628",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75f36ba6_bd7a4773",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2020-03-30T10:28:29Z",
       "side": 1,
       "message": "The default value of execution.defaultThreadPoolSize is 2 which is the size of the WorkQueue.getDefaultQueue(). Before your change the PushAll tasks were processed with\n(default) two threads and now they will be processed with one thread.\nIs this intentional?",
+      "range": {
+        "startLine": 59,
+        "startChar": 30,
+        "endLine": 59,
+        "endChar": 31
+      },
+      "revId": "a48cf30f552b5cc91cb3eb369ea81eaae2dd3628",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "410cc593_2cdc02bb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-03-30T18:12:40Z",
+      "side": 1,
+      "message": "Hmm, no, not quite. We\u0027re actually running this code on 2.7, which 1) doesn\u0027t have a configurable default thread pool size, and 2) only has 1 thread in the default pool.\n\nImagining if we were running on a modern Gerrit, I think we would probably just configure the default thread pool size to be larger. @Martin, do you think we still need this change if we had that?",
+      "parentUuid": "75f36ba6_bd7a4773",
       "range": {
         "startLine": 59,
         "startChar": 30,
