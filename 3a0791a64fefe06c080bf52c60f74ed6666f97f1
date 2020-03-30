@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d76fddfe_b573b1f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-30T14:00:57Z",
+      "side": 1,
+      "message": "OK, but this is also possible with the traditional monolithic replication.config. We do that, just we do not store it in the replication plugin repository but in a different Git repository\nwhich is fetched and checked out every 5 minutes on the production server. We also utilize Gerrit to review all replication.config changes.\n\nI propose to just mention the simplification of diff computation\nand leave other parts out :-)",
+      "revId": "3a0791a64fefe06c080bf52c60f74ed6666f97f1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
