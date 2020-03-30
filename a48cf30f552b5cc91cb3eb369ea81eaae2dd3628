@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0849250a_cac88907",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-30T10:28:29Z",
+      "side": 1,
+      "message": "\"thread pool\" or just \"queue\"\n\n\"thread queue\" is not a correct term.\nThere is a thread pool which operates on a queue of tasks.",
+      "range": {
+        "startLine": 7,
+        "startChar": 25,
+        "endLine": 7,
+        "endChar": 37
+      },
+      "revId": "a48cf30f552b5cc91cb3eb369ea81eaae2dd3628",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4418ba6f_033a69c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-30T10:28:29Z",
+      "side": 1,
+      "message": "Is it really scheduling that takes that time?\nOr is it running the push-all task which takes that time?",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "a48cf30f552b5cc91cb3eb369ea81eaae2dd3628",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75f36ba6_bd7a4773",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-30T10:28:29Z",
+      "side": 1,
+      "message": "The default value of execution.defaultThreadPoolSize is 2 which is the size of the WorkQueue.getDefaultQueue(). Before your change the PushAll tasks were processed with\n(default) two threads and now they will be processed with one thread.\nIs this intentional?",
+      "range": {
+        "startLine": 59,
+        "startChar": 30,
+        "endLine": 59,
+        "endChar": 31
+      },
+      "revId": "a48cf30f552b5cc91cb3eb369ea81eaae2dd3628",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
