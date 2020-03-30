@@ -120,6 +120,24 @@
     },
     {
       "key": {
+        "uuid": "83fd9830_5bcee460",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-30T14:28:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d610ac33_a7f95055",
+      "revId": "a0526f74c49887bf639bf7daa47a3bf58214053a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d59fe51e_2722dece",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 16
