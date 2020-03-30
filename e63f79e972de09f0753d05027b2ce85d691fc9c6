@@ -46,6 +46,30 @@
       "revId": "e63f79e972de09f0753d05027b2ce85d691fc9c6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bb3e089_46b5fbd4",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-03-30T13:56:54Z",
+      "side": 1,
+      "message": "replication.remotes.d was proposed by the community but both names are fine for me. I will change it to etc/replication",
+      "parentUuid": "21689320_537da3f5",
+      "range": {
+        "startLine": 435,
+        "startChar": 11,
+        "endLine": 435,
+        "endChar": 22
+      },
+      "revId": "e63f79e972de09f0753d05027b2ce85d691fc9c6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
