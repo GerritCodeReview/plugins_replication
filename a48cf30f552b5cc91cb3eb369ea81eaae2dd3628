@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "da8fa945_ba5592ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-31T07:45:55Z",
+      "side": 1,
+      "message": "I would still like to understand how scheduling (and by that\nI mean putting a task in the queue) can take 7 minutes. Can you\nshare more details from your findings?",
+      "parentUuid": "5eeccce4_4f8b2855",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "a48cf30f552b5cc91cb3eb369ea81eaae2dd3628",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75f36ba6_bd7a4773",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
         "patchSetId": 1
@@ -131,6 +155,30 @@
       "side": 1,
       "message": "Hmm, no, not quite. We\u0027re actually running this code on 2.7, which 1) doesn\u0027t have a configurable default thread pool size, and 2) only has 1 thread in the default pool.\n\nImagining if we were running on a modern Gerrit, I think we would probably just configure the default thread pool size to be larger. @Martin, do you think we still need this change if we had that?",
       "parentUuid": "75f36ba6_bd7a4773",
+      "range": {
+        "startLine": 59,
+        "startChar": 30,
+        "endLine": 59,
+        "endChar": 31
+      },
+      "revId": "a48cf30f552b5cc91cb3eb369ea81eaae2dd3628",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72bdf2bc_5cba7eb7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-31T07:45:55Z",
+      "side": 1,
+      "message": "\u003e Hmm, no, not quite. We\u0027re actually running this code on 2.7, which 1) doesn\u0027t have a configurable default thread pool size, and 2) only has 1 thread in the default pool.\n\nI don\u0027t get this argument. This change is uploaded for stable-2.16 and, I guess,\nall reviewers will be reviewing it with Gerrit 2.16 as the reference.\n\n\u003e \n\u003e Imagining if we were running on a modern Gerrit, I think we would probably just configure the default thread pool size to be larger. @Martin, do you think we still need this change if we had that?",
+      "parentUuid": "410cc593_2cdc02bb",
       "range": {
         "startLine": 59,
         "startChar": 30,
