@@ -236,6 +236,30 @@
       "revId": "a48cf30f552b5cc91cb3eb369ea81eaae2dd3628",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d9f0fe1_234fe098",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-03-31T18:39:28Z",
+      "side": 1,
+      "message": "Perhaps it would make sense to additionally allow admins define the name of the pool to put replication tasks in. This would allow admins to chose a private pool if desired, possibly be defining a pool that they plan to share with some tasks from other plugins even.",
+      "parentUuid": "4136e717_9f489784",
+      "range": {
+        "startLine": 59,
+        "startChar": 30,
+        "endLine": 59,
+        "endChar": 31
+      },
+      "revId": "a48cf30f552b5cc91cb3eb369ea81eaae2dd3628",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
