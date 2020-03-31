@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "be630d6e_bb217d69",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-03-31T18:24:50Z",
+      "side": 1,
+      "message": "It is the push-all task that can take that long, but not to complete the push-all replication, but to put all ~100K task,s that are push all tasks, into the queue. Putting these tasks into the queue requires writing all these tasks to separate tmp files on NFS and then moving them into place one at a time.",
+      "parentUuid": "da8fa945_ba5592ad",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "a48cf30f552b5cc91cb3eb369ea81eaae2dd3628",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75f36ba6_bd7a4773",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
         "patchSetId": 1
