@@ -212,6 +212,30 @@
       "revId": "a48cf30f552b5cc91cb3eb369ea81eaae2dd3628",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4136e717_9f489784",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-03-31T18:35:47Z",
+      "side": 1,
+      "message": "I don\u0027t think the size of the pool is relevant. I think that what types of tasks are in the pool is what is relevant. I would not want a task that such as replication that will not be lost on restart ever blocking tasks such as running hooks or sending emails that are expected to complete in a more timely manner and would be lost if the server restarts. I would actually recommend that Gerrit have different \"default\" pools for such tasks so that they can still be shared by similar tasks, but be in different pools from the other \"types\" of tasks. I would suggest a \"smallTask\" pool and a \"largeTask\" pool at least, possibly along with \"small/largeRecurringTask\" pools.",
+      "parentUuid": "72bdf2bc_5cba7eb7",
+      "range": {
+        "startLine": 59,
+        "startChar": 30,
+        "endLine": 59,
+        "endChar": 31
+      },
+      "revId": "a48cf30f552b5cc91cb3eb369ea81eaae2dd3628",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
