@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8fc3fb0b_e2ba7d49",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-31T08:31:49Z",
+      "side": 1,
+      "message": "This is a more complex way than necessary to remove non-loadable configs which are here\nmanifested as empty Optional. Simplify by utilizing the Java Stream API:\n\n  .map(this::loadConfig)\n  .filter(Optional::isPresent)\n  .map(Optional::get)",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 16
+      },
+      "revId": "d32655ed640313cc2861ba5fada7bf57f7417ae3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e49de8f4_f7fbc918",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-03-31T08:31:49Z",
+      "side": 1,
+      "message": "I am not sure this is correct. According to [1] the last modified timestamp of a directory\ndoesn\u0027t change when a file inside that directory changes. \n\n[1] https://superuser.com/a/1039029",
+      "revId": "d32655ed640313cc2861ba5fada7bf57f7417ae3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
