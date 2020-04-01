@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0617bc33_aed6d996",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-04-01T11:25:28Z",
+      "side": 1,
+      "message": "When loading config (loadConfig method) we log an error in the case of an exception,\nignore that config and continue loading the next one.\n\nHere, we stop on the first exception.\n\nI don\u0027t know which style is better but we should be consistent in how do we handle errors\nwhen accessing config files.",
+      "revId": "d7a362c6cc443af08b5d9d324b410df32dfa559f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d1b9e2a6_af6f9d6f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 19
