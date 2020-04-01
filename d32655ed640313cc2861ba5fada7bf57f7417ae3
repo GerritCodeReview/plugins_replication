@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cd073150_a909d815",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-04-01T10:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fc3fb0b_e2ba7d49",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 16
+      },
+      "revId": "d32655ed640313cc2861ba5fada7bf57f7417ae3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e49de8f4_f7fbc918",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 18
@@ -39,6 +63,24 @@
       "revId": "d32655ed640313cc2861ba5fada7bf57f7417ae3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a486afe6_6a9cd297",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-04-01T10:15:01Z",
+      "side": 1,
+      "message": "I\u0027ve tested that code on linux based system(Ubuntu 18.04) and it was working. But you are right let\u0027s make sure that it works everywhere. I\u0027ve modified the code to check `replication` directory(in case we removed some file) and all individual files. Tests are added",
+      "parentUuid": "e49de8f4_f7fbc918",
+      "revId": "d32655ed640313cc2861ba5fada7bf57f7417ae3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
