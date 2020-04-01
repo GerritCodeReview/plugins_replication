@@ -81,6 +81,24 @@
       "revId": "d32655ed640313cc2861ba5fada7bf57f7417ae3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4524fd7_00ed6657",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-01T10:49:38Z",
+      "side": 1,
+      "message": "JGit has the same issue and the same logic for checking the up-to-date status of a file/directory. Can we possibly reuse it here and avoid reinventing it?\n\nAlso, depending on the \u0027core.trustfolderstat\u0027, the stat of the folder could be trusted or not, depending on the underlying filesystem.",
+      "parentUuid": "a486afe6_6a9cd297",
+      "revId": "d32655ed640313cc2861ba5fada7bf57f7417ae3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }

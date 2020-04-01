@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1b9e2a6_af6f9d6f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-01T10:49:38Z",
+      "side": 1,
+      "message": "Can we look at the way JGit does and use the same logic?\nIt would be best so that the Gerrit admin has a unique place to say if the filesystem stats should be trusted or not for detecting changes on directories.",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 3
+      },
+      "revId": "d7a362c6cc443af08b5d9d324b410df32dfa559f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
