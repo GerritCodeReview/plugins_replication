@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3632cd73_56af1285",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-04-01T14:07:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0617bc33_aed6d996",
+      "revId": "d7a362c6cc443af08b5d9d324b410df32dfa559f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1b9e2a6_af6f9d6f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 19
@@ -39,6 +57,30 @@
       "revId": "d7a362c6cc443af08b5d9d324b410df32dfa559f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b7e4618_f625f98f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-04-01T14:07:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1b9e2a6_af6f9d6f",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 3
+      },
+      "revId": "d7a362c6cc443af08b5d9d324b410df32dfa559f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
