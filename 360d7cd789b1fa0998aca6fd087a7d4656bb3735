@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18c33a15_89244023",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfigTest.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-02T21:06:26Z",
+      "side": 1,
+      "message": "This fails locally for my (MacOS) with the following error:\ncom.google.common.io.InsecureRecursiveDeleteException: /private/var/tmp/_bazel_lucamilanesio/05146e5884bb386b6d372310d769d784/sandbox/darwin-sandbox/163/execroot/gerrit/_tmp/0acd761e872ec47bd792b1167aa19dfc/site3222765744805607009/etc/replication: unable to guarantee security of recursive delete\n\nPlease note that the Zuul CI verifications do not execute any test at the moment, so it is best to manually verify it before merging.\n\n@Marcin does it work for you?",
+      "range": {
+        "startLine": 275,
+        "startChar": 4,
+        "endLine": 275,
+        "endChar": 31
+      },
+      "revId": "360d7cd789b1fa0998aca6fd087a7d4656bb3735",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
