@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "d99edc13_ff808dc3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-04-02T14:27:13Z",
+      "side": 1,
+      "message": "\u003e Another option is to try to calculate hash from all config files and serve that as a version. WDYT?\n\nI would prefer that solution and thus avoid any issues and corner cases with using timestamps.",
+      "parentUuid": "a10578f7_4e35a970",
+      "range": {
+        "startLine": 155,
+        "startChar": 12,
+        "endLine": 155,
+        "endChar": 56
+      },
+      "revId": "d9f19f78ef53ac0b2d15d37068c247c4516ea2a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f1a4e8d2_0c901814",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 20
