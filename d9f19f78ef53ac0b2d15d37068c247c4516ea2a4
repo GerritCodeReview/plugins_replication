@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "00c3bf7b_fe53aa91",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-04-02T09:48:54Z",
+      "side": 1,
+      "message": "Note that ReplicationConfig.getVersion() returns String and, at least at the interface level,\nthere is nothing that guarantees that this String can be parsed as a number. Further, the\nversion strings are not necessarily ordered. We detect that version changed when the returned\nversion string is different from a previously saved version string. There is no ordering.\n\nTherefore, I believe we shouldn\u0027t convert replicationConfig.getVersion() into Long here.\nInstead, simply concatenate replicationConfig.getVersion with the version of the directory\ngiven as a string.",
+      "range": {
+        "startLine": 155,
+        "startChar": 12,
+        "endLine": 155,
+        "endChar": 56
+      },
+      "revId": "d9f19f78ef53ac0b2d15d37068c247c4516ea2a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1a4e8d2_0c901814",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-04-02T09:48:54Z",
+      "side": 1,
+      "message": "Configs\n\nto be consistent with the name of the corresponding field: remoteConfigsDirSnapshot",
+      "range": {
+        "startLine": 163,
+        "startChar": 24,
+        "endLine": 163,
+        "endChar": 35
+      },
+      "revId": "d9f19f78ef53ac0b2d15d37068c247c4516ea2a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aa952335_868e4004",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 20
