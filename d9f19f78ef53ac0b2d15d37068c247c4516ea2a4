@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "a10578f7_4e35a970",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-04-02T13:45:11Z",
+      "side": 1,
+      "message": "Unfortunately looks like we cannot use lastModification as a version. According to Matthias comment lastModification time can be the same and still FileSnapshot.isModified will be true(it\u0027s calculated on file size, file key and lastModified). What I want to suggest is to replace ReplicationConfig.getVersion method with ReplicationConfig.isModified. This will solve another issue we currently have. What is the config version if we remove a file? It is the latest lastModification time from all files? But then if someone remove a file which is not the newest one version will not change. Or maybe it\u0027s the lastModification of a deleted file? But then after reloading the config version will change again so we will reload twice(unacceptable).\n\nThe only issue with ReplicationConfig.isModified is that currently we are keeping failed config version so we are not reloading config if we still see version which failed during loading.\n\nAnother option is to try to calculate hash from all config files and serve that as a version. WDYT?",
+      "parentUuid": "17711c87_6dda5c98",
+      "range": {
+        "startLine": 155,
+        "startChar": 12,
+        "endLine": 155,
+        "endChar": 56
+      },
+      "revId": "d9f19f78ef53ac0b2d15d37068c247c4516ea2a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f1a4e8d2_0c901814",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 20
@@ -130,6 +154,30 @@
       "writtenOn": "2020-04-02T12:24:47Z",
       "side": 1,
       "message": "This truncates fractions of milliseconds, how much depends on the OS, filesystem\nand Java version. Hence don\u0027t do this but use type Instance.\n\nJGit measures the actual timestamp resolution in FS.FileStoreAttributes.\nIn order to care for racy timestamp comparison you should use FileSnapshot.isModified()\nin order in order to safely detect if the file was modified. It knows how to\nhandle racy timestamps (see below) and also which limitations different Java versions\nhave when handling file timestamps. This method not only looks at the lastModified (mtime)\nbut also at other file attributes like inode etc in order to detect modification.\nSo do not limit the version comparison to the timestamp but let FileSnapshot check\nif the directory changed (though see the caveat below).\n\nNote that, if the time (wall clock) when you look at the file again, is too close to the\nlastModified timestamp (less than timestamp resolution) you can\u0027t tell if it was\nmodified by looking at the timestamp so it might be modified or unmodified (racily clean).\nThis is also known as the racy git problem [1]. To be sure wait longer than the\ntimestamp resolution and retry, if FileSnapshot still says it\u0027s unmodified you\ncan rely on that. Though if you don\u0027t place an edit lock on the file while doing so\n1 ns later another thread could have modified it again so there is still a (small)\nchange for a race. In JGit\u0027s use of this implementation this is not a problem\nsince most objects in git are immutable and the mutable objects (e.g. refs/heads/master)\nare always modified by creating a lock file (refs/heads/master.lock),\nwriting the new content into the lock file and then atomically renaming it\nto the actual file (e.g. renaming refs/heads/master.lock to refs/heads/master).\n\nOn a directory locking isn\u0027t possible. And the directory lastModified timestamp\ncan only detect if the list of contained files changed (file added,removed or renamed) but it cannot detect if content of\nany of the contained files was modified which only changes lastModified of\nthe modified file but not the lastModified of the parent directory. I am not\nsure which type of modifications you are looking for.\n\nIf you also need to detect file modifications in that directory you may consider to\nstore these config files in a git repository and read versions directly from versions\nin git (not from the filesystem). Then (j)git can tell you if a file changed and\nyou would also get diff between versions for free.\n\n[1] https://crypto.stanford.edu/~blynn/gg/race.html",
+      "range": {
+        "startLine": 168,
+        "startChar": 57,
+        "endLine": 168,
+        "endChar": 72
+      },
+      "revId": "d9f19f78ef53ac0b2d15d37068c247c4516ea2a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5964537_c8bb4c81",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-04-02T13:45:11Z",
+      "side": 1,
+      "message": "Hi Matthias, thank you for you detailed explanation it helps a lot to understand how it should be done. I\u0027ve already started working on patch set which will use isModified instead of lastModified. I\u0027ve looked at the implementation and I figure out that isModified is calculated based on file size, file key and last modified so last modified cannot be used as a version because file can be different and the modification time will not change. I\u0027ve also noticed racy timestamps handling in FileSnapshot when I was writing unit tests for that code.\nAgain thank you very much for detailed explanation I will post new code for review shortly",
+      "parentUuid": "f6554ba9_a09105f3",
       "range": {
         "startLine": 168,
         "startChar": 57,
