@@ -22,6 +22,30 @@
       "revId": "27ad28ab03c5f8f0c23b7527afda0f6378beb447",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f921345_8f0209f7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-02T23:40:12Z",
+      "side": 1,
+      "message": "Right, then the only reliable solution is to calculate the SHA1 of all config files.",
+      "parentUuid": "1c538c94_f54e918a",
+      "range": {
+        "startLine": 165,
+        "startChar": 32,
+        "endLine": 165,
+        "endChar": 55
+      },
+      "revId": "27ad28ab03c5f8f0c23b7527afda0f6378beb447",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
