@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e62e14d_ccb9ee06",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-02T20:50:48Z",
+      "side": 1,
+      "message": "\u003e According to Matthias comment we can trust the folder stats only when files are immutable which is true for JGit\n\nTrue, point taken.",
+      "parentUuid": "0bfad8e2_18d08268",
+      "revId": "7fe90eed60ac7709eeffa8af8b90b50ada078227",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05f6bfce_2d3e5996",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 21
