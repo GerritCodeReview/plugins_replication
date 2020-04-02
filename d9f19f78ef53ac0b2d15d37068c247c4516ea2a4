@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa952335_868e4004",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-02T09:22:19Z",
+      "side": 1,
+      "message": "I don\u0027t believe this would always work: we should check as JGit does on the core.trustfolderstat and apply a similar logic.",
+      "range": {
+        "startLine": 164,
+        "startChar": 8,
+        "endLine": 164,
+        "endChar": 74
+      },
+      "revId": "d9f19f78ef53ac0b2d15d37068c247c4516ea2a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
