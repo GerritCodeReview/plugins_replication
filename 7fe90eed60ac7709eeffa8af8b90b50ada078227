@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1545d7aa_ed108786",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-02T19:21:27Z",
+      "side": 1,
+      "message": "This needs to be conditioned by JGit config \u0027core.trustfolderstat\u0027 \u003d\u003d false.\nIf we trust the folder stats, then having the snapshot of the directory should be good enough.",
+      "revId": "7fe90eed60ac7709eeffa8af8b90b50ada078227",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05f6bfce_2d3e5996",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-02T19:21:27Z",
+      "side": 1,
+      "message": "I guess here we would need also to filter only the configuration files, is that correct?\nSomething like:\n\n  .filter(f -\u003e f.getName().endsWith(\".config\"))",
+      "revId": "7fe90eed60ac7709eeffa8af8b90b50ada078227",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
