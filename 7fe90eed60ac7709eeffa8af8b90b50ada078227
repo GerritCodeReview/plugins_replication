@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "d5a5a5c8_848e8a8f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2020-04-02T23:31:34Z",
+      "side": 1,
+      "message": "JGit\u0027s core.trustfolderstat option can be set to false if you don\u0027t want to rely on timestamps\ne.g. on NFS were client caching may fudge timestamp comparisons if multiple machines each using\na different NFS client access the same repository accessed via NFS.",
+      "parentUuid": "4e62e14d_ccb9ee06",
+      "revId": "7fe90eed60ac7709eeffa8af8b90b50ada078227",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05f6bfce_2d3e5996",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 21
