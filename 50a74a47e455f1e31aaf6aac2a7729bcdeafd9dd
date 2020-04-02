@@ -426,6 +426,30 @@
     },
     {
       "key": {
+        "uuid": "4a24a30a_8ccbdb24",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DynamicReplicationFileBasedConfigs.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-04-02T18:32:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5465b1f1_4515519d",
+      "range": {
+        "startLine": 61,
+        "startChar": 28,
+        "endLine": 61,
+        "endChar": 43
+      },
+      "revId": "50a74a47e455f1e31aaf6aac2a7729bcdeafd9dd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a6853548_3c3df149",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 2
