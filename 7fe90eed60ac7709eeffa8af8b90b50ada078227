@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "a71389c3_93e1d061",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-02T23:37:59Z",
+      "side": 1,
+      "message": "In this case, Marcin never trusts the folder stats, because the files are mutable and thus also on local filesystem. the folder stats are the same even if the files inside have changed.",
+      "parentUuid": "d5a5a5c8_848e8a8f",
+      "revId": "7fe90eed60ac7709eeffa8af8b90b50ada078227",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05f6bfce_2d3e5996",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 21
