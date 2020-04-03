@@ -118,6 +118,30 @@
       "revId": "27ad28ab03c5f8f0c23b7527afda0f6378beb447",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcd5f75e_0efe1d4a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-04-03T10:24:12Z",
+      "side": 1,
+      "message": "\u003e If you are using FileBasedConfig most of this JGit external logic should be unnecessary since FileBasedConfig already uses FileSnapshot to detect modifications. See how FileRepository is using FileBasedConfig.isOutdated(). Doing the same for all of the configs you are considering here should correctly cover modifications of config files.\n\nUnfortunately we are not using FileBasedConfig we are building custom Config based on individual FileBasedConfigs in the constructor and we are not keeping FileBasedConfigs. We could keep them but I\u0027m not sure we will get much improvement, see my comment below.\n\n\u003e I don\u0027t think using hasher.putBoolean(fileSnapshot.isModified()) would cause any issues. And it should be faster than reading and hashing the content of all the config files with each polling.\n\nWe are not hashing the content we are hashing FileSnapshot.hasCode which is based on file attributes(size, file key, last modified) fileSnapshot.isModified() will not give us any performance improvement because to calculate if the file was modified it is reading file attributes as well. But to use it we have to keep FileSnapshot or FileBasedConfig for all config files(so extra memory footprint and we have to maintain it). Same for FileBasedConfig.isOutdated() is using fileSnapshot.isModified() so no performance improvement.\n\n\u003e and any changes in the overall list of config files (new config file, deleted config file, renamed config file) you can detect in the same way like ObjectDirectory.searchPacksAgain() detects new/deleted pack files.\n\nBut please have in mind that we are calculating version. If we have tustFolderStat to true and isModified on directory level return false we still have to check all files if we don\u0027t have file modification. If it\u0027s returning true we have to go over all files anyway to calculate new version which is based on all files. So in all cases we have to go over all individual files anyway.",
+      "parentUuid": "9a640c48_15121d66",
+      "range": {
+        "startLine": 165,
+        "startChar": 32,
+        "endLine": 165,
+        "endChar": 55
+      },
+      "revId": "27ad28ab03c5f8f0c23b7527afda0f6378beb447",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
