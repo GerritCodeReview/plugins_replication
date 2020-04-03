@@ -46,6 +46,30 @@
       "revId": "27ad28ab03c5f8f0c23b7527afda0f6378beb447",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fc7eae1_d880065f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-04-03T07:55:53Z",
+      "side": 1,
+      "message": "Let me summarise what racy condition is to make sure that I\u0027m understanding it correctly. \nUsual use case for FileSnapshot is that we are creating FileSnapshot.save(path) and during that operation we are storing lastModified time and lastRead time. Then code is calling isModified(path) to check if file was modified. During that operation we are checking if stored lastModifed \u003d\u003d current lastModified if that is true we are doing one more check if current lastModified - lastRead \u003c threshold(threashold is something like few milliseconds). If yes we have to assume that last read was done to recent so there could be a change which haven\u0027t updated lastModified time so to make sure that we will not miss the change we have to return true from isModified.\n\nThis makes perfectly sense for low latency code like JGit but we are checking if configs were modified every 30 seconds and I believe max what we can do is every second(I cannot imagine that someone will have to check configs that often). Config changes are not high throughput I cannot imagine more than few changes per minute.\n\nPlease have in mind that here we are not reloading configs here we are calculating version which is based on file attributes(we are using FileSnapshot to get those attributes) and we are comparing with previously calculated version. To be impacted by racy condition someone would have to change file twice in time under the threshold(lastModified will not change) and size would have to stay the same and file key as well. And this condition must happen during the file read while reloading the config. In any other case we will read version with two changes.\n\nPlease have in mind that reloading the replication config is a time and resources consuming operation, we have to stop replication for all destinations(all current replication tasks are queued) we have to replace configuration and restart. We should avoid reloading config if it is not necessary and in our case we are fine with reloading the config 30 seconds later.\n\nI was thinking about adding hasher.putBoolean(fileSnapshot.isModified()) but I\u0027m afraid that it will produce unstable version which will trigger unnecessary config reloads.",
+      "parentUuid": "8f921345_8f0209f7",
+      "range": {
+        "startLine": 165,
+        "startChar": 32,
+        "endLine": 165,
+        "endChar": 55
+      },
+      "revId": "27ad28ab03c5f8f0c23b7527afda0f6378beb447",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
