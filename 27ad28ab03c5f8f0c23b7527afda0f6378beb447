@@ -166,6 +166,30 @@
       "revId": "27ad28ab03c5f8f0c23b7527afda0f6378beb447",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "416ce880_87ff6923",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-04-03T12:04:41Z",
+      "side": 1,
+      "message": "I still believe that there is a value in using it. It\u0027s solving various files systems handling. It\u0027s handling exceptions as well.",
+      "parentUuid": "4da7feaf_a39d848e",
+      "range": {
+        "startLine": 165,
+        "startChar": 32,
+        "endLine": 165,
+        "endChar": 55
+      },
+      "revId": "27ad28ab03c5f8f0c23b7527afda0f6378beb447",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
