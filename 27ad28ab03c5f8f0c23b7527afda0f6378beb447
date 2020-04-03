@@ -70,6 +70,30 @@
       "revId": "27ad28ab03c5f8f0c23b7527afda0f6378beb447",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cbf6e30_c6803d91",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2020-04-03T09:48:41Z",
+      "side": 1,
+      "message": "I think when you are polling every 30 seconds (any interval larger than the threshold measured by JGit) you can safely ignore racy reads and I don\u0027t think using hasher.putBoolean(fileSnapshot.isModified()) would cause any issues. And it should be faster than reading and hashing the content of all the config files with each polling.\n\nI forgot to mention another approach already supported by FileBasedConfig:\n\nIf you are using FileBasedConfig most of this JGit external logic should be unnecessary since FileBasedConfig already uses FileSnapshot to detect modifications. See how FileRepository is using FileBasedConfig.isOutdated(). Doing the same for all of the configs you are considering here should correctly cover modifications of config files.",
+      "parentUuid": "5fc7eae1_d880065f",
+      "range": {
+        "startLine": 165,
+        "startChar": 32,
+        "endLine": 165,
+        "endChar": 55
+      },
+      "revId": "27ad28ab03c5f8f0c23b7527afda0f6378beb447",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
