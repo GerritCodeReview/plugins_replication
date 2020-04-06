@@ -55,18 +55,18 @@ public class FanoutReplicationConfig implements ReplicationConfig {
     try (Stream<Path> files = Files.list(remoteConfigsDirPath)) {
       files
           .filter(Files::isRegularFile)
-          .filter(this::isConfig)
-          .map(this::loadConfig)
+          .filter(FanoutReplicationConfig::isConfig)
+          .map(FanoutReplicationConfig::loadConfig)
           .filter(Optional::isPresent)
           .map(Optional::get)
-          .filter(this::isValid)
+          .filter(FanoutReplicationConfig::isValid)
           .forEach(cfg -> addRemoteConfig(cfg, config));
     } catch (IllegalStateException e) {
       throw new ConfigInvalidException(e.getMessage());
     }
   }
 
-  private void removeRemotes(Config config) {
+  private static void removeRemotes(Config config) {
     Set<String> remoteNames = config.getSubsections("remote");
     if (remoteNames.size() > 0) {
       logger.atSevere().log(
@@ -79,7 +79,7 @@ public class FanoutReplicationConfig implements ReplicationConfig {
     }
   }
 
-  private void addRemoteConfig(FileBasedConfig source, Config destination) {
+  private static void addRemoteConfig(FileBasedConfig source, Config destination) {
     String remoteName = getNameWithoutExtension(source.getFile().getName());
     for (String name : source.getNames("remote")) {
       destination.setStringList(
@@ -90,7 +90,7 @@ public class FanoutReplicationConfig implements ReplicationConfig {
     }
   }
 
-  private boolean isValid(Config cfg) {
+  private static boolean isValid(Config cfg) {
     if (cfg.getSections().size() != 1 || !cfg.getSections().contains("remote")) {
       logger.atSevere().log(
           "Remote replication configuration file %s must contain only one remote section.", cfg);
@@ -105,7 +105,7 @@ public class FanoutReplicationConfig implements ReplicationConfig {
     return true;
   }
 
-  private Optional<FileBasedConfig> loadConfig(Path path) {
+  private static Optional<FileBasedConfig> loadConfig(Path path) {
     FileBasedConfig cfg = new FileBasedConfig(path.toFile(), FS.DETECTED);
     try {
       cfg.load();
@@ -117,7 +117,7 @@ public class FanoutReplicationConfig implements ReplicationConfig {
     return Optional.of(cfg);
   }
 
-  private boolean isConfig(Path p) {
+  private static boolean isConfig(Path p) {
     return p.toString().endsWith(".config");
   }
 
@@ -158,7 +158,7 @@ public class FanoutReplicationConfig implements ReplicationConfig {
     try (Stream<Path> files = Files.list(remoteConfigsDirPath)) {
       files
           .filter(Files::isRegularFile)
-          .filter(this::isConfig)
+          .filter(FanoutReplicationConfig::isConfig)
           .sorted()
           .map(Path::toFile)
           .map(FileSnapshot::save)
