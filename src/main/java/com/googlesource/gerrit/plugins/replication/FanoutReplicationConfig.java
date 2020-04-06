@@ -53,7 +53,7 @@ public class FanoutReplicationConfig implements ReplicationConfig {
     config = replicationConfig.getConfig();
     removeRemotes(config);
 
-    try (Stream<Path> files = Files.walk(remoteConfigsDirPath, 1)) {
+    try (Stream<Path> files = Files.list(remoteConfigsDirPath)) {
       files
           .filter(Files::isRegularFile)
           .filter(path -> getFileExtension(path.toString()).equals("config"))
