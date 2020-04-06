@@ -56,7 +56,7 @@ public class FanoutReplicationConfig implements ReplicationConfig {
     try (Stream<Path> files = Files.list(remoteConfigsDirPath)) {
       files
           .filter(Files::isRegularFile)
-          .filter(path -> getFileExtension(path.toString()).equals("config"))
+          .filter(this::isConfig)
           .map(this::loadConfig)
           .filter(Optional::isPresent)
           .map(Optional::get)
@@ -118,6 +118,10 @@ public class FanoutReplicationConfig implements ReplicationConfig {
     return Optional.of(cfg);
   }
 
+  private boolean isConfig(Path p) {
+    return p.toString().endsWith(".config");
+  }
+
   @Override
   public boolean isReplicateAllOnPluginStart() {
     return replicationConfig.isReplicateAllOnPluginStart();
@@ -155,7 +159,7 @@ public class FanoutReplicationConfig implements ReplicationConfig {
     try (Stream<Path> files = Files.list(remoteConfigsDirPath)) {
       files
           .filter(Files::isRegularFile)
-          .filter(path -> getFileExtension(path.toString()).equals("config"))
+          .filter(this::isConfig)
           .sorted()
           .map(Path::toFile)
           .map(FileSnapshot::save)
