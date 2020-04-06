@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "7b2a9155_6d847949",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-06T11:13:08Z",
+      "side": 1,
+      "message": "\u0027this\u0027 can be replaced with \u0027FanoutReplicationConfig\u0027 when the isConfig method is made static",
+      "range": {
+        "startLine": 58,
+        "startChar": 18,
+        "endLine": 58,
+        "endChar": 22
+      },
+      "revId": "befa5f3a89ce8ebca2effdfe21c66e4e98a0f020",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8aef7417_12ec1e90",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-06T11:13:08Z",
+      "side": 1,
+      "message": "This can be a static method",
+      "range": {
+        "startLine": 120,
+        "startChar": 2,
+        "endLine": 120,
+        "endChar": 17
+      },
+      "revId": "befa5f3a89ce8ebca2effdfe21c66e4e98a0f020",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f81e2432_0c8a533c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
         "patchSetId": 2
@@ -18,6 +64,53 @@
         "startChar": 0,
         "endLine": 123,
         "endChar": 0
+      },
+      "revId": "befa5f3a89ce8ebca2effdfe21c66e4e98a0f020",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86da6fbf_74ac2d19",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-06T11:13:08Z",
+      "side": 1,
+      "message": "Yes, but here there are several private methods already at the top, so putting it here makes it consistent with the existing code. It\u0027s out of the scope of this change to move them all.",
+      "parentUuid": "f81e2432_0c8a533c",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 0
+      },
+      "revId": "befa5f3a89ce8ebca2effdfe21c66e4e98a0f020",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4468e35_73359774",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-06T11:13:08Z",
+      "side": 1,
+      "message": "\u0027this\u0027 can be replaced with \u0027FanoutReplicationConfig\u0027 when the isConfig method is made static",
+      "range": {
+        "startLine": 161,
+        "startChar": 18,
+        "endLine": 161,
+        "endChar": 22
       },
       "revId": "befa5f3a89ce8ebca2effdfe21c66e4e98a0f020",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
