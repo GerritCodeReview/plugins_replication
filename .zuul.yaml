@@ -1,0 +1,6 @@
+- project:
+    check:
+      jobs:
+        - gerrit-plugin-build:
+            vars:
+              bazelisk_test_targets: "plugins/replication/..."
