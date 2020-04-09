@@ -71,6 +71,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -95,7 +97,9 @@ public class Destination {
 
   private final ReplicationStateListener stateLog;
   private final Object stateLock = new Object();
-  private final Map<URIish, PushOne> pending = new HashMap<>();
+  private final ConcurrentMap<URIish, PushOne> pending =
+      new ConcurrentHashMap<>(); // writes are covered by the stateLock, but some reads are still
+                                 // allowed without the lock
   private final Map<URIish, PushOne> inFlight = new HashMap<>();
   private final PushOne.Factory opFactory;
   private final DeleteProjectTask.Factory deleteProjectFactory;
