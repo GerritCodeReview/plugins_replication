@@ -85,6 +85,8 @@ public class FanoutReplicationConfigTest extends AbstractConfigTest {
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(2);
 
+    destinations.sort(new DestinationComparator().reversed());
+
     assertThatIsDestination(destinations.get(0), remoteName1, remoteUrl1);
     assertThatIsDestination(destinations.get(1), remoteName2, remoteUrl2);
   }

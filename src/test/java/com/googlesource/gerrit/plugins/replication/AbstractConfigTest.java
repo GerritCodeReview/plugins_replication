@@ -29,6 +29,7 @@ import com.google.inject.Module;
 import com.google.inject.util.Providers;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.eclipse.jgit.errors.ConfigInvalidException;
@@ -140,5 +141,12 @@ public abstract class AbstractConfigTest {
 
   protected ReplicationConfig newReplicationFileBasedConfig() {
     return new ReplicationFileBasedConfig(sitePaths, pluginDataPath);
+  }
+
+  static class DestinationComparator implements Comparator<Destination> {
+    @Override
+    public int compare(Destination o1, Destination o2) {
+      return o1.getRemoteConfigName().compareTo(o2.getRemoteConfigName());
+    }
   }
 }
