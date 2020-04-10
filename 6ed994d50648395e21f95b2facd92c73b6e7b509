@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89aeee37_3728cc7b",
+        "filename": "src/main/resources/Documentation/cmd-convert.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-04-10T14:30:38Z",
+      "side": 1,
+      "message": "This feels strange as a SSH command. Wouldn\u0027t this be more of a cmd-line pgm thing? Would you really be running this on a live server?",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 27
+      },
+      "revId": "6ed994d50648395e21f95b2facd92c73b6e7b509",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
