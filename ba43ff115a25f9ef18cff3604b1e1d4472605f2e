@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "527f7507_5519544a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AbstractConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-10T14:02:41Z",
+      "side": 1,
+      "message": "If you define:\n\n  protected static DestinationComparator DESTINATION_BYNAME_COMPARATOR \u003d new DestinationComparator();\n\nThen you don\u0027t have to create a new instance in the tests.",
+      "revId": "ba43ff115a25f9ef18cff3604b1e1d4472605f2e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db8f24ae_ce740bb3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-10T14:02:41Z",
+      "side": 1,
+      "message": "call this one 1_foo",
+      "range": {
+        "startLine": 36,
+        "startChar": 24,
+        "endLine": 36,
+        "endChar": 27
+      },
+      "revId": "ba43ff115a25f9ef18cff3604b1e1d4472605f2e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9156eb01_42bc666d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-10T14:02:41Z",
+      "side": 1,
+      "message": "call this one 2_bar",
+      "range": {
+        "startLine": 38,
+        "startChar": 24,
+        "endLine": 38,
+        "endChar": 27
+      },
+      "revId": "ba43ff115a25f9ef18cff3604b1e1d4472605f2e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbf89a6e_81b18da5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-10T14:02:41Z",
+      "side": 1,
+      "message": "You don\u0027t need to reverse anything, if remoteName1 and remoteName2 are already lexicographically ordered.",
+      "range": {
+        "startLine": 88,
+        "startChar": 49,
+        "endLine": 88,
+        "endChar": 60
+      },
+      "revId": "ba43ff115a25f9ef18cff3604b1e1d4472605f2e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "634f0de3_27bd5785",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-10T14:02:41Z",
+      "side": 1,
+      "message": "DESTINATION_BYNAME_COMPARATOR",
+      "range": {
+        "startLine": 88,
+        "startChar": 22,
+        "endLine": 88,
+        "endChar": 49
+      },
+      "revId": "ba43ff115a25f9ef18cff3604b1e1d4472605f2e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b4e7ff1_88eb3bb5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-10T14:02:41Z",
+      "side": 1,
+      "message": "You don\u0027t need to reverse anything, if remoteName1 and remoteName2 are already lexicographically ordered.",
+      "range": {
+        "startLine": 65,
+        "startChar": 49,
+        "endLine": 65,
+        "endChar": 60
+      },
+      "revId": "ba43ff115a25f9ef18cff3604b1e1d4472605f2e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01a51713_66814188",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-10T14:02:41Z",
+      "side": 1,
+      "message": "DESTINATION_BYNAME_COMPARATOR",
+      "range": {
+        "startLine": 65,
+        "startChar": 22,
+        "endLine": 65,
+        "endChar": 49
+      },
+      "revId": "ba43ff115a25f9ef18cff3604b1e1d4472605f2e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
