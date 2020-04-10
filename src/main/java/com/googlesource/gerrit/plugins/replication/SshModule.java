@@ -21,5 +21,6 @@ class SshModule extends PluginCommandModule {
   protected void configureCommands() {
     command(StartCommand.class);
     command(ListCommand.class);
+    command(ReplicationConfigConverterCommand.class);
   }
 }
