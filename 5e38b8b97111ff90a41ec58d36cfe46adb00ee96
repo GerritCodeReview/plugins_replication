@@ -45,6 +45,30 @@
       "revId": "5e38b8b97111ff90a41ec58d36cfe46adb00ee96",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d959c45_d2bbbdd6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigConverterCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-04-10T12:55:16Z",
+      "side": 1,
+      "message": "This is a optional parameter by default files are going to etc/replication directory\nMy idea was to allow to store remote configs somewhere aside to check if they are fine or review. Then admin can stop gerrit, manually move files to etc/replication and start gerrit. But again by default files will be stored in etc/replication so just gerrit restart is required",
+      "parentUuid": "8c5c090e_d008c402",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 24
+      },
+      "revId": "5e38b8b97111ff90a41ec58d36cfe46adb00ee96",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
