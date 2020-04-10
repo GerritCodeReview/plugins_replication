@@ -38,7 +38,7 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
   public void shouldAutoReloadReplicationConfig() throws Exception {
     FileBasedConfig fileConfig = newReplicationConfig();
     fileConfig.setBoolean("gerrit", null, "autoReload", true);
-    String remoteName1 = "foo";
+    String remoteName1 = "1_foo";
     String remoteUrl1 = "ssh://git@git.foo.com/${name}";
     fileConfig.setString("remote", remoteName1, "url", remoteUrl1);
     fileConfig.save();
@@ -55,7 +55,7 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
 
     TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
 
-    String remoteName2 = "bar";
+    String remoteName2 = "2_bar";
     String remoteUrl2 = "ssh://git@git.bar.com/${name}";
     fileConfig.setString("remote", remoteName2, "url", remoteUrl2);
     fileConfig.save();
