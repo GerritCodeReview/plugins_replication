@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bd2459e1_c9525f56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-04-13T22:40:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3dcbb4c_31abc2ba",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0c875faa_6c61ce00",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -71,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "6e46b0fd_d393025c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-04-13T22:40:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b1ba52e_aa9eb2a5",
+      "range": {
+        "startLine": 17,
+        "startChar": 11,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cabb76c_1ddaf20e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-04-13T22:40:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c875faa_6c61ce00",
+      "range": {
+        "startLine": 17,
+        "startChar": 53,
+        "endLine": 17,
+        "endChar": 71
+      },
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99c5c126_3d99b06e",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "c684d8c4_787edd69",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-04-13T22:40:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99c5c126_3d99b06e",
+      "range": {
+        "startLine": 21,
+        "startChar": 24,
+        "endLine": 21,
+        "endChar": 35
+      },
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0104bdf_46fd93d3",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -111,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "57c1b03d_9c178229",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-04-13T22:40:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0104bdf_46fd93d3",
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30d6038d_56cd8fa2",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -125,6 +239,24 @@
       "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d57d8dd3_7ddb3661",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-04-13T22:40:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30d6038d_56cd8fa2",
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -211,6 +343,30 @@
       "side": 1,
       "message": "Which files though? And why are those files important for replication updates?",
       "parentUuid": "527c4ca3_83d61885",
+      "range": {
+        "startLine": 477,
+        "startChar": 34,
+        "endLine": 477,
+        "endChar": 48
+      },
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdd56381_c6c1f92a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-04-13T22:40:07Z",
+      "side": 1,
+      "message": "Latest changes. So lets say some changes occurred on active instance. Before calculating delta we want to refresh NFS cache to make sure that we see latest version of those files, due to how NFS works (up till NFSv4) if we don\u0027t do we might be stacked with old version of those files meaning no delta.",
+      "parentUuid": "f07a6942_9a83864e",
       "range": {
         "startLine": 477,
         "startChar": 34,
