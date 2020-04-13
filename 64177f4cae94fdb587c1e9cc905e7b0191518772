@@ -2,6 +2,132 @@
   "comments": [
     {
       "key": {
+        "uuid": "a3dcbb4c_31abc2ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-13T17:24:36Z",
+      "side": 1,
+      "message": "information. A",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c875faa_6c61ce00",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-13T17:24:36Z",
+      "side": 1,
+      "message": "information. Then",
+      "range": {
+        "startLine": 17,
+        "startChar": 53,
+        "endLine": 17,
+        "endChar": 71
+      },
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b1ba52e_aa9eb2a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-13T17:24:36Z",
+      "side": 1,
+      "message": "may return",
+      "range": {
+        "startLine": 17,
+        "startChar": 11,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99c5c126_3d99b06e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-13T17:24:36Z",
+      "side": 1,
+      "message": "that this is doing an",
+      "range": {
+        "startLine": 21,
+        "startChar": 24,
+        "endLine": 21,
+        "endChar": 35
+      },
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0104bdf_46fd93d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-13T17:24:36Z",
+      "side": 1,
+      "message": "Add a sentence about this drawback being acceptable as a minor(?) performance degradation?",
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30d6038d_56cd8fa2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-13T17:24:36Z",
+      "side": 1,
+      "message": "Is this fix about consistency or actually fixing replication issues with/if NFS? -Would consider clarifying this last sentence, here in this commit message.",
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b8988cfa_12a91986",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 1
@@ -37,6 +163,30 @@
       "side": 1,
       "message": "To see latest version of the files on NFS.",
       "parentUuid": "b8988cfa_12a91986",
+      "range": {
+        "startLine": 477,
+        "startChar": 34,
+        "endLine": 477,
+        "endChar": 48
+      },
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "527c4ca3_83d61885",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-13T17:24:36Z",
+      "side": 1,
+      "message": "\u003e To see latest version of the files on NFS.\n\nClarify this in the comment? You can also extract this to a method with a significant name. That method can also have small javadoc if necessary, explaining its purpose briefly.",
+      "parentUuid": "8d20d56b_70a018a1",
       "range": {
         "startLine": 477,
         "startChar": 34,
