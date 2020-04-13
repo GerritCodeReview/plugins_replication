@@ -22,6 +22,30 @@
       "revId": "4e21fe8b7aba4219e89b83133d4bf69945f59cb2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63b8320c_bf01842e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-04-13T22:54:13Z",
+      "side": 1,
+      "message": "No, it appears that all the reads are covered by the stateLock.",
+      "parentUuid": "f2d201fe_e9e726ae",
+      "range": {
+        "startLine": 103,
+        "startChar": 2,
+        "endLine": 103,
+        "endChar": 64
+      },
+      "revId": "4e21fe8b7aba4219e89b83133d4bf69945f59cb2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
