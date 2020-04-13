@@ -474,6 +474,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       return Collections.emptyList();
     }
 
+    refreshNFSCache();
     Map<String, Ref> local = git.getAllRefs();
     boolean filter;
     PermissionBackend.ForProject forProject = permissionBackend.currentUser().project(projectName);
@@ -507,6 +508,13 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     return replicationPushFilter == null || replicationPushFilter.get() == null
         ? remoteUpdatesList
         : replicationPushFilter.get().filter(projectName.get(), remoteUpdatesList);
+  }
+
+  // Updating NFS caches to see latest version of files on NFS.
+  private void refreshNFSCache() {
+    if (git.getDirectory() != null) {
+      git.getDirectory().listFiles();
+    }
   }
 
   private List<RemoteRefUpdate> doPushAll(Transport tn, Map<String, Ref> local)
