@@ -474,6 +474,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       return Collections.emptyList();
     }
 
+    // Updating NFS caches to see latest changes.
+    if (git.getDirectory() != null) {
+      git.getDirectory().listFiles();
+    }
     Map<String, Ref> local = git.getAllRefs();
     boolean filter;
     PermissionBackend.ForProject forProject = permissionBackend.currentUser().project(projectName);
