@@ -424,6 +424,30 @@
       "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f57fe03_24e697ab",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-04-14T20:45:59Z",
+      "side": 1,
+      "message": "I would really like you to be more specific about \"the changes\". Git doesn\u0027t have changes.\n\nAlso, are you saying doing a ls on a top-level directory will refresh every subdirectory?\n\ni.e.\n\n ls -l repo.git/\n\nwill refresh\n\n repo.git/refs/heads/foo\n\n?",
+      "parentUuid": "80b9e1c3_8ac68654",
+      "range": {
+        "startLine": 477,
+        "startChar": 34,
+        "endLine": 477,
+        "endChar": 48
+      },
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
