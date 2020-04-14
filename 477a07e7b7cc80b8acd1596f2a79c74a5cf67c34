@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9e9523b_aeb4d963",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-04-14T22:20:14Z",
+      "side": 1,
+      "message": "When does this happen? Presumably replication is being triggered by an event updating a ref on this server and therefore this server already knows about the ref. What\u0027s the use case where this change aims to solve a problem?",
+      "revId": "477a07e7b7cc80b8acd1596f2a79c74a5cf67c34",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
