@@ -448,6 +448,30 @@
       "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3559f2e7_9472c095",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-04-14T22:07:50Z",
+      "side": 1,
+      "message": "I believe it does. It is a known issue in NFS (v4 and earlier). Solution for it was to call \"ls\" for it to refresh NFS caches.",
+      "parentUuid": "8f57fe03_24e697ab",
+      "range": {
+        "startLine": 477,
+        "startChar": 34,
+        "endLine": 477,
+        "endChar": 48
+      },
+      "revId": "64177f4cae94fdb587c1e9cc905e7b0191518772",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
