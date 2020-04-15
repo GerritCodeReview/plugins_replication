@@ -39,6 +39,30 @@
       "revId": "477a07e7b7cc80b8acd1596f2a79c74a5cf67c34",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0d61170_754b4abc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-04-15T00:09:26Z",
+      "side": 1,
+      "message": "Do it at the JGit layer: https://git.eclipse.org/r/#/c/123297/",
+      "parentUuid": "ffeb9577_4900f30f",
+      "range": {
+        "startLine": 515,
+        "startChar": 4,
+        "endLine": 518,
+        "endChar": 3
+      },
+      "revId": "477a07e7b7cc80b8acd1596f2a79c74a5cf67c34",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
