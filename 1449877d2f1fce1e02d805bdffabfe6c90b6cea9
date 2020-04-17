@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "607ce583_299a6399",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae73d9dc_6ab7ef1c",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec1871c5_37ed1359",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Constants.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2020-03-13T22:05:01Z",
       "side": 1,
       "message": "Worth it to introduce this class, just for one constant?",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ab2ed07_02b3a008",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Constants.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Not really. Was added based on a previous review comment but it is used in two different places which is duplication.Also could be useful going forward as this pattern is used in other plugins.",
+      "parentUuid": "ec1871c5_37ed1359",
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "faea0d17_a6d7c925",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05b63850_f8cb289a",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a3a3caa_d91cebec",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "2692bcaa_98666e37",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a3a3caa_d91cebec",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "231e3dc1_35c12329",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ServletCommandProcessing.java",
         "patchSetId": 2
@@ -81,6 +153,30 @@
       "writtenOn": "2020-03-13T22:05:01Z",
       "side": 1,
       "message": "This class is extending that one just for the sake of slightly customizing the writing of output. Such inheritance, along with introducing the WriteHelper class in PushResultProcessing, is an expensive design to maintain just for that minor customization benefit. How about replacing inheritance with composition, or another -simpler- design?",
+      "range": {
+        "startLine": 22,
+        "startChar": 38,
+        "endLine": 22,
+        "endChar": 66
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed65db5e_f1ea7a4d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ServletCommandProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "We could in a subsequence change. Did not want to make the change to invasive as it\u0027s a core plugin. The WriteHelper was done to reduce some of the duplication as a compromised based on a previous comment. Maybe we could discuss another scheme?",
+      "parentUuid": "231e3dc1_35c12329",
       "range": {
         "startLine": 22,
         "startChar": 38,
@@ -116,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "a76704ab_2d5c241a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ServletCommandProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cf842c7_33c33d3b",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 26
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea876bc_1057ef7f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ServletCommandProcessing.java",
         "patchSetId": 2
@@ -136,6 +256,30 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8aebc374_5fbdfa47",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ServletCommandProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ea876bc_1057ef7f",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 26,
+        "endChar": 9
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -162,6 +306,30 @@
     },
     {
       "key": {
+        "uuid": "26c4dacb_50cfd806",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommandMsg.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7596f7c_22d6e780",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 28
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d307e8ae_8431d50d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
         "patchSetId": 2
@@ -176,6 +344,24 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fa5e994_f5d328a4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d307e8ae_8431d50d",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -225,6 +411,54 @@
     },
     {
       "key": {
+        "uuid": "6a720fe6_32059e59",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b81b70e3_5b928f44",
+      "range": {
+        "startLine": 40,
+        "startChar": 92,
+        "endLine": 40,
+        "endChar": 95
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e10adc71_0bab2721",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c625436_b57c283c",
+      "range": {
+        "startLine": 40,
+        "startChar": 22,
+        "endLine": 40,
+        "endChar": 37
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e1c12cf_fcf2bba2",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
         "patchSetId": 2
@@ -245,6 +479,30 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c797fcd_b03e8956",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e1c12cf_fcf2bba2",
+      "range": {
+        "startLine": 46,
+        "startChar": 38,
+        "endLine": 46,
+        "endChar": 53
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -271,6 +529,30 @@
     },
     {
       "key": {
+        "uuid": "b3019c78_6b43cfd6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "473a16cf_e0196219",
+      "range": {
+        "startLine": 48,
+        "startChar": 11,
+        "endLine": 56,
+        "endChar": 19
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a33ebc4_f6ec1ecd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
         "patchSetId": 2
@@ -282,6 +564,30 @@
       "writtenOn": "2020-03-13T22:05:01Z",
       "side": 1,
       "message": "What to do if otherwise?",
+      "range": {
+        "startLine": 77,
+        "startChar": 6,
+        "endLine": 77,
+        "endChar": 27
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "050f9a84_51875a5b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Good question. It follows the same pattern as the ssh command. If wait is true and future is null it loops.",
+      "parentUuid": "4a33ebc4_f6ec1ecd",
       "range": {
         "startLine": 77,
         "startChar": 6,
@@ -311,6 +617,24 @@
     },
     {
       "key": {
+        "uuid": "b77f24b0_834b328a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7c046bc_229307ec",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7553645f_db919960",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
         "patchSetId": 2
@@ -331,6 +655,30 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d60e539d_24373a01",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7553645f_db919960",
+      "range": {
+        "startLine": 97,
+        "startChar": 15,
+        "endLine": 97,
+        "endChar": 59
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -357,6 +705,30 @@
     },
     {
       "key": {
+        "uuid": "d8d35c11_b0bedbd3",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6566357b_7c53f029",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 31
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec40028f_630740c1",
         "filename": "src/main/resources/Documentation/rest-api-replication.md",
         "patchSetId": 2
@@ -377,6 +749,30 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6be126b_40012484",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec40028f_630740c1",
+      "range": {
+        "startLine": 16,
+        "startChar": 26,
+        "endLine": 16,
+        "endChar": 28
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -403,6 +799,30 @@
     },
     {
       "key": {
+        "uuid": "7d41b874_4fa70071",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75d677b9_0eec0f2b",
+      "range": {
+        "startLine": 19,
+        "startChar": 60,
+        "endLine": 19,
+        "endChar": 67
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6cc5f88e_11bb6324",
         "filename": "src/main/resources/Documentation/rest-api-replication.md",
         "patchSetId": 2
@@ -426,6 +846,30 @@
     },
     {
       "key": {
+        "uuid": "b50a8b37_3b3c7d0d",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Top one should have been deleted.",
+      "parentUuid": "6cc5f88e_11bb6324",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 53
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d5616ff7_8538d6da",
         "filename": "src/main/resources/Documentation/rest-api-replication.md",
         "patchSetId": 2
@@ -440,6 +884,24 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "298589f6_f3e30d71",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Seem to render ok in intelij with our without spaces.",
+      "parentUuid": "d5616ff7_8538d6da",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -460,6 +922,24 @@
     },
     {
       "key": {
+        "uuid": "ca79b873_728c9840",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19e4f83a_5ffb0e7a",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f349c14_ceade4e5",
         "filename": "src/main/resources/Documentation/rest-api-replication.md",
         "patchSetId": 2
@@ -474,6 +954,24 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5ecf3d8_d0a2318d",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f349c14_ceade4e5",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -500,6 +998,30 @@
     },
     {
       "key": {
+        "uuid": "2accc2b2_c02e738c",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "951d00ae_4afe499b",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 8
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "779c358b_034c8beb",
         "filename": "src/main/resources/Documentation/rest-api-replication.md",
         "patchSetId": 2
@@ -523,6 +1045,30 @@
     },
     {
       "key": {
+        "uuid": "0bfd890f_3f3dbfd8",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "779c358b_034c8beb",
+      "range": {
+        "startLine": 58,
+        "startChar": 36,
+        "endLine": 58,
+        "endChar": 41
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fbfd8f3b_a25c9003",
         "filename": "src/main/resources/Documentation/rest-api-replication.md",
         "patchSetId": 2
@@ -537,6 +1083,24 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb6f9414_80191352",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbfd8f3b_a25c9003",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -557,6 +1121,24 @@
     },
     {
       "key": {
+        "uuid": "29be3b13_1f9ec8a3",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45bec3a0_cf626245",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1517e00_6c23a162",
         "filename": "src/main/resources/Documentation/rest-api-replication.md",
         "patchSetId": 2
@@ -571,6 +1153,24 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26426893_0b7094ac",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1517e00_6c23a162",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -591,6 +1191,24 @@
     },
     {
       "key": {
+        "uuid": "f2f55ac4_81b99753",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d953060b_7e99f87c",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea6f2ca5_78fc9254",
         "filename": "src/main/resources/Documentation/rest-api-replication.md",
         "patchSetId": 2
@@ -605,6 +1223,24 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bd4fce3_dbc17cf5",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea6f2ca5_78fc9254",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -631,6 +1267,30 @@
     },
     {
       "key": {
+        "uuid": "419035c7_d5644a23",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "All Request/Response at ####",
+      "parentUuid": "8b83cb2b_9b9fba87",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 4
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cfa33d1c_1b25deec",
         "filename": "src/main/resources/Documentation/rest-api-replication.md",
         "patchSetId": 2
@@ -648,6 +1308,24 @@
     },
     {
       "key": {
+        "uuid": "818bf0ee_4b8d4498",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfa33d1c_1b25deec",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c70eed8c_aecd6b35",
         "filename": "src/main/resources/Documentation/rest-api-replication.md",
         "patchSetId": 2
@@ -662,6 +1340,24 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc48abcc_44211dcd",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c70eed8c_aecd6b35",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -688,6 +1384,30 @@
     },
     {
       "key": {
+        "uuid": "8914a22c_fda2a511",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "966f19ce_a2036218",
+      "range": {
+        "startLine": 94,
+        "startChar": 60,
+        "endLine": 94,
+        "endChar": 71
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "733a5dce_b133200b",
         "filename": "src/main/resources/Documentation/rest-api-replication.md",
         "patchSetId": 2
@@ -708,6 +1428,30 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa074b33_4279efa7",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Well could be anything but sure.",
+      "parentUuid": "733a5dce_b133200b",
+      "range": {
+        "startLine": 102,
+        "startChar": 13,
+        "endLine": 102,
+        "endChar": 17
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -734,6 +1478,30 @@
     },
     {
       "key": {
+        "uuid": "d3d7133b_c3e946ff",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ab9ea41_4518e236",
+      "range": {
+        "startLine": 92,
+        "startChar": 14,
+        "endLine": 92,
+        "endChar": 38
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "26595aa6_6e02f6d9",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
         "patchSetId": 2
@@ -754,6 +1522,30 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd0562b4_332f21f0",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26595aa6_6e02f6d9",
+      "range": {
+        "startLine": 114,
+        "startChar": 14,
+        "endLine": 114,
+        "endChar": 39
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -780,6 +1572,30 @@
     },
     {
       "key": {
+        "uuid": "70492ab7_a6672b59",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f3ed2f7_3cc9da27",
+      "range": {
+        "startLine": 209,
+        "startChar": 14,
+        "endLine": 209,
+        "endChar": 34
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5dfdb7d9_09ffeb33",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
         "patchSetId": 2
@@ -800,6 +1616,30 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4eb8d7d0_e8d74ddb",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dfdb7d9_09ffeb33",
+      "range": {
+        "startLine": 231,
+        "startChar": 14,
+        "endLine": 231,
+        "endChar": 37
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -826,6 +1666,30 @@
     },
     {
       "key": {
+        "uuid": "46ec6fa3_c8246e57",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27f8fc1d_4703d56d",
+      "range": {
+        "startLine": 265,
+        "startChar": 14,
+        "endLine": 265,
+        "endChar": 29
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c148cd4_90c5c3b2",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
         "patchSetId": 2
@@ -849,6 +1713,30 @@
     },
     {
       "key": {
+        "uuid": "2ec7fec0_af06b0a3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c148cd4_90c5c3b2",
+      "range": {
+        "startLine": 295,
+        "startChar": 41,
+        "endLine": 295,
+        "endChar": 78
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb208a42_2fbf70f6",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
         "patchSetId": 2
@@ -860,6 +1748,30 @@
       "writtenOn": "2020-03-13T22:05:01Z",
       "side": 1,
       "message": "Not sure I understand why we need this class, beside ReplicationHttpTest. Maybe explain the goal of each in the commit message?",
+      "range": {
+        "startLine": 45,
+        "startChar": 13,
+        "endLine": 45,
+        "endChar": 40
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad70917e_6d47d66c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Previous comments wanted tests of the parsing of Json message. Not sure I understand. Let\u0027s discuss.",
+      "parentUuid": "bb208a42_2fbf70f6",
       "range": {
         "startLine": 45,
         "startChar": 13,
@@ -895,6 +1807,30 @@
     },
     {
       "key": {
+        "uuid": "d9b28e61_8df22c71",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb4dfff9_e1d1d601",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 9
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6bced81_35a9a1c9",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
         "patchSetId": 2
@@ -906,6 +1842,24 @@
       "writtenOn": "2020-03-13T22:05:01Z",
       "side": 1,
       "message": "No blank lines above (and similarly below) makes the test method harder to read, I find.",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5ed896a_f90fd052",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Following templates from other plugins. What is the convention for tests?",
+      "parentUuid": "d6bced81_35a9a1c9",
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -935,6 +1889,30 @@
     },
     {
       "key": {
+        "uuid": "df260e76_980684ea",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec89294b_f046304a",
+      "range": {
+        "startLine": 101,
+        "startChar": 14,
+        "endLine": 101,
+        "endChar": 45
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f1153da_c112ff30",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
         "patchSetId": 2
@@ -958,6 +1936,30 @@
     },
     {
       "key": {
+        "uuid": "ea4ceb41_623cf990",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "I really tried here. Could not get rid of them. Any ideas ?",
+      "parentUuid": "1f1153da_c112ff30",
+      "range": {
+        "startLine": 212,
+        "startChar": 10,
+        "endLine": 212,
+        "endChar": 16
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e998b0d2_191345b4",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
         "patchSetId": 2
@@ -969,6 +1971,30 @@
       "writtenOn": "2020-03-13T22:05:01Z",
       "side": 1,
       "message": "Type safety warning in Eclipse.",
+      "range": {
+        "startLine": 220,
+        "startChar": 74,
+        "endLine": 220,
+        "endChar": 86
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4fb8c57_ba73cb3f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-04-17T21:34:51Z",
+      "side": 1,
+      "message": "Same as above.",
+      "parentUuid": "e998b0d2_191345b4",
       "range": {
         "startLine": 220,
         "startChar": 74,
