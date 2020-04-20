@@ -261,9 +261,12 @@ public class Destination {
 
   private boolean shouldReplicate(ProjectState state, CurrentUser user)
       throws PermissionBackendException {
+    String name = state.getProject().getName();
     if (!config.replicateHiddenProjects()
         && state.getProject().getState()
             == com.google.gerrit.extensions.client.ProjectState.HIDDEN) {
+      repLog.atFine().log(
+          "Project %s is hidden and replication of hidden projects is disabled", name);
       return false;
     }
 
@@ -276,6 +279,9 @@ public class Destination {
       permissionBackend.user(user).project(state.getNameKey()).check(permissionToCheck);
       return true;
     } catch (AuthException e) {
+      repLog.atFine().log(
+          "Project %s is not visible to current user %s",
+          name, user.getUserName().orElse("unknown"));
       return false;
     }
   }
@@ -292,15 +298,20 @@ public class Destination {
                   try {
                     projectState = projectCache.checkedGet(project);
                   } catch (IOException e) {
+                    repLog.atWarning().withCause(e).log(
+                        "Error reading project %s from cache", project);
                     return false;
                   }
                   if (projectState == null) {
+                    repLog.atFine().log("Project %s does not exist", project);
                     throw new NoSuchProjectException(project);
                   }
                   if (!projectState.statePermitsRead()) {
+                    repLog.atFine().log("Project %s does not permit read", project);
                     return false;
                   }
                   if (!shouldReplicate(projectState, userProvider.get())) {
+                    repLog.atFine().log("Project %s should not be replicated", project);
                     return false;
                   }
                   if (PushOne.ALL_REFS.equals(ref)) {
@@ -313,6 +324,9 @@ public class Destination {
                         .ref(ref)
                         .check(RefPermission.READ);
                   } catch (AuthException e) {
+                    repLog.atFine().log(
+                        "Ref %s on project %s is not visible to calling user",
+                        ref, project, userProvider.get().getUserName().orElse("unknown"));
                     return false;
                   }
                   return true;
@@ -363,10 +377,11 @@ public class Destination {
 
   void schedule(
       Project.NameKey project, String ref, URIish uri, ReplicationState state, boolean now) {
-    repLog.atInfo().log("scheduling replication %s:%s => %s", project, ref, uri);
     if (!shouldReplicate(project, ref, state)) {
+      repLog.atFine().log("Not scheduling replication %s:%s => %s", project, ref, uri);
       return;
     }
+    repLog.atInfo().log("scheduling replication %s:%s => %s", project, ref, uri);
 
     if (!config.replicatePermissions()) {
       PushOne e;
@@ -575,6 +590,7 @@ public class Destination {
 
   boolean wouldPushProject(Project.NameKey project) {
     if (!shouldReplicate(project)) {
+      repLog.atFine().log("Skipping replication of project %s", project.get());
       return false;
     }
 
@@ -584,7 +600,12 @@ public class Destination {
       return true;
     }
 
-    return (new ReplicationFilter(projects)).matches(project);
+    boolean matches = (new ReplicationFilter(projects)).matches(project);
+    if (!matches) {
+      repLog.atFine().log(
+          "Skipping replication of project %s; does not match filter", project.get());
+    }
+    return matches;
   }
 
   boolean isSingleProjectMatch() {
@@ -607,6 +628,7 @@ public class Destination {
 
   boolean wouldPushRef(String ref) {
     if (!config.replicatePermissions() && RefNames.REFS_CONFIG.equals(ref)) {
+      repLog.atFine().log("NOT pushing ref %s; meta ref", ref);
       return false;
     }
     for (RefSpec s : config.getRemoteConfig().getPushRefSpecs()) {
@@ -614,6 +636,7 @@ public class Destination {
         return true;
       }
     }
+    repLog.atFine().log("NOT pushing ref %s; does not match push ref specs", ref);
     return false;
   }
 

@@ -184,6 +184,8 @@ public class ReplicationQueue
             new ReplicateRefUpdate(project.get(), refName, uri, cfg.getRemoteConfigName()));
         cfg.schedule(project, refName, uri, state);
       }
+    } else {
+      repLog.atFine().log("Skipping ref %s on project %s", refName, project.get());
     }
 
     if (withoutState) {
