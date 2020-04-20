@@ -196,6 +196,10 @@ public class ReplicationQueue
       Set<String> eventsReplayed = new HashSet<>();
       replaying = true;
       for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.list()) {
+        if (t == null) {
+          repLog.atWarning().log("Encountered null replication event in ReplicationTasksStorage");
+          continue;
+        }
         String eventKey = String.format("%s:%s", t.project, t.ref);
         if (!eventsReplayed.contains(eventKey)) {
           repLog.atInfo().log("Firing pending task %s", eventKey);
