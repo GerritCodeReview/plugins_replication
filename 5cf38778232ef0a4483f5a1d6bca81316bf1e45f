@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "e3360fcb_0ee12356",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-20T13:03:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f3b8dc6f_5c671e4e",
+      "range": {
+        "startLine": 325,
+        "startChar": 27,
+        "endLine": 325,
+        "endChar": 35
+      },
+      "revId": "5cf38778232ef0a4483f5a1d6bca81316bf1e45f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9c9dc2e_2035ef74",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 1
