@@ -22,6 +22,30 @@
       "revId": "8d695af79ccc766237bc69c94b9f352c692554b0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6299e49b_ab600d0c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-20T11:26:25Z",
+      "side": 0,
+      "message": "Done in https://gerrit-review.googlesource.com/c/plugins/replication/+/263512",
+      "parentUuid": "0eeab06b_716eca22",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 240,
+        "endChar": 75
+      },
+      "revId": "8d695af79ccc766237bc69c94b9f352c692554b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
