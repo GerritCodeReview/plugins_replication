@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f4d19efb_473178ae",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-20T12:37:51Z",
+      "side": 1,
+      "message": "If there was an IO error it would be handled at L300.  I will reword this to \"project does not exist\"",
+      "parentUuid": "8b247e3f_86272681",
+      "range": {
+        "startLine": 306,
+        "startChar": 41,
+        "endLine": 306,
+        "endChar": 70
+      },
+      "revId": "29417d14e4049cc72294f1c768db9508543044f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72c5a7f2_57cc7be0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "29417d14e4049cc72294f1c768db9508543044f4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3faf5521_2607208c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-20T12:37:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72c5a7f2_57cc7be0",
+      "range": {
+        "startLine": 381,
+        "startChar": 27,
+        "endLine": 381,
+        "endChar": 41
+      },
+      "revId": "29417d14e4049cc72294f1c768db9508543044f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
