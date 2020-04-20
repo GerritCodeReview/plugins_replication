@@ -86,6 +86,8 @@ import org.eclipse.jgit.transport.URIish;
 public class Destination {
   private static final NamedFluentLogger repLog = ReplicationQueue.repLog;
 
+  private static final String PROJECT_NOT_AVAILABLE = "source project %s not available";
+
   public interface Factory {
     Destination create(DestinationConfiguration config);
   }
@@ -318,7 +320,7 @@ public class Destination {
               })
           .call();
     } catch (NoSuchProjectException err) {
-      stateLog.error(String.format("source project %s not available", project), err, states);
+      stateLog.error(String.format(PROJECT_NOT_AVAILABLE, project), err, states);
     } catch (Exception e) {
       Throwables.throwIfUnchecked(e);
       throw new RuntimeException(e);
@@ -347,7 +349,7 @@ public class Destination {
               })
           .call();
     } catch (NoSuchProjectException err) {
-      stateLog.error(String.format("source project %s not available", project), err, states);
+      stateLog.error(String.format(PROJECT_NOT_AVAILABLE, project), err, states);
     } catch (Exception e) {
       Throwables.throwIfUnchecked(e);
       throw new RuntimeException(e);
@@ -385,7 +387,7 @@ public class Destination {
             return;
           }
         } catch (IOException err) {
-          stateLog.error(String.format("source project %s not available", project), err, state);
+          stateLog.error(String.format(PROJECT_NOT_AVAILABLE, project), err, state);
           return;
         }
       }
