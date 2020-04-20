@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0eeab06b_716eca22",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-04-20T09:37:30Z",
+      "side": 0,
+      "message": "Looks like merge of this went wrong, this code is not present in 2.16.",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 240,
+        "endChar": 75
+      },
+      "revId": "8d695af79ccc766237bc69c94b9f352c692554b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
