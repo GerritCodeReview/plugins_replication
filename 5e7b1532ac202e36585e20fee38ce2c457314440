@@ -1,11 +1,13 @@
 {
   "checks": {
     "zuul-check:plugins_replication": {
-      "state": "SCHEDULED",
-      "message": "Change has been enqueued in check",
+      "state": "FAILED",
+      "message": "Change failed",
+      "url": "https://ci.gerritcodereview.com/t/gerrit/buildset/ac5256a94d1145a78c1abc582c781978",
       "started": "2020-04-20T06:09:01Z",
+      "finished": "2020-04-20T06:11:06Z",
       "created": "2020-04-20T06:09:01Z",
-      "updated": "2020-04-20T06:09:01Z"
+      "updated": "2020-04-20T06:11:06Z"
     }
   }
 }
