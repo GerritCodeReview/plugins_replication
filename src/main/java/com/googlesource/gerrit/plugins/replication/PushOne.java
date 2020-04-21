@@ -516,6 +516,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     Map<String, Ref> remote = listRemote(tn);
     for (Ref src : local.values()) {
       if (!canPushRef(src.getName(), noPerms)) {
+        repLog.atFine().log("Skipping push of ref %s", src.getName());
         continue;
       }
 
