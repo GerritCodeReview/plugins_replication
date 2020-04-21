@@ -628,7 +628,7 @@ public class Destination {
 
   boolean wouldPushRef(String ref) {
     if (!config.replicatePermissions() && RefNames.REFS_CONFIG.equals(ref)) {
-      repLog.atFine().log("NOT pushing ref %s; meta ref", ref);
+      repLog.atFine().log("Skipping push of ref %s; it is a meta ref", ref);
       return false;
     }
     for (RefSpec s : config.getRemoteConfig().getPushRefSpecs()) {
@@ -636,7 +636,7 @@ public class Destination {
         return true;
       }
     }
-    repLog.atFine().log("NOT pushing ref %s; does not match push ref specs", ref);
+    repLog.atFine().log("Skipping push of ref %s; it does not match push ref specs", ref);
     return false;
   }
 
