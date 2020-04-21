@@ -1,0 +1,521 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4bc25ef_25c8fee6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "adding",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 3
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76670bb5_1140980e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "May remove this line. Related to this, this change should likely be moved to the stable-2.16 branch, as this is a rather needful improvement.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 8
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e87a79c2_4f07bf7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Nit: above, the lines are usually wrapped filling the 72 characters maximum [2].\n\n[2] https://gerrit-review.googlesource.com/Documentation/dev-crafting-changes.html#git-commit-settings",
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a1341e9_36340e12",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "startCommandRequest",
+      "range": {
+        "startLine": 46,
+        "startChar": 24,
+        "endLine": 46,
+        "endChar": 43
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6fdda80_c31ea664",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "message {}\",\n\n-Fix comes from a sonar-lint [3] issue in IDE. (Also part of our DoD now.) This issue repeats elsewhere in this file, and maybe in other new code too.\n\n[3] https://www.sonarlint.org/",
+      "range": {
+        "startLine": 53,
+        "startChar": 40,
+        "endLine": 53,
+        "endChar": 51
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b851438_50885a99",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Throws currently unhandled IOException (cf. Sonar-lint). Repeats elsewhere in this file and maybe in other new code.",
+      "range": {
+        "startLine": 54,
+        "startChar": 10,
+        "endLine": 54,
+        "endChar": 19
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e358026a_b32501df",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Should this object become an Optional, rather than having to check for null? Relates to when can it be null, is such a case properly handled elsewhere \u0026c.",
+      "range": {
+        "startLine": 70,
+        "startChar": 8,
+        "endLine": 70,
+        "endChar": 19
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db42c584_606cdb9f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Missing a hidden private constructor; otherwise, default (implicit) public one available.",
+      "range": {
+        "startLine": 162,
+        "startChar": 15,
+        "endLine": 162,
+        "endChar": 26
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f1cf5ff_d768e4d6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ServletCommandProcessing.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Can be inlined.",
+      "range": {
+        "startLine": 37,
+        "startChar": 16,
+        "endLine": 37,
+        "endChar": 22
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0927df3f_f16d187a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ServletCommandProcessing.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Same as above.",
+      "range": {
+        "startLine": 43,
+        "startChar": 16,
+        "endLine": 43,
+        "endChar": 22
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5ea77fc_d48b8e73",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "stateLogger",
+      "range": {
+        "startLine": 34,
+        "startChar": 41,
+        "endLine": 34,
+        "endChar": 49
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d127347_eb64d79a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Missing gjf [1].\n\n[1] https://gerrit-review.googlesource.com/Documentation/dev-crafting-changes.html#style",
+      "range": {
+        "startLine": 42,
+        "startChar": 6,
+        "endLine": 42,
+        "endChar": 112
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cda73c9b_e3fef474",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "this.stateLogger",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 12
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc1c1e2a_f9cd16b7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "1. Above, we don\u0027t send an error but only log errors if failures. Inconsistent?\n2. Here, why not having push tasks should be an error?\n(How does the ssh command compare?)",
+      "range": {
+        "startLine": 101,
+        "startChar": 17,
+        "endLine": 101,
+        "endChar": 26
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "202d7bca_3dc36810",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Extra trailing characters, to remove.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 2
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66ed39c5_7214e35a",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Wrap this line here?",
+      "range": {
+        "startLine": 10,
+        "startChar": 75,
+        "endLine": 10,
+        "endChar": 76
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73426447_13d92ae3",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Extra trailing space.",
+      "range": {
+        "startLine": 13,
+        "startChar": 53,
+        "endLine": 13,
+        "endChar": 54
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e2c8679_30ff3789",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Same there.",
+      "range": {
+        "startLine": 16,
+        "startChar": 57,
+        "endLine": 16,
+        "endChar": 64
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d00e2c1a_18e2bd14",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Would format this code-like style keyword.",
+      "range": {
+        "startLine": 16,
+        "startChar": 49,
+        "endLine": 16,
+        "endChar": 52
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb3a028d_bac58805",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "No longer used; would remove.",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 162,
+        "endChar": 10
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c686df2_3faead21",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Same as above.",
+      "range": {
+        "startLine": 181,
+        "startChar": 4,
+        "endLine": 181,
+        "endChar": 9
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af1b0b17_9231e3f7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 215,
+        "startChar": 1,
+        "endLine": 215,
+        "endChar": 6
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09edb4a2_21c60e1f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "File is missing gjf [1] in many places.\n\n[1] https://gerrit-review.googlesource.com/Documentation/dev-crafting-changes.html#style",
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}

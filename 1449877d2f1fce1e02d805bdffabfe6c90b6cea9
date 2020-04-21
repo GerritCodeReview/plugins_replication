@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "750e8e5d_069ec264",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Constants.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Given the rather trivial nature of the message at line 19, I\u0027d use the non-String sendError method instead, and remove this constant and class. The caller will still already know about the fact that this is a bad request (aka invalid command) anyway.",
+      "parentUuid": "8ab2ed07_02b3a008",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "05b63850_f8cb289a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 2
@@ -177,6 +195,30 @@
       "side": 1,
       "message": "We could in a subsequence change. Did not want to make the change to invasive as it\u0027s a core plugin. The WriteHelper was done to reduce some of the duplication as a compromised based on a previous comment. Maybe we could discuss another scheme?",
       "parentUuid": "231e3dc1_35c12329",
+      "range": {
+        "startLine": 22,
+        "startChar": 38,
+        "endLine": 22,
+        "endChar": 66
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ca8ce99_7fa54037",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ServletCommandProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Ack; let\u0027s leave it as is for now.",
+      "parentUuid": "ed65db5e_f1ea7a4d",
       "range": {
         "startLine": 22,
         "startChar": 38,
@@ -588,6 +630,30 @@
       "side": 1,
       "message": "Good question. It follows the same pattern as the ssh command. If wait is true and future is null it loops.",
       "parentUuid": "4a33ebc4_f6ec1ecd",
+      "range": {
+        "startLine": 77,
+        "startChar": 6,
+        "endLine": 77,
+        "endChar": 27
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "581d9c83_f6f417e4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "How about inserting a small comment to document this briefly here?",
+      "parentUuid": "050f9a84_51875a5b",
       "range": {
         "startLine": 77,
         "startChar": 6,
@@ -1784,6 +1850,30 @@
     },
     {
       "key": {
+        "uuid": "cc4f1f81_40e98064",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Ok, so maybe explain the purpose or difference (scope) of each test class, then? I can\u0027t quickly find that earlier comment. I\u0027d propose some small class javadoc in each test class file.",
+      "parentUuid": "ad70917e_6d47d66c",
+      "range": {
+        "startLine": 45,
+        "startChar": 13,
+        "endLine": 45,
+        "endChar": 40
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fb4dfff9_e1d1d601",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
         "patchSetId": 2
@@ -1860,6 +1950,24 @@
       "side": 1,
       "message": "Following templates from other plugins. What is the convention for tests?",
       "parentUuid": "d6bced81_35a9a1c9",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cceadae0_f5daf859",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Readability of each test method step, usually one \"paragraph\" or block per logical assertion.",
+      "parentUuid": "f5ed896a_f90fd052",
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -1948,6 +2056,30 @@
       "side": 1,
       "message": "I really tried here. Could not get rid of them. Any ideas ?",
       "parentUuid": "1f1153da_c112ff30",
+      "range": {
+        "startLine": 212,
+        "startChar": 10,
+        "endLine": 212,
+        "endChar": 16
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13368eb5_241147ad",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-21T18:37:23Z",
+      "side": 1,
+      "message": "Me neither.",
+      "parentUuid": "ea4ceb41_623cf990",
       "range": {
         "startLine": 212,
         "startChar": 10,
