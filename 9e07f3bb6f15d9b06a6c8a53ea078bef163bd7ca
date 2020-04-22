@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df971979_21c86c5a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-22T11:59:09Z",
+      "side": 1,
+      "message": "However, they were easier to grep when being on the same line. Example: by extracting the replication-id and finding out all the refs associated with it.\n\nSplitting it to multiple lines would make grep through the replication_log more difficult.\nI never *read* the log but rather *process* the log with scripting.\n\nCan you preserve the ability to grep easily as well? Or can we simply drop the \u0027\\n\u0027 in the middle of the log message?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 17
+      },
+      "revId": "9e07f3bb6f15d9b06a6c8a53ea078bef163bd7ca",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "007f8ab5_cd836027",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-22T11:59:09Z",
+      "side": 1,
+      "message": "This would make the grep more difficult and root-cause-analysis of problems investigations more  difficult.",
+      "range": {
+        "startLine": 475,
+        "startChar": 73,
+        "endLine": 475,
+        "endChar": 86
+      },
+      "revId": "9e07f3bb6f15d9b06a6c8a53ea078bef163bd7ca",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
