@@ -461,7 +461,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       return new PushResult();
     }
 
-    repLog.atSevere().log("Push to %s references: %s", uri, todo);
+    repLog.atInfo().log("Push to %s references: %s", uri, todo);
 
     return tn.push(NullProgressMonitor.INSTANCE, todo);
   }
