@@ -14,9 +14,12 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.common.flogger.LazyArgs.lazy;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
+import static java.util.stream.Collectors.joining;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
@@ -62,6 +65,7 @@ import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.NullProgressMonitor;
+import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.CredentialsProvider;
@@ -461,9 +465,33 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       return new PushResult();
     }
 
-    repLog.atInfo().log("Push to %s references: %s", uri, todo);
+    repLog.atInfo().log("Push to %s references: %s", uri, lazy(() -> refUpdatesForLogging(todo)));
 
     return tn.push(NullProgressMonitor.INSTANCE, todo);
+  }
+
+  private static String refUpdatesForLogging(List<RemoteRefUpdate> refUpdates) {
+    return refUpdates.stream().map(PushOne::refUpdateForLogging).collect(joining(", "));
+  }
+
+  private static String refUpdateForLogging(RemoteRefUpdate update) {
+    return MoreObjects.toStringHelper(RemoteRefUpdate.class)
+        .add("name", update.getRemoteName())
+        .add("status", update.getStatus())
+        .add("oldId", objectIdToString(update.getExpectedOldObjectId()))
+        .add("newId", objectIdToString(update.getNewObjectId()))
+        .add("force", booleanToString(update.isForceUpdate()))
+        .add("delete", booleanToString(update.isDelete()))
+        .add("ffwd", booleanToString(update.isFastForward()))
+        .toString();
+  }
+
+  private static String objectIdToString(ObjectId id) {
+    return id != null ? id.getName() : "null";
+  }
+
+  private static String booleanToString(boolean b) {
+    return b ? "yes" : "no";
   }
 
   private List<RemoteRefUpdate> generateUpdates(Transport tn)
