@@ -448,8 +448,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     updateStates(res.getRemoteUpdates());
   }
 
-  private PushResult pushVia(Transport tn)
-      throws IOException, NotSupportedException, TransportException, PermissionBackendException {
+  private PushResult pushVia(Transport tn) throws IOException, PermissionBackendException {
     tn.applyConfig(config);
     tn.setCredentialsProvider(credentialsProvider);
 
@@ -509,8 +508,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
         : replicationPushFilter.get().filter(projectName.get(), remoteUpdatesList);
   }
 
-  private List<RemoteRefUpdate> doPushAll(Transport tn, Map<String, Ref> local)
-      throws NotSupportedException, TransportException, IOException {
+  private List<RemoteRefUpdate> doPushAll(Transport tn, Map<String, Ref> local) throws IOException {
     List<RemoteRefUpdate> cmds = new ArrayList<>();
     boolean noPerms = !pool.isReplicatePermissions();
     Map<String, Ref> remote = listRemote(tn);
