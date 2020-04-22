@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c20aede2_8f781f80",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-22T23:42:51Z",
+      "side": 0,
+      "message": "What\u0027t the problem with this formatting?  IIUC it\u0027s intentional to have the \"s\" suffix to denote seconds.",
+      "revId": "33c43edae57a68da75268b32bd7429bbd9a865a8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
