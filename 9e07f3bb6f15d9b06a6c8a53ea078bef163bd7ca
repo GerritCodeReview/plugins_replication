@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2d885848_6414bce9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-23T01:54:18Z",
+      "side": 1,
+      "message": "Would it help to include the replication-id in each line?\n\nOtherwise, yes, I can remove the newline and make this change only a reduction of the redundant info (i.e. not using the default RemoteRefUpdate toString implementation)",
+      "parentUuid": "df971979_21c86c5a",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 17
+      },
+      "revId": "9e07f3bb6f15d9b06a6c8a53ea078bef163bd7ca",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "007f8ab5_cd836027",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 1
