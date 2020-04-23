@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "42157d66_09ffa720",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-23T11:47:48Z",
+      "side": 1,
+      "message": "\u003e Would it help to include the replication-id in each line?\n\nYes, it would help, including the time-stamp of when the event happened. Basically replicating the first part of the logs.\n\n\u003e Otherwise, yes, I can remove the newline and make this change only a reduction of the redundant info (i.e. not using the default RemoteRefUpdate toString implementation)\n\nYes, I would split into two different changes, taking the newline off this one. Everything else looks good to me and I don\u0027t see any issues.",
+      "parentUuid": "2d885848_6414bce9",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 17
+      },
+      "revId": "9e07f3bb6f15d9b06a6c8a53ea078bef163bd7ca",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "007f8ab5_cd836027",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 1
