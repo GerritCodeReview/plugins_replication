@@ -46,6 +46,30 @@
       "revId": "7649b84b5204364123d0a953e269e68e9c8aef29",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ec60f6a_2531c0c9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-23T21:21:57Z",
+      "side": -2,
+      "message": "Done. Thanks for catching this definitely unwanted loss.",
+      "parentUuid": "b4ac734a_37bab0d0",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 19
+      },
+      "revId": "7649b84b5204364123d0a953e269e68e9c8aef29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
