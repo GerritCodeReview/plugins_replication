@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "986b05b3_a29adf23",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-23T20:47:36Z",
+      "side": -2,
+      "message": "Are we then losing all this extra diagnostic logs introduced by DavidP? I believe they should be kept, WDYT?",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 19
+      },
+      "revId": "7649b84b5204364123d0a953e269e68e9c8aef29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
