@@ -16,6 +16,24 @@
       "revId": "33c43edae57a68da75268b32bd7429bbd9a865a8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "922d1870_aae3b543",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-23T13:34:23Z",
+      "side": 0,
+      "message": "I missed that important detail; thanks, abandoning.",
+      "parentUuid": "c20aede2_8f781f80",
+      "revId": "33c43edae57a68da75268b32bd7429bbd9a865a8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
