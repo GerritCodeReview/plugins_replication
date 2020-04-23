@@ -164,17 +164,16 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
   @Override
   public void cancel() {
-    repLog.info("Replication [{}] to {} was canceled", HexFormat.fromInt(id), getURI());
+    repLog.atInfo().log("Replication [%s] to %s was canceled", HexFormat.fromInt(id), getURI());
     canceledByReplication();
     pool.pushWasCanceled(this);
   }
 
   @Override
   public void setCanceledWhileRunning() {
-    repLog.info(
-        "Replication [{}] to {} was canceled while being executed",
-        HexFormat.fromInt(id),
-        getURI());
+    repLog.atInfo().log(
+        "Replication [%s] to %s was canceled while being executed",
+        HexFormat.fromInt(id), getURI());
     canceledWhileRunning.set(true);
   }
 
@@ -229,10 +228,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     if (ALL_REFS.equals(ref)) {
       delta.clear();
       pushAllRefs = true;
-      repLog.trace("Added all refs for replication to {}", uri);
+      repLog.atFinest().log("Added all refs for replication to %s", uri);
     } else if (!pushAllRefs) {
       delta.add(ref);
-      repLog.trace("Added ref {} for replication to {}", ref, uri);
+      repLog.atFinest().log("Added ref %s for replication to %s", ref, uri);
     }
   }
 
@@ -317,18 +316,18 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     RunwayStatus status = pool.requestRunway(this);
     if (!status.isAllowed()) {
       if (status.isCanceled()) {
-        repLog.info("PushOp for replication to {} was canceled and thus won't be rescheduled", uri);
+        repLog.atInfo().log(
+            "PushOp for replication to %s was canceled and thus won't be rescheduled", uri);
       } else {
-        repLog.info(
-            "Rescheduling replication to {} to avoid collision with the in-flight push [{}].",
-            uri,
-            HexFormat.fromInt(status.getInFlightPushId()));
+        repLog.atInfo().log(
+            "Rescheduling replication to %s to avoid collision with the in-flight push [%s].",
+            uri, HexFormat.fromInt(status.getInFlightPushId()));
         pool.reschedule(this, Destination.RetryReason.COLLISION);
       }
       return;
     }
 
-    repLog.info("Replication to {} started...", uri);
+    repLog.atInfo().log("Replication to %s started...", uri);
     Timer1.Context context = metrics.start(config.getName());
     try {
       long startedAt = context.getStartTime();
@@ -337,12 +336,9 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       git = gitManager.openRepository(projectName);
       runImpl();
       long elapsed = NANOSECONDS.toMillis(context.stop());
-      repLog.info(
-          "Replication to {} completed in {}ms, {}ms delay, {} retries",
-          uri,
-          elapsed,
-          delay,
-          retryCount);
+      repLog.atInfo().log(
+          "Replication to %s completed in %dms, %dms delay, %d retries",
+          uri, elapsed, delay, retryCount);
     } catch (RepositoryNotFoundException e) {
       stateLog.error(
           "Cannot replicate " + projectName + "; Local repository error: " + e.getMessage(),
@@ -359,7 +355,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
           || msg.contains("unavailable")) {
         createRepository();
       } else {
-        repLog.error("Cannot replicate {}; Remote repository error: {}", projectName, msg);
+        repLog.atSevere().log("Cannot replicate %s; Remote repository error: %s", projectName, msg);
       }
 
     } catch (NoRemoteRepositoryException e) {
@@ -369,12 +365,12 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     } catch (TransportException e) {
       Throwable cause = e.getCause();
       if (cause instanceof JSchException && cause.getMessage().startsWith("UnknownHostKey:")) {
-        repLog.error("Cannot replicate to {}: {}", uri, cause.getMessage());
+        repLog.atSevere().log("Cannot replicate to %s: %s", uri, cause.getMessage());
       } else if (e instanceof LockFailureException) {
         lockRetryCount++;
         // The LockFailureException message contains both URI and reason
         // for this failure.
-        repLog.error("Cannot replicate to {}: {}", uri, e.getMessage());
+        repLog.atSevere().log("Cannot replicate to %s: %s", uri, e.getMessage());
 
         // The remote push operation should be retried.
         if (lockRetryCount <= maxLockRetries) {
@@ -384,17 +380,15 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
             pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
           }
         } else {
-          repLog.error(
-              "Giving up after {} occurrences of this error: {} during replication to {}",
-              lockRetryCount,
-              e.getMessage(),
-              uri);
+          repLog.atSevere().log(
+              "Giving up after %d occurrences of this error: %s during replication to %s",
+              lockRetryCount, e.getMessage(), uri);
         }
       } else {
         if (canceledWhileRunning.get()) {
           logCanceledWhileRunningException(e);
         } else {
-          repLog.error("Cannot replicate to {}", uri, e);
+          repLog.atSevere().withCause(e).log("Cannot replicate to %s", uri);
           // The remote push operation should be retried.
           pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
         }
@@ -412,7 +406,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   private void logCanceledWhileRunningException(TransportException e) {
-    repLog.info("Cannot replicate to {}. It was canceled while running", uri, e);
+    repLog.atInfo().withCause(e).log("Cannot replicate to %s. It was canceled while running", uri);
   }
 
   private void createRepository() {
@@ -420,10 +414,11 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       try {
         Ref head = git.exactRef(Constants.HEAD);
         if (createProject(projectName, head != null ? getName(head) : null)) {
-          repLog.warn("Missing repository created; retry replication to {}", uri);
+          repLog.atWarning().log("Missing repository created; retry replication to %s", uri);
           pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
         } else {
-          repLog.warn("Missing repository could not be created when replicating {}", uri);
+          repLog.atWarning().log(
+              "Missing repository could not be created when replicating %s", uri);
         }
       } catch (IOException ioe) {
         stateLog.error(
@@ -456,8 +451,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     updateStates(res.getRemoteUpdates());
   }
 
-  private PushResult pushVia(Transport tn)
-      throws IOException, NotSupportedException, TransportException, PermissionBackendException {
+  private PushResult pushVia(Transport tn) throws IOException, PermissionBackendException {
     tn.applyConfig(config);
     tn.setCredentialsProvider(credentialsProvider);
 
@@ -471,10 +465,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     }
 
     if (replConfig.getMaxRefsToLog() == 0 || todo.size() <= replConfig.getMaxRefsToLog()) {
-      repLog.info("Push to {} references: {}", uri, todo);
+      repLog.atInfo().log("Push to %s references: %s", uri, todo);
     } else {
-      repLog.info(
-          "Push to {} references (first {} of {} listed): {}",
+      repLog.atInfo().log(
+          "Push to %s references (first %d of %d listed): %s",
           uri,
           replConfig.getMaxRefsToLog(),
           todo.size(),
@@ -527,13 +521,13 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
         : replicationPushFilter.get().filter(projectName.get(), remoteUpdatesList);
   }
 
-  private List<RemoteRefUpdate> doPushAll(Transport tn, Map<String, Ref> local)
-      throws NotSupportedException, TransportException, IOException {
+  private List<RemoteRefUpdate> doPushAll(Transport tn, Map<String, Ref> local) throws IOException {
     List<RemoteRefUpdate> cmds = new ArrayList<>();
     boolean noPerms = !pool.isReplicatePermissions();
     Map<String, Ref> remote = listRemote(tn);
     for (Ref src : local.values()) {
       if (!canPushRef(src.getName(), noPerms)) {
+        repLog.atFine().log("Skipping push of ref %s", src.getName());
         continue;
       }
 

@@ -55,7 +55,7 @@ public class DeleteProjectTask implements Runnable {
       return;
     }
 
-    repLog.warn("Cannot delete project {} on remote site {}.", project, replicateURI);
+    repLog.atWarning().log("Cannot delete project %s on remote site %s.", project, replicateURI);
   }
 
   @Override
