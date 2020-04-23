@@ -16,6 +16,24 @@
       "revId": "b71f5b6a7c3ec0415c1767c62548b4196f1e48d4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f2504cc_c0be0e08",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-04-23T20:35:24Z",
+      "side": 1,
+      "message": "Done, but please @Luca review this manual resolution: I\u0027m not sure if that change applied only to ssh or also to http. An amend will be needed again if http is also to be clarified as limited. Thanks.",
+      "parentUuid": "58beafd1_8ff58c06",
+      "revId": "b71f5b6a7c3ec0415c1767c62548b4196f1e48d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
