@@ -181,22 +181,45 @@ remote.NAME.adminUrl
 	local environment.  In that case, an alternative SSH url could
 	be specified to repository creation.
 
-	To enable replication to different Gerrit instance use `gerrit+ssh://`,
+	To enable replication to different Gerrit instance use
 	`gerrit+http://` or `gerrit+https://` as protocol name followed
 	by hostname of another Gerrit server eg.
 
-	`gerrit+ssh://replica1.my.org/`
-	<br>
 	`gerrit+http://replica2.my.org/`
 	<br>
 	`gerrit+https://replica3.my.org/`
 
-	In this case replication will use Gerrit's SSH API or Gerrit's REST API
+	In this case replication will use Gerrit's REST API
 	to create/remove projects and update repository HEAD references.
+
+	*Backward compatibility notice*
+
+	Before Gerrit v2.13 it was possible to enable replication to different
+	Gerrit masters using `gerrit+ssh://`
+	as protocol name followed by hostname of another Gerrit server eg.
+
+	`gerrit+ssh://replica1.my.org/`
+
+	In that case replication would have used Gerrit's SSH API to
+	create/remove projects and update repository HEAD references.
 
 	NOTE: In order to replicate project deletion, the
 	link:https://gerrit-review.googlesource.com/admin/projects/plugins/delete-project delete-project[delete-project]
-	plugin must be installed on the other Gerrit.
+	plugin was needed to be installed on the other Gerrit.
+
+	The `gerrit+ssh` option is kept for backward compatibility, however
+	the use-case behind it is not valid anymore since the introduction of
+	Lucene indexes and the removal of ReviewDb, which would require
+	a lot more machinery to setup a master to master replication scenario.
+
+	The `gerrit+ssh` option is still possible but is limited to the
+	ability to replicate only regular Git repositories that do not
+	contain any code-review or NoteDb information.
+
+	Using `gerrit+ssh` for replicating all Gerrit repositories
+	would result in failures on the All-Users.git replication and
+	would not be able to replicate changes magic refs and indexes
+	across nodes.
 
 remote.NAME.receivepack
 :	Path of the `git-receive-pack` executable on the remote
