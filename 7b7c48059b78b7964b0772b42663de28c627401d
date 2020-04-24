@@ -169,6 +169,30 @@
     },
     {
       "key": {
+        "uuid": "b012e6c6_51d8b46c",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-24T11:38:50Z",
+      "side": 1,
+      "message": "Not necessarily. If it\u0027s not working in the vanilla replication plugin and is removed, we\u0027ll just keep it in our fork (and potentially contribute back a working version later)",
+      "parentUuid": "677d42c8_ff558e55",
+      "range": {
+        "startLine": 200,
+        "startChar": 21,
+        "endLine": 201,
+        "endChar": 47
+      },
+      "revId": "7b7c48059b78b7964b0772b42663de28c627401d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4209bb26_5d841e13",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
