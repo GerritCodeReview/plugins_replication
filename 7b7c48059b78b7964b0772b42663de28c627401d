@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "f217ac50_17cef5e2",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-24T11:00:56Z",
+      "side": 1,
+      "message": "\u003e This is confusing for people who don\u0027t know that review meta data is stored in git.\n\nRight, shall we then say for \"repositories that are not used for code-reviews?\"\n\n\u003e If the intention is to point out that replication cannot be done directly to a gerrit server, and instead to a git daemon that is accessing the same repos as gerrit (i.e. \"behind the back\" of gerrit), then this should be stated explicitly rather than talking about \"regular\" repositories.\n\nI don\u0027t think you can use the gerrit+ssh protocol for a Git Daemon, wasn\u0027t it supposed to be used for a Gerrit master-to-master replication? It needs the Gerrit create-project and delete-project commands, right?\n\n\u003e Or, maybe just replace this with something like \"the ability to replicate regular refs, and not Gerrit\u0027s special refs such as refs/changes/*\"\n.\n.. and refs/meta/* also. But then, again, becomes too technical and the user may not know what is a refs/changes/* or refs/meta/* :-(\n\nI am unsure if gerrit+ssh is of any use AS-IS, if the Gerrit admin is not technical enough for understanding the context.\n\nWhy ideas?",
+      "parentUuid": "1ccec0a9_7086e55e",
+      "range": {
+        "startLine": 200,
+        "startChar": 21,
+        "endLine": 201,
+        "endChar": 47
+      },
+      "revId": "7b7c48059b78b7964b0772b42663de28c627401d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4209bb26_5d841e13",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
