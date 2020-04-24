@@ -47,9 +47,9 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     try {
       config.load();
     } catch (ConfigInvalidException e) {
-      repLog.error(String.format("Config file %s is invalid: %s", cfgPath, e.getMessage()), e);
+      repLog.atSevere().withCause(e).log("Config file %s is invalid: %s", cfgPath, e.getMessage());
     } catch (IOException e) {
-      repLog.error(String.format("Cannot read %s: %s", cfgPath, e.getMessage()), e);
+      repLog.atSevere().withCause(e).log("Cannot read %s: %s", cfgPath, e.getMessage());
     }
     this.replicateAllOnPluginStart = config.getBoolean("gerrit", "replicateOnStartup", false);
     this.defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);

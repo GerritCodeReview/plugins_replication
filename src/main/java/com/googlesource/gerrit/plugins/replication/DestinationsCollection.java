@@ -106,7 +106,7 @@ public class DestinationsCollection implements ReplicationDestinations {
         try {
           uri = new URIish(url);
         } catch (URISyntaxException e) {
-          repLog.warn("adminURL '{}' is invalid: {}", url, e.getMessage());
+          repLog.atWarning().log("adminURL '%s' is invalid: %s", url, e.getMessage());
           continue;
         }
 
@@ -114,13 +114,14 @@ public class DestinationsCollection implements ReplicationDestinations {
           String path =
               replaceName(uri.getPath(), projectName.get(), config.isSingleProjectMatch());
           if (path == null) {
-            repLog.warn("adminURL {} does not contain ${name}", uri);
+            repLog.atWarning().log("adminURL %s does not contain ${name}", uri);
             continue;
           }
 
           uri = uri.setPath(path);
           if (!isSSH(uri)) {
-            repLog.warn("adminURL '{}' is invalid: only SSH and HTTP are supported", uri);
+            repLog.atWarning().log(
+                "adminURL '%s' is invalid: only SSH and HTTP are supported", uri);
             continue;
           }
         }
