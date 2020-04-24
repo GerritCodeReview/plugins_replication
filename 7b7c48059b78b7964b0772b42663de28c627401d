@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9a091d9_01eeee1a",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-24T02:22:39Z",
+      "side": 1,
+      "message": "If NoteDb is enabled then all repos will have NoteDb refs; there is no distinction for \"regular\" repositories.",
+      "range": {
+        "startLine": 200,
+        "startChar": 21,
+        "endLine": 201,
+        "endChar": 47
+      },
+      "revId": "7b7c48059b78b7964b0772b42663de28c627401d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4209bb26_5d841e13",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-24T02:22:39Z",
+      "side": 1,
+      "message": "This is potentially confusing.  Magic refs are refs like \"refs/for/\", \"refs/drafts/\" and \"refs/publish\".  The change refs (refs/changes/*) are real refs. Maybe just remove \"magic\" here so that it only says \"change refs\".",
+      "range": {
+        "startLine": 205,
+        "startChar": 32,
+        "endLine": 205,
+        "endChar": 51
+      },
+      "revId": "7b7c48059b78b7964b0772b42663de28c627401d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99ad7e44_921ac3c5",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-24T02:22:39Z",
+      "side": 1,
+      "message": "The indexes are not stored in git, so the intention of this is not clear.",
+      "range": {
+        "startLine": 205,
+        "startChar": 51,
+        "endLine": 205,
+        "endChar": 62
+      },
+      "revId": "7b7c48059b78b7964b0772b42663de28c627401d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
