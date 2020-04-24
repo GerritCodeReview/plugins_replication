@@ -14,8 +14,6 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerrit;
-import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerritHttp;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isSSH;
 import static com.googlesource.gerrit.plugins.replication.ReplicationFileBasedConfig.replaceName;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
@@ -114,20 +112,6 @@ public class DestinationsCollection implements ReplicationDestinations, Replicat
           continue;
         }
 
-        if (!isGerrit(uri) && !isGerritHttp(uri)) {
-          String path =
-              replaceName(uri.getPath(), projectName.get(), config.isSingleProjectMatch());
-          if (path == null) {
-            repLog.warn("adminURL {} does not contain ${name}", uri);
-            continue;
-          }
-
-          uri = uri.setPath(path);
-          if (!isSSH(uri)) {
-            repLog.warn("adminURL '{}' is invalid: only SSH and HTTP are supported", uri);
-            continue;
-          }
-        }
         uris.put(config, uri);
         adminURLUsed = true;
       }
