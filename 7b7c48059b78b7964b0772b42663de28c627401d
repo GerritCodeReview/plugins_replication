@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "1ccec0a9_7086e55e",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-24T10:56:18Z",
+      "side": 1,
+      "message": "This is confusing for people who don\u0027t know that review meta data is stored in git.\n\nIf the intention is to point out that replication cannot be done directly to a gerrit server, and instead to a git daemon that is accessing the same repos as gerrit (i.e. \"behind the back\" of gerrit), then this should be stated explicitly rather than talking about \"regular\" repositories.\n\nOr, maybe just replace this with something like \"the ability to replicate regular refs, and not Gerrit\u0027s special refs such as refs/changes/*\"",
+      "parentUuid": "2b9b8910_165b68ec",
+      "range": {
+        "startLine": 200,
+        "startChar": 21,
+        "endLine": 201,
+        "endChar": 47
+      },
+      "revId": "7b7c48059b78b7964b0772b42663de28c627401d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4209bb26_5d841e13",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
