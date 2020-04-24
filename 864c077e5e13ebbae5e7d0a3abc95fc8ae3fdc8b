@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9e5322c_77571a26",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-24T12:34:43Z",
+      "side": 0,
+      "message": "Nope, it\u0027s the other way around: it should be executed unconditionally.",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 9
+      },
+      "revId": "864c077e5e13ebbae5e7d0a3abc95fc8ae3fdc8b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
