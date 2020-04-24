@@ -16,44 +16,38 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import com.google.inject.Provider;
 import com.google.inject.util.Providers;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
-import org.junit.Before;
 import org.junit.Test;
 
 public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
-  ReplicationFileBasedConfig replicationFileBasedConfig;
+  ReplicationConfig replicationConfig;
 
   public AutoReloadConfigDecoratorTest() throws IOException {
     super();
   }
 
-  @Override
-  @Before
-  public void setup() {
-    super.setup();
-
-    replicationFileBasedConfig = newReplicationFileBasedConfig();
-  }
-
   @Test
   public void shouldAutoReloadReplicationConfig() throws Exception {
-    FileBasedConfig replicationConfig = newReplicationConfig();
-    replicationConfig.setBoolean("gerrit", null, "autoReload", true);
+    FileBasedConfig fileConfig = newReplicationConfig();
+    fileConfig.setBoolean("gerrit", null, "autoReload", true);
     String remoteName1 = "foo";
     String remoteUrl1 = "ssh://git@git.foo.com/${name}";
-    replicationConfig.setString("remote", remoteName1, "url", remoteUrl1);
-    replicationConfig.save();
+    fileConfig.setString("remote", remoteName1, "url", remoteUrl1);
+    fileConfig.save();
 
-    newAutoReloadConfig().start();
+    replicationConfig = newReplicationFileBasedConfig();
 
-    DestinationsCollection destinationsCollections =
-        newDestinationsCollections(replicationFileBasedConfig);
+    newAutoReloadConfig(() -> newReplicationFileBasedConfig()).start();
+
+    DestinationsCollection destinationsCollections = newDestinationsCollections(replicationConfig);
     destinationsCollections.startup(workQueueMock);
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
@@ -63,8 +57,8 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
 
     String remoteName2 = "bar";
     String remoteUrl2 = "ssh://git@git.bar.com/${name}";
-    replicationConfig.setString("remote", remoteName2, "url", remoteUrl2);
-    replicationConfig.save();
+    fileConfig.setString("remote", remoteName2, "url", remoteUrl2);
+    fileConfig.save();
     executorService.refreshCommand.run();
 
     destinations = destinationsCollections.getAll(FilterType.ALL);
@@ -74,16 +68,151 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
   }
 
   @Test
+  public void shouldAutoReloadFanoutReplicationConfigWhenConfigIsAdded() throws Exception {
+    String remoteName1 = "foo";
+    String remoteUrl1 = "ssh://git@git.foo.com/${name}";
+    FileBasedConfig remoteConfig = newReplicationConfig("replication/" + remoteName1 + ".config");
+    remoteConfig.setString("remote", null, "url", remoteUrl1);
+    remoteConfig.save();
+
+    replicationConfig = new FanoutReplicationConfig(sitePaths, pluginDataPath);
+
+    newAutoReloadConfig(
+            () -> {
+              try {
+                return new FanoutReplicationConfig(sitePaths, pluginDataPath);
+              } catch (IOException | ConfigInvalidException e) {
+                throw new RuntimeException(e);
+              }
+            })
+        .start();
+
+    DestinationsCollection destinationsCollections = newDestinationsCollections(replicationConfig);
+    destinationsCollections.startup(workQueueMock);
+    List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
+    assertThat(destinations).hasSize(1);
+    assertThatContainsDestination(destinations, remoteName1, remoteUrl1);
+
+    TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
+
+    String remoteName2 = "foobar";
+    String remoteUrl2 = "ssh://git@git.foobar.com/${name}";
+    remoteConfig = newReplicationConfig("replication/" + remoteName2 + ".config");
+    remoteConfig.setString("remote", null, "url", remoteUrl2);
+    remoteConfig.save();
+    executorService.refreshCommand.run();
+
+    destinations = destinationsCollections.getAll(FilterType.ALL);
+    assertThat(destinations).hasSize(2);
+    assertThatContainsDestination(destinations, remoteName1, remoteUrl1);
+    assertThatContainsDestination(destinations, remoteName2, remoteUrl2);
+  }
+
+  @Test
+  public void shouldAutoReloadFanoutReplicationConfigWhenConfigIsRemoved() throws Exception {
+    String remoteName1 = "foo";
+    String remoteUrl1 = "ssh://git@git.foo.com/${name}";
+    FileBasedConfig remoteConfig = newReplicationConfig("replication/" + remoteName1 + ".config");
+    remoteConfig.setString("remote", null, "url", remoteUrl1);
+    remoteConfig.save();
+
+    String remoteName2 = "foobar";
+    String remoteUrl2 = "ssh://git@git.foobar.com/${name}";
+    remoteConfig = newReplicationConfig("replication/" + remoteName2 + ".config");
+    remoteConfig.setString("remote", null, "url", remoteUrl2);
+    remoteConfig.save();
+
+    replicationConfig = new FanoutReplicationConfig(sitePaths, pluginDataPath);
+
+    newAutoReloadConfig(
+            () -> {
+              try {
+                return new FanoutReplicationConfig(sitePaths, pluginDataPath);
+              } catch (IOException | ConfigInvalidException e) {
+                throw new RuntimeException(e);
+              }
+            })
+        .start();
+
+    DestinationsCollection destinationsCollections = newDestinationsCollections(replicationConfig);
+    destinationsCollections.startup(workQueueMock);
+    List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
+    assertThat(destinations).hasSize(2);
+    assertThatContainsDestination(destinations, remoteName1, remoteUrl1);
+    assertThatContainsDestination(destinations, remoteName2, remoteUrl2);
+
+    TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
+
+    assertThat(
+            sitePaths.etc_dir.resolve("replication/" + remoteName2 + ".config").toFile().delete())
+        .isTrue();
+
+    executorService.refreshCommand.run();
+
+    destinations = destinationsCollections.getAll(FilterType.ALL);
+    assertThat(destinations).hasSize(1);
+    assertThatContainsDestination(destinations, remoteName1, remoteUrl1);
+  }
+
+  @Test
+  public void shouldAutoReloadFanoutReplicationConfigWhenConfigIsModified() throws Exception {
+    String remoteName1 = "foo";
+    String remoteUrl1 = "ssh://git@git.foo.com/${name}";
+    FileBasedConfig remoteConfig = newReplicationConfig("replication/" + remoteName1 + ".config");
+    remoteConfig.setString("remote", null, "url", remoteUrl1);
+    remoteConfig.save();
+
+    String remoteName2 = "bar";
+    String remoteUrl2 = "ssh://git@git.bar.com/${name}";
+    remoteConfig = newReplicationConfig("replication/" + remoteName2 + ".config");
+    remoteConfig.setString("remote", null, "url", remoteUrl2);
+    remoteConfig.save();
+
+    replicationConfig = new FanoutReplicationConfig(sitePaths, pluginDataPath);
+
+    newAutoReloadConfig(
+            () -> {
+              try {
+                return new FanoutReplicationConfig(sitePaths, pluginDataPath);
+              } catch (IOException | ConfigInvalidException e) {
+                throw new RuntimeException(e);
+              }
+            })
+        .start();
+
+    DestinationsCollection destinationsCollections = newDestinationsCollections(replicationConfig);
+    destinationsCollections.startup(workQueueMock);
+    List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
+    assertThat(destinations).hasSize(2);
+    assertThatContainsDestination(destinations, remoteName1, remoteUrl1);
+    assertThatContainsDestination(destinations, remoteName2, remoteUrl2);
+
+    TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
+
+    String remoteUrl3 = "ssh://git@git.foobar.com/${name}";
+    remoteConfig.setString("remote", null, "url", remoteUrl3);
+    remoteConfig.save();
+
+    executorService.refreshCommand.run();
+
+    destinations = destinationsCollections.getAll(FilterType.ALL);
+    assertThat(destinations).hasSize(2);
+    assertThatContainsDestination(destinations, remoteName1, remoteUrl1);
+    assertThatContainsDestination(destinations, remoteName2, remoteUrl3);
+  }
+
+  @Test
   public void shouldNotAutoReloadReplicationConfigIfDisabled() throws Exception {
     String remoteName1 = "foo";
     String remoteUrl1 = "ssh://git@git.foo.com/${name}";
-    FileBasedConfig replicationConfig = newReplicationConfig();
-    replicationConfig.setBoolean("gerrit", null, "autoReload", false);
-    replicationConfig.setString("remote", remoteName1, "url", remoteUrl1);
-    replicationConfig.save();
+    FileBasedConfig fileConfig = newReplicationConfig();
+    fileConfig.setBoolean("gerrit", null, "autoReload", false);
+    fileConfig.setString("remote", remoteName1, "url", remoteUrl1);
+    fileConfig.save();
 
-    DestinationsCollection destinationsCollections =
-        newDestinationsCollections(replicationFileBasedConfig);
+    replicationConfig = newReplicationFileBasedConfig();
+
+    DestinationsCollection destinationsCollections = newDestinationsCollections(replicationConfig);
     destinationsCollections.startup(workQueueMock);
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
@@ -91,27 +220,32 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
 
     TimeUnit.SECONDS.sleep(1); // Allow the filesystem to change the update TS
 
-    replicationConfig.setString("remote", "bar", "url", "ssh://git@git.bar.com/${name}");
-    replicationConfig.save();
+    fileConfig.setString("remote", "bar", "url", "ssh://git@git.bar.com/${name}");
+    fileConfig.save();
     executorService.refreshCommand.run();
 
     assertThat(destinationsCollections.getAll(FilterType.ALL)).isEqualTo(destinations);
   }
 
-  private AutoReloadConfigDecorator newAutoReloadConfig() throws ConfigInvalidException {
+  private AutoReloadConfigDecorator newAutoReloadConfig(
+      Supplier<ReplicationConfig> configSupplier) {
     AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
-            newDestinationsCollections(replicationFileBasedConfig),
-            replicationFileBasedConfig,
-            sitePaths,
-            pluginDataPath,
+            configParser,
+            new Provider<ReplicationConfig>() {
+
+              @Override
+              public ReplicationConfig get() {
+                return configSupplier.get();
+              }
+            },
             eventBus,
             Providers.of(replicationQueueMock));
     return new AutoReloadConfigDecorator(
-        "replication", workQueueMock, replicationFileBasedConfig, autoReloadRunnable, eventBus);
-  }
-
-  private ReplicationFileBasedConfig newReplicationFileBasedConfig() {
-    return new ReplicationFileBasedConfig(sitePaths, pluginDataPath);
+        "replication",
+        workQueueMock,
+        newReplicationFileBasedConfig(),
+        autoReloadRunnable,
+        eventBus);
   }
 }

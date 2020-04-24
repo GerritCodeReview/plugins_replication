@@ -13,16 +13,19 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
+
 import com.google.common.base.Strings;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
+import java.io.IOException;
 import java.nio.file.Path;
+import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 
-@Singleton
 public class ReplicationFileBasedConfig implements ReplicationConfig {
   private static final int DEFAULT_SSH_CONNECTION_TIMEOUT_MS = 2 * 60 * 1000; // 2 minutes
 
@@ -41,6 +44,13 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     this.site = site;
     this.cfgPath = site.etc_dir.resolve("replication.config");
     this.config = new FileBasedConfig(cfgPath.toFile(), FS.DETECTED);
+    try {
+      config.load();
+    } catch (ConfigInvalidException e) {
+      repLog.atSevere().withCause(e).log("Config file %s is invalid: %s", cfgPath, e.getMessage());
+    } catch (IOException e) {
+      repLog.atSevere().withCause(e).log("Cannot read %s: %s", cfgPath, e.getMessage());
+    }
     this.replicateAllOnPluginStart = config.getBoolean("gerrit", "replicateOnStartup", false);
     this.defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);
     this.maxRefsToLog = config.getInt("gerrit", "maxRefsToLog", 0);
@@ -98,7 +108,8 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     return cfgPath;
   }
 
-  public FileBasedConfig getConfig() {
+  @Override
+  public Config getConfig() {
     return config;
   }
 
