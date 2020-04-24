@@ -18,6 +18,7 @@ import static com.googlesource.gerrit.plugins.replication.GerritSshApi.GERRIT_AD
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.gerrit.common.UsedAt;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.restapi.Url;
 import com.google.inject.Inject;
@@ -37,6 +38,7 @@ import org.eclipse.jgit.transport.CredentialItem;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.URIish;
 
+@UsedAt(UsedAt.Project.COLLABNET)
 public class GerritRestApi implements AdminApi {
 
   public interface Factory {

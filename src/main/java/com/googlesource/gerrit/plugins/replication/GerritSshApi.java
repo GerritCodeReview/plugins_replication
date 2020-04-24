@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.common.UsedAt;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.ssh.SshAddressesModule;
 import java.io.IOException;
@@ -24,6 +25,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.jgit.transport.URIish;
 
+@UsedAt(UsedAt.Project.COLLABNET)
 public class GerritSshApi implements AdminApi {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
