@@ -145,6 +145,30 @@
     },
     {
       "key": {
+        "uuid": "677d42c8_ff558e55",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-24T11:30:55Z",
+      "side": 1,
+      "message": "\u003e Should we conduct a survey if anyone actually using it and if not potentially remove it entirely?\n\nCollabNet (now Digital.ai) uses it for their product, so it must stay :-)",
+      "parentUuid": "2f380b19_2201eba0",
+      "range": {
+        "startLine": 200,
+        "startChar": 21,
+        "endLine": 201,
+        "endChar": 47
+      },
+      "revId": "7b7c48059b78b7964b0772b42663de28c627401d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4209bb26_5d841e13",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
