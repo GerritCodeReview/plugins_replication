@@ -190,7 +190,6 @@ public class Destination {
                 DynamicItem.bind(binder(), AdminApiFactory.class)
                     .to(AdminApiFactory.DefaultAdminApiFactory.class);
 
-                install(new FactoryModuleBuilder().build(GerritRestApi.Factory.class));
                 bind(CloseableHttpClient.class)
                     .toProvider(HttpClientProvider.class)
                     .in(Scopes.SINGLETON);
