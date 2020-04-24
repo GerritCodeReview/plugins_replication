@@ -16,6 +16,24 @@
       "revId": "a222dfed53f43dff0dbc660d57e3a48a71301acd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ec2e4f6_1208a184",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AdminApiFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-24T12:30:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5bbcf78_26783ff1",
+      "revId": "a222dfed53f43dff0dbc660d57e3a48a71301acd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
