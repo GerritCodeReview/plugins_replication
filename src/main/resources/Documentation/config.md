@@ -200,22 +200,45 @@ remote.NAME.adminUrl
 	local environment.  In that case, an alternative SSH url could
 	be specified to repository creation.
 
-	To enable replication to different Gerrit instance use `gerrit+ssh://`,
+	To enable replication to different Gerrit instance use
 	`gerrit+http://` or `gerrit+https://` as protocol name followed
 	by hostname of another Gerrit server eg.
 
-	`gerrit+ssh://replica1.my.org/`
-	<br>
 	`gerrit+http://replica2.my.org/`
 	<br>
 	`gerrit+https://replica3.my.org/`
 
-	In this case replication will use Gerrit's SSH API or Gerrit's REST API
+	In this case replication will use Gerrit's REST API
 	to create/remove projects and update repository HEAD references.
 
 	NOTE: In order to replicate project deletion, the
 	link:https://gerrit-review.googlesource.com/admin/projects/plugins/delete-project delete-project[delete-project]
 	plugin must be installed on the other Gerrit.
+
+	*Backward compatibility notice*
+
+	Before Gerrit v2.13 it was possible to enable replication to different
+	Gerrit masters using `gerrit+ssh://`
+	as protocol name followed by hostname of another Gerrit server eg.
+
+	`gerrit+ssh://replica1.my.org/`
+
+	In that case replication would have used Gerrit's SSH API to
+	create/remove projects and update repository HEAD references.
+
+	The `gerrit+ssh` option is kept for backward compatibility, however
+	the use-case behind it is not valid anymore since the introduction of
+	Lucene indexes and the removal of ReviewDb, which would require
+	a lot more machinery to setup a master to master replication scenario.
+
+	The `gerrit+ssh` option is still possible but is limited to the
+	ability to replicate only regular Git repositories that do not
+	contain any code-review or NoteDb information.
+
+	Using `gerrit+ssh` for replicating all Gerrit repositories
+	would result in failures on the All-Users.git replication and
+	would not be able to replicate changes magic refs and indexes
+	across nodes.
 
 remote.NAME.receivepack
 :	Path of the `git-receive-pack` executable on the remote
@@ -446,6 +469,79 @@ remote.NAME.slowLatencyThreshold
 
 	default: 15 minutes
 
+Directory `replication`
+--------------------
+The optional directory `$site_path/etc/replication` contains Git-style
+config files that controls the replication settings for the replication
+plugin. When present all `remote` sections from `replication.config` file are
+ignored.
+
+Files are composed of one `remote` section. Multiple `remote` sections or any
+other section makes the file invalid and skipped by the replication plugin.
+File name defines remote section name. Each section provides common configuration
+settings for one or more destination URLs. For more details how to setup `remote`
+sections please refer to the `replication.config` section.
+
+### Configuration example:
+
+Static configuration in `$site_path/etc/replication.config`:
+
+```
+[gerrit]
+    autoReload = true
+    replicateOnStartup = false
+[replication]
+    lockErrorMaxRetries = 5
+    maxRetries = 5
+```
+
+Remote sections in `$site_path/etc/replication` directory:
+
+* File `$site_path/etc/replication/host-one.config`
+
+ ```
+ [remote]
+    url = gerrit2@host-one.example.com:/some/path/${name}.git
+ ```
+
+
+* File `$site_path/etc/replication/pubmirror.config`
+
+ ```
+  [remote]
+    url = mirror1.us.some.org:/pub/git/${name}.git
+    url = mirror2.us.some.org:/pub/git/${name}.git
+    url = mirror3.us.some.org:/pub/git/${name}.git
+    push = +refs/heads/*:refs/heads/*
+    push = +refs/tags/*:refs/tags/*
+    threads = 3
+    authGroup = Public Mirror Group
+    authGroup = Second Public Mirror Group
+ ```
+
+Replication plugin resolves config files to the following configuration:
+
+```
+[gerrit]
+    autoReload = true
+    replicateOnStartup = false
+[replication]
+    lockErrorMaxRetries = 5
+    maxRetries = 5
+
+[remote "host-one"]
+    url = gerrit2@host-one.example.com:/some/path/${name}.git
+
+[remote "pubmirror"]
+    url = mirror1.us.some.org:/pub/git/${name}.git
+    url = mirror2.us.some.org:/pub/git/${name}.git
+    url = mirror3.us.some.org:/pub/git/${name}.git
+    push = +refs/heads/*:refs/heads/*
+    push = +refs/tags/*:refs/tags/*
+    threads = 3
+    authGroup = Public Mirror Group
+    authGroup = Second Public Mirror Group
+```
 
 File `secure.config`
 --------------------

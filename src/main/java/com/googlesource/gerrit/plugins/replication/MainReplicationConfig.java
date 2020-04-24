@@ -1,4 +1,4 @@
-// Copyright (C) 2019 The Android Open Source Project
+// Copyright (C) 2020 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,18 +14,10 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import java.util.List;
-import org.eclipse.jgit.errors.ConfigInvalidException;
+import com.google.inject.BindingAnnotation;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
-public interface ReplicationConfigValidator {
-
-  /**
-   * validate the new replication.config
-   *
-   * @param newConfig new configuration detected
-   * @return List of validated {@link RemoteConfiguration}
-   * @throws ConfigInvalidException if the new configuration is not valid.
-   */
-  List<RemoteConfiguration> validateConfig(ReplicationFileBasedConfig newConfig)
-      throws ConfigInvalidException;
-}
+@BindingAnnotation
+@Retention(RetentionPolicy.RUNTIME)
+public @interface MainReplicationConfig {}
