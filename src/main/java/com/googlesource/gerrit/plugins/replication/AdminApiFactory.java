@@ -33,32 +33,21 @@ public interface AdminApiFactory {
   @Singleton
   static class DefaultAdminApiFactory implements AdminApiFactory {
     protected final SshHelper sshHelper;
-    private final GerritRestApi.Factory gerritRestApiFactory;
 
     @Inject
-    public DefaultAdminApiFactory(SshHelper sshHelper, GerritRestApi.Factory gerritRestApiFactory) {
+    public DefaultAdminApiFactory(SshHelper sshHelper) {
       this.sshHelper = sshHelper;
-      this.gerritRestApiFactory = gerritRestApiFactory;
     }
 
     @Override
     public Optional<AdminApi> create(URIish uri) {
-      if (isGerrit(uri)) {
-        return Optional.of(new GerritSshApi(sshHelper, uri));
-      } else if (!uri.isRemote()) {
+      if (!uri.isRemote()) {
         return Optional.of(new LocalFS(uri));
       } else if (isSSH(uri)) {
         return Optional.of(new RemoteSsh(sshHelper, uri));
-      } else if (isGerritHttp(uri)) {
-        return Optional.of(gerritRestApiFactory.create(uri));
       }
       return Optional.empty();
     }
-  }
-
-  static boolean isGerrit(URIish uri) {
-    String scheme = uri.getScheme();
-    return scheme != null && scheme.toLowerCase().equals("gerrit+ssh");
   }
 
   static boolean isSSH(URIish uri) {
@@ -73,10 +62,5 @@ public interface AdminApiFactory {
       return true;
     }
     return false;
-  }
-
-  public static boolean isGerritHttp(URIish uri) {
-    String scheme = uri.getScheme();
-    return scheme != null && scheme.toLowerCase().contains("gerrit+http");
   }
 }
