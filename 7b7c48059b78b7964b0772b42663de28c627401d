@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "e747d54e_1f93fc43",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-24T11:04:33Z",
+      "side": 1,
+      "message": "\u003e shall we then say for \"repositories that are not used for code-reviews?\"\n\nThat would also be confusing.  What\u0027s a repository that\u0027s not used for code reviews?  Aren\u0027t all repositories potentially having code reviews on them, even All-Users and All-Projects?",
+      "parentUuid": "f217ac50_17cef5e2",
+      "range": {
+        "startLine": 200,
+        "startChar": 21,
+        "endLine": 201,
+        "endChar": 47
+      },
+      "revId": "7b7c48059b78b7964b0772b42663de28c627401d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4209bb26_5d841e13",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
