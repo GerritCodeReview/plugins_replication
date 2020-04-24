@@ -27,6 +27,7 @@ import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.git.WorkQueue;
+import com.google.gerrit.util.logging.NamedFluentLogger;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
@@ -39,8 +40,6 @@ import java.util.Set;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import org.eclipse.jgit.transport.URIish;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /** Manages automatic replication to remote repositories. */
 public class ReplicationQueue
@@ -50,7 +49,7 @@ public class ReplicationQueue
         ProjectDeletedListener,
         HeadUpdatedListener {
   static final String REPLICATION_LOG_NAME = "replication_log";
-  static final Logger repLog = LoggerFactory.getLogger(REPLICATION_LOG_NAME);
+  static final NamedFluentLogger repLog = NamedFluentLogger.forName(REPLICATION_LOG_NAME);
 
   private final ReplicationStateListener stateLog;
 
@@ -99,7 +98,7 @@ public class ReplicationQueue
     distributor.stop();
     int discarded = destinations.get().shutdown();
     if (discarded > 0) {
-      repLog.warn("Canceled {} replication events during shutdown", discarded);
+      repLog.atWarning().log("Canceled %d replication events during shutdown", discarded);
     }
   }
 
@@ -158,6 +157,8 @@ public class ReplicationQueue
           }
           cfg.schedule(project, refName, uri, state, now);
         }
+      } else {
+        repLog.atFine().log("Skipping ref %s on project %s", refName, project.get());
       }
     }
   }
@@ -170,7 +171,7 @@ public class ReplicationQueue
       for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.listWaiting()) {
         String eventKey = String.format("%s:%s", t.project, t.ref);
         if (!eventsReplayed.contains(eventKey)) {
-          repLog.info("Firing pending task {}", eventKey);
+          repLog.atInfo().log("Firing pending task %s", eventKey);
           fire(t.project, t.ref, true);
           eventsReplayed.add(eventKey);
         }
@@ -223,7 +224,7 @@ public class ReplicationQueue
     for (ReferenceUpdatedEvent event : beforeStartupEventsQueue) {
       String eventKey = String.format("%s:%s", event.projectName(), event.refName());
       if (!eventsReplayed.contains(eventKey)) {
-        repLog.info("Firing pending task {}", event);
+        repLog.atInfo().log("Firing pending task %s", event);
         fire(event.projectName(), event.refName(), false);
         eventsReplayed.add(eventKey);
       }

@@ -58,7 +58,8 @@ public class UpdateHeadTask implements Runnable {
       return;
     }
 
-    repLog.warn("Cannot update HEAD of project {} on remote site {}.", project, replicateURI);
+    repLog.atWarning().log(
+        "Cannot update HEAD of project %s on remote site %s.", project, replicateURI);
   }
 
   @Override

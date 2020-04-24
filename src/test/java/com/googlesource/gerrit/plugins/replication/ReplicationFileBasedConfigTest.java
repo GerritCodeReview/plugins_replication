@@ -62,8 +62,8 @@ public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(2);
 
-    assertThatIsDestination(destinations.get(0), remoteName1, remoteUrl1);
-    assertThatIsDestination(destinations.get(1), remoteName2, remoteUrl2);
+    assertThatContainsDestination(destinations, remoteName1, remoteUrl1);
+    assertThatContainsDestination(destinations, remoteName2, remoteUrl2);
   }
 
   @Test

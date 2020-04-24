@@ -53,6 +53,7 @@ import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectState;
 import com.google.gerrit.server.util.RequestContext;
+import com.google.gerrit.util.logging.NamedFluentLogger;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
@@ -84,10 +85,11 @@ import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
-import org.slf4j.Logger;
 
 public class Destination {
-  private static final Logger repLog = ReplicationQueue.repLog;
+  private static final NamedFluentLogger repLog = ReplicationQueue.repLog;
+
+  private static final String PROJECT_NOT_AVAILABLE = "source project %s not available";
 
   public interface Factory {
     Destination create(DestinationConfiguration config);
@@ -157,7 +159,7 @@ public class Destination {
           builder.add(g.getUUID());
           addRecursiveParents(g.getUUID(), builder, groupIncludeCache);
         } else {
-          repLog.warn("Group \"{}\" not recognized, removing from authGroup", name);
+          repLog.atWarning().log("Group \"%s\" not recognized, removing from authGroup", name);
         }
       }
       remoteUser = new RemoteSiteUser(new ListGroupMembership(builder.build()));
@@ -241,11 +243,9 @@ public class Destination {
         int numInFlight = inFlight.size();
 
         if (numPending > 0 || numInFlight > 0) {
-          repLog.warn(
-              "Cancelling replication events (pending={}, inFlight={}) for destination {}",
-              numPending,
-              numInFlight,
-              getRemoteConfigName());
+          repLog.atWarning().log(
+              "Cancelling replication events (pending=%d, inFlight=%d) for destination %s",
+              numPending, numInFlight, getRemoteConfigName());
 
           foreachPushOp(
               pending,
@@ -277,9 +277,12 @@ public class Destination {
 
   private boolean shouldReplicate(ProjectState state, CurrentUser user)
       throws PermissionBackendException {
+    String name = state.getProject().getName();
     if (!config.replicateHiddenProjects()
         && state.getProject().getState()
             == com.google.gerrit.extensions.client.ProjectState.HIDDEN) {
+      repLog.atFine().log(
+          "Project %s is hidden and replication of hidden projects is disabled", name);
       return false;
     }
 
@@ -292,6 +295,9 @@ public class Destination {
       permissionBackend.user(user).project(state.getNameKey()).check(permissionToCheck);
       return true;
     } catch (AuthException e) {
+      repLog.atFine().log(
+          "Project %s is not visible to current user %s",
+          name, user.getUserName().orElse("unknown"));
       return false;
     }
   }
@@ -306,12 +312,16 @@ public class Destination {
                 try {
                   projectState = projectCache.get(project).orElseThrow(noSuchProject(project));
                 } catch (StorageException e) {
+                  repLog.atWarning().withCause(e).log(
+                      "Error reading project %s from cache", project);
                   return false;
                 }
                 if (!projectState.statePermitsRead()) {
+                  repLog.atFine().log("Project %s does not permit read", project);
                   return false;
                 }
                 if (!shouldReplicate(projectState, userProvider.get())) {
+                  repLog.atFine().log("Project %s should not be replicated", project);
                   return false;
                 }
                 if (PushOne.ALL_REFS.equals(ref)) {
@@ -324,13 +334,16 @@ public class Destination {
                       .ref(ref)
                       .check(RefPermission.READ);
                 } catch (AuthException e) {
+                  repLog.atFine().log(
+                      "Ref %s on project %s is not visible to calling user",
+                      ref, project, userProvider.get().getUserName().orElse("unknown"));
                   return false;
                 }
                 return true;
               })
           .call();
     } catch (NoSuchProjectException err) {
-      stateLog.error(String.format("source project %s not available", project), err, states);
+      stateLog.error(String.format(PROJECT_NOT_AVAILABLE, project), err, states);
     } catch (Exception e) {
       Throwables.throwIfUnchecked(e);
       throw new RuntimeException(e);
@@ -353,7 +366,7 @@ public class Destination {
               })
           .call();
     } catch (NoSuchProjectException err) {
-      stateLog.error(String.format("source project %s not available", project), err, states);
+      stateLog.error(String.format(PROJECT_NOT_AVAILABLE, project), err, states);
     } catch (Exception e) {
       Throwables.throwIfUnchecked(e);
       throw new RuntimeException(e);
@@ -367,10 +380,11 @@ public class Destination {
 
   void schedule(
       Project.NameKey project, String ref, URIish uri, ReplicationState state, boolean now) {
-    repLog.info("scheduling replication {}:{} => {}", project, ref, uri);
     if (!shouldReplicate(project, ref, state)) {
+      repLog.atFine().log("Not scheduling replication %s:%s => %s", project, ref, uri);
       return;
     }
+    repLog.atInfo().log("scheduling replication %s:%s => %s", project, ref, uri);
 
     if (!config.replicatePermissions()) {
       PushOne e;
@@ -391,7 +405,7 @@ public class Destination {
             return;
           }
         } catch (IOException err) {
-          stateLog.error(String.format("source project %s not available", project), err, state);
+          stateLog.error(String.format(PROJECT_NOT_AVAILABLE, project), err, state);
           return;
         }
       }
@@ -412,7 +426,8 @@ public class Destination {
         task.addState(ref, state);
       }
       state.increasePushTaskCount(project.get(), ref);
-      repLog.info("scheduled {}:{} => {} to run after {}s", project, ref, task, config.getDelay());
+      repLog.atInfo().log(
+          "scheduled %s:%s => %s to run after %ds", project, ref, task, config.getDelay());
     }
   }
 
@@ -588,6 +603,7 @@ public class Destination {
 
   boolean wouldPushProject(Project.NameKey project) {
     if (!shouldReplicate(project)) {
+      repLog.atFine().log("Skipping replication of project %s", project.get());
       return false;
     }
 
@@ -597,7 +613,12 @@ public class Destination {
       return true;
     }
 
-    return (new ReplicationFilter(projects)).matches(project);
+    boolean matches = (new ReplicationFilter(projects)).matches(project);
+    if (!matches) {
+      repLog.atFine().log(
+          "Skipping replication of project %s; does not match filter", project.get());
+    }
+    return matches;
   }
 
   boolean isSingleProjectMatch() {
@@ -606,6 +627,7 @@ public class Destination {
 
   boolean wouldPushRef(String ref) {
     if (!config.replicatePermissions() && RefNames.REFS_CONFIG.equals(ref)) {
+      repLog.atFine().log("Skipping push of ref %s; it is a meta ref", ref);
       return false;
     }
     if (PushOne.ALL_REFS.equals(ref)) {
@@ -616,6 +638,7 @@ public class Destination {
         return true;
       }
     }
+    repLog.atFine().log("Skipping push of ref %s; it does not match push ref specs", ref);
     return false;
   }
 
@@ -647,7 +670,8 @@ public class Destination {
         } else if (remoteNameStyle.equals("basenameOnly")) {
           name = FilenameUtils.getBaseName(name);
         } else if (!remoteNameStyle.equals("slash")) {
-          repLog.debug("Unknown remoteNameStyle: {}, falling back to slash", remoteNameStyle);
+          repLog.atFine().log(
+              "Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
         }
         String replacedPath = replaceName(uri.getPath(), name, config.isSingleProjectMatch());
         if (replacedPath != null) {
@@ -739,7 +763,7 @@ public class Destination {
       try {
         eventDispatcher.get().postEvent(BranchNameKey.create(project, ref), event);
       } catch (PermissionBackendException e) {
-        repLog.error("error posting event", e);
+        repLog.atSevere().withCause(e).log("error posting event");
       }
     }
   }
@@ -753,7 +777,7 @@ public class Destination {
       try {
         eventDispatcher.get().postEvent(BranchNameKey.create(project, ref), event);
       } catch (PermissionBackendException e) {
-        repLog.error("error posting event", e);
+        repLog.atSevere().withCause(e).log("error posting event");
       }
     }
   }
