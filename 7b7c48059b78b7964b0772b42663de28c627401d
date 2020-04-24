@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2b9b8910_165b68ec",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-24T09:46:40Z",
+      "side": 1,
+      "message": "\u003e If NoteDb is enabled then all repos will have NoteDb refs; there is no distinction for \"regular\" repositories.\n\nAnd \"that do not contain any code-review or NoteDb information\" is not explaining what \"regular\" means? You cannot basically use for any repo that has code reviews. Basically, only simple git repos that you keep in Gerrit only as a git server.",
+      "parentUuid": "e9a091d9_01eeee1a",
+      "range": {
+        "startLine": 200,
+        "startChar": 21,
+        "endLine": 201,
+        "endChar": 47
+      },
+      "revId": "7b7c48059b78b7964b0772b42663de28c627401d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4209bb26_5d841e13",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
@@ -64,6 +88,30 @@
         "startChar": 51,
         "endLine": 205,
         "endChar": 62
+      },
+      "revId": "7b7c48059b78b7964b0772b42663de28c627401d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ffbb876_03e5231f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-24T09:46:40Z",
+      "side": 1,
+      "message": "You are right, point taken. Is \"changes and meta\" refs, not magic.",
+      "parentUuid": "4209bb26_5d841e13",
+      "range": {
+        "startLine": 205,
+        "startChar": 32,
+        "endLine": 205,
+        "endChar": 51
       },
       "revId": "7b7c48059b78b7964b0772b42663de28c627401d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
