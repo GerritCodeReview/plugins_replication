@@ -217,6 +217,30 @@
     },
     {
       "key": {
+        "uuid": "1f9ba6e9_457e1935",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-24T12:15:37Z",
+      "side": 1,
+      "message": "To be on the safe side today that we are releasing Gerrit v3.2-rc0, I\u0027ve removed it on master:\nhttps://gerrit-review.googlesource.com/c/plugins/replication/+/264292\n\nThen we can run a survey and check if it is actually used also in v2.16, v3.0 or v3.1 by anyone.",
+      "parentUuid": "9b40c1f5_83c5ebcf",
+      "range": {
+        "startLine": 200,
+        "startChar": 21,
+        "endLine": 201,
+        "endChar": 47
+      },
+      "revId": "7b7c48059b78b7964b0772b42663de28c627401d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4209bb26_5d841e13",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
