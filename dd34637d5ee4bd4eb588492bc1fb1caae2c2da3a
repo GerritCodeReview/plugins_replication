@@ -16,6 +16,24 @@
       "revId": "dd34637d5ee4bd4eb588492bc1fb1caae2c2da3a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06b85306_76da4b5c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-24T13:48:30Z",
+      "side": 1,
+      "message": "\u003e IMHO, the topic is not so simple.\n\u003e \n\u003e By removing the gerrit+ssh and gerrit+http protocols we are\n\u003e removing the possibility to create missing projects and propagate\n\u003e project deletions when the other side is Gerrit master.\n\nYes, will rephrase in that sense.\n\n\u003e However, we are not really removing a possibility to replicate\n\u003e to another Gerrit master, which this change claims to do.\n\nFair enough, that is a different problem though. I believe we should\nleave that \"open\" anyway, because Digital.ai actually uses the Gerrit\nmaster to master replication directly.\n\n\u003e One can use the normal http/ssh urls and specify a remote\n\u003e Gerrit master url and run into the same issue you described above.\n\nApart from knowing about the issue and customising the behaviour\nin their Gerrit fork and in their plugin. But I\u0027ll leave it to\nDavidP to comment on that, as I don\u0027t know the specifics of its use-case.\n\n\u003e I am not against removal of the gerrit+ssh and gerrit+http but\n\u003e if we want to disable replication to another Gerrit master we\n\u003e have to do more than just remove these two \"protocols\". For example, we can check if the remote is actually a Gerrit server.\n\nSure, we could, but it is out of scope of this change.\nI\u0027ll remove the part that mentions that in the commit.",
+      "parentUuid": "92b96e75_48c000d2",
+      "revId": "dd34637d5ee4bd4eb588492bc1fb1caae2c2da3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
