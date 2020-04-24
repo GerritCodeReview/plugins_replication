@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92b96e75_48c000d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-04-24T13:42:13Z",
+      "side": 1,
+      "message": "IMHO, the topic is not so simple.\n\nBy removing the gerrit+ssh and gerrit+http protocols we are\nremoving the possibility to create missing projects and propagate\nproject deletions when the other side is Gerrit master.\n\nHowever, we are not really removing a possibility to replicate\nto another Gerrit master, which this change claims to do.\nOne can use the normal http/ssh urls and specify a remote\nGerrit master url and run into the same issue you described above.\n\nI am not against removal of the gerrit+ssh and gerrit+http but\nif we want to disable replication to another Gerrit master we\nhave to do more than just remove these two \"protocols\". For example, we can check if the remote is actually a Gerrit server.\nWe could do that by trying a specific REST call which is only\nprovided by Gerrit master.",
+      "revId": "dd34637d5ee4bd4eb588492bc1fb1caae2c2da3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
