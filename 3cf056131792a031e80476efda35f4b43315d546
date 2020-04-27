@@ -22,6 +22,30 @@
       "revId": "3cf056131792a031e80476efda35f4b43315d546",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0aa6a55_fdf9f458",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-27T23:30:08Z",
+      "side": 1,
+      "message": "The exception includes the full URI and the message \"lock failure\", so the log ends up looking something like:\n\n  Cannot replicate to http://path/to/project.git: http://path/to/project.git lock failure\n\nWith this change the message will be:\n\n  Cannot replicate to http://path/to/project.git due to lock failure\n\nWe could just make it log the exception, but then if the formatting of the exception message changed then this log will also change. I think it\u0027s better to make the log message fixed. If we want the detail, maybe we can add a .withCause(...) call to the log.",
+      "parentUuid": "d3682185_7f0465fc",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "3cf056131792a031e80476efda35f4b43315d546",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
