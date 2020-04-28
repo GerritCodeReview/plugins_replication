@@ -543,12 +543,14 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
     if (config.isMirror()) {
       for (Ref ref : remote.values()) {
-        if (!Constants.HEAD.equals(ref.getName())) {
-          RefSpec spec = matchDst(ref.getName());
-          if (spec != null && !local.containsKey(spec.getSource())) {
-            // No longer on local side, request removal.
-            delete(cmds, spec);
-          }
+        if (Constants.HEAD.equals(ref.getName())) {
+          repLog.atFine().log("Skipping deletion of %s", ref.getName());
+          continue;
+        }
+        RefSpec spec = matchDst(ref.getName());
+        if (spec != null && !local.containsKey(spec.getSource())) {
+          // No longer on local side, request removal.
+          delete(cmds, spec);
         }
       }
     }
