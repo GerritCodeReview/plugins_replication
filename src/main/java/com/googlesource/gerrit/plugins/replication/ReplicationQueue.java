@@ -85,7 +85,7 @@ public class ReplicationQueue
     if (!running) {
       destinations.get().startup(workQueue);
       running = true;
-      replicationTasksStorage.resetAll();
+      replicationTasksStorage.recoverAll();
       firePendingEvents();
       fireBeforeStartupEvents();
       distributor = new Distributor(workQueue);
