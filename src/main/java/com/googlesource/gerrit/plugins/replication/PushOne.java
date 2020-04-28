@@ -321,7 +321,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
         repLog.atInfo().log(
             "PushOp for replication to %s was canceled and thus won't be rescheduled", uri);
       } else if (status.isExternalInflight()) {
-        repLog.atInfo().log("PushOp for replication to %s was denied externally", uri);
+        repLog.atInfo().log(
+            "PushOp for replication to %s was denied externally"
+                + " (likely completing or completed by another node)",
+            uri);
       } else {
         repLog.atInfo().log(
             "Rescheduling replication to %s to avoid collision with the in-flight push [%s].",

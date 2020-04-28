@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
@@ -163,7 +164,7 @@ public class ReplicationTasksStorage {
     lock.release();
   }
 
-  public synchronized void resetAll() {
+  public synchronized void recoverAll() {
     try (DirectoryStream<Path> dirs = Files.newDirectoryStream(createDir(runningUpdates))) {
       for (Path dir : dirs) {
         UriLock lock = null;
@@ -171,10 +172,10 @@ public class ReplicationTasksStorage {
           if (lock == null) {
             lock = new UriLock(u);
           }
-          new Task(u).reset();
+          new Task(u).recover();
         }
         if (lock != null) {
-          lock.release();
+          lock.recover();
         }
       }
     } catch (IOException e) {
@@ -264,7 +265,10 @@ public class ReplicationTasksStorage {
         Files.createDirectory(runningDir);
         return true;
       } catch (FileAlreadyExistsException e) {
-        return false; // already running, likely externally
+        logger.atFine().log(
+            "Direcotory already exists (likely running on another node) while starting uri %s",
+            uriKey);
+        return false;
       } catch (IOException e) {
         logger.atSevere().withCause(e).log("Error while starting uri %s", uriKey);
         return true; // safer to risk a duplicate than to skip it
@@ -276,12 +280,22 @@ public class ReplicationTasksStorage {
         logger.atFine().log("DELETE %s %s DISABLED", runningDir, updateLog());
         return;
       }
+      delete("resetting", "recovered");
+    }
 
+    public void recover() {
+      delete("recovering", "completed");
+    }
+
+    private void delete(String myAction, String otherAction) {
       try {
         logger.atFine().log("DELETE %s %s", runningDir, updateLog());
         Files.delete(runningDir);
+      } catch (NoSuchFileException e) {
+        logger.atFine().log(
+            "Directory not found (likely %s by another node) for uri %s", otherAction, uriKey);
       } catch (IOException e) {
-        logger.atSevere().withCause(e).log("Error while releasing uri %s", uriKey);
+        logger.atSevere().withCause(e).log("Error while %s uri %s", myAction, uriKey);
       }
     }
 
@@ -323,7 +337,7 @@ public class ReplicationTasksStorage {
         logger.atFine().log("CREATE %s %s", tmp, updateLog());
         Files.write(tmp, json.getBytes(UTF_8));
         logger.atFine().log("RENAME %s %s %s", tmp, waiting, updateLog());
-        rename(tmp, waiting);
+        rename(tmp, waiting, "creating", null);
       } catch (IOException e) {
         logger.atWarning().withCause(e).log("Couldn't create task %s", json);
       }
@@ -331,12 +345,16 @@ public class ReplicationTasksStorage {
     }
 
     public boolean start() {
-      rename(waiting, running);
+      rename(waiting, running, "starting", "inFlight, completed, or recovered");
       return Files.exists(running);
     }
 
     public void reset() {
-      rename(running, waiting);
+      rename(running, waiting, "resetting", "recovered");
+    }
+
+    public void recover() {
+      rename(running, waiting, "recovering", "completed");
     }
 
     public boolean isWaiting() {
@@ -357,12 +375,21 @@ public class ReplicationTasksStorage {
       }
     }
 
-    private void rename(Path from, Path to) {
+    private void rename(Path from, Path to, String myAction, String otherAction) {
       try {
-        logger.atFine().log("RENAME %s to %s %s", from, to, updateLog());
-        Files.move(from, to, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+        try {
+          logger.atFine().log("RENAME %s to %s %s", from, to, updateLog());
+          Files.move(from, to, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+        } catch (NoSuchFileException e) {
+          if (otherAction == null) {
+            throw e;
+          }
+          logger.atFine().log(
+              "File not found while %s (likely %s by another node) for task %s",
+              myAction, otherAction, taskKey);
+        }
       } catch (IOException e) {
-        logger.atSevere().withCause(e).log("Error while renaming task %s", taskKey);
+        logger.atSevere().withCause(e).log("Error while %s task %s", myAction, taskKey);
       }
     }
 
