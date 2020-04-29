@@ -30,7 +30,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
 
@@ -138,21 +141,24 @@ public class ReplicationTasksStorage {
     this.disableDeleteForTesting = deleteDisabled;
   }
 
-  public synchronized boolean start(PushOne push) {
+  /** returns the started refs or no value if in-flight */
+  public synchronized Optional<Set<String>> start(PushOne push) {
     UriLock lock = new UriLock(push);
     if (!lock.acquire()) {
-      return false;
+      return Optional.empty();
     }
 
-    boolean started = false;
+    Set<String> started = new HashSet<>();
     for (String ref : push.getRefs()) {
-      started = new Task(lock, ref).start() || started;
+      if (new Task(lock, ref).start()) {
+        started.add(ref);
+      }
     }
 
-    if (!started) { // No tasks left, likely replicated externally
+    if (started.isEmpty()) { // No tasks left, likely replicated externally
       lock.release();
     }
-    return started;
+    return Optional.of(started);
   }
 
   public synchronized void reset(PushOne push) {
