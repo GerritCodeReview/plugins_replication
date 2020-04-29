@@ -368,9 +368,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
         repLog.atSevere().log("Cannot replicate to %s: %s", uri, cause.getMessage());
       } else if (e instanceof LockFailureException) {
         lockRetryCount++;
-        // The LockFailureException message contains both URI and reason
-        // for this failure.
-        repLog.atSevere().log("Cannot replicate to %s: %s", uri, e.getMessage());
+        repLog.atSevere().log("Cannot replicate to %s due to lock failure", uri);
 
         // The remote push operation should be retried.
         if (lockRetryCount <= maxLockRetries) {
@@ -381,8 +379,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
           }
         } else {
           repLog.atSevere().log(
-              "Giving up after %d occurrences of this error: %s during replication to %s",
-              lockRetryCount, e.getMessage(), uri);
+              "Giving up after %d lock failures during replication to %s", lockRetryCount, uri);
         }
       } else {
         if (canceledWhileRunning.get()) {
