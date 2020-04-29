@@ -167,7 +167,10 @@ public class ReplicationState {
     NOT_ATTEMPTED,
 
     /** The ref was successfully replicated. */
-    SUCCEEDED;
+    SUCCEEDED,
+
+    /** The ref was skipped, likely because it was completed by another node. */
+    SKIPPED;
 
     @Override
     public String toString() {

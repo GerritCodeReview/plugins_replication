@@ -296,6 +296,20 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     }
   }
 
+  private void skipped() {
+    for (Map.Entry<String, ReplicationState> entry : stateMap.entries()) {
+      entry
+          .getValue()
+          .notifyRefReplicated(
+              projectName.get(),
+              entry.getKey(),
+              uri,
+              RefPushResult.SKIPPED,
+              RemoteRefUpdate.Status.OK);
+    }
+    stateMap.clear();
+  }
+
   @Override
   public void run() {
     try {
@@ -331,15 +345,18 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       if (status.isCanceled()) {
         repLog.atInfo().log(
             "PushOp for replication to %s was canceled and thus won't be rescheduled", uri);
-      } else if (status.isExternalInflight()) {
+      } else if (status.isExternalCompleted()) {
         repLog.atInfo().log(
-            "PushOp for replication to %s was denied externally"
-                + " (likely in-flight or completed by another node)",
-            uri);
+            "PushOp for replication to %s was completed externally (likely by another node)", uri);
+        skipped();
       } else {
+        String id =
+            status.isExternalInflight()
+                ? "external (likely another node)"
+                : HexFormat.fromInt(status.getInFlightPushId());
         repLog.atInfo().log(
             "Rescheduling replication to %s to avoid collision with the in-flight push [%s].",
-            uri, HexFormat.fromInt(status.getInFlightPushId()));
+            uri, id);
         pool.reschedule(this, Destination.RetryReason.COLLISION);
         isCollision = true;
       }

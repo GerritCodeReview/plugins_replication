@@ -119,6 +119,9 @@ public interface PushResultProcessing {
           sb.append("FAILED!");
           hasError.compareAndSet(false, true);
           break;
+        case SKIPPED:
+          sb.append("Skipped (likely completed by another node)");
+          break;
         case NOT_ATTEMPTED:
           sb.append("NOT ATTEMPTED!");
           break;
