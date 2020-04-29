@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64c5026d_f10f3e94",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-04-29T11:29:32Z",
+      "side": 1,
+      "message": "In this condition, the PushOp hasn\u0027t started yet, the reset() operation would then fail.",
+      "range": {
+        "startLine": 524,
+        "startChar": 41,
+        "endLine": 524,
+        "endChar": 55
+      },
+      "revId": "48ff6f398941572243a0fd7aa26e07d6c95696a1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
