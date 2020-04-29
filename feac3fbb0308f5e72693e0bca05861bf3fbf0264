@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "305bcbfe_41158832",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-04-29T16:37:45Z",
+      "side": 1,
+      "message": "maybe s/completing/in-flight/ ?",
+      "range": {
+        "startLine": 326,
+        "startChar": 28,
+        "endLine": 326,
+        "endChar": 38
+      },
+      "revId": "feac3fbb0308f5e72693e0bca05861bf3fbf0264",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46826050_e3e3b5e8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-04-29T16:37:45Z",
+      "side": 1,
+      "message": "We could s/running/inFlight/ ? We use both terms in the code.",
+      "range": {
+        "startLine": 269,
+        "startChar": 47,
+        "endLine": 269,
+        "endChar": 54
+      },
+      "revId": "feac3fbb0308f5e72693e0bca05861bf3fbf0264",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
