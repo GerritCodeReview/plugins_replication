@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.common.flogger.LazyArgs.lazy;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -320,12 +321,18 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       if (status.isCanceled()) {
         repLog.atInfo().log(
             "PushOp for replication to %s was canceled and thus won't be rescheduled", uri);
-      } else if (status.isExternalInflight()) {
-        repLog.atInfo().log("PushOp for replication to %s was denied externally", uri);
+      } else if (status.isExternalCompleted()) {
+        repLog.atInfo().log(
+            "PushOp for replication to %s was completed externally (likely by another node)", uri);
       } else {
         repLog.atInfo().log(
             "Rescheduling replication to %s to avoid collision with the in-flight push [%s].",
-            uri, HexFormat.fromInt(status.getInFlightPushId()));
+            uri,
+            lazy(
+                () ->
+                    status.isExternalInflight()
+                        ? "external (likely another node)"
+                        : HexFormat.fromInt(status.getInFlightPushId())));
         pool.reschedule(this, Destination.RetryReason.COLLISION);
       }
       return;
