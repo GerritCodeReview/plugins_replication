@@ -19,6 +19,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.flogger.FluentLogger;
 import com.google.common.hash.Hashing;
+import com.google.gerrit.common.Nullable;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.google.inject.ProvisionException;
@@ -30,7 +31,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
 
@@ -138,18 +141,22 @@ public class ReplicationTasksStorage {
     this.disableDeleteForTesting = deleteDisabled;
   }
 
-  public synchronized boolean start(PushOne push) {
+  /** returns the started refs or null if in-flight */
+  @Nullable
+  public synchronized Set<String> start(PushOne push) {
     UriLock lock = new UriLock(push);
     if (!lock.acquire()) {
-      return false;
+      return null;
     }
 
-    boolean started = false;
+    Set<String> started = new HashSet<>();
     for (String ref : push.getRefs()) {
-      started = new Task(lock, ref).start() || started;
+      if (new Task(lock, ref).start()) {
+        started.add(ref);
+      }
     }
 
-    if (!started) { // No tasks left, likely replicated externally
+    if (started.isEmpty()) { // No tasks left, likely replicated externally
       lock.release();
     }
     return started;
