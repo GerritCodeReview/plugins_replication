@@ -27,6 +27,10 @@ public class RunwayStatus {
     return new RunwayStatus(false, inFlightPushId);
   }
 
+  public static RunwayStatus completedExternal() {
+    return new RunwayStatus(false, -2);
+  }
+
   public static RunwayStatus deniedExternal() {
     return new RunwayStatus(false, -1);
   }
@@ -49,6 +53,10 @@ public class RunwayStatus {
 
   public boolean isExternalInflight() {
     return !allowed && inFlightPushId == -1;
+  }
+
+  public boolean isExternalCompleted() {
+    return !allowed && inFlightPushId == -2;
   }
 
   public int getInFlightPushId() {
