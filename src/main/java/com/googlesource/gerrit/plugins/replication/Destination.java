@@ -584,7 +584,9 @@ public class Destination {
 
   void notifyFinished(PushOne op) {
     synchronized (stateLock) {
-      replicationTasksStorage.get().finish(op);
+      if (!op.isRetrying()) {
+        replicationTasksStorage.get().finish(op);
+      }
       inFlight.remove(op.getURI());
     }
   }
