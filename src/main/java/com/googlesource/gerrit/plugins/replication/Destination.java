@@ -533,7 +533,6 @@ public class Destination {
         pending.put(uri, pushOp);
         switch (reason) {
           case COLLISION:
-            replicationTasksStorage.get().reset(pushOp);
             @SuppressWarnings("unused")
             ScheduledFuture<?> ignored =
                 pool.schedule(pushOp, config.getRescheduleDelay(), TimeUnit.SECONDS);
