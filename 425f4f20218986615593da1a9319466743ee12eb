@@ -46,6 +46,30 @@
       "revId": "425f4f20218986615593da1a9319466743ee12eb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4778bf52_d0d3d020",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-05-04T12:13:48Z",
+      "side": 1,
+      "message": "How shall we proceed? Clean revert of this change is not possible, there are conflicts\non some files. After resolving the conflicts, build fails. There are follow-up change\nof this one which depend on flogger. Mainly these are changes from DavidP where logging\nis improved to provide more info.",
+      "parentUuid": "9d7a73e0_e567430c",
+      "range": {
+        "startLine": 315,
+        "startChar": 4,
+        "endLine": 315,
+        "endChar": 12
+      },
+      "revId": "425f4f20218986615593da1a9319466743ee12eb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
