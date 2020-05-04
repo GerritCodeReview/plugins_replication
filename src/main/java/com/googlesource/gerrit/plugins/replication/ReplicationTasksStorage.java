@@ -26,6 +26,7 @@ import com.google.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,18 +109,24 @@ public class ReplicationTasksStorage {
   }
 
   public List<ReplicateRefUpdate> list() {
-    ArrayList<ReplicateRefUpdate> result = new ArrayList<>();
+    List<ReplicateRefUpdate> results = new ArrayList<>();
     try (DirectoryStream<Path> events = Files.newDirectoryStream(refUpdates())) {
-      for (Path e : events) {
-        if (Files.isRegularFile(e)) {
-          String json = new String(Files.readAllBytes(e), UTF_8);
-          result.add(GSON.fromJson(json, ReplicateRefUpdate.class));
+      for (Path path : events) {
+        if (Files.isRegularFile(path)) {
+          try {
+            String json = new String(Files.readAllBytes(path), UTF_8);
+            results.add(GSON.fromJson(json, ReplicateRefUpdate.class));
+          } catch (NoSuchFileException ex) {
+            logger.atFine().log(
+                "File %s not found while listing waiting tasks (likely in-flight or completed by another node)",
+                path);
+          }
         }
       }
     } catch (IOException e) {
       logger.atSevere().withCause(e).log("Error when firing pending events");
     }
-    return result;
+    return results;
   }
 
   @SuppressWarnings("deprecation")
