@@ -33,6 +33,7 @@ import com.google.gerrit.server.git.PerThreadRequestScope;
 import com.google.gerrit.server.git.ProjectRunnable;
 import com.google.gerrit.server.git.WorkQueue.CanceledWhileRunning;
 import com.google.gerrit.server.ioutil.HexFormat;
+import com.google.gerrit.server.logging.TraceContext;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackend.RefFilterOptions;
 import com.google.gerrit.server.permissions.PermissionBackendException;
@@ -72,7 +73,6 @@ import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.Transport;
 import org.eclipse.jgit.transport.URIish;
-import org.slf4j.MDC;
 
 /**
  * A push to remote operation started by {@link GitReferenceUpdatedListener}.
@@ -83,7 +83,7 @@ import org.slf4j.MDC;
 class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final ReplicationStateListener stateLog;
   static final String ALL_REFS = "..all..";
-  static final String ID_MDC_KEY = "pushOneId";
+  static final String ID_KEY = "pushOneId";
 
   interface Factory {
     PushOne create(Project.NameKey d, URIish u);
@@ -308,11 +308,16 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   private void runPushOperation() {
+    try (TraceContext ctx = TraceContext.open().addTag(ID_KEY, HexFormat.fromInt(id))) {
+      doRunPushOperation();
+    }
+  }
+
+  private void doRunPushOperation() {
     // Lock the queue, and remove ourselves, so we can't be modified once
     // we start replication (instead a new instance, with the same URI, is
     // created and scheduled for a future point in time.)
     //
-    MDC.put(ID_MDC_KEY, HexFormat.fromInt(id));
     RunwayStatus status = pool.requestRunway(this);
     if (!status.isAllowed()) {
       if (status.isCanceled()) {

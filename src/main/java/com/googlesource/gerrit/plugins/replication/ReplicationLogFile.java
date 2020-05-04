@@ -28,6 +28,6 @@ public class ReplicationLogFile extends PluginLogFile {
         systemLog,
         serverInfo,
         ReplicationQueue.REPLICATION_LOG_NAME,
-        new PatternLayout("[%d] [%X{" + PushOne.ID_MDC_KEY + "}] %m%n"));
+        new PatternLayout("[%d] %m%n"));
   }
 }
