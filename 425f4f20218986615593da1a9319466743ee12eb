@@ -118,6 +118,30 @@
       "revId": "425f4f20218986615593da1a9319466743ee12eb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29ba88e8_aa7549ef",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-04T13:00:21Z",
+      "side": 1,
+      "message": "https://bugs.chromium.org/p/gerrit/issues/detail?id\u003d12678",
+      "parentUuid": "b4b38e60_4c3b6ce0",
+      "range": {
+        "startLine": 315,
+        "startChar": 4,
+        "endLine": 315,
+        "endChar": 12
+      },
+      "revId": "425f4f20218986615593da1a9319466743ee12eb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
