@@ -33,6 +33,7 @@ import com.google.gerrit.server.git.PerThreadRequestScope;
 import com.google.gerrit.server.git.ProjectRunnable;
 import com.google.gerrit.server.git.WorkQueue.CanceledWhileRunning;
 import com.google.gerrit.server.ioutil.HexFormat;
+import com.google.gerrit.server.logging.TraceContext;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackend.RefFilterOptions;
 import com.google.gerrit.server.permissions.PermissionBackendException;
@@ -308,6 +309,12 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   private void runPushOperation() {
+    try (TraceContext ctx = TraceContext.open().addTag(ID_MDC_KEY, HexFormat.fromInt(id))) {
+      doRunPushOperation();
+    }
+  }
+
+  private void doRunPushOperation() {
     // Lock the queue, and remove ourselves, so we can't be modified once
     // we start replication (instead a new instance, with the same URI, is
     // created and scheduled for a future point in time.)
