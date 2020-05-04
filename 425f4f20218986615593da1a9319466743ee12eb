@@ -70,6 +70,30 @@
       "revId": "425f4f20218986615593da1a9319466743ee12eb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2be4d4ae_5829eb74",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-04T12:33:56Z",
+      "side": 1,
+      "message": "\u003e How shall we proceed? \n\nIt depends on whether or not it\u0027s curently doable to pass parameter to Flogger?\n\nIf yes, then a fix should be straight forward.\n\nIf not, then we probably would have to extend Flogger, and wait for a new release.\n\nIn the latter case we would have to rollack the whole series.",
+      "parentUuid": "4778bf52_d0d3d020",
+      "range": {
+        "startLine": 315,
+        "startChar": 4,
+        "endLine": 315,
+        "endChar": 12
+      },
+      "revId": "425f4f20218986615593da1a9319466743ee12eb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
