@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "cd649a8a_9b18a1bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-05T07:21:30Z",
+      "side": 1,
+      "message": "Why it is not a clean revert? Can\u0027t a series of reverts by applied?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 59
+      },
+      "revId": "76c9c36cd0be8027df940ff6d23c980e938c0cc1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7520331f_c8e85df6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-05T07:21:30Z",
+      "side": 1,
+      "message": "This is not accurate. It has equivalent construct using trace context. Unfortunately, it will change the format output. Mention this here?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 56
+      },
+      "revId": "76c9c36cd0be8027df940ff6d23c980e938c0cc1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bb1515dc_7a621676",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
