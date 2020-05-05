@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb1515dc_7a621676",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2020-05-05T06:53:42Z",
+      "side": 1,
+      "message": "where exactly is the MDC used in the slf4j based implementation ?",
+      "revId": "76c9c36cd0be8027df940ff6d23c980e938c0cc1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
