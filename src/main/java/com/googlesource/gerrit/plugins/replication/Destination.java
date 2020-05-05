@@ -52,7 +52,6 @@ import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectState;
 import com.google.gerrit.server.util.RequestContext;
-import com.google.gerrit.util.logging.NamedFluentLogger;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
@@ -82,9 +81,10 @@ import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
+import org.slf4j.Logger;
 
 public class Destination {
-  private static final NamedFluentLogger repLog = ReplicationQueue.repLog;
+  private static final Logger repLog = ReplicationQueue.repLog;
 
   private static final String PROJECT_NOT_AVAILABLE = "source project %s not available";
 
@@ -154,7 +154,7 @@ public class Destination {
           builder.add(g.getUUID());
           addRecursiveParents(g.getUUID(), builder, groupIncludeCache);
         } else {
-          repLog.atWarning().log("Group \"%s\" not recognized, removing from authGroup", name);
+          repLog.warn("Group \"{}\" not recognized, removing from authGroup", name);
         }
       }
       remoteUser = new RemoteSiteUser(new ListGroupMembership(builder.build()));
@@ -231,7 +231,7 @@ public class Destination {
   public int shutdown() {
     int cnt = 0;
     if (pool != null) {
-      repLog.atWarning().log("Cancelling replication events");
+      repLog.warn("Cancelling replication events");
 
       foreachPushOp(
           pending,
@@ -265,8 +265,7 @@ public class Destination {
     if (!config.replicateHiddenProjects()
         && state.getProject().getState()
             == com.google.gerrit.extensions.client.ProjectState.HIDDEN) {
-      repLog.atFine().log(
-          "Project %s is hidden and replication of hidden projects is disabled", name);
+      repLog.debug("Project {} is hidden and replication of hidden projects is disabled", name);
       return false;
     }
 
@@ -279,9 +278,10 @@ public class Destination {
       permissionBackend.user(user).project(state.getNameKey()).check(permissionToCheck);
       return true;
     } catch (AuthException e) {
-      repLog.atFine().log(
-          "Project %s is not visible to current user %s",
-          name, user.getUserName().orElse("unknown"));
+      repLog.debug(
+          "Project {} is not visible to current user {}",
+          name,
+          user.getUserName().orElse("unknown"));
       return false;
     }
   }
@@ -298,20 +298,19 @@ public class Destination {
                   try {
                     projectState = projectCache.checkedGet(project);
                   } catch (IOException e) {
-                    repLog.atWarning().withCause(e).log(
-                        "Error reading project %s from cache", project);
+                    repLog.warn("Error reading project {} from cache", project, e);
                     return false;
                   }
                   if (projectState == null) {
-                    repLog.atFine().log("Project %s does not exist", project);
+                    repLog.debug("Project {} does not exist", project);
                     throw new NoSuchProjectException(project);
                   }
                   if (!projectState.statePermitsRead()) {
-                    repLog.atFine().log("Project %s does not permit read", project);
+                    repLog.debug("Project {} does not permit read", project);
                     return false;
                   }
                   if (!shouldReplicate(projectState, userProvider.get())) {
-                    repLog.atFine().log("Project %s should not be replicated", project);
+                    repLog.debug("Project {} should not be replicated", project);
                     return false;
                   }
                   if (PushOne.ALL_REFS.equals(ref)) {
@@ -324,9 +323,11 @@ public class Destination {
                         .ref(ref)
                         .check(RefPermission.READ);
                   } catch (AuthException e) {
-                    repLog.atFine().log(
-                        "Ref %s on project %s is not visible to calling user",
-                        ref, project, userProvider.get().getUserName().orElse("unknown"));
+                    repLog.debug(
+                        "Ref {} on project {} is not visible to calling user {}",
+                        ref,
+                        project,
+                        userProvider.get().getUserName().orElse("unknown"));
                     return false;
                   }
                   return true;
@@ -378,10 +379,10 @@ public class Destination {
   void schedule(
       Project.NameKey project, String ref, URIish uri, ReplicationState state, boolean now) {
     if (!shouldReplicate(project, ref, state)) {
-      repLog.atFine().log("Not scheduling replication %s:%s => %s", project, ref, uri);
+      repLog.debug("Not scheduling replication {}:{} => {}", project, ref, uri);
       return;
     }
-    repLog.atInfo().log("scheduling replication %s:%s => %s", project, ref, uri);
+    repLog.info("scheduling replication {}:{} => {}", project, ref, uri);
 
     if (!config.replicatePermissions()) {
       PushOne e;
@@ -423,8 +424,7 @@ public class Destination {
         task.addState(ref, state);
       }
       state.increasePushTaskCount(project.get(), ref);
-      repLog.atInfo().log(
-          "scheduled %s:%s => %s to run after %ds", project, ref, task, config.getDelay());
+      repLog.info("scheduled {}:{} => {} to run after {}s", project, ref, task, config.getDelay());
     }
   }
 
@@ -590,7 +590,7 @@ public class Destination {
 
   boolean wouldPushProject(Project.NameKey project) {
     if (!shouldReplicate(project)) {
-      repLog.atFine().log("Skipping replication of project %s", project.get());
+      repLog.debug("Skipping replication of project {}", project.get());
       return false;
     }
 
@@ -602,8 +602,7 @@ public class Destination {
 
     boolean matches = (new ReplicationFilter(projects)).matches(project);
     if (!matches) {
-      repLog.atFine().log(
-          "Skipping replication of project %s; does not match filter", project.get());
+      repLog.debug("Skipping replication of project {}; does not match filter", project.get());
     }
     return matches;
   }
@@ -628,7 +627,7 @@ public class Destination {
 
   boolean wouldPushRef(String ref) {
     if (!config.replicatePermissions() && RefNames.REFS_CONFIG.equals(ref)) {
-      repLog.atFine().log("Skipping push of ref %s; it is a meta ref", ref);
+      repLog.debug("Skipping push of ref {}; it is a meta ref", ref);
       return false;
     }
     for (RefSpec s : config.getRemoteConfig().getPushRefSpecs()) {
@@ -636,7 +635,7 @@ public class Destination {
         return true;
       }
     }
-    repLog.atFine().log("Skipping push of ref %s; it does not match push ref specs", ref);
+    repLog.debug("Skipping push of ref {}; it does not match push ref specs", ref);
     return false;
   }
 
@@ -668,8 +667,7 @@ public class Destination {
         } else if (remoteNameStyle.equals("basenameOnly")) {
           name = FilenameUtils.getBaseName(name);
         } else if (!remoteNameStyle.equals("slash")) {
-          repLog.atFine().log(
-              "Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
+          repLog.debug("Unknown remoteNameStyle: {}, falling back to slash", remoteNameStyle);
         }
         String replacedPath =
             ReplicationQueue.replaceName(uri.getPath(), name, isSingleProjectMatch());
@@ -758,7 +756,7 @@ public class Destination {
       try {
         eventDispatcher.get().postEvent(new Branch.NameKey(project, ref), event);
       } catch (PermissionBackendException e) {
-        repLog.atSevere().withCause(e).log("error posting event");
+        repLog.error("error posting event", e);
       }
     }
   }
@@ -772,7 +770,7 @@ public class Destination {
       try {
         eventDispatcher.get().postEvent(new Branch.NameKey(project, ref), event);
       } catch (PermissionBackendException e) {
-        repLog.atSevere().withCause(e).log("error posting event");
+        repLog.error("error posting event", e);
       }
     }
   }
