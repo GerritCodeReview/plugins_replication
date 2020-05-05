@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "32346693_2b477bef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-05-05T07:39:36Z",
+      "side": 1,
+      "message": "Because there were several new log statements added in later commits. We don\u0027t want to also revert those, but just change them to use slf4j.",
+      "parentUuid": "cd649a8a_9b18a1bf",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 59
+      },
+      "revId": "76c9c36cd0be8027df940ff6d23c980e938c0cc1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7520331f_c8e85df6",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
