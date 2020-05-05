@@ -325,7 +325,7 @@ public class Destination {
                         .check(RefPermission.READ);
                   } catch (AuthException e) {
                     repLog.atFine().log(
-                        "Ref %s on project %s is not visible to calling user",
+                        "Ref %s on project %s is not visible to calling user %s",
                         ref, project, userProvider.get().getUserName().orElse("unknown"));
                     return false;
                   }
