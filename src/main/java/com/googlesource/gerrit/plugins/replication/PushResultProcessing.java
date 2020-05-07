@@ -109,7 +109,7 @@ public abstract class PushResultProcessing {
           break;
       }
       sb.append(" (");
-      sb.append(refStatus.toString());
+      sb.append(refStatus == null ? "unknown" : refStatus.toString());
       sb.append(")");
       writeStdOut(sb.toString());
     }
