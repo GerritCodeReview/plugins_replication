@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.gerrit.testing.GerritJUnit.assertThrows;
+import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.NO_OP;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.flogger.FluentLogger;
@@ -46,8 +47,6 @@ import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
-import org.eclipse.jgit.transport.RemoteRefUpdate;
-import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
 import org.junit.Test;
 
@@ -204,24 +203,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   @Test
   public void shouldCreateOneReplicationTaskWhenSchedulingRepoFullSync() throws Exception {
-    PushResultProcessing pushResultProcessing =
-        new PushResultProcessing() {
-
-          @Override
-          void onRefReplicatedToOneNode(
-              String project,
-              String ref,
-              URIish uri,
-              ReplicationState.RefPushResult status,
-              RemoteRefUpdate.Status refStatus) {}
-
-          @Override
-          void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {}
-
-          @Override
-          void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {}
-        };
-
     createTestProject("projectreplica");
 
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
@@ -230,7 +211,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, new ReplicationState(pushResultProcessing), true);
+        .scheduleFullSync(project, null, new ReplicationState(NO_OP), true);
 
     assertThat(listReplicationTasks(".*all.*")).hasSize(1);
   }
