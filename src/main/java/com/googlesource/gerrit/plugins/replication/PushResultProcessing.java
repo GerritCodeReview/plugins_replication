@@ -25,36 +25,54 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
 
-public abstract class PushResultProcessing {
+public interface PushResultProcessing {
+  public static final PushResultProcessing NO_OP = new PushResultProcessing() {};
 
-  abstract void onRefReplicatedToOneNode(
+  /**
+   * Invoked when a ref has been replicated to one node.
+   *
+   * @param project
+   * @param ref
+   * @param uri
+   * @param status
+   * @param refStatus
+   */
+  default void onRefReplicatedToOneNode(
       String project,
       String ref,
       URIish uri,
       RefPushResult status,
-      RemoteRefUpdate.Status refStatus);
+      RemoteRefUpdate.Status refStatus) {}
 
-  abstract void onRefReplicatedToAllNodes(String project, String ref, int nodesCount);
+  /**
+   * Invoked when a ref has been replicated to all nodes.
+   *
+   * @param project
+   * @param ref
+   * @param nodesCount
+   */
+  default void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {}
 
-  abstract void onAllRefsReplicatedToAllNodes(int totalPushTasksCount);
+  /**
+   * Invoked when all refs have been replicated to all nodes.
+   *
+   * @param totalPushTasksCount
+   */
+  default void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {}
 
   /**
    * Write message to standard out.
    *
    * @param message message text.
    */
-  void writeStdOut(String message) {
-    // Default doing nothing
-  }
+  default void writeStdOut(String message) {}
 
   /**
    * Write message to standard error.
    *
    * @param message message text.
    */
-  void writeStdErr(String message) {
-    // Default doing nothing
-  }
+  default void writeStdErr(String message) {}
 
   static String resolveNodeName(URIish uri) {
     StringBuilder sb = new StringBuilder();
@@ -70,7 +88,7 @@ public abstract class PushResultProcessing {
     return sb.toString();
   }
 
-  public static class CommandProcessing extends PushResultProcessing {
+  public static class CommandProcessing implements PushResultProcessing {
     private WeakReference<StartCommand> sshCommand;
     private AtomicBoolean hasError = new AtomicBoolean();
 
@@ -79,7 +97,7 @@ public abstract class PushResultProcessing {
     }
 
     @Override
-    void onRefReplicatedToOneNode(
+    public void onRefReplicatedToOneNode(
         String project,
         String ref,
         URIish uri,
@@ -115,7 +133,7 @@ public abstract class PushResultProcessing {
     }
 
     @Override
-    void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {
+    public void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {
       StringBuilder sb = new StringBuilder();
       sb.append("Replication of ");
       sb.append(project);
@@ -128,7 +146,7 @@ public abstract class PushResultProcessing {
     }
 
     @Override
-    void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {
+    public void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {
       if (totalPushTasksCount == 0) {
         return;
       }
@@ -141,7 +159,7 @@ public abstract class PushResultProcessing {
     }
 
     @Override
-    void writeStdOut(String message) {
+    public void writeStdOut(String message) {
       StartCommand command = sshCommand.get();
       if (command != null) {
         command.writeStdOutSync(message);
@@ -149,7 +167,7 @@ public abstract class PushResultProcessing {
     }
 
     @Override
-    void writeStdErr(String message) {
+    public void writeStdErr(String message) {
       StartCommand command = sshCommand.get();
       if (command != null) {
         command.writeStdErrSync(message);
@@ -157,7 +175,7 @@ public abstract class PushResultProcessing {
     }
   }
 
-  public static class GitUpdateProcessing extends PushResultProcessing {
+  public static class GitUpdateProcessing implements PushResultProcessing {
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
     private final EventDispatcher dispatcher;
@@ -167,7 +185,7 @@ public abstract class PushResultProcessing {
     }
 
     @Override
-    void onRefReplicatedToOneNode(
+    public void onRefReplicatedToOneNode(
         String project,
         String ref,
         URIish uri,
@@ -177,12 +195,9 @@ public abstract class PushResultProcessing {
     }
 
     @Override
-    void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {
+    public void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {
       postEvent(new RefReplicationDoneEvent(project, ref, nodesCount));
     }
-
-    @Override
-    void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {}
 
     private void postEvent(RefEvent event) {
       try {
