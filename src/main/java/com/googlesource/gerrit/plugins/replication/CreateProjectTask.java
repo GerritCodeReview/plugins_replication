@@ -63,8 +63,7 @@ public class CreateProjectTask {
       return true;
     }
 
-    repLog.atWarning().log(
-        "Cannot create new project %s on remote site %s.", projectName, replicateURI);
+    repLog.warn("Cannot create new project {} on remote site {}.", projectName, replicateURI);
     return false;
   }
 }

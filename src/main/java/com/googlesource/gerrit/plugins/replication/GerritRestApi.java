@@ -62,34 +62,34 @@ public class GerritRestApi implements AdminApi {
 
   @Override
   public boolean createProject(Project.NameKey project, String head) {
-    repLog.atInfo().log("Creating project %s on %s", project, uri);
+    repLog.info("Creating project {} on {}", project, uri);
     String url = String.format("%s/a/projects/%s", toHttpUri(uri), Url.encode(project.get()));
     try {
       return httpClient
           .execute(new HttpPut(url), new HttpResponseHandler(), getContext())
           .isSuccessful();
     } catch (IOException e) {
-      repLog.atSevere().log("Couldn't perform project creation on %s", uri, e);
+      repLog.error("Couldn't perform project creation on {}", uri, e);
       return false;
     }
   }
 
   @Override
   public boolean deleteProject(Project.NameKey project) {
-    repLog.atInfo().log("Deleting project %s on %s", project, uri);
+    repLog.info("Deleting project {} on {}", project, uri);
     String url = String.format("%s/a/projects/%s", toHttpUri(uri), Url.encode(project.get()));
     try {
       httpClient.execute(new HttpDelete(url), new HttpResponseHandler(), getContext());
       return true;
     } catch (IOException e) {
-      repLog.atSevere().log("Couldn't perform project deletion on %s", uri, e);
+      repLog.error("Couldn't perform project deletion on {}", uri, e);
     }
     return false;
   }
 
   @Override
   public boolean updateHead(Project.NameKey project, String newHead) {
-    repLog.atInfo().log("Updating head of %s on %s", project, uri);
+    repLog.info("Updating head of {} on {}", project, uri);
     String url = String.format("%s/a/projects/%s/HEAD", toHttpUri(uri), Url.encode(project.get()));
     try {
       HttpPut req = new HttpPut(url);
@@ -99,7 +99,7 @@ public class GerritRestApi implements AdminApi {
       httpClient.execute(req, new HttpResponseHandler(), getContext());
       return true;
     } catch (IOException e) {
-      repLog.atSevere().log("Couldn't perform update head on %s", uri, e);
+      repLog.error("Couldn't perform update head on {}", uri, e);
     }
     return false;
   }

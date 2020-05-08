@@ -42,14 +42,18 @@ public class RemoteSsh implements AdminApi {
     OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
       sshHelper.executeRemoteSsh(uri, cmd, errStream);
-      repLog.atInfo().log("Created remote repository: %s", uri);
+      repLog.info("Created remote repository: {}", uri);
     } catch (IOException e) {
-      repLog.atSevere().withCause(e).log(
-          "Error creating remote repository at %s:\n"
-              + "  Exception: %s\n"
-              + "  Command: %s\n"
-              + "  Output: %s",
-          uri, e, cmd, errStream);
+      repLog.error(
+          "Error creating remote repository at {}:\n"
+              + "  Exception: {}\n"
+              + "  Command: {}\n"
+              + "  Output: {}",
+          uri,
+          e,
+          cmd,
+          errStream,
+          e);
       return false;
     }
     return true;
@@ -62,14 +66,18 @@ public class RemoteSsh implements AdminApi {
     OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
       sshHelper.executeRemoteSsh(uri, cmd, errStream);
-      repLog.atInfo().log("Deleted remote repository: %s", uri);
+      repLog.info("Deleted remote repository: {}", uri);
     } catch (IOException e) {
-      repLog.atSevere().withCause(e).log(
-          "Error deleting remote repository at %s}:\n"
-              + "  Exception: %s\n"
-              + "  Command: %s\n"
-              + "  Output: %s",
-          uri, e, cmd, errStream);
+      repLog.error(
+          "Error deleting remote repository at {}}:\n"
+              + "  Exception: {}\n"
+              + "  Command: {}\n"
+              + "  Output: {}",
+          uri,
+          e,
+          cmd,
+          errStream,
+          e);
       return false;
     }
     return true;
@@ -84,12 +92,17 @@ public class RemoteSsh implements AdminApi {
     try {
       sshHelper.executeRemoteSsh(uri, cmd, errStream);
     } catch (IOException e) {
-      repLog.atSevere().withCause(e).log(
-          "Error updating HEAD of remote repository at %s to %s:\n"
-              + "  Exception: %s\n"
-              + "  Command: %s\n"
-              + "  Output: %s",
-          uri, newHead, e, cmd, errStream);
+      repLog.error(
+          "Error updating HEAD of remote repository at {} to {}:\n"
+              + "  Exception: {}\n"
+              + "  Command: {}\n"
+              + "  Output: {}",
+          uri,
+          newHead,
+          e,
+          cmd,
+          errStream,
+          e);
       return false;
     }
     return true;

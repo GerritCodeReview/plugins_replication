@@ -43,9 +43,9 @@ public class LocalFS implements AdminApi {
         u.disableRefLog();
         u.link(head);
       }
-      repLog.atInfo().log("Created local repository: %s", uri);
+      repLog.info("Created local repository: {}", uri);
     } catch (IOException e) {
-      repLog.atSevere().withCause(e).log("Error creating local repository %s", uri.getPath());
+      repLog.error("Error creating local repository {}", uri.getPath(), e);
       return false;
     }
     return true;
@@ -55,9 +55,9 @@ public class LocalFS implements AdminApi {
   public boolean deleteProject(Project.NameKey project) {
     try {
       recursivelyDelete(new File(uri.getPath()));
-      repLog.atInfo().log("Deleted local repository: %s", uri);
+      repLog.info("Deleted local repository: {}", uri);
     } catch (IOException e) {
-      repLog.atSevere().withCause(e).log("Error deleting local repository %s:\n", uri.getPath());
+      repLog.error("Error deleting local repository {}:\n", uri.getPath(), e);
       return false;
     }
     return true;
@@ -71,8 +71,7 @@ public class LocalFS implements AdminApi {
         u.link(newHead);
       }
     } catch (IOException e) {
-      repLog.atSevere().withCause(e).log(
-          "Failed to update HEAD of repository %s to %s", uri.getPath(), newHead);
+      repLog.error("Failed to update HEAD of repository {} to {}", uri.getPath(), newHead, e);
       return false;
     }
     return true;
