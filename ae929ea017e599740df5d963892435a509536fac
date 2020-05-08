@@ -16,6 +16,24 @@
       "revId": "ae929ea017e599740df5d963892435a509536fac",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3020f269_69793319",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-05-08T06:50:23Z",
+      "side": 0,
+      "message": "I noticed by chance while I was doing the revert of the flogger migration on stable-2.16",
+      "parentUuid": "f3d65fd6_35a90413",
+      "revId": "ae929ea017e599740df5d963892435a509536fac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
