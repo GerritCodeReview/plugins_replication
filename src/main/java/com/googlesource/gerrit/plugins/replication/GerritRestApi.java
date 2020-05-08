@@ -16,8 +16,8 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.GerritSshApi.GERRIT_ADMIN_PROTOCOL_PREFIX;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
-import com.google.common.base.Charsets;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.restapi.Url;
 import com.google.inject.Inject;
@@ -93,8 +93,7 @@ public class GerritRestApi implements AdminApi {
     String url = String.format("%s/a/projects/%s/HEAD", toHttpUri(uri), Url.encode(project.get()));
     try {
       HttpPut req = new HttpPut(url);
-      req.setEntity(
-          new StringEntity(String.format("{\"ref\": \"%s\"}", newHead), Charsets.UTF_8.name()));
+      req.setEntity(new StringEntity(String.format("{\"ref\": \"%s\"}", newHead), UTF_8.name()));
       req.addHeader(new BasicHeader("Content-Type", "application/json"));
       httpClient.execute(req, new HttpResponseHandler(), getContext());
       return true;
