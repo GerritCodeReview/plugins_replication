@@ -419,7 +419,7 @@ public class Destination {
         ScheduledFuture<?> ignored =
             pool.schedule(task, now ? 0 : config.getDelay(), TimeUnit.SECONDS);
         pending.put(uri, task);
-      } else if (!task.getRefs().contains(ref)) {
+      } else {
         addRef(task, ref);
         task.addState(ref, state);
       }

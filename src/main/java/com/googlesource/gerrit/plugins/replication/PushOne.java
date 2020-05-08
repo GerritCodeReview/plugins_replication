@@ -227,8 +227,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       delta.clear();
       pushAllRefs = true;
       repLog.trace("Added all refs for replication to {}", uri);
-    } else if (!pushAllRefs) {
-      delta.add(ref);
+    } else if (!pushAllRefs && delta.add(ref)) {
       repLog.trace("Added ref {} for replication to {}", ref, uri);
     }
   }
