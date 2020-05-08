@@ -69,7 +69,7 @@ public class GerritRestApi implements AdminApi {
           .execute(new HttpPut(url), new HttpResponseHandler(), getContext())
           .isSuccessful();
     } catch (IOException e) {
-      repLog.atSevere().log("Couldn't perform project creation on %s", uri, e);
+      repLog.atSevere().withCause(e).log("Couldn't perform project creation on %s", uri);
       return false;
     }
   }
@@ -82,7 +82,7 @@ public class GerritRestApi implements AdminApi {
       httpClient.execute(new HttpDelete(url), new HttpResponseHandler(), getContext());
       return true;
     } catch (IOException e) {
-      repLog.atSevere().log("Couldn't perform project deletion on %s", uri, e);
+      repLog.atSevere().withCause(e).log("Couldn't perform project deletion on %s", uri);
     }
     return false;
   }
@@ -99,7 +99,7 @@ public class GerritRestApi implements AdminApi {
       httpClient.execute(req, new HttpResponseHandler(), getContext());
       return true;
     } catch (IOException e) {
-      repLog.atSevere().log("Couldn't perform update head on %s", uri, e);
+      repLog.atSevere().withCause(e).log("Couldn't perform update head on %s", uri);
     }
     return false;
   }
