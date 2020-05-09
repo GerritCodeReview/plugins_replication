@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56fdff10_16901b3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-09T21:19:41Z",
+      "side": 1,
+      "message": "Fix",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "808aebd78fbcc4b0e14ff851309b5f8868c9835c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b44741d8_6b7ff1b1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-09T21:19:41Z",
+      "side": 1,
+      "message": "Fix an issue where configuration parsing ...",
+      "revId": "808aebd78fbcc4b0e14ff851309b5f8868c9835c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a40e5761_1128e166",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-09T21:19:41Z",
+      "side": 1,
+      "message": "a regression",
+      "range": {
+        "startLine": 11,
+        "startChar": 67,
+        "endLine": 11,
+        "endChar": 72
+      },
+      "revId": "808aebd78fbcc4b0e14ff851309b5f8868c9835c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4480f00_1bae72ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-09T21:19:41Z",
+      "side": 1,
+      "message": "Restore the pluggability of the configuration parsing by creating a",
+      "range": {
+        "startLine": 14,
+        "startChar": 52,
+        "endLine": 15,
+        "endChar": 6
+      },
+      "revId": "808aebd78fbcc4b0e14ff851309b5f8868c9835c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f81cc29c_55a80cdc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-09T21:19:41Z",
+      "side": 1,
+      "message": "bound",
+      "range": {
+        "startLine": 15,
+        "startChar": 43,
+        "endLine": 15,
+        "endChar": 47
+      },
+      "revId": "808aebd78fbcc4b0e14ff851309b5f8868c9835c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2821973a_e03a8455",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-09T21:19:41Z",
+      "side": 1,
+      "message": "the plugin\u0027s Guice Module.",
+      "range": {
+        "startLine": 16,
+        "startChar": 3,
+        "endLine": 16,
+        "endChar": 11
+      },
+      "revId": "808aebd78fbcc4b0e14ff851309b5f8868c9835c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d473958_31143efd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-09T21:19:41Z",
+      "side": 1,
+      "message": "Add JavaDoc",
+      "revId": "808aebd78fbcc4b0e14ff851309b5f8868c9835c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd9419fe_17569fd0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-09T21:19:41Z",
+      "side": 1,
+      "message": "Add JavaDoc",
+      "revId": "808aebd78fbcc4b0e14ff851309b5f8868c9835c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
