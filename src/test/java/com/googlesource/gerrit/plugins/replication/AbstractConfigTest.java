@@ -72,7 +72,7 @@ public abstract class AbstractConfigTest {
     sitePaths = new SitePaths(sitePath);
     pluginDataPath = createTempPath("data");
     destinationFactoryMock = mock(Destination.Factory.class);
-    configParser = new ConfigParser();
+    configParser = new DestinationConfigParser();
   }
 
   @Before
