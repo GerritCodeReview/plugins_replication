@@ -118,6 +118,30 @@
       "revId": "855e65c3fbcf1d17d6efbd67c682af584ba3ff85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da4fe89c_20ed0367",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteSsh.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-05-09T09:14:23Z",
+      "side": -1,
+      "message": "No, the revert was correct.  The original code *before the migration to flogger* had the exception twice, and then the revert brought it back to the same.  See the link above (migration to flogger).  Anyway, it\u0027s probably better to remove the second one; I approved your change.",
+      "parentUuid": "dcf63776_675ccf72",
+      "range": {
+        "startLine": 68,
+        "startChar": 49,
+        "endLine": 68,
+        "endChar": 50
+      },
+      "revId": "855e65c3fbcf1d17d6efbd67c682af584ba3ff85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
