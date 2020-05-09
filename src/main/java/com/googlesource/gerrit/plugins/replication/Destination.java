@@ -99,9 +99,9 @@ public class Destination {
 
   private final ReplicationStateListener stateLog;
   private final Object stateLock = new Object();
-  private final ConcurrentMap<URIish, PushOne> pending =
-      new ConcurrentHashMap<>(); // writes are covered by the stateLock, but some reads are still
-                                 // allowed without the lock
+  // writes are covered by the stateLock, but some reads are still
+  // allowed without the lock
+  private final ConcurrentMap<URIish, PushOne> pending = new ConcurrentHashMap<>();
   private final Map<URIish, PushOne> inFlight = new HashMap<>();
   private final PushOne.Factory opFactory;
   private final DeleteProjectTask.Factory deleteProjectFactory;
