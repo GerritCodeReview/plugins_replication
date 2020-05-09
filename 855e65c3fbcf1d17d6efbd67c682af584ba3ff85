@@ -46,6 +46,30 @@
       "revId": "855e65c3fbcf1d17d6efbd67c682af584ba3ff85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f997996_3f46e445",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteSsh.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-05-09T09:03:48Z",
+      "side": -1,
+      "message": "{} fixed in https://gerrit-review.googlesource.com/c/plugins/replication/+/266774\n\nIf we\u0027re going to change the content of the log, that should be done on one of the earlier branches and merged up.  It shouldn\u0027t block this change though.",
+      "parentUuid": "5ba9c7c7_77ce9d5a",
+      "range": {
+        "startLine": 68,
+        "startChar": 49,
+        "endLine": 68,
+        "endChar": 50
+      },
+      "revId": "855e65c3fbcf1d17d6efbd67c682af584ba3ff85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
