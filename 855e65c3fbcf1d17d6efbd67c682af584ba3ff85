@@ -22,6 +22,30 @@
       "revId": "855e65c3fbcf1d17d6efbd67c682af584ba3ff85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ba9c7c7_77ce9d5a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteSsh.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-05-09T09:00:56Z",
+      "side": -1,
+      "message": "The e is passed twice deliberately.  It was like that before the migration to flogger.  See https://gerrit-review.googlesource.com/c/plugins/replication/+/258291/5/src/main/java/com/googlesource/gerrit/plugins/replication/RemoteSsh.java\n\nI\u0027ll do a separate change to fix the {} on master.",
+      "parentUuid": "42b61ea8_9828273a",
+      "range": {
+        "startLine": 68,
+        "startChar": 49,
+        "endLine": 68,
+        "endChar": 50
+      },
+      "revId": "855e65c3fbcf1d17d6efbd67c682af584ba3ff85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
