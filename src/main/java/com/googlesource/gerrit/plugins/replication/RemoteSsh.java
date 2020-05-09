@@ -65,7 +65,7 @@ public class RemoteSsh implements AdminApi {
       repLog.atInfo().log("Deleted remote repository: %s", uri);
     } catch (IOException e) {
       repLog.atSevere().withCause(e).log(
-          "Error deleting remote repository at %s}:\n"
+          "Error deleting remote repository at %s:\n"
               + "  Exception: %s\n"
               + "  Command: %s\n"
               + "  Output: %s",
