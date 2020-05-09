@@ -80,8 +80,8 @@ class ReplicationModule extends AbstractModule {
 
     bind(EventBus.class).in(Scopes.SINGLETON);
     bind(ReplicationDestinations.class).to(DestinationsCollection.class);
-    bind(ConfigParser.class).in(Scopes.SINGLETON);
-
+    bind(ConfigParser.class).to(DestinationConfigParser.class).in(Scopes.SINGLETON);
+   
     if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
       bind(ReplicationConfig.class)
           .annotatedWith(MainReplicationConfig.class)
