@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42b61ea8_9828273a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteSsh.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-09T08:37:50Z",
+      "side": -1,
+      "message": "It seems that the base version is broken. Why don\u0027t we fix it first? I just checked and on stable-3.1 I see in fact this:\n\n  repLog.error(\n          \"Error deleting remote repository at {}}:\\n\"\n              + \"  Exception: {}\\n\"\n              + \"  Command: {}\\n\"\n              + \"  Output: {}\",\n          uri,\n          e,\n          cmd,\n          errStream,\n          e);\n      return false;\n\nIn fact, it\u0027s broken twice: {}} and exception \"e\" is passed twice, while it should be only passed once.\n\nMoreover, I checked it further, and all stable branches started form 2.16 are affected: 2.16, 3.0 and 3.1.",
+      "range": {
+        "startLine": 68,
+        "startChar": 49,
+        "endLine": 68,
+        "endChar": 50
+      },
+      "revId": "855e65c3fbcf1d17d6efbd67c682af584ba3ff85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
