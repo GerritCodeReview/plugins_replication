@@ -44,7 +44,7 @@ public class RemoteSsh implements AdminApi {
       sshHelper.executeRemoteSsh(uri, cmd, errStream);
       repLog.atInfo().log("Created remote repository: %s", uri);
     } catch (IOException e) {
-      repLog.atSevere().withCause(e).log(
+      repLog.atSevere().log(
           "Error creating remote repository at %s:\n"
               + "  Exception: %s\n"
               + "  Command: %s\n"
@@ -64,8 +64,8 @@ public class RemoteSsh implements AdminApi {
       sshHelper.executeRemoteSsh(uri, cmd, errStream);
       repLog.atInfo().log("Deleted remote repository: %s", uri);
     } catch (IOException e) {
-      repLog.atSevere().withCause(e).log(
-          "Error deleting remote repository at %s}:\n"
+      repLog.atSevere().log(
+          "Error deleting remote repository at %s:\n"
               + "  Exception: %s\n"
               + "  Command: %s\n"
               + "  Output: %s",
@@ -84,7 +84,7 @@ public class RemoteSsh implements AdminApi {
     try {
       sshHelper.executeRemoteSsh(uri, cmd, errStream);
     } catch (IOException e) {
-      repLog.atSevere().withCause(e).log(
+      repLog.atSevere().log(
           "Error updating HEAD of remote repository at %s to %s:\n"
               + "  Exception: %s\n"
               + "  Command: %s\n"

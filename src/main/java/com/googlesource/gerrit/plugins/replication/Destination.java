@@ -320,6 +320,10 @@ public class Destination {
                       "Error reading project %s from cache", project);
                   return false;
                 }
+                if (projectState == null) {
+                  repLog.atFine().log("Project %s does not exist", project);
+                  throw new NoSuchProjectException(project);
+                }
                 if (!projectState.statePermitsRead()) {
                   repLog.atFine().log("Project %s does not permit read", project);
                   return false;
@@ -661,31 +665,32 @@ public class Destination {
 
   List<URIish> getURIs(Project.NameKey project, String urlMatch) {
     List<URIish> r = Lists.newArrayListWithCapacity(config.getRemoteConfig().getURIs().size());
-    for (URIish uri : config.getRemoteConfig().getURIs()) {
-      if (matches(uri, urlMatch)) {
-        String name = project.get();
-        if (needsUrlEncoding(uri)) {
-          name = encode(name);
-        }
-        String remoteNameStyle = config.getRemoteNameStyle();
-        if (remoteNameStyle.equals("dash")) {
-          name = name.replace("/", "-");
-        } else if (remoteNameStyle.equals("underscore")) {
-          name = name.replace("/", "_");
-        } else if (remoteNameStyle.equals("basenameOnly")) {
-          name = FilenameUtils.getBaseName(name);
-        } else if (!remoteNameStyle.equals("slash")) {
-          repLog.atFine().log(
-              "Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
-        }
-        String replacedPath = replaceName(uri.getPath(), name, config.isSingleProjectMatch());
-        if (replacedPath != null) {
-          uri = uri.setPath(replacedPath);
-          r.add(uri);
-        }
+    for (URIish configUri : config.getRemoteConfig().getURIs()) {
+      URIish uri = getURI(configUri, project);
+      if (matches(configUri, urlMatch) || matches(uri, urlMatch)) {
+        r.add(uri);
       }
     }
     return r;
+  }
+
+  URIish getURI(URIish template, Project.NameKey project) {
+    String name = project.get();
+    if (needsUrlEncoding(template)) {
+      name = encode(name);
+    }
+    String remoteNameStyle = config.getRemoteNameStyle();
+    if (remoteNameStyle.equals("dash")) {
+      name = name.replace("/", "-");
+    } else if (remoteNameStyle.equals("underscore")) {
+      name = name.replace("/", "_");
+    } else if (remoteNameStyle.equals("basenameOnly")) {
+      name = FilenameUtils.getBaseName(name);
+    } else if (!remoteNameStyle.equals("slash")) {
+      repLog.atFine().log("Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
+    }
+    String replacedPath = replaceName(template.getPath(), name, isSingleProjectMatch());
+    return (replacedPath != null) ? template.setPath(replacedPath) : template;
   }
 
   static boolean needsUrlEncoding(URIish uri) {

@@ -104,6 +104,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final Set<String> delta = Sets.newHashSetWithExpectedSize(4);
   private boolean pushAllRefs;
   private Repository git;
+  private boolean isCollision;
   private boolean retrying;
   private int retryCount;
   private final int maxRetries;
@@ -281,7 +282,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   private void statesCleanUp() {
-    if (!stateMap.isEmpty() && !isRetrying()) {
+    if (!stateMap.isEmpty() && !isRetrying() && !isCollision) {
       for (Map.Entry<String, ReplicationState> entry : stateMap.entries()) {
         entry
             .getValue()
@@ -321,6 +322,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     // created and scheduled for a future point in time.)
     //
     RunwayStatus status = pool.requestRunway(this);
+    isCollision = false;
     if (!status.isAllowed()) {
       if (status.isCanceled()) {
         repLog.atInfo().log(
@@ -332,6 +334,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
             "Rescheduling replication to %s to avoid collision with the in-flight push [%s].",
             uri, HexFormat.fromInt(status.getInFlightPushId()));
         pool.reschedule(this, Destination.RetryReason.COLLISION);
+        isCollision = true;
       }
       return;
     }
