@@ -94,6 +94,30 @@
       "revId": "855e65c3fbcf1d17d6efbd67c682af584ba3ff85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcf63776_675ccf72",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteSsh.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-09T09:12:17Z",
+      "side": -1,
+      "message": "Here is the fix on stable-2.16 branch, that we should merge up and replace the base here.",
+      "parentUuid": "8e0548e2_9d9cb6ec",
+      "range": {
+        "startLine": 68,
+        "startChar": 49,
+        "endLine": 68,
+        "endChar": 50
+      },
+      "revId": "855e65c3fbcf1d17d6efbd67c682af584ba3ff85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
