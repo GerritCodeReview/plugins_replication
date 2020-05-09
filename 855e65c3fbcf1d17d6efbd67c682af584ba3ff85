@@ -70,6 +70,30 @@
       "revId": "855e65c3fbcf1d17d6efbd67c682af584ba3ff85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e0548e2_9d9cb6ec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteSsh.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-09T09:08:02Z",
+      "side": -1,
+      "message": "It\u0027s not about master, but about 2.16, 3.0 and 3.1 branch. Something went wrong during revert. e. g. Exception st passed twice in number of log statements.",
+      "parentUuid": "0f997996_3f46e445",
+      "range": {
+        "startLine": 68,
+        "startChar": 49,
+        "endLine": 68,
+        "endChar": 50
+      },
+      "revId": "855e65c3fbcf1d17d6efbd67c682af584ba3ff85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
