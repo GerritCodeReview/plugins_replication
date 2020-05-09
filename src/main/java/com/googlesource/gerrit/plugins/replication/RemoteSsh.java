@@ -52,8 +52,7 @@ public class RemoteSsh implements AdminApi {
           uri,
           e,
           cmd,
-          errStream,
-          e);
+          errStream);
       return false;
     }
     return true;
@@ -69,15 +68,14 @@ public class RemoteSsh implements AdminApi {
       repLog.info("Deleted remote repository: {}", uri);
     } catch (IOException e) {
       repLog.error(
-          "Error deleting remote repository at {}}:\n"
+          "Error deleting remote repository at {}:\n"
               + "  Exception: {}\n"
               + "  Command: {}\n"
               + "  Output: {}",
           uri,
           e,
           cmd,
-          errStream,
-          e);
+          errStream);
       return false;
     }
     return true;
@@ -101,8 +99,7 @@ public class RemoteSsh implements AdminApi {
           newHead,
           e,
           cmd,
-          errStream,
-          e);
+          errStream);
       return false;
     }
     return true;
