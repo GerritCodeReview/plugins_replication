@@ -105,14 +105,14 @@ public class AutoReloadRunnableTest {
     }
   }
 
-  private static class TestValidConfigurationListener extends ConfigParser {
+  private static class TestValidConfigurationListener implements ConfigParser {
     @Override
     public List<RemoteConfiguration> parseRemotes(Config newConfig) {
       return Collections.emptyList();
     }
   }
 
-  private static class TestInvalidConfigurationListener extends ConfigParser {
+  private static class TestInvalidConfigurationListener implements ConfigParser {
     @Override
     public List<RemoteConfiguration> parseRemotes(Config configurationChangeEvent)
         throws ConfigInvalidException {
