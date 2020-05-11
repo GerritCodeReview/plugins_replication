@@ -34,6 +34,24 @@
       "revId": "20e77335d0e830df34c14aaf6e994c5f2f81e7df",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2b07f3f_f03fbc97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-11T18:02:01Z",
+      "side": 1,
+      "message": "Maybe only include it when it is different?",
+      "parentUuid": "7e561cd2_82616abc",
+      "revId": "20e77335d0e830df34c14aaf6e994c5f2f81e7df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
