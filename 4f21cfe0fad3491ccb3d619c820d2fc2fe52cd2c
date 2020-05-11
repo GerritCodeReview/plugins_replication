@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6ad80a3_29841620",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-11T18:43:38Z",
+      "side": 1,
+      "message": "This doesn\u0027t really apply to this change anymore?",
+      "range": {
+        "startLine": 13,
+        "startChar": 8,
+        "endLine": 14,
+        "endChar": 14
+      },
+      "revId": "4f21cfe0fad3491ccb3d619c820d2fc2fe52cd2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
