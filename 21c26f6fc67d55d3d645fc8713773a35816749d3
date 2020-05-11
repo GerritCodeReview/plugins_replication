@@ -46,6 +46,30 @@
       "revId": "21c26f6fc67d55d3d645fc8713773a35816749d3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "810a6129_0bf265af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-11T22:26:51Z",
+      "side": 1,
+      "message": "Apparently Shawn did, as there was a specific logic behind it.",
+      "parentUuid": "a18d5e4b_22554489",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 16
+      },
+      "revId": "21c26f6fc67d55d3d645fc8713773a35816749d3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
