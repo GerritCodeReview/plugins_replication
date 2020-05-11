@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0ac80d06_417383e4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-11T16:41:07Z",
+      "side": 1,
+      "message": "Oops. Thanks for fixing. Does Zuul not run the style check?",
+      "parentUuid": "2c2419c7_2782cdf7",
+      "range": {
+        "startLine": 101,
+        "startChar": 33,
+        "endLine": 102,
+        "endChar": 60
+      },
+      "revId": "4e21fe8b7aba4219e89b83133d4bf69945f59cb2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2d201fe_e9e726ae",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 1
