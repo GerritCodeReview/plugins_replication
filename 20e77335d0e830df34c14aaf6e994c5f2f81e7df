@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83293367_65aa1d50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-05-11T08:41:50Z",
+      "side": 1,
+      "message": "Is this always true?\nIf we specify a push pattern for a remote like:\n\n  [remote \"foo\"]\n    push \u003d refs/heads/*:refs/heads/foo/*\n\nthen if refs/heads/master gets updated we will have:\n\n  remoteName \u003d refs/heads/foo/master\n  srcRef \u003d refs/heads/master\n\nRight?",
+      "revId": "20e77335d0e830df34c14aaf6e994c5f2f81e7df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
