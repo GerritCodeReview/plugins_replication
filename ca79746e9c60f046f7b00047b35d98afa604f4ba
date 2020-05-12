@@ -34,6 +34,24 @@
       "revId": "ca79746e9c60f046f7b00047b35d98afa604f4ba",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72e05f12_29f6822f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-05-12T09:58:51Z",
+      "side": 1,
+      "message": "Check your commit message too, it still indicates that it will only be included when they differ.",
+      "parentUuid": "37caef4d_1212c3de",
+      "revId": "ca79746e9c60f046f7b00047b35d98afa604f4ba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
