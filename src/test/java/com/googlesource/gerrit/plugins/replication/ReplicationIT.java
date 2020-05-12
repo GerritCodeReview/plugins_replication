@@ -55,8 +55,9 @@ import org.junit.Test;
 
 @UseLocalDisk
 @TestPlugin(
-    name = "replication",
-    sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
+  name = "replication",
+  sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule"
+)
 public class ReplicationIT extends LightweightPluginDaemonTest {
   private static final Optional<String> ALL_PROJECTS = Optional.empty();
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
@@ -266,9 +267,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
     assertThat(listReplicationTasks(".*all.*")).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
-      assertThat(task.uri).isEqualTo(expectedURI);
-    }
+    tasksStorage.stream().forEach((task) -> assertThat(task.uri).isEqualTo(expectedURI));
   }
 
   @Test
@@ -287,10 +286,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
     assertThat(listReplicationTasks(".*")).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
-      assertThat(task.uri).isEqualTo(expectedURI);
-    }
-    assertThat(tasksStorage.list()).isNotEmpty();
+    tasksStorage.stream().forEach((task) -> assertThat(task.uri).isEqualTo(expectedURI));
+    assertThat(tasksStorage.stream().count()).isAtLeast(1L);
   }
 
   @Test
@@ -389,7 +386,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
       throws IOException {
 
     List<String> replicaUrls =
-        replicaSuffixes.stream()
+        replicaSuffixes
+            .stream()
             .map(suffix -> gitPath.resolve("${name}" + suffix + ".git").toString())
             .collect(toList());
     config.setStringList("remote", remoteName, "url", replicaUrls);
@@ -419,7 +417,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage.list().stream()
+    return tasksStorage
+        .stream()
         .filter(task -> refmaskPattern.matcher(task.ref).matches())
         .collect(toList());
   }
