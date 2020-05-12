@@ -70,6 +70,24 @@
       "revId": "ca79746e9c60f046f7b00047b35d98afa604f4ba",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3578821e_2f1f8e3c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-05-12T10:53:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74d216ca_b73735f6",
+      "revId": "ca79746e9c60f046f7b00047b35d98afa604f4ba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
