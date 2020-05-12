@@ -198,22 +198,30 @@ public class ReplicationQueue
 
   private void firePendingEvents() {
     replaying = true;
-    try {
-      replaying = true;
-      for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.listWaiting()) {
-        if (t == null) {
-          repLog.atWarning().log("Encountered null replication event in ReplicationTasksStorage");
-          continue;
-        }
-        try {
-          fire(new URIish(t.uri), Project.nameKey(t.project), t.ref);
-        } catch (URISyntaxException e) {
-          repLog.atSevere().withCause(e).log("Encountered malformed URI for persisted event %s", t);
-        }
-      }
-    } finally {
-      replaying = false;
-    }
+    new ChainedScheduler.StreamScheduler<ReplicationTasksStorage.ReplicateRefUpdate>(
+        workQueue.getDefaultQueue(),
+        replicationTasksStorage.streamWaiting(),
+        new ChainedScheduler.Runner<ReplicationTasksStorage.ReplicateRefUpdate>() {
+          @Override
+          public void run(ReplicationTasksStorage.ReplicateRefUpdate u) {
+            try {
+              fire(new URIish(u.uri), Project.nameKey(u.project), u.ref);
+            } catch (URISyntaxException e) {
+              repLog.atSevere().withCause(e).log(
+                  "Encountered malformed URI for persisted event %s", u);
+            }
+          }
+
+          @Override
+          public void onDone() {
+            replaying = false;
+          }
+
+          @Override
+          public String toString(ReplicationTasksStorage.ReplicateRefUpdate u) {
+            return "Scheduling push to " + String.format("%s:%s", u.project, u.ref);
+          }
+        });
   }
 
   private void pruneCompleted() {
