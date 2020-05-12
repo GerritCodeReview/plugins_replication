@@ -94,6 +94,30 @@
       "revId": "21c26f6fc67d55d3d645fc8713773a35816749d3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df6e9e9b_7296c3da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2020-05-12T15:13:16Z",
+      "side": 1,
+      "message": "\u003e Apparently Shawn did, as there was a specific logic behind it.\n\nCitation needed.\n\nI don\u0027t think we want to edit every change based on footer ordering.",
+      "parentUuid": "1e2879be_353987b2",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 16
+      },
+      "revId": "21c26f6fc67d55d3d645fc8713773a35816749d3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
