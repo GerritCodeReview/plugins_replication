@@ -195,24 +195,26 @@ public class ReplicationQueue
   }
 
   private void firePendingEvents() {
-    try {
-      Set<String> eventsReplayed = new HashSet<>();
-      replaying = true;
-      for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.list()) {
-        if (t == null) {
-          repLog.warn("Encountered null replication event in ReplicationTasksStorage");
-          continue;
-        }
-        String eventKey = String.format("%s:%s", t.project, t.ref);
-        if (!eventsReplayed.contains(eventKey)) {
-          repLog.info("Firing pending task {}", eventKey);
-          onGitReferenceUpdated(t.project, t.ref);
-          eventsReplayed.add(eventKey);
-        }
-      }
-    } finally {
-      replaying = false;
-    }
+    final Set<String> eventsReplayed = new HashSet<>();
+    replaying = true;
+    new ChainedScheduler.StreamScheduler<ReplicationTasksStorage.ReplicateRefUpdate>(
+        workQueue.getDefaultQueue(),
+        replicationTasksStorage.stream(),
+        new ChainedScheduler.Runner<ReplicationTasksStorage.ReplicateRefUpdate>() {
+          @Override
+          public void run(ReplicationTasksStorage.ReplicateRefUpdate t) {
+            final String eventKey = String.format("%s:%s", t.project, t.ref);
+            if (eventsReplayed.add(eventKey)) {
+              repLog.info("Firing pending task {}", eventKey);
+              onGitReferenceUpdated(t.project, t.ref);
+            }
+          }
+
+          @Override
+          public void onDone() {
+            replaying = false;
+          }
+        });
   }
 
   @Override
