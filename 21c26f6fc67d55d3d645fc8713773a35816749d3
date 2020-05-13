@@ -118,6 +118,30 @@
       "revId": "21c26f6fc67d55d3d645fc8713773a35816749d3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96592e18_caee0844",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-05-13T00:25:27Z",
+      "side": 1,
+      "message": "\u003e Citation needed\n\nhttps://gerrit-review.googlesource.com/c/gerrit/+/11374/1..2//COMMIT_MSG\n\n\u003e I don\u0027t think we want to edit every change based on footer ordering.\n\nWe shouldn\u0027t have to.  The ordering got broken with one of the recent updates to the hook; reverting back to the previous version should fix it.",
+      "parentUuid": "df6e9e9b_7296c3da",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 16
+      },
+      "revId": "21c26f6fc67d55d3d645fc8713773a35816749d3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
