@@ -22,6 +22,30 @@
       "revId": "4eae51ae5b82ea6137782691865f6fb4cd42b8a7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2100c77_21aa3972",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-13T15:12:23Z",
+      "side": 1,
+      "message": "Yeah, that tripped me up too. In this case, we\u0027re logging the file name, which is \u0027e\u0027, and purposefully not logging the exception \u0027ex\u0027.",
+      "parentUuid": "dc702236_95c55021",
+      "range": {
+        "startLine": 122,
+        "startChar": 16,
+        "endLine": 122,
+        "endChar": 17
+      },
+      "revId": "4eae51ae5b82ea6137782691865f6fb4cd42b8a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
