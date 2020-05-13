@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc702236_95c55021",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-05-13T02:02:20Z",
+      "side": 1,
+      "message": "Exceptions should be logged by using the withCause(e) call, rather than as varargs.\n\nAlso, the variable name is \u0027ex\u0027 in this case, not \u0027e\u0027",
+      "range": {
+        "startLine": 122,
+        "startChar": 16,
+        "endLine": 122,
+        "endChar": 17
+      },
+      "revId": "4eae51ae5b82ea6137782691865f6fb4cd42b8a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
