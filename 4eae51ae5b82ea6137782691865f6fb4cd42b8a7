@@ -46,6 +46,30 @@
       "revId": "4eae51ae5b82ea6137782691865f6fb4cd42b8a7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b74dc69_57a508e9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-05-13T23:18:26Z",
+      "side": 1,
+      "message": "Ugh, yeah, now I see.\n\nIn that case can we change \u0027e\u0027 to something more intuitive, like \u0027path\u0027 or \u0027file\u0027?",
+      "parentUuid": "b2100c77_21aa3972",
+      "range": {
+        "startLine": 122,
+        "startChar": 16,
+        "endLine": 122,
+        "endChar": 17
+      },
+      "revId": "4eae51ae5b82ea6137782691865f6fb4cd42b8a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
