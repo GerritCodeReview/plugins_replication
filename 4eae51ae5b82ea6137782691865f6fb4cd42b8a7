@@ -70,6 +70,30 @@
       "revId": "4eae51ae5b82ea6137782691865f6fb4cd42b8a7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e17c7738_a6e78159",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-14T18:14:21Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "6b74dc69_57a508e9",
+      "range": {
+        "startLine": 122,
+        "startChar": 16,
+        "endLine": 122,
+        "endChar": 17
+      },
+      "revId": "4eae51ae5b82ea6137782691865f6fb4cd42b8a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
