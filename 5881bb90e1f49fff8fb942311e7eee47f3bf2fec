@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "a1c6da53_d23b106d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-15T13:57:27Z",
+      "side": 1,
+      "message": "nit: possibly describe the reason for the general outage?\n\ngit refupdate \u003d\u003e onGitReferenceUpdated() \u003d\u003e ReplicationQueue.fire() \u003d\u003e DestinationsCollection.getAll()\n\nAll of the above are *sync* and *blocking* operations.\n\nWith NoteDb, almost *everything* in Gerrit causes a ref-update and, therefore, would be blocked in that chain, causing a *UNIQUE SINGLE SYNC* in the entire Gerrit JVM that can bring an entire server down.",
+      "range": {
+        "startLine": 12,
+        "startChar": 33,
+        "endLine": 12,
+        "endChar": 47
+      },
+      "revId": "5881bb90e1f49fff8fb942311e7eee47f3bf2fec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8f419c1a_0de92c86",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
