@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.common.flogger.LazyArgs.lazy;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -482,14 +483,14 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     }
 
     if (replConfig.getMaxRefsToLog() == 0 || todo.size() <= replConfig.getMaxRefsToLog()) {
-      repLog.atInfo().log("Push to %s references: %s", uri, refUpdatesForLogging(todo));
+      repLog.atInfo().log("Push to %s references: %s", uri, lazy(() -> refUpdatesForLogging(todo)));
     } else {
       repLog.atInfo().log(
           "Push to %s references (first %d of %d listed): %s",
           uri,
           replConfig.getMaxRefsToLog(),
           todo.size(),
-          refUpdatesForLogging(todo.subList(0, replConfig.getMaxRefsToLog())));
+          lazy(() -> refUpdatesForLogging(todo.subList(0, replConfig.getMaxRefsToLog()))));
     }
 
     return tn.push(NullProgressMonitor.INSTANCE, todo);
