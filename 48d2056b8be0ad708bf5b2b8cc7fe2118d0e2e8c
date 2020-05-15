@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "7a033c10_553424ed",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-05-15T18:32:19Z",
+      "side": 1,
+      "message": "+1 but it should be is separate change",
+      "parentUuid": "4ae4ff98_e30bb265",
+      "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "65ccac2f_ffb05664",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
         "patchSetId": 2
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "Do we want to execute two reloads concurrently? I don\u0027t believe so :-(",
       "parentUuid": "65ccac2f_ffb05664",
+      "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dad1428f_c859ceeb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-05-15T18:32:19Z",
+      "side": 1,
+      "message": "Luca is correct we want to make sure that we do not have more than one reload at the same time",
+      "parentUuid": "972709d6_1b48e589",
       "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
