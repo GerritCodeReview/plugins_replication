@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "3318b2b9_49593e36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-15T21:11:19Z",
+      "side": 1,
+      "message": "I believe PS3 is exhaustive enough to cover this concern.",
+      "parentUuid": "4e30fd13_228f6064",
+      "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31c658e5_a34af220",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -125,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "8538c9e9_1bc0d310",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-15T21:11:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7a033c10_553424ed",
+      "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65ccac2f_ffb05664",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
         "patchSetId": 2
@@ -175,6 +211,24 @@
       "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2a1cdf1_df355b4e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-15T21:11:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "dad1428f_c859ceeb",
+      "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
