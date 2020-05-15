@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e30fd13_228f6064",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-15T14:58:04Z",
+      "side": 1,
+      "message": "\u003e And maybe to help with that, why the synchronized was added initially?\n\nThat is a question for Saša then, not Marcin :-)\nIt wasn\u0027t initially there, but during the review with Saša we added the synchronized.\n\nI am not sure Marcin knows why it was there. What is sure, is that the synchronized in *that* point is a single point of failure for the whole Gerrit JVM because it blocks *ANY* update operation on *ANYTHING* in Gerrit UI, repos, anything.",
+      "parentUuid": "5f61b7a3_6c126bf1",
+      "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "31c658e5_a34af220",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4ae4ff98_e30bb265",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-15T14:58:04Z",
+      "side": 1,
+      "message": "Good idea, follow-up change?",
+      "parentUuid": "7daff139_451d045f",
+      "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "65ccac2f_ffb05664",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
         "patchSetId": 2
@@ -82,6 +118,24 @@
       "writtenOn": "2020-05-15T14:46:29Z",
       "side": 1,
       "message": "If access to the this.destinations doesn\u0027t need to be synchronized then this method also\nshouldn\u0027t synchronize access to this.destinations. In this case, just like in the shutdown()\nmethod, reduce the scope of synchronization to just accessing the shuttingDown?",
+      "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "972709d6_1b48e589",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-15T14:58:04Z",
+      "side": 1,
+      "message": "Do we want to execute two reloads concurrently? I don\u0027t believe so :-(",
+      "parentUuid": "65ccac2f_ffb05664",
       "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
