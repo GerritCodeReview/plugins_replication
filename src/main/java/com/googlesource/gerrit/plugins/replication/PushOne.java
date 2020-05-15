@@ -17,8 +17,10 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
@@ -65,6 +67,7 @@ import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.NullProgressMonitor;
+import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.CredentialsProvider;
@@ -232,7 +235,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       delta.clear();
       pushAllRefs = true;
       repLog.atFinest().log("Added all refs for replication to %s", uri);
-    } else if (!pushAllRefs) {
+    } else if (!pushAllRefs && delta.add(ref)) {
       delta.add(ref);
       repLog.atFinest().log("Added ref %s for replication to %s", ref, uri);
     }
@@ -479,17 +482,44 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     }
 
     if (replConfig.getMaxRefsToLog() == 0 || todo.size() <= replConfig.getMaxRefsToLog()) {
-      repLog.atInfo().log("Push to %s references: %s", uri, todo);
+      repLog.atInfo().log("Push to %s references: %s", uri, refUpdatesForLogging(todo));
     } else {
       repLog.atInfo().log(
           "Push to %s references (first %d of %d listed): %s",
           uri,
           replConfig.getMaxRefsToLog(),
           todo.size(),
-          todo.subList(0, replConfig.getMaxRefsToLog()));
+          refUpdatesForLogging(todo.subList(0, replConfig.getMaxRefsToLog())));
     }
 
     return tn.push(NullProgressMonitor.INSTANCE, todo);
+  }
+
+  private static String refUpdatesForLogging(List<RemoteRefUpdate> refUpdates) {
+    return refUpdates.stream().map(PushOne::refUpdateForLogging).collect(joining(", "));
+  }
+
+  private static String refUpdateForLogging(RemoteRefUpdate update) {
+    String refSpec = String.format("%s:%s", update.getSrcRef(), update.getRemoteName());
+    String id =
+        String.format(
+            "%s..%s", objectIdToString(update.getExpectedOldObjectId()), update.getNewObjectId());
+    return MoreObjects.toStringHelper(RemoteRefUpdate.class)
+        .add("refSpec", refSpec)
+        .add("status", update.getStatus())
+        .add("id", id)
+        .add("force", booleanToString(update.isForceUpdate()))
+        .add("delete", booleanToString(update.isDelete()))
+        .add("ffwd", booleanToString(update.isFastForward()))
+        .toString();
+  }
+
+  private static String objectIdToString(ObjectId id) {
+    return id != null ? id.getName() : "(null)";
+  }
+
+  private static String booleanToString(boolean b) {
+    return b ? "yes" : "no";
   }
 
   private List<RemoteRefUpdate> generateUpdates(Transport tn)
