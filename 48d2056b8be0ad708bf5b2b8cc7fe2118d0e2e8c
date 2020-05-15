@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9779001_f69514d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-05-15T14:46:29Z",
+      "side": 1,
+      "message": "Could you also elaborate more on why, after the removal of synchronized, the code is still thread-safe?",
+      "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31c658e5_a34af220",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-05-15T14:46:29Z",
+      "side": 1,
+      "message": "Overall I am not 100% sure that this code is correct, but I am also not sure I can prove that it is incorrect. Since this.destinations is an ImmutableList the only way of updating it is to replace\nit with a new list. Since it is volatile, the update of this.destinations is atomic and thread safe.\nNevertheless, I have some questions in my inline comments.",
+      "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7daff139_451d045f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-05-15T14:46:29Z",
+      "side": 1,
+      "message": "Not directly related to this change, but if this field is the only remaining reason for\nsynchronization in this class then why not also make it volatile and simplify the code?",
+      "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65ccac2f_ffb05664",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-05-15T14:46:29Z",
+      "side": 1,
+      "message": "If access to the this.destinations doesn\u0027t need to be synchronized then this method also\nshouldn\u0027t synchronize access to this.destinations. In this case, just like in the shutdown()\nmethod, reduce the scope of synchronization to just accessing the shuttingDown?",
+      "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
