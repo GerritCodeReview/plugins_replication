@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5f61b7a3_6c126bf1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-15T14:50:04Z",
+      "side": 1,
+      "message": "And maybe to help with that, why the synchronized was added initially?",
+      "parentUuid": "f9779001_f69514d6",
+      "revId": "48d2056b8be0ad708bf5b2b8cc7fe2118d0e2e8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "31c658e5_a34af220",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
