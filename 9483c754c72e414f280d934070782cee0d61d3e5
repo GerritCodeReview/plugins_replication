@@ -33,6 +33,24 @@
       "revId": "9483c754c72e414f280d934070782cee0d61d3e5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "854be7df_93612a47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-16T00:42:00Z",
+      "side": 1,
+      "message": "\u003e ... I can\u0027t even seem to get the pendingEvents firing to work on 2.16, can anyone else? It claims in the logs that it is firing the events, but nothing happens, perhaps it is currently broken in 2.16 (I will investigate more)?\n\nArgh, burned by a bug I had already fixed, but not far back enough:\nhttps://gerrit-review.googlesource.com/c/plugins/replication/+/267852",
+      "parentUuid": "ee4b65b1_0c1243b3",
+      "revId": "9483c754c72e414f280d934070782cee0d61d3e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
