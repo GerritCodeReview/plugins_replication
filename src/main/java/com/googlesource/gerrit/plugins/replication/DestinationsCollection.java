@@ -139,7 +139,7 @@ public class DestinationsCollection implements ReplicationDestinations {
   }
 
   @Override
-  public synchronized List<Destination> getAll(FilterType filterType) {
+  public List<Destination> getAll(FilterType filterType) {
     Predicate<? super Destination> filter;
     switch (filterType) {
       case PROJECT_CREATION:
@@ -157,7 +157,7 @@ public class DestinationsCollection implements ReplicationDestinations {
   }
 
   @Override
-  public synchronized boolean isEmpty() {
+  public boolean isEmpty() {
     return destinations.isEmpty();
   }
 
