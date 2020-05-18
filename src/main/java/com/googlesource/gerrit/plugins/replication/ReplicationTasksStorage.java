@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
@@ -154,13 +155,21 @@ public class ReplicationTasksStorage {
   private List<ReplicateRefUpdate> list(Path tasks) {
     List<ReplicateRefUpdate> results = new ArrayList<>();
     try (DirectoryStream<Path> events = Files.newDirectoryStream(tasks)) {
-      for (Path e : events) {
-        if (Files.isRegularFile(e)) {
-          String json = new String(Files.readAllBytes(e), UTF_8);
-          results.add(GSON.fromJson(json, ReplicateRefUpdate.class));
-        } else if (Files.isDirectory(e)) {
+      for (Path path : events) {
+        if (Files.isRegularFile(path)) {
           try {
-            results.addAll(list(e));
+            String json = new String(Files.readAllBytes(path), UTF_8);
+            results.add(GSON.fromJson(json, ReplicateRefUpdate.class));
+          } catch (NoSuchFileException ex) {
+            logger.atFine().log(
+                "File %s not found while listing waiting tasks (likely in-flight or completed by another node)",
+                path);
+          } catch (IOException e) {
+            logger.atSevere().withCause(e).log("Error when firing pending event %s", path);
+          }
+        } else if (Files.isDirectory(path)) {
+          try {
+            results.addAll(list(path));
           } catch (DirectoryIteratorException d) {
             // iterating over the sub-directories is expected to have dirs disappear
             Nfs.throwIfNotStaleFileHandle(d.getCause());
