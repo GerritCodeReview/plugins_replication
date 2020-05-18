@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3a4ba97_0cf18092",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-18T01:21:05Z",
+      "side": 1,
+      "message": "Parent change fails to replicate to all pending destinations when I make an event unreadable, this change manages to bypass the read failure and replicate to all the destinations.",
+      "revId": "8738fded0d6e0240e748b950a4a9b84ac8595896",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
