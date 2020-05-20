@@ -52,6 +52,24 @@
       "revId": "30ccc8c07b59440c495d0268227398ffdf7ec545",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a0f3582_e1edce4f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-20T16:04:42Z",
+      "side": 1,
+      "message": "\u003e This is likely because there was no concept of a low-prio queue in Gerrit core which plugins could use.\n\nI think the defaultQueue basically serves that purpose.\n\n\u003e What guarantees that the tasks put in default queue will execute with lower\n\u003e prio? The size of the default queue is configurable [1] and if an admin\n\u003e configures a higher number of threads, then the tasks in the default queue\n\u003e will also rob other thread pools of CPU and memory.\n\u003e \n\u003e [1] https://gerrit-review.googlesource.com/Documentation/config-gerrit.html#execution\n\nI agree. It would be good if an admin only ever had to bump this when there is enough background (low priority) load work on their server that they need more threads to keep up. In that case, it is appropriate to then rob the higher priority tasks of their resources in order to throttle them to a point that the background work can keep up. Ideally this adjustment would not be needed, and the queue size would auto-adjust to ensure that it keeps up with the work being generated. \n\nThis adjustment is probably good at tweaking throughput, but an admin might also be used because of latency issues, i.e. when one lo priority task runs too long and blocks other low priority tasks increasing their latency. However it would be better to never have to adjust this for latency issues, as such issues would be more effectively deal with by splitting them up, like what the ChainedScheduler does. If it makes it to core, we can start doing this.\n\n\u003e I agree. The main reason I commented on this change was that it felt wrong to\n\u003e me that a generic concept like ChainedScheduler gets implemented in a plugin.\n\u003e If we need a concept like that then it belongs to Gerrit core so that other\n\u003e plugins can also make use of it.\n\nGlad to see the idea has support and yes that would be nice to get it in core!\n\n\u003e However, if you would prefer to first start with the ChainedScheduler in the\n\u003e replication plugin with the intention of moving it to Gerrit core, or providing\n\u003e an alternative low-prio queue in the Gerrit core then I am also fine with this\n\u003e change.\n\nI think it might make sense to bring it in early to the plugin since it is not required to be in core, and then to bring it in core when there is a core user of it? It also probably makes sense to not block plugins fixes from using the ChainedScheduler on it being merged in core.",
+      "parentUuid": "b79f26fd_5cadc98d",
+      "revId": "30ccc8c07b59440c495d0268227398ffdf7ec545",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
