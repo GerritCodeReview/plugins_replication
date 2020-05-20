@@ -74,7 +74,6 @@ public class ReplicationQueue
   private final DynamicItem<AdminApiFactory> adminApiFactory;
   private final ReplicationTasksStorage replicationTasksStorage;
   private volatile boolean running;
-  private volatile boolean replaying;
   private final Queue<ReferenceUpdatedEvent> beforeStartupEventsQueue;
 
   @Inject
@@ -115,10 +114,6 @@ public class ReplicationQueue
 
   public boolean isRunning() {
     return running;
-  }
-
-  public boolean isReplaying() {
-    return replaying;
   }
 
   void scheduleFullSync(Project.NameKey project, String urlMatch, ReplicationState state) {
@@ -195,24 +190,22 @@ public class ReplicationQueue
   }
 
   private void firePendingEvents() {
-    try {
-      Set<String> eventsReplayed = new HashSet<>();
-      replaying = true;
-      for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.list()) {
-        if (t == null) {
-          repLog.warn("Encountered null replication event in ReplicationTasksStorage");
-          continue;
-        }
-        String eventKey = String.format("%s:%s", t.project, t.ref);
-        if (!eventsReplayed.contains(eventKey)) {
-          repLog.info("Firing pending task {}", eventKey);
-          onGitReferenceUpdated(t.project, t.ref);
-          eventsReplayed.add(eventKey);
+    for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.list()) {
+      if (t == null) {
+        repLog.warn("Encountered null replication event in ReplicationTasksStorage");
+        continue;
+      }
+      String eventKey = String.format("%s:%s:%s:%s", t.project, t.ref, t.remote, t.uri);
+      repLog.info("Firing pending task {}", eventKey);
+      Project.NameKey project = new Project.NameKey(t.project);
+      for (Destination cfg : config.getDestinationsForRemote(t.remote, FilterType.ALL)) {
+        try {
+          cfg.toSchedule(project, t.ref, new URIish(t.uri));
+        } catch (URISyntaxException e) {
         }
       }
-    } finally {
-      replaying = false;
     }
+    repLog.info("Done reading pending events");
   }
 
   @Override

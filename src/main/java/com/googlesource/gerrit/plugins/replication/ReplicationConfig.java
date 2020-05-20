@@ -13,19 +13,45 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
+import static java.util.stream.Collectors.toList;
+
 import com.google.gerrit.server.git.WorkQueue;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public interface ReplicationConfig {
 
   enum FilterType {
     PROJECT_CREATION,
     PROJECT_DELETION,
-    ALL
+    ALL;
+
+    public Predicate<? super Destination> getDestiationPredicate() {
+      switch (this) {
+        case PROJECT_CREATION:
+          return dest -> dest.isCreateMissingRepos();
+        case PROJECT_DELETION:
+          return dest -> dest.isReplicateProjectDeletions();
+        case ALL:
+        default:
+          return dest -> true;
+      }
+    }
+  }
+
+  default List<Destination> getDestinationsForRemote(String remote, FilterType filterType) {
+    return streamDestinations(filterType)
+        .filter(dest -> remote.equals(dest.getRemoteConfigName()))
+        .collect(toList());
   }
 
   List<Destination> getDestinations(FilterType filterType);
+
+  default Stream<Destination> streamDestinations(FilterType filterType) {
+    return getDestinations(filterType).stream();
+  }
 
   boolean isReplicateAllOnPluginStart();
 

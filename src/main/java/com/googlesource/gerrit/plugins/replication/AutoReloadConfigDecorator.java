@@ -96,8 +96,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
             || (!shuttingDown
                 && lastModified > currentConfigTs
                 && lastModified > lastFailedConfigTs
-                && queue.isRunning()
-                && !queue.isReplaying())) {
+                && queue.isRunning())) {
           queue.stop();
           currentConfig = loadConfig();
           currentConfigTs = lastModified;
