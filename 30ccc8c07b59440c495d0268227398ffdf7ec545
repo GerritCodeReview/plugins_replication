@@ -16,6 +16,24 @@
       "revId": "30ccc8c07b59440c495d0268227398ffdf7ec545",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adb8f6e1_9793e954",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-20T14:53:00Z",
+      "side": 1,
+      "message": "As mentioned in another comment on this change, there is another change that proposes using its own threadpool, The downside to creating another threadpool is that all threadpools get similar priorities and thus every new thread pool robs the existing threadpools of some processing and memory. I think that the addition of new threadpools for lower priority work is the wrong direction, and we probably have done too much of it already. Other examples of background plugin tasks that I know of that I would like to use this pattern for are the cleaners in the websessions-flatfile and batch pluigns, as these don\u0027t deserve their own thread pools either. I think new threadpools make sense for tasks that should not have their priority lowered, i.e. it is good for tasks that need to be protected from lower priority work, but theradpools are not a good solution for tasks that are lower priority work that we are trying to protect higher priority tasks from. We mostly put tasks in the defaultQueue when we think the tasks should are low enough priority that they should not run otherplaces! I think this chained approach is a less resource intensive approach to lower priority \"background\" tasks and hope that we might see something like it for more lower priority tasks eventually. That being said, I do think we need a solution to this scheduling problem, and if the other change is favored over this one I will not be upset, we can always improve upon it later.\n\nAs for future improvements, ideally this scheduling work would get allocated to the remote threadpool which each event is for. This could be potentially be done with more complicated architectural changes, I\u0027m not sure that is worth it as the immediate fix, but I do think it is worth considering soon. For example, it might not be too hard to split the reading of events apart from the scheduling of tasks, and that would have two benefits. If one task reads all the events from disk, and puts them into a Set for each remote, they would get properly de-duped right away (that fact that this de-duping doesn\u0027t currently happen is another bug in the existing codebase), and the reading would likely be fast since it hopefully would not trigger the same \"project cache loading\" slowness as scheduling. Then, the scheduling, which likely would trigger the project cache slowness could be done for each Set on each remotes threadpool, thus appropriately distributing this work where it belongs. Additionally if this scheduling were then done using a \"ChainedScehduler\" like this one on the threadpool for each remote, it would have the additional benefit of lowering the priority of the scheduling of these pending tasks below the priority of the user generated replication tasks.",
+      "parentUuid": "939caa1b_eb1b4d58",
+      "revId": "30ccc8c07b59440c495d0268227398ffdf7ec545",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
