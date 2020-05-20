@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "939caa1b_eb1b4d58",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-05-20T14:13:38Z",
+      "side": 1,
+      "message": "Why not create a dedicated thread pool, use it for scheduling the pending tasks and then shut it down? This would avoid the need for\n\"protecting\" the defaultQueue from overload and simplify the coding as we wouldn\u0027t need a ChainedExecutor in this case.",
+      "revId": "30ccc8c07b59440c495d0268227398ffdf7ec545",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
