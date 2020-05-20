@@ -94,6 +94,7 @@ public class Destination {
 
   private final ReplicationStateListener stateLog;
   private final Object stateLock = new Object();
+  private final DestinationChainedScheduler chainedScheduler;
   private final Map<URIish, PushOne> pending = new HashMap<>();
   private final Map<URIish, PushOne> inFlight = new HashMap<>();
   private final PushOne.Factory opFactory;
@@ -145,6 +146,8 @@ public class Destination {
     this.stateLog = stateLog;
     this.replicationTasksStorage = rts;
     config = cfg;
+    chainedScheduler = new DestinationChainedScheduler(this, eventDispatcher);
+
     CurrentUser remoteUser;
     if (!cfg.getAuthGroupNames().isEmpty()) {
       ImmutableSet.Builder<AccountGroup.UUID> builder = ImmutableSet.builder();
@@ -251,6 +254,10 @@ public class Destination {
       pool = null;
     }
     return cnt;
+  }
+
+  public ScheduledExecutorService getScheduledExecutorService() {
+    return pool;
   }
 
   private void foreachPushOp(Map<URIish, PushOne> opsMap, Function<PushOne, Void> pushOneFunction) {
@@ -370,6 +377,10 @@ public class Destination {
       throw new RuntimeException(e);
     }
     return false;
+  }
+
+  public void toSchedule(Project.NameKey project, String ref, URIish uri) {
+    chainedScheduler.toSchedule(project, ref, uri);
   }
 
   void schedule(Project.NameKey project, String ref, URIish uri, ReplicationState state) {

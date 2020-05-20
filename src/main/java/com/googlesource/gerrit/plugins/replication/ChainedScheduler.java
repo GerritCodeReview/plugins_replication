@@ -85,7 +85,8 @@ public class ChainedScheduler<T> {
               stream.close();
               super.onDone();
             }
-          });
+          },
+          false);
     }
   }
 
@@ -115,11 +116,17 @@ public class ChainedScheduler<T> {
   protected final Iterator<T> iterator;
   protected final Runner<T> runner;
 
+  protected final boolean isRemove;
+
   public ChainedScheduler(
-      ScheduledExecutorService threadPool, Iterator<T> iterator, Runner<T> runner) {
+      ScheduledExecutorService threadPool,
+      Iterator<T> iterator,
+      Runner<T> runner,
+      boolean isRemove) {
     this.threadPool = threadPool;
     this.iterator = iterator;
     this.runner = runner;
+    this.isRemove = isRemove;
     next();
   }
 
@@ -129,7 +136,11 @@ public class ChainedScheduler<T> {
       return;
     }
 
-    schedule(new Chainer(iterator.next()));
+    T item = iterator.next();
+    if (isRemove) {
+      iterator.remove();
+    }
+    schedule(new Chainer(item));
   }
 
   protected void schedule(Runnable r) {

@@ -34,7 +34,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Predicate;
+import java.util.stream.Stream;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.transport.RefSpec;
@@ -76,20 +76,14 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
    */
   @Override
   public List<Destination> getDestinations(FilterType filterType) {
-    Predicate<? super Destination> filter;
-    switch (filterType) {
-      case PROJECT_CREATION:
-        filter = dest -> dest.isCreateMissingRepos();
-        break;
-      case PROJECT_DELETION:
-        filter = dest -> dest.isReplicateProjectDeletions();
-        break;
-      case ALL:
-      default:
-        filter = dest -> true;
-        break;
-    }
-    return destinations.stream().filter(Objects::nonNull).filter(filter).collect(toList());
+    return streamDestinations(filterType).collect(toList());
+  }
+
+  @Override
+  public Stream<Destination> streamDestinations(FilterType filterType) {
+    return destinations.stream()
+        .filter(Objects::nonNull)
+        .filter(filterType.getDestiationPredicate());
   }
 
   private List<Destination> allDestinations(Destination.Factory destinationFactory)

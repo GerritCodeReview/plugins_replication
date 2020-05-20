@@ -74,7 +74,6 @@ public class ReplicationQueue
   private final DynamicItem<AdminApiFactory> adminApiFactory;
   private final ReplicationTasksStorage replicationTasksStorage;
   private volatile boolean running;
-  private volatile boolean replaying;
   private final Queue<ReferenceUpdatedEvent> beforeStartupEventsQueue;
 
   @Inject
@@ -115,10 +114,6 @@ public class ReplicationQueue
 
   public boolean isRunning() {
     return running;
-  }
-
-  public boolean isReplaying() {
-    return replaying;
   }
 
   void scheduleFullSync(Project.NameKey project, String urlMatch, ReplicationState state) {
@@ -195,33 +190,29 @@ public class ReplicationQueue
   }
 
   private void firePendingEvents() {
-    final Set<String> eventsReplayed = new HashSet<>();
-    replaying = true;
     new ChainedScheduler.StreamScheduler<ReplicationTasksStorage.ReplicateRefUpdate>(
         workQueue.getDefaultQueue(),
         replicationTasksStorage.stream(),
         new ChainedScheduler.Runner<ReplicationTasksStorage.ReplicateRefUpdate>() {
           @Override
           public void run(ReplicationTasksStorage.ReplicateRefUpdate u) {
-            String eventKey = getKey(u);
-            if (eventsReplayed.add(eventKey)) {
-              repLog.info("Firing pending task {}", eventKey);
-              onGitReferenceUpdated(u.project, u.ref);
+            for (Destination cfg : config.getDestinationsForRemote(u.remote, FilterType.ALL)) {
+              try {
+                cfg.toSchedule(new Project.NameKey(u.project), u.ref, new URIish(u.uri));
+              } catch (URISyntaxException e) {
+              }
             }
           }
 
           @Override
           public void onDone() {
-            replaying = false;
+            repLog.info("Done reading pending events");
           }
 
           @Override
           public String toString(ReplicationTasksStorage.ReplicateRefUpdate u) {
-            return "Scheduling push to " + getKey(u);
-          }
-
-          public String getKey(ReplicationTasksStorage.ReplicateRefUpdate u) {
-            return String.format("%s:%s", u.project, u.ref);
+            return String.format(
+                "Queuing push to %s:%s:%s:%s", u.project, u.ref, u.remote, u.uri);
           }
         });
   }
