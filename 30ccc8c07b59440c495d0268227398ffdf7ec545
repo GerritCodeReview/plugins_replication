@@ -34,6 +34,24 @@
       "revId": "30ccc8c07b59440c495d0268227398ffdf7ec545",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b79f26fd_5cadc98d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-05-20T15:29:03Z",
+      "side": 1,
+      "message": "\u003e As mentioned in another comment on this change, there is another change that proposes using its own threadpool, The downside to creating another threadpool is that all threadpools get similar priorities and thus every new thread pool robs the existing threadpools of some processing and memory. I think that the addition of new threadpools for lower priority work is the wrong direction, and we probably have done too much of it already. Other examples of background plugin tasks that I know of that I would like to use this pattern for are the cleaners in the websessions-flatfile and batch pluigns, as these don\u0027t deserve their own thread pools either.\n\nThis is likely because there was no concept of a low-prio queue in Gerrit core which plugins could use.\n\n\u003e I think new threadpools make sense for tasks that should not have their priority lowered, i.e. it is good for tasks that need to be protected from lower priority work, but theradpools are not a good solution for tasks that are lower priority work that we are trying to protect higher priority tasks from. We mostly put tasks in the defaultQueue when we think the tasks should are low enough priority that they should not run otherplaces!\n\nWhat guarantees that the tasks put in default queue will execute with lower\nprio? The size of the default queue is configurable [1] and if an admin\nconfigures a higher number of threads, then the tasks in the default queue\nwill also rob other thread pools of CPU and memory.\n\n[1] https://gerrit-review.googlesource.com/Documentation/config-gerrit.html#execution\n\n\u003e I think this chained approach is a less resource intensive approach to lower priority \"background\" tasks and hope that we might see something like it for more lower priority tasks eventually. That being said, I do think we need a solution to this scheduling problem, and if the other change is favored over this one I will not be upset, we can always improve upon it later.\n\nI agree. The main reason I commented on this change was that it felt wrong to\nme that a generic concept like ChainedScheduler gets implemented in a plugin.\nIf we need a concept like that then it belongs to Gerrit core so that other\nplugins can also make use of it.\n\nHowever, if you would prefer to first start with the ChainedScheduler in the\nreplication plugin with the intention of moving it to Gerrit core, or providing\nan alternative low-prio queue in the Gerrit core then I am also fine with this\nchange.",
+      "parentUuid": "adb8f6e1_9793e954",
+      "revId": "30ccc8c07b59440c495d0268227398ffdf7ec545",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
