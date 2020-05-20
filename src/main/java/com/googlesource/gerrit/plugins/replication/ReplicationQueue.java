@@ -61,7 +61,6 @@ public class ReplicationQueue
   private final Provider<ReplicationDestinations> destinations; // For Guice circular dependency
   private final ReplicationTasksStorage replicationTasksStorage;
   private volatile boolean running;
-  private volatile boolean replaying;
   private final Queue<ReferenceUpdatedEvent> beforeStartupEventsQueue;
   private Distributor distributor;
 
@@ -107,11 +106,6 @@ public class ReplicationQueue
   @Override
   public boolean isRunning() {
     return running;
-  }
-
-  @Override
-  public boolean isReplaying() {
-    return replaying;
   }
 
   void scheduleFullSync(Project.NameKey project, String urlMatch, ReplicationState state) {
@@ -197,29 +191,30 @@ public class ReplicationQueue
   }
 
   private void firePendingEvents() {
-    replaying = true;
     new ChainedScheduler.StreamScheduler<ReplicationTasksStorage.ReplicateRefUpdate>(
         workQueue.getDefaultQueue(),
         replicationTasksStorage.streamWaiting(),
         new ChainedScheduler.Runner<ReplicationTasksStorage.ReplicateRefUpdate>() {
           @Override
           public void run(ReplicationTasksStorage.ReplicateRefUpdate u) {
-            try {
-              fire(new URIish(u.uri), Project.nameKey(u.project), u.ref);
-            } catch (URISyntaxException e) {
-              repLog.atSevere().withCause(e).log(
-                  "Encountered malformed URI for persisted event %s", u);
+            for (Destination cfg : destinations.get().getForRemote(FilterType.ALL, u.remote)) {
+              try {
+                cfg.toSchedule(Project.nameKey(u.project), u.ref, new URIish(u.uri));
+              } catch (URISyntaxException e) {
+                repLog.atSevere().withCause(e).log(
+                    "Encountered malformed URI for persisted event %s", u);
+              }
             }
           }
 
           @Override
           public void onDone() {
-            replaying = false;
+            repLog.atInfo().log("Done reading pending events");
           }
 
           @Override
           public String toString(ReplicationTasksStorage.ReplicateRefUpdate u) {
-            return "Scheduling push to " + String.format("%s:%s", u.project, u.ref);
+            return String.format("Queuing push to %s:%s:%s:%s", u.project, u.ref, u.remote, u.uri);
           }
         });
   }

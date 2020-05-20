@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import java.nio.file.Path;
+import java.util.function.Predicate;
 import org.eclipse.jgit.lib.Config;
 
 /** Configuration of all the replication end points. */
@@ -24,7 +25,19 @@ public interface ReplicationConfig {
   enum FilterType {
     PROJECT_CREATION,
     PROJECT_DELETION,
-    ALL
+    ALL;
+
+    public Predicate<? super Destination> getDestiationPredicate() {
+      switch (this) {
+        case PROJECT_CREATION:
+          return dest -> dest.isCreateMissingRepos();
+        case PROJECT_DELETION:
+          return dest -> dest.isReplicateProjectDeletions();
+        case ALL:
+        default:
+          return dest -> true;
+      }
+    }
   }
 
   /**

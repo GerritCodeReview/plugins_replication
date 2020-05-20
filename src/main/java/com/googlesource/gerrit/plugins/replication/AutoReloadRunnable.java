@@ -52,8 +52,7 @@ public class AutoReloadRunnable implements Runnable {
     ObservableQueue queue = queueObserverProvider.get();
     if (pendingConfigVersion.equals(loadedConfigVersion)
         || pendingConfigVersion.equals(lastFailedConfigVersion)
-        || !queue.isRunning()
-        || queue.isReplaying()) {
+        || !queue.isRunning()) {
       return;
     }
 

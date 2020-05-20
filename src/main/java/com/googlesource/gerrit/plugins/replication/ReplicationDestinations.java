@@ -14,12 +14,15 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static java.util.stream.Collectors.toList;
+
 import com.google.common.collect.Multimap;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.WorkQueue;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 import org.eclipse.jgit.transport.URIish;
 
 /** Git destinations currently active for replication. */
@@ -53,6 +56,29 @@ public interface ReplicationDestinations {
    * @return the list of active destinations
    */
   List<Destination> getDestinations(URIish uriish, Project.NameKey project, String ref);
+
+  /**
+   * List of currently active replication destinations for a remote.
+   *
+   * @param filterType type project filtering
+   * @param remote name of the remote
+   * @return the list of active destinations
+   */
+  default List<Destination> getForRemote(FilterType filterType, String remote) {
+    return stream(filterType)
+        .filter(dest -> remote.equals(dest.getRemoteConfigName()))
+        .collect(toList());
+  }
+
+  /**
+   * Stream of currently active replication destinations.
+   *
+   * @param filterType type project filtering
+   * @return the stream of active destinations
+   */
+  default Stream<Destination> stream(FilterType filterType) {
+    return getAll(filterType).stream();
+  }
 
   /** @return true if there are no destinations, false otherwise. */
   boolean isEmpty();
