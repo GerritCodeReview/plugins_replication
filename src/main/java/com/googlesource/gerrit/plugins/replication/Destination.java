@@ -99,6 +99,7 @@ public class Destination {
 
   private final ReplicationStateListener stateLog;
   private final Object stateLock = new Object();
+  private final DestinationChainedScheduler chainedScheduler;
   // writes are covered by the stateLock, but some reads are still
   // allowed without the lock
   private final ConcurrentMap<URIish, PushOne> pending = new ConcurrentHashMap<>();
@@ -154,6 +155,8 @@ public class Destination {
     this.stateLog = stateLog;
     this.replicationTasksStorage = rts;
     config = cfg;
+    chainedScheduler = new DestinationChainedScheduler(this, eventDispatcher);
+
     CurrentUser remoteUser;
     if (!cfg.getAuthGroupNames().isEmpty()) {
       ImmutableSet.Builder<AccountGroup.UUID> builder = ImmutableSet.builder();
@@ -273,6 +276,10 @@ public class Destination {
     return cnt;
   }
 
+  public ScheduledExecutorService getScheduledExecutorService() {
+    return pool;
+  }
+
   private void foreachPushOp(Map<URIish, PushOne> opsMap, Function<PushOne, Void> pushOneFunction) {
     for (PushOne pushOne : ImmutableList.copyOf(opsMap.values())) {
       pushOneFunction.apply(pushOne);
@@ -380,6 +387,10 @@ public class Destination {
       throw new RuntimeException(e);
     }
     return false;
+  }
+
+  public void toSchedule(Project.NameKey project, String ref, URIish uri) {
+    chainedScheduler.toSchedule(project, ref, uri);
   }
 
   void schedule(Project.NameKey project, String ref, URIish uri, ReplicationState state) {

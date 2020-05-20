@@ -22,11 +22,4 @@ public interface ObservableQueue {
    * @return true, when the queue is running, false otherwise
    */
   boolean isRunning();
-
-  /**
-   * Indicates whether the observed queue is replaying queued events
-   *
-   * @return true, when the queue is replaying, false otherwise
-   */
-  boolean isReplaying();
 }
