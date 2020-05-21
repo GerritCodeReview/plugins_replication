@@ -22,6 +22,30 @@
       "revId": "2cb6112e081e97d4dfd8e677b6f02c779db95e85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "daff6ad0_4f95709f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-21T04:35:14Z",
+      "side": 1,
+      "message": "I considered it, but that\u0027s already done on 3.1 in 6d05dba08ce5935ea9ceba867c4ee7bcf7a1087c. This is a backport of that change to 2.16. I thought changing less here would make merging it to 3.1 simpler.\n\nI\u0027m happy to do it if you\u0027d prefer.",
+      "parentUuid": "a89d6e01_0c7c5739",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 39
+      },
+      "revId": "2cb6112e081e97d4dfd8e677b6f02c779db95e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
