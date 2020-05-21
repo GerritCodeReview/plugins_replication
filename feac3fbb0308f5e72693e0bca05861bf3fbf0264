@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e079d522_747c1ef3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-21T21:40:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "305bcbfe_41158832",
+      "range": {
+        "startLine": 326,
+        "startChar": 28,
+        "endLine": 326,
+        "endChar": 38
+      },
+      "revId": "feac3fbb0308f5e72693e0bca05861bf3fbf0264",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46826050_e3e3b5e8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 1
@@ -68,6 +92,54 @@
       "revId": "feac3fbb0308f5e72693e0bca05861bf3fbf0264",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a9a66bd_9a86b12e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-21T21:40:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07920feb_0d1b6843",
+      "range": {
+        "startLine": 269,
+        "startChar": 13,
+        "endLine": 269,
+        "endChar": 23
+      },
+      "revId": "feac3fbb0308f5e72693e0bca05861bf3fbf0264",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29d06190_6f162f61",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-21T21:40:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46826050_e3e3b5e8",
+      "range": {
+        "startLine": 269,
+        "startChar": 47,
+        "endLine": 269,
+        "endChar": 54
+      },
+      "revId": "feac3fbb0308f5e72693e0bca05861bf3fbf0264",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
