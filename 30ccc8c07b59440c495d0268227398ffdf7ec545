@@ -70,6 +70,24 @@
       "revId": "30ccc8c07b59440c495d0268227398ffdf7ec545",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df5ffaf8_2e8cdd04",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-21T23:44:17Z",
+      "side": 1,
+      "message": "\u003e As for future improvements, ideally this scheduling work would get allocated to the remote threadpool which each event is for...\n\nA sample of what this might look like is here: https://gerrit-review.googlesource.com/c/plugins/replication/+/268612\n\nThat change is much more complicated, and is probably better kept for a newer release. I made it here so that it can be compared to this current change. As far as startup is concerned, this current change is faster than 268612 because it does not wait for the tasks to be read from disk, and this could be very significant on a slow NFS, or a slow disk. So I think we should choose the current change to ensure that startup is faster, and then if we want, we can additionally rebase 268612 on this change to get the fairness benefit of scheduling via the appropriate threadpool. As a fruther future improvement, it would still be good to split the on-disk storage per Destination so that even the reading is done on the appropriate threadpools, but that requires another ondisk format change.",
+      "parentUuid": "3a0f3582_e1edce4f",
+      "revId": "30ccc8c07b59440c495d0268227398ffdf7ec545",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
