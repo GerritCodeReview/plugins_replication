@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a89d6e01_0c7c5739",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-05-21T03:04:03Z",
+      "side": 1,
+      "message": "This is duplicated below. It would be bette to factor it to a method so it can be reused in both places, reducing the risk that the key generation gets out of sync again if one place is changed.",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 39
+      },
+      "revId": "2cb6112e081e97d4dfd8e677b6f02c779db95e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
