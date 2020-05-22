@@ -352,6 +352,20 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     }
   }
 
+  @Test
+  public void shouldCleanupTasksAfterNewProjectReplication() throws Exception {
+    tasksStorage.disableDeleteForTesting(false);
+    setReplicationDestination("task_cleanup_project", "replica", ALL_PROJECTS);
+    config.setInt("remote", "task_cleanup_project", "replicationRetry", 0);
+    config.save();
+    reloadConfig();
+    assertThat(tasksStorage.listRunning()).hasSize(0);
+    Project.NameKey sourceProject = createTestProject("task_cleanup_project");
+
+    waitUntil(() -> projectExists(Project.nameKey(sourceProject + "replica.git")));
+    waitUntil(() -> tasksStorage.listRunning().size() == 0);
+  }
+
   private Ref getRef(Repository repo, String branchName) throws IOException {
     return repo.getRefDatabase().exactRef(branchName);
   }
