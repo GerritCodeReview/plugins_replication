@@ -219,6 +219,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     return maxRetries == 0 || retryCount <= maxRetries;
   }
 
+  private void retryDone() {
+    this.retrying = false;
+  }
+
   void canceledByReplication() {
     canceled = true;
   }
@@ -357,6 +361,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
         metrics.recordSlowProjectReplication(
             config.getName(), projectName.get(), pool.getSlowLatencyThreshold(), elapsed);
       }
+      retryDone();
       repLog.atInfo().log(
           "Replication to %s completed in %dms, %dms delay, %d retries",
           uri, elapsed, delay, retryCount);
