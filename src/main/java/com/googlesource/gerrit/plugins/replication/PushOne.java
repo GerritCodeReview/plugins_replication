@@ -219,6 +219,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     return maxRetries == 0 || retryCount <= maxRetries;
   }
 
+  private void retryDone() {
+    this.retrying = false;
+  }
+
   void canceledByReplication() {
     canceled = true;
   }
@@ -360,6 +364,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       repLog.atInfo().log(
           "Replication to %s completed in %dms, %dms delay, %d retries",
           uri, elapsed, delay, retryCount);
+      retryDone();
     } catch (RepositoryNotFoundException e) {
       stateLog.error(
           "Cannot replicate " + projectName + "; Local repository error: " + e.getMessage(),
