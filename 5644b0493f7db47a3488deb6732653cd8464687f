@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "542f86f6_ecefd2ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-22T17:17:55Z",
+      "side": 1,
+      "message": "\u003e Code looks OK, but it would be nice if there were some tests.\n\nDoes the test framework support writing multi-master test?\n",
+      "revId": "5644b0493f7db47a3488deb6732653cd8464687f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
