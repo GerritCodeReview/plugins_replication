@@ -69,7 +69,8 @@ public class ReplicationTasksStorage {
 
   public String persist(ReplicateRefUpdate r) {
     String json = GSON.toJson(r) + "\n";
-    String eventKey = sha1(json).name();
+    String key = r.project + "\n" + r.ref + "\n" + r.uri + "\n" + r.remote;
+    String eventKey = sha1(key).name();
     Path file = refUpdates().resolve(eventKey);
 
     if (Files.exists(file)) {
@@ -91,8 +92,8 @@ public class ReplicationTasksStorage {
   }
 
   public void delete(ReplicateRefUpdate r) {
-    String taskJson = GSON.toJson(r) + "\n";
-    String taskKey = sha1(taskJson).name();
+    String key = r.project + "\n" + r.ref + "\n" + r.uri + "\n" + r.remote;
+    String taskKey = sha1(key).name();
     Path file = refUpdates().resolve(taskKey);
 
     if (disableDeleteForTesting) {
