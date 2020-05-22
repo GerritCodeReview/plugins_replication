@@ -225,6 +225,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     return maxRetries == 0 || retryCount <= maxRetries;
   }
 
+  private void retryDone() {
+    this.retrying = false;
+  }
+
   void canceledByReplication() {
     canceled = true;
   }
@@ -353,6 +357,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       git = gitManager.openRepository(projectName);
       runImpl();
       long elapsed = NANOSECONDS.toMillis(context.stop());
+      retryDone();
       repLog.info(
           "Replication to {} completed in {}ms, {}ms delay, {} retries",
           uri,
