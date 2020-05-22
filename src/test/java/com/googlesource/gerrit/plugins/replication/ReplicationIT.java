@@ -67,6 +67,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   private Path gitPath;
   private Path storagePath;
   private FileBasedConfig config;
+  private ReplicationConfig replicationConfig;
   private ReplicationTasksStorage tasksStorage;
 
   @Override
@@ -84,6 +85,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     super.setUpTestPlugin();
 
     pluginDataDir = plugin.getSysInjector().getInstance(Key.get(Path.class, PluginData.class));
+    replicationConfig = plugin.getSysInjector().getInstance(ReplicationConfig.class);
     storagePath = pluginDataDir.resolve("ref-updates");
     tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
     cleanupReplicationTasks();
@@ -366,6 +368,20 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     waitUntil(() -> tasksStorage.listRunning().size() == 0);
   }
 
+  @Test
+  public void shouldCleanupBothTasksAndLocksAfterNewProjectReplication() throws Exception {
+    tasksStorage.disableDeleteForTesting(false);
+    setReplicationDestination("task_cleanup_locks_project", "replica", ALL_PROJECTS);
+    config.setInt("remote", "task_cleanup_locks_project", "replicationRetry", 0);
+    config.save();
+    reloadConfig();
+    assertThat(tasksStorage.listRunning()).hasSize(0);
+    Project.NameKey sourceProject = createTestProject("task_cleanup_locks_project");
+
+    waitUntil(() -> projectExists(Project.nameKey(sourceProject + "replica.git")));
+    waitUntil(() -> isTaskCleanedUp());
+  }
+
   private Ref getRef(Repository repo, String branchName) throws IOException {
     return repo.getRefDatabase().exactRef(branchName);
   }
@@ -456,6 +472,12 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         }
       }
     }
+  }
+
+  private boolean isTaskCleanedUp() {
+    Path refUpdates = replicationConfig.getEventsDirectory().resolve("ref-updates");
+    Path runningUpdates = refUpdates.resolve("running");
+    return runningUpdates.toFile().list().length == 0;
   }
 
   private boolean projectExists(Project.NameKey name) {
