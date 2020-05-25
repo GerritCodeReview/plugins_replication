@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "00fbf979_c651a055",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Constants.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "\u003e Given the rather trivial nature of the message at line 19, I\u0027d use the non-String sendError method instead, and remove this constant and class. The caller will still already know about the fact that this is a bad request (aka invalid command) anyway.\n\nMissed?",
+      "parentUuid": "750e8e5d_069ec264",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "05b63850_f8cb289a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 2
@@ -228,6 +246,30 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b11c200f_952ea619",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ServletCommandProcessing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ca8ce99_7fa54037",
+      "range": {
+        "startLine": 22,
+        "startChar": 38,
+        "endLine": 22,
+        "endChar": 66
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -654,6 +696,30 @@
       "side": 1,
       "message": "How about inserting a small comment to document this briefly here?",
       "parentUuid": "050f9a84_51875a5b",
+      "range": {
+        "startLine": 77,
+        "startChar": 6,
+        "endLine": 77,
+        "endChar": 27
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "561b4af5_0048859b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "\u003e How about inserting a small comment to document this briefly here?\n\nMissed?",
+      "parentUuid": "581d9c83_f6f417e4",
       "range": {
         "startLine": 77,
         "startChar": 6,
@@ -1874,6 +1940,30 @@
     },
     {
       "key": {
+        "uuid": "24db7044_1d8cf16f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "\u003e Ok, so maybe explain the purpose or difference (scope) of each test class, then? I can\u0027t quickly find that earlier comment. I\u0027d propose some small class javadoc in each test class file.\n\nMissed?",
+      "parentUuid": "cc4f1f81_40e98064",
+      "range": {
+        "startLine": 45,
+        "startChar": 13,
+        "endLine": 45,
+        "endChar": 40
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fb4dfff9_e1d1d601",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
         "patchSetId": 2
@@ -1968,6 +2058,24 @@
       "side": 1,
       "message": "Readability of each test method step, usually one \"paragraph\" or block per logical assertion.",
       "parentUuid": "f5ed896a_f90fd052",
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec88d110_133e4c1e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "\u003e Readability of each test method step, usually one \"paragraph\" or block per logical assertion.\n\nMissed?",
+      "parentUuid": "cceadae0_f5daf859",
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -2092,6 +2200,30 @@
     },
     {
       "key": {
+        "uuid": "50d6a968_6243af47",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13368eb5_241147ad",
+      "range": {
+        "startLine": 212,
+        "startChar": 10,
+        "endLine": 212,
+        "endChar": 16
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e998b0d2_191345b4",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
         "patchSetId": 2
@@ -2136,6 +2268,30 @@
       "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd4e53c5_4bea9e2a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4fb8c57_ba73cb3f",
+      "range": {
+        "startLine": 220,
+        "startChar": 74,
+        "endLine": 220,
+        "endChar": 86
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }

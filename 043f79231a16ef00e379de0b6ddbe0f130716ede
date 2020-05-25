@@ -1,0 +1,227 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31a816c5_9028c4b5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "The handling of this field should match the one for startReplicationRequest below, I think; they\u0027re similar in purpose.",
+      "range": {
+        "startLine": 36,
+        "startChar": 10,
+        "endLine": 36,
+        "endChar": 63
+      },
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9804d20_812dca88",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "So here, why do we treat this field as an instance one, but not startCommandRequest?",
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56c1b350_4cb9e8be",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "Would remove this blank line.",
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3dcbf52d_5725f8c1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "This line will be wrongfully reached in the startReplicationRequest case; right? I mean, if \u0027req\u0027 happens to be a startReplicationRequest, logically that is. I understand that here the two fields are treated differently, which I think they shouldn\u0027t.",
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acfb4088_87a306ad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "This trace would always or often show, potentially cluttering the log. How about using debug level instead?",
+      "range": {
+        "startLine": 57,
+        "startChar": 11,
+        "endLine": 57,
+        "endChar": 15
+      },
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e92fea56_5f68a8be",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "Would remove this blank line as well.",
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d95e79c_810b831b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "Was fine before without this blank line.",
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9faeccc4_7074568e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "private static final (followed by a blank line).",
+      "range": {
+        "startLine": 45,
+        "startChar": 2,
+        "endLine": 45,
+        "endChar": 9
+      },
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e33f2304_66e5a186",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "SC_BAD_REQUEST_MSG, rather?",
+      "range": {
+        "startLine": 262,
+        "startChar": 51,
+        "endLine": 262,
+        "endChar": 70
+      },
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a187d47c_9a5fe25e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "Unused, warning in Eclipse.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 78
+      },
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25a4b3a9_95c65bca",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "Unused, too.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 59
+      },
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}

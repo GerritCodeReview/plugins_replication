@@ -648,6 +648,30 @@
     },
     {
       "key": {
+        "uuid": "d6aeee94_5b69ebfd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b86daf4_be8aeab0",
+      "range": {
+        "startLine": 101,
+        "startChar": 17,
+        "endLine": 101,
+        "endChar": 26
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "202d7bca_3dc36810",
         "filename": "src/main/resources/Documentation/rest-api-replication.md",
         "patchSetId": 3
@@ -876,6 +900,30 @@
         "startChar": 49,
         "endLine": 16,
         "endChar": 52
+      },
+      "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cf95864a_10c0f38d",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-25T20:36:30Z",
+      "side": 1,
+      "message": "Me neither, not anymore.",
+      "parentUuid": "6e5b4c24_87f98211",
+      "range": {
+        "startLine": 16,
+        "startChar": 57,
+        "endLine": 16,
+        "endChar": 64
       },
       "revId": "433e22f456ce9ad45c68f3c1ba3d3c7ee973eae5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
