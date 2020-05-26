@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6f9cd76_1b307612",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-26T23:20:00Z",
+      "side": 1,
+      "message": "As is, this test has no pass/fail? Better to wait until the project is replicated, then verify that it is cleaned up.",
+      "range": {
+        "startLine": 382,
+        "startChar": 17,
+        "endLine": 382,
+        "endChar": 20
+      },
+      "revId": "c3df6759bbc9d771f6102705b07d0d44e2ab2377",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
