@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4b809456_5fb3f759",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-05-27T19:13:39Z",
+      "side": 1,
+      "message": "It just sort of evolved that way :). Right.",
+      "parentUuid": "31a816c5_9028c4b5",
+      "range": {
+        "startLine": 36,
+        "startChar": 10,
+        "endLine": 36,
+        "endChar": 63
+      },
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9804d20_812dca88",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 5
@@ -39,6 +63,24 @@
       "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "455adc5b_187b6c53",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-05-27T19:13:39Z",
+      "side": 1,
+      "message": "If I understand above correctly.",
+      "parentUuid": "c9804d20_812dca88",
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "03298b69_d48c02ad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-05-27T19:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56c1b350_4cb9e8be",
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3dcbf52d_5725f8c1",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 5
@@ -70,6 +130,24 @@
       "writtenOn": "2020-05-25T20:36:30Z",
       "side": 1,
       "message": "This line will be wrongfully reached in the startReplicationRequest case; right? I mean, if \u0027req\u0027 happens to be a startReplicationRequest, logically that is. I understand that here the two fields are treated differently, which I think they shouldn\u0027t.",
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07e3afdf_405a1a9f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-05-27T19:13:39Z",
+      "side": 1,
+      "message": "Not sure I understand. Try block is required as the send could throw an excpeton. This code will only be run if the req is not valid somehow.",
+      "parentUuid": "3dcbf52d_5725f8c1",
       "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "49a98b42_3755a0ee",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-05-27T19:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acfb4088_87a306ad",
+      "range": {
+        "startLine": 57,
+        "startChar": 11,
+        "endLine": 57,
+        "endChar": 15
+      },
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e92fea56_5f68a8be",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 5
@@ -116,6 +218,24 @@
     },
     {
       "key": {
+        "uuid": "c4c72258_46e6654a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-05-27T19:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e92fea56_5f68a8be",
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d95e79c_810b831b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
         "patchSetId": 5
@@ -130,6 +250,24 @@
       "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96a64933_dd7890b7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-05-27T19:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d95e79c_810b831b",
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -156,6 +294,30 @@
     },
     {
       "key": {
+        "uuid": "02dbf7b6_fafe8154",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-05-27T19:13:39Z",
+      "side": 1,
+      "message": "Removed, no longer needed due to previous comment.",
+      "parentUuid": "9faeccc4_7074568e",
+      "range": {
+        "startLine": 45,
+        "startChar": 2,
+        "endLine": 45,
+        "endChar": 9
+      },
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e33f2304_66e5a186",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
         "patchSetId": 5
@@ -176,6 +338,30 @@
       "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a39e1cb_3e2c3324",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationHttpTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-05-27T19:13:39Z",
+      "side": 1,
+      "message": "No longer needed, removed.",
+      "parentUuid": "e33f2304_66e5a186",
+      "range": {
+        "startLine": 262,
+        "startChar": 51,
+        "endLine": 262,
+        "endChar": 70
+      },
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -202,6 +388,30 @@
     },
     {
       "key": {
+        "uuid": "26633c21_e253089c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-05-27T19:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a187d47c_9a5fe25e",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 78
+      },
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "25a4b3a9_95c65bca",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
         "patchSetId": 5
@@ -222,6 +432,30 @@
       "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c084baf1_c4f43d6b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-05-27T19:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25a4b3a9_95c65bca",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 59
+      },
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
