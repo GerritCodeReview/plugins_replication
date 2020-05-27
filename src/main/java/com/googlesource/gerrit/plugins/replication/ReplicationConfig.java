@@ -13,9 +13,11 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.git.WorkQueue;
 import java.nio.file.Path;
 import java.util.List;
+import org.eclipse.jgit.transport.URIish;
 
 public interface ReplicationConfig {
 
@@ -24,6 +26,8 @@ public interface ReplicationConfig {
     PROJECT_DELETION,
     ALL
   }
+
+  List<Destination> getDestinations(URIish uriish, Project.NameKey project, String ref);
 
   List<Destination> getDestinations(FilterType filterType);
 
