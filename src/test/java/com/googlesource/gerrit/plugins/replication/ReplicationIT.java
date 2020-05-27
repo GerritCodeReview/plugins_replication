@@ -27,8 +27,11 @@ import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.annotations.PluginData;
+import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
+import com.google.gerrit.extensions.events.ProjectDeletedListener;
+import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Key;
@@ -65,6 +68,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   @Inject private SitePaths sitePaths;
   @Inject private ProjectOperations projectOperations;
+  @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
   private Path pluginDataDir;
   private Path gitPath;
   private Path storagePath;
@@ -105,6 +109,34 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     ProjectInfo replicaProject = gApi.projects().name(sourceProject + "replica").get();
     assertThat(replicaProject).isNotNull();
+  }
+
+  @Test
+  public void shouldReplicateProjectDeletion() throws Exception {
+    String projectNameDeleted = "project-deleted";
+    Project.NameKey replicaProject = createTestProject(projectNameDeleted + "replica");
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    setProjectDeletionReplication("foo", true);
+    reloadConfig();
+
+    ProjectDeletedListener.Event event =
+        new ProjectDeletedListener.Event() {
+          @Override
+          public String getProjectName() {
+            return projectNameDeleted;
+          }
+
+          @Override
+          public NotifyHandling getNotify() {
+            return NotifyHandling.NONE;
+          }
+        };
+
+    for (ProjectDeletedListener l : deletedListeners) {
+      l.onProjectDeleted(event);
+    }
+
+    waitUntil(() -> !projectExists(replicaProject));
   }
 
   @Test
@@ -399,6 +431,12 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     config.setInt("remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY);
     project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
     config.setBoolean("gerrit", null, "autoReload", true);
+    config.save();
+  }
+
+  private void setProjectDeletionReplication(String remoteName, boolean replicateProjectDeletion)
+      throws IOException {
+    config.setBoolean("remote", remoteName, "replicateProjectDeletions", replicateProjectDeletion);
     config.save();
   }
 
