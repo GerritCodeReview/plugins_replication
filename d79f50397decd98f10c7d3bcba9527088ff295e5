@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "614a7d79_68f377d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-27T20:23:00Z",
+      "side": 1,
+      "message": "Would it be possible to fix these one at a time? I\u0027m not sure what code is for fixing deletion vs fixing creation.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 16
+      },
+      "revId": "d79f50397decd98f10c7d3bcba9527088ff295e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22334c16_f3fffc98",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-27T20:23:00Z",
+      "side": 1,
+      "message": "Is this actually a bug in wouldPushProject that it doesn\u0027t handle deletion correctly?",
+      "range": {
+        "startLine": 90,
+        "startChar": 10,
+        "endLine": 90,
+        "endChar": 51
+      },
+      "revId": "d79f50397decd98f10c7d3bcba9527088ff295e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c0c39a8_35cf6adf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-27T20:23:00Z",
+      "side": 1,
+      "message": "why add this?",
+      "range": {
+        "startLine": 296,
+        "startChar": 35,
+        "endLine": 296,
+        "endChar": 85
+      },
+      "revId": "d79f50397decd98f10c7d3bcba9527088ff295e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
