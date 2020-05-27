@@ -58,7 +58,9 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   private static final Optional<String> ALL_PROJECTS = Optional.empty();
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private static final int TEST_REPLICATION_DELAY = 1;
-  private static final Duration TEST_TIMEOUT = Duration.ofSeconds(TEST_REPLICATION_DELAY * 2);
+  private static final int TEST_REPLICATION_RETRY = 1;
+  private static final Duration TEST_TIMEOUT =
+      Duration.ofSeconds((TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) + 1);
 
   @Inject private SitePaths sitePaths;
   private Path pluginDataDir;
@@ -97,7 +99,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     assertThat(listReplicationTasks("refs/meta/config")).hasSize(1);
 
-    waitUntil(() -> projectExists(new Project.NameKey(sourceProject + "replica.git")));
+    waitUntil(() -> nonEmptyProjectExists(new Project.NameKey(sourceProject + "replica")));
 
     ProjectInfo replicaProject = gApi.projects().name(sourceProject + "replica").get();
     assertThat(replicaProject).isNotNull();
@@ -360,6 +362,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
             .collect(toList());
     config.setStringList("remote", remoteName, "url", replicaUrls);
     config.setInt("remote", remoteName, "replicationDelay", TEST_REPLICATION_DELAY);
+    config.setInt("remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY);
     project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
     config.save();
   }
@@ -391,9 +394,9 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     }
   }
 
-  private boolean projectExists(Project.NameKey name) {
+  private boolean nonEmptyProjectExists(Project.NameKey name) {
     try (Repository r = repoManager.openRepository(name)) {
-      return true;
+      return !r.getAllRefsByPeeledObjectId().isEmpty();
     } catch (Exception e) {
       return false;
     }
