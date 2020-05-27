@@ -29,6 +29,8 @@ import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
+import com.google.gerrit.extensions.events.ProjectDeletedListener;
+import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Key;
@@ -59,10 +61,13 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   private static final Optional<String> ALL_PROJECTS = Optional.empty();
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private static final int TEST_REPLICATION_DELAY = 1;
-  private static final Duration TEST_TIMEOUT = Duration.ofSeconds(TEST_REPLICATION_DELAY * 2);
+  private static final int TEST_REPLICATION_RETRY = 1;
+  private static final Duration TEST_TIMEOUT =
+      Duration.ofSeconds((TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) + 1);
 
   @Inject private SitePaths sitePaths;
   @Inject private ProjectOperations projectOperations;
+  @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
   private Path pluginDataDir;
   private Path gitPath;
   private Path storagePath;
@@ -99,7 +104,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     assertThat(listReplicationTasks("refs/meta/config")).hasSize(1);
 
-    waitUntil(() -> projectExists(Project.nameKey(sourceProject + "replica.git")));
+    waitUntil(() -> projectExists(Project.nameKey(sourceProject + "replica")));
 
     ProjectInfo replicaProject = gApi.projects().name(sourceProject + "replica").get();
     assertThat(replicaProject).isNotNull();
@@ -362,7 +367,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     assertThat(tasksStorage.listRunning()).hasSize(0);
     Project.NameKey sourceProject = createTestProject("task_cleanup_project");
 
-    waitUntil(() -> projectExists(Project.nameKey(sourceProject + "replica.git")));
+    waitUntil(() -> projectExists(Project.nameKey(sourceProject + "replica")));
     waitUntil(() -> tasksStorage.listRunning().size() == 0);
   }
 
@@ -394,8 +399,15 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
             .collect(toList());
     config.setStringList("remote", remoteName, "url", replicaUrls);
     config.setInt("remote", remoteName, "replicationDelay", TEST_REPLICATION_DELAY);
+    config.setInt("remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY);
     project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
     config.setBoolean("gerrit", null, "autoReload", true);
+    config.save();
+  }
+
+  private void setProjectDeletionReplication(String remoteName, boolean replicateProjectDeletion)
+      throws IOException {
+    config.setBoolean("remote", remoteName, "replicateProjectDeletions", replicateProjectDeletion);
     config.save();
   }
 
@@ -460,7 +472,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private boolean projectExists(Project.NameKey name) {
     try (Repository r = repoManager.openRepository(name)) {
-      return true;
+      return !r.getAllRefsByPeeledObjectId().isEmpty();
     } catch (Exception e) {
       return false;
     }
