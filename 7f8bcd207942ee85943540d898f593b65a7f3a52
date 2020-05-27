@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "977784cb_935db3cd",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-27T22:34:16Z",
+      "side": 1,
+      "message": "Best would be changing its name to \u0027nonEmptyProjectExists\u0027, as we also check that the repo contains at least one ref.",
+      "range": {
+        "startLine": 441,
+        "startChar": 18,
+        "endLine": 441,
+        "endChar": 31
+      },
+      "revId": "7f8bcd207942ee85943540d898f593b65a7f3a52",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
