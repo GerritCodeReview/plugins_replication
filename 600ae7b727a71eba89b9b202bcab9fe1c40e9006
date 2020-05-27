@@ -22,6 +22,30 @@
       "revId": "600ae7b727a71eba89b9b202bcab9fe1c40e9006",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a86279fe_e38c9b21",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-27T22:39:35Z",
+      "side": 1,
+      "message": "I know and I agree.\nCan you find a better way to disable the removal of the tasks so that can be used for stable assertions?",
+      "parentUuid": "cb7799ef_53569ce1",
+      "range": {
+        "startLine": 296,
+        "startChar": 39,
+        "endLine": 296,
+        "endChar": 44
+      },
+      "revId": "600ae7b727a71eba89b9b202bcab9fe1c40e9006",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
