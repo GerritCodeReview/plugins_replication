@@ -140,6 +140,30 @@
       "revId": "d79f50397decd98f10c7d3bcba9527088ff295e5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df3ba8df_23f038a0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-27T21:05:46Z",
+      "side": 1,
+      "message": "I think it would be better if the tests did not have the ability to alter behavior. This is likely to create more bugs and/or cover up bugs. I don\u0027t know how to use a separate lock directory and still maintain the locking semantics.",
+      "parentUuid": "a09939a9_1daaf020",
+      "range": {
+        "startLine": 296,
+        "startChar": 35,
+        "endLine": 296,
+        "endChar": 85
+      },
+      "revId": "d79f50397decd98f10c7d3bcba9527088ff295e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
