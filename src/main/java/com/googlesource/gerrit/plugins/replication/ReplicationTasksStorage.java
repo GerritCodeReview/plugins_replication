@@ -292,12 +292,12 @@ public class ReplicationTasksStorage {
     }
 
     public void release() {
-      if (disableDeleteForTesting) {
-        logger.atFine().log("DELETE %s %s DISABLED", runningDir, updateLog());
-        return;
-      }
-
       try {
+        if (disableDeleteForTesting && Files.list(runningDir).findFirst().isPresent()) {
+          logger.atFine().log("DELETE %s %s DISABLED", runningDir, updateLog());
+          return;
+        }
+
         logger.atFine().log("DELETE %s %s", runningDir, updateLog());
         Files.delete(runningDir);
       } catch (IOException e) {
