@@ -111,6 +111,34 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   @Test
+  public void shouldReplicateProjectDeletion() throws Exception {
+    String projectNameDeleted = "project-deleted";
+    Project.NameKey replicaProject = createTestProject(projectNameDeleted + "replica");
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    setProjectDeletionReplication("foo", true);
+    reloadConfig();
+
+    ProjectDeletedListener.Event event =
+        new ProjectDeletedListener.Event() {
+          @Override
+          public String getProjectName() {
+            return projectNameDeleted;
+          }
+
+          @Override
+          public NotifyHandling getNotify() {
+            return NotifyHandling.NONE;
+          }
+        };
+
+    for (ProjectDeletedListener l : deletedListeners) {
+      l.onProjectDeleted(event);
+    }
+
+    waitUntil(() -> !projectExists(replicaProject));
+  }
+
+  @Test
   public void shouldReplicateNewChangeRef() throws Exception {
     Project.NameKey targetProject = createTestProject(project + "replica");
 
