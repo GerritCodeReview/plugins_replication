@@ -87,7 +87,7 @@ public class DestinationsCollection implements ReplicationDestinations {
 
     SetMultimap<Destination, URIish> uris = HashMultimap.create();
     for (Destination config : getAll(filterType)) {
-      if (!config.wouldPushProject(projectName)) {
+      if (filterType != FilterType.PROJECT_DELETION && !config.wouldPushProject(projectName)) {
         continue;
       }
 
