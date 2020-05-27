@@ -17,6 +17,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.FileUtil;
 import com.google.gerrit.extensions.annotations.PluginData;
+import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
@@ -26,6 +27,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.transport.URIish;
 
 @Singleton
 public class AutoReloadConfigDecorator implements ReplicationConfig {
@@ -69,6 +71,12 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
 
   private synchronized boolean isAutoReload() {
     return currentConfig.getConfig().getBoolean("gerrit", "autoReload", false);
+  }
+
+  @Override
+  public List<Destination> getDestinations(URIish uri, Project.NameKey project, String ref) {
+    reloadIfNeeded();
+    return currentConfig.getDestinations(uri, project, ref);
   }
 
   @Override

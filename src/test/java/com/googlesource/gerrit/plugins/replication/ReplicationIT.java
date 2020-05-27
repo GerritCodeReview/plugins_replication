@@ -40,6 +40,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -362,8 +363,58 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     }
   }
 
+ @Test
+  public void shouldFirePendingOnlyToStoredUri() throws Exception {
+    String suffix1 = "replica1";
+    String suffix2 = "replica2";
+    Project.NameKey target1 = createTestProject("project" + suffix1);
+    Project.NameKey target2 = createTestProject("project" + suffix2);
+    String remote1 = "foo1";
+    String remote2 = "foo2";
+    setReplicationDestination(remote1, suffix1, ALL_PROJECTS);
+    setReplicationDestination(remote2, suffix2, ALL_PROJECTS);
+    reloadConfig();
+
+    Result pushResult = createChange();
+    String sourceRef = pushResult.getPatchSet().getRefName();
+
+    replicationQueueStop();
+
+    tasksStorage.disableDeleteForTesting(false);
+    listReplicationTasks("refs/changes/\\d*/\\d*/\\d*").stream()
+        .filter(task -> remote1.equals(task.remote))
+        .forEach(u -> tasksStorage.delete(u));
+    tasksStorage.disableDeleteForTesting(true);
+
+    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*").stream()
+        .filter(task -> remote2.equals(task.remote))
+        .collect(toList())).hasSize(1);
+
+    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*").stream()
+        .filter(task -> remote1.equals(task.remote))
+        .collect(toList())).hasSize(0);
+
+    replicationQueueStart();
+
+    assertThat(isPushCompleted(target2, sourceRef, TEST_TIMEOUT)).isEqualTo(true);
+    assertThat(isPushCompleted(target1, sourceRef, TEST_TIMEOUT)).isEqualTo(false);
+  }
+
   private Project.NameKey createTestProject(String name) throws Exception {
     return createProject(name);
+  }
+
+  public boolean isPushCompleted(Project.NameKey project, String ref, Duration timeOut) {
+    try (Repository repo = repoManager.openRepository(project)) {
+      WaitUtil.waitUntil(() -> checkedGetRef(repo, ref) != null,
+timeOut);
+      return true;
+    } catch (InterruptedException e) {
+      return false;
+    } catch (Exception e) {
+      throw new RuntimeException("Cannot open repo for project" +
+project, e);
+    }
   }
 
   private Ref getRef(Repository repo, String branchName) throws IOException {
@@ -415,6 +466,22 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private void shutdownConfig() {
     plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).shutdown();
+  }
+
+  private void replicationQueueStart() {
+    getReplicationQueueInstance().start();
+  }
+
+  private void replicationQueueStop() {
+    getReplicationQueueInstance().stop();
+  }
+
+  private ReplicationQueue getReplicationQueueInstance() {
+    return getInstance(ReplicationQueue.class);
+  }
+
+  private <T> T getInstance(Class<T> classObj) {
+    return plugin.getSysInjector().getInstance(classObj);
   }
 
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
