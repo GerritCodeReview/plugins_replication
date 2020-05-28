@@ -16,6 +16,24 @@
       "revId": "5644b0493f7db47a3488deb6732653cd8464687f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2016d715_3df416f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-05-28T13:36:58Z",
+      "side": 1,
+      "message": "For full e2e test we need multi-master support but I believe we can easily reproduce that issue with a unit test. Lock is just a directory so we can manually create it before creating a new change. In that way we can simulate situation when other master is replicating. If the code is correct replication for this new change should be rescheduled and in meantime we can manually remove lock directory to simulate other master replication finish. If everything works fine replication for the new change should be triggered.",
+      "parentUuid": "542f86f6_ecefd2ff",
+      "revId": "5644b0493f7db47a3488deb6732653cd8464687f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
