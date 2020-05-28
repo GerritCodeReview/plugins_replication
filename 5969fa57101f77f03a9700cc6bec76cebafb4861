@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b973f8c9_71af8e27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-05-28T05:54:14Z",
+      "side": 1,
+      "message": "This commit doesn\u0027t include any tests.",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 0
+      },
+      "revId": "5969fa57101f77f03a9700cc6bec76cebafb4861",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
