@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d66bd91_271fa9ed",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-28T14:13:40Z",
+      "side": 1,
+      "message": "Do you really need this from the Gerrit\u0027s sysInjector? Can\u0027t you just add @Inject at L70?",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 85
+      },
+      "revId": "8c009b27f90554477f55bb4427416c3cf549336b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1942eadf_8a13433e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-28T14:13:40Z",
+      "side": 1,
+      "message": "Why not using Java\u0027s nio Files.list() ?",
+      "range": {
+        "startLine": 480,
+        "startChar": 11,
+        "endLine": 480,
+        "endChar": 41
+      },
+      "revId": "8c009b27f90554477f55bb4427416c3cf549336b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
