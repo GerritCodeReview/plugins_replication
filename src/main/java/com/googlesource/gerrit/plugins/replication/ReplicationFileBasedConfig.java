@@ -189,7 +189,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
 
     SetMultimap<Destination, URIish> uris = HashMultimap.create();
     for (Destination config : getDestinations(filterType)) {
-      if (!config.wouldPushProject(projectName)) {
+      if (filterType != FilterType.PROJECT_DELETION && !config.wouldPushProject(projectName)) {
         continue;
       }
 

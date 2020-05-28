@@ -222,7 +222,6 @@ public class ReplicationQueue
 
   @AutoValue
   abstract static class ReferenceUpdatedEvent {
-
     static ReferenceUpdatedEvent create(String projectName, String refName) {
       return new AutoValue_ReplicationQueue_ReferenceUpdatedEvent(projectName, refName);
     }
