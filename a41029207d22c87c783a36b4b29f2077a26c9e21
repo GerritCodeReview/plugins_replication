@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c066cdcb_febb5087",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-28T21:06:37Z",
+      "side": 1,
+      "message": "I\u0027ve uploaded the best compromise I could think of between logging accuracy and code complexity. Done.",
+      "parentUuid": "ede259a3_1bb342af",
+      "range": {
+        "startLine": 309,
+        "startChar": 24,
+        "endLine": 309,
+        "endChar": 59
+      },
+      "revId": "a41029207d22c87c783a36b4b29f2077a26c9e21",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "003831b5_4d1dc068",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 2
@@ -69,6 +93,30 @@
       "revId": "a41029207d22c87c783a36b4b29f2077a26c9e21",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1eaf48f8_42ebec3b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-28T21:06:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "003831b5_4d1dc068",
+      "range": {
+        "startLine": 359,
+        "startChar": 7,
+        "endLine": 359,
+        "endChar": 47
+      },
+      "revId": "a41029207d22c87c783a36b4b29f2077a26c9e21",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -116,6 +164,30 @@
       "revId": "a41029207d22c87c783a36b4b29f2077a26c9e21",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb45ef14_4a733b50",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-28T21:06:37Z",
+      "side": 1,
+      "message": "I\u0027ve uploaded the best compromise I could think of between logging accuracy and code complexity. Done",
+      "parentUuid": "7eaae82a_9ba43705",
+      "range": {
+        "startLine": 403,
+        "startChar": 10,
+        "endLine": 405,
+        "endChar": 11
+      },
+      "revId": "a41029207d22c87c783a36b4b29f2077a26c9e21",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
