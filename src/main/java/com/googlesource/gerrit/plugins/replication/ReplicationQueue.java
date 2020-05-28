@@ -255,7 +255,7 @@ public class ReplicationQueue
 
     Set<URIish> uris = new HashSet<>();
     for (Destination config : this.config.getDestinations(filterType)) {
-      if (!config.wouldPushProject(projectName)) {
+      if (filterType != FilterType.PROJECT_DELETION && !config.wouldPushProject(projectName)) {
         continue;
       }
 

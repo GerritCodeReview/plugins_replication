@@ -121,7 +121,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         new ProjectDeletedListener.Event() {
           @Override
           public String getProjectName() {
-            return projectNameDeleted;
+            return name(projectNameDeleted);
           }
 
           @Override
