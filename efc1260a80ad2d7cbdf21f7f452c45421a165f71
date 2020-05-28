@@ -16,6 +16,24 @@
       "revId": "efc1260a80ad2d7cbdf21f7f452c45421a165f71",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15dc8979_87001e36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-28T04:58:14Z",
+      "side": 1,
+      "message": "I made a wrong push, now includes the fix of the code as well.",
+      "parentUuid": "98e56036_43315c32",
+      "revId": "efc1260a80ad2d7cbdf21f7f452c45421a165f71",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
