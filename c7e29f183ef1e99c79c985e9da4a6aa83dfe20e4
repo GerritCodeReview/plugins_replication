@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60535c2e_dc4ba99e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-28T21:56:02Z",
+      "side": 1,
+      "message": "nit: s/startings/starting/",
+      "range": {
+        "startLine": 403,
+        "startChar": 42,
+        "endLine": 403,
+        "endChar": 43
+      },
+      "revId": "c7e29f183ef1e99c79c985e9da4a6aa83dfe20e4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
