@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b8f6a020_24775c61",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-28T05:04:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22ad2d9a_6fe605fe",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 70
+      },
+      "revId": "28f8c75200ae666983b2008c487678a89f013863",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f463e87_38a859a7",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "bfe6e461_25d2482f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-28T05:04:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f463e87_38a859a7",
+      "range": {
+        "startLine": 402,
+        "startChar": 0,
+        "endLine": 402,
+        "endChar": 84
+      },
+      "revId": "28f8c75200ae666983b2008c487678a89f013863",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65dab257_78024e42",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "28f8c75200ae666983b2008c487678a89f013863",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5519619a_ed65b536",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-28T05:04:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65dab257_78024e42",
+      "range": {
+        "startLine": 408,
+        "startChar": 0,
+        "endLine": 413,
+        "endChar": 0
+      },
+      "revId": "28f8c75200ae666983b2008c487678a89f013863",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
