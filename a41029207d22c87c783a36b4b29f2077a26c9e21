@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d3096f6_1bad7be8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-05-28T13:49:41Z",
+      "side": 1,
+      "message": "nit: Passing parameters just for logging is misleading, introducing unnecessary complexity and making code less flexible for changes. Why we do not throw exceptions and handle them in recover and release methods where we have knowledge how to properly handle them",
+      "range": {
+        "startLine": 309,
+        "startChar": 24,
+        "endLine": 309,
+        "endChar": 59
+      },
+      "revId": "a41029207d22c87c783a36b4b29f2077a26c9e21",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "003831b5_4d1dc068",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-05-28T13:49:41Z",
+      "side": 1,
+      "message": "nit: we should avoid passing nulls",
+      "range": {
+        "startLine": 359,
+        "startChar": 7,
+        "endLine": 359,
+        "endChar": 47
+      },
+      "revId": "a41029207d22c87c783a36b4b29f2077a26c9e21",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d7856b3_cc53cabc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-05-28T13:49:41Z",
+      "side": 1,
+      "message": "nit: Same as with delete method. This logic doesn\u0027t belong here, caller should decide what to do with the exception. That\u0027s how we can also avoid passing nulls and have a logic based on that.",
+      "range": {
+        "startLine": 403,
+        "startChar": 10,
+        "endLine": 405,
+        "endChar": 11
+      },
+      "revId": "a41029207d22c87c783a36b4b29f2077a26c9e21",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
