@@ -154,6 +154,24 @@
     },
     {
       "key": {
+        "uuid": "66263c87_7f55569c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-28T13:18:06Z",
+      "side": 1,
+      "message": "This comment is part of my other related comment about revisiting that approach, namely mixing a static request field with a non-static one (while they should be more like siblings, as request fields both).",
+      "parentUuid": "07e3afdf_405a1a9f",
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "acfb4088_87a306ad",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 5

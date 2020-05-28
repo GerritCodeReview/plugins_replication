@@ -2030,6 +2030,30 @@
     },
     {
       "key": {
+        "uuid": "3e4a0a63_85335f93",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-05-28T13:18:06Z",
+      "side": 1,
+      "message": "Yes, adding some standard (yet brief enough) class java-doc for each.",
+      "parentUuid": "3a2cedb5_8d0f45ba",
+      "range": {
+        "startLine": 45,
+        "startChar": 13,
+        "endLine": 45,
+        "endChar": 40
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fb4dfff9_e1d1d601",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
         "patchSetId": 2
