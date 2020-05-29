@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "ed734a9a_72398652",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationMultiMasterIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-29T20:29:32Z",
+      "side": 1,
+      "message": "I am trying to ensure that the lock is completed externally before the push is attempted, any slowdown could make that miss. What did you think the assert should do?",
+      "parentUuid": "3693558b_b39480cc",
+      "revId": "f9d1208b8a8c9eee4f49e93008fb5ae6d21f56a8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "133c348b_410a17d8",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationMultiMasterIT.java",
         "patchSetId": 7
@@ -53,6 +71,24 @@
       "writtenOn": "2020-05-29T20:16:38Z",
       "side": 1,
       "message": "How does this show that it was skipped due to completed externally?",
+      "revId": "f9d1208b8a8c9eee4f49e93008fb5ae6d21f56a8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdc5188e_4a122a7b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationMultiMasterIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-29T20:29:32Z",
+      "side": 1,
+      "message": "It shows that replica1 never actually gets replicated to if the external signal is that it was completed.",
+      "parentUuid": "133c348b_410a17d8",
       "revId": "f9d1208b8a8c9eee4f49e93008fb5ae6d21f56a8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
