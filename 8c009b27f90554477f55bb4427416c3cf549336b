@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "3744d8f1_05894b12",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-05-29T08:44:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "36ad653b_c737172e",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 85
+      },
+      "revId": "8c009b27f90554477f55bb4427416c3cf549336b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1942eadf_8a13433e",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 2
