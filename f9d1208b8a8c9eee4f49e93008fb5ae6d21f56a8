@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "653d9392_e2d51c3c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationMultiMasterIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-29T20:16:38Z",
+      "side": 1,
+      "message": "2020",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "f9d1208b8a8c9eee4f49e93008fb5ae6d21f56a8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3693558b_b39480cc",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationMultiMasterIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-29T20:16:38Z",
+      "side": 1,
+      "message": "Is an assert needed before you release the lock?",
+      "revId": "f9d1208b8a8c9eee4f49e93008fb5ae6d21f56a8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "133c348b_410a17d8",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationMultiMasterIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-05-29T20:16:38Z",
+      "side": 1,
+      "message": "How does this show that it was skipped due to completed externally?",
+      "revId": "f9d1208b8a8c9eee4f49e93008fb5ae6d21f56a8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
