@@ -34,6 +34,24 @@
       "revId": "5644b0493f7db47a3488deb6732653cd8464687f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71f37517_89a13d0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-05-29T18:24:19Z",
+      "side": 1,
+      "message": "Yes, great if that\u0027s considered OK, thanks. I took it one step further and used the internal storage mechanism to simulate these external actions. Done",
+      "parentUuid": "2016d715_3df416f0",
+      "revId": "5644b0493f7db47a3488deb6732653cd8464687f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
