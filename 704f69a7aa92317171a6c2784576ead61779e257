@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6df3171d_3b0cb213",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-06-02T05:07:43Z",
+      "side": 1,
+      "message": "Binding this here means it cannot be replaced by an implementation that provides a different version of Destination.",
+      "range": {
+        "startLine": 177,
+        "startChar": 16,
+        "endLine": 179,
+        "endChar": 70
+      },
+      "revId": "704f69a7aa92317171a6c2784576ead61779e257",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
