@@ -2054,6 +2054,30 @@
     },
     {
       "key": {
+        "uuid": "9d0eff80_d9c035f4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-02T13:02:42Z",
+      "side": 1,
+      "message": "I think some of the confusion is related to the poorly named classes. I have changed the name of StartCommandRequest to the StartReplicationRequest. This is the structure that represents the data received via the Http Request. The StartReplicationRequest has been rename to StartReplicationProcessing request. This is not a Request in the Http context, but it\u0027s the class that interfaces with the gerrit push mechanism. Maybe that\u0027s clearer ? I also added the Java doc for each class as requested.",
+      "parentUuid": "3e4a0a63_85335f93",
+      "range": {
+        "startLine": 45,
+        "startChar": 13,
+        "endLine": 45,
+        "endChar": 40
+      },
+      "revId": "1449877d2f1fce1e02d805bdffabfe6c90b6cea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb4dfff9_e1d1d601",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequestTest.java",
         "patchSetId": 2
