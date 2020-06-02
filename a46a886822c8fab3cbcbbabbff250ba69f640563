@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd9565ea_40633c29",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-02T17:14:52Z",
+      "side": 1,
+      "message": "This has the side effect of increasing the timeout for every test. It would be better if a new variable were used specificaly when retries are expected, and in those cases it would also be better to set the retry limit to something smaller than 60.",
+      "revId": "a46a886822c8fab3cbcbbabbff250ba69f640563",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
