@@ -49,7 +49,6 @@ import com.google.gerrit.server.util.IdGenerator;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
-import com.jcraft.jsch.JSchException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -387,10 +386,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     } catch (NotSupportedException e) {
       stateLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
     } catch (TransportException e) {
-      Throwable cause = e.getCause();
-      if (cause instanceof JSchException && cause.getMessage().startsWith("UnknownHostKey:")) {
-        repLog.atSevere().log("Cannot replicate to %s: %s", uri, cause.getMessage());
-      } else if (e instanceof LockFailureException) {
+      if (e instanceof LockFailureException) {
         lockRetryCount++;
         repLog.atSevere().log("Cannot replicate to %s due to lock failure", uri);
 
