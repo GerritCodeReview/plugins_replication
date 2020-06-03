@@ -70,6 +70,30 @@
       "revId": "583848945b150503fb76fb780f53bc5c2b42546c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cd69380_2a780167",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1100310
+      },
+      "writtenOn": "2020-06-03T21:18:42Z",
+      "side": 0,
+      "message": "David, I\u0027m getting lost among all these small changes, and I don\u0027t know the Gerrit code well enough anymore to figure out the global picture. Best I can do is \"peephole reviews\".\n\nAnyway: if you use the org.eclipse.jgit.ssh.apache.SshdSessionFactory it\u0027ll use its own JGitServerKeyVerifier which won\u0027t go through the sshd KnownHostsServerKeyVerifier but use the configured ServerKeyDatabase. That one is by default its own OpenSshServerKeyDatabase. I don\u0027t think the exception message would contain the string \"UnknownHostKey\". It will still throw an exception, but the message is likely to be different. I think it\u0027d be \"Server key did not validate\".\n\nIf the knownhosts file cannot be updated, it also logs \"Could not update known hosts file\" with the filename and causing exception.",
+      "parentUuid": "9e33f4ae_5fb3e3e8",
+      "range": {
+        "startLine": 393,
+        "startChar": 75,
+        "endLine": 393,
+        "endChar": 89
+      },
+      "revId": "583848945b150503fb76fb780f53bc5c2b42546c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
