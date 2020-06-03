@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "17b18909_55d6a015",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-03T22:08:19Z",
+      "side": 1,
+      "message": "Because this problem is present now in a released version of Gerrit (i.e. 3.2.0) it would be worth to create an issue, so that we can refer to it in the release notes.",
+      "revId": "d5e6223d4c0c46abd454ca03c9e63dd6699096fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
