@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0dc29cb_2453bd60",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-03T18:12:45Z",
+      "side": 1,
+      "message": "Should we perhaps limit this to a small number (1?), and just mention how many other refs when more than that?",
+      "range": {
+        "startLine": 199,
+        "startChar": 73,
+        "endLine": 199,
+        "endChar": 80
+      },
+      "revId": "0d4a3359c45fd013310bb2c0964bde79c4a28a23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
