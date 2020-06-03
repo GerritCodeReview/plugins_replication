@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4121ef33_09998338",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-03T18:16:11Z",
+      "side": 1,
+      "message": "Perhaps it would be better to re-enable replicateProjectsOnStartup by default, as it is generally a bad thing to disable except in multi-master scenarios with a workaround? This change seems like a reflection of the bad policy of disabling it.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
