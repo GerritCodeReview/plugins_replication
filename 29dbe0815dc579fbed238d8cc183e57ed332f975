@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7f9f84c2_b9ec2281",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-04T14:42:27Z",
+      "side": 1,
+      "message": "\u003e Is this really the case also if there isn\u0027t a multi-master node distribution?\n\nYes, it can happen in MM startup without distribution.\n\n\u003e I would keep this as an error for single-master and lower the severity for a multi-master setup.\n\nThere is no way to do that since we don\u0027t know if someone is running MM or not. \n\n\u003e Also, this is swallowing the exception, which isn\u0027t nice as we won\u0027t why the delete failed.\n\nThis is part of the contract, external entities are allowed to delete it, i.e. deletion is not an error so there should not be an exception. Think of it like git, other processes are allowed to change refs. This contracts allows any replication system, not just other masters it could be a bunch of scripts or a human even, to interact with this filesystem and help replicate.",
+      "parentUuid": "dc09c5fa_b30bd01d",
+      "range": {
+        "startLine": 302,
+        "startChar": 50,
+        "endLine": 302,
+        "endChar": 82
+      },
+      "revId": "29dbe0815dc579fbed238d8cc183e57ed332f975",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e9a2d8ec_e97176c0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 5
