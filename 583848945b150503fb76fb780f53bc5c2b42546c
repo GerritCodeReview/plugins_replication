@@ -118,6 +118,30 @@
       "revId": "583848945b150503fb76fb780f53bc5c2b42546c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc650fed_401d487f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-06-04T06:02:02Z",
+      "side": 0,
+      "message": "Thanks, Thomas.",
+      "parentUuid": "508e21f0_65c132c2",
+      "range": {
+        "startLine": 393,
+        "startChar": 75,
+        "endLine": 393,
+        "endChar": 89
+      },
+      "revId": "583848945b150503fb76fb780f53bc5c2b42546c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
