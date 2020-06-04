@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fd3a7a6_3d909c22",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-04T09:39:35Z",
+      "side": 1,
+      "message": "why not call pushReference(Destination cfg, Project.NameKey project, String refName, ReplicationState state)",
+      "range": {
+        "startLine": 173,
+        "startChar": 6,
+        "endLine": 173,
+        "endChar": 50
+      },
+      "revId": "c450dc3ecce4a5153c542b48761242f4549dc864",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
