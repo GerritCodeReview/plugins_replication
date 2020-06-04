@@ -22,6 +22,30 @@
       "revId": "c450dc3ecce4a5153c542b48761242f4549dc864",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "971278b1_140119ed",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-04T14:36:25Z",
+      "side": 1,
+      "message": "pushReference() does more than this method, it will fire to more than the current URI if a Destination has more than one URI configured, and it will persist the event again. It is better to not have either of those done here. This change is explicitly trying to limit the firing to avoid infinite loops (A fires B and then B refires A) in MM scenarios. Also, in MM scenarios, re-persisting can also result in infinite loops, Node 1 fires A and persist it, and then node 2 fires A and re-persists it (after node 1 completed it), resulting an a potential infinite loop (given very specific timing).",
+      "parentUuid": "1fd3a7a6_3d909c22",
+      "range": {
+        "startLine": 173,
+        "startChar": 6,
+        "endLine": 173,
+        "endChar": 50
+      },
+      "revId": "c450dc3ecce4a5153c542b48761242f4549dc864",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
