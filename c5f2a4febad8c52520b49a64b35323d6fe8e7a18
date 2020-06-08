@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a082c0b_523452c9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-08T21:08:31Z",
+      "side": 1,
+      "message": "Now that this method returns an object, its name should differ from an actual setter (or getter) one. This method no longer handles a field.",
+      "range": {
+        "startLine": 72,
+        "startChar": 34,
+        "endLine": 72,
+        "endChar": 60
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22d8afb3_e95bbde0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-08T21:08:31Z",
+      "side": 1,
+      "message": "Needs to be removed, as per [1].\n\n[1] https://gerrit-review.googlesource.com/Documentation/dev-crafting-changes.html#style",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 10
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65056c61_494d8c19",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-08T21:08:31Z",
+      "side": 1,
+      "message": "I think this line should move out of the try block, as a non-throwing one.",
+      "range": {
+        "startLine": 76,
+        "startChar": 6,
+        "endLine": 76,
+        "endChar": 29
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6771f5cb_0c9ab1b9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-08T21:08:31Z",
+      "side": 1,
+      "message": "This is silencing the catched exception; it shouldn\u0027t.",
+      "range": {
+        "startLine": 79,
+        "startChar": 49,
+        "endLine": 80,
+        "endChar": 18
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a74229f1_322b2e2b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-08T21:08:31Z",
+      "side": 1,
+      "message": "Curly braces should be used even for single-line blocks [2]. -Not sure why the formatter didn\u0027t flag this.\n\n[2] https://google.github.io/styleguide/javaguide.html#s4.1.1-braces-always-used",
+      "range": {
+        "startLine": 89,
+        "startChar": 95,
+        "endLine": 90,
+        "endChar": 37
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93421066_e92701dd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-08T21:08:31Z",
+      "side": 1,
+      "message": "Can\u0027t returning null be replaced with an Optional?",
+      "range": {
+        "startLine": 91,
+        "startChar": 11,
+        "endLine": 91,
+        "endChar": 15
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
