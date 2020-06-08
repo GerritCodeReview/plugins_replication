@@ -94,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "2d668ea2_20ef3391",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1094140
+      },
+      "writtenOn": "2020-06-08T21:56:44Z",
+      "side": 1,
+      "message": "Nevermind, realized this is a feature for catching multiple exceptions. Thought it was a bitwise OR.",
+      "parentUuid": "66c209cb_bd2c510d",
+      "range": {
+        "startLine": 79,
+        "startChar": 32,
+        "endLine": 79,
+        "endChar": 33
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6771f5cb_0c9ab1b9",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 10
