@@ -190,6 +190,24 @@
     },
     {
       "key": {
+        "uuid": "59e87e2e_bf0bffdd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-09T15:12:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65891377_8c20cb18",
+      "revId": "043f79231a16ef00e379de0b6ddbe0f130716ede",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "acfb4088_87a306ad",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 5

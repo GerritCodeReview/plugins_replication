@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d10dd9cd_eb7a36a2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-09T15:12:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a082c0b_523452c9",
+      "range": {
+        "startLine": 72,
+        "startChar": 34,
+        "endLine": 72,
+        "endChar": 60
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22d8afb3_e95bbde0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 10
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "51782fab_e9c08401",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-09T15:12:54Z",
+      "side": 1,
+      "message": "Thanks for the reference. I didn\u0027t understand this comment before.",
+      "parentUuid": "22d8afb3_e95bbde0",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 10
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65056c61_494d8c19",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 10
@@ -68,6 +116,30 @@
       "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e56fa27_6bef9413",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-09T15:12:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65056c61_494d8c19",
+      "range": {
+        "startLine": 76,
+        "startChar": 6,
+        "endLine": 76,
+        "endChar": 29
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -118,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "c517a519_f14f1547",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-09T15:12:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d668ea2_20ef3391",
+      "range": {
+        "startLine": 79,
+        "startChar": 32,
+        "endLine": 79,
+        "endChar": 33
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6771f5cb_0c9ab1b9",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 10
@@ -129,6 +225,30 @@
       "writtenOn": "2020-06-08T21:08:31Z",
       "side": 1,
       "message": "This is silencing the catched exception; it shouldn\u0027t.",
+      "range": {
+        "startLine": 79,
+        "startChar": 49,
+        "endLine": 80,
+        "endChar": 18
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "965350a6_d06b665b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-09T15:12:54Z",
+      "side": 1,
+      "message": "Not sure about this . Gerrit is expecting a ValidationException. Should we throw it anyway or just log ?",
+      "parentUuid": "6771f5cb_0c9ab1b9",
       "range": {
         "startLine": 79,
         "startChar": 49,
@@ -164,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "0da67c99_aa2082e1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-09T15:12:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a74229f1_322b2e2b",
+      "range": {
+        "startLine": 89,
+        "startChar": 95,
+        "endLine": 90,
+        "endChar": 37
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93421066_e92701dd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 10
@@ -184,6 +328,30 @@
       "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96f85326_d7bff84c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-09T15:12:54Z",
+      "side": 1,
+      "message": "I\u0027m not sure I see the benefit of using Optional here. The code actualy gets a little longer and I don\u0027t think is anymore readable. I could be applying it wrong, but sure, I\u0027ll give it a go. Input appreciated on an alternative approach if you have time.",
+      "parentUuid": "93421066_e92701dd",
+      "range": {
+        "startLine": 91,
+        "startChar": 11,
+        "endLine": 91,
+        "endChar": 15
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
