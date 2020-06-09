@@ -46,6 +46,30 @@
       "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9e7128f_a12e138a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-09T07:56:45Z",
+      "side": 1,
+      "message": "\u003e Well, I think even without multi-master one might prefer not to replicate everything on startup, especially if that involves thousands of projects to be replicated.\n\nI tend to agree with Eryk: it all depends on how many projects you have and how many remotes you have. With tens of thousands of projects and hundreds of remotes, triggering the replication of everything to everywhere is definitely a no-go (e.g. 10k projects x 100 remotes \u003d 1M pushes, it will take forever).\n\nAlso with a smaller number of projects (e.g. 100 and a few remotes like 10) it will still generate a huge number of pushes.\n\nI believe what Eryk is proposing makes sense: *some* projects could be super critical to be always pushed at start, others are not. Bearing in mind that a git push even when there is nothing to push would still go through the refs advertisement phase that could potentially take a very long time.",
+      "parentUuid": "bdaff0b2_e82316c0",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
