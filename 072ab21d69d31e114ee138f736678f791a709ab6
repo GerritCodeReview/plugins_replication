@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1a06fd4_7d7430b6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-10T13:09:02Z",
+      "side": 1,
+      "message": "StartReplicationRequest startReplicationRequest\n\n(An else block is not necessary here.)",
+      "range": {
+        "startLine": 58,
+        "startChar": 5,
+        "endLine": 59,
+        "endChar": 29
+      },
+      "revId": "072ab21d69d31e114ee138f736678f791a709ab6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8eff285_d388708b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-10T13:09:02Z",
+      "side": 1,
+      "message": "This is the extra keyword that should have been removed.",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 10
+      },
+      "revId": "072ab21d69d31e114ee138f736678f791a709ab6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31b1157b_dc85616c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-10T13:09:02Z",
+      "side": 1,
+      "message": "Would remove this blank line, to attach the above comment with its related code below.",
+      "revId": "072ab21d69d31e114ee138f736678f791a709ab6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}

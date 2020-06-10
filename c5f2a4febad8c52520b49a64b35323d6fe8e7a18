@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "c96c7d67_47884a08",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-10T13:09:02Z",
+      "side": 1,
+      "message": "This one should have been kept though, as it forces the constructor to initialize that field.",
+      "range": {
+        "startLine": 37,
+        "startChar": 10,
+        "endLine": 37,
+        "endChar": 16
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3a082c0b_523452c9",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 10
@@ -249,6 +272,30 @@
       "side": 1,
       "message": "Not sure about this . Gerrit is expecting a ValidationException. Should we throw it anyway or just log ?",
       "parentUuid": "6771f5cb_0c9ab1b9",
+      "range": {
+        "startLine": 79,
+        "startChar": 49,
+        "endLine": 80,
+        "endChar": 18
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0870f0e_ca9960b0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-10T13:09:02Z",
+      "side": 1,
+      "message": "If this (re)throws the exception, the code at line 53 will not run as it is now. If this code stays as is thus logs and returns Empty, then line 53 will return SC_BAD_REQUEST right after. Is this catch case here supposed to ultimately return SC_BAD_REQUEST to the client?",
+      "parentUuid": "965350a6_d06b665b",
       "range": {
         "startLine": 79,
         "startChar": 49,
