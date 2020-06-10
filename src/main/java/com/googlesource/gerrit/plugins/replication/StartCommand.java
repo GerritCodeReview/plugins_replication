@@ -21,7 +21,7 @@ import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.CommandProcessing;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.util.Optional;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import org.kohsuke.args4j.Argument;
@@ -73,27 +73,13 @@ final class StartCommand extends SshCommand {
     future = pushFactory.create(urlMatch, projectFilter, state, now).schedule(0, TimeUnit.SECONDS);
 
     if (wait) {
-      if (future != null) {
-        try {
-          future.get();
-        } catch (InterruptedException e) {
-          stateLog.error(
-              "Thread was interrupted while waiting for PushAll operation to finish", e, state);
-          return;
-        } catch (ExecutionException e) {
-          stateLog.error("An exception was thrown in PushAll operation", e, state);
-          return;
-        }
-      }
-
-      if (state.hasPushTask()) {
-        try {
-          state.waitForReplication();
-        } catch (InterruptedException e) {
-          writeStdErrSync("We are interrupted while waiting replication to complete");
-        }
-      } else {
+      if (!state.hasPushTask()) {
         writeStdOutSync("Nothing to replicate");
+      } else {
+        Optional errorMsg = StartReplicationProcessing.handleWait(future, state);
+        if (errorMsg.isPresent()) {
+          stateLog.error(errorMsg.get().toString());
+        }
       }
     }
   }
