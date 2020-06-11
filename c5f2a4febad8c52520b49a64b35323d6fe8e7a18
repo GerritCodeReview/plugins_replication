@@ -356,6 +356,30 @@
     },
     {
       "key": {
+        "uuid": "bd3fd3c4_5e15de66",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-11T16:07:06Z",
+      "side": 1,
+      "message": "My proposal: the createStartReplicationRequest method should rethrow the IOException only; the rest looks fine. That exception should then be catched by the calling doPost, which should issue an SC_INTERNAL_SERVER_ERROR -discriminating IOException from an otherwise SC_BAD_REQUEST.",
+      "parentUuid": "0243a76c_77a5f869",
+      "range": {
+        "startLine": 79,
+        "startChar": 49,
+        "endLine": 80,
+        "endChar": 18
+      },
+      "revId": "c5f2a4febad8c52520b49a64b35323d6fe8e7a18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a74229f1_322b2e2b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 10
