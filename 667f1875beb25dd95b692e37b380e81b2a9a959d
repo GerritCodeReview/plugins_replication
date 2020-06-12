@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "50057faf_b231f7e8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-12T15:12:32Z",
+      "side": 1,
+      "message": "A message closer to the specifically failing createStartReplicationRequest business, around the actual request reading that failed, maybe. How about replacing \u0027starting\u0027 with \"reading start request for\"?\n\n-Because the replication didn\u0027t start/initialize yet, so \u0027starting\u0027 could be misleading for the admin I think. This case differs from the below one that may fail upon executing (having truly started, or starting) the replication.",
+      "parentUuid": "1ffaa0f8_3d0faf59",
+      "range": {
+        "startLine": 52,
+        "startChar": 28,
+        "endLine": 52,
+        "endChar": 36
+      },
+      "revId": "667f1875beb25dd95b692e37b380e81b2a9a959d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ae93db92_95af4d23",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 15
@@ -107,6 +131,30 @@
       "writtenOn": "2020-06-12T14:41:54Z",
       "side": 1,
       "message": "My eclipse shows a warning here (SonarLint on the Fly) stating that an IOException is not being handled (same as the outher res.sendError requests). The function signature throws IOException so I\u0027m not sure why this is here. Also, in the other cases, we are already in a catch block which get\u0027s messy. Ideas ?",
+      "range": {
+        "startLine": 58,
+        "startChar": 6,
+        "endLine": 58,
+        "endChar": 56
+      },
+      "revId": "667f1875beb25dd95b692e37b380e81b2a9a959d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35e9e6d3_dbdfe388",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-12T15:12:32Z",
+      "side": 1,
+      "message": "Not sure about that lint issue myself in this case, yes. We could ignore it for now, or locally disable it but that could lend missed positives. Beside this likely false negative, what else is messy, more precisely?",
+      "parentUuid": "ae93db92_95af4d23",
       "range": {
         "startLine": 58,
         "startChar": 6,
