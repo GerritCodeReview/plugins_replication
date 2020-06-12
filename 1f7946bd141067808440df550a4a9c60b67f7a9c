@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abb77b13_e57f121c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-12T15:46:55Z",
+      "side": 1,
+      "message": "May move out of the try block.",
+      "range": {
+        "startLine": 84,
+        "startChar": 6,
+        "endLine": 84,
+        "endChar": 50
+      },
+      "revId": "1f7946bd141067808440df550a4a9c60b67f7a9c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d88c3fcd_8589d534",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-06-12T15:46:55Z",
+      "side": 1,
+      "message": "String constants already defined in StartReplicationProcessing; duplication to remove?",
+      "range": {
+        "startLine": 95,
+        "startChar": 28,
+        "endLine": 96,
+        "endChar": 41
+      },
+      "revId": "1f7946bd141067808440df550a4a9c60b67f7a9c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
