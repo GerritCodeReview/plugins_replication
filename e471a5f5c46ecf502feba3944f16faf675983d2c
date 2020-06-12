@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "6d1b33b1_4d85c2ba",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-12T13:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bca1a66_479bc8ab",
+      "range": {
+        "startLine": 53,
+        "startChar": 49,
+        "endLine": 53,
+        "endChar": 52
+      },
+      "revId": "e471a5f5c46ecf502feba3944f16faf675983d2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "336c821c_245d81e7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-12T13:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf44a0ab_7c220550",
+      "range": {
+        "startLine": 53,
+        "startChar": 28,
+        "endLine": 53,
+        "endChar": 37
+      },
+      "revId": "e471a5f5c46ecf502feba3944f16faf675983d2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35ad49c2_86cda485",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 14
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ea72d721_2f9cf5a5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-12T13:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35ad49c2_86cda485",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 27
+      },
+      "revId": "e471a5f5c46ecf502feba3944f16faf675983d2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06499370_6a234d51",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 14
@@ -91,6 +163,30 @@
       "revId": "e471a5f5c46ecf502feba3944f16faf675983d2c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46482b0e_df41128e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-12T13:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06499370_6a234d51",
+      "range": {
+        "startLine": 75,
+        "startChar": 38,
+        "endLine": 75,
+        "endChar": 52
+      },
+      "revId": "e471a5f5c46ecf502feba3944f16faf675983d2c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
