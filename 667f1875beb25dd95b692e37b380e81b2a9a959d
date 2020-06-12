@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "1455f0ea_0c6387fc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-12T15:29:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50057faf_b231f7e8",
+      "range": {
+        "startLine": 52,
+        "startChar": 28,
+        "endLine": 52,
+        "endChar": 36
+      },
+      "revId": "667f1875beb25dd95b692e37b380e81b2a9a959d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae93db92_95af4d23",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 15
@@ -164,6 +188,30 @@
       "revId": "667f1875beb25dd95b692e37b380e81b2a9a959d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5c8ab3d_bc1dea25",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-12T15:29:42Z",
+      "side": 1,
+      "message": "I propose just wrapping the send in a function that catches the IOException. Apparently it\u0027s a security issue with servlets https://cwe.mitre.org/data/definitions/600.html. With the wrapper, the warning is gone.",
+      "parentUuid": "35e9e6d3_dbdfe388",
+      "range": {
+        "startLine": 58,
+        "startChar": 6,
+        "endLine": 58,
+        "endChar": 56
+      },
+      "revId": "667f1875beb25dd95b692e37b380e81b2a9a959d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
