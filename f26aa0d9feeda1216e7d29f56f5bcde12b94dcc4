@@ -118,6 +118,30 @@
       "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a33ace4_b94bae36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-15T23:19:09Z",
+      "side": 1,
+      "message": "\u003e We don\u0027t have 1M replication events, but we do have 100K events, and we still expect to never loose events and we ensure that replicate start all is run after any master server goes down. We have 9 master servers, and we restart them weekly, (which does create close to 1M events) and this does scale for us.\n\nI want to clarify a bit here, while we have 9 masters, only 3 are actively used, which means that we do get approximately 900K events (since they all get restarted), but only 3 of the masters are serving those 900K events. If we started replicating from all of those masters, it would go even better.",
+      "parentUuid": "b552da37_5cd35269",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
