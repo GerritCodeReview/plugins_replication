@@ -142,6 +142,30 @@
       "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a508ca7_de446b56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-06-15T23:27:11Z",
+      "side": 1,
+      "message": "\u003e Is there any reason for this change other than the current performance issue?\n\nThe use case for us is we want to ensure that All-Projects and All-Users is always replicated.",
+      "parentUuid": "6a33ace4_b94bae36",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
