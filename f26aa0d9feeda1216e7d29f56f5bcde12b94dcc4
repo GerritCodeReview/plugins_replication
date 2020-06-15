@@ -94,6 +94,30 @@
       "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b552da37_5cd35269",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-15T23:08:01Z",
+      "side": 1,
+      "message": "I think this using this \"feature\" is fundamentally asking for a broken setup with the hopes that no one notices, and I think it would be bad advice to let the users of the replication plugin think that this is a good idea.\n\nWe don\u0027t have 1M replication events, but we do have 100K events, and we still expect to never loose events and we ensure that replicate start all is run after any master server goes down. We have 9 master servers, and we restart them weekly, (which does create close to 1M events) and this does scale for us, and there are several existing proposed major improvements that will make this much better even, and many that could still be done (git protocol v2!). I don\u0027t think that it is unreasonable to think that if a service has 1M replication events that this can be handled by the replication plugin with the right amount of server horsepower.\n\nTurning a feature off is not a scaling solution, and I think we are doing a dis-service to the community if we don\u0027t seek and apply solutions to scalability problems instead of turning features off. This change https://gerrit-review.googlesource.com/c/plugins/replication/+/267812 can greatly reduce the impact of massive startup replication, it would be good if Luca could try this change, and also the MM master fixes here https://gerrit-review.googlesource.com/c/plugins/replication/+/265572 before giving up on making replication reliable for \"all-but-a-select-few\" projects on a server. I would rather we fix our code base than we add workarounds for performance \"bugs\".\n\nIs there any reason for this change other than the current performance issue?",
+      "parentUuid": "80ca7af3_133d4058",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }

@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "edeae033_0d682f89",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-15T23:08:01Z",
+      "side": 1,
+      "message": "It would be helpful to have an explanation here as to why you would set the to \"false\" as doing so should be highly discouraged since it is known to create the problem you are trying to workaround here.",
+      "range": {
+        "startLine": 11,
+        "startChar": 56,
+        "endLine": 11,
+        "endChar": 61
+      },
+      "revId": "bd47f4b97b49fb7bebdb22b5cea13b16bbba4411",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6087c88_1256b156",
         "filename": "/COMMIT_MSG",
         "patchSetId": 8
