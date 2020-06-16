@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f08f3593_6821e39d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-16T00:58:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f166de9e_bdcbac7d",
+      "range": {
+        "startLine": 28,
+        "startChar": 70,
+        "endLine": 28,
+        "endChar": 82
+      },
+      "revId": "f590639a0acc6ac31f183c0e3dd9807ae05f025c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "81ba5b19_394a6847",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "f590639a0acc6ac31f183c0e3dd9807ae05f025c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "142c36a9_10bf4dc1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-16T00:58:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81ba5b19_394a6847",
+      "range": {
+        "startLine": 30,
+        "startChar": 35,
+        "endLine": 30,
+        "endChar": 48
+      },
+      "revId": "f590639a0acc6ac31f183c0e3dd9807ae05f025c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
