@@ -238,6 +238,30 @@
       "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "007aa220_2dcfaf10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2020-06-16T21:44:39Z",
+      "side": 1,
+      "message": "\u003e \u003e We don\u0027t want to replicate everything at startup.\n\u003e \n\u003e The sentence above is already supported, despite it not being a use case. The currently expressed desire for this knob is the equivalent of \"I just want it to work this way\", but no justification is being provided.\n\u003e \n\u003e A use case is something like: \"I would like any update on my server to get replicated to my remotes\". If this is not working, than there is a bug. The design of the replication plugin requires that you either keep startup replication turned on or that you manually run replication start at some point after a server has been \"downed\". This change does not alter this, it only provides a knob that when turned on will provide the illusion that a broken setup works. I cannot recommend such a knob for community use.\n\u003e \n\nLet me reword this. The use case: \" I would like to have any update on my server to get replicated to my remotes, however I don\u0027t want it to happen all at once on the server startup. It is sufficient for me to wait until new change to the projects will cause those  projects to be replicated. I only want some specific projects to be replicated on startup.\"\n\nBTW, this is a real request from one of our customers.\nWhy do you think it is not a user case?",
+      "parentUuid": "23f457ae_d949b01f",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
