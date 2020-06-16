@@ -286,6 +286,30 @@
       "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df3be39d_0ac3d6e3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-16T21:57:54Z",
+      "side": 1,
+      "message": "\u003e Let me reword this. The use case: \" I would like to have any update on my server to get replicated to my remotes, however I don\u0027t want it to happen all at once on the server startup. It is sufficient for me to wait until new change to the projects will cause those  projects to be replicated. I only want some specific projects to be replicated on startup.\"\n\nBecause I doubt any customer would say\" do not replicate these projects on startup\" if it were free. In other words, you are expressing a solution not a use case. The desire is to have things replicated with no misses, and I am guessing that you perceive that there are downsides to doing that always for all projects on startup, so you need to express that in your use case. The use case should not express the solution.",
+      "parentUuid": "a8b4bb87_2bbd1ce5",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
