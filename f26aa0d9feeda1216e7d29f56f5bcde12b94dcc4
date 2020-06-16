@@ -262,6 +262,30 @@
       "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8b4bb87_2bbd1ce5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-16T21:51:01Z",
+      "side": 1,
+      "message": "\u003e \u003e \u003e We don\u0027t want to replicate everything at startup.\n\u003e \u003e \n\u003e \u003e The sentence above is already supported, despite it not being a use case. The currently expressed desire for this knob is the equivalent of \"I just want it to work this way\", but no justification is being provided.\n\u003e \u003e \n\u003e \u003e A use case is something like: \"I would like any update on my server to get replicated to my remotes\". If this is not working, than there is a bug. The design of the replication plugin requires that you either keep startup replication turned on or that you manually run replication start at some point after a server has been \"downed\". This change does not alter this, it only provides a knob that when turned on will provide the illusion that a broken setup works. I cannot recommend such a knob for community use.\n\u003e \u003e \n\u003e \n\u003e Let me reword this. The use case: \" I would like to have any update on my server to get replicated to my remotes, however I don\u0027t want it to happen all at once on the server startup. It is sufficient for me to wait until new change to the projects will cause those  projects to be replicated. I only want some specific projects to be replicated on startup.\"\n\n+1 to that requirement: we also have customers that have thousands of projects but only a very small set of them are to be replicated at startup. Why? Business decisions and associated workflows.\n\nOf course, if Martin won\u0027t use this feature, he can simply not use it. I don\u0027t believe it would break any existing functionality.",
+      "parentUuid": "007aa220_2dcfaf10",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
