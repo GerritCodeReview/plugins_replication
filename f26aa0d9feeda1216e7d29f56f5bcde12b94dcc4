@@ -334,6 +334,30 @@
       "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a097bd3a_c9e7892a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-16T23:11:10Z",
+      "side": 1,
+      "message": "\u003e \u003e Why? Business decisions and associated workflows.\n\u003e \n\u003e It would be great if you could give us a sample workflow\n\nOf course I cannot give you the *exact* workflow as it is covered by NDA. A \"sample\" can be the following:\n\n- Project A is the mono-repo that is mostly active across the company: we want that to be 100% aligned across all the sites, otherwise it won\u0027t make any sense for the company to keep on developing its product. Other projects are less critical and it is more important to minimise the startup time and system resources than having them aligned at 100%: we can accept a bit of temporary inconsistency and minimise downtime costs.\n\n\u003e Currently, the only reason listed to do this is performance/workload issues (which is a real problem!)\n\nI gave you a business reason, justified on costs vs. benefits.\n\n\u003e however that is not a workflow issue, and it can be solved with many solutions, and there are at least 2 changes uploaded that improve this.\n\nWhat are the pointers to the changes that enable the selective projects replications at startup?",
+      "parentUuid": "b43bdace_fccac3f4",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
