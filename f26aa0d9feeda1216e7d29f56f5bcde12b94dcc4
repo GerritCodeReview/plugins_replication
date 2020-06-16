@@ -214,6 +214,30 @@
       "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23f457ae_d949b01f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-16T00:20:48Z",
+      "side": 1,
+      "message": "\u003e We don\u0027t want to replicate everything at startup.\n\nThe sentence above is already supported, despite it not being a use case. The currently expressed desire for this knob is the equivalent of \"I just want it to work this way\", but no justification is being provided.\n\nA use case is something like: \"I would like any update on my server to get replicated to my remotes\". If this is not working, than there is a bug. The design of the replication plugin requires that you either keep startup replication turned on or that you manually run replication start at some point after a server has been \"downed\". This change does not alter this, it only provides a knob that when turned on will provide the illusion that a broken setup works. I cannot recommend such a knob for community use.\n\nTurning off startup replication is not a recommendation for general community use. And if we are to recommend doing it to the community, then I think we should have a good reason to do so. We do it because we have an external customization that fires this at time more appropriate for a multi-master setup. This customization is specific to a specific multi-master implementation, and it would not be appropriate currently for the replication plugin to have to carry code that we could not recommend that others in the community to use. Since what you are trying to do is currently possible to achieve without modifying the replication plugin (via a startup script wrapper which calls replicate start on the projects you want) I don\u0027t think the community should bare the burden of this config option without a strong use case that we could recommend the community to use.",
+      "parentUuid": "6d6ef3e8_95b32d8d",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "f26aa0d9feeda1216e7d29f56f5bcde12b94dcc4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
