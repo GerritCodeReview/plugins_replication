@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9e099ea_b4c25294",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-06-17T17:23:17Z",
+      "side": 1,
+      "message": "if the task",
+      "range": {
+        "startLine": 9,
+        "startChar": 49,
+        "endLine": 9,
+        "endChar": 56
+      },
+      "revId": "6da4e6d3bc66650ced0a164ce7d98189ac74f0f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8783ad32_52663629",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-06-17T17:23:17Z",
+      "side": 1,
+      "message": "cancelled",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 8
+      },
+      "revId": "6da4e6d3bc66650ced0a164ce7d98189ac74f0f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a955079_016c08ee",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-06-17T17:23:17Z",
+      "side": 1,
+      "message": "Cancelled",
+      "range": {
+        "startLine": 420,
+        "startChar": 60,
+        "endLine": 420,
+        "endChar": 68
+      },
+      "revId": "6da4e6d3bc66650ced0a164ce7d98189ac74f0f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f95f1836_b83b4931",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-06-17T17:23:17Z",
+      "side": 1,
+      "message": "cancelled, in general s/cancelled/canceled/g",
+      "range": {
+        "startLine": 423,
+        "startChar": 58,
+        "endLine": 423,
+        "endChar": 66
+      },
+      "revId": "6da4e6d3bc66650ced0a164ce7d98189ac74f0f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d18806a8_fd972aa9",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2020-06-17T17:23:17Z",
+      "side": 1,
+      "message": "I lack of knowledge of the replication plugin hence trying to understand what the test is doing is a bit hard for me. Let me try to guess:\n- push starts \u003d\u003e 2 running tasks\n- push fail, removed from running tasks and rescheduled \u003d\u003e 0 running tasks\n- push retried \u003d\u003e 2 running tasks\n\n...at the end when we run out of retries, we check if the task has been cleaned up, is that correct?",
+      "range": {
+        "startLine": 438,
+        "startChar": 0,
+        "endLine": 446,
+        "endChar": 39
+      },
+      "revId": "6da4e6d3bc66650ced0a164ce7d98189ac74f0f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
