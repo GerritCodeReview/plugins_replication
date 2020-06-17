@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.stream.Collectors.toList;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.flogger.FluentLogger;
@@ -28,10 +29,13 @@ import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.NotDirectoryException;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
 
@@ -153,33 +157,51 @@ public class ReplicationTasksStorage {
   }
 
   private List<ReplicateRefUpdate> list(Path tasks) {
-    List<ReplicateRefUpdate> results = new ArrayList<>();
-    try (DirectoryStream<Path> events = Files.newDirectoryStream(tasks)) {
-      for (Path path : events) {
-        if (Files.isRegularFile(path)) {
-          try {
-            String json = new String(Files.readAllBytes(path), UTF_8);
-            results.add(GSON.fromJson(json, ReplicateRefUpdate.class));
-          } catch (NoSuchFileException ex) {
-            logger.atFine().log(
-                "File %s not found while listing waiting tasks (likely in-flight or completed by another node)",
-                path);
-          } catch (IOException e) {
-            logger.atSevere().withCause(e).log("Error when firing pending event %s", path);
-          }
-        } else if (Files.isDirectory(path)) {
-          try {
-            results.addAll(list(path));
-          } catch (DirectoryIteratorException d) {
-            // iterating over the sub-directories is expected to have dirs disappear
-            Nfs.throwIfNotStaleFileHandle(d.getCause());
-          }
-        }
-      }
-    } catch (IOException e) {
-      logger.atSevere().withCause(e).log("Error while listing tasks");
+    return stream(tasks).collect(toList());
+  }
+
+  public Stream<ReplicateRefUpdate> streamWaiting() {
+    return stream(createDir(waitingUpdates));
+  }
+
+  private Stream<ReplicateRefUpdate> stream(Path tasks) {
+    return walk(tasks)
+        .map(path -> getReplicateRefUpdate(path))
+        .filter(optional -> optional.isPresent())
+        .map(optional -> optional.get());
+  }
+
+  private Stream<Path> walk(Path path) {
+    try {
+      return Stream.concat(Stream.of(path), Files.list(path).flatMap(sub -> walk(sub)));
+    } catch (NotDirectoryException e) {
+      return Stream.of(path);
+    } catch (Exception e) {
+      handle(path, e);
     }
-    return results;
+    return Stream.empty();
+  }
+
+  private Optional<ReplicateRefUpdate> getReplicateRefUpdate(Path file) {
+    try {
+      String json = new String(Files.readAllBytes(file), UTF_8);
+      return Optional.of(GSON.fromJson(json, ReplicateRefUpdate.class));
+    } catch (Exception e) {
+      if (!(e instanceof IOException && e.getMessage().equals("Is a directory"))) {
+        handle(file, e);
+      }
+    }
+    return Optional.empty();
+  }
+
+  private void handle(Path path, Exception e) {
+    if (e instanceof NoSuchFileException) {
+      logger.atFine().log(
+          "File %s not found while listing waiting tasks (likely in-flight or completed by another node)",
+          path);
+    } else {
+      logger.atSevere().withCause(e).log("Error when firing pending event %s", path);
+    }
   }
 
   @SuppressWarnings("deprecation")
