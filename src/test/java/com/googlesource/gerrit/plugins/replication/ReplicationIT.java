@@ -35,6 +35,8 @@ import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Key;
+import com.googlesource.gerrit.plugins.replication.Destination.QueueInfo;
+import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -51,6 +53,7 @@ import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
+import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
 import org.junit.Test;
 
@@ -69,6 +72,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   @Inject private SitePaths sitePaths;
   @Inject private ProjectOperations projectOperations;
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
+  private DestinationsCollection destinationCollection;
   private Path pluginDataDir;
   private Path gitPath;
   private Path storagePath;
@@ -94,6 +98,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     replicationConfig = plugin.getSysInjector().getInstance(ReplicationConfig.class);
     storagePath = pluginDataDir.resolve("ref-updates");
     tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
+    destinationCollection = plugin.getSysInjector().getInstance(DestinationsCollection.class);
     cleanupReplicationTasks();
     tasksStorage.disableDeleteForTesting(true);
   }
@@ -414,6 +419,45 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     waitUntil(() -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")));
     waitUntil(() -> isTaskCleanedUp());
+  }
+
+  @Test
+  public void shouldCleanupBothTasksAndLocksAfterReplicationCancelledAfterMaxRetries()
+      throws Exception {
+    String projectName = "task_cleanup_locks_project_cancelled";
+    String remoteDestination = "http://invalidurl:9090/";
+    URIish urish = new URIish(remoteDestination + projectName + ".git");
+    tasksStorage.disableDeleteForTesting(false);
+
+    setReplicationDestination(projectName, "replica", Optional.of(projectName));
+    // replace correct urls with invalid one to trigger retry
+    config.setString("remote", projectName, "url", remoteDestination + "${name}.git");
+    config.setInt("remote", projectName, "replicationMaxRetries", 1);
+    config.save();
+    reloadConfig();
+    Destination destination =
+        destinationCollection.getAll(FilterType.ALL).stream()
+            .filter(dest -> dest.getProjects().contains(projectName))
+            .findFirst()
+            .get();
+
+    waitUntil(() -> tasksStorage.listRunning().size() == 0);
+
+    createTestProject(projectName);
+
+    waitUntil(() -> isTaskRescheduled(destination.getQueueInfo(), urish));
+    // replicationRetry is set to 1 minute which is the minimum value. That's why
+    // should be safe to get the pushOne object from pending because it should be here for
+    // one minute
+    PushOne pushOp = destination.getQueueInfo().pending.get(urish);
+
+    WaitUtil.waitUntil(() -> pushOp.wasCanceled(), Duration.ofMinutes(3));
+    waitUntil(() -> isTaskCleanedUp());
+  }
+
+  private boolean isTaskRescheduled(QueueInfo queue, URIish uri) {
+    PushOne pushOne = queue.pending.get(uri);
+    return pushOne == null ? false : pushOne.isRetrying();
   }
 
   private Ref getRef(Repository repo, String branchName) throws IOException {
