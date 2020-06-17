@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89a6693f_c1e8ae58",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-17T18:20:57Z",
+      "side": 1,
+      "message": "The URI locks looks quite fragile as it is the second time that we have a P1 on the replication plugin on that, in just 2 weeks of production use of the v3.2.x, which isn\u0027t a good thing.\n\nDo we need to increase the test coverage of the locks mechanism? Do we need a way to auto-release the locks that lasted for too much time? (a sort of lock-timeout)",
+      "range": {
+        "startLine": 11,
+        "startChar": 10,
+        "endLine": 11,
+        "endChar": 19
+      },
+      "revId": "2a1d6e4f665d011874504b56e2ddf3460c99f2ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41c356e1_d05bdbb6",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-17T18:20:57Z",
+      "side": 1,
+      "message": "has",
+      "range": {
+        "startLine": 439,
+        "startChar": 21,
+        "endLine": 439,
+        "endChar": 23
+      },
+      "revId": "2a1d6e4f665d011874504b56e2ddf3460c99f2ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ff7b3fc_9725f127",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-17T18:20:57Z",
+      "side": 1,
+      "message": "Why 2? Magic values should be avoided in tests and replaced with self-documenting constants. The fact that you need so many comments is a symptom of that.",
+      "range": {
+        "startLine": 440,
+        "startChar": 57,
+        "endLine": 440,
+        "endChar": 58
+      },
+      "revId": "2a1d6e4f665d011874504b56e2ddf3460c99f2ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b14f6dc_b2c84fea",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-17T18:20:57Z",
+      "side": 1,
+      "message": "Can we also do some more assertions on what the tasks contain?",
+      "range": {
+        "startLine": 444,
+        "startChar": 33,
+        "endLine": 444,
+        "endChar": 59
+      },
+      "revId": "2a1d6e4f665d011874504b56e2ddf3460c99f2ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
