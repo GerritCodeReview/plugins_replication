@@ -416,6 +416,42 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     waitUntil(() -> isTaskCleanedUp());
   }
 
+  @Test
+  public void shouldCleanupBothTasksAndLocksAfterReplicationCancelled() throws Exception {
+    String projectName = "task_cleanup_locks_project_cancelled";
+    tasksStorage.disableDeleteForTesting(false);
+
+    setReplicationDestination(projectName, "replica", ALL_PROJECTS);
+    // replace correct urls with invalid one to trigger retry
+    config.unset("remote", projectName, "url");
+    config.setString("remote", projectName, "url", "http://invalidurl:9090/${name}.git");
+
+    config.setInt("remote", projectName, "replicationMaxRetries", 1);
+    config.save();
+    reloadConfig();
+
+    assertThat(tasksStorage.listRunning()).hasSize(0);
+
+    createTestProject(projectName);
+    waitUntil(() -> replicationTaskForRefStarted(projectName, "refs/heads/master"));
+    // after reschedule tasks are moved from running
+    waitUntil(() -> tasksStorage.listRunning().size() == 0);
+    // check if retry started
+    waitUntil(() -> replicationTaskForRefStarted(projectName, "refs/heads/master"));
+
+    waitUntil(() -> isTaskCleanedUp());
+  }
+
+  private Boolean replicationTaskForRefStarted(String projectName, String ref) {
+    return tasksStorage.listRunning().stream()
+        .filter(
+            refUpdate -> {
+              return refUpdate.project.equals(projectName) && refUpdate.ref.equals(ref);
+            })
+        .findFirst()
+        .isPresent();
+  }
+
   private Ref getRef(Repository repo, String branchName) throws IOException {
     return repo.getRefDatabase().exactRef(branchName);
   }
