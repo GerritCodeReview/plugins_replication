@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "111b71ff_5cde86a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-17T17:28:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9e099ea_b4c25294",
+      "range": {
+        "startLine": 9,
+        "startChar": 49,
+        "endLine": 9,
+        "endChar": 56
+      },
+      "revId": "6da4e6d3bc66650ced0a164ce7d98189ac74f0f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8783ad32_52663629",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "6da4e6d3bc66650ced0a164ce7d98189ac74f0f9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5138620_8578c9b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-17T17:28:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8783ad32_52663629",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 8
+      },
+      "revId": "6da4e6d3bc66650ced0a164ce7d98189ac74f0f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "5ffc7ab6_9d7b9136",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-17T17:28:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a955079_016c08ee",
+      "range": {
+        "startLine": 420,
+        "startChar": 60,
+        "endLine": 420,
+        "endChar": 68
+      },
+      "revId": "6da4e6d3bc66650ced0a164ce7d98189ac74f0f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f95f1836_b83b4931",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "6da4e6d3bc66650ced0a164ce7d98189ac74f0f9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ff1d641_2effd077",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-17T17:28:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f95f1836_b83b4931",
+      "range": {
+        "startLine": 423,
+        "startChar": 58,
+        "endLine": 423,
+        "endChar": 66
+      },
+      "revId": "6da4e6d3bc66650ced0a164ce7d98189ac74f0f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
