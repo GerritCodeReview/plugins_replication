@@ -21,6 +21,7 @@ gerrit_plugin(
 
 junit_tests(
     name = "replication_tests",
+    timeout = "long",
     srcs = glob([
         "src/test/java/**/*Test.java",
         "src/test/java/**/*IT.java",
