@@ -416,6 +416,36 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     waitUntil(() -> isTaskCleanedUp());
   }
 
+  @Test
+  public void shouldCleanupBothTasksAndLocksAfterReplicationCancelled() throws Exception {
+    tasksStorage.disableDeleteForTesting(false);
+
+    setReplicationDestination("task_cleanup_locks_project_cancelled", "replica", ALL_PROJECTS);
+    // replace correct urls with invalid one to trigger retry
+    config.unset("remote", "task_cleanup_locks_project_cancelled", "url");
+    config.setString(
+        "remote",
+        "task_cleanup_locks_project_cancelled",
+        "url",
+        "http://invalidurl:9090/${name}.git");
+
+    config.setInt("remote", "task_cleanup_locks_project_cancelled", "replicationMaxRetries", 1);
+    config.save();
+    reloadConfig();
+
+    assertThat(tasksStorage.listRunning()).hasSize(0);
+
+    createTestProject("task_cleanup_locks_project_cancelled");
+    // check if push is started
+    waitUntil(() -> tasksStorage.listRunning().size() == 2);
+    // after reschedule tasks are moved from running
+    waitUntil(() -> tasksStorage.listRunning().size() == 0);
+    // check if retry started
+    waitUntil(() -> tasksStorage.listRunning().size() == 2);
+
+    waitUntil(() -> isTaskCleanedUp());
+  }
+
   private Ref getRef(Repository repo, String branchName) throws IOException {
     return repo.getRefDatabase().exactRef(branchName);
   }
