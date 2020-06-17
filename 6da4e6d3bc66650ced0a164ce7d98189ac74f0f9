@@ -210,6 +210,30 @@
       "revId": "6da4e6d3bc66650ced0a164ce7d98189ac74f0f9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8ffd1f9_5117a22d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-17T17:29:08Z",
+      "side": 1,
+      "message": "Yes you are correct",
+      "parentUuid": "d18806a8_fd972aa9",
+      "range": {
+        "startLine": 438,
+        "startChar": 0,
+        "endLine": 446,
+        "endChar": 39
+      },
+      "revId": "6da4e6d3bc66650ced0a164ce7d98189ac74f0f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
