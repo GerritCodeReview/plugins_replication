@@ -225,6 +225,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
   void canceledByReplication() {
     canceled = true;
+    retryDone();
   }
 
   boolean wasCanceled() {
