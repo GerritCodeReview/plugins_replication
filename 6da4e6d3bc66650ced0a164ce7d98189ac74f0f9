@@ -213,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "6fca22df_467bad48",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-17T17:34:16Z",
+      "side": 1,
+      "message": "yes for all cancelled tasks",
+      "parentUuid": "873626bb_a7fab103",
+      "range": {
+        "startLine": 438,
+        "startChar": 4,
+        "endLine": 438,
+        "endChar": 21
+      },
+      "revId": "6da4e6d3bc66650ced0a164ce7d98189ac74f0f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d18806a8_fd972aa9",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 1
