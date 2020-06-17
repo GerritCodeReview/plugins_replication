@@ -173,25 +173,35 @@ public class ReplicationQueue
   }
 
   private void firePendingEvents() {
+    final Set<String> eventsReplayed = new HashSet<>();
     replaying = true;
-    try {
-      Set<String> eventsReplayed = new HashSet<>();
-      replaying = true;
-      for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.list()) {
-        if (t == null) {
-          repLog.warn("Encountered null replication event in ReplicationTasksStorage");
-          continue;
-        }
-        String eventKey = String.format("%s:%s", t.project, t.ref);
-        if (!eventsReplayed.contains(eventKey)) {
-          repLog.info("Firing pending task {}", eventKey);
-          onGitReferenceUpdated(t.project, t.ref);
-          eventsReplayed.add(eventKey);
-        }
-      }
-    } finally {
-      replaying = false;
-    }
+    new ChainedScheduler.StreamScheduler<ReplicationTasksStorage.ReplicateRefUpdate>(
+        workQueue.getDefaultQueue(),
+        replicationTasksStorage.stream(),
+        new ChainedScheduler.Runner<ReplicationTasksStorage.ReplicateRefUpdate>() {
+          @Override
+          public void run(ReplicationTasksStorage.ReplicateRefUpdate u) {
+            String eventKey = getKey(u);
+            if (eventsReplayed.add(eventKey)) {
+              repLog.info("Firing pending task {}", eventKey);
+              onGitReferenceUpdated(u.project, u.ref);
+            }
+          }
+
+          @Override
+          public void onDone() {
+            replaying = false;
+          }
+
+          @Override
+          public String toString(ReplicationTasksStorage.ReplicateRefUpdate u) {
+            return "Scheduling push to " + getKey(u);
+          }
+
+          public String getKey(ReplicationTasksStorage.ReplicateRefUpdate u) {
+            return String.format("%s:%s", u.project, u.ref);
+          }
+        });
   }
 
   @Override
