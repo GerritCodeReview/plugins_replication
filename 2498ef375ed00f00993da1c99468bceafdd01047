@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "560dcdbe_5580940e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T11:12:43Z",
+      "side": 1,
+      "message": "How is the cancelling of events is simulated/tested?",
+      "range": {
+        "startLine": 420,
+        "startChar": 60,
+        "endLine": 420,
+        "endChar": 69
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a66c9d5_a21bf812",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T11:12:43Z",
+      "side": 1,
+      "message": "Why unset? If you set the value it would automatically replace the existing one.",
+      "range": {
+        "startLine": 426,
+        "startChar": 4,
+        "endLine": 426,
+        "endChar": 47
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f28a5f2f_27a67f05",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T11:12:43Z",
+      "side": 1,
+      "message": "Should this instead a waitUntil()? We could have some parts of the test setup that have created replication tasks and some of them could still be running, isn\u0027t it?",
+      "range": {
+        "startLine": 433,
+        "startChar": 4,
+        "endLine": 433,
+        "endChar": 54
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6a140a9_944a50fa",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T11:12:43Z",
+      "side": 1,
+      "message": "If the replication event starts and finishes immediately, this wait() may never wake up :-(",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 436,
+        "endChar": 84
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8581c5c1_1ed66791",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T11:12:43Z",
+      "side": 1,
+      "message": "This is too implicit IMHO: you know that there is a retry because the creation of a new project is triggering a replication event in retry mode, correct? That isn\u0027t really obvious for the reader though :-(",
+      "range": {
+        "startLine": 437,
+        "startChar": 13,
+        "endLine": 437,
+        "endChar": 29
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16f3569d_a23efb3f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T11:12:43Z",
+      "side": 1,
+      "message": "Do we have any way to check that this was actually a retried event?",
+      "range": {
+        "startLine": 440,
+        "startChar": 4,
+        "endLine": 440,
+        "endChar": 84
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
