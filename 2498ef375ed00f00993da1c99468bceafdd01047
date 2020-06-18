@@ -262,6 +262,30 @@
     },
     {
       "key": {
+        "uuid": "df634ccb_013e961c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-18T21:49:47Z",
+      "side": 1,
+      "message": "I think there are many tests which are doing this, and they seem to be reliable enough.",
+      "parentUuid": "63c10300_64952a12",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 436,
+        "endChar": 84
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8581c5c1_1ed66791",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 4
@@ -368,6 +392,30 @@
       "side": 1,
       "message": "I was looking if I can get PushOp from replication queue but it doesn\u0027t look like. But let me have a second look, maybe there is a way to get those data(maybe I can read them from the taskStorage)",
       "parentUuid": "16f3569d_a23efb3f",
+      "range": {
+        "startLine": 440,
+        "startChar": 4,
+        "endLine": 440,
+        "endChar": 84
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cfbc998_346c7691",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-18T21:49:47Z",
+      "side": 1,
+      "message": "I think that since you checked that it was 0 above, you can assume that it is a retry since we are not triggering any other replication events. There is no indication via the ReplicationTasksStorage that something is a retry, but it does store the specific values of an event, so if you wanted to be more specific you could check that an event contains the specific details that you expect.\n\nI think it is important to keep the bar low for tests, i.e. we want to encourage tests, and lean more towards good than perfect to ensure that we have tests! Test mechanisms can always be improved pretty easily if one turns out to be unreliable as long as the intent is clear. I was able to grasp the intent of these tests fairly quickly, the hardest part for me was realizing that the push would get canceled implicitly because of the invalid url, and Luca already suggested to encode that into the test name.",
+      "parentUuid": "c5304223_edbf9b7d",
       "range": {
         "startLine": 440,
         "startChar": 4,
