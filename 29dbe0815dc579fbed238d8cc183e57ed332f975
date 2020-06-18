@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "50f37b03_9fdc519a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T11:49:00Z",
+      "side": 1,
+      "message": "Is the renaming part of the scope of this change?",
+      "range": {
+        "startLine": 168,
+        "startChar": 27,
+        "endLine": 168,
+        "endChar": 37
+      },
+      "revId": "29dbe0815dc579fbed238d8cc183e57ed332f975",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1df01a6_a601e2e2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T11:49:00Z",
+      "side": 1,
+      "message": "For a single-master use-case, this is a warning and the Gerrit admin should be aware of it.\nAlso, the exception should be included in the logging IMHO.",
+      "range": {
+        "startLine": 301,
+        "startChar": 15,
+        "endLine": 301,
+        "endChar": 23
+      },
+      "revId": "29dbe0815dc579fbed238d8cc183e57ed332f975",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dc09c5fa_b30bd01d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 5
@@ -121,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "b9e865c7_8a4dcdc6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T11:49:00Z",
+      "side": 1,
+      "message": "The \u0027likely\u0027 is misplaced for a multi-master scenario and misleading for a single-master scenario. Can we instead let the replication plugin *know* that this is a multi-master scenario configuration so that logs and levels can be set accordingly?\n\nIf we do not expect a situation to happen (e.g. locks present when they should not), we should raise a warning. For know if a situation is supposed to happen or not, the replication plugin needs to be aware that the directory is shared with other masters or not.",
+      "parentUuid": "6176b1b9_21756705",
+      "range": {
+        "startLine": 302,
+        "startChar": 50,
+        "endLine": 302,
+        "endChar": 82
+      },
+      "revId": "29dbe0815dc579fbed238d8cc183e57ed332f975",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e9a2d8ec_e97176c0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 5
@@ -165,6 +235,30 @@
       "revId": "29dbe0815dc579fbed238d8cc183e57ed332f975",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90d1296b_ab08686c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T11:49:00Z",
+      "side": 1,
+      "message": "Same comment as above: this is a warning in case of a single-master scenario.",
+      "parentUuid": "b38aca2f_6f567add",
+      "range": {
+        "startLine": 312,
+        "startChar": 51,
+        "endLine": 312,
+        "endChar": 83
+      },
+      "revId": "29dbe0815dc579fbed238d8cc183e57ed332f975",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     },
     {
       "key": {
@@ -215,6 +309,30 @@
     },
     {
       "key": {
+        "uuid": "94181ca7_12d839e6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T11:49:00Z",
+      "side": 1,
+      "message": "Same comment as above: this is a warning in case of a single-master scenario.",
+      "parentUuid": "5327098d_4ef5243a",
+      "range": {
+        "startLine": 382,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 21
+      },
+      "revId": "29dbe0815dc579fbed238d8cc183e57ed332f975",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "792b9e17_69a09ea4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 5
@@ -262,6 +380,30 @@
     },
     {
       "key": {
+        "uuid": "90af17a8_bebcd365",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T11:49:00Z",
+      "side": 1,
+      "message": "Same comment as above: this is a warning in case of a single-master scenario.",
+      "parentUuid": "ff935c39_b6d9896d",
+      "range": {
+        "startLine": 393,
+        "startChar": 0,
+        "endLine": 395,
+        "endChar": 21
+      },
+      "revId": "29dbe0815dc579fbed238d8cc183e57ed332f975",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bfbf5507_0c840bdf",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 5
@@ -306,6 +448,30 @@
       "revId": "29dbe0815dc579fbed238d8cc183e57ed332f975",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "179414fc_f10d1748",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T11:49:00Z",
+      "side": 1,
+      "message": "Same comment as above: this is a warning in case of a single-master scenario.",
+      "parentUuid": "e7140618_aa0862f4",
+      "range": {
+        "startLine": 403,
+        "startChar": 0,
+        "endLine": 405,
+        "endChar": 21
+      },
+      "revId": "29dbe0815dc579fbed238d8cc183e57ed332f975",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
