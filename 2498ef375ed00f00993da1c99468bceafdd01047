@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "954bfcdc_ccc5d3df",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-18T13:05:28Z",
+      "side": 1,
+      "message": "We have invalid remote url and replicationMaxRetries set to 1 so it will retry once and after that task will be cancelled",
+      "parentUuid": "560dcdbe_5580940e",
+      "range": {
+        "startLine": 420,
+        "startChar": 60,
+        "endLine": 420,
+        "endChar": 69
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a66c9d5_a21bf812",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2020-06-18T11:12:43Z",
       "side": 1,
       "message": "Why unset? If you set the value it would automatically replace the existing one.",
+      "range": {
+        "startLine": 426,
+        "startChar": 4,
+        "endLine": 426,
+        "endChar": 47
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc28b80d_d414834f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-18T13:05:28Z",
+      "side": 1,
+      "message": "I wanted be be explicit because we have list of urls",
+      "parentUuid": "0a66c9d5_a21bf812",
       "range": {
         "startLine": 426,
         "startChar": 4,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "644f8676_f8656859",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-18T13:05:28Z",
+      "side": 1,
+      "message": "Copied from test above, but yes this can be waitUntil",
+      "parentUuid": "f28a5f2f_27a67f05",
+      "range": {
+        "startLine": 433,
+        "startChar": 4,
+        "endLine": 433,
+        "endChar": 54
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6a140a9_944a50fa",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 4
@@ -82,6 +154,30 @@
       "writtenOn": "2020-06-18T11:12:43Z",
       "side": 1,
       "message": "If the replication event starts and finishes immediately, this wait() may never wake up :-(",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 436,
+        "endChar": 84
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63c10300_64952a12",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-18T13:05:28Z",
+      "side": 1,
+      "message": "we have 1 second delay for replication start. we should be in that line before replication happened. You are right it\u0027s a bit risky but I\u0027m not sure how to check that in a different way. But let me have a second look",
+      "parentUuid": "d6a140a9_944a50fa",
       "range": {
         "startLine": 436,
         "startChar": 0,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "93405d21_4fd195c2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-18T13:05:28Z",
+      "side": 1,
+      "message": "Replication retry is set to minimum value which is 1 minute. This means that when task is rescheduled is moved from running, that\u0027s why I\u0027m checking if this happened",
+      "parentUuid": "8581c5c1_1ed66791",
+      "range": {
+        "startLine": 437,
+        "startChar": 13,
+        "endLine": 437,
+        "endChar": 29
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "16f3569d_a23efb3f",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 4
@@ -128,6 +248,30 @@
       "writtenOn": "2020-06-18T11:12:43Z",
       "side": 1,
       "message": "Do we have any way to check that this was actually a retried event?",
+      "range": {
+        "startLine": 440,
+        "startChar": 4,
+        "endLine": 440,
+        "endChar": 84
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5304223_edbf9b7d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-18T13:05:28Z",
+      "side": 1,
+      "message": "I was looking if I can get PushOp from replication queue but it doesn\u0027t look like. But let me have a second look, maybe there is a way to get those data(maybe I can read them from the taskStorage)",
+      "parentUuid": "16f3569d_a23efb3f",
       "range": {
         "startLine": 440,
         "startChar": 4,
