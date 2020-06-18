@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6b0e369a_8aa4b79b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-18T07:59:29Z",
+      "side": 1,
+      "message": "I agree we definitely should increase test covered for URI locks, I can work on that and create follow up change. Auto-release will be more complex to implement but definitely durable. Let me create a ticket for that so we can prioritise it.",
+      "parentUuid": "89a6693f_c1e8ae58",
+      "range": {
+        "startLine": 11,
+        "startChar": 10,
+        "endLine": 11,
+        "endChar": 19
+      },
+      "revId": "2a1d6e4f665d011874504b56e2ddf3460c99f2ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41c356e1_d05bdbb6",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "2a1d6e4f665d011874504b56e2ddf3460c99f2ac",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21c774f8_ebec2a42",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-18T07:59:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41c356e1_d05bdbb6",
+      "range": {
+        "startLine": 439,
+        "startChar": 21,
+        "endLine": 439,
+        "endChar": 23
+      },
+      "revId": "2a1d6e4f665d011874504b56e2ddf3460c99f2ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "46cf8632_2a237fd2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-18T07:59:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ff7b3fc_9725f127",
+      "range": {
+        "startLine": 440,
+        "startChar": 57,
+        "endLine": 440,
+        "endChar": 58
+      },
+      "revId": "2a1d6e4f665d011874504b56e2ddf3460c99f2ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b14f6dc_b2c84fea",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "2a1d6e4f665d011874504b56e2ddf3460c99f2ac",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdb0e3b6_9fcc8062",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-18T07:59:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b14f6dc_b2c84fea",
+      "range": {
+        "startLine": 444,
+        "startChar": 33,
+        "endLine": 444,
+        "endChar": 59
+      },
+      "revId": "2a1d6e4f665d011874504b56e2ddf3460c99f2ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
