@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "bd3ebc0e_c4f0ff64",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T16:08:58Z",
+      "side": 1,
+      "message": "Gotcha, what about adding \"CancelledAfterMaxRetries\" ?",
+      "parentUuid": "954bfcdc_ccc5d3df",
+      "range": {
+        "startLine": 420,
+        "startChar": 60,
+        "endLine": 420,
+        "endChar": 69
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a66c9d5_a21bf812",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 4
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "4c9b2d05_adc877fd",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T16:08:58Z",
+      "side": 1,
+      "message": "The the L427 doesn\u0027t *add* a URL but *sets* a URL, so the unset() here is unneeded. have you tried removing it? Would the test still pass?",
+      "parentUuid": "bc28b80d_d414834f",
+      "range": {
+        "startLine": 426,
+        "startChar": 4,
+        "endLine": 426,
+        "endChar": 47
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f28a5f2f_27a67f05",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 4
@@ -131,6 +179,30 @@
       "side": 1,
       "message": "Copied from test above, but yes this can be waitUntil",
       "parentUuid": "f28a5f2f_27a67f05",
+      "range": {
+        "startLine": 433,
+        "startChar": 4,
+        "endLine": 433,
+        "endChar": 54
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85cab22a_a378992f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T16:08:58Z",
+      "side": 1,
+      "message": "Can you change it to a waitUntil()? So that we would avoid potential flakiness.",
+      "parentUuid": "644f8676_f8656859",
       "range": {
         "startLine": 433,
         "startChar": 4,
@@ -225,6 +297,30 @@
       "side": 1,
       "message": "Replication retry is set to minimum value which is 1 minute. This means that when task is rescheduled is moved from running, that\u0027s why I\u0027m checking if this happened",
       "parentUuid": "8581c5c1_1ed66791",
+      "range": {
+        "startLine": 437,
+        "startChar": 13,
+        "endLine": 437,
+        "endChar": 29
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82bba8c5_9f7e7901",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-18T16:08:58Z",
+      "side": 1,
+      "message": "Can you add that information to the comment? So that is clearer for the reader to understand what\u0027s going on here.",
+      "parentUuid": "93405d21_4fd195c2",
       "range": {
         "startLine": 437,
         "startChar": 13,
