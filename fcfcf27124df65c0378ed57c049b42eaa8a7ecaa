@@ -45,6 +45,30 @@
       "revId": "fcfcf27124df65c0378ed57c049b42eaa8a7ecaa",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abf9d9a6_aef3164b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-19T19:33:28Z",
+      "side": 1,
+      "message": "In ReplicationIT we have a method waitUntil which calls WaitUtil.waitUntil with default timeout(see line 503) here we are not using default timeout.",
+      "parentUuid": "1257ee9b_2d5050b3",
+      "range": {
+        "startLine": 454,
+        "startChar": 4,
+        "endLine": 454,
+        "endChar": 13
+      },
+      "revId": "fcfcf27124df65c0378ed57c049b42eaa8a7ecaa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
