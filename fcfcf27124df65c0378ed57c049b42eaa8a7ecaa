@@ -22,6 +22,29 @@
       "revId": "fcfcf27124df65c0378ed57c049b42eaa8a7ecaa",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1257ee9b_2d5050b3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-19T19:30:02Z",
+      "side": 1,
+      "message": "why does this use of waitUntil have the \u0027WaitUtil.\u0027 prefix?",
+      "range": {
+        "startLine": 454,
+        "startChar": 4,
+        "endLine": 454,
+        "endChar": 13
+      },
+      "revId": "fcfcf27124df65c0378ed57c049b42eaa8a7ecaa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
