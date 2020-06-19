@@ -561,6 +561,7 @@ public class Destination {
                   pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
             } else {
               pushOp.canceledByReplication();
+              pushOp.retryDone();
               pending.remove(uri);
               stateLog.error(
                   "Push to " + pushOp.getURI() + " cancelled after maximum number of retries",
