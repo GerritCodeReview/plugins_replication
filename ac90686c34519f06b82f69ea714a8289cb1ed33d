@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6146753a_9e98f53f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-06-19T06:17:31Z",
+      "side": 1,
+      "message": "It was renamed: [1]. Why use the old name?\n\n[1] https://resources.collab.net/blogs/introducing-digitalai",
+      "range": {
+        "startLine": 147,
+        "startChar": 10,
+        "endLine": 147,
+        "endChar": 34
+      },
+      "revId": "ac90686c34519f06b82f69ea714a8289cb1ed33d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
