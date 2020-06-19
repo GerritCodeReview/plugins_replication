@@ -22,6 +22,30 @@
       "revId": "ac90686c34519f06b82f69ea714a8289cb1ed33d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5c7d8a3_3d47d1f0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-06-19T06:47:49Z",
+      "side": 1,
+      "message": "I\u0027m not sure if we need to rename this, but if we do it should be in a separate change.",
+      "parentUuid": "6146753a_9e98f53f",
+      "range": {
+        "startLine": 147,
+        "startChar": 10,
+        "endLine": 147,
+        "endChar": 34
+      },
+      "revId": "ac90686c34519f06b82f69ea714a8289cb1ed33d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
