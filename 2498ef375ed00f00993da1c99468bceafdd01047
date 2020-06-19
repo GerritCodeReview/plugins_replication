@@ -545,6 +545,30 @@
       "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad3c3b6a_7424d42d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2020-06-19T12:35:57Z",
+      "side": 1,
+      "message": "I think I can get QueueInfo so maybe there is a better way to check if task is replying or canceled",
+      "parentUuid": "0cfbc998_346c7691",
+      "range": {
+        "startLine": 440,
+        "startChar": 4,
+        "endLine": 440,
+        "endChar": 84
+      },
+      "revId": "2498ef375ed00f00993da1c99468bceafdd01047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
