@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ce02f9b6_cdf0b9e4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-19T20:28:33Z",
+      "side": 1,
+      "message": "First is OK, but what I meant was to basically just put everything below here in a separate function and the call it like this: \n\n newFunction(startReplicationRequest.get())",
+      "parentUuid": "6928be99_72edf21d",
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35365f22_95761a82",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 18
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "What do you propose we do ? Silently discard ? Maybe make a debug level instead ?",
       "parentUuid": "35365f22_95761a82",
+      "range": {
+        "startLine": 87,
+        "startChar": 21,
+        "endLine": 87,
+        "endChar": 40
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0aaf65b0_aea10f34",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-19T20:28:33Z",
+      "side": 1,
+      "message": "My suggestion is to not log it here (which is not quite the same as discarding). When this error happens you will be returning an error message to the user which is the best way to report user errors. There is nothing wrong with the server here, the operation completed normally, so an admin perusing the logs should not be confronted withe a message.",
+      "parentUuid": "a0de93f4_933a1e6b",
       "range": {
         "startLine": 87,
         "startChar": 21,
@@ -225,6 +267,30 @@
     },
     {
       "key": {
+        "uuid": "1fbbd976_5310ed8b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationProcessing.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-19T20:28:33Z",
+      "side": 1,
+      "message": "I guess I would ask the opposite question, why \"package protected\", it feels like a API kinda thing? To be fair, I generally never have found a use for \"package protected\", it always feels wrong to me, so I am not the best person to ask.",
+      "parentUuid": "ae50bc2d_56a315b6",
+      "range": {
+        "startLine": 32,
+        "startChar": 15,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "adfc2f6b_681aafb0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationProcessing.java",
         "patchSetId": 18
@@ -254,6 +320,24 @@
       "side": 1,
       "message": "Agree it\u0027s duplication but we wanted to minimize impact to existing functionality at least for the first commit. I previous reviewer wanted the comment added.",
       "parentUuid": "adfc2f6b_681aafb0",
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12a95255_900bd0a6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationProcessing.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-19T20:28:33Z",
+      "side": 1,
+      "message": "That\u0027s not how we generally do things, we don\u0027t merge code and then clean it up.",
+      "parentUuid": "f60a7398_14c7cf8e",
       "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -336,6 +420,24 @@
       "side": 1,
       "message": "Good question. I think it could eventually time out depending on the size of the repo but I suspect this could also happen with an ssh command as well. The replicatoin once triggered would continue regardless of the http session timing out. Should we remove it ?",
       "parentUuid": "13d3eede_044ffb7c",
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d186595e_f792dc87",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-19T20:28:33Z",
+      "side": 1,
+      "message": "I don\u0027t it it makes sense as an http feature, but I\u0027m not against it. I use the --wait feature with ssh all the time and it works even when replication takes over a day.",
+      "parentUuid": "814f21b0_932bce3c",
       "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
