@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6928be99_72edf21d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-19T19:02:36Z",
+      "side": 1,
+      "message": "Not sure I understood the second option. Is the first ok ?",
+      "parentUuid": "114e59d8_c6e43e42",
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35365f22_95761a82",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 18
@@ -30,6 +48,30 @@
       "writtenOn": "2020-06-16T20:15:05Z",
       "side": 1,
       "message": "Do we want \"user generated\" errors in the logs? If the user supplies bad json, I don\u0027t think it belongs in the logs.",
+      "range": {
+        "startLine": 87,
+        "startChar": 21,
+        "endLine": 87,
+        "endChar": 40
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0de93f4_933a1e6b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-19T19:02:36Z",
+      "side": 1,
+      "message": "What do you propose we do ? Silently discard ? Maybe make a debug level instead ?",
+      "parentUuid": "35365f22_95761a82",
       "range": {
         "startLine": 87,
         "startChar": 21,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "20aeb601_c266c41c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-19T19:02:36Z",
+      "side": 1,
+      "message": "I think this was added during an internal review for reasons similiar to below to explicitly prevent the default public constructor being available if I understand correctly. See similar comment on patch 3 here:\n\nhttps://gerrit-review.googlesource.com/c/plugins/replication/+/256499/3/src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java#162",
+      "parentUuid": "4e90a4b8_e2cee6a9",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 180,
+        "endChar": 28
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8d09b3dd_e29f6857",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
         "patchSetId": 18
@@ -76,6 +142,30 @@
       "writtenOn": "2020-06-16T20:15:05Z",
       "side": 1,
       "message": "Would it make more sense to add these as default methods to the interface?",
+      "range": {
+        "startLine": 216,
+        "startChar": 18,
+        "endLine": 216,
+        "endChar": 42
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6041e995_072fff5d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-19T19:02:36Z",
+      "side": 1,
+      "message": "Possibly. I didn\u0027t want the change to be to invasive as this is a core plugin. Maybe we can do this in a subsequent change ?",
+      "parentUuid": "8d09b3dd_e29f6857",
       "range": {
         "startLine": 216,
         "startChar": 18,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "ae50bc2d_56a315b6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationProcessing.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-19T19:02:36Z",
+      "side": 1,
+      "message": "Changed to enum. Curious as to why public ?",
+      "parentUuid": "db84bbaa_bf64a1bc",
+      "range": {
+        "startLine": 32,
+        "startChar": 15,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "adfc2f6b_681aafb0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationProcessing.java",
         "patchSetId": 18
@@ -122,6 +236,24 @@
       "writtenOn": "2020-06-16T20:15:05Z",
       "side": 1,
       "message": "Is there a way to share more of this code as to make this comment obsolete?",
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f60a7398_14c7cf8e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationProcessing.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-19T19:02:36Z",
+      "side": 1,
+      "message": "Agree it\u0027s duplication but we wanted to minimize impact to existing functionality at least for the first commit. I previous reviewer wanted the comment added.",
+      "parentUuid": "adfc2f6b_681aafb0",
       "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -151,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "014f50eb_758a8af2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-19T19:02:36Z",
+      "side": 1,
+      "message": "Possibly, but again, we wanted to minimize the risk of affecting existing functionality for this first commit.",
+      "parentUuid": "46829833_e86a5c59",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 37
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "13d3eede_044ffb7c",
         "filename": "src/main/resources/Documentation/rest-api-replication.md",
         "patchSetId": 18
@@ -162,6 +318,24 @@
       "writtenOn": "2020-06-16T20:15:05Z",
       "side": 1,
       "message": "Is this a good idea to do for an http connection?",
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "814f21b0_932bce3c",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-19T19:02:36Z",
+      "side": 1,
+      "message": "Good question. I think it could eventually time out depending on the size of the repo but I suspect this could also happen with an ssh command as well. The replicatoin once triggered would continue regardless of the http session timing out. Should we remove it ?",
+      "parentUuid": "13d3eede_044ffb7c",
       "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -188,6 +362,30 @@
       "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89752d63_ee2e421f",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-06-19T19:02:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "352ffc61_fdf9a6e7",
+      "range": {
+        "startLine": 97,
+        "startChar": 55,
+        "endLine": 97,
+        "endChar": 67
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
