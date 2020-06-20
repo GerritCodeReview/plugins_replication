@@ -563,9 +563,7 @@ public class Destination {
       if (inFlightOp != null) {
         return RunwayStatus.denied(inFlightOp.getId());
       }
-      if (!replicationTasksStorage.get().start(op)) {
-        return RunwayStatus.deniedExternal();
-      }
+      replicationTasksStorage.get().start(op);
       inFlight.put(op.getURI(), op);
     }
     return RunwayStatus.allowed();
