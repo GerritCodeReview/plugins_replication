@@ -19,6 +19,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import com.google.auto.value.AutoValue;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Queues;
+import com.google.gerrit.common.UsedAt;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
@@ -149,17 +150,40 @@ public class ReplicationQueue
     }
 
     for (Destination cfg : destinations.get().getAll(FilterType.ALL)) {
-      if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
-        for (URIish uri : cfg.getURIs(project, urlMatch)) {
-          if (!isPersisted) {
-            replicationTasksStorage.create(
-                new ReplicateRefUpdate(project.get(), refName, uri, cfg.getRemoteConfigName()));
-          }
-          cfg.schedule(project, refName, uri, state, now);
+      pushReference(cfg, project, urlMatch, refName, state, now, isPersisted);
+    }
+  }
+
+  @UsedAt(UsedAt.Project.COLLABNET)
+  public void pushReference(Destination cfg, Project.NameKey project, String refName) {
+    pushReference(cfg, project, null, refName, null, true, false);
+  }
+
+  private void pushReference(
+      Destination cfg,
+      Project.NameKey project,
+      String urlMatch,
+      String refName,
+      ReplicationState state,
+      boolean now,
+      boolean isPersisted) {
+    boolean withoutState = state == null;
+    if (withoutState) {
+      state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
+    }
+    if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
+      for (URIish uri : cfg.getURIs(project, urlMatch)) {
+        if (!isPersisted) {
+          replicationTasksStorage.create(
+              new ReplicateRefUpdate(project.get(), refName, uri, cfg.getRemoteConfigName()));
         }
-      } else {
-        repLog.atFine().log("Skipping ref %s on project %s", refName, project.get());
+        cfg.schedule(project, refName, uri, state, now);
       }
+    } else {
+      repLog.atFine().log("Skipping ref %s on project %s", refName, project.get());
+    }
+    if (withoutState) {
+      state.markAllPushTasksScheduled();
     }
   }
 
