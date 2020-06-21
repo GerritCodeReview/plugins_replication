@@ -67,8 +67,18 @@ public interface ReplicationConfig {
    */
   Path getEventsDirectory();
 
+  /**
+   * Timeout for establishing SSH connection to remote.
+   *
+   * @return connection timeout, zero if infinite.
+   */
   int getSshConnectionTimeout();
 
+  /**
+   * Timeout for executing an SSH command on remote.
+   *
+   * @return command timeout, zero if infinite.
+   */
   int getSshCommandTimeout();
 
   /**
@@ -79,5 +89,10 @@ public interface ReplicationConfig {
    */
   String getVersion();
 
+  /**
+   * Return a copy of the current config.
+   *
+   * @return the config.
+   */
   Config getConfig();
 }
