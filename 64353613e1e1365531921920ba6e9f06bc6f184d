@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "756342d8_ca288243",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-23T18:06:11Z",
+      "side": 1,
+      "message": "\u003e The only instantiated ChainedScheduler is a StreamScheduler. Merge ChainedScheduler and StreamScheduler into a scheduler that is aware of the Stream\n\nI made two classes to ensure that each class attempts to follow the \"implement a single concern\" principle. If I merge the two, that will no longer be the case.\n\nAlso, as a general approach I think it is better to write shareable framework code, especially when it is an obvious pattern. I think Saza would agree since he thought that this class was a good enough idea that he wanted me to put into core even. Additionally, reuse isn\u0027t just theoretical, I actually do re-use this class in this change: https://gerrit-review.googlesource.com/c/plugins/replication/+/268612\n\nThat being said, if you disagree, I do understand the value of keeping things simpler and more concrete until there is a shared use. And if it would help, I would be happy to make a reduced version of this class for this change, and to then refactor it to be more reusable for (or after) the other change.",
+      "parentUuid": "bc5b693b_22e041a1",
+      "revId": "64353613e1e1365531921920ba6e9f06bc6f184d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5fd44058_32da304b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
         "patchSetId": 6
