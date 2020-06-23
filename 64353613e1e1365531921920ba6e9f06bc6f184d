@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc5b693b_22e041a1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-06-23T07:40:24Z",
+      "side": 1,
+      "message": "This feels as a much too complicated structure.\n\nThe only instantiated ChainedScheduler is a StreamScheduler. Merge ChainedScheduler and StreamScheduler into a scheduler that is aware of the Stream\nThat way you can remove the extra inner StreamScheduler class but also DecoratorRunner.\nI would also skip the generics since this is only used for ReplicateRefUpdate\n\n    public class ChainedEventScheduler {\n      private final ScheduledExecutorService threadPool;\n      private final Stream\u003cReplicateRefUpdate\u003e refUpdates;\n      private final Iterator\u003cReplicateRefUpdate\u003e iterator;\n      private final Runner runner;\n\n      public ChainedScheduler(\n          ScheduledExecutorService threadPool, Stream\u003cReplicateRefUpdate\u003e refUpdates, Runner\u003cT\u003e runner) {\n        this.threadPool \u003d threadPool;\n        this.refUpdate \u003d refUpdates;\n        this.iterator \u003d refUpdates.iterator();\n        this.runner \u003d runner;\n        next();\n      }\n\n      protected void next() {\n        if (!iterator.hasNext()) {\n          runner.onDone();\n          refUpdates.close()\n          return;\n        }\n\n        schedule(new Chainer(iterator.next()));\n      }\n\n      protected void schedule(Runnable r) {\n        threadPool.execute(r);\n      }\n    }",
+      "revId": "64353613e1e1365531921920ba6e9f06bc6f184d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fd44058_32da304b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-06-23T07:40:24Z",
+      "side": 1,
+      "message": "executed",
+      "range": {
+        "startLine": 36,
+        "startChar": 17,
+        "endLine": 36,
+        "endChar": 26
+      },
+      "revId": "64353613e1e1365531921920ba6e9f06bc6f184d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5b336d0_b461b094",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-06-23T07:40:24Z",
+      "side": 1,
+      "message": "thread pool",
+      "range": {
+        "startLine": 36,
+        "startChar": 34,
+        "endLine": 36,
+        "endChar": 44
+      },
+      "revId": "64353613e1e1365531921920ba6e9f06bc6f184d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00572e6d_a3f39efb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-06-23T07:40:24Z",
+      "side": 1,
+      "message": "This seems to only be called by tests (in one case the test actually turns it back into a stream).\nI would suggest to skip this method and re-write the tests to use stream() instead.",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 3
+      },
+      "revId": "64353613e1e1365531921920ba6e9f06bc6f184d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9676a528_0b5f3bff",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-06-23T07:40:24Z",
+      "side": 1,
+      "message": "Since stream(Path) is only used by stream() it feels redundant.\nUse Optional::isPresent \u0026 Optional::get.\nI would suggest to rewrite it as:\n\n    public Stream\u003cReplicateRefUpdate\u003e stream() {\n      return walk(refUpdates())\n          .map(path -\u003e getReplicateRefUpdate(path))\n          .filter(Optional::isPresent)\n          .map(Optional::get);    \n    }\n\nThis would make it easier to read.",
+      "range": {
+        "startLine": 118,
+        "startChar": 2,
+        "endLine": 127,
+        "endChar": 3
+      },
+      "revId": "64353613e1e1365531921920ba6e9f06bc6f184d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
