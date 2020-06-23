@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d3b2c644_96d1c805",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-06-23T06:25:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aeb1dfb_822114f8",
+      "range": {
+        "startLine": 335,
+        "startChar": 40,
+        "endLine": 335,
+        "endChar": 48
+      },
+      "revId": "462bed62c45cae9d2de5f94a783bc54349affbad",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2fc402b1_5ab34d36",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2020-06-23T06:05:54Z",
       "side": 1,
       "message": "This should have size 1 *ONLY* if mirror is true, otherwise branch deletions should have no effects in the replication events.",
+      "range": {
+        "startLine": 349,
+        "startChar": 47,
+        "endLine": 349,
+        "endChar": 70
+      },
+      "revId": "462bed62c45cae9d2de5f94a783bc54349affbad",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c453ebc2_2352bc7b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-06-23T06:25:22Z",
+      "side": 1,
+      "message": "This is a list of persisted ref updates; it is not remote specific.  The push of the deletion is only skipped later, when it does the push operation to each remote.",
+      "parentUuid": "2fc402b1_5ab34d36",
       "range": {
         "startLine": 349,
         "startChar": 47,
