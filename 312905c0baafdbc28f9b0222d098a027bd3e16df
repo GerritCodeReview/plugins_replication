@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37ee16b3_0a7d6a13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-24T15:59:36Z",
+      "side": 1,
+      "message": "It isn\u0027t a \"potential loss\" but rather a \"certain loss\" of events during an in-flight push.",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09c2480e_3a189c52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-24T15:59:36Z",
+      "side": 1,
+      "message": "This is the condition of the \"in-flight\" push. Previously (v3.1.x) the event was rescheduled. From v3.2.x it is cancelled, which is a P0 regression.\n\nIt is not associated with a MM scenario, it is a normal use-case of a single M scenario.\nIf it is broken with single M then of course is broken with MM as well.",
+      "range": {
+        "startLine": 14,
+        "startChar": 4,
+        "endLine": 14,
+        "endChar": 37
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d61bbcd_2ea3753d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-24T15:59:36Z",
+      "side": 1,
+      "message": "Yes, and that\u0027s a very serious regression as it would result in nodes stay behind indefinitely.",
+      "range": {
+        "startLine": 17,
+        "startChar": 10,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaa0fd5c_0d292afa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-24T15:59:36Z",
+      "side": 1,
+      "message": "Rather than \"now\" it is \"it restores existing behaviour in v3.1\"",
+      "range": {
+        "startLine": 21,
+        "startChar": 41,
+        "endLine": 23,
+        "endChar": 32
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64719a0e_fb6cdec9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-24T15:59:36Z",
+      "side": 1,
+      "message": "Can you also add Issue 12986?",
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "114250a7_c32b346d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-24T15:59:36Z",
+      "side": 1,
+      "message": "Yes, I believe this is 100% related to Issue 12986: the rescheduling doesn\u0027t happen anymore and the in-flight push scenario (very common) is causing certain loss of replication events.",
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
