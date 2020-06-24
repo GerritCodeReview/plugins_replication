@@ -328,6 +328,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   private void replicateBranchDeletion(boolean mirror) throws Exception {
+    tasksStorage.disableDeleteForTesting(false);
+
     setReplicationDestination("foo", "replica", ALL_PROJECTS, mirror);
     reloadConfig();
 
