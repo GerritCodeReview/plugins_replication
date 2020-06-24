@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "62b98cde_449cbdc1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-06-24T07:15:07Z",
+      "side": 1,
+      "message": "I typically favor readability over (possibly sometime in the future leveraged) reusability. In this case, as you pointed out, the reusability is not merely a pattern but is actually leveraged down the line.\nI would prefer if this iteration of ChainedScheduler was only catering to the current need. My reason for this is that having the implementation and use in the same commit helps when trying to decipher the code at a later date.\n\nThat being said it\u0027s still a nit: and not a very strong preference.\nThe CR-1 was for the spelling errors and the redundant ReplicationTasksStorage#list method.",
+      "parentUuid": "756342d8_ca288243",
+      "revId": "64353613e1e1365531921920ba6e9f06bc6f184d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5fd44058_32da304b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
         "patchSetId": 6
