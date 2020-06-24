@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "826512e8_58945519",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-24T20:50:50Z",
+      "side": 1,
+      "message": "I believe that comments on the commit message are accepted as well. I believe this fix is good and may solve the problem of the events loss during in-flight pushes, which is very serious. The MM issue is secondary IMHO, as the scenario has never been even declared as \u0027alpha\u0027 or \u0027experimental\u0027 in the release notes.\n\nI\u0027ll clarify the suggested change in every comment, so that they become actionable.",
+      "parentUuid": "6557c917_7444e89c",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09c2480e_3a189c52",
         "filename": "/COMMIT_MSG",
         "patchSetId": 13
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "That\u0027s not the behavior this change is claiming to solve.",
       "parentUuid": "09c2480e_3a189c52",
+      "range": {
+        "startLine": 14,
+        "startChar": 4,
+        "endLine": 14,
+        "endChar": 37
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a52f250_bde91e8b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-24T20:50:50Z",
+      "side": 1,
+      "message": "I agree that it isn\u0027t the initial claim: however, it looks like it may solve *that* P0 problem. Would you prefer instead to have separate fixes? WDYT?\n\nP.S. I was pointed to this change by Martin for solving the in-flight events loss problem (P0 on production-ready functionality that was working in v3.1 and is broken in v3.2)",
+      "parentUuid": "7519cff4_c2d5aac7",
       "range": {
         "startLine": 14,
         "startChar": 4,
@@ -143,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "2254f366_355c757d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-24T20:50:50Z",
+      "side": 1,
+      "message": "add: \"and the replication remote ends to fall behind indefinitely\"",
+      "parentUuid": "01eba8f4_33186f72",
+      "range": {
+        "startLine": 17,
+        "startChar": 10,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eaa0fd5c_0d292afa",
         "filename": "/COMMIT_MSG",
         "patchSetId": 13
@@ -190,6 +262,30 @@
     },
     {
       "key": {
+        "uuid": "2305783a_ddcab9f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-24T20:50:50Z",
+      "side": 1,
+      "message": "See my comment above: just agree with Martin if we want to address with this change also the events loss during in-flight pushes. If yes, it should be mentioned in the commit message. If not, it should be solved with a different change.",
+      "parentUuid": "c0ac9ba5_27824ad0",
+      "range": {
+        "startLine": 21,
+        "startChar": 41,
+        "endLine": 23,
+        "endChar": 32
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64719a0e_fb6cdec9",
         "filename": "/COMMIT_MSG",
         "patchSetId": 13
@@ -225,6 +321,24 @@
     },
     {
       "key": {
+        "uuid": "981c90e6_6ba9bf0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-24T20:50:50Z",
+      "side": 1,
+      "message": "Same comment as above. I am fine in just ignoring this change for now and sort out the P0 in a separate one.",
+      "parentUuid": "486b3f67_77494e90",
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "114250a7_c32b346d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 13
@@ -253,6 +367,23 @@
       "writtenOn": "2020-06-24T16:02:20Z",
       "side": 1,
       "message": "@Ponch this is related to the issue you are investigating in prod.",
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "60df00a2_859e25df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-24T20:50:50Z",
+      "side": 1,
+      "message": "@Martin: I changed the comments in a more actionable form. P.S. I\u0027ve given a +1 which means I am happy to review and help improving the change to get it merged.",
       "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
