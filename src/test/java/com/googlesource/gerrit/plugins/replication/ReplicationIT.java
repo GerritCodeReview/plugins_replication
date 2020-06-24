@@ -328,37 +328,42 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   private void replicateBranchDeletion(boolean mirror) throws Exception {
-    setReplicationDestination("foo", "replica", ALL_PROJECTS, mirror);
-    reloadConfig();
+    tasksStorage.disableDeleteForTesting(false);
+    try {
+      setReplicationDestination("foo", "replica", ALL_PROJECTS, mirror);
+      reloadConfig();
 
-    Project.NameKey targetProject = createTestProject(project + "replica");
-    String branchToDelete = "refs/heads/todelete";
-    String master = "refs/heads/master";
-    BranchInput input = new BranchInput();
-    input.revision = master;
-    gApi.projects().name(project.get()).branch(branchToDelete).create(input);
+      Project.NameKey targetProject = createTestProject(project + "replica");
+      String branchToDelete = "refs/heads/todelete";
+      String master = "refs/heads/master";
+      BranchInput input = new BranchInput();
+      input.revision = master;
+      gApi.projects().name(project.get()).branch(branchToDelete).create(input);
 
-    assertThat(listReplicationTasks("refs/heads/(todelete|master)")).hasSize(2);
+      assertThat(listReplicationTasks("refs/heads/(todelete|master)")).hasSize(2);
 
-    try (Repository repo = repoManager.openRepository(targetProject)) {
-      waitUntil(() -> checkedGetRef(repo, branchToDelete) != null);
-    }
-
-    gApi.projects().name(project.get()).branch(branchToDelete).delete();
-
-    assertThat(listReplicationTasks(branchToDelete)).hasSize(1);
-
-    try (Repository repo = repoManager.openRepository(targetProject)) {
-      if (mirror) {
-        waitUntil(() -> checkedGetRef(repo, branchToDelete) == null);
+      try (Repository repo = repoManager.openRepository(targetProject)) {
+        waitUntil(() -> checkedGetRef(repo, branchToDelete) != null);
       }
 
-      Ref targetBranchRef = getRef(repo, branchToDelete);
-      if (mirror) {
-        assertThat(targetBranchRef).isNull();
-      } else {
-        assertThat(targetBranchRef).isNotNull();
+      gApi.projects().name(project.get()).branch(branchToDelete).delete();
+
+      assertThat(listReplicationTasks(branchToDelete)).hasSize(1);
+
+      try (Repository repo = repoManager.openRepository(targetProject)) {
+        if (mirror) {
+          waitUntil(() -> checkedGetRef(repo, branchToDelete) == null);
+        }
+
+        Ref targetBranchRef = getRef(repo, branchToDelete);
+        if (mirror) {
+          assertThat(targetBranchRef).isNull();
+        } else {
+          assertThat(targetBranchRef).isNotNull();
+        }
       }
+    } finally {
+      tasksStorage.disableDeleteForTesting(true);
     }
   }
 
