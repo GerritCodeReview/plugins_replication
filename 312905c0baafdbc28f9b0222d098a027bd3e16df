@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6557c917_7444e89c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T18:02:28Z",
+      "side": 1,
+      "message": "Hi Luca,\n\nI would appreciate comments focused on if the code is doing what the commit message says it is and if the code is correct. That\u0027s what I think the normal expectation [1] for code review is.\n\nThese comments on the commit message do not appear to be doing that.\n\nThanks,\nNasser\n\n[1] https://google.github.io/eng-practices/review/reviewer/looking-for.html",
+      "parentUuid": "37ee16b3_0a7d6a13",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09c2480e_3a189c52",
         "filename": "/COMMIT_MSG",
         "patchSetId": 13
@@ -45,6 +69,30 @@
       "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7519cff4_c2d5aac7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T18:02:28Z",
+      "side": 1,
+      "message": "That\u0027s not the behavior this change is claiming to solve.",
+      "parentUuid": "09c2480e_3a189c52",
+      "range": {
+        "startLine": 14,
+        "startChar": 4,
+        "endLine": 14,
+        "endChar": 37
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "01eba8f4_33186f72",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T18:02:28Z",
+      "side": 1,
+      "message": "Unhelpful or was there something actionable from this comment?",
+      "parentUuid": "3d61bbcd_2ea3753d",
+      "range": {
+        "startLine": 17,
+        "startChar": 10,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eaa0fd5c_0d292afa",
         "filename": "/COMMIT_MSG",
         "patchSetId": 13
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "c0ac9ba5_27824ad0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T18:02:28Z",
+      "side": 1,
+      "message": "That\u0027s not the behavior this change is claiming to solve.",
+      "parentUuid": "eaa0fd5c_0d292afa",
+      "range": {
+        "startLine": 21,
+        "startChar": 41,
+        "endLine": 23,
+        "endChar": 32
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64719a0e_fb6cdec9",
         "filename": "/COMMIT_MSG",
         "patchSetId": 13
@@ -108,6 +204,24 @@
       "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "486b3f67_77494e90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T18:02:28Z",
+      "side": 1,
+      "message": "That\u0027s not the issue this change is claiming to solve. It may solve more than what we expect, but that\u0027s not the goal.",
+      "parentUuid": "64719a0e_fb6cdec9",
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
