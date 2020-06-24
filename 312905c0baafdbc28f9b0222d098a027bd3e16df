@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "82f2de47_0646fd7a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T21:09:55Z",
+      "side": 1,
+      "message": "I did not exclude comments on commit messages. I asked that the commit (including message) be reviewed with an approach that confirms intent and correctness.\n\nI don\u0027t see evidence in the code to suggest this modification could affect single-master scenarios. If you do, please point that out.",
+      "parentUuid": "826512e8_58945519",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09c2480e_3a189c52",
         "filename": "/COMMIT_MSG",
         "patchSetId": 13
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "I agree that it isn\u0027t the initial claim: however, it looks like it may solve *that* P0 problem. Would you prefer instead to have separate fixes? WDYT?\n\nP.S. I was pointed to this change by Martin for solving the in-flight events loss problem (P0 on production-ready functionality that was working in v3.1 and is broken in v3.2)",
       "parentUuid": "7519cff4_c2d5aac7",
+      "range": {
+        "startLine": 14,
+        "startChar": 4,
+        "endLine": 14,
+        "endChar": 37
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afe4c0f1_59b5aa13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T21:09:55Z",
+      "side": 1,
+      "message": "What are you basing that on? If there are separate problems I absolutely want separate fixes. I think that\u0027s almost always the expectation for any commit in this project.\n\nMartin has provided a revert change of the URI locks if you want to pursue that as a remedy to the P0 issue that\u0027s been reported.",
+      "parentUuid": "8a52f250_bde91e8b",
       "range": {
         "startLine": 14,
         "startChar": 4,
@@ -215,6 +263,30 @@
     },
     {
       "key": {
+        "uuid": "ede8dedb_52b1868a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T21:09:55Z",
+      "side": 1,
+      "message": "Add that to your comment or are you asking that this text be added to the message? If I assume the latter, do we need to clarify the impact of a lost push event for a reader of this commit message? I would expect most folks would understand that to mean the remote falls behind unless that ref is triggered again for replication.",
+      "parentUuid": "2254f366_355c757d",
+      "range": {
+        "startLine": 17,
+        "startChar": 10,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eaa0fd5c_0d292afa",
         "filename": "/COMMIT_MSG",
         "patchSetId": 13
@@ -286,6 +358,30 @@
     },
     {
       "key": {
+        "uuid": "5fe43b59_d8e68583",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T21:09:55Z",
+      "side": 1,
+      "message": "As I explain above, a different change please.",
+      "parentUuid": "2305783a_ddcab9f7",
+      "range": {
+        "startLine": 21,
+        "startChar": 41,
+        "endLine": 23,
+        "endChar": 32
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64719a0e_fb6cdec9",
         "filename": "/COMMIT_MSG",
         "patchSetId": 13
@@ -339,6 +435,24 @@
     },
     {
       "key": {
+        "uuid": "65d8077c_301cc6fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T21:09:55Z",
+      "side": 1,
+      "message": "This change fixes a real issue. I don\u0027t see why it should be ignored. Since when do we ignore bug fixes?\n\nAnd I can\u0027t say this change won\u0027t solve other issues (such as the P0), only that it is the intent of this change to solve one specific issue.",
+      "parentUuid": "981c90e6_6ba9bf0c",
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "114250a7_c32b346d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 13
@@ -384,6 +498,23 @@
       "writtenOn": "2020-06-24T20:50:50Z",
       "side": 1,
       "message": "@Martin: I changed the comments in a more actionable form. P.S. I\u0027ve given a +1 which means I am happy to review and help improving the change to get it merged.",
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9aa0193e_6fbfb54e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T21:09:55Z",
+      "side": 1,
+      "message": "Checks pass.",
       "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
