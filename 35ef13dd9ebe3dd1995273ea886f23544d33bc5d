@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06d796f1_e49e9459",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-06-24T00:18:04Z",
+      "side": 1,
+      "message": "In both tests it fails here. The list contains 2 elements, which are both the same.",
+      "range": {
+        "startLine": 349,
+        "startChar": 4,
+        "endLine": 349,
+        "endChar": 61
+      },
+      "revId": "35ef13dd9ebe3dd1995273ea886f23544d33bc5d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
