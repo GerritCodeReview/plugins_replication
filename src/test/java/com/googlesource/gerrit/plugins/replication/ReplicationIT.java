@@ -331,6 +331,56 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   @Test
+  public void shouldReplicateBranchDeletionWhenMirror() throws Exception {
+    replicateBranchDeletion(true);
+  }
+
+  @Test
+  public void shouldNotReplicateBranchDeletionWhenNotMirror() throws Exception {
+    replicateBranchDeletion(false);
+  }
+
+  private void replicateBranchDeletion(boolean mirror) throws Exception {
+    tasksStorage.disableDeleteForTesting(false);
+    try {
+      setReplicationDestination("foo", "replica", ALL_PROJECTS, mirror);
+      reloadConfig();
+
+      Project.NameKey targetProject = createTestProject(project + "replica");
+      String branchToDelete = "refs/heads/todelete";
+      String master = "refs/heads/master";
+      BranchInput input = new BranchInput();
+      input.revision = master;
+      gApi.projects().name(project.get()).branch(branchToDelete).create(input);
+
+      assertThat(listReplicationTasks("refs/heads/(todelete|master)")).hasSize(2);
+
+      try (Repository repo = repoManager.openRepository(targetProject)) {
+        waitUntil(() -> checkedGetRef(repo, branchToDelete) != null);
+      }
+
+      gApi.projects().name(project.get()).branch(branchToDelete).delete();
+
+      assertThat(listReplicationTasks(branchToDelete)).hasSize(1);
+
+      try (Repository repo = repoManager.openRepository(targetProject)) {
+        if (mirror) {
+          waitUntil(() -> checkedGetRef(repo, branchToDelete) == null);
+        }
+
+        Ref targetBranchRef = getRef(repo, branchToDelete);
+        if (mirror) {
+          assertThat(targetBranchRef).isNull();
+        } else {
+          assertThat(targetBranchRef).isNotNull();
+        }
+      }
+    } finally {
+      tasksStorage.disableDeleteForTesting(true);
+    }
+  }
+
+  @Test
   public void shouldNotDrainTheQueueWhenReloading() throws Exception {
     // Setup repo to replicate
     Project.NameKey targetProject = createTestProject(project + "replica");
@@ -481,13 +531,24 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private void setReplicationDestination(
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
-    setReplicationDestination(remoteName, Arrays.asList(replicaSuffix), project);
+    setReplicationDestination(remoteName, Arrays.asList(replicaSuffix), project, false);
+  }
+
+  private void setReplicationDestination(
+      String remoteName, String replicaSuffix, Optional<String> project, boolean mirror)
+      throws IOException {
+    setReplicationDestination(remoteName, Arrays.asList(replicaSuffix), project, mirror);
   }
 
   private void setReplicationDestination(
       String remoteName, List<String> replicaSuffixes, Optional<String> project)
       throws IOException {
+    setReplicationDestination(remoteName, replicaSuffixes, project, false);
+  }
 
+  private void setReplicationDestination(
+      String remoteName, List<String> replicaSuffixes, Optional<String> project, boolean mirror)
+      throws IOException {
     List<String> replicaUrls =
         replicaSuffixes.stream()
             .map(suffix -> gitPath.resolve("${name}" + suffix + ".git").toString())
@@ -495,6 +556,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     config.setStringList("remote", remoteName, "url", replicaUrls);
     config.setInt("remote", remoteName, "replicationDelay", TEST_REPLICATION_DELAY);
     config.setInt("remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY);
+    config.setBoolean("remote", remoteName, "mirror", mirror);
     project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
     config.setBoolean("gerrit", null, "autoReload", true);
     config.save();
