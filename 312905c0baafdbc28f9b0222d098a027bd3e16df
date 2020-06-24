@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "48ff4693_f3a22c79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-24T21:13:29Z",
+      "side": 1,
+      "message": "Gotcha, please ignore my reviews on that direction. We will work on a different change to fix that. Apologies for the misunderstanding.",
+      "parentUuid": "82f2de47_0646fd7a",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09c2480e_3a189c52",
         "filename": "/COMMIT_MSG",
         "patchSetId": 13
