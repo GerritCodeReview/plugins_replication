@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0d2c4c23_fd4bc15d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-24T18:34:58Z",
+      "side": 1,
+      "message": "Passes checks.\n\nIt\u0027s been almost 3 weeks that this change has been ready, can I get someone to look at it again please?",
+      "revId": "c450dc3ecce4a5153c542b48761242f4549dc864",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1fd3a7a6_3d909c22",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 4
@@ -46,6 +63,30 @@
       "revId": "c450dc3ecce4a5153c542b48761242f4549dc864",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f261dcd1_c11669c7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-06-24T18:34:58Z",
+      "side": 1,
+      "message": "Forgot to hit resolved",
+      "parentUuid": "971278b1_140119ed",
+      "range": {
+        "startLine": 173,
+        "startChar": 6,
+        "endLine": 173,
+        "endChar": 50
+      },
+      "revId": "c450dc3ecce4a5153c542b48761242f4549dc864",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
