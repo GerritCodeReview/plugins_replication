@@ -22,6 +22,30 @@
       "revId": "16f5fccbd27aee3bb0363683f17aec96acf30132",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f38bf083_1d97c5f5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-06-24T07:16:16Z",
+      "side": 1,
+      "message": "It\u0027s set in setUpTestPlugin which I thought was called once before all the tests are run.",
+      "parentUuid": "e24e4553_b8a37dcd",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 367,
+        "endChar": 5
+      },
+      "revId": "16f5fccbd27aee3bb0363683f17aec96acf30132",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
