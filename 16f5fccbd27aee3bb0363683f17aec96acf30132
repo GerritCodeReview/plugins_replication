@@ -46,6 +46,30 @@
       "revId": "16f5fccbd27aee3bb0363683f17aec96acf30132",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63755d98_6e954293",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-24T07:25:52Z",
+      "side": 1,
+      "message": "It is actually executed before every test (just double-checked now).",
+      "parentUuid": "f38bf083_1d97c5f5",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 367,
+        "endChar": 5
+      },
+      "revId": "16f5fccbd27aee3bb0363683f17aec96acf30132",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
