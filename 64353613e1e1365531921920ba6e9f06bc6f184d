@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "d2dca30c_4df2c042",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T23:28:36Z",
+      "side": 1,
+      "message": "Thanks Sven, that makes sense. For now I didn\u0027t make it less generic because when I tried it locally it didn\u0027t seem as clean. If you review the new patchset and think it could benefit from being reduced to this specific need, I can do that.",
+      "parentUuid": "62b98cde_449cbdc1",
+      "revId": "64353613e1e1365531921920ba6e9f06bc6f184d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5fd44058_32da304b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
         "patchSetId": 6
@@ -101,6 +119,54 @@
     },
     {
       "key": {
+        "uuid": "49220a0e_e4aceb28",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T23:28:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fd44058_32da304b",
+      "range": {
+        "startLine": 36,
+        "startChar": 17,
+        "endLine": 36,
+        "endChar": 26
+      },
+      "revId": "64353613e1e1365531921920ba6e9f06bc6f184d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4174e227_1a1e1c8c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T23:28:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5b336d0_b461b094",
+      "range": {
+        "startLine": 36,
+        "startChar": 34,
+        "endLine": 36,
+        "endChar": 44
+      },
+      "revId": "64353613e1e1365531921920ba6e9f06bc6f184d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "00572e6d_a3f39efb",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 6
@@ -124,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "8f71e1b6_472f4367",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T23:28:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00572e6d_a3f39efb",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 3
+      },
+      "revId": "64353613e1e1365531921920ba6e9f06bc6f184d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9676a528_0b5f3bff",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 6
@@ -144,6 +234,30 @@
       "revId": "64353613e1e1365531921920ba6e9f06bc6f184d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4bb3aa4_f0163c13",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-24T23:28:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9676a528_0b5f3bff",
+      "range": {
+        "startLine": 118,
+        "startChar": 2,
+        "endLine": 127,
+        "endChar": 3
+      },
+      "revId": "64353613e1e1365531921920ba6e9f06bc6f184d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
