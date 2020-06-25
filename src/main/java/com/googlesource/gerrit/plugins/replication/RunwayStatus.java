@@ -15,6 +15,8 @@
 package com.googlesource.gerrit.plugins.replication;
 
 public class RunwayStatus {
+  private static final int EXTERNAL_PUSH_ID = -1;
+
   public static RunwayStatus allowed() {
     return new RunwayStatus(true, 0);
   }
@@ -28,7 +30,7 @@ public class RunwayStatus {
   }
 
   public static RunwayStatus deniedExternal() {
-    return new RunwayStatus(false, -1);
+    return new RunwayStatus(false, EXTERNAL_PUSH_ID);
   }
 
   private final boolean allowed;
@@ -48,7 +50,7 @@ public class RunwayStatus {
   }
 
   public boolean isExternalInflight() {
-    return !allowed && inFlightPushId == -1;
+    return !allowed && inFlightPushId == EXTERNAL_PUSH_ID;
   }
 
   public int getInFlightPushId() {
