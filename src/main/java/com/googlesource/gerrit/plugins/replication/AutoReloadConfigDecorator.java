@@ -87,6 +87,12 @@ public class AutoReloadConfigDecorator implements ReplicationConfig {
   }
 
   @Override
+  public List<Destination> getDestinations(URIish uri, Project.NameKey project, String ref) {
+    reloadIfNeeded();
+    return currentConfig.getDestinations(uri, project, ref);
+  }
+
+  @Override
   public synchronized List<Destination> getDestinations(FilterType filterType) {
     return currentConfig.getDestinations(filterType);
   }

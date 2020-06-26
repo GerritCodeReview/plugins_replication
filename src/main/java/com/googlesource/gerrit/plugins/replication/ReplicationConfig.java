@@ -29,6 +29,8 @@ public interface ReplicationConfig {
     ALL
   }
 
+  List<Destination> getDestinations(URIish uriish, Project.NameKey project, String ref);
+
   List<Destination> getDestinations(FilterType filterType);
 
   Multimap<Destination, URIish> getURIs(
