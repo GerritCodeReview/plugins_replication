@@ -16,6 +16,47 @@
       "revId": "bdaea910694dd5a3474dbc051b298aaee9d77950",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eadcd751_7ef5f5ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-26T06:41:41Z",
+      "side": 1,
+      "message": "That is fixed in v3.1 with the introduction of mandatory plugins. Mandatory plugins cannot be unloaded and Gerrit won\u0027t start if they fail to load at startup.",
+      "parentUuid": "462e5967_8923c3e9",
+      "revId": "bdaea910694dd5a3474dbc051b298aaee9d77950",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58c9c87a_16194f00",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventsStorage.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-26T06:41:41Z",
+      "side": 1,
+      "message": "This may lead to stored events loss when two replication events are referring to the same file.\n\nExample: project:foo ref:bar receives two replication events. They are associated with the same file but executed at different times. The second can be lost of a crash happens between the first and the second event.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 5
+      },
+      "revId": "bdaea910694dd5a3474dbc051b298aaee9d77950",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
