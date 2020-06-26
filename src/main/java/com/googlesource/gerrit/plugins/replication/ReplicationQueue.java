@@ -145,6 +145,14 @@ public class ReplicationQueue
     state.markAllPushTasksScheduled();
   }
 
+  private void fire(URIish uri, Project.NameKey project, String refName) {
+    ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
+    for (Destination dest : config.getDestinations(uri, project, refName)) {
+      dest.schedule(project, refName, uri, state);
+    }
+    state.markAllPushTasksScheduled();
+  }
+
   @UsedAt(UsedAt.Project.COLLABNET)
   public void pushReference(Destination cfg, Project.NameKey project, String refName) {
     pushReference(cfg, project, refName, null);
@@ -175,18 +183,16 @@ public class ReplicationQueue
   private void firePendingEvents() {
     replaying = true;
     try {
-      Set<String> eventsReplayed = new HashSet<>();
       replaying = true;
       for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.list()) {
         if (t == null) {
           repLog.warn("Encountered null replication event in ReplicationTasksStorage");
           continue;
         }
-        String eventKey = String.format("%s:%s", t.project, t.ref);
-        if (!eventsReplayed.contains(eventKey)) {
-          repLog.info("Firing pending task {}", eventKey);
-          onGitReferenceUpdated(t.project, t.ref);
-          eventsReplayed.add(eventKey);
+        try {
+          fire(new URIish(t.uri), new Project.NameKey(t.project), t.ref);
+        } catch (URISyntaxException e) {
+          repLog.error("Encountered malformed URI for persisted event %s", t);
         }
       }
     } finally {
