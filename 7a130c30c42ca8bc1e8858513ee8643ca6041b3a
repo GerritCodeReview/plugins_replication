@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "844fbed0_2a7aa193",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-26T06:49:29Z",
+      "side": 1,
+      "message": "This is triggering the loss of replication events in the replication queue when two events are backed by the same file:\n\nReplication events A and B are sharing the same file: one of the two will be executed and the other will get a deniedExternal() status that would cause its cancellation.\n\nThe problem is that the MM implementation was assuming that the underlying events storage in place was bullet proof, which unfortunately wasn\u0027t the case at all: this \"file-sharing\" problem of two events was an initial flaw of the implementation.\n\nThe flaw itself did not produce immediate problems, because it was visible only when a crash happened between A and B. The events were anyway kept in the replication queue and executed as normal.\n\nAfter this change, the replication events that are sharing the same file are lost, causing a major functional regression of the replication plugin.\n\nI believe that reverting this commit is a good idea (Martin already proposed that) and we should:\n\na) Re-design the replication storage, with bullet-proof tests\nb) Re-introduce the MM locking after that, with bullet-proof tests",
+      "range": {
+        "startLine": 566,
+        "startChar": 0,
+        "endLine": 568,
+        "endChar": 7
+      },
+      "revId": "7a130c30c42ca8bc1e8858513ee8643ca6041b3a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
