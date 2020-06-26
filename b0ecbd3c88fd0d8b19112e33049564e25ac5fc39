@@ -16,6 +16,24 @@
       "revId": "b0ecbd3c88fd0d8b19112e33049564e25ac5fc39",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08b5a988_801eebd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-26T08:11:18Z",
+      "side": 1,
+      "message": "The [1] isn\u0027t relevant anymore for stable-3.2: the \"denied externally\" logic has been reverted.",
+      "parentUuid": "e7140d73_85e39edc",
+      "revId": "b0ecbd3c88fd0d8b19112e33049564e25ac5fc39",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
