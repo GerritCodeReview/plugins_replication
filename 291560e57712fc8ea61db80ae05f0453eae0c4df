@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "947c056b_8d84776a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-26T07:00:57Z",
+      "side": 0,
+      "message": "This removal is fixing the loss of replication events that are backed by the same file on the replication storage.",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 588,
+        "endChar": 7
+      },
+      "revId": "291560e57712fc8ea61db80ae05f0453eae0c4df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
