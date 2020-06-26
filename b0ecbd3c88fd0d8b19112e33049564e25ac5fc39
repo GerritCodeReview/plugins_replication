@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7140d73_85e39edc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-06-26T07:58:55Z",
+      "side": 1,
+      "message": "Do you want to rebase and submit [1] and then redo this merge, or do that later?\n\n[1] https://gerrit-review.googlesource.com/c/plugins/replication/+/273275",
+      "revId": "b0ecbd3c88fd0d8b19112e33049564e25ac5fc39",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
