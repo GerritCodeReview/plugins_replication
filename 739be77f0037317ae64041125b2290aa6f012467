@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c6f441d_8f86ed93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-26T21:59:11Z",
+      "side": 1,
+      "message": "Thanks, Martin, fix definitely appreciated. Please bear in mind that it will be released in v3.0 and not in v2.16 (EOL). I\u0027ll do the merge to stable-3.0 right now.",
+      "revId": "739be77f0037317ae64041125b2290aa6f012467",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
