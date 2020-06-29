@@ -52,6 +52,24 @@
       "revId": "d85571979b342670e2d07a23d88b2315a911e49b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c838caac_bc745a8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-29T07:51:09Z",
+      "side": 1,
+      "message": "Yes, but one less (the v2.16 to v3.0). Anyway, working on it now, it should be ready for review later today.",
+      "parentUuid": "4b81faf3_2b29942b",
+      "revId": "d85571979b342670e2d07a23d88b2315a911e49b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
