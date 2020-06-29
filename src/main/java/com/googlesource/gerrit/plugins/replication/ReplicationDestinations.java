@@ -44,6 +44,16 @@ public interface ReplicationDestinations {
    */
   List<Destination> getAll(FilterType filterType);
 
+  /**
+   * Return the active replication destinations for a uri/project/ref triplet.
+   *
+   * @param uriish uri of the destinations
+   * @param project name of the project
+   * @param ref ref name
+   * @return the list of active destinations
+   */
+  List<Destination> getDestinations(URIish uriish, Project.NameKey project, String ref);
+
   /** @return true if there are no destinations, false otherwise. */
   boolean isEmpty();
 
