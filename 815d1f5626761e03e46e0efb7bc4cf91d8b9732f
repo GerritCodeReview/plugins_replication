@@ -22,6 +22,30 @@
       "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7c9eae0_441b3662",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-29T18:52:59Z",
+      "side": 0,
+      "message": "[snip]\n\nThanks for this summary Saša!\n\n\u003e As an alternative possibility I would like to propose the following: what if the firePendingEvents method is executed whole as one task in the default queue?\n\u003e It is definitely more invasive towards the default queue as it would keep one thread busy\n\u003e until all pending tasks are rescheduled. However, if this is really an issue we can\n\u003e simply increase the size of the default queue by one, see execution.defaultThreadPoolSize [1].\n\u003e This solution is technically not as good as the one proposed in this change but we don\u0027t\n\u003e end up with several new low-level constructs (listed above).\n\u003e \n\u003e WDYT?\n\nYes, we definitely could do this and we did consider it. I even backported the changes to support setting defaultThreadPoolSize to 2.7 so that we could potentially do that on our fork (in case it wasn\u0027t clear before, we\u0027ve adapted our 2.7 fork and 3.2 version of the replication plugin to run together). I don\u0027t prefer this as it\u0027s basically saying we have to use more threads.\n\nThis also doesn\u0027t provide a path to the next change [2] in the series where the scheduling effort becomes part of each replication remote\u0027s pool\u0027s work.\n\nIs there another way to build confidence around the new low-level constructs? As I showed with the coverage report, they do get tested during the replication tests, but I know that\u0027s not the same as comprehensive testing just for them. Would more testing help? Better (java)docs?\n\n[2] https://gerrit-review.googlesource.com/c/plugins/replication/+/268612",
+      "parentUuid": "a090b2b4_c3d98640",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 5
+      },
+      "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
