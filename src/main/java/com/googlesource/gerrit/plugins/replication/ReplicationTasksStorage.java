@@ -108,6 +108,11 @@ public class ReplicationTasksStorage {
   public void disableDeleteForTesting(boolean deleteDisabled) {
     this.disableDeleteForTesting = deleteDisabled;
   }
+  
+  @VisibleForTesting
+  public void delete(ReplicateRefUpdate r) {
+	  new Task(r).finish();
+  }
 
   public synchronized void start(PushOne push) {
     for (String ref : push.getRefs()) {

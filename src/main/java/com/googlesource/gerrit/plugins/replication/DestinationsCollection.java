@@ -38,6 +38,7 @@ import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.replication.Destination.Factory;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -153,6 +154,17 @@ public class DestinationsCollection implements ReplicationDestinations {
         break;
     }
     return destinations.stream().filter(Objects::nonNull).filter(filter).collect(toList());
+  }
+  
+  @Override
+  public List<Destination> getDestinations(URIish uri, Project.NameKey project, String ref) {
+    List<Destination> dests = new ArrayList<>();
+    for (Destination dest : getAll(FilterType.ALL)) {
+      if (dest.wouldPush(uri, project, ref)) {
+        dests.add(dest);
+      }
+    }
+    return dests;
   }
 
   @Override
