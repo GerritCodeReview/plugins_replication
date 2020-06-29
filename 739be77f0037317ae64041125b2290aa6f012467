@@ -50,6 +50,24 @@
       "revId": "739be77f0037317ae64041125b2290aa6f012467",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "478af182_530c9109",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-29T08:47:36Z",
+      "side": 1,
+      "message": "I need to investigate further on the breakage or understand if it is a flakiness: it appears to work on stable-3.0.",
+      "parentUuid": "79015d01_d4a9a9f6",
+      "revId": "739be77f0037317ae64041125b2290aa6f012467",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
