@@ -33,6 +33,24 @@
       "revId": "d48935c21bf1f61efbb1fbf6aad5aae689ce69c9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "807a1edd_56cb20cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-06-29T09:15:04Z",
+      "side": 1,
+      "message": "CR+1 \u003d LGTM but someone else must approve.\n\nI feel that I currently do not have sufficiently deep knowledge of the replication plugin to set CR+2 by myself.\n\nTogether with the previous CR+1 from David P it was proposed that Luca should take a look at it, and Luca was reluctant to score it due to it lacking test-case(s) for the new implementation I got the impression that this discussion isn\u0027t concluded and IMO Luca has far greater insight into the current state of this plugin than I have.",
+      "parentUuid": "d8574184_b3321ca2",
+      "revId": "d48935c21bf1f61efbb1fbf6aad5aae689ce69c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
