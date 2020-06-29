@@ -16,6 +16,24 @@
       "revId": "d85571979b342670e2d07a23d88b2315a911e49b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b1c01fc_68e1b938",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-29T07:42:09Z",
+      "side": 1,
+      "message": "I am doing it as we speak, but it is not trivial at all.\n\nThis highlights the reason why we are not happy to make changes on EOL releases, unless they are severe bugs or security issues.",
+      "parentUuid": "11789285_d73b3bee",
+      "revId": "d85571979b342670e2d07a23d88b2315a911e49b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
