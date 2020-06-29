@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a090b2b4_c3d98640",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-06-29T14:00:55Z",
+      "side": 0,
+      "message": "Let me try to move discussion on this change forward by first describing my understanding of this change. The main problem here is that this code snippet (firePendingEvents) is executed\nsynchronously, from that calling thread. When there are thousands of events to reschedule this can take a lot of time (at least in Qualcomm\u0027s case).\n\nThe proposed solution in this change is to move scheduling into background so that the start() method returns as fast as possible and that the replication plugin can start processing events.\nSo far, I believe that everyone agrees on the proposed concept :-)\n\nBesides moving this code into background this change also tries to act non-invasively on the default queue. This means that it wants to keep a thread from the default queue busy only\nfor a short time needed to schedule one task and then schedule the next task. To achieve that\nit introduced the concepts of: ChainedScheduled, Runner, DecoratedRunner, StreamScheduler, etc.. This code defines decorated tasks with the onDone callback used to schedule the next task. The code seems to be technically correct but it also introduces a lot of new low-level\nconstructs which makes reviewers unsure whether to submit this change.\n\nAs an alternative possibility I would like to propose the following: what if the firePendingEvents method is executed whole as one task in the default queue?\nIt is definitely more invasive towards the default queue as it would keep one thread busy\nuntil all pending tasks are rescheduled. However, if this is really an issue we can\nsimply increase the size of the default queue by one, see execution.defaultThreadPoolSize [1].\nThis solution is technically not as good as the one proposed in this change but we don\u0027t\nend up with several new low-level constructs (listed above).\n\nWDYT?\n\n[1] https://gerrit-review.googlesource.com/Documentation/config-gerrit.html#execution.defaultThreadPoolSize",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 5
+      },
+      "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
