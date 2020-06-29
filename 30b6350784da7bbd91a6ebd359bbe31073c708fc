@@ -80,6 +80,30 @@
       "revId": "30b6350784da7bbd91a6ebd359bbe31073c708fc",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16d6bcce_934b18d6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-29T23:35:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ede42ad_a06c6e49",
+      "range": {
+        "startLine": 598,
+        "startChar": 2,
+        "endLine": 609,
+        "endChar": 0
+      },
+      "revId": "30b6350784da7bbd91a6ebd359bbe31073c708fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
