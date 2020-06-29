@@ -34,6 +34,24 @@
       "revId": "d85571979b342670e2d07a23d88b2315a911e49b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b81faf3_2b29942b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-06-29T07:45:51Z",
+      "side": 1,
+      "message": "I suspect the same conflicts would occur if we had done the fix on stable-3.0 rather than 2.16.",
+      "parentUuid": "0b1c01fc_68e1b938",
+      "revId": "d85571979b342670e2d07a23d88b2315a911e49b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
