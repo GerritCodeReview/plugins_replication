@@ -46,6 +46,30 @@
       "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8228c09f_1ca27fc3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-06-30T12:33:56Z",
+      "side": 0,
+      "message": "\u003e Yes, we definitely could do this and we did consider it. I even backported the changes to support setting defaultThreadPoolSize to 2.7 so that we could potentially do that on our fork (in case it wasn\u0027t clear before, we\u0027ve adapted our 2.7 fork and 3.2 version of the replication plugin to run together). I don\u0027t prefer this as it\u0027s basically saying we have to use more threads.\n\nHere we are talking about (not) using one more thread which loops over pending\nevents and reschedules them. A straightforward synchronous code:\n\n  for t in pendingTasks:\n    schedule(t)\n\nneeds to be rewritten using relatively complex asynchronous code which also\nintroduces many new abstractions. \nWhy is this concept not applied in other places where we have the same\ncoding pattern, for example here [1] or here [2] (and many other places)?\n\n[1] https://gerrit.googlesource.com/gerrit/+/1f7c3856805e8d855ab68f8cfec8c14bf4237c67/java/com/google/gerrit/server/notedb/rebuild/NoteDbMigrator.java#816 \n[2] https://gerrit.googlesource.com/gerrit/+/1f7c3856805e8d855ab68f8cfec8c14bf4237c67/java/com/google/gerrit/server/index/account/AllAccountsIndexer.java#83\n \n\n\u003e Is there another way to build confidence around the new low-level constructs?\n\nThis is not against low-level constructs in general especially if such things\nwould be proposed and discussed on the master branch and if the concept would\nbe applied in the *whole* Gerrit code-base.\n\nBut when such things are introduced in an (old) stable branch of a plugin and used\nonly in that plugin then I suspect this is the reason for many +1s and no\none giving +2 with confidence.",
+      "parentUuid": "d7c9eae0_441b3662",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 5
+      },
+      "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
