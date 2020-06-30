@@ -33,6 +33,23 @@
       "revId": "c4374ae99040fe710e415d67e0912a35a1ed4b15",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3cc0d105_b90bcef1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-06-30T07:26:01Z",
+      "side": 1,
+      "message": "value of: isPushCompleted(...)\nexpected: false\nbut was : true\n\tat com.googlesource.gerrit.plugins.replication.ReplicationIT.shouldFirePendingOnlyToStoredUri(ReplicationIT.java:554)\n\n",
+      "revId": "c4374ae99040fe710e415d67e0912a35a1ed4b15",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
