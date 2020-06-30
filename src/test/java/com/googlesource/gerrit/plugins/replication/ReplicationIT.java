@@ -95,7 +95,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     storagePath = pluginDataDir.resolve("ref-updates");
     tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
     cleanupReplicationTasks();
-    tasksStorage.disableDeleteForTesting(true);
   }
 
   @Test
@@ -325,8 +324,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   private void replicateBranchDeletion(boolean mirror) throws Exception {
-    tasksStorage.disableDeleteForTesting(false);
-
     setReplicationDestination("foo", "replica", ALL_PROJECTS, mirror);
     reloadConfig();
 
@@ -432,7 +429,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   @Test
   public void shouldCleanupTasksAfterNewProjectReplication() throws Exception {
-    tasksStorage.disableDeleteForTesting(false);
     setReplicationDestination("task_cleanup_project", "replica", ALL_PROJECTS);
     config.setInt("remote", "task_cleanup_project", "replicationRetry", 0);
     config.save();
@@ -458,7 +454,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     String changeRef = createChange().getPatchSet().refName();
 
-    tasksStorage.disableDeleteForTesting(false);
     changeReplicationTasksForRemote(tasksStorage.listWaiting().stream(), changeRef, remote1)
         .forEach(
             (update) -> {
@@ -469,7 +464,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
               } catch (URISyntaxException e) {
               }
             });
-    tasksStorage.disableDeleteForTesting(true);
 
     setReplicationDestination(remote1, suffix1, ALL_PROJECTS);
     setReplicationDestination(remote2, suffix2, ALL_PROJECTS);
