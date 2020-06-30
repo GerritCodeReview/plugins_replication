@@ -70,6 +70,30 @@
       "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a8a85b2_b78c4c54",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-30T16:21:19Z",
+      "side": 0,
+      "message": "\u003e \u003e Yes, we definitely could do this and we did consider it. I even backported the changes to support setting defaultThreadPoolSize to 2.7 so that we could potentially do that on our fork (in case it wasn\u0027t clear before, we\u0027ve adapted our 2.7 fork and 3.2 version of the replication plugin to run together). I don\u0027t prefer this as it\u0027s basically saying we have to use more threads.\n\u003e \n\u003e Here we are talking about (not) using one more thread which loops over pending\n\u003e events and reschedules them. A straightforward synchronous code:\n\u003e \n\u003e   for t in pendingTasks:\n\u003e     schedule(t)\n\u003e \n\u003e needs to be rewritten using relatively complex asynchronous code which also\n\u003e introduces many new abstractions.\n\nYes. I really wish this was something already implemented in guava or similar that we could just use.\n\n\u003e Why is this concept not applied in other places where we have the same\n\u003e coding pattern, for example here [1] or here [2] (and many other places)?\n\u003e \n\u003e [1] https://gerrit.googlesource.com/gerrit/+/1f7c3856805e8d855ab68f8cfec8c14bf4237c67/java/com/google/gerrit/server/notedb/rebuild/NoteDbMigrator.java#816 \n\u003e [2] https://gerrit.googlesource.com/gerrit/+/1f7c3856805e8d855ab68f8cfec8c14bf4237c67/java/com/google/gerrit/server/index/account/AllAccountsIndexer.java#83\n\nI had actually looked for a few good places to maybe introduce this in Core. Thanks for finding some that look like great candidates!\n\n\u003e  \n\u003e \n\u003e \u003e Is there another way to build confidence around the new low-level constructs?\n\u003e \n\u003e This is not against low-level constructs in general especially if such things\n\u003e would be proposed and discussed on the master branch and if the concept would\n\u003e be applied in the *whole* Gerrit code-base.\n\u003e \n\u003e But when such things are introduced in an (old) stable branch of a plugin and used\n\u003e only in that plugin then I suspect this is the reason for many +1s and no\n\u003e one giving +2 with confidence.\n\nThat\u0027s understandable. If I took the effort to port, for example, NoteDbMigrator to use the ChainedScheduler, I would do that on 2.16 as well (since it really only makes sense there). Would that be more likely to get a +2 and pave the way for this change to move forward (with a refactor to leverage the classes from Core)?",
+      "parentUuid": "8228c09f_1ca27fc3",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 5
+      },
+      "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
