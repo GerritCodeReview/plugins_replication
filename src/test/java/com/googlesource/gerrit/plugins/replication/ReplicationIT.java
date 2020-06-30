@@ -370,8 +370,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     Project.NameKey target2 = createTestProject("project" + suffix2);
     String remote1 = "foo1";
     String remote2 = "foo2";
-    setReplicationDestination(remote1, suffix1, ALL_PROJECTS);
-    setReplicationDestination(remote2, suffix2, ALL_PROJECTS);
+    setReplicationDestination(remote1, suffix1, ALL_PROJECTS, Integer.MAX_VALUE);
+    setReplicationDestination(remote2, suffix2, ALL_PROJECTS, Integer.MAX_VALUE);
     reloadConfig();
 
     Result pushResult = createChange();
@@ -379,11 +379,16 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     replicationQueueStop();
 
+    setReplicationDestination(remote1, suffix1, ALL_PROJECTS);
+    setReplicationDestination(remote2, suffix2, ALL_PROJECTS);
+
     tasksStorage.disableDeleteForTesting(false);
     listReplicationTasks("refs/changes/\\d*/\\d*/\\d*").stream()
         .filter(task -> remote1.equals(task.remote))
-        .forEach(u -> tasksStorage.delete(u));
+        .forEach(tasksStorage::delete);
     tasksStorage.disableDeleteForTesting(true);
+
+    reloadConfig();
 
     assertThat(
             listReplicationTasks("refs/changes/\\d*/\\d*/\\d*").stream()
@@ -396,8 +401,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
                 .filter(task -> remote1.equals(task.remote))
                 .collect(toList()))
         .hasSize(0);
-
-    replicationQueueStart();
 
     assertThat(isPushCompleted(target2, sourceRef, TEST_TIMEOUT)).isEqualTo(true);
     assertThat(isPushCompleted(target1, sourceRef, TEST_TIMEOUT)).isEqualTo(false);
@@ -433,11 +436,27 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private void setReplicationDestination(
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
-    setReplicationDestination(remoteName, Arrays.asList(replicaSuffix), project);
+    setReplicationDestination(
+        remoteName, Arrays.asList(replicaSuffix), project, TEST_REPLICATION_DELAY);
+  }
+
+  private void setReplicationDestination(
+      String remoteName, String replicaSuffix, Optional<String> project, int replicationDelay)
+      throws IOException {
+    setReplicationDestination(remoteName, Arrays.asList(replicaSuffix), project, replicationDelay);
   }
 
   private void setReplicationDestination(
       String remoteName, List<String> replicaSuffixes, Optional<String> project)
+      throws IOException {
+    setReplicationDestination(remoteName, replicaSuffixes, project, TEST_REPLICATION_DELAY);
+  }
+
+  private void setReplicationDestination(
+      String remoteName,
+      List<String> replicaSuffixes,
+      Optional<String> project,
+      int replicationDelay)
       throws IOException {
 
     List<String> replicaUrls =
@@ -445,7 +464,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
             .map(suffix -> gitPath.resolve("${name}" + suffix + ".git").toString())
             .collect(toList());
     config.setStringList("remote", remoteName, "url", replicaUrls);
-    config.setInt("remote", remoteName, "replicationDelay", TEST_REPLICATION_DELAY);
+    config.setInt("remote", remoteName, "replicationDelay", replicationDelay);
     config.setInt("remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY);
     project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
     config.save();
