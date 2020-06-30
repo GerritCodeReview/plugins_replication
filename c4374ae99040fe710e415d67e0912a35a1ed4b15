@@ -50,6 +50,23 @@
       "revId": "c4374ae99040fe710e415d67e0912a35a1ed4b15",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16ef6030_bc8da7f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-30T22:58:10Z",
+      "side": 1,
+      "message": "And yes, the tests were flaky already in stable-2.16.\nThe fix is Change-Id: Ifd591da37e.\n\nOnce the fix is agreed and merged, we can re-merge this and it should then be working more reliably.",
+      "revId": "c4374ae99040fe710e415d67e0912a35a1ed4b15",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
