@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3842e0cb_8477e831",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-30T22:50:09Z",
+      "side": 1,
+      "message": "Do you still need to do this?",
+      "range": {
+        "startLine": 380,
+        "startChar": 4,
+        "endLine": 380,
+        "endChar": 24
+      },
+      "revId": "11858bfe709119ee81c942751e33cc81f5e4d6da",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e14d8bbd_60e0c39c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-06-30T22:50:09Z",
+      "side": 1,
+      "message": "Move these to just before you reloadConfig() again?",
+      "range": {
+        "startLine": 382,
+        "startChar": 4,
+        "endLine": 383,
+        "endChar": 62
+      },
+      "revId": "11858bfe709119ee81c942751e33cc81f5e4d6da",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
