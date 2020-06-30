@@ -86,7 +86,6 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
     storagePath = pluginDataDir.resolve("ref-updates");
     tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
     cleanupReplicationTasks();
-    tasksStorage.disableDeleteForTesting(true);
   }
 
   @After
