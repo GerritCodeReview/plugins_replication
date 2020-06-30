@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ac53d99_7973e748",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-06-30T22:58:52Z",
+      "side": 1,
+      "message": "Tested with repetitions up to 20 runs-per-test. Before the fix, it was starting failing between 5 and 10 runs-per-test.",
+      "revId": "82b4115e0156d12c09d2bad414daab5cf21ef32a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
