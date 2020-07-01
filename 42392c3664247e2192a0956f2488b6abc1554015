@@ -66,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "67fdef01_af295b62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-01T08:44:56Z",
+      "side": 1,
+      "message": "Not yet. I\u0027m planning to merge this up to stable-3.{0,1,2} once it\u0027s a bit more settled.",
+      "parentUuid": "40c93e66_65d54c1f",
+      "revId": "42392c3664247e2192a0956f2488b6abc1554015",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bfb6a0d4_bd29dae3",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 4
