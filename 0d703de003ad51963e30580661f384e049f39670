@@ -46,6 +46,30 @@
       "revId": "0d703de003ad51963e30580661f384e049f39670",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cec0228_a3610bd4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-07-01T14:42:16Z",
+      "side": 1,
+      "message": "\u003e Why not putting also this into the async thread block?\n\nThe original change also only moved firePendingEvents to the background. It did so\nfrom the firePendingEvents method body so maybe this is why you didn\u0027t spot that fireBeforeStartupEvents wasn\u0027t touched?",
+      "parentUuid": "1704dea6_99ba13ee",
+      "range": {
+        "startLine": 108,
+        "startChar": 6,
+        "endLine": 108,
+        "endChar": 32
+      },
+      "revId": "0d703de003ad51963e30580661f384e049f39670",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
