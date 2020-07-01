@@ -190,6 +190,30 @@
       "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5886bdd8_cef39b17",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-07-01T18:17:32Z",
+      "side": 0,
+      "message": "\u003e We should always prefer minimal invasive approach on very stable branches, and only accept new features on master.\n\nClarification, this is NOT a new feature. The new feature was the replicationTaskStorage feature. This change is a bug fix to the regression that introducing that feature caused.",
+      "parentUuid": "f14c58b7_fded6177",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 5
+      },
+      "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
