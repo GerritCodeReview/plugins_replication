@@ -16,6 +16,24 @@
       "revId": "58778e145d83dfa05035626aca62d968f11b7e3d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a0e6d72_453b75ca",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-01T15:15:58Z",
+      "side": 1,
+      "message": "It\u0027s actually used in many places: see L290 for instance.",
+      "parentUuid": "6681d032_8bb53169",
+      "revId": "58778e145d83dfa05035626aca62d968f11b7e3d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
