@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9853fb30_d4da8aeb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-01T08:43:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af2a3b23_5bea36fe",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 9
+      },
+      "revId": "42392c3664247e2192a0956f2488b6abc1554015",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "40c93e66_65d54c1f",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -77,6 +101,30 @@
       "side": 1,
       "message": "I\u0027m not sure, but at least it could be refactored slightly so that the call to listReplicationTasks is only called once.",
       "parentUuid": "bfb6a0d4_bd29dae3",
+      "range": {
+        "startLine": 390,
+        "startChar": 0,
+        "endLine": 400,
+        "endChar": 20
+      },
+      "revId": "42392c3664247e2192a0956f2488b6abc1554015",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cb6c362_2d338d78",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-01T08:43:57Z",
+      "side": 1,
+      "message": "This test is about checking that the events have been fired only for 1 of the two destinations.  I believe the L402 and L403 are the more relevant assertions.\n\nThe two ones above are more a whitebox-style checking, which is useful but not directly relevant to the test.",
+      "parentUuid": "1f088a71_e55818a4",
       "range": {
         "startLine": 390,
         "startChar": 0,
