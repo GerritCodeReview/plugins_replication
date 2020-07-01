@@ -152,6 +152,30 @@
       "revId": "42392c3664247e2192a0956f2488b6abc1554015",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9df414c1_71a0053f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-01T14:34:20Z",
+      "side": 1,
+      "message": "Going to address this concern in a follow-up change, because it isn\u0027t directly related to the fix of the flakiness problem.",
+      "parentUuid": "5cb6c362_2d338d78",
+      "range": {
+        "startLine": 390,
+        "startChar": 0,
+        "endLine": 400,
+        "endChar": 20
+      },
+      "revId": "42392c3664247e2192a0956f2488b6abc1554015",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
