@@ -34,6 +34,24 @@
       "revId": "58778e145d83dfa05035626aca62d968f11b7e3d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b976ae6_d92549b8",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-07-01T15:27:15Z",
+      "side": 1,
+      "message": "You are right. Funny that I didn\u0027t see that... maybe because some code sections were collapsed when I searched.",
+      "parentUuid": "4a0e6d72_453b75ca",
+      "revId": "58778e145d83dfa05035626aca62d968f11b7e3d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
