@@ -22,6 +22,30 @@
       "revId": "0d703de003ad51963e30580661f384e049f39670",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1704dea6_99ba13ee",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-07-01T14:02:12Z",
+      "side": 1,
+      "message": "You mean in its own thread? Should this be done configurable? Main thread vs. own thread?",
+      "parentUuid": "58870ac5_ccf5ab50",
+      "range": {
+        "startLine": 108,
+        "startChar": 6,
+        "endLine": 108,
+        "endChar": 32
+      },
+      "revId": "0d703de003ad51963e30580661f384e049f39670",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
