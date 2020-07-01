@@ -334,6 +334,30 @@
       "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d4da223_6a16aa19",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-07-01T19:46:50Z",
+      "side": 0,
+      "message": "\u003e The opposite is the case. There are another couple of Gerrit stakeholder / maintainers that don\u0027t use replication (or websession-flatfile) plugin and wouldn\u0027t be interested to review any changes here.\n\nI don\u0027t think that is relevant unless it affects core.\n\n\u003e As Saša pointed out, similar concepts in gerrit core could use similar scheduling approach. That way new concepts implemented in core would be more reliable, battle hardened implementations.\n\nThis is potentially true, and I welcome it in core.\n\n\u003e To put it even more drastically: let\u0027s break gerrit core before we break replication or any other core plugins (not to mention breaking the core plugin on most stable or even EOL branches).\n\nAs a maintainer, I would favor bringing into core things that have already proven themselves from plugins. And if I took that one step further, I would favor bringing stuff into core-plugins from non-core plugins first given the choice.\n\n\u003e In fact, a good example of adding new concepts even on master branch didn\u0027t help, if there is not enough time for testing and iron out the implementation, and the new concept had to be reverted, because it wasn\u0027t stable enough to be shipped on stable-3.2 release: [1], [2].\n\u003e \n\u003e [1] https://gerrit-review.googlesource.com/c/plugins/replication/+/241132\n\u003e [2] https://gerrit-review.googlesource.com/c/plugins/replication/+/272612\n\nI don\u0027t understand how that feature is relevant to the discussion since that was not a feature that could be brought into core?",
+      "parentUuid": "1ad69a5b_8941f908",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 5
+      },
+      "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
