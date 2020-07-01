@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6681d032_8bb53169",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-07-01T15:09:58Z",
+      "side": 1,
+      "message": "This method is now unused",
+      "revId": "58778e145d83dfa05035626aca62d968f11b7e3d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
