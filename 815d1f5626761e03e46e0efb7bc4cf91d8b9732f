@@ -94,6 +94,30 @@
       "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0f3fa41_05c8c89e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-07-01T13:54:07Z",
+      "side": 0,
+      "message": "\u003e \u003e But when such things are introduced in an (old) stable branch of a plugin and used\n\u003e \u003e only in that plugin then I suspect this is the reason for many +1s and no\n\u003e \u003e one giving +2 with confidence.\n\u003e \n\u003e That\u0027s understandable. If I took the effort to port, for example, NoteDbMigrator to use the ChainedScheduler, I would do that on 2.16 as well (since it really only makes sense there).\n\nWhy would we change NoteDbMigrator in stable-2.16? We don\u0027t have P0 issue\nwhich would justify changing that code.\n\nIn the master branch there are also many places with the same coding pattern, for example [1], [2] and [3] so the ChainedScheduler can be discussed there.\n\n[1] https://gerrit.googlesource.com/gerrit/+/refs/heads/master/java/com/google/gerrit/server/index/change/AllChangesIndexer.java#192\n[2] https://gerrit.googlesource.com/gerrit/+/refs/heads/master/java/com/google/gerrit/server/index/project/AllProjectsIndexer.java#75\n[3] https://gerrit.googlesource.com/gerrit/+/refs/heads/master/java/com/google/gerrit/server/index/group/AllGroupsIndexer.java#91\n\n\u003e Would that be more likely to get a +2 and pave the way for this change to move forward (with a refactor to leverage the classes from Core)?\n\nWould this alternative change [4] be a way forward for stable-2.16? It is really\nminimal and it only has one more thread running at the plugin startup for ca 30-45 minutes in your case.\n\n[4] https://gerrit-review.googlesource.com/c/plugins/replication/+/273868",
+      "parentUuid": "7a8a85b2_b78c4c54",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 5
+      },
+      "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
