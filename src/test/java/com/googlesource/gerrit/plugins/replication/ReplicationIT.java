@@ -45,6 +45,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -374,33 +375,21 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     setReplicationDestination(remote2, suffix2, ALL_PROJECTS, Integer.MAX_VALUE);
     reloadConfig();
 
-    Result pushResult = createChange();
-    String sourceRef = pushResult.getPatchSet().getRefName();
+    String changeRef = createChange().getPatchSet().getRefName();
 
     tasksStorage.disableDeleteForTesting(false);
-    listReplicationTasks("refs/changes/\\d*/\\d*/\\d*").stream()
-        .filter(task -> remote1.equals(task.remote))
-        .forEach(u -> tasksStorage.delete(u));
+    changeReplicationTasksForRemote(changeRef, remote1).forEach(tasksStorage::delete);
     tasksStorage.disableDeleteForTesting(true);
 
     setReplicationDestination(remote1, suffix1, ALL_PROJECTS);
     setReplicationDestination(remote2, suffix2, ALL_PROJECTS);
     reloadConfig();
 
-    assertThat(
-            listReplicationTasks("refs/changes/\\d*/\\d*/\\d*").stream()
-                .filter(task -> remote2.equals(task.remote))
-                .collect(toList()))
-        .hasSize(1);
+    assertThat(changeReplicationTasksForRemote(changeRef, remote2).count()).isEqualTo(1);
+    assertThat(changeReplicationTasksForRemote(changeRef, remote1).count()).isEqualTo(0);
 
-    assertThat(
-            listReplicationTasks("refs/changes/\\d*/\\d*/\\d*").stream()
-                .filter(task -> remote1.equals(task.remote))
-                .collect(toList()))
-        .hasSize(0);
-
-    assertThat(isPushCompleted(target2, sourceRef, TEST_TIMEOUT)).isEqualTo(true);
-    assertThat(isPushCompleted(target1, sourceRef, TEST_TIMEOUT)).isEqualTo(false);
+    assertThat(isPushCompleted(target2, changeRef, TEST_TIMEOUT)).isEqualTo(true);
+    assertThat(isPushCompleted(target1, changeRef, TEST_TIMEOUT)).isEqualTo(false);
   }
 
   private Project.NameKey createTestProject(String name) throws Exception {
@@ -483,6 +472,13 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private void shutdownConfig() {
     plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).shutdown();
+  }
+
+  private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
+      String changeRef, String remote) {
+    return tasksStorage.list().stream()
+        .filter(task -> changeRef.equals(task.ref))
+        .filter(task -> remote.equals(task.remote));
   }
 
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
