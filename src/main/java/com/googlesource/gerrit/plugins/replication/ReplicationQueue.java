@@ -99,7 +99,9 @@ public class ReplicationQueue
     if (!running) {
       config.startup(workQueue);
       running = true;
-      firePendingEvents();
+      Thread t = new Thread(this::firePendingEvents, "firePendingEvents");
+      t.setDaemon(true);
+      t.start();
       fireBeforeStartupEvents();
     }
   }
