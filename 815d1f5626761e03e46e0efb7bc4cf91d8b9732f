@@ -286,6 +286,30 @@
       "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e951fe19_743350fc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-07-01T19:09:25Z",
+      "side": 0,
+      "message": "\u003e \u003e My comment wasn\u0027t accurate: We should always prefer minimal invasive approach for fixing bugs on very stable branches. We should defer all new concepts to the master branch only. And I also agree with Saša: bring ChainedScheduler concept to gerrit core on master, so that more reviewers would provide feedback.\n\u003e \n\u003e \n\u003e Thanks. Is there a reason it would need to be in core first, why not on the master branch for the replication plugin (or any other plugin, this is something that the WebSessions and batch cleaners could use)?\n\nIt seems less risky to me to develop such a concept in a plugin before bringing it to core?",
+      "parentUuid": "df364367_499d7de2",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 5
+      },
+      "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
