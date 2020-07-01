@@ -99,7 +99,12 @@ public class ReplicationQueue
     if (!running) {
       config.startup(workQueue);
       running = true;
-      firePendingEvents();
+      new Thread(
+              () -> {
+                firePendingEvents();
+              },
+              "firePendingEvents")
+          .start();
       fireBeforeStartupEvents();
     }
   }
