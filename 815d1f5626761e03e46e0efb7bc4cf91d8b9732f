@@ -358,6 +358,30 @@
       "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7527ba42_80d1d196",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-07-02T12:32:47Z",
+      "side": 0,
+      "message": "Besides what David already mentioned here is my main main reason why I would like to\nhave the ChainedScheduler discussed and reviewed in master and ideally in Gerrit core:\nCode Readability.\n\nIf we take 10 random developers and show them the two version of the code,\nBase vs PS-8 or I224c2ce2a35f987af2343089b9bb00a7fcb7e3be vs PS-8,\nand ask them to understand what this code is doing I bet that 10 of 10 would need\nsignificantly longer time for the code which uses ChainedScheduler.\nI believe that code readability is also an important feature of the Gerrit project and\nit is important to get an opinion from most of the maintainers about replacing\na code like:\n\n  for m in collection:\n    executor.submit(m)\n\nwith asynchronous code like in PS-8 in order to save one thread for the duration of\nthe loop.",
+      "parentUuid": "2d4da223_6a16aa19",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 5
+      },
+      "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
