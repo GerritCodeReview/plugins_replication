@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b7ddbef_00fa6faa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-07-02T12:27:37Z",
+      "side": 1,
+      "message": "nit:\nwill [be] replayed",
+      "range": {
+        "startLine": 58,
+        "startChar": 45,
+        "endLine": 58,
+        "endChar": 58
+      },
+      "revId": "86b2132509b9aeb8b3efb4c60c78ad308e6079e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f595a92e_cd647ff7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-07-02T12:27:37Z",
+      "side": 1,
+      "message": "Some nits.",
+      "revId": "86b2132509b9aeb8b3efb4c60c78ad308e6079e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c787566d_d33b0668",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-07-02T12:27:37Z",
+      "side": 1,
+      "message": "IIUC this would also help in instances were you try to disable a malfunctioning mirror.\nWe have been impacted by this:\n1. New replication.config with mirror X disabled\n2. Plugin reload to get rid of scheduled replications to X.\n3. All persisted events to X got re-scheduled even though it was disabled.",
+      "range": {
+        "startLine": 99,
+        "startChar": 16,
+        "endLine": 99,
+        "endChar": 40
+      },
+      "revId": "86b2132509b9aeb8b3efb4c60c78ad308e6079e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ae5457a_b35dde2c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationChainedScheduler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-07-02T12:27:37Z",
+      "side": 1,
+      "message": "nit:\nConcurrentHashMap",
+      "range": {
+        "startLine": 74,
+        "startChar": 32,
+        "endLine": 74,
+        "endChar": 49
+      },
+      "revId": "86b2132509b9aeb8b3efb4c60c78ad308e6079e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
