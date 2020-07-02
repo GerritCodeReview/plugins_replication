@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "86e31b2f_f637b81f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-07-02T07:49:15Z",
+      "side": 1,
+      "message": "I can confirm that we have seen similar behavior but on Gerrit restart.\nRestart is delayed by minutes due to scheduling of replication-events.\nWe didn\u0027t even run replicate --all, that was just from stale persisted events (previous, 2.16.x, version of replication plugin, I don\u0027t think we are suffering from stale persisted events anymore).",
+      "parentUuid": "be630d6e_bb217d69",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "a48cf30f552b5cc91cb3eb369ea81eaae2dd3628",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75f36ba6_bd7a4773",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
         "patchSetId": 1
