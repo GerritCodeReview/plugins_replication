@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -513,6 +514,46 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     return pushOne == null ? false : pushOne.isRetrying();
   }
 
+  @Test
+  public void shouldFirePendingOnlyToStoredUri() throws Exception {
+    String suffix1 = "replica1";
+    String suffix2 = "replica2";
+    Project.NameKey target1 = createTestProject(project + suffix1);
+    Project.NameKey target2 = createTestProject(project + suffix2);
+    String remote1 = "foo1";
+    String remote2 = "foo2";
+    setReplicationDestination(remote1, suffix1, ALL_PROJECTS, Integer.MAX_VALUE, false);
+    setReplicationDestination(remote2, suffix2, ALL_PROJECTS, Integer.MAX_VALUE, false);
+    reloadConfig();
+
+    String changeRef = createChange().getPatchSet().refName();
+
+    tasksStorage.disableDeleteForTesting(false);
+    changeReplicationTasksForRemote(changeRef, remote1).forEach(tasksStorage::delete);
+    tasksStorage.disableDeleteForTesting(true);
+
+    setReplicationDestination(remote1, suffix1, ALL_PROJECTS);
+    setReplicationDestination(remote2, suffix2, ALL_PROJECTS);
+    reloadConfig();
+
+    assertThat(changeReplicationTasksForRemote(changeRef, remote2).count()).isEqualTo(1);
+    assertThat(changeReplicationTasksForRemote(changeRef, remote1).count()).isEqualTo(0);
+
+    assertThat(isPushCompleted(target2, changeRef, TEST_TIMEOUT)).isEqualTo(true);
+    assertThat(isPushCompleted(target1, changeRef, TEST_TIMEOUT)).isEqualTo(false);
+  }
+
+  public boolean isPushCompleted(Project.NameKey project, String ref, Duration timeOut) {
+    try (Repository repo = repoManager.openRepository(project)) {
+      WaitUtil.waitUntil(() -> checkedGetRef(repo, ref) != null, timeOut);
+      return true;
+    } catch (InterruptedException e) {
+      return false;
+    } catch (Exception e) {
+      throw new RuntimeException("Cannot open repo for project" + project, e);
+    }
+  }
+
   private Ref getRef(Repository repo, String branchName) throws IOException {
     return repo.getRefDatabase().exactRef(branchName);
   }
@@ -528,30 +569,47 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private void setReplicationDestination(
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
-    setReplicationDestination(remoteName, Arrays.asList(replicaSuffix), project, false);
+    setReplicationDestination(
+        remoteName, Arrays.asList(replicaSuffix), project, TEST_REPLICATION_DELAY, false);
   }
 
   private void setReplicationDestination(
       String remoteName, String replicaSuffix, Optional<String> project, boolean mirror)
       throws IOException {
-    setReplicationDestination(remoteName, Arrays.asList(replicaSuffix), project, mirror);
+    setReplicationDestination(
+        remoteName, Arrays.asList(replicaSuffix), project, TEST_REPLICATION_DELAY, mirror);
+  }
+
+  private void setReplicationDestination(
+      String remoteName,
+      String replicaSuffix,
+      Optional<String> project,
+      int replicationDelay,
+      boolean mirror)
+      throws IOException {
+    setReplicationDestination(
+        remoteName, Arrays.asList(replicaSuffix), project, replicationDelay, mirror);
   }
 
   private void setReplicationDestination(
       String remoteName, List<String> replicaSuffixes, Optional<String> project)
       throws IOException {
-    setReplicationDestination(remoteName, replicaSuffixes, project, false);
+    setReplicationDestination(remoteName, replicaSuffixes, project, TEST_REPLICATION_DELAY, false);
   }
 
   private void setReplicationDestination(
-      String remoteName, List<String> replicaSuffixes, Optional<String> project, boolean mirror)
+      String remoteName,
+      List<String> replicaSuffixes,
+      Optional<String> project,
+      int replicationDelay,
+      boolean mirror)
       throws IOException {
     List<String> replicaUrls =
         replicaSuffixes.stream()
             .map(suffix -> gitPath.resolve("${name}" + suffix + ".git").toString())
             .collect(toList());
     config.setStringList("remote", remoteName, "url", replicaUrls);
-    config.setInt("remote", remoteName, "replicationDelay", TEST_REPLICATION_DELAY);
+    config.setInt("remote", remoteName, "replicationDelay", replicationDelay);
     config.setInt("remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY);
     config.setBoolean("remote", remoteName, "mirror", mirror);
     project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
@@ -595,6 +653,13 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private <T> T getInstance(Class<T> classObj) {
     return plugin.getSysInjector().getInstance(classObj);
+  }
+
+  private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
+      String changeRef, String remote) {
+    return tasksStorage.list().stream()
+        .filter(task -> changeRef.equals(task.ref))
+        .filter(task -> remote.equals(task.remote));
   }
 
   private Project.NameKey createTestProject(String name) throws Exception {

@@ -609,6 +609,10 @@ public class Destination {
     return names;
   }
 
+  boolean wouldPush(URIish uri, Project.NameKey project, String ref) {
+    return matches(uri, project) && wouldPushProject(project) && wouldPushRef(ref);
+  }
+
   boolean wouldPushProject(Project.NameKey project) {
     if (!shouldReplicate(project)) {
       repLog.atFine().log("Skipping replication of project %s", project.get());
@@ -660,6 +664,16 @@ public class Destination {
 
   boolean isReplicateProjectDeletions() {
     return config.replicateProjectDeletions();
+  }
+
+  private boolean matches(URIish uri, Project.NameKey project) {
+    for (URIish configUri : config.getRemoteConfig().getURIs()) {
+      URIish projectUri = getURI(configUri, project);
+      if (uri.equals(projectUri)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   List<URIish> getURIs(Project.NameKey project, String urlMatch) {
