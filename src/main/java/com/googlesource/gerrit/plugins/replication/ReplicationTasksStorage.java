@@ -112,6 +112,11 @@ public class ReplicationTasksStorage {
     this.disableDeleteForTesting = deleteDisabled;
   }
 
+  @VisibleForTesting
+  public void delete(ReplicateRefUpdate r) {
+    new Task(r).delete();
+  }
+
   public synchronized void start(PushOne push) {
     for (String ref : push.getRefs()) {
       new Task(new ReplicateRefUpdate(push, ref)).start();
@@ -259,6 +264,15 @@ public class ReplicationTasksStorage {
       try {
         logger.atFine().log("DELETE %s %s", running, updateLog());
         Files.delete(running);
+      } catch (IOException e) {
+        logger.atSevere().withCause(e).log("Error while deleting task %s", taskKey);
+      }
+    }
+
+    public void delete() {
+      try {
+        Files.deleteIfExists(waiting);
+        Files.deleteIfExists(running);
       } catch (IOException e) {
         logger.atSevere().withCause(e).log("Error while deleting task %s", taskKey);
       }
