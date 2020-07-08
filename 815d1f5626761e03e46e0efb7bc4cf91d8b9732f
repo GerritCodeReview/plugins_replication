@@ -406,6 +406,30 @@
       "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "023cda98_fe375296",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-07-08T15:18:35Z",
+      "side": 0,
+      "message": "Sorry for a longer delay in the discussion, we had an incident in production\nwhich took a couple of days to follow-up, understand and cleanup.\n\n\u003e \u003e it is important to get an opinion from most of the maintainers about replacing\n\u003e \u003e a code like:\n\u003e \u003e \n\u003e \u003e   for m in collection:\n\u003e \u003e     executor.submit(m)\n\u003e \u003e \n\u003e \u003e with asynchronous code like in PS-8 \n\u003e \n\u003e I am not sure I understand the concern here. Of course, I am not going to claim that this is as simple as a for loop, it isn\u0027t. The concept is more advanced, it is more comparable to the complexity of using an executor. What specifically is your concern, is it 1) that this code is not readable for the task it is achieving? 2) the task it is achieving is not worth the complexity? 3) The complexity is not worth it on this branch?\n\u003e \n\u003e \u003e in order to save one thread for the duration of the loop.\n\u003e \n\u003e While it does \"save one thread\", it also prevents the queue from being filled with potentially 100K entries that will delay all current updates which helps prevent the reduction of priority of current updates.\n\nThinking again about what you wrote I realize that this change is actually\ndoing two things:\n1 move the rescheduling of the pending tasks in the background\n2 lowers priority of the pending tasks (compared to current replication tasks)\n\nI believe that we all agree on 1. But we implicitly get 2 in the context\nof implementing 1, without a dedicated change where this design decision\nis discussed.\n\nIf replication of change c1 is pending at the moment when the replication plugin\nstarts, and then change c2 gets uploaded shortly after the replication plugin\nis ready, the replication of c2 will have potentially (depending on the number of pending tasks) much higher priority. It may happen that c1 gets replicated\nfor example 30 minutes later than c2.\n\nDo we have agreement on 2? Maybe I missed some discussion.",
+      "parentUuid": "205ab3e2_9ecfa3d1",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 5
+      },
+      "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
