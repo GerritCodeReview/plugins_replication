@@ -430,6 +430,30 @@
       "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c02e7df_8dcf7ce0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-07-08T17:04:15Z",
+      "side": 0,
+      "message": "\u003e \u003e \u003e in order to save one thread for the duration of the loop.\n\u003e \u003e \n\u003e \u003e While it does \"save one thread\", it also prevents the queue from being filled with potentially 100K entries that will delay all current updates which helps prevent the reduction of priority of current updates.\n\nI am sorry, this explanation was wrong, I miss-lead the discussion with it. This explanation applies to https://gerrit-review.googlesource.com/c/plugins/replication/+/268612/2 and not to the current change. With this change, the queue can still get filled with 100K pending entries that will delay newly created events.\n\n\u003e 2 lowers priority of the pending tasks (compared to current replication tasks)\n\u003e \n\u003e I believe that we all agree on 1. But we implicitly get 2 in the context\n\u003e of implementing 1, without a dedicated change where this design decision\n\u003e is discussed.\n\nWhile I do want #2, it is not specifically targeted by this change and priority is not explicitly lowered with respect to other replication tasks in this change.\n\n\u003e If replication of change c1 is pending at the moment when the replication plugin\n\u003e starts, and then change c2 gets uploaded shortly after the replication plugin\n\u003e is ready, the replication of c2 will have potentially (depending on the number of pending tasks) much higher priority. It may happen that c1 gets replicated\n\u003e for example 30 minutes later than c2.\n\nDespite my miss-direction, you are correct about this scenario being possible, but that is because the replication plugin no longer waits for all the pending events to be read from disk, and if it takes a long time to read C1 in the background threads, then C2 can get executed before C1 is ever read. With this change, there is a priority reduction which happens in the default queue (but not in the replication queues), and that reduction is to reduce the priority of reading and scheduling replication tasks compared to all other non-replication tasks which may be in the default queue.\n\n\u003e Do we have agreement on 2?\n\nNot quite, sorry for the miss-direction in my previous reply.",
+      "parentUuid": "023cda98_fe375296",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 5
+      },
+      "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
