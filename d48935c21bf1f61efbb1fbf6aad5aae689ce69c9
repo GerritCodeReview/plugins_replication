@@ -51,6 +51,29 @@
       "revId": "d48935c21bf1f61efbb1fbf6aad5aae689ce69c9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8115ae03_0abad76f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-07-13T16:20:04Z",
+      "side": 1,
+      "message": "I am struggling to see which code in this class implements this policy. Maybe I don\u0027t\nunderstand what \"outstanding and waiting\" means here...\n\nIIUC, when scheduling we wrap into Chainer and Chainer.run() will first call next() which\nwill schedule another Chainer before executing the wrapped item.\n\nIf the thread pool is of size N then we can end up with N items being executed (concurrently) and N waiting in the executors queue, right? So it is not 1 outstanding but N outstanding?",
+      "range": {
+        "startLine": 26,
+        "startChar": 72,
+        "endLine": 27,
+        "endChar": 92
+      },
+      "revId": "d48935c21bf1f61efbb1fbf6aad5aae689ce69c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
