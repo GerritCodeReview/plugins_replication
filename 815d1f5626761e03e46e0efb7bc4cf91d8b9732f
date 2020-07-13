@@ -478,6 +478,30 @@
       "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f732c1b5_ff418464",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-07-13T18:03:23Z",
+      "side": 0,
+      "message": "\u003e \u003e \u003e \u003e \u003e in order to save one thread for the duration of the loop.\n\u003e \u003e \u003e \u003e \n\u003e \u003e \u003e \u003e While it does \"save one thread\", it also prevents the queue from being filled with potentially 100K entries that will delay all current updates which helps prevent the reduction of priority of current updates.\n\u003e \u003e \n\u003e \u003e I am sorry, this explanation was wrong, I miss-lead the discussion with it. This explanation applies to https://gerrit-review.googlesource.com/c/plugins/replication/+/268612/2 and not to the current change. With this change, the queue can still get filled with 100K pending entries that will delay newly created events.\n\u003e \n\u003e Why then prefer a complex code like ChainedScheduler, over the approach in [4]?\n\u003e \n\u003e I am sorry for still not being able to approve this change and I admit that I still\n\u003e do not fully grasp the ChainedScheduler code (which might indeed be a master piece).\n\u003e \n\u003e [4] https://gerrit-review.googlesource.com/c/plugins/replication/+/273868\n\nWhy then prefer a complex code like ChainedScheduler, over the approach in [4]?\n\nThe primary advantage over #4 (aside from the issues already mentioned in the review comments on that change), is that it does not require any extra threads. I do think it is important to stop the proliferation of extra threads, as each new thread lowers the priority of all existing threads and ultimately impacts the scalability of the system.\n\nTo summarize those 3 options and my understanding of the downsides:\n\n1) Use a chained scheduler -\u003e some extra complexity\n2) Use a new separate thread pool -\u003e extra thread proliferation\n3) Use an existing thread pool, bump the threads -\u003e extra thread proliferation \n4) Use an existing thread pool, no thread bump \u003e starvation of existing tasks\n\nI believe the above is true whether on a stable branch, or on the master branch. Perhaps it would help to decide what we want on the master branch first, and then decide how to achieve that?\n\n\u003e I am sorry for still not being able to approve this change and I admit that I still do not fully grasp the ChainedScheduler code (which might indeed be a master piece).\n\nFirst, let me make it clear that I very much appreciate your review!! I want someone to understand the technical implications and to criticize them. So, thank you very much for rewording what you think is happening, and getting me to clarify things to help clear up any miss-understandings and to get us on the same page first. I think that is vital before anyone can judge anything else about the change.\n\nI think the difficulty here is that there is no perfect simple solution without any downsides. I think we need to pick a \"good\" solution and not let \"perfect\" be the enemy of good. If this were a fix for master, I would argue extremely strongly for solution #1 as I believe that the extra complexity is needed and worth it to make our system begin to scale better. I also understand the appeal of not having extra complexity on a stable branch, however I am not sure the other downsides are good ones for a stable branch either, and it seems silly to just add those downsides to the stable branch to only later remove it on the master branch for a better solution, particularly because I don\u0027t think the complexity is that huge, and it is easily testable.",
+      "parentUuid": "ed4b5b72_5b3974af",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 5
+      },
+      "revId": "815d1f5626761e03e46e0efb7bc4cf91d8b9732f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
