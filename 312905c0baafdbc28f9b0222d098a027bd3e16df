@@ -477,6 +477,24 @@
     },
     {
       "key": {
+        "uuid": "f1f0e2bb_74dce59a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-13T22:49:15Z",
+      "side": 1,
+      "message": "After 2 weeks with a stable-3.2 branch, without further split-brains due to missed replication events, I believe we should resume this fix and start consolidating the replication clustering as well.\n\nWDYT?",
+      "parentUuid": "65d8077c_301cc6fa",
+      "revId": "312905c0baafdbc28f9b0222d098a027bd3e16df",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "114250a7_c32b346d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 13
