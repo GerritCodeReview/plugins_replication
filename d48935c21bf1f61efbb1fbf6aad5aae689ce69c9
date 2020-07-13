@@ -74,6 +74,30 @@
       "revId": "d48935c21bf1f61efbb1fbf6aad5aae689ce69c9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5031dc05_553b399b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-07-13T17:22:44Z",
+      "side": 1,
+      "message": "\u003e I am struggling to see which code in this class implements this policy. Maybe I don\u0027t\n\u003e understand what \"outstanding and waiting\" means here...\n\u003e \n\u003e IIUC, when scheduling we wrap into Chainer and Chainer.run() will first call next() which\n\u003e will schedule another Chainer before executing the wrapped item.\n\u003e \n\u003e If the thread pool is of size N then we can end up with N items being executed (concurrently) and N waiting in the executors queue, right? So it is not 1 outstanding but N outstanding?\n\nMy description is correct, there will only ever be 1 outstanding, not N. In order to queue one, the current queued one has to run and thus it can no longer be queued itself. The beauty of this is that if there are empty threads then you can get as many running as there are threads, but even when that happens, only 1 will be queued.",
+      "parentUuid": "8115ae03_0abad76f",
+      "range": {
+        "startLine": 26,
+        "startChar": 72,
+        "endLine": 27,
+        "endChar": 92
+      },
+      "revId": "d48935c21bf1f61efbb1fbf6aad5aae689ce69c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
