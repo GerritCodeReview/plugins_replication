@@ -757,8 +757,8 @@ public class Destination {
     return config.getDrainQueueAttempts();
   }
 
-  public int getReplicationDelaySeconds() {
-    return config.getDelay() * 1000;
+  public long getReplicationDelayMilliseconds() {
+    return config.getDelay() * 1000L;
   }
 
   int getSlowLatencyThreshold() {
