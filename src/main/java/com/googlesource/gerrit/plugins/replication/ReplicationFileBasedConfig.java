@@ -347,7 +347,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
         logger.atInfo().log(
             "Draining replication events, postpone shutdown. Events left: inFlight %d, pending %d",
             inFlight, pending);
-        Thread.sleep(destination.getReplicationDelaySeconds());
+        Thread.sleep(destination.getReplicationDelayMilliseconds());
       } catch (InterruptedException ie) {
         logger.atWarning().withCause(ie).log(
             "Wait for replication events to drain has been interrupted");
