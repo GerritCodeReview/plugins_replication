@@ -70,6 +70,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -583,7 +584,13 @@ public class Destination {
       if (inFlightOp != null) {
         return RunwayStatus.denied(inFlightOp.getId());
       }
-      replicationTasksStorage.get().start(op);
+      Optional<Set<String>> started = replicationTasksStorage.get().start(op);
+      if (!started.isPresent()) {
+        return RunwayStatus.deniedExternal();
+      }
+      if (started.get().isEmpty()) {
+        return RunwayStatus.completedExternal();
+      }
       inFlight.put(op.getURI(), op);
     }
     return RunwayStatus.allowed();

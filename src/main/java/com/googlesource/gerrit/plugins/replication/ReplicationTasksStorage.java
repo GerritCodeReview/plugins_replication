@@ -26,12 +26,16 @@ import com.google.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
 
@@ -49,9 +53,12 @@ import org.eclipse.jgit.transport.URIish;
  *
  * <p><code>
  *   .../building/<tmp_name>                       new replication tasks under construction
- *   .../running/<sha1>                            running replication tasks
+ *   .../running/<uri_sha1>/                       lock for URI
+ *   .../running/<uri_sha1>/<task_sha1>            running replication tasks
  *   .../waiting/<task_sha1_NN_shard>/<task_sha1>  outstanding replication tasks
  * </code>
+ *
+ * <p>The URI lock is acquired by creating the directory and released by removing it.
  *
  * <p>Tasks are moved atomically via a rename between those directories to indicate the current
  * state of each task.
@@ -65,26 +72,50 @@ public class ReplicationTasksStorage {
 
   private boolean disableDeleteForTesting;
 
-  public static class ReplicateRefUpdate {
-    public final String project;
+  public static class ReplicateRefUpdate extends UriUpdate {
     public final String ref;
-    public final String uri;
-    public final String remote;
 
-    public ReplicateRefUpdate(PushOne push, String ref) {
-      this(push.getProjectNameKey().get(), ref, push.getURI(), push.getRemoteName());
+    public ReplicateRefUpdate(UriUpdate update, String ref) {
+      this(update.project, ref, update.uri, update.remote);
     }
 
     public ReplicateRefUpdate(String project, String ref, URIish uri, String remote) {
-      this.project = project;
+      this(project, ref, uri.toASCIIString(), remote);
+    }
+
+    protected ReplicateRefUpdate(String project, String ref, String uri, String remote) {
+      super(project, uri, remote);
       this.ref = ref;
-      this.uri = uri.toASCIIString();
+    }
+
+    @Override
+    public String toString() {
+      return "ref-update " + ref + " (" + super.toString() + ")";
+    }
+  }
+
+  public static class UriUpdate {
+    public final String project;
+    public final String uri;
+    public final String remote;
+
+    public UriUpdate(PushOne push) {
+      this(push.getProjectNameKey().get(), push.getURI(), push.getRemoteName());
+    }
+
+    public UriUpdate(String project, URIish uri, String remote) {
+      this(project, uri.toASCIIString(), remote);
+    }
+
+    public UriUpdate(String project, String uri, String remote) {
+      this.project = project;
+      this.uri = uri;
       this.remote = remote;
     }
 
     @Override
     public String toString() {
-      return "ref-update " + project + ":" + ref + " uri:" + uri + " remote:" + remote;
+      return "uri-update " + project + " uri:" + uri + " remote:" + remote;
     }
   }
 
@@ -117,21 +148,55 @@ public class ReplicationTasksStorage {
     new Task(r).delete();
   }
 
-  public synchronized void start(PushOne push) {
-    for (String ref : push.getRefs()) {
-      new Task(new ReplicateRefUpdate(push, ref)).start();
+  /** returns the started refs or no value if in-flight */
+  public synchronized Optional<Set<String>> start(PushOne push) {
+    UriLock lock = new UriLock(push);
+    if (!lock.acquire()) {
+      return Optional.empty();
     }
+
+    Set<String> started = new HashSet<>();
+    for (String ref : push.getRefs()) {
+      if (new Task(lock, ref).start()) {
+        started.add(ref);
+      }
+    }
+
+    if (started.isEmpty()) { // No tasks left, likely replicated externally
+      lock.release();
+    }
+    return Optional.of(started);
   }
 
   public synchronized void reset(PushOne push) {
+    UriLock lock = new UriLock(push);
     for (String ref : push.getRefs()) {
-      new Task(new ReplicateRefUpdate(push, ref)).reset();
+      new Task(lock, ref).reset();
     }
+    lock.release();
   }
 
   public synchronized void resetAll() {
-    for (ReplicateRefUpdate r : list(createDir(runningUpdates))) {
-      new Task(r).reset();
+    try (DirectoryStream<Path> dirs = Files.newDirectoryStream(createDir(runningUpdates))) {
+      for (Path dir : dirs) {
+        UriLock lock = null;
+        try {
+          for (ReplicateRefUpdate u : list(dir)) {
+            if (lock == null) {
+              lock = new UriLock(u);
+            }
+            new Task(u).reset();
+          }
+        } catch (DirectoryIteratorException d) {
+          // iterating over the sub-directories is expected to have dirs disappear
+          Nfs.throwIfNotStaleFileHandle(d.getCause());
+        }
+        if (lock != null) {
+          lock.release();
+        }
+      }
+    } catch (IOException e) {
+      logger.atSevere().withCause(e).log("Error while aborting running tasks");
     }
   }
 
@@ -140,9 +205,11 @@ public class ReplicationTasksStorage {
   }
 
   public void finish(PushOne push) {
-    for (String ref : push.getRefs()) {
-      new Task(new ReplicateRefUpdate(push, ref)).finish();
+    UriLock lock = new UriLock(push);
+    for (ReplicateRefUpdate r : list(lock.runningDir)) {
+      new Task(lock, r.ref).finish();
     }
+    lock.release();
   }
 
   public synchronized List<ReplicateRefUpdate> listWaiting() {
@@ -207,22 +274,75 @@ public class ReplicationTasksStorage {
     }
   }
 
-  private class Task {
+  @VisibleForTesting
+  public class UriLock {
+    public final UriUpdate update;
+    public final String uriKey;
+    public final Path runningDir;
+
+    public UriLock(PushOne push) {
+      this(new UriUpdate(push));
+    }
+
+    public UriLock(UriUpdate update) {
+      this.update = update;
+      uriKey = sha1(update.uri).name();
+      runningDir = createDir(runningUpdates).resolve(uriKey);
+    }
+
+    public boolean acquire() {
+      try {
+        logger.atFine().log("MKDIR %s %s", runningDir, updateLog());
+        Files.createDirectory(runningDir);
+        return true;
+      } catch (FileAlreadyExistsException e) {
+        return false; // already running, likely externally
+      } catch (IOException e) {
+        logger.atSevere().withCause(e).log("Error while acquiring lock for URI %s", uriKey);
+        return true; // safer to risk a duplicate than to skip it
+      }
+    }
+
+    public void release() {
+      try {
+        if (disableDeleteForTesting && Files.list(runningDir).findFirst().isPresent()) {
+          logger.atFine().log("DELETE %s %s DISABLED", runningDir, updateLog());
+          return;
+        }
+
+        logger.atFine().log("DELETE %s %s", runningDir, updateLog());
+        Files.delete(runningDir);
+      } catch (IOException e) {
+        logger.atSevere().withCause(e).log("Error while releasing uri %s", uriKey);
+      }
+    }
+
+    private String updateLog() {
+      return String.format("(%s => %s)", update.project, update.uri);
+    }
+  }
+
+  @VisibleForTesting
+  public class Task {
     public final ReplicateRefUpdate update;
     public final String taskKey;
     public final Path running;
     public final Path waiting;
 
-    public Task(PushOne push, String ref) {
-      this(new ReplicateRefUpdate(push, ref));
+    public Task(ReplicateRefUpdate r) {
+      this(new UriLock(r), r.ref);
     }
 
-    public Task(ReplicateRefUpdate update) {
-      this.update = update;
+    public Task(PushOne push, String ref) {
+      this(new UriLock(push), ref);
+    }
+
+    public Task(UriLock lock, String ref) {
+      update = new ReplicateRefUpdate(lock.update, ref);
       String key = update.project + "\n" + update.ref + "\n" + update.uri + "\n" + update.remote;
       taskKey = sha1(key).name();
-      running = createDir(runningUpdates).resolve(taskKey);
-      waiting = createDir(waitingUpdates).resolve(taskKey);
+      running = lock.runningDir.resolve(taskKey);
+      waiting = createDir(waitingUpdates.resolve(taskKey.substring(0, 2))).resolve(taskKey);
     }
 
     public String create() {
@@ -243,8 +363,9 @@ public class ReplicationTasksStorage {
       return taskKey;
     }
 
-    public void start() {
+    public boolean start() {
       rename(waiting, running);
+      return Files.exists(running);
     }
 
     public void reset() {
@@ -265,7 +386,7 @@ public class ReplicationTasksStorage {
         logger.atFine().log("DELETE %s %s", running, updateLog());
         Files.delete(running);
       } catch (IOException e) {
-        logger.atSevere().withCause(e).log("Error while deleting task %s", taskKey);
+        logger.atSevere().withCause(e).log("Error while finishing task %s", taskKey);
       }
     }
 
