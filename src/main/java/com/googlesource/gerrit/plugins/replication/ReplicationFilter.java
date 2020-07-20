@@ -14,7 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.gerrit.common.data.AccessSection;
+import com.google.gerrit.entities.AccessSection;
 import com.google.gerrit.entities.Project;
 import java.util.Collections;
 import java.util.List;
