@@ -64,7 +64,12 @@ public class ReplicationTasksStorage {
 
   @Inject
   ReplicationTasksStorage(ReplicationConfig config) {
-    refUpdates = config.getEventsDirectory().resolve("ref-updates");
+    this(config.getEventsDirectory().resolve("ref-updates"));
+  }
+
+  @VisibleForTesting
+  public ReplicationTasksStorage(Path refUpdates) {
+    this.refUpdates = refUpdates;
   }
 
   public String persist(ReplicateRefUpdate r) {
