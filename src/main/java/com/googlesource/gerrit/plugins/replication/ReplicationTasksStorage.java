@@ -205,7 +205,8 @@ public class ReplicationTasksStorage {
     }
   }
 
-  private class Task {
+  @VisibleForTesting
+  class Task {
     public final ReplicateRefUpdate update;
     public final String json;
     public final String taskKey;
