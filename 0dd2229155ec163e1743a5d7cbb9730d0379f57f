@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "ac4e3162_ab675627",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-22T23:56:09Z",
+      "side": 1,
+      "message": "I have another change that I\u0027ll upload soon that tests the methods at the ReplicationTasksStorage layer directly.\n\nAs you note, the advantage of testing Task directly is that it\u0027s much more flexible with how it can be exercised.",
+      "parentUuid": "41332263_fa43f0ef",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 209,
+        "endChar": 12
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a3e2805d_467a602a",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
         "patchSetId": 1
@@ -53,6 +77,30 @@
       "writtenOn": "2020-07-22T23:28:57Z",
       "side": 1,
       "message": "This is using an in-memory filesystem, which is very unlikely to be used in the real scenario.\nHave you tried to use a real local filesystem? If yes, was it working fine for the purpose?",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 59
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b597acc_b3eea30d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-22T23:56:09Z",
+      "side": 1,
+      "message": "I didn\u0027t try. I thought all the Gerrit tests used jimfs now for this purpose?",
+      "parentUuid": "a3e2805d_467a602a",
       "range": {
         "startLine": 46,
         "startChar": 4,
@@ -88,6 +136,30 @@
     },
     {
       "key": {
+        "uuid": "0c93a4b9_f3d578d7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-22T23:56:09Z",
+      "side": 1,
+      "message": "I can add those assert helpers, thanks for suggesting them.\n\nI disagree about asserting one state means it must not be in another state. That might be true for some tests (and I can add that where applicable, within reason because I think otherwise it will add many extra asserts) but not all (such as the createWaitingTaskWhileTaskIsRunning test).",
+      "parentUuid": "d9ac6b6e_9acbb9b4",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 44
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0bfde54d_91349e56",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
         "patchSetId": 1
@@ -99,6 +171,24 @@
       "writtenOn": "2020-07-22T23:28:57Z",
       "side": 1,
       "message": "What about assertions on the isBuilding state?",
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f0e052e_340226eb",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-22T23:56:09Z",
+      "side": 1,
+      "message": "There\u0027s no methods on Task to inspect that. Do you have an approach for how you\u0027d do it? I avoid adding test code to prod classes unless absolutely necessary.",
+      "parentUuid": "0bfde54d_91349e56",
       "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -145,6 +235,30 @@
     },
     {
       "key": {
+        "uuid": "f886aba9_876b7b23",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-22T23:56:09Z",
+      "side": 1,
+      "message": "Hmm, I think there\u0027s a typo in the name. It should be \u0027createWaitingTaskWhileTaskIsRunning\u0027.",
+      "parentUuid": "3e369c88_e7d7612c",
+      "range": {
+        "startLine": 124,
+        "startChar": 14,
+        "endLine": 124,
+        "endChar": 31
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "058abdcf_5b5483c3",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
         "patchSetId": 1
@@ -156,6 +270,30 @@
       "writtenOn": "2020-07-22T23:28:57Z",
       "side": 1,
       "message": "What \"squashed\u0027 means in this context? Can you elaborate?\nIs there something we can do to verify that it happens from the test code?",
+      "range": {
+        "startLine": 189,
+        "startChar": 33,
+        "endLine": 189,
+        "endChar": 45
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7da93194_ff091a19",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-22T23:56:09Z",
+      "side": 1,
+      "message": "squashed means they aren\u0027t thrown from the method (but logs are written). There is not a way to confirm the expected log message unless we intercept the logger and inspect the message (which I don\u0027t think is good because then we\u0027re parsing log messages in our tests, and that\u0027s super fragile).\n\nThe test code is verifying that an exception is NOT thrown (thus the \"IsGraceful\" part of the name), so I don\u0027t think this test needs to change to be doing a useful job.",
+      "parentUuid": "058abdcf_5b5483c3",
       "range": {
         "startLine": 189,
         "startChar": 33,
