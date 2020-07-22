@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d478e6ca_7edee289",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-22T23:28:57Z",
+      "side": 1,
+      "message": "Very good initiative Nasser: this defines the interface and expected behaviour for the replication tasks, which we can then rely on moving forward.",
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41332263_fa43f0ef",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-22T23:28:57Z",
+      "side": 1,
+      "message": "Task isn\u0027t part of the external interface of the ReplicationTaskStorage: should the test just use the public methods? What\u0027s the rationale of exposing the Task just for the tests and then not using them in the way the component is used?\n\nHave you tried keeping this class private and use the other interface methods for testing?\n(e.g. start, reset, resetAll, finish)",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 209,
+        "endChar": 12
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3e2805d_467a602a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-22T23:28:57Z",
+      "side": 1,
+      "message": "This is using an in-memory filesystem, which is very unlikely to be used in the real scenario.\nHave you tried to use a real local filesystem? If yes, was it working fine for the purpose?",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 59
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9ac6b6e_9acbb9b4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-22T23:28:57Z",
+      "side": 1,
+      "message": "Having more tailored asserts would improve readability and also the message displayed in case of failure.\n\nWhat about introducing an \u0027assertIsWaiting(\u003ctask\u003e)\u0027, \u0027assertIsWaiting(\u003ctask\u003e)\u0027, ... ?\n\nAlso, asserting that a task is in one state, should also include the check that the task isn\u0027t in any of the the other states.",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 44
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bfde54d_91349e56",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-22T23:28:57Z",
+      "side": 1,
+      "message": "What about assertions on the isBuilding state?",
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30e8765c_eb16a059",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-22T23:28:57Z",
+      "side": 1,
+      "message": "Also, assertFalse(whiteBoxIsBuilding(\u003c\u003e))",
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e369c88_e7d7612c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-22T23:28:57Z",
+      "side": 1,
+      "message": "The method name suggests the the second task will be created as waiting, but the code is asserting that is both waiting and running? Is that correct?",
+      "range": {
+        "startLine": 124,
+        "startChar": 14,
+        "endLine": 124,
+        "endChar": 31
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "058abdcf_5b5483c3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-22T23:28:57Z",
+      "side": 1,
+      "message": "What \"squashed\u0027 means in this context? Can you elaborate?\nIs there something we can do to verify that it happens from the test code?",
+      "range": {
+        "startLine": 189,
+        "startChar": 33,
+        "endLine": 189,
+        "endChar": 45
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
