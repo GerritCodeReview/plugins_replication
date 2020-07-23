@@ -113,6 +113,30 @@
     },
     {
       "key": {
+        "uuid": "22f8e8ef_5dc656a0",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-23T21:18:50Z",
+      "side": 1,
+      "message": "Because the replication task storage relies directly on the underlying filesystem capabilities, I would suggest to make a more specific decision on what to test against. It\u0027s all about confidence that our tests are actually representative or not.",
+      "parentUuid": "3b597acc_b3eea30d",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 59
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d9ac6b6e_9acbb9b4",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
         "patchSetId": 1
@@ -148,6 +172,30 @@
       "side": 1,
       "message": "I can add those assert helpers, thanks for suggesting them.\n\nI disagree about asserting one state means it must not be in another state. That might be true for some tests (and I can add that where applicable, within reason because I think otherwise it will add many extra asserts) but not all (such as the createWaitingTaskWhileTaskIsRunning test).",
       "parentUuid": "d9ac6b6e_9acbb9b4",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 44
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38ec8c06_3386782d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-23T21:18:50Z",
+      "side": 1,
+      "message": "Does this mean that one replication task could potentially be in two states at the same time? What would be the underlying filesystem representation in that case? Two files? One file with a symlink in another directory?",
+      "parentUuid": "0c93a4b9_f3d578d7",
       "range": {
         "startLine": 64,
         "startChar": 4,
@@ -294,6 +342,30 @@
       "side": 1,
       "message": "squashed means they aren\u0027t thrown from the method (but logs are written). There is not a way to confirm the expected log message unless we intercept the logger and inspect the message (which I don\u0027t think is good because then we\u0027re parsing log messages in our tests, and that\u0027s super fragile).\n\nThe test code is verifying that an exception is NOT thrown (thus the \"IsGraceful\" part of the name), so I don\u0027t think this test needs to change to be doing a useful job.",
       "parentUuid": "058abdcf_5b5483c3",
+      "range": {
+        "startLine": 189,
+        "startChar": 33,
+        "endLine": 189,
+        "endChar": 45
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d30b8988_24136948",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-23T21:18:50Z",
+      "side": 1,
+      "message": "Gotcha, so \"squashed\" means that have been recovered and do not need to be thrown anymore. What\u0027s the purpose of logging them? Does the Gerrit admin need to take any action? If not, I would just even avoid putting the comment because it won\u0027t be asserting anything really from a test\u0027s perspective.\n\nWDYT?",
+      "parentUuid": "7da93194_ff091a19",
       "range": {
         "startLine": 189,
         "startChar": 33,
