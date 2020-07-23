@@ -137,6 +137,30 @@
     },
     {
       "key": {
+        "uuid": "2a313f08_58ad26e1",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-23T21:58:15Z",
+      "side": 1,
+      "message": "That seems more applicable to integration tests, not for unit tests. I would suggest we stick with jimfs for now, and someone can add extra support for a local filesystem as well later.",
+      "parentUuid": "22f8e8ef_5dc656a0",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 59
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d9ac6b6e_9acbb9b4",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
         "patchSetId": 1
@@ -196,6 +220,30 @@
       "side": 1,
       "message": "Does this mean that one replication task could potentially be in two states at the same time? What would be the underlying filesystem representation in that case? Two files? One file with a symlink in another directory?",
       "parentUuid": "0c93a4b9_f3d578d7",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 44
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b6ac680_85421a69",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-23T21:58:15Z",
+      "side": 1,
+      "message": "Each task is work for a given ref update. It\u0027s perfectly ok for one update to be running and another to be waiting. That would be two files in different directories (waiting/ running/).",
+      "parentUuid": "38ec8c06_3386782d",
       "range": {
         "startLine": 64,
         "startChar": 4,
@@ -366,6 +414,30 @@
       "side": 1,
       "message": "Gotcha, so \"squashed\" means that have been recovered and do not need to be thrown anymore. What\u0027s the purpose of logging them? Does the Gerrit admin need to take any action? If not, I would just even avoid putting the comment because it won\u0027t be asserting anything really from a test\u0027s perspective.\n\nWDYT?",
       "parentUuid": "7da93194_ff091a19",
+      "range": {
+        "startLine": 189,
+        "startChar": 33,
+        "endLine": 189,
+        "endChar": 45
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d95b011_72f82ac6",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-23T21:58:15Z",
+      "side": 1,
+      "message": "I\u0027m not trying to change the functional behavior in this change. However, I (and I think Martin) would be fine with not logging those messages.\n\nI can remove the comment on this line.",
+      "parentUuid": "d30b8988_24136948",
       "range": {
         "startLine": 189,
         "startChar": 33,
