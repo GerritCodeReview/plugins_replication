@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fb1a487_ddded235",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-07-24T21:41:33Z",
+      "side": 1,
+      "message": "Just to help clarify that the last line is the line under test, add a newline above it, and maybe we should wrap this line with an assertNoException() method (to be designed)?",
+      "revId": "fcfcee877aaefd9a73113a617c13d02d7b80784c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
