@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f707064_63b75504",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T20:52:55Z",
+      "side": 1,
+      "message": "Thanks for the amendments, looks definitely more readable now.\n\nSee inline my suggestion to complete the review of Change-Id: I164426e70 on stable-2.16, merge it up and then do this one on top of it?",
+      "revId": "d14fbac4c40ce47a3a855792009d4f5daf7efb07",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}

@@ -90,6 +90,30 @@
     },
     {
       "key": {
+        "uuid": "0858f01f_ea8909ea",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T20:52:55Z",
+      "side": 1,
+      "message": "Does it make sense to review Change-Id: I164426e70 on stable-2.16 and then merge that up on all branches up to master?",
+      "parentUuid": "a5ce0135_f7c7f8a5",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 209,
+        "endChar": 12
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3e2805d_467a602a",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
         "patchSetId": 1
@@ -173,6 +197,30 @@
       "side": 1,
       "message": "That seems more applicable to integration tests, not for unit tests. I would suggest we stick with jimfs for now, and someone can add extra support for a local filesystem as well later.",
       "parentUuid": "22f8e8ef_5dc656a0",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 59
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fbe44ec_625dd7e2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T20:52:55Z",
+      "side": 1,
+      "message": "What would be the value of using Jimfs vs. a real filesystem? Does it simplify the tests in any way?",
+      "parentUuid": "2a313f08_58ad26e1",
       "range": {
         "startLine": 46,
         "startChar": 4,
@@ -333,6 +381,24 @@
       "side": 1,
       "message": "There\u0027s no methods on Task to inspect that. Do you have an approach for how you\u0027d do it? I avoid adding test code to prod classes unless absolutely necessary.",
       "parentUuid": "0bfde54d_91349e56",
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "726f24b8_09a79fbc",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T20:52:55Z",
+      "side": 1,
+      "message": "What about checking if the file exists or not in the building sub-directory? However, I agree that isn\u0027t absolutely necessary. It\u0027s up to you.",
+      "parentUuid": "3f0e052e_340226eb",
       "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
