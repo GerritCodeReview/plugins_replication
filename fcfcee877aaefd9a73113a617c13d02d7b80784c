@@ -16,6 +16,24 @@
       "revId": "fcfcee877aaefd9a73113a617c13d02d7b80784c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4459f029_12f4ef05",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-24T22:24:15Z",
+      "side": 1,
+      "message": "Done. Also found a pattern in JUnit that covers the assertNoException case I think.",
+      "parentUuid": "7fb1a487_ddded235",
+      "revId": "fcfcee877aaefd9a73113a617c13d02d7b80784c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
