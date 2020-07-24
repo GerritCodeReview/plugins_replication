@@ -1,0 +1,366 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d86f96d_7cf8dc7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "Thanks, Nasser, for adding the unit-tests. They are really useful to understand the current interface and contract and highlights its weaknesses.\n\nI won\u0027t touch the implementation in stable-2.16, but your tests would allow fixing some of the problematic behaviour in the more recent branches, once they are merged up.",
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3aa64017_e4406716",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "What makes this storage \"persisted\" compared to the one at L51? They look identical to me.\nWhat about calling it originalStorage and copyStorage? Or just storage1 and storage2?",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 17
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa670563_cca0d175",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "why not original? Using presistedView vs. original doesn\u0027t make any difference in this test and the reader would wonder why the persistent is tested and not the original.",
+      "range": {
+        "startLine": 62,
+        "startChar": 15,
+        "endLine": 62,
+        "endChar": 28
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c5a5ba3_60c0b940",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "Readability hint: if using the Truth assertions on collection, it would make it more readable and in case of failure more explicit.\n\nExample:\n\nassertThat(persistentView.list()).containsExactly(REF_UPDATE)",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 64
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "784817b1_ac142d1f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "I am fine in testing this, but it should be reported then as a bug and fixed in a follow-up change. If we have two events coming through, the replication storage is \"compressing them\" together in a single file, which is incorrect.\n\nI am marking this comment as resolved, because the focus of this change is just to test the *current* behaviour, should it be correct or not.",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 3
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84afb533_a4d47799",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "Best to use Google Truth and assert on \u0027hasSize\u0027.",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 98,
+        "endChar": 49
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b849f2f8_56aeb7fe",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "Same as above: use Truth and assert on \u0027hasSize\u0027",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 49
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7768585c_ac606cd7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "Use Truth and assert on \u0027containsExactly\u0027.",
+      "range": {
+        "startLine": 103,
+        "startChar": 4,
+        "endLine": 103,
+        "endChar": 61
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccdf0978_a021ea4c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "Why testing it twice? Can we just make a separate test that says that all instances of the same storage have the same elements, and then just testing on one of them? Having always. the original and persistedView is quite misleading IMHO.",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 56
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "247d6de7_af9c0c40",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "Same as before: one test should focus on one aspect only.",
+      "range": {
+        "startLine": 107,
+        "startChar": 4,
+        "endLine": 107,
+        "endChar": 49
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc1ab470_f4d938b2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "Use Truth and assert on emptiness.",
+      "range": {
+        "startLine": 108,
+        "startChar": 4,
+        "endLine": 108,
+        "endChar": 44
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ade713a_b300e378",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "Isn\u0027t this case already tested at L79?",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 33
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04fd6bc8_735fc612",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "Use Truth and use assert on \u0027hasSize\u0027",
+      "range": {
+        "startLine": 135,
+        "startChar": 4,
+        "endLine": 135,
+        "endChar": 49
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4d1f47d_8757a6a1",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "These further actions/assertions do not belong to the test at L129: can they be split into a different one?\n\nExample:\n\ncanDeleteMultipleRefsForSameUri()",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 146,
+        "endChar": 44
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2de5b14e_aefed58d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "Having this delete on persistedView is misleading, as it really doesn\u0027t make any difference executing it in original or persistentView. The point is that one create + two delete does not raise any exception.",
+      "range": {
+        "startLine": 157,
+        "startChar": 4,
+        "endLine": 157,
+        "endChar": 37
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd56d848_f145b2df",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-24T23:28:43Z",
+      "side": 1,
+      "message": "Why not using Guava\u0027s MoreObjects?",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 3
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
