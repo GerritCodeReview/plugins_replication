@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2fb3fc77_3182a632",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-07-24T19:39:20Z",
+      "side": 1,
+      "message": "Hi Martin. Sorry for the delay in responding. Vacation then other work priorities :). Thanks. ",
+      "revId": "36170b9295a27034408b7cbc2aa5d303d6632879",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e339860_5f08a151",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 19
@@ -16,6 +33,24 @@
       "revId": "36170b9295a27034408b7cbc2aa5d303d6632879",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6c0547c_47f94256",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-07-24T19:39:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e339860_5f08a151",
+      "revId": "36170b9295a27034408b7cbc2aa5d303d6632879",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }

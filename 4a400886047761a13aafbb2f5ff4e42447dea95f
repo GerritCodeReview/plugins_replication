@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8c11edcd_77737dad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-07-24T19:39:20Z",
+      "side": 1,
+      "message": "Moved declaration closer for first option if ok.",
+      "parentUuid": "ce02f9b6_cdf0b9e4",
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35365f22_95761a82",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
         "patchSetId": 18
@@ -123,6 +141,30 @@
       "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04bd2828_4bbeffe3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/EventRestApiServlet.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-07-24T19:39:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0aaf65b0_aea10f34",
+      "range": {
+        "startLine": 87,
+        "startChar": 21,
+        "endLine": 87,
+        "endChar": 40
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -291,6 +333,30 @@
     },
     {
       "key": {
+        "uuid": "45880195_d92efa44",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationProcessing.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-07-24T19:39:20Z",
+      "side": 1,
+      "message": "Ok, makes sense. Public it is 😊",
+      "parentUuid": "1fbbd976_5310ed8b",
+      "range": {
+        "startLine": 32,
+        "startChar": 15,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "adfc2f6b_681aafb0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationProcessing.java",
         "patchSetId": 18
@@ -344,6 +410,24 @@
     },
     {
       "key": {
+        "uuid": "90cbf5cb_dcf9cab2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationProcessing.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-07-24T19:39:20Z",
+      "side": 1,
+      "message": "I took a stab at it put they are not exactly the same. They are writing to different places in the case of errors, one to stdout the other sends an HTTP error. Maybe throw the exception rather than catch it and print the string outside the function but not return string if successfull ? How about just removing the comment to avoid confusion ?",
+      "parentUuid": "12a95255_900bd0a6",
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "46829833_e86a5c59",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
         "patchSetId": 18
@@ -379,6 +463,30 @@
       "side": 1,
       "message": "Possibly, but again, we wanted to minimize the risk of affecting existing functionality for this first commit.",
       "parentUuid": "46829833_e86a5c59",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 37
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b77f3a4_8215809a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-07-24T19:39:20Z",
+      "side": 1,
+      "message": "Not clear how this could be done. Do you have examples ?",
+      "parentUuid": "014f50eb_758a8af2",
       "range": {
         "startLine": 17,
         "startChar": 13,
@@ -441,6 +549,24 @@
       "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4569a37a_7974ff3d",
+        "filename": "src/main/resources/Documentation/rest-api-replication.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-07-24T19:39:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d186595e_f792dc87",
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
