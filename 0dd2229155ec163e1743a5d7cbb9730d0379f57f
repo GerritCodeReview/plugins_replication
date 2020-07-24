@@ -114,6 +114,30 @@
     },
     {
       "key": {
+        "uuid": "343cd060_ed04fc71",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-24T21:05:56Z",
+      "side": 1,
+      "message": "If you want to get that change merged first, that\u0027s ok. But if you think these tests are good as-is, I wouldn\u0027t oppose submitting this change. I will gladly do the work to merge up I164426e70 and this change when they\u0027re submitted.",
+      "parentUuid": "0858f01f_ea8909ea",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 209,
+        "endChar": 12
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3e2805d_467a602a",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
         "patchSetId": 1
@@ -230,6 +254,30 @@
       "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9fc9fe7_55455bc7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-24T21:05:56Z",
+      "side": 1,
+      "message": "Yes. It removes local filesystem dependence within the tests and they run faster.",
+      "parentUuid": "1fbe44ec_625dd7e2",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 59
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -402,6 +450,24 @@
       "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6c93b3e_d340a649",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-24T21:05:56Z",
+      "side": 1,
+      "message": "There\u0027s no place where that would be a positive test, i.e. I would never expect to find it in the building/ dir unless I was somehow repeatedly checking it in the background while calling create(). We could get around that by breaking apart create() into two sub-methods, but that would only benefit testability, so I don\u0027t want to modify production code for it.",
+      "parentUuid": "726f24b8_09a79fbc",
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
