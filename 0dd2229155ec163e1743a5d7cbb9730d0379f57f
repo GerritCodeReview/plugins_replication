@@ -256,6 +256,30 @@
     },
     {
       "key": {
+        "uuid": "ed380554_98636434",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-24T20:18:33Z",
+      "side": 1,
+      "message": "I added some tests with multiple \"actors\" (might be threads or even the same thread but with different Task objects) that hopefully shows this.",
+      "parentUuid": "0b6ac680_85421a69",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 44
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0bfde54d_91349e56",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
         "patchSetId": 1
@@ -355,6 +379,30 @@
     },
     {
       "key": {
+        "uuid": "b0a12539_d233ee48",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-24T20:18:33Z",
+      "side": 1,
+      "message": "And yes, there are extra asserts here, I\u0027ll remove them.",
+      "parentUuid": "f886aba9_876b7b23",
+      "range": {
+        "startLine": 124,
+        "startChar": 14,
+        "endLine": 124,
+        "endChar": 31
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "058abdcf_5b5483c3",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
         "patchSetId": 1
@@ -447,6 +495,30 @@
       "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cc6a1d0_b37f5a10",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-24T20:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d95b011_72f82ac6",
+      "range": {
+        "startLine": 189,
+        "startChar": 33,
+        "endLine": 189,
+        "endChar": 45
+      },
+      "revId": "0dd2229155ec163e1743a5d7cbb9730d0379f57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
