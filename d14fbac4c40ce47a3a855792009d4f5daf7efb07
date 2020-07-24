@@ -16,6 +16,24 @@
       "revId": "d14fbac4c40ce47a3a855792009d4f5daf7efb07",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16a40018_dc4f753d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-24T21:30:48Z",
+      "side": 1,
+      "message": "The changes aren\u0027t likely to interfere with each other, so I don\u0027t think this needs to block and wait for the other.",
+      "parentUuid": "7f707064_63b75504",
+      "revId": "d14fbac4c40ce47a3a855792009d4f5daf7efb07",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
