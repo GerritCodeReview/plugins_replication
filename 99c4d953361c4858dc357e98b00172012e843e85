@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "956a724f_b6e43d8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:16:21Z",
+      "side": 1,
+      "message": "Yes, I think it will be much nicer working on master with some of these tests in place.",
+      "parentUuid": "8d86f96d_7cf8dc7a",
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3aa64017_e4406716",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 2
