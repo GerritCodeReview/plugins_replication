@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "8cc6f95a_57fc07b0",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "There\u0027s no functional difference. The intent is to show that a different RTS (ReplicationTasksStorage) object sees updates made by another RTS object because of the persisted updates, i.e. it\u0027s not just in memory in the one RTS object (and thus called it \"persistedView\"). It\u0027s a very black-box approach, but I thought it was helpful in demonstrating the tests.\n\nWith the suggestion below though, I can remove this from here and just put it in the one test where it matters.",
+      "parentUuid": "3aa64017_e4406716",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 17
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa670563_cca0d175",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 2
@@ -62,6 +86,30 @@
       "revId": "99c4d953361c4858dc357e98b00172012e843e85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a648afbc_59646da7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "Yeah, I think testing both would be clearest here. Let me fix.",
+      "parentUuid": "fa670563_cca0d175",
+      "range": {
+        "startLine": 62,
+        "startChar": 15,
+        "endLine": 62,
+        "endChar": 28
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -88,6 +136,30 @@
     },
     {
       "key": {
+        "uuid": "c158bea6_a6df2dd3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "I love this suggestion, but I don\u0027t see how to make it work with the custom equals() helper in here. ReplicateRefUpdate does get equals() and hashCode() later, but not there in 2.16. Feels wrong to add it just for tests. Any ideas for how to make this pattern work?\n\nMy best attempt is doing something like:\n\n private void assertContainsExactly(ReplicationTasksStorage storage, ReplicateRefUpdate update) {\n   assertTrue(equals(storage.list().get(0), update));\n }\n \n assertContainsExactly(persistedView, REF_UPDATE);",
+      "parentUuid": "6c5a5ba3_60c0b940",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 64
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "784817b1_ac142d1f",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 2
@@ -108,6 +180,30 @@
       "revId": "99c4d953361c4858dc357e98b00172012e843e85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d23a34d8_2043c59d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "Unresolving because of the questions below.\n\nIf it\u0027s behavior we don\u0027t expect as part of the RTS contract, then I would suggest we not test it. That said, I don\u0027t think this specific behavior is incorrect or problematic. De-duplicating an identical and non-running update shouldn\u0027t ever pose a problem because the tracking of \"work to be done\" is the same for both. The concern would be if there\u0027s a path where a running update completes and removes waiting/pending/also-running work that has unique \"work to be done\". Do you have a scenario like that where I could add a test case in here that you would expect to fail?",
+      "parentUuid": "784817b1_ac142d1f",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 3
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     },
     {
       "key": {
@@ -134,6 +230,30 @@
     },
     {
       "key": {
+        "uuid": "089c57c4_71241834",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84afb533_a4d47799",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 98,
+        "endChar": 49
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b849f2f8_56aeb7fe",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 2
@@ -154,6 +274,30 @@
       "revId": "99c4d953361c4858dc357e98b00172012e843e85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3c8a659_9a3baaf3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b849f2f8_56aeb7fe",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 49
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -180,6 +324,30 @@
     },
     {
       "key": {
+        "uuid": "1885c4ed_da5cc0f0",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7768585c_ac606cd7",
+      "range": {
+        "startLine": 103,
+        "startChar": 4,
+        "endLine": 103,
+        "endChar": 61
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ccdf0978_a021ea4c",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 2
@@ -200,6 +368,30 @@
       "revId": "99c4d953361c4858dc357e98b00172012e843e85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b848888_dc84003d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "Yeah, that could clean up a lot of the asserts, I\u0027ll try it.",
+      "parentUuid": "ccdf0978_a021ea4c",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 56
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -226,6 +418,30 @@
     },
     {
       "key": {
+        "uuid": "d76c91a9_6a0aef51",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "247d6de7_af9c0c40",
+      "range": {
+        "startLine": 107,
+        "startChar": 4,
+        "endLine": 107,
+        "endChar": 49
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc1ab470_f4d938b2",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 2
@@ -246,6 +462,30 @@
       "revId": "99c4d953361c4858dc357e98b00172012e843e85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3eae522_4a394511",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc1ab470_f4d938b2",
+      "range": {
+        "startLine": 108,
+        "startChar": 4,
+        "endLine": 108,
+        "endChar": 44
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -272,6 +512,30 @@
     },
     {
       "key": {
+        "uuid": "afe38508_6d2a6f85",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ade713a_b300e378",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 33
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04fd6bc8_735fc612",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 2
@@ -292,6 +556,30 @@
       "revId": "99c4d953361c4858dc357e98b00172012e843e85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57fc5644_dab89cae",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04fd6bc8_735fc612",
+      "range": {
+        "startLine": 135,
+        "startChar": 4,
+        "endLine": 135,
+        "endChar": 49
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -318,6 +606,30 @@
     },
     {
       "key": {
+        "uuid": "8239da28_d7d547b9",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4d1f47d_8757a6a1",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 146,
+        "endChar": 44
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2de5b14e_aefed58d",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 2
@@ -341,6 +653,30 @@
     },
     {
       "key": {
+        "uuid": "d8bbbf40_afe16d88",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2de5b14e_aefed58d",
+      "range": {
+        "startLine": 157,
+        "startChar": 4,
+        "endLine": 157,
+        "endChar": 37
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dd56d848_f145b2df",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 2
@@ -352,6 +688,30 @@
       "writtenOn": "2020-07-24T23:28:43Z",
       "side": 1,
       "message": "Why not using Guava\u0027s MoreObjects?",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 3
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b488d558_3083cb6c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-28T19:12:23Z",
+      "side": 1,
+      "message": "What from there would I use? Guava has it\u0027s own Objects.equals(), but they recommend using the JDK version if it\u0027s available.",
+      "parentUuid": "dd56d848_f145b2df",
       "range": {
         "startLine": 180,
         "startChar": 0,
