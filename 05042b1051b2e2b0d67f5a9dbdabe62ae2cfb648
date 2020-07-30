@@ -60,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "7b15dac2_d4c5ea5f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-30T18:21:23Z",
+      "side": 1,
+      "message": "Just that it still holds true when more than one update is persisted. A lot of the testing in here is to avoid \"works for one\" bugs. I can drop them if you don\u0027t think there\u0027s significant value, but I think it\u0027s good to have more tests with multiple updates.",
+      "parentUuid": "7082b466_6fbb905f",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 144,
+        "endChar": 32
+      },
+      "revId": "05042b1051b2e2b0d67f5a9dbdabe62ae2cfb648",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cbb90cb6_4032ddc4",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 3
@@ -71,6 +95,30 @@
       "writtenOn": "2020-07-30T06:34:37Z",
       "side": 1,
       "message": "The double-deleted is tested already at L180. What is the expected benefit of testing it again here?",
+      "range": {
+        "startLine": 200,
+        "startChar": 4,
+        "endLine": 200,
+        "endChar": 31
+      },
+      "revId": "05042b1051b2e2b0d67f5a9dbdabe62ae2cfb648",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3ddc011_d5d8462d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-07-30T18:21:23Z",
+      "side": 1,
+      "message": "Same as above: Just that it still holds true when more than one update is persisted. A lot of the testing in here is to avoid \"works for one\" bugs. I can drop them if you don\u0027t think there\u0027s significant value, but I think it\u0027s good to have more tests with multiple updates.",
+      "parentUuid": "cbb90cb6_4032ddc4",
       "range": {
         "startLine": 200,
         "startChar": 4,
