@@ -225,6 +225,30 @@
     },
     {
       "key": {
+        "uuid": "52d3ad66_d6742510",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-30T06:34:37Z",
+      "side": 1,
+      "message": "The storage is the representation of what we in memory, isn\u0027t it? If we compress events on storage but we do not compress them in memory, then we have a problem.\n\nHowever, this change is not focussed on that problem and I won\u0027t add any functional change in this commit.\n\nMarking this as resolved because we are documenting with these tests how it works *now* and that is correct.",
+      "parentUuid": "d23a34d8_2043c59d",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 3
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84afb533_a4d47799",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 2
@@ -739,6 +763,30 @@
       "revId": "99c4d953361c4858dc357e98b00172012e843e85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "262a4b5d_269f00db",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-30T06:34:37Z",
+      "side": 1,
+      "message": "Gotcha. I would then move this equals into the ReplicateRefUpdate in a follow-up change, which is its natural place to be. For now, I like the idea of keeping this change only based on test code.",
+      "parentUuid": "b488d558_3083cb6c",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 3
+      },
+      "revId": "99c4d953361c4858dc357e98b00172012e843e85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
