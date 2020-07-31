@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "f8c402b1_7c48f10b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-07-31T18:43:59Z",
+      "side": 1,
+      "message": "\u003e Sounds good, thanks Nasser. @Martin did you see the warning on unresolved comments before submission?\n\nYes. As they seemed addressed and you gave the change a +1, I didn\u0027t think it was important to check those boxes, does this cause a problem? You seem to have checked them now, so I assume you agree that they were addressed?",
+      "parentUuid": "d8735d28_1c3b9a39",
+      "revId": "05042b1051b2e2b0d67f5a9dbdabe62ae2cfb648",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7082b466_6fbb905f",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 3
