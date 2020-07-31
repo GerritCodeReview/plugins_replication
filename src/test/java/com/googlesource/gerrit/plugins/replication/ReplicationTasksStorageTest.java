@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 import com.google.common.jimfs.Configuration;
 import com.google.common.jimfs.Jimfs;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
+import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.UriUpdates;
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
@@ -42,12 +43,14 @@ public class ReplicationTasksStorageTest {
   protected ReplicationTasksStorage storage;
   protected FileSystem fileSystem;
   protected Path storageSite;
+  protected UriUpdates uriUpdates;
 
   @Before
   public void setUp() throws Exception {
     fileSystem = Jimfs.newFileSystem(Configuration.unix());
     storageSite = fileSystem.getPath("replication_site");
     storage = new ReplicationTasksStorage(storageSite);
+    uriUpdates = TestUriUpdates.create(REF_UPDATE);
   }
 
   @After
@@ -67,9 +70,10 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
-  public void canDeletePersistedUpdate() throws Exception {
+  public void canFinishPersistedUpdate() throws Exception {
     storage.create(REF_UPDATE);
-    storage.delete(REF_UPDATE);
+    storage.start(uriUpdates);
+    storage.finish(uriUpdates);
     assertThat(storage.list()).isEmpty();
   }
 
@@ -84,7 +88,8 @@ public class ReplicationTasksStorageTest {
     assertContainsExactly(storage, REF_UPDATE);
     assertContainsExactly(persistedView, REF_UPDATE);
 
-    storage.delete(REF_UPDATE);
+    storage.start(uriUpdates);
+    storage.finish(uriUpdates);
     assertThat(storage.list()).isEmpty();
     assertThat(persistedView.list()).isEmpty();
   }
@@ -113,20 +118,23 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
-  public void canDeleteDifferentUris() throws Exception {
+  public void canFinishDifferentUris() throws Exception {
     ReplicateRefUpdate updateB =
         new ReplicateRefUpdate(
             PROJECT,
             REF,
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
             REMOTE);
+    UriUpdates uriUpdatesB = TestUriUpdates.create(updateB);
     storage.create(REF_UPDATE);
     storage.create(updateB);
+    storage.start(uriUpdates);
+    storage.start(uriUpdatesB);
 
-    storage.delete(REF_UPDATE);
+    storage.finish(uriUpdates);
     assertContainsExactly(storage, updateB);
 
-    storage.delete(updateB);
+    storage.finish(uriUpdatesB);
     assertThat(storage.list()).isEmpty();
   }
 
@@ -158,47 +166,55 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
-  public void canDeleteMulipleRefsForSameUri() throws Exception {
-    ReplicateRefUpdate refA = new ReplicateRefUpdate(PROJECT, "refA", URISH, REMOTE);
-    ReplicateRefUpdate refB = new ReplicateRefUpdate(PROJECT, "refB", URISH, REMOTE);
-    storage.create(refA);
-    storage.create(refB);
+  public void canFinishMulipleRefsForSameUri() throws Exception {
+    ReplicateRefUpdate refUpdateA = new ReplicateRefUpdate(PROJECT, "refA", URISH, REMOTE);
+    ReplicateRefUpdate refUpdateB = new ReplicateRefUpdate(PROJECT, "refB", URISH, REMOTE);
+    UriUpdates uriUpdatesA = TestUriUpdates.create(refUpdateA);
+    UriUpdates uriUpdatesB = TestUriUpdates.create(refUpdateB);
+    storage.create(refUpdateA);
+    storage.create(refUpdateB);
+    storage.start(uriUpdatesA);
+    storage.start(uriUpdatesB);
 
-    storage.delete(refA);
-    assertContainsExactly(storage, refB);
+    storage.finish(uriUpdatesA);
+    assertContainsExactly(storage, refUpdateB);
 
-    storage.delete(refB);
+    storage.finish(uriUpdatesB);
     assertThat(storage.list()).isEmpty();
   }
 
   @Test(expected = Test.None.class /* no exception expected */)
-  public void illegalDeleteNonPersistedIsGraceful() throws Exception {
-    storage.delete(REF_UPDATE);
+  public void illegalFinishNonPersistedIsGraceful() throws Exception {
+    storage.finish(uriUpdates);
   }
 
   @Test(expected = Test.None.class /* no exception expected */)
-  public void illegalDoubleDeleteIsGraceful() throws Exception {
+  public void illegalDoubleFinishIsGraceful() throws Exception {
     storage.create(REF_UPDATE);
-    storage.delete(REF_UPDATE);
+    storage.start(uriUpdates);
+    storage.finish(uriUpdates);
 
-    storage.delete(REF_UPDATE);
+    storage.finish(uriUpdates);
   }
 
   @Test(expected = Test.None.class /* no exception expected */)
-  public void illegalDoubleDeleteDifferentUriIsGraceful() throws Exception {
+  public void illegalDoubleFinishDifferentUriIsGraceful() throws Exception {
     ReplicateRefUpdate updateB =
         new ReplicateRefUpdate(
             PROJECT,
             REF,
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
             REMOTE);
+    UriUpdates uriUpdatesB = TestUriUpdates.create(updateB);
     storage.create(REF_UPDATE);
     storage.create(updateB);
-    storage.delete(REF_UPDATE);
-    storage.delete(updateB);
+    storage.start(uriUpdates);
+    storage.start(uriUpdatesB);
+    storage.finish(uriUpdates);
+    storage.finish(uriUpdatesB);
 
-    storage.delete(REF_UPDATE);
-    storage.delete(updateB);
+    storage.finish(uriUpdates);
+    storage.finish(uriUpdatesB);
     assertThat(storage.list()).isEmpty();
   }
 

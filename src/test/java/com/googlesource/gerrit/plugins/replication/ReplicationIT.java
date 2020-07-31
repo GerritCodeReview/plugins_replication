@@ -36,7 +36,9 @@ import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Key;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
+import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.UriUpdates;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -449,7 +451,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   @Test
-  public void shouldFirePendingOnlyToStoredUri() throws Exception {
+  public void shouldFirePendingOnlyToRemainingUris() throws Exception {
     String suffix1 = "replica1";
     String suffix2 = "replica2";
     Project.NameKey target1 = createTestProject(project + suffix1);
@@ -463,7 +465,16 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     String changeRef = createChange().getPatchSet().refName();
 
     tasksStorage.disableDeleteForTesting(false);
-    changeReplicationTasksForRemote(changeRef, remote1).forEach(tasksStorage::delete);
+    changeReplicationTasksForRemote(changeRef, remote1)
+        .forEach(
+            (update) -> {
+              try {
+                UriUpdates uriUpdates = TestUriUpdates.create(update);
+                tasksStorage.start(uriUpdates);
+                tasksStorage.finish(uriUpdates);
+              } catch (URISyntaxException e) {
+              }
+            });
     tasksStorage.disableDeleteForTesting(true);
 
     setReplicationDestination(remote1, suffix1, ALL_PROJECTS);
