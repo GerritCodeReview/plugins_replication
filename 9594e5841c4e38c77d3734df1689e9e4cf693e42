@@ -16,6 +16,24 @@
       "revId": "9594e5841c4e38c77d3734df1689e9e4cf693e42",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2c374d6_e1c5c188",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-31T11:56:27Z",
+      "side": 1,
+      "message": "I believe it requires some more adaptation: there are compilation issues (see the Checks tab)",
+      "parentUuid": "30af049a_3379e745",
+      "revId": "9594e5841c4e38c77d3734df1689e9e4cf693e42",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
