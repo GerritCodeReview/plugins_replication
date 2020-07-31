@@ -19,6 +19,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.flogger.FluentLogger;
 import com.google.common.hash.Hashing;
+import com.google.gerrit.entities.Project;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.google.inject.ProvisionException;
@@ -32,6 +33,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
 
@@ -68,8 +70,12 @@ public class ReplicationTasksStorage {
     public final String uri;
     public final String remote;
 
-    public ReplicateRefUpdate(PushOne push, String ref) {
-      this(push.getProjectNameKey().get(), ref, push.getURI(), push.getRemoteName());
+    public ReplicateRefUpdate(UriUpdates uriUpdates, String ref) {
+      this(
+          uriUpdates.getProjectNameKey().get(),
+          ref,
+          uriUpdates.getURI(),
+          uriUpdates.getRemoteName());
     }
 
     public ReplicateRefUpdate(String project, String ref, URIish uri, String remote) {
@@ -83,6 +89,16 @@ public class ReplicationTasksStorage {
     public String toString() {
       return "ref-update " + project + ":" + ref + " uri:" + uri + " remote:" + remote;
     }
+  }
+
+  public interface UriUpdates {
+    Project.NameKey getProjectNameKey();
+
+    URIish getURI();
+
+    String getRemoteName();
+
+    Set<String> getRefs();
   }
 
   private static final Gson GSON = new Gson();
@@ -114,20 +130,15 @@ public class ReplicationTasksStorage {
     this.disableDeleteForTesting = deleteDisabled;
   }
 
-  @VisibleForTesting
-  public void delete(ReplicateRefUpdate r) {
-    new Task(r).delete();
-  }
-
-  public synchronized void start(PushOne push) {
-    for (String ref : push.getRefs()) {
-      new Task(new ReplicateRefUpdate(push, ref)).start();
+  public synchronized void start(UriUpdates uriUpdates) {
+    for (String ref : uriUpdates.getRefs()) {
+      new Task(new ReplicateRefUpdate(uriUpdates, ref)).start();
     }
   }
 
-  public synchronized void reset(PushOne push) {
-    for (String ref : push.getRefs()) {
-      new Task(new ReplicateRefUpdate(push, ref)).reset();
+  public synchronized void reset(UriUpdates uriUpdates) {
+    for (String ref : uriUpdates.getRefs()) {
+      new Task(new ReplicateRefUpdate(uriUpdates, ref)).reset();
     }
   }
 
@@ -137,9 +148,9 @@ public class ReplicationTasksStorage {
     }
   }
 
-  public synchronized void finish(PushOne push) {
-    for (String ref : push.getRefs()) {
-      new Task(new ReplicateRefUpdate(push, ref)).finish();
+  public synchronized void finish(UriUpdates uriUpdates) {
+    for (String ref : uriUpdates.getRefs()) {
+      new Task(new ReplicateRefUpdate(uriUpdates, ref)).finish();
     }
   }
 
@@ -256,15 +267,6 @@ public class ReplicationTasksStorage {
       try {
         logger.atFine().log("DELETE %s %s", running, updateLog());
         Files.delete(running);
-      } catch (IOException e) {
-        logger.atSevere().withCause(e).log("Error while deleting task %s", taskKey);
-      }
-    }
-
-    public void delete() {
-      try {
-        Files.deleteIfExists(waiting);
-        Files.deleteIfExists(running);
       } catch (IOException e) {
         logger.atSevere().withCause(e).log("Error while deleting task %s", taskKey);
       }
