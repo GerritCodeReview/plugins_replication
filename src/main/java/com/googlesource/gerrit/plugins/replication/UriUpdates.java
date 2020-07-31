@@ -15,7 +15,9 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.entities.Project;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.eclipse.jgit.transport.URIish;
 
 /** A data container for updates to a single URI */
@@ -27,4 +29,13 @@ public interface UriUpdates {
   String getRemoteName();
 
   Set<String> getRefs();
+
+  default List<ReplicationTasksStorage.ReplicateRefUpdate> getReplicateRefUpdates() {
+    return getRefs().stream()
+        .map(
+            (ref) ->
+                new ReplicationTasksStorage.ReplicateRefUpdate(
+                    getProjectNameKey().get(), ref, getURI(), getRemoteName()))
+        .collect(Collectors.toList());
+  }
 }

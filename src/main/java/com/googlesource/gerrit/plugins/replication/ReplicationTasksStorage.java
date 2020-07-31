@@ -68,14 +68,6 @@ public class ReplicationTasksStorage {
     public final String uri;
     public final String remote;
 
-    public ReplicateRefUpdate(UriUpdates uriUpdates, String ref) {
-      this(
-          uriUpdates.getProjectNameKey().get(),
-          ref,
-          uriUpdates.getURI(),
-          uriUpdates.getRemoteName());
-    }
-
     public ReplicateRefUpdate(String project, String ref, URIish uri, String remote) {
       this.project = project;
       this.ref = ref;
@@ -119,14 +111,14 @@ public class ReplicationTasksStorage {
   }
 
   public synchronized void start(UriUpdates uriUpdates) {
-    for (String ref : uriUpdates.getRefs()) {
-      new Task(new ReplicateRefUpdate(uriUpdates, ref)).start();
+    for (ReplicateRefUpdate update : uriUpdates.getReplicateRefUpdates()) {
+      new Task(update).start();
     }
   }
 
   public synchronized void reset(UriUpdates uriUpdates) {
-    for (String ref : uriUpdates.getRefs()) {
-      new Task(new ReplicateRefUpdate(uriUpdates, ref)).reset();
+    for (ReplicateRefUpdate update : uriUpdates.getReplicateRefUpdates()) {
+      new Task(update).reset();
     }
   }
 
@@ -137,8 +129,8 @@ public class ReplicationTasksStorage {
   }
 
   public synchronized void finish(UriUpdates uriUpdates) {
-    for (String ref : uriUpdates.getRefs()) {
-      new Task(new ReplicateRefUpdate(uriUpdates, ref)).finish();
+    for (ReplicateRefUpdate update : uriUpdates.getReplicateRefUpdates()) {
+      new Task(update).finish();
     }
   }
 
