@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "d8735d28_1c3b9a39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-31T07:00:46Z",
+      "side": 1,
+      "message": "Sounds good, thanks Nasser. @Martin did you see the warning on unresolved comments before submission?",
+      "revId": "05042b1051b2e2b0d67f5a9dbdabe62ae2cfb648",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7082b466_6fbb905f",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 3
@@ -84,6 +101,30 @@
     },
     {
       "key": {
+        "uuid": "cb2904e5_fb94a5e1",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-31T07:00:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7b15dac2_d4c5ea5f",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 144,
+        "endChar": 32
+      },
+      "revId": "05042b1051b2e2b0d67f5a9dbdabe62ae2cfb648",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cbb90cb6_4032ddc4",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 3
@@ -128,6 +169,30 @@
       "revId": "05042b1051b2e2b0d67f5a9dbdabe62ae2cfb648",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4615fc9a_e138238f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-07-31T07:00:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c3ddc011_d5d8462d",
+      "range": {
+        "startLine": 200,
+        "startChar": 4,
+        "endLine": 200,
+        "endChar": 31
+      },
+      "revId": "05042b1051b2e2b0d67f5a9dbdabe62ae2cfb648",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
