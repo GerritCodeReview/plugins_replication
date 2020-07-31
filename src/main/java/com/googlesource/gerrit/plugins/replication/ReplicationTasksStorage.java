@@ -68,8 +68,12 @@ public class ReplicationTasksStorage {
     public final String uri;
     public final String remote;
 
-    public ReplicateRefUpdate(PushOne push, String ref) {
-      this(push.getProjectNameKey().get(), ref, push.getURI(), push.getRemoteName());
+    public ReplicateRefUpdate(UriUpdates uriUpdates, String ref) {
+      this(
+          uriUpdates.getProjectNameKey().get(),
+          ref,
+          uriUpdates.getURI(),
+          uriUpdates.getRemoteName());
     }
 
     public ReplicateRefUpdate(String project, String ref, URIish uri, String remote) {
@@ -114,20 +118,15 @@ public class ReplicationTasksStorage {
     this.disableDeleteForTesting = deleteDisabled;
   }
 
-  @VisibleForTesting
-  public void delete(ReplicateRefUpdate r) {
-    new Task(r).delete();
-  }
-
-  public synchronized void start(PushOne push) {
-    for (String ref : push.getRefs()) {
-      new Task(new ReplicateRefUpdate(push, ref)).start();
+  public synchronized void start(UriUpdates uriUpdates) {
+    for (String ref : uriUpdates.getRefs()) {
+      new Task(new ReplicateRefUpdate(uriUpdates, ref)).start();
     }
   }
 
-  public synchronized void reset(PushOne push) {
-    for (String ref : push.getRefs()) {
-      new Task(new ReplicateRefUpdate(push, ref)).reset();
+  public synchronized void reset(UriUpdates uriUpdates) {
+    for (String ref : uriUpdates.getRefs()) {
+      new Task(new ReplicateRefUpdate(uriUpdates, ref)).reset();
     }
   }
 
@@ -137,9 +136,9 @@ public class ReplicationTasksStorage {
     }
   }
 
-  public synchronized void finish(PushOne push) {
-    for (String ref : push.getRefs()) {
-      new Task(new ReplicateRefUpdate(push, ref)).finish();
+  public synchronized void finish(UriUpdates uriUpdates) {
+    for (String ref : uriUpdates.getRefs()) {
+      new Task(new ReplicateRefUpdate(uriUpdates, ref)).finish();
     }
   }
 
@@ -256,15 +255,6 @@ public class ReplicationTasksStorage {
       try {
         logger.atFine().log("DELETE %s %s", running, updateLog());
         Files.delete(running);
-      } catch (IOException e) {
-        logger.atSevere().withCause(e).log("Error while deleting task %s", taskKey);
-      }
-    }
-
-    public void delete() {
-      try {
-        Files.deleteIfExists(waiting);
-        Files.deleteIfExists(running);
       } catch (IOException e) {
         logger.atSevere().withCause(e).log("Error while deleting task %s", taskKey);
       }
