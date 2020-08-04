@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6439a0e4_ee0171ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-04T22:22:43Z",
+      "side": 1,
+      "message": "Mistakenly created a change instead of moving this change https://gerrit-review.googlesource.com/c/plugins/replication/+/268612 to master.",
+      "revId": "27c9b2ffd6224f10b336b53081ec2947343beb5b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
