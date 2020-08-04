@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9853757_66a1d9c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-08-04T07:29:22Z",
+      "side": 1,
+      "message": "Since the original change (267812) was moved to master this series of merges doesn\u0027t make sense anymore, abandon?",
+      "revId": "44fdef7ce6446973ab9432449b08dde74150b6a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
