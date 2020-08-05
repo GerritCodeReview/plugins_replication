@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad9893c6_047e600c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-05T22:56:41Z",
+      "side": 1,
+      "message": "nit: use imperative form.",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 23
+      },
+      "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7ca5135_16cc01cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-05T22:56:41Z",
+      "side": 1,
+      "message": "I agree with you in general that we should not have code that is meant to be used just for testing. In this case, however, the cost of not having 3 lines of code for exposing a piece of code that is used anyway resulted in 52 extra lines of code that would not be needed.\n\nBottom line: it is best to have 3 lines of overhead rather than 52 lines of overhead, IMHO.\nHowever, I am open to challenges on the above :-)",
+      "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
