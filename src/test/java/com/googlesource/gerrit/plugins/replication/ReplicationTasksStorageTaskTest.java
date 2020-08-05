@@ -346,27 +346,27 @@ public class ReplicationTasksStorageTaskTest {
     assertIsWaiting(persistedView);
   }
 
-  private void assertIsWaiting(Task task) {
+  public static void assertIsWaiting(Task task) {
     assertTrue(whiteBoxIsWaiting(task));
   }
 
-  private void assertNotWaiting(Task task) {
+  public static void assertNotWaiting(Task task) {
     assertFalse(whiteBoxIsWaiting(task));
   }
 
-  private void assertIsRunning(Task task) {
+  public static void assertIsRunning(Task task) {
     assertTrue(whiteBoxIsRunning(task));
   }
 
-  private void assertNotRunning(Task task) {
+  public static void assertNotRunning(Task task) {
     assertFalse(whiteBoxIsRunning(task));
   }
 
-  private boolean whiteBoxIsRunning(Task task) {
+  public static boolean whiteBoxIsRunning(Task task) {
     return Files.exists(task.running);
   }
 
-  private boolean whiteBoxIsWaiting(Task task) {
+  public static boolean whiteBoxIsWaiting(Task task) {
     return Files.exists(task.waiting);
   }
 
