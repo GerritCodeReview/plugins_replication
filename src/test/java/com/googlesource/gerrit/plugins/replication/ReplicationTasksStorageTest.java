@@ -202,12 +202,12 @@ public class ReplicationTasksStorageTest {
     assertThat(storage.list()).isEmpty();
   }
 
-  private void assertContainsExactly(
+  public static void assertContainsExactly(
       ReplicationTasksStorage tasksStorage, ReplicateRefUpdate update) {
     assertTrue(equals(tasksStorage.list().get(0), update));
   }
 
-  private boolean equals(ReplicateRefUpdate one, ReplicateRefUpdate two) {
+  private static boolean equals(ReplicateRefUpdate one, ReplicateRefUpdate two) {
     return (one == null && two == null)
         || (one != null
             && two != null
