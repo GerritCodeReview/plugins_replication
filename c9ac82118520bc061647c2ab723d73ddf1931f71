@@ -16,6 +16,29 @@
       "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be8133ef_6f1d6216",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2020-08-05T14:42:13Z",
+      "side": 1,
+      "message": "out of curiosity: is there any benefit of calling next() prior actually doing the stuff? Would that end in the situation when runner.onDone() would be called prior runner.run(item) is performed? Would that be a problem then?\nI can imagine that \u0027replying\u0027 will be set to false prior the last replication event will be actually scheduled... It could potentially be a problem for tests (if they ever verify that ;)).\n\nSorry if I haven\u0027t understood it correct ;)",
+      "range": {
+        "startLine": 101,
+        "startChar": 6,
+        "endLine": 105,
+        "endChar": 7
+      },
+      "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
