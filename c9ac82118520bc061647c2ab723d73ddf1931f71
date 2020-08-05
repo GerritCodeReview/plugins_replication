@@ -19,6 +19,52 @@
     },
     {
       "key": {
+        "uuid": "2c6dd28b_6c8356dd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-05T23:15:20Z",
+      "side": 1,
+      "message": "Looking at the methods, this is a runner of an item in a stream. The onDone() is called when the stream is complete, the run() is the execution of the item.\n\nWhat about giving a name that is more representative of what it is?\nProposal: ItemRunner?",
+      "range": {
+        "startLine": 35,
+        "startChar": 19,
+        "endLine": 35,
+        "endChar": 25
+      },
+      "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2597cf9_922fadba",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-05T23:15:20Z",
+      "side": 1,
+      "message": "This is used only once at L82: what\u0027s the benefit of defining a standalone class?\nWhy not just inlining at L82 instead?",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 40
+      },
+      "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "be8133ef_6f1d6216",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
         "patchSetId": 11
@@ -35,6 +81,29 @@
         "startChar": 6,
         "endLine": 105,
         "endChar": 7
+      },
+      "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9d75579_d83d0223",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-05T23:15:20Z",
+      "side": 1,
+      "message": "I see what you want to achieve: a generic mechanism for chaining a lower priority tasks to an existing scheduler. Then using this into the replication queue for the events replay.\n\nHowever, it would be much clearer if the two concerns were addressed in two separate changes:\n- introduction of a ChainedScheduler + associated unit-tests\n- use of the ChainedScheduler in the replication plugin for the events replay\n\nWDYT?",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 224,
+        "endChar": 11
       },
       "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
