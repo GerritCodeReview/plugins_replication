@@ -39,6 +39,24 @@
       "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d1ee7408_e2db92a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-06T16:25:50Z",
+      "side": 1,
+      "message": "Currently the 3.1 code is not testing the use cases and APIs that the replication plugin uses in 3.1. This change (and likely even more) should have been done in the merge to 3.1 as the APIs have changed in 3.1. The tests before this change reflect the 2.16 API and not the way the 3.1 API is designed. This is a problem as the tests now do not help test the code paths that the plugin will actually use in real use cases. This miss-alignment happened because the delete() method was not removed from the code base even though is it no longer a part of the API and the tests were able to pass even though the API changed. This highlights how leaving unused code around only for testing is detrimental as it allows tests that should no longer pass to continue to pass. This approach to trying to save 49 lines of code in tests is the equivalent of saying \"let\u0027s save test code by removing tests\".",
+      "parentUuid": "b7ca5135_16cc01cc",
+      "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
