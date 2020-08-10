@@ -235,6 +235,24 @@
       "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "073b86c3_4d781a36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-10T22:31:42Z",
+      "side": 1,
+      "message": "It is indeed a very useful refactoring that allows to test the start/finish more effectively. It goes beyond IMHO the scope of the headline: \"remove delete() missed during the merge\".\n\nRemoving a dead method and its associated tests is a valid objective for a change. Adding another test and refactoring the code to make it testable",
+      "parentUuid": "1da88f66_fb773c58",
+      "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
