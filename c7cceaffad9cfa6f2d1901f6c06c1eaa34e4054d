@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d39869b1_ef5a0f98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-10T22:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3a70f9c_7f318d89",
+      "range": {
+        "startLine": 7,
+        "startChar": 30,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "823b32bc_2f780aac",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a58497d2_df8eab9d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-10T22:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "823b32bc_2f780aac",
+      "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -62,6 +104,30 @@
       "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26f1179a_7a4c7923",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-10T22:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad9893c6_047e600c",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 23
+      },
+      "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -151,6 +217,24 @@
       "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1da88f66_fb773c58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-10T22:23:15Z",
+      "side": 1,
+      "message": "\u003e \u003e \u003e Can we possibly break it down into different concerns?\n\u003e \u003e \u003e 1. Clean-up post merge by removing the delete() method and its associated references in tests, which are now dead code.\n\u003e \u003e \u003e 2. Refactoring with the new test-cases\n\u003e \u003e \n\u003e \u003e This change is not adding any new test cases. It is only addressing #1.\n\u003e \n\u003e See the introduction of UriUpdates in ReplicationTaskStorage.java:73\n\nThat\u0027s not a new test. It\u0027s a helper interface to reduce duplicate code. I can upload this without it, but you end up with error prone code (I originally wrote this without it, in hindsight, I would have pushed so you could see the diff).",
+      "parentUuid": "948c775a_21db39b1",
+      "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
