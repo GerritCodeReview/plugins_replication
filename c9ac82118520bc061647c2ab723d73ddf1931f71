@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "3f01c47d_3f8288f7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-10T22:47:56Z",
+      "side": 1,
+      "message": "\u003e Looking at the methods, this is a runner of an item in a stream. The onDone() is called when the stream is complete, the run() is the execution of the item.\n\nI can see how the docs made it look like this, that was wrong. I have updated the docs to hopefully clarify that this is NOT actually the case.\n\n\u003e What about giving a name that is more representative of what it is?\n\u003e Proposal: ItemRunner?\n\nI think this name would be more confusing as it does not run a single Item, it runs them all.\n\nI also think that adding \u0027Item\u0027 or \u0027Items\u0027 to the Runner interface would just make it overly complicated to use as this is the API for a ChainedScheduler and will need to be overridden foe each use of the ChainedScheduler. In such cases, usually shorter names are better, common examples: \"Iteraror\" vs \"ItemIterator\", \"Stream\" vs \"ItemsStream\".",
+      "parentUuid": "2c6dd28b_6c8356dd",
+      "range": {
+        "startLine": 35,
+        "startChar": 19,
+        "endLine": 35,
+        "endChar": 25
+      },
+      "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2597cf9_922fadba",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
         "patchSetId": 11
@@ -65,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "550999d8_f290c899",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-10T22:47:56Z",
+      "side": 1,
+      "message": "Keeping this as a separate class helps clearly identify the coding pattern. Naturally, this helps with code re-use, but more importantly it helps separate concerns. This class now has a single concern, and so does the StreamScheduler. If I were to move this code into the StreamScheduler, the StreamScheduler would then have to implement two concerns and it would be harder to comprehend. Guava does a similar thing with its Forwarding Decorators: https://github.com/google/guava/wiki/CollectionHelpersExplained There are many explanations of this pattern in tutorials, example: http://www.javabyexamples.com/forwarding-reusable-decorators I think it makes more sense to have a separate class to do the forwarding as it is easier to review. I have adjusted the class name to be a bit closer to those examples.",
+      "parentUuid": "f2597cf9_922fadba",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 40
+      },
+      "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "be8133ef_6f1d6216",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
         "patchSetId": 11
@@ -85,6 +133,30 @@
       "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73f415b3_a3dc669e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-10T22:47:56Z",
+      "side": 1,
+      "message": "\u003e out of curiosity: is there any benefit of calling next() prior actually doing the stuff?\n\nYes, as the next() call is where the scheduling happens. If the scheduling were called when a task completed instead of when it was started, then no two tasks could ever run at the same time. That approach could also provide a useful scheduling pattern, one with an even further reduced priority over the current pattern. Someone could easily modify this scheduler to be able to implement either approach in the future if they needed it, however this change is looking to take advantage of free threads when they are available to perform the work in parallel, and that requires scheduling the next work item before the task work actually begins.\n\n\u003e Would that end in the situation when runner.onDone() would be called prior runner.run(item) is performed?\n\nYes, I believe it would, and that is NOT the intent. I have fixed this in the next PS, and also hopefully highlighted the scheduling aspect better (single intent method should now be clearer).\n\n\u003e Sorry if I haven\u0027t understood it correct ;)\n\nI think you did, thanks for pointing that bug!",
+      "parentUuid": "be8133ef_6f1d6216",
+      "range": {
+        "startLine": 101,
+        "startChar": 6,
+        "endLine": 105,
+        "endChar": 7
+      },
+      "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
