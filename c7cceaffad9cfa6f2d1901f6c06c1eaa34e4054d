@@ -75,6 +75,24 @@
       "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be44076d_60582c3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-10T20:51:42Z",
+      "side": 1,
+      "message": "\u003e \u003e Currently the 3.1 code is not testing the use cases and APIs that the replication plugin uses in 3.1. This change (and likely even more) should have been done in the merge to 3.1 as the APIs have changed in 3.1. The tests before this change reflect the 2.16 API and not the way the 3.1 API is designed.\n\u003e \n\u003e Basically this is a delete \u003d\u003e finish translation needed because of the new v3.1 replication task storage design.\n\nYes\n\n\u003e Can we make this intent more explicit? Now it is clear to me, whilst previously it looked like just a cleanup + a refactoring, but now I get it.\n\nI tried to do that in the commit message, but guess I missed something. Can you suggest what would make it clearer?\n\n\u003e \n\u003e \u003e This is a problem as the tests now do not help test the code paths that the plugin will actually use in real use cases. This miss-alignment happened because the delete() method was not removed from the code base even though is it no longer a part of the API and the tests were able to pass even though the API changed.\n\u003e \n\u003e Should have been then part of the merge, as you said before?\n\u003e Can we possibly break it down into different concerns?\n\u003e 1. Clean-up post merge by removing the delete() method and its associated references in tests, which are now dead code.\n\u003e 2. Refactoring with the new test-cases\n\nThis change is not adding any new test cases. It is only addressing #1.",
+      "parentUuid": "28c6dcfe_5ed8965d",
+      "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
