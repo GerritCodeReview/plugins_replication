@@ -46,6 +46,30 @@
       "revId": "9898899b19eb3a3b9f0e17c1801ccec8291677f7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8b0cb9c_dd3d9e90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-10T22:51:56Z",
+      "side": 1,
+      "message": "Just to show the duplication, here\u0027s the diff from this PS to what it would be without the UriUpdates interface in just ReplicationTasksStorage:\n\n diff --git a/src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java b/src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java\n index 8a5aba23..178d997b 100644\n --- a/src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java\n +++ b/src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java\n @@ -19,7 +19,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;\n  import com.google.common.annotations.VisibleForTesting;\n  import com.google.common.flogger.FluentLogger;\n  import com.google.common.hash.Hashing;\n -import com.google.gerrit.entities.Project;\n  import com.google.gson.Gson;\n  import com.google.inject.Inject;\n  import com.google.inject.ProvisionException;\n @@ -70,14 +69,6 @@ public class ReplicationTasksStorage {\n      public final String uri;\n      public final String remote;\n \n -    public ReplicateRefUpdate(UriUpdates uriUpdates, String ref) {\n -      this(\n -          uriUpdates.getProjectNameKey().get(),\n -          ref,\n -          uriUpdates.getURI(),\n -          uriUpdates.getRemoteName());\n -    }\n -\n      public ReplicateRefUpdate(String project, String ref, URIish uri, String remote) {\n        this.project \u003d project;\n        this.ref \u003d ref;\n @@ -91,16 +82,6 @@ public class ReplicationTasksStorage {\n      }\n    }\n \n -  public interface UriUpdates {\n -    Project.NameKey getProjectNameKey();\n -\n -    URIish getURI();\n -\n -    String getRemoteName();\n -\n -    Set\u003cString\u003e getRefs();\n -  }\n -\n    private static final Gson GSON \u003d new Gson();\n \n    private final Path refUpdates;\n @@ -130,15 +111,25 @@ public class ReplicationTasksStorage {\n      this.disableDeleteForTesting \u003d deleteDisabled;\n    }\n \n -  public synchronized void start(UriUpdates uriUpdates) {\n -    for (String ref : uriUpdates.getRefs()) {\n -      new Task(new ReplicateRefUpdate(uriUpdates, ref)).start();\n +  public synchronized void start(PushOne push) {\n +    start(push.getRefs(), push.getProjectNameKey().get(), push.getURI(), push.getRemoteName());\n +  }\n +\n +  @VisibleForTesting\n +  public synchronized void start(Set\u003cString\u003e refs, String project, URIish uri, String remote) {\n +    for (String ref : refs) {\n +      new Task(new ReplicateRefUpdate(project, ref, uri, remote)).start();\n      }\n    }\n \n -  public synchronized void reset(UriUpdates uriUpdates) {\n -    for (String ref : uriUpdates.getRefs()) {\n -      new Task(new ReplicateRefUpdate(uriUpdates, ref)).reset();\n +  public synchronized void reset(PushOne push) {\n +    reset(push.getRefs(), push.getProjectNameKey().get(), push.getURI(), push.getRemoteName());\n +  }\n +\n +  @VisibleForTesting\n +  public synchronized void reset(Set\u003cString\u003e refs, String project, URIish uri, String remote) {\n +    for (String ref : refs) {\n +      new Task(new ReplicateRefUpdate(project, ref, uri, remote)).reset();\n      }\n    }\n \n @@ -148,9 +139,14 @@ public class ReplicationTasksStorage {\n      }\n    }\n \n -  public synchronized void finish(UriUpdates uriUpdates) {\n -    for (String ref : uriUpdates.getRefs()) {\n -      new Task(new ReplicateRefUpdate(uriUpdates, ref)).finish();\n +  public synchronized void finish(PushOne push) {\n +    finish(push.getRefs(), push.getProjectNameKey().get(), push.getURI(), push.getRemoteName());\n +  }\n +\n +  @VisibleForTesting\n +  public synchronized void finish(Set\u003cString\u003e refs, String project, URIish uri, String remote) {\n +    for (String ref : refs) {\n +      new Task(new ReplicateRefUpdate(project, ref, uri, remote)).finish();\n      }\n    }",
+      "parentUuid": "0f32bd01_369cca70",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 24
+      },
+      "revId": "9898899b19eb3a3b9f0e17c1801ccec8291677f7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
