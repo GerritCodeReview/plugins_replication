@@ -22,6 +22,30 @@
       "revId": "9898899b19eb3a3b9f0e17c1801ccec8291677f7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f32bd01_369cca70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-10T22:35:29Z",
+      "side": 1,
+      "message": "I\u0027m really against adding error prone code if I can avoid it in the first place. Do we really want to encourage it? If I saw you uploading a change that had 3 nearly duplicate lines, I\u0027d be asking you to improve it. If you really want that in a new change, I can split it.",
+      "parentUuid": "30782cbd_b730206e",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 24
+      },
+      "revId": "9898899b19eb3a3b9f0e17c1801ccec8291677f7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
