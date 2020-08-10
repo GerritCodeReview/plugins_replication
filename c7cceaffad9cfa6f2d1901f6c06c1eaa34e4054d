@@ -271,6 +271,24 @@
       "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d35893a2_627129d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-10T22:39:39Z",
+      "side": 1,
+      "message": "\u003e \u003e It is indeed a very useful refactoring that allows to test the start/finish more effectively. It goes beyond IMHO the scope of the headline: \"remove delete() missed during the merge\".\n\u003e \u003e \n\u003e \u003e Removing a dead method and its associated tests is a valid objective for a change. Adding another test and refactoring the code to make it testable\n\u003e \n\u003e You keep saying \"adding another test\". What test are you referring to?\n\nAlso, to be clear, to keep the unit tests working without delete(), start() and finish() *must* have some refactoring done. The \"optional\" piece is the new interface.",
+      "parentUuid": "4c4381f3_01537434",
+      "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
