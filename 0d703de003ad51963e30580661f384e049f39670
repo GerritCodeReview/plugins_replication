@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "b0a43178_c473adac",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-10T10:55:47Z",
+      "side": 1,
+      "message": "\u003e \u003e executing the task in a plain thread isn\u0027t observable via show-queue command\n\u003e True, but this is also not a goal of this change. If this is important I could do it in a follow-up change.\n\u003e This would mean that we register a new queue and submit firePendingEvents task into that queue.\n\nI agree with Saša: the focus of this change is making the simplest and safest fix to the problem. Then, on master, Martin\u0027s change it resolving it with a more canonical and comprehensive fashion.\n\nThe thread is spawn with a well-known name and will be visible in JavaMelody anyway. Also, it is supposed to be created only at startup.\n\nIt is then acceptable IMHO.",
+      "parentUuid": "096721a6_a2592007",
+      "revId": "0d703de003ad51963e30580661f384e049f39670",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "58870ac5_ccf5ab50",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 1
