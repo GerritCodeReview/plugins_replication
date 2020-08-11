@@ -160,6 +160,30 @@
     },
     {
       "key": {
+        "uuid": "4d9919d0_22d7e5c0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2020-08-11T14:55:22Z",
+      "side": 1,
+      "message": "\u003e Yes, I believe it would, and that is NOT the intent...\n\nThat was the reason why I have asked about the benefits of doing the front-loading as it could be easily solved with back-loading, but that wouldn\u0027t result in the thread pool soaking with replication tasks during the no-load period ;) PS#12 solves the problem and preserves the soaking IOW LGTM.\nAnd I\u0027m glad that I have helped ;).",
+      "parentUuid": "73f415b3_a3dc669e",
+      "range": {
+        "startLine": 101,
+        "startChar": 6,
+        "endLine": 105,
+        "endChar": 7
+      },
+      "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a9d75579_d83d0223",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 11
