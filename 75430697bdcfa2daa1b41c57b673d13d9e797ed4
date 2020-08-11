@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d19be536_1dd69a48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-11T22:29:14Z",
+      "side": 1,
+      "message": "Once Change-Id: I224c2ce is merged, the statement may not be true anymore.",
+      "range": {
+        "startLine": 10,
+        "startChar": 26,
+        "endLine": 11,
+        "endChar": 27
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adca82d5_41859ec7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-11T22:29:14Z",
+      "side": 1,
+      "message": "When there is no load, they will still be serialised. Where is the mechanism that makes them faster in absence of load?",
+      "range": {
+        "startLine": 24,
+        "startChar": 27,
+        "endLine": 24,
+        "endChar": 39
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d962158_a5bb6943",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-11T22:29:14Z",
+      "side": 1,
+      "message": "I did not find any throttling mechanism in the ChainedScheduler: could you provide a source file + line number of where that is implemented? What I see from the code is a serial firing of the events using a stream.",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ab2a70c_6efd55ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-11T22:29:14Z",
+      "side": 1,
+      "message": "I believe I start to understand more how the ChainedScheduler works. However, as it is done in a separate class for making it reusable, I would love to see some API contract validation.\n\nI am also struggling to find in the code the behaviour described in the commit message.",
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
