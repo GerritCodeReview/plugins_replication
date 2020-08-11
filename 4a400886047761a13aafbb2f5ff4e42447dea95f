@@ -428,6 +428,24 @@
     },
     {
       "key": {
+        "uuid": "dfa860c2_84360e20",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationProcessing.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-11T21:52:55Z",
+      "side": 1,
+      "message": "\u003e I took a stab at it put they are not exactly the same. They are writing to different places in the case of errors, one to stdout the other sends an HTTP error. Maybe throw the exception rather than catch it and print the string outside the function but not return string if successfull ? How about just removing the comment to avoid confusion ?\n\nHmm, I believe there is code in the plugin which already deals with a similar issue by creating a special \"writer\" to write to, try something like that?",
+      "parentUuid": "90cbf5cb_dcf9cab2",
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "46829833_e86a5c59",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
         "patchSetId": 18
@@ -487,6 +505,30 @@
       "side": 1,
       "message": "Not clear how this could be done. Do you have examples ?",
       "parentUuid": "014f50eb_758a8af2",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 37
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0f7bcef_afb43ecb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-11T21:52:55Z",
+      "side": 1,
+      "message": "\u003e Not clear how this could be done. Do you have examples ?\n\nMaybe something like this:\n\nhttps://gerrit.googlesource.com/plugins/examples/+/refs/heads/master/example-sshAndRestCommandOptionBeanParseListener/src/main/java/com/googlesource/gerrit/plugins/examples/sshandrestcommandoptionbeanparselistener/Modules.java",
+      "parentUuid": "3b77f3a4_8215809a",
       "range": {
         "startLine": 17,
         "startChar": 13,
