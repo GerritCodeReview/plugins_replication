@@ -307,6 +307,24 @@
       "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "199fe4df_f7a42676",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-11T23:05:22Z",
+      "side": 1,
+      "message": "\u003e \u003e \u003e \u003e It is indeed a very useful refactoring that allows to test the start/finish more effectively. It goes beyond IMHO the scope of the headline: \"remove delete() missed during the merge\".\n\u003e \u003e \u003e \u003e \n\u003e \u003e \u003e \u003e Removing a dead method and its associated tests is a valid objective for a change. Adding another test and refactoring the code to make it testable\n\u003e \u003e \u003e \n\u003e \u003e \u003e You keep saying \"adding another test\". What test are you referring to?\n\u003e \u003e \n\u003e \u003e Also, to be clear, to keep the unit tests working without delete(), start() and finish() *must* have some refactoring done. The \"optional\" piece is the new interface.\n\u003e \n\u003e The headline of the commit is \"TasksStorage: Remove delete() missed during merge\" hence I assumed that is the main purpose of the change. However, I see that the new test on the start/finish methods makes the bulk of the code change.\n\nRemoving delete() is absolutely the main (and only) purpose of this change. Please comment on specific examples of this change doing something else if you insist they exist.\n\nAnd again, what \"new test\"? Please comment on the lines that you see adding a new test. I\u0027m definitely fixing existing tests, but no new tests are added.\n\n\u003e \n\u003e I was expecting two changes instead:\n\u003e - removal of the delete() and the associated test (missed during the merge)\n\u003e - addition of the new start/finish methods with the associated refactoring needed to test it effectively.\n\nThose two changes do not make sense to me. Removing delete() and the tests that use it would be removing test coverage. I have a single change that maintains test coverage by fixing the tests to not use delete(), which as the commit message explains is what should have been done originally.",
+      "parentUuid": "30153622_920bb9b1",
+      "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
