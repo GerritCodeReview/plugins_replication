@@ -289,6 +289,24 @@
       "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30153622_920bb9b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-11T22:12:24Z",
+      "side": 1,
+      "message": "\u003e \u003e \u003e It is indeed a very useful refactoring that allows to test the start/finish more effectively. It goes beyond IMHO the scope of the headline: \"remove delete() missed during the merge\".\n\u003e \u003e \u003e \n\u003e \u003e \u003e Removing a dead method and its associated tests is a valid objective for a change. Adding another test and refactoring the code to make it testable\n\u003e \u003e \n\u003e \u003e You keep saying \"adding another test\". What test are you referring to?\n\u003e \n\u003e Also, to be clear, to keep the unit tests working without delete(), start() and finish() *must* have some refactoring done. The \"optional\" piece is the new interface.\n\nThe headline of the commit is \"TasksStorage: Remove delete() missed during merge\" hence I assumed that is the main purpose of the change. However, I see that the new test on the start/finish methods makes the bulk of the code change.\n\nI was expecting two changes instead:\n- removal of the delete() and the associated test (missed during the merge)\n- addition of the new start/finish methods with the associated refactoring needed to test it effectively.\n\nHope this clarifies.",
+      "parentUuid": "d35893a2_627129d4",
+      "revId": "c7cceaffad9cfa6f2d1901f6c06c1eaa34e4054d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
