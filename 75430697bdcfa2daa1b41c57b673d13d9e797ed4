@@ -435,6 +435,23 @@
     },
     {
       "key": {
+        "uuid": "0fcb9f4f_e53db171",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-12T21:16:00Z",
+      "side": 1,
+      "message": "I confirm my +1, I will hold off any further comments for giving space to other contributors and maintainers to dig into the change and provider their feedback.\n\nI will make further investigation on the code offline, thanks in the meantime to Martin for uploading his change and his proposed ChainScheduler. I apologise in advance if I created frustration with my questions on the code: I just wanted was deeply understand the change, its consequences on the replication plugin architecture and provide meaningful feedback.",
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e447db75_17763441",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
         "patchSetId": 12
