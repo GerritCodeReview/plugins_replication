@@ -311,6 +311,30 @@
     },
     {
       "key": {
+        "uuid": "fbe9d46d_3407996c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-12T15:26:33Z",
+      "side": 1,
+      "message": "\u003e Because the current implementation is putting another task in the queue *before* execution the fire of the replication event, they could end up occupying all replication threads at once.\n\nThis is incorrect, I think there is still a miss-understanding of this change (understandable, I regularly think it is doing more than it is). This change does not change the way that startup-pending events are executed, it only changes the way they are scheduled! In other words, before this change, the replication plugin tries to schedule all the startup-pending events before letting the server startup, but it does not wait for all of those startup-pending events to execute. This change doesn\u0027t even wait for the scheduling as it only starts a ChainedScheduler in the default queue (not a replication queue). So all these startup-pending eventa will be iterated over in the default queue and each one will then be scheduled in the appropriate replication queue. There is no throttling of the startup-pending event execution, only a throttling of the scheduling to avoid overloading the default queue.\n\n\u003e Should we also define an \"intial delay\" so that we don\u0027t start replaying immediately but we give time for any interactive replication event to come through?\n\nNo since they are in another queue entirely (see above),\n\n\u003e With this solution, I could not see effectively how many events are waiting to be served in the low-prio queue, as the \u0027show-queue\u0027 would give me only always only 1 element for the replayed events.\n\nThis is true, however that is also true in the current situation. To clarify, It will always be impossible to see the unscheduled items. This change is about scheduling, not execution (there is another change about that, so this sort of discussion might apply there). So as soon as the items are scheduled, they will be scheduled/waiting and will still be visible in the replication queues once they are scheduled/waiting.",
+      "parentUuid": "f3bed1d0_aef68dec",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ab2a70c_6efd55ea",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
