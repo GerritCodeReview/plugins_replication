@@ -183,6 +183,80 @@ public class ReplicationTasksStorageTest {
     assertThat(storage.list()).isEmpty();
   }
 
+  @Test
+  public void canResetRunningUpdateAndFinish() throws Exception {
+    storage.create(REF_UPDATE);
+    storage.start(uriUpdates);
+
+    storage.reset(uriUpdates);
+    assertContainsExactly(storage.listWaiting(), REF_UPDATE);
+    assertThat(storage.listRunning()).isEmpty();
+
+    storage.start(uriUpdates);
+    assertContainsExactly(storage.listRunning(), REF_UPDATE);
+    assertThat(storage.listWaiting()).isEmpty();
+
+    storage.finish(uriUpdates);
+    assertThat(storage.listBuilding()).isEmpty();
+    assertThat(storage.listWaiting()).isEmpty();
+    assertThat(storage.listRunning()).isEmpty();
+  }
+
+  @Test
+  public void canResetAllEmpty() throws Exception {
+    storage.resetAll();
+    assertThat(storage.listBuilding()).isEmpty();
+    assertThat(storage.listWaiting()).isEmpty();
+    assertThat(storage.listRunning()).isEmpty();
+  }
+
+  @Test
+  public void canResetAllSingleUpdateAndFinish() throws Exception {
+    storage.create(REF_UPDATE);
+    storage.start(uriUpdates);
+
+    storage.resetAll();
+    assertContainsExactly(storage.listWaiting(), REF_UPDATE);
+    assertThat(storage.listRunning()).isEmpty();
+
+    storage.start(uriUpdates);
+    assertContainsExactly(storage.listRunning(), REF_UPDATE);
+    assertThat(storage.listWaiting()).isEmpty();
+
+    storage.finish(uriUpdates);
+    assertThat(storage.listBuilding()).isEmpty();
+    assertThat(storage.listWaiting()).isEmpty();
+    assertThat(storage.listRunning()).isEmpty();
+  }
+
+  @Test
+  public void canResetAllMultipleUpdatesAndFinish() throws Exception {
+    ReplicateRefUpdate updateB =
+        new ReplicateRefUpdate(
+            PROJECT,
+            REF,
+            getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
+            REMOTE);
+    UriUpdates uriUpdatesB = TestUriUpdates.create(updateB);
+    storage.create(REF_UPDATE);
+    storage.create(updateB);
+    storage.start(uriUpdates);
+    storage.start(uriUpdatesB);
+
+    storage.resetAll();
+    assertThat(storage.listWaiting()).hasSize(2);
+    assertTrue(equals(storage.listWaiting().get(0), REF_UPDATE));
+    assertTrue(equals(storage.listWaiting().get(1), updateB));
+
+    storage.start(uriUpdates);
+    storage.finish(uriUpdates);
+    storage.start(uriUpdatesB);
+    storage.finish(uriUpdatesB);
+    assertThat(storage.listBuilding()).isEmpty();
+    assertThat(storage.listWaiting()).isEmpty();
+    assertThat(storage.listRunning()).isEmpty();
+  }
+
   @Test(expected = Test.None.class /* no exception expected */)
   public void illegalFinishUncreatedIsGraceful() throws Exception {
     storage.finish(uriUpdates);
