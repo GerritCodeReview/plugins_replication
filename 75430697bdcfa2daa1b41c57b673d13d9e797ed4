@@ -359,6 +359,30 @@
     },
     {
       "key": {
+        "uuid": "96fa035c_5626a134",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-12T21:02:01Z",
+      "side": 1,
+      "message": "\u003e \u003e \u003e Because the current implementation is putting another task in the queue *before* execution the fire of the replication event, they could end up occupying all replication threads at once.\n\u003e \u003e \n\u003e \u003e This is incorrect,\n\u003e \n\u003e Gerrit is starting up, the acceptors (HTTP and SSH) aren\u0027t started yet, you have 100s of events to replay and 10 replication threads.\n\u003e The replication plugin starts, the first event is put in the executor queue. The first thread starts execution and, as first thing, add the second event in the executor queue. The second event thread starts executing and, as first thing, add the third event in the executor queue,\n\nThis is correct up until this point, but only if by \"event\" you mean the scheduling of the replication event. None of this is talking about the actual pushes, only the firing. This change only alters the behavior of the firing, not the behavior of the pushes. See line 208 in the ReplicationQueue.java to understand this.\n\n\u003e (that continues until the saturation of all available threads in the replication execution thread pool).\n\nNo, the firing in this change is done in the Gerrit default queue, not in the replication queues, please see line 202 of the ReplicationQueue to understand this.\n\n...\n\u003e P.S. Because Gerrit is not started yet, there are no other replication events going to \"throttle\" the replayed events.\n\nThis change is not attempting to do this, it is only attempting to throttle the scheduling of replication events, not the pushes. This throttling occurs with respect to other things in the default queue, not to the pushes. As soon as the the first entry from the ChainedScheduler is put into the default queue the replication plugin will resume startup and the rest of the server will startup, this will not be delayed until all the pending events are scheduled.\n\n...\n\u003e True, but as you mentioned, the number of elements shown will always be 1, which won\u0027t answer the question \"how many are left? how long would it take to complete?\".\n\nAs I already have pointed out, this is an existing problem and this change is not attempting to solve that problem. This change has been under review for a long time now, and I would appreciate if you could help focus on the problem this change is trying to solve.\n\n\u003e Having a \"low-prio\" execution backlog is a good thing, and is needed in Gerrit in general. It would be best to have it implemented once and have it well supported by existing tooling.\n\nI think this is too vague of a statement to be applied and discussed on this change. Specifics matter and exact situations matter. Your review on this change has been at times very frustrating. I want your review because you often point out valuable things. I would be very grateful if you would focus more on reading the comments and the code on this change, being open minded about understanding what it is actually doing (which may require letting go of some miss-understandings), and less on other related replication issues.\n\nI think that words and explanations in commit messages are important. I used the word throttling, and I specifically described what I meant by that and when it applied. I think that I am responsible for making sure that is clear, and so far I believe it is. I believe the current miss-understanding is not related to any particular way that I worded things, but may rather be due to some preconceived notions about how throttling might be done in some contexts. My wording cannot fix that, as one has to be willing to try to understand the throttling concept I describe without assuming how it should work. I very much am starting to feel like you are not fully reading my or other people\u0027s comments (I know we likely all do that some time), could you please make a better effort at this?",
+      "parentUuid": "b02ade7b_3b4a97b4",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ab2a70c_6efd55ea",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
