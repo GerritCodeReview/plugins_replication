@@ -191,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "7e6d4627_32d92112",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-12T08:20:54Z",
+      "side": 1,
+      "message": "\u003e \u003e \u003e I did not find any throttling mechanism in the ChainedScheduler: could you provide a source file + line number of where that is implemented? What I see from the code is a serial firing of the events using a stream.\n\u003e \u003e \n\u003e \u003e Line 104 here:\n\u003e \u003e https://gerrit-review.googlesource.com/c/plugins/replication/+/267812/12/src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java\n\u003e \u003e The next event is scheduled before executing the current event. Since an event\u0027s Task must be running before it can schedule another one, only one event can ever be scheduled concurrently.\n\u003e \n\u003e Yes, that is what I understood from the code.\n\u003e \n\u003e \u003e However nothing prevents multiple event Tasks from running at the same time, and the next one is scheduled before executing the current event. If there are free threads then it is possible for more than one event to be executing at the same time.\n\u003e \n\u003e Ah, gotcha. Because just before start running one you schedule the next one. And where do you throttle? How do you make sure that you\u0027re not occupying the full capacity of the execution pool? How do you give priority to the interactive events?\n\nLet clarify with an example of \"throttling\", so that it becomes clearer what I was expecting to see in the code based on the commit message.\n\nIf the queue is completely empty, then execute all the replayed events as fast as you can. If there are interactive events coming through, then check that the replayed events are taking no more than X% (configurable?) of the running threads. If one replayed event, coming to a running state, goes over the X% limit, then throttle.\n\nP.S. The above is an example of throttling. Of course you can achieve that in many ways.\n\nAnother alternative solution would be, instead of throttling, just introduce the concept of \"priority queue\", exactly like the one in the airports for the security checks. The \"executor\" is shared (the number of slots for putting your stuff on the conveyor) but you could come from the general queue or from the \"priority queue\". If there is someone in the priority queue waiting, the general queue gets locked to a minimum of executors (let\u0027s say only 1 slot out of 4). If the priority queue is empty, the general queue gets the full capacity.\n\nThanks again for your patience in explaining the code.\n\n\u003e \u003e This is what I mean by \"natural\", no special code is required to throttle this way, the \"scheduleNext then execute\" ordering takes care of the throttling.\n\u003e \n\u003e Gotcha, but unless we are limiting the thread utilisation in \"some way\", I\u0027m not sure we can say we are throttling.",
+      "parentUuid": "f99da00f_357c5619",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ab2a70c_6efd55ea",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
