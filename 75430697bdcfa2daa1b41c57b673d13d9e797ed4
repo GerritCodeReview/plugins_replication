@@ -263,6 +263,30 @@
     },
     {
       "key": {
+        "uuid": "8fae6871_058f9198",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-12T14:48:02Z",
+      "side": 1,
+      "message": "\u003e I also believe that I understand the ChainedScheduler, let me add a few\n\u003e comments to the Lucas observations.\n\u003e \n\u003e \n\u003e \u003e \u003e Ah, gotcha. Because just before start running one you schedule the next one. \n\u003e \n\u003e Correct.\n\u003e \n\u003e \u003e And where do you throttle? How do you make sure that you\u0027re not occupying the full capacity of the execution pool? How do you give priority to the interactive events?\n\u003e \n\u003e By having at most one (pending) task in the queue at any time. As you correctly\n\u003e observed, one task needs to be picked up from the queue (by a free thread)\n\u003e and only then the next one can go into the queue.\n\nHowever, during startup, Gerrit isn\u0027t active yet, it is just starting the plugins and the HTTP and SSH acceptors are not finalised.\n\nBecause the current implementation is putting another task in the queue *before* execution the fire of the replication event, they could end up occupying all replication threads at once.\n\nShould we also define an \"intial delay\" so that we don\u0027t start replaying immediately but we give time for any interactive replication event to come through?\n\n\u003e \u003e Another alternative solution would be, instead of throttling, just introduce the concept of \"priority queue\", exactly like the one in the airports for the security checks. The \"executor\" is shared (the number of slots for putting your stuff on the conveyor) but you could come from the general queue or from the \"priority queue\". If there is someone in the priority queue waiting, the general queue gets locked to a minimum of executors (let\u0027s say only 1 slot out of 4). If the priority queue is empty, the general queue gets the full capacity.\n\u003e \n\u003e This is an interesting question. \n\u003e \n\u003e Let me also try to translate the ChainedScheduler\n\u003e into an airport based example: There is only one queue where all the passengers\n\u003e who are *allowed* to enter the queue have the same priority.\n\u003e However, the passengers are classified into two groups: priority and low-prio.\n\u003e A priority passenger can enter the queue at any time.\n\u003e A low-prio passenger can only enter the queue at the moment when an already\n\u003e queued low-prio passenger gets called to be processed.\n\u003e \n\u003e This way, at any time, there is at most one low-prio passenger in the queue.\n\u003e If there are no priority-passengers then the low-prio will get processed faster as\n\u003e all counters will serve them. But as soon as a priority passenger arrives\n\u003e he will be the next or the second next, having to wait for at most one\n\u003e low-prio passenger which is already queued.\n\nThanks for the explanation, now it makes sense.\nBasically, the \"external stream of the replication events\" *IS* the low-prio passengers queue.\n\nIt would be nice to have this mechanism in the Gerrit\u0027s queue system, so that:\na. The low-prio queue backlog is visible in the gerrit show-queue command\nb. the high-prio/low-prio queueing system can be used in other parts of gerrit\n\nWith this solution, I could not see effectively how many events are waiting to be served in the low-prio queue, as the \u0027show-queue\u0027 would give me only always only 1 element for the replayed events.\n\n\u003e \u003e \n\u003e \u003e Thanks again for your patience in explaining the code.\n\u003e \u003e \n\u003e \u003e \u003e \u003e This is what I mean by \"natural\", no special code is required to throttle this way, the \"scheduleNext then execute\" ordering takes care of the throttling.\n\u003e \u003e \u003e \n\u003e \u003e \u003e Gotcha, but unless we are limiting the thread utilisation in \"some way\", I\u0027m not sure we can say we are throttling.",
+      "parentUuid": "13e51e5d_9f01f57b",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ab2a70c_6efd55ea",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
@@ -292,6 +316,23 @@
       "side": 1,
       "message": "\u003e I believe I start to understand more how the ChainedScheduler works. However, as it is done in a separate class for making it reusable, I would love to see some API contract validation.\n\nWhat do you have in mind, ChainedScheduler unit tests?\n \n\u003e I am also struggling to find in the code the behaviour described in the commit message.\n\nIs this a repeat of your comment on the commit message?",
       "parentUuid": "9ab2a70c_6efd55ea",
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9bd00cd4_b0eaac38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-12T14:48:02Z",
+      "side": 1,
+      "message": "Thanks Saša for your feedback.",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
