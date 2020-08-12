@@ -452,6 +452,24 @@
     },
     {
       "key": {
+        "uuid": "1a146591_fb7ee8b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-12T21:32:30Z",
+      "side": 1,
+      "message": "\u003e I just wanted was deeply understand the change, its consequences on the replication plugin architecture and provide meaningful feedback.\n\nThank you, this is very much appreciated especially as your expertise is limited!",
+      "parentUuid": "0fcb9f4f_e53db171",
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e447db75_17763441",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
         "patchSetId": 12
