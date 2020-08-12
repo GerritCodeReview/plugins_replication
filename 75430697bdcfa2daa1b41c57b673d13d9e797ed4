@@ -287,6 +287,30 @@
     },
     {
       "key": {
+        "uuid": "f3bed1d0_aef68dec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-12T14:51:48Z",
+      "side": 1,
+      "message": "\u003e Now that we have a solid understanding of the ChainedScheduler and based on\n\u003e the analogies with the airport queues, it seems to me that an Executor\n\u003e based on a priority queue would achieve the same effect. Martin, what do\n\u003e you think?\n\nI don\u0027t understand how one could apply a priority queue (the data structure) to this code. A PR requires some property on items in the PR that is comparable to determine the order that things come out of the queue. The order things come out of a PR is only related to that property and not to insertion order. That seems very different from what would ne desired here. What would be the objective to use a PQ?\n\nThis change implements exactly the behavior that I think is most appropriate here in a very simple way. It allows an open throttle on items when utilization is low, and it throttles things down to one item at a time (no parallelism) when utilization is high.",
+      "parentUuid": "14c6cb27_5f7bb046",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ab2a70c_6efd55ea",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
