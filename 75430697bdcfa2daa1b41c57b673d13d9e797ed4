@@ -335,6 +335,30 @@
     },
     {
       "key": {
+        "uuid": "b02ade7b_3b4a97b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-12T20:10:27Z",
+      "side": 1,
+      "message": "\u003e \u003e Because the current implementation is putting another task in the queue *before* execution the fire of the replication event, they could end up occupying all replication threads at once.\n\u003e \n\u003e This is incorrect,\n\nGerrit is starting up, the acceptors (HTTP and SSH) aren\u0027t started yet, you have 100s of events to replay and 10 replication threads.\n\nThe replication plugin starts, the first event is put in the executor queue. The first thread starts execution and, as first thing, add the second event in the executor queue. The second event thread starts executing  and, as first thing, add the third event in the executor queue, (that continues until the saturation of all available threads in the replication execution thread pool).\n\nP.S. Because Gerrit is not started yet, there are no other replication events going to \"throttle\" the replayed events.\n\nCan you highlight what is incorrect in my understanding?\nFrom what I saw in the code and discussed on the change, that\u0027s my understanding on how it works at the moment.\n\n\u003e I think there is still a miss-understanding of this change (understandable, I regularly think it is doing more than it is). This change does not change the way that startup-pending events are executed, it only changes the way they are scheduled! In other words, before this change, the replication plugin tries to schedule all the startup-pending events before letting the server startup, but it does not wait for all of those startup-pending events to execute. This change doesn\u0027t even wait for the scheduling as it only starts a ChainedScheduler in the default queue (not a replication queue). So all these startup-pending eventa will be iterated over in the default queue and each one will then be scheduled in the appropriate replication queue. There is no throttling of the startup-pending event execution, only a throttling of the scheduling to avoid overloading the default queue.\n\u003e \n\u003e \u003e Should we also define an \"intial delay\" so that we don\u0027t start replaying immediately but we give time for any interactive replication event to come through?\n\u003e \n\u003e No since they are in another queue entirely (see above),\n\n*IF* (but IF) the simulation I\u0027ve described above is correct, then we do need to introduce an initial delay to prevent all the executors to get busy at startup.\n\n\u003e \u003e With this solution, I could not see effectively how many events are waiting to be served in the low-prio queue, as the \u0027show-queue\u0027 would give me only always only 1 element for the replayed events.\n\u003e \n\u003e This is true, however that is also true in the current situation.\n\nWe do not have currently the concept of \"low-prio\" events waiting to be scheduled. If we introduce a new concept (good thing, I like it) we should provide also visibility on the status of the process.\n\nA Gerrit admin would like to know \"how long would it take to consume them all?\". If we don\u0027t have visibility or metrics on the \"low-prio\" events waiting to be scheduled.\n\n\u003e To clarify, It will always be impossible to see the unscheduled items.\n\nUnless we write the code in a way that can highlight them.\n\n\u003e This change is about scheduling, not execution (there is another change about that, so this sort of discussion might apply there). So as soon as the items are scheduled, they will be scheduled/waiting and will still be visible in the replication queues once they are scheduled/waiting.\n\nTrue, but as you mentioned, the number of elements shown will always be 1, which won\u0027t answer the question \"how many are left? how long would it take to complete?\".\n\nHaving a \"low-prio\" execution backlog is a good thing, and is needed in Gerrit in general. It would be best to have it implemented once and have it well supported by existing tooling.",
+      "parentUuid": "fbe9d46d_3407996c",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ab2a70c_6efd55ea",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
