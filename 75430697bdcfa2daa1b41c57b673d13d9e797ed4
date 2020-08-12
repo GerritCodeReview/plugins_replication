@@ -239,6 +239,30 @@
     },
     {
       "key": {
+        "uuid": "14c6cb27_5f7bb046",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-08-12T14:23:35Z",
+      "side": 1,
+      "message": "Now that we have a solid understanding of the ChainedScheduler and based on\nthe analogies with the airport queues, it seems to me that an Executor\nbased on a priority queue would achieve the same effect. Martin, what do\nyou think?",
+      "parentUuid": "13e51e5d_9f01f57b",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ab2a70c_6efd55ea",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
