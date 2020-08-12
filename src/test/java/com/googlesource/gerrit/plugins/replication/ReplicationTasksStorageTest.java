@@ -25,6 +25,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.Repli
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Objects;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.After;
@@ -63,13 +64,13 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
-  public void canListPersistedUpdate() throws Exception {
+  public void canListWaitingUpdate() throws Exception {
     storage.create(REF_UPDATE);
-    assertContainsExactly(storage, REF_UPDATE);
+    assertContainsExactly(storage.listWaiting(), REF_UPDATE);
   }
 
   @Test
-  public void canFinishPersistedUpdate() throws Exception {
+  public void canFinishRunningUpdate() throws Exception {
     storage.create(REF_UPDATE);
     storage.start(uriUpdates);
     storage.finish(uriUpdates);
@@ -84,8 +85,8 @@ public class ReplicationTasksStorageTest {
     assertThat(persistedView.list()).isEmpty();
 
     storage.create(REF_UPDATE);
-    assertContainsExactly(storage, REF_UPDATE);
-    assertContainsExactly(persistedView, REF_UPDATE);
+    assertContainsExactly(storage.list(), REF_UPDATE);
+    assertContainsExactly(persistedView.list(), REF_UPDATE);
 
     storage.start(uriUpdates);
     storage.finish(uriUpdates);
@@ -94,15 +95,15 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
-  public void sameRefUpdatePersistedTwiceIsStoredOnce() throws Exception {
+  public void sameRefUpdateCreatedTwiceIsStoredOnce() throws Exception {
     String key = storage.create(REF_UPDATE);
     String secondKey = storage.create(REF_UPDATE);
     assertEquals(key, secondKey);
-    assertContainsExactly(storage, REF_UPDATE);
+    assertContainsExactly(storage.list(), REF_UPDATE);
   }
 
   @Test
-  public void canPersistDifferentUris() throws Exception {
+  public void canCreateDifferentUris() throws Exception {
     ReplicateRefUpdate updateB =
         new ReplicateRefUpdate(
             PROJECT,
@@ -131,14 +132,14 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
 
     storage.finish(uriUpdates);
-    assertContainsExactly(storage, updateB);
+    assertContainsExactly(storage.list(), updateB);
 
     storage.finish(uriUpdatesB);
     assertThat(storage.list()).isEmpty();
   }
 
   @Test
-  public void differentUrisPersistedTwiceIsStoredOnce() throws Exception {
+  public void differentUrisCreatedTwiceAreStoredOnce() throws Exception {
     ReplicateRefUpdate updateB =
         new ReplicateRefUpdate(
             PROJECT,
@@ -154,7 +155,7 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
-  public void canPersistMulipleRefsForSameUri() throws Exception {
+  public void canCreateMulipleRefsForSameUri() throws Exception {
     ReplicateRefUpdate refA = new ReplicateRefUpdate(PROJECT, "refA", URISH, REMOTE);
     ReplicateRefUpdate refB = new ReplicateRefUpdate(PROJECT, "refB", URISH, REMOTE);
 
@@ -176,14 +177,21 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
 
     storage.finish(uriUpdatesA);
-    assertContainsExactly(storage, refUpdateB);
+    assertContainsExactly(storage.list(), refUpdateB);
 
     storage.finish(uriUpdatesB);
     assertThat(storage.list()).isEmpty();
   }
 
   @Test(expected = Test.None.class /* no exception expected */)
-  public void illegalFinishNonPersistedIsGraceful() throws Exception {
+  public void illegalFinishWaitingUpdateIsGraceful() throws Exception {
+    storage.create(REF_UPDATE);
+    storage.finish(uriUpdates);
+    assertContainsExactly(storage.listWaiting(), REF_UPDATE);
+  }
+
+  @Test(expected = Test.None.class /* no exception expected */)
+  public void illegalFinishNonCreatedIsGraceful() throws Exception {
     storage.finish(uriUpdates);
   }
 
@@ -217,9 +225,9 @@ public class ReplicationTasksStorageTest {
     assertThat(storage.list()).isEmpty();
   }
 
-  private void assertContainsExactly(
-      ReplicationTasksStorage tasksStorage, ReplicateRefUpdate update) {
-    assertTrue(equals(tasksStorage.list().get(0), update));
+  private void assertContainsExactly(List<ReplicateRefUpdate> all, ReplicateRefUpdate single) {
+    assertThat(all).hasSize(1);
+    assertTrue(equals(all.get(0), single));
   }
 
   private boolean equals(ReplicateRefUpdate one, ReplicateRefUpdate two) {
