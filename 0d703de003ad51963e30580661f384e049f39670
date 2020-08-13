@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "a598bfd8_87bc435d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2020-08-13T14:53:06Z",
+      "side": 1,
+      "message": "I agree, this looks ok and we don\u0027t need to jump through hoops to add sophisticated monitoring on a stable branch.\n\nCurrently firePendingEvents only logs URISyntaxException, maybe we should also log potential runtime exceptions otherwise they wouldn\u0027t show up in the logs if run from a separate thread, or do I miss something ?",
+      "parentUuid": "39f5eab1_58aa3696",
+      "revId": "0d703de003ad51963e30580661f384e049f39670",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "58870ac5_ccf5ab50",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 1
