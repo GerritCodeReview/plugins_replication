@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "186b38ab_db12dbd9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-08-13T15:22:16Z",
+      "side": 1,
+      "message": "I am not sure that RuntimeExceptions thrown from LifecycleManager.start() are\nlogged at all (I mean even before this change).\nLet me log any exception which causes firePendingEvents to exit.",
+      "parentUuid": "a598bfd8_87bc435d",
+      "revId": "0d703de003ad51963e30580661f384e049f39670",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "58870ac5_ccf5ab50",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 1
