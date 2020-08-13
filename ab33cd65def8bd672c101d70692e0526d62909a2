@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55b3f73f_3da10b2e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-13T15:30:40Z",
+      "side": 1,
+      "message": "Should we be more aggressive and use Throwable instead?",
+      "range": {
+        "startLine": 221,
+        "startChar": 13,
+        "endLine": 221,
+        "endChar": 22
+      },
+      "revId": "ab33cd65def8bd672c101d70692e0526d62909a2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
