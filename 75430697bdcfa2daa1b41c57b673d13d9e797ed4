@@ -407,6 +407,30 @@
     },
     {
       "key": {
+        "uuid": "f3bef526_26154ec1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-13T16:02:31Z",
+      "side": 1,
+      "message": "\u003e First, let me tell that I am ready to give +2 on this change.\n\nyay! :)\n\n\u003e The reason I asked about using a thread pool executor with a priority queue\n\u003e was to make sure that we cannot achieve the same with the standard java\n\u003e libraries. It is good to have it documented here, why standard java libraries\n\u003e didn\u0027t work for this use-case.\n\nSure makes sense.\n\n\u003e \u003e I don\u0027t understand how one could apply a priority queue (the data structure) to this code. A PR requires some property on items in the PR that is comparable to determine the order that things come out of the queue. The order things come out of a PR is only related to that property and not to insertion order. That seems very different from what would ne desired here.\n\u003e \n\n\u003e Regarding the ordering and keeping the FIFO ordering of elements \n...\n\u003e [2] https://gist.github.com/zivkov/f26bb5932e836f6875a3c12fd9a102ef\n\nYes, it certainly is possible to use a PQ, however, I don\u0027t think it is a good fit in its natural form, or even with FIFO ordering within a priority level. The main issue is that its priorities are essentially absolute which can lead to complete starvation. This is the equivalent of real-time operation on linux. With a PQ, higher priority tasks would always trump lower priority ones which means that if there is a continuous supply of high priority tasks, the lower priority ones will never get run. That may be desirable in some use cases, and it could be tweaked in other use cases by slowly bumping the priority of older tasks, or something similar. I think the ChainedScheduler ends up simpler and actually has the very nice property that it makes progress no matter what and it avoids complete starvation in the presence of a continuous stream of other tasks.\n\nHowever, the analysis above is only talking about priorities. The primary piece of the ChainedScheduler is the most important piece, and it is not one of priorities. The primary advantage, and most of the code in the scheduler, is its ability to split work up into individual items. This is actually the piece that makes it interact really well with other tasks because instead of having one long task that is effectively O(N) in the queue which becomes problematic as N gets large, it spreads out the workload, even the workload of the splitting itself over N tasks of O(1) instead. This is what really makes it scale, particularly when even just iterating over tasks and doing nothing else is prohibitively long. So even if we were to use some other priority structure such as a PQ, it would need to be in addition to something like the ChainedScheduler because we still need a queue friendly scalable mechanism to perform the task iteration/splitting!",
+      "parentUuid": "6715a68e_f4e58c10",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ab2a70c_6efd55ea",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
