@@ -22,6 +22,30 @@
       "revId": "6cb0abc9d803829432e33548ed9402a2d49509ae",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92ae5361_57e9ca3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-14T21:01:10Z",
+      "side": 1,
+      "message": "Yeah, we debated doing that too, but I thought it would be more confusing. The new \u0027waiting\u0027 UTs are where \u0027persist\u0027 is being replaced, so they\u0027re mostly the same change. We\u0027ll give it a try though.",
+      "parentUuid": "0d8984a8_14884b27",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "6cb0abc9d803829432e33548ed9402a2d49509ae",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
