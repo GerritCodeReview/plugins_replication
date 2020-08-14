@@ -25,6 +25,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.Repli
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Objects;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.After;
@@ -65,7 +66,7 @@ public class ReplicationTasksStorageTest {
   @Test
   public void canListWaitingUpdate() throws Exception {
     storage.create(REF_UPDATE);
-    assertContainsExactly(storage, REF_UPDATE);
+    assertContainsExactly(storage.list(), REF_UPDATE);
   }
 
   @Test
@@ -84,8 +85,8 @@ public class ReplicationTasksStorageTest {
     assertThat(persistedView.list()).isEmpty();
 
     storage.create(REF_UPDATE);
-    assertContainsExactly(storage, REF_UPDATE);
-    assertContainsExactly(persistedView, REF_UPDATE);
+    assertContainsExactly(storage.list(), REF_UPDATE);
+    assertContainsExactly(persistedView.list(), REF_UPDATE);
 
     storage.start(uriUpdates);
     storage.finish(uriUpdates);
@@ -98,7 +99,7 @@ public class ReplicationTasksStorageTest {
     String key = storage.create(REF_UPDATE);
     String secondKey = storage.create(REF_UPDATE);
     assertEquals(key, secondKey);
-    assertContainsExactly(storage, REF_UPDATE);
+    assertContainsExactly(storage.list(), REF_UPDATE);
   }
 
   @Test
@@ -131,7 +132,7 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
 
     storage.finish(uriUpdates);
-    assertContainsExactly(storage, updateB);
+    assertContainsExactly(storage.list(), updateB);
 
     storage.finish(uriUpdatesB);
     assertThat(storage.list()).isEmpty();
@@ -176,7 +177,7 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
 
     storage.finish(uriUpdatesA);
-    assertContainsExactly(storage, refUpdateB);
+    assertContainsExactly(storage.list(), refUpdateB);
 
     storage.finish(uriUpdatesB);
     assertThat(storage.list()).isEmpty();
@@ -217,9 +218,9 @@ public class ReplicationTasksStorageTest {
     assertThat(storage.list()).isEmpty();
   }
 
-  private void assertContainsExactly(
-      ReplicationTasksStorage tasksStorage, ReplicateRefUpdate update) {
-    assertTrue(equals(tasksStorage.list().get(0), update));
+  private void assertContainsExactly(List<ReplicateRefUpdate> all, ReplicateRefUpdate single) {
+    assertThat(all).hasSize(1);
+    assertTrue(equals(all.get(0), single));
   }
 
   private boolean equals(ReplicateRefUpdate one, ReplicateRefUpdate two) {
