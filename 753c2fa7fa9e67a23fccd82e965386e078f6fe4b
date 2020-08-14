@@ -39,6 +39,30 @@
       "revId": "753c2fa7fa9e67a23fccd82e965386e078f6fe4b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83550cdf_7a02077b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-14T22:52:48Z",
+      "side": 1,
+      "message": "I\u0027d still prefer to defer that refactoring for a non-stable branch. At that point, we can convert ReplicateRefUpdate to an AutoValue, which solves this whole thing. Part of the goal of building up these tests is to make refactors like that safer.",
+      "parentUuid": "34bc912c_78407b7e",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 3
+      },
+      "revId": "753c2fa7fa9e67a23fccd82e965386e078f6fe4b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
