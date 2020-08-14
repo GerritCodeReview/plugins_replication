@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "01c33723_1d859861",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-14T22:44:18Z",
+      "side": 1,
+      "message": "Have you explored the option suggested?",
+      "revId": "753c2fa7fa9e67a23fccd82e965386e078f6fe4b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "34bc912c_78407b7e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-14T22:44:18Z",
+      "side": 1,
+      "message": "We have already discuss that option in an earlier review: instead of this change, you could move this equals into the ReplicateRefUpdate class. That would make the entire set of assertions a lot easier to use, because you could use the collections matchers.",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 3
+      },
+      "revId": "753c2fa7fa9e67a23fccd82e965386e078f6fe4b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
