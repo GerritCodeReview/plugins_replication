@@ -431,6 +431,30 @@
     },
     {
       "key": {
+        "uuid": "95425a4e_66e5bdd7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-08-14T16:02:24Z",
+      "side": 1,
+      "message": "\u003e The main issue is that its priorities are essentially absolute which can lead to complete starvation\n\nOK, fair enough this is definitely one of the advantages of using ChainedScheduler over a PQ based solution.\n\n\u003e This is actually the piece that makes it interact really well with other tasks because instead of having one long task that is effectively O(N) in the queue.\n\nI don\u0027t get what would that O(N) task be. The tasks would be of the same granularity in both solutions.\n\n\u003e So even if we were to use some other priority structure such as a PQ, it would need to be in addition to something like the ChainedScheduler because we still need a queue friendly scalable mechanism to perform the task iteration/splitting!\n\nWhat is \"queue friendly\"?\n\nSince I don\u0027t really find any remaining issue in this change and we agree on\nat least on the potential starvation issue of the low-prio tasks when using\nPQ I am going to approve this change.",
+      "parentUuid": "f3bef526_26154ec1",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ab2a70c_6efd55ea",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
