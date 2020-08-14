@@ -455,6 +455,30 @@
     },
     {
       "key": {
+        "uuid": "b7c94b8a_a01bbe0f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-14T20:30:17Z",
+      "side": 1,
+      "message": "\u003e \u003e This is actually the piece that makes it interact really well with other tasks because instead of having one long task that is effectively O(N) in the queue.\n\u003e \n\u003e I don\u0027t get what would that O(N) task be. The tasks would be of the same granularity in both solutions.\n\nBefore this change, on startup there is one large for-loop. This for-loop iterates over all the pending event files and schedules them (it does not run the pending push events). Since this happens before the startup of the server, it is a big show stopper. You have suggested for 2.16 that we should put this one big for-loop as a single task in its own queue. For the master branch we agreed that we can improve this by doing this iteration via the default Gerrit queue, the idea is to to avoid having an extra thread. However, if we just put the giant for-loop in the default Gerrit queue, it will end up consuming a potentially large amount of time in a single task. Enter then the idea of a scheduler that only performs one iteration of the loop per task in the queue, this is the primary purpose of the ChainedScheduler, to split the giant for-loop up by using an iterator instead. I can\u0027t think of any other way to split this iteration up over multiple tasks besides using some form of a ChainedScheduler. This is being done not to alter the priority of the tasks, the priority altering is effectively a side-benefit that happens to be a good fit.\n\n\u003e \u003e So even if we were to use some other priority structure such as a PQ, it would need to be in addition to something like the ChainedScheduler because we still need a queue friendly scalable mechanism to perform the task iteration/splitting!\n\u003e \n\u003e What is \"queue friendly\"?\n\nSplitting the iteration over many tasks instead of one big for-loop. It is not until this split is done that one can consider using a PQ or any other mechanism to the alter priorities. In other words, you would need something like a ChainedScheduler in order to populate a PQ!\n\n\u003e Since I don\u0027t really find any remaining issue in this change and we agree on\n\u003e at least on the potential starvation issue of the low-prio tasks when using\n\u003e PQ I am going to approve this change.\n\nGreat!",
+      "parentUuid": "95425a4e_66e5bdd7",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ab2a70c_6efd55ea",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
