@@ -63,13 +63,13 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
-  public void canListPersistedUpdate() throws Exception {
+  public void canListWaitingUpdate() throws Exception {
     storage.create(REF_UPDATE);
     assertContainsExactly(storage, REF_UPDATE);
   }
 
   @Test
-  public void canFinishPersistedUpdate() throws Exception {
+  public void canFinishRunningUpdate() throws Exception {
     storage.create(REF_UPDATE);
     storage.start(uriUpdates);
     storage.finish(uriUpdates);
@@ -94,7 +94,7 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
-  public void sameRefUpdatePersistedTwiceIsStoredOnce() throws Exception {
+  public void sameRefUpdateCreatedTwiceIsStoredOnce() throws Exception {
     String key = storage.create(REF_UPDATE);
     String secondKey = storage.create(REF_UPDATE);
     assertEquals(key, secondKey);
@@ -102,7 +102,7 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
-  public void canPersistDifferentUris() throws Exception {
+  public void canCreateDifferentUris() throws Exception {
     ReplicateRefUpdate updateB =
         new ReplicateRefUpdate(
             PROJECT,
@@ -138,7 +138,7 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
-  public void differentUrisPersistedTwiceIsStoredOnce() throws Exception {
+  public void differentUrisCreatedTwiceIsStoredOnce() throws Exception {
     ReplicateRefUpdate updateB =
         new ReplicateRefUpdate(
             PROJECT,
@@ -154,7 +154,7 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
-  public void canPersistMulipleRefsForSameUri() throws Exception {
+  public void canCreateMulipleRefsForSameUri() throws Exception {
     ReplicateRefUpdate refA = new ReplicateRefUpdate(PROJECT, "refA", URISH, REMOTE);
     ReplicateRefUpdate refB = new ReplicateRefUpdate(PROJECT, "refB", URISH, REMOTE);
 
@@ -183,7 +183,7 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test(expected = Test.None.class /* no exception expected */)
-  public void illegalFinishNonPersistedIsGraceful() throws Exception {
+  public void illegalFinishUncreatedIsGraceful() throws Exception {
     storage.finish(uriUpdates);
   }
 
