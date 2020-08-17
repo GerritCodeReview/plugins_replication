@@ -34,7 +34,7 @@ public interface UriUpdates {
     return getRefs().stream()
         .map(
             (ref) ->
-                new ReplicationTasksStorage.ReplicateRefUpdate(
+                ReplicationTasksStorage.ReplicateRefUpdate.create(
                     getProjectNameKey().get(), ref, getURI(), getRemoteName()))
         .collect(Collectors.toList());
   }

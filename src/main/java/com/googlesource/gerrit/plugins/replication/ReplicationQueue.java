@@ -186,7 +186,7 @@ public class ReplicationQueue
       for (URIish uri : cfg.getURIs(project, urlMatch)) {
         if (!isPersisted) {
           replicationTasksStorage.create(
-              new ReplicateRefUpdate(project.get(), refName, uri, cfg.getRemoteConfigName()));
+              ReplicateRefUpdate.create(project.get(), refName, uri, cfg.getRemoteConfigName()));
         }
         cfg.schedule(project, refName, uri, state, now);
       }
@@ -208,7 +208,7 @@ public class ReplicationQueue
           continue;
         }
         try {
-          fire(new URIish(t.uri), Project.nameKey(t.project), t.ref);
+          fire(new URIish(t.uri()), Project.nameKey(t.project()), t.ref());
         } catch (URISyntaxException e) {
           repLog.atSevere().withCause(e).log("Encountered malformed URI for persisted event %s", t);
         }
