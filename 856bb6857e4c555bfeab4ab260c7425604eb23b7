@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b3807dd7_2583e3e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-17T16:31:23Z",
+      "side": 1,
+      "message": "Fair enough, I\u0027ll start using it in the same change.",
+      "parentUuid": "74ea7d02_cd20b663",
+      "revId": "856bb6857e4c555bfeab4ab260c7425604eb23b7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e57fa328_b590365f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2020-08-17T16:14:24Z",
       "side": 1,
       "message": "I don\u0027t think this change stands on its own. I believe our policy is to only add code when it gets used, not for some potential future use.",
+      "revId": "856bb6857e4c555bfeab4ab260c7425604eb23b7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "189d58e3_28b55005",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-17T16:31:23Z",
+      "side": 1,
+      "message": "I believe this is similar to the previous comment, will start using the methods in the code as well and in the same change.",
+      "parentUuid": "e57fa328_b590365f",
       "revId": "856bb6857e4c555bfeab4ab260c7425604eb23b7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
