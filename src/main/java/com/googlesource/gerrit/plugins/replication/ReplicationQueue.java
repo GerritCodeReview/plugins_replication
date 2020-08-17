@@ -187,7 +187,7 @@ public class ReplicationQueue
     replaying = true;
     try {
       replaying = true;
-      for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.listWaiting()) {
+      for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.waiting()) {
         if (t == null) {
           repLog.warn("Encountered null replication event in ReplicationTasksStorage");
           continue;
