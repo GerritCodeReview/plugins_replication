@@ -33,6 +33,52 @@
       "revId": "856bb6857e4c555bfeab4ab260c7425604eb23b7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faa55acf_90c163b4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-08-17T16:21:20Z",
+      "side": 1,
+      "message": "Replace with:\n\n  return Objects.hash(project, ref, remote, uri);",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 20
+      },
+      "revId": "856bb6857e4c555bfeab4ab260c7425604eb23b7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7be72a93_a691634c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-08-17T16:21:20Z",
+      "side": 1,
+      "message": "Replace with:\n\n  if (!(obj instanceof ReplicationRefUpdate)) {\n    return false;\n  }\n\nThe above code also handle the null case as \"null intanceof\" X is always false.",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 53
+      },
+      "revId": "856bb6857e4c555bfeab4ab260c7425604eb23b7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
