@@ -289,7 +289,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
     assertThat(listIncompleteTasks(Pattern.quote(PushOne.ALL_REFS))).hasSize(1);
-    streamIncompleteTasks().forEach((task) -> assertThat(task.uri).isEqualTo(expectedURI));
+    streamIncompleteTasks().forEach((task) -> assertThat(task.uri()).isEqualTo(expectedURI));
   }
 
   @Test
@@ -308,7 +308,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
     assertThat(listIncompleteTasks()).hasSize(1);
-    streamIncompleteTasks().forEach((task) -> assertThat(task.uri).isEqualTo(expectedURI));
+    streamIncompleteTasks().forEach((task) -> assertThat(task.uri()).isEqualTo(expectedURI));
   }
 
   @Test
@@ -667,8 +667,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
       Stream<ReplicateRefUpdate> updates, String changeRef, String remote) {
     return updates
-        .filter(task -> changeRef.equals(task.ref))
-        .filter(task -> remote.equals(task.remote));
+        .filter(task -> changeRef.equals(task.ref()))
+        .filter(task -> remote.equals(task.remote()));
   }
 
   private Project.NameKey createTestProject(String name) throws Exception {
@@ -678,7 +678,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   private List<ReplicateRefUpdate> listIncompleteTasks(String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
     return streamIncompleteTasks()
-        .filter(task -> refmaskPattern.matcher(task.ref).matches())
+        .filter(task -> refmaskPattern.matcher(task.ref()).matches())
         .collect(toList());
   }
 

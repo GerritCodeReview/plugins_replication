@@ -16,10 +16,13 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.auto.value.AutoValue;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.flogger.FluentLogger;
 import com.google.common.hash.Hashing;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
 import com.google.inject.Inject;
 import com.google.inject.ProvisionException;
 import com.google.inject.Singleton;
@@ -64,10 +67,11 @@ import org.eclipse.jgit.transport.URIish;
 public class ReplicationTasksStorage {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  public static class ReplicateRefUpdate {
-    public static Optional<ReplicateRefUpdate> createOptionally(Path file) {
+  @AutoValue
+  public abstract static class ReplicateRefUpdate {
+    public static Optional<ReplicateRefUpdate> createOptionally(Path file, Gson gson) {
       try {
-        return Optional.of(create(file));
+        return Optional.of(create(file, gson));
       } catch (NoSuchFileException e) {
         logger.atFine().log("File %s not found while reading task", file);
       } catch (IOException e) {
@@ -78,30 +82,35 @@ public class ReplicationTasksStorage {
       return Optional.empty();
     }
 
-    public static ReplicateRefUpdate create(Path file) throws IOException {
+    public static ReplicateRefUpdate create(Path file, Gson gson) throws IOException {
       String json = new String(Files.readAllBytes(file), UTF_8);
-      return GSON.fromJson(json, ReplicateRefUpdate.class);
+      return gson.fromJson(json, ReplicateRefUpdate.class);
     }
 
-    public final String project;
-    public final String ref;
-    public final String uri;
-    public final String remote;
-
-    public ReplicateRefUpdate(String project, String ref, URIish uri, String remote) {
-      this.project = project;
-      this.ref = ref;
-      this.uri = uri.toASCIIString();
-      this.remote = remote;
+    public static ReplicateRefUpdate create(String project, String ref, URIish uri, String remote) {
+      return new AutoValue_ReplicationTasksStorage_ReplicateRefUpdate(
+          project, ref, uri.toASCIIString(), remote);
     }
+
+    public abstract String project();
+
+    public abstract String ref();
+
+    public abstract String uri();
+
+    public abstract String remote();
 
     @Override
-    public String toString() {
-      return "ref-update " + project + ":" + ref + " uri:" + uri + " remote:" + remote;
+    public final String toString() {
+      return "ref-update " + project() + ":" + ref() + " uri:" + uri() + " remote:" + remote();
+    }
+
+    public static TypeAdapter<ReplicateRefUpdate> typeAdapter(Gson gson) {
+      return new AutoValue_ReplicationTasksStorage_ReplicateRefUpdate.GsonTypeAdapter(gson);
     }
   }
 
-  private static final Gson GSON = new Gson();
+  private final Gson gson;
 
   private final Path buildingUpdates;
   private final Path runningUpdates;
@@ -117,6 +126,8 @@ public class ReplicationTasksStorage {
     buildingUpdates = refUpdates.resolve("building");
     runningUpdates = refUpdates.resolve("running");
     waitingUpdates = refUpdates.resolve("waiting");
+    gson =
+        new GsonBuilder().registerTypeAdapterFactory(ReplicationAdapterFactory.create()).create();
   }
 
   public synchronized String create(ReplicateRefUpdate r) {
@@ -167,7 +178,7 @@ public class ReplicationTasksStorage {
 
   private Stream<ReplicateRefUpdate> streamRecursive(Path dir) {
     return walk(dir)
-        .map(path -> ReplicateRefUpdate.createOptionally(path))
+        .map(path -> ReplicateRefUpdate.createOptionally(path, gson))
         .filter(Optional::isPresent)
         .map(Optional::get);
   }
@@ -205,7 +216,8 @@ public class ReplicationTasksStorage {
 
     public Task(ReplicateRefUpdate update) {
       this.update = update;
-      String key = update.project + "\n" + update.ref + "\n" + update.uri + "\n" + update.remote;
+      String key =
+          update.project() + "\n" + update.ref() + "\n" + update.uri() + "\n" + update.remote();
       taskKey = sha1(key).name();
       running = createDir(runningUpdates).resolve(taskKey);
       waiting = createDir(waitingUpdates).resolve(taskKey);
@@ -216,7 +228,7 @@ public class ReplicationTasksStorage {
         return taskKey;
       }
 
-      String json = GSON.toJson(update) + "\n";
+      String json = gson.toJson(update) + "\n";
       try {
         Path tmp = Files.createTempFile(createDir(buildingUpdates), taskKey, null);
         logger.atFine().log("CREATE %s %s", tmp, updateLog());
@@ -260,7 +272,7 @@ public class ReplicationTasksStorage {
     }
 
     private String updateLog() {
-      return String.format("(%s:%s => %s)", update.project, update.ref, update.uri);
+      return String.format("(%s:%s => %s)", update.project(), update.ref(), update.uri());
     }
   }
 }
