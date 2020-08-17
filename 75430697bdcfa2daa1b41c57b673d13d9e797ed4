@@ -479,6 +479,30 @@
     },
     {
       "key": {
+        "uuid": "c554f186_9e405986",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-08-17T11:17:26Z",
+      "side": 1,
+      "message": "Ok, thanks for additional comments. These will be useful for documenting the motivation for the ChainedScheduler. I have one additional concern and I am temporarily reducing my +2 to +1.",
+      "parentUuid": "b7c94b8a_a01bbe0f",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ab2a70c_6efd55ea",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
@@ -584,6 +608,23 @@
     },
     {
       "key": {
+        "uuid": "0a3495e1_b5a1fdfc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-08-17T11:17:26Z",
+      "side": 1,
+      "message": "This iterator will be accessed by multiple threads. I couldn\u0027t prove that this is thread-safe. The javadoc of Stream.iterator doesn\u0027t tell that the resulting iterator is thread-safe.",
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e447db75_17763441",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
         "patchSetId": 12
@@ -600,6 +641,53 @@
         "startChar": 15,
         "endLine": 107,
         "endChar": 33
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf80bae5_ad311aee",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-08-17T11:17:26Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "e447db75_17763441",
+      "range": {
+        "startLine": 107,
+        "startChar": 15,
+        "endLine": 107,
+        "endChar": 33
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e37e00b_19826dfa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-08-17T11:17:26Z",
+      "side": 1,
+      "message": "Eclipse tells me that this specification of type arguments is redundant. Indeed, this can be removed.",
+      "range": {
+        "startLine": 204,
+        "startChar": 36,
+        "endLine": 204,
+        "endChar": 78
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
