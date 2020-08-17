@@ -159,6 +159,30 @@
       "revId": "753c2fa7fa9e67a23fccd82e965386e078f6fe4b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa54322d_c806c8f0",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-17T23:56:16Z",
+      "side": 1,
+      "message": "\u003e \u003e \u003e That seems much more invasive than what\u0027s needed to fix this test.\n\u003e \u003e \n\u003e \u003e If you look at the test, it is removing code and not invasive.\n\u003e \n\u003e The change as a whole is more invasive than necessary on a stable branch. Maintaining a custom equals in the *test* code is a much safer policy for a stable branch. I can upload a change to switch ReplicateRefUpdate to AutoValue on master this week (if not today). This whole conversation becomes moot at that point.\n\nI don\u0027t want to review your change on this change, however your change has not been approved, and so far has had no review favoring it. There is no consensus your change is the way to go and there has been a lot of argument against it. I would favor ordering the dependencies so that the controversial stuff(your change) comes after we add the simpler non-invasive tests(this change)?",
+      "parentUuid": "92f23d18_05eb0900",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 3
+      },
+      "revId": "753c2fa7fa9e67a23fccd82e965386e078f6fe4b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
