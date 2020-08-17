@@ -270,7 +270,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
     assertThat(listReplicationTasks(".*all.*")).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
+    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.replicateRefUpdates()) {
       assertThat(task.uri).isEqualTo(expectedURI);
     }
   }
@@ -291,10 +291,10 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
     assertThat(listReplicationTasks(".*")).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
+    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.replicateRefUpdates()) {
       assertThat(task.uri).isEqualTo(expectedURI);
     }
-    assertThat(tasksStorage.list()).isNotEmpty();
+    assertThat(tasksStorage.replicateRefUpdates()).isNotEmpty();
   }
 
   @Test
@@ -442,11 +442,11 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     config.setInt("remote", "task_cleanup_project", "replicationRetry", 0);
     config.save();
     reloadConfig();
-    assertThat(tasksStorage.listRunning()).hasSize(0);
+    assertThat(tasksStorage.running()).isEmpty();
     Project.NameKey sourceProject = createTestProject("task_cleanup_project");
 
     waitUntil(() -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")));
-    waitUntil(() -> tasksStorage.listRunning().size() == 0);
+    waitUntil(() -> tasksStorage.running().isEmpty());
   }
 
   @Test
@@ -601,7 +601,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
       String changeRef, String remote) {
-    return tasksStorage.list().stream()
+    return tasksStorage.replicateRefUpdates().stream()
         .filter(task -> changeRef.equals(task.ref))
         .filter(task -> remote.equals(task.remote));
   }
@@ -612,7 +612,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage.list().stream()
+    return tasksStorage.replicateRefUpdates().stream()
         .filter(task -> refmaskPattern.matcher(task.ref).matches())
         .collect(toList());
   }

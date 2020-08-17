@@ -17,7 +17,6 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 
 import com.google.common.jimfs.Configuration;
 import com.google.common.jimfs.Jimfs;
@@ -25,8 +24,6 @@ import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.Repli
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.Objects;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.After;
 import org.junit.Before;
@@ -60,13 +57,13 @@ public class ReplicationTasksStorageTest {
 
   @Test
   public void canListEmptyStorage() throws Exception {
-    assertThat(storage.list()).isEmpty();
+    assertThat(storage.replicateRefUpdates()).isEmpty();
   }
 
   @Test
   public void canListWaitingUpdate() throws Exception {
     storage.create(REF_UPDATE);
-    assertContainsExactly(storage.list(), REF_UPDATE);
+    assertThat(storage.replicateRefUpdates()).containsExactly(REF_UPDATE);
   }
 
   @Test
@@ -74,24 +71,24 @@ public class ReplicationTasksStorageTest {
     storage.create(REF_UPDATE);
     storage.start(uriUpdates);
     storage.finish(uriUpdates);
-    assertThat(storage.list()).isEmpty();
+    assertThat(storage.replicateRefUpdates()).isEmpty();
   }
 
   @Test
   public void instancesOfTheSameStorageHaveTheSameElements() throws Exception {
     ReplicationTasksStorage persistedView = new ReplicationTasksStorage(storageSite);
 
-    assertThat(storage.list()).isEmpty();
-    assertThat(persistedView.list()).isEmpty();
+    assertThat(storage.replicateRefUpdates()).isEmpty();
+    assertThat(persistedView.replicateRefUpdates()).isEmpty();
 
     storage.create(REF_UPDATE);
-    assertContainsExactly(storage.list(), REF_UPDATE);
-    assertContainsExactly(persistedView.list(), REF_UPDATE);
+    assertThat(storage.replicateRefUpdates()).containsExactly(REF_UPDATE);
+    assertThat(persistedView.replicateRefUpdates()).containsExactly(REF_UPDATE);
 
     storage.start(uriUpdates);
     storage.finish(uriUpdates);
-    assertThat(storage.list()).isEmpty();
-    assertThat(persistedView.list()).isEmpty();
+    assertThat(storage.replicateRefUpdates()).isEmpty();
+    assertThat(persistedView.replicateRefUpdates()).isEmpty();
   }
 
   @Test
@@ -99,7 +96,7 @@ public class ReplicationTasksStorageTest {
     String key = storage.create(REF_UPDATE);
     String secondKey = storage.create(REF_UPDATE);
     assertEquals(key, secondKey);
-    assertContainsExactly(storage.list(), REF_UPDATE);
+    assertThat(storage.replicateRefUpdates()).containsExactly(REF_UPDATE);
   }
 
   @Test
@@ -113,7 +110,7 @@ public class ReplicationTasksStorageTest {
 
     String keyA = storage.create(REF_UPDATE);
     String keyB = storage.create(updateB);
-    assertThat(storage.list()).hasSize(2);
+    assertThat(storage.replicateRefUpdates()).hasSize(2);
     assertNotEquals(keyA, keyB);
   }
 
@@ -132,10 +129,10 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
 
     storage.finish(uriUpdates);
-    assertContainsExactly(storage.list(), updateB);
+    assertThat(storage.replicateRefUpdates()).containsExactly(updateB);
 
     storage.finish(uriUpdatesB);
-    assertThat(storage.list()).isEmpty();
+    assertThat(storage.replicateRefUpdates()).isEmpty();
   }
 
   @Test
@@ -151,7 +148,7 @@ public class ReplicationTasksStorageTest {
     storage.create(updateB);
     storage.create(REF_UPDATE);
     storage.create(updateB);
-    assertThat(storage.list()).hasSize(2);
+    assertThat(storage.replicateRefUpdates()).hasSize(2);
   }
 
   @Test
@@ -161,7 +158,7 @@ public class ReplicationTasksStorageTest {
 
     String keyA = storage.create(refA);
     String keyB = storage.create(refB);
-    assertThat(storage.list()).hasSize(2);
+    assertThat(storage.replicateRefUpdates()).hasSize(2);
     assertNotEquals(keyA, keyB);
   }
 
@@ -177,10 +174,10 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
 
     storage.finish(uriUpdatesA);
-    assertContainsExactly(storage.list(), refUpdateB);
+    assertThat(storage.replicateRefUpdates()).containsExactly(refUpdateB);
 
     storage.finish(uriUpdatesB);
-    assertThat(storage.list()).isEmpty();
+    assertThat(storage.replicateRefUpdates()).isEmpty();
   }
 
   @Test(expected = Test.None.class /* no exception expected */)
@@ -215,22 +212,7 @@ public class ReplicationTasksStorageTest {
 
     storage.finish(uriUpdates);
     storage.finish(uriUpdatesB);
-    assertThat(storage.list()).isEmpty();
-  }
-
-  private void assertContainsExactly(List<ReplicateRefUpdate> all, ReplicateRefUpdate single) {
-    assertThat(all).hasSize(1);
-    assertTrue(equals(all.get(0), single));
-  }
-
-  private boolean equals(ReplicateRefUpdate one, ReplicateRefUpdate two) {
-    return (one == null && two == null)
-        || (one != null
-            && two != null
-            && Objects.equals(one.project, two.project)
-            && Objects.equals(one.ref, two.ref)
-            && Objects.equals(one.remote, two.remote)
-            && Objects.equals(one.uri, two.uri));
+    assertThat(storage.replicateRefUpdates()).isEmpty();
   }
 
   public static URIish getUrish(String uri) {
