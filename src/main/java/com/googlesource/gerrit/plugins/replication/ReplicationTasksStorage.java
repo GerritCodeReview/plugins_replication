@@ -32,6 +32,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
 
@@ -78,6 +79,30 @@ public class ReplicationTasksStorage {
     @Override
     public String toString() {
       return "ref-update " + project + ":" + ref + " uri:" + uri + " remote:" + remote;
+    }
+
+    @Override
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((project == null) ? 0 : project.hashCode());
+      result = prime * result + ((ref == null) ? 0 : ref.hashCode());
+      result = prime * result + ((remote == null) ? 0 : remote.hashCode());
+      result = prime * result + ((uri == null) ? 0 : uri.hashCode());
+      return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (this == obj) return true;
+      if (obj == null) return false;
+      if (getClass() != obj.getClass()) return false;
+      ReplicateRefUpdate other = (ReplicateRefUpdate) obj;
+
+      return Objects.equals(project, other.project)
+          && Objects.equals(ref, other.ref)
+          && Objects.equals(remote, other.remote)
+          && Objects.equals(uri, other.uri);
     }
   }
 
