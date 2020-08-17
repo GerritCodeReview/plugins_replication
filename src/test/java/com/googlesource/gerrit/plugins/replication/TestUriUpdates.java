@@ -26,10 +26,10 @@ import org.eclipse.jgit.transport.URIish;
 public abstract class TestUriUpdates implements UriUpdates {
   public static TestUriUpdates create(ReplicateRefUpdate update) throws URISyntaxException {
     return create(
-        Project.nameKey(update.project),
-        new URIish(update.uri),
-        update.remote,
-        Collections.singleton(update.ref));
+        Project.nameKey(update.project()),
+        new URIish(update.uri()),
+        update.remote(),
+        Collections.singleton(update.ref()));
   }
 
   public static TestUriUpdates create(

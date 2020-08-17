@@ -17,7 +17,6 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 
 import com.google.common.jimfs.Configuration;
 import com.google.common.jimfs.Jimfs;
@@ -25,8 +24,6 @@ import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.Repli
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.Objects;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.After;
 import org.junit.Before;
@@ -38,7 +35,7 @@ public class ReplicationTasksStorageTest {
   protected static final String REMOTE = "myDest";
   protected static final URIish URISH = getUrish("http://example.com/" + PROJECT + ".git");
   protected static final ReplicateRefUpdate REF_UPDATE =
-      new ReplicateRefUpdate(PROJECT, REF, URISH, REMOTE);
+      ReplicateRefUpdate.create(PROJECT, REF, URISH, REMOTE);
 
   protected ReplicationTasksStorage storage;
   protected FileSystem fileSystem;
@@ -67,7 +64,7 @@ public class ReplicationTasksStorageTest {
   @Test
   public void canListWaitingUpdate() throws Exception {
     storage.create(REF_UPDATE);
-    assertContainsExactly(storage.listWaiting(), REF_UPDATE);
+    assertThat(storage.listWaiting()).containsExactly(REF_UPDATE);
   }
 
   @Test
@@ -75,7 +72,7 @@ public class ReplicationTasksStorageTest {
     storage.create(REF_UPDATE);
     storage.start(uriUpdates);
     assertThat(storage.listWaiting()).isEmpty();
-    assertContainsExactly(storage.listRunning(), REF_UPDATE);
+    assertThat(storage.listRunning()).containsExactly(REF_UPDATE);
   }
 
   @Test
@@ -94,14 +91,14 @@ public class ReplicationTasksStorageTest {
     assertThat(persistedView.listWaiting()).isEmpty();
 
     storage.create(REF_UPDATE);
-    assertContainsExactly(storage.listWaiting(), REF_UPDATE);
-    assertContainsExactly(persistedView.listWaiting(), REF_UPDATE);
+    assertThat(storage.listWaiting()).containsExactly(REF_UPDATE);
+    assertThat(persistedView.listWaiting()).containsExactly(REF_UPDATE);
 
     storage.start(uriUpdates);
     assertThat(storage.listWaiting()).isEmpty();
     assertThat(persistedView.listWaiting()).isEmpty();
-    assertContainsExactly(storage.listRunning(), REF_UPDATE);
-    assertContainsExactly(persistedView.listRunning(), REF_UPDATE);
+    assertThat(storage.listRunning()).containsExactly(REF_UPDATE);
+    assertThat(persistedView.listRunning()).containsExactly(REF_UPDATE);
 
     storage.finish(uriUpdates);
     assertThat(storage.listRunning()).isEmpty();
@@ -113,13 +110,13 @@ public class ReplicationTasksStorageTest {
     String key = storage.create(REF_UPDATE);
     String secondKey = storage.create(REF_UPDATE);
     assertEquals(key, secondKey);
-    assertContainsExactly(storage.listWaiting(), REF_UPDATE);
+    assertThat(storage.listWaiting()).containsExactly(REF_UPDATE);
   }
 
   @Test
   public void canCreateDifferentUris() throws Exception {
     ReplicateRefUpdate updateB =
-        new ReplicateRefUpdate(
+        ReplicateRefUpdate.create(
             PROJECT,
             REF,
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
@@ -134,7 +131,7 @@ public class ReplicationTasksStorageTest {
   @Test
   public void canStartDifferentUris() throws Exception {
     ReplicateRefUpdate updateB =
-        new ReplicateRefUpdate(
+        ReplicateRefUpdate.create(
             PROJECT,
             REF,
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
@@ -144,18 +141,18 @@ public class ReplicationTasksStorageTest {
     storage.create(updateB);
 
     storage.start(uriUpdates);
-    assertContainsExactly(storage.listWaiting(), updateB);
-    assertContainsExactly(storage.listRunning(), REF_UPDATE);
+    assertThat(storage.listWaiting()).containsExactly(updateB);
+    assertThat(storage.listRunning()).containsExactly(REF_UPDATE);
 
     storage.start(uriUpdatesB);
     assertThat(storage.listWaiting()).isEmpty();
-    assertContainsExactly(storage.listRunning(), REF_UPDATE, updateB);
+    assertThat(storage.listRunning()).containsExactly(REF_UPDATE, updateB);
   }
 
   @Test
   public void canFinishDifferentUris() throws Exception {
     ReplicateRefUpdate updateB =
-        new ReplicateRefUpdate(
+        ReplicateRefUpdate.create(
             PROJECT,
             REF,
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
@@ -167,7 +164,7 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
 
     storage.finish(uriUpdates);
-    assertContainsExactly(storage.listRunning(), updateB);
+    assertThat(storage.listRunning()).containsExactly(updateB);
 
     storage.finish(uriUpdatesB);
     assertThat(storage.listRunning()).isEmpty();
@@ -176,7 +173,7 @@ public class ReplicationTasksStorageTest {
   @Test
   public void differentUrisCreatedTwiceIsStoredOnce() throws Exception {
     ReplicateRefUpdate updateB =
-        new ReplicateRefUpdate(
+        ReplicateRefUpdate.create(
             PROJECT,
             REF,
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
@@ -191,8 +188,8 @@ public class ReplicationTasksStorageTest {
 
   @Test
   public void canCreateMulipleRefsForSameUri() throws Exception {
-    ReplicateRefUpdate refA = new ReplicateRefUpdate(PROJECT, "refA", URISH, REMOTE);
-    ReplicateRefUpdate refB = new ReplicateRefUpdate(PROJECT, "refB", URISH, REMOTE);
+    ReplicateRefUpdate refA = ReplicateRefUpdate.create(PROJECT, "refA", URISH, REMOTE);
+    ReplicateRefUpdate refB = ReplicateRefUpdate.create(PROJECT, "refB", URISH, REMOTE);
 
     String keyA = storage.create(refA);
     String keyB = storage.create(refB);
@@ -202,8 +199,8 @@ public class ReplicationTasksStorageTest {
 
   @Test
   public void canFinishMulipleRefsForSameUri() throws Exception {
-    ReplicateRefUpdate refUpdateA = new ReplicateRefUpdate(PROJECT, "refA", URISH, REMOTE);
-    ReplicateRefUpdate refUpdateB = new ReplicateRefUpdate(PROJECT, "refB", URISH, REMOTE);
+    ReplicateRefUpdate refUpdateA = ReplicateRefUpdate.create(PROJECT, "refA", URISH, REMOTE);
+    ReplicateRefUpdate refUpdateB = ReplicateRefUpdate.create(PROJECT, "refB", URISH, REMOTE);
     UriUpdates uriUpdatesA = TestUriUpdates.create(refUpdateA);
     UriUpdates uriUpdatesB = TestUriUpdates.create(refUpdateB);
     storage.create(refUpdateA);
@@ -212,7 +209,7 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
 
     storage.finish(uriUpdatesA);
-    assertContainsExactly(storage.listRunning(), refUpdateB);
+    assertThat(storage.listRunning()).containsExactly(refUpdateB);
 
     storage.finish(uriUpdatesB);
     assertThat(storage.listRunning()).isEmpty();
@@ -224,7 +221,7 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdates);
 
     storage.reset(uriUpdates);
-    assertContainsExactly(storage.listWaiting(), REF_UPDATE);
+    assertThat(storage.listWaiting()).containsExactly(REF_UPDATE);
     assertThat(storage.listRunning()).isEmpty();
   }
 
@@ -235,7 +232,7 @@ public class ReplicationTasksStorageTest {
     storage.reset(uriUpdates);
 
     storage.start(uriUpdates);
-    assertContainsExactly(storage.listRunning(), REF_UPDATE);
+    assertThat(storage.listRunning()).containsExactly(REF_UPDATE);
     assertThat(storage.listWaiting()).isEmpty();
 
     storage.finish(uriUpdates);
@@ -254,7 +251,7 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdates);
 
     storage.resetAll();
-    assertContainsExactly(storage.listWaiting(), REF_UPDATE);
+    assertThat(storage.listWaiting()).containsExactly(REF_UPDATE);
     assertThat(storage.listRunning()).isEmpty();
   }
 
@@ -265,7 +262,7 @@ public class ReplicationTasksStorageTest {
     storage.resetAll();
 
     storage.start(uriUpdates);
-    assertContainsExactly(storage.listRunning(), REF_UPDATE);
+    assertThat(storage.listRunning()).containsExactly(REF_UPDATE);
     assertThat(storage.listWaiting()).isEmpty();
 
     storage.finish(uriUpdates);
@@ -275,7 +272,7 @@ public class ReplicationTasksStorageTest {
   @Test
   public void canResetAllMultipleUpdates() throws Exception {
     ReplicateRefUpdate updateB =
-        new ReplicateRefUpdate(
+        ReplicateRefUpdate.create(
             PROJECT,
             REF,
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
@@ -287,13 +284,13 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
 
     storage.resetAll();
-    assertContainsExactly(storage.listWaiting(), REF_UPDATE, updateB);
+    assertThat(storage.listWaiting()).containsExactly(REF_UPDATE, updateB);
   }
 
   @Test
   public void canCompleteMultipleResetAllUpdates() throws Exception {
     ReplicateRefUpdate updateB =
-        new ReplicateRefUpdate(
+        ReplicateRefUpdate.create(
             PROJECT,
             REF,
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
@@ -306,11 +303,11 @@ public class ReplicationTasksStorageTest {
     storage.resetAll();
 
     storage.start(uriUpdates);
-    assertContainsExactly(storage.listRunning(), REF_UPDATE);
-    assertContainsExactly(storage.listWaiting(), updateB);
+    assertThat(storage.listRunning()).containsExactly(REF_UPDATE);
+    assertThat(storage.listWaiting()).containsExactly(updateB);
 
     storage.start(uriUpdatesB);
-    assertContainsExactly(storage.listRunning(), REF_UPDATE, updateB);
+    assertThat(storage.listRunning()).containsExactly(REF_UPDATE, updateB);
     assertThat(storage.listWaiting()).isEmpty();
 
     storage.finish(uriUpdates);
@@ -335,7 +332,7 @@ public class ReplicationTasksStorageTest {
   @Test(expected = Test.None.class /* no exception expected */)
   public void illegalDoubleFinishDifferentUriIsGraceful() throws Exception {
     ReplicateRefUpdate updateB =
-        new ReplicateRefUpdate(
+        ReplicateRefUpdate.create(
             PROJECT,
             REF,
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
@@ -356,24 +353,6 @@ public class ReplicationTasksStorageTest {
   private void assertNoIncompleteTasks(ReplicationTasksStorage storage) {
     assertThat(storage.listWaiting()).isEmpty();
     assertThat(storage.listRunning()).isEmpty();
-  }
-
-  private void assertContainsExactly(
-      List<ReplicateRefUpdate> all, ReplicateRefUpdate... refUpdates) {
-    assertThat(all).hasSize(refUpdates.length);
-    for (int i = 0; i < refUpdates.length; i++) {
-      assertTrue(equals(all.get(i), refUpdates[i]));
-    }
-  }
-
-  private boolean equals(ReplicateRefUpdate one, ReplicateRefUpdate two) {
-    return (one == null && two == null)
-        || (one != null
-            && two != null
-            && Objects.equals(one.project, two.project)
-            && Objects.equals(one.ref, two.ref)
-            && Objects.equals(one.remote, two.remote)
-            && Objects.equals(one.uri, two.uri));
   }
 
   public static URIish getUrish(String uri) {
