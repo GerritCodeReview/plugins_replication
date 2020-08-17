@@ -111,6 +111,30 @@
       "revId": "753c2fa7fa9e67a23fccd82e965386e078f6fe4b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e847c08d_58c760ae",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-17T22:48:53Z",
+      "side": 1,
+      "message": "\u003e That seems much more invasive than what\u0027s needed to fix this test.\n\nIf you look at the test, it is removing code and not invasive.\nThe rest of the change has been added to satisfy Martin\u0027s requirement to use the hashCode and equals in the code to see its benefits.\n\nIt is basically two changes squashed in one:\n- the move of equals to the ReplicationRefUpdate class\n- the use of the method from the replication plugin code\n\nI could have done it in two steps (as I typically do), however, Martin\u0027s feedback was meaningful and required to have its utilisation also in the same change.\n\nHope that makes sense.",
+      "parentUuid": "5911b9cf_a89aff7c",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 3
+      },
+      "revId": "753c2fa7fa9e67a23fccd82e965386e078f6fe4b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
