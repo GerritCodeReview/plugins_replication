@@ -30,8 +30,9 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
 
@@ -62,7 +63,7 @@ public class ReplicationTasksStorage {
 
   private boolean disableDeleteForTesting;
 
-  public static class ReplicateRefUpdate {
+  public static final class ReplicateRefUpdate {
     public final String project;
     public final String ref;
     public final String uri;
@@ -78,6 +79,24 @@ public class ReplicationTasksStorage {
     @Override
     public String toString() {
       return "ref-update " + project + ":" + ref + " uri:" + uri + " remote:" + remote;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(project, ref, remote, uri);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (!(obj instanceof ReplicateRefUpdate)) {
+        return false;
+      }
+      ReplicateRefUpdate other = (ReplicateRefUpdate) obj;
+
+      return Objects.equals(project, other.project)
+          && Objects.equals(ref, other.ref)
+          && Objects.equals(remote, other.remote)
+          && Objects.equals(uri, other.uri);
     }
   }
 
@@ -134,27 +153,27 @@ public class ReplicationTasksStorage {
     }
   }
 
-  public synchronized List<ReplicateRefUpdate> listWaiting() {
-    return list(createDir(waitingUpdates));
+  public synchronized Set<ReplicateRefUpdate> listWaiting() {
+    return replicateRefUpdates(createDir(waitingUpdates));
   }
 
   @VisibleForTesting
-  public synchronized List<ReplicateRefUpdate> listRunning() {
-    return list(createDir(runningUpdates));
+  public synchronized Set<ReplicateRefUpdate> listRunning() {
+    return replicateRefUpdates(createDir(runningUpdates));
   }
 
   @VisibleForTesting
-  public synchronized List<ReplicateRefUpdate> listBuilding() {
-    return list(createDir(buildingUpdates));
+  public synchronized Set<ReplicateRefUpdate> listBuilding() {
+    return replicateRefUpdates(createDir(buildingUpdates));
   }
 
   @VisibleForTesting
-  public synchronized List<ReplicateRefUpdate> list() {
-    return list(createDir(refUpdates));
+  public synchronized Set<ReplicateRefUpdate> list() {
+    return replicateRefUpdates(createDir(refUpdates));
   }
 
-  private List<ReplicateRefUpdate> list(Path tasks) {
-    List<ReplicateRefUpdate> results = new ArrayList<>();
+  private Set<ReplicateRefUpdate> replicateRefUpdates(Path tasks) {
+    Set<ReplicateRefUpdate> results = new HashSet<>();
     try (DirectoryStream<Path> events = Files.newDirectoryStream(tasks)) {
       for (Path path : events) {
         if (Files.isRegularFile(path)) {
@@ -170,7 +189,7 @@ public class ReplicationTasksStorage {
           }
         } else if (Files.isDirectory(path)) {
           try {
-            results.addAll(list(path));
+            results.addAll(replicateRefUpdates(path));
           } catch (DirectoryIteratorException d) {
             // iterating over the sub-directories is expected to have dirs disappear
             Nfs.throwIfNotStaleFileHandle(d.getCause());
