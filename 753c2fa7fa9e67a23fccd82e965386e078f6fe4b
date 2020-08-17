@@ -63,6 +63,30 @@
       "revId": "753c2fa7fa9e67a23fccd82e965386e078f6fe4b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1db95edf_af2397b7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-17T15:56:58Z",
+      "side": 1,
+      "message": "See the alternative approach with Change-Id: Ib1e68a52.\nstable-3.1 is still a supported branch and adding two methods is not a big refactoring either.\nI agree with you instead for the AutoValue introduction: we can merge this one up to master and then introduce AutoValues all throughout the replication plugin.",
+      "parentUuid": "83550cdf_7a02077b",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 3
+      },
+      "revId": "753c2fa7fa9e67a23fccd82e965386e078f6fe4b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
