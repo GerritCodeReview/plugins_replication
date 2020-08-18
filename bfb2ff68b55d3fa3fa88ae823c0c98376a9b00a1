@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b42da3e_1a269af8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-18T00:46:45Z",
+      "side": 1,
+      "message": "The code in here looks all correct. I like the idea of using a Set, however to do so it also adds s a manually coded and potentially error prone equals() and hashcode(). This means that it comes with some risk for a stable branch without providing any functional benefit. i.e. this is not adding a test or a bug fix. It is a \"nice-to-have\" refactoring that I am not sure we should accept on a stable branch. My concern leaves me at a 0 vote.",
+      "revId": "bfb2ff68b55d3fa3fa88ae823c0c98376a9b00a1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
