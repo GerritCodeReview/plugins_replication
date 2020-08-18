@@ -660,6 +660,24 @@
     },
     {
       "key": {
+        "uuid": "2824ca16_ebf173a4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-08-18T14:42:04Z",
+      "side": 1,
+      "message": "This assumption, that two threads will never concurrently access this iterator, should be documented here for future reference as it is seems critical for this code to work correctly.\n\nHowever, even if this iterator will never be accessed concurrently by more than one thread I still wonder if an update of the\ninternal state of the iterator (like the current index) is guaranteed to be visible by the other threads?\nFor example, imagine we add another instance member to the ChainedScheduler: int totalScheduled, and we increase\nit every time a the scheduleNext() successfully schedules a task. Even without concurrent access by more than one thread\nwe would need to synchronize the read/write access to this variable in order to make sure that updates are visible by the\nother threads (or use volatile or AtomicInt or something else...).\n\nAn iterator will likely have an internal state like: int cursor. If one thread increases that value (by calling next())\nwhat guarantees that this update is visible to the other threads? In the terms of the java memory model: what guarantees\nthe happens-before/happens-after semantics for two updates done from two different threads?",
+      "parentUuid": "2044f7bf_4f9bade2",
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e447db75_17763441",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
         "patchSetId": 12
