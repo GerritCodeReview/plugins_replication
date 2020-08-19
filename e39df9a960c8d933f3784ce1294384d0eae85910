@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29117586_1cedf493",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-19T22:27:19Z",
+      "side": 1,
+      "message": "The replication in a multi-master setup isn\u0027t included yet in any Gerrit release. It is planned for v3.3 (current master branch).\n\nShould this change moved to master then? WDYT?",
+      "revId": "e39df9a960c8d933f3784ce1294384d0eae85910",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
