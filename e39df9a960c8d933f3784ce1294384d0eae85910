@@ -34,6 +34,24 @@
       "revId": "e39df9a960c8d933f3784ce1294384d0eae85910",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9116b33d_e04590f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-19T22:39:56Z",
+      "side": 1,
+      "message": "\u003e Starting with WDYT: This change belongs here.\n\u003e \n\u003e There\u0027s no docs or anything saying it *shouldn\u0027t* work. I agree there is a specific feature planned for 3.3 which *requires* a MM setup, but to me that\u0027s different from being MM-compatible. We should always aim for MM compatibility and adding tests to ensure that compatibility isn\u0027t broken is a Good Thing.\n\nMakes sense: can this be explained in the commit message?\n\n\u003e Does the commit message need to be improved to explain that? I assume any change adding tests is doing so either because 1) it\u0027s codifying something that already works or 2) it\u0027s demonstrating something that fails. This change is #1.\n\nYes, please.",
+      "parentUuid": "52bcc283_6ca93903",
+      "revId": "e39df9a960c8d933f3784ce1294384d0eae85910",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
