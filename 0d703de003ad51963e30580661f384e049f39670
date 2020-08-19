@@ -145,6 +145,24 @@
     },
     {
       "key": {
+        "uuid": "3ca6da39_9a5222fc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-19T23:37:29Z",
+      "side": 1,
+      "message": "Ugh, I think this change is going to be very problematic. Now there is no visibility to when this task is done. This thread/task could be running forever and we would not know this. This change is specifically trying address the fact that this can take extremely long periods of time, and now there is no way of knowing how long. I think this needs to be reverted. Mathias\u0027s concern should be addressed.",
+      "parentUuid": "433c01ef_8cee7461",
+      "revId": "0d703de003ad51963e30580661f384e049f39670",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "58870ac5_ccf5ab50",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 1
