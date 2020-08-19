@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1db2f7e1_2267d39e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-19T23:10:28Z",
+      "side": 1,
+      "message": "Does this need the annotation if it\u0027s public and used in prod code?",
+      "range": {
+        "startLine": 160,
+        "startChar": 2,
+        "endLine": 160,
+        "endChar": 20
+      },
+      "revId": "f30117d9ebc1f8bfde83ac240b32bad3689ca696",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5b7786a_3d3e446a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-19T23:10:28Z",
+      "side": 1,
+      "message": "This isn\u0027t used anywhere, remove?",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 3
+      },
+      "revId": "f30117d9ebc1f8bfde83ac240b32bad3689ca696",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "651d9d3c_1be70507",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-19T23:10:28Z",
+      "side": 1,
+      "message": "I\u0027m planning to remove this next week since any prod callers should be using waiting() or running(). Tests using this need to be migrated to one of those more specific methods. Since that\u0027s a tests-only change, I\u0027d like to do that cleanup before this change merges so that we\u0027re not adding/modifying usage of this method. Would that be ok with you? (if you want to get to it first, that\u0027s also fine with me 😊)",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 3
+      },
+      "revId": "f30117d9ebc1f8bfde83ac240b32bad3689ca696",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d1e103b_e9a243cb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-19T23:10:28Z",
+      "side": 1,
+      "message": "I\u0027m not sure this should be renamed. \u0027list\u0027 here is an action. You could change it to \u0027collect\u0027 if you want to signify that it\u0027s not explicitly a List.",
+      "range": {
+        "startLine": 175,
+        "startChar": 34,
+        "endLine": 175,
+        "endChar": 53
+      },
+      "revId": "f30117d9ebc1f8bfde83ac240b32bad3689ca696",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d978eeb5_b8b16598",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationFanoutIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-19T23:10:28Z",
+      "side": 1,
+      "message": "Should this become a Set?",
+      "range": {
+        "startLine": 244,
+        "startChar": 10,
+        "endLine": 244,
+        "endChar": 14
+      },
+      "revId": "f30117d9ebc1f8bfde83ac240b32bad3689ca696",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
