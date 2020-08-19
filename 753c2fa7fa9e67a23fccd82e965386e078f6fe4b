@@ -183,6 +183,30 @@
       "revId": "753c2fa7fa9e67a23fccd82e965386e078f6fe4b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fa0e21d_86a0adbd",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-19T22:49:20Z",
+      "side": 1,
+      "message": "As this is an existing code problem not related to this change, I am going to consider this resolved.",
+      "parentUuid": "aa54322d_c806c8f0",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 3
+      },
+      "revId": "753c2fa7fa9e67a23fccd82e965386e078f6fe4b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
