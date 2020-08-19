@@ -33,6 +33,29 @@
       "revId": "3c764785b62efea8038650dc6d2f7cb8d740972c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd1b8145_0682ee36",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-19T23:54:09Z",
+      "side": 1,
+      "message": "FYI, be aware that when attempting to merge this to 3.1 it will likely allow the server to startup, but then still hold up the replication plugin from doing anything because almost all the methods in the ReplicationTasksStorage class are synchronized. In particular list() is synchronized which means that this thread will then hold a lock on that Class until it is done.",
+      "range": {
+        "startLine": 102,
+        "startChar": 34,
+        "endLine": 102,
+        "endChar": 51
+      },
+      "revId": "3c764785b62efea8038650dc6d2f7cb8d740972c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
