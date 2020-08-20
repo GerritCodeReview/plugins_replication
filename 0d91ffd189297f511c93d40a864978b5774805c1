@@ -164,6 +164,30 @@
       "revId": "0d91ffd189297f511c93d40a864978b5774805c1",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bba4e334_228c752d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-20T11:48:41Z",
+      "side": 1,
+      "message": "I fully agree with your statement: the MM use-case would need to deal with all these issues across multiple processes on potentially different hosts. This change was intended to fix the single-M scenario.\n\nThe MM replication use-case is in the roadmap for v3.3 and it should be addressed in master. It is likely to need further refactoring, fixes and improvements.",
+      "parentUuid": "361b7fb6_6a888ac1",
+      "range": {
+        "startLine": 134,
+        "startChar": 9,
+        "endLine": 134,
+        "endChar": 21
+      },
+      "revId": "0d91ffd189297f511c93d40a864978b5774805c1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
