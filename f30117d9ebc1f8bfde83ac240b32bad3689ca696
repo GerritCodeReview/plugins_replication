@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "913fa9af_45746e88",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-20T21:06:54Z",
+      "side": 1,
+      "message": "Done in 279256: ReplicationTasksStorage: Remove test-only list* methods | https://gerrit-review.googlesource.com/c/plugins/replication/+/279256\nif you want to rebase on top of that?",
+      "parentUuid": "651d9d3c_1be70507",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 3
+      },
+      "revId": "f30117d9ebc1f8bfde83ac240b32bad3689ca696",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d1e103b_e9a243cb",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 6
