@@ -105,7 +105,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     Project.NameKey sourceProject = createTestProject("foo");
 
-    assertThat(listReplicationTasks("refs/meta/config")).hasSize(1);
+    assertThat(listIncompleteTasks("refs/meta/config")).hasSize(1);
 
     waitUntil(() -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")));
 
@@ -152,7 +152,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
 
-    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(1);
+    assertThat(listIncompleteTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(1);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
@@ -175,7 +175,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     input.revision = master;
     gApi.projects().name(project.get()).branch(newBranch).create(input);
 
-    assertThat(listReplicationTasks("refs/heads/(mybranch|master)")).hasSize(2);
+    assertThat(listIncompleteTasks("refs/heads/(mybranch|master)")).hasSize(2);
 
     try (Repository repo = repoManager.openRepository(targetProject);
         Repository sourceRepo = repoManager.openRepository(project)) {
@@ -201,7 +201,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
 
-    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(2);
+    assertThat(listIncompleteTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(2);
 
     try (Repository repo1 = repoManager.openRepository(targetProject1);
         Repository repo2 = repoManager.openRepository(targetProject2)) {
@@ -233,7 +233,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     createChange();
 
-    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
+    assertThat(listIncompleteTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
 
     setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
     setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
@@ -251,7 +251,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, null, new ReplicationState(NO_OP), true);
 
-    assertThat(listReplicationTasks(".*all.*")).hasSize(1);
+    assertThat(listIncompleteTasks(".*all.*")).hasSize(1);
   }
 
   @Test
@@ -269,8 +269,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
-    assertThat(listReplicationTasks(".*all.*")).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
+    assertThat(listIncompleteTasks(".*all.*")).hasSize(1);
+    for (ReplicationTasksStorage.ReplicateRefUpdate task : listIncompleteTasks()) {
       assertThat(task.uri).isEqualTo(expectedURI);
     }
   }
@@ -290,11 +290,10 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
-    assertThat(listReplicationTasks(".*")).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
+    assertThat(listIncompleteTasks()).hasSize(1);
+    for (ReplicationTasksStorage.ReplicateRefUpdate task : listIncompleteTasks()) {
       assertThat(task.uri).isEqualTo(expectedURI);
     }
-    assertThat(tasksStorage.list()).isNotEmpty();
   }
 
   @Test
@@ -342,7 +341,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     input.revision = master;
     gApi.projects().name(project.get()).branch(branchToDelete).create(input);
 
-    assertThat(listReplicationTasks("refs/heads/(todelete|master)")).hasSize(2);
+    assertThat(listIncompleteTasks("refs/heads/(todelete|master)")).hasSize(2);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, branchToDelete) != null);
@@ -350,7 +349,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     gApi.projects().name(project.get()).branch(branchToDelete).delete();
 
-    assertThat(listReplicationTasks(branchToDelete)).hasSize(1);
+    assertThat(listIncompleteTasks(branchToDelete)).hasSize(1);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       if (mirror) {
@@ -464,7 +463,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     String changeRef = createChange().getPatchSet().refName();
 
     tasksStorage.disableDeleteForTesting(false);
-    changeReplicationTasksForRemote(changeRef, remote1)
+    changeReplicationTasksForRemote(tasksStorage.listWaiting().stream(), changeRef, remote1)
         .forEach(
             (update) -> {
               try {
@@ -601,7 +600,12 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
       String changeRef, String remote) {
-    return tasksStorage.list().stream()
+    return changeReplicationTasksForRemote(streamIncompleteTasks(), changeRef, remote);
+  }
+
+  private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
+      Stream<ReplicateRefUpdate> updates, String changeRef, String remote) {
+    return updates
         .filter(task -> changeRef.equals(task.ref))
         .filter(task -> remote.equals(task.remote));
   }
@@ -610,11 +614,24 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     return projectOperations.newProject().name(name).create();
   }
 
-  private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
+  private List<ReplicateRefUpdate> listIncompleteTasks(String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage.list().stream()
+    return streamIncompleteTasks()
         .filter(task -> refmaskPattern.matcher(task.ref).matches())
         .collect(toList());
+  }
+
+  private List<ReplicateRefUpdate> listIncompleteTasks() {
+    return streamIncompleteTasks().collect(toList());
+  }
+
+  @SuppressWarnings(
+      "SynchronizeOnNonFinalField") // tasksStorage is non-final but only set in setUpTestPlugin()
+  private Stream<ReplicateRefUpdate> streamIncompleteTasks() {
+    synchronized (tasksStorage) {
+      return Stream.concat(
+          tasksStorage.listWaiting().stream(), tasksStorage.listRunning().stream());
+    }
   }
 
   public void cleanupReplicationTasks() throws IOException {
