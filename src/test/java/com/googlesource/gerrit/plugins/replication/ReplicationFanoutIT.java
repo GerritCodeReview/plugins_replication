@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -241,11 +242,15 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
     return projectOperations.newProject().name(name).create();
   }
 
+  @SuppressWarnings(
+      "SynchronizeOnNonFinalField") // tasksStorage is non-final but only set in setUpTestPlugin()
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage.list().stream()
-        .filter(task -> refmaskPattern.matcher(task.ref).matches())
-        .collect(toList());
+    synchronized (tasksStorage) {
+      return Stream.concat(tasksStorage.listWaiting().stream(), tasksStorage.listRunning().stream())
+          .filter(task -> refmaskPattern.matcher(task.ref).matches())
+          .collect(toList());
+    }
   }
 
   public void cleanupReplicationTasks() throws IOException {
