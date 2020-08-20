@@ -128,6 +128,30 @@
       "revId": "3c764785b62efea8038650dc6d2f7cb8d740972c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a40d3097_a22261e3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-20T14:17:37Z",
+      "side": 1,
+      "message": "\u003e \u003e \u003e The ReplicationTaskStorage has no synchronization in stable-2.16.\n\u003e \u003e \u003e As I see, synchronization is introduced in stable-3.1 in this [1] change.\n\u003e \u003e \u003e I don\u0027t know if synchronization was the only way to resolve the issues\n\u003e \u003e \u003e listed in the commit message of [1]. Luca?\n\u003e \u003e \n\u003e \u003e [1] was mainly directed for having a \"stabla picture\" when you list the replication tasks on the filesystem. You need to block the modifications during the listing, otherwise the results are unpredictable.\n\u003e \n\u003e I would support on alternative fix as this was for testing support only I believe.\n\n+1, that should be done on stable-3.1.\n\n\u003e \u003e It is true that during the listing we would not allow further additions to the replication queue, however, that should take fractions of seconds and,\n\u003e \n\u003e I don\u0027t believe that seconds is the case on a busy server with 100K events on NFS.\n\nCan you share some numbers with us? What is the min/p95/p99/max time for listing the events directory for your NFS in prod?\n\n\u003e \u003e as Saša said, isn\u0027t blocking Gerrit startup anyway.\n\u003e \n\u003e Agreed, however it would be a new regression to block replication (instead of server startup), so this should not be merged to 3.1 if it causes a regression. \n\nI believe the plan for merging to stable-3.1 should be:\n1. Get rid of the synchronized on the list() method\n2. Refactor the tests to avoid using the list() method because of the synchronisation issues.\n\nP.S. Bear in mind that *IF* the list() in your production system takes minutes (e.g. 20-30 mins) then it would not take an accurate picture of the events for replay, because the situation on the filesystem would have changed. We can take the discussion offline and continue on the stable-3.1 branch as it is not relevant for this change.\n\n\u003e \u003e The headline of this change is \"Don\u0027t wait for pending event to process ...\" and I believe that the concern of this change in this branch is addressed.\n\u003e \n\u003e I don\u0027t think the headline is relevant when considering the merge to 3.1.\n\nTrue, the headline should be different for the merge to 3.1.\n\n\u003e \u003e For further improvements on other branches, we are likely to require further changes *IF* the listing is a matter of concern for your guys, if you are in a stable-3.x branch in production.\n\u003e \n\u003e I believe that the \u0027regression listing\" synchronized regression needs to be prevented  before merging this to 3.1.\n\n+1, to be fixed on stable-3.1 *before* merging stable-3.0 (containing this change).\n\nWe can merge this up to stable-3.0 and then wait for the removal of the synchronized on the list() method.",
+      "parentUuid": "d4af84e2_78b002b7",
+      "range": {
+        "startLine": 102,
+        "startChar": 34,
+        "endLine": 102,
+        "endChar": 51
+      },
+      "revId": "3c764785b62efea8038650dc6d2f7cb8d740972c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
