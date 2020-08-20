@@ -163,6 +163,24 @@
     },
     {
       "key": {
+        "uuid": "2d651811_213f3a2e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2020-08-20T00:00:35Z",
+      "side": 1,
+      "message": "add a log statement to firePendingEvents() logging progress in a follow up change ?",
+      "parentUuid": "3ca6da39_9a5222fc",
+      "revId": "0d703de003ad51963e30580661f384e049f39670",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "58870ac5_ccf5ab50",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 1
