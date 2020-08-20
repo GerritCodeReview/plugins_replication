@@ -270,7 +270,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
     assertThat(listReplicationTasks(".*all.*")).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
+    for (ReplicationTasksStorage.ReplicateRefUpdate task : listReplicationTasks()) {
       assertThat(task.uri).isEqualTo(expectedURI);
     }
   }
@@ -290,11 +290,10 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
-    assertThat(listReplicationTasks(".*")).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
+    assertThat(listReplicationTasks()).hasSize(1);
+    for (ReplicationTasksStorage.ReplicateRefUpdate task : listReplicationTasks()) {
       assertThat(task.uri).isEqualTo(expectedURI);
     }
-    assertThat(tasksStorage.list()).isNotEmpty();
   }
 
   @Test
@@ -464,7 +463,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     String changeRef = createChange().getPatchSet().refName();
 
     tasksStorage.disableDeleteForTesting(false);
-    changeReplicationTasksForRemote(changeRef, remote1)
+    changeReplicationTasksForRemote(tasksStorage.listWaiting().stream(), changeRef, remote1)
         .forEach(
             (update) -> {
               try {
@@ -601,7 +600,12 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
       String changeRef, String remote) {
-    return tasksStorage.list().stream()
+    return changeReplicationTasksForRemote(listIncompleteTasks(), changeRef, remote);
+  }
+
+  private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
+      Stream<ReplicateRefUpdate> updates, String changeRef, String remote) {
+    return updates
         .filter(task -> changeRef.equals(task.ref))
         .filter(task -> remote.equals(task.remote));
   }
@@ -610,11 +614,24 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     return projectOperations.newProject().name(name).create();
   }
 
+  private List<ReplicateRefUpdate> listReplicationTasks() {
+    return listReplicationTasks(".*");
+  }
+
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage.list().stream()
+    return listIncompleteTasks()
         .filter(task -> refmaskPattern.matcher(task.ref).matches())
         .collect(toList());
+  }
+
+  @SuppressWarnings(
+      "SynchronizeOnNonFinalField") // tasksStorage is non-final but only set in setUpTestPlugin()
+  private Stream<ReplicateRefUpdate> listIncompleteTasks() {
+    synchronized (tasksStorage) {
+      return Stream.concat(
+          tasksStorage.listWaiting().stream(), tasksStorage.listRunning().stream());
+    }
   }
 
   public void cleanupReplicationTasks() throws IOException {
