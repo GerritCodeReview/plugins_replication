@@ -181,6 +181,24 @@
     },
     {
       "key": {
+        "uuid": "693a3339_53015adc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2020-08-20T11:41:03Z",
+      "side": 1,
+      "message": "\u003e This change is specifically trying address the fact that this can take extremely long periods of time, and now there is no way of knowing how long. \n\nThe main topic of this change was to not block Gerrit server start. This is also the topic of the commit message. \n\n\u003e This change is specifically trying address the fact that this can take extremely long periods of time ...\n\n... in the calling thread, blocking Gerrit server start.\n\n\u003e add a log statement to firePendingEvents() logging progress in a follow up change ?\n\nI will add some logging in a follow-up change.",
+      "parentUuid": "2d651811_213f3a2e",
+      "revId": "0d703de003ad51963e30580661f384e049f39670",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "58870ac5_ccf5ab50",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 1
