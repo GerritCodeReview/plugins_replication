@@ -80,6 +80,30 @@
       "revId": "3c764785b62efea8038650dc6d2f7cb8d740972c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42e0198d_c7827c0f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-20T12:14:30Z",
+      "side": 1,
+      "message": "\u003e The ReplicationTaskStorage has no synchronization in stable-2.16.\n\u003e As I see, synchronization is introduced in stable-3.1 in this [1] change.\n\u003e I don\u0027t know if synchronization was the only way to resolve the issues\n\u003e listed in the commit message of [1]. Luca?\n\n[1] was mainly directed for having a \"stabla picture\" when you list the replication tasks on the filesystem. You need to block the modifications during the listing, otherwise the results are unpredictable.\n\nIt is true that during the listing we would not allow further additions to the replication queue, however, that should take fractions of seconds and, as Saša said, isn\u0027t blocking Gerrit startup anyway.\n\nThe headline of this change is \"Don\u0027t wait for pending event to process ...\" and I believe that the concern of this change in this branch is addressed.\n\nFor further improvements on other branches, we are likely to require further changes *IF* the listing is a matter of concern for your guys, if you are in a stable-3.x branch in production.",
+      "parentUuid": "72689512_2dc28ec4",
+      "range": {
+        "startLine": 102,
+        "startChar": 34,
+        "endLine": 102,
+        "endChar": 51
+      },
+      "revId": "3c764785b62efea8038650dc6d2f7cb8d740972c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
