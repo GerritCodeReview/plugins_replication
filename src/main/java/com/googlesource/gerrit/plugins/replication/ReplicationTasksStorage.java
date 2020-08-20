@@ -83,7 +83,6 @@ public class ReplicationTasksStorage {
 
   private static final Gson GSON = new Gson();
 
-  private final Path refUpdates;
   private final Path buildingUpdates;
   private final Path runningUpdates;
   private final Path waitingUpdates;
@@ -95,7 +94,6 @@ public class ReplicationTasksStorage {
 
   @VisibleForTesting
   public ReplicationTasksStorage(Path refUpdates) {
-    this.refUpdates = refUpdates;
     buildingUpdates = refUpdates.resolve("building");
     runningUpdates = refUpdates.resolve("running");
     waitingUpdates = refUpdates.resolve("waiting");
@@ -138,19 +136,8 @@ public class ReplicationTasksStorage {
     return list(createDir(waitingUpdates));
   }
 
-  @VisibleForTesting
   public synchronized List<ReplicateRefUpdate> listRunning() {
     return list(createDir(runningUpdates));
-  }
-
-  @VisibleForTesting
-  public synchronized List<ReplicateRefUpdate> listBuilding() {
-    return list(createDir(buildingUpdates));
-  }
-
-  @VisibleForTesting
-  public synchronized List<ReplicateRefUpdate> list() {
-    return list(createDir(refUpdates));
   }
 
   private List<ReplicateRefUpdate> list(Path tasks) {
