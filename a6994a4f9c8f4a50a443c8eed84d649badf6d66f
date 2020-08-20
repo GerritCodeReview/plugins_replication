@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "03535178_122f8294",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-08-20T17:14:57Z",
+      "side": 1,
+      "message": "Yes, we have been using list() in some of the other test cases here, however, we wanted to remove it in one of the followup changes as it is used exclusively in tests and probably replace it with a test helper instead. We didn\u0027t want to add new code that makes use of it. WDYT?",
+      "parentUuid": "7e60d37b_8cc25956",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 48
+      },
+      "revId": "a6994a4f9c8f4a50a443c8eed84d649badf6d66f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1321025b_b75a23f0",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 3
@@ -94,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "42cfaf00_224ecaab",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-08-20T17:14:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "982058b3_e5124c24",
+      "range": {
+        "startLine": 247,
+        "startChar": 4,
+        "endLine": 247,
+        "endChar": 49
+      },
+      "revId": "a6994a4f9c8f4a50a443c8eed84d649badf6d66f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31405db4_6fceafce",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 3
@@ -137,6 +185,30 @@
       "revId": "a6994a4f9c8f4a50a443c8eed84d649badf6d66f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c6ead44_62661786",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-08-20T17:14:57Z",
+      "side": 1,
+      "message": "Yeah, that makes sense. I have removed these for now. We can re-add these tests in a new change which also updates the code to report these bad scenarios.",
+      "parentUuid": "4e77e97e_7aa46346",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 3
+      },
+      "revId": "a6994a4f9c8f4a50a443c8eed84d649badf6d66f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
