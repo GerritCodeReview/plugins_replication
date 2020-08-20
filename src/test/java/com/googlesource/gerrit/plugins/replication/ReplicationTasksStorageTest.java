@@ -60,13 +60,14 @@ public class ReplicationTasksStorageTest {
 
   @Test
   public void canListEmptyStorage() throws Exception {
-    assertThat(storage.list()).isEmpty();
+    assertThat(storage.listWaiting()).isEmpty();
+    assertThat(storage.listRunning()).isEmpty();
   }
 
   @Test
   public void canListWaitingUpdate() throws Exception {
     storage.create(REF_UPDATE);
-    assertContainsExactly(storage.list(), REF_UPDATE);
+    assertContainsExactly(storage.listWaiting(), REF_UPDATE);
   }
 
   @Test
@@ -74,24 +75,30 @@ public class ReplicationTasksStorageTest {
     storage.create(REF_UPDATE);
     storage.start(uriUpdates);
     storage.finish(uriUpdates);
-    assertThat(storage.list()).isEmpty();
+    assertThat(storage.listWaiting()).isEmpty();
+    assertThat(storage.listRunning()).isEmpty();
   }
 
   @Test
   public void instancesOfTheSameStorageHaveTheSameElements() throws Exception {
     ReplicationTasksStorage persistedView = new ReplicationTasksStorage(storageSite);
 
-    assertThat(storage.list()).isEmpty();
-    assertThat(persistedView.list()).isEmpty();
+    assertThat(storage.listWaiting()).isEmpty();
+    assertThat(persistedView.listWaiting()).isEmpty();
 
     storage.create(REF_UPDATE);
-    assertContainsExactly(storage.list(), REF_UPDATE);
-    assertContainsExactly(persistedView.list(), REF_UPDATE);
+    assertContainsExactly(storage.listWaiting(), REF_UPDATE);
+    assertContainsExactly(persistedView.listWaiting(), REF_UPDATE);
 
     storage.start(uriUpdates);
+    assertThat(storage.listWaiting()).isEmpty();
+    assertThat(persistedView.listWaiting()).isEmpty();
+    assertContainsExactly(storage.listRunning(), REF_UPDATE);
+    assertContainsExactly(persistedView.listRunning(), REF_UPDATE);
+
     storage.finish(uriUpdates);
-    assertThat(storage.list()).isEmpty();
-    assertThat(persistedView.list()).isEmpty();
+    assertThat(storage.listRunning()).isEmpty();
+    assertThat(persistedView.listRunning()).isEmpty();
   }
 
   @Test
@@ -99,7 +106,7 @@ public class ReplicationTasksStorageTest {
     String key = storage.create(REF_UPDATE);
     String secondKey = storage.create(REF_UPDATE);
     assertEquals(key, secondKey);
-    assertContainsExactly(storage.list(), REF_UPDATE);
+    assertContainsExactly(storage.listWaiting(), REF_UPDATE);
   }
 
   @Test
@@ -113,7 +120,7 @@ public class ReplicationTasksStorageTest {
 
     String keyA = storage.create(REF_UPDATE);
     String keyB = storage.create(updateB);
-    assertThat(storage.list()).hasSize(2);
+    assertThat(storage.listWaiting()).hasSize(2);
     assertNotEquals(keyA, keyB);
   }
 
@@ -132,10 +139,10 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
 
     storage.finish(uriUpdates);
-    assertContainsExactly(storage.list(), updateB);
+    assertContainsExactly(storage.listRunning(), updateB);
 
     storage.finish(uriUpdatesB);
-    assertThat(storage.list()).isEmpty();
+    assertThat(storage.listRunning()).isEmpty();
   }
 
   @Test
@@ -151,7 +158,7 @@ public class ReplicationTasksStorageTest {
     storage.create(updateB);
     storage.create(REF_UPDATE);
     storage.create(updateB);
-    assertThat(storage.list()).hasSize(2);
+    assertThat(storage.listWaiting()).hasSize(2);
   }
 
   @Test
@@ -161,7 +168,7 @@ public class ReplicationTasksStorageTest {
 
     String keyA = storage.create(refA);
     String keyB = storage.create(refB);
-    assertThat(storage.list()).hasSize(2);
+    assertThat(storage.listWaiting()).hasSize(2);
     assertNotEquals(keyA, keyB);
   }
 
@@ -177,10 +184,10 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
 
     storage.finish(uriUpdatesA);
-    assertContainsExactly(storage.list(), refUpdateB);
+    assertContainsExactly(storage.listRunning(), refUpdateB);
 
     storage.finish(uriUpdatesB);
-    assertThat(storage.list()).isEmpty();
+    assertThat(storage.listRunning()).isEmpty();
   }
 
   @Test(expected = Test.None.class /* no exception expected */)
@@ -215,7 +222,7 @@ public class ReplicationTasksStorageTest {
 
     storage.finish(uriUpdates);
     storage.finish(uriUpdatesB);
-    assertThat(storage.list()).isEmpty();
+    assertThat(storage.listRunning()).isEmpty();
   }
 
   private void assertContainsExactly(List<ReplicateRefUpdate> all, ReplicateRefUpdate single) {
