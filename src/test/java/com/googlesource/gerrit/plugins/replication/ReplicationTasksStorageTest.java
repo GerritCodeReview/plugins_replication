@@ -120,6 +120,27 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
+  public void canStartDifferentUris() throws Exception {
+    ReplicateRefUpdate updateB =
+        new ReplicateRefUpdate(
+            PROJECT,
+            REF,
+            getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
+            REMOTE);
+    UriUpdates uriUpdatesB = TestUriUpdates.create(updateB);
+    storage.create(REF_UPDATE);
+    storage.create(updateB);
+
+    storage.start(uriUpdates);
+    assertContainsExactly(storage.listWaiting(), updateB);
+    assertContainsExactly(storage.listRunning(), REF_UPDATE);
+
+    storage.start(uriUpdatesB);
+    assertThat(storage.listWaiting()).isEmpty();
+    assertContainsExactly(storage.listRunning(), REF_UPDATE, updateB);
+  }
+
+  @Test
   public void canFinishDifferentUris() throws Exception {
     ReplicateRefUpdate updateB =
         new ReplicateRefUpdate(
@@ -220,9 +241,12 @@ public class ReplicationTasksStorageTest {
     assertThat(storage.listRunning()).isEmpty();
   }
 
-  private void assertContainsExactly(List<ReplicateRefUpdate> all, ReplicateRefUpdate single) {
-    assertThat(all).hasSize(1);
-    assertTrue(equals(all.get(0), single));
+  private void assertContainsExactly(
+      List<ReplicateRefUpdate> all, ReplicateRefUpdate... refUpdates) {
+    assertThat(all).hasSize(refUpdates.length);
+    for (int i = 0; i < refUpdates.length; i++) {
+      assertTrue(equals(all.get(i), refUpdates[i]));
+    }
   }
 
   private boolean equals(ReplicateRefUpdate one, ReplicateRefUpdate two) {
