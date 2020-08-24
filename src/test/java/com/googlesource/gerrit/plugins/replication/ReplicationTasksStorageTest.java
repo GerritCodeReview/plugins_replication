@@ -120,6 +120,27 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
+  public void canStartDifferentUris() throws Exception {
+    ReplicateRefUpdate updateB =
+        new ReplicateRefUpdate(
+            PROJECT,
+            REF,
+            getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
+            REMOTE);
+    UriUpdates uriUpdatesB = TestUriUpdates.create(updateB);
+    storage.create(REF_UPDATE);
+    storage.create(updateB);
+
+    storage.start(uriUpdates);
+    assertContainsExactly(storage.listWaiting(), updateB);
+    assertContainsExactly(storage.listRunning(), REF_UPDATE);
+
+    storage.start(uriUpdatesB);
+    assertThat(storage.listWaiting()).isEmpty();
+    assertThat(storage.listRunning()).hasSize(2);
+  }
+
+  @Test
   public void canFinishDifferentUris() throws Exception {
     ReplicateRefUpdate updateB =
         new ReplicateRefUpdate(
