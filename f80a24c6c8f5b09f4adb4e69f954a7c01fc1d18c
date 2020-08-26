@@ -51,6 +51,24 @@
       "revId": "f80a24c6c8f5b09f4adb4e69f954a7c01fc1d18c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc51b270_9d5bdf51",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-26T23:08:08Z",
+      "side": 1,
+      "message": "You are outlining a different gap I believe. Before your change, this change tested both \"waiting\" and \"running\", in this change it no longer does, that is a new gap. At a minimum to be on par with the code before this change you should replace the list() with both listWaiting() and listRunning(). But once you go that far, it probably makes sense to place the listWaitings() more appropriately then here (before the \"finish\"). This better placement was not possible before the split, but seems appropriate as part of the split, not something that should wait for a follow-on.",
+      "parentUuid": "5500742f_bfd42918",
+      "revId": "f80a24c6c8f5b09f4adb4e69f954a7c01fc1d18c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
