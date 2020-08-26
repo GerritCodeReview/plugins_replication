@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "80e5e62d_dacc0e3e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-26T21:31:51Z",
+      "side": 1,
+      "message": "I can\u0027t find any reference to it in the tests though: am I missing anything?",
+      "parentUuid": "c3e02d96_2f510e53",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 17
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1aa55ae8_6b703cfb",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
         "patchSetId": 2
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Before close fileSystem, trying to clear the resources which are dependent on it and being defensive. WDYT ?",
       "parentUuid": "1aa55ae8_6b703cfb",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 23
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53d331f8_0f98b7ee",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-26T21:31:51Z",
+      "side": 1,
+      "message": "How assigning the instance variables to null would clear any resource? Could you clarify what you would like to achieve?",
+      "parentUuid": "dde00511_e74963bf",
       "range": {
         "startLine": 56,
         "startChar": 0,
@@ -140,6 +188,30 @@
       "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe77688e_941db165",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-26T21:31:51Z",
+      "side": 1,
+      "message": "I still see the full reference to the method, including the classname. Did you miss a \u0027git add\u0027 in the latest PS?",
+      "parentUuid": "a6be57a4_6916176b",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 51
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     },
     {
       "key": {
@@ -331,6 +403,30 @@
     },
     {
       "key": {
+        "uuid": "a2d0eb70_a74848d8",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-26T21:31:51Z",
+      "side": 1,
+      "message": "Gotcha, could you then rephrase the name and say something like \u0027WhenTaskAFinishesBeforeTaskB\u0027? So that the reader could get your explanation straight away.",
+      "parentUuid": "d79e1e9b_01d3603b",
+      "range": {
+        "startLine": 148,
+        "startChar": 50,
+        "endLine": 148,
+        "endChar": 66
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9260931e_33b0ef32",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
         "patchSetId": 2
@@ -366,6 +462,30 @@
       "side": 1,
       "message": "taskA.finish() is called after taskB.finish()",
       "parentUuid": "9260931e_33b0ef32",
+      "range": {
+        "startLine": 165,
+        "startChar": 50,
+        "endLine": 165,
+        "endChar": 66
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a6ddbab_580431f0",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-26T21:31:51Z",
+      "side": 1,
+      "message": "Similarly, why not saying \u0027WhenTaskAFinishesAfterTaskB\u0027?",
+      "parentUuid": "e47b1968_261c48f7",
       "range": {
         "startLine": 165,
         "startChar": 50,
