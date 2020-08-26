@@ -545,6 +545,30 @@
       "revId": "a6994a4f9c8f4a50a443c8eed84d649badf6d66f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "557c538b_e8a22517",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-26T22:57:34Z",
+      "side": 1,
+      "message": "\u003e I see that you want to write tests that are successfully checking what the replication task storage does today. Although that is a completely valid approach, it still conflict with the general concept the illegal operations shouldn\u0027t be swallowing problems.\n\nThis does not codify swallowing problems, it only codifies that if there is a problem, that it does not interfere with system operations if there is one.\n\n\u003e It would be best to take these tests off this change and, instead, open a bug and fix the underlying problems.\n\nI don\u0027t understand this suggestion, as there is not underlying problem that I am aware of?",
+      "parentUuid": "4e77e97e_7aa46346",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 3
+      },
+      "revId": "a6994a4f9c8f4a50a443c8eed84d649badf6d66f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
