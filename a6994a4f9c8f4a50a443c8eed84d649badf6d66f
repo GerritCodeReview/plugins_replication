@@ -169,6 +169,30 @@
     },
     {
       "key": {
+        "uuid": "30920324_7762caac",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-26T23:15:14Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "245890df_759f83d0",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 48
+      },
+      "revId": "a6994a4f9c8f4a50a443c8eed84d649badf6d66f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1321025b_b75a23f0",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 3
@@ -560,6 +584,30 @@
       "side": 1,
       "message": "\u003e I see that you want to write tests that are successfully checking what the replication task storage does today. Although that is a completely valid approach, it still conflict with the general concept the illegal operations shouldn\u0027t be swallowing problems.\n\nThis does not codify swallowing problems, it only codifies that if there is a problem, that it does not interfere with system operations if there is one.\n\n\u003e It would be best to take these tests off this change and, instead, open a bug and fix the underlying problems.\n\nI don\u0027t understand this suggestion, as there is not underlying problem that I am aware of?",
       "parentUuid": "4e77e97e_7aa46346",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 3
+      },
+      "revId": "a6994a4f9c8f4a50a443c8eed84d649badf6d66f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7355ba5_683585dd",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-26T23:15:14Z",
+      "side": 1,
+      "message": "Let me clarify: we are testing here that *IF* there is a problem in the way the storage is called (incorrect calls or management of the replication task states), the replication task storage does not throw any exception but simply returns gracefully.\n\nWe have had problems in v2.16, v3.0, v3.1 and v3.2 where *IF* the underlying storage would have been more assertive (i.e. throwing exception) we would have spotted out the bug and, possibly, failed the build or the tests.\n\nHope that clarifies my comment.",
+      "parentUuid": "557c538b_e8a22517",
       "range": {
         "startLine": 293,
         "startChar": 0,
