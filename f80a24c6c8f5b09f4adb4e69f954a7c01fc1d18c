@@ -69,6 +69,24 @@
       "revId": "f80a24c6c8f5b09f4adb4e69f954a7c01fc1d18c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f60be7ec_c86de08a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-26T23:16:23Z",
+      "side": 1,
+      "message": "Oh I see, I agree, I\u0027ll do that.",
+      "parentUuid": "cc51b270_9d5bdf51",
+      "revId": "f80a24c6c8f5b09f4adb4e69f954a7c01fc1d18c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
