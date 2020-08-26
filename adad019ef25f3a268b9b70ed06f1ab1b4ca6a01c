@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1dce0df5_fe3d098d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationFanoutIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-26T23:25:43Z",
+      "side": 1,
+      "message": "What about listBuilding()?\n\n+ What if the replication tasks are changing their status during listing? The test would become flaky as it may fail randomly.",
+      "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a197b0bb_c75447a7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-26T23:25:43Z",
+      "side": 1,
+      "message": "How do you make sure that the replication task did not start?",
+      "range": {
+        "startLine": 273,
+        "startChar": 72,
+        "endLine": 273,
+        "endChar": 83
+      },
+      "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9c54df4_a91725d1",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-26T23:25:43Z",
+      "side": 1,
+      "message": "Same question as above: what if the task started its execution?",
+      "range": {
+        "startLine": 293,
+        "startChar": 28,
+        "endLine": 293,
+        "endChar": 39
+      },
+      "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec30bad5_d5810b7c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-26T23:25:43Z",
+      "side": 1,
+      "message": "The method should also be changed to listWaitingReplicationTasks, as we now only list the tasks in waiting state, correct?",
+      "range": {
+        "startLine": 612,
+        "startChar": 35,
+        "endLine": 612,
+        "endChar": 55
+      },
+      "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa75c29f_6147b36e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-26T23:25:43Z",
+      "side": 1,
+      "message": "Missing listBuilding()",
+      "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bde557f_5dca06d4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-26T23:25:43Z",
+      "side": 1,
+      "message": "Missing listBuilding()?",
+      "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f1c0b85_0b612233",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-08-26T23:25:43Z",
+      "side": 1,
+      "message": "I believe we also want to assert that once the task is finished, it does not exist anymore in any state.\n\nI would then add also the asserts for listWaiting() and listBuilding()",
+      "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
