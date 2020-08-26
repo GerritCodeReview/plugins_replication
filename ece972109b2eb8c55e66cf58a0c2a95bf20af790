@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bda5db68_3f009c5e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-26T22:52:22Z",
+      "side": 1,
+      "message": "Use containsExactly() here?",
+      "range": {
+        "startLine": 140,
+        "startChar": 34,
+        "endLine": 140,
+        "endChar": 38
+      },
+      "revId": "ece972109b2eb8c55e66cf58a0c2a95bf20af790",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
