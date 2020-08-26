@@ -71,6 +71,14 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
+  public void canStartUpdate() throws Exception {
+    storage.create(REF_UPDATE);
+    storage.start(uriUpdates);
+    assertThat(storage.listWaiting()).isEmpty();
+    assertContainsExactly(storage.listRunning(), REF_UPDATE);
+  }
+
+  @Test
   public void canFinishRunningUpdate() throws Exception {
     storage.create(REF_UPDATE);
     storage.start(uriUpdates);
@@ -93,6 +101,8 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdates);
     assertThat(storage.listWaiting()).isEmpty();
     assertThat(persistedView.listWaiting()).isEmpty();
+    assertContainsExactly(storage.listRunning(), REF_UPDATE);
+    assertContainsExactly(persistedView.listRunning(), REF_UPDATE);
 
     storage.finish(uriUpdates);
     assertThat(storage.listRunning()).isEmpty();
