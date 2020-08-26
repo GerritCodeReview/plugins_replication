@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c3e02d96_2f510e53",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-08-26T18:47:20Z",
+      "side": 1,
+      "message": "Yes, similar to a third node where we are doing asserts on persisted state.",
+      "parentUuid": "3458f274_8d43faa7",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 17
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1aa55ae8_6b703cfb",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2020-08-25T21:17:50Z",
       "side": 1,
       "message": "Those are unneeded: every invocation of a test method would use a different instance of these variables anyway.",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 23
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dde00511_e74963bf",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-08-26T18:47:20Z",
+      "side": 1,
+      "message": "Before close fileSystem, trying to clear the resources which are dependent on it and being defensive. WDYT ?",
+      "parentUuid": "1aa55ae8_6b703cfb",
       "range": {
         "startLine": 56,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "a6be57a4_6916176b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-08-26T18:47:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cc96432_04c95993",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 51
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d8db365f_0c1f3d70",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a19900f5_88b2d0f5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-08-26T18:47:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8db365f_0c1f3d70",
+      "range": {
+        "startLine": 84,
+        "startChar": 52,
+        "endLine": 84,
+        "endChar": 58
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "08c3a2c2_74d4c470",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-08-26T18:47:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bda781aa_87e15147",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 60
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c788579_7111e1c1",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
         "patchSetId": 2
@@ -128,6 +248,30 @@
       "writtenOn": "2020-08-25T21:17:50Z",
       "side": 1,
       "message": "The bug mentioned is for v3.2 or later",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 62
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "482e409d_0d9936f2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-08-26T18:47:20Z",
+      "side": 1,
+      "message": "Will update the bug.",
+      "parentUuid": "6c788579_7111e1c1",
       "range": {
         "startLine": 137,
         "startChar": 0,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "d79e1e9b_01d3603b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-08-26T18:47:20Z",
+      "side": 1,
+      "message": "taskA.finish() is called before taskB.start()",
+      "parentUuid": "78d0706b_05bd4da9",
+      "range": {
+        "startLine": 148,
+        "startChar": 50,
+        "endLine": 148,
+        "endChar": 66
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9260931e_33b0ef32",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
         "patchSetId": 2
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "e47b1968_261c48f7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-08-26T18:47:20Z",
+      "side": 1,
+      "message": "taskA.finish() is called after taskB.finish()",
+      "parentUuid": "9260931e_33b0ef32",
+      "range": {
+        "startLine": 165,
+        "startChar": 50,
+        "endLine": 165,
+        "endChar": 66
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a622f7e_bae7bfaa",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
         "patchSetId": 2
@@ -197,6 +389,30 @@
       "writtenOn": "2020-08-25T21:17:50Z",
       "side": 1,
       "message": "Is there any plan to fix these errors in the replication task storage? The storage should detect incorrect sequencing and reporting them as errors. In that way we would be able to detect bugs in the replication plugin earlier and fix them as we find them.\n\nI know these tests are just documenting the current \"swallowing\" of those inconsistencies, however, it would be best to invest some time in fixing them rather than verifying an incorrect behaviour.\n\nWDYT?",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 3
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3eff8798_1bc276d7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-08-26T18:47:20Z",
+      "side": 1,
+      "message": "@Nasser, can you answer this ?",
+      "parentUuid": "9a622f7e_bae7bfaa",
       "range": {
         "startLine": 182,
         "startChar": 0,
@@ -229,6 +445,30 @@
       "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0fcb675_81c4bada",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-08-26T18:47:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a41ff5ff_cff90d23",
+      "range": {
+        "startLine": 349,
+        "startChar": 2,
+        "endLine": 349,
+        "endChar": 9
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
