@@ -33,6 +33,24 @@
       "revId": "f80a24c6c8f5b09f4adb4e69f954a7c01fc1d18c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5500742f_bfd42918",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-26T22:58:47Z",
+      "side": 1,
+      "message": "Yes, but that\u0027s an existing gap (there are no \"canStart\" type tests in here yet). This change isn\u0027t trying to address that gap. I think I suggested to Kaushik that he upload a change for it, but I think it got lost in other communication. I can push a change for it now on top of this.",
+      "parentUuid": "31128bed_8a56fa28",
+      "revId": "f80a24c6c8f5b09f4adb4e69f954a7c01fc1d18c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
