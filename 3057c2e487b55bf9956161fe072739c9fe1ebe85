@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7591b562_7f873bc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-27T19:19:23Z",
+      "side": 1,
+      "message": "$ bazel test  --runs_per_test\u003d10  --nocache_test_results   ...\nINFO: Invocation ID: d59515c8-0372-4309-961e-b5d33062cd24\nINFO: Build option --test_filter has changed, discarding analysis cache.\nINFO: Analyzed target //plugins/replication:replication_tests (0 packages loaded, 5413 targets configured).\nINFO: Found 1 test target...\nTarget //plugins/replication:replication_tests up-to-date:\n  bazel-bin/plugins/replication/replication_tests.jar\n  bazel-bin/plugins/replication/replication_tests\nINFO: Elapsed time: 729.857s, Critical Path: 249.56s\nINFO: 13 processes: 11 darwin-sandbox, 2 worker.\nINFO: Build completed successfully, 14 total actions\n//plugins/replication:replication_tests                                  PASSED in 247.2s\n  Stats over 10 runs: max \u003d 247.2s, min \u003d 234.6s, avg \u003d 243.9s, dev \u003d 4.6s\n\nINFO: Build completed successfully, 14 total actions",
+      "revId": "3057c2e487b55bf9956161fe072739c9fe1ebe85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
