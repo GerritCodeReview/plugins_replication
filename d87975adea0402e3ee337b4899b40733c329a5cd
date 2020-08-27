@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7b6b9b2_70d432f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-27T03:57:37Z",
+      "side": 1,
+      "message": "$ bazel test --runs_per_test\u003d10 ...\nINFO: Invocation ID: 06375c34-07a3-4424-bba2-10a8bee41261\nINFO: Build option --runs_per_test has changed, discarding analysis cache.\nINFO: Analyzed target //plugins/replication:replication_tests (0 packages loaded, 5413 targets configured).\nINFO: Found 1 test target...\nTarget //plugins/replication:replication_tests up-to-date:\n  bazel-bin/plugins/replication/replication_tests.jar\n  bazel-bin/plugins/replication/replication_tests\nINFO: Elapsed time: 728.027s, Critical Path: 250.80s\nINFO: 11 processes: 10 darwin-sandbox, 1 worker.\nINFO: Build completed successfully, 12 total actions\n//plugins/replication:replication_tests                                  PASSED in 249.1s\n  Stats over 10 runs: max \u003d 249.1s, min \u003d 234.7s, avg \u003d 243.2s, dev \u003d 5.3s\n\nINFO: Build completed successfully, 12 total actions",
+      "revId": "d87975adea0402e3ee337b4899b40733c329a5cd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
