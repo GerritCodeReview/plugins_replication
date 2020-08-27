@@ -16,6 +16,29 @@
       "revId": "3057c2e487b55bf9956161fe072739c9fe1ebe85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3dc5171c_db6111da",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-27T19:33:52Z",
+      "side": 1,
+      "message": "I am concerned about the naming of this method. It doesn\u0027t seem to work well with the split. Perhaps this should take in a collection of ReplicateRefUpdates? Or, this should be updated the same way you did listReplicationTasks()?",
+      "range": {
+        "startLine": 601,
+        "startChar": 37,
+        "endLine": 601,
+        "endChar": 68
+      },
+      "revId": "3057c2e487b55bf9956161fe072739c9fe1ebe85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
