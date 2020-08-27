@@ -87,6 +87,30 @@
       "revId": "d87975adea0402e3ee337b4899b40733c329a5cd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a2bbe52_546579da",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-27T18:43:23Z",
+      "side": 1,
+      "message": "You could potentially call listWaiting() and listRunning() inside a syncronized(taskStorage) block, and that should prevent the listings from changing since the taskStorage list methods are currently synchronized. While I think we want to eventually remove the need for those synchronized since they are there mainly for the tests, that should not be the in this change. By adding that synchronized you would not be adding any additional constraints that this test doesn\u0027t already rely on.",
+      "parentUuid": "fc230c4c_9d1bec08",
+      "range": {
+        "startLine": 618,
+        "startChar": 11,
+        "endLine": 618,
+        "endChar": 24
+      },
+      "revId": "d87975adea0402e3ee337b4899b40733c329a5cd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
