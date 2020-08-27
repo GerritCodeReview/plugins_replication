@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "883af494_29e53ca5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationFanoutIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-27T03:44:35Z",
+      "side": 1,
+      "message": "listBuilding() was unused and is removed in https://gerrit-review.googlesource.com/c/plugins/replication/+/279256/4/src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java\n\nBuilding happens before it would be listed as Waiting. Under what scenario would not listing Building cause a failure?",
+      "parentUuid": "1dce0df5_fe3d098d",
+      "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a197b0bb_c75447a7",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 4
@@ -39,6 +57,30 @@
       "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2fa8fc5_9c993970",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-27T03:44:35Z",
+      "side": 1,
+      "message": "I can\u0027t be. This test should probably be fixed to not rely on investigating the storage to confirm correct behavior, but that\u0027s not a problem for this change. I\u0027ll look in waiting or running so that there\u0027s no regression here.",
+      "parentUuid": "a197b0bb_c75447a7",
+      "range": {
+        "startLine": 273,
+        "startChar": 72,
+        "endLine": 273,
+        "endChar": 83
+      },
+      "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "c2e15089_d15e8137",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-27T03:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9c54df4_a91725d1",
+      "range": {
+        "startLine": 293,
+        "startChar": 28,
+        "endLine": 293,
+        "endChar": 39
+      },
+      "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec30bad5_d5810b7c",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 4
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "a6e054a9_d09f1e66",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-27T03:44:35Z",
+      "side": 1,
+      "message": "Now that I\u0027ve changed it to list both, I\u0027ll leave the name as is.",
+      "parentUuid": "ec30bad5_d5810b7c",
+      "range": {
+        "startLine": 612,
+        "startChar": 35,
+        "endLine": 612,
+        "endChar": 55
+      },
+      "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa75c29f_6147b36e",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 4
@@ -102,6 +192,24 @@
       "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbf4ac39_aaa41f3e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-27T03:44:35Z",
+      "side": 1,
+      "message": "It doesn\u0027t exist in this change: https://gerrit-review.googlesource.com/c/plugins/replication/+/279256/4/src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+      "parentUuid": "fa75c29f_6147b36e",
+      "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "cbb79a5f_6c12090e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-27T03:44:35Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "6bde557f_5dca06d4",
+      "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f1c0b85_0b612233",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
         "patchSetId": 4
@@ -133,6 +259,24 @@
       "writtenOn": "2020-08-26T23:25:43Z",
       "side": 1,
       "message": "I believe we also want to assert that once the task is finished, it does not exist anymore in any state.\n\nI would then add also the asserts for listWaiting() and listBuilding()",
+      "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbabab62_ac487f1c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-27T03:44:35Z",
+      "side": 1,
+      "message": "I think canFinishRunningUpdate() already asserts that.",
+      "parentUuid": "8f1c0b85_0b612233",
       "revId": "adad019ef25f3a268b9b70ed06f1ab1b4ca6a01c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
