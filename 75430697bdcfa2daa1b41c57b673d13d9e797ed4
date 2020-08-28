@@ -625,6 +625,24 @@
     },
     {
       "key": {
+        "uuid": "0d4d83d2_0dccfa8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-28T23:54:05Z",
+      "side": 1,
+      "message": "I\u0027ve added UTs (they are way more complicated, took way longer to write and debug, and way more code than this class!)",
+      "parentUuid": "c37919fa_2310846a",
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a3495e1_b5a1fdfc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
         "patchSetId": 12
@@ -696,6 +714,24 @@
     },
     {
       "key": {
+        "uuid": "38c4c668_a27ee297",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-28T23:54:05Z",
+      "side": 1,
+      "message": "Great stuff! Done.",
+      "parentUuid": "ea35ed0a_5b18bb7c",
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e447db75_17763441",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
         "patchSetId": 12
@@ -743,6 +779,30 @@
     },
     {
       "key": {
+        "uuid": "9c024231_78e931db",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-28T23:54:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf80bae5_ad311aee",
+      "range": {
+        "startLine": 107,
+        "startChar": 15,
+        "endLine": 107,
+        "endChar": 33
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e37e00b_19826dfa",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 12
@@ -766,6 +826,30 @@
     },
     {
       "key": {
+        "uuid": "1d75ea3e_28a15839",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-28T23:54:05Z",
+      "side": 1,
+      "message": "The compiler disagrees: \n\n plugins/replication/src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java:204: error: cannot infer type arguments for Runner\u003cT\u003e\n        new ChainedScheduler.Runner\u003c\u003e() {\n                                   ^\n  reason: \u0027\u003c\u003e\u0027 with anonymous inner classes is not supported in -source 8\n    (use -source 9 or higher to enable \u0027\u003c\u003e\u0027 with anonymous inner classes)\n  where T is a type-variable:\n    T extends Object declared in interface Runner",
+      "parentUuid": "4e37e00b_19826dfa",
+      "range": {
+        "startLine": 204,
+        "startChar": 36,
+        "endLine": 204,
+        "endChar": 78
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d7bc8e9_a0ae546f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 12
@@ -780,6 +864,24 @@
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "363cd989_1b9accf9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-28T23:54:05Z",
+      "side": 1,
+      "message": "This synchronizeds are primarily there for testing. I believe that newer tests should not be written with this constraint as they will not hold in MM scenarios.",
+      "parentUuid": "4d7bc8e9_a0ae546f",
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
