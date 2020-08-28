@@ -39,6 +39,30 @@
       "revId": "3057c2e487b55bf9956161fe072739c9fe1ebe85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ac8843d_3d4fc963",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-28T20:45:31Z",
+      "side": 1,
+      "message": "I like the taking a collection (I\u0027m just going to use a stream though for simplicity). One of the callers above is always safe to use only listWaiting() and the other two should be considering both waiting and running.",
+      "parentUuid": "3dc5171c_db6111da",
+      "range": {
+        "startLine": 601,
+        "startChar": 37,
+        "endLine": 601,
+        "endChar": 68
+      },
+      "revId": "3057c2e487b55bf9956161fe072739c9fe1ebe85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
