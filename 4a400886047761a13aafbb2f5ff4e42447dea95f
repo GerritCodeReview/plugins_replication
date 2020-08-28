@@ -446,6 +446,24 @@
     },
     {
       "key": {
+        "uuid": "e0c59509_a2222764",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationProcessing.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-08-28T19:52:28Z",
+      "side": 1,
+      "message": "Hi Martin. I tried again. Not sure if it\u0027s the most elegant way though :)",
+      "parentUuid": "dfa860c2_84360e20",
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "46829833_e86a5c59",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
         "patchSetId": 18
@@ -529,6 +547,30 @@
       "side": 1,
       "message": "\u003e Not clear how this could be done. Do you have examples ?\n\nMaybe something like this:\n\nhttps://gerrit.googlesource.com/plugins/examples/+/refs/heads/master/example-sshAndRestCommandOptionBeanParseListener/src/main/java/com/googlesource/gerrit/plugins/examples/sshandrestcommandoptionbeanparselistener/Modules.java",
       "parentUuid": "3b77f3a4_8215809a",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 37
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6514babc_dfadb9a1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-08-28T19:52:28Z",
+      "side": 1,
+      "message": "That\u0027s cools stuff, I didn\u0027t know that. Thanks. I still am not sure the best way to mash them together though given the json etc. I quickly looked through other plugins and I didn\u0027t see any examples there either. Do you think it\u0027s really necessary ? If so, are there other examples more like this that you know of ? Thanks.",
+      "parentUuid": "e0f7bcef_afb43ecb",
       "range": {
         "startLine": 17,
         "startChar": 13,
