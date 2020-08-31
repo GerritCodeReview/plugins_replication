@@ -33,6 +33,24 @@
       "revId": "fb70da57505f3fd1633685b1320937c2a8db560e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f00e2471_d61b2193",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-08-31T19:49:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9e51794_4ba83d00",
+      "revId": "fb70da57505f3fd1633685b1320937c2a8db560e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
