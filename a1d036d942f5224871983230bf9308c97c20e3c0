@@ -16,6 +16,52 @@
       "revId": "a1d036d942f5224871983230bf9308c97c20e3c0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "47f12d3b_835769e2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-31T20:56:11Z",
+      "side": 1,
+      "message": "call this listIncompleteTasks(), and implement if by calling the streamIncompleteTasks?",
+      "range": {
+        "startLine": 617,
+        "startChar": 35,
+        "endLine": 617,
+        "endChar": 55
+      },
+      "revId": "a1d036d942f5224871983230bf9308c97c20e3c0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d0d6370_385409e5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-31T20:56:11Z",
+      "side": 1,
+      "message": "Call this streamImcompleteTasks()?",
+      "range": {
+        "startLine": 630,
+        "startChar": 37,
+        "endLine": 630,
+        "endChar": 56
+      },
+      "revId": "a1d036d942f5224871983230bf9308c97c20e3c0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
