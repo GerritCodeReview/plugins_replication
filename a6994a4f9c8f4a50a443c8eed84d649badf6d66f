@@ -617,6 +617,30 @@
       "revId": "a6994a4f9c8f4a50a443c8eed84d649badf6d66f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbb44999_35297100",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-31T23:02:48Z",
+      "side": 1,
+      "message": "These tests were removed to stay within scope of this change.",
+      "parentUuid": "e7355ba5_683585dd",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 3
+      },
+      "revId": "a6994a4f9c8f4a50a443c8eed84d649badf6d66f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
