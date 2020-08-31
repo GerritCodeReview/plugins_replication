@@ -16,6 +16,23 @@
       "revId": "fb70da57505f3fd1633685b1320937c2a8db560e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9e51794_4ba83d00",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-31T16:31:03Z",
+      "side": 1,
+      "message": "This is a lot of lines to do very little, and it is hard to read, it takes away from the simplicity of the test. I think you want most of this code hidden in a helper somewhere.",
+      "revId": "fb70da57505f3fd1633685b1320937c2a8db560e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
