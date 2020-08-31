@@ -665,6 +665,30 @@
     },
     {
       "key": {
+        "uuid": "64cf8590_db8dcb27",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskMMTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-31T23:15:44Z",
+      "side": 1,
+      "message": "This sort of fix would alter the behavior of the plugin, so it should not be in scope of a change adding tests. We will re-evaluate this once we have many tests merged,",
+      "parentUuid": "3eff8798_1bc276d7",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 3
+      },
+      "revId": "5a3962e1a3ce0a1f18b64f355ca34dd906e27f56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a41ff5ff_cff90d23",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
         "patchSetId": 2
