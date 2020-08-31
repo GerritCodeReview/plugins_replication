@@ -270,9 +270,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
     assertThat(listIncompleteTasks(Pattern.quote(PushOne.ALL_REFS))).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : listIncompleteTasks()) {
-      assertThat(task.uri).isEqualTo(expectedURI);
-    }
+    streamIncompleteTasks().forEach((task) -> assertThat(task.uri).isEqualTo(expectedURI));
   }
 
   @Test
@@ -291,9 +289,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
     assertThat(listIncompleteTasks()).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : listIncompleteTasks()) {
-      assertThat(task.uri).isEqualTo(expectedURI);
-    }
+    streamIncompleteTasks().forEach((task) -> assertThat(task.uri).isEqualTo(expectedURI));
   }
 
   @Test
