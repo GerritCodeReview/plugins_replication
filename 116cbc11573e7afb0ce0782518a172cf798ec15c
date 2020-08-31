@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9651aa20_dfb2c036",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-08-31T18:23:15Z",
+      "side": 0,
+      "message": "You seem to have deleted a bunch of code here, did this get moved elsewhere?",
+      "revId": "116cbc11573e7afb0ce0782518a172cf798ec15c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
