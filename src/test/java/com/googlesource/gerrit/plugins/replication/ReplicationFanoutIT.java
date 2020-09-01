@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -108,7 +109,7 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
     input.revision = master;
     gApi.projects().name(project.get()).branch(newBranch).create(input);
 
-    assertThat(listReplicationTasks("refs/heads/(mybranch|master)")).hasSize(2);
+    assertThat(listIncompleteTasks("refs/heads/(mybranch|master)")).hasSize(2);
 
     try (Repository repo = repoManager.openRepository(targetProject);
         Repository sourceRepo = repoManager.openRepository(project)) {
@@ -134,7 +135,7 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
 
-    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(2);
+    assertThat(listIncompleteTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(2);
 
     try (Repository repo1 = repoManager.openRepository(targetProject1);
         Repository repo2 = repoManager.openRepository(targetProject2)) {
@@ -166,7 +167,7 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
 
     createChange();
 
-    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
+    assertThat(listIncompleteTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
 
     setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
     setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
@@ -241,11 +242,15 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
     return projectOperations.newProject().name(name).create();
   }
 
-  private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
+  @SuppressWarnings(
+      "SynchronizeOnNonFinalField") // tasksStorage is non-final but only set in setUpTestPlugin()
+  private List<ReplicateRefUpdate> listIncompleteTasks(String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage.list().stream()
-        .filter(task -> refmaskPattern.matcher(task.ref).matches())
-        .collect(toList());
+    synchronized (tasksStorage) {
+      return Stream.concat(tasksStorage.listWaiting().stream(), tasksStorage.listRunning().stream())
+          .filter(task -> refmaskPattern.matcher(task.ref).matches())
+          .collect(toList());
+    }
   }
 
   public void cleanupReplicationTasks() throws IOException {
