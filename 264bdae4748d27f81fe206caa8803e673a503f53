@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "757c5227_0de2800d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-01T22:05:57Z",
+      "side": 1,
+      "message": "This thread will have a lock on the storage while generating the list of waiting tasks. In that sense, it still blocks plugin startup (but does not block general Gerrit startup). This could still be a concern if that listing takes a long time. I can try to remove the synchronized. Anyone have other ideas?",
+      "range": {
+        "startLine": 86,
+        "startChar": 6,
+        "endLine": 86,
+        "endChar": 16
+      },
+      "revId": "264bdae4748d27f81fe206caa8803e673a503f53",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
