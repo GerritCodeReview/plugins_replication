@@ -132,11 +132,11 @@ public class ReplicationTasksStorage {
     }
   }
 
-  public synchronized List<ReplicateRefUpdate> listWaiting() {
+  public List<ReplicateRefUpdate> listWaiting() {
     return list(createDir(waitingUpdates));
   }
 
-  public synchronized List<ReplicateRefUpdate> listRunning() {
+  public List<ReplicateRefUpdate> listRunning() {
     return list(createDir(runningUpdates));
   }
 
