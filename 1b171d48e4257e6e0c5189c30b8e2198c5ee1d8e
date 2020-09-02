@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "01504112_cad5c424",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-02T18:56:07Z",
+      "side": 1,
+      "message": "What would you recommend doing to test for that beyond the results I already posted?",
+      "parentUuid": "51361463_9a00e0d1",
+      "revId": "1b171d48e4257e6e0c5189c30b8e2198c5ee1d8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b9a65c68_8a993383",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 1
@@ -47,6 +65,30 @@
       "writtenOn": "2020-09-02T18:25:03Z",
       "side": 1,
       "message": "if you remove the synchronized I think you will need to catch DirectoryIteratorException here .",
+      "range": {
+        "startLine": 167,
+        "startChar": 4,
+        "endLine": 167,
+        "endChar": 6
+      },
+      "revId": "1b171d48e4257e6e0c5189c30b8e2198c5ee1d8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f12cb0b3_8fa4b570",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-02T18:56:07Z",
+      "side": 1,
+      "message": "I don\u0027t think so. That exception would only occur if someone removed a top-level dir (like waiting/ or running/), i.e. if the Path \u0027tasks\u0027 was removed. Someone could force that to happen artificially (the code never does it), but it\u0027s not a new case exposed by lack of synchronized.",
+      "parentUuid": "b9a65c68_8a993383",
       "range": {
         "startLine": 167,
         "startChar": 4,
