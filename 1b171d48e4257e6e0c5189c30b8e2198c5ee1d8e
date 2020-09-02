@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8c61c15_1bd4f3c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-02T17:01:03Z",
+      "side": 1,
+      "message": "$ bazel test  --runs_per_test\u003d10  --nocache_test_results  --test_filter\u003dcom.googlesource.gerrit.plugins.replication.ReplicationIT ...\nINFO: Invocation ID: 9d59cf7f-cfcf-4df3-b8e0-f21e14b7a00c\nINFO: Analyzed target //plugins/replication:replication_tests (0 packages loaded, 0 targets configured).\nINFO: Found 1 test target...\nTarget //plugins/replication:replication_tests up-to-date:\n  bazel-bin/plugins/replication/replication_tests.jar\n  bazel-bin/plugins/replication/replication_tests\nINFO: Elapsed time: 660.505s, Critical Path: 227.37s\nINFO: 16 processes: 13 darwin-sandbox, 3 worker.\nINFO: Build completed successfully, 17 total actions\n//plugins/replication:replication_tests                                  PASSED in 223.9s\n  Stats over 10 runs: max \u003d 223.9s, min \u003d 215.0s, avg \u003d 219.1s, dev \u003d 3.0s\n\nINFO: Build completed successfully, 17 total actions\n\n\n$ bazel test  --runs_per_test\u003d10  --nocache_test_results  --test_filter\u003dcom.googlesource.gerrit.plugins.replication.ReplicationFanoutIT ...\nINFO: Invocation ID: d7ac46dc-91d3-48b2-a11c-e2908de1af7c\nINFO: Build option --test_filter has changed, discarding analysis cache.\nINFO: Analyzed target //plugins/replication:replication_tests (0 packages loaded, 5415 targets configured).\nINFO: Found 1 test target...\nTarget //plugins/replication:replication_tests up-to-date:\n  bazel-bin/plugins/replication/replication_tests.jar\n  bazel-bin/plugins/replication/replication_tests\nINFO: Elapsed time: 60.864s, Critical Path: 24.75s\nINFO: 10 processes: 10 darwin-sandbox.\nINFO: Build completed successfully, 11 total actions\n//plugins/replication:replication_tests                                  PASSED in 24.4s\n  Stats over 10 runs: max \u003d 24.4s, min \u003d 16.7s, avg \u003d 20.6s, dev \u003d 2.8s\n\nExecuted 1 out of 1 test: 1 test passes.\nINFO: Build completed successfully, 11 total actions",
+      "revId": "1b171d48e4257e6e0c5189c30b8e2198c5ee1d8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
