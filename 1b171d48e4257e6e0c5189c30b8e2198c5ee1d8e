@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "724d31f1_26b6c155",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-02T19:57:55Z",
+      "side": 1,
+      "message": "$ bazel test  --runs_per_test\u003d50  --nocache_test_results  ...\nINFO: Invocation ID: cd596eda-e390-4605-91d0-d3cd6196c872\nINFO: Build options --runs_per_test and --test_filter have changed, discarding analysis cache.\nINFO: Analyzed target //plugins/replication:replication_tests (0 packages loaded, 5413 targets configured).\nINFO: Found 1 test target...\nTarget //plugins/replication:replication_tests up-to-date:\n  bazel-bin/plugins/replication/replication_tests.jar\n  bazel-bin/plugins/replication/replication_tests\nINFO: Elapsed time: 3107.283s, Critical Path: 250.07s\nINFO: 50 processes: 50 darwin-sandbox.\nINFO: Build completed successfully, 51 total actions\n//plugins/replication:replication_tests                                  PASSED in 249.6s\n  Stats over 50 runs: max \u003d 249.6s, min \u003d 233.1s, avg \u003d 239.1s, dev \u003d 3.5s\n\nINFO: Build completed successfully, 51 total actions\n\nThat\u0027s 50 runs, 4 in parallel at a time. I\u0027m running again with all cores going (16 as well). I can run it on a bigger machine with more cores if you think that would make a difference.",
+      "parentUuid": "ac49580a_8de3cf0c",
+      "revId": "1b171d48e4257e6e0c5189c30b8e2198c5ee1d8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b9a65c68_8a993383",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 1
