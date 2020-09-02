@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "51361463_9a00e0d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-02T18:36:10Z",
+      "side": 1,
+      "message": "The synchronized was introduced to fix the tests flakiness. I am fine in removing it but we need to make sure that the tests are stable and not flaky anymore.",
+      "revId": "1b171d48e4257e6e0c5189c30b8e2198c5ee1d8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9a65c68_8a993383",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 1
