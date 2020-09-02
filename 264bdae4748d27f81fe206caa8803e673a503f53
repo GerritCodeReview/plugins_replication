@@ -46,6 +46,30 @@
       "revId": "264bdae4748d27f81fe206caa8803e673a503f53",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5892efbf_0a25058f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-02T21:07:26Z",
+      "side": 1,
+      "message": "That change is merged, so it should be safe to merge this now too.",
+      "parentUuid": "13038a39_e73b8fc0",
+      "range": {
+        "startLine": 86,
+        "startChar": 6,
+        "endLine": 86,
+        "endChar": 16
+      },
+      "revId": "264bdae4748d27f81fe206caa8803e673a503f53",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
