@@ -81,7 +81,9 @@ public class ReplicationQueue
       destinations.get().startup(workQueue);
       running = true;
       replicationTasksStorage.resetAll();
-      firePendingEvents();
+      Thread t = new Thread(this::firePendingEvents, "firePendingEvents");
+      t.setDaemon(true);
+      t.start();
       fireBeforeStartupEvents();
     }
   }
@@ -198,6 +200,8 @@ public class ReplicationQueue
           repLog.error("Encountered malformed URI for persisted event %s", t);
         }
       }
+    } catch (Throwable e) {
+      repLog.error("Unexpected error while firing pending events", e);
     } finally {
       replaying = false;
     }
