@@ -39,6 +39,7 @@ import com.googlesource.gerrit.plugins.replication.Destination.QueueInfo;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -117,7 +118,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     Project.NameKey sourceProject = createTestProject("foo");
 
-    assertThat(listReplicationTasks("refs/meta/config")).hasSize(1);
+    assertThat(listIncompleteTasks("refs/meta/config")).hasSize(1);
 
     waitUntil(() -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")));
 
@@ -164,7 +165,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
 
-    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(1);
+    assertThat(listIncompleteTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(1);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
@@ -187,7 +188,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     input.revision = master;
     gApi.projects().name(project.get()).branch(newBranch).create(input);
 
-    assertThat(listReplicationTasks("refs/heads/(mybranch|master)")).hasSize(2);
+    assertThat(listIncompleteTasks("refs/heads/(mybranch|master)")).hasSize(2);
 
     try (Repository repo = repoManager.openRepository(targetProject);
         Repository sourceRepo = repoManager.openRepository(project)) {
@@ -213,7 +214,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
 
-    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(2);
+    assertThat(listIncompleteTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(2);
 
     try (Repository repo1 = repoManager.openRepository(targetProject1);
         Repository repo2 = repoManager.openRepository(targetProject2)) {
@@ -245,7 +246,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     createChange();
 
-    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
+    assertThat(listIncompleteTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
 
     setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
     setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
@@ -263,7 +264,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, null, new ReplicationState(NO_OP), true);
 
-    assertThat(listReplicationTasks(".*all.*")).hasSize(1);
+    assertThat(listIncompleteTasks(Pattern.quote(PushOne.ALL_REFS))).hasSize(1);
   }
 
   @Test
@@ -281,10 +282,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
-    assertThat(listReplicationTasks(".*all.*")).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
-      assertThat(task.uri).isEqualTo(expectedURI);
-    }
+    assertThat(listIncompleteTasks(Pattern.quote(PushOne.ALL_REFS))).hasSize(1);
+    streamIncompleteTasks().forEach((task) -> assertThat(task.uri).isEqualTo(expectedURI));
   }
 
   @Test
@@ -302,11 +301,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
-    assertThat(listReplicationTasks(".*")).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
-      assertThat(task.uri).isEqualTo(expectedURI);
-    }
-    assertThat(tasksStorage.list()).isNotEmpty();
+    assertThat(listIncompleteTasks()).hasSize(1);
+    streamIncompleteTasks().forEach((task) -> assertThat(task.uri).isEqualTo(expectedURI));
   }
 
   @Test
@@ -354,7 +350,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     input.revision = master;
     gApi.projects().name(project.get()).branch(branchToDelete).create(input);
 
-    assertThat(listReplicationTasks("refs/heads/(todelete|master)")).hasSize(2);
+    assertThat(listIncompleteTasks("refs/heads/(todelete|master)")).hasSize(2);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, branchToDelete) != null);
@@ -362,7 +358,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     gApi.projects().name(project.get()).branch(branchToDelete).delete();
 
-    assertThat(listReplicationTasks(branchToDelete)).hasSize(1);
+    assertThat(listIncompleteTasks(branchToDelete)).hasSize(1);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       if (mirror) {
@@ -515,7 +511,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   @Test
-  public void shouldFirePendingOnlyToStoredUri() throws Exception {
+  public void shouldFirePendingOnlyToRemainingUris() throws Exception {
     String suffix1 = "replica1";
     String suffix2 = "replica2";
     Project.NameKey target1 = createTestProject(project + suffix1);
@@ -529,7 +525,16 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     String changeRef = createChange().getPatchSet().refName();
 
     tasksStorage.disableDeleteForTesting(false);
-    changeReplicationTasksForRemote(changeRef, remote1).forEach(tasksStorage::delete);
+    changeReplicationTasksForRemote(tasksStorage.listWaiting().stream(), changeRef, remote1)
+        .forEach(
+            (update) -> {
+              try {
+                UriUpdates uriUpdates = TestUriUpdates.create(update);
+                tasksStorage.start(uriUpdates);
+                tasksStorage.finish(uriUpdates);
+              } catch (URISyntaxException e) {
+              }
+            });
     tasksStorage.disableDeleteForTesting(true);
 
     setReplicationDestination(remote1, suffix1, ALL_PROJECTS);
@@ -657,7 +662,12 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
       String changeRef, String remote) {
-    return tasksStorage.list().stream()
+    return changeReplicationTasksForRemote(streamIncompleteTasks(), changeRef, remote);
+  }
+
+  private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
+      Stream<ReplicateRefUpdate> updates, String changeRef, String remote) {
+    return updates
         .filter(task -> changeRef.equals(task.ref))
         .filter(task -> remote.equals(task.remote));
   }
@@ -666,11 +676,24 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     return projectOperations.newProject().name(name).create();
   }
 
-  private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
+  private List<ReplicateRefUpdate> listIncompleteTasks(String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage.list().stream()
+    return streamIncompleteTasks()
         .filter(task -> refmaskPattern.matcher(task.ref).matches())
         .collect(toList());
+  }
+
+  private List<ReplicateRefUpdate> listIncompleteTasks() {
+    return streamIncompleteTasks().collect(toList());
+  }
+
+  @SuppressWarnings(
+      "SynchronizeOnNonFinalField") // tasksStorage is non-final but only set in setUpTestPlugin()
+  private Stream<ReplicateRefUpdate> streamIncompleteTasks() {
+    synchronized (tasksStorage) {
+      return Stream.concat(
+          tasksStorage.listWaiting().stream(), tasksStorage.listRunning().stream());
+    }
   }
 
   public void cleanupReplicationTasks() throws IOException {

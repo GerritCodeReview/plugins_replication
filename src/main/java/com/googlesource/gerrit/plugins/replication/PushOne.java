@@ -86,7 +86,7 @@ import org.eclipse.jgit.transport.URIish;
  * <p>Instance members are protected by the lock within PushQueue. Callers must take that lock to
  * ensure they are working with a current view of the object.
  */
-class PushOne implements ProjectRunnable, CanceledWhileRunning {
+class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private final ReplicationStateListener stateLog;
   static final String ALL_REFS = "..all..";
   static final String ID_KEY = "pushOneId";
@@ -231,7 +231,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     return canceled || canceledWhileRunning.get();
   }
 
-  URIish getURI() {
+  @Override
+  public URIish getURI() {
     return uri;
   }
 
@@ -246,7 +247,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     }
   }
 
-  Set<String> getRefs() {
+  @Override
+  public Set<String> getRefs() {
     return pushAllRefs ? Sets.newHashSet(ALL_REFS) : delta;
   }
 
