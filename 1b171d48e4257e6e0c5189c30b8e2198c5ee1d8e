@@ -90,6 +90,41 @@
     },
     {
       "key": {
+        "uuid": "f3c522af_c04b0104",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-02T20:10:04Z",
+      "side": 1,
+      "message": "This should be safe.",
+      "revId": "1b171d48e4257e6e0c5189c30b8e2198c5ee1d8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6979949_034ac7fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-02T20:10:04Z",
+      "side": 1,
+      "message": "I believe the synchronized is now in the test code, which is fine, as the flakiness was detected when running tests and not during the plugin startup phase.",
+      "parentUuid": "724d31f1_26b6c155",
+      "revId": "1b171d48e4257e6e0c5189c30b8e2198c5ee1d8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b9a65c68_8a993383",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 1
