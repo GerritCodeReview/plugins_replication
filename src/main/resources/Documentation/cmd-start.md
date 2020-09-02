@@ -11,8 +11,7 @@ SYNOPSIS
 ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start
   [--now]
   [--wait]
-  [--url <PATTERN>]
-  {--all | <PROJECT PATTERN> ...}
+  {--url <PATTERN> | [--url <PATTERN>] --all | [--url <PATTERN>] <PROJECT PATTERN> ...}
 ```
 
 DESCRIPTION
