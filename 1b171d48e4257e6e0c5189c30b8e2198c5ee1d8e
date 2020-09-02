@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ac49580a_8de3cf0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-02T19:32:01Z",
+      "side": 1,
+      "message": "I believe 10 runs aren\u0027t enough, also depends on how many cores your system has.\nI am running now on my laptop with 16 cores, 50 runs. Will post the results shortly.\n\nBear in mind that the replication plugin tests are executed together with the main Gerrit build, because this is a core plugin. Reintroducing flakiness would make the entire Gerrit build flaky again :-(",
+      "parentUuid": "01504112_cad5c424",
+      "revId": "1b171d48e4257e6e0c5189c30b8e2198c5ee1d8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b9a65c68_8a993383",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 1
