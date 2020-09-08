@@ -16,6 +16,24 @@
       "revId": "116cbc11573e7afb0ce0782518a172cf798ec15c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d658f3ae_c9925866",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-09-08T19:07:44Z",
+      "side": 0,
+      "message": "Yes, it was moved within the handleWait routine to try and avoid duplication as per previous comment.",
+      "parentUuid": "9651aa20_dfb2c036",
+      "revId": "116cbc11573e7afb0ce0782518a172cf798ec15c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }

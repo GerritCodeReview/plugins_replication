@@ -482,6 +482,24 @@
     },
     {
       "key": {
+        "uuid": "dc463150_c58d516e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationProcessing.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-09-08T19:07:44Z",
+      "side": 1,
+      "message": "The new handleWait function is shared.",
+      "parentUuid": "b0f89d7b_5c91ecd3",
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "46829833_e86a5c59",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
         "patchSetId": 18
@@ -613,6 +631,30 @@
       "side": 1,
       "message": "\u003e I still am not sure the best way to mash them together though given the json etc.\n\nI\u0027m not following, there is no json in here. My suggestion is to use this class in the ssh command also so that there is only one class defining options.",
       "parentUuid": "6514babc_dfadb9a1",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 37
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63667b1b_ed2b0c09",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-09-08T19:07:44Z",
+      "side": 1,
+      "message": "Ok, starting to understand. Wouldn\u0027t you still need the StartCommand as it extends the SshCommand ? Also, the handling of the --all is slightly different in that we pass all or project in the http version. Gave it a shot but the code just got messy. I will discuss it with my team.",
+      "parentUuid": "12242935_c74c2929",
       "range": {
         "startLine": 17,
         "startChar": 13,
