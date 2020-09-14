@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "c1a8c8fd_a4f3fe03",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-14T22:50:59Z",
+      "side": 1,
+      "message": "repeated?",
+      "range": {
+        "startLine": 18,
+        "startChar": 48,
+        "endLine": 18,
+        "endChar": 55
+      },
+      "revId": "a7c0b069ffcb37501d81b76ffb6d551a1be51c50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40bad2f6_8e5b8e17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-14T22:50:59Z",
+      "side": 1,
+      "message": "prevents isn\u0027t wrong, but maybe \u0027skips\u0027 describes the intent better?",
+      "range": {
+        "startLine": 18,
+        "startChar": 15,
+        "endLine": 18,
+        "endChar": 23
+      },
+      "revId": "a7c0b069ffcb37501d81b76ffb6d551a1be51c50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07e5a3de_550e3899",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-14T22:50:59Z",
+      "side": 1,
+      "message": "I would end the sentence after \u0027disk.\u0027 And then continue as: \"This allows new replication events being created on the server to be scheduled before all pending events have been scheduled.\" Maybe call out that this means the priority of new events is being bumped vs pending events?",
+      "range": {
+        "startLine": 19,
+        "startChar": 29,
+        "endLine": 21,
+        "endChar": 44
+      },
+      "revId": "a7c0b069ffcb37501d81b76ffb6d551a1be51c50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e2b76901_cc260203",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 15
@@ -16,6 +85,155 @@
       "revId": "a7c0b069ffcb37501d81b76ffb6d551a1be51c50",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7e596fb_64254370",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-14T22:50:59Z",
+      "side": 1,
+      "message": "-1 is for the ReplicationTasksStorage comments\n\nSaša, could you take a look at the tests? They look good to me, but I think you understand the ChainedScheduler very well and might spot gaps I missed.",
+      "revId": "a7c0b069ffcb37501d81b76ffb6d551a1be51c50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3bd49113_d8353f58",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-14T22:50:59Z",
+      "side": 1,
+      "message": "I know this isn\u0027t public, but a short javadoc wouldn\u0027t hurt",
+      "range": {
+        "startLine": 98,
+        "startChar": 18,
+        "endLine": 98,
+        "endChar": 25
+      },
+      "revId": "a7c0b069ffcb37501d81b76ffb6d551a1be51c50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a664399_85f77750",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-14T22:50:59Z",
+      "side": 1,
+      "message": "Call from line 161?",
+      "range": {
+        "startLine": 203,
+        "startChar": 39,
+        "endLine": 203,
+        "endChar": 60
+      },
+      "revId": "a7c0b069ffcb37501d81b76ffb6d551a1be51c50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b948b25_5fcf35ee",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-14T22:50:59Z",
+      "side": 1,
+      "message": "Should this get called from line 163 too?",
+      "range": {
+        "startLine": 215,
+        "startChar": 15,
+        "endLine": 215,
+        "endChar": 21
+      },
+      "revId": "a7c0b069ffcb37501d81b76ffb6d551a1be51c50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f449b43_4b38ee24",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ChainedSchedulerTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-14T22:50:59Z",
+      "side": 1,
+      "message": "Immediately?",
+      "range": {
+        "startLine": 234,
+        "startChar": 28,
+        "endLine": 234,
+        "endChar": 37
+      },
+      "revId": "a7c0b069ffcb37501d81b76ffb6d551a1be51c50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "852aac9e_7e5fd03a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ChainedSchedulerTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-14T22:50:59Z",
+      "side": 1,
+      "message": "Is \"Fine\" adding something specific to this name vs \"oneItemCompletes\"? I think \"Successfully\" is unnecessary to specify.",
+      "range": {
+        "startLine": 245,
+        "startChar": 30,
+        "endLine": 245,
+        "endChar": 34
+      },
+      "revId": "a7c0b069ffcb37501d81b76ffb6d551a1be51c50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a567266_2f669753",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ChainedSchedulerTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-14T22:50:59Z",
+      "side": 1,
+      "message": "Also add tests for StreamScheduler and ForwardingRunner?",
+      "revId": "a7c0b069ffcb37501d81b76ffb6d551a1be51c50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }

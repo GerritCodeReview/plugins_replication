@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d104296_3a89f85f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-14T22:50:59Z",
+      "side": 0,
+      "message": "Maybe I missed this in earlier discussion, but how are nulls handled now?",
+      "range": {
+        "startLine": 206,
+        "startChar": 8,
+        "endLine": 209,
+        "endChar": 9
+      },
+      "revId": "7ad27c7ac49731e70dd5ad3691b0b410492792f0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
