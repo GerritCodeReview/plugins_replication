@@ -105,6 +105,23 @@
     },
     {
       "key": {
+        "uuid": "8a974d98_2fb5067f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-14T22:52:00Z",
+      "side": 1,
+      "message": "Also, it looks like there\u0027s a bunch of unresolved comments on earlier patch sets. Can folks check those and ACK/Resolve as needed?",
+      "revId": "a7c0b069ffcb37501d81b76ffb6d551a1be51c50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3bd49113_d8353f58",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
         "patchSetId": 15
