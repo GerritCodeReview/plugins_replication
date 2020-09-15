@@ -500,6 +500,24 @@
     },
     {
       "key": {
+        "uuid": "cfa9b3fa_530c50ad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationProcessing.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-09-15T19:47:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc463150_c58d516e",
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46829833_e86a5c59",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
         "patchSetId": 18
@@ -655,6 +673,30 @@
       "side": 1,
       "message": "Ok, starting to understand. Wouldn\u0027t you still need the StartCommand as it extends the SshCommand ? Also, the handling of the --all is slightly different in that we pass all or project in the http version. Gave it a shot but the code just got messy. I will discuss it with my team.",
       "parentUuid": "12242935_c74c2929",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 37
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8fd9b29_403bf3f8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1071622
+      },
+      "writtenOn": "2020-09-15T19:47:04Z",
+      "side": 1,
+      "message": "Is it possible for us to set up a google meeting to discuss this last issue ? I\u0027m in EDT timezone. If so do you have a preferred time/day ? Thanks",
+      "parentUuid": "63667b1b_ed2b0c09",
       "range": {
         "startLine": 17,
         "startChar": 13,
