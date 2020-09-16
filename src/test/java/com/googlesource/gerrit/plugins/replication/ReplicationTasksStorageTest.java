@@ -358,7 +358,7 @@ public class ReplicationTasksStorageTest {
     assertThat(storage.listRunning()).isEmpty();
   }
 
-  private void assertContainsExactly(
+  public static void assertContainsExactly(
       List<ReplicateRefUpdate> all, ReplicateRefUpdate... refUpdates) {
     assertThat(all).hasSize(refUpdates.length);
     for (int i = 0; i < refUpdates.length; i++) {
@@ -366,7 +366,7 @@ public class ReplicationTasksStorageTest {
     }
   }
 
-  private boolean equals(ReplicateRefUpdate one, ReplicateRefUpdate two) {
+  private static boolean equals(ReplicateRefUpdate one, ReplicateRefUpdate two) {
     return (one == null && two == null)
         || (one != null
             && two != null
