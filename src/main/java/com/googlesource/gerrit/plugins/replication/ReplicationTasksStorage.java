@@ -23,8 +23,11 @@ import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.google.inject.ProvisionException;
 import com.google.inject.Singleton;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
 import java.nio.file.DirectoryIteratorException;
+import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -32,6 +35,8 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
 
@@ -48,9 +53,9 @@ import org.eclipse.jgit.transport.URIish;
  * task:
  *
  * <p><code>
- *   .../building/<tmp_name>  new replication tasks under construction
- *   .../running/<sha1>       running replication tasks
- *   .../waiting/<sha1>       outstanding replication tasks
+ *   .../building/<tmp_name>                              new replication tasks under construction
+ *   .../running/<sha1(uri)>/<ownerId>/<sha1(task)>       running replication tasks
+ *   .../waiting/<sha1(task)>                             outstanding replication tasks
  * </code>
  *
  * <p>Tasks are moved atomically via a rename between those directories to indicate the current
@@ -79,6 +84,11 @@ public class ReplicationTasksStorage {
     public String toString() {
       return "ref-update " + project + ":" + ref + " uri:" + uri + " remote:" + remote;
     }
+
+    private String sha1() {
+      String key = project + "\n" + ref + "\n" + uri + "\n" + remote;
+      return ReplicationTasksStorage.sha1(key);
+    }
   }
 
   private static final Gson GSON = new Gson();
@@ -86,6 +96,7 @@ public class ReplicationTasksStorage {
   private final Path buildingUpdates;
   private final Path runningUpdates;
   private final Path waitingUpdates;
+  private final String ownerId;
 
   @Inject
   ReplicationTasksStorage(ReplicationConfig config) {
@@ -97,6 +108,13 @@ public class ReplicationTasksStorage {
     buildingUpdates = refUpdates.resolve("building");
     runningUpdates = refUpdates.resolve("running");
     waitingUpdates = refUpdates.resolve("waiting");
+    ownerId = getOwnerId();
+  }
+
+  protected static String getOwnerId() {
+    String uuid = UUID.randomUUID().toString();
+    String vmInstanceName = ManagementFactory.getRuntimeMXBean().getName(); // Usually pid@hostname
+    return vmInstanceName + "_" + uuid;
   }
 
   public synchronized String create(ReplicateRefUpdate r) {
@@ -121,8 +139,8 @@ public class ReplicationTasksStorage {
   }
 
   public synchronized void resetAll() {
-    for (ReplicateRefUpdate r : listRunning()) {
-      new Task(r).reset();
+    for (Task t : runningTasks()) {
+      t.reset();
     }
   }
 
@@ -133,21 +151,29 @@ public class ReplicationTasksStorage {
   }
 
   public List<ReplicateRefUpdate> listWaiting() {
-    return list(createDir(waitingUpdates));
+    return listRefUpdates(createDir(waitingUpdates));
   }
 
   public List<ReplicateRefUpdate> listRunning() {
+    return listRefUpdates(createDir(runningUpdates));
+  }
+
+  public List<Task> runningTasks() {
     return list(createDir(runningUpdates));
   }
 
-  private List<ReplicateRefUpdate> list(Path tasks) {
-    List<ReplicateRefUpdate> results = new ArrayList<>();
+  private List<ReplicateRefUpdate> listRefUpdates(Path dir) {
+    return list(dir).stream().map(t -> t.update).collect(Collectors.toList());
+  }
+
+  private List<Task> list(Path tasks) {
+    List<Task> results = new ArrayList<>();
     try (DirectoryStream<Path> events = Files.newDirectoryStream(tasks)) {
       for (Path path : events) {
         if (Files.isRegularFile(path)) {
           try {
             String json = new String(Files.readAllBytes(path), UTF_8);
-            results.add(GSON.fromJson(json, ReplicateRefUpdate.class));
+            results.add(new Task(GSON.fromJson(json, ReplicateRefUpdate.class), path));
           } catch (NoSuchFileException ex) {
             logger.atFine().log(
                 "File %s not found while listing waiting tasks (likely in-flight or completed by another node)",
@@ -171,8 +197,8 @@ public class ReplicationTasksStorage {
   }
 
   @SuppressWarnings("deprecation")
-  private ObjectId sha1(String s) {
-    return ObjectId.fromRaw(Hashing.sha1().hashString(s, UTF_8).asBytes());
+  private static String sha1(String s) {
+    return ObjectId.fromRaw(Hashing.sha1().hashString(s, UTF_8).asBytes()).name();
   }
 
   private static Path createDir(Path dir) {
@@ -188,16 +214,25 @@ public class ReplicationTasksStorage {
     public final ReplicateRefUpdate update;
     public final String json;
     public final String taskKey;
+    public final String uriKey;
     public final Path running;
     public final Path waiting;
 
     public Task(ReplicateRefUpdate update) {
+      this(update, ownerId);
+    }
+
+    public Task(ReplicateRefUpdate update, String ownerId) {
       this.update = update;
       json = GSON.toJson(update) + "\n";
-      String key = update.project + "\n" + update.ref + "\n" + update.uri + "\n" + update.remote;
-      taskKey = sha1(key).name();
-      running = createDir(runningUpdates).resolve(taskKey);
+      taskKey = update.sha1();
+      uriKey = sha1(update.uri);
+      running = createDir(runningUpdates.resolve(uriKey).resolve(ownerId)).resolve(taskKey);
       waiting = createDir(waitingUpdates).resolve(taskKey);
+    }
+
+    public Task(ReplicateRefUpdate update, Path taskFile) {
+      this(update, taskFile.getParent().getFileName().toString());
     }
 
     public String create() {
@@ -234,6 +269,12 @@ public class ReplicationTasksStorage {
       try {
         logger.atFine().log("DELETE %s %s", running, updateLog());
         Files.delete(running);
+        try {
+          Files.deleteIfExists(running.getParent());
+          Files.deleteIfExists(running.getParent().getParent());
+        } catch (DirectoryNotEmptyException | FileNotFoundException e) {
+          logger.atWarning().withCause(e).log("Error cleaning up finished task %s", taskKey);
+        }
       } catch (IOException e) {
         logger.atSevere().withCause(e).log("Error while deleting task %s", taskKey);
       }
