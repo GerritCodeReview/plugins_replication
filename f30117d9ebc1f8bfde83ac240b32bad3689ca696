@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7201daeb_06891b78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-17T15:52:16Z",
+      "side": 1,
+      "message": "Hey Luca, I just pushed 281816: Convert ReplicateRefUpdate to AutoValue | https://gerrit-review.googlesource.com/c/plugins/replication/+/281816 which would replace this on master. Want to take a look?",
+      "revId": "f30117d9ebc1f8bfde83ac240b32bad3689ca696",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1db2f7e1_2267d39e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 6
