@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6252e915_fa52ab46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-17T15:51:16Z",
+      "side": 1,
+      "message": "Passes tests with Core change: 281776: Use auto-value-gson | https://gerrit-review.googlesource.com/c/gerrit/+/281776",
+      "revId": "952600c4b86c0757610b225cb26a7f9f7756a0e2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d9fd9cd_4e7c4e64",
+        "filename": "BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-17T15:51:16Z",
+      "side": 1,
+      "message": "Depends on 281776: Use auto-value-gson | https://gerrit-review.googlesource.com/c/gerrit/+/281776",
+      "revId": "952600c4b86c0757610b225cb26a7f9f7756a0e2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
