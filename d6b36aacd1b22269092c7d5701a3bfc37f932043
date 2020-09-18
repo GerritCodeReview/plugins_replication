@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e86cc6c_4058a602",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-18T21:13:36Z",
+      "side": 1,
+      "message": "The \u0027master\u0027 term should be avoided",
+      "range": {
+        "startLine": 7,
+        "startChar": 40,
+        "endLine": 7,
+        "endChar": 46
+      },
+      "revId": "d6b36aacd1b22269092c7d5701a3bfc37f932043",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be2d03bb_204bf0d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-18T21:13:36Z",
+      "side": 1,
+      "message": "Same as before",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "d6b36aacd1b22269092c7d5701a3bfc37f932043",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "486efcb1_533cd552",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-18T21:13:36Z",
+      "side": 1,
+      "message": "Same as before",
+      "range": {
+        "startLine": 14,
+        "startChar": 63,
+        "endLine": 14,
+        "endChar": 69
+      },
+      "revId": "d6b36aacd1b22269092c7d5701a3bfc37f932043",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
