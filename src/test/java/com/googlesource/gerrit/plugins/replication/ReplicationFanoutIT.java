@@ -247,7 +247,7 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
   private List<ReplicateRefUpdate> listIncompleteTasks(String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
     synchronized (tasksStorage) {
-      return Stream.concat(tasksStorage.listWaiting().stream(), tasksStorage.listRunning().stream())
+      return Stream.concat(tasksStorage.streamWaiting(), tasksStorage.streamRunning())
           .filter(task -> refmaskPattern.matcher(task.ref).matches())
           .collect(toList());
     }
