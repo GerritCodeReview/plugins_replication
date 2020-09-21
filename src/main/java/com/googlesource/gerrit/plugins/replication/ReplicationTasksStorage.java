@@ -29,9 +29,7 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.NotDirectoryException;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
@@ -143,9 +141,7 @@ public class ReplicationTasksStorage {
   }
 
   public synchronized void resetAll() {
-    for (ReplicateRefUpdate r : list(createDir(runningUpdates))) {
-      new Task(r).reset();
-    }
+    streamRunning().forEach(r -> new Task(r).reset());
   }
 
   public boolean isWaiting(UriUpdates uriUpdates) {
@@ -160,16 +156,12 @@ public class ReplicationTasksStorage {
     }
   }
 
-  public List<ReplicateRefUpdate> listWaiting() {
-    return list(createDir(waitingUpdates));
+  public Stream<ReplicateRefUpdate> streamWaiting() {
+    return streamRecursive(createDir(waitingUpdates));
   }
 
-  public List<ReplicateRefUpdate> listRunning() {
-    return list(createDir(runningUpdates));
-  }
-
-  private List<ReplicateRefUpdate> list(Path taskDir) {
-    return streamRecursive(taskDir).collect(Collectors.toList());
+  public Stream<ReplicateRefUpdate> streamRunning() {
+    return streamRecursive(createDir(runningUpdates));
   }
 
   private Stream<ReplicateRefUpdate> streamRecursive(Path dir) {
