@@ -202,13 +202,17 @@ public class ReplicationQueue
     replaying = true;
     try {
       replaying = true;
-      for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.listWaiting()) {
-        try {
-          fire(new URIish(t.uri), Project.nameKey(t.project), t.ref);
-        } catch (URISyntaxException e) {
-          repLog.atSevere().withCause(e).log("Encountered malformed URI for persisted event %s", t);
-        }
-      }
+      replicationTasksStorage
+          .streamWaiting()
+          .forEach(
+              t -> {
+                try {
+                  fire(new URIish(t.uri), Project.nameKey(t.project), t.ref);
+                } catch (URISyntaxException e) {
+                  repLog.atSevere().withCause(e).log(
+                      "Encountered malformed URI for persisted event %s", t);
+                }
+              });
     } catch (Throwable e) {
       repLog.atSevere().withCause(e).log("Unexpected error while firing pending events");
     } finally {
