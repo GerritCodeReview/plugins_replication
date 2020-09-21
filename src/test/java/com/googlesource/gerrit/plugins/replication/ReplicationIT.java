@@ -525,7 +525,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     String changeRef = createChange().getPatchSet().refName();
 
     tasksStorage.disableDeleteForTesting(false);
-    changeReplicationTasksForRemote(tasksStorage.listWaiting().stream(), changeRef, remote1)
+    changeReplicationTasksForRemote(tasksStorage.streamWaiting(), changeRef, remote1)
         .forEach(
             (update) -> {
               try {
@@ -691,8 +691,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
       "SynchronizeOnNonFinalField") // tasksStorage is non-final but only set in setUpTestPlugin()
   private Stream<ReplicateRefUpdate> streamIncompleteTasks() {
     synchronized (tasksStorage) {
-      return Stream.concat(
-          tasksStorage.listWaiting().stream(), tasksStorage.listRunning().stream());
+      return Stream.concat(tasksStorage.streamWaiting(), tasksStorage.streamRunning());
     }
   }
 
