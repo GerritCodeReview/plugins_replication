@@ -49,6 +49,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
@@ -450,11 +451,11 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     config.setInt("remote", "task_cleanup_project", "replicationRetry", 0);
     config.save();
     reloadConfig();
-    assertThat(tasksStorage.listRunning()).hasSize(0);
+    assertThat(listRunning()).hasSize(0);
     Project.NameKey sourceProject = createTestProject("task_cleanup_project");
 
     waitUntil(() -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")));
-    waitUntil(() -> tasksStorage.listRunning().size() == 0);
+    waitUntil(() -> listRunning().size() == 0);
   }
 
   @Test
@@ -464,7 +465,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     config.setInt("remote", "task_cleanup_locks_project", "replicationRetry", 0);
     config.save();
     reloadConfig();
-    assertThat(tasksStorage.listRunning()).hasSize(0);
+    assertThat(listRunning()).hasSize(0);
     Project.NameKey sourceProject = createTestProject("task_cleanup_locks_project");
 
     waitUntil(() -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")));
@@ -491,7 +492,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
             .findFirst()
             .get();
 
-    waitUntil(() -> tasksStorage.listRunning().size() == 0);
+    waitUntil(() -> listRunning().size() == 0);
 
     createTestProject(projectName);
 
@@ -674,6 +675,10 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private Project.NameKey createTestProject(String name) throws Exception {
     return projectOperations.newProject().name(name).create();
+  }
+
+  public List<ReplicateRefUpdate> listRunning() {
+    return tasksStorage.streamRunning().collect(Collectors.toList());
   }
 
   private List<ReplicateRefUpdate> listIncompleteTasks(String refRegex) {
