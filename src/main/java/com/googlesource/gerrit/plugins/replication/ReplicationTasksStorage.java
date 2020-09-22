@@ -32,6 +32,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
 
@@ -66,6 +67,24 @@ public class ReplicationTasksStorage {
   private boolean disableDeleteForTesting;
 
   public static class ReplicateRefUpdate {
+    public static Optional<ReplicateRefUpdate> createOptionally(Path file) {
+      try {
+        return Optional.of(create(file));
+      } catch (NoSuchFileException e) {
+        logger.atFine().log("File %s not found while reading task", file);
+      } catch (IOException e) {
+        if (!e.getMessage().equals("Is a directory")) {
+          logger.atSevere().withCause(e).log("Error while reading task %", file);
+        }
+      }
+      return Optional.empty();
+    }
+
+    public static ReplicateRefUpdate create(Path file) throws IOException {
+      String json = new String(Files.readAllBytes(file), UTF_8);
+      return GSON.fromJson(json, ReplicateRefUpdate.class);
+    }
+
     public final String project;
     public final String ref;
     public final String uri;
@@ -153,17 +172,9 @@ public class ReplicationTasksStorage {
     List<ReplicateRefUpdate> results = new ArrayList<>();
     try (DirectoryStream<Path> events = Files.newDirectoryStream(tasks)) {
       for (Path path : events) {
-        if (Files.isRegularFile(path)) {
-          try {
-            String json = new String(Files.readAllBytes(path), UTF_8);
-            results.add(GSON.fromJson(json, ReplicateRefUpdate.class));
-          } catch (NoSuchFileException ex) {
-            logger.atFine().log(
-                "File %s not found while listing waiting tasks (likely in-flight or completed by another node)",
-                path);
-          } catch (IOException e) {
-            logger.atSevere().withCause(e).log("Error when firing pending event %s", path);
-          }
+        Optional<ReplicateRefUpdate> update = ReplicateRefUpdate.createOptionally(path);
+        if (update.isPresent()) {
+          results.add(update.get());
         } else if (Files.isDirectory(path)) {
           try {
             results.addAll(list(path));

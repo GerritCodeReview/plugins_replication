@@ -203,10 +203,6 @@ public class ReplicationQueue
     try {
       replaying = true;
       for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.listWaiting()) {
-        if (t == null) {
-          repLog.atWarning().log("Encountered null replication event in ReplicationTasksStorage");
-          continue;
-        }
         try {
           fire(new URIish(t.uri), Project.nameKey(t.project), t.ref);
         } catch (URISyntaxException e) {
