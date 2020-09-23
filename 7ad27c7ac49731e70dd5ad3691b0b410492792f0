@@ -22,6 +22,30 @@
       "revId": "7ad27c7ac49731e70dd5ad3691b0b410492792f0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b22d37f_ba27f36f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-09-23T20:24:14Z",
+      "side": 0,
+      "message": "There is not need to handle nulls anymore since the new streamWaiting() method does not return nulls. Instead streamWaiting() filters out items that it cannot read using the Optional returned by the new getReplicateRefUpdate() method.",
+      "parentUuid": "8d104296_3a89f85f",
+      "range": {
+        "startLine": 206,
+        "startChar": 8,
+        "endLine": 209,
+        "endChar": 9
+      },
+      "revId": "7ad27c7ac49731e70dd5ad3691b0b410492792f0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
