@@ -22,6 +22,30 @@
       "revId": "f5d850da8014ecb67e1c0df24fa75c3672da4480",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "250d0100_1ee4be37",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-09-24T15:44:55Z",
+      "side": 1,
+      "message": "Clarifying via method variable names is preferable to docs (easier for users, and less of a maintenance problem).",
+      "parentUuid": "bf9663ef_13be0aab",
+      "range": {
+        "startLine": 175,
+        "startChar": 37,
+        "endLine": 175,
+        "endChar": 52
+      },
+      "revId": "f5d850da8014ecb67e1c0df24fa75c3672da4480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
