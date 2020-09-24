@@ -68,6 +68,30 @@
       "revId": "98606eda4a2ea11c523ee982c9def6b7fdad20e0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe723770_bbb55c94",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-09-24T07:45:06Z",
+      "side": 1,
+      "message": "Since this is an intermediary commit, ignore this comment.",
+      "parentUuid": "6e0c483e_08b4c5a6",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 9
+      },
+      "revId": "98606eda4a2ea11c523ee982c9def6b7fdad20e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
