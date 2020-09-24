@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c811017d_5f6638ce",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-09-24T07:33:16Z",
+      "side": 1,
+      "message": "parse?\nRemove optionally suffix, method signature should suffice.\nAdd Javadoc if you feel that it\u0027s not self-explanatory.",
+      "range": {
+        "startLine": 70,
+        "startChar": 47,
+        "endLine": 70,
+        "endChar": 63
+      },
+      "revId": "98606eda4a2ea11c523ee982c9def6b7fdad20e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9455ce8f_df35dffd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-09-24T07:33:16Z",
+      "side": 1,
+      "message": "deserialize?",
+      "range": {
+        "startLine": 83,
+        "startChar": 37,
+        "endLine": 83,
+        "endChar": 43
+      },
+      "revId": "98606eda4a2ea11c523ee982c9def6b7fdad20e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e0c483e_08b4c5a6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-09-24T07:33:16Z",
+      "side": 1,
+      "message": "Switch the if clauses and use the Optional API?\n\n    if (Files.isDirectory(path)) {\n      ...\n    } else {\n      ReplicateRefUpdate.create(path).ifPresent(rru -\u003e results.add(rru));\n    }",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 9
+      },
+      "revId": "98606eda4a2ea11c523ee982c9def6b7fdad20e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
