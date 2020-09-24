@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8c764682_5b323ee3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-09-24T22:43:26Z",
+      "side": 1,
+      "message": "This is new new language, primaries and replicas.",
+      "parentUuid": "271171e9_f4a36b89",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61ef51ef_e18073d1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2020-09-24T21:19:05Z",
       "side": 1,
       "message": "I would just start the phrase with: \"When two different Gerrit servers ...\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "512996ed_87d9b8ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-09-24T22:43:26Z",
+      "side": 1,
+      "message": "I think multi-primary would be more consistent with the new consensus on terms?",
+      "parentUuid": "61ef51ef_e18073d1",
       "range": {
         "startLine": 9,
         "startChar": 0,
@@ -253,6 +301,30 @@
     },
     {
       "key": {
+        "uuid": "8a3a4560_19b2de0c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-09-24T22:43:26Z",
+      "side": 1,
+      "message": "The objective of the variable is to show intent, not to be functionally different. Think of the following example:  \n\n TEST_REPLICATION_DELAY \u003d1\n TEST_RETRY_DELAY \u003d1\n\nAlthough those variables contain the same thing, their intent is different. The SECOND_REF_UPDATE is created on line 69. This simulates how the plugin will use this API and it this test whether this usage works or not, without the need to know about how the data is stored (memory, filesystem...).",
+      "parentUuid": "3a19e123_63481063",
+      "range": {
+        "startLine": 64,
+        "startChar": 47,
+        "endLine": 64,
+        "endChar": 62
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6325d63_16694e44",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
         "patchSetId": 1
@@ -321,6 +393,30 @@
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b2cbabe_e51b006f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-09-24T22:43:26Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "d9b0add6_0d8939e2",
+      "range": {
+        "startLine": 66,
+        "startChar": 15,
+        "endLine": 66,
+        "endChar": 30
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -454,6 +550,30 @@
       "side": 1,
       "message": "As above: a comment would be helpful for the reader to understand the scenario you are creating.",
       "parentUuid": "1fb1f543_3d7bbd55",
+      "range": {
+        "startLine": 72,
+        "startChar": 9,
+        "endLine": 72,
+        "endChar": 29
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d231ecfc_d21be3ff",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-09-24T22:43:26Z",
+      "side": 1,
+      "message": "Such a comment would need to be removed once it is fixed since although you are correct, that is part of the problematic implementaion that needs to be fixed.",
+      "parentUuid": "3ac9cd2e_d28c4421",
       "range": {
         "startLine": 72,
         "startChar": 9,
