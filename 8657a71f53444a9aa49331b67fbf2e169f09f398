@@ -1,0 +1,251 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "271171e9_f4a36b89",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T21:19:05Z",
+      "side": 1,
+      "message": "What is a multi-primary?",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61ef51ef_e18073d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T21:19:05Z",
+      "side": 1,
+      "message": "I would just start the phrase with: \"When two different Gerrit servers ...\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af06ada9_dfa4e688",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T21:19:05Z",
+      "side": 1,
+      "message": "Bug: Issue 13441",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be02a262_fa9a854b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T21:19:05Z",
+      "side": 1,
+      "message": "Thanks, Adithya, for creating this test. This is not a problem just for replication clustering scenarios but also for the single Gerrit server.",
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "338a9a38_c9933d72",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T21:19:05Z",
+      "side": 1,
+      "message": "import ReplicationTaskStorage.ReplicateRefUpdate, so that you can avoid repeating the full name  which would make the test more readable.",
+      "range": {
+        "startLine": 35,
+        "startChar": 25,
+        "endLine": 35,
+        "endChar": 67
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3451a032_980a7d6e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T21:19:05Z",
+      "side": 1,
+      "message": "How is this different than nodeA or nodeB?",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 61
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77142503_1b8ac6c5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T21:19:05Z",
+      "side": 1,
+      "message": "How is this different than REF_UPDATE? It looks identical to me, unless I am missing something.",
+      "range": {
+        "startLine": 64,
+        "startChar": 47,
+        "endLine": 64,
+        "endChar": 62
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6325d63_16694e44",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T21:19:05Z",
+      "side": 1,
+      "message": "This looks also identical to URI_UPDATE",
+      "range": {
+        "startLine": 66,
+        "startChar": 15,
+        "endLine": 66,
+        "endChar": 30
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4677bf5c_3c5d347d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T21:19:05Z",
+      "side": 1,
+      "message": "This resets the task URI_UPDATE that is running on nodeA, correct?",
+      "range": {
+        "startLine": 68,
+        "startChar": 10,
+        "endLine": 68,
+        "endChar": 21
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61ae2075_16d81e95",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T21:19:05Z",
+      "side": 1,
+      "message": "And this one finishes the task that is running on nodeB, correct?",
+      "range": {
+        "startLine": 72,
+        "startChar": 9,
+        "endLine": 72,
+        "endChar": 29
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11455a07_93f5a70f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T21:19:05Z",
+      "side": 1,
+      "message": "The point here is that we are missing the value of the SHA1 that is getting pushed. If the two events were trying to push the *same* SHA1, then losing one of the two isn\u0027t a problem, as the SHA1 gets pushed anyway.\n\nAt the moment, the primary key of the replication task is:\nURI + repo + ref + remote\n\nIf we have two replication events for *two* SHA1s (it may happen, in heavily loaded environments) then one of the two events is lost, because they go in conflict with the same key.",
+      "range": {
+        "startLine": 75,
+        "startChar": 55,
+        "endLine": 75,
+        "endChar": 70
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
