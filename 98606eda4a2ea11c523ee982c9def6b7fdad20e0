@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "419092f3_5ab6bcd9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-09-24T15:42:11Z",
+      "side": 1,
+      "message": "Both this method and the method below do the same thing, except that this one wraps the one below with an Optional. You have suggested to alter the one to \"parse\" and the other to \"desiralize\". Since either of those names could apply to either of these methods, this alteration does not feel valuable to users of these methods, instead if feels like playing a game to just come up with names that don\u0027t collide. By using \"create\" as a name, these methods are using a common pattern which makes for consistency of usage and less thought required by users. \n\nThe \"Optionally\" in this method achieves two things 1) it helps document what the method returns, which helps avoid naming collisions because java does not support overloading methods based on return values, and 2) it helps to differentiate it from the method below be clearly outlining how the functional intent is different. It is generally considered better practice to use method/variable naming to clarify things and to use docs only as a last resort as docs are rarely read, and they are a maintenance problem (they need to be modified when the code is modified, and this is often missed).",
+      "parentUuid": "c811017d_5f6638ce",
+      "range": {
+        "startLine": 70,
+        "startChar": 47,
+        "endLine": 70,
+        "endChar": 63
+      },
+      "revId": "98606eda4a2ea11c523ee982c9def6b7fdad20e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9455ce8f_df35dffd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "98606eda4a2ea11c523ee982c9def6b7fdad20e0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12256567_14515b8c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-09-24T15:42:11Z",
+      "side": 1,
+      "message": "See note above.",
+      "parentUuid": "9455ce8f_df35dffd",
+      "range": {
+        "startLine": 83,
+        "startChar": 37,
+        "endLine": 83,
+        "endChar": 43
+      },
+      "revId": "98606eda4a2ea11c523ee982c9def6b7fdad20e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
