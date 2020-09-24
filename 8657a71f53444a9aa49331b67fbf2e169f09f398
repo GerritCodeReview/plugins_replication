@@ -158,6 +158,30 @@
     },
     {
       "key": {
+        "uuid": "0235194d_bbbf049c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T22:04:03Z",
+      "side": 1,
+      "message": "The \"persisted view\" is just in its name, I do not see any difference with nodeA or nodeB. Can you clarify how it would give a different view (the persisted one) compared to nodeA or nodeB? I may be completely missing the point, if yes, I apologise in advance. If not, I would like to understand more about it.",
+      "parentUuid": "22819cc4_ef0b9b5b",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 61
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77142503_1b8ac6c5",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
         "patchSetId": 1
@@ -202,6 +226,30 @@
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a19e123_63481063",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T22:04:03Z",
+      "side": 1,
+      "message": "The creation of the in-memory object does not make any difference if done earlier or later.\n\nSee the constructor code below:\n\n    public ReplicateRefUpdate(String project, String ref, URIish uri, String remote) {\n      this.project \u003d project;\n      this.ref \u003d ref;\n      this.uri \u003d uri.toASCIIString();\n      this.remote \u003d remote;\n    }\n\nAren\u0027t you confusing the creation of the in-memory object with the creation of the underlying persistent file on the filesystem? That is done at L69 and that makes sense done after the nodeA.create(REF_UPDATE).",
+      "parentUuid": "c9254fc6_4513ac49",
+      "range": {
+        "startLine": 64,
+        "startChar": 47,
+        "endLine": 64,
+        "endChar": 62
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     },
     {
       "key": {
@@ -252,6 +300,30 @@
     },
     {
       "key": {
+        "uuid": "d9b0add6_0d8939e2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T22:04:03Z",
+      "side": 1,
+      "message": "Yep, same comment as above.",
+      "parentUuid": "c9d84b25_f98f3848",
+      "range": {
+        "startLine": 66,
+        "startChar": 15,
+        "endLine": 66,
+        "endChar": 30
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4677bf5c_3c5d347d",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
         "patchSetId": 1
@@ -299,6 +371,30 @@
     },
     {
       "key": {
+        "uuid": "c26af5a5_9ed754a4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T22:04:03Z",
+      "side": 1,
+      "message": "Cool, possibly a comment would help the reader :-)",
+      "parentUuid": "7e58edce_47999288",
+      "range": {
+        "startLine": 68,
+        "startChar": 10,
+        "endLine": 68,
+        "endChar": 21
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61ae2075_16d81e95",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
         "patchSetId": 1
@@ -334,6 +430,30 @@
       "side": 1,
       "message": "Yes",
       "parentUuid": "61ae2075_16d81e95",
+      "range": {
+        "startLine": 72,
+        "startChar": 9,
+        "endLine": 72,
+        "endChar": 29
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ac9cd2e_d28c4421",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-09-24T22:04:03Z",
+      "side": 1,
+      "message": "As above: a comment would be helpful for the reader to understand the scenario you are creating.",
+      "parentUuid": "1fb1f543_3d7bbd55",
       "range": {
         "startLine": 72,
         "startChar": 9,
