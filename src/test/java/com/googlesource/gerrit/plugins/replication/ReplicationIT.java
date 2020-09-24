@@ -69,6 +69,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   private static final int TEST_REPLICATION_DELAY = 1;
   private static final int TEST_REPLICATION_RETRY = 1;
   private static final int TEST_REPLICATION_MAX_RETRIES = 1;
+  private static final int TEST_PROJECT_CREATION_SECONDS = 10;
   private static final Duration TEST_TIMEOUT =
       Duration.ofSeconds((TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) + 1);
 
@@ -76,6 +77,10 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
       Duration.ofSeconds(
           (TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) * TEST_REPLICATION_MAX_RETRIES
               + 10);
+
+  private static final Duration TEST_NEW_PROJECT_TIMEOUT =
+      Duration.ofSeconds(
+          (TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) + TEST_PROJECT_CREATION_SECONDS);
 
   @Inject private SitePaths sitePaths;
   @Inject private ProjectOperations projectOperations;
@@ -120,7 +125,9 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     assertThat(listIncompleteTasks("refs/meta/config")).hasSize(1);
 
-    waitUntil(() -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")));
+    WaitUtil.waitUntil(
+        () -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")),
+        TEST_NEW_PROJECT_TIMEOUT);
 
     ProjectInfo replicaProject = gApi.projects().name(sourceProject + "replica").get();
     assertThat(replicaProject).isNotNull();
