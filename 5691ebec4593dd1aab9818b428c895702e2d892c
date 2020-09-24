@@ -45,6 +45,30 @@
       "revId": "5691ebec4593dd1aab9818b428c895702e2d892c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0e8fb78_d5be50c4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-09-24T15:52:15Z",
+      "side": 1,
+      "message": "Unfortunately you cannot overload method names based on return type alone. So if we wanted a \"list\" version again in the future (or if we wanted to override this class to provide such a method for testing), we would have a name collision. It is best to clarify the return type in the method name when it is very likely to be ambiguous and cause potential collisions.\n\nNote: this is similar to how it is often important to clarify argument types in a method name in untyped languages such as python. You can think of this is a \"manual\" or \"explicit\" method overloading technique.",
+      "parentUuid": "38e1e102_43993a40",
+      "range": {
+        "startLine": 159,
+        "startChar": 36,
+        "endLine": 159,
+        "endChar": 49
+      },
+      "revId": "5691ebec4593dd1aab9818b428c895702e2d892c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
