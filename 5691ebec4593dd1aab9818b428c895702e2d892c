@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07452087_38b5ed25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-09-24T07:15:04Z",
+      "side": 1,
+      "message": "Wouldn\u0027t a simple:\n\n    ReplicationTaskStorage: Use Stream API instead of List\n\nBe more to the point?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 47
+      },
+      "revId": "5691ebec4593dd1aab9818b428c895702e2d892c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38e1e102_43993a40",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-09-24T07:15:04Z",
+      "side": 1,
+      "message": "The \"stream\" prefix feels redundant to me, the method signature should suffice.\nHow about just \"waiting()\" or \"waitingTasks()\"?\nSame below, streamrunning() -\u003e runnning()",
+      "range": {
+        "startLine": 159,
+        "startChar": 36,
+        "endLine": 159,
+        "endChar": 49
+      },
+      "revId": "5691ebec4593dd1aab9818b428c895702e2d892c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
