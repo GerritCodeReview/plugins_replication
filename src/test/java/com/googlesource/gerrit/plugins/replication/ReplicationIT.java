@@ -63,8 +63,13 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private static final int TEST_REPLICATION_DELAY = 1;
   private static final int TEST_REPLICATION_RETRY = 1;
+  private static final int TEST_PROJECT_CREATION_SECONDS = 10;
   private static final Duration TEST_TIMEOUT =
       Duration.ofSeconds((TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) + 1);
+
+  private static final Duration TEST_NEW_PROJECT_TIMEOUT =
+      Duration.ofSeconds(
+          (TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) + TEST_PROJECT_CREATION_SECONDS);
 
   @Inject private SitePaths sitePaths;
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
@@ -104,7 +109,9 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     assertThat(listReplicationTasks("refs/meta/config")).hasSize(1);
 
-    waitUntil(() -> nonEmptyProjectExists(new Project.NameKey(sourceProject + "replica")));
+    WaitUtil.waitUntil(
+        () -> nonEmptyProjectExists(new Project.NameKey(sourceProject + "replica.git")),
+        TEST_NEW_PROJECT_TIMEOUT);
 
     ProjectInfo replicaProject = gApi.projects().name(sourceProject + "replica").get();
     assertThat(replicaProject).isNotNull();
