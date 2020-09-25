@@ -302,6 +302,30 @@
     },
     {
       "key": {
+        "uuid": "39e78d16_4ce11d1c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-09-25T19:15:32Z",
+      "side": 1,
+      "message": "Currently in our test case, we are managing tasks on nodeA and nodeB. When we consider a third node for asserts, we can be sure that this object doesn’t use the internal state stored in nodeA \u0026 NodeB and would give us the persisted view.",
+      "parentUuid": "0235194d_bbbf049c",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 61
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77142503_1b8ac6c5",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
         "patchSetId": 1
