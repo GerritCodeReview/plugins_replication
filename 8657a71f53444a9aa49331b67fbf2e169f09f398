@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "6f244cbc_864ae626",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-09-25T19:06:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "512996ed_87d9b8ee",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af06ada9_dfa4e688",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -116,6 +140,30 @@
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5feb69cb_6de0aeda",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-09-25T19:06:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af06ada9_dfa4e688",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -156,6 +204,30 @@
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94e08b96_768f8741",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-09-25T19:06:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "338a9a38_c9933d72",
+      "range": {
+        "startLine": 35,
+        "startChar": 25,
+        "endLine": 35,
+        "endChar": 67
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
