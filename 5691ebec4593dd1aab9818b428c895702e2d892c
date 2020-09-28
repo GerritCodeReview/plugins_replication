@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6c993b1d_7a58f970",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-09-28T22:01:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07452087_38b5ed25",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 47
+      },
+      "revId": "5691ebec4593dd1aab9818b428c895702e2d892c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38e1e102_43993a40",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 2
