@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "14850e84_8e90cc66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-09-28T20:05:34Z",
+      "side": 1,
+      "message": "The flakiness shows up when this change got merged a46a886822c8fab3cbcbbabbff250ba69f640563. It is a problem in 3.2, 3.1, 3.0, and 2.16.",
+      "parentUuid": "c728dcb9_6b59d2ec",
+      "revId": "cfee1fffa1d54955314e8d2c75f33264235595db",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "03e48676_ec94c0a1",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 1
