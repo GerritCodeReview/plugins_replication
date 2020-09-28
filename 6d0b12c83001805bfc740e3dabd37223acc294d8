@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72cbd1ac_aaa0008e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-09-28T20:27:48Z",
+      "side": 1,
+      "message": "bazel test  --runs_per_test\u003d10  --nocache_test_results -j 1  //plugins/replication/... --test_filter\u003dcom.googlesource.gerrit.plugins.replication.ReplicationIT.shouldReplicateNewProject \nINFO: Invocation ID: 7432a86a-65c4-42b1-a8b5-484b33273106\nINFO: Analyzed target //plugins/replication:replication_tests (0 packages loaded, 0 targets configured).\nINFO: Found 1 test target...\nTarget //plugins/replication:replication_tests up-to-date:\n  bazel-bin/plugins/replication/replication_tests.jar\n  bazel-bin/plugins/replication/replication_tests\nINFO: Elapsed time: 902.165s, Critical Path: 97.46s\nINFO: 13 processes: 11 linux-sandbox, 2 worker.\nINFO: Build completed successfully, 14 total actions\n//plugins/replication:replication_tests                                  PASSED in 91.0s\n  Stats over 10 runs: max \u003d 91.0s, min \u003d 88.8s, avg \u003d 89.4s, dev \u003d 0.7s\n\nINFO: Build completed successfully, 14 total actions\n",
+      "revId": "6d0b12c83001805bfc740e3dabd37223acc294d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
