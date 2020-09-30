@@ -69,6 +69,30 @@
       "revId": "f5d850da8014ecb67e1c0df24fa75c3672da4480",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05d28f61_983f4c3d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-09-30T16:45:57Z",
+      "side": 1,
+      "message": "I couldn\u0027t find anything. Maybe because they didn\u0027t know how to handle errors in a generic way.",
+      "parentUuid": "acac2241_270f4843",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 29
+      },
+      "revId": "f5d850da8014ecb67e1c0df24fa75c3672da4480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
