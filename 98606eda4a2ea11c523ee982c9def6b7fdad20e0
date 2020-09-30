@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "2458cf66_e4fc0616",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-09-30T16:38:53Z",
+      "side": 1,
+      "message": "+couple more folks with +2 powers in case Sven is busy",
+      "revId": "98606eda4a2ea11c523ee982c9def6b7fdad20e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c811017d_5f6638ce",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 1
