@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "fc3e3aff_a185413f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-01T20:17:27Z",
+      "side": 1,
+      "message": "I think it\u0027s worth explaining that in the commit message.",
+      "parentUuid": "ca200dbc_2bf332d3",
+      "revId": "5f6078e32aaab95a6dbb1a17271a677c05f32ff6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c6b4b4c8_2897cc66",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
