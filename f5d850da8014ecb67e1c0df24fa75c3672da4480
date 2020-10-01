@@ -93,6 +93,30 @@
       "revId": "f5d850da8014ecb67e1c0df24fa75c3672da4480",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93d06a66_1dc55d31",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-01T15:16:25Z",
+      "side": 1,
+      "message": "Why not use walk? https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#walk-java.nio.file.Path-java.nio.file.FileVisitOption...-",
+      "parentUuid": "05d28f61_983f4c3d",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 29
+      },
+      "revId": "f5d850da8014ecb67e1c0df24fa75c3672da4480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
