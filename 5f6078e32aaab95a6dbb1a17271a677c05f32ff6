@@ -16,6 +16,24 @@
       "revId": "5f6078e32aaab95a6dbb1a17271a677c05f32ff6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1c77499_a480b15d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-01T19:53:09Z",
+      "side": 1,
+      "message": "Works:\n\n $ bazel test --runs_per_test\u003d50  --nocache_test_results   ...\n INFO: Invocation ID: 9aba218b-22aa-4acb-a855-57898dd63709\n INFO: Build options --runs_per_test and --test_filter have changed, discarding analysis cache.\n INFO: Analyzed target //plugins/replication:replication_tests (0 packages loaded, 5414 targets configured).\n INFO: Found 1 test target...\n Target //plugins/replication:replication_tests up-to-date:\n   bazel-bin/plugins/replication/replication_tests.jar\n   bazel-bin/plugins/replication/replication_tests\n INFO: Elapsed time: 3100.701s, Critical Path: 246.30s\n INFO: 50 processes: 50 darwin-sandbox.\n INFO: Build completed successfully, 51 total actions\n //plugins/replication:replication_tests                                  PASSED in 245.8s\n   Stats over 50 runs: max \u003d 245.8s, min \u003d 232.0s, avg \u003d 238.1s, dev \u003d 4.0s\n \n INFO: Build completed successfully, 51 total actions",
+      "parentUuid": "c6b4b4c8_2897cc66",
+      "revId": "5f6078e32aaab95a6dbb1a17271a677c05f32ff6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
