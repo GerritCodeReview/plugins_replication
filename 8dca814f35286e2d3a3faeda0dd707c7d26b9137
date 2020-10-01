@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23dc4a91_44cf1ca8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-10-01T22:25:50Z",
+      "side": 1,
+      "message": "This isn\u0027t resolving the case where this problem occurs for the *same* Gerrit node :-( which is currently still possible.",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 27
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4be767d_d321d32e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-10-01T22:25:50Z",
+      "side": 1,
+      "message": "I would be useful to:\n- trace this as a warning, so that the Gerrit admin could be notified of potential issues\n- include the exception as well, so that it is clear which is the cause",
+      "range": {
+        "startLine": 274,
+        "startChar": 10,
+        "endLine": 274,
+        "endChar": 77
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
