@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "31600086_0956eace",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-10-01T20:21:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25a90e85_c1f0b917",
+      "range": {
+        "startLine": 87,
+        "startChar": 19,
+        "endLine": 87,
+        "endChar": 89
+      },
+      "revId": "e3bbf5e2823a43eadd96c4de4c1c3b3cd981f99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "203f2258_9a425a36",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 4
@@ -65,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "124c37ab_46b92f36",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-10-01T20:21:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "203f2258_9a425a36",
+      "range": {
+        "startLine": 163,
+        "startChar": 35,
+        "endLine": 163,
+        "endChar": 43
+      },
+      "revId": "e3bbf5e2823a43eadd96c4de4c1c3b3cd981f99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f7e26a2_d890f1e0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 4
@@ -85,6 +133,30 @@
       "revId": "e3bbf5e2823a43eadd96c4de4c1c3b3cd981f99b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e59ecd6_492162a1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-10-01T20:21:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f7e26a2_d890f1e0",
+      "range": {
+        "startLine": 274,
+        "startChar": 49,
+        "endLine": 274,
+        "endChar": 53
+      },
+      "revId": "e3bbf5e2823a43eadd96c4de4c1c3b3cd981f99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
