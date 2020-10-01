@@ -251,6 +251,15 @@ public class ReplicationTasksStorage {
     }
 
     public void start() {
+      if (Files.exists(running.getParent())) {
+        for (Task t : list(running.getParent())) {
+          if (t.update.ref.equals(this.update.ref)) {
+            logger.atFine().log(
+                "A Task with key %s with ref: is already running on same node",
+                t.taskKey, t.update.toString());
+          }
+        }
+      }
       rename(waiting, running);
     }
 
