@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29441d50_50cf0a8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-01T20:07:45Z",
+      "side": 1,
+      "message": "Few nits, but looks good overall.",
+      "revId": "e3bbf5e2823a43eadd96c4de4c1c3b3cd981f99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25a90e85_c1f0b917",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-01T20:07:45Z",
+      "side": 1,
+      "message": "don\u0027t need the \u0027this.\u0027 prefix for these?",
+      "range": {
+        "startLine": 87,
+        "startChar": 19,
+        "endLine": 87,
+        "endChar": 89
+      },
+      "revId": "e3bbf5e2823a43eadd96c4de4c1c3b3cd981f99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "203f2258_9a425a36",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-01T20:07:45Z",
+      "side": 1,
+      "message": "listRefUpdates? or listUpdates?",
+      "range": {
+        "startLine": 163,
+        "startChar": 35,
+        "endLine": 163,
+        "endChar": 43
+      },
+      "revId": "e3bbf5e2823a43eadd96c4de4c1c3b3cd981f99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f7e26a2_d890f1e0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-01T20:07:45Z",
+      "side": 1,
+      "message": "maybe instead of \u0027the\u0027, we can specify \u0027running\u0027 or \u0027finished\u0027?",
+      "range": {
+        "startLine": 274,
+        "startChar": 49,
+        "endLine": 274,
+        "endChar": 53
+      },
+      "revId": "e3bbf5e2823a43eadd96c4de4c1c3b3cd981f99b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
