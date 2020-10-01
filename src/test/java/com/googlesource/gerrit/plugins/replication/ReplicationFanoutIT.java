@@ -156,13 +156,13 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
   @Test
   public void shouldCreateIndividualReplicationTasksForEveryRemoteUrlPair() throws Exception {
     List<String> replicaSuffixes = Arrays.asList("replica1", "replica2");
-    createTestProject(project + "replica1");
-    createTestProject(project + "replica2");
 
-    setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
-    setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
-    config.setInt("remote", "foo1", "replicationDelay", TEST_REPLICATION_DELAY * 100);
-    config.setInt("remote", "foo2", "replicationDelay", TEST_REPLICATION_DELAY * 100);
+    FileBasedConfig dest1 = setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
+    FileBasedConfig dest2 = setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
+    dest1.setInt("remote", null, "replicationDelay", TEST_REPLICATION_DELAY * 100);
+    dest2.setInt("remote", null, "replicationDelay", TEST_REPLICATION_DELAY * 100);
+    dest1.save();
+    dest2.save();
     reloadConfig();
 
     createChange();
@@ -191,7 +191,7 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
     setReplicationDestination(remoteName, Arrays.asList(replicaSuffix), project);
   }
 
-  private void setReplicationDestination(
+  private FileBasedConfig setReplicationDestination(
       String remoteName, List<String> replicaSuffixes, Optional<String> allProjects)
       throws IOException {
     FileBasedConfig remoteConfig =
@@ -200,6 +200,7 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
             FS.DETECTED);
 
     setReplicationDestination(remoteConfig, replicaSuffixes, allProjects);
+    return remoteConfig;
   }
 
   private void setAutoReload() throws IOException {
