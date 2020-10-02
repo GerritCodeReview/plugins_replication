@@ -709,6 +709,30 @@
     },
     {
       "key": {
+        "uuid": "5853834a_f7010c8f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartReplicationRequest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-02T16:36:30Z",
+      "side": 1,
+      "message": "\u003e Is it possible for us to set up a google meeting to discuss this last issue ? I\u0027m in EDT timezone. If so do you have a preferred time/day ? Thanks\n\n@David, feel free to invite me also to this short review meeting, if you guys think my support may be needed. I\u0027m fine either way.",
+      "parentUuid": "f8fd9b29_403bf3f8",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 37
+      },
+      "revId": "4a400886047761a13aafbb2f5ff4e42447dea95f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "13d3eede_044ffb7c",
         "filename": "src/main/resources/Documentation/rest-api-replication.md",
         "patchSetId": 18
