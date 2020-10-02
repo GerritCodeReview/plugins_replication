@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cf015b62_966ba0a1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-10-02T15:37:40Z",
+      "side": 1,
+      "message": "Acknowledged. This change is focused on multi-primary scenarios and also I did put up an other change for some additional logging to easily detect such issues here: https://gerrit-review.googlesource.com/c/plugins/replication/+/283296",
+      "parentUuid": "23dc4a91_44cf1ca8",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 27
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "667e039c_9154800b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 5
