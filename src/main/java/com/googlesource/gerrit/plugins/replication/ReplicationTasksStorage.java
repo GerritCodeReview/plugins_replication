@@ -63,8 +63,6 @@ import org.eclipse.jgit.transport.URIish;
 public class ReplicationTasksStorage {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  private boolean disableDeleteForTesting;
-
   public static class ReplicateRefUpdate {
     public final String project;
     public final String ref;
@@ -104,11 +102,6 @@ public class ReplicationTasksStorage {
 
   public synchronized String create(ReplicateRefUpdate r) {
     return new Task(r).create();
-  }
-
-  @VisibleForTesting
-  public void disableDeleteForTesting(boolean deleteDisabled) {
-    this.disableDeleteForTesting = deleteDisabled;
   }
 
   public synchronized void start(UriUpdates uriUpdates) {
@@ -238,11 +231,6 @@ public class ReplicationTasksStorage {
     }
 
     public void finish() {
-      if (disableDeleteForTesting) {
-        logger.atFine().log("DELETE %s %s DISABLED", running, updateLog());
-        return;
-      }
-
       try {
         logger.atFine().log("DELETE %s %s", running, updateLog());
         Files.delete(running);

@@ -76,6 +76,11 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
       Duration.ofSeconds(
           (TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) * TEST_REPLICATION_MAX_RETRIES
               + 10);
+  private static final int TEST_PROJECT_CREATION_SECONDS = 10;
+
+  private static final Duration TEST_NEW_PROJECT_TIMEOUT =
+      Duration.ofSeconds(
+          (TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) + TEST_PROJECT_CREATION_SECONDS);
 
   @Inject private SitePaths sitePaths;
   @Inject private ProjectOperations projectOperations;
@@ -108,7 +113,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
     destinationCollection = plugin.getSysInjector().getInstance(DestinationsCollection.class);
     cleanupReplicationTasks();
-    tasksStorage.disableDeleteForTesting(true);
   }
 
   @Test
@@ -120,7 +124,9 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     assertThat(listIncompleteTasks("refs/meta/config")).hasSize(1);
 
-    waitUntil(() -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")));
+    WaitUtil.waitUntil(
+        () -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")),
+        TEST_NEW_PROJECT_TIMEOUT);
 
     ProjectInfo replicaProject = gApi.projects().name(sourceProject + "replica").get();
     assertThat(replicaProject).isNotNull();
@@ -338,8 +344,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   private void replicateBranchDeletion(boolean mirror) throws Exception {
-    tasksStorage.disableDeleteForTesting(false);
-
     setReplicationDestination("foo", "replica", ALL_PROJECTS, mirror);
     reloadConfig();
 
@@ -445,7 +449,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   @Test
   public void shouldCleanupTasksAfterNewProjectReplication() throws Exception {
-    tasksStorage.disableDeleteForTesting(false);
     setReplicationDestination("task_cleanup_project", "replica", ALL_PROJECTS);
     config.setInt("remote", "task_cleanup_project", "replicationRetry", 0);
     config.save();
@@ -459,7 +462,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   @Test
   public void shouldCleanupBothTasksAndLocksAfterNewProjectReplication() throws Exception {
-    tasksStorage.disableDeleteForTesting(false);
     setReplicationDestination("task_cleanup_locks_project", "replica", ALL_PROJECTS);
     config.setInt("remote", "task_cleanup_locks_project", "replicationRetry", 0);
     config.save();
@@ -477,7 +479,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     String projectName = "task_cleanup_locks_project_cancelled";
     String remoteDestination = "http://invalidurl:9090/";
     URIish urish = new URIish(remoteDestination + projectName + ".git");
-    tasksStorage.disableDeleteForTesting(false);
 
     setReplicationDestination(projectName, "replica", Optional.of(projectName));
     // replace correct urls with invalid one to trigger retry
@@ -524,7 +525,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     String changeRef = createChange().getPatchSet().refName();
 
-    tasksStorage.disableDeleteForTesting(false);
     changeReplicationTasksForRemote(tasksStorage.listWaiting().stream(), changeRef, remote1)
         .forEach(
             (update) -> {
@@ -535,7 +535,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
               } catch (URISyntaxException e) {
               }
             });
-    tasksStorage.disableDeleteForTesting(true);
 
     setReplicationDestination(remote1, suffix1, ALL_PROJECTS);
     setReplicationDestination(remote2, suffix2, ALL_PROJECTS);
