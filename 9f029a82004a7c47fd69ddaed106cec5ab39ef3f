@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8fd94ea6_327f14fe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2020-10-03T23:19:09Z",
+      "side": 1,
+      "message": "This exception occurs quite frequently, running the replication plugin tests hits this \u003e100 times.\nCreating and handling exceptions doesn\u0027t come for free, see\nhttps://shipilev.net/blog/2014/exceptional-performance/",
+      "revId": "9f029a82004a7c47fd69ddaed106cec5ab39ef3f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
