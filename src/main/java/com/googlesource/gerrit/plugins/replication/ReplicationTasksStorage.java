@@ -74,7 +74,7 @@ public class ReplicationTasksStorage {
         logger.atFine().log("File %s not found while reading task", file);
       } catch (IOException e) {
         if (!e.getMessage().equals("Is a directory")) {
-          logger.atSevere().withCause(e).log("Error while reading task %", file);
+          logger.atSevere().withCause(e).log("Error while reading task %s", file);
         }
       }
       return Optional.empty();
