@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e5bd359_f6dfb32c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-05T14:30:28Z",
+      "side": 1,
+      "message": "Removed myself from attention set, until merge conflicts and base-change comments may progress.",
+      "revId": "bd44e2e61812c407ae3b0ad17181f86806db7329",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
