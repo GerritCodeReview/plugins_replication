@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "8fd94ea6_327f14fe",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
@@ -14,10 +15,28 @@
       "side": 1,
       "message": "This exception occurs quite frequently, running the replication plugin tests hits this \u003e100 times.\nCreating and handling exceptions doesn\u0027t come for free, see\nhttps://shipilev.net/blog/2014/exceptional-performance/",
       "revId": "9f029a82004a7c47fd69ddaed106cec5ab39ef3f",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90af35b4_196d261f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-05T21:57:49Z",
+      "side": 1,
+      "message": "I\u0027ve tested this call with one file (so it will trigger this exception), by calling listRunning() 10M times, and I cannot notice a performance difference between the current code and if I add:\n\n if (!Files.isDirectory(path)) {\n   return Stream.of(path);\n }\n\nafter line 183. Did you have something else in mind?\n\nI believe the lack of a performance difference is likely because adding the extra filesystem call is likely just as slow as creating the exception. My testing was not extensive and was done within the test framework. I would guess that if there is any variance per filesystem, that it would likely mean that some FSes are even slower and thus creating exceptions would likely be faster in those cases?\n\nGiven that there does not seem to be a performance difference I think the code is simpler and likely less buggy without the extra check. Without the extra check we are ensuring that this error path gets tested, and this error path needs to stay here either way if we want the code to not be racy.",
+      "parentUuid": "8fd94ea6_327f14fe",
+      "revId": "9f029a82004a7c47fd69ddaed106cec5ab39ef3f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "b5f6f3f5_13576410",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
@@ -37,8 +56,31 @@
         "endChar": 73
       },
       "revId": "9f029a82004a7c47fd69ddaed106cec5ab39ef3f",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8d2607e_02e7a361",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-05T21:57:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5f6f3f5_13576410",
+      "range": {
+        "startLine": 188,
+        "startChar": 72,
+        "endLine": 188,
+        "endChar": 73
+      },
+      "revId": "9f029a82004a7c47fd69ddaed106cec5ab39ef3f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
