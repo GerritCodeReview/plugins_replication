@@ -37,7 +37,10 @@ junit_tests(
     srcs = glob([
         "src/test/java/**/*IT.java",
     ]),
-    tags = ["replication"],
+    tags = [
+        "replication",
+        "flaky",
+    ],
     visibility = ["//visibility:public"],
     deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
         ":replication__plugin",
