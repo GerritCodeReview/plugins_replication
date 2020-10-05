@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "05973599_a6439047",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-05T20:19:03Z",
+      "side": 1,
+      "message": "plugin",
+      "range": {
+        "startLine": 9,
+        "startChar": 16,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "0adbeba413158e66c21875e2bc81836c27ba43ba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e96a4cd_98c6bbc4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-05T20:19:03Z",
+      "side": 1,
+      "message": "Blank line above?",
+      "revId": "0adbeba413158e66c21875e2bc81836c27ba43ba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3429c94e_53702125",
@@ -14,6 +54,41 @@
       "writtenOn": "2020-10-05T20:03:22Z",
       "side": 1,
       "message": "As shown by the Zuul build at [2], this would just prevent the Gerrit build to fail, but the replication plugin validation will continue to run tests.\n\n[2] https://ci.gerritcodereview.com/t/gerrit/build/aac9ac3864314a7baac4407912868f3d/console",
+      "revId": "0adbeba413158e66c21875e2bc81836c27ba43ba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f7ea62e_81e03c42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-05T20:19:03Z",
+      "side": 1,
+      "message": "Some nits and a comment.",
+      "revId": "0adbeba413158e66c21875e2bc81836c27ba43ba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63b125e4_b8bbbb51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-05T20:19:03Z",
+      "side": 1,
+      "message": "I can see the build passing in [2], but I can\u0027t find the trace of passing it out of tagging these tests as flaky (explicitly, from [2]\u0027s views). -Doesn\u0027t matter that much though.",
+      "parentUuid": "3429c94e_53702125",
       "revId": "0adbeba413158e66c21875e2bc81836c27ba43ba",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
