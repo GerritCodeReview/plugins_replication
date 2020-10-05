@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3429c94e_53702125",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-10-05T20:03:22Z",
+      "side": 1,
+      "message": "As shown by the Zuul build at [2], this would just prevent the Gerrit build to fail, but the replication plugin validation will continue to run tests.\n\n[2] https://ci.gerritcodereview.com/t/gerrit/build/aac9ac3864314a7baac4407912868f3d/console",
+      "revId": "0adbeba413158e66c21875e2bc81836c27ba43ba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
