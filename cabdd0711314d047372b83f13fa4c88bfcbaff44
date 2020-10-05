@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b61f30bd_9e3063d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-10-05T21:19:20Z",
+      "side": 1,
+      "message": "\u003e Has anyone bisected to see when the flakiness appeared? If this problem hasn\u0027t changed since we discussed in Slack, then I224c2ce2a35f987af2343089b9bb00a7fcb7e3be was the only functional change before tests became flaky.\n\nCan you guys do a bisect and provide a fix?\n\n\u003e I think it\u0027s risky to flag tests as flaky on a stable branch and would much prefer a fix.\n\nAgreed, I\u0027ll keep this change as-is for another 12h, to see if a fix can be found. In the meantime, we need to resume the Gerrit builds stability, as they are randomly failing at the moment.",
+      "parentUuid": "787017c1_d0771136",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 32
+      },
+      "revId": "cabdd0711314d047372b83f13fa4c88bfcbaff44",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "03e62d42_9fbde7d7",
