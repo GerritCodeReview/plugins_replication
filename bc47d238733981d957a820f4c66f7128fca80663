@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36f4aa69_5e722529",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083042
+      },
+      "writtenOn": "2020-10-06T12:33:10Z",
+      "side": 1,
+      "message": "Zuul failure is because it seems to analyze the change in isolation, missing this:\nhttps://gerrit-review.googlesource.com/c/gerrit/+/283559/3/java/com/google/gerrit/server/CurrentUser.java",
+      "revId": "bc47d238733981d957a820f4c66f7128fca80663",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
