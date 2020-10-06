@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fff75db_7257a512",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-06T15:32:25Z",
+      "side": 1,
+      "message": "Would recover the previous related import and replace these based on it.",
+      "range": {
+        "startLine": 364,
+        "startChar": 11,
+        "endLine": 370,
+        "endChar": 44
+      },
+      "revId": "78dcabb7a2120d3555508e8fd68080d48d32ef2d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
