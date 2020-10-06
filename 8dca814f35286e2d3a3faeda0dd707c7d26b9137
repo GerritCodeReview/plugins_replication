@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "23dc4a91_44cf1ca8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
@@ -20,10 +21,10 @@
         "endChar": 27
       },
       "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "cf015b62_966ba0a1",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
@@ -44,10 +45,34 @@
         "endChar": 27
       },
       "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75ea509d_46ebbaf4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-06T23:37:05Z",
+      "side": 1,
+      "message": "Marking resolved.",
+      "parentUuid": "cf015b62_966ba0a1",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 27
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "667e039c_9154800b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
@@ -67,10 +92,10 @@
         "endChar": 27
       },
       "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "ef75515c_e3994fef",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
@@ -91,10 +116,10 @@
         "endChar": 27
       },
       "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "b4be767d_d321d32e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
@@ -114,10 +139,10 @@
         "endChar": 77
       },
       "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "9e970e5f_0837520d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
@@ -138,8 +163,31 @@
         "endChar": 77
       },
       "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "454da1ab_3655656c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-06T23:37:05Z",
+      "side": 1,
+      "message": "I disagree with this for the new exception handling in the next PS, as those specific exceptions are expected during startup recovery with multiple primaries. Keeping this atFine() is consistent with other such errors such as line 176 above. Adding this id will make it possible to spot \"same server\" issues as we do in the logging change in this series. The more genertic IOException is being logged below (line 277) at a higher severity.",
+      "parentUuid": "9e970e5f_0837520d",
+      "range": {
+        "startLine": 274,
+        "startChar": 10,
+        "endLine": 274,
+        "endChar": 77
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
