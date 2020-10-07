@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "6252e915_fa52ab46",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "Passes tests with Core change: 281776: Use auto-value-gson | https://gerrit-review.googlesource.com/c/gerrit/+/281776",
       "revId": "952600c4b86c0757610b225cb26a7f9f7756a0e2",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "1d9fd9cd_4e7c4e64",
         "filename": "BUILD",
@@ -31,10 +32,10 @@
       "side": 1,
       "message": "Depends on 281776: Use auto-value-gson | https://gerrit-review.googlesource.com/c/gerrit/+/281776",
       "revId": "952600c4b86c0757610b225cb26a7f9f7756a0e2",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "6334e86f_a2b25c28",
         "filename": "BUILD",
@@ -49,10 +50,10 @@
       "message": "Should this change be WIP, until Ibf639c51f5 is approved and merged?",
       "parentUuid": "1d9fd9cd_4e7c4e64",
       "revId": "952600c4b86c0757610b225cb26a7f9f7756a0e2",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "a23b97ea_7aa24457",
         "filename": "BUILD",
@@ -67,8 +68,25 @@
       "message": "Done",
       "parentUuid": "6334e86f_a2b25c28",
       "revId": "952600c4b86c0757610b225cb26a7f9f7756a0e2",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a27dcf8c_cf177f41",
+        "filename": "BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-07T16:34:33Z",
+      "side": 1,
+      "message": "Dependent Core change is merged now.",
+      "parentUuid": "a23b97ea_7aa24457",
+      "revId": "952600c4b86c0757610b225cb26a7f9f7756a0e2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
