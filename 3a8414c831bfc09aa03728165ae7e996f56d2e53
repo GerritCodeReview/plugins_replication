@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5281ce1_dbb66f85",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationAdapterFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-07T22:10:39Z",
+      "side": 1,
+      "message": "This seems to be non tied to the replication plugin, maybe make it more generic: AutoValueTypeAdapterFactory?",
+      "range": {
+        "startLine": 21,
+        "startChar": 7,
+        "endLine": 21,
+        "endChar": 16
+      },
+      "revId": "3a8414c831bfc09aa03728165ae7e996f56d2e53",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
