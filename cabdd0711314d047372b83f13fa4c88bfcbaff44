@@ -240,6 +240,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "285e57e3_8a119c61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-08T19:43:27Z",
+      "side": 1,
+      "message": "\u003e \u003e My recommendation is still to bisect and determine what introduced flakiness on 2.16.\n\u003e \n\u003e I agree with you. However, do you have any timelines for that? Today this breakages are impacting every single change validation.\n\nI haven\u0027t been working on it, so no, I have no timeline. I don\u0027t even know how to reproduce the failure. Does this only happen when replication tests are run from the core build?\n\nNo matter who has time for fixing the real problem, disabling tests on stable branches is not an acceptable solution. Either we live with the pain of flaky tests or someone finds the time to fix the real problem.",
+      "parentUuid": "70da0220_1064a7d7",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 32
+      },
+      "revId": "cabdd0711314d047372b83f13fa4c88bfcbaff44",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "03e62d42_9fbde7d7",
