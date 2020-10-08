@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b37e2fd0_b239592f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-10-08T22:54:30Z",
+      "side": 1,
+      "message": "Change-Id: I74c8e6587 doesn\u0027t look like it is addressing the issue when two replication tasks are colliding on the same Gerrit server.\n\nMarking this as unresolved, as this change isn\u0027t really solving the problem. If we solve the issue with a single Gerrit server, it will be resolved also for the multiple server.\n\nOn the other side, if we use this solution that works only for the multi-server scenario, the single one would still break.",
+      "parentUuid": "75ea509d_46ebbaf4",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 27
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "667e039c_9154800b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 5
@@ -204,6 +228,30 @@
       "side": 1,
       "message": "Done.",
       "parentUuid": "454da1ab_3655656c",
+      "range": {
+        "startLine": 274,
+        "startChar": 10,
+        "endLine": 274,
+        "endChar": 77
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49079446_ba11769c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-10-08T22:54:30Z",
+      "side": 1,
+      "message": "We are not cleaning up tasks but we still don\u0027t give any warning to the Gerrit admin. The directory are supposed to be used as \"lock mechanism\", correct? Would this be potentially a problem later on?",
+      "parentUuid": "9dde24ba_cadb896b",
       "range": {
         "startLine": 274,
         "startChar": 10,
