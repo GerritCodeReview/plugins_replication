@@ -22,6 +22,30 @@
       },
       "revId": "78dcabb7a2120d3555508e8fd68080d48d32ef2d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27eb7ee4_45d62431",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-08T02:32:12Z",
+      "side": 1,
+      "message": "I\u0027m not quite following the suggestion. On line 363 I am creating a new assertThat() which takes a Stream. Even of I put the import back, the compiler thinks tries to call the new assertThat(Stream) from line 363 here instead of the one from the import:\n\nplugins/replication/src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java:365: error: incompatible types: inference variable R has incompatible bounds\n    return assertThat(stream.collect(Collectors.toList()));\n           ^\n    equality constraints: List\u003cT#2\u003e\n    lower bounds: Stream\u003c?\u003e,Object\n  where R,A,T#1,T#2 are type-variables:\n    R extends Object declared in method \u003cR,A\u003ecollect(Collector\u003c? super T#1,A,R\u003e)\n    A extends Object declared in method \u003cR,A\u003ecollect(Collector\u003c? super T#1,A,R\u003e)\n    T#1 extends Object declared in interface Stream\n    T#2 extends Object declared in method \u003cT#2\u003etoList()",
+      "parentUuid": "2fff75db_7257a512",
+      "range": {
+        "startLine": 364,
+        "startChar": 11,
+        "endLine": 370,
+        "endChar": 44
+      },
+      "revId": "78dcabb7a2120d3555508e8fd68080d48d32ef2d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
