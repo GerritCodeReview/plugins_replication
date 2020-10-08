@@ -288,6 +288,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e8f79d6_ec45beeb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-08T21:31:43Z",
+      "side": 1,
+      "message": "\u003e \u003e \u003e \u003e My recommendation is still to bisect and determine what introduced flakiness on 2.16.\n\u003e \u003e \u003e \n\u003e \u003e \u003e I agree with you. However, do you have any timelines for that? Today this breakages are impacting every single change validation.\n\u003e \u003e \n\u003e \u003e I haven\u0027t been working on it, so no, I have no timeline. I don\u0027t even know how to reproduce the failure. Does this only happen when replication tests are run from the core build?\n\u003e \n\u003e I do not really know, because I can\u0027t reproduce it locally either.\n\u003e The CI validation on the replication plugin is done by Zuul, but it doesn\u0027t perform the flakiness checks, so those problems are potentially going through un-noticed.\n\nHow would you suggest trying to reproduce this then?\n\n\u003e \n\u003e \u003e No matter who has time for fixing the real problem, disabling tests on stable branches is not an acceptable solution. Either we live with the pain of flaky tests or someone finds the time to fix the real problem.\n\u003e \n\u003e I believe the rationale of having the \u0027flaky\u0027 label is to temporarily disabling those tests that are misbehaving randomly, so that they do not interfere with the rest of the CI pipeline. That would buy some time for fixing the issue. One thing doesn\u0027t exclude the other. Fixing flakiness is hard and takes time, especially when it is quite difficult to reproduce. However, we can\u0027t afford breaking the validation of all the other changes in Gerrit whilst we look for a solution.\n\u003e \n\u003e Hope that rationale makes sense.\n\nIf we had very specific replication tests that we\u0027re marking flaky, I could be more inclined to follow that path. Here we\u0027re setting *all* replication tests as flaky and that seems inappropriate and risky.",
+      "parentUuid": "7414366c_b2582dd6",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 32
+      },
+      "revId": "cabdd0711314d047372b83f13fa4c88bfcbaff44",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "03e62d42_9fbde7d7",
