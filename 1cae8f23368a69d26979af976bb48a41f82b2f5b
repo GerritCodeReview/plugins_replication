@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "275f48b0_56297d11",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-10-08T23:05:51Z",
+      "side": 1,
+      "message": "This cycle could be an expensive computation: use the Flogger\u0027s best practices [1]\nand guard with if (logger.atFine().isEnabled()) { }\n\n[1] https://google.github.io/flogger/best_practice.html",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 7
+      },
+      "revId": "1cae8f23368a69d26979af976bb48a41f82b2f5b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
