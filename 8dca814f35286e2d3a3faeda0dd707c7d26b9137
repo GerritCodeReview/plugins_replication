@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "788ab90a_33a0edc4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-09T16:23:23Z",
+      "side": 1,
+      "message": "\u003e Change-Id: I74c8e6587 doesn\u0027t look like it is addressing the issue when two replication tasks are colliding on the same Gerrit server.\n\u003e \n\u003e Marking this as unresolved, as this change isn\u0027t really solving the problem. If we solve the issue with a single Gerrit server, it will be resolved also for the multiple server.\n\u003e \n\u003e On the other side, if we use this solution that works only for the multi-server scenario, the single one would still break.\n\nThis change addresses a known existing problem with multi-primary setups. We don\u0027t have a change addressing a known existing problem with single server setups because we don\u0027t know of one (there\u0027s hints of what one might be based on your bug report, but despite significant efforts, it hasn\u0027t reproduced outside your prod env).\n\nLet\u0027s not mix discussions. If you don\u0027t think this change is harmful and/or in fact if it would be helpful to multi-primary setups, please don\u0027t block it.",
+      "parentUuid": "b37e2fd0_b239592f",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 27
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "667e039c_9154800b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 5
@@ -276,6 +300,30 @@
       "side": 1,
       "message": "Since the scope of exception is changed to DirectoryNotEmpty, this would happen when there is an other node replicating and it will clean after done.\n\nAlso, removed FileNotFoundException since we are using .deleteIfexists().\n\n@Martin, WDYT ?",
       "parentUuid": "49079446_ba11769c",
+      "range": {
+        "startLine": 274,
+        "startChar": 10,
+        "endLine": 274,
+        "endChar": 77
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e724b4b9_31bead86",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-09T16:23:23Z",
+      "side": 1,
+      "message": "\u003e The directory are supposed to be used as \"lock mechanism\", correct?\n\nNo, this change is not adding any locks. Just better identification of tasks in storage.",
+      "parentUuid": "2c36f364_09b215d6",
       "range": {
         "startLine": 274,
         "startChar": 10,
