@@ -16,6 +16,24 @@
       "message": "link to Bug?",
       "revId": "3212a6e4a7fa9f250c384ec5a8cb5e2a1112760e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e803fd8_cd8cf3a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-09T19:40:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c3e33f4_d9e34910",
+      "revId": "3212a6e4a7fa9f250c384ec5a8cb5e2a1112760e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
