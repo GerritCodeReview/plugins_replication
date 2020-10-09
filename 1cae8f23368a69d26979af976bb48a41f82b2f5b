@@ -22,6 +22,30 @@
       },
       "revId": "1cae8f23368a69d26979af976bb48a41f82b2f5b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d71c3cc_cb3e43bc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-09T02:26:45Z",
+      "side": 1,
+      "message": "I only see one %s, but two parameters?",
+      "parentUuid": "275f48b0_56297d11",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 7
+      },
+      "revId": "1cae8f23368a69d26979af976bb48a41f82b2f5b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
