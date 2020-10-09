@@ -260,6 +260,30 @@
       },
       "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c36f364_09b215d6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-10-09T07:02:27Z",
+      "side": 1,
+      "message": "Since the scope of exception is changed to DirectoryNotEmpty, this would happen when there is an other node replicating and it will clean after done.\n\nAlso, removed FileNotFoundException since we are using .deleteIfexists().\n\n@Martin, WDYT ?",
+      "parentUuid": "49079446_ba11769c",
+      "range": {
+        "startLine": 274,
+        "startChar": 10,
+        "endLine": 274,
+        "endChar": 77
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
