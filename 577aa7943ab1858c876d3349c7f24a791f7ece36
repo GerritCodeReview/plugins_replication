@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30658069_34d63a43",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-09T19:18:43Z",
+      "side": 1,
+      "message": "Why do you need the explicit toString()?",
+      "range": {
+        "startLine": 260,
+        "startChar": 37,
+        "endLine": 260,
+        "endChar": 48
+      },
+      "revId": "577aa7943ab1858c876d3349c7f24a791f7ece36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
