@@ -34,6 +34,41 @@
       "parentUuid": "b6e748c5_7c7be3c5",
       "revId": "882c6147720227c161a2fb573c79cfc683e70379",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "143de069_b03ec279",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-09T16:08:32Z",
+      "side": 1,
+      "message": "Confirmed this works for me too.",
+      "revId": "882c6147720227c161a2fb573c79cfc683e70379",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82954093_f49baf57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-09T16:08:32Z",
+      "side": 1,
+      "message": "\u003e \u003e Further splitting of ReplicationIT would probably help too, but this is a good start, thanks!\n\u003e \n\u003e Yeah, I was thinking about the same. That requires a code change though and it would be most likely to result in conflicts when merging upstream.\n\u003e \n\u003e Unfortunately, AFAIK Bazel cannot go beyond the single file granularity for separating tests, so we would need to have separate files for separate IT tests.\n\nAgreed.",
+      "parentUuid": "792b570e_45dbd787",
+      "revId": "882c6147720227c161a2fb573c79cfc683e70379",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
