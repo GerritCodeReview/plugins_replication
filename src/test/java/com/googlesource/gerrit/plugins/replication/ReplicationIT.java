@@ -107,8 +107,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     Project.NameKey sourceProject = createTestProject("foo");
 
-    assertThat(listReplicationTasks("refs/meta/config")).hasSize(1);
-
     WaitUtil.waitUntil(
         () -> nonEmptyProjectExists(new Project.NameKey(sourceProject + "replica.git")),
         TEST_NEW_PROJECT_TIMEOUT);
@@ -156,8 +154,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().getRefName();
 
-    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(1);
-
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
 
@@ -178,8 +174,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     BranchInput input = new BranchInput();
     input.revision = master;
     gApi.projects().name(project.get()).branch(newBranch).create(input);
-
-    assertThat(listReplicationTasks("refs/heads/(mybranch|master)")).hasSize(2);
 
     try (Repository repo = repoManager.openRepository(targetProject);
         Repository sourceRepo = repoManager.openRepository(project)) {
@@ -204,8 +198,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     Result pushResult = createChange();
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().getRefName();
-
-    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(2);
 
     try (Repository repo1 = repoManager.openRepository(targetProject1);
         Repository repo2 = repoManager.openRepository(targetProject2)) {
