@@ -17,7 +17,6 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerrit;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isSSH;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.Queues;
@@ -123,11 +122,6 @@ public class ReplicationQueue
     return replaying;
   }
 
-  void scheduleFullSync(Project.NameKey project, String urlMatch, ReplicationState state) {
-    scheduleFullSync(project, urlMatch, state, false);
-  }
-
-  @VisibleForTesting
   public void scheduleFullSync(
       Project.NameKey project, String urlMatch, ReplicationState state, boolean now) {
     if (!running) {
