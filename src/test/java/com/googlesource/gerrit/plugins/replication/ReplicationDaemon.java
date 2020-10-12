@@ -57,7 +57,6 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
   @Inject private ProjectOperations projectOperations;
   protected Path gitPath;
   protected FileBasedConfig config;
-  protected ReplicationTasksStorage tasksStorage;
 
   @Override
   public void setUpTestPlugin() throws Exception {
@@ -70,7 +69,6 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
         "suffix1",
         Optional.of("not-used-project")); // Simulates a full replication.config initialization
     super.setUpTestPlugin();
-    tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
   }
 
   protected void setReplicationDestination(
@@ -98,6 +96,44 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
     config.setStringList("remote", remoteName, "url", replicaUrls);
     config.setInt("remote", remoteName, "replicationDelay", replicationDelay);
     config.setInt("remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY_MINUTES);
+    project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
+    config.save();
+    return config;
+  }
+
+  protected void setReplicationDestination(
+      String remoteName,
+      String replicaSuffix,
+      Optional<String> project,
+      int replicationDelay,
+      boolean mirror)
+      throws IOException {
+    setReplicationDestination(
+        remoteName, Arrays.asList(replicaSuffix), project, replicationDelay, mirror);
+  }
+
+  protected void setReplicationDestination(
+      String remoteName, String replicaSuffix, Optional<String> project, boolean mirror)
+      throws IOException {
+    setReplicationDestination(
+        remoteName, Arrays.asList(replicaSuffix), project, TEST_REPLICATION_DELAY_SECONDS, mirror);
+  }
+
+  protected FileBasedConfig setReplicationDestination(
+      String remoteName,
+      List<String> replicaSuffixes,
+      Optional<String> project,
+      int replicationDelay,
+      boolean mirror)
+      throws IOException {
+    List<String> replicaUrls =
+        replicaSuffixes.stream()
+            .map(suffix -> gitPath.resolve("${name}" + suffix + ".git").toString())
+            .collect(toList());
+    config.setStringList("remote", remoteName, "url", replicaUrls);
+    config.setInt("remote", remoteName, "replicationDelay", replicationDelay);
+    config.setInt("remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY_MINUTES);
+    config.setBoolean("remote", remoteName, "mirror", mirror);
     project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
     config.save();
     return config;
