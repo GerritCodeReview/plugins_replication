@@ -17,12 +17,10 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.gerrit.testing.GerritJUnit.assertThrows;
 import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.NO_OP;
-import static java.util.stream.Collectors.toList;
 
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
-import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
@@ -30,18 +28,9 @@ import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.inject.Inject;
-import com.google.inject.Key;
-import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 import java.util.function.Supplier;
-import java.util.regex.Pattern;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
@@ -49,7 +38,6 @@ import org.eclipse.jgit.lib.RefUpdate;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
-import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.junit.Test;
 
 @UseLocalDisk
@@ -68,18 +56,6 @@ public class ReplicationIT extends ReplicationDaemon {
               + TEST_PROJECT_CREATION_SECONDS);
 
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
-  private Path storagePath;
-
-  @Override
-  public void setUpTestPlugin() throws Exception {
-    super.setUpTestPlugin();
-    storagePath =
-        plugin
-            .getSysInjector()
-            .getInstance(Key.get(Path.class, PluginData.class))
-            .resolve("ref-updates");
-    cleanupReplicationTasks();
-  }
 
   @Test
   public void shouldReplicateNewProject() throws Exception {
@@ -291,15 +267,11 @@ public class ReplicationIT extends ReplicationDaemon {
     input.revision = master;
     gApi.projects().name(project.get()).branch(branchToDelete).create(input);
 
-    assertThat(listReplicationTasks("refs/heads/(todelete|master)")).hasSize(2);
-
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, branchToDelete) != null);
     }
 
     gApi.projects().name(project.get()).branch(branchToDelete).delete();
-
-    assertThat(listReplicationTasks(branchToDelete)).hasSize(1);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       if (mirror) {
@@ -388,33 +360,6 @@ public class ReplicationIT extends ReplicationDaemon {
     return repo.getRefDatabase().exactRef(branchName);
   }
 
-  private void setReplicationDestination(
-      String remoteName, String replicaSuffix, Optional<String> project, boolean mirror)
-      throws IOException {
-    setReplicationDestination(
-        remoteName, Arrays.asList(replicaSuffix), project, TEST_REPLICATION_DELAY_SECONDS, mirror);
-  }
-
-  private FileBasedConfig setReplicationDestination(
-      String remoteName,
-      List<String> replicaSuffixes,
-      Optional<String> project,
-      int replicationDelay,
-      boolean mirror)
-      throws IOException {
-    List<String> replicaUrls =
-        replicaSuffixes.stream()
-            .map(suffix -> gitPath.resolve("${name}" + suffix + ".git").toString())
-            .collect(toList());
-    config.setStringList("remote", remoteName, "url", replicaUrls);
-    config.setInt("remote", remoteName, "replicationDelay", replicationDelay);
-    config.setInt("remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY_MINUTES);
-    config.setBoolean("remote", remoteName, "mirror", mirror);
-    project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
-    config.save();
-    return config;
-  }
-
   private void setProjectDeletionReplication(String remoteName, boolean replicateProjectDeletion)
       throws IOException {
     config.setBoolean("remote", remoteName, "replicateProjectDeletions", replicateProjectDeletion);
@@ -447,21 +392,6 @@ public class ReplicationIT extends ReplicationDaemon {
 
   private <T> T getInstance(Class<T> classObj) {
     return plugin.getSysInjector().getInstance(classObj);
-  }
-
-  private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
-    Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage.list().stream()
-        .filter(task -> refmaskPattern.matcher(task.ref).matches())
-        .collect(toList());
-  }
-
-  private void cleanupReplicationTasks() throws IOException {
-    try (DirectoryStream<Path> files = Files.newDirectoryStream(storagePath)) {
-      for (Path path : files) {
-        path.toFile().delete();
-      }
-    }
   }
 
   private boolean nonEmptyProjectExists(Project.NameKey name) {

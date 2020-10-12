@@ -20,6 +20,7 @@ import static java.util.stream.Collectors.toList;
 
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
+import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.reviewdb.client.Project;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.util.Arrays;
@@ -39,9 +40,12 @@ import org.junit.Test;
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
 public class ReplicationStorageIT extends ReplicationDaemon {
+  protected ReplicationTasksStorage tasksStorage;
+
   @Override
   public void setUpTestPlugin() throws Exception {
     super.setUpTestPlugin();
+    tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
   }
 
   @Test
@@ -202,6 +206,36 @@ public class ReplicationStorageIT extends ReplicationDaemon {
       assertThat(task.uri).isEqualTo(expectedURI);
       assertThat(task.ref).isEqualTo(PushOne.ALL_REFS);
     }
+  }
+
+  @Test
+  public void shouldReplicateBranchDeletionWhenMirror() throws Exception {
+    replicateBranchDeletion(true);
+  }
+
+  @Test
+  public void shouldNotReplicateBranchDeletionWhenNotMirror() throws Exception {
+    replicateBranchDeletion(false);
+  }
+
+  private void replicateBranchDeletion(boolean mirror) throws Exception {
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    Project.NameKey targetProject = createTestProject(project + "replica");
+    String branchToDelete = "refs/heads/todelete";
+    String master = "refs/heads/master";
+    BranchInput input = new BranchInput();
+    input.revision = master;
+    gApi.projects().name(project.get()).branch(branchToDelete).create(input);
+    isPushCompleted(targetProject, branchToDelete, TEST_PUSH_TIMEOUT);
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS, Integer.MAX_VALUE, mirror);
+    reloadConfig();
+
+    gApi.projects().name(project.get()).branch(branchToDelete).delete();
+
+    assertThat(listReplicationTasks(branchToDelete)).hasSize(1);
   }
 
   private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
