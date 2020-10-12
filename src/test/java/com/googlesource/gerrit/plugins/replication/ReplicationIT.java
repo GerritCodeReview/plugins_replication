@@ -24,7 +24,6 @@ import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
-import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
@@ -33,22 +32,20 @@ import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
-import com.google.inject.Key;
-import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
-import java.util.regex.Pattern;
 import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.RefUpdate;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 import org.junit.Test;
@@ -72,31 +69,20 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   @Inject private SitePaths sitePaths;
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
-  private Path pluginDataDir;
   private Path gitPath;
-  private Path storagePath;
   private FileBasedConfig config;
-  private ReplicationTasksStorage tasksStorage;
 
   @Override
   public void setUpTestPlugin() throws Exception {
     gitPath = sitePaths.site_path.resolve("git");
-
     config =
         new FileBasedConfig(sitePaths.etc_dir.resolve("replication.config").toFile(), FS.DETECTED);
+    config.save();
     setReplicationDestination(
         "remote1",
         "suffix1",
         Optional.of("not-used-project")); // Simulates a full replication.config initialization
-    config.save();
-
     super.setUpTestPlugin();
-
-    pluginDataDir = plugin.getSysInjector().getInstance(Key.get(Path.class, PluginData.class));
-    storagePath = pluginDataDir.resolve("ref-updates");
-    tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
-    cleanupReplicationTasks();
-    tasksStorage.disableDeleteForTesting(true);
   }
 
   @Test
@@ -216,45 +202,54 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   @Test
   public void shouldMatchTemplatedURL() throws Exception {
-    createTestProject("projectreplica");
+    Project.NameKey targetProject = createTestProject("projectreplica");
 
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
 
+    String newRef = "refs/heads/newForTest";
+    ObjectId newRefTip = createNewBranchWithoutPush("refs/heads/master", newRef);
+
     String urlMatch = gitPath.resolve("${name}" + "replica" + ".git").toString();
-    String expectedURI = gitPath.resolve(project + "replica" + ".git").toString();
 
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
-    assertThat(listReplicationTasks(".*all.*")).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
-      assertThat(task.uri).isEqualTo(expectedURI);
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, newRef) != null);
+
+      Ref targetBranchRef = getRef(repo, newRef);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(newRefTip);
     }
   }
 
   @Test
   public void shouldMatchRealURL() throws Exception {
-    createTestProject("projectreplica");
+    Project.NameKey targetProject = createTestProject("projectreplica");
 
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
 
+    String newRef = "refs/heads/newForTest";
+    ObjectId newRefTip = createNewBranchWithoutPush("refs/heads/master", newRef);
+
     String urlMatch = gitPath.resolve(project + "replica" + ".git").toString();
-    String expectedURI = urlMatch;
 
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
-    assertThat(listReplicationTasks(".*")).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
-      assertThat(task.uri).isEqualTo(expectedURI);
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, newRef) != null);
+
+      Ref targetBranchRef = getRef(repo, newRef);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(newRefTip);
     }
-    assertThat(tasksStorage.list()).isNotEmpty();
   }
 
   @Test
@@ -397,26 +392,27 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).shutdown();
   }
 
-  private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
-    Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage.list().stream()
-        .filter(task -> refmaskPattern.matcher(task.ref).matches())
-        .collect(toList());
-  }
-
-  private void cleanupReplicationTasks() throws IOException {
-    try (DirectoryStream<Path> files = Files.newDirectoryStream(storagePath)) {
-      for (Path path : files) {
-        path.toFile().delete();
-      }
-    }
-  }
-
   private boolean nonEmptyProjectExists(Project.NameKey name) {
     try (Repository r = repoManager.openRepository(name)) {
       return !r.getAllRefsByPeeledObjectId().isEmpty();
     } catch (Exception e) {
       return false;
+    }
+  }
+
+  private ObjectId createNewBranchWithoutPush(String fromBranch, String newBranch)
+      throws Exception {
+    try (Repository repo = repoManager.openRepository(project);
+        RevWalk walk = new RevWalk(repo)) {
+      Ref ref = repo.exactRef(fromBranch);
+      RevCommit tip = null;
+      if (ref != null) {
+        tip = walk.parseCommit(ref.getObjectId());
+      }
+      RefUpdate update = repo.updateRef(newBranch);
+      update.setNewObjectId(tip);
+      update.update(walk);
+      return update.getNewObjectId();
     }
   }
 }
