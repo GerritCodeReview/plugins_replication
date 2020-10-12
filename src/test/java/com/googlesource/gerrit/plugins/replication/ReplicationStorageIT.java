@@ -150,6 +150,51 @@ public class ReplicationStorageIT extends LightweightPluginDaemonTest {
     assertThat(isPushCompleted(target1, changeRef, TEST_PUSH_TIMEOUT)).isEqualTo(false);
   }
 
+  @Test
+  public void shouldFirePendingChangeRefs() throws Exception {
+    String suffix1 = "replica1";
+    String suffix2 = "replica2";
+    String remote1 = "foo1";
+    String remote2 = "foo2";
+    setReplicationDestination(remote1, suffix1, ALL_PROJECTS, Integer.MAX_VALUE);
+    setReplicationDestination(remote2, suffix2, ALL_PROJECTS, Integer.MAX_VALUE);
+    reloadConfig();
+
+    String changeRef1 = createChange().getPatchSet().getRefName();
+    String changeRef2 = createChange().getPatchSet().getRefName();
+    reloadConfig();
+
+    assertThat(changeReplicationTasksForRemote(changeRef1, remote1).count()).isEqualTo(1);
+    assertThat(changeReplicationTasksForRemote(changeRef1, remote2).count()).isEqualTo(1);
+    assertThat(changeReplicationTasksForRemote(changeRef2, remote1).count()).isEqualTo(1);
+    assertThat(changeReplicationTasksForRemote(changeRef2, remote2).count()).isEqualTo(1);
+  }
+
+  @Test
+  public void shouldFireAndCompletePendingChangeRefs() throws Exception {
+    String suffix1 = "replica1";
+    String suffix2 = "replica2";
+    Project.NameKey target1 = createTestProject("project" + suffix1);
+    Project.NameKey target2 = createTestProject("project" + suffix2);
+    String remote1 = "foo1";
+    String remote2 = "foo2";
+    setReplicationDestination(remote1, suffix1, ALL_PROJECTS, Integer.MAX_VALUE);
+    setReplicationDestination(remote2, suffix2, ALL_PROJECTS, Integer.MAX_VALUE);
+    reloadConfig();
+
+    String changeRef1 = createChange().getPatchSet().getRefName();
+    String changeRef2 = createChange().getPatchSet().getRefName();
+
+    setReplicationDestination(remote1, suffix1, ALL_PROJECTS);
+    setReplicationDestination(remote2, suffix2, ALL_PROJECTS);
+    reloadConfig();
+
+    assertThat(isPushCompleted(target1, changeRef1, TEST_PUSH_TIMEOUT)).isEqualTo(true);
+    assertThat(isPushCompleted(target2, changeRef1, TEST_PUSH_TIMEOUT)).isEqualTo(true);
+    assertThat(isPushCompleted(target1, changeRef2, TEST_PUSH_TIMEOUT)).isEqualTo(true);
+    assertThat(isPushCompleted(target2, changeRef2, TEST_PUSH_TIMEOUT)).isEqualTo(true);
+  }
+
   private void setReplicationDestination(
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
     setReplicationDestination(
