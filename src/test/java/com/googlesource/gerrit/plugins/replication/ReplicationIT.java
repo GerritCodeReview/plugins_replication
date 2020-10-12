@@ -45,7 +45,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -216,43 +215,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   @Test
-  public void shouldCreateIndividualReplicationTasksForEveryRemoteUrlPair() throws Exception {
-    List<String> replicaSuffixes = Arrays.asList("replica1", "replica2");
-    createTestProject("projectreplica1");
-    createTestProject("projectreplica2");
-
-    FileBasedConfig dest1 = setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
-    FileBasedConfig dest2 = setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
-    dest1.setInt("remote", null, "replicationDelay", TEST_REPLICATION_DELAY * 100);
-    dest2.setInt("remote", null, "replicationDelay", TEST_REPLICATION_DELAY * 100);
-    dest1.save();
-    dest2.save();
-    reloadConfig();
-
-    createChange();
-
-    assertThat(listReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
-
-    setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
-    setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
-  }
-
-  @Test
-  public void shouldCreateOneReplicationTaskWhenSchedulingRepoFullSync() throws Exception {
-    createTestProject("projectreplica");
-
-    setReplicationDestination("foo", "replica", ALL_PROJECTS);
-    reloadConfig();
-
-    plugin
-        .getSysInjector()
-        .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, new ReplicationState(NO_OP), true);
-
-    assertThat(listReplicationTasks(".*all.*")).hasSize(1);
-  }
-
-  @Test
   public void shouldMatchTemplatedURL() throws Exception {
     createTestProject("projectreplica");
 
@@ -364,35 +326,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     }
   }
 
-  @Test
-  public void shouldFirePendingOnlyToStoredUri() throws Exception {
-    String suffix1 = "replica1";
-    String suffix2 = "replica2";
-    Project.NameKey target1 = createTestProject("project" + suffix1);
-    Project.NameKey target2 = createTestProject("project" + suffix2);
-    String remote1 = "foo1";
-    String remote2 = "foo2";
-    setReplicationDestination(remote1, suffix1, ALL_PROJECTS, Integer.MAX_VALUE);
-    setReplicationDestination(remote2, suffix2, ALL_PROJECTS, Integer.MAX_VALUE);
-    reloadConfig();
-
-    String changeRef = createChange().getPatchSet().getRefName();
-
-    tasksStorage.disableDeleteForTesting(false);
-    changeReplicationTasksForRemote(changeRef, remote1).forEach(tasksStorage::delete);
-    tasksStorage.disableDeleteForTesting(true);
-
-    setReplicationDestination(remote1, suffix1, ALL_PROJECTS);
-    setReplicationDestination(remote2, suffix2, ALL_PROJECTS);
-    reloadConfig();
-
-    assertThat(changeReplicationTasksForRemote(changeRef, remote2).count()).isEqualTo(1);
-    assertThat(changeReplicationTasksForRemote(changeRef, remote1).count()).isEqualTo(0);
-
-    assertThat(isPushCompleted(target2, changeRef, TEST_TIMEOUT)).isEqualTo(true);
-    assertThat(isPushCompleted(target1, changeRef, TEST_TIMEOUT)).isEqualTo(false);
-  }
-
   private Project.NameKey createTestProject(String name) throws Exception {
     return createProject(name);
   }
@@ -425,18 +358,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
     setReplicationDestination(
         remoteName, Arrays.asList(replicaSuffix), project, TEST_REPLICATION_DELAY);
-  }
-
-  private void setReplicationDestination(
-      String remoteName, String replicaSuffix, Optional<String> project, int replicationDelay)
-      throws IOException {
-    setReplicationDestination(remoteName, Arrays.asList(replicaSuffix), project, replicationDelay);
-  }
-
-  private FileBasedConfig setReplicationDestination(
-      String remoteName, List<String> replicaSuffixes, Optional<String> project)
-      throws IOException {
-    return setReplicationDestination(remoteName, replicaSuffixes, project, TEST_REPLICATION_DELAY);
   }
 
   private FileBasedConfig setReplicationDestination(
@@ -474,13 +395,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private void shutdownConfig() {
     plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).shutdown();
-  }
-
-  private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
-      String changeRef, String remote) {
-    return tasksStorage.list().stream()
-        .filter(task -> changeRef.equals(task.ref))
-        .filter(task -> remote.equals(task.remote));
   }
 
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
