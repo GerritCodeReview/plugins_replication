@@ -16,7 +16,6 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.gerrit.testing.GerritJUnit.assertThrows;
-import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.NO_OP;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.flogger.FluentLogger;
@@ -24,7 +23,6 @@ import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
-import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
@@ -33,18 +31,13 @@ import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
-import com.google.inject.Key;
-import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
-import java.util.regex.Pattern;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -72,31 +65,20 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   @Inject private SitePaths sitePaths;
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
-  private Path pluginDataDir;
   private Path gitPath;
-  private Path storagePath;
   private FileBasedConfig config;
-  private ReplicationTasksStorage tasksStorage;
 
   @Override
   public void setUpTestPlugin() throws Exception {
     gitPath = sitePaths.site_path.resolve("git");
-
     config =
         new FileBasedConfig(sitePaths.etc_dir.resolve("replication.config").toFile(), FS.DETECTED);
+    config.save();
     setReplicationDestination(
         "remote1",
         "suffix1",
         Optional.of("not-used-project")); // Simulates a full replication.config initialization
-    config.save();
-
     super.setUpTestPlugin();
-
-    pluginDataDir = plugin.getSysInjector().getInstance(Key.get(Path.class, PluginData.class));
-    storagePath = pluginDataDir.resolve("ref-updates");
-    tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
-    cleanupReplicationTasks();
-    tasksStorage.disableDeleteForTesting(true);
   }
 
   @Test
@@ -212,49 +194,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
       assertThat(targetBranchRef2).isNotNull();
       assertThat(targetBranchRef2.getObjectId()).isEqualTo(sourceCommit.getId());
     }
-  }
-
-  @Test
-  public void shouldMatchTemplatedURL() throws Exception {
-    createTestProject("projectreplica");
-
-    setReplicationDestination("foo", "replica", ALL_PROJECTS);
-    reloadConfig();
-
-    String urlMatch = gitPath.resolve("${name}" + "replica" + ".git").toString();
-    String expectedURI = gitPath.resolve(project + "replica" + ".git").toString();
-
-    plugin
-        .getSysInjector()
-        .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
-
-    assertThat(listReplicationTasks(".*all.*")).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
-      assertThat(task.uri).isEqualTo(expectedURI);
-    }
-  }
-
-  @Test
-  public void shouldMatchRealURL() throws Exception {
-    createTestProject("projectreplica");
-
-    setReplicationDestination("foo", "replica", ALL_PROJECTS);
-    reloadConfig();
-
-    String urlMatch = gitPath.resolve(project + "replica" + ".git").toString();
-    String expectedURI = urlMatch;
-
-    plugin
-        .getSysInjector()
-        .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
-
-    assertThat(listReplicationTasks(".*")).hasSize(1);
-    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
-      assertThat(task.uri).isEqualTo(expectedURI);
-    }
-    assertThat(tasksStorage.list()).isNotEmpty();
   }
 
   @Test
@@ -395,21 +334,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private void shutdownConfig() {
     plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).shutdown();
-  }
-
-  private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
-    Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage.list().stream()
-        .filter(task -> refmaskPattern.matcher(task.ref).matches())
-        .collect(toList());
-  }
-
-  private void cleanupReplicationTasks() throws IOException {
-    try (DirectoryStream<Path> files = Files.newDirectoryStream(storagePath)) {
-      for (Path path : files) {
-        path.toFile().delete();
-      }
-    }
   }
 
   private boolean nonEmptyProjectExists(Project.NameKey name) {
