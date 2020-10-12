@@ -195,6 +195,52 @@ public class ReplicationStorageIT extends LightweightPluginDaemonTest {
     assertThat(isPushCompleted(target2, changeRef2, TEST_PUSH_TIMEOUT)).isEqualTo(true);
   }
 
+  @Test
+  public void shouldMatchTemplatedUrl() throws Exception {
+    createTestProject("projectreplica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS, Integer.MAX_VALUE);
+    reloadConfig();
+
+    String urlMatch = gitPath.resolve("${name}" + "replica" + ".git").toString();
+    String expectedURI = gitPath.resolve(project + "replica" + ".git").toString();
+
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), false);
+
+    assertThat(listReplicationTasks(".*")).hasSize(1);
+    assertThat(listReplicationTasks(".*all.*")).hasSize(1);
+    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
+      assertThat(task.uri).isEqualTo(expectedURI);
+    }
+  }
+
+  @Test
+  public void shouldMatchRealUrl() throws Exception {
+    createTestProject("projectreplica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS, Integer.MAX_VALUE);
+    reloadConfig();
+
+    String urlMatch = gitPath.resolve(project + "replica" + ".git").toString();
+    String expectedURI = urlMatch;
+
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), false);
+
+    assertThat(listReplicationTasks(".*")).hasSize(1);
+    assertThat(tasksStorage.list()).hasSize(1);
+    for (ReplicationTasksStorage.ReplicateRefUpdate task : tasksStorage.list()) {
+      assertThat(task.uri).isEqualTo(expectedURI);
+      assertThat(task.ref).isEqualTo(PushOne.ALL_REFS);
+    }
+    assertThat(tasksStorage.list()).isNotEmpty();
+  }
+
   private void setReplicationDestination(
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
     setReplicationDestination(
