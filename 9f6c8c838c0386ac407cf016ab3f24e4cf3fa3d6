@@ -16,6 +16,29 @@
       "message": "Looks like Marco\u0027s comment is addressed.",
       "revId": "9f6c8c838c0386ac407cf016ab3f24e4cf3fa3d6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2f18667_1584e3a5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-13T15:13:55Z",
+      "side": 1,
+      "message": "\u003c? extends YourMostRestrictiveSuperTypeLocally\u003e\n\n[1] https://www.informit.com/articles/article.aspx?p\u003d2861454\u0026seqNum\u003d6\n\u003c\u003d\u003e \"Item 31: Use bounded wildcards to increase API flexibility\"\n-from the EJ book.\n\nNot that I myself practiced this lately, but I think this new code could be improved by restricting which type \u0027stream\u0027 can tolerate as input. Even if only for a private, test class (helper) method here.\n\nIf no one application or library super-type can be used, then I\u0027d consider \u003c? extends Object\u003e if that works without Eclipse warnings. Goal being, to make stream\u0027s generic type explicit enough, rather than a pure wildcard.",
+      "range": {
+        "startLine": 361,
+        "startChar": 49,
+        "endLine": 361,
+        "endChar": 52
+      },
+      "revId": "9f6c8c838c0386ac407cf016ab3f24e4cf3fa3d6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
