@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35c14118_8de9a3ce",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-13T16:38:17Z",
+      "side": 1,
+      "message": "don\u0027t call getParent() twice.",
+      "range": {
+        "startLine": 256,
+        "startChar": 29,
+        "endLine": 256,
+        "endChar": 48
+      },
+      "revId": "484732dc467f5ec129243e5c91f7e7cdd16f9c54",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d538468c_efd2088f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-13T16:38:17Z",
+      "side": 1,
+      "message": "You don\u0027t need this if. We can log anytime we find a task for a URI already running on the node.",
+      "range": {
+        "startLine": 257,
+        "startChar": 11,
+        "endLine": 257,
+        "endChar": 55
+      },
+      "revId": "484732dc467f5ec129243e5c91f7e7cdd16f9c54",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
