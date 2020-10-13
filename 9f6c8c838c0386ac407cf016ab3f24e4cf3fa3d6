@@ -63,6 +63,30 @@
       },
       "revId": "9f6c8c838c0386ac407cf016ab3f24e4cf3fa3d6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1533136b_f65f6553",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-13T22:00:10Z",
+      "side": 1,
+      "message": "Up to you @Martin. Personally, I\u0027d consider this potential improvement still, but I\u0027m fine with your final say here. I\u0027ll let somebody else approve or review otherwise, potentially marking this comment as Resolved (or else).",
+      "parentUuid": "6f243b40_281f63e9",
+      "range": {
+        "startLine": 361,
+        "startChar": 49,
+        "endLine": 361,
+        "endChar": 52
+      },
+      "revId": "9f6c8c838c0386ac407cf016ab3f24e4cf3fa3d6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
