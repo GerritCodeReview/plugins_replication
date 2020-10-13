@@ -39,6 +39,30 @@
       },
       "revId": "9f6c8c838c0386ac407cf016ab3f24e4cf3fa3d6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f243b40_281f63e9",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2020-10-13T20:09:55Z",
+      "side": 1,
+      "message": "I don\u0027t see anything in that article addressing this route of situation, the closest situation I see is this explanation \u0027As a rule, if a type parameter appears only once in a method declaration, replace it with a wildcard\u0027. I believe that the current approach is the best as the objective is to make this API as generic as possible, and non restrictive.",
+      "parentUuid": "e2f18667_1584e3a5",
+      "range": {
+        "startLine": 361,
+        "startChar": 49,
+        "endLine": 361,
+        "endChar": 52
+      },
+      "revId": "9f6c8c838c0386ac407cf016ab3f24e4cf3fa3d6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
