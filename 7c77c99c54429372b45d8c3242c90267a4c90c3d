@@ -34,6 +34,24 @@
       "parentUuid": "a7290ba2_7ee30ccc",
       "revId": "7c77c99c54429372b45d8c3242c90267a4c90c3d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eb29571_07219918",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-15T21:38:26Z",
+      "side": 1,
+      "message": "Done: https://gerrit-review.googlesource.com/c/plugins/replication/+/284796",
+      "parentUuid": "1257460b_21974c0e",
+      "revId": "7c77c99c54429372b45d8c3242c90267a4c90c3d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
