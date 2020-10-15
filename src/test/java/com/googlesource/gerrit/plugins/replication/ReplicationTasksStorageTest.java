@@ -27,6 +27,7 @@ import java.nio.file.FileSystem;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.After;
 import org.junit.Before;
@@ -39,6 +40,7 @@ public class ReplicationTasksStorageTest {
   protected static final URIish URISH = getUrish("http://example.com/" + PROJECT + ".git");
   protected static final ReplicateRefUpdate REF_UPDATE =
       new ReplicateRefUpdate(PROJECT, REF, URISH, REMOTE);
+  protected static final long SECONDS_TASK_STALE_AGE = 2;
 
   protected ReplicationTasksStorage storage;
   protected FileSystem fileSystem;
@@ -49,7 +51,7 @@ public class ReplicationTasksStorageTest {
   public void setUp() throws Exception {
     fileSystem = Jimfs.newFileSystem(Configuration.unix());
     storageSite = fileSystem.getPath("replication_site");
-    storage = new ReplicationTasksStorage(storageSite);
+    storage = new ReplicationTasksStorage(storageSite, SECONDS_TASK_STALE_AGE);
     uriUpdates = TestUriUpdates.create(REF_UPDATE);
   }
 
@@ -88,7 +90,8 @@ public class ReplicationTasksStorageTest {
 
   @Test
   public void instancesOfTheSameStorageHaveTheSameElements() throws Exception {
-    ReplicationTasksStorage persistedView = new ReplicationTasksStorage(storageSite);
+    ReplicationTasksStorage persistedView =
+        new ReplicationTasksStorage(storageSite, Long.MAX_VALUE);
 
     assertThat(storage.listWaiting()).isEmpty();
     assertThat(persistedView.listWaiting()).isEmpty();
@@ -243,75 +246,60 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
-  public void canResetAllEmpty() throws Exception {
-    storage.resetAll();
-    assertNoIncompleteTasks(storage);
+  public void canRecoverStaleTasks() throws Exception {
+    ReplicateRefUpdate staleUpdate = new ReplicateRefUpdate(PROJECT, REF, URISH, "remoteA");
+    UriUpdates staleUriUpdates = TestUriUpdates.create(staleUpdate);
+    storage.create(staleUpdate);
+    storage.start(staleUriUpdates);
+
+    TimeUnit.SECONDS.sleep(SECONDS_TASK_STALE_AGE + 1);
+    storage.create(REF_UPDATE);
+    storage.start(uriUpdates);
+    assertContainsExactly(storage.listWaiting(), staleUpdate);
+    assertContainsExactly(storage.listRunning(), REF_UPDATE);
   }
 
   @Test
-  public void canResetAllUpdate() throws Exception {
+  public void canCompleteRecoveredStaleUpdate() throws Exception {
+    ReplicateRefUpdate updateB = new ReplicateRefUpdate(PROJECT, REF, URISH, "remoteB");
+    UriUpdates uriUpdatesB = TestUriUpdates.create(updateB);
     storage.create(REF_UPDATE);
     storage.start(uriUpdates);
+    TimeUnit.SECONDS.sleep(SECONDS_TASK_STALE_AGE + 1);
 
-    storage.resetAll();
+    storage.create(updateB);
+    storage.start(uriUpdatesB);
     assertContainsExactly(storage.listWaiting(), REF_UPDATE);
-    assertThat(storage.listRunning()).isEmpty();
-  }
-
-  @Test
-  public void canCompleteResetAllUpdate() throws Exception {
-    storage.create(REF_UPDATE);
-    storage.start(uriUpdates);
-    storage.resetAll();
+    storage.finish(uriUpdatesB);
 
     storage.start(uriUpdates);
     assertContainsExactly(storage.listRunning(), REF_UPDATE);
-    assertThat(storage.listWaiting()).isEmpty();
 
     storage.finish(uriUpdates);
     assertNoIncompleteTasks(storage);
   }
 
   @Test
-  public void canResetAllMultipleUpdates() throws Exception {
-    ReplicateRefUpdate updateB =
-        new ReplicateRefUpdate(
-            PROJECT,
-            REF,
-            getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
-            REMOTE);
+  public void canCompleteMultipleRecoveredStaleUpdates() throws Exception {
+    ReplicateRefUpdate updateB = new ReplicateRefUpdate(PROJECT, REF, URISH, "remoteB");
+    ReplicateRefUpdate updateC = new ReplicateRefUpdate(PROJECT, REF, URISH, "remoteC");
     UriUpdates uriUpdatesB = TestUriUpdates.create(updateB);
+    UriUpdates uriUpdatesC = TestUriUpdates.create(updateC);
     storage.create(REF_UPDATE);
     storage.create(updateB);
     storage.start(uriUpdates);
     storage.start(uriUpdatesB);
+    TimeUnit.SECONDS.sleep(SECONDS_TASK_STALE_AGE + 1);
 
-    storage.resetAll();
-    assertContainsExactly(storage.listWaiting(), REF_UPDATE, updateB);
-  }
-
-  @Test
-  public void canCompleteMultipleResetAllUpdates() throws Exception {
-    ReplicateRefUpdate updateB =
-        new ReplicateRefUpdate(
-            PROJECT,
-            REF,
-            getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
-            REMOTE);
-    UriUpdates uriUpdatesB = TestUriUpdates.create(updateB);
-    storage.create(REF_UPDATE);
-    storage.create(updateB);
-    storage.start(uriUpdates);
-    storage.start(uriUpdatesB);
-    storage.resetAll();
+    storage.create(updateC);
+    storage.start(uriUpdatesC);
+    assertContainsExactly(storage.listWaiting(), updateB, REF_UPDATE);
+    assertContainsExactly(storage.listRunning(), updateC);
+    storage.finish(uriUpdatesC);
 
     storage.start(uriUpdates);
-    assertContainsExactly(storage.listRunning(), REF_UPDATE);
-    assertContainsExactly(storage.listWaiting(), updateB);
-
     storage.start(uriUpdatesB);
-    assertContainsExactly(storage.listRunning(), REF_UPDATE, updateB);
-    assertThat(storage.listWaiting()).isEmpty();
+    assertContainsExactly(storage.listRunning(), updateB, REF_UPDATE);
 
     storage.finish(uriUpdates);
     storage.finish(uriUpdatesB);

@@ -31,9 +31,12 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.FileTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
@@ -95,18 +98,24 @@ public class ReplicationTasksStorage {
   private final Path runningUpdates;
   private final Path waitingUpdates;
   private final String ownerId;
+  private final long taskAgeStaleSeconds;
 
   @Inject
   ReplicationTasksStorage(ReplicationConfig config) {
-    this(config.getEventsDirectory().resolve("ref-updates"));
+    this(
+        config.getEventsDirectory().resolve("ref-updates"),
+        config
+            .getConfig()
+            .getLong("replication", "taskAgeStaleSeconds", TimeUnit.HOURS.toSeconds(1)));
   }
 
   @VisibleForTesting
-  public ReplicationTasksStorage(Path refUpdates) {
+  public ReplicationTasksStorage(Path refUpdates, long taskAgeStaleSeconds) {
     buildingUpdates = refUpdates.resolve("building");
     runningUpdates = refUpdates.resolve("running");
     waitingUpdates = refUpdates.resolve("waiting");
     ownerId = getOwnerId();
+    this.taskAgeStaleSeconds = taskAgeStaleSeconds;
   }
 
   protected static String getOwnerId() {
@@ -133,12 +142,6 @@ public class ReplicationTasksStorage {
   public synchronized void reset(UriUpdates uriUpdates) {
     for (ReplicateRefUpdate update : uriUpdates.getReplicateRefUpdates()) {
       new Task(update).reset();
-    }
-  }
-
-  public synchronized void resetAll() {
-    for (Task t : runningTasks()) {
-      t.reset();
     }
   }
 
@@ -261,6 +264,16 @@ public class ReplicationTasksStorage {
           }
         }
       }
+
+      Path uriDir = running.getParent().getParent();
+      for (Task t : list(uriDir)) {
+        if (t.isStale()) {
+          logger.atFine().log(
+              "Task: %s [%s] is identified as stale and is being finished", t.taskKey, t.update);
+          t.reset();
+        }
+      }
+
       rename(waiting, running);
     }
 
@@ -292,8 +305,19 @@ public class ReplicationTasksStorage {
       try {
         logger.atFine().log("RENAME %s to %s %s", from, to, updateLog());
         Files.move(from, to, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+        Files.setLastModifiedTime(to, FileTime.from(Instant.now()));
       } catch (IOException e) {
         logger.atSevere().withCause(e).log("Error while renaming task %s", taskKey);
+      }
+    }
+
+    public boolean isStale() {
+      try {
+        return Instant.now()
+            .minusMillis(TimeUnit.SECONDS.toMillis(taskAgeStaleSeconds))
+            .isAfter(Files.getLastModifiedTime(running).toInstant());
+      } catch (IOException e) {
+        return false;
       }
     }
 

@@ -80,7 +80,6 @@ public class ReplicationQueue
     if (!running) {
       destinations.get().startup(workQueue);
       running = true;
-      replicationTasksStorage.resetAll();
       Thread t = new Thread(this::firePendingEvents, "firePendingEvents");
       t.setDaemon(true);
       t.start();

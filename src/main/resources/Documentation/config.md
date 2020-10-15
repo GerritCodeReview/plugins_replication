@@ -149,6 +149,13 @@ replication.eventsDirectory
 
 	When not set, defaults to the plugin's data directory.
 
+replication.taskAgeStaleSeconds
+:	Maximum time to recover a stale task
+
+	When a node starts a task with specific URI, running tasks older than
+	this threshold are considered stale and will be recovered. This age is
+	specified in seconds. By default, 3600 seconds.
+
 remote.NAME.url
 :	Address of the remote server to push to.  Multiple URLs may be
 	specified within a single remote block, listing different

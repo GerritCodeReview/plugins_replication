@@ -22,6 +22,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.Repli
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
+import java.util.concurrent.TimeUnit;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.After;
 import org.junit.Before;
@@ -36,6 +37,7 @@ public class ReplicationTasksStorageMPTest {
   protected static final ReplicateRefUpdate REF_UPDATE =
       new ReplicationTasksStorage.ReplicateRefUpdate(PROJECT, REF, URISH, REMOTE);
   protected static final UriUpdates URI_UPDATE = getUriUpdates(REF_UPDATE);
+  protected static final long SECONDS_TASK_STALE_AGE = 2;
 
   protected FileSystem fileSystem;
   protected Path storageSite;
@@ -47,9 +49,9 @@ public class ReplicationTasksStorageMPTest {
   public void setUp() throws Exception {
     fileSystem = Jimfs.newFileSystem(Configuration.unix());
     storageSite = fileSystem.getPath("replication_site");
-    nodeA = new ReplicationTasksStorage(storageSite);
-    nodeB = new ReplicationTasksStorage(storageSite);
-    nodeC = new ReplicationTasksStorage(storageSite);
+    nodeA = new ReplicationTasksStorage(storageSite, SECONDS_TASK_STALE_AGE);
+    nodeB = new ReplicationTasksStorage(storageSite, SECONDS_TASK_STALE_AGE);
+    nodeC = new ReplicationTasksStorage(storageSite, SECONDS_TASK_STALE_AGE);
   }
 
   @After
@@ -58,23 +60,18 @@ public class ReplicationTasksStorageMPTest {
   }
 
   @Test
-  public void resetTasksShouldNotBeLost() {
+  public void staleTasksByOtherNodeAreRecovered() throws Exception {
     nodeA.create(REF_UPDATE);
     nodeA.start(URI_UPDATE);
+    ReplicateRefUpdate secondRefUpdate =
+        new ReplicationTasksStorage.ReplicateRefUpdate(PROJECT, REF, URISH, "remoteB");
+    UriUpdates secondUpdate = TestUriUpdates.create(secondRefUpdate);
+    TimeUnit.SECONDS.sleep(SECONDS_TASK_STALE_AGE + 1);
 
-    ReplicationTasksStorage.ReplicateRefUpdate secondRefUpdate =
-        new ReplicationTasksStorage.ReplicateRefUpdate(PROJECT, REF, URISH, REMOTE);
-    UriUpdates secondUriUpdate = getUriUpdates(secondRefUpdate);
-
-    nodeB.resetAll(); // nodeB startup recovery
     nodeB.create(secondRefUpdate);
-    nodeB.start(secondUriUpdate);
-
-    nodeA.finish(URI_UPDATE);
+    nodeB.start(secondUpdate);
     assertContainsExactly(nodeC.listRunning(), secondRefUpdate);
-
-    nodeB.reset(secondUriUpdate);
-    assertContainsExactly(nodeC.listWaiting(), secondRefUpdate);
+    assertContainsExactly(nodeC.listWaiting(), REF_UPDATE);
   }
 
   public static UriUpdates getUriUpdates(ReplicationTasksStorage.ReplicateRefUpdate refUpdate) {

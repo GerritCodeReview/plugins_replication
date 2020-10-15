@@ -25,6 +25,8 @@ import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.Task;
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.concurrent.TimeUnit;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.After;
 import org.junit.Before;
@@ -37,14 +39,17 @@ public class ReplicationTasksStorageTaskTest {
   protected static final URIish URISH = getUrish("http://example.com/" + PROJECT + ".git");
   protected static final ReplicateRefUpdate REF_UPDATE =
       new ReplicateRefUpdate(PROJECT, REF, URISH, REMOTE);
+  protected static final long SECONDS_TASK_STALE_AGE = 2;
 
   protected ReplicationTasksStorage tasksStorage;
   protected FileSystem fileSystem;
+  protected Path storageSite;
 
   @Before
   public void setUp() throws Exception {
     fileSystem = Jimfs.newFileSystem(Configuration.unix());
-    tasksStorage = new ReplicationTasksStorage(fileSystem.getPath("replication_site"));
+    storageSite = fileSystem.getPath("replication_site");
+    tasksStorage = new ReplicationTasksStorage(storageSite, SECONDS_TASK_STALE_AGE);
   }
 
   @After
@@ -278,6 +283,32 @@ public class ReplicationTasksStorageTaskTest {
     updateB.start();
     assertIsRunning(updateA);
     assertIsRunning(updateB);
+  }
+
+  @Test
+  public void tasksWillBecomeStale() throws Exception {
+    Task staleUpdate =
+        tasksStorage.new Task(new ReplicateRefUpdate(PROJECT, REF, URISH, "remoteA"));
+    staleUpdate.create();
+    staleUpdate.start();
+
+    TimeUnit.SECONDS.sleep(SECONDS_TASK_STALE_AGE + 1);
+    assertTrue(staleUpdate.isStale());
+  }
+
+  @Test
+  public void canRecoverStaleTasks() throws Exception {
+    Task staleUpdate =
+        tasksStorage.new Task(new ReplicateRefUpdate(PROJECT, REF, URISH, "remoteA"));
+    Task newUpdate = tasksStorage.new Task(REF_UPDATE);
+    staleUpdate.create();
+    staleUpdate.start();
+
+    TimeUnit.SECONDS.sleep(SECONDS_TASK_STALE_AGE + 1);
+    newUpdate.create();
+    newUpdate.start();
+    assertIsWaiting(staleUpdate);
+    assertIsRunning(newUpdate);
   }
 
   @Test
