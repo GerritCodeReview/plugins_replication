@@ -122,8 +122,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
     Project.NameKey sourceProject = createTestProject("foo");
 
-    assertThat(listIncompleteTasks("refs/meta/config")).hasSize(1);
-
     WaitUtil.waitUntil(
         () -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")),
         TEST_NEW_PROJECT_TIMEOUT);
@@ -171,8 +169,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
 
-    assertThat(listIncompleteTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(1);
-
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
 
@@ -193,8 +189,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     BranchInput input = new BranchInput();
     input.revision = master;
     gApi.projects().name(project.get()).branch(newBranch).create(input);
-
-    assertThat(listIncompleteTasks("refs/heads/(mybranch|master)")).hasSize(2);
 
     try (Repository repo = repoManager.openRepository(targetProject);
         Repository sourceRepo = repoManager.openRepository(project)) {
@@ -220,8 +214,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
 
-    assertThat(listIncompleteTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(2);
-
     try (Repository repo1 = repoManager.openRepository(targetProject1);
         Repository repo2 = repoManager.openRepository(targetProject2)) {
       waitUntil(
@@ -244,10 +236,12 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     createTestProject(project + "replica1");
     createTestProject(project + "replica2");
 
-    setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
-    setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
-    config.setInt("remote", "foo1", "replicationDelay", TEST_REPLICATION_DELAY * 100);
-    config.setInt("remote", "foo2", "replicationDelay", TEST_REPLICATION_DELAY * 100);
+    FileBasedConfig dest1 = setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
+    FileBasedConfig dest2 = setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
+    dest1.setInt("remote", null, "replicationDelay", TEST_REPLICATION_DELAY * 100);
+    dest2.setInt("remote", null, "replicationDelay", TEST_REPLICATION_DELAY * 100);
+    dest1.save();
+    dest2.save();
     reloadConfig();
 
     createChange();
@@ -595,13 +589,14 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
         remoteName, Arrays.asList(replicaSuffix), project, replicationDelay, mirror);
   }
 
-  private void setReplicationDestination(
+  private FileBasedConfig setReplicationDestination(
       String remoteName, List<String> replicaSuffixes, Optional<String> project)
       throws IOException {
-    setReplicationDestination(remoteName, replicaSuffixes, project, TEST_REPLICATION_DELAY, false);
+    return setReplicationDestination(
+        remoteName, replicaSuffixes, project, TEST_REPLICATION_DELAY, false);
   }
 
-  private void setReplicationDestination(
+  private FileBasedConfig setReplicationDestination(
       String remoteName,
       List<String> replicaSuffixes,
       Optional<String> project,
@@ -619,6 +614,7 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
     config.setBoolean("gerrit", null, "autoReload", true);
     config.save();
+    return config;
   }
 
   private void setProjectDeletionReplication(String remoteName, boolean replicateProjectDeletion)
