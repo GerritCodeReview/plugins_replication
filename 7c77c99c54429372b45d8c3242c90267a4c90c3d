@@ -52,6 +52,24 @@
       "parentUuid": "1257460b_21974c0e",
       "revId": "7c77c99c54429372b45d8c3242c90267a4c90c3d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ea4441d_40d179c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-10-15T21:39:03Z",
+      "side": 1,
+      "message": "Yes, but this is the first merge we have since the introduction of the stable-3.3 branch. As a rule of thumb, we don\u0027t skip patches / fixes in any intermediate release.\n\nAlso note that the replication plugin on master won\u0027t compile on Gerrit v3.3, that\u0027s why we needed the stable-3.3 branch, and I\u0027ve just created it for this purpose.",
+      "parentUuid": "1257460b_21974c0e",
+      "revId": "7c77c99c54429372b45d8c3242c90267a4c90c3d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
