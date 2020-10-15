@@ -24,6 +24,18 @@ junit_tests(
     timeout = "long",
     srcs = glob([
         "src/test/java/**/*Test.java",
+    ]),
+    tags = ["replication"],
+    visibility = ["//visibility:public"],
+    deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
+        ":replication__plugin",
+        ":replication_util",
+    ],
+)
+
+junit_tests(
+    name = "replication_it",
+    srcs = glob([
         "src/test/java/**/*IT.java",
     ]),
     tags = ["replication"],
