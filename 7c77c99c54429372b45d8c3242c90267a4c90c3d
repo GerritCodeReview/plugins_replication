@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7290ba2_7ee30ccc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-10-15T21:30:31Z",
+      "side": 1,
+      "message": "It would be best to merge on stable-3.3 first and *then* stable-3.3 to master.",
+      "revId": "7c77c99c54429372b45d8c3242c90267a4c90c3d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
