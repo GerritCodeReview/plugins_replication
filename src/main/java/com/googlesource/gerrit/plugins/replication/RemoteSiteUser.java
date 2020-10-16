@@ -28,4 +28,10 @@ public class RemoteSiteUser extends CurrentUser {
   public GroupMembership getEffectiveGroups() {
     return effectiveGroups;
   }
+
+  @Override
+  public Object getCacheKey() {
+    // Never cache a remote user
+    return new Object();
+  }
 }
