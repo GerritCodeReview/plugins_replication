@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "415bf65c_9dac9c29",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-21T16:02:56Z",
+      "side": 1,
+      "message": "Glad that refactoring commits get split this way. Now, should this change be split further? I notice quite a few changes listed further above.",
+      "revId": "9acbc2b755d6e41d2d6f734531c20fce82fdca1c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "42db2f26_98eeab6f",
@@ -14,6 +31,86 @@
       "writtenOn": "2020-10-20T16:00:05Z",
       "side": 1,
       "message": "Did some additional soak testing for the integration tests:\n\n $ bazel test --runs_per_test\u003d25  --nocache_test_results   //plugins/replication:replication_it\n INFO: Invocation ID: ffc456cb-d95a-45af-b784-3e3f688ffcb4\n INFO: Build options --runs_per_test and --test_filter have changed, discarding analysis cache.\n INFO: Analyzed target //plugins/replication:replication_it (0 packages loaded, 4763 targets configured).\n INFO: Found 1 test target...\n Target //plugins/replication:replication_it up-to-date:\n   bazel-bin/plugins/replication/replication_it.jar\n   bazel-bin/plugins/replication/replication_it\n INFO: Elapsed time: 1129.214s, Critical Path: 170.45s\n INFO: 28 processes: 26 darwin-sandbox, 2 worker.\n INFO: Build completed successfully, 29 total actions\n //plugins/replication:replication_it                                     PASSED in 168.6s\n   Stats over 25 runs: max \u003d 168.6s, min \u003d 156.8s, avg \u003d 162.4s, dev \u003d 3.0s\n \n INFO: Build completed successfully, 29 total actions\n",
+      "revId": "9acbc2b755d6e41d2d6f734531c20fce82fdca1c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70d48eaa_da1c20f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-21T16:02:56Z",
+      "side": 1,
+      "message": "Nits and a question; thanks. Also welcoming other CRs.",
+      "revId": "9acbc2b755d6e41d2d6f734531c20fce82fdca1c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b21c1121_2c8d2ab4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-21T16:02:56Z",
+      "side": 1,
+      "message": "Address, or detail some more (refactor this comment)? (Or remove it?)",
+      "range": {
+        "startLine": 58,
+        "startChar": 62,
+        "endLine": 58,
+        "endChar": 86
+      },
+      "revId": "9acbc2b755d6e41d2d6f734531c20fce82fdca1c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83522039_da4846d6",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-21T16:02:56Z",
+      "side": 1,
+      "message": "Url, if willing to be consistent with similar code in this file; same at line 221.",
+      "range": {
+        "startLine": 199,
+        "startChar": 34,
+        "endLine": 199,
+        "endChar": 37
+      },
+      "revId": "9acbc2b755d6e41d2d6f734531c20fce82fdca1c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "319f2c41_ed3d8221",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-21T16:02:56Z",
+      "side": 1,
+      "message": "Extra blank line?",
       "revId": "9acbc2b755d6e41d2d6f734531c20fce82fdca1c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
