@@ -18,26 +18,14 @@ import static com.google.common.truth.Truth.assertThat;
 import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.NO_OP;
 import static java.util.stream.Collectors.toList;
 
-import com.google.common.flogger.FluentLogger;
-import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.server.config.SitePaths;
-import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
-import org.eclipse.jgit.lib.Ref;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.storage.file.FileBasedConfig;
-import org.eclipse.jgit.util.FS;
 import org.junit.Test;
 
 /**
@@ -50,31 +38,11 @@ import org.junit.Test;
 @TestPlugin(
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
-public class ReplicationStorageIT extends LightweightPluginDaemonTest {
-  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-  private static final Optional<String> ALL_PROJECTS = Optional.empty();
-
-  private static final int TEST_REPLICATION_DELAY_SECONDS = 1;
-  private static final int TEST_REPLICATION_RETRY_MINUTES = 1;
-  private static final int TEST_PUSH_TIME_SECONDS = 1;
-  private static final Duration TEST_PUSH_TIMEOUT =
-      Duration.ofSeconds(TEST_REPLICATION_DELAY_SECONDS + TEST_PUSH_TIME_SECONDS);
-
-  @Inject private SitePaths sitePaths;
-  private Path gitPath;
-  private FileBasedConfig config;
+public class ReplicationStorageIT extends ReplicationDaemon {
   private ReplicationTasksStorage tasksStorage;
 
   @Override
   public void setUpTestPlugin() throws Exception {
-    gitPath = sitePaths.site_path.resolve("git");
-    config =
-        new FileBasedConfig(sitePaths.etc_dir.resolve("replication.config").toFile(), FS.DETECTED);
-    config.save();
-    setReplicationDestination(
-        "remote1",
-        "suffix1",
-        Optional.of("not-used-project")); // Simulates a full replication.config initialization
     super.setUpTestPlugin();
     tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
   }
@@ -239,69 +207,11 @@ public class ReplicationStorageIT extends LightweightPluginDaemonTest {
     }
   }
 
-  private void setReplicationDestination(
-      String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
-    setReplicationDestination(
-        remoteName, Arrays.asList(replicaSuffix), project, TEST_REPLICATION_RETRY_MINUTES);
-  }
-
-  private void setReplicationDestination(
-      String remoteName, String replicaSuffix, Optional<String> project, int replicationDelay)
-      throws IOException {
-    setReplicationDestination(remoteName, Arrays.asList(replicaSuffix), project, replicationDelay);
-  }
-
-  private FileBasedConfig setReplicationDestination(
-      String remoteName,
-      List<String> replicaSuffixes,
-      Optional<String> project,
-      int replicationDelay)
-      throws IOException {
-    List<String> replicaUrls =
-        replicaSuffixes.stream()
-            .map(suffix -> gitPath.resolve("${name}" + suffix + ".git").toString())
-            .collect(toList());
-    config.setStringList("remote", remoteName, "url", replicaUrls);
-    config.setInt("remote", remoteName, "replicationDelay", replicationDelay);
-    config.setInt("remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY_MINUTES);
-    project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
-    config.save();
-    return config;
-  }
-
-  private Project.NameKey createTestProject(String name) throws Exception {
-    return createProject(name);
-  }
-
-  public boolean isPushCompleted(Project.NameKey project, String ref, Duration timeOut) {
-    try (Repository repo = repoManager.openRepository(project)) {
-      WaitUtil.waitUntil(() -> checkedGetRef(repo, ref) != null, timeOut);
-      return true;
-    } catch (InterruptedException e) {
-      return false;
-    } catch (Exception e) {
-      throw new RuntimeException("Cannot open repo for project" + project, e);
-    }
-  }
-
   private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
       String changeRef, String remote) {
     return tasksStorage.list().stream()
         .filter(task -> changeRef.equals(task.ref))
         .filter(task -> remote.equals(task.remote));
-  }
-
-  private Ref checkedGetRef(Repository repo, String branchName) {
-    try {
-      return repo.getRefDatabase().exactRef(branchName);
-    } catch (Exception e) {
-      logger.atSevere().withCause(e).log("failed to get ref %s in repo %s", branchName, repo);
-      return null;
-    }
-  }
-
-  private void reloadConfig() {
-    plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).forceReload();
   }
 
   private List<ReplicateRefUpdate> listReplicationTasks(String refRegex) {
