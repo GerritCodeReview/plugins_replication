@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b008b8c_fe3ec098",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-21T16:21:20Z",
+      "side": 1,
+      "message": "Maybe? I have the same concern you do, especially as I consider what the 3.1 merge will look like. Let me see what I can do after I address the concerns in the 2.16 change.",
+      "parentUuid": "b2fd62c8_12c3a5dc",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 50
+      },
+      "revId": "263801cd5efbb154a56a8b1b8de4d68bdd4532eb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8a340146_c0ae7df5",
