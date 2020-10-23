@@ -16,6 +16,46 @@
       "message": "Luca, can you take another look please? I think your concerns have been addressed. (fyi, there are more changes coming in the next week or two that build on this)",
       "revId": "c36be57765d9fac1a140b2d415911c8039377a50",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b638d5dc_e493457e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-23T16:41:43Z",
+      "side": 1,
+      "message": "Luca, please give an explanation why you think your ",
+      "revId": "c36be57765d9fac1a140b2d415911c8039377a50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c058f7e_5a6026f7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-23T16:41:43Z",
+      "side": 1,
+      "message": "I believe this would be a normal situation with single primary setups when there is more than on ref being replicated to the same URI. This tells me that these deletes are in the wrong place, the delete should happen at the URI level, not at the task level?",
+      "range": {
+        "startLine": 274,
+        "startChar": 17,
+        "endLine": 274,
+        "endChar": 44
+      },
+      "revId": "c36be57765d9fac1a140b2d415911c8039377a50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
