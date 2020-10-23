@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "271171e9_f4a36b89",
         "filename": "/COMMIT_MSG",
@@ -20,10 +21,10 @@
         "endChar": 23
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "8c764682_5b323ee3",
         "filename": "/COMMIT_MSG",
@@ -44,10 +45,10 @@
         "endChar": 23
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "61ef51ef_e18073d1",
         "filename": "/COMMIT_MSG",
@@ -67,10 +68,10 @@
         "endChar": 40
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "512996ed_87d9b8ee",
         "filename": "/COMMIT_MSG",
@@ -91,10 +92,10 @@
         "endChar": 40
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "6f244cbc_864ae626",
         "filename": "/COMMIT_MSG",
@@ -115,10 +116,10 @@
         "endChar": 40
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "af06ada9_dfa4e688",
         "filename": "/COMMIT_MSG",
@@ -138,10 +139,10 @@
         "endChar": 16
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "5feb69cb_6de0aeda",
         "filename": "/COMMIT_MSG",
@@ -162,10 +163,10 @@
         "endChar": 16
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "be02a262_fa9a854b",
         "filename": "/PATCHSET_LEVEL",
@@ -179,10 +180,10 @@
       "side": 1,
       "message": "Thanks, Adithya, for creating this test. This is not a problem just for replication clustering scenarios but also for the single Gerrit server.",
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "338a9a38_c9933d72",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -202,10 +203,10 @@
         "endChar": 67
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "94e08b96_768f8741",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -226,10 +227,10 @@
         "endChar": 67
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "3451a032_980a7d6e",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -249,10 +250,10 @@
         "endChar": 61
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "22819cc4_ef0b9b5b",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -273,10 +274,10 @@
         "endChar": 61
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "0235194d_bbbf049c",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -297,10 +298,10 @@
         "endChar": 61
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "39e78d16_4ce11d1c",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -321,10 +322,10 @@
         "endChar": 61
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "055f8590_7262bdea",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -345,10 +346,10 @@
         "endChar": 61
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "603ac10a_3fcafe7b",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -369,10 +370,10 @@
         "endChar": 61
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "77142503_1b8ac6c5",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -392,10 +393,10 @@
         "endChar": 62
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "c9254fc6_4513ac49",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -416,10 +417,10 @@
         "endChar": 62
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "3a19e123_63481063",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -440,10 +441,10 @@
         "endChar": 62
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "8a3a4560_19b2de0c",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -464,10 +465,10 @@
         "endChar": 62
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "e6325d63_16694e44",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -487,10 +488,10 @@
         "endChar": 30
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "c9d84b25_f98f3848",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -511,10 +512,10 @@
         "endChar": 30
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "d9b0add6_0d8939e2",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -535,10 +536,10 @@
         "endChar": 30
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "5b2cbabe_e51b006f",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -559,10 +560,10 @@
         "endChar": 30
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "4677bf5c_3c5d347d",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -582,10 +583,10 @@
         "endChar": 21
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "7e58edce_47999288",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -606,10 +607,10 @@
         "endChar": 21
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "c26af5a5_9ed754a4",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -630,10 +631,10 @@
         "endChar": 21
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "61ae2075_16d81e95",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -653,10 +654,10 @@
         "endChar": 29
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "1fb1f543_3d7bbd55",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -677,10 +678,10 @@
         "endChar": 29
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "3ac9cd2e_d28c4421",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -701,10 +702,10 @@
         "endChar": 29
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "d231ecfc_d21be3ff",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -725,10 +726,10 @@
         "endChar": 29
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "11455a07_93f5a70f",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
@@ -748,8 +749,31 @@
         "endChar": 70
       },
       "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3d029a2_c58fc507",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-23T16:34:03Z",
+      "side": 1,
+      "message": "This seems like an accurate comment, but unrelated to this change. Marking as resolved. Please create a bug issue to track?",
+      "parentUuid": "11455a07_93f5a70f",
+      "range": {
+        "startLine": 75,
+        "startChar": 55,
+        "endLine": 75,
+        "endChar": 70
+      },
+      "revId": "8657a71f53444a9aa49331b67fbf2e169f09f398",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
