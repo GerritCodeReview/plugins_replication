@@ -120,6 +120,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd9c7b93_079ff18a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-23T16:34:03Z",
+      "side": 1,
+      "message": "I\u0027m going to mark this resolved again since there\u0027s been no reply after 2 weeks.",
+      "parentUuid": "788ab90a_33a0edc4",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 27
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "667e039c_9154800b",
@@ -324,6 +348,30 @@
       "side": 1,
       "message": "\u003e The directory are supposed to be used as \"lock mechanism\", correct?\n\nNo, this change is not adding any locks. Just better identification of tasks in storage.",
       "parentUuid": "2c36f364_09b215d6",
+      "range": {
+        "startLine": 274,
+        "startChar": 10,
+        "endLine": 274,
+        "endChar": 77
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c08bc103_50d4206c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-23T16:34:03Z",
+      "side": 1,
+      "message": "I don\u0027t see any AIs in this comment thread. Marking as resolved.",
+      "parentUuid": "e724b4b9_31bead86",
       "range": {
         "startLine": 274,
         "startChar": 10,
