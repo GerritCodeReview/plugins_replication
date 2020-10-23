@@ -16,6 +16,24 @@
       "message": "nit: should be moved before L16",
       "revId": "39d5f9ce95ffd8675486175e8c4ae9846b47a3db",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae1885eb_3dc82f06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-23T23:06:17Z",
+      "side": 1,
+      "message": "This is not necessary as anything in the last paragraph is a footer.",
+      "parentUuid": "c7bd69eb_3c2abdd6",
+      "revId": "39d5f9ce95ffd8675486175e8c4ae9846b47a3db",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
