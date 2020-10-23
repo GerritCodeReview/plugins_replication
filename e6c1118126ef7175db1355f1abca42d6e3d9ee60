@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30a37867_d63c689b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-23T23:20:09Z",
+      "side": 1,
+      "message": "I slimmed this down and moved the improvement of tests in ReplicationIT to a follow-up change. It probably doesn\u0027t make the merges to stable-3.* any easier to review, but it should improve reviewability of this change.",
+      "revId": "e6c1118126ef7175db1355f1abca42d6e3d9ee60",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
