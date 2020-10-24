@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d849b777_827753ae",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-24T00:06:42Z",
+      "side": 0,
+      "message": "Deferred removing this until the next change so that tests pass reliably.",
+      "range": {
+        "startLine": 100,
+        "startChar": 4,
+        "endLine": 100,
+        "endChar": 47
+      },
+      "revId": "64617a846c9fa06215031b2ad34a30d58003a732",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
