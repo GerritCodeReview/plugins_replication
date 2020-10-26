@@ -347,11 +347,11 @@ public class ReplicationTasksStorageTaskTest {
   }
 
   private void assertIsWaiting(Task task) {
-    assertTrue(whiteBoxIsWaiting(task));
+    assertTrue(task.isWaiting());
   }
 
   private void assertNotWaiting(Task task) {
-    assertFalse(whiteBoxIsWaiting(task));
+    assertFalse(task.isWaiting());
   }
 
   private void assertIsRunning(Task task) {
@@ -364,10 +364,6 @@ public class ReplicationTasksStorageTaskTest {
 
   private boolean whiteBoxIsRunning(Task task) {
     return Files.exists(task.running);
-  }
-
-  private boolean whiteBoxIsWaiting(Task task) {
-    return Files.exists(task.waiting);
   }
 
   public static URIish getUrish(String uri) {
