@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "348ab067_9d4d58f9",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDaemon.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-27T20:10:03Z",
+      "side": 1,
+      "message": "Was it intentional to also move these methods to a common place?",
+      "revId": "d608ef52e372208fd6add12183ed6cce8e6328bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
