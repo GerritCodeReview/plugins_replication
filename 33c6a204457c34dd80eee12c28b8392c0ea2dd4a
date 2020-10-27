@@ -22,6 +22,30 @@
       },
       "revId": "33c6a204457c34dd80eee12c28b8392c0ea2dd4a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "872dec57_d8d00d68",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ChainedSchedulerTest.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-27T18:38:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19b6cf6c_e6bcfa35",
+      "range": {
+        "startLine": 381,
+        "startChar": 38,
+        "endLine": 381,
+        "endChar": 59
+      },
+      "revId": "33c6a204457c34dd80eee12c28b8392c0ea2dd4a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
