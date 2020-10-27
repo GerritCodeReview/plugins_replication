@@ -16,6 +16,24 @@
       "message": "Was it intentional to also move these methods to a common place?",
       "revId": "d608ef52e372208fd6add12183ed6cce8e6328bd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1721b726_5164c7bd",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDaemon.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-27T20:18:09Z",
+      "side": 1,
+      "message": "Yes, but I forgot to dedup them, so I need to fix that. Let me upload a new PS.",
+      "parentUuid": "348ab067_9d4d58f9",
+      "revId": "d608ef52e372208fd6add12183ed6cce8e6328bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
