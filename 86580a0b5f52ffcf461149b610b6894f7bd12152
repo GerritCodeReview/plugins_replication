@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff272ba9_2fa5f86b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-27T14:46:51Z",
+      "side": 1,
+      "message": "Yes, each storage instance represents a different node. The intent is to ensure that different instances share and see the same data (in an ideal world we would have different JVMs, but that isn\u0027t really feasible in these tests), and to outline specific expected API calls and behavior depending on their ordering by different actors (nodes). The naming of these by node/actor helps illustrate the specific expected scenarios. These scenarios would not be expected if a single node were being used and thus they should NOT be captured in the non-MP file. Yes, many are very similar to those in the non-MP file, just like running a multi-primary setup is similar to running a single primary setup. However, it is my belief that every scenario in here should be at least subtly different than those in the non-MP file. If that is not the case it is likely an oversight.",
+      "parentUuid": "ffaa76c4_077a6ba6",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 61
+      },
+      "revId": "86580a0b5f52ffcf461149b610b6894f7bd12152",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09d88561_dd44dc49",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
         "patchSetId": 4
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a8c51b94_290a90ca",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-27T14:46:51Z",
+      "side": 1,
+      "message": "\u003e What am I missing?\n\n\"Everything in between\"? 😊 \n\nI can understand that these tests look rather simplistic, and that is because they are. The value in this simplicity is the lack of assumptions about the internals of the storage classes, the fact that this is testing the API in a opaque-box manner. This tests the specific behavior of the API, the fact that the update ends up being stored (today with this implementation) in the same file and on the same file-system is part of the testing. Those are opaque-box details that this test should catch if they were broken in the future if the code changes.",
+      "parentUuid": "09d88561_dd44dc49",
+      "range": {
+        "startLine": 62,
+        "startChar": 14,
+        "endLine": 62,
+        "endChar": 50
+      },
+      "revId": "86580a0b5f52ffcf461149b610b6894f7bd12152",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98b0a0dc_61b1913d",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
         "patchSetId": 4
@@ -60,6 +108,30 @@
       "writtenOn": "2020-10-27T11:56:39Z",
       "side": 1,
       "message": "Since all three ReplicationTasksStorages are working on the same file-system this tests that if a file is deleted it should not be there anymore. This is already tested with:\nhttps://gerrit-review.googlesource.com/c/plugins/replication/+/279060/4/src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java#70",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 74,
+        "endChar": 47
+      },
+      "revId": "86580a0b5f52ffcf461149b610b6894f7bd12152",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d65acec1_729d38c6",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-27T14:46:51Z",
+      "side": 1,
+      "message": "The tests in the file are specific behavior that we expect when there are multiple primaries. From a opaque-box standpoint, as far as the API is concerned, it knows nothing about a \"file to delete\" since a opaque-box view doesn\u0027t know that these updates are stored in a file. You seem to be using your knowledge of the code to say \"it should work, why test it?\" The idea of tests (especially opaque-box tests which are often considered more valuable) is to avoid assuming that you understand the code and to prove that it works today, and whether it continues to work in the future when and if the code changes. \n\nThe test you point to uses the same instance of the storage to create and delete an update, this test uses a different instance (to simulate a different node). Since the implementation uses a file, this test passes. If however, someone decided to use hashmap inside the storage class (and did not share that map), or if they used a file and pointed it to some instance specific or inconsistent location, these tests should catch that mistake by failing.\n\nYes, these tests are very simple, and testing the simple stuff (the assumptions) can save a lot of time when debugging issues in the future. Even if these tests never fail, they help to be sure the simple stuff is working when there is a problem with a more complicated test.",
+      "parentUuid": "98b0a0dc_61b1913d",
       "range": {
         "startLine": 74,
         "startChar": 4,
