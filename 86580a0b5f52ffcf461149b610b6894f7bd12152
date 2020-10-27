@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffaa76c4_077a6ba6",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-10-27T11:56:39Z",
+      "side": 1,
+      "message": "I don\u0027t get the purpose of these tests, to me it looks like you\u0027re creating three identical ReplicationTasksStorages?",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 61
+      },
+      "revId": "86580a0b5f52ffcf461149b610b6894f7bd12152",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09d88561_dd44dc49",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-10-27T11:56:39Z",
+      "side": 1,
+      "message": "Doesn\u0027t this actually test that you can only create the same file once? Since this is a given on a file-system it\u0027s actually testing that the three ReplicationTasksStorages (nodeA, nodeB and persistedView) are working on the same filesystem?\nWhat am I missing?",
+      "range": {
+        "startLine": 62,
+        "startChar": 14,
+        "endLine": 62,
+        "endChar": 50
+      },
+      "revId": "86580a0b5f52ffcf461149b610b6894f7bd12152",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98b0a0dc_61b1913d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageMPTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-10-27T11:56:39Z",
+      "side": 1,
+      "message": "Since all three ReplicationTasksStorages are working on the same file-system this tests that if a file is deleted it should not be there anymore. This is already tested with:\nhttps://gerrit-review.googlesource.com/c/plugins/replication/+/279060/4/src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java#70",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 74,
+        "endChar": 47
+      },
+      "revId": "86580a0b5f52ffcf461149b610b6894f7bd12152",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
