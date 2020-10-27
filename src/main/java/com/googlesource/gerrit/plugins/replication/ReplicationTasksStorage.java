@@ -37,8 +37,6 @@ import org.eclipse.jgit.transport.URIish;
 public class ReplicationTasksStorage {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  private boolean disableDeleteForTesting;
-
   public static class ReplicateRefUpdate {
     public final String project;
     public final String ref;
@@ -91,20 +89,10 @@ public class ReplicationTasksStorage {
     return eventKey;
   }
 
-  @VisibleForTesting
-  public void disableDeleteForTesting(boolean deleteDisabled) {
-    this.disableDeleteForTesting = deleteDisabled;
-  }
-
   public void delete(ReplicateRefUpdate r) {
     String key = r.project + "\n" + r.ref + "\n" + r.uri + "\n" + r.remote;
     String taskKey = sha1(key).name();
     Path file = refUpdates().resolve(taskKey);
-
-    if (disableDeleteForTesting) {
-      logger.atFine().log("DELETE %s (%s:%s => %s) DISABLED", file, r.project, r.ref, r.uri);
-      return;
-    }
 
     try {
       logger.atFine().log("DELETE %s (%s:%s => %s)", file, r.project, r.ref, r.uri);

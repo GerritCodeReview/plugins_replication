@@ -15,7 +15,6 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.auto.value.AutoValue;
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Queues;
 import com.google.gerrit.common.UsedAt;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
@@ -102,11 +101,6 @@ public class ReplicationQueue
     return replaying;
   }
 
-  void scheduleFullSync(Project.NameKey project, String urlMatch, ReplicationState state) {
-    scheduleFullSync(project, urlMatch, state, false);
-  }
-
-  @VisibleForTesting
   public void scheduleFullSync(
       Project.NameKey project, String urlMatch, ReplicationState state, boolean now) {
     if (!running) {
