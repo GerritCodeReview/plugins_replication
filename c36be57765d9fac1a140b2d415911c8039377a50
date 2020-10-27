@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a573abc8_ccc27387",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-27T03:29:58Z",
+      "side": 1,
+      "message": "Ignore this, is was an outdated goof.",
+      "parentUuid": "3704a59b_7422201c",
+      "revId": "c36be57765d9fac1a140b2d415911c8039377a50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0c058f7e_5a6026f7",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 8
