@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "9e54d22f_d1e94895",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "Please take another look!",
       "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "2c6dd28b_6c8356dd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -37,10 +38,10 @@
         "endChar": 25
       },
       "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "3f01c47d_3f8288f7",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -61,10 +62,10 @@
         "endChar": 25
       },
       "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "f2597cf9_922fadba",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -84,10 +85,10 @@
         "endChar": 40
       },
       "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "550999d8_f290c899",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -108,10 +109,10 @@
         "endChar": 40
       },
       "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "be8133ef_6f1d6216",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -131,10 +132,10 @@
         "endChar": 7
       },
       "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "73f415b3_a3dc669e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -155,10 +156,10 @@
         "endChar": 7
       },
       "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "4d9919d0_22d7e5c0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -179,10 +180,10 @@
         "endChar": 7
       },
       "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "a9d75579_d83d0223",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
@@ -202,8 +203,31 @@
         "endChar": 11
       },
       "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b7c9262_fbfb4c80",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-28T23:00:58Z",
+      "side": 1,
+      "message": "During the online meeting we settled on introducing the ChainedScheduler with its first user (here)",
+      "parentUuid": "a9d75579_d83d0223",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 224,
+        "endChar": 11
+      },
+      "revId": "c9ac82118520bc061647c2ab723d73ddf1931f71",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
