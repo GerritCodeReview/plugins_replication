@@ -31,11 +31,9 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Ref;
@@ -51,9 +49,6 @@ import org.junit.Test;
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
 public class ReplicationFanoutIT extends ReplicationDaemon {
-  private static final Duration TEST_TIMEOUT =
-      Duration.ofSeconds(TEST_REPLICATION_DELAY_SECONDS * 2);
-
   private Path pluginDataDir;
   private Path storagePath;
   private ReplicationTasksStorage tasksStorage;
@@ -95,10 +90,9 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
 
     assertThat(listIncompleteTasks("refs/heads/(mybranch|master)")).hasSize(2);
 
+    isPushCompleted(targetProject, newBranch, TEST_PUSH_TIMEOUT);
     try (Repository repo = repoManager.openRepository(targetProject);
         Repository sourceRepo = repoManager.openRepository(project)) {
-      waitUntil(() -> checkedGetRef(repo, newBranch) != null);
-
       Ref masterRef = getRef(sourceRepo, master);
       Ref targetBranchRef = getRef(repo, newBranch);
       assertThat(targetBranchRef).isNotNull();
@@ -123,9 +117,10 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
 
     try (Repository repo1 = repoManager.openRepository(targetProject1);
         Repository repo2 = repoManager.openRepository(targetProject2)) {
-      waitUntil(
+      WaitUtil.waitUntil(
           () ->
-              (checkedGetRef(repo1, sourceRef) != null && checkedGetRef(repo2, sourceRef) != null));
+              (checkedGetRef(repo1, sourceRef) != null && checkedGetRef(repo2, sourceRef) != null),
+          TEST_PUSH_TIMEOUT);
 
       Ref targetBranchRef1 = getRef(repo1, sourceRef);
       assertThat(targetBranchRef1).isNotNull();
@@ -191,10 +186,6 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
     project.ifPresent(prj -> config.setString("remote", null, "projects", prj));
 
     config.save();
-  }
-
-  private void waitUntil(Supplier<Boolean> waitCondition) throws InterruptedException {
-    WaitUtil.waitUntil(waitCondition, TEST_TIMEOUT);
   }
 
   private List<ReplicateRefUpdate> listWaitingTasks(String refRegex) {
