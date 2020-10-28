@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "8f2c2e9d_7d527710",
         "filename": "/COMMIT_MSG",
@@ -14,10 +15,28 @@
       "side": 1,
       "message": "From a design perspective I think that not only should firing pending events not delay the startup of the replication plugin, I believe that the cost of reading and firing them should be born by the replication threadpool to which they apply, otherwise we are back to a similar problem that we had with jshell, we are allowing the work from one remote to block the work of another remote. Imagine on startup that one remote has 20K events (our remotes do), and imaging that another remote only has 1 event. If that 1 event for the latter remote happens to be at the end of the directory listing, that remote will not get its update, even though it may have plenty of threads available to do so, until all the other 20K events for the other remote are read and scheduled.\n\nI don\u0027t think it is possible to distribute things to their own threadpool with the current storage model as it is not possible to tell for which threadpool an event on disk is for without reading it, i.e. it is not possible to fetch all the events for a particular pool without reading all the events for every pool.\n\nI have not started working on a change to fix this yet, but I do believe that it would be valuable to change the storage so that better work distribution is possible. This might be as simple as creating one ReplicationTasksStorage object per threadpool (remote/Destination?) and inserting a new directory level to represent this in the filesystem. This might look something like this: data/replication/\u003cremote_name\u003e/ref-updates, or like this data/replication/remotes/\u003cremote_name\u003e/ref-updates. Not only would this allow for better work distribution, it would allow for more parallelism as each remote would be iterating of their own directory. Longer NFS iterations tend to be slow, but many smaller NFS iterations in parallel are typically fast.",
       "revId": "9483c754c72e414f280d934070782cee0d61d3e5",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0ffbd32_475a6de1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-28T22:58:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8f2c2e9d_7d527710",
+      "revId": "9483c754c72e414f280d934070782cee0d61d3e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "3d1c954b_9bc52af3",
         "filename": "/COMMIT_MSG",
@@ -31,10 +50,10 @@
       "side": 1,
       "message": "Can you create an issue for this, and link it here?",
       "revId": "9483c754c72e414f280d934070782cee0d61d3e5",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "10a85af0_132479aa",
         "filename": "/COMMIT_MSG",
@@ -49,10 +68,10 @@
       "message": "Done",
       "parentUuid": "3d1c954b_9bc52af3",
       "revId": "9483c754c72e414f280d934070782cee0d61d3e5",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "ee4b65b1_0c1243b3",
         "filename": "/PATCHSET_LEVEL",
@@ -66,10 +85,10 @@
       "side": 1,
       "message": "This is a new scheduling idea that I have come up with that tries to deal with the \"buffer bloat\" concept that exists with the pendingEvents firing. I believe that the typical approach we have been using in Gerrit for similar problems is to either create a new threadpool, as this other change  https://gerrit-review.googlesource.com/c/plugins/replication/+/258953 is specifically proposing or to put things in the default queue. Both have their downsides, adding more thread pools results in more memory usage and contends for CPU on par with everything else, making the task compete priority wise with every other threadpool. Since I believe this task is a lower priority than many things in other thread pools, giving it a its own threadpool would effectively raise its priority higher than what it potentially deserves. In these cases, for lower priority tasks we often share them in a common threadpool with other similarly low priority task, and so in that case we could put the fireing pending tasks in the defaultQueue. However putting potentially very long running tasks in a common lower priority pool runs the risk of starving the other tasks in that pool for too long. I believe this new approach is safer for potentially long worksets to put in any pool since it breaks the long tasks into small tasks and throttles them nicely with other tasks. I believe this scheduling approach might be useful anywhere in Gerrit where we have iterative things happening in the background (for example possibly for reading incoming mail from the mailbox).\n\nWe see long replication plugin startup times in production when we have 90K+ pending events on NFS, to the point that we have had to disable replaying them. I suspect that the long startup times are also the inspiration for this other change https://gerrit-review.googlesource.com/c/plugins/replication/+/238812 and I think it would be better to try and come up with some solution to reduce the plugin startup time then to have to create workarounds to deal with it. I do not believe that design wise we should allow firing pending events to block the plugin from starting.\n\nI would like to re-enable replaying for us soon, and likely will need either something like change 258953, or this change. I wanted to try and get some feedback on the approach so I\u0027ve uploaded this to 2.16 because I believe the problem is present there also, but I can\u0027t even seem to get the pendingEvents firing to work on 2.16, can anyone else? It claims in the logs that it is firing the events, but nothing happens, perhaps it is currently broken in 2.16 (I will investigate more)?",
       "revId": "9483c754c72e414f280d934070782cee0d61d3e5",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "854be7df_93612a47",
         "filename": "/PATCHSET_LEVEL",
@@ -84,8 +103,7 @@
       "message": "\u003e ... I can\u0027t even seem to get the pendingEvents firing to work on 2.16, can anyone else? It claims in the logs that it is firing the events, but nothing happens, perhaps it is currently broken in 2.16 (I will investigate more)?\n\nArgh, burned by a bug I had already fixed, but not far back enough:\nhttps://gerrit-review.googlesource.com/c/plugins/replication/+/267852",
       "parentUuid": "ee4b65b1_0c1243b3",
       "revId": "9483c754c72e414f280d934070782cee0d61d3e5",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
