@@ -78,7 +78,7 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
     setAutoReload();
     config.save();
 
-    setReplicationDestination("remote1", "suffix1", Optional.of("not-used-project"));
+    setReplicationDestinationRemoteConfig("remote1", "suffix1", Optional.of("not-used-project"));
 
     super.setUpTestPlugin();
 
@@ -98,7 +98,7 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
 
   @Test
   public void shouldReplicateNewBranch() throws Exception {
-    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    setReplicationDestinationRemoteConfig("foo", "replica", ALL_PROJECTS);
     reloadConfig();
 
     Project.NameKey targetProject = createTestProject(project + "replica");
@@ -126,8 +126,8 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
     Project.NameKey targetProject1 = createTestProject(project + "replica1");
     Project.NameKey targetProject2 = createTestProject(project + "replica2");
 
-    setReplicationDestination("foo1", "replica1", ALL_PROJECTS);
-    setReplicationDestination("foo2", "replica2", ALL_PROJECTS);
+    setReplicationDestinationRemoteConfig("foo1", "replica1", ALL_PROJECTS);
+    setReplicationDestinationRemoteConfig("foo2", "replica2", ALL_PROJECTS);
     reloadConfig();
 
     Result pushResult = createChange();
@@ -156,8 +156,10 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
   public void shouldCreateIndividualReplicationTasksForEveryRemoteUrlPair() throws Exception {
     List<String> replicaSuffixes = Arrays.asList("replica1", "replica2");
 
-    FileBasedConfig dest1 = setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
-    FileBasedConfig dest2 = setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
+    FileBasedConfig dest1 =
+        setReplicationDestinationRemoteConfig("foo1", replicaSuffixes, ALL_PROJECTS);
+    FileBasedConfig dest2 =
+        setReplicationDestinationRemoteConfig("foo2", replicaSuffixes, ALL_PROJECTS);
     dest1.setInt("remote", null, "replicationDelay", Integer.MAX_VALUE);
     dest2.setInt("remote", null, "replicationDelay", Integer.MAX_VALUE);
     dest1.save();
@@ -182,12 +184,12 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
     }
   }
 
-  private void setReplicationDestination(
+  private void setReplicationDestinationRemoteConfig(
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
-    setReplicationDestination(remoteName, Arrays.asList(replicaSuffix), project);
+    setReplicationDestinationRemoteConfig(remoteName, Arrays.asList(replicaSuffix), project);
   }
 
-  private FileBasedConfig setReplicationDestination(
+  private FileBasedConfig setReplicationDestinationRemoteConfig(
       String remoteName, List<String> replicaSuffixes, Optional<String> allProjects)
       throws IOException {
     FileBasedConfig remoteConfig =
