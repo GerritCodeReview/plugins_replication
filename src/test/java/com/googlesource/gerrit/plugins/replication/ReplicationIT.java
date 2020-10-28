@@ -22,18 +22,13 @@ import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.entities.Project;
-import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.inject.Inject;
-import com.google.inject.Key;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.Duration;
 import java.util.function.Supplier;
 import org.eclipse.jgit.lib.Constants;
@@ -50,30 +45,11 @@ import org.junit.Test;
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
 public class ReplicationIT extends ReplicationDaemon {
-  private static final int TEST_PROJECT_CREATION_SECONDS = 10;
   private static final Duration TEST_TIMEOUT =
       Duration.ofSeconds(
           (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60) + 1);
 
-  private static final Duration TEST_NEW_PROJECT_TIMEOUT =
-      Duration.ofSeconds(
-          (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60)
-              + TEST_PROJECT_CREATION_SECONDS);
-
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
-  private Path pluginDataDir;
-  private Path storagePath;
-  private ReplicationTasksStorage tasksStorage;
-
-  @Override
-  public void setUpTestPlugin() throws Exception {
-    super.setUpTestPlugin();
-
-    pluginDataDir = plugin.getSysInjector().getInstance(Key.get(Path.class, PluginData.class));
-    storagePath = pluginDataDir.resolve("ref-updates");
-    tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
-    cleanupReplicationTasks();
-  }
 
   @Test
   public void shouldReplicateNewProject() throws Exception {
@@ -374,19 +350,6 @@ public class ReplicationIT extends ReplicationDaemon {
     }
   }
 
-  @Test
-  public void shouldCleanupTasksAfterNewProjectReplication() throws Exception {
-    setReplicationDestination("task_cleanup_project", "replica", ALL_PROJECTS);
-    config.setInt("remote", "task_cleanup_project", "replicationRetry", 0);
-    config.save();
-    reloadConfig();
-    assertThat(tasksStorage.listRunning()).hasSize(0);
-    Project.NameKey sourceProject = createTestProject("task_cleanup_project");
-
-    waitUntil(() -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")));
-    waitUntil(() -> tasksStorage.listRunning().size() == 0);
-  }
-
   private Ref getRef(Repository repo, String branchName) throws IOException {
     return repo.getRefDatabase().exactRef(branchName);
   }
@@ -415,30 +378,6 @@ public class ReplicationIT extends ReplicationDaemon {
 
   private ReplicationQueue getReplicationQueueInstance() {
     return getInstance(ReplicationQueue.class);
-  }
-
-  public void cleanupReplicationTasks() throws IOException {
-    cleanupReplicationTasks(storagePath);
-  }
-
-  private void cleanupReplicationTasks(Path basePath) throws IOException {
-    try (DirectoryStream<Path> files = Files.newDirectoryStream(basePath)) {
-      for (Path path : files) {
-        if (Files.isDirectory(path)) {
-          cleanupReplicationTasks(path);
-        } else {
-          path.toFile().delete();
-        }
-      }
-    }
-  }
-
-  private boolean nonEmptyProjectExists(Project.NameKey name) {
-    try (Repository r = repoManager.openRepository(name)) {
-      return !r.getAllRefsByPeeledObjectId().isEmpty();
-    } catch (Exception e) {
-      return false;
-    }
   }
 
   private ObjectId createNewBranchWithoutPush(String fromBranch, String newBranch)
