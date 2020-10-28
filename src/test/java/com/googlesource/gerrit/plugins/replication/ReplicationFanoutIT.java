@@ -156,14 +156,8 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
   public void shouldCreateIndividualReplicationTasksForEveryRemoteUrlPair() throws Exception {
     List<String> replicaSuffixes = Arrays.asList("replica1", "replica2");
 
-    FileBasedConfig dest1 =
-        setReplicationDestinationRemoteConfig("foo1", replicaSuffixes, ALL_PROJECTS);
-    FileBasedConfig dest2 =
-        setReplicationDestinationRemoteConfig("foo2", replicaSuffixes, ALL_PROJECTS);
-    dest1.setInt("remote", null, "replicationDelay", Integer.MAX_VALUE);
-    dest2.setInt("remote", null, "replicationDelay", Integer.MAX_VALUE);
-    dest1.save();
-    dest2.save();
+    setReplicationDestinationRemoteConfig("foo1", replicaSuffixes, ALL_PROJECTS, Integer.MAX_VALUE);
+    setReplicationDestinationRemoteConfig("foo2", replicaSuffixes, ALL_PROJECTS, Integer.MAX_VALUE);
     reloadConfig();
 
     createChange();
@@ -186,18 +180,22 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
 
   private void setReplicationDestinationRemoteConfig(
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
-    setReplicationDestinationRemoteConfig(remoteName, Arrays.asList(replicaSuffix), project);
+    setReplicationDestinationRemoteConfig(
+        remoteName, Arrays.asList(replicaSuffix), project, TEST_REPLICATION_DELAY);
   }
 
   private FileBasedConfig setReplicationDestinationRemoteConfig(
-      String remoteName, List<String> replicaSuffixes, Optional<String> allProjects)
+      String remoteName,
+      List<String> replicaSuffixes,
+      Optional<String> allProjects,
+      int replicationDelay)
       throws IOException {
     FileBasedConfig remoteConfig =
         new FileBasedConfig(
             sitePaths.etc_dir.resolve("replication/" + remoteName + ".config").toFile(),
             FS.DETECTED);
 
-    setReplicationDestination(remoteConfig, replicaSuffixes, allProjects);
+    setReplicationDestination(remoteConfig, replicaSuffixes, allProjects, replicationDelay);
     return remoteConfig;
   }
 
@@ -207,7 +205,10 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
   }
 
   private void setReplicationDestination(
-      FileBasedConfig config, List<String> replicaSuffixes, Optional<String> project)
+      FileBasedConfig config,
+      List<String> replicaSuffixes,
+      Optional<String> project,
+      int replicationDelay)
       throws IOException {
 
     List<String> replicaUrls =
@@ -215,7 +216,7 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
             .map(suffix -> gitPath.resolve("${name}" + suffix + ".git").toString())
             .collect(toList());
     config.setStringList("remote", null, "url", replicaUrls);
-    config.setInt("remote", null, "replicationDelay", TEST_REPLICATION_DELAY);
+    config.setInt("remote", null, "replicationDelay", replicationDelay);
     project.ifPresent(prj -> config.setString("remote", null, "projects", prj));
 
     config.save();
