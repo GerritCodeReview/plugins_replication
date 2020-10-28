@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "d19be536_1dd69a48",
         "filename": "/COMMIT_MSG",
@@ -20,10 +21,10 @@
         "endChar": 27
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "d3249d2e_5fdfbbd9",
         "filename": "/COMMIT_MSG",
@@ -44,10 +45,34 @@
         "endChar": 27
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b50f4a80_ad80e69c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-28T23:00:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3249d2e_5fdfbbd9",
+      "range": {
+        "startLine": 10,
+        "startChar": 26,
+        "endLine": 11,
+        "endChar": 27
+      },
+      "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "adca82d5_41859ec7",
         "filename": "/COMMIT_MSG",
@@ -67,10 +92,10 @@
         "endChar": 39
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "3d962158_a5bb6943",
         "filename": "/COMMIT_MSG",
@@ -90,10 +115,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "eef6cc70_f7157a9d",
         "filename": "/COMMIT_MSG",
@@ -114,10 +139,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "4102add1_3875b4b9",
         "filename": "/COMMIT_MSG",
@@ -138,10 +163,10 @@
         "endChar": 39
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "d5559254_17a36117",
         "filename": "/COMMIT_MSG",
@@ -162,10 +187,10 @@
         "endChar": 39
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "f99da00f_357c5619",
         "filename": "/COMMIT_MSG",
@@ -186,10 +211,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "7e6d4627_32d92112",
         "filename": "/COMMIT_MSG",
@@ -210,10 +235,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "13e51e5d_9f01f57b",
         "filename": "/COMMIT_MSG",
@@ -234,10 +259,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "14c6cb27_5f7bb046",
         "filename": "/COMMIT_MSG",
@@ -258,10 +283,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "8fae6871_058f9198",
         "filename": "/COMMIT_MSG",
@@ -282,10 +307,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "f3bed1d0_aef68dec",
         "filename": "/COMMIT_MSG",
@@ -306,10 +331,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "fbe9d46d_3407996c",
         "filename": "/COMMIT_MSG",
@@ -330,10 +355,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "b02ade7b_3b4a97b4",
         "filename": "/COMMIT_MSG",
@@ -354,10 +379,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "96fa035c_5626a134",
         "filename": "/COMMIT_MSG",
@@ -378,10 +403,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "6715a68e_f4e58c10",
         "filename": "/COMMIT_MSG",
@@ -402,10 +427,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "f3bef526_26154ec1",
         "filename": "/COMMIT_MSG",
@@ -426,10 +451,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "95425a4e_66e5bdd7",
         "filename": "/COMMIT_MSG",
@@ -450,10 +475,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "b7c94b8a_a01bbe0f",
         "filename": "/COMMIT_MSG",
@@ -474,10 +499,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "c554f186_9e405986",
         "filename": "/COMMIT_MSG",
@@ -498,10 +523,10 @@
         "endChar": 17
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "9ab2a70c_6efd55ea",
         "filename": "/PATCHSET_LEVEL",
@@ -515,10 +540,10 @@
       "side": 1,
       "message": "I believe I start to understand more how the ChainedScheduler works. However, as it is done in a separate class for making it reusable, I would love to see some API contract validation.\n\nI am also struggling to find in the code the behaviour described in the commit message.",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "5c790dac_90978cc0",
         "filename": "/PATCHSET_LEVEL",
@@ -533,10 +558,10 @@
       "message": "\u003e I believe I start to understand more how the ChainedScheduler works. However, as it is done in a separate class for making it reusable, I would love to see some API contract validation.\n\nWhat do you have in mind, ChainedScheduler unit tests?\n \n\u003e I am also struggling to find in the code the behaviour described in the commit message.\n\nIs this a repeat of your comment on the commit message?",
       "parentUuid": "9ab2a70c_6efd55ea",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "9bd00cd4_b0eaac38",
         "filename": "/PATCHSET_LEVEL",
@@ -550,10 +575,10 @@
       "side": 1,
       "message": "Thanks Saša for your feedback.",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "0fcb9f4f_e53db171",
         "filename": "/PATCHSET_LEVEL",
@@ -567,10 +592,10 @@
       "side": 1,
       "message": "I confirm my +1, I will hold off any further comments for giving space to other contributors and maintainers to dig into the change and provider their feedback.\n\nI will make further investigation on the code offline, thanks in the meantime to Martin for uploading his change and his proposed ChainScheduler. I apologise in advance if I created frustration with my questions on the code: I just wanted was deeply understand the change, its consequences on the replication plugin architecture and provide meaningful feedback.",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "1a146591_fb7ee8b7",
         "filename": "/PATCHSET_LEVEL",
@@ -585,10 +610,10 @@
       "message": "\u003e I just wanted was deeply understand the change, its consequences on the replication plugin architecture and provide meaningful feedback.\n\nThank you, this is very much appreciated especially as your expertise is limited!",
       "parentUuid": "0fcb9f4f_e53db171",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "4d2e3f29_2ded0110",
         "filename": "/PATCHSET_LEVEL",
@@ -603,10 +628,10 @@
       "message": "\u003e \u003e I just wanted was deeply understand the change, its consequences on the replication plugin architecture and provide meaningful feedback.\n\u003e \n\u003e Thank you, this is very much appreciated especially as your expertise is limited!\n\nThat didn\u0027t come out right, what I meant was, \"you have expertise, and very few others do\".",
       "parentUuid": "1a146591_fb7ee8b7",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "c37919fa_2310846a",
         "filename": "/PATCHSET_LEVEL",
@@ -620,10 +645,10 @@
       "side": 1,
       "message": "Thanks for the feedback! I am working on fixing the remaining issue, and adding UTs, will upload a new PS soon.",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "0d4d83d2_0dccfa8f",
         "filename": "/PATCHSET_LEVEL",
@@ -638,10 +663,10 @@
       "message": "I\u0027ve added UTs (they are way more complicated, took way longer to write and debug, and way more code than this class!)",
       "parentUuid": "c37919fa_2310846a",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "0a3495e1_b5a1fdfc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -655,10 +680,10 @@
       "side": 1,
       "message": "This iterator will be accessed by multiple threads. I couldn\u0027t prove that this is thread-safe. The javadoc of Stream.iterator doesn\u0027t tell that the resulting iterator is thread-safe.",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "2044f7bf_4f9bade2",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -673,10 +698,10 @@
       "message": "\u003e This iterator will be accessed by multiple threads.\n\nIt will NOT be accessed by more than one thread concurrently ever. Every Task will only access the iterator in scheduleNext(), and will never access it again once it has called schedule(). In that moment of time between the first iterator call (line 136), and the last (line 140), no other Task can exist that will not have already completed those calls since new Tasks are only created after their completion by the current Task.",
       "parentUuid": "0a3495e1_b5a1fdfc",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "2824ca16_ebf173a4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -691,10 +716,10 @@
       "message": "This assumption, that two threads will never concurrently access this iterator, should be documented here for future reference as it is seems critical for this code to work correctly.\n\nHowever, even if this iterator will never be accessed concurrently by more than one thread I still wonder if an update of the\ninternal state of the iterator (like the current index) is guaranteed to be visible by the other threads?\nFor example, imagine we add another instance member to the ChainedScheduler: int totalScheduled, and we increase\nit every time a the scheduleNext() successfully schedules a task. Even without concurrent access by more than one thread\nwe would need to synchronize the read/write access to this variable in order to make sure that updates are visible by the\nother threads (or use volatile or AtomicInt or something else...).\n\nAn iterator will likely have an internal state like: int cursor. If one thread increases that value (by calling next())\nwhat guarantees that this update is visible to the other threads? In the terms of the java memory model: what guarantees\nthe happens-before/happens-after semantics for two updates done from two different threads?",
       "parentUuid": "2044f7bf_4f9bade2",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "ea35ed0a_5b18bb7c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -709,10 +734,10 @@
       "message": "\u003e In the terms of the java memory model: what guarantees\nthe happens-before/happens-after semantics for two updates done from two different threads?\n\nI did some further research and can answer my own question(s). By the rules of the java\nmemory model [1] we would have to synchronize because there wouldn\u0027t be a happens-before\nrelationship between two updates of the iterator from two different threads.\n\nHowever, the java.util.concurrent package [2] (section \"Memory Consistency Properties\")\nextends the guarantees of the java memory model to higher-level synchronization.\nIn particular this guarantee of the java.util.concurrent applies here:\n\"Actions in a thread prior to the submission of a Runnable to an Executor happen-before its execution begins. Similarly for Callables submitted to an ExecutorService\"\n\nSince, in this change, new tasks are submitted to the executor service by another (running)\ntask, all actions done in the submitting task, in particular the update of the iterator\nin the scheduleNext() method, happen-before the newly submitted task\u0027s actions. Therefore,\nthe updates of the iterator are visible to the (next) submitted task in the thread pool.\n\nNote that this would not be the case if we would submit all tasks from one thread.\n\nFurther, if we would ever extend the ChainedScheduler to support more than one chain\n(by submitted N initial tasks to the thread pool), this code wouldn\u0027t be thread safe any more.\n\nTo summarize, this code works because:\n* there is one chain of tasks and each task submits the next task\n* the potential race condition in the lines 136-140 never occurs as at more than one thread\nwill never execute these lines concurrently.\n\nI believe that this should be documented in this code in order to make it harder to unintentionally\nbreak this code in the future.\n\n[1] https://docs.oracle.com/javase/specs/jls/se7/html/jls-17.html#jls-17.4.5\n[2] https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/package-summary.html",
       "parentUuid": "2824ca16_ebf173a4",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "38c4c668_a27ee297",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -727,10 +752,10 @@
       "message": "Great stuff! Done.",
       "parentUuid": "ea35ed0a_5b18bb7c",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "e447db75_17763441",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -750,10 +775,10 @@
         "endChar": 33
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "cf80bae5_ad311aee",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -774,10 +799,10 @@
         "endChar": 33
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "9c024231_78e931db",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ChainedScheduler.java",
@@ -798,10 +823,10 @@
         "endChar": 33
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "4e37e00b_19826dfa",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
@@ -821,10 +846,10 @@
         "endChar": 78
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "1d75ea3e_28a15839",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
@@ -845,10 +870,10 @@
         "endChar": 78
       },
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "4d7bc8e9_a0ae546f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
@@ -862,10 +887,10 @@
       "side": 1,
       "message": "Most of the list* methods in this class are synchronized for the reasons given in [1].\nThis method is not synchronized. Is this an issue? I don\u0027t know, but it would be nice\nto hear from the author of [1] about his opinion. Luca WDYT?\n\n[1] https://gerrit-review.googlesource.com/c/plugins/replication/+/247792",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "363cd989_1b9accf9",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
@@ -880,8 +905,7 @@
       "message": "This synchronizeds are primarily there for testing. I believe that newer tests should not be written with this constraint as they will not hold in MM scenarios.",
       "parentUuid": "4d7bc8e9_a0ae546f",
       "revId": "75430697bdcfa2daa1b41c57b673d13d9e797ed4",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
