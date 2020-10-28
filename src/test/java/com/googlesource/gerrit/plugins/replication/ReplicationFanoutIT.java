@@ -158,18 +158,15 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
 
     FileBasedConfig dest1 = setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
     FileBasedConfig dest2 = setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
-    dest1.setInt("remote", null, "replicationDelay", TEST_REPLICATION_DELAY * 100);
-    dest2.setInt("remote", null, "replicationDelay", TEST_REPLICATION_DELAY * 100);
+    dest1.setInt("remote", null, "replicationDelay", Integer.MAX_VALUE);
+    dest2.setInt("remote", null, "replicationDelay", Integer.MAX_VALUE);
     dest1.save();
     dest2.save();
     reloadConfig();
 
     createChange();
 
-    assertThat(listIncompleteTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
-
-    setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
-    setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
+    assertThat(listWaitingTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
   }
 
   private Ref getRef(Repository repo, String branchName) throws IOException {
@@ -240,6 +237,13 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
 
   private Project.NameKey createTestProject(String name) throws Exception {
     return projectOperations.newProject().name(name).create();
+  }
+
+  private List<ReplicateRefUpdate> listWaitingTasks(String refRegex) {
+    Pattern refmaskPattern = Pattern.compile(refRegex);
+    return tasksStorage.listWaiting().stream()
+        .filter(task -> refmaskPattern.matcher(task.ref).matches())
+        .collect(toList());
   }
 
   @SuppressWarnings(
