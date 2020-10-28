@@ -27,6 +27,7 @@ import java.net.URISyntaxException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import org.junit.Test;
@@ -49,6 +50,11 @@ public class ReplicationStorageIT extends ReplicationDaemon {
 
   @Override
   public void setUpTestPlugin() throws Exception {
+    initConfig();
+    setReplicationDestination(
+        "remote1",
+        "suffix1",
+        Optional.of("not-used-project")); // Simulates a full replication.config initialization
     super.setUpTestPlugin();
     tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
   }

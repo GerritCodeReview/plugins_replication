@@ -63,19 +63,6 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
   protected Path gitPath;
   protected FileBasedConfig config;
 
-  @Override
-  public void setUpTestPlugin() throws Exception {
-    gitPath = sitePaths.site_path.resolve("git");
-    config =
-        new FileBasedConfig(sitePaths.etc_dir.resolve("replication.config").toFile(), FS.DETECTED);
-    config.save();
-    setReplicationDestination(
-        "remote1",
-        "suffix1",
-        Optional.of("not-used-project")); // Simulates a full replication.config initialization
-    super.setUpTestPlugin();
-  }
-
   protected void setReplicationDestination(
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
     setReplicationDestination(
@@ -177,6 +164,16 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
       return !r.getAllRefsByPeeledObjectId().isEmpty();
     } catch (Exception e) {
       return false;
+    }
+  }
+
+  protected void initConfig() throws IOException {
+    if (config == null) {
+      gitPath = sitePaths.site_path.resolve("git");
+      config =
+          new FileBasedConfig(
+              sitePaths.etc_dir.resolve("replication.config").toFile(), FS.DETECTED);
+      config.save();
     }
   }
 }

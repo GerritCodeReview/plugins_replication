@@ -17,19 +17,14 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.truth.Truth.assertThat;
 import static java.util.stream.Collectors.toList;
 
-import com.google.common.flogger.FluentLogger;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
-import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
-import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.extensions.api.projects.BranchInput;
-import com.google.gerrit.server.config.SitePaths;
-import com.google.inject.Inject;
 import com.google.inject.Key;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.io.IOException;
@@ -55,29 +50,19 @@ import org.junit.Test;
 @TestPlugin(
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
-public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
-  private static final Optional<String> ALL_PROJECTS = Optional.empty();
-  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-  private static final int TEST_REPLICATION_DELAY = 1;
-  private static final Duration TEST_TIMEOUT = Duration.ofSeconds(TEST_REPLICATION_DELAY * 2);
+public class ReplicationFanoutIT extends ReplicationDaemon {
+  private static final Duration TEST_TIMEOUT =
+      Duration.ofSeconds(TEST_REPLICATION_DELAY_SECONDS * 2);
 
-  @Inject private SitePaths sitePaths;
-  @Inject private ProjectOperations projectOperations;
   private Path pluginDataDir;
-  private Path gitPath;
   private Path storagePath;
-  private FileBasedConfig config;
   private ReplicationTasksStorage tasksStorage;
 
   @Override
   public void setUpTestPlugin() throws Exception {
-    gitPath = sitePaths.site_path.resolve("git");
-
-    config =
-        new FileBasedConfig(sitePaths.etc_dir.resolve("replication.config").toFile(), FS.DETECTED);
-    setAutoReload();
+    initConfig();
+    config.setBoolean("gerrit", null, "autoReload", true);
     config.save();
-
     setReplicationDestinationRemoteConfig("remote1", "suffix1", Optional.of("not-used-project"));
 
     super.setUpTestPlugin();
@@ -169,19 +154,10 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
     return repo.getRefDatabase().exactRef(branchName);
   }
 
-  private Ref checkedGetRef(Repository repo, String branchName) {
-    try {
-      return repo.getRefDatabase().exactRef(branchName);
-    } catch (Exception e) {
-      logger.atSevere().withCause(e).log("failed to get ref %s in repo %s", branchName, repo);
-      return null;
-    }
-  }
-
   private void setReplicationDestinationRemoteConfig(
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
     setReplicationDestinationRemoteConfig(
-        remoteName, Arrays.asList(replicaSuffix), project, TEST_REPLICATION_DELAY);
+        remoteName, Arrays.asList(replicaSuffix), project, TEST_REPLICATION_DELAY_SECONDS);
   }
 
   private FileBasedConfig setReplicationDestinationRemoteConfig(
@@ -197,11 +173,6 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
 
     setReplicationDestination(remoteConfig, replicaSuffixes, allProjects, replicationDelay);
     return remoteConfig;
-  }
-
-  private void setAutoReload() throws IOException {
-    config.setBoolean("gerrit", null, "autoReload", true);
-    config.save();
   }
 
   private void setReplicationDestination(
@@ -224,22 +195,6 @@ public class ReplicationFanoutIT extends LightweightPluginDaemonTest {
 
   private void waitUntil(Supplier<Boolean> waitCondition) throws InterruptedException {
     WaitUtil.waitUntil(waitCondition, TEST_TIMEOUT);
-  }
-
-  private void reloadConfig() {
-    getAutoReloadConfigDecoratorInstance().reload();
-  }
-
-  private AutoReloadConfigDecorator getAutoReloadConfigDecoratorInstance() {
-    return getInstance(AutoReloadConfigDecorator.class);
-  }
-
-  private <T> T getInstance(Class<T> classObj) {
-    return plugin.getSysInjector().getInstance(classObj);
-  }
-
-  private Project.NameKey createTestProject(String name) throws Exception {
-    return projectOperations.newProject().name(name).create();
   }
 
   private List<ReplicateRefUpdate> listWaitingTasks(String refRegex) {

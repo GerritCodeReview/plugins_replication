@@ -30,6 +30,7 @@ import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.inject.Inject;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Optional;
 import java.util.function.Supplier;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
@@ -50,6 +51,16 @@ public class ReplicationIT extends ReplicationDaemon {
           (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60) + 1);
 
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
+
+  @Override
+  public void setUpTestPlugin() throws Exception {
+    initConfig();
+    setReplicationDestination(
+        "remote1",
+        "suffix1",
+        Optional.of("not-used-project")); // Simulates a full replication.config initialization
+    super.setUpTestPlugin();
+  }
 
   @Test
   public void shouldReplicateNewProject() throws Exception {
