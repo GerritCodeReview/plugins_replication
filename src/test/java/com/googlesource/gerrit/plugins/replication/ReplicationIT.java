@@ -17,90 +17,39 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.gerrit.testing.GerritJUnit.assertThrows;
 import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.NO_OP;
-import static java.util.stream.Collectors.toList;
 
-import com.google.common.flogger.FluentLogger;
-import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
-import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.entities.Project;
-import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
-import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
-import com.google.inject.Key;
-import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 import java.util.function.Supplier;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.RefUpdate;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
-import org.eclipse.jgit.storage.file.FileBasedConfig;
-import org.eclipse.jgit.util.FS;
+import org.eclipse.jgit.revwalk.RevWalk;
 import org.junit.Test;
 
 @UseLocalDisk
 @TestPlugin(
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
-public class ReplicationIT extends LightweightPluginDaemonTest {
-  private static final Optional<String> ALL_PROJECTS = Optional.empty();
-  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-  private static final int TEST_REPLICATION_DELAY = 1;
-  private static final int TEST_REPLICATION_RETRY = 1;
-  private static final int TEST_PROJECT_CREATION_SECONDS = 10;
+public class ReplicationIT extends ReplicationDaemon {
   private static final Duration TEST_TIMEOUT =
-      Duration.ofSeconds((TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) + 1);
-
-  private static final Duration TEST_NEW_PROJECT_TIMEOUT =
       Duration.ofSeconds(
-          (TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) + TEST_PROJECT_CREATION_SECONDS);
+          (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60) + 1);
 
-  @Inject private SitePaths sitePaths;
-  @Inject private ProjectOperations projectOperations;
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
-  private Path pluginDataDir;
-  private Path gitPath;
-  private Path storagePath;
-  private FileBasedConfig config;
-  private ReplicationTasksStorage tasksStorage;
-
-  @Override
-  public void setUpTestPlugin() throws Exception {
-    gitPath = sitePaths.site_path.resolve("git");
-
-    config =
-        new FileBasedConfig(sitePaths.etc_dir.resolve("replication.config").toFile(), FS.DETECTED);
-    setReplicationDestination(
-        "remote1",
-        "suffix1",
-        Optional.of("not-used-project")); // Simulates a full replication.config initialization
-    config.save();
-
-    super.setUpTestPlugin();
-
-    pluginDataDir = plugin.getSysInjector().getInstance(Key.get(Path.class, PluginData.class));
-    storagePath = pluginDataDir.resolve("ref-updates");
-    tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
-    cleanupReplicationTasks();
-  }
 
   @Test
   public void shouldReplicateNewProject() throws Exception {
@@ -218,78 +167,55 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
   }
 
   @Test
-  public void shouldCreateIndividualReplicationTasksForEveryRemoteUrlPair() throws Exception {
-    List<String> replicaSuffixes = Arrays.asList("replica1", "replica2");
-    createTestProject(project + "replica1");
-    createTestProject(project + "replica2");
-
-    FileBasedConfig dest1 = setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
-    FileBasedConfig dest2 = setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
-    dest1.setInt("remote", null, "replicationDelay", TEST_REPLICATION_DELAY * 100);
-    dest2.setInt("remote", null, "replicationDelay", TEST_REPLICATION_DELAY * 100);
-    dest1.save();
-    dest2.save();
-    reloadConfig();
-
-    createChange();
-
-    assertThat(listIncompleteTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
-
-    setReplicationDestination("foo1", replicaSuffixes, ALL_PROJECTS);
-    setReplicationDestination("foo2", replicaSuffixes, ALL_PROJECTS);
-  }
-
-  @Test
-  public void shouldCreateOneReplicationTaskWhenSchedulingRepoFullSync() throws Exception {
-    createTestProject(project + "replica");
-
-    setReplicationDestination("foo", "replica", ALL_PROJECTS);
-    reloadConfig();
-
-    plugin
-        .getSysInjector()
-        .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, new ReplicationState(NO_OP), true);
-
-    assertThat(listIncompleteTasks(Pattern.quote(PushOne.ALL_REFS))).hasSize(1);
-  }
-
-  @Test
   public void shouldMatchTemplatedURL() throws Exception {
-    createTestProject(project + "replica");
+    Project.NameKey targetProject = createTestProject(project + "replica");
 
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
+
+    String newRef = "refs/heads/newForTest";
+    ObjectId newRefTip = createNewBranchWithoutPush("refs/heads/master", newRef);
 
     String urlMatch = gitPath.resolve("${name}" + "replica" + ".git").toString();
-    String expectedURI = gitPath.resolve(project + "replica" + ".git").toString();
 
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
-    assertThat(listIncompleteTasks(Pattern.quote(PushOne.ALL_REFS))).hasSize(1);
-    streamIncompleteTasks().forEach((task) -> assertThat(task.uri).isEqualTo(expectedURI));
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, newRef) != null);
+
+      Ref targetBranchRef = getRef(repo, newRef);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(newRefTip);
+    }
   }
 
   @Test
   public void shouldMatchRealURL() throws Exception {
-    createTestProject(project + "replica");
+    Project.NameKey targetProject = createTestProject(project + "replica");
 
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
 
+    String newRef = "refs/heads/newForTest";
+    ObjectId newRefTip = createNewBranchWithoutPush("refs/heads/master", newRef);
+
     String urlMatch = gitPath.resolve(project + "replica" + ".git").toString();
-    String expectedURI = urlMatch;
 
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
-    assertThat(listIncompleteTasks()).hasSize(1);
-    streamIncompleteTasks().forEach((task) -> assertThat(task.uri).isEqualTo(expectedURI));
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, newRef) != null);
+
+      Ref targetBranchRef = getRef(repo, newRef);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(newRefTip);
+    }
   }
 
   @Test
@@ -335,15 +261,11 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     input.revision = master;
     gApi.projects().name(project.get()).branch(branchToDelete).create(input);
 
-    assertThat(listIncompleteTasks("refs/heads/(todelete|master)")).hasSize(2);
-
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, branchToDelete) != null);
     }
 
     gApi.projects().name(project.get()).branch(branchToDelete).delete();
-
-    assertThat(listIncompleteTasks(branchToDelete)).hasSize(1);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       if (mirror) {
@@ -428,129 +350,8 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     }
   }
 
-  @Test
-  public void shouldCleanupTasksAfterNewProjectReplication() throws Exception {
-    setReplicationDestination("task_cleanup_project", "replica", ALL_PROJECTS);
-    config.setInt("remote", "task_cleanup_project", "replicationRetry", 0);
-    config.save();
-    reloadConfig();
-    assertThat(tasksStorage.listRunning()).hasSize(0);
-    Project.NameKey sourceProject = createTestProject("task_cleanup_project");
-
-    waitUntil(() -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")));
-    waitUntil(() -> tasksStorage.listRunning().size() == 0);
-  }
-
-  @Test
-  public void shouldFirePendingOnlyToRemainingUris() throws Exception {
-    String suffix1 = "replica1";
-    String suffix2 = "replica2";
-    Project.NameKey target1 = createTestProject(project + suffix1);
-    Project.NameKey target2 = createTestProject(project + suffix2);
-    String remote1 = "foo1";
-    String remote2 = "foo2";
-    setReplicationDestination(remote1, suffix1, ALL_PROJECTS, Integer.MAX_VALUE, false);
-    setReplicationDestination(remote2, suffix2, ALL_PROJECTS, Integer.MAX_VALUE, false);
-    reloadConfig();
-
-    String changeRef = createChange().getPatchSet().refName();
-
-    changeReplicationTasksForRemote(tasksStorage.listWaiting().stream(), changeRef, remote1)
-        .forEach(
-            (update) -> {
-              try {
-                UriUpdates uriUpdates = TestUriUpdates.create(update);
-                tasksStorage.start(uriUpdates);
-                tasksStorage.finish(uriUpdates);
-              } catch (URISyntaxException e) {
-              }
-            });
-
-    setReplicationDestination(remote1, suffix1, ALL_PROJECTS);
-    setReplicationDestination(remote2, suffix2, ALL_PROJECTS);
-    reloadConfig();
-
-    assertThat(changeReplicationTasksForRemote(changeRef, remote2).count()).isEqualTo(1);
-    assertThat(changeReplicationTasksForRemote(changeRef, remote1).count()).isEqualTo(0);
-
-    assertThat(isPushCompleted(target2, changeRef, TEST_TIMEOUT)).isEqualTo(true);
-    assertThat(isPushCompleted(target1, changeRef, TEST_TIMEOUT)).isEqualTo(false);
-  }
-
-  public boolean isPushCompleted(Project.NameKey project, String ref, Duration timeOut) {
-    try (Repository repo = repoManager.openRepository(project)) {
-      WaitUtil.waitUntil(() -> checkedGetRef(repo, ref) != null, timeOut);
-      return true;
-    } catch (InterruptedException e) {
-      return false;
-    } catch (Exception e) {
-      throw new RuntimeException("Cannot open repo for project" + project, e);
-    }
-  }
-
   private Ref getRef(Repository repo, String branchName) throws IOException {
     return repo.getRefDatabase().exactRef(branchName);
-  }
-
-  private Ref checkedGetRef(Repository repo, String branchName) {
-    try {
-      return repo.getRefDatabase().exactRef(branchName);
-    } catch (Exception e) {
-      logger.atSevere().withCause(e).log("failed to get ref %s in repo %s", branchName, repo);
-      return null;
-    }
-  }
-
-  private void setReplicationDestination(
-      String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
-    setReplicationDestination(
-        remoteName, Arrays.asList(replicaSuffix), project, TEST_REPLICATION_DELAY, false);
-  }
-
-  private void setReplicationDestination(
-      String remoteName, String replicaSuffix, Optional<String> project, boolean mirror)
-      throws IOException {
-    setReplicationDestination(
-        remoteName, Arrays.asList(replicaSuffix), project, TEST_REPLICATION_DELAY, mirror);
-  }
-
-  private void setReplicationDestination(
-      String remoteName,
-      String replicaSuffix,
-      Optional<String> project,
-      int replicationDelay,
-      boolean mirror)
-      throws IOException {
-    setReplicationDestination(
-        remoteName, Arrays.asList(replicaSuffix), project, replicationDelay, mirror);
-  }
-
-  private FileBasedConfig setReplicationDestination(
-      String remoteName, List<String> replicaSuffixes, Optional<String> project)
-      throws IOException {
-    return setReplicationDestination(
-        remoteName, replicaSuffixes, project, TEST_REPLICATION_DELAY, false);
-  }
-
-  private FileBasedConfig setReplicationDestination(
-      String remoteName,
-      List<String> replicaSuffixes,
-      Optional<String> project,
-      int replicationDelay,
-      boolean mirror)
-      throws IOException {
-    List<String> replicaUrls =
-        replicaSuffixes.stream()
-            .map(suffix -> gitPath.resolve("${name}" + suffix + ".git").toString())
-            .collect(toList());
-    config.setStringList("remote", remoteName, "url", replicaUrls);
-    config.setInt("remote", remoteName, "replicationDelay", replicationDelay);
-    config.setInt("remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY);
-    config.setBoolean("remote", remoteName, "mirror", mirror);
-    project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
-    config.setBoolean("gerrit", null, "autoReload", true);
-    config.save();
-    return config;
   }
 
   private void setProjectDeletionReplication(String remoteName, boolean replicateProjectDeletion)
@@ -561,10 +362,6 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
 
   private void waitUntil(Supplier<Boolean> waitCondition) throws InterruptedException {
     WaitUtil.waitUntil(waitCondition, TEST_TIMEOUT);
-  }
-
-  private void reloadConfig() {
-    getAutoReloadConfigDecoratorInstance().reload();
   }
 
   private void shutdownDestinations() {
@@ -579,75 +376,23 @@ public class ReplicationIT extends LightweightPluginDaemonTest {
     getReplicationQueueInstance().stop();
   }
 
-  private AutoReloadConfigDecorator getAutoReloadConfigDecoratorInstance() {
-    return getInstance(AutoReloadConfigDecorator.class);
-  }
-
   private ReplicationQueue getReplicationQueueInstance() {
     return getInstance(ReplicationQueue.class);
   }
 
-  private <T> T getInstance(Class<T> classObj) {
-    return plugin.getSysInjector().getInstance(classObj);
-  }
-
-  private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
-      String changeRef, String remote) {
-    return changeReplicationTasksForRemote(streamIncompleteTasks(), changeRef, remote);
-  }
-
-  private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
-      Stream<ReplicateRefUpdate> updates, String changeRef, String remote) {
-    return updates
-        .filter(task -> changeRef.equals(task.ref))
-        .filter(task -> remote.equals(task.remote));
-  }
-
-  private Project.NameKey createTestProject(String name) throws Exception {
-    return projectOperations.newProject().name(name).create();
-  }
-
-  private List<ReplicateRefUpdate> listIncompleteTasks(String refRegex) {
-    Pattern refmaskPattern = Pattern.compile(refRegex);
-    return streamIncompleteTasks()
-        .filter(task -> refmaskPattern.matcher(task.ref).matches())
-        .collect(toList());
-  }
-
-  private List<ReplicateRefUpdate> listIncompleteTasks() {
-    return streamIncompleteTasks().collect(toList());
-  }
-
-  @SuppressWarnings(
-      "SynchronizeOnNonFinalField") // tasksStorage is non-final but only set in setUpTestPlugin()
-  private Stream<ReplicateRefUpdate> streamIncompleteTasks() {
-    synchronized (tasksStorage) {
-      return Stream.concat(
-          tasksStorage.listWaiting().stream(), tasksStorage.listRunning().stream());
-    }
-  }
-
-  public void cleanupReplicationTasks() throws IOException {
-    cleanupReplicationTasks(storagePath);
-  }
-
-  private void cleanupReplicationTasks(Path basePath) throws IOException {
-    try (DirectoryStream<Path> files = Files.newDirectoryStream(basePath)) {
-      for (Path path : files) {
-        if (Files.isDirectory(path)) {
-          cleanupReplicationTasks(path);
-        } else {
-          path.toFile().delete();
-        }
+  private ObjectId createNewBranchWithoutPush(String fromBranch, String newBranch)
+      throws Exception {
+    try (Repository repo = repoManager.openRepository(project);
+        RevWalk walk = new RevWalk(repo)) {
+      Ref ref = repo.exactRef(fromBranch);
+      RevCommit tip = null;
+      if (ref != null) {
+        tip = walk.parseCommit(ref.getObjectId());
       }
-    }
-  }
-
-  private boolean nonEmptyProjectExists(Project.NameKey name) {
-    try (Repository r = repoManager.openRepository(name)) {
-      return !r.getAllRefsByPeeledObjectId().isEmpty();
-    } catch (Exception e) {
-      return false;
+      RefUpdate update = repo.updateRef(newBranch);
+      update.setNewObjectId(tip);
+      update.update(walk);
+      return update.getNewObjectId();
     }
   }
 }
