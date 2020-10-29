@@ -159,10 +159,6 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
     assertThat(listWaitingTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
   }
 
-  private Ref getRef(Repository repo, String branchName) throws IOException {
-    return repo.getRefDatabase().exactRef(branchName);
-  }
-
   private void setReplicationDestinationRemoteConfig(
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
     setReplicationDestinationRemoteConfig(

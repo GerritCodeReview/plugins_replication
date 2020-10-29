@@ -169,6 +169,10 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
     }
   }
 
+  protected Ref getRef(Repository repo, String branchName) throws IOException {
+    return repo.getRefDatabase().exactRef(branchName);
+  }
+
   protected void reloadConfig() {
     getAutoReloadConfigDecoratorInstance().reload();
   }
