@@ -16,6 +16,23 @@
       "message": "Luca or Martin, can you take a look please?",
       "revId": "3116297c42a4d4c02fa31af6a944fddd0f012668",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d08eabcc_58b44925",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-10-29T21:20:06Z",
+      "side": 1,
+      "message": "Needs rebasing and resolving potential conflicts.",
+      "revId": "3116297c42a4d4c02fa31af6a944fddd0f012668",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
