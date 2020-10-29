@@ -23,19 +23,14 @@ import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.entities.Project;
-import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.extensions.api.projects.BranchInput;
-import com.google.inject.Key;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -49,8 +44,6 @@ import org.junit.Test;
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
 public class ReplicationFanoutIT extends ReplicationDaemon {
-  private Path pluginDataDir;
-  private Path storagePath;
   private ReplicationTasksStorage tasksStorage;
 
   @Override
@@ -61,11 +54,7 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
     setReplicationDestinationRemoteConfig("remote1", "suffix1", Optional.of("not-used-project"));
 
     super.setUpTestPlugin();
-
-    pluginDataDir = plugin.getSysInjector().getInstance(Key.get(Path.class, PluginData.class));
-    storagePath = pluginDataDir.resolve("ref-updates");
     tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
-    cleanupReplicationTasks();
   }
 
   @After
@@ -88,8 +77,6 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
     input.revision = master;
     gApi.projects().name(project.get()).branch(newBranch).create(input);
 
-    assertThat(listIncompleteTasks("refs/heads/(mybranch|master)")).hasSize(2);
-
     isPushCompleted(targetProject, newBranch, TEST_PUSH_TIMEOUT);
     try (Repository repo = repoManager.openRepository(targetProject);
         Repository sourceRepo = repoManager.openRepository(project)) {
@@ -98,6 +85,21 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
       assertThat(targetBranchRef).isNotNull();
       assertThat(targetBranchRef.getObjectId()).isEqualTo(masterRef.getObjectId());
     }
+  }
+
+  @Test
+  public void shouldReplicateNewBranchStorage() throws Exception {
+    setReplicationDestinationRemoteConfig("foo", "replica", ALL_PROJECTS, Integer.MAX_VALUE);
+    reloadConfig();
+
+    createTestProject(project + "replica");
+    String newBranch = "refs/heads/mybranch";
+    String master = "refs/heads/master";
+    BranchInput input = new BranchInput();
+    input.revision = master;
+    gApi.projects().name(project.get()).branch(newBranch).create(input);
+
+    assertThat(listWaitingTasks("refs/heads/(mybranch|master)")).hasSize(2);
   }
 
   @Test
@@ -112,8 +114,6 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
     Result pushResult = createChange();
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
-
-    assertThat(listIncompleteTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(2);
 
     try (Repository repo1 = repoManager.openRepository(targetProject1);
         Repository repo2 = repoManager.openRepository(targetProject2)) {
@@ -130,6 +130,20 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
       assertThat(targetBranchRef2).isNotNull();
       assertThat(targetBranchRef2.getObjectId()).isEqualTo(sourceCommit.getId());
     }
+  }
+
+  @Test
+  public void shouldReplicateNewBranchToTwoRemotesStorage() throws Exception {
+    createTestProject(project + "replica1");
+    createTestProject(project + "replica2");
+
+    setReplicationDestinationRemoteConfig("foo1", "replica1", ALL_PROJECTS, Integer.MAX_VALUE);
+    setReplicationDestinationRemoteConfig("foo2", "replica2", ALL_PROJECTS, Integer.MAX_VALUE);
+    reloadConfig();
+
+    createChange();
+
+    assertThat(listWaitingTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(2);
   }
 
   @Test
@@ -153,6 +167,13 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
     setReplicationDestinationRemoteConfig(
         remoteName, Arrays.asList(replicaSuffix), project, TEST_REPLICATION_DELAY_SECONDS);
+  }
+
+  private void setReplicationDestinationRemoteConfig(
+      String remoteName, String replicaSuffix, Optional<String> project,
+      int replicationDelay) throws IOException {
+    setReplicationDestinationRemoteConfig(
+        remoteName, Arrays.asList(replicaSuffix), project, replicationDelay);
   }
 
   private FileBasedConfig setReplicationDestinationRemoteConfig(
@@ -193,32 +214,5 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
     return tasksStorage.listWaiting().stream()
         .filter(task -> refmaskPattern.matcher(task.ref).matches())
         .collect(toList());
-  }
-
-  @SuppressWarnings(
-      "SynchronizeOnNonFinalField") // tasksStorage is non-final but only set in setUpTestPlugin()
-  private List<ReplicateRefUpdate> listIncompleteTasks(String refRegex) {
-    Pattern refmaskPattern = Pattern.compile(refRegex);
-    synchronized (tasksStorage) {
-      return Stream.concat(tasksStorage.listWaiting().stream(), tasksStorage.listRunning().stream())
-          .filter(task -> refmaskPattern.matcher(task.ref).matches())
-          .collect(toList());
-    }
-  }
-
-  public void cleanupReplicationTasks() throws IOException {
-    cleanupReplicationTasks(storagePath);
-  }
-
-  private void cleanupReplicationTasks(Path basePath) throws IOException {
-    try (DirectoryStream<Path> files = Files.newDirectoryStream(basePath)) {
-      for (Path path : files) {
-        if (Files.isDirectory(path)) {
-          cleanupReplicationTasks(path);
-        } else {
-          path.toFile().delete();
-        }
-      }
-    }
   }
 }
