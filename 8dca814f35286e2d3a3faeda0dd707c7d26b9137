@@ -218,6 +218,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "adb0dc5b_b1411ed9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-29T22:30:28Z",
+      "side": 1,
+      "message": "Luca, perhaps I\u0027m misunderstanding your response, but I don\u0027t see Martin\u0027s or my earlier questions addressed. To quote my earlier response \"Let\u0027s not mix discussions. If you don\u0027t think this change is harmful and/or in fact if it would be helpful to multi-primary setups, please don\u0027t block it.\" All your responses are focused on a problem I believe you see as related to the problem we\u0027re solving. We don\u0027t have evidence to suggest they are related.\n\nIf you cannot explain how this discussion relates to this change, then this discussion is only serving to derail this change. It is inappropriate to hijack someone\u0027s change to push a different agenda.\n\n@Marco @Edwin Can we get some help from the community managers here? We perceive this entire line of discussion as unrelated to this change, and this latest reply continues to ignore our request to see how this relates to the problem we are trying to solve. It is completely inappropriate and disrespectful to keep pushing an alternative design, and without outlining what use case that design is trying to solve.",
+      "parentUuid": "2f80fb33_7300752c",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 27
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "667e039c_9154800b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 5
