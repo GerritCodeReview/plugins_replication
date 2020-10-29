@@ -170,13 +170,13 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
   }
 
   private void setReplicationDestinationRemoteConfig(
-      String remoteName, String replicaSuffix, Optional<String> project,
-      int replicationDelay) throws IOException {
+      String remoteName, String replicaSuffix, Optional<String> project, int replicationDelay)
+      throws IOException {
     setReplicationDestinationRemoteConfig(
         remoteName, Arrays.asList(replicaSuffix), project, replicationDelay);
   }
 
-  private FileBasedConfig setReplicationDestinationRemoteConfig(
+  private void setReplicationDestinationRemoteConfig(
       String remoteName,
       List<String> replicaSuffixes,
       Optional<String> allProjects,
@@ -188,25 +188,6 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
             FS.DETECTED);
 
     setReplicationDestination(remoteConfig, replicaSuffixes, allProjects, replicationDelay);
-    return remoteConfig;
-  }
-
-  private void setReplicationDestination(
-      FileBasedConfig config,
-      List<String> replicaSuffixes,
-      Optional<String> project,
-      int replicationDelay)
-      throws IOException {
-
-    List<String> replicaUrls =
-        replicaSuffixes.stream()
-            .map(suffix -> gitPath.resolve("${name}" + suffix + ".git").toString())
-            .collect(toList());
-    config.setStringList("remote", null, "url", replicaUrls);
-    config.setInt("remote", null, "replicationDelay", replicationDelay);
-    project.ifPresent(prj -> config.setString("remote", null, "projects", prj));
-
-    config.save();
   }
 
   private List<ReplicateRefUpdate> listWaitingTasks(String refRegex) {

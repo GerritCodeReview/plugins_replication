@@ -102,25 +102,47 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
         remoteName, Arrays.asList(replicaSuffix), project, replicationDelay, mirror);
   }
 
-  protected FileBasedConfig setReplicationDestination(
+  protected void setReplicationDestination(
       String remoteName,
       List<String> replicaSuffixes,
       Optional<String> project,
       int replicationDelay,
       boolean mirror)
       throws IOException {
+    setReplicationDestination(
+        config, remoteName, replicaSuffixes, project, replicationDelay, mirror);
+    config.setBoolean("gerrit", null, "autoReload", true);
+    config.save();
+  }
+
+  protected void setReplicationDestination(
+      FileBasedConfig config,
+      List<String> replicaSuffixes,
+      Optional<String> project,
+      int replicationDelay)
+      throws IOException {
+    setReplicationDestination(config, null, replicaSuffixes, project, replicationDelay, false);
+  }
+
+  protected void setReplicationDestination(
+      FileBasedConfig remoteConfig,
+      String remoteName,
+      List<String> replicaSuffixes,
+      Optional<String> project,
+      int replicationDelay,
+      boolean mirror)
+      throws IOException {
+
     List<String> replicaUrls =
         replicaSuffixes.stream()
             .map(suffix -> gitPath.resolve("${name}" + suffix + ".git").toString())
             .collect(toList());
-    config.setStringList("remote", remoteName, "url", replicaUrls);
-    config.setInt("remote", remoteName, "replicationDelay", replicationDelay);
-    config.setInt("remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY_MINUTES);
-    config.setBoolean("remote", remoteName, "mirror", mirror);
-    project.ifPresent(prj -> config.setString("remote", remoteName, "projects", prj));
-    config.setBoolean("gerrit", null, "autoReload", true);
-    config.save();
-    return config;
+    remoteConfig.setStringList("remote", remoteName, "url", replicaUrls);
+    remoteConfig.setInt("remote", remoteName, "replicationDelay", replicationDelay);
+    remoteConfig.setInt("remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY_MINUTES);
+    remoteConfig.setBoolean("remote", remoteName, "mirror", mirror);
+    project.ifPresent(prj -> remoteConfig.setString("remote", remoteName, "projects", prj));
+    remoteConfig.save();
   }
 
   protected Project.NameKey createTestProject(String name) throws Exception {
