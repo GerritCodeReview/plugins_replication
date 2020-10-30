@@ -51,14 +51,11 @@ import org.eclipse.jgit.transport.URIish;
  * <p><code>
  *   .../building/<tmp_name>                       new replication tasks under construction
  *   .../running/<sha1>                            running replication tasks
- *   .../waiting/<task_sha1_NN_shard>/<task_sha1>  outstanding replication tasks
+ *   .../waiting/<task_sha1>  outstanding replication tasks
  * </code>
  *
  * <p>Tasks are moved atomically via a rename between those directories to indicate the current
  * state of each task.
- *
- * <p>Note: The .../waiting/<task_sha1_NN_shard> directories are never removed. This helps prevent
- * failures when moving tasks to and from the shard directories from different hosts concurrently.
  */
 @Singleton
 public class ReplicationTasksStorage {
