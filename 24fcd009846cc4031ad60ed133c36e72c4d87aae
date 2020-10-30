@@ -16,6 +16,29 @@
       "message": "I\u0027d personally like to let Martin finish reviewing this series first, for me at least; thanks.",
       "revId": "24fcd009846cc4031ad60ed133c36e72c4d87aae",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4ad15c6_e19ef492",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationFanoutIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-30T19:16:08Z",
+      "side": 1,
+      "message": "Maybe it would be better to have two separate methods, one that uses the default, and one that sets the MAX_VALUE, with a name implying \"forever\", \"orwillnotcomplete\", or something like that?",
+      "range": {
+        "startLine": 160,
+        "startChar": 89,
+        "endLine": 160,
+        "endChar": 98
+      },
+      "revId": "24fcd009846cc4031ad60ed133c36e72c4d87aae",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
