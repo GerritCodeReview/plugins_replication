@@ -32,7 +32,7 @@ public class ReplicationTasksStorageMPTest {
   protected static final String REF = "myRef";
   protected static final String REMOTE = "myDest";
   protected static final URIish URISH =
-      ReplicationTasksStorageTaskTest.getUrish("http://example.com/" + PROJECT + ".git");
+      ReplicationTasksStorageTest.getUrish("http://example.com/" + PROJECT + ".git");
   protected static final ReplicationTasksStorage.ReplicateRefUpdate REF_UPDATE =
       new ReplicationTasksStorage.ReplicateRefUpdate(PROJECT, REF, URISH, REMOTE);
   protected static final UriUpdates URI_UPDATES = getUriUpdates(REF_UPDATE);
@@ -57,6 +57,14 @@ public class ReplicationTasksStorageMPTest {
     nodeA = null;
     nodeB = null;
     fileSystem.close();
+  }
+
+  @Test
+  public void sameTaskCreatedByOtherNodeIsDeduped() {
+    nodeA.create(REF_UPDATE);
+
+    nodeB.create(REF_UPDATE);
+    assertContainsExactly(persistedView.listWaiting(), REF_UPDATE);
   }
 
   @Test
