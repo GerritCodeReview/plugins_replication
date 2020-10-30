@@ -242,6 +242,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5ae1ca6_330e9378",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-30T12:53:55Z",
+      "side": 1,
+      "message": "Thanks for reaching out Nasser. So I just had a look at this change and unresolved thread. My very own review comment would be, can Adithya try to see if adding a UUID to each replication task could help 1. simplify this solution for the multi-node problem, and 2. be a more flexible design for other topologies (where N nodes \u003e\u003d 1)?\n\nThe latter would only be an appreciated benefit of the former, without being the main problem to solve here I agree. But at least we would clear the possibility (or opportunity) of simplifying this change -for the main problem it tries to solve (N \u003e 1).\n\nNow, if we cannot confirm the UUID-per-task hypothesis for at least N \u003e 1, then let\u0027s fall-back to this original patch proposal and review it further. Doing so will still require a) focused then b) respectful comments from every reviewer, as per our community code of conduct [1] below.\n\nIf we CMs co-witness otherwise, then we might have to veto unrelated reviews out. This would be unfortunate and something I\u0027d personally hate having to do. So let\u0027s not reach that stage shall we? -We are all experienced and sensible enough professionals after all, working as a team on a shared component that we reuse.\n\n[1] https://www.gerritcodereview.com/codeofconduct.html\n\nI also propose to leave this specific thread unresolved until my proposal above may unfold.",
+      "parentUuid": "adb0dc5b_b1411ed9",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 27
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "667e039c_9154800b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 5
