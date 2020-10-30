@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab4acf77_840136cd",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDaemon.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-30T19:17:04Z",
+      "side": 1,
+      "message": "Yes! Thanks. I was thinking it was doing more than necessary.",
+      "parentUuid": "caf0f032_6684c491",
+      "range": {
+        "startLine": 123,
+        "startChar": 12,
+        "endLine": 123,
+        "endChar": 18
+      },
+      "revId": "4ff1fa6727412efc63935c07df994e0780a44611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b99cd44_7b75f0ef",
@@ -47,6 +71,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2088b718_9fa9ada5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDaemon.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-30T19:17:04Z",
+      "side": 1,
+      "message": "waitUntil doesn\u0027t return a boolean, so we need to return true when we don\u0027t hit the InterruptedException. Moved it lower to show that better.",
+      "parentUuid": "7b99cd44_7b75f0ef",
+      "range": {
+        "startLine": 140,
+        "startChar": 13,
+        "endLine": 140,
+        "endChar": 17
+      },
+      "revId": "4ff1fa6727412efc63935c07df994e0780a44611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58e4e617_47737cb8",
@@ -60,6 +108,24 @@
       "writtenOn": "2020-10-30T18:39:49Z",
       "side": 1,
       "message": "The code already show that you are waiting 2 pushes, it might be good to explain why 2 (because 4 tasks on 2 threads?)",
+      "revId": "4ff1fa6727412efc63935c07df994e0780a44611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e41fe294_47e69c03",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-30T19:17:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58e4e617_47737cb8",
       "revId": "4ff1fa6727412efc63935c07df994e0780a44611",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
