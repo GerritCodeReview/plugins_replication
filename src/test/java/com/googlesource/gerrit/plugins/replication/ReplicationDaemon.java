@@ -28,7 +28,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -143,6 +145,31 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
     } catch (Exception e) {
       throw new RuntimeException("Cannot open repo for project" + project, e);
     }
+  }
+
+  protected boolean isPushCompleted(Map<Project.NameKey, String> refsByProject, Duration timeOut) {
+    try {
+      WaitUtil.waitUntil(
+          () -> {
+            Iterator<Map.Entry<Project.NameKey, String>> iterator =
+                refsByProject.entrySet().iterator();
+            while (iterator.hasNext()) {
+              Map.Entry<Project.NameKey, String> entry = iterator.next();
+              try (Repository repo = repoManager.openRepository(entry.getKey())) {
+                if (checkedGetRef(repo, entry.getValue()) != null) {
+                  iterator.remove();
+                }
+              } catch (IOException e) {
+                throw new RuntimeException("Cannot open repo for project" + entry.getKey(), e);
+              }
+            }
+            return refsByProject.isEmpty();
+          },
+          timeOut);
+    } catch (InterruptedException e) {
+      return false;
+    }
+    return true;
   }
 
   protected Ref checkedGetRef(Repository repo, String branchName) {
