@@ -23,7 +23,9 @@ import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.reviewdb.client.Project;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import org.junit.Test;
@@ -152,15 +154,20 @@ public class ReplicationStorageIT extends ReplicationDaemon {
 
     String changeRef1 = createChange().getPatchSet().getRefName();
     String changeRef2 = createChange().getPatchSet().getRefName();
+    Map<Project.NameKey, String> refsByProject = new HashMap<>();
+    refsByProject.put(target1, changeRef1);
+    refsByProject.put(target2, changeRef1);
+    refsByProject.put(target1, changeRef2);
+    refsByProject.put(target2, changeRef2);
 
     setReplicationDestination(remote1, suffix1, ALL_PROJECTS);
     setReplicationDestination(remote2, suffix2, ALL_PROJECTS);
     reloadConfig();
 
-    assertThat(isPushCompleted(target1, changeRef1, TEST_PUSH_TIMEOUT)).isEqualTo(true);
-    assertThat(isPushCompleted(target2, changeRef1, TEST_PUSH_TIMEOUT)).isEqualTo(true);
-    assertThat(isPushCompleted(target1, changeRef2, TEST_PUSH_TIMEOUT)).isEqualTo(true);
-    assertThat(isPushCompleted(target2, changeRef2, TEST_PUSH_TIMEOUT)).isEqualTo(true);
+    // Wait for completion within the time 2 pushes should take because each remote only has 1
+    // thread and needs to push 2 events
+    assertThat(isPushCompleted(refsByProject, TEST_PUSH_TIMEOUT.plus(TEST_PUSH_TIMEOUT)))
+        .isEqualTo(true);
   }
 
   @Test
