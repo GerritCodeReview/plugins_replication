@@ -95,6 +95,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e0112d6_098b32c2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDaemon.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-30T19:44:08Z",
+      "side": 1,
+      "message": "Ah yes, I was confused, the inner return is for anonymous method, not the outer method.",
+      "parentUuid": "2088b718_9fa9ada5",
+      "range": {
+        "startLine": 140,
+        "startChar": 13,
+        "endLine": 140,
+        "endChar": 17
+      },
+      "revId": "4ff1fa6727412efc63935c07df994e0780a44611",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58e4e617_47737cb8",
