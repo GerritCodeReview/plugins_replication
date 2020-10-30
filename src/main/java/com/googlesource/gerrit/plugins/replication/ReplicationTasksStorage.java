@@ -73,9 +73,7 @@ public class ReplicationTasksStorage {
       } catch (NoSuchFileException e) {
         logger.atFine().log("File %s not found while reading task", file);
       } catch (IOException e) {
-        if (!e.getMessage().contains("not a regular file")) {
-          logger.atSevere().withCause(e).log("Error while reading task %s", file);
-        }
+        logger.atSevere().withCause(e).log("Error while reading task %s", file);
       }
       return Optional.empty();
     }
@@ -169,15 +167,15 @@ public class ReplicationTasksStorage {
   }
 
   private Stream<ReplicateRefUpdate> streamRecursive(Path dir) {
-    return walk(dir)
+    return walkNonDirs(dir)
         .map(path -> ReplicateRefUpdate.createOptionally(path, gson))
         .filter(Optional::isPresent)
         .map(Optional::get);
   }
 
-  private static Stream<Path> walk(Path path) {
+  private static Stream<Path> walkNonDirs(Path path) {
     try {
-      return Stream.concat(Stream.of(path), Files.list(path).flatMap(sub -> walk(sub)));
+      return Files.list(path).flatMap(sub -> walkNonDirs(sub));
     } catch (NotDirectoryException e) {
       return Stream.of(path);
     } catch (Exception e) {
