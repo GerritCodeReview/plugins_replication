@@ -314,6 +314,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1dd27213_e8c842f4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-10-30T23:56:35Z",
+      "side": 1,
+      "message": "I apologise if talking about how to make a solution robust has been seen as disrespectful. I do appreciate all the code that is written to improve the solution and that was not at all intended or desired.\n\nLet me explain why I do not see having a replication task owner UUID as an improvement, also for a N \u003e 1 scenario, hence the comment is relevant for this change.\n\nWhen you have N\u003d2 Gerrit servers, they are both generating events and replication tasks that correspond to the same replication task file. How?\n\nGerrit server (1st) generates replication task1 and task2, both have the same owner-UUID1 and they are both associated with the same repository/ref, hence one of the two tasks is lost. Gerrit server (2nd) generates replication task3 and task4, both have the same owner-UUID2 and they are both associated with the same repository/ref, hence one of the two tasks is lost again.\n\nBottom line: in case of N\u003d2 and concurrency of replication events on the same repository/ref, we are losing 2 replication tasks. Hence, the underlying problem isn\u0027t resolved.\n\nI am interested as everyone in the stability of the replication plugin and, based on my experience in using it in production with large scale setups and on multiple releases, I would like to share my view on other edge cases.\n\nI do respect the work that you guys are doing, and I more than happy to contribute to it, in a constructive and respectful way, inline with the Gerrit Community code of conduct.",
+      "parentUuid": "cab68faf_9b940700",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 27
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "667e039c_9154800b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 5
