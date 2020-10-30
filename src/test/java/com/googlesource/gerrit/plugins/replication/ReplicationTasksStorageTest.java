@@ -373,12 +373,12 @@ public class ReplicationTasksStorageTest {
     assertThat(storage.listRunning()).isEmpty();
   }
 
-  private void assertNoIncompleteTasks(ReplicationTasksStorage storage) {
+  protected static void assertNoIncompleteTasks(ReplicationTasksStorage storage) {
     assertThat(storage.listWaiting()).isEmpty();
     assertThat(storage.listRunning()).isEmpty();
   }
 
-  private void assertContainsExactly(
+  protected static void assertContainsExactly(
       List<ReplicateRefUpdate> all, ReplicateRefUpdate... refUpdates) {
     assertThat(all).hasSize(refUpdates.length);
     for (int i = 0; i < refUpdates.length; i++) {
@@ -386,7 +386,7 @@ public class ReplicationTasksStorageTest {
     }
   }
 
-  private boolean equals(ReplicateRefUpdate one, ReplicateRefUpdate two) {
+  public static boolean equals(ReplicateRefUpdate one, ReplicateRefUpdate two) {
     return (one == null && two == null)
         || (one != null
             && two != null
