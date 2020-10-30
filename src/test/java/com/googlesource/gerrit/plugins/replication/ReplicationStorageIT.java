@@ -22,8 +22,13 @@ import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.projects.BranchInput;
+import com.googlesource.gerrit.plugins.replication.Destination.QueueInfo;
+import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
+import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -32,6 +37,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
+import org.eclipse.jgit.transport.URIish;
 import org.junit.Test;
 
 /**
@@ -46,9 +52,17 @@ import org.junit.Test;
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
 public class ReplicationStorageIT extends ReplicationDaemon {
   private static final int TEST_TASK_FINISH_SECONDS = 1;
+  private static final int TEST_REPLICATION_MAX_RETRIES = 1;
   protected static final Duration TEST_TASK_FINISH_TIMEOUT =
       Duration.ofSeconds(TEST_TASK_FINISH_SECONDS);
+  private static final Duration MAX_RETRY_WITH_TOLERANCE_TIMEOUT =
+      Duration.ofSeconds(
+          (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60)
+                  * TEST_REPLICATION_MAX_RETRIES
+              + 10);
   protected ReplicationTasksStorage tasksStorage;
+  private DestinationsCollection destinationCollection;
+  private ReplicationConfig replicationConfig;
 
   @Override
   public void setUpTestPlugin() throws Exception {
@@ -59,6 +73,8 @@ public class ReplicationStorageIT extends ReplicationDaemon {
         Optional.of("not-used-project")); // Simulates a full replication.config initialization
     super.setUpTestPlugin();
     tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
+    destinationCollection = plugin.getSysInjector().getInstance(DestinationsCollection.class);
+    replicationConfig = plugin.getSysInjector().getInstance(ReplicationConfig.class);
   }
 
   @Test
@@ -287,6 +303,68 @@ public class ReplicationStorageIT extends ReplicationDaemon {
         () -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")),
         TEST_NEW_PROJECT_TIMEOUT);
     WaitUtil.waitUntil(() -> tasksStorage.listRunning().size() == 0, TEST_TASK_FINISH_TIMEOUT);
+  }
+
+  @Test
+  public void shouldCleanupBothTasksAndLocksAfterNewProjectReplication() throws Exception {
+    setReplicationDestination("task_cleanup_locks_project", "replica", ALL_PROJECTS);
+    config.setInt("remote", "task_cleanup_locks_project", "replicationRetry", 0);
+    config.save();
+    reloadConfig();
+    assertThat(tasksStorage.listRunning()).hasSize(0);
+    Project.NameKey sourceProject = createTestProject("task_cleanup_locks_project");
+
+    WaitUtil.waitUntil(
+        () -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")),
+        TEST_NEW_PROJECT_TIMEOUT);
+    WaitUtil.waitUntil(() -> isTaskCleanedUp(), TEST_TASK_FINISH_TIMEOUT);
+  }
+
+  @Test
+  public void shouldCleanupBothTasksAndLocksAfterReplicationCancelledAfterMaxRetries()
+      throws Exception {
+    String projectName = "task_cleanup_locks_project_cancelled";
+    String remoteDestination = "http://invalidurl:9090/";
+    URIish urish = new URIish(remoteDestination + projectName + ".git");
+
+    setReplicationDestination(projectName, "replica", Optional.of(projectName));
+    // replace correct urls with invalid one to trigger retry
+    config.setString("remote", projectName, "url", remoteDestination + "${name}.git");
+    config.setInt("remote", projectName, "replicationMaxRetries", TEST_REPLICATION_MAX_RETRIES);
+    config.save();
+    reloadConfig();
+    Destination destination =
+        destinationCollection.getAll(FilterType.ALL).stream()
+            .filter(dest -> dest.getProjects().contains(projectName))
+            .findFirst()
+            .get();
+
+    createTestProject(projectName);
+
+    WaitUtil.waitUntil(
+        () -> isTaskRescheduled(destination.getQueueInfo(), urish), TEST_NEW_PROJECT_TIMEOUT);
+    // replicationRetry is set to 1 minute which is the minimum value. That's why
+    // should be safe to get the pushOne object from pending because it should be
+    // here for one minute
+    PushOne pushOp = destination.getQueueInfo().pending.get(urish);
+
+    WaitUtil.waitUntil(() -> pushOp.wasCanceled(), MAX_RETRY_WITH_TOLERANCE_TIMEOUT);
+    WaitUtil.waitUntil(() -> isTaskCleanedUp(), TEST_TASK_FINISH_TIMEOUT);
+  }
+
+  private boolean isTaskRescheduled(QueueInfo queue, URIish uri) {
+    PushOne pushOne = queue.pending.get(uri);
+    return pushOne == null ? false : pushOne.isRetrying();
+  }
+
+  private boolean isTaskCleanedUp() {
+    Path refUpdates = replicationConfig.getEventsDirectory().resolve("ref-updates");
+    Path runningUpdates = refUpdates.resolve("running");
+    try {
+      return Files.list(runningUpdates).count() == 0;
+    } catch (IOException e) {
+      throw new RuntimeException(e.getMessage(), e);
+    }
   }
 
   private Stream<ReplicateRefUpdate> waitingChangeReplicationTasksForRemote(

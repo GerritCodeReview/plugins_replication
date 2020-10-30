@@ -22,20 +22,13 @@ import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.entities.Project;
-import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.inject.Inject;
-import com.google.inject.Key;
-import com.googlesource.gerrit.plugins.replication.Destination.QueueInfo;
-import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.Duration;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -46,7 +39,6 @@ import org.eclipse.jgit.lib.RefUpdate;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
-import org.eclipse.jgit.transport.URIish;
 import org.junit.Test;
 
 @UseLocalDisk
@@ -56,21 +48,10 @@ import org.junit.Test;
 public class ReplicationIT extends ReplicationDaemon {
   private static final int TEST_REPLICATION_DELAY = 1;
   private static final int TEST_REPLICATION_RETRY = 1;
-  private static final int TEST_REPLICATION_MAX_RETRIES = 1;
   private static final Duration TEST_TIMEOUT =
       Duration.ofSeconds((TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) + 1);
 
-  private static final Duration MAX_RETRY_WITH_TOLERANCE_TIMEOUT =
-      Duration.ofSeconds(
-          (TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) * TEST_REPLICATION_MAX_RETRIES
-              + 10);
-
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
-  private DestinationsCollection destinationCollection;
-  private Path pluginDataDir;
-  private Path storagePath;
-  private ReplicationConfig replicationConfig;
-  private ReplicationTasksStorage tasksStorage;
 
   @Override
   public void setUpTestPlugin() throws Exception {
@@ -80,13 +61,6 @@ public class ReplicationIT extends ReplicationDaemon {
         "suffix1",
         Optional.of("not-used-project")); // Simulates a full replication.config initialization
     super.setUpTestPlugin();
-
-    pluginDataDir = plugin.getSysInjector().getInstance(Key.get(Path.class, PluginData.class));
-    replicationConfig = plugin.getSysInjector().getInstance(ReplicationConfig.class);
-    storagePath = pluginDataDir.resolve("ref-updates");
-    tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
-    destinationCollection = plugin.getSysInjector().getInstance(DestinationsCollection.class);
-    cleanupReplicationTasks();
   }
 
   @Test
@@ -388,59 +362,6 @@ public class ReplicationIT extends ReplicationDaemon {
     }
   }
 
-  // TODO: Move to ReplicationStorageIT
-  @Test
-  public void shouldCleanupBothTasksAndLocksAfterNewProjectReplication() throws Exception {
-    setReplicationDestination("task_cleanup_locks_project", "replica", ALL_PROJECTS);
-    config.setInt("remote", "task_cleanup_locks_project", "replicationRetry", 0);
-    config.save();
-    reloadConfig();
-    assertThat(tasksStorage.listRunning()).hasSize(0);
-    Project.NameKey sourceProject = createTestProject("task_cleanup_locks_project");
-
-    waitUntil(() -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")));
-    waitUntil(() -> isTaskCleanedUp());
-  }
-
-  // TODO: Move to ReplicationStorageIT
-  @Test
-  public void shouldCleanupBothTasksAndLocksAfterReplicationCancelledAfterMaxRetries()
-      throws Exception {
-    String projectName = "task_cleanup_locks_project_cancelled";
-    String remoteDestination = "http://invalidurl:9090/";
-    URIish urish = new URIish(remoteDestination + projectName + ".git");
-
-    setReplicationDestination(projectName, "replica", Optional.of(projectName));
-    // replace correct urls with invalid one to trigger retry
-    config.setString("remote", projectName, "url", remoteDestination + "${name}.git");
-    config.setInt("remote", projectName, "replicationMaxRetries", TEST_REPLICATION_MAX_RETRIES);
-    config.save();
-    reloadConfig();
-    Destination destination =
-        destinationCollection.getAll(FilterType.ALL).stream()
-            .filter(dest -> dest.getProjects().contains(projectName))
-            .findFirst()
-            .get();
-
-    waitUntil(() -> tasksStorage.listRunning().size() == 0);
-
-    createTestProject(projectName);
-
-    waitUntil(() -> isTaskRescheduled(destination.getQueueInfo(), urish));
-    // replicationRetry is set to 1 minute which is the minimum value. That's why
-    // should be safe to get the pushOne object from pending because it should be
-    // here for one minute
-    PushOne pushOp = destination.getQueueInfo().pending.get(urish);
-
-    WaitUtil.waitUntil(() -> pushOp.wasCanceled(), MAX_RETRY_WITH_TOLERANCE_TIMEOUT);
-    waitUntil(() -> isTaskCleanedUp());
-  }
-
-  private boolean isTaskRescheduled(QueueInfo queue, URIish uri) {
-    PushOne pushOne = queue.pending.get(uri);
-    return pushOne == null ? false : pushOne.isRetrying();
-  }
-
   private void setProjectDeletionReplication(String remoteName, boolean replicateProjectDeletion)
       throws IOException {
     config.setBoolean("remote", remoteName, "replicateProjectDeletions", replicateProjectDeletion);
@@ -480,32 +401,6 @@ public class ReplicationIT extends ReplicationDaemon {
       update.setNewObjectId(tip);
       update.update(walk);
       return update.getNewObjectId();
-    }
-  }
-
-  private boolean isTaskCleanedUp() {
-    Path refUpdates = replicationConfig.getEventsDirectory().resolve("ref-updates");
-    Path runningUpdates = refUpdates.resolve("running");
-    try {
-      return Files.list(runningUpdates).count() == 0;
-    } catch (IOException e) {
-      throw new RuntimeException(e.getMessage(), e);
-    }
-  }
-
-  public void cleanupReplicationTasks() throws IOException {
-    cleanupReplicationTasks(storagePath);
-  }
-
-  private void cleanupReplicationTasks(Path basePath) throws IOException {
-    try (DirectoryStream<Path> files = Files.newDirectoryStream(basePath)) {
-      for (Path path : files) {
-        if (Files.isDirectory(path)) {
-          cleanupReplicationTasks(path);
-        } else {
-          path.toFile().delete();
-        }
-      }
     }
   }
 }
