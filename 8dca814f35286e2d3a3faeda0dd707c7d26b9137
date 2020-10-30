@@ -266,6 +266,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48845a65_ad0f39a4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-10-30T14:04:25Z",
+      "side": 1,
+      "message": "\u003e Thanks for reaching out Nasser. So I just had a look at this change and unresolved thread. My very own review comment would be, can Adithya try to see if adding a UUID to each replication task could help 1. simplify this solution for the multi-node problem, and 2. be a more flexible design for other topologies (where N nodes \u003e\u003d 1)?\n\nThanks for taking a look Marco. Per-task UUIDs is an anti-feature (at least for the problems we know of - see below for more on that). Tasks are expected to be combined/replaced when new equivalent (or greater) work is scheduled and the original task is not yet running. Doing otherwise is a duplication of replication effort. Adding a UUID per task means you need some other logic to de-dup tasks since today that\u0027s handled by keeping task names (which are a \"key\" based on fields in the task) the same when the work done by the task is the same.\n\nWhile I\u0027m happy to explain that, I\u0027m not happy to have to do so on *this change*. This change identifies a specific problem and proposes a solution. That solution is not being reviewed and alternate solutions are being proposed. It\u0027s disrespectful to the folks putting in the effort to write the code that they think solves a problem to then ignore their solution and focus on something else instead. That\u0027s why we\u0027re looking for CM help.\n\n\u003e \n\u003e The latter would only be an appreciated benefit of the former, without being the main problem to solve here I agree. But at least we would clear the possibility (or opportunity) of simplifying this change -for the main problem it tries to solve (N \u003e 1).\n\u003e \n\u003e Now, if we cannot confirm the UUID-per-task hypothesis for at least N \u003e 1, then let\u0027s fall-back to this original patch proposal and review it further. Doing so will still require a) focused then b) respectful comments from every reviewer, as per our community code of conduct [1] below.\n\u003e \n\nThis was Luca\u0027s original comment:\n\n\u003e \u003e This isn\u0027t resolving the case where this problem occurs for the *same* Gerrit node :-( which is currently still possible.\n\nHe\u0027s also said:\n\n\u003e \u003e The problem is one: the replication tasks are getting lost, with or without concurrency with other Gerrit servers.\n\nWe\u0027re looking for a use case that exhibits a problem. These are not use cases. They\u0027re implementation details. No use case has been provided. Without a use case, any proposal is a solution in search of a problem. That\u0027s not how we write software. It is inappropriate to push a solution without identifying the problem and even more inappropriate to do so as a \"review\" of someone else\u0027s change.",
+      "parentUuid": "d5ae1ca6_330e9378",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 27
+      },
+      "revId": "8dca814f35286e2d3a3faeda0dd707c7d26b9137",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "667e039c_9154800b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
         "patchSetId": 5
