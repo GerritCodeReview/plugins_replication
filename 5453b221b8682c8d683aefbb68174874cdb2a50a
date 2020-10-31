@@ -16,6 +16,24 @@
       "message": "Is this change still relevant?",
       "revId": "5453b221b8682c8d683aefbb68174874cdb2a50a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afdb40b7_8ef88117",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-10-31T00:14:40Z",
+      "side": 1,
+      "message": "Yes, it is because the use of the gerrit+ssh and gerrit+http protocol for replication won\u0027t work.\n\nDo you have time to review it?",
+      "parentUuid": "16c28b70_49024940",
+      "revId": "5453b221b8682c8d683aefbb68174874cdb2a50a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
