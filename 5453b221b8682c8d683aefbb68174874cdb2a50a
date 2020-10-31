@@ -34,6 +34,24 @@
       "parentUuid": "16c28b70_49024940",
       "revId": "5453b221b8682c8d683aefbb68174874cdb2a50a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a93b0b9_a0214224",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-10-31T00:29:23Z",
+      "side": 1,
+      "message": "What are the implications of this change for this series https://gerrit-review.googlesource.com/c/plugins/replication/+/254954 ?",
+      "parentUuid": "afdb40b7_8ef88117",
+      "revId": "5453b221b8682c8d683aefbb68174874cdb2a50a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
