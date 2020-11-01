@@ -66,7 +66,7 @@ public class ReplicationTasksStorage {
   public abstract static class ReplicateRefUpdate {
     public static Optional<ReplicateRefUpdate> createOptionally(Path file, Gson gson) {
       try {
-        return Optional.of(create(file, gson));
+        return Optional.ofNullable(create(file, gson));
       } catch (NoSuchFileException e) {
         logger.atFine().log("File %s not found while reading task", file);
       } catch (IOException e) {
