@@ -242,7 +242,6 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       pushAllRefs = true;
       repLog.atFinest().log("Added all refs for replication to %s", uri);
     } else if (!pushAllRefs && delta.add(ref)) {
-      delta.add(ref);
       repLog.atFinest().log("Added ref %s for replication to %s", ref, uri);
     }
   }
