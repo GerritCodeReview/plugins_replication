@@ -82,6 +82,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31fe7086_bf91216a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritRestApi.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-03T21:48:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3937f4cf_9f5c04cb",
+      "revId": "41975eb5b8b2cd8b323fe8afad0c3c07251b064e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efcb2a6b_60a660f9",
@@ -95,6 +113,24 @@
       "writtenOn": "2020-11-02T09:16:25Z",
       "side": 1,
       "message": "This class is now no longer used.\nRemove it?",
+      "revId": "41975eb5b8b2cd8b323fe8afad0c3c07251b064e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50a5c132_c47d4a22",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-03T21:48:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efcb2a6b_60a660f9",
       "revId": "41975eb5b8b2cd8b323fe8afad0c3c07251b064e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
