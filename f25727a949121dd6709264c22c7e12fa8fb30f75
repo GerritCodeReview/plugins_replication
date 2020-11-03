@@ -22,6 +22,30 @@
       },
       "revId": "f25727a949121dd6709264c22c7e12fa8fb30f75",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36a632f2_4ba4ab31",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-03T15:04:13Z",
+      "side": 1,
+      "message": "Yes, but that was the case when it was introduced in 258956: Only fire the specified pending event URI | https://gerrit-review.googlesource.com/c/plugins/replication/+/258956\n\nI considered keeping the isPersisted boolean and making this call pushReference, but part of the stated purpose of 258956 was to skip the \u0027cfg.wouldPushProject(project) \u0026\u0026 cfg.wouldPushRef(refName)\u0027 checks. I could get around that by changing it to:\n\n  if (isPersisted || (cfg.wouldPushProject(project) \u0026\u0026 cfg.wouldPushRef(refName))) {\n\nbut that seems strange, since then we\u0027re skipping most of that method.",
+      "parentUuid": "81f72e56_2cc85912",
+      "range": {
+        "startLine": 153,
+        "startChar": 15,
+        "endLine": 153,
+        "endChar": 19
+      },
+      "revId": "f25727a949121dd6709264c22c7e12fa8fb30f75",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
