@@ -46,6 +46,30 @@
       },
       "revId": "0e34c23c9d733cf1761e2d288380e606eca9bb32",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c05b460a_1427afc0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-11-03T00:24:54Z",
+      "side": 1,
+      "message": "\u003e Looking at https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#readAllBytes-java.nio.file.Path-, it\u0027s not clear what happens if someone deletes the file as we\u0027re reading it. It could throw an IOException, but we\u0027re not seeing that. Googling doesn\u0027t give me any hits as to why we\u0027re getting an empty String here. I could definitely add a check for the empty String and log it, but I don\u0027t know why it\u0027s happening and I agree there\u0027s no code path that makes sense to me other than \"Files.readAllBytes is doing something undocumented when reading a file we\u0027re deleting/just deleted\".\n\nI agree it\u0027s likely something like that.\n \n\u003e Also, nothing seems to throw NoSuchFileException in this path, so I don\u0027t know why we\u0027re catching that.\n\nIt\u0027s an IOException, so it\u0027s hard to tell when its thrown. The intent is to differentiate it in the logs (not an error) from an IOException because it is expected that tasks can get deleted while we are listing them.",
+      "parentUuid": "a0878247_ec573fbb",
+      "range": {
+        "startLine": 67,
+        "startChar": 35,
+        "endLine": 67,
+        "endChar": 47
+      },
+      "revId": "0e34c23c9d733cf1761e2d288380e606eca9bb32",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
