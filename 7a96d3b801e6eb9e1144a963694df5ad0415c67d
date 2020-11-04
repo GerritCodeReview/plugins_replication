@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d07d55a_5474950b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-11-04T08:58:38Z",
+      "side": 1,
+      "message": "Sorry missed this one on the previous run.",
+      "revId": "7a96d3b801e6eb9e1144a963694df5ad0415c67d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c54e48fa_257725ca",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-11-04T08:58:38Z",
+      "side": 1,
+      "message": "only SSH is supported?",
+      "range": {
+        "startLine": 120,
+        "startChar": 60,
+        "endLine": 120,
+        "endChar": 81
+      },
+      "revId": "7a96d3b801e6eb9e1144a963694df5ad0415c67d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
