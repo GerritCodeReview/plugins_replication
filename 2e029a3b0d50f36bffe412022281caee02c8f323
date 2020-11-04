@@ -94,6 +94,30 @@
       },
       "revId": "2e029a3b0d50f36bffe412022281caee02c8f323",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b84570b7_02a8d50e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-11-04T12:42:07Z",
+      "side": 1,
+      "message": "I think we should document, in the release-notes, that it doesn\u0027t work on stable-3.3, wouldn\u0027t hurt to add a small comment about it not working on vanilla Gerrit in the code also.\n\nOther than that it sounds like a good suggestion.",
+      "parentUuid": "9911a7b4_45b29d0a",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 6
+      },
+      "revId": "2e029a3b0d50f36bffe412022281caee02c8f323",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
