@@ -70,6 +70,30 @@
       },
       "revId": "2e029a3b0d50f36bffe412022281caee02c8f323",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9911a7b4_45b29d0a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-04T12:34:05Z",
+      "side": 1,
+      "message": "\u003e It requires both modified Gerrit and replication plugin due to the fact that we manage users outside of the Gerrit - replica can access the user base directly without the necessity of \u0027refs/users/*\u0027 being replicated or not ;) In fact it is better if those refs are actually not replicated as they may collide in certain cases :D\n\nThanks for explaining the use-case.\n\n\u003e Having said that I don\u0027t believe that this change is fundamentally wrong if the others don\u0027t want to have that option. All we need though is to have a possibility to provide alternative to AdminApiFactory implementation which is done in the referenced change ;)\n\nIdea: why don\u0027t we keep the code, flag the GerritRestApi and GerritSshApi with @UsedAt(CollabNet) and remove the reference in the documentation?\nI believe at the moment it is misleading because people try to use that feature with a plain-vanilla Gerrit and then raise bugs that we would have to address or explain.\n\nWDYT?",
+      "parentUuid": "b121698f_db644e87",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 6
+      },
+      "revId": "2e029a3b0d50f36bffe412022281caee02c8f323",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
