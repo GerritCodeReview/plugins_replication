@@ -26,6 +26,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Lists;
+import com.google.gerrit.common.UsedAt;
 import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.entities.AccountGroup;
 import com.google.gerrit.entities.BranchNameKey;
@@ -187,8 +188,7 @@ public class Destination {
                 install(new FactoryModuleBuilder().build(UpdateHeadTask.Factory.class));
 
                 DynamicItem.itemOf(binder(), AdminApiFactory.class);
-                DynamicItem.bind(binder(), AdminApiFactory.class)
-                    .to(AdminApiFactory.DefaultAdminApiFactory.class);
+                DynamicItem.bind(binder(), AdminApiFactory.class).to(getAdminApiFactory());
 
                 install(new FactoryModuleBuilder().build(GerritRestApi.Factory.class));
                 bind(CloseableHttpClient.class)
@@ -213,6 +213,15 @@ public class Destination {
     deleteProjectFactory = child.getInstance(DeleteProjectTask.Factory.class);
     updateHeadFactory = child.getInstance(UpdateHeadTask.Factory.class);
     threadScoper = child.getInstance(PerThreadRequestScope.Scoper.class);
+  }
+
+  /**
+   * CollabNet uses enhanced (notifying to the external system) protocols therefore this method is
+   * used to swap the implementation
+   */
+  @UsedAt(UsedAt.Project.COLLABNET)
+  protected Class<? extends AdminApiFactory> getAdminApiFactory() {
+    return AdminApiFactory.DefaultAdminApiFactory.class;
   }
 
   private void addRecursiveParents(
