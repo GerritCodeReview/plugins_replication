@@ -187,8 +187,7 @@ public class Destination {
                 install(new FactoryModuleBuilder().build(UpdateHeadTask.Factory.class));
 
                 DynamicItem.itemOf(binder(), AdminApiFactory.class);
-                DynamicItem.bind(binder(), AdminApiFactory.class)
-                    .to(AdminApiFactory.DefaultAdminApiFactory.class);
+                DynamicItem.bind(binder(), AdminApiFactory.class).to(getAdminApiFactory());
 
                 install(new FactoryModuleBuilder().build(GerritRestApi.Factory.class));
                 bind(CloseableHttpClient.class)
@@ -213,6 +212,10 @@ public class Destination {
     deleteProjectFactory = child.getInstance(DeleteProjectTask.Factory.class);
     updateHeadFactory = child.getInstance(UpdateHeadTask.Factory.class);
     threadScoper = child.getInstance(PerThreadRequestScope.Scoper.class);
+  }
+
+  protected Class<? extends AdminApiFactory> getAdminApiFactory() {
+    return AdminApiFactory.DefaultAdminApiFactory.class;
   }
 
   private void addRecursiveParents(
