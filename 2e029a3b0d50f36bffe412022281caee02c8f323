@@ -22,6 +22,30 @@
       },
       "revId": "2e029a3b0d50f36bffe412022281caee02c8f323",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5bfab6c_be20974d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-04T12:13:37Z",
+      "side": 1,
+      "message": "\u003e That is in fact the feature that Digital.ai (former CollabNet) has built the solution upon and as long as there are no means to circumvent it (see changes mentioned in [1]) I would prefer that this change is not merged.\n\u003e \n\u003e [1]\n\u003e https://gerrit-review.googlesource.com/c/plugins/replication/+/286782\n\nThanks for raising this up: does the feature work out of the box or does it require to have a modified version of Gerrit + replication plugin?",
+      "parentUuid": "549594e0_76091ed7",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 6
+      },
+      "revId": "2e029a3b0d50f36bffe412022281caee02c8f323",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
