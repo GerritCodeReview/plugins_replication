@@ -142,6 +142,30 @@
       },
       "revId": "2e029a3b0d50f36bffe412022281caee02c8f323",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980a67a0_0bda3c0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-05T22:31:14Z",
+      "side": 1,
+      "message": "@Jacek the latest PS18 should address your concerns, flagging also the REST/SSH API as CollabNet-specific.\n\nIt should now be fully compatible with your current fork, but without the documentation that could be misleading for the regular users.\n\nCan you double-check and resolve the comment if that is enough from your perspective?",
+      "parentUuid": "cd376cbb_2be52801",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 6
+      },
+      "revId": "2e029a3b0d50f36bffe412022281caee02c8f323",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
