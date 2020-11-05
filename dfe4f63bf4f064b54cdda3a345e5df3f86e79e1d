@@ -70,6 +70,53 @@
       },
       "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e597581_a48799db",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-05T22:05:18Z",
+      "side": 1,
+      "message": "I believe also Google uses the @UsedAt annotation, and, so far, we have all accepted it.\nI believe Digital.ai (aka CollabNet) uses a custom replication plugin that uses the replication plugin as a dependency.\n\nThat is pretty much the same approach we have for the pull-replication plugin.\n\n@Jacek can you do something similar to what we\u0027ve done with pull-replication? In that way, it will be evident for the community how to use it, if they want to.",
+      "parentUuid": "e690aaef_5c7b6ff1",
+      "range": {
+        "startLine": 191,
+        "startChar": 16,
+        "endLine": 191,
+        "endChar": 27
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14374d35_20ea944d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-05T22:05:18Z",
+      "side": 1,
+      "message": "Nit: should this be DIGITALAI?",
+      "range": {
+        "startLine": 222,
+        "startChar": 25,
+        "endLine": 222,
+        "endChar": 34
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
