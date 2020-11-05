@@ -46,6 +46,30 @@
       },
       "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e690aaef_5c7b6ff1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-11-05T20:37:10Z",
+      "side": 1,
+      "message": "\u003e It is not that any other plugin will use it. It is a part of child injector that is Destination specific. IOW common replication objects are kept common but instances (e.g. PushOne, UpdateHead, etc...) that are destination specific are created in a dedicated namespace.\n\u003e DynamicItem was used here (at least this is my impression after reading related commit message ;)) so that there is a default implementation for community use case but classes that derive from Destination (btw: CollabNet does) could swap AdminApiFactory with different implementation.\n\u003e\n\u003e Unfortunately it wasn\u0027t finalised to the extend it could be effectively done as access to the injector is no longer possible after Destination gets created hence the change that we are reviewing now ;)\n\u003e \n\u003e I\u0027m not changing any existing functionality (after all the same DefaultAdminApiFactory class is used) hence I wasn\u0027t expecting that tests will be required for this change to survive the review but obviously I can do it (preferably in the follow up change) ;).\n\u003e \n\u003e I would also appreciate some guidance here - I was thinking about a unit test where alternative AdminApiFactory gets provided with mocked AdminApi and some method (e.g. \u0027scheduleDeleteProject\u0027) would be called that results in AdminApi call which would be eventually verified for existence... Would that be reasonable proof of concept?\n\nHow is Collabnet replacing classes in a plugin. Is this a fork of the plugin, is the plugin being used from another plugin, is the plugin being used as a library? I think we need such a concept, of how this would be used to be documented in the codebase as a supported option for us to be able to support it. I do not think we should support the idea of adding code that is annotated as used by someone. I think that public documented examples in the code (preferably), or at least in another available plugin should be the expectation. Without this, I don\u0027t see how we can make decisions about how to alter code in a way that won\u0027t break the existing users of the code. That is not a burden that I believe an open source project should have.",
+      "parentUuid": "192830c9_4aea251a",
+      "range": {
+        "startLine": 191,
+        "startChar": 16,
+        "endLine": 191,
+        "endChar": 27
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
