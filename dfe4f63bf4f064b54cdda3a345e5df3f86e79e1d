@@ -22,6 +22,30 @@
       },
       "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "192830c9_4aea251a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2020-11-05T19:57:46Z",
+      "side": 1,
+      "message": "It is not that any other plugin will use it. It is a part of child injector that is Destination specific. IOW common replication objects are kept common but instances (e.g. PushOne, UpdateHead, etc...) that are destination specific are created in a dedicated namespace.\nDynamicItem was used here (at least this is my impression after reading related commit message ;)) so that there is a default implementation for community use case but classes that derive from Destination (btw: CollabNet does) could swap AdminApiFactory with different implementation.\nUnfortunately it wasn\u0027t finalised to the extend it could be effectively done as access to the injector is no longer possible after Destination gets created hence the change that we are reviewing now ;)\n\nI\u0027m not changing any existing functionality (after all the same DefaultAdminApiFactory class is used) hence I wasn\u0027t expecting that tests will be required for this change to survive the review but obviously I can do it (preferably in the follow up change) ;).\n\nI would also appreciate some guidance here - I was thinking about a unit test where alternative AdminApiFactory gets provided with mocked AdminApi and some method (e.g. \u0027scheduleDeleteProject\u0027) would be called that results in AdminApi call which would be eventually verified for existence... Would that be reasonable proof of concept?",
+      "parentUuid": "6158cc87_ce043bdc",
+      "range": {
+        "startLine": 191,
+        "startChar": 16,
+        "endLine": 191,
+        "endChar": 27
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
