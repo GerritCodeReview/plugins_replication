@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db083481_1a48a1ec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2020-11-05T22:29:35Z",
+      "side": 1,
+      "message": "\u003e How is Collabnet replacing classes in a plugin. Is this a fork of the plugin, is the plugin being used from another plugin, is the plugin being used as a library?\n\nWe add couple commits on the top of the open-source plugin (turn some methods either public or protected but also add functionality that is too controversial for the community to accept it e.g. list of projects to be replicated when server is started ;)) and include it as a library.\n\n\u003e I do not think we should support the idea of adding code that is annotated as used by someone.\n\nI\u0027m not saying that this is a perfect solution but at least it explains why some decisions were made. For the record we have so far 1 other place where \u0027UsedAt\u0027 is used in replication plugin ;)\n\n\u003e I don\u0027t see how we can make decisions about how to alter code in a way that won\u0027t break the existing users of the code\n\nI\u0027m optimistic that we can work it out either through the review or over the slack/zoom/etc when needed :)\n\nI believe so far it was working: doors were opened enough for us to implement our solution in the same time we stayed close enough to the source to be able to contribute back...\n\n@Luca: you mean publish the plugin we build on the top of the replication? I wish I could ;) all I can do is create some documentation on how we actually use the replication plugin and how it differs from the community version provided that it will make sense for the interested parties :D",
+      "parentUuid": "e690aaef_5c7b6ff1",
+      "range": {
+        "startLine": 191,
+        "startChar": 16,
+        "endLine": 191,
+        "endChar": 27
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14374d35_20ea944d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 4
@@ -109,6 +133,30 @@
       "writtenOn": "2020-11-05T22:05:18Z",
       "side": 1,
       "message": "Nit: should this be DIGITALAI?",
+      "range": {
+        "startLine": 222,
+        "startChar": 25,
+        "endLine": 222,
+        "endChar": 34
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e2ca4d3_14a35e67",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2020-11-05T22:29:35Z",
+      "side": 1,
+      "message": "I wasn\u0027t sure it if is worth changing as enum is used in both core and plugins... I can issue a change to core that straightens it and apply it to all affected plugins though...",
+      "parentUuid": "14374d35_20ea944d",
       "range": {
         "startLine": 222,
         "startChar": 25,
