@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6158cc87_ce043bdc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-11-05T18:01:35Z",
+      "side": 1,
+      "message": "It is my understanding that other plugins will not be able to provide implementations for this unless this DynamicItem declaration (line 191) is done in core? If this is not the case, can you upload an example to the cookbook plugin which illustrates how this could be used? Also, can you add a test case to show this being replaced and working?",
+      "range": {
+        "startLine": 191,
+        "startChar": 16,
+        "endLine": 191,
+        "endChar": 27
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
