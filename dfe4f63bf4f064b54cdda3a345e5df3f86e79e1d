@@ -170,6 +170,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a68d75e0_d12e5605",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-11-06T08:24:05Z",
+      "side": 1,
+      "message": "A more generalized description perhaps.\nThe fact that digital is using it is obvious from the @UsedAt annotation but it\u0027s in no way limited to digital, other installations might find this useful.\nSomething like:\n\nOverride this method to inject a custom implementation of AdminApiFactory. This makes it possible to perform admin tasks (such as f.i. delete project) through protocols other than plain SSH.",
+      "range": {
+        "startLine": 219,
+        "startChar": 5,
+        "endLine": 220,
+        "endChar": 36
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14374d35_20ea944d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 4
