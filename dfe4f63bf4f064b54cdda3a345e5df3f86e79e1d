@@ -211,6 +211,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3256a498_c79dd348",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-06T21:31:21Z",
+      "side": 1,
+      "message": "I discussed the issue in the past with David and my understanding is that:\n- they are trying to get rid of the fork, by moving all the innovations to core Gerrit, when they are not tied to the IP of their product\n- more than \"fork\" they are rebasing their patches on tip of the stable branches\n\nI believe there is value in discussing the feature and making it more usable by the general community.\n\nWith regards to the UsedAt, it was introduced for avoiding the removal of \"potentially unused\" methods/classes which may break major users of the Gerrit open-source project, like Google and Digital.it.\n\nAs GerritForge, we never needed to introduce it, as 100% of the code we run is open-source, except the private keys and secrets, of course :-)",
+      "parentUuid": "9c11056a_9444a6af",
+      "range": {
+        "startLine": 191,
+        "startChar": 16,
+        "endLine": 191,
+        "endChar": 27
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a68d75e0_d12e5605",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 4
@@ -365,6 +389,30 @@
       "side": 1,
       "message": "Does that mechanism make use of this feature https://gerrit-review.googlesource.com/c/gerrit/+/91605 ?",
       "parentUuid": "47644c88_8510e848",
+      "range": {
+        "startLine": 222,
+        "startChar": 25,
+        "endLine": 222,
+        "endChar": 34
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ac44b17_5a4d13a6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-06T21:31:21Z",
+      "side": 1,
+      "message": "Yep, and it is documented at:\nhttps://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/resources/Documentation/extension-point.md",
+      "parentUuid": "c51ae29a_9b8ebffc",
       "range": {
         "startLine": 222,
         "startChar": 25,
