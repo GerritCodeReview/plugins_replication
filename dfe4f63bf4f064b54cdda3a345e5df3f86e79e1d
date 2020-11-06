@@ -284,6 +284,30 @@
       },
       "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47644c88_8510e848",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-06T20:10:59Z",
+      "side": 1,
+      "message": "\u003e I support the idea of having ways of extending the plugin, and I don\u0027t want you to have to annotate things to do so, which is mostly why I am asking about how you are using this. We have done some crazy stuff with our plugins, and making plugins use other plugins. Most of the help we have needed for that has been upstreamed, but there are some things we still can\u0027t do. Registering DynamicItems from a plugin so that another plugin could bind an alternate version of that item, is something that I have been wanting to be able to do and that I have not figured out how to do yet.\n\nWe do that already, in the multi-site plugin: the replication plugin defines a DynamicItem that the multi-site plugin populates with an implementation.\n\n\u003e If there were such a mechanism in core, would that prevent the need for this?\n\nYou do not need to change Gerrit core to do that.",
+      "parentUuid": "46476943_ddb1ab6b",
+      "range": {
+        "startLine": 222,
+        "startChar": 25,
+        "endLine": 222,
+        "endChar": 34
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
