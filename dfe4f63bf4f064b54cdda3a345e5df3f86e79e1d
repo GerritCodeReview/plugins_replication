@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "376e6a56_777c0e51",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-11-06T01:16:39Z",
+      "side": 1,
+      "message": "\u003e I believe also Google uses the @UsedAt annotation, and, so far, we have all accepted it.\n\nI don\u0027t know the specifics here. I do believe it is reasonable to want to be able to see documentation (an implementation) about why something is needed, and I would recommend that this be the standard, even if we have not done so in the past in all occasions. Some of our (Qcom) changes have not done this in the past either, we have mostly rectified this by now, and we would like to know about more places that we should do this if there are any.\n\n\u003e I believe Digital.ai (aka CollabNet) uses a custom replication plugin that uses the replication plugin as a dependency.\n\nCan this be documented on how? Does that mean they run this plugin, or use it as a library (include its code, but doesn\u0027t run the plugin)?\n\n\u003e That is pretty much the same approach we have for the pull-replication plugin.\n\nAt least that plugin is open so that we can look to see how this is done. However, if we can improve things to make shared pieces part of a library with clearer interfaces, that would be welcomed.",
+      "parentUuid": "2e597581_a48799db",
+      "range": {
+        "startLine": 191,
+        "startChar": 16,
+        "endLine": 191,
+        "endChar": 27
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14374d35_20ea944d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 4
