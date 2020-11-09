@@ -228,7 +228,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
 
   void addRef(String ref) {
     if (ALL_REFS.equals(ref)) {
-      delta.clear();
+      delta.add(ref);
       pushAllRefs = true;
       repLog.trace("Added all refs for replication to {}", uri);
     } else if (!pushAllRefs && delta.add(ref)) {
@@ -237,7 +237,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   }
 
   Set<String> getRefs() {
-    return pushAllRefs ? Sets.newHashSet(ALL_REFS) : delta;
+    return delta;
   }
 
   void addRefs(Set<String> refs) {

@@ -22,10 +22,12 @@ import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.reviewdb.client.Project;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import org.junit.Test;
@@ -41,6 +43,10 @@ import org.junit.Test;
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
 public class ReplicationStorageIT extends ReplicationDaemon {
+  private static final int TEST_TASK_FINISH_SECONDS = 1;
+  protected static final Duration TEST_TASK_FINISH_TIMEOUT =
+      Duration.ofSeconds(TEST_TASK_FINISH_SECONDS);
+
   private ReplicationTasksStorage tasksStorage;
 
   @Override
@@ -212,6 +218,55 @@ public class ReplicationStorageIT extends ReplicationDaemon {
       assertThat(task.uri).isEqualTo(expectedURI);
       assertThat(task.ref).isEqualTo(PushOne.ALL_REFS);
     }
+  }
+
+  @Test
+  public void shouldCleanupTasksAfterNewProjectReplicationAndWhenSchedulingRepoFullSync()
+      throws Exception {
+    setReplicationDestination("task_cleanup_full_sync_project", "replica", ALL_PROJECTS);
+    config.setInt("remote", "task_cleanup_full_sync_project", "replicationRetry", 0);
+    config.save();
+    reloadConfig();
+
+    Project.NameKey sourceProject = createTestProject("task_cleanup_full_sync_project");
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(sourceProject, null, new ReplicationState(NO_OP), false);
+
+    WaitUtil.waitUntil(
+        () -> nonEmptyProjectExists(new Project.NameKey(sourceProject + "replica.git")),
+        TEST_NEW_PROJECT_TIMEOUT);
+
+    TimeUnit.SECONDS.sleep(TEST_TASK_FINISH_TIMEOUT.getSeconds());
+    assertThat(tasksStorage.list()).hasSize(0);
+  }
+
+  @Test
+  public void shouldCleanupTasksAfterSchedulingRepoFullSyncTwice() throws Exception {
+    setReplicationDestination("task_cleanup_full_sync_twice_project", "replica", ALL_PROJECTS);
+    config.setInt("remote", "task_cleanup_full_sync_twice_project", "replicationRetry", 0);
+    config.save();
+    reloadConfig();
+
+    Project.NameKey sourceProject = createTestProject("task_cleanup_full_sync_twice_project");
+
+    WaitUtil.waitUntil(
+        () -> nonEmptyProjectExists(new Project.NameKey(sourceProject + "replica.git")),
+        TEST_NEW_PROJECT_TIMEOUT);
+
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(sourceProject, null, new ReplicationState(NO_OP), false);
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(sourceProject, null, new ReplicationState(NO_OP), true);
+
+    TimeUnit.SECONDS.sleep(TEST_PUSH_TIMEOUT.getSeconds());
+    TimeUnit.SECONDS.sleep(TEST_TASK_FINISH_TIMEOUT.getSeconds());
+    assertThat(tasksStorage.list()).hasSize(0);
   }
 
   private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(

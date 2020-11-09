@@ -311,14 +311,6 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).shutdown();
   }
 
-  private boolean nonEmptyProjectExists(Project.NameKey name) {
-    try (Repository r = repoManager.openRepository(name)) {
-      return !r.getAllRefsByPeeledObjectId().isEmpty();
-    } catch (Exception e) {
-      return false;
-    }
-  }
-
   private ObjectId createNewBranchWithoutPush(String fromBranch, String newBranch)
       throws Exception {
     try (Repository repo = repoManager.openRepository(project);

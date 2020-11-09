@@ -51,8 +51,13 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
   protected static final int TEST_REPLICATION_DELAY_SECONDS = 1;
   protected static final int TEST_REPLICATION_RETRY_MINUTES = 1;
   protected static final int TEST_PUSH_TIME_SECONDS = 1;
+  protected static final int TEST_PROJECT_CREATION_SECONDS = 10;
   protected static final Duration TEST_PUSH_TIMEOUT =
       Duration.ofSeconds(TEST_REPLICATION_DELAY_SECONDS + TEST_PUSH_TIME_SECONDS);
+  protected static final Duration TEST_NEW_PROJECT_TIMEOUT =
+      Duration.ofSeconds(
+          (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60)
+              + TEST_PROJECT_CREATION_SECONDS);
 
   @Inject protected SitePaths sitePaths;
   protected Path gitPath;
@@ -152,5 +157,13 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
 
   protected void reloadConfig() {
     plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).forceReload();
+  }
+
+  protected boolean nonEmptyProjectExists(Project.NameKey name) {
+    try (Repository r = repoManager.openRepository(name)) {
+      return !r.getAllRefsByPeeledObjectId().isEmpty();
+    } catch (Exception e) {
+      return false;
+    }
   }
 }
