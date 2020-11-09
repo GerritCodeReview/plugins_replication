@@ -235,6 +235,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd9286c2_bfb1d3e4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2020-11-09T19:13:38Z",
+      "side": 1,
+      "message": "I have created the follow-up change that introduces integration test that illustrate how AdminApiFactory is swapped in Digital.ai implementation (at least to the extend when it doesn\u0027t require introduction of more terms).",
+      "parentUuid": "3256a498_c79dd348",
+      "range": {
+        "startLine": 191,
+        "startChar": 16,
+        "endLine": 191,
+        "endChar": 27
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a68d75e0_d12e5605",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 4
@@ -246,6 +270,30 @@
       "writtenOn": "2020-11-06T08:24:05Z",
       "side": 1,
       "message": "A more generalized description perhaps.\nThe fact that digital is using it is obvious from the @UsedAt annotation but it\u0027s in no way limited to digital, other installations might find this useful.\nSomething like:\n\nOverride this method to inject a custom implementation of AdminApiFactory. This makes it possible to perform admin tasks (such as f.i. delete project) through protocols other than plain SSH.",
+      "range": {
+        "startLine": 219,
+        "startChar": 5,
+        "endLine": 220,
+        "endChar": 36
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d37d68f_580a433c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2020-11-09T19:13:38Z",
+      "side": 1,
+      "message": "Good point. Used your suggestion to give the idea what can be done with it. I have also left the sentence describing on how it is used in CollabNet to give a practical example.",
+      "parentUuid": "a68d75e0_d12e5605",
       "range": {
         "startLine": 219,
         "startChar": 5,
@@ -413,6 +461,30 @@
       "side": 1,
       "message": "Yep, and it is documented at:\nhttps://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/resources/Documentation/extension-point.md",
       "parentUuid": "c51ae29a_9b8ebffc",
+      "range": {
+        "startLine": 222,
+        "startChar": 25,
+        "endLine": 222,
+        "endChar": 34
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d089098_c85f8913",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2020-11-09T19:13:38Z",
+      "side": 1,
+      "message": "I agree that DynamicItem is typically a way to solve this puzzle but IMHO in this case it is hard to be achieved for multiple reasons:\n1. Destination contains a lot of logic that would be nice to re-use if general idea of the extension is the same - hence Destination override would make sense\n2. once the Destination is created one has no access to the child injector that is used for the AdminApiFactory binding definition - one would have to provide alternate configuration with all dependencies (including thread scoper etc.) in order to satisfy DI for sth remotely similar to GerritSshApi...",
+      "parentUuid": "8ac44b17_5a4d13a6",
       "range": {
         "startLine": 222,
         "startChar": 25,
