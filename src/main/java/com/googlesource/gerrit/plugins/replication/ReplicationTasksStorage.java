@@ -139,8 +139,8 @@ public class ReplicationTasksStorage {
     }
   }
 
-  public synchronized void resetAll() {
-    streamRunning().forEach(r -> new Task(r).reset());
+  public synchronized void recoverAll() {
+    streamRunning().forEach(r -> new Task(r).recover());
   }
 
   public boolean isWaiting(UriUpdates uriUpdates) {
@@ -233,6 +233,10 @@ public class ReplicationTasksStorage {
     }
 
     public void reset() {
+      rename(running, waiting);
+    }
+
+    public void recover() {
       rename(running, waiting);
     }
 

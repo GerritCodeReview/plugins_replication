@@ -262,27 +262,27 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
-  public void canResetAllEmpty() throws Exception {
-    storage.resetAll();
+  public void canRecoverAllEmpty() throws Exception {
+    storage.recoverAll();
     assertNoIncompleteTasks(storage);
   }
 
   @Test
-  public void canResetAllUpdate() throws Exception {
+  public void canRecoverAllUpdate() throws Exception {
     storage.create(REF_UPDATE);
     storage.start(uriUpdates);
 
-    storage.resetAll();
+    storage.recoverAll();
     assertThatStream(storage.streamWaiting()).containsExactly(REF_UPDATE);
     assertThatStream(storage.streamRunning()).isEmpty();
     assertTrue(storage.isWaiting(uriUpdates));
   }
 
   @Test
-  public void canCompleteResetAllUpdate() throws Exception {
+  public void canCompleteRecoverAllUpdate() throws Exception {
     storage.create(REF_UPDATE);
     storage.start(uriUpdates);
-    storage.resetAll();
+    storage.recoverAll();
 
     storage.start(uriUpdates);
     assertThatStream(storage.streamRunning()).containsExactly(REF_UPDATE);
@@ -294,7 +294,7 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
-  public void canResetAllMultipleUpdates() throws Exception {
+  public void canRecoverAllMultipleUpdates() throws Exception {
     ReplicateRefUpdate updateB =
         ReplicateRefUpdate.create(
             PROJECT,
@@ -307,12 +307,12 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdates);
     storage.start(uriUpdatesB);
 
-    storage.resetAll();
+    storage.recoverAll();
     assertThatStream(storage.streamWaiting()).containsExactly(REF_UPDATE, updateB);
   }
 
   @Test
-  public void canCompleteMultipleResetAllUpdates() throws Exception {
+  public void canCompleteMultipleRecoverAllUpdates() throws Exception {
     ReplicateRefUpdate updateB =
         ReplicateRefUpdate.create(
             PROJECT,
@@ -324,7 +324,7 @@ public class ReplicationTasksStorageTest {
     storage.create(updateB);
     storage.start(uriUpdates);
     storage.start(uriUpdatesB);
-    storage.resetAll();
+    storage.recoverAll();
 
     storage.start(uriUpdates);
     assertThatStream(storage.streamRunning()).containsExactly(REF_UPDATE);

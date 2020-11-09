@@ -127,11 +127,11 @@ public class ReplicationTasksStorageMPTest {
   }
 
   @Test
-  public void canBeResetAllAndCompletedByOtherNode() {
+  public void canBeRecoveredAllAndCompletedByOtherNode() {
     nodeA.create(REF_UPDATE);
     nodeA.start(URI_UPDATES);
 
-    nodeB.resetAll();
+    nodeB.recoverAll();
     assertThatStream(persistedView.streamWaiting()).containsExactly(REF_UPDATE);
 
     nodeB.start(URI_UPDATES);
@@ -146,10 +146,10 @@ public class ReplicationTasksStorageMPTest {
   }
 
   @Test
-  public void canBeResetAllAndCompletedByOtherNodeFastOriginalNode() {
+  public void canBeRecoveredAllAndCompletedByOtherNodeFastOriginalNode() {
     nodeA.create(REF_UPDATE);
     nodeA.start(URI_UPDATES);
-    nodeB.resetAll();
+    nodeB.recoverAll();
 
     nodeA.finish(URI_UPDATES);
     assertThatStream(persistedView.streamWaiting()).containsExactly(REF_UPDATE);
@@ -162,10 +162,10 @@ public class ReplicationTasksStorageMPTest {
   }
 
   @Test
-  public void canBeResetAllAndCompletedByOtherNodeSlowOriginalNode() {
+  public void canBeRecoveredAllAndCompletedByOtherNodeSlowOriginalNode() {
     nodeA.create(REF_UPDATE);
     nodeA.start(URI_UPDATES);
-    nodeB.resetAll();
+    nodeB.recoverAll();
 
     nodeB.start(URI_UPDATES);
     assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);

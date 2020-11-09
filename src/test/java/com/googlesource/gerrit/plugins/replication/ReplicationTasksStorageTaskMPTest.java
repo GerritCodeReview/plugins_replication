@@ -132,11 +132,11 @@ public class ReplicationTasksStorageTaskMPTest {
   }
 
   @Test
-  public void canBeResetAllAndCompletedByOtherNode() {
+  public void canRecoverAllAndCompletedByOtherNode() {
     taskA.create();
     taskA.start();
 
-    nodeB.resetAll();
+    nodeB.recoverAll();
     assertIsWaiting(taskA);
 
     taskB.create();
@@ -155,10 +155,10 @@ public class ReplicationTasksStorageTaskMPTest {
   }
 
   @Test
-  public void resetAllAndCompletedByOtherNodeWhenTaskAFinishesBeforeTaskB() {
+  public void recoverAllAndCompletedByOtherNodeWhenTaskAFinishesBeforeTaskB() {
     taskA.create();
     taskA.start();
-    nodeB.resetAll();
+    nodeB.recoverAll();
 
     taskA.finish();
     assertIsWaiting(taskA);
@@ -174,10 +174,10 @@ public class ReplicationTasksStorageTaskMPTest {
   }
 
   @Test
-  public void resetAllAndCompletedByOtherNodeWhenTaskAFinishesAfterTaskB() {
+  public void recoverAllAndCompletedByOtherNodeWhenTaskAFinishesAfterTaskB() {
     taskA.create();
     taskA.start();
-    nodeB.resetAll();
+    nodeB.recoverAll();
 
     taskB.start();
     assertIsRunning(taskA);
