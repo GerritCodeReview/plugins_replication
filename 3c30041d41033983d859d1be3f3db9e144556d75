@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b42cfad2_cde00618",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-11-09T21:49:07Z",
+      "side": 1,
+      "message": "I think the test names can now be simplified to no longer have \"All\u0027 in the names since we added \u0027All\u0027 just to make it different from \u0027reset\u0027.",
+      "range": {
+        "startLine": 282,
+        "startChar": 14,
+        "endLine": 282,
+        "endChar": 41
+      },
+      "revId": "3c30041d41033983d859d1be3f3db9e144556d75",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
