@@ -28,7 +28,7 @@ public class DestinationConfiguration {
   private final int rescheduleDelay;
   private final int retryDelay;
   private final int drainQueueAttempts;
-  private final int lockErrorMaxRetries;
+  private final int updateRefErrorMaxRetries;
   private final ImmutableList<String> adminUrls;
   private final int poolThreads;
   private final boolean createMissingRepos;
@@ -56,8 +56,11 @@ public class DestinationConfiguration {
         Math.max(0, getInt(remoteConfig, cfg, "drainQueueAttempts", DEFAULT_DRAIN_QUEUE_ATTEMPTS));
     poolThreads = Math.max(0, getInt(remoteConfig, cfg, "threads", 1));
     authGroupNames = ImmutableList.copyOf(cfg.getStringList("remote", name, "authGroup"));
-    lockErrorMaxRetries = cfg.getInt("replication", "lockErrorMaxRetries", 0);
-
+    updateRefErrorMaxRetries =
+        cfg.getInt(
+            "replication",
+            "updateRefErrorMaxRetries",
+            cfg.getInt("replication", "lockErrorMaxRetries", 0));
     createMissingRepos = cfg.getBoolean("remote", name, "createMissingRepositories", true);
     replicatePermissions = cfg.getBoolean("remote", name, "replicatePermissions", true);
     replicateProjectDeletions = cfg.getBoolean("remote", name, "replicateProjectDeletions", false);
@@ -89,8 +92,8 @@ public class DestinationConfiguration {
     return poolThreads;
   }
 
-  public int getLockErrorMaxRetries() {
-    return lockErrorMaxRetries;
+  public int getUpdateRefErrorMaxRetries() {
+    return updateRefErrorMaxRetries;
   }
 
   public ImmutableList<String> getUrls() {
