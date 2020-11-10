@@ -111,7 +111,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
   private final int maxRetries;
   private boolean canceled;
   private final ListMultimap<String, ReplicationState> stateMap = LinkedListMultimap.create();
-  private final int maxLockRetries;
+  private final int maxUpdateRefRetries;
   private int lockRetryCount;
   private final int id;
   private final long createdAt;
@@ -147,7 +147,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     projectName = d;
     uri = u;
     lockRetryCount = 0;
-    maxLockRetries = pool.getLockErrorMaxRetries();
+    maxUpdateRefRetries = pool.getUpdateRefErrorMaxRetries();
     id = ig.next();
     stateLog = sl;
     createdAt = System.nanoTime();
@@ -375,12 +375,12 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
       Throwable cause = e.getCause();
       if (cause instanceof JSchException && cause.getMessage().startsWith("UnknownHostKey:")) {
         repLog.error("Cannot replicate to {}: {}", uri, cause.getMessage());
-      } else if (e instanceof LockFailureException) {
+      } else if (e instanceof UpdateRefFailureException) {
         lockRetryCount++;
         repLog.error("Cannot replicate to {} due to lock failure", uri);
 
         // The remote push operation should be retried.
-        if (lockRetryCount <= maxLockRetries) {
+        if (lockRetryCount <= maxUpdateRefRetries) {
           if (canceledWhileRunning.get()) {
             logCanceledWhileRunningException(e);
           } else {
@@ -642,7 +642,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     cmds.add(new RemoteRefUpdate(git, (Ref) null, dst, force, null, null));
   }
 
-  private void updateStates(Collection<RemoteRefUpdate> refUpdates) throws LockFailureException {
+  private void updateStates(Collection<RemoteRefUpdate> refUpdates)
+      throws UpdateRefFailureException {
     Set<String> doneRefs = new HashSet<>();
     boolean anyRefFailed = false;
     RemoteRefUpdate.Status lastRefStatusError = RemoteRefUpdate.Status.OK;
@@ -686,8 +687,9 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
                         + " of destination repository.",
                     u.getRemoteName(), uri),
                 logStatesArray);
-          } else if ("failed to lock".equals(u.getMessage())) {
-            throw new LockFailureException(uri, u.getMessage());
+          } else if ("failed to lock".equals(u.getMessage())
+              || "failed to update ref".equals(u.getMessage())) {
+            throw new UpdateRefFailureException(uri, u.getMessage());
           } else {
             stateLog.error(
                 String.format(
@@ -726,10 +728,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
     stateMap.clear();
   }
 
-  public static class LockFailureException extends TransportException {
+  public static class UpdateRefFailureException extends TransportException {
     private static final long serialVersionUID = 1L;
 
-    LockFailureException(URIish uri, String message) {
+    UpdateRefFailureException(URIish uri, String message) {
       super(uri, message);
     }
   }
