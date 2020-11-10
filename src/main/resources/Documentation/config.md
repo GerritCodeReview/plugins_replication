@@ -90,19 +90,23 @@ gerrit.sshConnectionTimeout
 :	Timeout for SSH connections. If 0, there is no timeout and
         the client waits indefinitely. By default, 2 minutes.
 
-replication.lockErrorMaxRetries
-:	Number of times to retry a replication operation if a lock
-	error is detected.
+<a name="replication.updateRefErrorMaxRetries">replication.updateRefErrorMaxRetries</a>
+:	Number of times to retry a replication operation if an update
+	ref error is detected.
 
 	If two or more replication operations (to the same GIT and Ref)
 	are scheduled at approximately the same time (and end up on different
 	replication threads), there is a large probability that the last
-	push to complete will fail with a remote "failure to lock" error.
+	push to complete will fail with a remote "failed to update ref" error.
+	This error may also occur due to a transient issue like file system
+	being full which was previously returned as "failed to write" by git.
+
 	This option allows Gerrit to retry the replication push when the
-	"failure to lock" error is detected.
+	"failed to update ref" error is detected. Also retry when the error
+	"failed to lock" is detected as that is the legacy string used by git.
 
 	A good value would be 3 retries or less, depending on how often
-	you see lockError collisions in your server logs. A too highly set
+	you see updateRefError collisions in your server logs. A too highly set
 	value risks keeping around the replication operations in the queue
 	for a long time, and the number of items in the queue will increase
 	with time.
@@ -116,6 +120,16 @@ replication.lockErrorMaxRetries
 	replicationDelay.
 
 	Default: 0 (disabled, i.e. never retry)
+
+replication.lockErrorMaxRetries
+:	Refer to the [replication.updateRefErrorMaxRetries][4] section.
+
+	If both `lockErrorMaxRetries` and `updateRefErrorMaxRetries` are
+	configured, then `updateRefErrorMaxRetries` takes precedence.
+
+	Default: 0 (disabled, i.e. never retry)
+
+[4]: #replication.updateRefErrorMaxRetries
 
 replication.maxRetries
 :	Maximum number of times to retry a push operation that previously
