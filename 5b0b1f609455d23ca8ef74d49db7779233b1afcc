@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b29a900c_9c6eef77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2020-11-10T15:39:21Z",
+      "side": 1,
+      "message": "Let me elaborate what we do:\n1. pickup the latest \u0027stable\u0027 (for instance 3.2)\n\n2. rebase our changes on the top of it (these changes are mostly related to turning some methods public/protected and there is a few about adding functionality that is was not accepted in upstream) - technically it is not a fork as we can always tell what is the difference between what we use vs what is in upstream and quite often decide to upstream things if possible (that is general statement not always true for all plugins ;))\n\n3. build it and include it as a library in one of our home plugins that include own versions of the following classes:\n- DestinationConfiguration (extends DestinationConfiguration): first major difference between open source and in-house - configuration of what is replicated where is stored in the external system not in the config files on the master instance\n\n- NotifyingGerritSshApi (extends GerritSshApi): each replication request is notified to the external system (start and completion/failure)\n\n- ReplicationDestinations (implements ReplicationDestinations): retrieves DestinationConfiguration from the external system\n\n- Destination (extends Destination): so that AdminApiFactory could be swapped and our version of protocol used + own version of DestinationConfiguration\n\n- finally ReplicationModule is created to capture all changes together - written from scratch as one cannot alter bindings to different classes\n\n+ probably couple of minor classes that I forgot to mention ;) anyway the main idea is to use scheduling and resiliency from the upstream but read the configuration from external system and update replication status there. Should I go ahead and include all classes that we alter in this test?",
+      "parentUuid": "2a172612_53ecf5ae",
+      "revId": "5b0b1f609455d23ca8ef74d49db7779233b1afcc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77899f48_951b134c",
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4535c3c_5d7816cd",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/SwapAdminApiReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2020-11-10T15:39:21Z",
+      "side": 1,
+      "message": "haven\u0027t noticed that, just copy-pasted it from ReplicationIT thanks for the heads up",
+      "parentUuid": "77899f48_951b134c",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 54
+      },
+      "revId": "5b0b1f609455d23ca8ef74d49db7779233b1afcc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d62b770_23cf8315",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/SwapAdminApiReplicationIT.java",
         "patchSetId": 1
@@ -54,6 +96,30 @@
       "writtenOn": "2020-11-09T21:24:10Z",
       "side": 1,
       "message": "We\u0027re trying to establish a pattern of not using a generic test timeout. The timeout should be based on the specific operation being waited upon (for example, a PUSH_TIMEOUT or a CREATE_NEW_PROJECT_TIMEOUT).",
+      "range": {
+        "startLine": 53,
+        "startChar": 32,
+        "endLine": 53,
+        "endChar": 44
+      },
+      "revId": "5b0b1f609455d23ca8ef74d49db7779233b1afcc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "913611ce_75e57549",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/SwapAdminApiReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2020-11-10T15:39:21Z",
+      "side": 1,
+      "message": "Done, thanks for the hint! :)",
+      "parentUuid": "4d62b770_23cf8315",
       "range": {
         "startLine": 53,
         "startChar": 32,
