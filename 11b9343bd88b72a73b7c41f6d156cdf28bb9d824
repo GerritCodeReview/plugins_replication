@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55670f0c_ac9c397a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-12T04:39:14Z",
+      "side": 1,
+      "message": "Luca/Marco, do either of you know if there\u0027s a better way to handle renaming the lockErrorMaxRetries config than what Kaushik did here?",
+      "revId": "11b9343bd88b72a73b7c41f6d156cdf28bb9d824",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7d594e2_d8ccb755",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-12T04:39:14Z",
+      "side": 1,
+      "message": "updateRefRetryCount ?",
+      "range": {
+        "startLine": 379,
+        "startChar": 8,
+        "endLine": 379,
+        "endChar": 22
+      },
+      "revId": "11b9343bd88b72a73b7c41f6d156cdf28bb9d824",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3519552_dd072227",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-12T04:39:14Z",
+      "side": 1,
+      "message": "update ref failure?",
+      "range": {
+        "startLine": 380,
+        "startChar": 52,
+        "endLine": 380,
+        "endChar": 64
+      },
+      "revId": "11b9343bd88b72a73b7c41f6d156cdf28bb9d824",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5497449e_2895adcc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-12T04:39:14Z",
+      "side": 1,
+      "message": "update ref?",
+      "range": {
+        "startLine": 391,
+        "startChar": 34,
+        "endLine": 391,
+        "endChar": 38
+      },
+      "revId": "11b9343bd88b72a73b7c41f6d156cdf28bb9d824",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e6e9662_5449b3c2",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-12T04:39:14Z",
+      "side": 1,
+      "message": "Briefly mention other causes of \"failed to update ref\" and how they may be transient? (disk space was mentioned in that git commit, maybe others?)",
+      "revId": "11b9343bd88b72a73b7c41f6d156cdf28bb9d824",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
