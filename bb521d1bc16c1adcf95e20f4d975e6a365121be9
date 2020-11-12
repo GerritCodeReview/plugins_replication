@@ -39,6 +39,30 @@
       },
       "revId": "bb521d1bc16c1adcf95e20f4d975e6a365121be9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "110a1028_7766b054",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/SwapAdminApiReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2020-11-12T08:50:49Z",
+      "side": 1,
+      "message": "That is correct. I look forward to hearing from Nasser. I believe that we have 2 options:\n1. treat it as a sole verification of the change that it depends on and then your suggestion makes perfect sense\n2. treat it as an example of how our integration works and then I will extend even more classes and add more test cases that cover the other classes swap.\n\nWhat do you guys think?\n\nbtw: Luca can you tell me why it fails with verification? I\u0027m probably missing sth obvious but I can\u0027t access any logs related to it...",
+      "parentUuid": "92c2c523_b516f3f2",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 5
+      },
+      "revId": "bb521d1bc16c1adcf95e20f4d975e6a365121be9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
