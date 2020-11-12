@@ -257,6 +257,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b63e6c8c_6185b690",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-12T00:36:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fd9286c2_bfb1d3e4",
+      "range": {
+        "startLine": 191,
+        "startChar": 16,
+        "endLine": 191,
+        "endChar": 27
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a68d75e0_d12e5605",
@@ -485,6 +509,30 @@
       "side": 1,
       "message": "I agree that DynamicItem is typically a way to solve this puzzle but IMHO in this case it is hard to be achieved for multiple reasons:\n1. Destination contains a lot of logic that would be nice to re-use if general idea of the extension is the same - hence Destination override would make sense\n2. once the Destination is created one has no access to the child injector that is used for the AdminApiFactory binding definition - one would have to provide alternate configuration with all dependencies (including thread scoper etc.) in order to satisfy DI for sth remotely similar to GerritSshApi...",
       "parentUuid": "8ac44b17_5a4d13a6",
+      "range": {
+        "startLine": 222,
+        "startChar": 25,
+        "endLine": 222,
+        "endChar": 34
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b5f7ae5_f33f963c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-12T00:36:27Z",
+      "side": 1,
+      "message": "1. Reusing the logic (aka implementation) would lead your extension to be very fragile across releases and having to adapt over and over again. Sometimes a bit of code duplication is useful, so that you can rely on interfaces rather than implementation behaviour.\n\n2. You can also define *your* remotes and then it\u0027s up to you to define the injections you need.",
+      "parentUuid": "6d089098_c85f8913",
       "range": {
         "startLine": 222,
         "startChar": 25,
