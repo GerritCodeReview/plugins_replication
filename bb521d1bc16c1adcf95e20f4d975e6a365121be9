@@ -87,6 +87,30 @@
       },
       "revId": "bb521d1bc16c1adcf95e20f4d975e6a365121be9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7442dd78_111ab207",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/SwapAdminApiReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-12T15:23:54Z",
+      "side": 1,
+      "message": "\u003e \u003e That is correct. I look forward to hearing from Nasser. I believe that we have 2 options:\n\nI just replied on the parent change. I\u0027m still trying to understand the usage enough to weigh in on the options below. In general I\u0027d prefer to not duplicate tests, but I\u0027m not sure enough about this scenario to say what\u0027s correct here.\n\n\u003e \u003e 1. treat it as a sole verification of the change that it depends on and then your suggestion makes perfect sense\n\u003e \n\u003e +1\n\u003e \n\u003e \u003e 2. treat it as an example of how our integration works and then I will extend even more classes and add more test cases that cover the other classes swap.\n\u003e \n\u003e We can of course duplicate tests, but they always risk to get out of sync and forgotten ... then becoming tech debt.\n\u003e \n\u003e \u003e btw: Luca can you tell me why it fails with verification? I\u0027m probably missing sth obvious but I can\u0027t access any logs related to it...\n\u003e \n\u003e It isn\u0027t obvious at all and, unfortunately, I can\u0027t get much from the error shown by Zuul :-(\n\u003e \n\u003e At the moment, we\u0027re pretty much stuck with the CI notifications / validations, until the Zuul functionality is restored.\n\nZuul guru James Blair just said he\u0027d take a look at the issue, so hopefully it\u0027s fixed soon. See https://groups.google.com/d/msgid/repo-discuss/1a99a552-2274-4611-a20d-5f268bdc5418n%40googlegroups.com?utm_medium\u003demail\u0026utm_source\u003dfooter for some more details on the issue.",
+      "parentUuid": "7c56ef7c_2bdf9e80",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 5
+      },
+      "revId": "bb521d1bc16c1adcf95e20f4d975e6a365121be9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
