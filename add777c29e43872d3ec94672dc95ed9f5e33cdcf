@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2af43b79_5362cc35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-12T00:36:27Z",
+      "side": 1,
+      "message": "I\u0027m not opposed to this change. However, Martin has a point: if we can make this more useful for the rest of the community as well, it would definitely be a plus.",
+      "revId": "add777c29e43872d3ec94672dc95ed9f5e33cdcf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1f0d05d_5ed1aaec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-12T00:36:27Z",
+      "side": 1,
+      "message": "nit: wrap long line",
+      "range": {
+        "startLine": 219,
+        "startChar": 80,
+        "endLine": 219,
+        "endChar": 93
+      },
+      "revId": "add777c29e43872d3ec94672dc95ed9f5e33cdcf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbc1e9a9_172e608e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-12T00:36:27Z",
+      "side": 1,
+      "message": "nit: wrap long line",
+      "range": {
+        "startLine": 220,
+        "startChar": 80,
+        "endLine": 220,
+        "endChar": 98
+      },
+      "revId": "add777c29e43872d3ec94672dc95ed9f5e33cdcf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
