@@ -16,6 +16,29 @@
       "message": "Btw: can anyone point me to the problem that zuul complains about? Details (Checks tab) look weird to me as I can\u0027t find the log...",
       "revId": "bb521d1bc16c1adcf95e20f4d975e6a365121be9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92c2c523_b516f3f2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/SwapAdminApiReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-12T00:44:56Z",
+      "side": 1,
+      "message": "Do we really care about testing again that the replication plugin works? The goal of the test is the assertion L78, correct?",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 5
+      },
+      "revId": "bb521d1bc16c1adcf95e20f4d975e6a365121be9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
