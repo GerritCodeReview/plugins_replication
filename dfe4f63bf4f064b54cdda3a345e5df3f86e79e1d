@@ -589,6 +589,30 @@
       },
       "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e60b46fe_61f1b644",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2020-11-12T16:13:36Z",
+      "side": 1,
+      "message": "\u003e I\u0027m going to reply here vs...\n\nMakes sense the latter will not get merged before this one hence we could keep discussion here ;)\n\n\u003e Martin and I have been talking a lot about taking on some major refactoring in the replication plugin. It\u0027s possible that with some refactoring replacing specific (likely smaller) pieces of replication becomes more practical. We\u0027re hoping to talk about it more during the upcoming summit.\n\nI can see that there is a sessions dedicated to it and I will obviously show-up there to discuss ;)\n\n\u003e Am I summarizing that correctly?\n\nMostly yes, I forgot to mention that we are also using our API to add/remove projects on the replication server...\n\n\u003e For #1, if DestinationConfiguration was sufficiently pluggable, would that work for you?\n\nI guess it is already pretty pluggable considering that we swap defaults with our implementation as mentioned in the follow up change.\n\n\n\u003e For #2, could you have another plugin that consumes the Replication* events that the replication plugin already publishes? I assume there\u0027s some reason you\u0027re not doing that, but it\u0027s not clear to me.\n\nWe are actually doing it for regular replication events. I was not precise enough, sorry. The problem is that non of change-head, add or remove project results in those events so we would still lack notifications here. Considering that + our own commands to add/remove project we are back to AdminApiFactory swap. Even if those operations would result in some replication events the necessity of using own commands would still be an issue that would have to be solved somehow...",
+      "parentUuid": "3b1af80f_2269c9ba",
+      "range": {
+        "startLine": 222,
+        "startChar": 25,
+        "endLine": 222,
+        "endChar": 34
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
