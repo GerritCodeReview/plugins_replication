@@ -565,6 +565,30 @@
       },
       "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b1af80f_2269c9ba",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-12T15:21:26Z",
+      "side": 1,
+      "message": "I\u0027m going to reply here vs on https://gerrit-review.googlesource.com/c/plugins/replication/+/287199 so that more of the discussion stays together. Sorry if that makes it more confusing.\n\nMartin and I have been talking a lot about taking on some major refactoring in the replication plugin. It\u0027s possible that with some refactoring replacing specific (likely smaller) pieces of replication becomes more practical. We\u0027re hoping to talk about it more during the upcoming summit.\n\n@Jacek, from your big (and helpful!) comment on 287199 where you detailed the 5 areas you modify replication, it sounds like you have custom features for 1) a non-file-based remote config and 2) changing where/how replication start/completion notifications are sent. Am I summarizing that correctly?\n\nFor #1, if DestinationConfiguration was sufficiently pluggable, would that work for you?\n\nFor #2, could you have another plugin that consumes the Replication* events that the replication plugin already publishes? I assume there\u0027s some reason you\u0027re not doing that, but it\u0027s not clear to me.",
+      "parentUuid": "10096ae0_004fe0d9",
+      "range": {
+        "startLine": 222,
+        "startChar": 25,
+        "endLine": 222,
+        "endChar": 34
+      },
+      "revId": "dfe4f63bf4f064b54cdda3a345e5df3f86e79e1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
