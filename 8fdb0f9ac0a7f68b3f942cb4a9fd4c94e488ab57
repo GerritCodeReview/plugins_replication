@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8feddb0c_07390d54",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-11-16T18:31:41Z",
+      "side": 0,
+      "message": "Would it make more sense to make the error message reflect what the reply actually is (i.e. keep \"lock failures\" when the message is still there)?",
+      "range": {
+        "startLine": 391,
+        "startChar": 34,
+        "endLine": 391,
+        "endChar": 39
+      },
+      "revId": "8fdb0f9ac0a7f68b3f942cb4a9fd4c94e488ab57",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
