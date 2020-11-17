@@ -16,6 +16,24 @@
       "message": "This \"fix\" is fixing something by modifying the otherwise correct behavior of a layer which should know nothing about the layer it is \"fixing\" a problem with. This feels like a layering violation.",
       "revId": "0aaf73385a47a608f7892eb7e14db4326d7adab0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "796cdd51_15e6acee",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-17T20:43:01Z",
+      "side": 1,
+      "message": "Maybe. I mentally approached it as without this change, getRefs() is \"hiding\" the real refs by only returning \"ALL_REFS\". I guess the other way to look at it is for all other layers to understand what \"ALL_REFS\" means. Depending on your view, that could also be a layering violation. Is it appropriate for everything in the replication plugin to understand the magic \"ALL_REFS\"? If yes, I think ReplicationTasksStorage could do some extra work to find tasks matching any ref when ALL_REFS is found. That also seems odd, but maybe is better long term to match the storage layer to the rest of replication.",
+      "parentUuid": "8c84a20d_52f01835",
+      "revId": "0aaf73385a47a608f7892eb7e14db4326d7adab0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
