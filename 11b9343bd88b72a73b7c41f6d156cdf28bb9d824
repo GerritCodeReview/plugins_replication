@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d5b10b4_493209af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-18T23:05:55Z",
+      "side": 1,
+      "message": "Ping, any thoughts?",
+      "parentUuid": "55670f0c_ac9c397a",
+      "revId": "11b9343bd88b72a73b7c41f6d156cdf28bb9d824",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7d594e2_d8ccb755",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 1
