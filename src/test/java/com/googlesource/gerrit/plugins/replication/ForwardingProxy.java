@@ -70,11 +70,12 @@ public class ForwardingProxy {
     }
   }
 
+  @SuppressWarnings("unchecked") // newProxyInstance returns Object
   public static <T> T create(Class<T> toProxy, T delegate, Object overrider) {
     return (T)
         Proxy.newProxyInstance(
             delegate.getClass().getClassLoader(),
             new Class[] {toProxy},
-            new Handler(delegate, overrider));
+            new Handler<>(delegate, overrider));
   }
 }
