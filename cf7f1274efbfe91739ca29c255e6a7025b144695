@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f51c9e6_900e43d3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ChainedSchedulerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-18T02:39:11Z",
+      "side": 1,
+      "message": "This should probably come with a comment as to why. Martin can you help with that?",
+      "range": {
+        "startLine": 419,
+        "startChar": 10,
+        "endLine": 419,
+        "endChar": 37
+      },
+      "revId": "cf7f1274efbfe91739ca29c255e6a7025b144695",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0b06c69_bc81d471",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ChainedSchedulerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-18T02:39:11Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 424,
+        "startChar": 4,
+        "endLine": 424,
+        "endChar": 34
+      },
+      "revId": "cf7f1274efbfe91739ca29c255e6a7025b144695",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aeed6bb_af2eba68",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ForwardingProxy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-11-18T02:39:11Z",
+      "side": 1,
+      "message": "Needs a comment for why. Martin?",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 32
+      },
+      "revId": "cf7f1274efbfe91739ca29c255e6a7025b144695",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
