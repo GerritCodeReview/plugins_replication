@@ -40,7 +40,7 @@ public class ChainedScheduler<T> {
    */
   public interface Runner<T> {
     /** Will get executed in the thread pool task for each item */
-    default void run(T item) {}
+    void run(T item);
 
     /** Will get called after the last item completes */
     default void onDone() {}

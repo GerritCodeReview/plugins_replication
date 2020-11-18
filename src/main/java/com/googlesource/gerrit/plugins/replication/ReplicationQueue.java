@@ -192,7 +192,7 @@ public class ReplicationQueue
 
   private void firePendingEvents() {
     replaying = true;
-    new ChainedScheduler.StreamScheduler<ReplicationTasksStorage.ReplicateRefUpdate>(
+    new ChainedScheduler.StreamScheduler<>(
         workQueue.getDefaultQueue(),
         replicationTasksStorage.streamWaiting(),
         new ChainedScheduler.Runner<ReplicationTasksStorage.ReplicateRefUpdate>() {

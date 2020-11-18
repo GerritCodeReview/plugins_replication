@@ -238,7 +238,7 @@ public class ChainedSchedulerTest {
     TestRunner runner = new TestRunner();
     List<String> items = new ArrayList<>();
 
-    new ChainedScheduler(executor, items.iterator(), runner);
+    new ChainedScheduler<>(executor, items.iterator(), runner);
     assertThat(runner.awaitDone(1)).isEqualTo(true);
     assertThat(runner.runCount()).isEqualTo(0);
   }
@@ -250,7 +250,7 @@ public class ChainedSchedulerTest {
     List<String> items = new ArrayList<>();
     items.add(FIRST);
 
-    new ChainedScheduler(executor, items.iterator(), runner);
+    new ChainedScheduler<>(executor, items.iterator(), runner);
     assertThat(runner.awaitDone(1)).isEqualTo(true);
     assertThat(runner.runCount()).isEqualTo(1);
   }
@@ -261,7 +261,7 @@ public class ChainedSchedulerTest {
     TestRunner runner = new TestRunner();
     List<String> items = createManyItems();
 
-    new ChainedScheduler(executor, items.iterator(), runner);
+    new ChainedScheduler<>(executor, items.iterator(), runner);
     assertThat(runner.awaitDone(items.size())).isEqualTo(true);
     assertThat(runner.runCount()).isEqualTo(items.size());
   }
@@ -282,7 +282,7 @@ public class ChainedSchedulerTest {
     items.add(SECOND);
     items.add(THIRD);
 
-    new ChainedScheduler(executor, items.iterator(), runner);
+    new ChainedScheduler<>(executor, items.iterator(), runner);
     assertThat(runner.awaitDone(items.size())).isEqualTo(true);
     assertThat(runner.runCount()).isEqualTo(items.size());
   }
@@ -293,7 +293,7 @@ public class ChainedSchedulerTest {
     WaitingRunner runner = new WaitingRunner();
     List<String> items = createManyItems();
 
-    new ChainedScheduler(executor, items.iterator(), runner);
+    new ChainedScheduler<>(executor, items.iterator(), runner);
     for (int i = 1; i <= items.size(); i++) {
       assertThat(runner.isDone()).isEqualTo(false);
       runner.runOneRandomStarted();
@@ -312,7 +312,7 @@ public class ChainedSchedulerTest {
       List<String> items = createItems(threads + 1 /* Running */ + 1 /* Waiting */);
       CountingIterator it = new CountingIterator(items.iterator());
 
-      new ChainedScheduler(executor, it, runner);
+      new ChainedScheduler<>(executor, it, runner);
       assertThat(runner.awaitStart(FIRST, 1)).isEqualTo(true); // Confirms at least one Running
       assertThat(it.count).isGreaterThan(1); // Confirms at least one extra Waiting or Running
       assertThat(it.count).isLessThan(items.size()); // Confirms at least one still not queued
@@ -341,7 +341,7 @@ public class ChainedSchedulerTest {
     WaitingRunner runner = new WaitingRunner();
     List<String> items = createManyItems();
 
-    new ChainedScheduler(executor, items.iterator(), runner);
+    new ChainedScheduler<>(executor, items.iterator(), runner);
 
     for (int j = 1; j <= MANY_ITEMS_SIZE; j += threads) {
       // If #threads items can start before any complete, it proves #threads are
@@ -372,7 +372,7 @@ public class ChainedSchedulerTest {
       batches.add(executeWaitingRunnableBatch(batchSize, executor));
     }
 
-    new ChainedScheduler(executor, items.iterator(), runner);
+    new ChainedScheduler<>(executor, items.iterator(), runner);
 
     for (int i = 1; i <= items.size(); i++) {
       for (int b = 0; b < blockSize; b++) {
@@ -399,7 +399,8 @@ public class ChainedSchedulerTest {
     TestRunner runner = new TestRunner();
     List<String> items = createManyItems();
 
-    new ChainedScheduler(executor, items.iterator(), new ChainedScheduler.ForwardingRunner(runner));
+    new ChainedScheduler<>(
+        executor, items.iterator(), new ChainedScheduler.ForwardingRunner<>(runner));
     assertThat(runner.awaitDone(items.size())).isEqualTo(true);
     assertThat(runner.runCount()).isEqualTo(items.size());
   }
@@ -415,21 +416,15 @@ public class ChainedSchedulerTest {
     final AtomicBoolean closed = new AtomicBoolean(false);
     Object closeRecorder =
         new Object() {
+          @SuppressWarnings("unused")
           public void close() {
             closed.set(true);
           }
         };
-    Stream<String> stream =
-        ForwardingProxy.create(
-            Stream.class,
-            items.stream(),
-            new Object() {
-              public void close() {
-                closed.set(true);
-              }
-            });
+    @SuppressWarnings("unchecked")
+    Stream<String> stream = ForwardingProxy.create(Stream.class, items.stream(), closeRecorder);
 
-    new ChainedScheduler.StreamScheduler(executor, stream, runner);
+    new ChainedScheduler.StreamScheduler<>(executor, stream, runner);
     assertThat(closed.get()).isEqualTo(false);
 
     // Since there is only a single thread, the Stream cannot get closed before this runs
