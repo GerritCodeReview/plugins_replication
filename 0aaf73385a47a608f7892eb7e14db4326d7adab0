@@ -34,6 +34,24 @@
       "parentUuid": "8c84a20d_52f01835",
       "revId": "0aaf73385a47a608f7892eb7e14db4326d7adab0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa87c004_cf6a04e8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-11-18T00:11:59Z",
+      "side": 1,
+      "message": "I\u0027m not really sure what to make of this reply. Feels like a brain dump without a question or position?",
+      "parentUuid": "796cdd51_15e6acee",
+      "revId": "0aaf73385a47a608f7892eb7e14db4326d7adab0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
