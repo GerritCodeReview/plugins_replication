@@ -1,13 +1,9 @@
 {
   "checks": {
     "zuul-check:plugins_replication": {
-      "state": "FAILED",
-      "message": "Change failed",
-      "url": "https://ci.gerritcodereview.com/t/gerrit/buildset/f84a1f88646e450aa9c5b428101e378c",
-      "started": "2020-11-20T15:19:43Z",
-      "finished": "2020-11-20T15:27:56Z",
+      "state": "NOT_STARTED",
       "created": "2020-11-20T15:19:44Z",
-      "updated": "2020-11-20T15:27:57Z"
+      "updated": "2020-11-20T16:19:48Z"
     }
   }
 }
