@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfe5114d_543e3c54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-20T16:12:24Z",
+      "side": 1,
+      "message": "It would be best to avoid changing the configuration settings in a stable and EOL version, unless we really have to.\n\nOther than that, thanks for the fix.",
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2d27c89_9e561376",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-20T16:12:24Z",
+      "side": 1,
+      "message": "Do we really need to change the configuration settings? At the end of the day this is still related to a lock error, just returned with a different textual description.\n\nThe configuration should not depend on the implementation details: the high level concept is still that the update failed because of an underlying locking issue and therefore it can be retried.",
+      "range": {
+        "startLine": 62,
+        "startChar": 13,
+        "endLine": 62,
+        "endChar": 37
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5c3fb75_fb029d82",
@@ -19,6 +59,76 @@
         "startChar": 52,
         "endLine": 380,
         "endChar": 62
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fe26906_3ad8569c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-20T16:12:24Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "e5c3fb75_fb029d82",
+      "range": {
+        "startLine": 380,
+        "startChar": 52,
+        "endLine": 380,
+        "endChar": 62
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ac5d7b_54f3531b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-20T16:12:24Z",
+      "side": 1,
+      "message": "This still looks a bit fragile and easy to break in the future. What about making slightly more resilient with:\n- case insensitivity\n- checking for substrings",
+      "range": {
+        "startLine": 693,
+        "startChar": 21,
+        "endLine": 694,
+        "endChar": 62
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "936f4283_73644aac",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-11-20T16:12:24Z",
+      "side": 1,
+      "message": "Actually this is for both the case of lock failing or update failing. What about LockOrUpdateRefFailureException?",
+      "range": {
+        "startLine": 734,
+        "startChar": 22,
+        "endLine": 734,
+        "endChar": 31
       },
       "revId": "92093874e733f497802b4b30fcdf61404930c34d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
