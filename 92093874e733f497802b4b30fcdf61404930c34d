@@ -18,6 +18,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0627e490_5e77a170",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-11-20T18:05:27Z",
+      "side": 1,
+      "message": "Thanks Marco and Luca for reviewing this change.",
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2d27c89_9e561376",
@@ -31,6 +48,30 @@
       "writtenOn": "2020-11-20T16:12:24Z",
       "side": 1,
       "message": "Do we really need to change the configuration settings? At the end of the day this is still related to a lock error, just returned with a different textual description.\n\nThe configuration should not depend on the implementation details: the high level concept is still that the update failed because of an underlying locking issue and therefore it can be retried.",
+      "range": {
+        "startLine": 62,
+        "startChar": 13,
+        "endLine": 62,
+        "endChar": 37
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d28cb363_3843d337",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-11-20T18:05:27Z",
+      "side": 1,
+      "message": "It is related to the lock error, but is more than just the lock error. The \u0027update ref\u0027 failure includes \u0027failed to lock\u0027 and \u0027failed to write\u0027. Refer to the git commit I posted in my commit-message. I should have probably explained this in my commit-message instead of just pointing to the git commit.",
+      "parentUuid": "e2d27c89_9e561376",
       "range": {
         "startLine": 62,
         "startChar": 13,
@@ -90,6 +131,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79baf82f_3f18fcd1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-11-20T18:05:27Z",
+      "side": 1,
+      "message": "Shall we say \"Cannot replicate to {} due to a lock or write ref failure\" as \u0027update ref\u0027 failure includes \u0027failed to lock\u0027 and \u0027failed to write\u0027?",
+      "parentUuid": "1fe26906_3ad8569c",
+      "range": {
+        "startLine": 380,
+        "startChar": 52,
+        "endLine": 380,
+        "endChar": 62
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28ac5d7b_54f3531b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
@@ -113,6 +178,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0feb790b_d0c6c25d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-11-20T18:05:27Z",
+      "side": 1,
+      "message": "I suspect, by doing this, we may match failures we don\u0027t intend to match. I prefer a strict match, but I am open to your suggestion if other reviewers also feel strongly about a loose match.",
+      "parentUuid": "28ac5d7b_54f3531b",
+      "range": {
+        "startLine": 693,
+        "startChar": 21,
+        "endLine": 694,
+        "endChar": 62
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "936f4283_73644aac",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
@@ -124,6 +213,30 @@
       "writtenOn": "2020-11-20T16:12:24Z",
       "side": 1,
       "message": "Actually this is for both the case of lock failing or update failing. What about LockOrUpdateRefFailureException?",
+      "range": {
+        "startLine": 734,
+        "startChar": 22,
+        "endLine": 734,
+        "endChar": 31
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a873cfc6_38bb1bfd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-11-20T18:05:27Z",
+      "side": 1,
+      "message": "LockOrUpdateRefFailureException may not be a good name, since based on the git commit I put in my commit-message, UpdateRefFailure \u0027includes\u0027 the LockFailure. They aren\u0027t two different failures. My commit message attempted to make that distinction clear, but was probably unable to?",
+      "parentUuid": "936f4283_73644aac",
       "range": {
         "startLine": 734,
         "startChar": 22,
@@ -180,6 +293,54 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36eed701_d4667a71",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-11-20T18:05:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2b3dd052_5481cd5d",
+      "range": {
+        "startLine": 125,
+        "startChar": 8,
+        "endLine": 125,
+        "endChar": 10
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52f22f2e_1aafa81f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-11-20T18:05:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c7cbb9a6_12954b33",
+      "range": {
+        "startLine": 125,
+        "startChar": 11,
+        "endLine": 125,
+        "endChar": 47
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82a09082_180232d7",
@@ -203,6 +364,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e9e3688_b04d8cbc",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-11-20T18:05:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "82a09082_180232d7",
+      "range": {
+        "startLine": 127,
+        "startChar": 9,
+        "endLine": 127,
+        "endChar": 61
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "599ec1cc_508a3557",
@@ -216,6 +401,30 @@
       "writtenOn": "2020-11-19T20:13:58Z",
       "side": 1,
       "message": "then",
+      "range": {
+        "startLine": 128,
+        "startChar": 13,
+        "endLine": 128,
+        "endChar": 21
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc07467b_a101ebad",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-11-20T18:05:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "599ec1cc_508a3557",
       "range": {
         "startLine": 128,
         "startChar": 13,
