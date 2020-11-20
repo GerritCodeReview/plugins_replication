@@ -35,6 +35,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86205aa8_53d49f70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-11-20T19:20:49Z",
+      "side": 1,
+      "message": "We have attempted to make the config backwards connectible, so that folks already having the existing config value won\u0027t be impacted.",
+      "parentUuid": "cfe5114d_543e3c54",
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2d27c89_9e561376",
