@@ -115,17 +115,17 @@ public class ReplicationQueue
 
   public void scheduleFullSync(
       Project.NameKey project, String urlMatch, ReplicationState state, boolean now) {
-    fire(project, urlMatch, PushOne.ALL_REFS, state, now, false);
+    fire(project, urlMatch, PushOne.ALL_REFS, state, now);
   }
 
   @Override
   public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
-    fire(event.getProjectName(), event.getRefName(), false);
+    fire(event.getProjectName(), event.getRefName());
   }
 
-  private void fire(String projectName, String refName, boolean isPersisted) {
+  private void fire(String projectName, String refName) {
     ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
-    fire(Project.nameKey(projectName), null, refName, state, false, isPersisted);
+    fire(Project.nameKey(projectName), null, refName, state, false);
     state.markAllPushTasksScheduled();
   }
 
@@ -134,8 +134,7 @@ public class ReplicationQueue
       String urlMatch,
       String refName,
       ReplicationState state,
-      boolean now,
-      boolean isPersisted) {
+      boolean now) {
     if (!running) {
       stateLog.warn(
           "Replication plugin did not finish startup before event, event replication is postponed",
@@ -145,7 +144,7 @@ public class ReplicationQueue
     }
 
     for (Destination cfg : destinations.get().getAll(FilterType.ALL)) {
-      pushReference(cfg, project, urlMatch, refName, state, now, isPersisted);
+      pushReference(cfg, project, urlMatch, refName, state, now);
     }
   }
 
@@ -159,7 +158,7 @@ public class ReplicationQueue
 
   @UsedAt(UsedAt.Project.COLLABNET)
   public void pushReference(Destination cfg, Project.NameKey project, String refName) {
-    pushReference(cfg, project, null, refName, null, true, false);
+    pushReference(cfg, project, null, refName, null, true);
   }
 
   private void pushReference(
@@ -168,18 +167,15 @@ public class ReplicationQueue
       String urlMatch,
       String refName,
       ReplicationState state,
-      boolean now,
-      boolean isPersisted) {
+      boolean now) {
     boolean withoutState = state == null;
     if (withoutState) {
       state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
     }
     if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
       for (URIish uri : cfg.getURIs(project, urlMatch)) {
-        if (!isPersisted) {
-          replicationTasksStorage.create(
-              ReplicateRefUpdate.create(project.get(), refName, uri, cfg.getRemoteConfigName()));
-        }
+        replicationTasksStorage.create(
+            ReplicateRefUpdate.create(project.get(), refName, uri, cfg.getRemoteConfigName()));
         cfg.schedule(project, refName, uri, state, now);
       }
     } else {
@@ -264,7 +260,7 @@ public class ReplicationQueue
       String eventKey = String.format("%s:%s", event.projectName(), event.refName());
       if (!eventsReplayed.contains(eventKey)) {
         repLog.atInfo().log("Firing pending task %s", event);
-        fire(event.projectName(), event.refName(), false);
+        fire(event.projectName(), event.refName());
         eventsReplayed.add(eventKey);
       }
     }

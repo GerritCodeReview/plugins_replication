@@ -31,7 +31,7 @@ public class CreateProjectTask {
   }
 
   private final RemoteConfig config;
-  private final DestinationsCollection destinations;
+  private final ReplicationDestinations destinations;
   private final DynamicItem<AdminApiFactory> adminApiFactory;
   private final Project.NameKey project;
   private final String head;
@@ -39,7 +39,7 @@ public class CreateProjectTask {
   @Inject
   CreateProjectTask(
       RemoteConfig config,
-      DestinationsCollection destinations,
+      ReplicationDestinations destinations,
       DynamicItem<AdminApiFactory> adminApiFactory,
       @Assisted Project.NameKey project,
       @Assisted String head) {
@@ -51,8 +51,10 @@ public class CreateProjectTask {
   }
 
   public boolean create() {
-    return destinations.getURIs(Optional.of(config.getName()), project, FilterType.PROJECT_CREATION)
-        .values().stream()
+    return destinations
+        .getURIs(Optional.of(config.getName()), project, FilterType.PROJECT_CREATION)
+        .values()
+        .stream()
         .map(u -> createProject(u, project, head))
         .reduce(true, (a, b) -> a && b);
   }
