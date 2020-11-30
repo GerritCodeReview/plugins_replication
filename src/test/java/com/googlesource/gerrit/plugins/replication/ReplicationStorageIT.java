@@ -16,28 +16,19 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.NO_OP;
-import static java.util.stream.Collectors.toList;
 
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.projects.BranchInput;
-import com.googlesource.gerrit.plugins.replication.Destination.QueueInfo;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
-import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
-import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.Test;
 
@@ -51,32 +42,7 @@ import org.junit.Test;
 @TestPlugin(
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
-public class ReplicationStorageIT extends ReplicationDaemon {
-  private static final int TEST_TASK_FINISH_SECONDS = 1;
-  private static final int TEST_REPLICATION_MAX_RETRIES = 1;
-  protected static final Duration TEST_TASK_FINISH_TIMEOUT =
-      Duration.ofSeconds(TEST_TASK_FINISH_SECONDS);
-  private static final Duration MAX_RETRY_WITH_TOLERANCE_TIMEOUT =
-      Duration.ofSeconds(
-          (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60)
-                  * TEST_REPLICATION_MAX_RETRIES
-              + 10);
-  protected ReplicationTasksStorage tasksStorage;
-  private DestinationsCollection destinationCollection;
-  private ReplicationConfig replicationConfig;
-
-  @Override
-  public void setUpTestPlugin() throws Exception {
-    initConfig();
-    setReplicationDestination(
-        "remote1",
-        "suffix1",
-        Optional.of("not-used-project")); // Simulates a full replication.config initialization
-    super.setUpTestPlugin();
-    tasksStorage = plugin.getSysInjector().getInstance(ReplicationTasksStorage.class);
-    destinationCollection = plugin.getSysInjector().getInstance(DestinationsCollection.class);
-    replicationConfig = plugin.getSysInjector().getInstance(ReplicationConfig.class);
-  }
+public class ReplicationStorageIT extends ReplicationStorageDaemon {
 
   @Test
   public void shouldCreateIndividualReplicationTasksForEveryRemoteUrlPair() throws Exception {
@@ -357,51 +323,5 @@ public class ReplicationStorageIT extends ReplicationDaemon {
 
     WaitUtil.waitUntil(() -> pushOp.wasCanceled(), MAX_RETRY_WITH_TOLERANCE_TIMEOUT);
     WaitUtil.waitUntil(() -> isTaskCleanedUp(), TEST_TASK_FINISH_TIMEOUT);
-  }
-
-  private boolean isTaskRescheduled(QueueInfo queue, URIish uri) {
-    PushOne pushOne = queue.pending.get(uri);
-    return pushOne == null ? false : pushOne.isRetrying();
-  }
-
-  private boolean isTaskCleanedUp() {
-    Path refUpdates = replicationConfig.getEventsDirectory().resolve("ref-updates");
-    Path runningUpdates = refUpdates.resolve("running");
-    try {
-      return Files.list(runningUpdates).count() == 0;
-    } catch (IOException e) {
-      throw new RuntimeException(e.getMessage(), e);
-    }
-  }
-
-  private Stream<ReplicateRefUpdate> waitingChangeReplicationTasksForRemote(
-      String changeRef, String remote) {
-    return tasksStorage
-        .streamWaiting()
-        .filter(task -> changeRef.equals(task.ref()))
-        .filter(task -> remote.equals(task.remote()));
-  }
-
-  private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
-      Stream<ReplicateRefUpdate> updates, String changeRef, String remote) {
-    return updates
-        .filter(task -> changeRef.equals(task.ref()))
-        .filter(task -> remote.equals(task.remote()));
-  }
-
-  private List<ReplicateRefUpdate> listWaitingReplicationTasks(String refRegex) {
-    Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage
-        .streamWaiting()
-        .filter(task -> refmaskPattern.matcher(task.ref()).matches())
-        .collect(toList());
-  }
-
-  private List<ReplicateRefUpdate> listWaiting() {
-    return tasksStorage.streamWaiting().collect(Collectors.toList());
-  }
-
-  private List<ReplicateRefUpdate> listRunning() {
-    return tasksStorage.streamRunning().collect(Collectors.toList());
   }
 }
