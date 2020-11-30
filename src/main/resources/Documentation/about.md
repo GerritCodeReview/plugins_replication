@@ -16,6 +16,12 @@ configuration is not recommended.  It is also possible to specify a
 local path as replication target. This makes e.g. sense if a network
 share is mounted to which the repositories should be replicated.
 
+In multi-primary scenario, any replication work which is already
+in-flight or completed by the other nodes is not performed to
+avoid extra work. This is because, the storage for replication
+events is shared between multiple primaries.(The storage location
+is specified in the config using: `replication.eventsDirectory`).
+
 Replication of account data (NoteDb)
 ------------------------------------
 

@@ -32,7 +32,9 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.NotDirectoryException;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
@@ -93,6 +95,11 @@ public class ReplicationTasksStorage {
 
     public abstract String remote();
 
+    public String sha1() {
+      return ReplicationTasksStorage.sha1(project() + "\n" + ref() + "\n" + uri() + "\n" + remote())
+          .name();
+    }
+
     @Override
     public final String toString() {
       return "ref-update " + project() + ":" + ref() + " uri:" + uri() + " remote:" + remote();
@@ -127,10 +134,15 @@ public class ReplicationTasksStorage {
     return new Task(r).create();
   }
 
-  public synchronized void start(UriUpdates uriUpdates) {
+  public synchronized Set<String> start(UriUpdates uriUpdates) {
+    Set<String> startedRefs = new HashSet<>();
     for (ReplicateRefUpdate update : uriUpdates.getReplicateRefUpdates()) {
-      new Task(update).start();
+      Task t = new Task(update);
+      if (t.start()) {
+        startedRefs.add(t.update.ref());
+      }
     }
+    return startedRefs;
   }
 
   public synchronized void reset(UriUpdates uriUpdates) {
@@ -182,7 +194,7 @@ public class ReplicationTasksStorage {
   }
 
   @SuppressWarnings("deprecation")
-  private ObjectId sha1(String s) {
+  private static ObjectId sha1(String s) {
     return ObjectId.fromRaw(Hashing.sha1().hashString(s, UTF_8).asBytes());
   }
 
@@ -203,9 +215,7 @@ public class ReplicationTasksStorage {
 
     public Task(ReplicateRefUpdate update) {
       this.update = update;
-      String key =
-          update.project() + "\n" + update.ref() + "\n" + update.uri() + "\n" + update.remote();
-      taskKey = sha1(key).name();
+      taskKey = update.sha1();
       running = createDir(runningUpdates).resolve(taskKey);
       waiting = createDir(waitingUpdates).resolve(taskKey);
     }
@@ -228,8 +238,8 @@ public class ReplicationTasksStorage {
       return taskKey;
     }
 
-    public void start() {
-      rename(waiting, running);
+    public boolean start() {
+      return rename(waiting, running);
     }
 
     public void reset() {
@@ -253,12 +263,14 @@ public class ReplicationTasksStorage {
       }
     }
 
-    private void rename(Path from, Path to) {
+    private boolean rename(Path from, Path to) {
       try {
         logger.atFine().log("RENAME %s to %s %s", from, to, updateLog());
         Files.move(from, to, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+        return true;
       } catch (IOException e) {
         logger.atSevere().withCause(e).log("Error while renaming task %s", taskKey);
+        return false;
       }
     }
 
