@@ -84,7 +84,7 @@ public class ReplicationTasksStorageTest {
   @Test
   public void canStartWaitingUpdate() throws Exception {
     storage.create(REF_UPDATE);
-    storage.start(uriUpdates);
+    assertThat(storage.start(uriUpdates)).containsExactly(REF_UPDATE.ref());
     assertThatStream(storage.streamWaiting()).isEmpty();
     assertFalse(storage.isWaiting(uriUpdates));
     assertThatStream(storage.streamRunning()).containsExactly(REF_UPDATE);

@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.common.truth.Truth.assertThat;
 import static com.googlesource.gerrit.plugins.replication.ReplicationTasksStorageTest.assertNoIncompleteTasks;
 import static com.googlesource.gerrit.plugins.replication.ReplicationTasksStorageTest.assertThatStream;
 
@@ -192,6 +193,18 @@ public class ReplicationTasksStorageMPTest {
 
     nodeB.finish(URI_UPDATES);
     assertNoIncompleteTasks(persistedView);
+  }
+
+  @Test
+  public void duplicateWorkIsNotPerformed() {
+    nodeA.create(REF_UPDATE);
+    nodeB.create(REF_UPDATE);
+
+    assertThat(nodeA.start(URI_UPDATES)).containsExactly(REF_UPDATE.ref());
+    assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
+
+    assertThat(nodeB.start(URI_UPDATES)).isEmpty();
+    assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
   }
 
   public static UriUpdates getUriUpdates(ReplicationTasksStorage.ReplicateRefUpdate refUpdate) {

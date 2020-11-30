@@ -259,6 +259,12 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     }
   }
 
+  void setRefs(Set<String> refs) {
+    pushAllRefs = false;
+    delta.clear();
+    addRefs(refs);
+  }
+
   void addState(String ref, ReplicationState state) {
     stateMap.put(ref, state);
   }
