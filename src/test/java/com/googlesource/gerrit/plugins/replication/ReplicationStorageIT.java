@@ -90,7 +90,7 @@ public class ReplicationStorageIT extends ReplicationDaemon {
 
     createChange();
 
-    assertThat(listWaitingReplicationTasks("refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
+    assertThat(listWaitingReplicationTasks(tasksStorage, "refs/changes/\\d*/\\d*/\\d*")).hasSize(4);
   }
 
   @Test
@@ -105,7 +105,8 @@ public class ReplicationStorageIT extends ReplicationDaemon {
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, null, new ReplicationState(NO_OP), false);
 
-    assertThat(listWaitingReplicationTasks(Pattern.quote(PushOne.ALL_REFS))).hasSize(1);
+    assertThat(listWaitingReplicationTasks(tasksStorage, Pattern.quote(PushOne.ALL_REFS)))
+        .hasSize(1);
   }
 
   @Test
@@ -294,7 +295,7 @@ public class ReplicationStorageIT extends ReplicationDaemon {
 
     gApi.projects().name(project.get()).branch(branchToDelete).delete();
 
-    assertThat(listWaitingReplicationTasks(branchToDelete)).hasSize(1);
+    assertThat(listWaitingReplicationTasks(tasksStorage, branchToDelete)).hasSize(1);
   }
 
   @Test
@@ -389,7 +390,8 @@ public class ReplicationStorageIT extends ReplicationDaemon {
         .filter(task -> remote.equals(task.remote()));
   }
 
-  private List<ReplicateRefUpdate> listWaitingReplicationTasks(String refRegex) {
+  protected static List<ReplicateRefUpdate> listWaitingReplicationTasks(
+      ReplicationTasksStorage tasksStorage, String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
     return tasksStorage
         .streamWaiting()
