@@ -33,6 +33,24 @@
       "message": "Can you score a Verified vote, to also include your testing of these modifications rendering well, with this added linkage working?",
       "revId": "a407cc55508dede3c63869b493cbc8c92b4eaba4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b7a234f_7cb59cb8",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-12-01T20:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "364bdbfc_50f3204e",
+      "revId": "a407cc55508dede3c63869b493cbc8c92b4eaba4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
