@@ -1,0 +1,239 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f8a7f2_d3a8a9f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-01T19:24:59Z",
+      "side": 1,
+      "message": "reword as: This change only starts the replication tasks which are present",
+      "revId": "d701c8abc4e3addf581340cccb3c3c20eb686652",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38fb76a3_1273cfdf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-01T19:24:59Z",
+      "side": 1,
+      "message": "ignores?",
+      "range": {
+        "startLine": 10,
+        "startChar": 35,
+        "endLine": 10,
+        "endChar": 44
+      },
+      "revId": "d701c8abc4e3addf581340cccb3c3c20eb686652",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56b0c916_80cfa99f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-01T19:24:59Z",
+      "side": 1,
+      "message": "will reduce duplicate work",
+      "range": {
+        "startLine": 11,
+        "startChar": 40,
+        "endLine": 12,
+        "endChar": 8
+      },
+      "revId": "d701c8abc4e3addf581340cccb3c3c20eb686652",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a801df9d_de61909d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-01T19:24:59Z",
+      "side": 1,
+      "message": "started",
+      "range": {
+        "startLine": 13,
+        "startChar": 33,
+        "endLine": 13,
+        "endChar": 42
+      },
+      "revId": "d701c8abc4e3addf581340cccb3c3c20eb686652",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad54c911_9ecffc36",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-01T19:24:59Z",
+      "side": 1,
+      "message": "Explain this means shared storage for replication events (reference the config value)?",
+      "range": {
+        "startLine": 19,
+        "startChar": 3,
+        "endLine": 19,
+        "endChar": 25
+      },
+      "revId": "d701c8abc4e3addf581340cccb3c3c20eb686652",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "013378db_7afcfd07",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-01T19:24:59Z",
+      "side": 1,
+      "message": "Where is this used where you don\u0027t provide the instance variable as the first arg?\n\nIf there is a usage of that, can you add a wrapper for this that uses the tasksStorage instance variable so you don\u0027t always have to pass it down?",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 400,
+        "endChar": 3
+      },
+      "revId": "d701c8abc4e3addf581340cccb3c3c20eb686652",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fe09eee_07c85391",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageMPIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-01T19:24:59Z",
+      "side": 1,
+      "message": "Probably better to create a new ReplicationStorageDaemon and have both ReplicationStorageIT and this new class extend that. Then you can move this method there instead of importing. You can probably also share the setUpTestPlugin() method and the instance variables between both.",
+      "range": {
+        "startLine": 18,
+        "startChar": 79,
+        "endLine": 18,
+        "endChar": 106
+      },
+      "revId": "d701c8abc4e3addf581340cccb3c3c20eb686652",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6f8bbcb_76dd1cdf",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageMPIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-01T19:24:59Z",
+      "side": 1,
+      "message": "Add a javadoc",
+      "revId": "d701c8abc4e3addf581340cccb3c3c20eb686652",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a5797b5_4f59ca84",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageMPIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-01T19:24:59Z",
+      "side": 1,
+      "message": "This needs to set a longer delay to be non-racy. See the other tests in ReplicationStorageIT and the javadoc at the top of that class. This isn\u0027t exactly like those because we don\u0027t want to reload the config again after messing with the tasks, but the default 1 second delay is going to be racy.",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 62
+      },
+      "revId": "d701c8abc4e3addf581340cccb3c3c20eb686652",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f266d410_b8ca989c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageMPIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-01T19:24:59Z",
+      "side": 1,
+      "message": "put this at the end of line 68",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 60
+      },
+      "revId": "d701c8abc4e3addf581340cccb3c3c20eb686652",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5543d732_df4493dd",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageMPIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-01T19:24:59Z",
+      "side": 1,
+      "message": "Asserts for empty running \u0026 waiting tasks?",
+      "revId": "d701c8abc4e3addf581340cccb3c3c20eb686652",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
