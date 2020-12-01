@@ -48,6 +48,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01957e50_95957c83",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ChainedSchedulerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-01T17:34:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93f08e98_c000fc9d",
+      "range": {
+        "startLine": 419,
+        "startChar": 10,
+        "endLine": 419,
+        "endChar": 37
+      },
+      "revId": "cf7f1274efbfe91739ca29c255e6a7025b144695",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0b06c69_bc81d471",
@@ -95,6 +119,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31288a9f_6df73a53",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ChainedSchedulerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-01T17:34:14Z",
+      "side": 1,
+      "message": "The Stream.class is converted to Stream\u003cString\u003e.class.",
+      "parentUuid": "7b8d1714_6d8baca0",
+      "range": {
+        "startLine": 424,
+        "startChar": 4,
+        "endLine": 424,
+        "endChar": 34
+      },
+      "revId": "cf7f1274efbfe91739ca29c255e6a7025b144695",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4aeed6bb_af2eba68",
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "Anyone not using eclipse is not likely to be able to give reasonable answers to why these are needed until the builds fails them so that someone can narrow them down to \"why\". Until then, I strongly suggest that we turn these off via eclipse settings so that eclipse users are no longer bugged by them.",
       "parentUuid": "4aeed6bb_af2eba68",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 32
+      },
+      "revId": "cf7f1274efbfe91739ca29c255e6a7025b144695",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3d43821_7866c81e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ForwardingProxy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-01T17:34:14Z",
+      "side": 1,
+      "message": "@Edwin, can you suggest something here?",
+      "parentUuid": "cf65959d_51da6d47",
       "range": {
         "startLine": 73,
         "startChar": 2,
