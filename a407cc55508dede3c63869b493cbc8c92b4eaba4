@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a8ac54b_da9158a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-12-01T20:02:10Z",
+      "side": 1,
+      "message": "Verified locally that the clickable link to replication.updateRefErrorMaxRetries section in the documentation renders correctly and works as expected.",
+      "revId": "a407cc55508dede3c63869b493cbc8c92b4eaba4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "364bdbfc_50f3204e",
