@@ -100,6 +100,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f7c5814_1efa1d9c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-12-01T20:34:40Z",
+      "side": 1,
+      "message": "Thanks for clarifying.\nFailed to lock was associated to concurrent operations, but failed to write could be something different, like a storage failure (e.g. out of disk space).\n\nNow, with failed to update, we\u0027re really stuck and we just don\u0027t know :-(\nIt would be worth documenting this properly in the replication plugin and leave to the admin to choose what to do.\n\nI believe the fix on stable-2.16 makes sense, as we would not catch this error otherwise and not retry.",
+      "parentUuid": "d28cb363_3843d337",
+      "range": {
+        "startLine": 62,
+        "startChar": 13,
+        "endLine": 62,
+        "endChar": 37
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5c3fb75_fb029d82",
@@ -268,6 +292,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d96cdccd_c325f684",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-12-01T20:34:40Z",
+      "side": 1,
+      "message": "OK, but it would be best to:\n- define literals as constants\n- put the reference to the Git source code, to indicate that those need to match exactly the ones returned by the git server\n\nHave you checked also other Git server implementations if they return something slightly different?",
+      "parentUuid": "0feb790b_d0c6c25d",
+      "range": {
+        "startLine": 693,
+        "startChar": 21,
+        "endLine": 694,
+        "endChar": 62
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "936f4283_73644aac",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 3
@@ -303,6 +351,30 @@
       "side": 1,
       "message": "LockOrUpdateRefFailureException may not be a good name, since based on the git commit I put in my commit-message, UpdateRefFailure \u0027includes\u0027 the LockFailure. They aren\u0027t two different failures. My commit message attempted to make that distinction clear, but was probably unable to?",
       "parentUuid": "936f4283_73644aac",
+      "range": {
+        "startLine": 734,
+        "startChar": 22,
+        "endLine": 734,
+        "endChar": 31
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6d634df_27233956",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2020-12-01T20:34:40Z",
+      "side": 1,
+      "message": "update-ref isn\u0027t necessarily a locking error, as discussed above.\nI believe that returning UpdateRefFailureException whilst there was a lock failure could be misleading.\n\nWhy not keeping then the LockFailureException as well and making it a subclass of UpdateReffailureException, so that we can still differentiate between the two, but both are associated with a UpdateRefFailureException?\n\nWDYT?",
+      "parentUuid": "a873cfc6_38bb1bfd",
       "range": {
         "startLine": 734,
         "startChar": 22,
