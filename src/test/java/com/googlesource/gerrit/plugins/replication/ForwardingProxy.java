@@ -75,6 +75,6 @@ public class ForwardingProxy {
         Proxy.newProxyInstance(
             delegate.getClass().getClassLoader(),
             new Class[] {toProxy},
-            new Handler(delegate, overrider));
+            new Handler<>(delegate, overrider));
   }
 }
