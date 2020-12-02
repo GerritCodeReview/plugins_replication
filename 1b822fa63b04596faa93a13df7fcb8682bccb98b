@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "462b5670_572231b5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-02T02:32:47Z",
+      "side": 0,
+      "message": "Don\u0027t move private helpers that aren\u0027t used by other classes.",
+      "range": {
+        "startLine": 362,
+        "startChar": 0,
+        "endLine": 365,
+        "endChar": 3
+      },
+      "revId": "1b822fa63b04596faa93a13df7fcb8682bccb98b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
