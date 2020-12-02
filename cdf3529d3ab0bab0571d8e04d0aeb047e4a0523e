@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b8f8d30_ed1d3fe2",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-12-02T17:05:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da011ecd_2d016ae2",
+      "range": {
+        "startLine": 22,
+        "startChar": 43,
+        "endLine": 22,
+        "endChar": 49
+      },
+      "revId": "cdf3529d3ab0bab0571d8e04d0aeb047e4a0523e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48797c3b_1fa901a7",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-12-02T02:32:47Z",
       "side": 1,
       "message": "limit to foo_branch_.* ?",
+      "range": {
+        "startLine": 56,
+        "startChar": 55,
+        "endLine": 56,
+        "endChar": 59
+      },
+      "revId": "cdf3529d3ab0bab0571d8e04d0aeb047e4a0523e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e70c4801_e0f06246",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageMPIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-12-02T17:05:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48797c3b_1fa901a7",
       "range": {
         "startLine": 56,
         "startChar": 55,
