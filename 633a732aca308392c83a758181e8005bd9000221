@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c310c059_983af3a4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageDaemon.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-12-02T17:22:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f12deca_9ab20f41",
+      "revId": "633a732aca308392c83a758181e8005bd9000221",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48c9043e_c7caed3d",
@@ -31,6 +49,30 @@
       "writtenOn": "2020-12-02T17:06:32Z",
       "side": 1,
       "message": "We importing the inner class already, so don\u0027t change this from what was already in this file.",
+      "range": {
+        "startLine": 365,
+        "startChar": 15,
+        "endLine": 365,
+        "endChar": 39
+      },
+      "revId": "633a732aca308392c83a758181e8005bd9000221",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba61138e_4c62f0fe",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-12-02T17:22:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48c9043e_c7caed3d",
       "range": {
         "startLine": 365,
         "startChar": 15,
