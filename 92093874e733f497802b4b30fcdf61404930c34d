@@ -124,6 +124,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "875d7169_d7f9203b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-12-02T22:49:20Z",
+      "side": 1,
+      "message": "Updated the doc to add some more details.",
+      "parentUuid": "0f7c5814_1efa1d9c",
+      "range": {
+        "startLine": 62,
+        "startChar": 13,
+        "endLine": 62,
+        "endChar": 37
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5c3fb75_fb029d82",
@@ -314,6 +338,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5c2c831_b5e72cf3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-12-02T22:49:20Z",
+      "side": 1,
+      "message": "Done.\n\nThis change isn\u0027t about ensuring all the other Git server implementations work. We are trying to make it work with what we know. We did check JGit and added a comment for it pointing to the JGit code.",
+      "parentUuid": "d96cdccd_c325f684",
+      "range": {
+        "startLine": 693,
+        "startChar": 21,
+        "endLine": 694,
+        "endChar": 62
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "936f4283_73644aac",
@@ -375,6 +423,30 @@
       "side": 1,
       "message": "update-ref isn\u0027t necessarily a locking error, as discussed above.\nI believe that returning UpdateRefFailureException whilst there was a lock failure could be misleading.\n\nWhy not keeping then the LockFailureException as well and making it a subclass of UpdateReffailureException, so that we can still differentiate between the two, but both are associated with a UpdateRefFailureException?\n\nWDYT?",
       "parentUuid": "a873cfc6_38bb1bfd",
+      "range": {
+        "startLine": 734,
+        "startChar": 22,
+        "endLine": 734,
+        "endChar": 31
+      },
+      "revId": "92093874e733f497802b4b30fcdf61404930c34d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e0d7266_c1921294",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2020-12-02T22:49:20Z",
+      "side": 1,
+      "message": "\u003e update-ref isn\u0027t necessarily a locking error, as discussed above.\nAgreed. New git versions do not differentiate between a lock failure and any other kind of update ref failure.\n\n\u003e I believe that returning UpdateRefFailureException whilst there was a lock failure could be misleading.\nA lock failure is an update-ref failure. I don\u0027t really think it would be misleading.\n\n\u003e \n\u003e Why not keeping then the LockFailureException as well and making it a subclass of UpdateReffailureException, so that we can still differentiate between the two, but both are associated with a UpdateRefFailureException?\nHow would we differentiate between the two? Can you help provide sample code to demonstrate how?",
+      "parentUuid": "e6d634df_27233956",
       "range": {
         "startLine": 734,
         "startChar": 22,
