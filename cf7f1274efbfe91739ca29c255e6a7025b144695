@@ -212,6 +212,30 @@
       },
       "revId": "cf7f1274efbfe91739ca29c255e6a7025b144695",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3414265c_61501e19",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ForwardingProxy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2020-12-02T08:24:56Z",
+      "side": 1,
+      "message": "For this change, I think having this annotation here is fine as it is consistent with the rest of the code base that also uses such annotations to keep Eclipse warning-free.\n\nIn the past Eclipse has been the default IDE for most Gerrit devs, hence the focus was on keeping it warning-free. Not sure if this should still be a goal, nowadays that many of us use Intellij (not me). I agree that it would be much better to only rely on ErrorProne to detect these since it would make the build fail for everyone. But I guess it requires that someone takes the time to understand how we could use ErrorProne better. The Eclipse settings should then be changed to be inline with what ErrorProne would find. My 2 cents :)",
+      "parentUuid": "c3d43821_7866c81e",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 32
+      },
+      "revId": "cf7f1274efbfe91739ca29c255e6a7025b144695",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
