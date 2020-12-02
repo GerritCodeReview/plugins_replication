@@ -236,6 +236,30 @@
       },
       "revId": "cf7f1274efbfe91739ca29c255e6a7025b144695",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfc370df_e41fde1d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ForwardingProxy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-02T17:21:18Z",
+      "side": 1,
+      "message": "I checked and there doesn\u0027t seem to be a way to have ErrorProne fail on unchecked casts. For now, I figured out what this one was upset about and added a comment. I\u0027ll upload another change to tweak Eclipse settings (assuming I can figure out how).",
+      "parentUuid": "3414265c_61501e19",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 32
+      },
+      "revId": "cf7f1274efbfe91739ca29c255e6a7025b144695",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
