@@ -14,9 +14,6 @@ gerrit_plugin(
         "Gerrit-SshModule: com.googlesource.gerrit.plugins.replication.SshModule",
     ],
     resources = glob(["src/main/resources/**/*"]),
-    deps = [
-        "//lib/commons:io",
-    ],
 )
 
 junit_tests(
