@@ -16,6 +16,23 @@
       "message": "I\u0027ll +2 after seeing successful results of additional manual/semi-automated testing with a MP setup.",
       "revId": "b6993a80d04f973754d8cd08820e8ce9cf6d2ba0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc3c2c09_e0603cfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2020-12-08T18:58:17Z",
+      "side": 1,
+      "message": "I have tested this change using a docker setup consisting of two primaries and two configured destinations. Test case involves \n\n  1. updating a ref on git repo\n  2. Run replication start on Node A with long replication delay\n  3. Run replication start --now on Node B\n  4. Verify that Node A doesn\u0027t do any replication work\n  5. Verify that the ref update is replicated\n\nVerification is done by looking at the git daemon logs, which shows this specific line\n\n  gitd-1_1 | 2020-12-08T15:40:22.480152900Z [11]  Request upload-pack for \u0027/testrep01.git\u0027 \n\nis only logged once per configured destination (without this change we could see two upload-pack requests for each destination).",
+      "revId": "b6993a80d04f973754d8cd08820e8ce9cf6d2ba0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
