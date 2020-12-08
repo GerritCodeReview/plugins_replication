@@ -726,8 +726,8 @@ public class Destination {
     return config.getProjects();
   }
 
-  int getLockErrorMaxRetries() {
-    return config.getLockErrorMaxRetries();
+  int getUpdateRefErrorMaxRetries() {
+    return config.getUpdateRefErrorMaxRetries();
   }
 
   String getRemoteConfigName() {
