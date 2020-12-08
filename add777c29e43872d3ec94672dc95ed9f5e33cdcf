@@ -53,6 +53,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8595f58e_277d52e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-08T03:48:56Z",
+      "side": 1,
+      "message": "I think there was hopes to discuss more in depth during the contributor summit, but I think that didn\u0027t quite happen. I think I would find it useful to have some live discussion (with good note taking!), would others?\n\nI don\u0027t think this is an urgent item from Jacek (please correct me if I\u0027m wrong) and I think we can use this to try and get a good improved design in the plugin layering.\n\nIt seems like there\u0027s at least a need for some kind of pluggable support for 1) remote config (non-file-based), 2) changing where/how replication start/completion notifications are sent (as well as ensuring all events are captured in that scope) and, 3) custom/alternate commands for everything not natively handled by JGit (project creation, etc).\n\nThose 3 sound like great problems to solve to me and maybe if that\u0027s captured well enough, folks could just start proposing solutions or we could discuss solutions live?",
+      "parentUuid": "903a6af7_7c40c7a4",
+      "revId": "add777c29e43872d3ec94672dc95ed9f5e33cdcf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1f0d05d_5ed1aaec",
