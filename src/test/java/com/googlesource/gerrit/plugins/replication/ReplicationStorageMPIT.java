@@ -15,7 +15,6 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertTrue;
 
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
@@ -69,6 +68,7 @@ public class ReplicationStorageMPIT extends ReplicationStorageDaemon {
       assertThat(targetBranchRefB.getObjectId()).isEqualTo(masterRef.getObjectId());
     }
 
-    assertTrue(noIncompleteTasks());
+    WaitUtil.waitUntil(() -> listRunning().size() == 0, TEST_TASK_FINISH_TIMEOUT);
+    assertThat(listWaiting()).isEmpty();
   }
 }
