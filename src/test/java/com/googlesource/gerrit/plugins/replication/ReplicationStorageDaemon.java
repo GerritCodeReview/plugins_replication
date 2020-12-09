@@ -23,6 +23,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * This class can be extended by any ReplicationStorage*IT class and provides common setup and
@@ -55,17 +56,6 @@ public class ReplicationStorageDaemon extends ReplicationDaemon {
     replicationConfig = plugin.getSysInjector().getInstance(ReplicationConfig.class);
   }
 
-  protected boolean noIncompleteTasks() {
-    Path refUpdates = replicationConfig.getEventsDirectory().resolve("ref-updates");
-    Path runningUpdates = refUpdates.resolve("running");
-    Path waitingUpdates = refUpdates.resolve("waiting");
-    try {
-      return Files.list(runningUpdates).count() == 0 && Files.list(waitingUpdates).count() == 0;
-    } catch (IOException e) {
-      throw new RuntimeException(e.getMessage(), e);
-    }
-  }
-
   protected List<ReplicationTasksStorage.ReplicateRefUpdate> listWaitingReplicationTasks(
       String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
@@ -85,5 +75,13 @@ public class ReplicationStorageDaemon extends ReplicationDaemon {
         throw new RuntimeException("Couldn't delete waiting task", e);
       }
     }
+  }
+
+  protected List<ReplicationTasksStorage.ReplicateRefUpdate> listWaiting() {
+    return tasksStorage.streamWaiting().collect(Collectors.toList());
+  }
+
+  protected List<ReplicationTasksStorage.ReplicateRefUpdate> listRunning() {
+    return tasksStorage.streamRunning().collect(Collectors.toList());
   }
 }

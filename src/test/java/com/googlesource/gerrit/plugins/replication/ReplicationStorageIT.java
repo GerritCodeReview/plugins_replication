@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.Test;
@@ -360,13 +359,5 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     return updates
         .filter(task -> changeRef.equals(task.ref()))
         .filter(task -> remote.equals(task.remote()));
-  }
-
-  private List<ReplicateRefUpdate> listWaiting() {
-    return tasksStorage.streamWaiting().collect(Collectors.toList());
-  }
-
-  private List<ReplicateRefUpdate> listRunning() {
-    return tasksStorage.streamRunning().collect(Collectors.toList());
   }
 }
