@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38bea4a3_eff03f4d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-10T20:43:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45c87f70_c710e4bf",
+      "range": {
+        "startLine": 11,
+        "startChar": 21,
+        "endLine": 12,
+        "endChar": 48
+      },
+      "revId": "ffbe757427ad3db3dbb55a585623cad381efa704",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ccbc8d7_4e27729c",
@@ -37,6 +61,24 @@
       "writtenOn": "2020-12-10T16:51:02Z",
       "side": 1,
       "message": "I think it would be clearer and easier to understand this code if you didn\u0027t add the replayLock and instead converted the \"replaying\" variable into an AtomicBoolean and used it as a locking mechanism.",
+      "revId": "ffbe757427ad3db3dbb55a585623cad381efa704",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5302e723_48fcbdaa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-10T20:43:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ccbc8d7_4e27729c",
       "revId": "ffbe757427ad3db3dbb55a585623cad381efa704",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
