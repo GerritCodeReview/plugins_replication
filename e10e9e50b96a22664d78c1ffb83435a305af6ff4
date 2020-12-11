@@ -46,6 +46,30 @@
       },
       "revId": "e10e9e50b96a22664d78c1ffb83435a305af6ff4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf3e5f32_52ff748d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-12-11T17:28:39Z",
+      "side": 1,
+      "message": "\u003e I considered it, but it seemed inconsistent with the line above. Which is preferred?\n\nDoing at the field level is more consistent with primitive types, takes less code (fewer bugs), and ensures that it will always be set to something, even if a new constructor is added later. I would always do field initialization unless I had a specific reason not to.",
+      "parentUuid": "9f956e5e_9a8dd4d0",
+      "range": {
+        "startLine": 83,
+        "startChar": 20,
+        "endLine": 83,
+        "endChar": 33
+      },
+      "revId": "e10e9e50b96a22664d78c1ffb83435a305af6ff4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
