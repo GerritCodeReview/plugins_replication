@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ca3bf24_d029e494",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2020-12-11T18:35:20Z",
+      "side": 1,
+      "message": "does breaking this paragraph like this looks good ?\n\nBy default show-queue output will be truncated to show 2 refs, if\nnumber of refs is more than two, truncation is needed since it will\nbecome inconvenient if there are too many refs being replicated.\n\ndefault value 2 is chosen because whenever new patchset is created\nthere are two refs (change ref and meta ref).",
+      "parentUuid": "97ec2214_db43bba7",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 44
+      },
+      "revId": "21a657e37809d333502a9869be97c28ce4c1281a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcc2ea49_fb448693",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 3
