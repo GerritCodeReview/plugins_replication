@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d46098d4_0c8987c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-11T20:43:58Z",
+      "side": 1,
+      "message": "\u003e does breaking this paragraph like this looks good ?\n\u003e \n\u003e By default show-queue output will be truncated to show 2 refs, if\n\nYou can end the first sentence at this first comma.\n\n\u003e number of refs is more than two, truncation is needed since it will\n\u003e become inconvenient if there are too many refs being replicated.\n\nI think this is mostly saying the same thing as lines 9-10? The unique part is maybe why more than 2 is considered \"too many\"? Maybe explain that after the sentence below or as an addition to it?\n\n\u003e \n\u003e default value 2 is chosen because whenever new patchset is created\n\u003e there are two refs (change ref and meta ref).\n\nThis is a good sentence on its own, but if you remove the intermediate sentence, you don\u0027t need to repeat \u0027default value 2\u0027. You could say \"The value 2 is chosen ...\"",
+      "parentUuid": "5ca3bf24_d029e494",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 44
+      },
+      "revId": "21a657e37809d333502a9869be97c28ce4c1281a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcc2ea49_fb448693",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 3
