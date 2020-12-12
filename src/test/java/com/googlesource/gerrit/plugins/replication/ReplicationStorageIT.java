@@ -20,6 +20,7 @@ import static java.util.stream.Collectors.toList;
 
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
+import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.googlesource.gerrit.plugins.replication.Destination.QueueInfo;
