@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "485b0b14_9e563ca2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-12-14T20:59:16Z",
+      "side": 1,
+      "message": "Make the code output the plural only when needed?",
+      "range": {
+        "startLine": 26,
+        "startChar": 80,
+        "endLine": 26,
+        "endChar": 83
+      },
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "58c89649_4cbd3b24",
@@ -14,6 +37,69 @@
       "writtenOn": "2020-12-14T18:08:51Z",
       "side": 1,
       "message": "Martin?",
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dafc8156_bd46a99b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-12-14T20:59:16Z",
+      "side": 1,
+      "message": "I am a little leary of relying on the toString() method of a Set.",
+      "range": {
+        "startLine": 231,
+        "startChar": 13,
+        "endLine": 231,
+        "endChar": 28
+      },
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ced0af87_f84bb22a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-12-14T20:59:16Z",
+      "side": 1,
+      "message": "Seems like this might be better below line 36?",
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3169abd8_92ee183b",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-12-14T20:59:16Z",
+      "side": 1,
+      "message": "s/whenever new/whenever a new/ \n\nSame anywhere else.",
+      "range": {
+        "startLine": 92,
+        "startChar": 24,
+        "endLine": 92,
+        "endChar": 36
+      },
       "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
