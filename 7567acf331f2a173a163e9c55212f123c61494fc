@@ -83,6 +83,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0747266_e7015793",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2020-12-15T18:42:09Z",
+      "side": 1,
+      "message": "does this sounds good  ? \n\n\n/**\n   * Returns the string representation of refs which is limited to(atmost)  \n   * maxRefsToShow config\n   *\n   * \u003cul\u003e\n   *   \u003cli\u003eRefs will not be limited when maxRefsToShow config is set to zero.\n   *   \u003cli\u003eBy default output will be limited to two refs.\n   * \u003c/ul\u003e\n   *\n   * The default value of two is chosen because whenever new patchset is created there are two refs (change ref and meta ref).\n   *\n   * @return string representation of refs which is limited to  \n   * maxRefsToShow config\n   */",
+      "parentUuid": "bc43626f_c9c142ff",
+      "range": {
+        "startLine": 214,
+        "startChar": 17,
+        "endLine": 214,
+        "endChar": 26
+      },
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dafc8156_bd46a99b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 5
