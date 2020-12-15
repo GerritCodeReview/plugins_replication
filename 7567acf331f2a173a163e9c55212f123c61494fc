@@ -41,6 +41,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5304aeac_9546e5af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2020-12-15T12:48:01Z",
+      "side": 1,
+      "message": "a",
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dafc8156_bd46a99b",
@@ -54,6 +71,30 @@
       "writtenOn": "2020-12-14T20:59:16Z",
       "side": 1,
       "message": "I am a little leary of relying on the toString() method of a Set.",
+      "range": {
+        "startLine": 231,
+        "startChar": 13,
+        "endLine": 231,
+        "endChar": 28
+      },
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dd6ab90_d76deda9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2020-12-15T12:48:01Z",
+      "side": 1,
+      "message": "i am not sure about the reason, but if we are not using toString() method then  do you think using  \n\nString.join(\u003cdelimiter\u003e, refs);  // delimiter will be  \", \"\n\n \n\nis a good idea ?",
+      "parentUuid": "dafc8156_bd46a99b",
       "range": {
         "startLine": 231,
         "startChar": 13,
