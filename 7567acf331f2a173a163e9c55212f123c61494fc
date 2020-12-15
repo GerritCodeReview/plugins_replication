@@ -60,6 +60,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc43626f_c9c142ff",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-12-15T15:23:45Z",
+      "side": 1,
+      "message": "I think this explanation needs to be better, without knowing what this function does, I don\u0027t know what \"truncated refs\" means, and I would assume it means a Collection of refs in which each ref was truncated somehow. The method name makes me think the same thing.",
+      "range": {
+        "startLine": 214,
+        "startChar": 17,
+        "endLine": 214,
+        "endChar": 26
+      },
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dafc8156_bd46a99b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 5
@@ -95,6 +118,30 @@
       "side": 1,
       "message": "i am not sure about the reason, but if we are not using toString() method then  do you think using  \n\nString.join(\u003cdelimiter\u003e, refs);  // delimiter will be  \", \"\n\n \n\nis a good idea ?",
       "parentUuid": "dafc8156_bd46a99b",
+      "range": {
+        "startLine": 231,
+        "startChar": 13,
+        "endLine": 231,
+        "endChar": 28
+      },
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d52b5bef_0ed55e1c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-12-15T15:23:45Z",
+      "side": 1,
+      "message": "\u003e i am not sure about the reason, but if we are not using toString() method then  do you think using  \n\nBecause a Set is an interface and it does not guarantee any particular toString() format implementation.\n \n\u003e String.join(\u003cdelimiter\u003e, refs);  // delimiter will be  \", \"\n\nThis would be better.",
+      "parentUuid": "3dd6ab90_d76deda9",
       "range": {
         "startLine": 231,
         "startChar": 13,
