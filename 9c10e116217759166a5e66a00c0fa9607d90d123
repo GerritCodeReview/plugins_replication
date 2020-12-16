@@ -34,6 +34,24 @@
       "parentUuid": "d58bc70c_1dc65b73",
       "revId": "9c10e116217759166a5e66a00c0fa9607d90d123",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca024b82_30023847",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-12-16T13:21:44Z",
+      "side": 1,
+      "message": "See James announcement: [1] where Zuul Depends-On syntax introduced.\n\n[1] http://openstack.10931.n7.nabble.com/infra-all-New-Zuul-Depends-On-syntax-td145680.html",
+      "parentUuid": "b0a5197d_2c4aff53",
+      "revId": "9c10e116217759166a5e66a00c0fa9607d90d123",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
