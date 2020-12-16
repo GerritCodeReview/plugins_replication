@@ -107,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7dd1541_11c2db9a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2020-12-16T12:02:12Z",
+      "side": 1,
+      "message": "or maybe this way :\n\nReturns a comma separated string representation of refs which are limited to atmost maxRefsToShow replication config.",
+      "parentUuid": "b0747266_e7015793",
+      "range": {
+        "startLine": 214,
+        "startChar": 17,
+        "endLine": 214,
+        "endChar": 26
+      },
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dafc8156_bd46a99b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 5
