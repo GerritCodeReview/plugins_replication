@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30932783_694a0eba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-17T15:34:26Z",
+      "side": 1,
+      "message": "Since this security fix was made pretty far back, did we break replication for all those older versions too? Should this change get moved to an earlier (EOL) branch?",
+      "revId": "f9c32d280720b6f3a4ab6ef266d21058ba9acb67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18b3a972_09008a16",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-17T15:34:26Z",
+      "side": 1,
+      "message": "This is a great test to add!\n\nI\u0027d be more comfortable with this change if we had at least one test with authGroup so that we\u0027re confident we\u0027re not breaking it. Could you do that in a parent change? If you don\u0027t think you\u0027ll have time, let me know and I\u0027ll see what I can do.",
+      "range": {
+        "startLine": 184,
+        "startChar": 14,
+        "endLine": 184,
+        "endChar": 36
+      },
+      "revId": "f9c32d280720b6f3a4ab6ef266d21058ba9acb67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7361da1c_f861d7ee",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-17T15:34:26Z",
+      "side": 1,
+      "message": "I think you can use the isPushCompleted helper (and use the TEST_PUSH_TIMEOUT since that\u0027s the relevant timeout):\n\n  assertThat(isPushCompleted(allUsersMirror, userRef, TEST_PUSH_TIMEOUT)).isEqualTo(true);",
+      "range": {
+        "startLine": 191,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 5
+      },
+      "revId": "f9c32d280720b6f3a4ab6ef266d21058ba9acb67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
