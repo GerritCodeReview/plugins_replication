@@ -21,7 +21,9 @@ import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.N
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
+import com.google.gerrit.acceptance.testsuite.account.AccountOperations;
 import com.google.gerrit.entities.Project;
+import com.google.gerrit.entities.RefNames;
 import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
@@ -51,6 +53,7 @@ public class ReplicationIT extends ReplicationDaemon {
           (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60) + 1);
 
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
+  @Inject private AccountOperations accountOperations;
 
   @Override
   public void setUpTestPlugin() throws Exception {
@@ -175,6 +178,16 @@ public class ReplicationIT extends ReplicationDaemon {
       assertThat(targetBranchRef2).isNotNull();
       assertThat(targetBranchRef2.getObjectId()).isEqualTo(sourceCommit.getId());
     }
+  }
+
+  @Test
+  public void shouldReplicateUserRef() throws Exception {
+    Project.NameKey allUsersMirror = createTestProject("All-Users" + "-mirror");
+    setReplicationDestination("all-users-mirror", "-mirror", Optional.of("All-Users"));
+    reloadConfig();
+
+    String userRef = RefNames.refsUsers(accountOperations.newAccount().create());
+    assertThat(isPushCompleted(allUsersMirror, userRef, TEST_PUSH_TIMEOUT)).isEqualTo(true);
   }
 
   @Test

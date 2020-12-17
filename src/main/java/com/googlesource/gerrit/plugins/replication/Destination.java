@@ -329,6 +329,9 @@ public class Destination {
                 if (PushOne.ALL_REFS.equals(ref)) {
                   return true;
                 }
+                if (userProvider.get().isInternalUser()) {
+                  return true;
+                }
                 try {
                   permissionBackend
                       .user(userProvider.get())
