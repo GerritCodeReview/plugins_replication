@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "207c4323_e414cb5a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2020-12-17T05:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "485b0b14_9e563ca2",
+      "range": {
+        "startLine": 26,
+        "startChar": 80,
+        "endLine": 26,
+        "endChar": 83
+      },
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "58c89649_4cbd3b24",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -153,6 +177,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abbd0602_8ef6db9d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2020-12-17T05:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "230947be_a2c1fc6a",
+      "range": {
+        "startLine": 214,
+        "startChar": 17,
+        "endLine": 214,
+        "endChar": 26
+      },
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dafc8156_bd46a99b",
@@ -224,6 +272,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0d8ecad_da1f7f9d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2020-12-17T05:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d52b5bef_0ed55e1c",
+      "range": {
+        "startLine": 231,
+        "startChar": 13,
+        "endLine": 231,
+        "endChar": 28
+      },
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ced0af87_f84bb22a",
@@ -241,6 +313,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d14d4501_aaae410c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2020-12-17T05:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ced0af87_f84bb22a",
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3169abd8_92ee183b",
@@ -254,6 +344,30 @@
       "writtenOn": "2020-12-14T20:59:16Z",
       "side": 1,
       "message": "s/whenever new/whenever a new/ \n\nSame anywhere else.",
+      "range": {
+        "startLine": 92,
+        "startChar": 24,
+        "endLine": 92,
+        "endChar": 36
+      },
+      "revId": "7567acf331f2a173a163e9c55212f123c61494fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15281fb7_10a25966",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2020-12-17T05:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3169abd8_92ee183b",
       "range": {
         "startLine": 92,
         "startChar": 24,
