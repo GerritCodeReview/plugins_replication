@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c54aba04_5ae74ee8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-17T15:35:50Z",
+      "side": 1,
+      "message": "Some early review",
+      "revId": "3a20141dec4f39aef190504fbbc078de785f7066",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c899cb26_f1cb3423",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-17T15:35:50Z",
+      "side": 1,
+      "message": "Is it about replicating to a Gerrit mirror or about what content you expect to be replicated (or both)?",
+      "range": {
+        "startLine": 374,
+        "startChar": 46,
+        "endLine": 375,
+        "endChar": 7
+      },
+      "revId": "3a20141dec4f39aef190504fbbc078de785f7066",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "244d3b01_8c5614d4",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-17T15:35:50Z",
+      "side": 1,
+      "message": "link to notedb info?",
+      "range": {
+        "startLine": 376,
+        "startChar": 23,
+        "endLine": 376,
+        "endChar": 30
+      },
+      "revId": "3a20141dec4f39aef190504fbbc078de785f7066",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
