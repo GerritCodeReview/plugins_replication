@@ -16,6 +16,24 @@
       "message": "CI failure is related:\n\n\nplugins/replication/src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageMPIT.java:71: error: cannot find symbol\n    WaitUtil.waitUntil(() -\u003e listRunning().isEmpty(), TEST_TASK_FINISH_TIMEOUT);\n    ^\n  symbol:   variable WaitUtil\n  location: class ReplicationStorageMPIT\n\nI\u0027m working on a fix.",
       "revId": "d7e9abbab122894cc9f8c0aad59720b44dd2794d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb2260b3_9fc881fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-12-17T20:54:19Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "68eee44d_81470248",
+      "revId": "d7e9abbab122894cc9f8c0aad59720b44dd2794d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
