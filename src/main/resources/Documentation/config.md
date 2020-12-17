@@ -371,6 +371,11 @@ remote.NAME.authGroup
 	can be specified for this group to control if a project should
 	be replicated or not to the remote.
 
+	*NOTE:* If an authGroup is provided, and you want a complete
+        mirror (for backup reasons or to run a Gerrit replica), at
+        least one of the provided authGroups must have "Access Database"
+	capability. Otherwise link:note-db[db] refs will not be replicated.
+
 	By default, replicates without group control, i.e. replicates
 	everything to all remotes.
 
