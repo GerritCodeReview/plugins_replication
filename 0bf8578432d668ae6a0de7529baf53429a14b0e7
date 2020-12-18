@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31f5f678_34b42645",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-12-18T22:52:12Z",
+      "side": 1,
+      "message": "I\u0027m having a hard time liking the \"+ 2 more refs\" outside the brackets and I would suggest the following format instead:\n\n (retry 1) push aaa.com:/git/test.git [refs/heads/b1, refs/heads, ...(2 more)]\n\nI think the \"refs\" part was redundant information. Maybe this format would be easier to \nsimplify the coding too?",
+      "revId": "0bf8578432d668ae6a0de7529baf53429a14b0e7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
