@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f580ac8b_5c716cb9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-12-18T07:29:48Z",
+      "side": 1,
+      "message": "Thanks for clarifying. But then this is a evident regression:\n\nOld code:\n\n  if (isVisible \u003d\u003d null) {\n      isVisible \u003d getUser().isInternalUser() || canPerform(Permission.READ);\n  }\n  return isVisible;\n\nNew code:\n\n  // Don\u0027t allow checking for NoteDb refs unless instructed otherwise.\n    if (!allowNoteDbRefs\n        \u0026\u0026 (refName.startsWith(Constants.R_TAGS) || RefNames.isGerritRef(refName))) {\n      logger.atWarning().atMostEvery(30, TimeUnit.SECONDS).log(\n          \"%s: Can\u0027t determine visibility of %s in RefControl. Denying access. \"\n              + \"This case should have been handled before.\",\n          projectControl.getProject().getName(), refName);\n      return false;\n    }\n    if (hasReadPermissionOnRef \u003d\u003d null) {\n      hasReadPermissionOnRef \u003d getUser().isInternalUser() || canPerform(Permission.READ);\n    }\n\nI guess we can reorder the condition as it was before security check in gerrit core and exempt internal user from permission check? It\u0027s already there, but got broken.\n\n@Patrick, @Edwin: any comments?",
+      "parentUuid": "64651bac_b74b5b64",
+      "range": {
+        "startLine": 9,
+        "startChar": 55,
+        "endLine": 10,
+        "endChar": 40
+      },
+      "revId": "f9c32d280720b6f3a4ab6ef266d21058ba9acb67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30932783_694a0eba",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
