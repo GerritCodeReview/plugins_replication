@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb73a23a_36234b9d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2020-12-18T18:04:46Z",
+      "side": 1,
+      "message": "i am not sure how we can prevent that, since in the if block we are not limiting the refs while in outside if we are limiting the refs, so we definitely need a if condition to decide whether we want to limit or not limit the refs\n\nString.join(\", \", refs)  //refs are not limited \n\nrefs.stream().limit(maxRefsToShow).collect(Collectors.joining(\", \")); //ref are limited",
+      "parentUuid": "692b1a51_c191aec6",
+      "revId": "c4272a734d6f50d5ac03e8d5d948d032f1ed77bc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3a13b03_1e3a2397",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 6
