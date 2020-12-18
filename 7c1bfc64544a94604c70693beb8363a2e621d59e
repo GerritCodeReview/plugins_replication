@@ -46,6 +46,30 @@
       },
       "revId": "7c1bfc64544a94604c70693beb8363a2e621d59e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e22f54_e2eadb3e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2020-12-18T16:49:07Z",
+      "side": 1,
+      "message": "I don\u0027t think replication should assume what PermissionBackend returns. That\u0027s more likely to burn us in the future.",
+      "parentUuid": "988bccc2_9fb2f5c3",
+      "range": {
+        "startLine": 332,
+        "startChar": 0,
+        "endLine": 334,
+        "endChar": 17
+      },
+      "revId": "7c1bfc64544a94604c70693beb8363a2e621d59e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
