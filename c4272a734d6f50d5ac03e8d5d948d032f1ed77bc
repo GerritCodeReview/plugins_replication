@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "692b1a51_c191aec6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2020-12-18T00:27:52Z",
+      "side": 1,
+      "message": "\u003e i think maybe code from line 232 can be simplified so do you think this looks more simplified now :\n\u003e \n\u003e String limitedRefs \u003d refs.stream().limit(maxRefsToShow).collect(Collectors.joining(\", \"));\n\u003e \n\u003e limitedRefs  \u003d \"[\" + String.join(\", \", limitedRefs) + \"]\" + \" + \" + remainingRefs + \" more ref\";\n\u003e \n\u003e return (remainingRefs \u003e 1) ? limitedRefs  + \"s\" : limitedRefs ;\n\nYou seem to be proposing two joins, if you eliminate the String.join() it likely will be simpler indeed. I think you can likely simplify more by not repeating code in the if block that is very similar to code outside it.",
+      "parentUuid": "e41b9a2d_01079844",
+      "revId": "c4272a734d6f50d5ac03e8d5d948d032f1ed77bc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3a13b03_1e3a2397",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 6
