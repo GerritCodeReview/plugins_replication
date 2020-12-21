@@ -284,6 +284,9 @@ public class Destination {
       return false;
     }
 
+    if (state.isAllUsers() && config.replicateDbRefs()) {
+      return true;
+    }
     // Hidden projects(permitsRead = false) should only be accessible by the project owners.
     // READ_CONFIG is checked here because it's only allowed to project owners(ACCESS may also
     // be allowed for other users).
@@ -325,6 +328,9 @@ public class Destination {
                 if (!shouldReplicate(projectState, userProvider.get())) {
                   repLog.debug("Project {} should not be replicated", project);
                   return false;
+                }
+                if (RefNames.isGerritRef(ref)) {
+                  return config.replicateDbRefs();
                 }
                 if (PushOne.ALL_REFS.equals(ref)) {
                   return true;
