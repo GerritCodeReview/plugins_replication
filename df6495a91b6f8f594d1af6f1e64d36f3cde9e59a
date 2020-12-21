@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc10fddb_97091c84",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-12-21T12:52:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d66ab5e_e0b670d4",
+      "range": {
+        "startLine": 316,
+        "startChar": 10,
+        "endLine": 316,
+        "endChar": 18
+      },
+      "revId": "df6495a91b6f8f594d1af6f1e64d36f3cde9e59a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed58a849_fa150962",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-12-21T12:36:47Z",
       "side": 1,
       "message": "One string without concatenation?",
+      "range": {
+        "startLine": 317,
+        "startChar": 53,
+        "endLine": 317,
+        "endChar": 76
+      },
+      "revId": "df6495a91b6f8f594d1af6f1e64d36f3cde9e59a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f659fb0_48848814",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-12-21T12:52:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed58a849_fa150962",
       "range": {
         "startLine": 317,
         "startChar": 53,
