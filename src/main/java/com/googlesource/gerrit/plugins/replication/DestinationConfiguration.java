@@ -38,6 +38,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final boolean replicatePermissions;
   private final boolean replicateProjectDeletions;
   private final boolean replicateHiddenProjects;
+  private final boolean replicateDbRefs;
   private final String remoteNameStyle;
   private final ImmutableList<String> urls;
   private final ImmutableList<String> projects;
@@ -69,6 +70,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
     replicatePermissions = cfg.getBoolean("remote", name, "replicatePermissions", true);
     replicateProjectDeletions = cfg.getBoolean("remote", name, "replicateProjectDeletions", false);
     replicateHiddenProjects = cfg.getBoolean("remote", name, "replicateHiddenProjects", false);
+    replicateDbRefs = cfg.getBoolean("remote", name, "replicateDbRefs", true);
     remoteNameStyle =
         MoreObjects.firstNonNull(cfg.getString("remote", name, "remoteNameStyle"), "slash");
     maxRetries =
@@ -153,6 +155,10 @@ public class DestinationConfiguration implements RemoteConfiguration {
 
   public boolean replicateHiddenProjects() {
     return replicateHiddenProjects;
+  }
+
+  public boolean replicateDbRefs() {
+    return replicateDbRefs;
   }
 
   @Override

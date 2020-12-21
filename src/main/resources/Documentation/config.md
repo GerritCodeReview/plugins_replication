@@ -393,6 +393,12 @@ remote.NAME.replicatePermissions
 
 	By default, true, replicating everything.
 
+remote.NAME.replicateDbRefs
+:	If true, internal db-refs will also be replicated to the remote site.
+	These refs are needed to keep a backup or mirror server current.
+
+	By default, true, replicating all db-refs.
+
 remote.NAME.replicateProjectDeletions
 :	If true, project deletions will also be replicated to the
 	remote site.

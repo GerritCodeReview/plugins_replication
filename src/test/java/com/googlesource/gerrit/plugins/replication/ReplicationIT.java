@@ -21,7 +21,10 @@ import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.N
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
+import com.google.gerrit.acceptance.testsuite.account.AccountOperations;
 import com.google.gerrit.entities.Project;
+import com.google.gerrit.entities.Project.NameKey;
+import com.google.gerrit.entities.RefNames;
 import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
@@ -51,6 +54,7 @@ public class ReplicationIT extends ReplicationDaemon {
           (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60) + 1);
 
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
+  @Inject private AccountOperations accountOperations;
 
   @Override
   public void setUpTestPlugin() throws Exception {
@@ -178,6 +182,54 @@ public class ReplicationIT extends ReplicationDaemon {
   }
 
   @Test
+  public void dbRefsReplicatedWithReplicateDbTrue() throws Exception {
+    Project.NameKey allUsersMirror = getAllUsersMirror();
+    setReplicationDestination("all-users-mirror", "-mirror", Optional.of("All-Users"));
+    config.setString("remote", "all-users-mirror", "replicateDbRefs", "True");
+    reloadConfig();
+
+    String userRef = RefNames.refsUsers(accountOperations.newAccount().create());
+    assertThat(isPushCompleted(allUsersMirror, userRef, TEST_PUSH_TIMEOUT)).isEqualTo(true);
+  }
+
+  @Test
+  public void dbRefsReplicatedWithAuthGroupAndReplicateDbTrue() throws Exception {
+    Project.NameKey allUsersMirror = getAllUsersMirror();
+    setReplicationDestination("all-users-mirror", "-mirror", Optional.of("All-Users"));
+    config.setString("remote", "all-users-mirror", "authGroup", "Registered-Users");
+    config.setString("remote", "all-users-mirror", "replicateDbRefs", "True");
+    config.save();
+    reloadConfig();
+
+    String userRef = RefNames.refsUsers(accountOperations.newAccount().create());
+    assertThat(isPushCompleted(allUsersMirror, userRef, TEST_PUSH_TIMEOUT)).isEqualTo(true);
+  }
+
+  @Test
+  public void dbRefsNotReplicatedWithReplicateDbFalse() throws Exception {
+    Project.NameKey allUsersMirror = getAllUsersMirror();
+    setReplicationDestination("all-users-mirror", "-mirror", Optional.of("All-Users"));
+    config.setString("remote", "all-users-mirror", "replicateDbRefs", "False");
+    config.save();
+    reloadConfig();
+
+    String userRef = RefNames.refsUsers(accountOperations.newAccount().create());
+    assertThat(isPushCompleted(allUsersMirror, userRef, TEST_PUSH_TIMEOUT)).isEqualTo(false);
+  }
+
+  @Test
+  public void dbRefsNotReplicatedWithAuthGroupAndReplicateDbFalse() throws Exception {
+    Project.NameKey allUsersMirror = getAllUsersMirror();
+    setReplicationDestination("all-users-mirror", "-mirror", Optional.of("All-Users"));
+    config.setString("remote", "all-users-mirror", "replicateDbRefs", "False");
+    config.save();
+    reloadConfig();
+
+    String userRef = RefNames.refsUsers(accountOperations.newAccount().create());
+    assertThat(isPushCompleted(allUsersMirror, userRef, TEST_PUSH_TIMEOUT)).isEqualTo(false);
+  }
+
+  @Test
   public void shouldMatchTemplatedURL() throws Exception {
     Project.NameKey targetProject = createTestProject(project + "replica");
 
@@ -259,6 +311,14 @@ public class ReplicationIT extends ReplicationDaemon {
   @Test
   public void shouldNotReplicateBranchDeletionWhenNotMirror() throws Exception {
     replicateBranchDeletion(false);
+  }
+
+  private Project.NameKey getAllUsersMirror() throws Exception {
+    Project.NameKey allUsersMirror = Project.nameKey("All-Users-mirror");
+    if (projectCache.checkedGet(allUsersMirror) == null) {
+      createTestProject(allUsersMirror.get());
+    }
+    return allUsersMirror;
   }
 
   private void replicateBranchDeletion(boolean mirror) throws Exception {
