@@ -28,6 +28,7 @@ import com.google.common.collect.Lists;
 import com.google.gerrit.common.data.GroupReference;
 import com.google.gerrit.entities.AccountGroup;
 import com.google.gerrit.entities.BranchNameKey;
+import com.google.gerrit.entities.PatchSet;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.entities.RefNames;
 import com.google.gerrit.extensions.config.FactoryModule;
@@ -284,6 +285,9 @@ public class Destination {
       return false;
     }
 
+    if (state.isAllUsers() && config.replicateDbRefs()) {
+      return true;
+    }
     // Hidden projects(permitsRead = false) should only be accessible by the project owners.
     // READ_CONFIG is checked here because it's only allowed to project owners(ACCESS may also
     // be allowed for other users).
@@ -325,6 +329,12 @@ public class Destination {
                 if (!shouldReplicate(projectState, userProvider.get())) {
                   repLog.debug("Project {} should not be replicated", project);
                   return false;
+                }
+                if (RefNames.isGerritRef(ref)) {
+                  /* Patch sets contains source-code so we should honor the READ permissions. */
+                  if (!(RefNames.isRefsChanges(ref) && PatchSet.Id.fromRef(ref) != null)) {
+                    return config.replicateDbRefs();
+                  }
                 }
                 if (PushOne.ALL_REFS.equals(ref)) {
                   return true;
