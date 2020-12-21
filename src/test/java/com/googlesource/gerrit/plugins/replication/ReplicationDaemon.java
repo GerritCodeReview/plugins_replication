@@ -61,7 +61,7 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
               + TEST_PROJECT_CREATION_SECONDS);
 
   @Inject protected SitePaths sitePaths;
-  @Inject private ProjectOperations projectOperations;
+  @Inject ProjectOperations projectOperations;
   protected Path gitPath;
   protected FileBasedConfig config;
 
