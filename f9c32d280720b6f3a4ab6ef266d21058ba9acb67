@@ -96,6 +96,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "457efe89_9084c42c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-12-28T07:45:38Z",
+      "side": 1,
+      "message": "This change is still valid however, no point in checking for permission if it\u0027s an InternalUser.",
+      "parentUuid": "475bbae0_db05efca",
+      "range": {
+        "startLine": 9,
+        "startChar": 55,
+        "endLine": 10,
+        "endChar": 40
+      },
+      "revId": "f9c32d280720b6f3a4ab6ef266d21058ba9acb67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30932783_694a0eba",
@@ -149,6 +173,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0196e72c_5109b4e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-12-28T07:45:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "53f4fa0e_caebfca7",
+      "revId": "f9c32d280720b6f3a4ab6ef266d21058ba9acb67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18b3a972_09008a16",
@@ -186,6 +228,30 @@
       "side": 1,
       "message": "This has no affect when authgroup is set since then the scoped user is a CurrentUser and not an InternalUser.\nThe security-fix (root-cause) affects replication with authgroup since you need to give at least one of the authgroup READ to the db references, most easily done with giving it \"Access Database\". See follow-up change.",
       "parentUuid": "18b3a972_09008a16",
+      "range": {
+        "startLine": 184,
+        "startChar": 14,
+        "endLine": 184,
+        "endChar": 36
+      },
+      "revId": "f9c32d280720b6f3a4ab6ef266d21058ba9acb67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bb66bf5_ddfe7f2e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-12-28T07:45:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "80d3356b_087ab458",
       "range": {
         "startLine": 184,
         "startChar": 14,

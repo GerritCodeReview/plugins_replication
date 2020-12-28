@@ -16,6 +16,23 @@
       "message": "New approach to solve the issue for cases with or without authGroup:\nhttps://gerrit-review.googlesource.com/c/plugins/replication/+/291951",
       "revId": "0995fe0445f507279c05cb5ee60a9413671be400",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a13bdbd2_b1c44211",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-12-28T07:45:38Z",
+      "side": 1,
+      "message": "Are there any more questions regarding this (now) performance fix?",
+      "revId": "0995fe0445f507279c05cb5ee60a9413671be400",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
