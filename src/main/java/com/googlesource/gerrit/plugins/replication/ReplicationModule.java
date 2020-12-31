@@ -80,6 +80,7 @@ class ReplicationModule extends AbstractModule {
         .to(StartReplicationCapability.class);
 
     install(new FactoryModuleBuilder().build(PushAll.Factory.class));
+    install(new FactoryModuleBuilder().build(ProjectDeletionState.Factory.class));
 
     bind(EventBus.class).in(Scopes.SINGLETON);
     bind(ReplicationDestinations.class).to(DestinationsCollection.class);
