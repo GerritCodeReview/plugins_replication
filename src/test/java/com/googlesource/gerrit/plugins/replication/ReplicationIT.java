@@ -23,16 +23,12 @@ import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.entities.Project;
-import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.inject.Inject;
-import java.io.IOException;
-import java.time.Duration;
 import java.util.Optional;
-import java.util.function.Supplier;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
@@ -49,8 +45,6 @@ import org.junit.Test;
 public class ReplicationIT extends ReplicationDaemon {
   private static final int TEST_REPLICATION_DELAY = 1;
   private static final int TEST_REPLICATION_RETRY = 1;
-  private static final Duration TEST_TIMEOUT =
-      Duration.ofSeconds((TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) + 1);
 
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
 
@@ -87,21 +81,8 @@ public class ReplicationIT extends ReplicationDaemon {
     setProjectDeletionReplication("foo", true);
     reloadConfig();
 
-    ProjectDeletedListener.Event event =
-        new ProjectDeletedListener.Event() {
-          @Override
-          public String getProjectName() {
-            return projectNameDeleted;
-          }
-
-          @Override
-          public NotifyHandling getNotify() {
-            return NotifyHandling.NONE;
-          }
-        };
-
     for (ProjectDeletedListener l : deletedListeners) {
-      l.onProjectDeleted(event);
+      l.onProjectDeleted(projectDeletedEvent(projectNameDeleted));
     }
 
     waitUntil(() -> !nonEmptyProjectExists(replicaProject));
@@ -361,16 +342,6 @@ public class ReplicationIT extends ReplicationDaemon {
       assertThat(targetBranchRef).isNotNull();
       assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
     }
-  }
-
-  private void setProjectDeletionReplication(String remoteName, boolean replicateProjectDeletion)
-      throws IOException {
-    config.setBoolean("remote", remoteName, "replicateProjectDeletions", replicateProjectDeletion);
-    config.save();
-  }
-
-  private void waitUntil(Supplier<Boolean> waitCondition) throws InterruptedException {
-    WaitUtil.waitUntil(waitCondition, TEST_TIMEOUT);
   }
 
   private void shutdownDestinations() {
