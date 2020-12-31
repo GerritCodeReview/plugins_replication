@@ -23,6 +23,8 @@ import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.entities.Project;
+import com.google.gerrit.extensions.api.changes.NotifyHandling;
+import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import java.io.IOException;
@@ -232,5 +234,25 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
               sitePaths.etc_dir.resolve("replication.config").toFile(), FS.DETECTED);
       config.save();
     }
+  }
+
+  protected ProjectDeletedListener.Event projectDeletedEvent(String projectNameDeleted) {
+    return new ProjectDeletedListener.Event() {
+      @Override
+      public String getProjectName() {
+        return projectNameDeleted;
+      }
+
+      @Override
+      public NotifyHandling getNotify() {
+        return NotifyHandling.NONE;
+      }
+    };
+  }
+
+  protected void setProjectDeletionReplication(String remoteName, boolean replicateProjectDeletion)
+      throws IOException {
+    config.setBoolean("remote", remoteName, "replicateProjectDeletions", replicateProjectDeletion);
+    config.save();
   }
 }

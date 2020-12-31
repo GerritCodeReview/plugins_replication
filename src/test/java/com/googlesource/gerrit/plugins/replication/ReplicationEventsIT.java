@@ -24,10 +24,16 @@ import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.projects.BranchInput;
+import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
+import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.events.EventDispatcher;
+import com.google.gerrit.server.events.ProjectEvent;
 import com.google.gerrit.server.events.RefEvent;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationDoneEvent;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationScheduledEvent;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationSucceededEvent;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicationDoneEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
@@ -46,6 +52,13 @@ import org.junit.Test;
 public class ReplicationEventsIT extends ReplicationDaemon {
   private static final Duration TEST_POST_EVENT_TIMEOUT = Duration.ofSeconds(1);
 
+  protected static final int TEST_PROJECT_DELETION_TIME_SECONDS = 1;
+  private static final Duration TEST_DELETE_PROJECT_TIMEOUT =
+      Duration.ofSeconds(
+          (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60)
+              + TEST_PROJECT_DELETION_TIME_SECONDS);
+
+  @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
   @Inject private DynamicItem<EventDispatcher> eventDispatcher;
   private TestDispatcher testDispatcher;
 
@@ -113,10 +126,62 @@ public class ReplicationEventsIT extends ReplicationDaemon {
     assertThat(testDispatcher.getEvents(RefReplicationDoneEvent.class).size()).isEqualTo(1);
   }
 
+  @Test
+  public void shouldEmitProjectDeletionEventsForOneRemote() throws Exception {
+    String projectName = project.get();
+    setReplicationTarget("replica", project.get());
+
+    reloadConfig();
+
+    for (ProjectDeletedListener l : deletedListeners) {
+      l.onProjectDeleted(projectDeletedEvent(projectName));
+    }
+
+    assertThat(testDispatcher.getEvents(project, ProjectDeletionReplicationScheduledEvent.class))
+        .hasSize(1);
+
+    waitForProjectEvent(
+        () -> testDispatcher.getEvents(project, ProjectDeletionReplicationSucceededEvent.class), 1);
+    waitForProjectEvent(
+        () -> testDispatcher.getEvents(project, ProjectDeletionReplicationDoneEvent.class), 1);
+  }
+
+  @Test
+  public void shouldEmitProjectDeletionEventsForMultipleRemotes() throws Exception {
+    String projectName = project.get();
+    setReplicationTarget("replica1", projectName);
+    setReplicationTarget("replica2", projectName);
+
+    reloadConfig();
+
+    for (ProjectDeletedListener l : deletedListeners) {
+      l.onProjectDeleted(projectDeletedEvent(projectName));
+    }
+
+    assertThat(testDispatcher.getEvents(project, ProjectDeletionReplicationScheduledEvent.class))
+        .hasSize(2);
+    waitForProjectEvent(
+        () -> testDispatcher.getEvents(project, ProjectDeletionReplicationSucceededEvent.class), 2);
+    waitForProjectEvent(
+        () -> testDispatcher.getEvents(project, ProjectDeletionReplicationDoneEvent.class), 1);
+  }
+
   private <T extends RefEvent> void waitForRefEvent(Supplier<List<T>> events, String refName)
       throws InterruptedException {
     WaitUtil.waitUntil(
         () -> events.get().stream().filter(e -> refName.equals(e.getRefName())).count() == 1,
         TEST_POST_EVENT_TIMEOUT);
+  }
+
+  private <T extends ProjectEvent> void waitForProjectEvent(Supplier<List<T>> events, int count)
+      throws InterruptedException {
+    WaitUtil.waitUntil(() -> events.get().size() == count, TEST_POST_EVENT_TIMEOUT);
+  }
+
+  private Project.NameKey setReplicationTarget(String replica, String ofProject) throws Exception {
+    Project.NameKey replicaProject = createTestProject(String.format("%s%s", ofProject, replica));
+    setReplicationDestination(replica, replica, Optional.of(ofProject));
+    setProjectDeletionReplication(replica, true);
+    return replicaProject;
   }
 }
