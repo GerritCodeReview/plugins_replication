@@ -21,7 +21,6 @@ import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.N
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
-import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
@@ -30,7 +29,6 @@ import com.google.gerrit.reviewdb.client.Project;
 import com.google.inject.Inject;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.function.Supplier;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
@@ -46,9 +44,6 @@ import org.junit.Test;
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
 public class ReplicationIT extends ReplicationDaemon {
   private static final int TEST_PROJECT_CREATION_SECONDS = 10;
-  private static final Duration TEST_TIMEOUT =
-      Duration.ofSeconds(
-          (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60) + 1);
 
   private static final Duration TEST_NEW_PROJECT_TIMEOUT =
       Duration.ofSeconds(
@@ -80,21 +75,8 @@ public class ReplicationIT extends ReplicationDaemon {
     setProjectDeletionReplication("foo", true);
     reloadConfig();
 
-    ProjectDeletedListener.Event event =
-        new ProjectDeletedListener.Event() {
-          @Override
-          public String getProjectName() {
-            return projectNameDeleted;
-          }
-
-          @Override
-          public NotifyHandling getNotify() {
-            return NotifyHandling.NONE;
-          }
-        };
-
     for (ProjectDeletedListener l : deletedListeners) {
-      l.onProjectDeleted(event);
+      l.onProjectDeleted(projectDeletedEvent(projectNameDeleted));
     }
 
     waitUntil(() -> !nonEmptyProjectExists(replicaProject));
@@ -360,16 +342,6 @@ public class ReplicationIT extends ReplicationDaemon {
     return repo.getRefDatabase().exactRef(branchName);
   }
 
-  private void setProjectDeletionReplication(String remoteName, boolean replicateProjectDeletion)
-      throws IOException {
-    config.setBoolean("remote", remoteName, "replicateProjectDeletions", replicateProjectDeletion);
-    config.save();
-  }
-
-  private void waitUntil(Supplier<Boolean> waitCondition) throws InterruptedException {
-    WaitUtil.waitUntil(waitCondition, TEST_TIMEOUT);
-  }
-
   private void shutdownConfig() {
     getAutoReloadConfigDecoratorInstance().shutdown();
   }
@@ -392,14 +364,6 @@ public class ReplicationIT extends ReplicationDaemon {
 
   private <T> T getInstance(Class<T> classObj) {
     return plugin.getSysInjector().getInstance(classObj);
-  }
-
-  private boolean nonEmptyProjectExists(Project.NameKey name) {
-    try (Repository r = repoManager.openRepository(name)) {
-      return !r.getAllRefsByPeeledObjectId().isEmpty();
-    } catch (Exception e) {
-      return false;
-    }
   }
 
   private ObjectId createNewBranchWithoutPush(String fromBranch, String newBranch)

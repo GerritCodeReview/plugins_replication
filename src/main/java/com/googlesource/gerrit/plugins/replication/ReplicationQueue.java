@@ -53,6 +53,7 @@ public class ReplicationQueue
   private final DynamicItem<EventDispatcher> dispatcher;
   private final ReplicationConfig config;
   private final ReplicationTasksStorage replicationTasksStorage;
+  private final ProjectDeletionState.Factory projectDeletionStateFactory;
   private volatile boolean running;
   private volatile boolean replaying;
   private final Queue<ReferenceUpdatedEvent> beforeStartupEventsQueue;
@@ -63,12 +64,14 @@ public class ReplicationQueue
       ReplicationConfig rc,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListeners sl,
-      ReplicationTasksStorage rts) {
+      ReplicationTasksStorage rts,
+      ProjectDeletionState.Factory pd) {
     workQueue = wq;
     dispatcher = dis;
     config = rc;
     stateLog = sl;
     replicationTasksStorage = rts;
+    projectDeletionStateFactory = pd;
     beforeStartupEventsQueue = Queues.newConcurrentLinkedQueue();
   }
 
@@ -202,8 +205,9 @@ public class ReplicationQueue
   @Override
   public void onProjectDeleted(ProjectDeletedListener.Event event) {
     Project.NameKey p = new Project.NameKey(event.getProjectName());
+    ProjectDeletionState state = projectDeletionStateFactory.create(p);
     config.getURIs(Optional.empty(), p, FilterType.PROJECT_DELETION).entries().stream()
-        .forEach(e -> e.getKey().scheduleDeleteProject(e.getValue(), p));
+        .forEach(e -> e.getKey().scheduleDeleteProject(e.getValue(), p, state));
   }
 
   @Override
