@@ -63,6 +63,7 @@ import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
 import java.io.IOException;
@@ -461,10 +462,12 @@ public class Destination {
     }
   }
 
-  void scheduleDeleteProject(URIish uri, Project.NameKey project) {
+  void scheduleDeleteProject(URIish uri, Project.NameKey project, ProjectDeletionState state) {
+    repLog.atFine().log("scheduling deletion of project {} at {}", project, uri);
     @SuppressWarnings("unused")
     ScheduledFuture<?> ignored =
-        pool.schedule(deleteProjectFactory.create(uri, project), 0, TimeUnit.SECONDS);
+        pool.schedule(deleteProjectFactory.create(uri, project, state), 0, TimeUnit.SECONDS);
+    state.setScheduled(uri);
   }
 
   void scheduleUpdateHead(URIish uri, Project.NameKey project, String newHead) {
