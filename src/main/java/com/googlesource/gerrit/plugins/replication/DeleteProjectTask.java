@@ -27,31 +27,41 @@ import org.eclipse.jgit.transport.URIish;
 
 public class DeleteProjectTask implements Runnable {
   interface Factory {
-    DeleteProjectTask create(URIish replicateURI, Project.NameKey project);
+
+    DeleteProjectTask create(URIish replicateURI, Project.NameKey project, ProjectDeletionState state);
   }
 
   private final DynamicItem<AdminApiFactory> adminApiFactory;
   private final int id;
   private final URIish replicateURI;
   private final Project.NameKey project;
+  private final ProjectDeletionState state;
 
   @Inject
   DeleteProjectTask(
-      DynamicItem<AdminApiFactory> adminApiFactory,
-      IdGenerator ig,
-      @Assisted URIish replicateURI,
-      @Assisted Project.NameKey project) {
+          DynamicItem<AdminApiFactory> adminApiFactory,
+          IdGenerator ig,
+          @Assisted ProjectDeletionState state,
+          @Assisted URIish replicateURI,
+          @Assisted Project.NameKey project) {
     this.adminApiFactory = adminApiFactory;
     this.id = ig.next();
     this.replicateURI = replicateURI;
     this.project = project;
+    this.state = state;
   }
 
   @Override
   public void run() {
     Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI);
     if (adminApi.isPresent()) {
-      adminApi.get().deleteProject(project);
+      state.setRunning(replicateURI);
+      if(adminApi.get().deleteProject(project)) {
+        state.setSucceeded(replicateURI);
+      }
+      else {
+        state.setFailed(replicateURI);
+      }
       return;
     }
 
