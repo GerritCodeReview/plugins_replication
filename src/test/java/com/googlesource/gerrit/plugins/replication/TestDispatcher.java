@@ -39,8 +39,9 @@ public class TestDispatcher implements EventDispatcher {
   }
 
   @Override
-  public void postEvent(
-      Project.NameKey projectName, ProjectEvent event) {} // Not used in replication
+  public void postEvent(Project.NameKey projectName, ProjectEvent event) {
+    projectEvents.add(event);
+  }
 
   @Override
   public void postEvent(Event event) {
@@ -51,6 +52,11 @@ public class TestDispatcher implements EventDispatcher {
     return getEvents(branch).stream().filter(clazz::isInstance).collect(Collectors.toList());
   }
 
+  public List<ProjectEvent> getEvents(
+      Project.NameKey project, Class<? extends ProjectEvent> clazz) {
+    return getEvents(project).stream().filter(clazz::isInstance).collect(Collectors.toList());
+  }
+
   public <T extends RefEvent> List<T> getEvents(Class<T> clazz) {
     return events.stream().filter(clazz::isInstance).map(clazz::cast).collect(Collectors.toList());
   }
@@ -58,6 +64,12 @@ public class TestDispatcher implements EventDispatcher {
   private List<RefEvent> getEvents(BranchNameKey branch) {
     return refEvents.stream()
         .filter(e -> e.getBranchNameKey().equals(branch))
+        .collect(Collectors.toList());
+  }
+
+  private List<ProjectEvent> getEvents(Project.NameKey project) {
+    return projectEvents.stream()
+        .filter(e -> e.getProjectNameKey().equals(project))
         .collect(Collectors.toList());
   }
 }

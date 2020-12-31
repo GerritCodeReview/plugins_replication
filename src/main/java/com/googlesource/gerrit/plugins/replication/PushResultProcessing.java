@@ -14,6 +14,8 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.googlesource.gerrit.plugins.replication.ReplicationUtil.resolveNodeName;
+
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.server.events.EventDispatcher;
@@ -75,20 +77,6 @@ public interface PushResultProcessing {
    * @param message message text.
    */
   default void writeStdErr(String message) {}
-
-  static String resolveNodeName(URIish uri) {
-    StringBuilder sb = new StringBuilder();
-    if (uri.isRemote()) {
-      sb.append(uri.getHost());
-      if (uri.getPort() != -1) {
-        sb.append(":");
-        sb.append(uri.getPort());
-      }
-    } else {
-      sb.append(uri.getPath());
-    }
-    return sb.toString();
-  }
 
   public static class CommandProcessing implements PushResultProcessing {
     private WeakReference<StartCommand> sshCommand;

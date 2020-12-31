@@ -23,13 +23,11 @@ import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.entities.Project;
-import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.inject.Inject;
-import java.io.IOException;
 import java.time.Duration;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -87,21 +85,8 @@ public class ReplicationIT extends ReplicationDaemon {
     setProjectDeletionReplication("foo", true);
     reloadConfig();
 
-    ProjectDeletedListener.Event event =
-        new ProjectDeletedListener.Event() {
-          @Override
-          public String getProjectName() {
-            return projectNameDeleted;
-          }
-
-          @Override
-          public NotifyHandling getNotify() {
-            return NotifyHandling.NONE;
-          }
-        };
-
     for (ProjectDeletedListener l : deletedListeners) {
-      l.onProjectDeleted(event);
+      l.onProjectDeleted(projectDeletedEvent(projectNameDeleted));
     }
 
     waitUntil(() -> !nonEmptyProjectExists(replicaProject));
@@ -361,12 +346,6 @@ public class ReplicationIT extends ReplicationDaemon {
       assertThat(targetBranchRef).isNotNull();
       assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
     }
-  }
-
-  private void setProjectDeletionReplication(String remoteName, boolean replicateProjectDeletion)
-      throws IOException {
-    config.setBoolean("remote", remoteName, "replicateProjectDeletions", replicateProjectDeletion);
-    config.save();
   }
 
   private void waitUntil(Supplier<Boolean> waitCondition) throws InterruptedException {
