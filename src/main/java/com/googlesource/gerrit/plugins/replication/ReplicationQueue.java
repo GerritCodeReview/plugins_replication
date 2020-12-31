@@ -60,6 +60,7 @@ public class ReplicationQueue
   private final DynamicItem<EventDispatcher> dispatcher;
   private final Provider<ReplicationDestinations> destinations; // For Guice circular dependency
   private final ReplicationTasksStorage replicationTasksStorage;
+  private final ProjectDeletionState.Factory projectDeletionStateFactory;
   private volatile boolean running;
   private final AtomicBoolean replaying = new AtomicBoolean();
   private final Queue<ReferenceUpdatedEvent> beforeStartupEventsQueue;
@@ -72,7 +73,8 @@ public class ReplicationQueue
       Provider<ReplicationDestinations> rd,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListeners sl,
-      ReplicationTasksStorage rts) {
+      ReplicationTasksStorage rts,
+      ProjectDeletionState.Factory pd) {
     replConfig = rc;
     workQueue = wq;
     dispatcher = dis;
@@ -80,6 +82,7 @@ public class ReplicationQueue
     stateLog = sl;
     replicationTasksStorage = rts;
     beforeStartupEventsQueue = Queues.newConcurrentLinkedQueue();
+    projectDeletionStateFactory = pd;
   }
 
   @Override
@@ -245,8 +248,9 @@ public class ReplicationQueue
   @Override
   public void onProjectDeleted(ProjectDeletedListener.Event event) {
     Project.NameKey p = Project.nameKey(event.getProjectName());
+    ProjectDeletionState state = projectDeletionStateFactory.create(p);
     destinations.get().getURIs(Optional.empty(), p, FilterType.PROJECT_DELETION).entries().stream()
-        .forEach(e -> e.getKey().scheduleDeleteProject(e.getValue(), p));
+        .forEach(e -> e.getKey().scheduleDeleteProject(e.getValue(), p, state));
   }
 
   @Override

@@ -38,6 +38,7 @@ junit_tests(
     srcs = glob([
         "src/test/java/**/*IT.java",
     ]),
+    timeout = "long",
     tags = ["replication"],
     visibility = ["//visibility:public"],
     deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
