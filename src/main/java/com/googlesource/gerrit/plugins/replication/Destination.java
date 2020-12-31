@@ -454,10 +454,12 @@ public class Destination {
     }
   }
 
-  void scheduleDeleteProject(URIish uri, Project.NameKey project) {
+  void scheduleDeleteProject(URIish uri, Project.NameKey project, ProjectDeletionState state) {
+    repLog.atFine().log("scheduling deletion of project {} from {}", project, uri);
+    state.setScheduled(uri);
     @SuppressWarnings("unused")
     ScheduledFuture<?> ignored =
-        pool.schedule(deleteProjectFactory.create(uri, project), 0, TimeUnit.SECONDS);
+        pool.schedule(deleteProjectFactory.create(uri, project, state), 0, TimeUnit.SECONDS);
   }
 
   void scheduleUpdateHead(URIish uri, Project.NameKey project, String newHead) {
