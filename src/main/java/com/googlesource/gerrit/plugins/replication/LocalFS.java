@@ -54,9 +54,11 @@ public class LocalFS implements AdminApi {
   @Override
   public boolean deleteProject(Project.NameKey project) {
     try {
+      repLog.info("Sleeping 10 seconds");
+      Thread.sleep(10000);
       recursivelyDelete(new File(uri.getPath()));
       repLog.info("Deleted local repository: {}", uri);
-    } catch (IOException e) {
+    } catch (IOException | InterruptedException e) {
       repLog.error("Error deleting local repository {}:\n", uri.getPath(), e);
       return false;
     }
