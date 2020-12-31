@@ -14,16 +14,21 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import static java.util.stream.Collectors.toList;
-
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
+import com.google.gerrit.extensions.api.changes.NotifyHandling;
+import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.storage.file.FileBasedConfig;
+import org.eclipse.jgit.util.FS;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.Duration;
@@ -32,10 +37,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.eclipse.jgit.lib.Ref;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.storage.file.FileBasedConfig;
-import org.eclipse.jgit.util.FS;
+import java.util.function.Supplier;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * This class can be extended by any Replication*IT class and provides common setup and helper
@@ -54,6 +58,9 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
   protected static final int TEST_PUSH_TIME_SECONDS = 1;
   protected static final Duration TEST_PUSH_TIMEOUT =
       Duration.ofSeconds(TEST_REPLICATION_DELAY_SECONDS + TEST_PUSH_TIME_SECONDS);
+  private static final Duration TEST_TIMEOUT =
+          Duration.ofSeconds(
+                  (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60) + 1);
 
   @Inject protected SitePaths sitePaths;
   @Inject private ProjectOperations projectOperations;
@@ -184,4 +191,37 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
   protected void reloadConfig() {
     plugin.getSysInjector().getInstance(AutoReloadConfigDecorator.class).forceReload();
   }
+
+  protected boolean nonEmptyProjectExists(Project.NameKey name) {
+    try (Repository r = repoManager.openRepository(name)) {
+      return !r.getAllRefsByPeeledObjectId().isEmpty();
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  protected ProjectDeletedListener.Event projectDeletedEvent(String projectNameDeleted) {
+    return new ProjectDeletedListener.Event() {
+      @Override
+      public String getProjectName() {
+        return projectNameDeleted;
+      }
+
+      @Override
+      public NotifyHandling getNotify() {
+        return NotifyHandling.NONE;
+      }
+    };
+  }
+
+  protected void setProjectDeletionReplication(String remoteName, boolean replicateProjectDeletion)
+          throws IOException {
+    config.setBoolean("remote", remoteName, "replicateProjectDeletions", replicateProjectDeletion);
+    config.save();
+  }
+
+  protected void waitUntil(Supplier<Boolean> waitCondition) throws InterruptedException {
+    WaitUtil.waitUntil(waitCondition, TEST_TIMEOUT);
+  }
+
 }
