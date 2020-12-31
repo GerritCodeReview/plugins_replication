@@ -33,8 +33,11 @@ import com.google.inject.Provider;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
@@ -60,6 +63,8 @@ public class ReplicationQueue
   private final DynamicItem<EventDispatcher> dispatcher;
   private final Provider<ReplicationDestinations> destinations; // For Guice circular dependency
   private final ReplicationTasksStorage replicationTasksStorage;
+  private final com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState.Factory
+      projectDeletionStateFactory;
   private volatile boolean running;
   private final AtomicBoolean replaying = new AtomicBoolean();
   private final Queue<ReferenceUpdatedEvent> beforeStartupEventsQueue;
@@ -72,7 +77,8 @@ public class ReplicationQueue
       Provider<ReplicationDestinations> rd,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListeners sl,
-      ReplicationTasksStorage rts) {
+      ReplicationTasksStorage rts,
+      com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState.Factory pd) {
     replConfig = rc;
     workQueue = wq;
     dispatcher = dis;
@@ -80,6 +86,7 @@ public class ReplicationQueue
     stateLog = sl;
     replicationTasksStorage = rts;
     beforeStartupEventsQueue = Queues.newConcurrentLinkedQueue();
+    projectDeletionStateFactory = pd;
   }
 
   @Override
@@ -245,8 +252,12 @@ public class ReplicationQueue
   @Override
   public void onProjectDeleted(ProjectDeletedListener.Event event) {
     Project.NameKey p = Project.nameKey(event.getProjectName());
-    destinations.get().getURIs(Optional.empty(), p, FilterType.PROJECT_DELETION).entries().stream()
-        .forEach(e -> e.getKey().scheduleDeleteProject(e.getValue(), p));
+    ProjectDeletionState state = projectDeletionStateFactory.create(p);
+    Collection<Map.Entry<Destination, URIish>> projectsToDelete =
+        destinations.get().getURIs(Optional.empty(), p, FilterType.PROJECT_DELETION).entries();
+
+    projectsToDelete.forEach(e -> state.setToProcess(e.getValue()));
+    projectsToDelete.forEach(e -> e.getKey().scheduleDeleteProject(e.getValue(), p, state));
   }
 
   @Override

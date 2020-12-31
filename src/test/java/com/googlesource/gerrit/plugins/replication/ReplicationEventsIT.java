@@ -24,16 +24,24 @@ import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.projects.BranchInput;
+import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
+import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.events.EventDispatcher;
+import com.google.gerrit.server.events.ProjectEvent;
 import com.google.gerrit.server.events.RefEvent;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationDoneEvent;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationFailedEvent;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationScheduledEvent;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationSucceededEvent;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicationDoneEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
 import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +54,7 @@ import org.junit.Test;
 public class ReplicationEventsIT extends ReplicationDaemon {
   private static final Duration TEST_POST_EVENT_TIMEOUT = Duration.ofSeconds(1);
 
+  @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
   @Inject private DynamicItem<EventDispatcher> eventDispatcher;
   private TestDispatcher testDispatcher;
 
@@ -113,10 +122,156 @@ public class ReplicationEventsIT extends ReplicationDaemon {
     assertThat(testDispatcher.getEvents(RefReplicationDoneEvent.class).size()).isEqualTo(1);
   }
 
+  @Test
+  public void shouldEmitProjectDeletionEventsForOneRemote() throws Exception {
+    String projectName = project.get();
+    setReplicationTarget("replica", project.get());
+
+    reloadConfig();
+
+    for (ProjectDeletedListener l : deletedListeners) {
+      l.onProjectDeleted(projectDeletedEvent(projectName));
+    }
+
+    List<ProjectDeletionReplicationScheduledEvent> scheduledEvents =
+        testDispatcher.getEvents(project, ProjectDeletionReplicationScheduledEvent.class);
+    assertThat(scheduledEvents).hasSize(1);
+
+    assertThatAnyMatch(
+        scheduledEvents,
+        e -> project.equals(e.getProjectNameKey()) && e.getTargetNode().endsWith("replica.git"));
+
+    waitForProjectEvent(
+        () -> testDispatcher.getEvents(project, ProjectDeletionReplicationSucceededEvent.class), 1);
+
+    assertThatAnyMatch(
+        testDispatcher.getEvents(project, ProjectDeletionReplicationSucceededEvent.class),
+        e -> project.equals(e.getProjectNameKey()) && e.getTargetNode().endsWith("replica.git"));
+
+    waitForProjectEvent(
+        () -> testDispatcher.getEvents(project, ProjectDeletionReplicationDoneEvent.class), 1);
+
+    assertThatAnyMatch(
+        testDispatcher.getEvents(project, ProjectDeletionReplicationDoneEvent.class),
+        e -> project.equals(e.getProjectNameKey()));
+  }
+
+  @Test
+  public void shouldEmitProjectDeletionEventsForMultipleRemotesWhenSucceeding() throws Exception {
+    String projectName = project.get();
+    setReplicationTarget("replica1", projectName);
+    setReplicationTarget("replica2", projectName);
+
+    reloadConfig();
+
+    for (ProjectDeletedListener l : deletedListeners) {
+      l.onProjectDeleted(projectDeletedEvent(projectName));
+    }
+
+    List<ProjectDeletionReplicationScheduledEvent> scheduledEvents =
+        testDispatcher.getEvents(project, ProjectDeletionReplicationScheduledEvent.class);
+    assertThat(scheduledEvents).hasSize(2);
+
+    assertThatAnyMatch(
+        scheduledEvents,
+        e -> project.equals(e.getProjectNameKey()) && e.getTargetNode().endsWith("replica1.git"));
+    assertThatAnyMatch(
+        scheduledEvents,
+        e -> project.equals(e.getProjectNameKey()) && e.getTargetNode().endsWith("replica2.git"));
+
+    waitForProjectEvent(
+        () -> testDispatcher.getEvents(project, ProjectDeletionReplicationSucceededEvent.class), 2);
+
+    List<ProjectDeletionReplicationSucceededEvent> successEvents =
+        testDispatcher.getEvents(project, ProjectDeletionReplicationSucceededEvent.class);
+
+    assertThatAnyMatch(
+        successEvents,
+        e -> project.equals(e.getProjectNameKey()) && e.getTargetNode().endsWith("replica1.git"));
+    assertThatAnyMatch(
+        successEvents,
+        e -> project.equals(e.getProjectNameKey()) && e.getTargetNode().endsWith("replica2.git"));
+
+    waitForProjectEvent(
+        () -> testDispatcher.getEvents(project, ProjectDeletionReplicationDoneEvent.class), 1);
+
+    assertThatAnyMatch(
+        testDispatcher.getEvents(project, ProjectDeletionReplicationDoneEvent.class),
+        e -> project.equals(e.getProjectNameKey()));
+  }
+
+  @Test
+  public void shouldEmitProjectDeletionEventsForMultipleRemotesWhenFailing() throws Exception {
+    String projectName = project.get();
+    setReplicationTarget("replica1", projectName);
+
+    setReplicationDestination(
+        "not-existing-replica", "not-existing-replica", Optional.of(projectName));
+    setProjectDeletionReplication("not-existing-replica", true);
+
+    reloadConfig();
+
+    for (ProjectDeletedListener l : deletedListeners) {
+      l.onProjectDeleted(projectDeletedEvent(projectName));
+    }
+
+    List<ProjectDeletionReplicationScheduledEvent> scheduledEvents =
+        testDispatcher.getEvents(project, ProjectDeletionReplicationScheduledEvent.class);
+    assertThat(scheduledEvents).hasSize(2);
+
+    assertThatAnyMatch(
+        scheduledEvents,
+        e -> project.equals(e.getProjectNameKey()) && e.getTargetNode().endsWith("replica1.git"));
+    assertThatAnyMatch(
+        scheduledEvents,
+        e ->
+            project.equals(e.getProjectNameKey())
+                && e.getTargetNode().endsWith("not-existing-replica.git"));
+
+    waitForProjectEvent(
+        () -> testDispatcher.getEvents(project, ProjectDeletionReplicationSucceededEvent.class), 1);
+
+    waitForProjectEvent(
+        () -> testDispatcher.getEvents(project, ProjectDeletionReplicationFailedEvent.class), 1);
+
+    assertThatAnyMatch(
+        testDispatcher.getEvents(project, ProjectDeletionReplicationSucceededEvent.class),
+        e -> project.equals(e.getProjectNameKey()) && e.getTargetNode().endsWith("replica1.git"));
+
+    assertThatAnyMatch(
+        testDispatcher.getEvents(project, ProjectDeletionReplicationFailedEvent.class),
+        e ->
+            project.equals(e.getProjectNameKey())
+                && e.getTargetNode().endsWith("not-existing-replica.git"));
+
+    waitForProjectEvent(
+        () -> testDispatcher.getEvents(project, ProjectDeletionReplicationDoneEvent.class), 1);
+
+    assertThatAnyMatch(
+        testDispatcher.getEvents(project, ProjectDeletionReplicationDoneEvent.class),
+        e -> project.equals(e.getProjectNameKey()));
+  }
+
   private <T extends RefEvent> void waitForRefEvent(Supplier<List<T>> events, String refName)
       throws InterruptedException {
     WaitUtil.waitUntil(
         () -> events.get().stream().filter(e -> refName.equals(e.getRefName())).count() == 1,
         TEST_POST_EVENT_TIMEOUT);
+  }
+
+  private <T extends ProjectEvent> void waitForProjectEvent(Supplier<List<T>> events, int count)
+      throws InterruptedException {
+    WaitUtil.waitUntil(() -> events.get().size() == count, TEST_POST_EVENT_TIMEOUT);
+  }
+
+  private Project.NameKey setReplicationTarget(String replica, String ofProject) throws Exception {
+    Project.NameKey replicaProject = createTestProject(String.format("%s%s", ofProject, replica));
+    setReplicationDestination(replica, replica, Optional.of(ofProject));
+    setProjectDeletionReplication(replica, true);
+    return replicaProject;
+  }
+
+  private <T extends ProjectEvent> void assertThatAnyMatch(List<T> events, Predicate<T> p) {
+    assertThat(events.stream().anyMatch(p)).isTrue();
   }
 }
