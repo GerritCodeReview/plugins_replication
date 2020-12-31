@@ -15,8 +15,8 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.gerrit.server.project.ProjectCache.noSuchProject;
-import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;
 import static com.googlesource.gerrit.plugins.replication.ReplicationFileBasedConfig.replaceName;
+import static com.googlesource.gerrit.plugins.replication.ReplicationUtil.resolveNodeName;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.NON_EXISTING;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.REJECTED_OTHER_REASON;
 
@@ -459,10 +459,12 @@ public class Destination {
     }
   }
 
-  void scheduleDeleteProject(URIish uri, Project.NameKey project) {
+  void scheduleDeleteProject(URIish uri, Project.NameKey project, ProjectDeletionState state) {
+    repLog.atFine().log("scheduling deletion of project {} at {}", project, uri);
     @SuppressWarnings("unused")
     ScheduledFuture<?> ignored =
-        pool.schedule(deleteProjectFactory.create(uri, project), 0, TimeUnit.SECONDS);
+        pool.schedule(deleteProjectFactory.create(uri, project, state), 0, TimeUnit.SECONDS);
+    state.setScheduled(uri);
   }
 
   void scheduleUpdateHead(URIish uri, Project.NameKey project, String newHead) {
