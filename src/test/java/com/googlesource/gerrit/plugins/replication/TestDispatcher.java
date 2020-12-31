@@ -78,4 +78,10 @@ public class TestDispatcher implements EventDispatcher {
         .filter(e -> e.getProjectNameKey().equals(project))
         .collect(Collectors.toList());
   }
+
+  public String projectEventsString(Project.NameKey project) {
+    return getEventsForProject(project).stream()
+        .map(e -> String.format("(%s [created: %d])", e.type, e.eventCreatedOn))
+        .collect(Collectors.joining(","));
+  }
 }

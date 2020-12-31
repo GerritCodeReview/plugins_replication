@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.Sandboxed;
@@ -24,10 +25,16 @@ import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.projects.BranchInput;
+import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
+import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.events.EventDispatcher;
+import com.google.gerrit.server.events.ProjectEvent;
 import com.google.gerrit.server.events.RefEvent;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationDoneEvent;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationScheduledEvent;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationSucceededEvent;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicationDoneEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
@@ -44,10 +51,16 @@ import org.junit.Test;
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
 public class ReplicationEventsIT extends ReplicationDaemon {
-
   private static final Duration TEST_SCHEDULE_EVENT_TIMEOUT =
       Duration.ofSeconds(TEST_REPLICATION_DELAY_SECONDS);
 
+  protected static final int TEST_PROJECT_DELETION_TIME_SECONDS = 1;
+  private static final Duration TEST_DELETE_PROJECT_TIMEOUT =
+      Duration.ofSeconds(
+          (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60)
+              + TEST_PROJECT_DELETION_TIME_SECONDS);
+
+  @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
   @Inject private DynamicItem<EventDispatcher> eventDispatcher;
   private TestDispatcher testDispatcher;
 
@@ -118,10 +131,82 @@ public class ReplicationEventsIT extends ReplicationDaemon {
     assertThat(testDispatcher.getMatching(RefReplicationDoneEvent.class).size()).isEqualTo(1);
   }
 
+  @Test
+  public void shouldEmitProjectDeletionEventsForOneRemote() throws Exception {
+    String projectName = project.get();
+    Project.NameKey replicaProject = setReplicationTarget("replica", project.get());
+
+    reloadConfig();
+
+    for (ProjectDeletedListener l : deletedListeners) {
+      l.onProjectDeleted(projectDeletedEvent(projectName));
+    }
+
+    assertThat(testDispatcher.getMatching(project, ProjectDeletionReplicationScheduledEvent.class))
+        .hasSize(1);
+
+    WaitUtil.waitUntil(() -> (!nonEmptyProjectExists(replicaProject)), TEST_DELETE_PROJECT_TIMEOUT);
+
+    assertThat(testDispatcher.getMatching(project, ProjectDeletionReplicationSucceededEvent.class))
+        .hasSize(1);
+    assertThat(testDispatcher.getMatching(project, ProjectDeletionReplicationDoneEvent.class))
+        .hasSize(1);
+  }
+
+  @Test
+  public void shouldEmitProjectDeletionEventsForMultipleRemotes() throws Exception {
+    String projectName = project.get();
+    setReplicationTarget("replica1", projectName);
+    setReplicationTarget("replica2", projectName);
+
+    reloadConfig();
+
+    for (ProjectDeletedListener l : deletedListeners) {
+      l.onProjectDeleted(projectDeletedEvent(projectName));
+    }
+
+    final List<ProjectEvent> scheduled =
+        testDispatcher.getMatching(project, ProjectDeletionReplicationScheduledEvent.class);
+
+    if (scheduled.size() != 2) {
+      assertWithMessage(
+              String.format(
+                  "Expected two scheduled events. Events list is:\n%s",
+                  testDispatcher.projectEventsString(project)))
+          .fail();
+    }
+
+    WaitUtil.waitUntil(
+        () ->
+            (testDispatcher
+                    .getMatching(project, ProjectDeletionReplicationSucceededEvent.class)
+                    .size()
+                == 2),
+        TEST_DELETE_PROJECT_TIMEOUT);
+
+    final List<ProjectEvent> done =
+        testDispatcher.getMatching(project, ProjectDeletionReplicationDoneEvent.class);
+
+    if (done.size() != 1) {
+      assertWithMessage(
+              String.format(
+                  "Expected one done event. Events list is:\n%s",
+                  testDispatcher.projectEventsString(project)))
+          .fail();
+    }
+  }
+
   private <T extends RefEvent> void waitForRefEvent(Supplier<List<T>> events, String refName)
       throws InterruptedException {
     WaitUtil.waitUntil(
         () -> events.get().stream().filter(e -> refName.equals(e.getRefName())).count() == 1,
         TEST_SCHEDULE_EVENT_TIMEOUT);
+  }
+
+  private Project.NameKey setReplicationTarget(String replica, String ofProject) throws Exception {
+    Project.NameKey replicaProject = createTestProject(String.format("%s%s", ofProject, replica));
+    setReplicationDestination(replica, replica, Optional.of(ofProject));
+    setProjectDeletionReplication(replica, true);
+    return replicaProject;
   }
 }
