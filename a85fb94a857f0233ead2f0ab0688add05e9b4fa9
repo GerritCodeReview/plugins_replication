@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5abfa404_9a6846e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2021-01-04T20:39:27Z",
+      "side": 1,
+      "message": "Is this supposed to go in 3.1 since 3.0 is no more supported?",
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
