@@ -16,6 +16,167 @@
       "message": "Is this supposed to go in 3.1 since 3.0 is no more supported?",
       "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "913e8cea_f6a85f09",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DeleteProjectTask.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2021-01-04T21:18:30Z",
+      "side": 1,
+      "message": "Is this supposed to be set here? Seems like we are setting and unsetting it straight away at line #61 or #63",
+      "range": {
+        "startLine": 59,
+        "startChar": 6,
+        "endLine": 59,
+        "endChar": 37
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fec95798_6b664c8a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionReplicationDoneEvent.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2021-01-04T21:18:30Z",
+      "side": 1,
+      "message": "would it be useful to add the deletion time as well in the payload?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 3
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e643685c_91c6a7bf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionReplicationFailedEvent.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2021-01-04T21:18:30Z",
+      "side": 1,
+      "message": "Same comment as before about timestamping the event.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 3
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76b0f0cf_605c179d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2021-01-04T21:18:30Z",
+      "side": 1,
+      "message": "Shall we include the side effect in the method name? Something like: `setStatusAndBroadcastDeletionEvent` ?",
+      "range": {
+        "startLine": 80,
+        "startChar": 15,
+        "endLine": 80,
+        "endChar": 24
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70c435ec_f93b23e5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2021-01-04T21:18:30Z",
+      "side": 1,
+      "message": "What about *notifyIfDeletionDoneOnAllNodes* or *notifyIfDoneOnAllNodes*?\n\nWithout the *On* it doesn\u0027t look obvious to me if we are notifying all the nodes or if we are done on all the nodes.",
+      "range": {
+        "startLine": 85,
+        "startChar": 14,
+        "endLine": 85,
+        "endChar": 34
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75c651f4_e5edda36",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDaemon.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2021-01-04T21:18:30Z",
+      "side": 1,
+      "message": "what is this +1 for ?",
+      "range": {
+        "startLine": 62,
+        "startChar": 81,
+        "endLine": 62,
+        "endChar": 84
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cca6075_9e0dd8f1",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2021-01-04T21:18:30Z",
+      "side": 1,
+      "message": "Instead of having a double negation, what if we change the method name and we invert the logic, ending up with a method called *emptyProjectExists*.\n\nWhen using I believe it will be more readable:\n\n waitUntil(() -\u003e emptyProjectExists(replicaProject));",
+      "range": {
+        "startLine": 62,
+        "startChar": 20,
+        "endLine": 62,
+        "endChar": 42
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
