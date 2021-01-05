@@ -53,6 +53,42 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20084cd1_3fc72233",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T11:19:09Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "5e528a48_24237201",
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65685e3b_1af07dab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T11:19:09Z",
+      "side": 1,
+      "message": "Moved to master.",
+      "parentUuid": "5abfa404_9a6846e4",
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "913e8cea_f6a85f09",
@@ -90,6 +126,30 @@
       "side": 1,
       "message": "This was to notify consumers that the deletion is happening.\n\nLine #61 and #63 might not be running straight away because line #60 might take several minutes to complete the actual deletion.\n\nBut I agree, informing consumers about the \"running\" status is probably too much granularity, I will remove line 59.",
       "parentUuid": "913e8cea_f6a85f09",
+      "range": {
+        "startLine": 59,
+        "startChar": 6,
+        "endLine": 59,
+        "endChar": 37
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51bdc287_fac135a6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DeleteProjectTask.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T11:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4afafa6d_9a49485a",
       "range": {
         "startLine": 59,
         "startChar": 6,
@@ -229,6 +289,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d00f2b13_bbf6c55e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionReplicationRunningEvent.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T11:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9c7ff97_3bcd3256",
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ded980b8_c9faa404",
@@ -311,6 +389,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca5b17ee_6176006d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T11:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12129fa2_d1fe4639",
+      "range": {
+        "startLine": 80,
+        "startChar": 15,
+        "endLine": 80,
+        "endChar": 24
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70c435ec_f93b23e5",
@@ -348,6 +450,30 @@
       "side": 1,
       "message": "Yep notifyIfDoneOnAllNodes sounds better to me too",
       "parentUuid": "70c435ec_f93b23e5",
+      "range": {
+        "startLine": 85,
+        "startChar": 14,
+        "endLine": 85,
+        "endChar": 34
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "821abd22_8df93f50",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T11:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdc6a576_3edd1d2c",
       "range": {
         "startLine": 85,
         "startChar": 14,
