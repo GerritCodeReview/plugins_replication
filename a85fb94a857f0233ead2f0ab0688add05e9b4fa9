@@ -35,6 +35,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e528a48_24237201",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T08:52:01Z",
+      "side": 1,
+      "message": "Yep I will do.",
+      "parentUuid": "b58c25d3_928ce123",
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "913e8cea_f6a85f09",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-01-04T21:18:30Z",
       "side": 1,
       "message": "Is this supposed to be set here? Seems like we are setting and unsetting it straight away at line #61 or #63",
+      "range": {
+        "startLine": 59,
+        "startChar": 6,
+        "endLine": 59,
+        "endChar": 37
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4afafa6d_9a49485a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DeleteProjectTask.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T08:52:01Z",
+      "side": 1,
+      "message": "This was to notify consumers that the deletion is happening.\n\nLine #61 and #63 might not be running straight away because line #60 might take several minutes to complete the actual deletion.\n\nBut I agree, informing consumers about the \"running\" status is probably too much granularity, I will remove line 59.",
+      "parentUuid": "913e8cea_f6a85f09",
       "range": {
         "startLine": 59,
         "startChar": 6,
@@ -81,6 +123,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a2f57de_4edcd4d9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionReplicationDoneEvent.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T08:52:01Z",
+      "side": 1,
+      "message": "`ProjectDeletionReplicationDoneEvent` extends `ProjectEvent`, which extends `Event`, which already has an `eventCreatedOn` field.",
+      "parentUuid": "fec95798_6b664c8a",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 3
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e643685c_91c6a7bf",
@@ -94,6 +160,30 @@
       "writtenOn": "2021-01-04T21:18:30Z",
       "side": 1,
       "message": "Same comment as before about timestamping the event.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 3
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7150f3c7_694e4417",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionReplicationFailedEvent.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T08:52:01Z",
+      "side": 1,
+      "message": "Same as above.",
+      "parentUuid": "e643685c_91c6a7bf",
       "range": {
         "startLine": 26,
         "startChar": 0,
@@ -123,6 +213,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9c7ff97_3bcd3256",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionReplicationRunningEvent.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T08:52:01Z",
+      "side": 1,
+      "message": "Good point, I was not sure about this being useful or not and decided it might have been worth discussing during review.\n\nI agree this might be too much granularity and perhaps no consumers are interested in this.\n\nI will remove it.",
+      "parentUuid": "decdcd07_557691eb",
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ded980b8_c9faa404",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
         "patchSetId": 6
@@ -140,6 +248,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e400d3b4_e3a7c857",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T08:52:01Z",
+      "side": 1,
+      "message": "There might be more than one destination for projects. When a project is deleted its deletion needs to be scheduled and executed to multiple remote destinations.\n\nOnly when the project has been deleted from all destinations, an event should notify that the deletion is actually done.\n\nThis class aims to keep the state of the deletion for each destination so that the ProjectDeletionReplicationDoneEvent can be emitted when the deletion actually happened to all destinations.\n\nDoes it make sense?",
+      "parentUuid": "ded980b8_c9faa404",
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76b0f0cf_605c179d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
         "patchSetId": 6
@@ -151,6 +277,30 @@
       "writtenOn": "2021-01-04T21:18:30Z",
       "side": 1,
       "message": "Shall we include the side effect in the method name? Something like: `setStatusAndBroadcastDeletionEvent` ?",
+      "range": {
+        "startLine": 80,
+        "startChar": 15,
+        "endLine": 80,
+        "endChar": 24
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12129fa2_d1fe4639",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T08:52:01Z",
+      "side": 1,
+      "message": "Yes, sounds sensible to me.",
+      "parentUuid": "76b0f0cf_605c179d",
       "range": {
         "startLine": 80,
         "startChar": 15,
@@ -186,6 +336,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bdc6a576_3edd1d2c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T08:52:01Z",
+      "side": 1,
+      "message": "Yep notifyIfDoneOnAllNodes sounds better to me too",
+      "parentUuid": "70c435ec_f93b23e5",
+      "range": {
+        "startLine": 85,
+        "startChar": 14,
+        "endLine": 85,
+        "endChar": 34
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75c651f4_e5edda36",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDaemon.java",
         "patchSetId": 6
@@ -197,6 +371,30 @@
       "writtenOn": "2021-01-04T21:18:30Z",
       "side": 1,
       "message": "what is this +1 for ?",
+      "range": {
+        "startLine": 62,
+        "startChar": 81,
+        "endLine": 62,
+        "endChar": 84
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eb3ca1a_016cea33",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDaemon.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T08:52:01Z",
+      "side": 1,
+      "message": "This is just the porting of the variable from ReplicationIT.java to the ReplicationDaemon.java.\n\nThe reason the variable was set with the +1 was to make sure the test times out _after_ giving all the time for the replication to happen.",
+      "parentUuid": "75c651f4_e5edda36",
       "range": {
         "startLine": 62,
         "startChar": 81,
@@ -220,6 +418,30 @@
       "writtenOn": "2021-01-04T21:18:30Z",
       "side": 1,
       "message": "Instead of having a double negation, what if we change the method name and we invert the logic, ending up with a method called *emptyProjectExists*.\n\nWhen using I believe it will be more readable:\n\n waitUntil(() -\u003e emptyProjectExists(replicaProject));",
+      "range": {
+        "startLine": 62,
+        "startChar": 20,
+        "endLine": 62,
+        "endChar": 42
+      },
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71031d7c_8b131640",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-05T08:52:01Z",
+      "side": 1,
+      "message": "I agree, I thought the same 😊\n\nbut this is the porting of the method defined in ReplicationIT.java, so I left it as-is.\n\nI just refactored common code, without also changing it at the same time.",
+      "parentUuid": "1cca6075_9e0dd8f1",
       "range": {
         "startLine": 62,
         "startChar": 20,
