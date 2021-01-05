@@ -18,6 +18,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b58c25d3_928ce123",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-01-05T00:04:39Z",
+      "side": 1,
+      "message": "Can you move this to master?\nstable-3.0 is an EOL branch. New features should be for master.",
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "913e8cea_f6a85f09",
