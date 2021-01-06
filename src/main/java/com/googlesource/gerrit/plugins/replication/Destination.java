@@ -435,7 +435,7 @@ public class Destination {
       }
       state.increasePushTaskCount(project.get(), ref);
       repLog.atInfo().log(
-          "scheduled %s:%s => %s to run after %ds", project, ref, task, config.getDelay());
+          "scheduled %s:%s => %s to run after %ds", project, ref, task, now ? 0 :config.getDelay());
     }
   }
 
