@@ -52,6 +52,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResul
 import com.jcraft.jsch.JSchException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -271,6 +272,18 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   }
 
   void setRefs(Set<String> refs) {
+    Sets.difference(delta, refs)
+        .forEach(
+            alreadyCompletedRef ->
+                Arrays.asList(getStatesByRef(alreadyCompletedRef))
+                    .forEach(
+                        state ->
+                            state.notifyRefReplicated(
+                                projectName.get(),
+                                alreadyCompletedRef,
+                                uri,
+                                RefPushResult.NOT_ATTEMPTED,
+                                RemoteRefUpdate.Status.UP_TO_DATE)));
     pushAllRefs = false;
     delta.clear();
     addRefs(refs);
