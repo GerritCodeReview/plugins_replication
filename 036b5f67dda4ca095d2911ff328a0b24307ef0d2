@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b3dfd8d_8b228022",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-01-06T16:19:31Z",
+      "side": 1,
+      "message": "Name (and docs) seems no longer to match functionality.",
+      "range": {
+        "startLine": 236,
+        "startChar": 29,
+        "endLine": 236,
+        "endChar": 34
+      },
+      "revId": "036b5f67dda4ca095d2911ff328a0b24307ef0d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "728c1e53_6d52e710",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-01-06T16:19:31Z",
+      "side": 1,
+      "message": "More of the code in here can be shared with the code below.",
+      "revId": "036b5f67dda4ca095d2911ff328a0b24307ef0d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
