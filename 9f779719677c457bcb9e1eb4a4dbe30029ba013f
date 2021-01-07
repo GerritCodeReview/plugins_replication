@@ -18,6 +18,29 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "03144aa0_72650293",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-01-07T11:28:16Z",
+      "side": 1,
+      "message": "You can have this already without this change, by specifying test method as test_filter, as explained in Documentataion/dev-bazel.txt",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 59
+      },
+      "revId": "9f779719677c457bcb9e1eb4a4dbe30029ba013f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0a8cf988_501dc056",
