@@ -32,18 +32,16 @@ junit_tests(
     ],
 )
 
-junit_tests(
-    name = "replication_it",
-    srcs = glob([
-        "src/test/java/**/*IT.java",
-    ]),
+[junit_tests(
+    name = f[:f.index(".")].replace("/", "_"),
+    srcs = [f],
     tags = ["replication"],
     visibility = ["//visibility:public"],
     deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
         ":replication__plugin",
         ":replication_util",
     ],
-)
+) for f in glob(["src/test/java/**/*IT.java"])]
 
 java_library(
     name = "replication_util",
