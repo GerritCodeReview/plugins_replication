@@ -58,6 +58,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff850c24_36af1450",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-01-07T11:29:15Z",
+      "side": 1,
+      "message": "Marking as VRFY-1, as Zuul CI doesn\u0027t verify yet the style of BUILD files.",
+      "revId": "9f779719677c457bcb9e1eb4a4dbe30029ba013f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d61a512_ad12a712",
