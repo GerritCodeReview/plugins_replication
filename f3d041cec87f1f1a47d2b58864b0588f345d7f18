@@ -16,6 +16,23 @@
       "message": "The failure was unrelated. stable-3.3 branch was broken for short time. I will re-trigger the build.",
       "revId": "f3d041cec87f1f1a47d2b58864b0588f345d7f18",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba9da7ac_92b101ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-01-07T14:08:21Z",
+      "side": 1,
+      "message": "Merge should be re-done.",
+      "revId": "f3d041cec87f1f1a47d2b58864b0588f345d7f18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
