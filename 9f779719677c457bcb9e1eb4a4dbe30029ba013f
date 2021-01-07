@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df3a1c95_ce9db42a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-01-07T11:26:55Z",
+      "side": 1,
+      "message": "Optional: mention that sharding of tests would also make it faster, especially when run on RBE (50 machines).",
+      "revId": "9f779719677c457bcb9e1eb4a4dbe30029ba013f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a8cf988_501dc056",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-01-07T11:26:55Z",
+      "side": 1,
+      "message": "Should we also consider to add this optimization on stable branch and merge up to master?",
+      "revId": "9f779719677c457bcb9e1eb4a4dbe30029ba013f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d61a512_ad12a712",
+        "filename": "BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-01-07T11:26:55Z",
+      "side": 1,
+      "message": "Missing blank. If I run this change through buildifier I\u0027m getting this diff:\n\n  -    name \u003d f[:f.index(\".\")].replace(\"/\",\"_\"),\n  +    name \u003d f[:f.index(\".\")].replace(\"/\", \"_\"),",
+      "range": {
+        "startLine": 37,
+        "startChar": 39,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "9f779719677c457bcb9e1eb4a4dbe30029ba013f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
