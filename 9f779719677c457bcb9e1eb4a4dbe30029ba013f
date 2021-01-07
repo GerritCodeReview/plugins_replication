@@ -43,6 +43,48 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e0e5fb79_d8a8938b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-07T13:34:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df3a1c95_ce9db42a",
+      "revId": "9f779719677c457bcb9e1eb4a4dbe30029ba013f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c63bf59d_d139871e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-07T13:34:54Z",
+      "side": 1,
+      "message": "Yes, but it will still make it obvious which test it failed, when running through the CI, where you have no control on the --test_filter option.",
+      "parentUuid": "03144aa0_72650293",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 59
+      },
+      "revId": "9f779719677c457bcb9e1eb4a4dbe30029ba013f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0a8cf988_501dc056",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -75,6 +117,42 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f472e8b4_0c4a141e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-07T13:34:54Z",
+      "side": 1,
+      "message": "THanks for the heads up, I will run buildifier from now on.",
+      "parentUuid": "ff850c24_36af1450",
+      "revId": "9f779719677c457bcb9e1eb4a4dbe30029ba013f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48cba00f_a290b0e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-07T13:34:54Z",
+      "side": 1,
+      "message": "Sure, moved to stable-3.1",
+      "parentUuid": "0a8cf988_501dc056",
+      "revId": "9f779719677c457bcb9e1eb4a4dbe30029ba013f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d61a512_ad12a712",
@@ -88,6 +166,30 @@
       "writtenOn": "2021-01-07T11:26:55Z",
       "side": 1,
       "message": "Missing blank. If I run this change through buildifier I\u0027m getting this diff:\n\n  -    name \u003d f[:f.index(\".\")].replace(\"/\",\"_\"),\n  +    name \u003d f[:f.index(\".\")].replace(\"/\", \"_\"),",
+      "range": {
+        "startLine": 37,
+        "startChar": 39,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "9f779719677c457bcb9e1eb4a4dbe30029ba013f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13139d00_e2c1d178",
+        "filename": "BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-07T13:34:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4d61a512_ad12a712",
       "range": {
         "startLine": 37,
         "startChar": 39,
