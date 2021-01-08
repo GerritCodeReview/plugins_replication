@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c11f7ac0_bfde371f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-08T15:36:07Z",
+      "side": 1,
+      "message": "nit: where",
+      "range": {
+        "startLine": 11,
+        "startChar": 22,
+        "endLine": 11,
+        "endChar": 26
+      },
+      "revId": "2eefe286d0d9dfabd98a38b68078a87bac016f59",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff707100_78db819d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-08T15:36:07Z",
+      "side": 1,
+      "message": "This bug says https://gerrit.googlesource.com/gerrit/+/b5f92f10f99c7374c57bebde21d26bec12c38b33 fixed part of the issue already. Which of the tests you added fail without the rest of your code changes? (maybe you can split to add tests that work without the new config first?)\n\nI\u0027m a little confused why we need this new config. Shouldn\u0027t ref READ perms be able to handle all of this?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 16
+      },
+      "revId": "2eefe286d0d9dfabd98a38b68078a87bac016f59",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69f2ecc2_99c5eaaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-08T15:36:07Z",
+      "side": 1,
+      "message": "Partial review so far since I have high level questions about the change (posted on commit message).",
+      "revId": "2eefe286d0d9dfabd98a38b68078a87bac016f59",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9221c17_85775bdd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-08T15:36:07Z",
+      "side": 1,
+      "message": "Maybe put this check first so that the rest is about project visibility?",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 5
+      },
+      "revId": "2eefe286d0d9dfabd98a38b68078a87bac016f59",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
