@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d8112e5_d4210bbd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationUtil.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-08T17:08:40Z",
+      "side": 1,
+      "message": "Let\u0027s please not create util classes. These become dumping grounds for code. I think this would make (or is the start of) a nice helper class in a new replication.events subpackage. I\u0027m not sure what it should be named, because maybe it should be doing more that\u0027s common across building events. replication.events.BuilderHelper is the rough idea in my head, but again, I haven\u0027t really investigated the event code, so hopefully you can improve on that 😊",
+      "range": {
+        "startLine": 19,
+        "startChar": 12,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "79fd821a6b282e0c818084125963415a96dcd519",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba11e660_600f3aa5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-08T17:08:40Z",
+      "side": 1,
+      "message": "Name this based on the meaning: TEST_DELETE_PROJECT_TIMEOUT",
+      "range": {
+        "startLine": 45,
+        "startChar": 32,
+        "endLine": 45,
+        "endChar": 44
+      },
+      "revId": "79fd821a6b282e0c818084125963415a96dcd519",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5ad5baf_838641d7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-08T17:08:40Z",
+      "side": 1,
+      "message": "I don\u0027t think you want this helper even here. For just two calls, you\u0027re probably adding more characters than you\u0027re saving 😊 (and more importantly it obfuscates the timeout value).",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 3
+      },
+      "revId": "79fd821a6b282e0c818084125963415a96dcd519",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
