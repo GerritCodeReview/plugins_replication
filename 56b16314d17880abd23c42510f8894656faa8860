@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e169f8f2_65d719cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-08T16:38:34Z",
+      "side": 1,
+      "message": "I have not created any, nope.\n\nproject creations and HEAD updates can be inferred by consumers looking at ref-update events, where the old revision was ObjectId.zero.\n\nI think deletions are more problematic because the removal of the repository gets done at filesystem level (i.e. rm over some channel) and not through git so there are no ref-update events that can be observed.\n\nHaving said that, I think it would make sense to have one for ease and consistency and I am happy to create it.",
+      "parentUuid": "664d5398_a9da7b57",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 46
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85f6164b_ebb7a1ed",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DeleteProjectTask.java",
         "patchSetId": 19
@@ -37,6 +61,30 @@
       "writtenOn": "2021-01-07T15:14:59Z",
       "side": 1,
       "message": "What happens to the state if adminApi isn\u0027t present?",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 31
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d127907_7c63ab90",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DeleteProjectTask.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-08T16:38:34Z",
+      "side": 1,
+      "message": "This IF condition deals with the fact that adminApi is bound as a dynamicItem and thus, it could be theoretically absent.\n\nLooking at the code however the adminApi is _always_ bound[1] to a default implementation, which is also documented to be the only one available[2].\nSo I don\u0027t think as-is, this could ever be absent.\n\n[1]https://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java#191\n[2]https://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/resources/Documentation/extension-point.md",
+      "parentUuid": "85f6164b_ebb7a1ed",
       "range": {
         "startLine": 58,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e658d19a_fbd7eb78",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-08T16:38:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bf5e7146_90efd580",
+      "range": {
+        "startLine": 458,
+        "startChar": 59,
+        "endLine": 458,
+        "endChar": 63
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eff59c57_a31973d1",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-01-07T15:14:59Z",
       "side": 1,
       "message": "Should happen after line 462 so that we\u0027re sure it\u0027s been scheduled?",
+      "range": {
+        "startLine": 459,
+        "startChar": 4,
+        "endLine": 459,
+        "endChar": 28
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c06c2d47_5f3273ba",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-08T16:38:34Z",
+      "side": 1,
+      "message": "yep makes sense. Done.",
+      "parentUuid": "eff59c57_a31973d1",
       "range": {
         "startLine": 459,
         "startChar": 4,
@@ -118,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8047e29c_451362cc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionReplicationFailedEvent.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-08T16:38:34Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t like the name \u0027targetNode\u0027. I think it assumes too much about the remote. \n\nHow so? is it because \"node\" evokes the idea of a _remote_ target to you?\n\n\u003e I just noticed this terminology is used in the plugin\u0027s other event handling, but \u0027node\u0027 isn\u0027t used consistently as a term elsewhere (for example, the MP tests refer to different Gerrit primaries as nodes).\n\nCould you point me to some of those inconsistencies?\nI can see that the ReplicationTasksStorageTaskMPTest for example is referring to nodes, but in the context of the _storage_, not as _targets_ of replication activity, I thought that\u0027s why they are named \"nodes\" as opposed to \"targetNodes\".\n\n\u003e \n\u003e I would prefer we use a name well described in resolveNodeName() if that\u0027s really what we mean.\n\u003e I know you\u0027re building on that older code, but it looks like it has issues at least with naming and docs (I haven\u0027t really looked at it much before this). PushResultProcessing might need some refactoring before this change.\n\nRefactoring existing events would affect serialisation, and very likely break consumers.\nWould you mind creating an issue with the rationale behind the renaming of targetNode?",
+      "parentUuid": "2d8bbb2e_aeef8e3f",
+      "range": {
+        "startLine": 26,
+        "startChar": 70,
+        "endLine": 26,
+        "endChar": 80
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14d355eb_9f475ff5",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionReplicationSucceededEvent.java",
         "patchSetId": 19
@@ -135,6 +255,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0d465d9_1fe4962f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionReplicationSucceededEvent.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-08T16:38:34Z",
+      "side": 1,
+      "message": "Not sure.\nThese events extends ProjectEvent and AFAIK, it\u0027s not possible to extend classes from an AutoValue[1]\n\nhttps://github.com/google/auto/blob/master/value/userguide/howto.md#-have-one-autovalue-class-extend-another",
+      "parentUuid": "14d355eb_9f475ff5",
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4332bfb9_392eab2a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
         "patchSetId": 19
@@ -146,6 +284,30 @@
       "writtenOn": "2021-01-07T15:14:59Z",
       "side": 1,
       "message": "Should this move somewhere common to event handling?",
+      "range": {
+        "startLine": 20,
+        "startChar": 79,
+        "endLine": 20,
+        "endChar": 94
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "397561f1_a2ef288c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-08T16:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4332bfb9_392eab2a",
       "range": {
         "startLine": 20,
         "startChar": 79,
@@ -181,6 +343,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bad679ea_06aeef78",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-08T16:38:34Z",
+      "side": 1,
+      "message": "I think the two classes have different intent and responsibilities.\n\nReplicationState tracks the state of *pushing* specific refs to destination targets, whilst ProjectDeletionState tracks the state of project deletion operations.\n\nReplicationState involves tracking ref push results (its constructor takes a PushResultProcessing as an argument), whilst ProjectDeletionState does not need to track any ref at all.",
+      "parentUuid": "b7256842_5551b49a",
+      "range": {
+        "startLine": 32,
+        "startChar": 13,
+        "endLine": 32,
+        "endChar": 33
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "454ab0ec_5518e09c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
         "patchSetId": 19
@@ -192,6 +378,30 @@
       "writtenOn": "2021-01-07T15:14:59Z",
       "side": 1,
       "message": "This seems to be statusByUri not by remote (remote makes me assume the remote name that\u0027s in the destination config)?",
+      "range": {
+        "startLine": 39,
+        "startChar": 61,
+        "endLine": 39,
+        "endChar": 75
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60cd13e2_e3826d45",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-08T16:38:34Z",
+      "side": 1,
+      "message": "Fair point, let me rename this.",
+      "parentUuid": "454ab0ec_5518e09c",
       "range": {
         "startLine": 39,
         "startChar": 61,
@@ -215,6 +425,30 @@
       "writtenOn": "2021-01-07T15:14:59Z",
       "side": 1,
       "message": "do this on line 39?",
+      "range": {
+        "startLine": 46,
+        "startChar": 26,
+        "endLine": 46,
+        "endChar": 52
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "729925b8_ebe72a85",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-08T16:38:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6c43fa15_8807969f",
       "range": {
         "startLine": 46,
         "startChar": 26,
@@ -250,6 +484,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf91df86_dde52eb8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-08T16:38:34Z",
+      "side": 1,
+      "message": "Yes absolutely, that\u0027s a fair point!\nThe longer the list of URIs (and/or the quicker the deletion phase) the higher the risk.\nThanks for pointing this out, let me try to address this issue.",
+      "parentUuid": "49550ca4_43d35b47",
+      "range": {
+        "startLine": 81,
+        "startChar": 13,
+        "endLine": 81,
+        "endChar": 81
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37f30755_c740988b",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDaemon.java",
         "patchSetId": 19
@@ -261,6 +519,30 @@
       "writtenOn": "2021-01-07T15:14:59Z",
       "side": 1,
       "message": "We don\u0027t want a generic waitUntil. It makes the tests harder to understand. Please use WaitUtil like it\u0027s used on line 261 so that each test is tied to a specific expected timeout that is based on what\u0027s being tested.",
+      "range": {
+        "startLine": 260,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 3
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7add5d8_60695f85",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDaemon.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-08T16:38:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "37f30755_c740988b",
       "range": {
         "startLine": 260,
         "startChar": 0,
@@ -284,6 +566,30 @@
       "writtenOn": "2021-01-07T15:14:59Z",
       "side": 1,
       "message": "As noted in ReplicationDaemon, please use a waitUntil with a timeout specific to what you\u0027re testing (in this case a timeout for project deletion seems appropriate).",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 56
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcab7c0a_78882d0c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-08T16:38:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "25e6c0b0_ac34fd1e",
       "range": {
         "startLine": 73,
         "startChar": 4,
