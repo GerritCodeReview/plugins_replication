@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59c9ce81_4fd5fcaa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationUtil.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-09T17:09:49Z",
+      "side": 1,
+      "message": "I don\u0027t find anything inherently wrong with util classes, when they hold _actual_ utils. I think it is up to good code reviews to prevent them from becoming dumping grounds 😊\n\nThe reason I chose util is because I believe that resolveName() is just an utility that allows to parse node names from URIs: I don\u0027t think it belongs to the \u0027events\u0027 namespace because it is not just used for events, here[1] for example is used for logging.\n\nI am happy to change this to something more appropriate, but I am still pondering what that might be.\n\n\n[1]https://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/replication/PushResultProcessing.java#112",
+      "parentUuid": "4d8112e5_d4210bbd",
+      "range": {
+        "startLine": 19,
+        "startChar": 12,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "79fd821a6b282e0c818084125963415a96dcd519",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba11e660_600f3aa5",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
         "patchSetId": 21
@@ -37,6 +61,30 @@
       "writtenOn": "2021-01-08T17:08:40Z",
       "side": 1,
       "message": "Name this based on the meaning: TEST_DELETE_PROJECT_TIMEOUT",
+      "range": {
+        "startLine": 45,
+        "startChar": 32,
+        "endLine": 45,
+        "endChar": 44
+      },
+      "revId": "79fd821a6b282e0c818084125963415a96dcd519",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbc9927a_13c660e0",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-09T17:09:49Z",
+      "side": 1,
+      "message": "Yep, makes sense",
+      "parentUuid": "ba11e660_600f3aa5",
       "range": {
         "startLine": 45,
         "startChar": 32,
@@ -60,6 +108,30 @@
       "writtenOn": "2021-01-08T17:08:40Z",
       "side": 1,
       "message": "I don\u0027t think you want this helper even here. For just two calls, you\u0027re probably adding more characters than you\u0027re saving 😊 (and more importantly it obfuscates the timeout value).",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 3
+      },
+      "revId": "79fd821a6b282e0c818084125963415a96dcd519",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a37010b9_f29ec2ef",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-09T17:09:49Z",
+      "side": 1,
+      "message": "point taken.\nI just wanted to keep some consistency with other tests but I can see both approaches are used.\n\nLet me remove this wrapper.",
+      "parentUuid": "a5ad5baf_838641d7",
       "range": {
         "startLine": 132,
         "startChar": 0,

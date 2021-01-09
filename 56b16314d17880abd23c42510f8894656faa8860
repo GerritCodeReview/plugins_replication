@@ -72,6 +72,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d2b116b_550d4330",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-09T17:09:49Z",
+      "side": 1,
+      "message": "Done: https://bugs.chromium.org/p/gerrit/issues/detail?id\u003d13926",
+      "parentUuid": "bff5fc21_ecd5e5be",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 46
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85f6164b_ebb7a1ed",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "\u003e This IF condition deals with the fact that adminApi is bound as a dynamicItem and thus, it could be theoretically absent.\n\u003e \n\u003e Looking at the code however the adminApi is _always_ bound[1] to a default implementation, which is also documented to be the only one available[2].\n\u003e So I don\u0027t think as-is, this could ever be absent.\n\nI agree. I\u0027m also afraid of baking that assumption into the code. What would we expect to happen to the state if there was no adminApi bound? Maybe something like \"NOT_ATTEMPTED\"?",
       "parentUuid": "5d127907_7c63ab90",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 31
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc1345d3_6bf7f699",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DeleteProjectTask.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-09T17:09:49Z",
+      "side": 1,
+      "message": "At the moment the operation is skipped and a warning is logged[1][2][3].\nSeems like intended behaviour?\n\n[1]https://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/replication/DeleteProjectTask.java#58\n\n[2]https://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/replication/CreateProjectTask.java#67\n\n[3]https://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/replication/UpdateHeadTask.java#62",
+      "parentUuid": "ad0ede3c_78863882",
       "range": {
         "startLine": 58,
         "startChar": 4,
@@ -310,6 +358,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f3a601b_48bbdc7c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionReplicationFailedEvent.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-09T17:09:49Z",
+      "side": 1,
+      "message": "thanks 👍",
+      "parentUuid": "100c077f_6576bd35",
+      "range": {
+        "startLine": 26,
+        "startChar": 70,
+        "endLine": 26,
+        "endChar": 80
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14d355eb_9f475ff5",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionReplicationSucceededEvent.java",
         "patchSetId": 19
@@ -363,6 +435,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dfb21e84_d52060cb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionReplicationSucceededEvent.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-09T17:09:49Z",
+      "side": 1,
+      "message": "I think it *would* be possible if ProjectEvent had a no-arg default constructor, but it\u0027s not the case.\n\n```@AutoValue\nabstract class FooProjectEvent extends ProjectEvent {\n  public abstract String project();\n  public abstract String type();\n\n  static FooProjectEvent create(String project, String type) {\n    return new AutoValue_FooProjectEvent(project, type);\n  }\n\n  @Override\n  public Project.NameKey getProjectNameKey() {\n    return Project.nameKey(project());\n  }\n}```\n\nFails with\n\n```plugins/replication/src/main/java/com/googlesource/gerrit/plugins/replication/FooProjectEvent.java:22: error: constructor ProjectEvent in class ProjectEvent cannot be applied to given types;\nabstract class FooProjectEvent extends ProjectEvent {\n         ^\n  required: String\n  found: no arguments\n  reason: actual and formal argument lists differ in length\nTarget //:release failed to build```\n\nSame applies with the Builder pattern.\nIf I add a default no-arg constructor to the parent then the compiler is happy.\n\nSo bottom line is, this beats me\nAny idea? If anyone could teach me this trick I\u0027d be happy 😊",
+      "parentUuid": "5b7613c3_62a0d094",
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "350a8bd8_1808d9e6",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
         "patchSetId": 19
@@ -374,6 +464,24 @@
       "writtenOn": "2021-01-08T17:00:18Z",
       "side": 1,
       "message": "Can we start adding some more layers to the replication package hierarchy? For example, it\u0027d be great to have all the event stuff in a subpackage.",
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17a7583d_a5d78fad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-09T17:09:49Z",
+      "side": 1,
+      "message": "Yes I thought about the same.\nThe reason I was reluctant to do it was because I would have needed to move all the _existing_ events in a subpackage, which would have made this change way bigger than I\u0027d like it to (it already is).\n\nHow a follow up change that does just that?",
+      "parentUuid": "350a8bd8_1808d9e6",
       "revId": "56b16314d17880abd23c42510f8894656faa8860",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -486,6 +594,30 @@
       "side": 1,
       "message": "Ok, so if we went down the path of adding project creation events, you\u0027d expect a similar ProjectCreationState?",
       "parentUuid": "bad679ea_06aeef78",
+      "range": {
+        "startLine": 32,
+        "startChar": 13,
+        "endLine": 32,
+        "endChar": 33
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49aed108_56e5992e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-09T17:09:49Z",
+      "side": 1,
+      "message": "I would say so, yes.\n\nActually I think the state of project deletions, creations and update HEADs could be modelled in a similar way (well, emitted events will be different), but we might end up with a base/generic AdminOperationState for example.\n\nI would wave the rule of least power here and generify this, if needed, when the tackle other operations.\n\nWDYT?",
+      "parentUuid": "60fdf801_62de4f36",
       "range": {
         "startLine": 32,
         "startChar": 13,
