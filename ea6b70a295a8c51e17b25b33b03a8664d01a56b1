@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b19d8dde_1101f589",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-11T17:29:52Z",
+      "side": 1,
+      "message": "This isn\u0027t quite accurate. This also includes the brackets around the string and the count of hidden refs in parens. I think you should improve this sentence to capture that complexity better and provide an example string somewhere in the javadoc (@returns ?).",
+      "range": {
+        "startLine": 226,
+        "startChar": 5,
+        "endLine": 226,
+        "endChar": 45
+      },
+      "revId": "ea6b70a295a8c51e17b25b33b03a8664d01a56b1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0de3f69f_ca535e9a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-11T17:29:52Z",
+      "side": 1,
+      "message": "two refs ... what? I think you mean there are two refs to be replicated?",
+      "range": {
+        "startLine": 233,
+        "startChar": 93,
+        "endLine": 234,
+        "endChar": 9
+      },
+      "revId": "ea6b70a295a8c51e17b25b33b03a8664d01a56b1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f12dfe52_085924d1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-11T17:29:52Z",
+      "side": 1,
+      "message": "Maybe use a StringBuilder here? Maybe even one passed in from the caller? that would mean renaming this method to something like \u0027appendLimitedSpaceJoinedRefs()\u0027",
+      "range": {
+        "startLine": 242,
+        "startChar": 4,
+        "endLine": 242,
+        "endChar": 21
+      },
+      "revId": "ea6b70a295a8c51e17b25b33b03a8664d01a56b1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54d5ab4e_ebd6472e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-11T17:29:52Z",
+      "side": 1,
+      "message": "Rename to \u0027hiddenRefs\u0027?",
+      "range": {
+        "startLine": 243,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 18
+      },
+      "revId": "ea6b70a295a8c51e17b25b33b03a8664d01a56b1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
