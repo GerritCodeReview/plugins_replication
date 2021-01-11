@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8244ec5_358de6fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-01-11T08:09:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c11f7ac0_bfde371f",
+      "range": {
+        "startLine": 11,
+        "startChar": 22,
+        "endLine": 11,
+        "endChar": 26
+      },
+      "revId": "2eefe286d0d9dfabd98a38b68078a87bac016f59",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff707100_78db819d",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-01-08T15:36:07Z",
       "side": 1,
       "message": "This bug says https://gerrit.googlesource.com/gerrit/+/b5f92f10f99c7374c57bebde21d26bec12c38b33 fixed part of the issue already. Which of the tests you added fail without the rest of your code changes? (maybe you can split to add tests that work without the new config first?)\n\nI\u0027m a little confused why we need this new config. Shouldn\u0027t ref READ perms be able to handle all of this?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 16
+      },
+      "revId": "2eefe286d0d9dfabd98a38b68078a87bac016f59",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a989276_ad7e42e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-01-11T08:09:42Z",
+      "side": 1,
+      "message": "The linked commit fixes the issue for when no authGroup is used. But when authGroup is used the issue still remains.\nThis could be fixed by just giving one of the AuthGroups \"access database\" which is an alternative to this change [1].\nI thought a config option for replicating db would be more comprehensible for users of the replication plugin, but I might be wrong about this.\n\n\n[1] https://gerrit-review.googlesource.com/c/plugins/replication/+/291806",
+      "parentUuid": "ff707100_78db819d",
       "range": {
         "startLine": 19,
         "startChar": 0,
@@ -77,6 +125,30 @@
       "writtenOn": "2021-01-08T15:36:07Z",
       "side": 1,
       "message": "Maybe put this check first so that the rest is about project visibility?",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 5
+      },
+      "revId": "2eefe286d0d9dfabd98a38b68078a87bac016f59",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cc572eb_74b9ae0d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-01-11T08:09:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9221c17_85775bdd",
       "range": {
         "startLine": 288,
         "startChar": 0,
