@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "012d615a_65563f5a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2021-01-11T13:15:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b3dfd8d_8b228022",
+      "range": {
+        "startLine": 236,
+        "startChar": 29,
+        "endLine": 236,
+        "endChar": 34
+      },
+      "revId": "036b5f67dda4ca095d2911ff328a0b24307ef0d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "728c1e53_6d52e710",
@@ -55,6 +79,24 @@
       "side": 1,
       "message": "not sure why do we want to do that, is it for simplicity or readability ?\n\nin the end they are using StringJoiner toString method internally\n\nnot sure how we can share, since we cannot pass a limit to String.join method however i think we can do something like this :\n\nreturn \"[\" + refs.stream().collect(Collectors.joining(\" \")) + \"]\";",
       "parentUuid": "728c1e53_6d52e710",
+      "revId": "036b5f67dda4ca095d2911ff328a0b24307ef0d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0522287_0d13b753",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2021-01-11T13:15:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b28bb793_f7b19da2",
       "revId": "036b5f67dda4ca095d2911ff328a0b24307ef0d2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
