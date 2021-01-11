@@ -95,6 +95,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "746e7992_9507e207",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-11T17:34:20Z",
+      "side": 1,
+      "message": "\u003e The linked commit fixes the issue for when no authGroup is used. But when authGroup is used the issue still remains.\n\u003e This could be fixed by just giving one of the AuthGroups \"access database\" which is an alternative to this change [1].\n\u003e I thought a config option for replicating db would be more comprehensible for users of the replication plugin, but I might be wrong about this.\n\nI think requiring access database is more consistent with the rest of Gerrit. To me, it gets confusing when there are multiple ways of achieving the same thing. For example, if you did grant the authgroup access database and you had the replicateDbRefs setting, would you expect db refs to not be replicated when you set it to false? Either yes or no could be confusing to users.\n\nSince we already have a way to support this through auth groups, I\u0027d prefer only that solution unless that adds too unreasonable a burden on server/plugin admins. I don\u0027t think it does in this case, but I\u0027m not fixed in that view.\n\n\u003e \n\u003e \n\u003e [1] https://gerrit-review.googlesource.com/c/plugins/replication/+/291806",
+      "parentUuid": "0a989276_ad7e42e9",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 16
+      },
+      "revId": "2eefe286d0d9dfabd98a38b68078a87bac016f59",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "69f2ecc2_99c5eaaa",
