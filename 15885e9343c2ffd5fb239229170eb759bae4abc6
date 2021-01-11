@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee259c0c_a2e8ef0b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-11T19:25:59Z",
+      "side": 1,
+      "message": "should this be \u0027startedRefs\u0027?",
+      "range": {
+        "startLine": 274,
+        "startChar": 46,
+        "endLine": 274,
+        "endChar": 56
+      },
+      "revId": "15885e9343c2ffd5fb239229170eb759bae4abc6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
