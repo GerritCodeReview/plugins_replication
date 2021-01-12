@@ -72,6 +72,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78a8bb06_934af84e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2021-01-12T18:16:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da14b455_d02929d3",
+      "range": {
+        "startLine": 226,
+        "startChar": 5,
+        "endLine": 226,
+        "endChar": 45
+      },
+      "revId": "ea6b70a295a8c51e17b25b33b03a8664d01a56b1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0de3f69f_ca535e9a",
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "yes that is what i mean ,i agree when say like \"two refs to be replicated\" this reveals more clarity to reader\n\nwill be updated in next patchset",
       "parentUuid": "0de3f69f_ca535e9a",
+      "range": {
+        "startLine": 233,
+        "startChar": 93,
+        "endLine": 234,
+        "endChar": 9
+      },
+      "revId": "ea6b70a295a8c51e17b25b33b03a8664d01a56b1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06cf1666_744f719b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2021-01-12T18:16:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ee7f32f_a31cab0b",
       "range": {
         "startLine": 233,
         "startChar": 93,
@@ -203,6 +251,30 @@
       "writtenOn": "2021-01-11T17:29:52Z",
       "side": 1,
       "message": "Rename to \u0027hiddenRefs\u0027?",
+      "range": {
+        "startLine": 243,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 18
+      },
+      "revId": "ea6b70a295a8c51e17b25b33b03a8664d01a56b1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f00afe92_599cf809",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2021-01-12T18:16:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54d5ab4e_ebd6472e",
       "range": {
         "startLine": 243,
         "startChar": 8,
