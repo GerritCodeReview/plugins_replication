@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ebb3bdc_c6669442",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2021-01-12T10:52:56Z",
+      "side": 1,
+      "message": "i think this updated line captures required details\n\n * Returns a space separated string of refs limited to the maxRefsToShow with count of\n   * hidden refs when there are more refs than maxRefsToShow config.\n\ndo you think the same ?\n\ni have not added returns since first lines itself is telling what it is returning",
+      "parentUuid": "b19d8dde_1101f589",
+      "range": {
+        "startLine": 226,
+        "startChar": 5,
+        "endLine": 226,
+        "endChar": 45
+      },
+      "revId": "ea6b70a295a8c51e17b25b33b03a8664d01a56b1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0de3f69f_ca535e9a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 9
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ee7f32f_a31cab0b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2021-01-12T10:52:56Z",
+      "side": 1,
+      "message": "yes that is what i mean ,i agree when say like \"two refs to be replicated\" this reveals more clarity to reader\n\nwill be updated in next patchset",
+      "parentUuid": "0de3f69f_ca535e9a",
+      "range": {
+        "startLine": 233,
+        "startChar": 93,
+        "endLine": 234,
+        "endChar": 9
+      },
+      "revId": "ea6b70a295a8c51e17b25b33b03a8664d01a56b1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f12dfe52_085924d1",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 9
@@ -60,6 +108,30 @@
       "writtenOn": "2021-01-11T17:29:52Z",
       "side": 1,
       "message": "Maybe use a StringBuilder here? Maybe even one passed in from the caller? that would mean renaming this method to something like \u0027appendLimitedSpaceJoinedRefs()\u0027",
+      "range": {
+        "startLine": 242,
+        "startChar": 4,
+        "endLine": 242,
+        "endChar": 21
+      },
+      "revId": "ea6b70a295a8c51e17b25b33b03a8664d01a56b1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72066407_53a559aa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2021-01-12T10:52:56Z",
+      "side": 1,
+      "message": "i think java compiler optimizes it for us, after reading this article i am not sure if we need do this \n\nhttps://medium.com/javarevisited/java-compiler-optimization-for-string-concatenation-7f5237e5e6ed\n\nbasically it is saying \n\nString a \u003d b + c + d;\n\nis converted to \n\nString a \u003d new StringBuilder(b).append(c).append(d).toString();\n\nby java compiler.\n\nknowing this do you still think we should use StringBuilder",
+      "parentUuid": "f12dfe52_085924d1",
       "range": {
         "startLine": 242,
         "startChar": 4,
