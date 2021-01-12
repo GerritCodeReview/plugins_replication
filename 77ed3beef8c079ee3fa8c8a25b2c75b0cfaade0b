@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "022bdfd5_4619f236",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-12T18:32:53Z",
+      "side": 1,
+      "message": "\"round bracket\" looks to be a British-English only thing. Usually we call them parentheses.",
+      "range": {
+        "startLine": 238,
+        "startChar": 39,
+        "endLine": 238,
+        "endChar": 52
+      },
+      "revId": "77ed3beef8c079ee3fa8c8a25b2c75b0cfaade0b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
