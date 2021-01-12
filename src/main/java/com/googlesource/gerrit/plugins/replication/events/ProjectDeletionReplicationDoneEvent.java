@@ -1,4 +1,4 @@
-// Copyright (C) 2016 The Android Open Source Project
+// Copyright (C) 2021 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,28 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.replication;
+package com.googlesource.gerrit.plugins.replication.events;
 
 import com.google.gerrit.entities.Project;
-import com.google.gerrit.server.events.RefEvent;
+import com.google.gerrit.server.events.ProjectEvent;
 
-public class ReplicationScheduledEvent extends RefEvent {
-  public static final String TYPE = "ref-replication-scheduled";
+public class ProjectDeletionReplicationDoneEvent extends ProjectEvent {
+  public static final String TYPE = "project-deletion-replication-done";
 
   public final String project;
-  public final String ref;
-  public final String targetNode;
 
-  public ReplicationScheduledEvent(String project, String ref, String targetNode) {
+  public ProjectDeletionReplicationDoneEvent(String project) {
     super(TYPE);
     this.project = project;
-    this.ref = ref;
-    this.targetNode = targetNode;
-  }
-
-  @Override
-  public String getRefName() {
-    return ref;
   }
 
   @Override
