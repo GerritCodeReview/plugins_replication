@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef5b99a1_50a212af",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-12T15:34:55Z",
+      "side": 1,
+      "message": "\u003e When replicating to a Gerrit mirror you are interested in keeping the DB of that Gerrit mirror up-to-date so in that particular case you should have a keen interest that the DB refs are replicated.\n\nAck.\n\n\u003e But sure it\u0027s true for the general case as well, if you just replicate for backup reasons you will probably be mighty disappointed when you try to restore the server and realize your DB is out-of-date.\n\nYes, I think this is an important use case. Maybe reword as \"If an authGroup is provided, and you want a complete mirror (for backup reasons or to run a Gerrit replica), at least ...\"",
+      "parentUuid": "6196d571_dee58e2c",
+      "range": {
+        "startLine": 374,
+        "startChar": 46,
+        "endLine": 375,
+        "endChar": 7
+      },
+      "revId": "3a20141dec4f39aef190504fbbc078de785f7066",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "244d3b01_8c5614d4",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
