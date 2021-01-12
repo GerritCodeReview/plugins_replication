@@ -486,6 +486,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25745c84_2cda9602",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-12T09:15:50Z",
+      "side": 1,
+      "message": "Done in a follow up change.",
+      "parentUuid": "17a7583d_a5d78fad",
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4332bfb9_392eab2a",
