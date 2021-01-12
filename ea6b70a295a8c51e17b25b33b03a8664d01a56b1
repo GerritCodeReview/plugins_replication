@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da14b455_d02929d3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-12T15:08:40Z",
+      "side": 1,
+      "message": "That still doesn\u0027t mention the brackets.",
+      "parentUuid": "1ebb3bdc_c6669442",
+      "range": {
+        "startLine": 226,
+        "startChar": 5,
+        "endLine": 226,
+        "endChar": 45
+      },
+      "revId": "ea6b70a295a8c51e17b25b33b03a8664d01a56b1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0de3f69f_ca535e9a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 9
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "i think java compiler optimizes it for us, after reading this article i am not sure if we need do this \n\nhttps://medium.com/javarevisited/java-compiler-optimization-for-string-concatenation-7f5237e5e6ed\n\nbasically it is saying \n\nString a \u003d b + c + d;\n\nis converted to \n\nString a \u003d new StringBuilder(b).append(c).append(d).toString();\n\nby java compiler.\n\nknowing this do you still think we should use StringBuilder",
       "parentUuid": "f12dfe52_085924d1",
+      "range": {
+        "startLine": 242,
+        "startChar": 4,
+        "endLine": 242,
+        "endChar": 21
+      },
+      "revId": "ea6b70a295a8c51e17b25b33b03a8664d01a56b1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c47e0ebd_18665f79",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-12T15:08:40Z",
+      "side": 1,
+      "message": "\u003e i think java compiler optimizes it for us, after reading this article i am not sure if we need do this \n\u003e \n\u003e https://medium.com/javarevisited/java-compiler-optimization-for-string-concatenation-7f5237e5e6ed\n\u003e \n\u003e basically it is saying \n\u003e \n\u003e String a \u003d b + c + d;\n\u003e \n\u003e is converted to \n\u003e \n\u003e String a \u003d new StringBuilder(b).append(c).append(d).toString();\n\u003e \n\u003e by java compiler.\n\n\"b + c + d\" is optimized *in a single statement*. Here you have refsString being set to one value, then on line 245 that string would be discarded and a new string created, then another new string created on line 247, another new string created on line 217, and another on line 220. That does seem like it could benefit from a SB.",
+      "parentUuid": "72066407_53a559aa",
       "range": {
         "startLine": 242,
         "startChar": 4,
