@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9967acd8_a915553e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-01-12T21:55:53Z",
+      "side": 1,
+      "message": "Can you verify that the limit can be set to something other than 2, and to unlimited and then set the v+1, thanks!",
+      "revId": "2a7d9793041c2b1045cd814decd8096316859807",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
