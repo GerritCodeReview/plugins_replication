@@ -16,6 +16,23 @@
       "message": "Can you verify that the limit can be set to something other than 2, and to unlimited and then set the v+1, thanks!",
       "revId": "2a7d9793041c2b1045cd814decd8096316859807",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0489b47b_f0f85003",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1117824
+      },
+      "writtenOn": "2021-01-13T08:16:21Z",
+      "side": 1,
+      "message": "following is the show-queue output when tested on local workspace :\n\nwhen maxRefsToShow \u003d 3\n---------------------------\n915ddceb 13:34:32.991 13:33:32.990      [b16260ab] push file:///local/mnt/workspace/test/dest1/testRepo.git [refs/heads/b1 refs/heads/b2 refs/heads/b3 (+2)]\n\n\nwhen maxRefsToShow \u003d 0\n---------------------------\n37a855c5 13:43:41.180 13:42:41.179      [57ab89c1] push file:///local/mnt/workspace/test/dest1/testRepo.git [refs/heads/b7 refs/heads/b4 refs/heads/b5 refs/heads/b6]",
+      "revId": "2a7d9793041c2b1045cd814decd8096316859807",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
