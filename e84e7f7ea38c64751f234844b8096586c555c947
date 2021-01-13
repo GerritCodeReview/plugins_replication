@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "435197ef_d369e3dc",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-13T00:12:54Z",
+      "side": 1,
+      "message": "Ran out of time today, but these should be fixable by casting the returned events to the type we expect and then asserting the refs match.",
+      "range": {
+        "startLine": 75,
+        "startChar": 21,
+        "endLine": 75,
+        "endChar": 76
+      },
+      "revId": "e84e7f7ea38c64751f234844b8096586c555c947",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
