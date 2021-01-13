@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4cf9e06_92e269d6",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-13T14:36:53Z",
+      "side": 1,
+      "message": "Sounds good, let me pick up on that.",
+      "parentUuid": "435197ef_d369e3dc",
+      "range": {
+        "startLine": 75,
+        "startChar": 21,
+        "endLine": 75,
+        "endChar": 76
+      },
+      "revId": "e84e7f7ea38c64751f234844b8096586c555c947",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "71f3e5a1_751a3a51",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
         "patchSetId": 1
@@ -37,6 +61,24 @@
       "writtenOn": "2021-01-13T00:27:30Z",
       "side": 1,
       "message": "I saw this fail once randomly, so it might be flaky. Any ideas on how to robustly guard against that?",
+      "revId": "e84e7f7ea38c64751f234844b8096586c555c947",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "babaf8d7_3bfcfb1f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-13T14:36:53Z",
+      "side": 1,
+      "message": "I think it\u0027s possible that we are checking the events to be scheduled too early, _before_ they are actually scheduled.",
+      "parentUuid": "71f3e5a1_751a3a51",
       "revId": "e84e7f7ea38c64751f234844b8096586c555c947",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
