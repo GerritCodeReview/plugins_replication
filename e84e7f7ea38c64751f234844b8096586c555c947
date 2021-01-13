@@ -99,6 +99,24 @@
       "parentUuid": "babaf8d7_3bfcfb1f",
       "revId": "e84e7f7ea38c64751f234844b8096586c555c947",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73c11a68_18bdd7d7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-13T15:44:31Z",
+      "side": 1,
+      "message": "mmm, I think scheduling it would happen in a different thread, too.\n\nEach ref replication happens on a different thread (if you follow this stack[1]), so the publishing of the scheduled event happens inline with the *scheduled replication task*, not with the test itself.\n\nIn fact, by running [2] I managed to show flakiness caused by asserting before events were scheduled, not on the firing itself.\n\nI have a version of the tests that are not flaky anymore, let me push it and see what you think?\n\n[1]https://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java#199\n\n[2] bazelisk test --java_toolchain\u003d//tools:error_prone_warnings_toolchain --test_output\u003derrors --test_summary\u003ddetailed --flaky_test_attempts\u003d3 --runs_per_test\u003d5 //plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationEventsIT",
+      "parentUuid": "f7f75063_65a387b7",
+      "revId": "e84e7f7ea38c64751f234844b8096586c555c947",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
