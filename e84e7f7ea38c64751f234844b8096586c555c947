@@ -81,6 +81,24 @@
       "parentUuid": "71f3e5a1_751a3a51",
       "revId": "e84e7f7ea38c64751f234844b8096586c555c947",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7f75063_65a387b7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-13T15:14:30Z",
+      "side": 1,
+      "message": "I don\u0027t think we can have that problem for scheduling because it should happen inline with the test. However, replication running and completing would happen in another thread, so we may need a buffer between \"ref is updated\" and \"event is done firing\".",
+      "parentUuid": "babaf8d7_3bfcfb1f",
+      "revId": "e84e7f7ea38c64751f234844b8096586c555c947",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
