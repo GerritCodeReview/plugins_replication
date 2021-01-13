@@ -106,6 +106,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "896e1ab5_cf6e9a7f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-01-13T09:29:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef5b99a1_50a212af",
+      "range": {
+        "startLine": 374,
+        "startChar": 46,
+        "endLine": 375,
+        "endChar": 7
+      },
+      "revId": "3a20141dec4f39aef190504fbbc078de785f7066",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "244d3b01_8c5614d4",
@@ -143,6 +167,30 @@
       "side": 1,
       "message": "Yup, that should have been done.",
       "parentUuid": "244d3b01_8c5614d4",
+      "range": {
+        "startLine": 376,
+        "startChar": 23,
+        "endLine": 376,
+        "endChar": 30
+      },
+      "revId": "3a20141dec4f39aef190504fbbc078de785f7066",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1173eaf7_2faa6882",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-01-13T09:29:22Z",
+      "side": 1,
+      "message": "I cannot find a place were any useful notedb info (on ref level) is documented.\nThere\u0027s only note-db.html [1] with information that is only relevant when you migrate from ReviewDb.\nI can link to this, but it says nothing about which refs that are excluded from replication if you don\u0027t give the authGroup \"Access Database\".",
+      "parentUuid": "5091d6ed_7a4cada4",
       "range": {
         "startLine": 376,
         "startChar": 23,
