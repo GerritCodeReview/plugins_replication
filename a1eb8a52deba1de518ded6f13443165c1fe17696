@@ -16,6 +16,24 @@
       "message": "I think we need tests on the Ref* events before we do this. It would also be great if those tests and this change came before adding the deletion events. I\u0027ll see if I can squeeze some time today to add those tests at least.",
       "revId": "a1eb8a52deba1de518ded6f13443165c1fe17696",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a76803_7e339073",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-13T00:18:08Z",
+      "side": 1,
+      "message": "Done (mostly).",
+      "parentUuid": "1ece0f66_b1add54c",
+      "revId": "a1eb8a52deba1de518ded6f13443165c1fe17696",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
