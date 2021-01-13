@@ -199,6 +199,30 @@
       },
       "revId": "3a20141dec4f39aef190504fbbc078de785f7066",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb4a1564_3dbbd2d9",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-13T15:21:30Z",
+      "side": 1,
+      "message": "There is this specific section https://gerrit-review.googlesource.com/Documentation/config-accounts.html#replication for accounts and an equivalent for groups https://gerrit-review.googlesource.com/Documentation/config-groups.html#_replication\n\nI found those from https://gerrit-review.googlesource.com/Documentation/index.html#_server_administration (13. \"Accounts on NoteDb\" and 14. \"Groups on NoteDb\").\n\nMaybe we need to add a section like that for changes? I only found 3 references to a change meta ref in the docs:\n\n $ git grep \u0027/meta[^/]\u0027\n dev-plugins.txt:    \"refName\": \"refs/changes/01/1/meta\",\n note-db.txt:  git fetch https://gerrit.googlesource.com/gerrit refs/changes/70/98070/meta \\\n rest-api-changes.txt:  GET /changes/myProject~master~I8473b95934b5732ac55d26311a706c9c2bde9940/edit/foo/meta HTTP/1.0",
+      "parentUuid": "1173eaf7_2faa6882",
+      "range": {
+        "startLine": 376,
+        "startChar": 23,
+        "endLine": 376,
+        "endChar": 30
+      },
+      "revId": "3a20141dec4f39aef190504fbbc078de785f7066",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
