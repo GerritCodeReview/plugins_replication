@@ -397,6 +397,12 @@ remote.NAME.authGroup
 	By default, replicates without group control, i.e. replicates
 	everything to all remotes.
 
+	*NOTE:* If an authGroup is provided, and you want a complete
+	mirror (for backup reasons or to run a Gerrit replica), at
+	least one of the provided authGroups must have "Access Database"
+	capability. Otherwise [db](../../../Documentation/note-db.html)
+	refs will not be replicated.
+
 remote.NAME.createMissingRepositories
 :	If true, a repository is automatically created on the remote site.
 	If the remote site was not available at the moment when a new
