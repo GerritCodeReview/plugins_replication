@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eae9ed09_6bbd8ed1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-14T16:47:20Z",
+      "side": 1,
+      "message": "Sorry, forgot to publish last night :(",
+      "revId": "1673b1b3b026d85a7409565dba4ad645acb81ea4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "762133c4_a71b2019",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-14T16:47:20Z",
+      "side": 1,
+      "message": "SCHEDULE_EVENT makes me think of replication task scheduling, but I think you\u0027re using it to mean something different here. Is this more like TEST_POST_EVENT_TIMEOUT? As in, it\u0027s the time it takes to post the event? We could use FIRE_EVENT, but since the EventDispatcher has methods named postEvent, I think that\u0027s a better fit.",
+      "range": {
+        "startLine": 122,
+        "startChar": 13,
+        "endLine": 122,
+        "endChar": 27
+      },
+      "revId": "1673b1b3b026d85a7409565dba4ad645acb81ea4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
