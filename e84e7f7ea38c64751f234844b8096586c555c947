@@ -177,6 +177,24 @@
       "parentUuid": "ab754c7f_dc7f01ec",
       "revId": "e84e7f7ea38c64751f234844b8096586c555c947",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82cb613a_3f96fd5e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-15T13:44:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6866bbb9_f021797b",
+      "revId": "e84e7f7ea38c64751f234844b8096586c555c947",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
