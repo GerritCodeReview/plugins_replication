@@ -41,6 +41,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0155804f_229e4f85",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-15T13:43:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "85df5dbf_5f989a3a",
+      "range": {
+        "startLine": 45,
+        "startChar": 31,
+        "endLine": 45,
+        "endChar": 59
+      },
+      "revId": "1673b1b3b026d85a7409565dba4ad645acb81ea4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9732a81e_08aaf185",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-01-14T21:01:06Z",
       "side": 1,
       "message": "\"super\" not needed.",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 9
+      },
+      "revId": "1673b1b3b026d85a7409565dba4ad645acb81ea4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5af58198_ed39fb66",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-15T13:43:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9732a81e_08aaf185",
       "range": {
         "startLine": 58,
         "startChar": 4,
@@ -89,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "713150ae_781a8848",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-15T13:43:19Z",
+      "side": 1,
+      "message": "Yep, TEST_POST_EVENT_TIMEOUT is (un)arguably better.\nI will address this.",
+      "parentUuid": "762133c4_a71b2019",
+      "range": {
+        "startLine": 122,
+        "startChar": 13,
+        "endLine": 122,
+        "endChar": 27
+      },
+      "revId": "1673b1b3b026d85a7409565dba4ad645acb81ea4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "50aa9c18_b0999a91",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/TestDispatcher.java",
         "patchSetId": 3
@@ -100,6 +172,24 @@
       "writtenOn": "2021-01-14T21:01:06Z",
       "side": 1,
       "message": "No blank lines at the beginning of code blocks.",
+      "revId": "1673b1b3b026d85a7409565dba4ad645acb81ea4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1867934_1e9d383c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/TestDispatcher.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-15T13:43:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "50aa9c18_b0999a91",
       "revId": "1673b1b3b026d85a7409565dba4ad645acb81ea4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -117,6 +207,30 @@
       "writtenOn": "2021-01-14T21:01:06Z",
       "side": 1,
       "message": "There is no need to a Project of Branch to these methods as those are outline in the parameter types. Also, these methods feel like the same type of method as the \"getMatching\" methods, just different parameters, so I would name all of them similarly, if not the same, and let the parameters differentiate them.",
+      "range": {
+        "startLine": 76,
+        "startChar": 29,
+        "endLine": 76,
+        "endChar": 48
+      },
+      "revId": "1673b1b3b026d85a7409565dba4ad645acb81ea4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb2e46b4_d764aa2d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/TestDispatcher.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-15T13:43:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d5c3af32_c9047d66",
       "range": {
         "startLine": 76,
         "startChar": 29,

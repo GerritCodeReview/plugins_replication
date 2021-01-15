@@ -159,6 +159,24 @@
       "parentUuid": "73c11a68_18bdd7d7",
       "revId": "e84e7f7ea38c64751f234844b8096586c555c947",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6866bbb9_f021797b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-15T13:43:19Z",
+      "side": 1,
+      "message": "My bad, you\u0027re right about \"Normal\" replication not going through a different thread.\nI have checked again the flakiness symptoms of patchset 1 and they always occur at waiting-for-replication-to-complete time, not at waiting-for-replication-to-be-scheduled\" time.\n\nSpecifically:\n\n```\n1) replicateNewBranchSendsEvents(com.googlesource.gerrit.plugins.replication.ReplicationEventsIT)\nvalue of    : iterable.size()\nexpected    : 1\nbut was     : 0\niterable was: []\n\tat com.googlesource.gerrit.plugins.replication.ReplicationEventsIT.replicateNewBranchSendsEvents(ReplicationEventsIT.java:100)\n```\n\n\nI will adjust the test accordingly.",
+      "parentUuid": "ab754c7f_dc7f01ec",
+      "revId": "e84e7f7ea38c64751f234844b8096586c555c947",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
