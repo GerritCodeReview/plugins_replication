@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
@@ -24,7 +25,7 @@ import org.eclipse.jgit.transport.URIish;
 
 public class ReplicationState {
 
-  private boolean allScheduled;
+  private volatile boolean allScheduled;
   private final PushResultProcessing pushResultProcessing;
 
   private final Lock countingLock = new ReentrantLock();
@@ -33,8 +34,8 @@ public class ReplicationState {
   private static class RefReplicationStatus {
     private final String project;
     private final String ref;
-    private int nodesToReplicateCount;
-    private int replicatedNodesCount;
+    private AtomicInteger nodesToReplicateCount = new AtomicInteger();
+    private AtomicInteger replicatedNodesCount = new AtomicInteger();
 
     RefReplicationStatus(String project, String ref) {
       this.project = project;
@@ -47,8 +48,8 @@ public class ReplicationState {
   }
 
   private final Table<String, String, RefReplicationStatus> statusByProjectRef;
-  private int totalPushTasksCount;
-  private int finishedPushTasksCount;
+  private AtomicInteger totalPushTasksCount = new AtomicInteger();
+  private AtomicInteger finishedPushTasksCount = new AtomicInteger();
 
   ReplicationState(PushResultProcessing processing) {
     pushResultProcessing = processing;
@@ -58,15 +59,15 @@ public class ReplicationState {
   public void increasePushTaskCount(String project, String ref) {
     countingLock.lock();
     try {
-      getRefStatus(project, ref).nodesToReplicateCount++;
-      totalPushTasksCount++;
+      getRefStatus(project, ref).nodesToReplicateCount.getAndIncrement();
+      totalPushTasksCount.getAndIncrement();
     } finally {
       countingLock.unlock();
     }
   }
 
   public boolean hasPushTask() {
-    return totalPushTasksCount != 0;
+    return totalPushTasksCount.get() != 0;
   }
 
   public void notifyRefReplicated(
@@ -82,8 +83,8 @@ public class ReplicationState {
     countingLock.lock();
     try {
       RefReplicationStatus refStatus = getRefStatus(project, ref);
-      refStatus.replicatedNodesCount++;
-      finishedPushTasksCount++;
+      refStatus.replicatedNodesCount.getAndIncrement();
+      finishedPushTasksCount.getAndIncrement();
 
       if (allScheduled) {
         if (refStatus.allDone()) {
@@ -108,7 +109,7 @@ public class ReplicationState {
     countingLock.lock();
     try {
       allScheduled = true;
-      if (finishedPushTasksCount < totalPushTasksCount) {
+      if (finishedPushTasksCount.get() < totalPushTasksCount.get()) {
         return;
       }
     } finally {
@@ -120,7 +121,7 @@ public class ReplicationState {
 
   private void doAllPushTasksCompleted() {
     fireRemainingOnRefReplicatedToAllNodes();
-    pushResultProcessing.onAllRefsReplicatedToAllNodes(totalPushTasksCount);
+    pushResultProcessing.onAllRefsReplicatedToAllNodes(totalPushTasksCount.get());
     allPushTasksFinished.countDown();
   }
 
@@ -135,7 +136,7 @@ public class ReplicationState {
 
   private void doRefPushTasksCompleted(RefReplicationStatus refStatus) {
     pushResultProcessing.onRefReplicatedToAllNodes(
-        refStatus.project, refStatus.ref, refStatus.nodesToReplicateCount);
+        refStatus.project, refStatus.ref, refStatus.nodesToReplicateCount.get());
   }
 
   private RefReplicationStatus getRefStatus(String project, String ref) {
