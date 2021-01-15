@@ -87,6 +87,24 @@
       "message": "final? (same for the rest)",
       "revId": "138499475534ad4d2de52f475a31454a861c782c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48539292_7111e5ff",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2021-01-15T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cad56bb3_ba2dd25a",
+      "revId": "138499475534ad4d2de52f475a31454a861c782c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
