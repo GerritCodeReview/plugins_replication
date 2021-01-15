@@ -22,6 +22,30 @@
       },
       "revId": "94e42b7f63ce89e3fed8242f62345581c2ea3d85",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d9b0754_c5aad1e8",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/TestDispatcher.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-15T18:10:06Z",
+      "side": 1,
+      "message": "Yes, I had removed other projects-related method but missed this one, thanks.",
+      "parentUuid": "aa699bf2_9deaa57d",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "94e42b7f63ce89e3fed8242f62345581c2ea3d85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
