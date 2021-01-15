@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2322cc0_ca171ff2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-15T19:26:15Z",
+      "side": 1,
+      "message": "Maybe be consistent and use AtomicBoolean since you\u0027re using AtomicInteger?",
+      "range": {
+        "startLine": 28,
+        "startChar": 19,
+        "endLine": 28,
+        "endChar": 26
+      },
+      "revId": "138499475534ad4d2de52f475a31454a861c782c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cad56bb3_ba2dd25a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-15T19:26:15Z",
+      "side": 1,
+      "message": "final? (same for the rest)",
+      "revId": "138499475534ad4d2de52f475a31454a861c782c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
