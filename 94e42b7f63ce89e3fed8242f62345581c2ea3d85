@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa699bf2_9deaa57d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/TestDispatcher.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-15T15:03:30Z",
+      "side": 1,
+      "message": "If you\u0027re not going to have the getter for this yet, maybe remove it for now with a \"// Not used in replication\" comment like changeEvents? In hindsight, I probably should have dropped this in my initial change. I left it in when I was writing it so that I would make sure the pattern still worked for project delete events.",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "94e42b7f63ce89e3fed8242f62345581c2ea3d85",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
