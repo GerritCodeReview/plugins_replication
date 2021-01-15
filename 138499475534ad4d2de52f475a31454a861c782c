@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d68e6e07_70c42e13",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-01-15T19:34:37Z",
+      "side": 1,
+      "message": "I think they are different use cases. The boolean is never being change based on a previous value, that is when I would typically use the likely slower \"Atomic\" versions of the variables?",
+      "parentUuid": "c2322cc0_ca171ff2",
+      "range": {
+        "startLine": 28,
+        "startChar": 19,
+        "endLine": 28,
+        "endChar": 26
+      },
+      "revId": "138499475534ad4d2de52f475a31454a861c782c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cad56bb3_ba2dd25a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
         "patchSetId": 2
