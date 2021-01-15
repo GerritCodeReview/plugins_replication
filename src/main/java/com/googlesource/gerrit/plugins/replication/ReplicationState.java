@@ -24,7 +24,7 @@ import org.eclipse.jgit.transport.URIish;
 
 public class ReplicationState {
 
-  private boolean allScheduled;
+  private volatile boolean allScheduled;
   private final PushResultProcessing pushResultProcessing;
 
   private final Lock countingLock = new ReentrantLock();
@@ -33,8 +33,8 @@ public class ReplicationState {
   private static class RefReplicationStatus {
     private final String project;
     private final String ref;
-    private int nodesToReplicateCount;
-    private int replicatedNodesCount;
+    private volatile int nodesToReplicateCount;
+    private volatile int replicatedNodesCount;
 
     RefReplicationStatus(String project, String ref) {
       this.project = project;
@@ -47,8 +47,8 @@ public class ReplicationState {
   }
 
   private final Table<String, String, RefReplicationStatus> statusByProjectRef;
-  private int totalPushTasksCount;
-  private int finishedPushTasksCount;
+  private volatile int totalPushTasksCount;
+  private volatile int finishedPushTasksCount;
 
   ReplicationState(PushResultProcessing processing) {
     pushResultProcessing = processing;
