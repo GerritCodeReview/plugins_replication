@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07956d77_27487e08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-18T10:02:39Z",
+      "side": 1,
+      "message": "Once this is merged, tests needs to be re-triggered for this dependent multi-site CR[1]\n\n\n[1]https://gerrit-review.googlesource.com/c/plugins/multi-site/+/293986",
+      "revId": "ad1a152836e0f284ed1903e8a7d7775eae7568fc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
