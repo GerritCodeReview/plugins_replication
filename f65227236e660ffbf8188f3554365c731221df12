@@ -16,6 +16,29 @@
       "message": "Any more comments on this change?",
       "revId": "f65227236e660ffbf8188f3554365c731221df12",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b1982e8_95d765a3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2021-01-19T08:08:01Z",
+      "side": 1,
+      "message": "Just to make sure I understand here we are setting a success for a specific target/URI and we are notifying it to all the targets, correct?",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "f65227236e660ffbf8188f3554365c731221df12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
