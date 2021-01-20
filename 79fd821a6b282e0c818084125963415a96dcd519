@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1ef4818_99ec1e8f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationUtil.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-20T18:53:40Z",
+      "side": 1,
+      "message": "Did a bit of digging to find the birth of this method[1].\n\nLooks like it originated a while ago from an attempt to log node names/ports/protocols unambiguously.\n\nHow about a static ReplicationTarget.format() ?\n\n\n[1]https://gerrit-review.googlesource.com/c/plugins/replication/+/50500",
+      "parentUuid": "98aa197a_468dd2ba",
+      "range": {
+        "startLine": 19,
+        "startChar": 12,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "79fd821a6b282e0c818084125963415a96dcd519",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba11e660_600f3aa5",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
         "patchSetId": 21

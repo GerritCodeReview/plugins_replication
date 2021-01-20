@@ -52,6 +52,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd9627ac_c2071909",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-20T18:53:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e49e599b_3245c62c",
+      "revId": "f65227236e660ffbf8188f3554365c731221df12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b1982e8_95d765a3",
@@ -136,6 +154,24 @@
       "writtenOn": "2021-01-20T14:50:07Z",
       "side": 1,
       "message": "I think we should confirm the event is for the project we expect.",
+      "revId": "f65227236e660ffbf8188f3554365c731221df12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbff7e4e_6dda48da",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-20T18:53:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7d824731_f213ad83",
       "revId": "f65227236e660ffbf8188f3554365c731221df12",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
