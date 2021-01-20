@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e49e599b_3245c62c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-20T14:50:07Z",
+      "side": 1,
+      "message": "Should this move under events too? I think that\u0027s all its used for.",
+      "revId": "f65227236e660ffbf8188f3554365c731221df12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8b1982e8_95d765a3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
         "patchSetId": 28
@@ -102,6 +119,23 @@
         "endLine": 70,
         "endChar": 34
       },
+      "revId": "f65227236e660ffbf8188f3554365c731221df12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d824731_f213ad83",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-20T14:50:07Z",
+      "side": 1,
+      "message": "I think we should confirm the event is for the project we expect.",
       "revId": "f65227236e660ffbf8188f3554365c731221df12",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }

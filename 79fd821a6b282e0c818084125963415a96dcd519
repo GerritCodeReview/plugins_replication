@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98aa197a_468dd2ba",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationUtil.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-20T14:50:07Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t find anything inherently wrong with util classes, when they hold _actual_ utils. I think it is up to good code reviews to prevent them from becoming dumping grounds 😊\n\nI don\u0027t think you commonly find util classes in good libraries. Better to make reviewers\u0027 lives easier and avoid them. 😊\n\n\u003e \n\u003e The reason I chose util is because I believe that resolveName() is just an utility that allows to parse node names from URIs: I don\u0027t think it belongs to the \u0027events\u0027 namespace because it is not just used for events, here[1] for example is used for logging.\n\nOk. Maybe the better question then is why we\u0027re using resolveNodeName() at all? For example, why not use the URIish as-is? What benefit does resolveNodeName provide?\n\n\u003e \n\u003e I am happy to change this to something more appropriate, but I am still pondering what that might be.\n\nI admit I\u0027m not sure either, but maybe we can figure it out if we understand the method and its intended usage better.",
+      "parentUuid": "59c9ce81_4fd5fcaa",
+      "range": {
+        "startLine": 19,
+        "startChar": 12,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "79fd821a6b282e0c818084125963415a96dcd519",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba11e660_600f3aa5",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
         "patchSetId": 21
