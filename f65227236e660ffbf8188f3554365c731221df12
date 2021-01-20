@@ -18,6 +18,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bcdc1e8_5a868c50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-20T11:32:55Z",
+      "side": 1,
+      "message": "Any more feedbacks on this?",
+      "revId": "f65227236e660ffbf8188f3554365c731221df12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b1982e8_95d765a3",
@@ -55,6 +72,30 @@
       "side": 1,
       "message": "Yep, the plugin is emitting either success or failure at target level, these are embodied by the ProjectDeletionReplication{Succeeded,Failed} events.\n\nOnce all deletions from all targets have succeeded or failed, then the ProjectDeletionReplicationDone event is emitted.\n\n\u003e we are notifying it to all the targets, correct?\n\nThe code is just publishing the event, every interested subscriber will receive it.",
       "parentUuid": "8b1982e8_95d765a3",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "f65227236e660ffbf8188f3554365c731221df12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e65632e_99b3211c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-20T11:32:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f3e9bd5_e663b81d",
       "range": {
         "startLine": 70,
         "startChar": 4,
