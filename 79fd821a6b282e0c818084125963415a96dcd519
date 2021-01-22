@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d78d14b5_da6902d0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationUtil.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-22T21:57:14Z",
+      "side": 1,
+      "message": "\u003e \u003e Did a bit of digging to find the birth of this method[1].\n\u003e \u003e \n\u003e \u003e Looks like it originated a while ago from an attempt to log node names/ports/protocols unambiguously.\n\u003e \n\u003e Oof, that\u0027s worse than I thought. I don\u0027t even think that was for logging, it looks like it was only for output to the StartCommand (AFAIK that\u0027s the only place CommandProcessing has ever been used). That it got reused later for events was probably a mistake.\n\nYes, I think you\u0027re right.\n\n\u003e \n\u003e Is there a technical reason not to use the complete URIish (or modified to not include the project)? Events aren\u0027t exactly supposed to be consumed by humans. Obviously it would be inconsistent with other replication events if we don\u0027t change them too, but I think it would be worth changing them.\n\nThere are few methods already exposed by URIish (i.e. .getHumanishName(), .format(), etc[1]), but non of them does _exactly_ what resolveName() does, from what I can tell.\n\nIf there is a real need for expressing this specific \"format\" of URIish, which is not covered by any other method, then perhaps resolveName() should be exposed by URIish itself.\n\nWhile I acknowledge we could do with normalizing this method\u0027s usage and definition, I agree refactoring events using a different format is inherently risky and it might break consumers, for what we know, so I should be dealt as a separate task, imho.\n\nI would like to avoid making this CR paying the price for yet another refactoring (I believe we addressed quite few already).\n\nHow about I create an issue related to the resolveName() problem  so that we can address this separately?\n\nhttps://gerrit.googlesource.com/jgit/+/cf9433a9b3c3359fbb4cbdd9c65b99b44eba08e8/org.eclipse.jgit.test/tst/org/eclipse/jgit/transport/URIishTest.java#434",
+      "parentUuid": "41486dda_3dac4d23",
+      "range": {
+        "startLine": 19,
+        "startChar": 12,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "79fd821a6b282e0c818084125963415a96dcd519",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba11e660_600f3aa5",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
         "patchSetId": 21
