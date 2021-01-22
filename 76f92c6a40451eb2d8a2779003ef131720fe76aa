@@ -16,6 +16,41 @@
       "message": "Anymore comments on this anyone?",
       "revId": "76f92c6a40451eb2d8a2779003ef131720fe76aa",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b36ef1_459b99a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-22T20:36:34Z",
+      "side": 1,
+      "message": "I think I\u0027m good with this change other than the discussion on resolveNodeName().",
+      "parentUuid": "113b1c6d_3448f3e5",
+      "revId": "76f92c6a40451eb2d8a2779003ef131720fe76aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30f4620c_18aff134",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-22T20:36:34Z",
+      "side": 1,
+      "message": "-1 is just for figuring out what to do about resolveNodeName() and targetNode values.",
+      "revId": "76f92c6a40451eb2d8a2779003ef131720fe76aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
