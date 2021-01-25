@@ -170,6 +170,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d7771b4f_5293da4f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationUtil.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-25T14:09:06Z",
+      "side": 1,
+      "message": "\u003e \u003e \u003e \u003e Did a bit of digging to find the birth of this method[1].\n\u003e \u003e \u003e \u003e \n\u003e \u003e \u003e \u003e Looks like it originated a while ago from an attempt to log node names/ports/protocols unambiguously.\n\u003e \u003e \u003e \n\u003e \u003e \u003e Oof, that\u0027s worse than I thought. I don\u0027t even think that was for logging, it looks like it was only for output to the StartCommand (AFAIK that\u0027s the only place CommandProcessing has ever been used). That it got reused later for events was probably a mistake.\n\u003e \u003e \n\u003e \u003e Yes, I think you\u0027re right.\n\n\nThis is the first offending commit[1]\n\n[1]https://gerrit-review.googlesource.com/c/plugins/replication/+/50920\n\n\n\u003e \u003e \n\u003e \u003e \u003e \n\u003e \u003e \u003e Is there a technical reason not to use the complete URIish (or modified to not include the project)? Events aren\u0027t exactly supposed to be consumed by humans. Obviously it would be inconsistent with other replication events if we don\u0027t change them too, but I think it would be worth changing them.\n\u003e \u003e \n\u003e \u003e There are few methods already exposed by URIish (i.e. .getHumanishName(), .format(), etc[1]), but non of them does _exactly_ what resolveName() does, from what I can tell.\n\u003e \n\u003e I think the events shouldn\u0027t be using something like resolveNodeName at all. Events probably should use exactly the URIish.\n\u003e \n\u003e \u003e \n\u003e \u003e If there is a real need for expressing this specific \"format\" of URIish, which is not covered by any other method, then perhaps resolveName() should be exposed by URIish itself.\n\u003e \u003e \n\u003e \u003e While I acknowledge we could do with normalizing this method\u0027s usage and definition, I agree refactoring events using a different format is inherently risky and it might break consumers, for what we know, so I should be dealt as a separate task, imho.\n\u003e \n\u003e Any idea who consumes these now? We\u0027re between releases so this does seem like the time to break consumers if we\u0027re going to.\n\n\nThese are all the plugins consuming those events[2], which boils down to two:\n- high-availability\n- multi-site\n\nOf those, none is actually looking at \u0027targetNode\u0027 at all.\n\n[2]https://cs.bazel.build/search?q\u003d%28%5CbRefReplicatedEvent+or+%5CbRefReplicationDoneEvent+or+%5CbReplicationScheduledEvent%29+-file%3Aplugins%2Freplication\u0026num\u003d150\n\n\n\u003e \n\u003e \u003e \n\u003e \u003e I would like to avoid making this CR paying the price for yet another refactoring (I believe we addressed quite few already).\n\u003e \n\u003e I understand the sentiment and I am very grateful for your help with those!\n\u003e \n\u003e \u003e \n\u003e \u003e How about I create an issue related to the resolveName() problem  so that we can address this separately?\n\u003e \n\u003e My concern then is that we\u0027re making the events problem worse by building yet another set of events that use resolveNodeName. I would really prefer not to do that. I\u0027m tempted with the idea of just fixing these new delete events to use the uri and leaving the others as follow up work, but that leaves the replication events in a mismatched state. I guess if you call the new field \u0027targetUri\u0027 instead of \u0027targetNode\u0027, that would be ok?\n\nI agree, I think we should aim to have those events consistent.\nWe don\u0027t know if there is any other non public plugin out there that relies on targetNode, but for sure there isn\u0027t any public one even looking at that field.\n\nWhat do you think about replacing how targetNode is populate (and document it)?\n\n\n\u003e \n\u003e \u003e \n\u003e \u003e https://gerrit.googlesource.com/jgit/+/cf9433a9b3c3359fbb4cbdd9c65b99b44eba08e8/org.eclipse.jgit.test/tst/org/eclipse/jgit/transport/URIishTest.java#434",
+      "parentUuid": "9375b752_476fd8f2",
+      "range": {
+        "startLine": 19,
+        "startChar": 12,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "79fd821a6b282e0c818084125963415a96dcd519",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba11e660_600f3aa5",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
         "patchSetId": 21
