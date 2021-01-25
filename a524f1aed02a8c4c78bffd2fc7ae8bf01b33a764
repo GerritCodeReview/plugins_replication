@@ -16,6 +16,24 @@
       "message": "Can you use merge --log so you get a commit message that looks like the one in 291082: Merge branch \u0027stable-2.16\u0027 into stable-3.0 | https://gerrit-review.googlesource.com/c/plugins/replication/+/291082 ?",
       "revId": "a524f1aed02a8c4c78bffd2fc7ae8bf01b33a764",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3d134bb_aa21b70e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2021-01-25T23:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26e651ba_7d35a5ea",
+      "revId": "a524f1aed02a8c4c78bffd2fc7ae8bf01b33a764",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
