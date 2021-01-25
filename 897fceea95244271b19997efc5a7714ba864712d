@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70690587_7edd30ee",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2021-01-25T19:34:14Z",
+      "side": 1,
+      "message": "Perhaps it would be clearer to do something like this:\n\n notifyNotAttempted(setStartedRefs(starteRefs))",
+      "revId": "897fceea95244271b19997efc5a7714ba864712d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf30bdb3_f177e54b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2021-01-25T19:34:14Z",
+      "side": 1,
+      "message": "Don\u0027t add private here.",
+      "range": {
+        "startLine": 290,
+        "startChar": 2,
+        "endLine": 290,
+        "endChar": 10
+      },
+      "revId": "897fceea95244271b19997efc5a7714ba864712d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
