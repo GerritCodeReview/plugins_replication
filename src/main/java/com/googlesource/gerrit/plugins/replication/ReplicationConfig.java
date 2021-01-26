@@ -60,10 +60,10 @@ public interface ReplicationConfig {
   int getMaxRefsToLog();
 
   /**
-  * Returns the maximum number of replicating refs to show in the show-queue output
-  *
-  * @return maximum number of refs to show, 2 by default.
-  */
+   * Returns the maximum number of replicating refs to show in the show-queue output
+   *
+   * @return maximum number of refs to show, 2 by default.
+   */
   int getMaxRefsToShow();
 
   /**

@@ -55,7 +55,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     this.replicateAllOnPluginStart = config.getBoolean("gerrit", "replicateOnStartup", false);
     this.defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);
     this.maxRefsToLog = config.getInt("gerrit", "maxRefsToLog", 0);
-    this.maxRefsToShow= config.getInt("gerrit", "maxRefsToShow", 2);
+    this.maxRefsToShow = config.getInt("gerrit", "maxRefsToShow", 2);
     this.pluginDataDir = pluginDataDir;
   }
 

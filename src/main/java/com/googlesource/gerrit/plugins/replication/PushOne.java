@@ -213,8 +213,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
   @Override
   public String toString() {
-    String print =
-        "[" + HexFormat.fromInt(id) + "] push " + uri + " " + getLimitedRefs();
+    String print = "[" + HexFormat.fromInt(id) + "] push " + uri + " " + getLimitedRefs();
 
     if (retryCount > 0) {
       print = "(retry " + retryCount + ") " + print;
@@ -222,9 +221,9 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     return print;
   }
 
- /**
-   * Returns a string of refs limited to the maxRefsToShow config with count of total refs hidden when
-   * there are more refs than maxRefsToShow config.
+  /**
+   * Returns a string of refs limited to the maxRefsToShow config with count of total refs hidden
+   * when there are more refs than maxRefsToShow config.
    *
    * <ul>
    *   <li>Refs will not be limited when maxRefsToShow config is set to zero.
