@@ -193,7 +193,7 @@ public interface PushResultProcessing {
         URIish uri,
         RefPushResult status,
         RemoteRefUpdate.Status refStatus) {
-      postEvent(new RefReplicatedEvent(project, ref, resolveNodeName(uri), status, refStatus));
+      postEvent(new RefReplicatedEvent(project, ref, resolveNodeName(uri), uri, status, refStatus));
     }
 
     @Override

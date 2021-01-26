@@ -787,7 +787,7 @@ public class Destination {
     String targetNode = resolveNodeName(pushOp.getURI());
     for (String ref : refs) {
       ReplicationScheduledEvent event =
-          new ReplicationScheduledEvent(project.get(), ref, targetNode);
+          new ReplicationScheduledEvent(project.get(), ref, targetNode, pushOp.getURI());
       try {
         eventDispatcher.get().postEvent(BranchNameKey.create(project, ref), event);
       } catch (PermissionBackendException e) {
@@ -801,7 +801,8 @@ public class Destination {
     String targetNode = resolveNodeName(pushOp.getURI());
     for (String ref : pushOp.getRefs()) {
       RefReplicatedEvent event =
-          new RefReplicatedEvent(project.get(), ref, targetNode, RefPushResult.FAILED, status);
+          new RefReplicatedEvent(
+              project.get(), ref, targetNode, pushOp.getURI(), RefPushResult.FAILED, status);
       try {
         eventDispatcher.get().postEvent(BranchNameKey.create(project, ref), event);
       } catch (PermissionBackendException e) {
