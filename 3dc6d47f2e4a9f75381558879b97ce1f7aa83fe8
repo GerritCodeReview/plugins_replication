@@ -16,6 +16,24 @@
       "message": "Since these are two different fields, what is the justification for removing tagetNode? If you do want to remove it, it likely would be better to add the new field in one release, and remove the old field in the next release. This is the approach we generally advise when changing APIs as it allows user migration to the new filed to happen on a live system instead of tying it to the upgrade time.",
       "revId": "3dc6d47f2e4a9f75381558879b97ce1f7aa83fe8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00ecd60c_a50ec5fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-26T20:36:25Z",
+      "side": 1,
+      "message": "That\u0027s exactly what I asked about on https://gerrit-review.googlesource.com/c/plugins/replication/+/292364 so I\u0027m glad you mentioned it. I\u0027ll rework.",
+      "parentUuid": "aa221a63_96d7a715",
+      "revId": "3dc6d47f2e4a9f75381558879b97ce1f7aa83fe8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
