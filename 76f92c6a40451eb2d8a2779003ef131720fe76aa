@@ -68,6 +68,24 @@
       "message": "Thanks, Nasser and Tony, for working on this. Whilst I am happy of the collaboration and improvements, I see the risk of this change getting too big: I have memory of a change in Gerrit that is still pending after 8 years and hundreds of patch-sets :-(\n\nWould it make sense to break it down into different steps and getting them merged one-by-one?\n\nWDYT?",
       "revId": "76f92c6a40451eb2d8a2779003ef131720fe76aa",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7436bc3_3d78df1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-26T16:23:06Z",
+      "side": 1,
+      "message": "I don\u0027t think this change will grow further. Sounds like we need 1) this change updated to populate targetUri in the new delete events and 2) a change to replace targetNode with targetUri in the other events.\n\nThinking of this, we could add targetUri and leave targetNode as deprecated in the old events if we\u0027re concerned about the change. Do you have an opinion on that Luca?\n\nI\u0027m going to try and do #2 today.",
+      "parentUuid": "5a956566_2ee46159",
+      "revId": "76f92c6a40451eb2d8a2779003ef131720fe76aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
