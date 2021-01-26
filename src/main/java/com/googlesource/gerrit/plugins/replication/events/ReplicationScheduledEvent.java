@@ -16,19 +16,23 @@ package com.googlesource.gerrit.plugins.replication.events;
 
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.events.RefEvent;
+import org.eclipse.jgit.transport.URIish;
 
 public class ReplicationScheduledEvent extends RefEvent {
   public static final String TYPE = "ref-replication-scheduled";
 
   public final String project;
   public final String ref;
-  public final String targetNode;
+  @Deprecated public final String targetNode;
+  public final String targetUri;
 
-  public ReplicationScheduledEvent(String project, String ref, String targetNode) {
+  public ReplicationScheduledEvent(
+      String project, String ref, String targetNode, URIish targetUri) {
     super(TYPE);
     this.project = project;
     this.ref = ref;
     this.targetNode = targetNode;
+    this.targetUri = targetUri.toASCIIString();
   }
 
   @Override

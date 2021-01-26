@@ -20,13 +20,15 @@ import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResul
 import java.util.Objects;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
+import org.eclipse.jgit.transport.URIish;
 
 public class RefReplicatedEvent extends RefEvent {
   public static final String TYPE = "ref-replicated";
 
   public final String project;
   public final String ref;
-  public final String targetNode;
+  @Deprecated public final String targetNode;
+  public final String targetUri;
   public final String status;
   public final Status refStatus;
 
@@ -34,6 +36,7 @@ public class RefReplicatedEvent extends RefEvent {
       String project,
       String ref,
       String targetNode,
+      URIish targetUri,
       RefPushResult status,
       RemoteRefUpdate.Status refStatus) {
     super(TYPE);
@@ -42,6 +45,7 @@ public class RefReplicatedEvent extends RefEvent {
     this.targetNode = targetNode;
     this.status = status.toString();
     this.refStatus = refStatus;
+    this.targetUri = targetUri.toASCIIString();
   }
 
   @Override
@@ -67,6 +71,9 @@ public class RefReplicatedEvent extends RefEvent {
       return false;
     }
     if (!Objects.equals(event.targetNode, this.targetNode)) {
+      return false;
+    }
+    if (!Objects.equals(event.targetUri, this.targetUri)) {
       return false;
     }
     if (!Objects.equals(event.status, this.status)) {
