@@ -51,6 +51,23 @@
       "message": "-1 is just for figuring out what to do about resolveNodeName() and targetNode values.",
       "revId": "76f92c6a40451eb2d8a2779003ef131720fe76aa",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a956566_2ee46159",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-01-26T00:51:24Z",
+      "side": 1,
+      "message": "Thanks, Nasser and Tony, for working on this. Whilst I am happy of the collaboration and improvements, I see the risk of this change getting too big: I have memory of a change in Gerrit that is still pending after 8 years and hundreds of patch-sets :-(\n\nWould it make sense to break it down into different steps and getting them merged one-by-one?\n\nWDYT?",
+      "revId": "76f92c6a40451eb2d8a2779003ef131720fe76aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
