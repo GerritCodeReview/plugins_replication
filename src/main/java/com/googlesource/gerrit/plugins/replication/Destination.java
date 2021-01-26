@@ -15,7 +15,6 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.gerrit.server.project.ProjectCache.noSuchProject;
-import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;
 import static com.googlesource.gerrit.plugins.replication.ReplicationFileBasedConfig.replaceName;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.NON_EXISTING;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.REJECTED_OTHER_REASON;
@@ -787,10 +786,9 @@ public class Destination {
   private void postReplicationScheduledEvent(PushOne pushOp, String inputRef) {
     Set<String> refs = inputRef == null ? pushOp.getRefs() : ImmutableSet.of(inputRef);
     Project.NameKey project = pushOp.getProjectNameKey();
-    String targetNode = resolveNodeName(pushOp.getURI());
     for (String ref : refs) {
       ReplicationScheduledEvent event =
-          new ReplicationScheduledEvent(project.get(), ref, targetNode);
+          new ReplicationScheduledEvent(project.get(), ref, pushOp.getURI());
       try {
         eventDispatcher.get().postEvent(BranchNameKey.create(project, ref), event);
       } catch (PermissionBackendException e) {
@@ -801,10 +799,9 @@ public class Destination {
 
   private void postReplicationFailedEvent(PushOne pushOp, RemoteRefUpdate.Status status) {
     Project.NameKey project = pushOp.getProjectNameKey();
-    String targetNode = resolveNodeName(pushOp.getURI());
     for (String ref : pushOp.getRefs()) {
       RefReplicatedEvent event =
-          new RefReplicatedEvent(project.get(), ref, targetNode, RefPushResult.FAILED, status);
+          new RefReplicatedEvent(project.get(), ref, pushOp.getURI(), RefPushResult.FAILED, status);
       try {
         eventDispatcher.get().postEvent(BranchNameKey.create(project, ref), event);
       } catch (PermissionBackendException e) {

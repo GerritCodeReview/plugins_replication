@@ -14,34 +14,39 @@
 
 package com.googlesource.gerrit.plugins.replication.events;
 
+import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;
+
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.events.RefEvent;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 import java.util.Objects;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
+import org.eclipse.jgit.transport.URIish;
 
 public class RefReplicatedEvent extends RefEvent {
   public static final String TYPE = "ref-replicated";
 
   public final String project;
   public final String ref;
-  public final String targetNode;
+  @Deprecated public final String targetNode;
+  public final String targetUri;
   public final String status;
   public final Status refStatus;
 
   public RefReplicatedEvent(
       String project,
       String ref,
-      String targetNode,
+      URIish targetUri,
       RefPushResult status,
       RemoteRefUpdate.Status refStatus) {
     super(TYPE);
     this.project = project;
     this.ref = ref;
-    this.targetNode = targetNode;
+    this.targetNode = resolveNodeName(targetUri);
     this.status = status.toString();
     this.refStatus = refStatus;
+    this.targetUri = targetUri.toASCIIString();
   }
 
   @Override
@@ -67,6 +72,9 @@ public class RefReplicatedEvent extends RefEvent {
       return false;
     }
     if (!Objects.equals(event.targetNode, this.targetNode)) {
+      return false;
+    }
+    if (!Objects.equals(event.targetUri, this.targetUri)) {
       return false;
     }
     if (!Objects.equals(event.status, this.status)) {
