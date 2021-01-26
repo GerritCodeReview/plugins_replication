@@ -43,18 +43,19 @@ public class GitUpdateProcessingTest {
 
   @Test
   public void headRefReplicated() throws URISyntaxException, PermissionBackendException {
+    URIish completeUri = new URIish("git://someHost/basePath/someProject.git");
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent(
             "someProject",
             "refs/heads/master",
-            "someHost",
+            completeUri,
             RefPushResult.SUCCEEDED,
             RemoteRefUpdate.Status.OK);
 
     gitUpdateProcessing.onRefReplicatedToOneNode(
         "someProject",
         "refs/heads/master",
-        new URIish("git://someHost/someProject.git"),
+        completeUri,
         RefPushResult.SUCCEEDED,
         RemoteRefUpdate.Status.OK);
     verify(dispatcherMock, times(1)).postEvent(eq(expectedEvent));
@@ -62,18 +63,19 @@ public class GitUpdateProcessingTest {
 
   @Test
   public void changeRefReplicated() throws URISyntaxException, PermissionBackendException {
+    URIish completeUri = new URIish("git://someHost/basePath/someProject.git");
     RefReplicatedEvent expectedEvent =
         new RefReplicatedEvent(
             "someProject",
             "refs/changes/01/1/1",
-            "someHost",
+            completeUri,
             RefPushResult.FAILED,
             RemoteRefUpdate.Status.REJECTED_NONFASTFORWARD);
 
     gitUpdateProcessing.onRefReplicatedToOneNode(
         "someProject",
         "refs/changes/01/1/1",
-        new URIish("git://someHost/someProject.git"),
+        completeUri,
         RefPushResult.FAILED,
         RemoteRefUpdate.Status.REJECTED_NONFASTFORWARD);
     verify(dispatcherMock, times(1)).postEvent(eq(expectedEvent));
