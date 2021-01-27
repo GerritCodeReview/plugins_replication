@@ -119,6 +119,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe34060f_a4676338",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-01-27T16:20:32Z",
+      "side": 1,
+      "message": "That is correct, the GerritEvents were extracted from Gerrit-trigger into it\u0027s own lib way-back-when so that they could be reused by other applications.\nIf we must remove the old field we need to update gerritevents first and use the new event-definition in gerrit-trigger plugin.",
+      "parentUuid": "3865e752_8d0914d4",
+      "range": {
+        "startLine": 15,
+        "startChar": 20,
+        "endLine": 15,
+        "endChar": 65
+      },
+      "revId": "c4bf6c66b264818bc4bd981bbceee94813dbb8ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "29b39a29_b2b4216c",
