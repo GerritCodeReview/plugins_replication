@@ -167,6 +167,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e74c2b3_df181b32",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-01-27T18:46:14Z",
+      "side": 1,
+      "message": "From our side we consume both events in order to notify replication status to the third party system. Adding new field and preserving old is fine.\nRemoving old field will require an extra work to adapt existing machinery around it (which is mostly about getting host out of it so should work too).",
+      "parentUuid": "6748e169_d1517e83",
+      "range": {
+        "startLine": 15,
+        "startChar": 20,
+        "endLine": 15,
+        "endChar": 65
+      },
+      "revId": "c4bf6c66b264818bc4bd981bbceee94813dbb8ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "29b39a29_b2b4216c",
