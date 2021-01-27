@@ -95,6 +95,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3865e752_8d0914d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-27T15:54:56Z",
+      "side": 1,
+      "message": "Also, looks like GTP uses an event definition from https://github.com/sonyxperiadev/gerrit-events/blob/d15f38adc7ea90a98486dbe0df01d31335aaa3af/src/main/java/com/sonymobile/tools/gerrit/gerritevents/dto/events/RefReplicated.java\n\nAlso, +Sven since Axis has a maintainer for GTP.",
+      "parentUuid": "3b5fb765_e547d07c",
+      "range": {
+        "startLine": 15,
+        "startChar": 20,
+        "endLine": 15,
+        "endChar": 65
+      },
+      "revId": "c4bf6c66b264818bc4bd981bbceee94813dbb8ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "29b39a29_b2b4216c",
