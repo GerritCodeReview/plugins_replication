@@ -143,6 +143,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6748e169_d1517e83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-27T17:05:27Z",
+      "side": 1,
+      "message": "\u003e That is correct, the GerritEvents were extracted from Gerrit-trigger into it\u0027s own lib way-back-when so that they could be reused by other applications.\n\u003e If we must remove the old field we need to update gerritevents first and use the new event-definition in gerrit-trigger plugin.\n\nWe\u0027ll leave the old field for now. Will gerrit-trigger break if a new field is added?",
+      "parentUuid": "fe34060f_a4676338",
+      "range": {
+        "startLine": 15,
+        "startChar": 20,
+        "endLine": 15,
+        "endChar": 65
+      },
+      "revId": "c4bf6c66b264818bc4bd981bbceee94813dbb8ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "29b39a29_b2b4216c",
