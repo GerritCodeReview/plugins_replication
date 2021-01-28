@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c52cce3f_231e155a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-01-28T21:12:06Z",
+      "side": 1,
+      "message": "Will this loose the notifications for refs that are already in delta?",
+      "revId": "11b3069f8c720f245e75cff3590b637033d71384",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "589252af_c3748364",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-01-28T21:12:06Z",
+      "side": 1,
+      "message": "I think this calling line 275 is clearer for callers than calling this method, I would eliminate this method entirely.",
+      "revId": "11b3069f8c720f245e75cff3590b637033d71384",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbcfddef_7e89072a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 5
