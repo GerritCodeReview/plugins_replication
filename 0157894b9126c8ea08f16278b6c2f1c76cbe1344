@@ -34,6 +34,24 @@
       "parentUuid": "283f6986_f822e7e4",
       "revId": "0157894b9126c8ea08f16278b6c2f1c76cbe1344",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9966fd09_177c67dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2021-01-28T23:54:52Z",
+      "side": 1,
+      "message": "\u003e Added a sentence saying that we are publishing an update to ReplicationState object with this fix.\n\nDoesn\u0027t seem measurable, is there anything else? If not, it would be important to mention that this only affects correctness of an internal state that does not really affect anything.",
+      "parentUuid": "006758a1_eeb34dad",
+      "revId": "0157894b9126c8ea08f16278b6c2f1c76cbe1344",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
