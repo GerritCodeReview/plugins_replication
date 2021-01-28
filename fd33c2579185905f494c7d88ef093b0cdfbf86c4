@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd01b47d_2f0da556",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2021-01-28T17:08:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e95784e8_345623eb",
+      "revId": "fd33c2579185905f494c7d88ef093b0cdfbf86c4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4d22923_58dc4c23",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-01-28T17:04:28Z",
       "side": 1,
       "message": "Also describe the new/fixed message for consolidated pushes?",
+      "revId": "fd33c2579185905f494c7d88ef093b0cdfbf86c4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc38c258_02a8fb3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2021-01-28T17:08:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4d22923_58dc4c23",
       "revId": "fd33c2579185905f494c7d88ef093b0cdfbf86c4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
