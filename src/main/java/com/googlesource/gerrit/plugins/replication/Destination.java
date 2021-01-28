@@ -434,13 +434,16 @@ public class Destination {
         ScheduledFuture<?> ignored =
             pool.schedule(task, now ? 0 : config.getDelay(), TimeUnit.SECONDS);
         pending.put(uri, task);
+        repLog.atInfo().log(
+            "scheduled %s:%s => %s to run %s",
+            project, ref, task, now ? "now" : "after " + config.getDelay() + "s");
       } else {
         addRef(task, ref);
         task.addState(ref, state);
+        repLog.atInfo().log(
+            "consolidated %s:%s => %s with an existing pending push", project, ref, task);
       }
       state.increasePushTaskCount(project.get(), ref);
-      repLog.atInfo().log(
-          "scheduled %s:%s => %s to run after %ds", project, ref, task, config.getDelay());
     }
   }
 
