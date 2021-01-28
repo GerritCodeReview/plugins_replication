@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "806483ea_76772943",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-01-28T21:18:22Z",
+      "side": 1,
+      "message": "I\u0027m sorry, I didn\u0027t specifically mean for you change, I meant is this a latent bug whenever we have consolidation of an existing ref (internally triggered), and when someone calls replication start and adds ALL_REFS then. Will this prevent the original existing ref from every getting a notification when it is done?",
+      "parentUuid": "d6a76b2c_858cb00a",
+      "revId": "11b3069f8c720f245e75cff3590b637033d71384",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "589252af_c3748364",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 5
