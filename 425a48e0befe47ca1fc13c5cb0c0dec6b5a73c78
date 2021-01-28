@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "63096fd5_53040886",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RefReplicatedEvent.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-28T15:17:07Z",
+      "side": 1,
+      "message": "Looking at the use case in the gerrit trigger plugin, they want to match events to a destination to know if it\u0027s \"ready\" for jenkins to start jobs. If we include the project then the trigger plugin will need to support some kind of substring matching or do this parsing on their end. I\u0027m open to other approaches for this if you have ideas.",
+      "parentUuid": "be25c0da_5876534e",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 75
+      },
+      "revId": "425a48e0befe47ca1fc13c5cb0c0dec6b5a73c78",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b6cc95e9_9d506b7e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ReplicationScheduledEvent.java",
         "patchSetId": 3
