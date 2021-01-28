@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27ba6b5a_0a6f584c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-28T10:28:53Z",
+      "side": 1,
+      "message": "Thanks for flagging the field as @Deprecated.\nYes, I think creating a ticket and flagging it would be good.\nI still think we should mention this in the review notes otherwise we are not really giving users time to adapt to the new payload.\nWDYT?",
+      "parentUuid": "dcc26a65_e17fba5d",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 28
+      },
+      "revId": "c4bf6c66b264818bc4bd981bbceee94813dbb8ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51aeecc7_bf5b60de",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
