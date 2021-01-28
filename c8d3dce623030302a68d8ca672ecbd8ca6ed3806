@@ -46,6 +46,30 @@
       },
       "revId": "c8d3dce623030302a68d8ca672ecbd8ca6ed3806",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3273a5f_0ad96928",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-28T20:01:58Z",
+      "side": 1,
+      "message": "Ah yeah, the functions and layering you suggested looks clear to me. setStartedRefs() returns the not attempted ones?",
+      "parentUuid": "d1158f61_f9b2f62f",
+      "range": {
+        "startLine": 274,
+        "startChar": 7,
+        "endLine": 274,
+        "endChar": 25
+      },
+      "revId": "c8d3dce623030302a68d8ca672ecbd8ca6ed3806",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
