@@ -217,6 +217,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ce3a410d_fe42be6f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-01-28T07:49:10Z",
+      "side": 1,
+      "message": "I\u0027m 99.9% sure that gerrit-trigger doesn\u0027t care about fields it\u0027s not aware of, so gerrit-trigger shouldn\u0027t be affected by an extra field.",
+      "parentUuid": "5f0522f5_db9a0c32",
+      "range": {
+        "startLine": 15,
+        "startChar": 20,
+        "endLine": 15,
+        "endChar": 65
+      },
+      "revId": "c4bf6c66b264818bc4bd981bbceee94813dbb8ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "29b39a29_b2b4216c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
