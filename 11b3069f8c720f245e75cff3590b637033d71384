@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbcfddef_7e89072a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-28T20:54:42Z",
+      "side": 1,
+      "message": "should be private, move below setStartedRefs()",
+      "revId": "11b3069f8c720f245e75cff3590b637033d71384",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77edc056_7fdefc0a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-28T20:54:42Z",
+      "side": 1,
+      "message": "should be private",
+      "revId": "11b3069f8c720f245e75cff3590b637033d71384",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
