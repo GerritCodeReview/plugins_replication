@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "283f6986_f822e7e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-01-28T23:23:47Z",
+      "side": 1,
+      "message": "I think this could use an explanation as to what \"measurable\" behavior is affected by this fix?",
+      "revId": "0157894b9126c8ea08f16278b6c2f1c76cbe1344",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
