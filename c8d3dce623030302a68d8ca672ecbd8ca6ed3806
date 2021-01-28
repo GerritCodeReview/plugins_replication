@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23609fd5_54f6b0dc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-01-28T19:10:32Z",
+      "side": 1,
+      "message": "I know Martin suggested it, but this is a weird name for a method that takes the set of refs that are expected to be attempted. Would notifyStarted() be better?",
+      "range": {
+        "startLine": 274,
+        "startChar": 7,
+        "endLine": 274,
+        "endChar": 25
+      },
+      "revId": "c8d3dce623030302a68d8ca672ecbd8ca6ed3806",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
