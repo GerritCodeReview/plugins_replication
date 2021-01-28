@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6a76b2c_858cb00a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2021-01-28T21:14:00Z",
+      "side": 1,
+      "message": "We are calculating notAttemptedRefs even before this gets called at line 293 and then calling addrefs() on 296",
+      "parentUuid": "c52cce3f_231e155a",
+      "revId": "11b3069f8c720f245e75cff3590b637033d71384",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "589252af_c3748364",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 5
