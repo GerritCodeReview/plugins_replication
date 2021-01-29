@@ -96,6 +96,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "995462b7_07a19061",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RefReplicatedEvent.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-29T13:36:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "473e4dab_c47e42d8",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 75
+      },
+      "revId": "425a48e0befe47ca1fc13c5cb0c0dec6b5a73c78",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6cc95e9_9d506b7e",
@@ -109,6 +133,30 @@
       "writtenOn": "2021-01-28T10:28:53Z",
       "side": 1,
       "message": "Same as above, why removing the project?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 82
+      },
+      "revId": "425a48e0befe47ca1fc13c5cb0c0dec6b5a73c78",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94ab5c0c_366b2419",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ReplicationScheduledEvent.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-01-29T13:36:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b6cc95e9_9d506b7e",
       "range": {
         "startLine": 35,
         "startChar": 0,
