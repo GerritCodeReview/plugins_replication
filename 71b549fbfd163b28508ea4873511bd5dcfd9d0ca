@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abd44f38_d3c5f246",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-01-29T14:27:45Z",
+      "side": 1,
+      "message": "Sorry for not reviewing this \"properly\" until now, busy times at $DAY_JOB.",
+      "revId": "71b549fbfd163b28508ea4873511bd5dcfd9d0ca",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ab48832_11d7c12a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ReplicationScheduledEvent.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-01-29T14:27:45Z",
+      "side": 1,
+      "message": "Since targetNode is derived from targetUri, how about simplifying the event constructor signatures. This would also keep all \"targetNode-code\" in one place (per event), when targetNode is removed at a later date it would only affect the events themselves and not the surrounding code:\n\n    import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;\n    \n    ...\n    \n    public ReplicationScheduledEvent(String project, String ref, URIish targetUri) {\n      super(TYPE);\n      this.project \u003d project;\n      this.ref \u003d ref;\n      this.targetNode \u003d resolveNodeName(targetUri);\n      this.targetUri \u003d targetUri.toASCIIString()\n    }",
+      "range": {
+        "startLine": 30,
+        "startChar": 34,
+        "endLine": 30,
+        "endChar": 69
+      },
+      "revId": "71b549fbfd163b28508ea4873511bd5dcfd9d0ca",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
