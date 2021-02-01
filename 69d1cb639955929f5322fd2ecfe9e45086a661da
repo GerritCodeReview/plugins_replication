@@ -110,6 +110,30 @@
       },
       "revId": "69d1cb639955929f5322fd2ecfe9e45086a661da",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b5cb601_df8bb70b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ProjectDeletionReplicationScheduledEvent.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-02-01T19:14:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4b5b4b2_0ba28cd5",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 3
+      },
+      "revId": "69d1cb639955929f5322fd2ecfe9e45086a661da",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
