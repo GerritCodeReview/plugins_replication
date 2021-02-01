@@ -41,6 +41,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49407901_07534b5b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ProjectDeletionReplicationFailedEvent.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-02-01T19:13:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "49e96269_dcb29797",
+      "range": {
+        "startLine": 26,
+        "startChar": 63,
+        "endLine": 26,
+        "endChar": 79
+      },
+      "revId": "69d1cb639955929f5322fd2ecfe9e45086a661da",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bb90fb7_aa31e0e9",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-02-01T18:19:23Z",
       "side": 1,
       "message": "Do we need this getter? (same for other new events)",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 3
+      },
+      "revId": "69d1cb639955929f5322fd2ecfe9e45086a661da",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4b5b4b2_0ba28cd5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ProjectDeletionReplicationScheduledEvent.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-02-01T19:13:39Z",
+      "side": 1,
+      "message": "It\u0027s used only in the IT tests.\nI will flag it as @visibleForTesting only.",
+      "parentUuid": "2bb90fb7_aa31e0e9",
       "range": {
         "startLine": 37,
         "startChar": 0,
