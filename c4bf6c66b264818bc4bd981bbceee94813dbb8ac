@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "756a4fce_4e475bf4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-02-01T11:11:58Z",
+      "side": 1,
+      "message": "The approach of deprecating \"targetNode\" in favour of \"targetURI\" is to allow consumers to refactor their code to refer to the new field. The point I was trying to make is that we will need to make those consumers aware of this intention.\n\nI am not sure if there\u0027s any consolidated approach to this sort of thing in Gerrit. If it is commonly accepted that flagging the field as @deprecated gives enough visibility, then, I am also fine with this change.",
+      "parentUuid": "e0bce19f_1236e660",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 28
+      },
+      "revId": "c4bf6c66b264818bc4bd981bbceee94813dbb8ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51aeecc7_bf5b60de",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
