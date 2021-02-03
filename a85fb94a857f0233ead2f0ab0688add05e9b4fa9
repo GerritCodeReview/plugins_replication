@@ -360,6 +360,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6ca8a9c_51ee0101",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-02-03T18:14:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "69129905_fc102f5c",
+      "revId": "a85fb94a857f0233ead2f0ab0688add05e9b4fa9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76b0f0cf_605c179d",
