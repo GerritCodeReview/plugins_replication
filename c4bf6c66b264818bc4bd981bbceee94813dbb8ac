@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86dc6309_36836065",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-02-03T17:59:37Z",
+      "side": 1,
+      "message": "Agreed on release notes. AFAIK, there\u0027s no way to note this as something that needs to go into those ahead of time though. Is there?",
+      "parentUuid": "01aa91b1_160cd439",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 28
+      },
+      "revId": "c4bf6c66b264818bc4bd981bbceee94813dbb8ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51aeecc7_bf5b60de",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
