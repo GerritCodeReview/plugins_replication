@@ -404,6 +404,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2306b05b_9a51c50a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionReplicationFailedEvent.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-02-03T18:05:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f3a601b_48bbdc7c",
+      "range": {
+        "startLine": 26,
+        "startChar": 70,
+        "endLine": 26,
+        "endChar": 80
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14d355eb_9f475ff5",
@@ -471,6 +495,24 @@
       "side": 1,
       "message": "I think it *would* be possible if ProjectEvent had a no-arg default constructor, but it\u0027s not the case.\n\n```@AutoValue\nabstract class FooProjectEvent extends ProjectEvent {\n  public abstract String project();\n  public abstract String type();\n\n  static FooProjectEvent create(String project, String type) {\n    return new AutoValue_FooProjectEvent(project, type);\n  }\n\n  @Override\n  public Project.NameKey getProjectNameKey() {\n    return Project.nameKey(project());\n  }\n}```\n\nFails with\n\n```plugins/replication/src/main/java/com/googlesource/gerrit/plugins/replication/FooProjectEvent.java:22: error: constructor ProjectEvent in class ProjectEvent cannot be applied to given types;\nabstract class FooProjectEvent extends ProjectEvent {\n         ^\n  required: String\n  found: no arguments\n  reason: actual and formal argument lists differ in length\nTarget //:release failed to build```\n\nSame applies with the Builder pattern.\nIf I add a default no-arg constructor to the parent then the compiler is happy.\n\nSo bottom line is, this beats me\nAny idea? If anyone could teach me this trick I\u0027d be happy 😊",
       "parentUuid": "5b7613c3_62a0d094",
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dae456e_ff5321bf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionReplicationSucceededEvent.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-02-03T18:05:00Z",
+      "side": 1,
+      "message": "Yeah, I don\u0027t know. Thanks for trying it.",
+      "parentUuid": "dfb21e84_d52060cb",
       "revId": "56b16314d17880abd23c42510f8894656faa8860",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -660,6 +702,30 @@
       "side": 1,
       "message": "I would say so, yes.\n\nActually I think the state of project deletions, creations and update HEADs could be modelled in a similar way (well, emitted events will be different), but we might end up with a base/generic AdminOperationState for example.\n\nI would wave the rule of least power here and generify this, if needed, when the tackle other operations.\n\nWDYT?",
       "parentUuid": "60fdf801_62de4f36",
+      "range": {
+        "startLine": 32,
+        "startChar": 13,
+        "endLine": 32,
+        "endChar": 33
+      },
+      "revId": "56b16314d17880abd23c42510f8894656faa8860",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f89eae4e_949927bc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectDeletionState.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-02-03T18:05:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "49aed108_56e5992e",
       "range": {
         "startLine": 32,
         "startChar": 13,
