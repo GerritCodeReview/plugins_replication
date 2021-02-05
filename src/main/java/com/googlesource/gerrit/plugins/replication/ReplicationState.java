@@ -79,7 +79,7 @@ public class ReplicationState {
     pushResultProcessing.onRefReplicatedToOneNode(project, ref, uri, status, refUpdateStatus);
 
     RefReplicationStatus completedRefStatus = null;
-    boolean allPushTaksCompleted = false;
+    boolean allPushTasksCompleted = false;
     countingLock.lock();
     try {
       RefReplicationStatus refStatus = getRefStatus(project, ref);
@@ -90,7 +90,7 @@ public class ReplicationState {
         if (refStatus.allDone()) {
           completedRefStatus = statusByProjectRef.remove(project, ref);
         }
-        allPushTaksCompleted = finishedPushTasksCount.get() == totalPushTasksCount.get();
+        allPushTasksCompleted = finishedPushTasksCount.get() == totalPushTasksCount.get();
       }
     } finally {
       countingLock.unlock();
@@ -100,7 +100,7 @@ public class ReplicationState {
       doRefPushTasksCompleted(completedRefStatus);
     }
 
-    if (allPushTaksCompleted) {
+    if (allPushTasksCompleted) {
       doAllPushTasksCompleted();
     }
   }
