@@ -73,7 +73,6 @@ public class PushAll implements Runnable {
     } catch (Exception e) {
       stateLog.error("Cannot enumerate known projects", e, state);
     }
-    state.markAllPushTasksScheduled();
   }
 
   @Override

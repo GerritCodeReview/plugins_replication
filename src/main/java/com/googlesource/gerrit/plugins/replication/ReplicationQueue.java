@@ -131,9 +131,12 @@ public class ReplicationQueue
   }
 
   private void fire(String projectName, String refName) {
-    ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
-    fire(Project.nameKey(projectName), null, refName, state, false);
-    state.markAllPushTasksScheduled();
+    fire(
+        Project.nameKey(projectName),
+        null,
+        refName,
+        new ReplicationState(new GitUpdateProcessing(dispatcher.get())),
+        false);
   }
 
   private void fire(
@@ -153,6 +156,7 @@ public class ReplicationQueue
     for (Destination cfg : destinations.get().getAll(FilterType.ALL)) {
       pushReference(cfg, project, urlMatch, refName, state, now);
     }
+    state.markAllPushTasksScheduled();
   }
 
   private void fire(URIish uri, Project.NameKey project, String refName) {
