@@ -139,12 +139,17 @@ public class ReplicationState {
   }
 
   private RefReplicationStatus getRefStatus(String project, String ref) {
-    RefReplicationStatus refStatus = statusByProjectRef.get(project, ref);
-    if (refStatus == null) {
-      refStatus = new RefReplicationStatus(project, ref);
-      statusByProjectRef.put(project, ref, refStatus);
+    countingLock.lock();
+    try {
+      RefReplicationStatus refStatus = statusByProjectRef.get(project, ref);
+      if (refStatus == null) {
+        refStatus = new RefReplicationStatus(project, ref);
+        statusByProjectRef.put(project, ref, refStatus);
+      }
+      return refStatus;
+    } finally {
+      countingLock.unlock();
     }
-    return refStatus;
   }
 
   public void waitForReplication() throws InterruptedException {
