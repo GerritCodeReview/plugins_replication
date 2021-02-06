@@ -79,18 +79,14 @@ public class ReplicationState {
     pushResultProcessing.onRefReplicatedToOneNode(project, ref, uri, status, refUpdateStatus);
 
     RefReplicationStatus completedRefStatus = null;
-    boolean allPushTasksCompleted = false;
     countingLock.lock();
     try {
       RefReplicationStatus refStatus = getRefStatus(project, ref);
       refStatus.replicatedNodesCount.getAndIncrement();
       finishedPushTasksCount.getAndIncrement();
 
-      if (allScheduled) {
-        if (refStatus.allDone()) {
-          completedRefStatus = statusByProjectRef.remove(project, ref);
-        }
-        allPushTasksCompleted = finishedPushTasksCount.get() == totalPushTasksCount.get();
+      if (allScheduled && refStatus.allDone()) {
+        completedRefStatus = statusByProjectRef.remove(project, ref);
       }
     } finally {
       countingLock.unlock();
@@ -100,26 +96,29 @@ public class ReplicationState {
       doRefPushTasksCompleted(completedRefStatus);
     }
 
-    if (allPushTasksCompleted) {
-      doAllPushTasksCompleted();
-    }
+    checkAndDoAllPushTasksCompleted();
   }
 
   public void markAllPushTasksScheduled() {
     countingLock.lock();
     try {
       allScheduled = true;
-      if (finishedPushTasksCount.get() < totalPushTasksCount.get()) {
+    } finally {
+      countingLock.unlock();
+    }
+
+    checkAndDoAllPushTasksCompleted();
+  }
+
+  private void checkAndDoAllPushTasksCompleted() {
+    countingLock.lock();
+    try {
+      if (!(allScheduled && finishedPushTasksCount.get() == totalPushTasksCount.get())) {
         return;
       }
     } finally {
       countingLock.unlock();
     }
-
-    doAllPushTasksCompleted();
-  }
-
-  private void doAllPushTasksCompleted() {
     fireRemainingOnRefReplicatedToAllNodes();
     pushResultProcessing.onAllRefsReplicatedToAllNodes(totalPushTasksCount.get());
     allPushTasksFinished.countDown();
