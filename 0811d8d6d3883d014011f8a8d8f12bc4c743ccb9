@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eac60698_00d982b6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2021-02-08T06:17:32Z",
+      "side": 1,
+      "message": "It is not clear to me why this class is using a counting lock instead of a synchronized, as the lock is more error prone since it requires an \"unlock\", but a synchronized is more like a try-with-resources in that it auto releases when the block is closed. I don\u0027t think this class is using any feature that the lock provides over a synchronized, and I think it is actually making this code harder to read.",
+      "range": {
+        "startLine": 142,
+        "startChar": 17,
+        "endLine": 142,
+        "endChar": 21
+      },
+      "revId": "0811d8d6d3883d014011f8a8d8f12bc4c743ccb9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
