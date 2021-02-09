@@ -626,8 +626,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
         local = n;
       }
       local =
-          forProject
-              .filter(local.values(), git, RefFilterOptions.builder().setFilterMeta(true).build())
+          forProject.filter(local.values(), RefFilterOptions.builder().setFilterMeta(true).build())
               .stream()
               .collect(toMap(Ref::getName, r -> r));
     }
