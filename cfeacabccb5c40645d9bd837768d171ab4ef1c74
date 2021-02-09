@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a86ae704_ff0f872a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-02-09T23:16:42Z",
+      "side": 0,
+      "message": "This check becomes the !\u003d check at L116, however, less than isn\u0027t exactly a !\u003d. Can you think about possible side-effects that this may have? WDYT?",
+      "range": {
+        "startLine": 112,
+        "startChar": 10,
+        "endLine": 112,
+        "endChar": 66
+      },
+      "revId": "cfeacabccb5c40645d9bd837768d171ab4ef1c74",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
