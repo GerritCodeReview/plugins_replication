@@ -22,6 +22,30 @@
       },
       "revId": "0811d8d6d3883d014011f8a8d8f12bc4c743ccb9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc47c41b_9f3a4081",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-02-11T01:24:51Z",
+      "side": 1,
+      "message": "+1, I was asking myself the same question.",
+      "parentUuid": "eac60698_00d982b6",
+      "range": {
+        "startLine": 142,
+        "startChar": 17,
+        "endLine": 142,
+        "endChar": 21
+      },
+      "revId": "0811d8d6d3883d014011f8a8d8f12bc4c743ccb9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
