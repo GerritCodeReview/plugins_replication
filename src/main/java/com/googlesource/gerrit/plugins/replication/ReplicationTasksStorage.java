@@ -137,7 +137,7 @@ public class ReplicationTasksStorage {
     List<ReplicateRefUpdate> results = new ArrayList<>();
     try (DirectoryStream<Path> events = Files.newDirectoryStream(tasks)) {
       for (Path path : events) {
-        if (Files.isRegularFile(path)) {
+        if (path.toFile().isFile()) {
           try {
             String json = new String(Files.readAllBytes(path), UTF_8);
             results.add(GSON.fromJson(json, ReplicateRefUpdate.class));
@@ -148,7 +148,7 @@ public class ReplicationTasksStorage {
           } catch (IOException e) {
             logger.atSevere().withCause(e).log("Error when firing pending event %s", path);
           }
-        } else if (Files.isDirectory(path)) {
+        } else if (path.toFile().isDirectory()) {
           try {
             results.addAll(list(path));
           } catch (DirectoryIteratorException d) {
@@ -194,7 +194,7 @@ public class ReplicationTasksStorage {
     }
 
     public String create() {
-      if (Files.exists(waiting)) {
+      if (waiting.toFile().exists()) {
         return taskKey;
       }
 
