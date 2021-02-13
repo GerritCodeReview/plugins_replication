@@ -463,7 +463,7 @@ public class Destination {
   }
 
   void scheduleDeleteProject(URIish uri, Project.NameKey project, ProjectDeletionState state) {
-    repLog.atFine().log("scheduling deletion of project {} at {}", project, uri);
+    repLog.atFine().log("scheduling deletion of project %s at %s", project, uri);
     @SuppressWarnings("unused")
     ScheduledFuture<?> ignored =
         pool.schedule(deleteProjectFactory.create(uri, project, state), 0, TimeUnit.SECONDS);

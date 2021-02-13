@@ -68,7 +68,8 @@ public class GerritSshApi implements AdminApi {
       if (exitCode == 1) {
         logger.atInfo().log(
             "DeleteProject plugin is not installed on %s;"
-                + " will not try to forward this operation to that host");
+                + " will not try to forward this operation to that host",
+            uri);
         withoutDeleteProjectPlugin.add(uri);
       }
     }
