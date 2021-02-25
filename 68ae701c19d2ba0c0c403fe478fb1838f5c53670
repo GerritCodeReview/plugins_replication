@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca582b05_381ef6e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2021-02-25T05:11:02Z",
+      "side": 1,
+      "message": "Luca, I suspect this was the reason for the stale locks you were seeing last year.",
+      "revId": "68ae701c19d2ba0c0c403fe478fb1838f5c53670",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
