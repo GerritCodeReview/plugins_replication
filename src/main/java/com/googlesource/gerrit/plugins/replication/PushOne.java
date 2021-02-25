@@ -398,6 +398,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning {
             pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
           }
         } else {
+          retryDone();
           repLog.error(
               "Giving up after {} '{}' failures during replication to {}",
               updateRefRetryCount,
