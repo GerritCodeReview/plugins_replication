@@ -45,15 +45,9 @@ import org.junit.Test;
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
 public class ReplicationIT extends ReplicationDaemon {
-  private static final int TEST_PROJECT_CREATION_SECONDS = 10;
   private static final Duration TEST_TIMEOUT =
       Duration.ofSeconds(
           (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60) + 1);
-
-  private static final Duration TEST_NEW_PROJECT_TIMEOUT =
-      Duration.ofSeconds(
-          (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60)
-              + TEST_PROJECT_CREATION_SECONDS);
 
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
 
@@ -392,14 +386,6 @@ public class ReplicationIT extends ReplicationDaemon {
 
   private <T> T getInstance(Class<T> classObj) {
     return plugin.getSysInjector().getInstance(classObj);
-  }
-
-  private boolean nonEmptyProjectExists(Project.NameKey name) {
-    try (Repository r = repoManager.openRepository(name)) {
-      return !r.getAllRefsByPeeledObjectId().isEmpty();
-    } catch (Exception e) {
-      return false;
-    }
   }
 
   private ObjectId createNewBranchWithoutPush(String fromBranch, String newBranch)

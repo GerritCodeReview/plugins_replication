@@ -23,6 +23,7 @@ import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.reviewdb.client.Project;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +43,10 @@ import org.junit.Test;
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
 public class ReplicationStorageIT extends ReplicationDaemon {
+  protected static final int TEST_TASK_FINISH_SECONDS = 1;
+  protected static final int TEST_REPLICATION_MAX_RETRIES = 1;
+  protected static final Duration TEST_TASK_FINISH_TIMEOUT =
+      Duration.ofSeconds(TEST_TASK_FINISH_SECONDS);
   protected ReplicationTasksStorage tasksStorage;
 
   @Override
@@ -223,6 +228,21 @@ public class ReplicationStorageIT extends ReplicationDaemon {
   @Test
   public void shouldNotReplicateBranchDeletionWhenNotMirror() throws Exception {
     replicateBranchDeletion(false);
+  }
+
+  @Test
+  public void shouldCleanupTasksAfterNewProjectReplication() throws Exception {
+    setReplicationDestination("task_cleanup_project", "replica", ALL_PROJECTS);
+    config.setInt("remote", "task_cleanup_project", "replicationRetry", 0);
+    config.save();
+    reloadConfig();
+    assertThat(tasksStorage.list()).hasSize(0);
+    Project.NameKey sourceProject = createTestProject("task_cleanup_project");
+
+    WaitUtil.waitUntil(
+        () -> nonEmptyProjectExists(new Project.NameKey(sourceProject + "replica.git")),
+        TEST_NEW_PROJECT_TIMEOUT);
+    WaitUtil.waitUntil(() -> tasksStorage.list().size() == 0, TEST_TASK_FINISH_TIMEOUT);
   }
 
   private void replicateBranchDeletion(boolean mirror) throws Exception {
