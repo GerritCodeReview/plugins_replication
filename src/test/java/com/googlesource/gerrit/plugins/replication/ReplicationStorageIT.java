@@ -52,8 +52,8 @@ import org.junit.Test;
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
 public class ReplicationStorageIT extends ReplicationDaemon {
-  private static final int TEST_TASK_FINISH_SECONDS = 1;
-  private static final int TEST_REPLICATION_MAX_RETRIES = 1;
+  protected static final int TEST_TASK_FINISH_SECONDS = 1;
+  protected static final int TEST_REPLICATION_MAX_RETRIES = 1;
   protected static final Duration TEST_TASK_FINISH_TIMEOUT =
       Duration.ofSeconds(TEST_TASK_FINISH_SECONDS);
   private static final Duration MAX_RETRY_WITH_TOLERANCE_TIMEOUT =
@@ -271,26 +271,6 @@ public class ReplicationStorageIT extends ReplicationDaemon {
     replicateBranchDeletion(false);
   }
 
-  private void replicateBranchDeletion(boolean mirror) throws Exception {
-    setReplicationDestination("foo", "replica", ALL_PROJECTS);
-    reloadConfig();
-
-    Project.NameKey targetProject = createTestProject(project + "replica");
-    String branchToDelete = "refs/heads/todelete";
-    String master = "refs/heads/master";
-    BranchInput input = new BranchInput();
-    input.revision = master;
-    gApi.projects().name(project.get()).branch(branchToDelete).create(input);
-    isPushCompleted(targetProject, branchToDelete, TEST_PUSH_TIMEOUT);
-
-    setReplicationDestination("foo", "replica", ALL_PROJECTS, Integer.MAX_VALUE, mirror);
-    reloadConfig();
-
-    gApi.projects().name(project.get()).branch(branchToDelete).delete();
-
-    assertThat(listWaitingReplicationTasks(branchToDelete)).hasSize(1);
-  }
-
   @Test
   public void shouldCleanupTasksAfterNewProjectReplication() throws Exception {
     setReplicationDestination("task_cleanup_project", "replica", ALL_PROJECTS);
@@ -351,6 +331,26 @@ public class ReplicationStorageIT extends ReplicationDaemon {
 
     WaitUtil.waitUntil(() -> pushOp.wasCanceled(), MAX_RETRY_WITH_TOLERANCE_TIMEOUT);
     WaitUtil.waitUntil(() -> isTaskCleanedUp(), TEST_TASK_FINISH_TIMEOUT);
+  }
+
+  private void replicateBranchDeletion(boolean mirror) throws Exception {
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    Project.NameKey targetProject = createTestProject(project + "replica");
+    String branchToDelete = "refs/heads/todelete";
+    String master = "refs/heads/master";
+    BranchInput input = new BranchInput();
+    input.revision = master;
+    gApi.projects().name(project.get()).branch(branchToDelete).create(input);
+    isPushCompleted(targetProject, branchToDelete, TEST_PUSH_TIMEOUT);
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS, Integer.MAX_VALUE, mirror);
+    reloadConfig();
+
+    gApi.projects().name(project.get()).branch(branchToDelete).delete();
+
+    assertThat(listWaitingReplicationTasks(branchToDelete)).hasSize(1);
   }
 
   private boolean isTaskRescheduled(QueueInfo queue, URIish uri) {
