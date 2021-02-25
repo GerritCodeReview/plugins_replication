@@ -45,7 +45,8 @@ import org.junit.Test;
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
 public class ReplicationStorageIT extends ReplicationDaemon {
-  private static final int TEST_TASK_FINISH_SECONDS = 1;
+  protected static final int TEST_TASK_FINISH_SECONDS = 1;
+  protected static final int TEST_REPLICATION_MAX_RETRIES = 1;
   protected static final Duration TEST_TASK_FINISH_TIMEOUT =
       Duration.ofSeconds(TEST_TASK_FINISH_SECONDS);
   protected ReplicationTasksStorage tasksStorage;
@@ -254,6 +255,21 @@ public class ReplicationStorageIT extends ReplicationDaemon {
     replicateBranchDeletion(false);
   }
 
+  @Test
+  public void shouldCleanupTasksAfterNewProjectReplication() throws Exception {
+    setReplicationDestination("task_cleanup_project", "replica", ALL_PROJECTS);
+    config.setInt("remote", "task_cleanup_project", "replicationRetry", 0);
+    config.save();
+    reloadConfig();
+    assertThat(tasksStorage.listRunning()).hasSize(0);
+    Project.NameKey sourceProject = createTestProject("task_cleanup_project");
+
+    WaitUtil.waitUntil(
+        () -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")),
+        TEST_NEW_PROJECT_TIMEOUT);
+    WaitUtil.waitUntil(() -> tasksStorage.listRunning().size() == 0, TEST_TASK_FINISH_TIMEOUT);
+  }
+
   private void replicateBranchDeletion(boolean mirror) throws Exception {
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
@@ -272,21 +288,6 @@ public class ReplicationStorageIT extends ReplicationDaemon {
     gApi.projects().name(project.get()).branch(branchToDelete).delete();
 
     assertThat(listWaitingReplicationTasks(branchToDelete)).hasSize(1);
-  }
-
-  @Test
-  public void shouldCleanupTasksAfterNewProjectReplication() throws Exception {
-    setReplicationDestination("task_cleanup_project", "replica", ALL_PROJECTS);
-    config.setInt("remote", "task_cleanup_project", "replicationRetry", 0);
-    config.save();
-    reloadConfig();
-    assertThat(tasksStorage.listRunning()).hasSize(0);
-    Project.NameKey sourceProject = createTestProject("task_cleanup_project");
-
-    WaitUtil.waitUntil(
-        () -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")),
-        TEST_NEW_PROJECT_TIMEOUT);
-    WaitUtil.waitUntil(() -> tasksStorage.listRunning().size() == 0, TEST_TASK_FINISH_TIMEOUT);
   }
 
   private Stream<ReplicateRefUpdate> waitingChangeReplicationTasksForRemote(
