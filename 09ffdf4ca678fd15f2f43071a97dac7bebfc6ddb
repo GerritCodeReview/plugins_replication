@@ -16,6 +16,23 @@
       "message": "Ping: is there anyone interested if giving a final blessing?",
       "revId": "09ffdf4ca678fd15f2f43071a97dac7bebfc6ddb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f507c1f1_976fd2a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-02-26T01:49:47Z",
+      "side": 1,
+      "message": "If we are going to keep the code, I would rather it be documented, especially if it has limitations as that would be much harder to deduce from reading the code. I suggest abandoning this change and working on solutions if we want to remove it (like making it possible to add AdminApis from other plugins without needing a fork!)",
+      "revId": "09ffdf4ca678fd15f2f43071a97dac7bebfc6ddb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
