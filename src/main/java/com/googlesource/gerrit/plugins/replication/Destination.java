@@ -63,6 +63,7 @@ import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
+import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
@@ -70,7 +71,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -608,15 +608,15 @@ public class Destination {
     }
   }
 
-  public Set<String> getPrunableTaskNames() {
-    Set<String> names = new HashSet<>();
+  public Map<ReplicateRefUpdate, String> getTaskNamesByReplicateRefUpdate() {
+    Map<ReplicateRefUpdate, String> taskNameByReplicateRefUpdate = new HashMap<>();
     for (PushOne push : pending.values()) {
-      if (!replicationTasksStorage.get().isWaiting(push)) {
-        repLog.atFine().log("No longer isWaiting, can prune %s", push.getURI());
-        names.add(push.toString());
+      String taskName = push.toString();
+      for (ReplicateRefUpdate refUpdate : push.getReplicateRefUpdates()) {
+        taskNameByReplicateRefUpdate.put(refUpdate, taskName);
       }
     }
-    return names;
+    return taskNameByReplicateRefUpdate;
   }
 
   boolean wouldPush(URIish uri, Project.NameKey project, String ref) {

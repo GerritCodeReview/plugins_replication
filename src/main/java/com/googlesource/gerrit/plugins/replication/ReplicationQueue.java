@@ -41,6 +41,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -69,6 +70,11 @@ public class ReplicationQueue
   private final Queue<ReferenceUpdatedEvent> beforeStartupEventsQueue;
   private Distributor distributor;
 
+  protected enum Prune {
+    TRUE,
+    FALSE;
+  }
+
   @Inject
   ReplicationQueue(
       ReplicationConfig rc,
@@ -94,7 +100,7 @@ public class ReplicationQueue
       destinations.get().startup(workQueue);
       running = true;
       replicationTasksStorage.recoverAll();
-      firePendingEvents();
+      synchronizePendingEvents(Prune.FALSE);
       fireBeforeStartupEvents();
       distributor = new Distributor(workQueue);
     }
@@ -193,8 +199,14 @@ public class ReplicationQueue
     }
   }
 
-  private void firePendingEvents() {
+  private void synchronizePendingEvents(Prune prune) {
     if (replaying.compareAndSet(false, true)) {
+      final Map<ReplicateRefUpdate, String> taskNamesByReplicateRefUpdate = new ConcurrentHashMap<>();
+      if (Prune.TRUE.equals(prune)) {
+        for (Destination destination : destinations.get().getAll(FilterType.ALL)) {
+          taskNamesByReplicateRefUpdate.putAll(destination.getTaskNamesByReplicateRefUpdate());
+        }
+      }
       new ChainedScheduler.StreamScheduler<>(
           workQueue.getDefaultQueue(),
           replicationTasksStorage.streamWaiting(),
@@ -203,6 +215,9 @@ public class ReplicationQueue
             public void run(ReplicationTasksStorage.ReplicateRefUpdate u) {
               try {
                 fire(new URIish(u.uri()), Project.nameKey(u.project()), u.ref());
+                if (Prune.TRUE.equals(prune)) {
+                  taskNamesByReplicateRefUpdate.remove(u);
+                }
               } catch (URISyntaxException e) {
                 repLog.atSevere().withCause(e).log(
                     "Encountered malformed URI for persisted event %s", u);
@@ -213,6 +228,9 @@ public class ReplicationQueue
 
             @Override
             public void onDone() {
+              if (Prune.TRUE.equals(prune)) {
+                pruneNoLongerPending(taskNamesByReplicateRefUpdate.values());
+              }
               replaying.set(false);
             }
 
@@ -224,17 +242,12 @@ public class ReplicationQueue
     }
   }
 
-  private void pruneCompleted() {
+  private void pruneNoLongerPending(Collection<String> prunableTaskNames) {
     // Queue tasks have wrappers around them so workQueue.getTasks() does not return the PushOnes.
     // We also cannot access them by taskId since PushOnes don't have a taskId, they do have
-    // and Id, but it not the id assigned to the task in the queues. The tasks in the queue
-    // do use the same name as returned by toString() though, so that be used to correlate
+    // an Id, but it is not the id assigned to the task in the queues. The tasks in the queue
+    // do use the same name as returned by toString() though, so that can be used to correlate
     // PushOnes with queue tasks despite their wrappers.
-    Set<String> prunableTaskNames = new HashSet<>();
-    for (Destination destination : destinations.get().getAll(FilterType.ALL)) {
-      prunableTaskNames.addAll(destination.getPrunableTaskNames());
-    }
-
     for (WorkQueue.Task<?> task : workQueue.getTasks()) {
       WorkQueue.Task.State state = task.getState();
       if (state == WorkQueue.Task.State.SLEEPING || state == WorkQueue.Task.State.READY) {
@@ -310,8 +323,7 @@ public class ReplicationQueue
         return;
       }
       try {
-        firePendingEvents();
-        pruneCompleted();
+        synchronizePendingEvents(Prune.TRUE);
       } catch (Exception e) {
         repLog.atSevere().withCause(e).log("error distributing tasks");
       }
