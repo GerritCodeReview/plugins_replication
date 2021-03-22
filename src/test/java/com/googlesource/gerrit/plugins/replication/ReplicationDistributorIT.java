@@ -82,6 +82,21 @@ public class ReplicationDistributorIT extends ReplicationStorageDaemon {
     }
   }
 
+  @Test
+  public void distributorPrunesTaskFromWorkQueue() throws Exception {
+    createTestProject(project + "replica");
+    setReplicationDestination("foo", "replica", ALL_PROJECTS, Integer.MAX_VALUE);
+    reloadConfig();
+
+    String newBranch = "refs/heads/foo_branch";
+    createBranch(project, "refs/heads/master", newBranch);
+
+    deleteWaitingReplicationTasks(newBranch); // This simulates the work being started by other node
+
+    assertThat(waitForProjectTaskCount(0, Duration.ofSeconds(TEST_DISTRIBUTION_CYCLE_SECONDS)))
+        .isTrue();
+  }
+
   private List<WorkQueue.Task<?>> getProjectTasks() {
     return getInstance(WorkQueue.class).getTasks().stream()
         .filter(t -> t instanceof WorkQueue.ProjectTask)
