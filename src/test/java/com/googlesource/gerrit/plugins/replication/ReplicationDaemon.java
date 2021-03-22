@@ -26,6 +26,7 @@ import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.server.config.SitePaths;
+import com.google.gerrit.server.git.LocalDiskRepositoryManager;
 import com.google.inject.Inject;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -70,6 +71,18 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
   @Inject private ProjectOperations projectOperations;
   protected Path gitPath;
   protected FileBasedConfig config;
+
+  protected void setDistributionInterval(int interval) throws IOException {
+    config.setInt("replication", null, "distributionInterval", interval);
+    config.save();
+  }
+
+  protected String getProjectUri(Project.NameKey project) throws Exception {
+    return ((LocalDiskRepositoryManager) repoManager)
+        .getBasePath(project)
+        .resolve(project.get() + ".git")
+        .toString();
+  }
 
   protected void setReplicationDestination(
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
