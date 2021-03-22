@@ -91,6 +91,23 @@ public class ReplicationDistributorIT extends ReplicationStorageDaemon {
     }
   }
 
+  @Test
+  public void distributorPruningTaskFromWorkQueue() throws Exception {
+    createTestProject(project + "replica");
+    setReplicationDestination("foo", "replica", ALL_PROJECTS, Integer.MAX_VALUE);
+    reloadConfig();
+
+    String newBranch = "refs/heads/foo_branch";
+    BranchInput input = new BranchInput();
+    input.revision = "refs/heads/master";
+    gApi.projects().name(project.get()).branch(newBranch).create(input);
+
+    deleteWaitingReplicationTasks(newBranch); // This simulates the work being started by other node
+
+    WaitUtil.waitUntil(
+        () -> getProjectTasks().size() == 0, Duration.ofSeconds(TEST_DISTRIBUTION_CYCLE_SECONDS));
+  }
+
   private List<WorkQueue.Task<?>> getProjectTasks() {
     return getInstance(WorkQueue.class).getTasks().stream()
         .filter(t -> t instanceof WorkQueue.ProjectTask)
