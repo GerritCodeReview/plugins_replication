@@ -71,6 +71,11 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
   protected Path gitPath;
   protected FileBasedConfig config;
 
+  protected void setDistributionInterval(int interval) throws IOException {
+    config.setInt("replication", null, "distributionInterval", interval);
+    config.save();
+  }
+
   protected void setReplicationDestination(
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
     setReplicationDestination(
