@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e91c211_13290033",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1096249
+      },
+      "writtenOn": "2021-03-23T04:27:48Z",
+      "side": 1,
+      "message": "s/load the distributor puts/the load by distributor?\nor\ns/load the distributor/the load that distributor?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 50
+      },
+      "revId": "d3e8380311d73a463e6a9c0d5bde88f7d9a369b8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3ad577d_bc26a709",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1096249
+      },
+      "writtenOn": "2021-03-23T04:27:48Z",
+      "side": 1,
+      "message": "Should this be moved inside the if block below?",
+      "range": {
+        "startLine": 203,
+        "startChar": 42,
+        "endLine": 203,
+        "endChar": 71
+      },
+      "revId": "d3e8380311d73a463e6a9c0d5bde88f7d9a369b8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
