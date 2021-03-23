@@ -45,6 +45,29 @@
       },
       "revId": "d3e8380311d73a463e6a9c0d5bde88f7d9a369b8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a86e91a_d9ae9232",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-03-23T17:15:07Z",
+      "side": 1,
+      "message": "I would remove this ToDo, because I don\u0027t think we plan on doing this.",
+      "range": {
+        "startLine": 232,
+        "startChar": 16,
+        "endLine": 232,
+        "endChar": 67
+      },
+      "revId": "d3e8380311d73a463e6a9c0d5bde88f7d9a369b8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
