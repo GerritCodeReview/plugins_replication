@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce927f66_49b7a299",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-03-23T18:45:47Z",
+      "side": 1,
+      "message": "\u003e The things exposed from tasks are getProjectNameKey(), getRemoteName(). Maybe also add complete uri ?\n\nI don\u0027t believe we want to modify core to write this test case.",
+      "parentUuid": "5a74029b_ee6a3e5d",
+      "range": {
+        "startLine": 81,
+        "startChar": 12,
+        "endLine": 81,
+        "endChar": 34
+      },
+      "revId": "cbb8407307f3c35b6779e6d7c318f8b901b91fc9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9edbabb3_f0394619",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
         "patchSetId": 3
@@ -138,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07ad09b9_29f3a65d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-03-23T18:45:47Z",
+      "side": 1,
+      "message": "\u003e Yeah, does \"distributorReplicatingTaskFromStorage\" sounds good ?\n\nThe intent of the test that I am aware of is something like \"distributorAddsTasksFromStorage\".",
+      "parentUuid": "e7bcd60d_cfa7270e",
+      "revId": "cbb8407307f3c35b6779e6d7c318f8b901b91fc9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "35e25a7f_15d34989",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
         "patchSetId": 3
@@ -196,6 +238,30 @@
       "side": 1,
       "message": "If we need a valid ReplicateRefUpdate, uri is the generated dynamically by test setup. project, ref, remote can be just populated as strings",
       "parentUuid": "b93efdb0_3c872dc2",
+      "range": {
+        "startLine": 105,
+        "startChar": 2,
+        "endLine": 105,
+        "endChar": 10
+      },
+      "revId": "cbb8407307f3c35b6779e6d7c318f8b901b91fc9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51ebb661_cfff0c1d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-03-23T18:45:47Z",
+      "side": 1,
+      "message": "Yes, but you control the setup and this can deduce those things no?",
+      "parentUuid": "806d4d3e_81331bdd",
       "range": {
         "startLine": 105,
         "startChar": 2,
