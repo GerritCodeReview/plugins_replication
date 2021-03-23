@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66ede44f_d48faa58",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2021-03-23T19:32:18Z",
+      "side": 1,
+      "message": "Complete uri is already part of toString(), I was suggesting if we can also add that to the assert.",
+      "parentUuid": "ce927f66_49b7a299",
+      "range": {
+        "startLine": 81,
+        "startChar": 12,
+        "endLine": 81,
+        "endChar": 34
+      },
+      "revId": "cbb8407307f3c35b6779e6d7c318f8b901b91fc9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9edbabb3_f0394619",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
         "patchSetId": 3
