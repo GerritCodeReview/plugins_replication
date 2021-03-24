@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56b20509_f722153b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-03-24T19:30:44Z",
+      "side": 1,
+      "message": "You aren\u0027t actually asserting here that the work completed, you are asserting that the task completed. Below you are asserting that the work completed.",
+      "range": {
+        "startLine": 75,
+        "startChar": 34,
+        "endLine": 75,
+        "endChar": 38
+      },
+      "revId": "b007949ec4c40e3586eb2c7035f56e502e232289",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8b6eaba_07b1d07b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-03-24T19:30:44Z",
+      "side": 1,
+      "message": "s/waitForProjectTasksCount/waitForProjectTaskCount/ (singular count)",
+      "range": {
+        "startLine": 102,
+        "startChar": 18,
+        "endLine": 102,
+        "endChar": 42
+      },
+      "revId": "b007949ec4c40e3586eb2c7035f56e502e232289",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
