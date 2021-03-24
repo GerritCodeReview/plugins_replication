@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6c72db7_821cdc32",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2021-03-24T01:29:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dbd52ea_f1d9f1ec",
+      "revId": "cbb8407307f3c35b6779e6d7c318f8b901b91fc9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "846076f6_b6a24958",
@@ -137,6 +155,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fb1ed60_691c94e6",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2021-03-24T01:29:35Z",
+      "side": 1,
+      "message": "Removing toString() assert since its fragile.",
+      "parentUuid": "7b745194_1b8c764e",
+      "range": {
+        "startLine": 81,
+        "startChar": 12,
+        "endLine": 81,
+        "endChar": 34
+      },
+      "revId": "cbb8407307f3c35b6779e6d7c318f8b901b91fc9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9edbabb3_f0394619",
@@ -226,6 +268,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2647540b_6b04bb44",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2021-03-24T01:29:35Z",
+      "side": 1,
+      "message": "Changing this to assert() since its part of the test case.",
+      "parentUuid": "07ad09b9_29f3a65d",
+      "revId": "cbb8407307f3c35b6779e6d7c318f8b901b91fc9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35e25a7f_15d34989",
@@ -239,6 +299,30 @@
       "writtenOn": "2021-03-23T16:57:32Z",
       "side": 1,
       "message": "Use defined constant.",
+      "range": {
+        "startLine": 87,
+        "startChar": 41,
+        "endLine": 87,
+        "endChar": 61
+      },
+      "revId": "cbb8407307f3c35b6779e6d7c318f8b901b91fc9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7031ec8_a5886e62",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2021-03-24T01:29:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35e25a7f_15d34989",
       "range": {
         "startLine": 87,
         "startChar": 41,
@@ -310,6 +394,30 @@
       "side": 1,
       "message": "Yes, but you control the setup and this can deduce those things no?",
       "parentUuid": "806d4d3e_81331bdd",
+      "range": {
+        "startLine": 105,
+        "startChar": 2,
+        "endLine": 105,
+        "endChar": 10
+      },
+      "revId": "cbb8407307f3c35b6779e6d7c318f8b901b91fc9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "732a2e7a_deae8d0c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2021-03-24T01:29:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51ebb661_cfff0c1d",
       "range": {
         "startLine": 105,
         "startChar": 2,
