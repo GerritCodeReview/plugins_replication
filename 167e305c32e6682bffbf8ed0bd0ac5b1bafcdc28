@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "595d459a_9a28a24b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-03-24T16:49:27Z",
+      "side": 1,
+      "message": "This name is a bit vague (no idea from the name what condition it is waiting for).",
+      "range": {
+        "startLine": 106,
+        "startChar": 18,
+        "endLine": 106,
+        "endChar": 37
+      },
+      "revId": "167e305c32e6682bffbf8ed0bd0ac5b1bafcdc28",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
