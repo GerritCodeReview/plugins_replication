@@ -93,6 +93,30 @@
       },
       "revId": "fca0b140bf9ec29176934ac44f31ac442fe3cd43",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2798f76_aec78816",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-03-24T15:23:57Z",
+      "side": 1,
+      "message": "I think it is better to assume that any failure not thrown by an assert means that a test was \"untested\" (infra/setup problems), and we should rely only on asserts for test \"fail\" statuses.",
+      "parentUuid": "5b449c6a_edc561a4",
+      "range": {
+        "startLine": 108,
+        "startChar": 54,
+        "endLine": 108,
+        "endChar": 63
+      },
+      "revId": "fca0b140bf9ec29176934ac44f31ac442fe3cd43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
