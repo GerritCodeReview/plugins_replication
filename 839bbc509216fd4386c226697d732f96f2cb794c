@@ -16,6 +16,29 @@
       "message": "hướng dẫn trong tài liệu Gerrit",
       "revId": "839bbc509216fd4386c226697d732f96f2cb794c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "979aa11f_181ce6b3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-03-29T21:44:50Z",
+      "side": 1,
+      "message": "We don\u0027t use local finals: https://gerrit-review.googlesource.com/Documentation/dev-crafting-changes.html#_final",
+      "range": {
+        "startLine": 204,
+        "startChar": 6,
+        "endLine": 204,
+        "endChar": 12
+      },
+      "revId": "839bbc509216fd4386c226697d732f96f2cb794c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
