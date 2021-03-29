@@ -39,6 +39,30 @@
       },
       "revId": "839bbc509216fd4386c226697d732f96f2cb794c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beb4c6f3_a3dc07ad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-03-29T23:04:47Z",
+      "side": 1,
+      "message": "Unless they are required, and java requires it here since it is being used in an anonymous class.",
+      "parentUuid": "979aa11f_181ce6b3",
+      "range": {
+        "startLine": 204,
+        "startChar": 6,
+        "endLine": 204,
+        "endChar": 12
+      },
+      "revId": "839bbc509216fd4386c226697d732f96f2cb794c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
