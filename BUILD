@@ -14,9 +14,6 @@ gerrit_plugin(
         "Gerrit-SshModule: com.googlesource.gerrit.plugins.replication.SshModule",
     ],
     resources = glob(["src/main/resources/**/*"]),
-    deps = [
-        "//lib/auto:auto-value-gson",
-    ],
 )
 
 junit_tests(
