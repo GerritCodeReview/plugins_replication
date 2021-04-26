@@ -19,6 +19,7 @@ import static com.google.common.truth.Truth.assertThat;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.WaitUtil;
+import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.WorkQueue;
 import java.time.Duration;
@@ -89,7 +90,7 @@ public class ReplicationDistributorIT extends ReplicationStorageDaemon {
     reloadConfig();
 
     String newBranch = "refs/heads/foo_branch";
-    createBranch(project, "refs/heads/master", newBranch);
+    createBranch(BranchNameKey.create(project, newBranch));
 
     deleteWaitingReplicationTasks(newBranch); // This simulates the work being started by other node
 
