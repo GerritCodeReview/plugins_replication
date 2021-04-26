@@ -22,6 +22,30 @@
       },
       "revId": "e9e9fb5f9e7af9335e883da2508ae5958cb1474b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "873e30fe_0f89f9a3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1105741
+      },
+      "writtenOn": "2021-04-26T15:18:18Z",
+      "side": 1,
+      "message": "Yes, Added a check to confirm a task is created and then delete it.",
+      "parentUuid": "1bee8e3b_7ea79ac2",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 95,
+        "endChar": 33
+      },
+      "revId": "e9e9fb5f9e7af9335e883da2508ae5958cb1474b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
