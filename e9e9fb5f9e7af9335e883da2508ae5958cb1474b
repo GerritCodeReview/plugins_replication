@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bee8e3b_7ea79ac2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDistributorIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-04-26T15:00:38Z",
+      "side": 1,
+      "message": "I think this passed before because we didn\u0027t confirm a waiting task for newBranch was deleted? Is there a way to add that?",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 95,
+        "endChar": 33
+      },
+      "revId": "e9e9fb5f9e7af9335e883da2508ae5958cb1474b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
