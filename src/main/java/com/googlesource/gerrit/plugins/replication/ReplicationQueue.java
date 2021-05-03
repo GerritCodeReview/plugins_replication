@@ -229,7 +229,7 @@ public class ReplicationQueue
             @Override
             public void onDone() {
               if (Prune.TRUE.equals(prune)) {
-                pruneNoLongerPending(taskNamesByReplicateRefUpdate.values());
+                pruneNoLongerPending(new HashSet<>(taskNamesByReplicateRefUpdate.values()));
               }
               replaying.set(false);
             }
@@ -242,7 +242,7 @@ public class ReplicationQueue
     }
   }
 
-  private void pruneNoLongerPending(Collection<String> prunableTaskNames) {
+  private void pruneNoLongerPending(Set<String> prunableTaskNames) {
     // Queue tasks have wrappers around them so workQueue.getTasks() does not return the PushOnes.
     // We also cannot access them by taskId since PushOnes don't have a taskId, they do have
     // an Id, but it is not the id assigned to the task in the queues. The tasks in the queue
