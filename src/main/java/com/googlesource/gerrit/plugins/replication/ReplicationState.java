@@ -140,12 +140,12 @@ public class ReplicationState {
   }
 
   private RefReplicationStatus getRefStatus(String project, String ref) {
-    if (!statusByProjectRef.contains(project, ref)) {
-      RefReplicationStatus refStatus = new RefReplicationStatus(project, ref);
+    RefReplicationStatus refStatus = statusByProjectRef.get(project, ref);
+    if (refStatus == null) {
+      refStatus = new RefReplicationStatus(project, ref);
       statusByProjectRef.put(project, ref, refStatus);
-      return refStatus;
     }
-    return statusByProjectRef.get(project, ref);
+    return refStatus;
   }
 
   public void waitForReplication() throws InterruptedException {
