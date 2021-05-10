@@ -46,6 +46,59 @@ Then reload the replication plugin to pick up the new configuration:
 To manually trigger replication at runtime, see
 SSH command [start](cmd-start.md).
 
+<a name="configuring-cluster-replication"></a>
+Configuring Cluster Replication
+-------------------------------
+
+The replication plugin is designed to allow multiple primaries in a
+cluster to efficiently cooperate together. This cooperation is based on
+the replication event persistence subsystem and thus the directory
+pointed to by the replication.eventsDirectory config key must reside on
+a shared filesystem, such as NFS, to enable this cooperation.  By
+default simply pointing multiple primaries to the same eventsDirectory
+will enable some cooperation by preventing the same replication push
+from being duplicated by more than one primary.
+
+To further improve cooperation across the cluster, the
+replication.distributionInterval config value can be set. With
+distribution enabled, the replication queues for all the nodes sharing
+the same eventsDirectory will reflect approximately the same outstanding
+replication work (i.e. tasks waiting in the queue). Replication pushes
+which are running will continue to only be visible in the queue of the
+node on which the push is actually happening. This feature not only
+helps administrators get a cluster wide view of outstanding replication
+tasks, it allows replication tasks triggered by one primary to be
+fullfilled by another node which is less busy.
+
+This enhanced replication work distribution allows the amount of
+replication work a cluster can handle to scale more evenly and linearly
+with the amount of primaries in the cluster. Adding more nodes to a
+cluster without distribution enabled will generally not allow the thread
+count per remote to be reduced without impacting service levels to those
+remotes. This is because without distribution, all events triggered by a
+node will only be fullfilled by the node which triggered the event, even
+if all the other nodes in the cluster are idle. This behavior implies
+that each node should be configured in a way that allows it alone to
+provide the level of service which each remote requires. However with
+distribution enabled, it becomes possible to reduce the amount of
+replication threads configured per remote proportionally to the amount
+of nodes in the cluster while maintaining the same approximate service
+level as before adding new nodes.
+
+Thread per remote reduction without service impacts is possible with
+distribution because when configuring a node it can be expected that
+other nodes will pick up some of the work it triggers and it no longer
+needs to be configured as if it were the only node in the cluster. For
+example, if a remote requires 6 threads with one node to achieve
+acceptable service, it should only take 2 threads on 3 equivalently
+powered nodes to provide the same service level with distribution
+enabled. Scaling down of the thread requirements per remote results in a
+reduced memory footprint per remote on each node in the cluster and this
+enables the nodes in the cluster to now scale to handle more remotes
+with the approximate same service level than without distribution. The
+amount of extra supported remotes then also scales approximately
+linearly with the extra nodes in a cluster.
+
 File `replication.config`
 -------------------------
 
