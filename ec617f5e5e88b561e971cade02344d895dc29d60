@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "345f07a4_dffd58aa",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-05-28T15:18:43Z",
+      "side": 1,
+      "message": "Thanks for your suggestion! I prefer your second proposed option. Done",
+      "parentUuid": "817aaff7_bc16e938",
+      "range": {
+        "startLine": 55,
+        "startChar": 43,
+        "endLine": 55,
+        "endChar": 50
+      },
+      "revId": "ec617f5e5e88b561e971cade02344d895dc29d60",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b197eb9d_35fc9503",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-05-28T14:44:19Z",
       "side": 1,
       "message": "If you\u0027re going to break this up into two sentences this way, I would do s/it/the node/",
+      "range": {
+        "startLine": 90,
+        "startChar": 60,
+        "endLine": 90,
+        "endChar": 62
+      },
+      "revId": "ec617f5e5e88b561e971cade02344d895dc29d60",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e756a79_ea03edb7",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2021-05-28T15:18:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b197eb9d_35fc9503",
       "range": {
         "startLine": 90,
         "startChar": 60,
