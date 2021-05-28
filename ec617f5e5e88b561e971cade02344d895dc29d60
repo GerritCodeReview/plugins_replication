@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "817aaff7_bc16e938",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-05-28T14:44:19Z",
+      "side": 1,
+      "message": "What was wrong with \u0027and thus\u0027 ? This feels like a run-on sentence now.\n\nIf you think the sentence was too long before and you want to break it up, then I would start this new sentence with what\u0027s at the end:\n\nThis cooperation is based on the replication event persistence subsystem. To enable this cooperation, the directory pointed to by the replication.eventsDirectory config key must reside on a shared filesystem, such as NFS.\n\nBut I think then you could condense the first two sentences:\n\nThe replication plugin is designed to allow multiple primaries in a cluster to efficiently cooperate together via the replication event persistence subsystem. To enable this cooperation, the directory pointed to by the replication.eventsDirectory config key must reside on a shared filesystem, such as NFS.\n\nHow does that read to you?",
+      "range": {
+        "startLine": 55,
+        "startChar": 43,
+        "endLine": 55,
+        "endChar": 50
+      },
+      "revId": "ec617f5e5e88b561e971cade02344d895dc29d60",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b197eb9d_35fc9503",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-05-28T14:44:19Z",
+      "side": 1,
+      "message": "If you\u0027re going to break this up into two sentences this way, I would do s/it/the node/",
+      "range": {
+        "startLine": 90,
+        "startChar": 60,
+        "endLine": 90,
+        "endChar": 62
+      },
+      "revId": "ec617f5e5e88b561e971cade02344d895dc29d60",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
