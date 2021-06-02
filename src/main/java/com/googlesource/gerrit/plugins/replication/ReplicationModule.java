@@ -32,6 +32,10 @@ import com.google.inject.ProvisionException;
 import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationDoneEvent;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationFailedEvent;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationScheduledEvent;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationSucceededEvent;
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicationDoneEvent;
@@ -105,6 +109,16 @@ class ReplicationModule extends AbstractModule {
     EventTypes.register(RefReplicatedEvent.TYPE, RefReplicatedEvent.class);
     EventTypes.register(RefReplicationDoneEvent.TYPE, RefReplicationDoneEvent.class);
     EventTypes.register(ReplicationScheduledEvent.TYPE, ReplicationScheduledEvent.class);
+    EventTypes.register(
+        ProjectDeletionReplicationScheduledEvent.TYPE,
+        ProjectDeletionReplicationScheduledEvent.class);
+    EventTypes.register(
+        ProjectDeletionReplicationFailedEvent.TYPE, ProjectDeletionReplicationFailedEvent.class);
+    EventTypes.register(
+        ProjectDeletionReplicationSucceededEvent.TYPE,
+        ProjectDeletionReplicationSucceededEvent.class);
+    EventTypes.register(
+        ProjectDeletionReplicationDoneEvent.TYPE, ProjectDeletionReplicationDoneEvent.class);
     bind(SshSessionFactory.class).toProvider(ReplicationSshSessionFactoryProvider.class);
 
     bind(TransportFactory.class).to(TransportFactoryImpl.class).in(Scopes.SINGLETON);
