@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import com.google.common.base.Objects;
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.Sandboxed;
 import com.google.gerrit.acceptance.TestPlugin;
@@ -27,9 +28,12 @@ import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.extensions.registration.DynamicSet;
+import com.google.gerrit.server.events.Event;
 import com.google.gerrit.server.events.EventDispatcher;
+import com.google.gerrit.server.events.EventGsonProvider;
 import com.google.gerrit.server.events.ProjectEvent;
 import com.google.gerrit.server.events.RefEvent;
+import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationDoneEvent;
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationFailedEvent;
@@ -43,6 +47,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import org.eclipse.jgit.transport.URIish;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -57,6 +62,7 @@ public class ReplicationEventsIT extends ReplicationDaemon {
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
   @Inject private DynamicItem<EventDispatcher> eventDispatcher;
   private TestDispatcher testDispatcher;
+  private Gson eventGson;
 
   @Before
   public void setup() throws Exception {
@@ -68,6 +74,7 @@ public class ReplicationEventsIT extends ReplicationDaemon {
     setUpTestPlugin();
     testDispatcher = new TestDispatcher();
     eventDispatcher.set(testDispatcher, eventDispatcher.getPluginName());
+    eventGson = new EventGsonProvider().get();
   }
 
   @Test
@@ -252,6 +259,55 @@ public class ReplicationEventsIT extends ReplicationDaemon {
         e -> project.equals(e.getProjectNameKey()));
   }
 
+  @Test
+  public void shouldSerializeObjectsHavingProjectDeletionReplicationScheduledEventAsField()
+      throws Exception {
+    EventWrapper origEvent =
+        new EventWrapper(
+            new ProjectDeletionReplicationScheduledEvent(
+                project.get(), new URIish(String.format("git://someHost/%s.git", project.get()))));
+
+    EventWrapper gotEvent = eventGson.fromJson(eventGson.toJson(origEvent), origEvent.getClass());
+
+    assertThat(origEvent).isEqualTo(gotEvent);
+  }
+
+  @Test
+  public void shouldSerializeObjectsHavingProjectDeletionReplicationSucceededEventAsField()
+      throws Exception {
+    EventWrapper origEvent =
+        new EventWrapper(
+            new ProjectDeletionReplicationSucceededEvent(
+                project.get(), new URIish(String.format("git://someHost/%s.git", project.get()))));
+
+    EventWrapper gotEvent = eventGson.fromJson(eventGson.toJson(origEvent), origEvent.getClass());
+
+    assertThat(origEvent).isEqualTo(gotEvent);
+  }
+
+  @Test
+  public void shouldSerializeObjectsHavingProjectDeletionReplicationFailedEventAsField()
+      throws Exception {
+    EventWrapper origEvent =
+        new EventWrapper(
+            new ProjectDeletionReplicationFailedEvent(
+                project.get(), new URIish(String.format("git://someHost/%s.git", project.get()))));
+
+    EventWrapper gotEvent = eventGson.fromJson(eventGson.toJson(origEvent), origEvent.getClass());
+
+    assertThat(origEvent).isEqualTo(gotEvent);
+  }
+
+  @Test
+  public void shouldSerializeObjectsHavingProjectDeletionReplicationDoneEventAsField() {
+    EventWrapper origEvent =
+        new EventWrapper(new ProjectDeletionReplicationDoneEvent(project.get()));
+
+    EventWrapper gotEvent = eventGson.fromJson(eventGson.toJson(origEvent), origEvent.getClass());
+
+    assertThat(origEvent).isEqualTo(gotEvent);
+  }
+
   private <T extends RefEvent> void waitForRefEvent(Supplier<List<T>> events, String refName)
       throws InterruptedException {
     WaitUtil.waitUntil(
@@ -273,5 +329,27 @@ public class ReplicationEventsIT extends ReplicationDaemon {
 
   private <T extends ProjectEvent> void assertThatAnyMatch(List<T> events, Predicate<T> p) {
     assertThat(events.stream().anyMatch(p)).isTrue();
+  }
+
+  private static class EventWrapper {
+    private final Event event;
+
+    public EventWrapper(Event event) {
+      this.event = event;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (!(o instanceof EventWrapper)) {
+        return false;
+      }
+      EventWrapper eventWrapper = (EventWrapper) o;
+      return Objects.equal(event, eventWrapper.event);
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hashCode(event);
+    }
   }
 }
