@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f97ce8f_9a3b00f4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ProjectDeletionReplicationFailedEvent.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-06-02T20:22:54Z",
+      "side": 1,
+      "message": "We don\u0027t use this syntax elsewhere in gerrit code base, so we probably shouldn\u0027t here either.",
+      "revId": "adc5a8d573c966604de2a3110242dd5bd4eb7d00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
