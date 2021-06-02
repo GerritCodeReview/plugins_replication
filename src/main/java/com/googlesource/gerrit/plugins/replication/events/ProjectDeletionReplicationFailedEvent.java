@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication.events;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Objects;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.events.ProjectEvent;
 import org.eclipse.jgit.transport.URIish;
@@ -39,5 +40,19 @@ public class ProjectDeletionReplicationFailedEvent extends ProjectEvent {
   @VisibleForTesting
   public String getTargetUri() {
     return targetUri;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof ProjectDeletionReplicationFailedEvent)) {
+      return false;
+    }
+    ProjectDeletionReplicationFailedEvent that = (ProjectDeletionReplicationFailedEvent) o;
+    return Objects.equal(project, that.project) && Objects.equal(targetUri, that.targetUri);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(project, targetUri);
   }
 }
