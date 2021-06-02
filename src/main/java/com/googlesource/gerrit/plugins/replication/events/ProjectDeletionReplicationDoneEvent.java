@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication.events;
 
+import com.google.common.base.Objects;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.events.ProjectEvent;
 
@@ -30,5 +31,18 @@ public class ProjectDeletionReplicationDoneEvent extends ProjectEvent {
   @Override
   public Project.NameKey getProjectNameKey() {
     return Project.nameKey(project);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof ProjectDeletionReplicationDoneEvent)) return false;
+    ProjectDeletionReplicationDoneEvent that = (ProjectDeletionReplicationDoneEvent) o;
+    return Objects.equal(project, that.project);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(project);
   }
 }
