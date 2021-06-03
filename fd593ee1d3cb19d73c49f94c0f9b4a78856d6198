@@ -16,6 +16,24 @@
       "message": "This has been raised against stable-3.4 though: should the fix be moved there?",
       "revId": "fd593ee1d3cb19d73c49f94c0f9b4a78856d6198",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d9d6fe2_8c133a6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-06-03T17:56:19Z",
+      "side": 1,
+      "message": "master\u003d\u003dstable-3.4 still for replication: https://gerrit-review.googlesource.com/admin/repos/plugins/replication,branches",
+      "parentUuid": "336287f3_1b8dfddd",
+      "revId": "fd593ee1d3cb19d73c49f94c0f9b4a78856d6198",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
