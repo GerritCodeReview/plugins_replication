@@ -88,6 +88,24 @@
       "parentUuid": "3720c3d9_3b8750d8",
       "revId": "adc5a8d573c966604de2a3110242dd5bd4eb7d00",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54eab3b9_5413ed91",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ProjectDeletionReplicationFailedEvent.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-06-03T17:28:26Z",
+      "side": 1,
+      "message": "Yeah 😞\n\nThanks for fixing manually.",
+      "parentUuid": "bb6dfd58_19284fe5",
+      "revId": "adc5a8d573c966604de2a3110242dd5bd4eb7d00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
