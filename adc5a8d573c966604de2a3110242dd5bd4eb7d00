@@ -34,6 +34,24 @@
       "parentUuid": "0f97ce8f_9a3b00f4",
       "revId": "adc5a8d573c966604de2a3110242dd5bd4eb7d00",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fb280b4_247ad19d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ProjectDeletionReplicationFailedEvent.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-06-03T14:52:02Z",
+      "side": 1,
+      "message": "Sorry, I was referring to the one-liners. We don\u0027t ever use \u0027if ... return ...;\u0027 on a single line in Gerrit (as you see in the examples you shared). Looks like you still have those in PS3, so please fix.",
+      "parentUuid": "8aaae82c_f11ead21",
+      "revId": "adc5a8d573c966604de2a3110242dd5bd4eb7d00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
