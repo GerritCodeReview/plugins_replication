@@ -52,6 +52,24 @@
       "parentUuid": "3d9d6fe2_8c133a6f",
       "revId": "fd593ee1d3cb19d73c49f94c0f9b4a78856d6198",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7e174e1_c011fb6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-06-03T19:28:06Z",
+      "side": 1,
+      "message": "Actually, that wasn\u0027t the case: there are commits on master that are not included in stable-3.4 (Gerrit), in addition to this one.\n\nLet me check if they are still compatible, in that case we could just move the pointer in the submodule.",
+      "parentUuid": "168def35_8b688adf",
+      "revId": "fd593ee1d3cb19d73c49f94c0f9b4a78856d6198",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
