@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "336287f3_1b8dfddd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-06-03T17:46:04Z",
+      "side": 1,
+      "message": "This has been raised against stable-3.4 though: should the fix be moved there?",
+      "revId": "fd593ee1d3cb19d73c49f94c0f9b4a78856d6198",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
