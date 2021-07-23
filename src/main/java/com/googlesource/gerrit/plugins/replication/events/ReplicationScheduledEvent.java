@@ -17,23 +17,17 @@ package com.googlesource.gerrit.plugins.replication.events;
 import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;
 
 import com.google.gerrit.entities.Project;
-import com.google.gerrit.server.events.RefEvent;
+import java.util.Objects;
 import org.eclipse.jgit.transport.URIish;
 
-public class ReplicationScheduledEvent extends RefEvent {
+public class ReplicationScheduledEvent extends RemoteReplicationRefEvent {
   public static final String TYPE = "ref-replication-scheduled";
 
-  public final String project;
-  public final String ref;
   @Deprecated public final String targetNode;
-  public final String targetUri;
 
   public ReplicationScheduledEvent(String project, String ref, URIish targetUri) {
-    super(TYPE);
-    this.project = project;
-    this.ref = ref;
+    super(TYPE, project, ref, targetUri, null);
     this.targetNode = resolveNodeName(targetUri);
-    this.targetUri = targetUri.toASCIIString();
   }
 
   @Override
@@ -44,5 +38,25 @@ public class ReplicationScheduledEvent extends RefEvent {
   @Override
   public Project.NameKey getProjectNameKey() {
     return Project.nameKey(project);
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (!(other instanceof ReplicationScheduledEvent)) {
+      return false;
+    }
+    ReplicationScheduledEvent event = (ReplicationScheduledEvent) other;
+    if (!super.equals(other)) {
+      return false;
+    }
+    if (!Objects.equals(event.targetNode, this.targetNode)) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    return super.hashCode();
   }
 }
