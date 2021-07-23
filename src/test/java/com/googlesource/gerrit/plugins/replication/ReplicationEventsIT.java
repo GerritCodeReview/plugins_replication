@@ -42,11 +42,13 @@ import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplica
 import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicationDoneEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
+import java.net.URISyntaxException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.Before;
 import org.junit.Test;
@@ -306,6 +308,33 @@ public class ReplicationEventsIT extends ReplicationDaemon {
     EventWrapper gotEvent = eventGson.fromJson(eventGson.toJson(origEvent), origEvent.getClass());
 
     assertThat(origEvent).isEqualTo(gotEvent);
+  }
+
+  @Test
+  public void shouldSerializeRefReplicatedEvent() throws URISyntaxException {
+    RefReplicatedEvent origEvent =
+        new RefReplicatedEvent(
+            project.get(),
+            "refs/heads/master",
+            new URIish(String.format("git://someHost/%s.git", project.get())),
+            ReplicationState.RefPushResult.SUCCEEDED,
+            RemoteRefUpdate.Status.OK);
+
+    assertThat(origEvent)
+        .isEqualTo(eventGson.fromJson(eventGson.toJson(origEvent), RefReplicatedEvent.class));
+  }
+
+  @Test
+  public void shouldSerializeReplicationScheduledEvent() throws URISyntaxException {
+    ReplicationScheduledEvent origEvent =
+        new ReplicationScheduledEvent(
+            project.get(),
+            "refs/heads/master",
+            new URIish(String.format("git://someHost/%s.git", project.get())));
+
+    assertThat(origEvent)
+        .isEqualTo(
+            eventGson.fromJson(eventGson.toJson(origEvent), ReplicationScheduledEvent.class));
   }
 
   private <T extends RefEvent> void waitForRefEvent(Supplier<List<T>> events, String refName)
