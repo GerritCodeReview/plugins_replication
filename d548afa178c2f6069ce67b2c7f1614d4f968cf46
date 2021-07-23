@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3994835d_0b5d6602",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RefReplicatedEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-07-23T16:41:41Z",
+      "side": 1,
+      "message": "nit: would probably consider moving it to the common class so that it gets removed with from both classes if/when it is a time to do so ;)",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 45
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee7fd9ec_025eda40",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RemoteReplicationRefEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-07-23T16:41:41Z",
+      "side": 1,
+      "message": "nit: they used to be `public final` so that public getters were not needed",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 25
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc24dc1_631789d1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ReplicationScheduledEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-07-23T16:41:41Z",
+      "side": 1,
+      "message": "nit: probably worth mentioning in commit message as it wasn\u0027t here before ;)",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 3
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
