@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import com.google.common.base.Objects;
 import com.google.gerrit.acceptance.PushOneCommit.Result;
@@ -42,11 +43,13 @@ import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplica
 import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicationDoneEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
+import java.net.URISyntaxException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.Before;
 import org.junit.Test;
@@ -308,6 +311,34 @@ public class ReplicationEventsIT extends ReplicationDaemon {
     assertThat(origEvent).isEqualTo(gotEvent);
   }
 
+  @Test
+  public void shouldSerializeRefReplicatedEvent() throws URISyntaxException {
+    RefReplicatedEvent origEvent =
+        new RefReplicatedEvent(
+            project.get(),
+            "refs/heads/master",
+            new URIish(String.format("git://someHost/%s.git", project.get())),
+            ReplicationState.RefPushResult.SUCCEEDED,
+            RemoteRefUpdate.Status.OK);
+
+    assertThat(origEvent)
+        .isEqualTo(eventGson.fromJson(eventGson.toJson(origEvent), RefReplicatedEvent.class));
+  }
+
+  @Test
+  public void shouldSerializeReplicationScheduledEvent() throws URISyntaxException {
+    ReplicationScheduledEvent origEvent =
+        new ReplicationScheduledEvent(
+            project.get(),
+            "refs/heads/master",
+            new URIish(String.format("git://someHost/%s.git", project.get())));
+
+    assertTrue(
+        equals(
+            origEvent,
+            eventGson.fromJson(eventGson.toJson(origEvent), ReplicationScheduledEvent.class)));
+  }
+
   private <T extends RefEvent> void waitForRefEvent(Supplier<List<T>> events, String refName)
       throws InterruptedException {
     WaitUtil.waitUntil(
@@ -351,5 +382,25 @@ public class ReplicationEventsIT extends ReplicationDaemon {
     public int hashCode() {
       return Objects.hashCode(event);
     }
+  }
+
+  private boolean equals(ReplicationScheduledEvent scheduledEvent, Object other) {
+    if (!(other instanceof ReplicationScheduledEvent)) {
+      return false;
+    }
+    ReplicationScheduledEvent event = (ReplicationScheduledEvent) other;
+    if (!Objects.equal(event.project, scheduledEvent.project)) {
+      return false;
+    }
+    if (!Objects.equal(event.ref, scheduledEvent.ref)) {
+      return false;
+    }
+    if (!Objects.equal(event.targetUri, scheduledEvent.targetUri)) {
+      return false;
+    }
+    if (!Objects.equal(event.status, scheduledEvent.status)) {
+      return false;
+    }
+    return Objects.equal(event.targetNode, scheduledEvent.targetNode);
   }
 }

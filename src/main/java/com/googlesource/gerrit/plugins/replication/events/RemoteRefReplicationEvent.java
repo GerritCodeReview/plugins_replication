@@ -1,4 +1,4 @@
-// Copyright (C) 2016 The Android Open Source Project
+// Copyright (C) 2021 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,28 +14,34 @@
 
 package com.googlesource.gerrit.plugins.replication.events;
 
-import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;
-
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
+import com.google.gerrit.server.events.RefEvent;
 import org.eclipse.jgit.transport.URIish;
 
-public class ReplicationScheduledEvent extends RemoteRefReplicationEvent {
-  public static final String TYPE = "ref-replication-scheduled";
+public class RemoteRefReplicationEvent extends RefEvent {
 
-  @Deprecated public final String targetNode;
+  public final String project;
+  public final String ref;
+  public final String status;
+  public final String targetUri;
 
-  public ReplicationScheduledEvent(String project, String ref, URIish targetUri) {
-    super(TYPE, project, ref, targetUri, null);
-    this.targetNode = resolveNodeName(targetUri);
-  }
-
-  @Override
-  public String getRefName() {
-    return ref;
+  public RemoteRefReplicationEvent(
+      String type, String project, String ref, URIish targetUri, @Nullable String status) {
+    super(type);
+    this.project = project;
+    this.ref = ref;
+    this.status = status;
+    this.targetUri = targetUri.toASCIIString();
   }
 
   @Override
   public Project.NameKey getProjectNameKey() {
     return Project.nameKey(project);
+  }
+
+  @Override
+  public String getRefName() {
+    return ref;
   }
 }

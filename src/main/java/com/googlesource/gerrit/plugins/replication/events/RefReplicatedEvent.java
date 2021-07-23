@@ -16,22 +16,16 @@ package com.googlesource.gerrit.plugins.replication.events;
 
 import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;
 
-import com.google.gerrit.entities.Project;
-import com.google.gerrit.server.events.RefEvent;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
 import java.util.Objects;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
 import org.eclipse.jgit.transport.URIish;
 
-public class RefReplicatedEvent extends RefEvent {
+public class RefReplicatedEvent extends RemoteRefReplicationEvent {
   public static final String TYPE = "ref-replicated";
 
-  public final String project;
-  public final String ref;
   @Deprecated public final String targetNode;
-  public final String targetUri;
-  public final String status;
   public final Status refStatus;
 
   public RefReplicatedEvent(
@@ -40,23 +34,9 @@ public class RefReplicatedEvent extends RefEvent {
       URIish targetUri,
       RefPushResult status,
       RemoteRefUpdate.Status refStatus) {
-    super(TYPE);
-    this.project = project;
-    this.ref = ref;
+    super(TYPE, project, ref, targetUri, status.toString());
     this.targetNode = resolveNodeName(targetUri);
-    this.status = status.toString();
     this.refStatus = refStatus;
-    this.targetUri = targetUri.toASCIIString();
-  }
-
-  @Override
-  public Project.NameKey getProjectNameKey() {
-    return Project.nameKey(project);
-  }
-
-  @Override
-  public String getRefName() {
-    return ref;
   }
 
   @Override
