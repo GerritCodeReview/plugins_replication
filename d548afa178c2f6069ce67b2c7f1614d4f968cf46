@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ca3b52b_25081642",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RefReplicatedEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-07-26T09:37:20Z",
+      "side": 1,
+      "message": "Since it is deprecated I believe it should NOT maintained and adapted, but rather removed, when time arises (not sure what\u0027s the convention for deprecated fields sticking around?).\n\nThat\u0027s why I left it there.\n\nWDYT?",
+      "parentUuid": "3994835d_0b5d6602",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 45
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee7fd9ec_025eda40",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RemoteReplicationRefEvent.java",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2021-07-23T16:41:41Z",
       "side": 1,
       "message": "nit: they used to be `public final` so that public getters were not needed",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 25
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "916328bb_dbb6e5d1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RemoteReplicationRefEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-07-26T09:37:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ee7fd9ec_025eda40",
       "range": {
         "startLine": 24,
         "startChar": 2,
@@ -84,6 +132,30 @@
       "side": 1,
       "message": "why it wasn’t there before? was it just missing? if so shall we keep it in a separate change since it does t look to be part of the refactoring , right ?",
       "parentUuid": "0bc24dc1_631789d1",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 3
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6706c04c_0bae536c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ReplicationScheduledEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-07-26T09:37:20Z",
+      "side": 1,
+      "message": "This is simply needed to satisfy the equality check in the test[1], so it needs to be part of this change. it is quite common to override `equals`, to allow comparison of objects in the tests. We do it for all other events as well, just this one didn\u0027t have any equality test before I introduced one.\n\n@Jacek I would rather not mention this in the commit message, unless you feel strongly about it. I don\u0027t think explains any better why the change was made.\n\n@Ponch? @Jacek?\n\n[1]https://gerrit.googlesource.com/plugins/replication/+/refs/changes/02/312802/2/src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java#335",
+      "parentUuid": "5336031f_26819aca",
       "range": {
         "startLine": 43,
         "startChar": 2,

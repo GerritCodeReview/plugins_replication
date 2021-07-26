@@ -22,6 +22,30 @@
       },
       "revId": "dc9bb2e946e4c6c31e8a4665f30eca6d00017523",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29ff50b5_4225b792",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RefReplicatedEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-07-26T09:37:20Z",
+      "side": 0,
+      "message": "I really believe the targetUri should go in the parent, because all ref replication events point to a target, so it\u0027s a common field.\n\nYou\u0027re right, the targetNode conceptually should also be moved, but since it is deprecated I believe it should NOT be maintained and adapted to the new format, but rather removed (later on, when needed, as part of a different CR).",
+      "parentUuid": "75d8dd8e_95f3cdc1",
+      "range": {
+        "startLine": 49,
+        "startChar": 9,
+        "endLine": 49,
+        "endChar": 18
+      },
+      "revId": "dc9bb2e946e4c6c31e8a4665f30eca6d00017523",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
