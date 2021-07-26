@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "237986c0_51099e31",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RefReplicatedEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-07-26T19:58:53Z",
+      "side": 1,
+      "message": "I think this can actually be removed at any time now. It was released in 3.4 as deprecated: https://gerrit-review.googlesource.com/c/plugins/replication/+/294682\n\nMaybe remove it in a parent of this change so we don\u0027t have to figure out what to do with it? I think it just needs an entry in the 3.5 release notes (homepage repo).",
+      "parentUuid": "0ca3b52b_25081642",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 45
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee7fd9ec_025eda40",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RemoteReplicationRefEvent.java",
         "patchSetId": 2
@@ -180,6 +204,30 @@
       "side": 1,
       "message": "Sounds ok to me, not big deal leaving it here",
       "parentUuid": "6706c04c_0bae536c",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 3
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32774b44_3bdc3bbe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ReplicationScheduledEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-07-26T19:58:53Z",
+      "side": 1,
+      "message": "\u003e This is simply needed to satisfy the equality check in the test[1], so it needs to be part of this change. it is quite common to override `equals`, to allow comparison of objects in the tests. We do it for all other events as well, just this one didn\u0027t have any equality test before I introduced one.\n\nIf that\u0027s being done for the other events I think that\u0027s a bug. We shouldn\u0027t have code used just for tests in the non-test codebase. In other places where tests have needed equals(), we\u0027ve added implementations directly in the tests. I think that\u0027s the appropriate thing to do here if there\u0027s no \"real\" need for equals().",
+      "parentUuid": "83631666_7fa832a5",
       "range": {
         "startLine": 43,
         "startChar": 2,
