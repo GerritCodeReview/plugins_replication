@@ -164,6 +164,30 @@
       },
       "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83631666_7fa832a5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ReplicationScheduledEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2021-07-26T09:51:59Z",
+      "side": 1,
+      "message": "Sounds ok to me, not big deal leaving it here",
+      "parentUuid": "6706c04c_0bae536c",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 3
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
