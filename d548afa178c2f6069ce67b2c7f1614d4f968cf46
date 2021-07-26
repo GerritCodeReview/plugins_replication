@@ -68,6 +68,30 @@
       },
       "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5336031f_26819aca",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ReplicationScheduledEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2021-07-26T07:55:50Z",
+      "side": 1,
+      "message": "why it wasn’t there before? was it just missing? if so shall we keep it in a separate change since it does t look to be part of the refactoring , right ?",
+      "parentUuid": "0bc24dc1_631789d1",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 3
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
