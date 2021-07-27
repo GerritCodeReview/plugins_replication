@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5468129d_5527e391",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RefReplicatedEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-07-27T15:45:39Z",
+      "side": 1,
+      "message": "We know at least of one client that will be broken [1] (as you mentioned in [2]).\n\nThis change\u0027s only intention is to change the internal hierarchy of the events and I believe it\u0027s unrelated to the (arguably farther-reaching) task of removing that field.\n\nI believe this intention can be fulfilled without the need of addressing the removal of the deprecated field.\n\nI have created separate a monorail issue for that [3]\n\n[1] https://github.com/sonyxperiadev/gerrit-events/blob/d15f38adc7ea90a98486dbe0df01d31335aaa3af/src/main/java/com/sonymobile/tools/gerrit/gerritevents/dto/events/RefReplicated.java\n[2] https://gerrit-review.googlesource.com/c/modules/events-broker/+/312853\n[3] https://bugs.chromium.org/p/gerrit/issues/detail?id\u003d14825",
+      "parentUuid": "237986c0_51099e31",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 45
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee7fd9ec_025eda40",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RemoteReplicationRefEvent.java",
         "patchSetId": 2
@@ -228,6 +252,30 @@
       "side": 1,
       "message": "\u003e This is simply needed to satisfy the equality check in the test[1], so it needs to be part of this change. it is quite common to override `equals`, to allow comparison of objects in the tests. We do it for all other events as well, just this one didn\u0027t have any equality test before I introduced one.\n\nIf that\u0027s being done for the other events I think that\u0027s a bug. We shouldn\u0027t have code used just for tests in the non-test codebase. In other places where tests have needed equals(), we\u0027ve added implementations directly in the tests. I think that\u0027s the appropriate thing to do here if there\u0027s no \"real\" need for equals().",
       "parentUuid": "83631666_7fa832a5",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 3
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd313e9b_bc4320f0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ReplicationScheduledEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-07-27T15:45:39Z",
+      "side": 1,
+      "message": "\u003e \u003e This is simply needed to satisfy the equality check in the test[1], so it needs to be part of this change. it is quite common to override `equals`, to allow comparison of objects in the tests. We do it for all other events as well, just this one didn\u0027t have any equality test before I introduced one.\n\u003e \n\u003e If that\u0027s being done for the other events I think that\u0027s a bug. We shouldn\u0027t have code used just for tests in the non-test codebase. In other places where tests have needed equals(), we\u0027ve added implementations directly in the tests.\n\u003e I think that\u0027s the appropriate thing to do here if there\u0027s no \"real\" need for equals().\n\nYes, I\u0027d be happy too if we could remove the need for that.\nI don\u0027t like the alternatives either though, such as reflection, mockito, or field-by-field comparison.\n\nCould you point me to any of those cases where you added implementations directly in the tests, I couldn\u0027t find any? 😕",
+      "parentUuid": "32774b44_3bdc3bbe",
       "range": {
         "startLine": 43,
         "startChar": 2,
