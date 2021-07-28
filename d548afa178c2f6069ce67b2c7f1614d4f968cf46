@@ -144,6 +144,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "824cb8ae_bc3e5698",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RefReplicatedEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-07-28T15:18:39Z",
+      "side": 1,
+      "message": "I completely agree it shouldn\u0027t be this change. If you read my comment, I suggested \"Maybe remove it in a parent of this change\". I don\u0027t really care if it gets removed now or later, just wanted to offer it as a way around the conflict of whether the field should move with the refactor or stay in the current classes. If you delete it in the change before this, then there\u0027s no problem here refactoring the rest.\n\nAnd yes, that client will end up broken, but not until they use a version without this field (likely 3.5 in Q4 unless someone is using that client against a tip version of Gerrit). Thanks for the bug to track it.",
+      "parentUuid": "e34b6050_d84edcfe",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 45
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee7fd9ec_025eda40",
@@ -348,6 +372,30 @@
       "side": 1,
       "message": "I understand the rationale for it now and IMHO it doesn\u0027t require the commit message entry.",
       "parentUuid": "bd313e9b_bc4320f0",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 3
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05cf1a6f_1bd711d7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ReplicationScheduledEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-07-28T15:18:39Z",
+      "side": 1,
+      "message": "It\u0027s the same field-by-field code that you have here, just moved to the test class. It was added in this change https://gerrit-review.googlesource.com/c/plugins/replication/+/276714 before we moved to auto-value in https://gerrit.googlesource.com/plugins/replication/+/63fb2b4ba85380d798acbdc076e8673353507569%5E%21/#F8",
+      "parentUuid": "d36b14c9_94c79f7f",
       "range": {
         "startLine": 43,
         "startChar": 2,
