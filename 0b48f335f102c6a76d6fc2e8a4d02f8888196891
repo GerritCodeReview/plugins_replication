@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d00aba2_69a0abe4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-07-28T08:00:06Z",
+      "side": 1,
+      "message": "I would rephrase as:\n\"Inherit remote replication events from a common parent class\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 51
+      },
+      "revId": "0b48f335f102c6a76d6fc2e8a4d02f8888196891",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba7aae5d_7684bee1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-07-28T08:00:06Z",
+      "side": 1,
+      "message": "nit: extract?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 10
+      },
+      "revId": "0b48f335f102c6a76d6fc2e8a4d02f8888196891",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
