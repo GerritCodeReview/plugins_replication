@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5baedf79_bce37c79",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RemoteReplicationRefEvent.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-07-29T13:15:20Z",
+      "side": 1,
+      "message": "Yes, I agree.",
+      "parentUuid": "f0014b32_a054efda",
+      "range": {
+        "startLine": 22,
+        "startChar": 13,
+        "endLine": 22,
+        "endChar": 38
+      },
+      "revId": "e1666e1aa0bf482fc542517dac1e129da2c9f3ee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6ddf56d_5b40d664",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-07-29T13:03:18Z",
       "side": 1,
       "message": "Seems like we are using the pattern at L#324 for the assertions. Any reason why here we are using a different one?",
+      "range": {
+        "startLine": 336,
+        "startChar": 4,
+        "endLine": 339,
+        "endChar": 95
+      },
+      "revId": "e1666e1aa0bf482fc542517dac1e129da2c9f3ee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cec3c267_ad3d5f2d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-07-29T13:15:20Z",
+      "side": 1,
+      "message": "This is to do with the discussion about introducing equals() just for testing purposes[1].\n\n@Nasser raised some points against it, so we agreed to remove the (newly introduced) equals() method for the ReplicationScheduledEvent and to only define it the test (which is what I have done in the last ps).\n\nRefReplicatedEvent however already has an overridden equals(), so we can use object equality without having to redefine a new equals() for it.\n\nHope it makes sense.\n\n[1]https://gerrit-review.googlesource.com/c/plugins/replication/+/312802/comments/0bc24dc1_631789d1",
+      "parentUuid": "f6ddf56d_5b40d664",
       "range": {
         "startLine": 336,
         "startChar": 4,
