@@ -404,6 +404,30 @@
       },
       "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6976158f_fec916b6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/ReplicationScheduledEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-07-29T09:09:12Z",
+      "side": 1,
+      "message": "Thanks @Nasser, done 😊",
+      "parentUuid": "05cf1a6f_1bd711d7",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 3
+      },
+      "revId": "d548afa178c2f6069ce67b2c7f1614d4f968cf46",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
