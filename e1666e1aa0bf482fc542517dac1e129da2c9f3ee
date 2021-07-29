@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0014b32_a054efda",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/RemoteReplicationRefEvent.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2021-07-29T13:03:18Z",
+      "side": 1,
+      "message": "nit: RemoteReplicationRefEvent \u003d\u003e RemoteRefReplicationEvent, the latter sounds more natural to me?",
+      "range": {
+        "startLine": 22,
+        "startChar": 13,
+        "endLine": 22,
+        "endChar": 38
+      },
+      "revId": "e1666e1aa0bf482fc542517dac1e129da2c9f3ee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6ddf56d_5b40d664",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationEventsIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2021-07-29T13:03:18Z",
+      "side": 1,
+      "message": "Seems like we are using the pattern at L#324 for the assertions. Any reason why here we are using a different one?",
+      "range": {
+        "startLine": 336,
+        "startChar": 4,
+        "endLine": 339,
+        "endChar": 95
+      },
+      "revId": "e1666e1aa0bf482fc542517dac1e129da2c9f3ee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
