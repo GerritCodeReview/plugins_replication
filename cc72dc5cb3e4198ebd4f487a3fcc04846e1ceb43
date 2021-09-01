@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e69c532_64ea65d8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfigParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-09-01T18:44:14Z",
+      "side": 0,
+      "message": "@marcin, I think it should still have at least *one* push refSpec to be considered a valid push replication.\n\nFor me this is the spectrum of possibilities:\n\n- It has only one (or more) push refSpec: it is a valid destination\n- It has one (or more) push refSpec \u0026\u0026 possibly one (or more) fetch refSpec: it is still a valid destination\n- It has NO push refspec and no fetch refspec: it should be considered a destination, as this is the default.\n- it has NO push refspec BUT it has fetch refspec: it should NOT be considered a destination.\n\nWDYT?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 7
+      },
+      "revId": "cc72dc5cb3e4198ebd4f487a3fcc04846e1ceb43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
