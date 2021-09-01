@@ -67,7 +67,7 @@ public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
   }
 
   @Test
-  public void shouldSkipFetchRefSpecs() throws Exception {
+  public void shouldLoadDestinationWithFetchRefSpecs() throws Exception {
     FileBasedConfig config = newReplicationConfig();
     String pushRemote = "pushRemote";
     final String aRemoteURL = "ssh://somewhere/${name}.git";
@@ -82,8 +82,9 @@ public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
         newDestinationsCollections(newReplicationFileBasedConfig());
     destinationsCollections.startup(workQueueMock);
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
-    assertThat(destinations).hasSize(1);
+    assertThat(destinations).hasSize(2);
 
     assertThatIsDestination(destinations.get(0), pushRemote, aRemoteURL);
+    assertThatIsDestination(destinations.get(1), fetchRemote, aRemoteURL);
   }
 }

@@ -14,8 +14,6 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.flogger.FluentLogger;
@@ -53,11 +51,6 @@ public class DestinationConfigParser implements ConfigParser {
     ImmutableList.Builder<RemoteConfiguration> confs = ImmutableList.builder();
     for (RemoteConfig c : allRemotes(config)) {
       if (c.getURIs().isEmpty()) {
-        continue;
-      }
-
-      if (!c.getFetchRefSpecs().isEmpty()) {
-        repLog.atInfo().log("Ignore '%s' endpoint: not a 'push' target", c.getName());
         continue;
       }
 
