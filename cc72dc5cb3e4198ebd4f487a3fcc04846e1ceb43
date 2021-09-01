@@ -118,6 +118,30 @@
       },
       "revId": "cc72dc5cb3e4198ebd4f487a3fcc04846e1ceb43",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "858a950d_9d3c2a1d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfigParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2021-09-01T19:04:56Z",
+      "side": 0,
+      "message": "Sure we can do that in a follow up change",
+      "parentUuid": "b824c6a7_1d86a2b9",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 7
+      },
+      "revId": "cc72dc5cb3e4198ebd4f487a3fcc04846e1ceb43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
