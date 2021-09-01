@@ -94,6 +94,30 @@
       },
       "revId": "cc72dc5cb3e4198ebd4f487a3fcc04846e1ceb43",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b824c6a7_1d86a2b9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfigParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2021-09-01T19:03:53Z",
+      "side": 0,
+      "message": "ok I was under the impression that pull-replication was backed up by replication plugin *for the time being*, until we get confident and we reach feature parity.\n\nI hadn\u0027t realized that this is now not just a choice but a *must* that the two plugins always work together.\n\nIs this intention documented somewhere? If not, I suggest we make it really evident",
+      "parentUuid": "a52aefc5_0a87354a",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 7
+      },
+      "revId": "cc72dc5cb3e4198ebd4f487a3fcc04846e1ceb43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
