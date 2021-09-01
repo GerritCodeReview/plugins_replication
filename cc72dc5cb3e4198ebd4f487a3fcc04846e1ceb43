@@ -70,6 +70,30 @@
       },
       "revId": "cc72dc5cb3e4198ebd4f487a3fcc04846e1ceb43",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a52aefc5_0a87354a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfigParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2021-09-01T18:58:02Z",
+      "side": 0,
+      "message": "For now there is no such a configuration because pull-replication should always work with replication. Pull-replication is not providing full functionality of replication plugin. But if you really want to disable replication for some pull-replication configuration you have to do it explicitly with something like push \u003d NON_EXISTING_REF. In the future when pull-replication will contain full functionality we can apply logic of discarding destinations when push param is not set.",
+      "parentUuid": "3192df95_923f112e",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 7
+      },
+      "revId": "cc72dc5cb3e4198ebd4f487a3fcc04846e1ceb43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
