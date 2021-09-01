@@ -22,6 +22,30 @@
       },
       "revId": "cc72dc5cb3e4198ebd4f487a3fcc04846e1ceb43",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecfc59c5_86750ea9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfigParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2021-09-01T18:50:07Z",
+      "side": 0,
+      "message": "I\u0027m not sure. For replication plugin we want to keep \"backward compatibility\" and just add extra parameters for pull-replication. This means that when there is NO push refspec we should use defaults even if there is a fetch refspec.",
+      "parentUuid": "5e69c532_64ea65d8",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 7
+      },
+      "revId": "cc72dc5cb3e4198ebd4f487a3fcc04846e1ceb43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
