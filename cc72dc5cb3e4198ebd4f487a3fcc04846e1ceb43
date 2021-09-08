@@ -142,6 +142,30 @@
       },
       "revId": "cc72dc5cb3e4198ebd4f487a3fcc04846e1ceb43",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6673c318_fd73054f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfigParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-09-08T01:01:23Z",
+      "side": 0,
+      "message": "I am not sure that the two plugins must be used together. They may or may not. You may have a purely pull replication endpoint (e.g. you are mirroring an external repository) isn\u0027t it?",
+      "parentUuid": "858a950d_9d3c2a1d",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 7
+      },
+      "revId": "cc72dc5cb3e4198ebd4f487a3fcc04846e1ceb43",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
