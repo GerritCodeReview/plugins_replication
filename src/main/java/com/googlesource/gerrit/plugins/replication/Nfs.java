@@ -22,7 +22,6 @@ public class Nfs {
   /**
    * Determine if a throwable or a cause in its causal chain is a Stale NFS File Handle
    *
-   * @param throwable
    * @return a boolean true if the throwable or a cause in its causal chain is a Stale NFS File
    *     Handle
    */
@@ -39,7 +38,6 @@ public class Nfs {
   /**
    * Determine if an IOException is a Stale NFS File Handle
    *
-   * @param ioe
    * @return a boolean true if the IOException is a Stale NFS FIle Handle
    */
   public static boolean isStaleFileHandle(IOException ioe) {
