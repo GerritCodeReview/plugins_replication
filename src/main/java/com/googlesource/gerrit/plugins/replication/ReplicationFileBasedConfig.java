@@ -71,16 +71,18 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     return null;
   }
 
-  /* (non-Javadoc)
-   * @see com.googlesource.gerrit.plugins.replication.ReplicationConfig#isReplicateAllOnPluginStart()
+  /**
+   * See
+   * {@link com.googlesource.gerrit.plugins.replication.ReplicationConfig#isReplicateAllOnPluginStart()}
    */
   @Override
   public boolean isReplicateAllOnPluginStart() {
     return replicateAllOnPluginStart;
   }
 
-  /* (non-Javadoc)
-   * @see com.googlesource.gerrit.plugins.replication.ReplicationConfig#isDefaultForceUpdate()
+  /**
+   * See
+   * {@link com.googlesource.gerrit.plugins.replication.ReplicationConfig#isDefaultForceUpdate()}
    */
   @Override
   public boolean isDefaultForceUpdate() {

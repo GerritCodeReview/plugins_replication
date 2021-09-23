@@ -54,7 +54,7 @@ public interface ReplicationDestinations {
    */
   List<Destination> getDestinations(URIish uriish, Project.NameKey project, String ref);
 
-  /** @return true if there are no destinations, false otherwise. */
+  /** Returns true if there are no destinations, false otherwise. */
   boolean isEmpty();
 
   /**
