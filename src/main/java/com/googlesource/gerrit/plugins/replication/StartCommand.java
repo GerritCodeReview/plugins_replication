@@ -60,7 +60,6 @@ final class StartCommand extends SshCommand {
     }
 
     ReplicationState state = new ReplicationState(new CommandProcessing(this));
-    Future<?> future = null;
 
     ReplicationFilter projectFilter;
 
@@ -70,7 +69,8 @@ final class StartCommand extends SshCommand {
       projectFilter = new ReplicationFilter(projectPatterns);
     }
 
-    future = pushFactory.create(urlMatch, projectFilter, state, now).schedule(0, TimeUnit.SECONDS);
+    Future<?> future =
+        pushFactory.create(urlMatch, projectFilter, state, now).schedule(0, TimeUnit.SECONDS);
 
     if (wait) {
       if (future != null) {
