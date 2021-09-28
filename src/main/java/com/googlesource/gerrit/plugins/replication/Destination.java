@@ -23,7 +23,6 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.gerrit.entities.AccountGroup;
@@ -219,7 +218,7 @@ public class Destination {
 
   private void addRecursiveParents(
       AccountGroup.UUID g,
-      Builder<AccountGroup.UUID> builder,
+      ImmutableSet.Builder<AccountGroup.UUID> builder,
       GroupIncludeCache groupIncludeCache) {
     for (AccountGroup.UUID p : groupIncludeCache.parentGroupsOf(g)) {
       if (builder.build().contains(p)) {

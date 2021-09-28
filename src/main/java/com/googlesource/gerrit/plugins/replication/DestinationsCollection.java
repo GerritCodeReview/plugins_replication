@@ -35,7 +35,6 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.googlesource.gerrit.plugins.replication.Destination.Factory;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -50,7 +49,7 @@ import org.eclipse.jgit.transport.URIish;
 public class DestinationsCollection implements ReplicationDestinations {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  private final Factory destinationFactory;
+  private final Destination.Factory destinationFactory;
   private final Provider<ReplicationQueue> replicationQueue;
   private volatile List<Destination> destinations;
   private boolean shuttingDown;
