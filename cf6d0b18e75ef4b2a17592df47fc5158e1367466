@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19df04fd_4ac9d896",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-10-05T19:28:56Z",
+      "side": 1,
+      "message": "I am confused because the Issue was actually for skipping those destinations but this change is for NOT skipping it.\n\nDo we need another issue to explain why it was a bad idea skipping it?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 16
+      },
+      "revId": "cf6d0b18e75ef4b2a17592df47fc5158e1367466",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
