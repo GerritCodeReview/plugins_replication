@@ -91,6 +91,18 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
   }
 
   protected void setReplicationDestination(
+      String remoteName, String replicaSuffix, Optional<String> project, Integer pushBatchSize)
+      throws IOException {
+    setReplicationDestination(
+        remoteName,
+        Arrays.asList(replicaSuffix),
+        project,
+        TEST_REPLICATION_DELAY_SECONDS,
+        false,
+        Optional.ofNullable(pushBatchSize));
+  }
+
+  protected void setReplicationDestination(
       String remoteName, String replicaSuffix, Optional<String> project, boolean mirror)
       throws IOException {
     setReplicationDestination(
@@ -125,13 +137,37 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
 
   protected void setReplicationDestination(
       String remoteName,
+      String replicaSuffix,
+      Optional<String> project,
+      int replicationDelay,
+      boolean mirror,
+      Optional<Integer> pushBatchSize)
+      throws IOException {
+    setReplicationDestination(
+        remoteName, Arrays.asList(replicaSuffix), project, replicationDelay, mirror, pushBatchSize);
+  }
+
+  protected void setReplicationDestination(
+      String remoteName,
       List<String> replicaSuffixes,
       Optional<String> project,
       int replicationDelay,
       boolean mirror)
       throws IOException {
     setReplicationDestination(
-        config, remoteName, replicaSuffixes, project, replicationDelay, mirror);
+        remoteName, replicaSuffixes, project, replicationDelay, mirror, Optional.empty());
+  }
+
+  protected void setReplicationDestination(
+      String remoteName,
+      List<String> replicaSuffixes,
+      Optional<String> project,
+      int replicationDelay,
+      boolean mirror,
+      Optional<Integer> pushBatchSize)
+      throws IOException {
+    setReplicationDestination(
+        config, remoteName, replicaSuffixes, project, replicationDelay, mirror, pushBatchSize);
     config.setBoolean("gerrit", null, "autoReload", true);
     config.save();
   }
@@ -142,7 +178,8 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
       Optional<String> project,
       int replicationDelay)
       throws IOException {
-    setReplicationDestination(config, null, replicaSuffixes, project, replicationDelay, false);
+    setReplicationDestination(
+        config, null, replicaSuffixes, project, replicationDelay, false, Optional.empty());
   }
 
   protected void setReplicationDestination(
@@ -151,7 +188,8 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
       List<String> replicaSuffixes,
       Optional<String> project,
       int replicationDelay,
-      boolean mirror)
+      boolean mirror,
+      Optional<Integer> pushBatchSize)
       throws IOException {
 
     List<String> replicaUrls =
@@ -163,6 +201,7 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
     remoteConfig.setInt("remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY_MINUTES);
     remoteConfig.setBoolean("remote", remoteName, "mirror", mirror);
     project.ifPresent(prj -> remoteConfig.setString("remote", remoteName, "projects", prj));
+    pushBatchSize.ifPresent(pbs -> remoteConfig.setInt("remote", remoteName, "pushBatchSize", pbs));
     remoteConfig.save();
   }
 
