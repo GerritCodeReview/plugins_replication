@@ -98,6 +98,13 @@ public interface RemoteConfiguration {
   int getSlowLatencyThreshold();
 
   /**
+   * Returns the maximum number of refs that can be pushed in a single push operation.
+   *
+   * @return batch size, zero if unlimited.
+   */
+  int getPushBatchSize();
+
+  /**
    * Whether the remote configuration is for a single project only
    *
    * @return true, when configuration is for a single project, false otherwise
