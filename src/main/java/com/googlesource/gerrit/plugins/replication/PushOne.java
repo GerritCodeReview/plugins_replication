@@ -20,11 +20,13 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.toUnmodifiableList;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.entities.RefNames;
@@ -564,7 +566,36 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
           lazy(() -> refUpdatesForLogging(todo.subList(0, replConfig.getMaxRefsToLog()))));
     }
 
-    return tn.push(NullProgressMonitor.INSTANCE, todo);
+    return pushInBatches(tn, todo);
+  }
+
+  private PushResult pushInBatches(Transport tn, List<RemoteRefUpdate> todo)
+      throws NotSupportedException, TransportException {
+    int batchSize = replConfig.getPushBatchSize();
+    if (batchSize == 0 || todo.size() <= batchSize) {
+      return tn.push(NullProgressMonitor.INSTANCE, todo);
+    }
+
+    List<List<RemoteRefUpdate>> batches = Lists.partition(todo, batchSize);
+    repLog.atInfo().log("Push to %s in %d batches", uri, batches.size());
+    AggregatedPushResult result = new AggregatedPushResult();
+    int completedBatch = 1;
+    for (List<RemoteRefUpdate> batch : batches) {
+      repLog.atInfo().log(
+          "Pushing %d/%d batches for replication to %s", completedBatch, batches.size(), uri);
+      result.addResult(tn.push(NullProgressMonitor.INSTANCE, batch));
+
+      //  check if push should be no longer continued
+      if (wasCanceled()) {
+        repLog.atInfo().log(
+            "Push for replication to %s was canceled after %d completed batch and thus won't be"
+                + " rescheduled",
+            uri, completedBatch);
+        break;
+      }
+      completedBatch++;
+    }
+    return result;
   }
 
   private static String refUpdatesForLogging(List<RemoteRefUpdate> refUpdates) {
@@ -834,6 +865,30 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
     UpdateRefFailureException(URIish uri, String message) {
       super(uri, message);
+    }
+  }
+
+  /**
+   * Internal class used to aggregate PushResult objects from all push batches. See {@link
+   * PushOne#pushInBatches} for usage.
+   */
+  private static class AggregatedPushResult extends PushResult {
+    private final List<PushResult> results;
+
+    AggregatedPushResult() {
+      this.results = new ArrayList<>();
+    }
+
+    void addResult(PushResult result) {
+      results.add(result);
+    }
+
+    @Override
+    public Collection<RemoteRefUpdate> getRemoteUpdates() {
+      return results.stream()
+          .map(PushResult::getRemoteUpdates)
+          .flatMap(Collection::stream)
+          .collect(toUnmodifiableList());
     }
   }
 }
