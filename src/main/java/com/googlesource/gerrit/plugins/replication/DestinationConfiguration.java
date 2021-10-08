@@ -45,6 +45,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final RemoteConfig remoteConfig;
   private final int maxRetries;
   private final int slowLatencyThreshold;
+  private final int pushBatchSize;
 
   protected DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
@@ -84,6 +85,11 @@ public class DestinationConfiguration implements RemoteConfiguration {
                 "slowLatencyThreshold",
                 DEFAULT_SLOW_LATENCY_THRESHOLD_SECS,
                 TimeUnit.SECONDS);
+
+    pushBatchSize =
+        Math.max(
+            0,
+            getInt(remoteConfig, cfg, "pushBatchSize", cfg.getInt("gerrit", "pushBatchSize", 0)));
   }
 
   @Override
@@ -172,5 +178,10 @@ public class DestinationConfiguration implements RemoteConfiguration {
   @Override
   public int getSlowLatencyThreshold() {
     return slowLatencyThreshold;
+  }
+
+  @Override
+  public int getPushBatchSize() {
+    return pushBatchSize;
   }
 }

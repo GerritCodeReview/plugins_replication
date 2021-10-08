@@ -17,8 +17,10 @@ package com.googlesource.gerrit.plugins.replication;
 import static org.eclipse.jgit.lib.Ref.Storage.NEW;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -36,6 +38,7 @@ import com.google.gerrit.server.project.ProjectState;
 import com.google.gerrit.server.util.IdGenerator;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -115,7 +118,8 @@ public class PushOneTest {
         new ObjectIdRef.Unpeeled(
             NEW, "foo", ObjectId.fromString("0000000000000000000000000000000000000001"));
 
-    localRefs = Arrays.asList(newLocalRef);
+    localRefs = new ArrayList<>();
+    localRefs.add(newLocalRef);
 
     Ref remoteRef = new ObjectIdRef.Unpeeled(NEW, "foo", ObjectId.zeroId());
     remoteRefs = new HashMap<>();
@@ -221,6 +225,52 @@ public class PushOneTest {
     isCallFinished.await(10, TimeUnit.SECONDS);
 
     verify(transportMock, never()).push(any(), any());
+  }
+
+  @Test
+  public void shouldPushInSingleOperationWhenPushBatchSizeIsNotConfigured()
+      throws InterruptedException, IOException {
+    replicateTwoRefs(createPushOne(null));
+    verify(transportMock).push(any(), any());
+  }
+
+  @Test
+  public void shouldPushInBatchesWhenPushBatchSizeIsConfigured()
+      throws InterruptedException, IOException {
+    when(destinationMock.getPushBatchSize()).thenReturn(1);
+    replicateTwoRefs(createPushOne(null));
+    verify(transportMock, times(2)).push(any(), any());
+  }
+
+  @Test
+  public void shouldStopPushingInBatchesWhenPushOperationGetsCanceled()
+      throws InterruptedException, IOException {
+    when(destinationMock.getPushBatchSize()).thenReturn(1);
+    PushOne pushOne = createPushOne(null);
+
+    // cancel replication during the first push
+    doAnswer(
+            invocation -> {
+              pushOne.setCanceledWhileRunning();
+              return new PushResult();
+            })
+        .when(transportMock)
+        .push(any(), any());
+
+    replicateTwoRefs(pushOne);
+    verify(transportMock, times(1)).push(any(), any());
+  }
+
+  private void replicateTwoRefs(PushOne pushOne) throws InterruptedException {
+    ObjectIdRef barLocalRef =
+        new ObjectIdRef.Unpeeled(
+            NEW, "bar", ObjectId.fromString("0000000000000000000000000000000000000001"));
+    localRefs.add(barLocalRef);
+
+    pushOne.addRef(PushOne.ALL_REFS);
+    pushOne.run();
+
+    isCallFinished.await(TEST_PUSH_TIMEOUT_SECS, TimeUnit.SECONDS);
   }
 
   private PushOne createPushOne(DynamicItem<ReplicationPushFilter> replicationPushFilter) {
