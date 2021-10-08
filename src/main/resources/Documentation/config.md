@@ -148,6 +148,14 @@ gerrit.maxRefsToShow
 	`(retry 1) push aaa.com:/git/test.git [refs/heads/b1 refs/heads/b2 (+2)]`
 
 
+gerrit.pushBatchSize
+:	Max number of refs that are pushed in a single push operation. If more
+	than pushBatchSize are to be pushed then they are divided into batches
+	and pushed sequentially one-by-one.
+	By default, `0`, which means that there are no limitations on number of
+	refs to be transferred in a single push operation. Note that negative
+	values are treated as `0`.
+
 gerrit.sshCommandTimeout
 :	Timeout for SSH command execution. If 0, there is no timeout and
 	the client waits indefinitely. By default, 0.

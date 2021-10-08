@@ -89,6 +89,13 @@ public interface ReplicationConfig {
   int getSshCommandTimeout();
 
   /**
+   * Returns the maximum number of refs that can be pushed in a single push operation.
+   *
+   * @return batch size, zero if unlimited.
+   */
+  int getPushBatchSize();
+
+  /**
    * Current logical version string of the current configuration loaded in memory, depending on the
    * actual implementation of the configuration on the persistent storage.
    *
