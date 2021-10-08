@@ -348,6 +348,28 @@ public class ReplicationIT extends ReplicationDaemon {
     }
   }
 
+  @Test
+  public void shouldReplicateWithPushBatchSizeSetForRemote() throws Exception {
+    Project.NameKey targetProject = createTestProject(project + "replica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS, 1);
+    reloadConfig();
+
+    // creating a change results in 2 refs creation therefore it already qualifies for push in two
+    // batches of size 1 each
+    Result pushResult = createChange();
+    RevCommit sourceCommit = pushResult.getCommit();
+    String sourceRef = pushResult.getPatchSet().refName();
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      WaitUtil.waitUntil(() -> checkedGetRef(repo, sourceRef) != null, Duration.ofSeconds(60));
+
+      Ref targetBranchRef = getRef(repo, sourceRef);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
+    }
+  }
+
   private void waitUntil(Supplier<Boolean> waitCondition) throws InterruptedException {
     WaitUtil.waitUntil(waitCondition, TEST_TIMEOUT);
   }

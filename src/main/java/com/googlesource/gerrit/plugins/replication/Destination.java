@@ -774,6 +774,10 @@ public class Destination {
     return config.getSlowLatencyThreshold();
   }
 
+  int getPushBatchSize() {
+    return config.getPushBatchSize();
+  }
+
   private static boolean matches(URIish uri, String urlMatch) {
     if (urlMatch == null || urlMatch.equals("") || urlMatch.equals("*")) {
       return true;

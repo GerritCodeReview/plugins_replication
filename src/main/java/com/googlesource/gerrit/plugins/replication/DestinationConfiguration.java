@@ -14,10 +14,14 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.common.base.Suppliers.memoize;
+import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
+
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
 import com.google.gerrit.server.config.ConfigUtil;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.transport.RemoteConfig;
 
@@ -45,6 +49,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final RemoteConfig remoteConfig;
   private final int maxRetries;
   private final int slowLatencyThreshold;
+  private final Supplier<Integer> pushBatchSize;
 
   protected DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
@@ -84,6 +89,31 @@ public class DestinationConfiguration implements RemoteConfiguration {
                 "slowLatencyThreshold",
                 DEFAULT_SLOW_LATENCY_THRESHOLD_SECS,
                 TimeUnit.SECONDS);
+
+    pushBatchSize =
+        memoize(
+            () -> {
+              int configuredBatchSize =
+                  Math.max(
+                      0,
+                      getInt(
+                          remoteConfig,
+                          cfg,
+                          "pushBatchSize",
+                          cfg.getInt("gerrit", "pushBatchSize", 0)));
+              if (configuredBatchSize > 0) {
+                int distributionInterval = cfg.getInt("replication", "distributionInterval", 0);
+                if (distributionInterval > 0) {
+                  repLog.atWarning().log(
+                      "Push in batches cannot be turned on for remote (%s) when 'Cluster"
+                          + " Replication' (replication.distributionInterval) is configured",
+                      name);
+                  return 0;
+                }
+                return configuredBatchSize;
+              }
+              return 0;
+            });
   }
 
   @Override
@@ -172,5 +202,10 @@ public class DestinationConfiguration implements RemoteConfiguration {
   @Override
   public int getSlowLatencyThreshold() {
     return slowLatencyThreshold;
+  }
+
+  @Override
+  public int getPushBatchSize() {
+    return pushBatchSize.get();
   }
 }
