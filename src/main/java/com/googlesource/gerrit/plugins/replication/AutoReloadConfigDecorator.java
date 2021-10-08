@@ -125,6 +125,11 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleLi
   }
 
   @Override
+  public int getPushBatchSize() {
+    return currentConfig.getPushBatchSize();
+  }
+
+  @Override
   public Config getConfig() {
     return currentConfig.getConfig();
   }

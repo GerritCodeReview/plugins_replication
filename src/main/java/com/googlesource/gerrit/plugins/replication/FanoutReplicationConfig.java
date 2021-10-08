@@ -157,6 +157,11 @@ public class FanoutReplicationConfig implements ReplicationConfig {
   }
 
   @Override
+  public int getPushBatchSize() {
+    return replicationConfig.getPushBatchSize();
+  }
+
+  @Override
   public int getDistributionInterval() {
     return replicationConfig.getDistributionInterval();
   }
