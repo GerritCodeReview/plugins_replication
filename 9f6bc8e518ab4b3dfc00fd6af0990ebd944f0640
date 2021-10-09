@@ -1,6 +1,92 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ed4632d_eefbdd09",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-10-09T00:52:41Z",
+      "side": 1,
+      "message": "nit: with a large",
+      "range": {
+        "startLine": 9,
+        "startChar": 20,
+        "endLine": 9,
+        "endChar": 30
+      },
+      "revId": "9f6bc8e518ab4b3dfc00fd6af0990ebd944f0640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "836f105d_992989c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-10-09T00:52:41Z",
+      "side": 1,
+      "message": "nit: predictably",
+      "range": {
+        "startLine": 13,
+        "startChar": 35,
+        "endLine": 13,
+        "endChar": 46
+      },
+      "revId": "9f6bc8e518ab4b3dfc00fd6af0990ebd944f0640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75a7fcf6_f9502908",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-10-09T00:52:41Z",
+      "side": 1,
+      "message": "nit: on the number",
+      "range": {
+        "startLine": 16,
+        "startChar": 3,
+        "endLine": 16,
+        "endChar": 12
+      },
+      "revId": "9f6bc8e518ab4b3dfc00fd6af0990ebd944f0640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28a0a7d1_a7a4eed9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-10-09T00:52:41Z",
+      "side": 1,
+      "message": "I see a 4th point: the ability to reduce the \"price to pay\" for push failures. If you have a giant push of 500k refs and you fail all of them, you\u0027ll need to re-push all of them. If you split the 500k refs push into 100 pushes of 5k and you fail 10% of them, you\u0027ll just retry 50k refs.",
+      "revId": "9f6bc8e518ab4b3dfc00fd6af0990ebd944f0640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "01d6004a_2e686e02",
@@ -31,6 +117,109 @@
       "writtenOn": "2021-10-09T00:42:48Z",
       "side": 1,
       "message": "//plugins/replication:replication_tests                                  PASSED in 10.0s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationDistributorIT PASSED in 32.9s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationEventsIT PASSED in 165.6s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationFanoutIT PASSED in 33.1s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationIT PASSED in 164.8s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationStorageIT PASSED in 103.1s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationStorageMPIT PASSED in 58.8s",
+      "revId": "9f6bc8e518ab4b3dfc00fd6af0990ebd944f0640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34fcaf56_b1738cb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-10-09T00:52:41Z",
+      "side": 1,
+      "message": "I believe this should be covered by tests",
+      "revId": "9f6bc8e518ab4b3dfc00fd6af0990ebd944f0640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00bf5a94_400331b5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-10-09T00:52:41Z",
+      "side": 1,
+      "message": "com.google.common.collect.Lists",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 68
+      },
+      "revId": "9f6bc8e518ab4b3dfc00fd6af0990ebd944f0640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "254fc865_16f8b166",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-10-09T00:52:41Z",
+      "side": 1,
+      "message": "suggestion: I would also add a log of the batch number we are pushing out of the total batches",
+      "revId": "9f6bc8e518ab4b3dfc00fd6af0990ebd944f0640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "340e2880_2eb19854",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-10-09T00:52:41Z",
+      "side": 1,
+      "message": "zero or negative",
+      "range": {
+        "startLine": 94,
+        "startChar": 25,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "9f6bc8e518ab4b3dfc00fd6af0990ebd944f0640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b792ab5f_65b5ebb5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-10-09T00:52:41Z",
+      "side": 1,
+      "message": "unlimited?",
+      "range": {
+        "startLine": 94,
+        "startChar": 33,
+        "endLine": 94,
+        "endChar": 41
+      },
       "revId": "9f6bc8e518ab4b3dfc00fd6af0990ebd944f0640",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
