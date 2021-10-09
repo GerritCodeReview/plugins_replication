@@ -16,6 +16,23 @@
       "message": "The build passes for me. I don\u0027t understand the CI failure :-(",
       "revId": "9f6bc8e518ab4b3dfc00fd6af0990ebd944f0640",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af90256c_aad51c90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-10-09T00:42:48Z",
+      "side": 1,
+      "message": "//plugins/replication:replication_tests                                  PASSED in 10.0s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationDistributorIT PASSED in 32.9s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationEventsIT PASSED in 165.6s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationFanoutIT PASSED in 33.1s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationIT PASSED in 164.8s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationStorageIT PASSED in 103.1s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationStorageMPIT PASSED in 58.8s",
+      "revId": "9f6bc8e518ab4b3dfc00fd6af0990ebd944f0640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
