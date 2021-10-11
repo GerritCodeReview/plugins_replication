@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2432cd45_f5376b31",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-10-11T20:59:03Z",
+      "side": 1,
+      "message": "Why do this split at the push level vs the scheduling layer? Otherwise it\u0027s going to be harder to see/realize that a given push is actually going to be N pushes by looking at the queue. Certainly there would be challenges to solve if you do it at the scheduling layer too, but I\u0027d be interested in seeing those tradeoffs compared.",
+      "revId": "1bf4600328d5b988a137aae4d98f4b5eff380b35",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4708f47_5d93dc8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-10-11T20:59:03Z",
+      "side": 1,
+      "message": "What\u0027s the consideration of this as a replication global vs per-remote? #3 above is definitely a per-remote thing and perhaps #2 is as well.\n\nI think we could add per-remote later, so I don\u0027t think it\u0027s necessary in this change, but it may be worth considering how likely that is and therefore evaluate if the code is layered appropriately for that possibility.\n\nAlso, why is this \u0027pushBatchSize\u0027 vs \u0027batchSize\u0027? Replication is always pushing, so that seems redundant.",
+      "range": {
+        "startLine": 22,
+        "startChar": 37,
+        "endLine": 22,
+        "endChar": 57
+      },
+      "revId": "1bf4600328d5b988a137aae4d98f4b5eff380b35",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10495d7c_5c083b23",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationPushInBatchesIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-10-11T20:59:03Z",
+      "side": 1,
+      "message": "missing license header",
+      "revId": "1bf4600328d5b988a137aae4d98f4b5eff380b35",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
