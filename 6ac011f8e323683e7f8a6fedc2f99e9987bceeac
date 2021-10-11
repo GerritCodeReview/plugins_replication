@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98aa3eca_0766b317",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-10-11T21:35:19Z",
+      "side": 1,
+      "message": "I can\u0027t tell why verification on CI fails as it doesn\u0027t show any info but `-1` for me and it passes locally :/",
+      "revId": "6ac011f8e323683e7f8a6fedc2f99e9987bceeac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
