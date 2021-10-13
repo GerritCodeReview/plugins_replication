@@ -36,6 +36,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "410c483f_41a496c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-10-13T17:05:50Z",
+      "side": 1,
+      "message": "Ok. Let me look at that code and comment there.",
+      "parentUuid": "69b2232e_7dc5ea2c",
+      "revId": "1bf4600328d5b988a137aae4d98f4b5eff380b35",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4708f47_5d93dc8d",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "Having it per remote sounds line an interesting improvement will think look around for the implementation details.\n\nIn terms of name I wanted to be explicit about what it refers to but I have no strong opinion about it so let others say what they think too ;)",
       "parentUuid": "d4708f47_5d93dc8d",
+      "range": {
+        "startLine": 22,
+        "startChar": 37,
+        "endLine": 22,
+        "endChar": 57
+      },
+      "revId": "1bf4600328d5b988a137aae4d98f4b5eff380b35",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4ea0045_cb626d0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-10-13T17:05:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d055d90b_a9a7d232",
       "range": {
         "startLine": 22,
         "startChar": 37,
@@ -131,6 +173,30 @@
       "writtenOn": "2021-10-11T21:33:55Z",
       "side": 1,
       "message": "I was not able to add test in `ReplicationIT.java` without adding configuration in `setUpTestPlugin` - neither setting it in test method (followed by the `reploadConfig()`) or through GlobalPluginConfig (annotation for method) was not working - I guess it is a replication plugin specific thing... Considering that I wanted to have IT tests for both cases (when pushBatchSize is set or not) I have decided to introduce a dedicated file...",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 54
+      },
+      "revId": "1bf4600328d5b988a137aae4d98f4b5eff380b35",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a9c8147_753c89f5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationPushInBatchesIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-10-13T17:05:50Z",
+      "side": 1,
+      "message": "That shouldn\u0027t be the case. Plenty of other tests change configs that are reloadable. Is this config expected to be reloadable?",
+      "parentUuid": "5df34b07_df102bef",
       "range": {
         "startLine": 24,
         "startChar": 4,

@@ -34,6 +34,98 @@
       "parentUuid": "98aa3eca_0766b317",
       "revId": "6ac011f8e323683e7f8a6fedc2f99e9987bceeac",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec32a730_e912e68c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-10-13T17:05:50Z",
+      "side": 1,
+      "message": "If you\u0027re not re-running generateUpdates() for each batch, aren\u0027t you trusting that the updates you generated earlier are still valid? That seems like it defeats the point of a lot of the code in generateUpdates(). It\u0027s intended to be per-push. If you do multiple pushes, I think you need to call generateUpdates for each one.",
+      "range": {
+        "startLine": 579,
+        "startChar": 58,
+        "endLine": 579,
+        "endChar": 62
+      },
+      "revId": "6ac011f8e323683e7f8a6fedc2f99e9987bceeac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ede9e69_1c78624b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-10-13T17:05:50Z",
+      "side": 1,
+      "message": "do we know it was actually completed or could it have failed?",
+      "range": {
+        "startLine": 591,
+        "startChar": 62,
+        "endLine": 591,
+        "endChar": 71
+      },
+      "revId": "6ac011f8e323683e7f8a6fedc2f99e9987bceeac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "747b333f_ed1c8b97",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-10-13T17:05:50Z",
+      "side": 1,
+      "message": "Since you mentioned generateUpdates was expensive, I happened to look in here and saw this. I think for many replication use cases, this is going to be doing much more than what we need. Line 653 below can probably use exactRef(src) or something like that instead. And then add an else at 657 that does this without the toMap so that we can pass a list of refs to forProject.filter().\n\n702 is looking for a key in the \u0027local\u0027 map, but we can probably find a way to do that efficiently still.\n\nIf you think improving this performance would be a pre-req to using generateUpdates() per-batch, then this should probably come first.",
+      "range": {
+        "startLine": 635,
+        "startChar": 4,
+        "endLine": 636,
+        "endChar": 85
+      },
+      "revId": "6ac011f8e323683e7f8a6fedc2f99e9987bceeac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36da48f1_b09b37fb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-10-13T17:05:50Z",
+      "side": 1,
+      "message": "You can move this to 876 I think. I find it easier to read a class when default initialization is done before the constructor.",
+      "range": {
+        "startLine": 879,
+        "startChar": 21,
+        "endLine": 879,
+        "endChar": 38
+      },
+      "revId": "6ac011f8e323683e7f8a6fedc2f99e9987bceeac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
