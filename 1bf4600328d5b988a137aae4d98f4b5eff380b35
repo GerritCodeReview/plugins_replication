@@ -54,6 +54,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e63acd2b_da3bcdec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-10-19T07:49:13Z",
+      "side": 1,
+      "message": "Added `remote.NAME.pushBatchSize` that allows fine tuning of this parameter per remote.",
+      "parentUuid": "410c483f_41a496c8",
+      "revId": "1bf4600328d5b988a137aae4d98f4b5eff380b35",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4708f47_5d93dc8d",
