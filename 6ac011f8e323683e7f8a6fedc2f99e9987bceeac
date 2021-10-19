@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5862bd59_c2dff048",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-10-19T20:30:57Z",
+      "side": 1,
+      "message": "\u003e I would agree if there was a chance that other thread was pushing to the same repo in the same time - which is not. IMHO there is the same chance that big push fails or any of batches fails if 3rd party updates the repo in question in the same time.\n\nI don\u0027t think we should assume remotes (or the local repos) are only being updated by us. That may be the case for some setups, but certainly not all. For example, multi-primary clusters could update same repo from multiple processes and as you mention, some non-Gerrit process could make updates. The replication plugin doesn\u0027t currently make the assumption that it\u0027s the only writer and I\u0027m not comfortable with adding that assumption.\n\n\u003e However this is not the case that we want to solve (at least not yet ;)) as that would be: ensure that push works even if the remote was updated in the meantime ;)\n\nThat case is already handled by retries and retries do re-run generateUpdates().",
+      "parentUuid": "17e40f2e_5e1a9a43",
+      "range": {
+        "startLine": 579,
+        "startChar": 58,
+        "endLine": 579,
+        "endChar": 62
+      },
+      "revId": "6ac011f8e323683e7f8a6fedc2f99e9987bceeac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ede9e69_1c78624b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 4
@@ -120,6 +144,30 @@
       "side": 1,
       "message": "It is the same way we know if single push completed ;) IMHO it either was completed or exception was thrown and this code will not be reached.",
       "parentUuid": "9ede9e69_1c78624b",
+      "range": {
+        "startLine": 591,
+        "startChar": 62,
+        "endLine": 591,
+        "endChar": 71
+      },
+      "revId": "6ac011f8e323683e7f8a6fedc2f99e9987bceeac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc028dbf_effc736a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-10-19T20:30:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9a5c13d5_6f29e3f6",
       "range": {
         "startLine": 591,
         "startChar": 62,
@@ -179,6 +227,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e08dff73_99edf2e7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-10-19T20:30:57Z",
+      "side": 1,
+      "message": "There is that optimization and my idea for how you\u0027d add batch size support would be to limit that optimization to a certain batch size. That way the features work together.\n\nHowever, thinking about that more I\u0027m not sure how well it really works because you don\u0027t correctly know the size of the batch until you run generateUpdates. Maybe you\u0027d end up ignoring batch size until you reach the code above, then schedule a new push with anything that doesn\u0027t fit in your batch? Since this push is already in flight, it wouldn\u0027t be combined with the new one. That could really mess with scheduling priority though as the new task would be at the end of the queue.\n\nMaybe the conservative thing to do would be what you have here, but run generateUpdates for each push/batch? I don\u0027t love that either. Maybe see if others have ideas?\n\nIndependent of your change, I do think there\u0027s some reasonably easy optimization to be had in here, so that\u0027s nice to know if folks are seeing performance issues.",
+      "parentUuid": "af504cd3_6b5c43d1",
+      "range": {
+        "startLine": 635,
+        "startChar": 4,
+        "endLine": 636,
+        "endChar": 85
+      },
+      "revId": "6ac011f8e323683e7f8a6fedc2f99e9987bceeac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36da48f1_b09b37fb",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 4
@@ -214,6 +286,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "36da48f1_b09b37fb",
+      "range": {
+        "startLine": 879,
+        "startChar": 21,
+        "endLine": 879,
+        "endChar": 38
+      },
+      "revId": "6ac011f8e323683e7f8a6fedc2f99e9987bceeac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91391589_bee7d361",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-10-19T20:30:57Z",
+      "side": 1,
+      "message": "Not done in PS5?",
+      "parentUuid": "c3a0c7d9_dd12dcab",
       "range": {
         "startLine": 879,
         "startChar": 21,
