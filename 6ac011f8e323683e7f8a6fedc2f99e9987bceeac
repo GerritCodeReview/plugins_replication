@@ -109,6 +109,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e7de6cb_80a0300d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-10-20T07:21:55Z",
+      "side": 1,
+      "message": "So to sum it up: I\u0027m slightly improving this aspect (as smaller/faster pushes are more likely to succeed) but also not making it worse, correct?",
+      "parentUuid": "5862bd59_c2dff048",
+      "range": {
+        "startLine": 579,
+        "startChar": 58,
+        "endLine": 579,
+        "endChar": 62
+      },
+      "revId": "6ac011f8e323683e7f8a6fedc2f99e9987bceeac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ede9e69_1c78624b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 4
@@ -251,6 +275,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "233060d4_c3a51df8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-10-20T07:21:55Z",
+      "side": 1,
+      "message": "Fully agree with:\n\n\u003eIndependent of your change, I do think there\u0027s some reasonably easy optimization to be had in here, so that\u0027s nice to know if folks are seeing performance issues.\n\nand I can tackle it once we are over this one ;)",
+      "parentUuid": "e08dff73_99edf2e7",
+      "range": {
+        "startLine": 635,
+        "startChar": 4,
+        "endLine": 636,
+        "endChar": 85
+      },
+      "revId": "6ac011f8e323683e7f8a6fedc2f99e9987bceeac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36da48f1_b09b37fb",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 4
@@ -310,6 +358,30 @@
       "side": 1,
       "message": "Not done in PS5?",
       "parentUuid": "c3a0c7d9_dd12dcab",
+      "range": {
+        "startLine": 879,
+        "startChar": 21,
+        "endLine": 879,
+        "endChar": 38
+      },
+      "revId": "6ac011f8e323683e7f8a6fedc2f99e9987bceeac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d77166e_ee1c7694",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-10-20T07:21:55Z",
+      "side": 1,
+      "message": "Sorry about that - was switching between branches and lost this change :/",
+      "parentUuid": "91391589_bee7d361",
       "range": {
         "startLine": 879,
         "startChar": 21,
