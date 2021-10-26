@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d179b3fb_ffca7022",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-10-26T06:14:04Z",
+      "side": 1,
+      "message": "Java11 specific :/",
+      "range": {
+        "startLine": 887,
+        "startChar": 19,
+        "endLine": 887,
+        "endChar": 39
+      },
+      "revId": "73ba74535e82149ed97d863a3a4ca14fb32dcf64",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
