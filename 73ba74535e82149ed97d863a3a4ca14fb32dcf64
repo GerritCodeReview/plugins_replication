@@ -22,6 +22,30 @@
       },
       "revId": "73ba74535e82149ed97d863a3a4ca14fb32dcf64",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fa284fb_85c13d50",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-10-26T17:39:44Z",
+      "side": 1,
+      "message": "Gerrit master is Java-11 only.",
+      "parentUuid": "d179b3fb_ffca7022",
+      "range": {
+        "startLine": 887,
+        "startChar": 19,
+        "endLine": 887,
+        "endChar": 39
+      },
+      "revId": "73ba74535e82149ed97d863a3a4ca14fb32dcf64",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
