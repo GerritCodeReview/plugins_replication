@@ -22,12 +22,14 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.gerrit.entities.PatchSet;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.entities.RefNames;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
@@ -286,9 +288,22 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       delta.clear();
       pushAllRefs = true;
       repLog.atFinest().log("Added all refs for replication to %s", uri);
-    } else if (!pushAllRefs && delta.add(ref)) {
-      repLog.atFinest().log("Added ref %s for replication to %s", ref, uri);
+    } else if (!pushAllRefs) {
+      if (PatchSet.isChangeRef(ref)) {
+        String metaRef = getMetaRefFromChangeRef(ref);
+
+        if (delta.add(metaRef)) {
+          repLog.atFinest().log("Added refs %s for replication to %s", metaRef, uri);
+        }
+      }
+      if (delta.add(ref)) {
+        repLog.atFinest().log("Added ref %s for replication to %s", ref, uri);
+      }
     }
+  }
+
+  private static String getMetaRefFromChangeRef(String ref) {
+    return ref.substring(0, ref.lastIndexOf('/') + 1) + "meta";
   }
 
   @Override
@@ -488,6 +503,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       stateLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
     } catch (PermissionBackendException | RuntimeException | Error e) {
       stateLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
+    } catch (MissingMetaRefException e) {
+      pool.reschedule(this, Destination.RetryReason.META_REF_MISSING);
     } finally {
       pool.notifyFinished(this);
       if (git != null) {
@@ -534,7 +551,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     return target.getName();
   }
 
-  private void runImpl() throws IOException, PermissionBackendException {
+  private void runImpl() throws IOException, PermissionBackendException, MissingMetaRefException {
     PushResult res;
     try (Transport tn = transportFactory.open(git, uri)) {
       res = pushVia(tn);
@@ -542,7 +559,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     updateStates(res.getRemoteUpdates());
   }
 
-  private PushResult pushVia(Transport tn) throws IOException, PermissionBackendException {
+  private PushResult pushVia(Transport tn)
+      throws IOException, PermissionBackendException, MissingMetaRefException {
     tn.applyConfig(config);
     tn.setCredentialsProvider(credentialsProvider);
 
@@ -626,7 +644,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   }
 
   private List<RemoteRefUpdate> generateUpdates(Transport tn)
-      throws IOException, PermissionBackendException {
+      throws IOException, PermissionBackendException, MissingMetaRefException {
     Optional<ProjectState> projectState = projectCache.get(projectName);
     if (!projectState.isPresent()) {
       return Collections.emptyList();
@@ -708,18 +726,18 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     return cmds;
   }
 
-  private List<RemoteRefUpdate> doPushDelta(Map<String, Ref> local) throws IOException {
+  private List<RemoteRefUpdate> doPushDelta(Map<String, Ref> local)
+      throws IOException, MissingMetaRefException {
     List<RemoteRefUpdate> cmds = new ArrayList<>();
     boolean noPerms = !pool.isReplicatePermissions();
     for (String src : delta) {
       RefSpec spec = matchSrc(src);
       if (spec != null) {
         // If the ref still exists locally, send it, otherwise delete it.
-        Ref srcRef = local.get(src);
+        Ref srcRef = getSrcRef(local, src);
 
-        // Second try to ensure that the ref is truly not found locally
-        if (srcRef == null) {
-          srcRef = git.exactRef(src);
+        if (PatchSet.isChangeRef(src) && getSrcRef(local, getMetaRefFromChangeRef(src)) == null) {
+          throw new MissingMetaRefException(src);
         }
 
         if (srcRef != null && canPushRef(src, noPerms)) {
@@ -730,6 +748,17 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       }
     }
     return cmds;
+  }
+
+  private Ref getSrcRef(Map<String, Ref> local, String src) throws IOException {
+    Ref srcRef = local.get(src);
+
+    // Second try to ensure that the ref is truly not found locally
+    if (srcRef == null) {
+      srcRef = git.exactRef(src);
+    }
+
+    return srcRef;
   }
 
   private boolean canPushRef(String ref, boolean noPerms) {
@@ -762,16 +791,19 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     return null;
   }
 
-  private void push(List<RemoteRefUpdate> cmds, RefSpec spec, Ref src) throws IOException {
+  private RemoteRefUpdate createRemoteRefUpdate(RefSpec spec, Ref src) throws IOException {
     String dst = spec.getDestination();
     boolean force = spec.isForceUpdate();
-    cmds.add(new RemoteRefUpdate(git, src, dst, force, null, null));
+    return new RemoteRefUpdate(git, src, dst, force, null, null);
+  }
+
+  @VisibleForTesting
+  void push(List<RemoteRefUpdate> cmds, RefSpec spec, Ref src) throws IOException {
+    cmds.add(createRemoteRefUpdate(spec, src));
   }
 
   private void delete(List<RemoteRefUpdate> cmds, RefSpec spec) throws IOException {
-    String dst = spec.getDestination();
-    boolean force = spec.isForceUpdate();
-    cmds.add(new RemoteRefUpdate(git, (Ref) null, dst, force, null, null));
+    cmds.add(createRemoteRefUpdate(spec, null));
   }
 
   private void updateStates(Collection<RemoteRefUpdate> refUpdates)
@@ -865,6 +897,17 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
     UpdateRefFailureException(URIish uri, String message) {
       super(uri, message);
+    }
+  }
+
+  public static class MissingMetaRefException extends Exception {
+    private static final long serialVersionUID = 1L;
+
+    MissingMetaRefException(String changeRef) {
+      super(
+          String.format(
+              "Missing meta ref %s for change ref %s",
+              getMetaRefFromChangeRef(changeRef), changeRef));
     }
   }
 

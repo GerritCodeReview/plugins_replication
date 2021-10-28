@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.gerrit.server.project.ProjectCache.noSuchProject;
 import static com.googlesource.gerrit.plugins.replication.ReplicationFileBasedConfig.replaceName;
+import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.NON_EXISTING;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.REJECTED_OTHER_REASON;
 
@@ -120,7 +121,8 @@ public class Destination {
   protected enum RetryReason {
     TRANSPORT_ERROR,
     COLLISION,
-    REPOSITORY_MISSING;
+    REPOSITORY_MISSING,
+    META_REF_MISSING;
   }
 
   public static class QueueInfo {
@@ -550,6 +552,7 @@ public class Destination {
         pending.put(uri, pushOp);
         switch (reason) {
           case COLLISION:
+          case META_REF_MISSING:
             @SuppressWarnings("unused")
             ScheduledFuture<?> ignored =
                 pool.schedule(pushOp, config.getRescheduleDelay(), TimeUnit.SECONDS);
@@ -563,6 +566,7 @@ public class Destination {
                     : REJECTED_OTHER_REASON;
             postReplicationFailedEvent(pushOp, status);
             if (pushOp.setToRetry()) {
+              repLog.atInfo().log("TASK: %s; POSITION: reschedule; Refs: %s", pushOp.toString(), pushOp.getRefs());
               postReplicationScheduledEvent(pushOp);
               replicationTasksStorage.get().reset(pushOp);
               @SuppressWarnings("unused")
