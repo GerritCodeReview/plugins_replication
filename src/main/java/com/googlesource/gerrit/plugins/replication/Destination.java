@@ -120,7 +120,8 @@ public class Destination {
   protected enum RetryReason {
     TRANSPORT_ERROR,
     COLLISION,
-    REPOSITORY_MISSING;
+    REPOSITORY_MISSING,
+    META_REF_MISSING;
   }
 
   public static class QueueInfo {
@@ -550,6 +551,7 @@ public class Destination {
         pending.put(uri, pushOp);
         switch (reason) {
           case COLLISION:
+          case META_REF_MISSING:
             @SuppressWarnings("unused")
             ScheduledFuture<?> ignored =
                 pool.schedule(pushOp, config.getRescheduleDelay(), TimeUnit.SECONDS);

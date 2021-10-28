@@ -201,7 +201,8 @@ public class ReplicationQueue
 
   private void synchronizePendingEvents(Prune prune) {
     if (replaying.compareAndSet(false, true)) {
-      final Map<ReplicateRefUpdate, String> taskNamesByReplicateRefUpdate = new ConcurrentHashMap<>();
+      final Map<ReplicateRefUpdate, String> taskNamesByReplicateRefUpdate =
+          new ConcurrentHashMap<>();
       if (Prune.TRUE.equals(prune)) {
         for (Destination destination : destinations.get().getAll(FilterType.ALL)) {
           taskNamesByReplicateRefUpdate.putAll(destination.getTaskNamesByReplicateRefUpdate());
