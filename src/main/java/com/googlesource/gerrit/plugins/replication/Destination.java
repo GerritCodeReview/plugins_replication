@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.gerrit.server.project.ProjectCache.noSuchProject;
 import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.resolveNodeName;
 import static com.googlesource.gerrit.plugins.replication.ReplicationFileBasedConfig.replaceName;
+import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.NON_EXISTING;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.REJECTED_OTHER_REASON;
 
@@ -119,7 +120,8 @@ public class Destination {
   protected enum RetryReason {
     TRANSPORT_ERROR,
     COLLISION,
-    REPOSITORY_MISSING;
+    REPOSITORY_MISSING,
+    META_REF_MISSING;
   }
 
   public static class QueueInfo {
@@ -550,6 +552,7 @@ public class Destination {
             break;
           case TRANSPORT_ERROR:
           case REPOSITORY_MISSING:
+          case META_REF_MISSING:
           default:
             RemoteRefUpdate.Status status =
                 RetryReason.REPOSITORY_MISSING.equals(reason)
