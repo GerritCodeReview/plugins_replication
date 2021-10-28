@@ -17,8 +17,10 @@ package com.googlesource.gerrit.plugins.replication;
 import static org.eclipse.jgit.lib.Ref.Storage.NEW;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -36,6 +38,7 @@ import com.google.gerrit.server.project.ProjectState;
 import com.google.gerrit.server.util.IdGenerator;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -66,6 +69,7 @@ import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
@@ -100,7 +104,7 @@ public class PushOneTest {
 
   private Project.NameKey projectNameKey;
   private URIish urish;
-  private List<Ref> localRefs;
+  private ArrayList<Ref> localRefs;
 
   private Map<String, Ref> remoteRefs;
   private CountDownLatch isCallFinished;
@@ -115,7 +119,8 @@ public class PushOneTest {
         new ObjectIdRef.Unpeeled(
             NEW, "foo", ObjectId.fromString("0000000000000000000000000000000000000001"));
 
-    localRefs = Arrays.asList(newLocalRef);
+    localRefs = new ArrayList<>();
+    localRefs.add(newLocalRef);
 
     Ref remoteRef = new ObjectIdRef.Unpeeled(NEW, "foo", ObjectId.zeroId());
     remoteRefs = new HashMap<>();
@@ -221,6 +226,55 @@ public class PushOneTest {
     isCallFinished.await(10, TimeUnit.SECONDS);
 
     verify(transportMock, never()).push(any(), any());
+  }
+
+  @Test
+  public void shouldPushMetaRefTogetherWithChangeRef() throws InterruptedException, IOException {
+    PushOne pushOne = Mockito.spy(createPushOne(null));
+
+    Ref newLocalChangeRef =
+        new ObjectIdRef.Unpeeled(
+            NEW,
+            "refs/changes/11/11111/1",
+            ObjectId.fromString("0000000000000000000000000000000000000002"));
+
+    Ref newLocalChangeMetaRef =
+        new ObjectIdRef.Unpeeled(
+            NEW,
+            "refs/changes/11/11111/meta",
+            ObjectId.fromString("0000000000000000000000000000000000000003"));
+
+    localRefs.add(newLocalChangeRef);
+    localRefs.add(newLocalChangeMetaRef);
+
+    pushOne.addRef(newLocalChangeRef.getName());
+    pushOne.run();
+
+    isCallFinished.await(10, TimeUnit.SECONDS);
+    verify(transportMock, atLeastOnce()).push(any(), any());
+    verify(pushOne, times(2)).push(any(), any(), any());
+  }
+
+  @Test
+  public void shouldRescheduleChangeRefPushIfMetaRefIsMissing()
+      throws InterruptedException, IOException {
+    PushOne pushOne = Mockito.spy(createPushOne(null));
+
+    Ref newLocalChangeRef =
+        new ObjectIdRef.Unpeeled(
+            NEW,
+            "refs/changes/11/11211/1",
+            ObjectId.fromString("0000000000000000000000000000000000000004"));
+
+    localRefs.add(newLocalChangeRef);
+
+    pushOne.addRef(newLocalChangeRef.getName());
+    pushOne.run();
+
+    isCallFinished.await(10, TimeUnit.SECONDS);
+    verify(transportMock, never()).push(any(), any());
+    verify(pushOne, never()).push(any(), any(), any());
+    verify(destinationMock, times(1)).reschedule(pushOne, Destination.RetryReason.META_REF_MISSING);
   }
 
   private PushOne createPushOne(DynamicItem<ReplicationPushFilter> replicationPushFilter) {
