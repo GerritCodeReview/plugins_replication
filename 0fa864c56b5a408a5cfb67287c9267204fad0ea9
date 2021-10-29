@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b16ab7_7106165e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-10-29T01:39:04Z",
+      "side": 1,
+      "message": "If we are going to be able to split up larger pushes into smaller pushes for scaling purposes, then I would like to ensure that we do it in a way that each of the smaller pushes could potentially be done by different primaries concurrently. Does the solution offer this possibility? If not, what approach would?",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
