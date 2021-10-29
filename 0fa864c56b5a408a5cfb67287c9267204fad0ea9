@@ -16,6 +16,24 @@
       "message": "If we are going to be able to split up larger pushes into smaller pushes for scaling purposes, then I would like to ensure that we do it in a way that each of the smaller pushes could potentially be done by different primaries concurrently. Does the solution offer this possibility? If not, what approach would?",
       "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d61923ac_97e29c9d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-10-29T23:02:02Z",
+      "side": 1,
+      "message": "That is not the purpose as documented in Issue 13216. A target replication end like GitHub simply won\u0027t accept pushes with lots of refs: splitting a large push as a series of smaller and sequential pushes is the only way to replicate to those endpoints. It actually won\u0027t make it faster but slower than a single push with all the refs, but at least it will eventually succeed instead of always failing and retrying forever.\n\nPlease note that would \"solve\" a GitHub (or GitLab) problem by \"workaround\" on the Gerrit side.",
+      "parentUuid": "46b16ab7_7106165e",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
