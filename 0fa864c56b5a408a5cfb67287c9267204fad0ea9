@@ -34,6 +34,24 @@
       "parentUuid": "46b16ab7_7106165e",
       "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da8e5a55_960debe6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-10-30T08:03:59Z",
+      "side": 1,
+      "message": "But more importantly it is disabled by default and can be enabled/fine-tuned per remote.\n\n@Martin the idea is interesting but it would imply that division into batches happens on the scheduling level, gets serialised and individual batches could be picked up by any primary, right? Sounds like a lot work to me (but I could be wrong). As it was said by Luca - that is not the purpose of this change and AFAIU single master would group it back to single push :D",
+      "parentUuid": "d61923ac_97e29c9d",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
