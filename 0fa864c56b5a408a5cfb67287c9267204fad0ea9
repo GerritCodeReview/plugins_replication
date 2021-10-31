@@ -52,6 +52,24 @@
       "parentUuid": "d61923ac_97e29c9d",
       "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4df6ea2_d1f92624",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-10-31T23:38:41Z",
+      "side": 1,
+      "message": "\u003e That is not the purpose as documented in Issue 13216. A target replication end like GitHub simply won\u0027t accept pushes with lots of refs: splitting a large push as a series of smaller and sequential pushes is the only way to replicate to those endpoints. It actually won\u0027t make it faster but slower than a single push with all the refs, but at least it will eventually succeed instead of always failing and retrying forever\n\nMakes sense. Whatever approach you take, I think it is important that you ensure that the on disk data reflect whatever replication is doing, and what replication work is outstanding. This is important not only to let other primaries potentially help out, but also to ensure that benefit of splitting the refs into smaller batches not be lost by primary restarts. In another words, if you manage to replicate 9K refs out of 10K refs to a site (say in batches of 1K), and then the primary goes down, it is important that when the server starts up again, that it not try to re-replicate those 9K refs which were already successful. Does your current approach do this?",
+      "parentUuid": "d61923ac_97e29c9d",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
