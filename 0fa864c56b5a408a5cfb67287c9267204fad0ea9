@@ -70,6 +70,24 @@
       "parentUuid": "d61923ac_97e29c9d",
       "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d95c16d8_2ecfecd9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-11-02T07:49:22Z",
+      "side": 1,
+      "message": "AFAIU it will not be lost as `generateUpdates` asks remote for existing refs. IOW it will not try to resend 9K refs but only the remaining 1K as previous pushes succeeded. IMHO this looks like a small improvement over what we have now cuz if I\u0027m not mistaken we would push all 10K refs now... Having said that I believe that importance of having it accounted on the disk is not that important anymore ;).",
+      "parentUuid": "f4df6ea2_d1f92624",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
