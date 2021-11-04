@@ -88,6 +88,23 @@
       "parentUuid": "f4df6ea2_d1f92624",
       "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed01fa47_cad973c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-11-04T09:51:22Z",
+      "side": 1,
+      "message": "I believe this change would do the job, bearing in mind that isn\u0027t designed and suitable for a multi-primary setup or for a remote pushed by different sources. Possibly this needs to be highlighted in the docs.\n\nHowever, I see the points from Nasser and Martin that at least we need to make sure that under those conditions it doesn\u0027t generate inconsistencies, or at least more than the ones we have already.\n\nExample:\nTwo Gerrit primaries (not in HA, not in MS) force pushing to the same remote, they will step into each other toes overwriting each other refs regardless of this change. Therefore that isn\u0027t a valid scenario but we need to make sure that we don\u0027t make it worse.\n\n@Jacek can you check the HA scenario (multi-primary) to make sure that this change doesn\u0027t create inconsistencies?\n\nRepo with 1000 refs, batch of 10 refs, two primaries pushing at the same time. To simulate a slow remote, you can add a 10s sleep between pushes.",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
