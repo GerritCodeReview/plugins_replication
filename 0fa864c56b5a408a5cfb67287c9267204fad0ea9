@@ -105,6 +105,24 @@
       "message": "I believe this change would do the job, bearing in mind that isn\u0027t designed and suitable for a multi-primary setup or for a remote pushed by different sources. Possibly this needs to be highlighted in the docs.\n\nHowever, I see the points from Nasser and Martin that at least we need to make sure that under those conditions it doesn\u0027t generate inconsistencies, or at least more than the ones we have already.\n\nExample:\nTwo Gerrit primaries (not in HA, not in MS) force pushing to the same remote, they will step into each other toes overwriting each other refs regardless of this change. Therefore that isn\u0027t a valid scenario but we need to make sure that we don\u0027t make it worse.\n\n@Jacek can you check the HA scenario (multi-primary) to make sure that this change doesn\u0027t create inconsistencies?\n\nRepo with 1000 refs, batch of 10 refs, two primaries pushing at the same time. To simulate a slow remote, you can add a 10s sleep between pushes.",
       "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8d40a1b_d3130535",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-11-08T10:58:40Z",
+      "side": 1,
+      "message": "@Luca I have performed the following test:\n\n1. created local setup with two HA primaries (high-availability plugin) with shared folder over the local FS\n\n2. I have configured the replication plugin (slightly modified to wait 10s after each batch push) for both primaries like that\n\n  [gerrit]\n\tmaxRefsToShow \u003d 0\n  [replication]\n\teventsDirectory \u003d /tmp/gerrit-ha-replication/shared/replication_events\n  [remote \"file\"]\n\turl \u003d file:///tmp/gerrit-ha-replication/shared/test_repo.git\n\tthreads \u003d 1\n\tprojects \u003d test_repo\n\tdefaultForceUpdate \u003d true\n\treplicationDelay \u003d 10\n\tdistributionInterval \u003d 1\n\tpush \u003d +refs/heads/*:refs/heads/*\n\tpush \u003d +refs/tags/*:refs/tags/*\n\tpushBatchSize \u003d 3\n\nthe same eventsDirectory was used by both primaries\n\n3. I have cloned `test_repo` from each primary 2 times\n\n4. I have issued a loop (2 times in each repo) that was\n* crating 5 commits\n* pushing them to 8 refs (each cloned repo used different set of refs)\n* sleeping for 15s\n\nIOW each primary was replicating to 16 refs\n\n6. results:\n* as expected pushed to the same primary were consolidated into uber-push (16 refs)\n* each push was divided into 6 batches\n* batches were scoped per primary IOW once push was consolidated and put into execution division into batches had no impact on it (the other primary was not trying to push the ref/object)\n* replication destination had up to date refs (have checked all 32 refs)\n* IMHO it works as expected :)",
+      "parentUuid": "ed01fa47_cad973c0",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
