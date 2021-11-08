@@ -176,6 +176,41 @@
       "parentUuid": "69071764_c73b46be",
       "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a54d0c2f_0d52eb83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-11-08T22:40:09Z",
+      "side": 1,
+      "message": "Waiting for the test results with the replication distributor enabled.",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baca1fde_15d68bda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-11-08T22:40:09Z",
+      "side": 1,
+      "message": "+1\n\nDowngrading my vote until Jacek has tested with the replication distributor.",
+      "parentUuid": "94e7b692_f0a1fa85",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
