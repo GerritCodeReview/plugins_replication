@@ -158,6 +158,24 @@
       "message": "Thanks, Jacek, for testing the scenarios indicated by Martin \u0026 Nasser.",
       "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94e7b692_f0a1fa85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2021-11-08T22:38:32Z",
+      "side": 1,
+      "message": "If you did not enable the replication distributor, please test it that way as we want to ensure that the two primaries are not overlapping work.\n\nThis does not seem like it tested one of the scenarios I was concerned with, i.e. when the server has replicated a larger portion of a push, and then restarts, can you test that.",
+      "parentUuid": "69071764_c73b46be",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
