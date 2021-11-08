@@ -123,6 +123,24 @@
       "parentUuid": "ed01fa47_cad973c0",
       "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69071764_c73b46be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-11-08T11:06:10Z",
+      "side": 1,
+      "message": "\u003e I have issued a loop (2 times in each repo) that was\n\nnot 2 times by 20 times :D",
+      "parentUuid": "b8d40a1b_d3130535",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
