@@ -211,6 +211,24 @@
       "parentUuid": "94e7b692_f0a1fa85",
       "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "522fbfea_8ab81165",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-11-10T19:17:55Z",
+      "side": 1,
+      "message": "@Martin you were correct I had misconfigured events distributor so here is the proper replication.config for having it enabled (`distributionInterval` should be configured in the `replication` level not on the `remote`):\n\n  [gerrit]\n        maxRefsToShow \u003d 0\n  [replication]\n        eventsDirectory \u003d /tmp/gerrit-ha-replication/shared/replication_events\n        distributionInterval \u003d 1\n  [remote \"file\"]\n        url \u003d file:///tmp/gerrit-ha-replication/shared/test_repo.git\n        threads \u003d 1\n        projects \u003d test_repo\n        defaultForceUpdate \u003d true\n        replicationDelay \u003d 10\n        push \u003d +refs/heads/*:refs/heads/*\n        push \u003d +refs/tags/*:refs/tags/*\n        pushBatchSize \u003d 3\n        mirror \u003d true\n        rescheduleDelay \u003d 10\n\nNow in terms of the test results (procedure was the same as previously):\n1. having pushBatchSize \u003d 0 (existing, default behaviour) - resulted in 26 ERROR log entries [1] - but regardless of that destination was consistent with master in terms of refs and their objects\n\n2. having pushBatchSize \u003d 3 (this change) - resulted in 120 ERROR log entries [1] - again destination content was consistent with master\n\nConsidering the increased number of false negatives in log I believe that it is better to not have these two functionalities enabled in the same time therefore \u0027pushBatchSize\u0027 is considered disabled when `replication.distributionInterval` has value \u003e `0` (warning is issued once per each remote). Necessary changes (including Unit Tests) were added in PS#8.\n\n\n[1]\n[2021-11-09T11:37:56.846+01:00] [ReplicateTo-file-1[java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask@4854924a[Not completed, task \u003d java.util.concurrent.Executors$RunnableAdapter@19d11ded[Wrapped task \u003d com.google.gerrit.server.logging.LoggingContextAwareRunnable@1bedd4f8]]]] ERROR com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage : Error while deleting task 47673a96d09cdd4203ba1e5b7801f5a7e44271e2 [CONTEXT pushOneId\u003d\"2a04bc0d\" ]\njava.nio.file.NoSuchFileException: /private/tmp/gerrit-ha-replication/shared/replication_events/ref-updates/running/47673a96d09cdd4203ba1e5b7801f5a7e44271e2\n  at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92)\n  at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)\n  ...",
+      "parentUuid": "baca1fde_15d68bda",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
