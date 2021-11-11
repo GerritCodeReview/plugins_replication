@@ -229,6 +229,24 @@
       "parentUuid": "baca1fde_15d68bda",
       "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56d3ba9c_49ed543a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-11-11T16:00:36Z",
+      "side": 1,
+      "message": "\u003e Now in terms of the test results (procedure was the same as previously):\n\u003e 1. having pushBatchSize \u003d 0 (existing, default behaviour) - resulted in 26 ERROR log entries [1] - but regardless of that destination was consistent with master in terms of refs and their objects\n\u003e \n\u003e 2. having pushBatchSize \u003d 3 (this change) - resulted in 120 ERROR log entries [1] - again destination content was consistent with master\n\nGreat that you see the destination updated correctly in both cases. That\u0027s most important. \n\n\u003e \n\u003e Considering the increased number of false negatives in log I believe that it is better to not have these two functionalities enabled in the same time therefore \u0027pushBatchSize\u0027 is considered disabled when `replication.distributionInterval` has value \u003e `0` (warning is issued once per each remote). Necessary changes (including Unit Tests) were added in PS#8.\n\nYeah, these log entries are annoying. They\u0027re not really errors in a multi-primary environment, so I\u0027d rather fix them than try to reconfigure around it.\n\nWe can look at removing/silencing them, but I\u0027m not sure in what circumstances we should. We had considered doing it based on distributor config, but since you\u0027re seeing them with distributor on \u0026 off (and we do too), maybe that\u0027s not good enough. Do you have any ideas?",
+      "parentUuid": "522fbfea_8ab81165",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
