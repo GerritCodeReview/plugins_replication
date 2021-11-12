@@ -1,9 +1,11 @@
-@PLUGIN@ extension points
-==============
+# @PLUGIN@ extension points
 
-The replication plugin exposes an extension point to allow influencing its behaviour from another plugin or a script.
-Extension points can be defined from the replication plugin only when it is loaded as [libModule](/config-gerrit.html#gerrit.installModule) and
-implemented by another plugin by declaring a `provided` dependency from the replication plugin.
+The replication plugin exposes an extension point to allow influencing its
+behaviour from another plugin or a script. Extension points can be defined from
+the replication plugin only when it is loaded as
+[libModule](../../../Documentation/config-gerrit.html#gerrit.installModule) and
+implemented by another plugin by declaring a `provided` dependency from the
+replication plugin.
 
 ### Install extension libModule
 
@@ -15,17 +17,18 @@ and then add the replication extension module to the `gerrit.config`.
 
 Example:
 
-```
+```ini
 [gerrit]
   installModule = com.googlesource.gerrit.plugins.replication.ReplicationExtensionPointModule
 ```
 
-> **NOTE**: Use and configuration of the replication plugin as library module requires a Gerrit server restart and does not support hot plugin install or upgrade.
-
+> **NOTE**: Use and configuration of the replication plugin as library module
+> requires a Gerrit server restart and does not support hot plugin install or
+> upgrade.
 
 ### Extension points
 
-* `com.googlesource.gerrit.plugins.replication.ReplicationPushFilter`
+- `com.googlesource.gerrit.plugins.replication.ReplicationPushFilter`
 
   Filter out the ref updates pushed to a remote instance.
   Only one filter at a time is supported. Filter implementation needs to bind a `DynamicItem`.
@@ -34,11 +37,11 @@ Example:
 
   Example:
 
-  ```
+  ```java
   DynamicItem.bind(binder(), ReplicationPushFilter.class).to(ReplicationPushFilterImpl.class);
   ```
 
-* `com.googlesource.gerrit.plugins.replication.AdminApiFactory`
+- `com.googlesource.gerrit.plugins.replication.AdminApiFactory`
 
   Create an instance of `AdminApi` for a given remote URL. The default implementation
   provides API instances for local FS, remote SSH, and remote Gerrit.
@@ -48,6 +51,6 @@ Example:
 
   Example:
 
-  ```
+  ```java
   DynamicItem.bind(binder(), AdminApiFactory.class).to(AdminApiFactoryImpl.class);
   ```
