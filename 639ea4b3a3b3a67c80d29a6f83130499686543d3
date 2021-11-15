@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e6d984b_6efb50b3",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-11-15T22:56:16Z",
+      "side": 0,
+      "message": "So while I\u0027m not set against changes like this, they go against the norm for Gerrit projects. You can see this style in other core and non-core plugins:\n\nhttps://gerrit.googlesource.com/plugins/delete-project/+show/refs/heads/master/src/main/resources/Documentation/about.md\n\nhttps://gerrit.googlesource.com/plugins/delete-project/+show/refs/heads/master/src/main/resources/Documentation/cmd-delete.md\n\nhttps://gerrit.googlesource.com/plugins/hooks/+show/refs/heads/master/src/main/resources/Documentation/config.md\n\nhttps://gerrit.googlesource.com/plugins/high-availability/+show/refs/heads/master/src/main/resources/Documentation/config.md\n\nIf there are inconsistencies within a plugin, I think that\u0027s reasonable to fix. Applying a blanket style that\u0027s from an arbitrary checker/linter that doesn\u0027t run in CI is going to be a much tougher sell.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 36
+      },
+      "revId": "639ea4b3a3b3a67c80d29a6f83130499686543d3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
