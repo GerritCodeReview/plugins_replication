@@ -1,74 +1,71 @@
-@PLUGIN@ list
-==============
+# @PLUGIN@ list
 
-NAME
-----
+## NAME
+
 @PLUGIN@ list - List remote destination information.
 
-SYNOPSIS
---------
-```
+## SYNOPSIS
+
+```console
 ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list
   [--remote <PATTERN>]
   [--detail]
   [--json]
 ```
 
-DESCRIPTION
------------
+## DESCRIPTION
+
 Lists the name and URL for remote destinations.
 
-ACCESS
-------
+## ACCESS
+
 Caller must be a member of the privileged 'Administrators' group.
 
-SCRIPTING
----------
+## SCRIPTING
+
 This command is intended to be used in scripts.
 
-OPTIONS
--------
+## OPTIONS
 
 `--remote <PATTERN>`
-:	Only print information for destinations whose remote name matches
-	the `PATTERN`.
+: Only print information for destinations whose remote name matches
+the `PATTERN`.
 
 `--detail`
-:	Print additional detailed information: AdminUrl, AuthGroup, Project
-	and queue (pending and in-flight).
+: Print additional detailed information: AdminUrl, AuthGroup, Project
+and queue (pending and in-flight).
 
 `--json`
-:	Output in json format.
+: Output in json format.
 
-EXAMPLES
---------
+## EXAMPLES
+
 List all destinations:
 
-```
-  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list
+```console
+$ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list
 ```
 
 List all destinations detail information:
 
-```
-  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list --detail
+```console
+$ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list --detail
 ```
 
 List all destinations detail information in json format:
 
-```
-  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list --detail --json
+```console
+$ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list --detail --json
 ```
 
 List destinations whose name contains mirror:
 
-```
-  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list --remote mirror
-  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list --remote ^.*mirror.*
+```console
+$ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list --remote mirror
+$ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list --remote ^.*mirror.*
 ```
 
-SEE ALSO
---------
+## SEE ALSO
 
-* [Replication Configuration](config.md)
-* [Access Control](../../../Documentation/access-control.html)
+- [Replication Configuration](config.md)
+- [Access Control](../../../Documentation/access-control.html)
