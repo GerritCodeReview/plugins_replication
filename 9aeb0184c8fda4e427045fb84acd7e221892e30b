@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67d2c9fe_59a6ecf6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1111258
+      },
+      "writtenOn": "2021-11-15T23:25:15Z",
+      "side": 1,
+      "message": "\u003e I think you need to split this into its own change if you want to pursue it (see inline comments).\n\nYeah, I originally wanted to have multiple commits, but then there were just too many changes to make them easily separate. I\u0027ll see if I can get only the fixes here.",
+      "parentUuid": "9103b607_01520840",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 98
+      },
+      "revId": "9aeb0184c8fda4e427045fb84acd7e221892e30b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da4deeff_8fec2e8f",
         "filename": "src/main/resources/Documentation/about.md",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2021-11-15T22:56:16Z",
       "side": 1,
       "message": "This s/*/-/ replacement seems arbitrary and doesn\u0027t seem to violate the \u0027consistent\u0027 default from https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md004\n\nDo we need it?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 1
+      },
+      "revId": "9aeb0184c8fda4e427045fb84acd7e221892e30b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68ec5e2f_c6f94d14",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1111258
+      },
+      "writtenOn": "2021-11-15T23:25:15Z",
+      "side": 1,
+      "message": "\u003e This s/*/-/ replacement seems arbitrary and doesn\u0027t seem to violate the \u0027consistent\u0027 default from https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md004\n\u003e \n\u003e Do we need it?\n\nNot needed, but it was easier than trying to go against the autoformatter. I\u0027ll see if I can configure it to not change heading styles. I might need to just disable the format-on-save function with markdown, it tends to annoy me more than it helps. 😊",
+      "parentUuid": "da4deeff_8fec2e8f",
       "range": {
         "startLine": 28,
         "startChar": 0,
