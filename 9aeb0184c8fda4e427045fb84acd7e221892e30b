@@ -48,6 +48,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba65be98_f9576751",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1111258
+      },
+      "writtenOn": "2021-11-16T05:34:11Z",
+      "side": 1,
+      "message": "OK, I think I got it down to only fixes and improvements, no arbitrary changes of list styles.",
+      "parentUuid": "67d2c9fe_59a6ecf6",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 98
+      },
+      "revId": "9aeb0184c8fda4e427045fb84acd7e221892e30b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da4deeff_8fec2e8f",
@@ -95,6 +119,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "965ad9e5_66f039e8",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1111258
+      },
+      "writtenOn": "2021-11-16T05:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68ec5e2f_c6f94d14",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 1
+      },
+      "revId": "9aeb0184c8fda4e427045fb84acd7e221892e30b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee19f7fe_f7064949",
@@ -108,6 +156,30 @@
       "writtenOn": "2021-11-15T22:56:16Z",
       "side": 1,
       "message": "Same comment about s/*/-/",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 1
+      },
+      "revId": "9aeb0184c8fda4e427045fb84acd7e221892e30b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe54da16_086f6696",
+        "filename": "src/main/resources/Documentation/cmd-list.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1111258
+      },
+      "writtenOn": "2021-11-16T05:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee19f7fe_f7064949",
       "range": {
         "startLine": 70,
         "startChar": 0,
