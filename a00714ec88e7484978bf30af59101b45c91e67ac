@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfa5b1cb_03cf5dbf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-11-17T06:12:09Z",
+      "side": 1,
+      "message": "In hindsight I should have added this thought to my comments on the earlier patchset, but oh well.\n\nWe generally aim for small changes [1] that do one thing. 6 different things listed in a commit message is a red flag. Each of these bullets looks like a great small change. I get it that we often don\u0027t work that way, but it makes a reviewer\u0027s life a lot nicer and you get to learn the awesome power of \u0027git rebase -i\u0027 😊\n\nI\u0027ll look through the files now to see if there\u0027s anything I think you should just skip, but if not, I would make the smallest, simplest change first and at a glance, the order you\u0027ve listed them here is probably reasonable (though maybe put the s/slave/replica/ one after the pure fixes).\n\n[1] https://gerrit-review.googlesource.com/Documentation/dev-crafting-changes.html#change-size",
+      "revId": "a00714ec88e7484978bf30af59101b45c91e67ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d778393_9df4df12",
+        "filename": "src/main/resources/Documentation/cmd-list.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-11-17T06:12:09Z",
+      "side": 1,
+      "message": "Does not having these blank lines affect rendering in Gerrit or in some other markdown viewer?\n\nFor example, they look fine in gitiles: https://gerrit.googlesource.com/plugins/replication/+/639ea4b3a3b3a67c80d29a6f83130499686543d3/src/main/resources/Documentation/cmd-list.md\n\nand they seem fine on my local Gerrit server.\n\nI would definitely do all the testing of this change with Gerrit (browse to https://your.gerrit.server.example.com/plugins/replication/Documentation/config.md) and use a complex file like config.md as the easiest to test what changes will look like with Gerrit\u0027s markdown renderer. It\u0027s fine if Gerrit\u0027s rendering doesn\u0027t improve and gitiles or a local IDE/tool does, but we don\u0027t want to make anything worse in Gerrit. This is another reason to focus on the obvious fixes as their own small changes first.\n\nGive me a ping in chat if you need help with that setup.",
+      "revId": "a00714ec88e7484978bf30af59101b45c91e67ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b29d2308_ff05f941",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-11-17T06:12:09Z",
+      "side": 1,
+      "message": "This looks like a functional fix that should go on its own.",
+      "range": {
+        "startLine": 22,
+        "startChar": 23,
+        "endLine": 22,
+        "endChar": 27
+      },
+      "revId": "a00714ec88e7484978bf30af59101b45c91e67ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
