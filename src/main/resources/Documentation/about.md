@@ -17,7 +17,7 @@ local path as replication target. This makes e.g. sense if a network
 share is mounted to which the repositories should be replicated.
 
 It is possible to
-[configure](config.html#configuring-cluster-replication) the plugin so
+[configure](config.md#configuring-cluster-replication) the plugin so
 that multiple primaries share the replication work approximately evenly.
 
 Replication of account data (NoteDb)
