@@ -129,10 +129,10 @@ Replicate only projects located in the `documentation` subdirectory:
   $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start documentation/*
 ```
 
-Replicate projects whose path includes a folder named `vendor` to host slave1:
+Replicate projects whose path includes a folder named `vendor` to host replica1:
 
-```
-  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --url slave1 ^(|.*/)vendor(|/.*)
+```console
+  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --url replica1 ^(|.*/)vendor(|/.*)
 ```
 
 Replicate to only one specific destination URL:
