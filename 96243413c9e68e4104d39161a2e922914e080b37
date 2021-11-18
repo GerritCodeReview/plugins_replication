@@ -46,6 +46,30 @@
       },
       "revId": "96243413c9e68e4104d39161a2e922914e080b37",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56c126a5_501d4aa1",
+        "filename": "src/main/resources/Documentation/metrics.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-11-18T05:39:22Z",
+      "side": 1,
+      "message": "Yeah, that one is hard. I would put it close to last and tackle the issues I pointed out there in some of the other smaller files with similar patterns.",
+      "parentUuid": "21253c77_a8e04c97",
+      "range": {
+        "startLine": 6,
+        "startChar": 129,
+        "endLine": 6,
+        "endChar": 162
+      },
+      "revId": "96243413c9e68e4104d39161a2e922914e080b37",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
