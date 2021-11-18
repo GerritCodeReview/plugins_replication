@@ -7,7 +7,8 @@ NAME
 
 SYNOPSIS
 --------
-```
+
+```console
 ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start
   [--now]
   [--wait]
@@ -55,14 +56,14 @@ other reasons why an administrator may wish to trigger replication:
 
 If you get message "Nothing to replicate" while running this command,
 it may be caused by several reasons, such as you give a wrong url
-pattern in command options, or the authGroup in the replication.config
+pattern in command options, or the authGroup in the `replication.config`
 has no read access for the replicated projects.
 
 If one or several project patterns are supplied, only those projects
 conforming to both this/these pattern(s) and those defined in
-replication.config for the target host(s) are queued for replication.
+`replication.config` for the target host(s) are queued for replication.
 
-The patterns follow the same format as those in replication.config,
+The patterns follow the same format as those in `replication.config`,
 where wildcard or regular expression patterns can be given.
 Regular expression patterns must match a complete project name to be
 considered a match.
@@ -103,40 +104,40 @@ EXAMPLES
 --------
 Replicate every project, to every configured remote:
 
-```
-  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --all
+```console
+$ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --all
 ```
 
 Replicate only to `srv2` now that it is back online:
 
-```
-  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --url srv2 --all
+```console
+$ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --url srv2 --all
 ```
 
 Replicate only the `tools/gerrit` project, after deleting a ref
 locally by hand:
 
-```
-  $ git --git-dir=/home/git/tools/gerrit.git update-ref -d refs/changes/00/100/1
-  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start tools/gerrit
+```console
+$ git --git-dir=/home/git/tools/gerrit.git update-ref -d refs/changes/00/100/1
+$ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start tools/gerrit
 ```
 
 Replicate only projects located in the `documentation` subdirectory:
 
-```
-  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start documentation/*
+```console
+$ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start documentation/*
 ```
 
 Replicate projects whose path includes a folder named `vendor` to host replica1:
 
-```
-  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --url replica1 ^(|.*/)vendor(|/.*)
+```console
+$ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --url replica1 ^(|.*/)vendor(|/.*)
 ```
 
 Replicate to only one specific destination URL:
 
-```
-  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --url https://example.com/tools/gerrit.git
+```console
+$ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --url https://example.com/tools/gerrit.git
 ```
 
 SEE ALSO
