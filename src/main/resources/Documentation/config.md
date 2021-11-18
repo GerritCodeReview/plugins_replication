@@ -557,7 +557,7 @@ remote.NAME.remoteNameStyle
 	By default, replicates without matching, i.e. replicates
 	everything to all remotes.
 
-remote.NAME.slowLatencyThreshold
+<a name="remote.NAME.slowLatencyThreshold">remote.NAME.slowLatencyThreshold</a>
 :	the time duration after which the replication of a project to this
 	destination will be considered "slow". A slow project replication
 	will cause additional metrics to be exposed for further investigation.
