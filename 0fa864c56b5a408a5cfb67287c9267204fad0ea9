@@ -247,6 +247,24 @@
       "parentUuid": "522fbfea_8ab81165",
       "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcf8d9f6_2688361a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2021-11-18T07:40:27Z",
+      "side": 1,
+      "message": "@Nasser\n\u003e We can look at removing/silencing them, but I\u0027m not sure in what circumstances we should. We had considered doing it based on distributor config, but since you\u0027re seeing them with distributor on \u0026 off (and we do too), maybe that\u0027s not good enough. Do you have any ideas?\n\nSo far not many as the distributor concept is pretty new to me :) My proposal would be to make it working first even if it should be not enabled together with distributor. Do you happen to have and open issue for those false-negative log entries? If not please do create one (giving as much context as you can would be for sure helpful) if it is already there please point me to it ;).\n\n@Martin\n\u003e ... hen the server has replicated a larger portion of a push, and then restarts, can you test that.\n\nI have tested that scenario too. It is not perfect but still not bad as already pushed refs are returned with status `UP_TO_DATE` IOW no blobs are transferred. I have clarified that in the change description. My take would be to tackle that problem if/when we get there ;)",
+      "parentUuid": "56d3ba9c_49ed543a",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
