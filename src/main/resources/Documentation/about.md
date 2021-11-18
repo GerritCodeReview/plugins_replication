@@ -28,7 +28,6 @@ To replicate the account data in NoteDb the following branches from the
 
 * `refs/users/*` (user branches)
 * `refs/meta/external-ids` (external IDs)
-* `refs/starred-changes/*` (star labels, not needed for Gerrit slaves)
+* `refs/starred-changes/*` (star labels, not needed for Gerrit replicas)
 * `refs/sequences/accounts` (account sequence numbers, not needed for Gerrit
-  slaves)
-
+  replicas)
