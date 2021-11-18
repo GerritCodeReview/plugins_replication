@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "860eeff7_8da45054",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-11-18T05:23:23Z",
+      "side": 1,
+      "message": "Some of these updates don\u0027t render as well in Gerrit when you view the doc. I would split this bit from the languages for code blocks and indentation improvements.\n\nOne change overall to these is that the config names went from being bold-styled to code-styled. That\u0027s mostly ok, but links aren\u0027t styled as blue now and that does appear to affect readability.",
+      "revId": "159a7e9114fb8a033a6b7d84c5ccf738736ad61d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1dc9855_298b9072",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-11-18T05:23:23Z",
+      "side": 1,
+      "message": "I specifically noticed this looks different (not indented, maybe more)",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 3
+      },
+      "revId": "159a7e9114fb8a033a6b7d84c5ccf738736ad61d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5475379_f8b66539",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-11-18T05:23:23Z",
+      "side": 1,
+      "message": "This isn\u0027t indented under the config now. Looks like there\u0027s probably more of these each time you have a blank line with one or more paragraphs below for the same config item.",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 0
+      },
+      "revId": "159a7e9114fb8a033a6b7d84c5ccf738736ad61d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
