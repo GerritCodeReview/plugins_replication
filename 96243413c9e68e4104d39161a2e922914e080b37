@@ -22,6 +22,30 @@
       },
       "revId": "96243413c9e68e4104d39161a2e922914e080b37",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21253c77_a8e04c97",
+        "filename": "src/main/resources/Documentation/metrics.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1111258
+      },
+      "writtenOn": "2021-11-18T05:35:23Z",
+      "side": 1,
+      "message": "Yes, because that change is still big and hard to split. Will work on that.",
+      "parentUuid": "dbea964b_6087f350",
+      "range": {
+        "startLine": 6,
+        "startChar": 129,
+        "endLine": 6,
+        "endChar": 162
+      },
+      "revId": "96243413c9e68e4104d39161a2e922914e080b37",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
