@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1102826d_ab97cded",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2021-11-18T08:55:40Z",
+      "side": 1,
+      "message": "All tests have been performed and no critical issues found. I am happy for this change to be merged.",
+      "revId": "756d349cb3a16652568aad46b34f2eb9c3d04a36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
