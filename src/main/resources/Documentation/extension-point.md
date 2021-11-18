@@ -15,7 +15,7 @@ and then add the replication extension module to the `gerrit.config`.
 
 Example:
 
-```
+```ini
 [gerrit]
   installModule = com.googlesource.gerrit.plugins.replication.ReplicationExtensionPointModule
 ```
@@ -34,7 +34,7 @@ Example:
 
   Example:
 
-  ```
+  ```java
   DynamicItem.bind(binder(), ReplicationPushFilter.class).to(ReplicationPushFilterImpl.class);
   ```
 
@@ -48,6 +48,6 @@ Example:
 
   Example:
 
-  ```
+  ```java
   DynamicItem.bind(binder(), AdminApiFactory.class).to(AdminApiFactoryImpl.class);
   ```
