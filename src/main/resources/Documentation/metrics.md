@@ -3,7 +3,7 @@ Metrics
 
 Some metrics are emitted when replication occurs to a remote destination.
 The granularity of the metrics recorded is at destination level, however when a particular project replication is flagged
-as slow. This happens when the replication took longer than allowed threshold (see _remote.NAME.slowLatencyThreshold_ in [config.md](config.md))
+as slow. This happens when the replication took longer than allowed threshold (see [`remote.NAME.slowLatencyThreshold`](config.md#remote.NAME.slowLatencyThreshold)).
 
 The reason only slow metrics are published, rather than all, is to contain their number, which, on a big Gerrit installation
 could potentially be considerably big.
