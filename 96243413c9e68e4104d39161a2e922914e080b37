@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a32cf01_f5fc6c7b",
+        "filename": "src/main/resources/Documentation/cmd-list.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2021-11-18T05:37:49Z",
+      "side": 0,
+      "message": "unfortunately, when I look at this installed in Gerrit, this indenting was useful, but only because the rendering is bad overall. There\u0027s too much whitespace above this code block and not enough below it, so when you remove the indent, it looks like:\n\n List all destinations:\n \n $ ssh -p 29418 * replication list\n List all destinations detail information:\n \n $ ssh -p 29418 * replication list --detail\n List all destinations detail information in json format:\n \n $ ssh -p 29418 * replication list --detail --json\n List destinations whose name contains mirror:\n \n $ ssh -p 29418 * replication list --remote mirror\n $ ssh -p 29418 * replication list --remote ^.*mirror.*\n\nBut really we want:\n\n List all destinations:\n $ ssh -p 29418 * replication list\n \n List all destinations detail information:\n $ ssh -p 29418 * replication list --detail\n \n List all destinations detail information in json format:\n $ ssh -p 29418 * replication list --detail --json\n \n List destinations whose name contains mirror:\n $ ssh -p 29418 * replication list --remote mirror\n $ ssh -p 29418 * replication list --remote ^.*mirror.*",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 2
+      },
+      "revId": "96243413c9e68e4104d39161a2e922914e080b37",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
