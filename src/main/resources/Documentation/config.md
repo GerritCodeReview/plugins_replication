@@ -18,9 +18,9 @@ with the command line:
   ssh-keygen -m PEM -t rsa -C "your_email@example.com"
 ```
 
-<a name="example_file">
+<a name="example_file"></a>
 Next, create `$site_path/etc/replication.config` as a Git-style config
-file, for example to replicate in parallel to four different hosts:</a>
+file, for example to replicate in parallel to four different hosts:
 
 ```
   [remote "host-one"]
