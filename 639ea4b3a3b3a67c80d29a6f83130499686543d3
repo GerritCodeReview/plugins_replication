@@ -71,6 +71,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0890f860_d30ff577",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1111258
+      },
+      "writtenOn": "2021-11-18T04:34:13Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "44c6edf4_1aab52b0",
+      "range": {
+        "startLine": 20,
+        "startChar": 19,
+        "endLine": 20,
+        "endChar": 23
+      },
+      "revId": "639ea4b3a3b3a67c80d29a6f83130499686543d3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce3245ae_b35885d9",
@@ -84,6 +108,30 @@
       "writtenOn": "2021-11-17T06:12:09Z",
       "side": 0,
       "message": "Removing tabs everywhere is probably a change on its own (and one I welcome). You could maybe bundle it with the newlines you\u0027re adding as an \"Improve whitespace\" change.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 1
+      },
+      "revId": "639ea4b3a3b3a67c80d29a6f83130499686543d3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b8e7bf1_2eb277a3",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1111258
+      },
+      "writtenOn": "2021-11-18T04:34:13Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "ce3245ae_b35885d9",
       "range": {
         "startLine": 29,
         "startChar": 0,
