@@ -7,7 +7,7 @@ NAME
 
 SYNOPSIS
 --------
-```
+```console
 ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list
   [--remote <PATTERN>]
   [--detail]
@@ -44,25 +44,25 @@ EXAMPLES
 --------
 List all destinations:
 
-```
+```console
   $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list
 ```
 
 List all destinations detail information:
 
-```
+```console
   $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list --detail
 ```
 
 List all destinations detail information in json format:
 
-```
+```console
   $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list --detail --json
 ```
 
 List destinations whose name contains mirror:
 
-```
+```console
   $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list --remote mirror
   $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ list --remote ^.*mirror.*
 ```
