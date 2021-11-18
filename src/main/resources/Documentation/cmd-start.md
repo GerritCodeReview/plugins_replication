@@ -86,20 +86,20 @@ OPTIONS
 -------
 
 `--now`
-:   Start replicating right away without waiting the per remote
-	replication delay.
+: Start replicating right away without waiting the per remote
+replication delay.
 
 `--wait`
-:	Wait for replication to finish before exiting.
+: Wait for replication to finish before exiting.
 
 `--all`
-:	Schedule replication for all projects.
+: Schedule replication for all projects.
 
 `--url <PATTERN>`
-:	Replicate only to replication destinations whose configuration
-	URL contains the substring `PATTERN`, or whose expanded project
-	URL contains `PATTERN`. This can be useful to replicate only to
-	a previously down node, which has been brought back online.
+: Replicate only to replication destinations whose configuration
+URL contains the substring `PATTERN`, or whose expanded project
+URL contains `PATTERN`. This can be useful to replicate only to
+a previously down node, which has been brought back online.
 
 EXAMPLES
 --------
