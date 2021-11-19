@@ -9,12 +9,12 @@ remote system(s) is already in the Gerrit user's `~/.ssh/known_hosts`
 file.  The easiest way to add the host key is to connect once by hand
 with the command line:
 
-```
+```console
   sudo su -c 'ssh mirror1.us.some.org echo' gerrit2
 ```
 
 *NOTE:* make sure the local user's ssh keys format is PEM, here how to generate them:
-```
+```console
   ssh-keygen -m PEM -t rsa -C "your_email@example.com"
 ```
 
@@ -22,7 +22,7 @@ with the command line:
 Next, create `$site_path/etc/replication.config` as a Git-style config
 file, for example to replicate in parallel to four different hosts:
 
-```
+```ini
   [remote "host-one"]
     url = gerrit2@host-one.example.com:/some/path/${name}.git
 
@@ -39,7 +39,7 @@ file, for example to replicate in parallel to four different hosts:
 
 Then reload the replication plugin to pick up the new configuration:
 
-```
+```console
   ssh -p 29418 localhost gerrit plugin reload replication
 ```
 
@@ -595,7 +595,7 @@ sections please refer to the `replication.config` section.
 
 Static configuration in `$site_path/etc/replication.config`:
 
-```
+```ini
 [gerrit]
     autoReload = true
     replicateOnStartup = false
@@ -608,7 +608,7 @@ Remote sections in `$site_path/etc/replication` directory:
 
 * File `$site_path/etc/replication/host-one.config`
 
- ```
+ ```ini
  [remote]
     url = gerrit2@host-one.example.com:/some/path/${name}.git
  ```
@@ -616,7 +616,7 @@ Remote sections in `$site_path/etc/replication` directory:
 
 * File `$site_path/etc/replication/pubmirror.config`
 
- ```
+ ```ini
   [remote]
     url = mirror1.us.some.org:/pub/git/${name}.git
     url = mirror2.us.some.org:/pub/git/${name}.git
@@ -630,7 +630,7 @@ Remote sections in `$site_path/etc/replication` directory:
 
 Replication plugin resolves config files to the following configuration:
 
-```
+```ini
 [gerrit]
     autoReload = true
     replicateOnStartup = false
@@ -673,7 +673,7 @@ File `~/.ssh/config`
 Gerrit reads and caches the `~/.ssh/config` at startup, and
 supports most SSH configuration options.  For example:
 
-```
+```text
   Host host-one.example.com
     IdentityFile ~/.ssh/id_hostone
     PreferredAuthentications publickey
@@ -687,7 +687,7 @@ supports most SSH configuration options.  For example:
 *IdentityFile* and *PreferredAuthentications* must be defined for all the hosts.
 Here an example of the minimum `~/.ssh/config` needed:
 
-```
+```text
   Host *
     IdentityFile ~/.ssh/id_rsa
     PreferredAuthentications publickey
