@@ -53,16 +53,16 @@ Configuring Cluster Replication
 The replication plugin is designed to allow multiple primaries in a
 cluster to efficiently cooperate together via the replication event
 persistence subsystem. To enable this cooperation, the directory
-pointed to by the replication.eventsDirectory config key must reside on
+pointed to by the `replication.eventsDirectory` config key must reside on
 a shared filesystem, such as NFS. By default, simply pointing multiple
 primaries to the same eventsDirectory will enable some cooperation by
 preventing the same replication push from being duplicated by more
 than one primary.
 
 To further improve cooperation across the cluster, the
-replication.distributionInterval config value can be set. With
+`replication.distributionInterval` config value can be set. With
 distribution enabled, the replication queues for all the nodes sharing
-the same eventsDirectory will reflect approximately the same outstanding
+the same `eventsDirectory` will reflect approximately the same outstanding
 replication work (i.e. tasks waiting in the queue). Replication pushes
 which are running will continue to only be visible in the queue of the
 node on which the push is actually happening. This feature helps
@@ -181,7 +181,7 @@ replication.distributionInterval
 	(such as other masters in the same cluster) writing to the same
 	persistence store. To ensure that updates are seen well before their
 	replicationDelay expires when the distributor is used, the recommended
-	value for this is approximately the smallest remote.NAME.replicationDelay
+	value for this is approximately the smallest `remote.NAME.replicationDelay`
 	divided by 5.
 
 <a name="replication.updateRefErrorMaxRetries">replication.updateRefErrorMaxRetries</a>
@@ -200,7 +200,7 @@ replication.distributionInterval
 	"failed to lock" is detected as that is the legacy string used by git.
 
 	A good value would be 3 retries or less, depending on how often
-	you see updateRefError collisions in your server logs. A too highly set
+	you see `updateRefError` collisions in your server logs. A too highly set
 	value risks keeping around the replication operations in the queue
 	for a long time, and the number of items in the queue will increase
 	with time.
@@ -211,7 +211,7 @@ replication.distributionInterval
 	will never succeed.
 
 	The issue can also be mitigated somewhat by increasing the
-	replicationDelay.
+	`replicationDelay`.
 
 	Default: 0 (disabled, i.e. never retry)
 
@@ -233,7 +233,7 @@ replication.maxRetries
 	the replication event is discarded from the queue and the remote
 	destinations may remain out of sync.
 
-	Can be overridden at remote-level by setting replicationMaxRetries.
+	Can be overridden at remote-level by setting `replicationMaxRetries`.
 
 	By default, pushes are retried indefinitely.
 
@@ -247,9 +247,9 @@ replication.eventsDirectory
 	it will trigger all replications found under this directory.
 
 	For replication to work, is is important that atomic renames be possible
-	from within any subdirectory of the eventsDirectory to within any other
-	subdirectory of the eventsDirectory. This generally means that the entire
-	contents of the eventsDirectory should live on the same filesystem.
+	from within any subdirectory of the `eventsDirectory` to within any other
+	subdirectory of the `eventsDirectory`. This generally means that the entire
+	contents of the `eventsDirectory` should live on the same filesystem.
 
 	When not set, defaults to the plugin's data directory.
 
@@ -280,12 +280,12 @@ remote.NAME.adminUrl
 	remote block, listing different destinations which share the
 	same settings.
 
-	The adminUrl can be used as an ssh alternative to the url
+	The `adminUrl` can be used as an ssh alternative to the `url`
 	option, but only related to repository creation.  If not
 	specified, the repository creation tries to follow the default
 	way through the url value specified.
 
-	It is useful when the remote.NAME.url protocols do not allow
+	It is useful when the `remote.NAME.url` protocols do not allow
 	repository creation although their usage is mandatory in the
 	local environment.  In that case, an alternative SSH url could
 	be specified to repository creation.
@@ -326,7 +326,7 @@ remote.NAME.adminUrl
 	contain any code-review or NoteDb information.
 
 	Using `gerrit+ssh` for replicating all Gerrit repositories
-	would result in failures on the All-Users.git replication and
+	would result in failures on the `All-Users.git` replication and
 	would not be able to replicate changes magic refs and indexes
 	across nodes.
 
@@ -427,7 +427,7 @@ remote.NAME.replicationMaxRetries
 
 	This is a Gerrit specific extension to the Git remote block.
 
-	By default, use replication.maxRetries.
+	By default, use `replication.maxRetries`.
 
 remote.NAME.drainQueueAttempts
 :	Maximum number of attempts to drain the replication event queue before
@@ -436,7 +436,7 @@ remote.NAME.drainQueueAttempts
 	When stopping the plugin, the shutdown will be delayed trying to drain
 	the event queue.
 
-	The maximum delay is "drainQueueAttempts" * "replicationDelay" seconds.
+	The maximum delay is `drainQueueAttempts * replicationDelay` seconds.
 
 	When not set or set to 0, the queue is not drained and the pending
 	replication events are cancelled.
@@ -455,7 +455,7 @@ remote.NAME.threads
 
 remote.NAME.authGroup
 :	Specifies the name of a group that the remote should use to
-	access the repositories. Multiple authGroups may be specified
+	access the repositories. Multiple `authGroups` may be specified
 	within a single remote block to signify a wider access right.
 	In the project administration web interface the read access
 	can be specified for this group to control if a project should
@@ -521,7 +521,7 @@ remote.NAME.remoteNameStyle
 	dashes in the remote repository name. If set to "underscore",
 	slashes will be replaced with underscores in the repository name.
 
-	Option "basenameOnly" makes `${name}` to be only the basename
+	Option `basenameOnly` makes `${name}` to be only the basename
 	(the part after the last slash) of the repository path on the
 	Gerrit server, e.g. `${name}` of `foo/bar/my-repo.git` would
 	be `my-repo`.
@@ -534,7 +534,7 @@ remote.NAME.remoteNameStyle
 	> to conflicts where commits can be lost between the two repositories
 	> replicating to the same target `my-repo`.
 
-	By default, "slash", i.e. remote names will contain slashes as
+	By default, `slash`, i.e. remote names will contain slashes as
 	they do in Gerrit.
 
 <a name="remote.NAME.projects">remote.NAME.projects</a>
@@ -693,7 +693,7 @@ supports most SSH configuration options.  For example:
     PreferredAuthentications publickey
 ```
 
-*IdentityFile* and *PreferredAuthentications* must be defined for all the hosts.
+`IdentityFile` and `PreferredAuthentications` must be defined for all the hosts.
 Here an example of the minimum `~/.ssh/config` needed:
 
 ```
