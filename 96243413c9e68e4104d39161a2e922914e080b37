@@ -22,6 +22,30 @@
       },
       "revId": "96243413c9e68e4104d39161a2e922914e080b37",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "985c2872_9b5620da",
+        "filename": "src/main/resources/Documentation/cmd-list.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1111258
+      },
+      "writtenOn": "2021-11-19T06:13:01Z",
+      "side": 0,
+      "message": "Yes, I see that. Gerrit is rendering the code blocks inside \u003cpre\u003e and \u003ccode\u003e tags, which seems weird. The Gitiles rendering is much better. Leaving the extra indentation for now then.",
+      "parentUuid": "4a32cf01_f5fc6c7b",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 2
+      },
+      "revId": "96243413c9e68e4104d39161a2e922914e080b37",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
