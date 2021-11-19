@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1884e8a_770ef111",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1111258
+      },
+      "writtenOn": "2021-11-19T06:21:19Z",
+      "side": 1,
+      "message": "OK yeah, now I see that this page in particular is rendered wildly differently in Gerrit than other (more standard) markdown renderers, like Gitiles. It looks really bad in Gitiles right now. Not sure what to do about this, but I\u0027ll mostly leave it alone for now. (I\u0027m often reading docs in Gitiles as I prepare for Gerrit upgrades.)",
+      "parentUuid": "860eeff7_8da45054",
+      "revId": "159a7e9114fb8a033a6b7d84c5ccf738736ad61d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1dc9855_298b9072",
@@ -41,6 +59,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4f47a4e_0ed5041e",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1111258
+      },
+      "writtenOn": "2021-11-19T06:21:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1dc9855_298b9072",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 3
+      },
+      "revId": "159a7e9114fb8a033a6b7d84c5ccf738736ad61d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5475379_f8b66539",
@@ -54,6 +96,30 @@
       "writtenOn": "2021-11-18T05:23:23Z",
       "side": 1,
       "message": "This isn\u0027t indented under the config now. Looks like there\u0027s probably more of these each time you have a blank line with one or more paragraphs below for the same config item.",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 0
+      },
+      "revId": "159a7e9114fb8a033a6b7d84c5ccf738736ad61d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c100c6a_809a3ad4",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1111258
+      },
+      "writtenOn": "2021-11-19T06:21:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5475379_f8b66539",
       "range": {
         "startLine": 168,
         "startChar": 0,
