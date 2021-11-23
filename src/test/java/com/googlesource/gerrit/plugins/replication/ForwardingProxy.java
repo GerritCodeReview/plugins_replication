@@ -65,6 +65,7 @@ public class ForwardingProxy {
           return implementedByOverrider;
         }
       } catch (NoSuchMethodException | SecurityException e) {
+        return null;
       }
       return null;
     }
