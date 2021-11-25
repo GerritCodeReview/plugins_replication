@@ -434,7 +434,8 @@ remote.NAME.mirror
 remote.NAME.remoteNameStyle
 :	Provides possibilities to influence the name of the target
 	repository, e.g. by replacing slashes in the `${name}`
-	placeholder.
+	placeholder, when the target remote repository is not served
+	by Gerrit.
 
 	Github and Gitorious do not permit slashes "/" in repository
 	names and will change them to dashes "-" at repository creation
