@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.auto.value.AutoValue;
+import com.google.common.collect.ImmutableSet;
 import com.google.gerrit.entities.Project;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.net.URISyntaxException;
@@ -34,7 +35,7 @@ public abstract class TestUriUpdates implements UriUpdates {
 
   public static TestUriUpdates create(
       Project.NameKey project, URIish uri, String remote, Set<String> refs) {
-    return new AutoValue_TestUriUpdates(project, uri, remote, refs);
+    return new AutoValue_TestUriUpdates(project, uri, remote, ImmutableSet.copyOf(refs));
   }
 
   @Override
@@ -47,5 +48,5 @@ public abstract class TestUriUpdates implements UriUpdates {
   public abstract String getRemoteName();
 
   @Override
-  public abstract Set<String> getRefs();
+  public abstract ImmutableSet<String> getRefs();
 }
