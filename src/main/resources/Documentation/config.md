@@ -450,6 +450,14 @@ remote.NAME.remoteNameStyle
 	Gerrit server, e.g. `${name}` of `foo/bar/my-repo.git` would
 	be `my-repo`.
 
+	> **NOTE**: The use of repository name translation using `remoteNameStyle`
+	> may lead to dangerous situations if there are multiple repositories
+	> that may be mapped to the same target name. For instance when
+	> mapping `/foo/my-repo.git` to `my-repo` using "basenameOnly"
+	> would also map `/bar/my-repo.git` to the same `my-repo` leading
+	> to conflicts where commits can be lost between the two repositories
+	> replicating to the same target `my-repo`.
+
 	By default, "slash", i.e. remote names will contain slashes as
 	they do in Gerrit.
 
