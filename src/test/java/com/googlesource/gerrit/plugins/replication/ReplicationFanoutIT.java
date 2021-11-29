@@ -78,7 +78,7 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
     gApi.projects().name(project.get()).branch(newBranch).create(input);
 
     isPushCompleted(targetProject, newBranch, TEST_PUSH_TIMEOUT);
-    try (Repository repo = repoManager.openRepository(targetProject);
+    try (Repository repo = remoteRepoManager.openRepository(targetProject);
         Repository sourceRepo = repoManager.openRepository(project)) {
       Ref masterRef = getRef(sourceRepo, master);
       Ref targetBranchRef = getRef(repo, newBranch);
@@ -115,8 +115,8 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
 
-    try (Repository repo1 = repoManager.openRepository(targetProject1);
-        Repository repo2 = repoManager.openRepository(targetProject2)) {
+    try (Repository repo1 = remoteRepoManager.openRepository(targetProject1);
+        Repository repo2 = remoteRepoManager.openRepository(targetProject2)) {
       WaitUtil.waitUntil(
           () ->
               (checkedGetRef(repo1, sourceRef) != null && checkedGetRef(repo2, sourceRef) != null),

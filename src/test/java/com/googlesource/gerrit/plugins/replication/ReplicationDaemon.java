@@ -23,6 +23,9 @@ import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.config.SitePaths;
+import com.google.gerrit.server.git.GitRepositoryManager;
+import com.google.gerrit.server.git.LocalDiskRepositoryManager;
+import com.google.gerrit.testing.InMemoryRepositoryManager;
 import com.google.inject.Inject;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -64,6 +67,16 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
   @Inject private ProjectOperations projectOperations;
   protected Path gitPath;
   protected FileBasedConfig config;
+  protected GitRepositoryManager remoteRepoManager;
+
+  @Override
+  public void setUpTestPlugin() throws Exception {
+    remoteRepoManager =
+        InMemoryRepositoryManager.class.isInstance(repoManager)
+            ? repoManager
+            : new LocalDiskRepositoryManager(sitePaths, cfg);
+    super.setUpTestPlugin();
+  }
 
   protected void setReplicationDestination(
       String remoteName, String replicaSuffix, Optional<String> project) throws IOException {
@@ -152,7 +165,7 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
   }
 
   protected boolean isPushCompleted(Project.NameKey project, String ref, Duration timeOut) {
-    try (Repository repo = repoManager.openRepository(project)) {
+    try (Repository repo = remoteRepoManager.openRepository(project)) {
       WaitUtil.waitUntil(() -> checkedGetRef(repo, ref) != null, timeOut);
       return true;
     } catch (InterruptedException e) {
@@ -170,7 +183,7 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
                 refsByProject.entrySet().iterator();
             while (iterator.hasNext()) {
               Map.Entry<Project.NameKey, String> entry = iterator.next();
-              try (Repository repo = repoManager.openRepository(entry.getKey())) {
+              try (Repository repo = remoteRepoManager.openRepository(entry.getKey())) {
                 if (checkedGetRef(repo, entry.getValue()) != null) {
                   iterator.remove();
                 }
@@ -213,7 +226,7 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
   }
 
   protected boolean nonEmptyProjectExists(Project.NameKey name) {
-    try (Repository r = repoManager.openRepository(name)) {
+    try (Repository r = remoteRepoManager.openRepository(name)) {
       return !r.getAllRefsByPeeledObjectId().isEmpty();
     } catch (Exception e) {
       return false;

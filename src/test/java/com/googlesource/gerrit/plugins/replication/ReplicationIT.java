@@ -117,7 +117,7 @@ public class ReplicationIT extends ReplicationDaemon {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
 
-    try (Repository repo = repoManager.openRepository(targetProject)) {
+    try (Repository repo = remoteRepoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
 
       Ref targetBranchRef = getRef(repo, sourceRef);
@@ -138,7 +138,7 @@ public class ReplicationIT extends ReplicationDaemon {
     input.revision = master;
     gApi.projects().name(project.get()).branch(newBranch).create(input);
 
-    try (Repository repo = repoManager.openRepository(targetProject);
+    try (Repository repo = remoteRepoManager.openRepository(targetProject);
         Repository sourceRepo = repoManager.openRepository(project)) {
       waitUntil(() -> checkedGetRef(repo, newBranch) != null);
 
@@ -162,8 +162,8 @@ public class ReplicationIT extends ReplicationDaemon {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
 
-    try (Repository repo1 = repoManager.openRepository(targetProject1);
-        Repository repo2 = repoManager.openRepository(targetProject2)) {
+    try (Repository repo1 = remoteRepoManager.openRepository(targetProject1);
+        Repository repo2 = remoteRepoManager.openRepository(targetProject2)) {
       waitUntil(
           () ->
               (checkedGetRef(repo1, sourceRef) != null && checkedGetRef(repo2, sourceRef) != null));
@@ -195,7 +195,7 @@ public class ReplicationIT extends ReplicationDaemon {
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
-    try (Repository repo = repoManager.openRepository(targetProject)) {
+    try (Repository repo = remoteRepoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
 
       Ref targetBranchRef = getRef(repo, newRef);
@@ -221,7 +221,7 @@ public class ReplicationIT extends ReplicationDaemon {
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
 
-    try (Repository repo = repoManager.openRepository(targetProject)) {
+    try (Repository repo = remoteRepoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
 
       Ref targetBranchRef = getRef(repo, newRef);
@@ -243,7 +243,7 @@ public class ReplicationIT extends ReplicationDaemon {
     gApi.projects().name(project.get()).branch(newHead).create(input);
     gApi.projects().name(project.get()).head(newHead);
 
-    try (Repository repo = repoManager.openRepository(targetProject)) {
+    try (Repository repo = remoteRepoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newHead) != null);
 
       Ref targetProjectHead = getRef(repo, Constants.HEAD);
@@ -273,13 +273,13 @@ public class ReplicationIT extends ReplicationDaemon {
     input.revision = master;
     gApi.projects().name(project.get()).branch(branchToDelete).create(input);
 
-    try (Repository repo = repoManager.openRepository(targetProject)) {
+    try (Repository repo = remoteRepoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, branchToDelete) != null);
     }
 
     gApi.projects().name(project.get()).branch(branchToDelete).delete();
 
-    try (Repository repo = repoManager.openRepository(targetProject)) {
+    try (Repository repo = remoteRepoManager.openRepository(targetProject)) {
       if (mirror) {
         waitUntil(() -> checkedGetRef(repo, branchToDelete) == null);
       }
@@ -354,7 +354,7 @@ public class ReplicationIT extends ReplicationDaemon {
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
 
-    try (Repository repo = repoManager.openRepository(targetProject)) {
+    try (Repository repo = remoteRepoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
       Ref targetBranchRef = getRef(repo, sourceRef);
       assertThat(targetBranchRef).isNotNull();
