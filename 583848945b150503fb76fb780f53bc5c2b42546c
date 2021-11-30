@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "68da2894_1fe6efc9",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
@@ -20,10 +21,10 @@
         "endChar": 89
       },
       "revId": "583848945b150503fb76fb780f53bc5c2b42546c",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "20e1931e_c03181f4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
@@ -44,10 +45,10 @@
         "endChar": 89
       },
       "revId": "583848945b150503fb76fb780f53bc5c2b42546c",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "9e33f4ae_5fb3e3e8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
@@ -68,10 +69,10 @@
         "endChar": 89
       },
       "revId": "583848945b150503fb76fb780f53bc5c2b42546c",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "5cd69380_2a780167",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
@@ -92,10 +93,10 @@
         "endChar": 89
       },
       "revId": "583848945b150503fb76fb780f53bc5c2b42546c",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "508e21f0_65c132c2",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
@@ -116,10 +117,10 @@
         "endChar": 89
       },
       "revId": "583848945b150503fb76fb780f53bc5c2b42546c",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "bc650fed_401d487f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
@@ -140,8 +141,31 @@
         "endChar": 89
       },
       "revId": "583848945b150503fb76fb780f53bc5c2b42546c",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbed481d_db537dcb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1024147
+      },
+      "writtenOn": "2021-11-30T18:35:38Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "bc650fed_401d487f",
+      "range": {
+        "startLine": 393,
+        "startChar": 75,
+        "endLine": 393,
+        "endChar": 89
+      },
+      "revId": "583848945b150503fb76fb780f53bc5c2b42546c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
