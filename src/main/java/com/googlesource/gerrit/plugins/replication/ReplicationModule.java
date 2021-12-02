@@ -44,6 +44,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.transport.SshSessionFactory;
@@ -122,6 +123,7 @@ class ReplicationModule extends AbstractModule {
     bind(SshSessionFactory.class).toProvider(ReplicationSshSessionFactoryProvider.class);
 
     bind(TransportFactory.class).to(TransportFactoryImpl.class).in(Scopes.SINGLETON);
+    bind(CloseableHttpClient.class).toProvider(HttpClientProvider.class).in(Scopes.SINGLETON);
   }
 
   private FileBasedConfig getReplicationConfig() {
