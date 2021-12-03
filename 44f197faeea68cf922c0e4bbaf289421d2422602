@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97265eb6_38592d04",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2021-12-03T14:40:08Z",
+      "side": 1,
+      "message": "This might be a better fit for a retry than a reschedule, so that the maxRetry option takes effect.",
+      "revId": "44f197faeea68cf922c0e4bbaf289421d2422602",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6423284e_92a2264c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2021-12-03T14:40:08Z",
+      "side": 1,
+      "message": "debug logging should be removed",
+      "revId": "44f197faeea68cf922c0e4bbaf289421d2422602",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
