@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63bf380a_ef8b2ca3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2021-12-03T15:25:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97265eb6_38592d04",
+      "revId": "44f197faeea68cf922c0e4bbaf289421d2422602",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6423284e_92a2264c",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-12-03T14:40:08Z",
       "side": 1,
       "message": "debug logging should be removed",
+      "revId": "44f197faeea68cf922c0e4bbaf289421d2422602",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad6bbe1a_1136180f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2021-12-03T15:25:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6423284e_92a2264c",
       "revId": "44f197faeea68cf922c0e4bbaf289421d2422602",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
