@@ -30,15 +30,15 @@ OPTIONS
 -------
 
 `--remote <PATTERN>`
-:	Only print information for destinations whose remote name matches
-	the `PATTERN`.
+: Only print information for destinations whose remote name matches
+the `PATTERN`.
 
 `--detail`
-:	Print additional detailed information: AdminUrl, AuthGroup, Project
-	and queue (pending and in-flight).
+: Print additional detailed information: AdminUrl, AuthGroup, Project
+and queue (pending and in-flight).
 
 `--json`
-:	Output in json format.
+: Output in json format.
 
 EXAMPLES
 --------
