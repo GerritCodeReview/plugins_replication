@@ -702,6 +702,8 @@ public class Destination {
       name = name.replace("/", "_");
     } else if (remoteNameStyle.equals("basenameOnly")) {
       name = Files.getNameWithoutExtension(name);
+    } else if (remoteNameStyle.equals("nameOnly")) {
+      name = Files.getName(name);
     } else if (!remoteNameStyle.equals("slash")) {
       repLog.atFine().log("Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
     }
