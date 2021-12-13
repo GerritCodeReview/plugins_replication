@@ -69,8 +69,17 @@ import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
 import java.io.IOException;
+<<<<<<< HEAD   (8dafd933a883bdd15135a382753e1b9ea447daa0 Replace legacy non-Javadoc comment with {@inheritDoc})
 import java.net.URISyntaxException;
 import java.util.Collection;
+||||||| BASE   (bad55d97ac86f6b16b63a1c4870762aa101332d8 Merge branch 'stable-3.2' into stable-3.3)
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+=======
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.file.Paths;
+>>>>>>> CHANGE (39e397ddc24e675fe3506a6fa37fef84232cad8d Allow to only remove repository path in ${name})
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -821,7 +830,11 @@ public class Destination {
     } else if (remoteNameStyle.equals("underscore")) {
       name = name.replace("/", "_");
     } else if (remoteNameStyle.equals("basenameOnly")) {
-      name = Files.getNameWithoutExtension(name);
+      if (name.endsWith(".git")) {
+        name = Files.getNameWithoutExtension(name);
+      } else {
+        name = Paths.get(name).getFileName().toString();
+      }
     } else if (!remoteNameStyle.equals("slash")) {
       repLog.atFine().log("Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
     }
