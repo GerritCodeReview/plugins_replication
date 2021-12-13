@@ -70,6 +70,7 @@ import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -821,7 +822,11 @@ public class Destination {
     } else if (remoteNameStyle.equals("underscore")) {
       name = name.replace("/", "_");
     } else if (remoteNameStyle.equals("basenameOnly")) {
-      name = Files.getNameWithoutExtension(name);
+      if (name.endsWith(".git")) {
+        name = Files.getNameWithoutExtension(name);
+      } else {
+        name = Paths.get(name).getFileName().toString();
+      }
     } else if (!remoteNameStyle.equals("slash")) {
       repLog.atFine().log("Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
     }
