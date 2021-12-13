@@ -450,6 +450,10 @@ remote.NAME.remoteNameStyle
 	Gerrit server, e.g. `${name}` of `foo/bar/my-repo.git` would
 	be `my-repo`.
 
+	Option "nameOnly" makes `${name}` to be only the name without
+	the repository path on the Gerrit server, e.g. `${name}` of
+	`foo/bar/my.repo` would be `my.repo`.
+
 	> **NOTE**: The use of repository name translation using `remoteNameStyle`
 	> may lead to dangerous situations if there are multiple repositories
 	> that may be mapped to the same target name. For instance when

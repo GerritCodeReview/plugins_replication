@@ -67,6 +67,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResul
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -702,6 +703,8 @@ public class Destination {
       name = name.replace("/", "_");
     } else if (remoteNameStyle.equals("basenameOnly")) {
       name = Files.getNameWithoutExtension(name);
+    } else if (remoteNameStyle.equals("nameOnly")) {
+      name = Paths.get(name).getFileName().toString();
     } else if (!remoteNameStyle.equals("slash")) {
       repLog.atFine().log("Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
     }
