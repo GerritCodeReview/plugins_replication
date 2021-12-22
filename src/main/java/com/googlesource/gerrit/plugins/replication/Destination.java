@@ -634,7 +634,7 @@ public class Destination {
       return true;
     }
 
-    boolean matches = (new ReplicationFilter(projects)).matches(project);
+    boolean matches = new ReplicationFilter(projects).matches(project);
     if (!matches) {
       repLog.atFine().log(
           "Skipping replication of project %s; does not match filter", project.get());
