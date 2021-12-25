@@ -109,7 +109,7 @@ public class ChainedScheduler<T> {
       try {
         runner.run(item);
       } catch (RuntimeException e) { // catch to prevent chain from breaking
-        logger.atSevere().withCause(e).log("Error while running: " + item);
+        logger.atSevere().withCause(e).log("Error while running: %s", item);
       }
       if (!scheduledNext) {
         runner.onDone();
