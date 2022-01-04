@@ -19,9 +19,9 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 import com.google.common.collect.ForwardingIterator;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -367,7 +367,7 @@ public class ChainedSchedulerTest {
     WaitingRunner runner = new WaitingRunner();
 
     int batchSize = 5; // how many tasks are started concurrently
-    Queue<CountDownLatch> batches = new LinkedList<>();
+    Queue<CountDownLatch> batches = new ArrayDeque<>();
     for (int b = 0; b < blockSize; b++) {
       batches.add(executeWaitingRunnableBatch(batchSize, executor));
     }

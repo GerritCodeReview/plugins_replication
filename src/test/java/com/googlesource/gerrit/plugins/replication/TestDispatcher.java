@@ -22,14 +22,14 @@ import com.google.gerrit.server.events.Event;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.events.ProjectEvent;
 import com.google.gerrit.server.events.RefEvent;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class TestDispatcher implements EventDispatcher {
-  private final List<ProjectEvent> projectEvents = new LinkedList<>();
-  private final List<RefEvent> refEvents = new LinkedList<>();
-  private final List<Event> events = new LinkedList<>();
+  private final List<ProjectEvent> projectEvents = new ArrayList<>();
+  private final List<RefEvent> refEvents = new ArrayList<>();
+  private final List<Event> events = new ArrayList<>();
 
   @Override
   public void postEvent(Change change, ChangeEvent event) {} // Not used in replication
