@@ -384,6 +384,7 @@ public class ReplicationEventsIT extends ReplicationDaemon {
     }
   }
 
+  @SuppressWarnings("deprecation")
   private boolean equals(ReplicationScheduledEvent scheduledEvent, Object other) {
     if (!(other instanceof ReplicationScheduledEvent)) {
       return false;
