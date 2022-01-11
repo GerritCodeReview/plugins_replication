@@ -85,7 +85,7 @@ public class ChainedScheduler<T> {
       super(
           threadPool,
           stream.iterator(),
-          new ForwardingRunner<T>(runner) {
+          new ForwardingRunner<>(runner) {
             @Override
             public void onDone() {
               stream.close();

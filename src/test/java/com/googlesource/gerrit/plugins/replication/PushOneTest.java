@@ -322,7 +322,7 @@ public class PushOneTest {
               @Override
               public Callable<Object> answer(InvocationOnMock invocation) throws Throwable {
                 Callable<Object> originalCall = (Callable<Object>) invocation.getArguments()[0];
-                return new Callable<Object>() {
+                return new Callable<>() {
 
                   @Override
                   public Object call() throws Exception {
