@@ -30,7 +30,15 @@ import org.eclipse.jgit.transport.URIish;
 public interface PushResultProcessing {
   public static final PushResultProcessing NO_OP = new PushResultProcessing() {};
 
-  /** Invoked when a ref has been replicated to one node. */
+  /**
+   * Invoked when a ref has been replicated to one node.
+   *
+   * @param project the project name
+   * @param ref the ref name
+   * @param uri the URI
+   * @param status the status of the push
+   * @param refStatus the status for the ref
+   */
   default void onRefReplicatedToOneNode(
       String project,
       String ref,
@@ -38,10 +46,20 @@ public interface PushResultProcessing {
       RefPushResult status,
       RemoteRefUpdate.Status refStatus) {}
 
-  /** Invoked when a ref has been replicated to all nodes */
+  /**
+   * Invoked when a ref has been replicated to all nodes.
+   *
+   * @param project the project name
+   * @param ref the ref name
+   * @param nodesCount the number of nodes
+   */
   default void onRefReplicatedToAllNodes(String project, String ref, int nodesCount) {}
 
-  /** Invoked when all refs have been replicated to all nodes */
+  /**
+   * Invoked when all refs have been replicated to all nodes.
+   *
+   * @param totalPushTasksCount total number of push tasks
+   */
   default void onAllRefsReplicatedToAllNodes(int totalPushTasksCount) {}
 
   /**
