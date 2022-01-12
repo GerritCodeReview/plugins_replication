@@ -275,7 +275,7 @@ public class Destination {
   }
 
   private void foreachPushOp(Map<URIish, PushOne> opsMap, Function<PushOne, Void> pushOneFunction) {
-    for (PushOne pushOne : ImmutableList.copyOf(opsMap.values())) {
+    for (PushOne pushOne : opsMap.values()) {
       pushOneFunction.apply(pushOne);
     }
   }
