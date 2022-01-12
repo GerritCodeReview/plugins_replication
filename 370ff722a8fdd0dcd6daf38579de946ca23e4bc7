@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c608439a_d8ef146d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2022-01-12T16:49:18Z",
+      "side": 1,
+      "message": "This rather describes how a caller of the foreachPushOp would provide a defensive copy so that the called method cannot modify the original collection. However,\nas I understand the code, the called method makes a defensive copy so that any changes done to the original collection do no affect the collection returned by the values() method. Both this.pending and this.inFlight are ConcurrentCollection and it seems like this code is designed so that the concurrent modifications of these\ncollections are expected.\n\nI am not sure that it is safe to remove copyOf.",
+      "revId": "370ff722a8fdd0dcd6daf38579de946ca23e4bc7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
