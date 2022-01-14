@@ -24,6 +24,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.Repli
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
+import java.util.Set;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.After;
 import org.junit.Before;
@@ -36,7 +37,7 @@ public class ReplicationTasksStorageMPTest {
   protected static final URIish URISH =
       ReplicationTasksStorageTest.getUrish("http://example.com/" + PROJECT + ".git");
   protected static final ReplicateRefUpdate REF_UPDATE =
-      ReplicateRefUpdate.create(PROJECT, REF, URISH, REMOTE);
+      ReplicateRefUpdate.create(PROJECT, Set.of(REF), URISH, REMOTE);
   protected static final UriUpdates URI_UPDATES = getUriUpdates(REF_UPDATE);
 
   protected ReplicationTasksStorage nodeA;
@@ -200,7 +201,7 @@ public class ReplicationTasksStorageMPTest {
     nodeA.create(REF_UPDATE);
     nodeB.create(REF_UPDATE);
 
-    assertThat(nodeA.start(URI_UPDATES)).containsExactly(REF_UPDATE.ref());
+    assertThat(nodeA.start(URI_UPDATES)).containsExactly(REF_UPDATE.refs());
     assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
 
     assertThat(nodeB.start(URI_UPDATES)).isEmpty();
@@ -209,7 +210,7 @@ public class ReplicationTasksStorageMPTest {
 
   public static UriUpdates getUriUpdates(ReplicationTasksStorage.ReplicateRefUpdate refUpdate) {
     try {
-      return TestUriUpdates.create(refUpdate);
+      return new TestUriUpdates(refUpdate);
     } catch (URISyntaxException e) {
       throw new RuntimeException("Cannot instantiate UriUpdates object", e);
     }
