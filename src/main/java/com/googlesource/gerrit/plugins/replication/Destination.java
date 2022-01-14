@@ -275,6 +275,8 @@ public class Destination {
   }
 
   private void foreachPushOp(Map<URIish, PushOne> opsMap, Function<PushOne, Void> pushOneFunction) {
+    // Callers may modify the provided opsMap concurrently, hence make a defensive copy of the
+    // values to loop over them.
     for (PushOne pushOne : ImmutableList.copyOf(opsMap.values())) {
       pushOneFunction.apply(pushOne);
     }
