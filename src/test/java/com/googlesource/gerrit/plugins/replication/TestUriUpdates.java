@@ -14,39 +14,43 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableSet;
 import com.google.gerrit.entities.Project;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.net.URISyntaxException;
-import java.util.Collections;
 import java.util.Set;
 import org.eclipse.jgit.transport.URIish;
 
-@AutoValue
-public abstract class TestUriUpdates implements UriUpdates {
-  public static TestUriUpdates create(ReplicateRefUpdate update) throws URISyntaxException {
-    return create(
-        Project.nameKey(update.project()),
-        new URIish(update.uri()),
-        update.remote(),
-        Collections.singleton(update.ref()));
+public class TestUriUpdates implements UriUpdates {
+  private final Project.NameKey project;
+  private final URIish uri;
+  private final String remote;
+  private final Set<ImmutableSet<String>> refs;
+
+  public TestUriUpdates(ReplicateRefUpdate update) throws URISyntaxException {
+    project = Project.nameKey(update.project());
+    uri = new URIish(update.uri());
+    remote = update.remote();
+    refs = Set.of(update.refs());
   }
 
-  public static TestUriUpdates create(
-      Project.NameKey project, URIish uri, String remote, Set<String> refs) {
-    return new AutoValue_TestUriUpdates(project, uri, remote, ImmutableSet.copyOf(refs));
+  @Override
+  public Project.NameKey getProjectNameKey() {
+    return project;
   }
 
   @Override
-  public abstract Project.NameKey getProjectNameKey();
+  public URIish getURI() {
+    return uri;
+  }
 
   @Override
-  public abstract URIish getURI();
+  public String getRemoteName() {
+    return remote;
+  }
 
   @Override
-  public abstract String getRemoteName();
-
-  @Override
-  public abstract ImmutableSet<String> getRefs();
+  public Set<ImmutableSet<String>> getRefs() {
+    return refs;
+  }
 }

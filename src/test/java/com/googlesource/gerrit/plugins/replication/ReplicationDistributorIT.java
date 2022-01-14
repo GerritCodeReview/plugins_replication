@@ -24,6 +24,7 @@ import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.WorkQueue;
 import java.time.Duration;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.RefUpdate;
@@ -61,7 +62,7 @@ public class ReplicationDistributorIT extends ReplicationStorageDaemon {
     Project.NameKey targetProject = createTestProject(project + replica);
     ReplicationTasksStorage.ReplicateRefUpdate ref =
         ReplicationTasksStorage.ReplicateRefUpdate.create(
-            project.get(), newBranch, new URIish(getProjectUri(targetProject)), remote);
+            project.get(), Set.of(newBranch), new URIish(getProjectUri(targetProject)), remote);
     createBranch(project, master, newBranch);
     setReplicationDestination(remote, replica, ALL_PROJECTS);
     reloadConfig();
