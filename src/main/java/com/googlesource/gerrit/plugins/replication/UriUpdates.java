@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.gerrit.entities.Project;
 import java.util.List;
 import java.util.Set;
@@ -28,14 +29,15 @@ public interface UriUpdates {
 
   String getRemoteName();
 
-  Set<String> getRefs();
+  Set<ImmutableSet<String>> getRefs();
 
   default List<ReplicationTasksStorage.ReplicateRefUpdate> getReplicateRefUpdates() {
+    // TODO: keep batch refs together
     return getRefs().stream()
         .map(
-            (ref) ->
+            (refs) ->
                 ReplicationTasksStorage.ReplicateRefUpdate.create(
-                    getProjectNameKey().get(), ref, getURI(), getRemoteName()))
+                    getProjectNameKey().get(), refs, getURI(), getRemoteName()))
         .collect(Collectors.toList());
   }
 }

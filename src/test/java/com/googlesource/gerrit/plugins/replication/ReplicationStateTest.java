@@ -19,7 +19,12 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
+import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
+import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdateTypeAdapterFactory;
 import java.net.URISyntaxException;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.URIish;
@@ -206,5 +211,61 @@ public class ReplicationStateTest {
     assertEquals("failed", RefPushResult.FAILED.toString());
     assertEquals("not-attempted", RefPushResult.NOT_ATTEMPTED.toString());
     assertEquals("succeeded", RefPushResult.SUCCEEDED.toString());
+  }
+
+  @Test
+  public void writeReplicateRefUpdateTypeAdapter() throws Exception {
+    Gson gson =
+        new GsonBuilder()
+            .registerTypeAdapterFactory(new ReplicateRefUpdateTypeAdapterFactory())
+            .create();
+    ReplicateRefUpdate update =
+        ReplicateRefUpdate.create(
+            "someProject",
+            ImmutableSet.of("ref1"),
+            new URIish("git://host1/someRepo.git"),
+            "someRemote");
+    assertEquals(
+        gson.toJson(update),
+        "{\"project\":\"someProject\",\"refs\":[\"ref1\"],\"uri\":\"git://host1/someRepo.git\",\"remote\":\"someRemote\"}");
+    ReplicateRefUpdate update2 =
+        ReplicateRefUpdate.create(
+            "someProject",
+            ImmutableSet.of("ref1", "ref2"),
+            new URIish("git://host1/someRepo.git"),
+            "someRemote");
+    assertEquals(
+        gson.toJson(update2),
+        "{\"project\":\"someProject\",\"refs\":[\"ref1\",\"ref2\"],\"uri\":\"git://host1/someRepo.git\",\"remote\":\"someRemote\"}");
+  }
+
+  @Test
+  public void ReadReplicateRefUpdateTypeAdapter() throws Exception {
+    Gson gson =
+        new GsonBuilder()
+            .registerTypeAdapterFactory(new ReplicateRefUpdateTypeAdapterFactory())
+            .create();
+    ReplicateRefUpdate update =
+        ReplicateRefUpdate.create(
+            "someProject",
+            ImmutableSet.of("ref1"),
+            new URIish("git://host1/someRepo.git"),
+            "someRemote");
+    assertEquals(
+        gson.fromJson(
+            "{\"project\":\"someProject\",\"refs\":[\"ref1\"],\"uri\":\"git://host1/someRepo.git\",\"remote\":\"someRemote\"}",
+            ReplicateRefUpdate.class),
+        update);
+    ReplicateRefUpdate update2 =
+        ReplicateRefUpdate.create(
+            "someProject",
+            ImmutableSet.of("ref1", "ref2"),
+            new URIish("git://host1/someRepo.git"),
+            "someRemote");
+    assertEquals(
+        gson.fromJson(
+            "{\"project\":\"someProject\",\"refs\":[\"ref1\",\"ref2\"],\"uri\":\"git://host1/someRepo.git\",\"remote\":\"someRemote\"}",
+            ReplicateRefUpdate.class),
+        update2);
   }
 }

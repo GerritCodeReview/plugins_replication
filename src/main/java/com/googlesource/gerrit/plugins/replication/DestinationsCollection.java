@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.transport.URIish;
@@ -157,11 +158,13 @@ public class DestinationsCollection implements ReplicationDestinations {
   }
 
   @Override
-  public List<Destination> getDestinations(URIish uri, Project.NameKey project, String ref) {
+  public List<Destination> getDestinations(URIish uri, Project.NameKey project, Set<String> refs) {
     List<Destination> dests = new ArrayList<>();
     for (Destination dest : getAll(FilterType.ALL)) {
-      if (dest.wouldPush(uri, project, ref)) {
-        dests.add(dest);
+      for (String ref : refs) {
+        if (dest.wouldPush(uri, project, ref)) {
+          dests.add(dest);
+        }
       }
     }
     return dests;

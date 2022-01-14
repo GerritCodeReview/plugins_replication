@@ -111,6 +111,7 @@ public class ReplicationIT extends ReplicationDaemon {
     Result pushResult = createChange();
     RevCommit sourceCommit = pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
+    String metaRef = sourceRef.substring(0, sourceRef.lastIndexOf('/') + 1).concat("meta");
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
@@ -118,6 +119,9 @@ public class ReplicationIT extends ReplicationDaemon {
       Ref targetBranchRef = getRef(repo, sourceRef);
       assertThat(targetBranchRef).isNotNull();
       assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
+
+      Ref targetBranchMetaRef = getRef(repo, metaRef);
+      assertThat(targetBranchMetaRef).isNotNull();
     }
   }
 
