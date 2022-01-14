@@ -27,6 +27,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.Repli
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.eclipse.jgit.transport.URIish;
@@ -37,10 +38,13 @@ import org.junit.Test;
 public class ReplicationTasksStorageTest {
   protected static final String PROJECT = "myProject";
   protected static final String REF = "myRef";
+  protected static final String REF_2 = "myRef2";
   protected static final String REMOTE = "myDest";
   protected static final URIish URISH = getUrish("http://example.com/" + PROJECT + ".git");
   protected static final ReplicateRefUpdate REF_UPDATE =
-      ReplicateRefUpdate.create(PROJECT, REF, URISH, REMOTE);
+      ReplicateRefUpdate.create(PROJECT, Set.of(REF), URISH, REMOTE);
+  protected static final ReplicateRefUpdate REFS_UPDATE =
+      ReplicateRefUpdate.create(PROJECT, Set.of(REF, REF_2), URISH, REMOTE);
 
   protected ReplicationTasksStorage storage;
   protected FileSystem fileSystem;
@@ -52,7 +56,7 @@ public class ReplicationTasksStorageTest {
     fileSystem = Jimfs.newFileSystem(Configuration.unix());
     storageSite = fileSystem.getPath("replication_site");
     storage = new ReplicationTasksStorage(storageSite);
-    uriUpdates = TestUriUpdates.create(REF_UPDATE);
+    uriUpdates = new TestUriUpdates(REF_UPDATE);
   }
 
   @After
@@ -84,10 +88,20 @@ public class ReplicationTasksStorageTest {
   @Test
   public void canStartWaitingUpdate() throws Exception {
     storage.create(REF_UPDATE);
-    assertThat(storage.start(uriUpdates)).containsExactly(REF_UPDATE.ref());
+    assertThat(storage.start(uriUpdates)).containsExactly(REF_UPDATE.refs());
     assertThatStream(storage.streamWaiting()).isEmpty();
     assertFalse(storage.isWaiting(uriUpdates));
     assertThatStream(storage.streamRunning()).containsExactly(REF_UPDATE);
+  }
+
+  @Test
+  public void canStartWaitingUpdateWithMultipleRefs() throws Exception {
+    TestUriUpdates updates = new TestUriUpdates(REFS_UPDATE);
+    storage.create(REFS_UPDATE);
+    assertThat(storage.start(updates)).containsExactly(REFS_UPDATE.refs());
+    assertThatStream(storage.streamWaiting()).isEmpty();
+    assertFalse(storage.isWaiting(updates));
+    assertThatStream(storage.streamRunning()).containsExactly(REFS_UPDATE);
   }
 
   @Test
@@ -133,7 +147,7 @@ public class ReplicationTasksStorageTest {
     ReplicateRefUpdate updateB =
         ReplicateRefUpdate.create(
             PROJECT,
-            REF,
+            Set.of(REF),
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
             REMOTE);
 
@@ -141,7 +155,7 @@ public class ReplicationTasksStorageTest {
     String keyB = storage.create(updateB);
     assertThatStream(storage.streamWaiting()).hasSize(2);
     assertTrue(storage.isWaiting(uriUpdates));
-    assertTrue(storage.isWaiting(TestUriUpdates.create(updateB)));
+    assertTrue(storage.isWaiting(new TestUriUpdates(updateB)));
     assertNotEquals(keyA, keyB);
   }
 
@@ -150,10 +164,10 @@ public class ReplicationTasksStorageTest {
     ReplicateRefUpdate updateB =
         ReplicateRefUpdate.create(
             PROJECT,
-            REF,
+            Set.of(REF),
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
             REMOTE);
-    UriUpdates uriUpdatesB = TestUriUpdates.create(updateB);
+    UriUpdates uriUpdatesB = new TestUriUpdates(updateB);
     storage.create(REF_UPDATE);
     storage.create(updateB);
 
@@ -171,10 +185,10 @@ public class ReplicationTasksStorageTest {
     ReplicateRefUpdate updateB =
         ReplicateRefUpdate.create(
             PROJECT,
-            REF,
+            Set.of(REF),
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
             REMOTE);
-    UriUpdates uriUpdatesB = TestUriUpdates.create(updateB);
+    UriUpdates uriUpdatesB = new TestUriUpdates(updateB);
     storage.create(REF_UPDATE);
     storage.create(updateB);
     storage.start(uriUpdates);
@@ -192,7 +206,7 @@ public class ReplicationTasksStorageTest {
     ReplicateRefUpdate updateB =
         ReplicateRefUpdate.create(
             PROJECT,
-            REF,
+            Set.of(REF),
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
             REMOTE);
 
@@ -202,28 +216,30 @@ public class ReplicationTasksStorageTest {
     storage.create(updateB);
     assertThatStream(storage.streamWaiting()).hasSize(2);
     assertTrue(storage.isWaiting(uriUpdates));
-    assertTrue(storage.isWaiting(TestUriUpdates.create(updateB)));
+    assertTrue(storage.isWaiting(new TestUriUpdates(updateB)));
   }
 
   @Test
   public void canCreateMulipleRefsForSameUri() throws Exception {
-    ReplicateRefUpdate refA = ReplicateRefUpdate.create(PROJECT, "refA", URISH, REMOTE);
-    ReplicateRefUpdate refB = ReplicateRefUpdate.create(PROJECT, "refB", URISH, REMOTE);
+    ReplicateRefUpdate refA = ReplicateRefUpdate.create(PROJECT, Set.of("refA"), URISH, REMOTE);
+    ReplicateRefUpdate refB = ReplicateRefUpdate.create(PROJECT, Set.of("refB"), URISH, REMOTE);
 
     String keyA = storage.create(refA);
     String keyB = storage.create(refB);
     assertThatStream(storage.streamWaiting()).hasSize(2);
     assertNotEquals(keyA, keyB);
-    assertTrue(storage.isWaiting(TestUriUpdates.create(refA)));
-    assertTrue(storage.isWaiting(TestUriUpdates.create(refB)));
+    assertTrue(storage.isWaiting(new TestUriUpdates(refA)));
+    assertTrue(storage.isWaiting(new TestUriUpdates(refB)));
   }
 
   @Test
   public void canFinishMulipleRefsForSameUri() throws Exception {
-    ReplicateRefUpdate refUpdateA = ReplicateRefUpdate.create(PROJECT, "refA", URISH, REMOTE);
-    ReplicateRefUpdate refUpdateB = ReplicateRefUpdate.create(PROJECT, "refB", URISH, REMOTE);
-    UriUpdates uriUpdatesA = TestUriUpdates.create(refUpdateA);
-    UriUpdates uriUpdatesB = TestUriUpdates.create(refUpdateB);
+    ReplicateRefUpdate refUpdateA =
+        ReplicateRefUpdate.create(PROJECT, Set.of("refA"), URISH, REMOTE);
+    ReplicateRefUpdate refUpdateB =
+        ReplicateRefUpdate.create(PROJECT, Set.of("refB"), URISH, REMOTE);
+    UriUpdates uriUpdatesA = new TestUriUpdates(refUpdateA);
+    UriUpdates uriUpdatesB = new TestUriUpdates(refUpdateB);
     storage.create(refUpdateA);
     storage.create(refUpdateB);
     storage.start(uriUpdatesA);
@@ -298,10 +314,10 @@ public class ReplicationTasksStorageTest {
     ReplicateRefUpdate updateB =
         ReplicateRefUpdate.create(
             PROJECT,
-            REF,
+            Set.of(REF),
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
             REMOTE);
-    UriUpdates uriUpdatesB = TestUriUpdates.create(updateB);
+    UriUpdates uriUpdatesB = new TestUriUpdates(updateB);
     storage.create(REF_UPDATE);
     storage.create(updateB);
     storage.start(uriUpdates);
@@ -316,10 +332,10 @@ public class ReplicationTasksStorageTest {
     ReplicateRefUpdate updateB =
         ReplicateRefUpdate.create(
             PROJECT,
-            REF,
+            Set.of(REF),
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
             REMOTE);
-    UriUpdates uriUpdatesB = TestUriUpdates.create(updateB);
+    UriUpdates uriUpdatesB = new TestUriUpdates(updateB);
     storage.create(REF_UPDATE);
     storage.create(updateB);
     storage.start(uriUpdates);
@@ -358,10 +374,10 @@ public class ReplicationTasksStorageTest {
     ReplicateRefUpdate updateB =
         ReplicateRefUpdate.create(
             PROJECT,
-            REF,
+            Set.of(REF),
             getUrish("ssh://example.com/" + PROJECT + ".git"), // uses ssh not http
             REMOTE);
-    UriUpdates uriUpdatesB = TestUriUpdates.create(updateB);
+    UriUpdates uriUpdatesB = new TestUriUpdates(updateB);
     storage.create(REF_UPDATE);
     storage.create(updateB);
     storage.start(uriUpdates);
