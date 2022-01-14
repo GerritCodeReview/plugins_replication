@@ -24,6 +24,7 @@ import com.google.common.jimfs.Jimfs;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
+import java.util.Set;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.After;
 import org.junit.Before;
@@ -36,7 +37,7 @@ public class ReplicationTasksStorageTaskMPTest {
   protected static final URIish URISH =
       ReplicationTasksStorageTest.getUrish("http://example.com/" + PROJECT + ".git");
   protected static final ReplicateRefUpdate REF_UPDATE =
-      ReplicateRefUpdate.create(PROJECT, REF, URISH, REMOTE);
+      ReplicateRefUpdate.create(PROJECT, Set.of(REF), URISH, REMOTE);
 
   protected FileSystem fileSystem;
   protected Path storageSite;

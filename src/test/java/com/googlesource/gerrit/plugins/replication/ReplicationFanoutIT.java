@@ -191,7 +191,7 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
     Pattern refmaskPattern = Pattern.compile(refRegex);
     return tasksStorage
         .streamWaiting()
-        .filter(task -> refmaskPattern.matcher(task.ref()).matches())
+        .filter(task -> task.refs().stream().anyMatch(ref -> refmaskPattern.matcher(ref).matches()))
         .collect(toList());
   }
 }
