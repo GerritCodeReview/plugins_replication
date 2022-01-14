@@ -30,7 +30,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.entities.RefNames;
-import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.extensions.events.GitReferencesUpdatedListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
@@ -84,7 +84,7 @@ import org.eclipse.jgit.transport.Transport;
 import org.eclipse.jgit.transport.URIish;
 
 /**
- * A push to remote operation started by {@link GitReferenceUpdatedListener}.
+ * A push to remote operation started by {@link GitReferencesUpdatedListener}.
  *
  * <p>Instance members are protected by the lock within PushQueue. Callers must take that lock to
  * ensure they are working with a current view of the object.

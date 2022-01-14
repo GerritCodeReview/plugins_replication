@@ -72,8 +72,8 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   }
 
   /**
-   * See
-   * {@link com.googlesource.gerrit.plugins.replication.ReplicationConfig#isReplicateAllOnPluginStart()}
+   * See {@link
+   * com.googlesource.gerrit.plugins.replication.ReplicationConfig#isReplicateAllOnPluginStart()}
    */
   @Override
   public boolean isReplicateAllOnPluginStart() {
@@ -81,8 +81,8 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   }
 
   /**
-   * See
-   * {@link com.googlesource.gerrit.plugins.replication.ReplicationConfig#isDefaultForceUpdate()}
+   * See {@link
+   * com.googlesource.gerrit.plugins.replication.ReplicationConfig#isDefaultForceUpdate()}
    */
   @Override
   public boolean isDefaultForceUpdate() {

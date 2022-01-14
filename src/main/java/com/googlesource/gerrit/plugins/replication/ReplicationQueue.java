@@ -17,10 +17,11 @@ package com.googlesource.gerrit.plugins.replication;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 import com.google.auto.value.AutoValue;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Queues;
 import com.google.gerrit.common.UsedAt;
 import com.google.gerrit.entities.Project;
-import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.extensions.events.GitReferencesUpdatedListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
@@ -37,6 +38,7 @@ import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
@@ -45,13 +47,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 import org.eclipse.jgit.transport.URIish;
 
 /** Manages automatic replication to remote repositories. */
 public class ReplicationQueue
     implements ObservableQueue,
         LifecycleListener,
-        GitReferenceUpdatedListener,
+        GitReferencesUpdatedListener,
         ProjectDeletedListener,
         HeadUpdatedListener {
   static final String REPLICATION_LOG_NAME = "replication_log";
@@ -67,7 +70,7 @@ public class ReplicationQueue
   private final ProjectDeletionState.Factory projectDeletionStateFactory;
   private volatile boolean running;
   private final AtomicBoolean replaying = new AtomicBoolean();
-  private final Queue<ReferenceUpdatedEvent> beforeStartupEventsQueue;
+  private final Queue<ReferencesUpdatedEvent> beforeStartupEventsQueue;
   private Distributor distributor;
 
   protected enum Prune {
@@ -128,36 +131,48 @@ public class ReplicationQueue
 
   public void scheduleFullSync(
       Project.NameKey project, String urlMatch, ReplicationState state, boolean now) {
-    fire(project, urlMatch, PushOne.ALL_REFS, state, now);
+    fire(
+        project,
+        urlMatch,
+        List.of(
+            new com.google.gerrit.server.extensions.events.GitReferenceUpdated.UpdatedRef(
+                PushOne.ALL_REFS, null, null, null)),
+        state,
+        now);
   }
 
   @Override
-  public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
-    fire(event.getProjectName(), event.getRefName());
+  public void onGitReferencesUpdated(GitReferencesUpdatedListener.Event event) {
+    fire(event.getProjectName(), event.getUpdatedRefs());
   }
 
-  private void fire(String projectName, String refName) {
+  private void fire(String projectName, List<UpdatedRef> updatedRefs) {
     ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
-    fire(Project.nameKey(projectName), null, refName, state, false);
+    fire(Project.nameKey(projectName), null, updatedRefs, state, false);
     state.markAllPushTasksScheduled();
+  }
+
+  private List<String> getRefNames(List<UpdatedRef> updatedRefs) {
+    return updatedRefs.stream().map(UpdatedRef::getRefName).collect(Collectors.toList());
   }
 
   private void fire(
       Project.NameKey project,
       String urlMatch,
-      String refName,
+      List<UpdatedRef> updatedRefs,
       ReplicationState state,
       boolean now) {
     if (!running) {
       stateLog.warn(
           "Replication plugin did not finish startup before event, event replication is postponed",
           state);
-      beforeStartupEventsQueue.add(ReferenceUpdatedEvent.create(project.get(), refName));
+      beforeStartupEventsQueue.add(
+          ReferencesUpdatedEvent.create(project.get(), ImmutableList.copyOf(updatedRefs)));
       return;
     }
 
     for (Destination cfg : destinations.get().getAll(FilterType.ALL)) {
-      pushReference(cfg, project, urlMatch, refName, state, now);
+      pushReferences(cfg, project, urlMatch, getRefNames(updatedRefs), state, now);
     }
   }
 
@@ -171,28 +186,30 @@ public class ReplicationQueue
 
   @UsedAt(UsedAt.Project.COLLABNET)
   public void pushReference(Destination cfg, Project.NameKey project, String refName) {
-    pushReference(cfg, project, null, refName, null, true);
+    pushReferences(cfg, project, null, List.of(refName), null, true);
   }
 
-  private void pushReference(
+  private void pushReferences(
       Destination cfg,
       Project.NameKey project,
       String urlMatch,
-      String refName,
+      List<String> refNames,
       ReplicationState state,
       boolean now) {
     boolean withoutState = state == null;
     if (withoutState) {
       state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
     }
-    if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
-      for (URIish uri : cfg.getURIs(project, urlMatch)) {
-        replicationTasksStorage.create(
-            ReplicateRefUpdate.create(project.get(), refName, uri, cfg.getRemoteConfigName()));
-        cfg.schedule(project, refName, uri, state, now);
+    for (String refName : refNames) {
+      if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
+        for (URIish uri : cfg.getURIs(project, urlMatch)) {
+          replicationTasksStorage.create(
+              ReplicateRefUpdate.create(project.get(), refName, uri, cfg.getRemoteConfigName()));
+          cfg.schedule(project, refName, uri, state, now);
+        }
+      } else {
+        repLog.atFine().log("Skipping ref %s on project %s", refName, project.get());
       }
-    } else {
-      repLog.atFine().log("Skipping ref %s on project %s", refName, project.get());
     }
     if (withoutState) {
       state.markAllPushTasksScheduled();
@@ -201,7 +218,8 @@ public class ReplicationQueue
 
   private void synchronizePendingEvents(Prune prune) {
     if (replaying.compareAndSet(false, true)) {
-      final Map<ReplicateRefUpdate, String> taskNamesByReplicateRefUpdate = new ConcurrentHashMap<>();
+      final Map<ReplicateRefUpdate, String> taskNamesByReplicateRefUpdate =
+          new ConcurrentHashMap<>();
       if (Prune.TRUE.equals(prune)) {
         for (Destination destination : destinations.get().getAll(FilterType.ALL)) {
           taskNamesByReplicateRefUpdate.putAll(destination.getTaskNamesByReplicateRefUpdate());
@@ -281,26 +299,28 @@ public class ReplicationQueue
 
   private void fireBeforeStartupEvents() {
     Set<String> eventsReplayed = new HashSet<>();
-    for (ReferenceUpdatedEvent event : beforeStartupEventsQueue) {
-      String eventKey = String.format("%s:%s", event.projectName(), event.refName());
+    for (ReferencesUpdatedEvent event : beforeStartupEventsQueue) {
+      String eventKey =
+          String.format("%s:%s", event.projectName(), getRefNames(event.updatedRefs()));
       if (!eventsReplayed.contains(eventKey)) {
         repLog.atInfo().log("Firing pending task %s", event);
-        fire(event.projectName(), event.refName());
+        fire(event.projectName(), event.updatedRefs());
         eventsReplayed.add(eventKey);
       }
     }
   }
 
   @AutoValue
-  abstract static class ReferenceUpdatedEvent {
+  abstract static class ReferencesUpdatedEvent {
 
-    static ReferenceUpdatedEvent create(String projectName, String refName) {
-      return new AutoValue_ReplicationQueue_ReferenceUpdatedEvent(projectName, refName);
+    static ReferencesUpdatedEvent create(
+        String projectName, ImmutableList<UpdatedRef> updatedRefs) {
+      return new AutoValue_ReplicationQueue_ReferencesUpdatedEvent(projectName, updatedRefs);
     }
 
     public abstract String projectName();
 
-    public abstract String refName();
+    public abstract ImmutableList<UpdatedRef> updatedRefs();
   }
 
   protected class Distributor implements WorkQueue.CancelableRunnable {
