@@ -92,6 +92,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4bb34ff2_21f70161",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-01-14T07:47:06Z",
+      "side": 1,
+      "message": "Correcting myself: all 10k will be attempted but 9k will result in `UP_TO_DATE` - IOW not much improvement but the negotiation phase...",
+      "parentUuid": "d95c16d8_2ecfecd9",
+      "revId": "0fa864c56b5a408a5cfb67287c9267204fad0ea9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ed01fa47_cad973c0",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 7
