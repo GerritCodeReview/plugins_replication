@@ -20,6 +20,7 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.eclipse.jgit.transport.URIish;
 
 /** Git destinations currently active for replication. */
@@ -45,14 +46,14 @@ public interface ReplicationDestinations {
   List<Destination> getAll(FilterType filterType);
 
   /**
-   * Return the active replication destinations for a uri/project/ref triplet.
+   * Return the active replication destinations for a uri/project/refs triplet.
    *
    * @param uriish uri of the destinations
    * @param project name of the project
-   * @param ref ref name
+   * @param refs ref names
    * @return the list of active destinations
    */
-  List<Destination> getDestinations(URIish uriish, Project.NameKey project, String ref);
+  List<Destination> getDestinations(URIish uriish, Project.NameKey project, Set<String> refs);
 
   /** Returns true if there are no destinations, false otherwise. */
   boolean isEmpty();

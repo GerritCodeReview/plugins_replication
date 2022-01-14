@@ -69,7 +69,9 @@ import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEv
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -80,6 +82,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
@@ -388,17 +391,21 @@ public class Destination {
     return false;
   }
 
-  void schedule(Project.NameKey project, String ref, URIish uri, ReplicationState state) {
-    schedule(project, ref, uri, state, false);
+  void schedule(Project.NameKey project, Set<String> refs, URIish uri, ReplicationState state) {
+    schedule(project, refs, uri, state, false);
   }
 
   void schedule(
-      Project.NameKey project, String ref, URIish uri, ReplicationState state, boolean now) {
-    if (!shouldReplicate(project, ref, state)) {
-      repLog.atFine().log("Not scheduling replication %s:%s => %s", project, ref, uri);
-      return;
+      Project.NameKey project, Set<String> refs, URIish uri, ReplicationState state, boolean now) {
+    Set<String> refsToSchedule = new HashSet<>();
+    for (String ref : refs) {
+      if (!shouldReplicate(project, ref, state)) {
+        repLog.atFine().log("Not scheduling replication %s:%s => %s", project, ref, uri);
+        continue;
+      }
+      refsToSchedule.add(ref);
     }
-    repLog.atInfo().log("scheduling replication %s:%s => %s", project, ref, uri);
+    repLog.atInfo().log("scheduling replication %s:%s => %s", project, refs, uri);
 
     if (!config.replicatePermissions()) {
       PushOne e;
@@ -429,22 +436,25 @@ public class Destination {
       PushOne task = getPendingPush(uri);
       if (task == null) {
         task = opFactory.create(project, uri);
-        addRef(task, ref);
-        task.addState(ref, state);
+        addRefs(task, ImmutableSet.copyOf(refsToSchedule));
+        task.addState(refsToSchedule, state);
         @SuppressWarnings("unused")
         ScheduledFuture<?> ignored =
             pool.schedule(task, now ? 0 : config.getDelay(), TimeUnit.SECONDS);
         pending.put(uri, task);
         repLog.atInfo().log(
             "scheduled %s:%s => %s to run %s",
-            project, ref, task, now ? "now" : "after " + config.getDelay() + "s");
+            project, refsToSchedule, task, now ? "now" : "after " + config.getDelay() + "s");
       } else {
-        addRef(task, ref);
-        task.addState(ref, state);
+        addRefs(task, ImmutableSet.copyOf(refsToSchedule));
+        task.addState(refsToSchedule, state);
         repLog.atInfo().log(
-            "consolidated %s:%s => %s with an existing pending push", project, ref, task);
+            "consolidated %s:%s => %s with an existing pending push",
+            project, refsToSchedule, task);
       }
-      state.increasePushTaskCount(project.get(), ref);
+      for (String ref : refsToSchedule) {
+        state.increasePushTaskCount(project.get(), ref);
+      }
     }
   }
 
@@ -478,9 +488,9 @@ public class Destination {
         pool.schedule(updateHeadFactory.create(uri, project, newHead), 0, TimeUnit.SECONDS);
   }
 
-  private void addRef(PushOne e, String ref) {
-    e.addRef(ref);
-    postReplicationScheduledEvent(e, ref);
+  private void addRefs(PushOne e, ImmutableSet<String> refs) {
+    e.addRefBatch(refs);
+    postReplicationScheduledEvent(e, refs);
   }
 
   /**
@@ -524,7 +534,7 @@ public class Destination {
           // second one fails, it will also be rescheduled and then,
           // here, find out replication to its URI is already pending
           // for retry (blocking).
-          pendingPushOp.addRefs(pushOp.getRefs());
+          pendingPushOp.addRefBatches(pushOp.getRefs());
           pendingPushOp.addStates(pushOp.getStates());
           pushOp.removeStates();
 
@@ -543,7 +553,7 @@ public class Destination {
           pendingPushOp.canceledByReplication();
           pending.remove(uri);
 
-          pushOp.addRefs(pendingPushOp.getRefs());
+          pushOp.addRefBatches(pendingPushOp.getRefs());
           pushOp.addStates(pendingPushOp.getStates());
           pendingPushOp.removeStates();
         }
@@ -792,10 +802,10 @@ public class Destination {
     postReplicationScheduledEvent(pushOp, null);
   }
 
-  private void postReplicationScheduledEvent(PushOne pushOp, String inputRef) {
-    Set<String> refs = inputRef == null ? pushOp.getRefs() : ImmutableSet.of(inputRef);
+  private void postReplicationScheduledEvent(PushOne pushOp, ImmutableSet<String> inputRefs) {
+    Set<ImmutableSet<String>> refBatches = inputRefs == null ? pushOp.getRefs() : Set.of(inputRefs);
     Project.NameKey project = pushOp.getProjectNameKey();
-    for (String ref : refs) {
+    for (String ref : flattenSetOfRefBatches(refBatches)) {
       ReplicationScheduledEvent event =
           new ReplicationScheduledEvent(project.get(), ref, pushOp.getURI());
       try {
@@ -808,7 +818,7 @@ public class Destination {
 
   private void postReplicationFailedEvent(PushOne pushOp, RemoteRefUpdate.Status status) {
     Project.NameKey project = pushOp.getProjectNameKey();
-    for (String ref : pushOp.getRefs()) {
+    for (String ref : flattenSetOfRefBatches(pushOp.getRefs())) {
       RefReplicatedEvent event =
           new RefReplicatedEvent(project.get(), ref, pushOp.getURI(), RefPushResult.FAILED, status);
       try {
@@ -817,5 +827,9 @@ public class Destination {
         repLog.atSevere().withCause(e).log("error posting event");
       }
     }
+  }
+
+  private Set<String> flattenSetOfRefBatches(Set<ImmutableSet<String>> refBatches) {
+    return refBatches.stream().flatMap(Collection::stream).collect(Collectors.toSet());
   }
 }

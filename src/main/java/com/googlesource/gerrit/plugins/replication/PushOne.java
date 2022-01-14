@@ -22,15 +22,17 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.entities.RefNames;
-import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.extensions.events.GitBatchRefUpdateListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
@@ -84,7 +86,7 @@ import org.eclipse.jgit.transport.Transport;
 import org.eclipse.jgit.transport.URIish;
 
 /**
- * A push to remote operation started by {@link GitReferenceUpdatedListener}.
+ * A push to remote operation started by {@link GitBatchRefUpdateListener}.
  *
  * <p>Instance members are protected by the lock within PushQueue. Callers must take that lock to
  * ensure they are working with a current view of the object.
@@ -119,7 +121,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
   private final Project.NameKey projectName;
   private final URIish uri;
-  private final Set<String> delta = Sets.newHashSetWithExpectedSize(4);
+  private final Set<ImmutableSet<String>> refBatchesToPush = Sets.newHashSetWithExpectedSize(4);
   private boolean pushAllRefs;
   private Repository git;
   private boolean isCollision;
@@ -240,12 +242,16 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
    *     config.
    */
   protected String getLimitedRefs() {
-    Set<String> refs = getRefs();
+    Set<ImmutableSet<String>> refs = getRefs();
     int maxRefsToShow = replConfig.getMaxRefsToShow();
     if (maxRefsToShow == 0) {
       maxRefsToShow = refs.size();
     }
-    String refsString = refs.stream().limit(maxRefsToShow).collect(Collectors.joining(" "));
+    String refsString =
+        refs.stream()
+            .flatMap(Collection::stream)
+            .limit(maxRefsToShow)
+            .collect(Collectors.joining(" "));
     int hiddenRefs = refs.size() - maxRefsToShow;
     if (hiddenRefs > 0) {
       refsString += " (+" + hiddenRefs + ")";
@@ -281,52 +287,60 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   }
 
   void addRef(String ref) {
-    if (ALL_REFS.equals(ref)) {
-      delta.clear();
+    addRefBatch(ImmutableSet.of(ref));
+  }
+
+  void addRefBatch(ImmutableSet<String> refBatch) {
+    if (refBatch.size() == 1 && refBatch.contains(ALL_REFS)) {
+      refBatchesToPush.clear();
       pushAllRefs = true;
       repLog.atFinest().log("Added all refs for replication to %s", uri);
-    } else if (!pushAllRefs && delta.add(ref)) {
-      repLog.atFinest().log("Added ref %s for replication to %s", ref, uri);
+    } else if (!pushAllRefs && refBatchesToPush.add(refBatch)) {
+      repLog.atFinest().log("Added ref %s for replication to %s", refBatch, uri);
     }
   }
 
   @Override
-  public Set<String> getRefs() {
-    return pushAllRefs ? Sets.newHashSet(ALL_REFS) : delta;
+  public Set<ImmutableSet<String>> getRefs() {
+    return pushAllRefs ? Set.of(ImmutableSet.of(ALL_REFS)) : refBatchesToPush;
   }
 
-  void addRefs(Set<String> refs) {
+  void addRefBatches(Set<ImmutableSet<String>> refBatches) {
     if (!pushAllRefs) {
-      for (String ref : refs) {
-        addRef(ref);
+      for (ImmutableSet<String> refBatch : refBatches) {
+        addRefBatch(refBatch);
       }
     }
   }
 
-  Set<String> setStartedRefs(Set<String> startedRefs) {
-    Set<String> notAttemptedRefs = Sets.difference(delta, startedRefs);
+  Set<ImmutableSet<String>> setStartedRefs(Set<ImmutableSet<String>> startedRefs) {
+    Set<ImmutableSet<String>> notAttemptedRefs = Sets.difference(refBatchesToPush, startedRefs);
     pushAllRefs = false;
-    delta.clear();
-    addRefs(startedRefs);
+    refBatchesToPush.clear();
+    addRefBatches(startedRefs);
     return notAttemptedRefs;
   }
 
-  void notifyNotAttempted(Set<String> notAttemptedRefs) {
-    notAttemptedRefs.forEach(
-        ref ->
-            Arrays.asList(getStatesByRef(ref))
-                .forEach(
-                    state ->
-                        state.notifyRefReplicated(
-                            projectName.get(),
-                            ref,
-                            uri,
-                            RefPushResult.NOT_ATTEMPTED,
-                            RemoteRefUpdate.Status.UP_TO_DATE)));
+  void notifyNotAttempted(Set<ImmutableSet<String>> notAttemptedRefs) {
+    notAttemptedRefs.stream()
+        .flatMap(Collection::stream)
+        .forEach(
+            ref ->
+                Arrays.asList(getStatesByRef(ref))
+                    .forEach(
+                        state ->
+                            state.notifyRefReplicated(
+                                projectName.get(),
+                                ref,
+                                uri,
+                                RefPushResult.NOT_ATTEMPTED,
+                                RemoteRefUpdate.Status.UP_TO_DATE)));
   }
 
-  void addState(String ref, ReplicationState state) {
-    stateMap.put(ref, state);
+  void addState(Set<String> refs, ReplicationState state) {
+    for (String ref : refs) {
+      stateMap.put(ref, state);
+    }
   }
 
   ListMultimap<String, ReplicationState> getStates() {
@@ -645,7 +659,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
         // to only the references we will update during this operation.
         //
         Map<String, Ref> n = new HashMap<>();
-        for (String src : delta) {
+        for (String src : flattenRefBatchesToPush()) {
           Ref r = local.get(src);
           if (r != null) {
             n.put(src, r);
@@ -707,7 +721,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private List<RemoteRefUpdate> doPushDelta(Map<String, Ref> local) throws IOException {
     List<RemoteRefUpdate> cmds = new ArrayList<>();
     boolean noPerms = !pool.isReplicatePermissions();
-    for (String src : delta) {
+    Set<String> refs = flattenRefBatchesToPush();
+    for (String src : refs) {
       RefSpec spec = matchSrc(src);
       if (spec != null) {
         // If the ref still exists locally, send it, otherwise delete it.
@@ -758,7 +773,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     return null;
   }
 
-  private void push(List<RemoteRefUpdate> cmds, RefSpec spec, Ref src) throws IOException {
+  @VisibleForTesting
+  void push(List<RemoteRefUpdate> cmds, RefSpec spec, Ref src) throws IOException {
     String dst = spec.getDestination();
     boolean force = spec.isForceUpdate();
     cmds.add(new RemoteRefUpdate(git, src, dst, force, null, null));
@@ -854,6 +870,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       }
     }
     stateMap.clear();
+  }
+
+  private Set<String> flattenRefBatchesToPush() {
+    return refBatchesToPush.stream().flatMap(Collection::stream).collect(Collectors.toSet());
   }
 
   public static class UpdateRefFailureException extends TransportException {

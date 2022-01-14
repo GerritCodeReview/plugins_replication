@@ -19,7 +19,7 @@ import static com.googlesource.gerrit.plugins.replication.StartReplicationCapabi
 import com.google.common.eventbus.EventBus;
 import com.google.gerrit.extensions.annotations.Exports;
 import com.google.gerrit.extensions.config.CapabilityDefinition;
-import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.extensions.events.GitBatchRefUpdateListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
@@ -68,7 +68,7 @@ class ReplicationModule extends AbstractModule {
         .annotatedWith(UniqueAnnotations.create())
         .to(ReplicationQueue.class);
 
-    DynamicSet.bind(binder(), GitReferenceUpdatedListener.class).to(ReplicationQueue.class);
+    DynamicSet.bind(binder(), GitBatchRefUpdateListener.class).to(ReplicationQueue.class);
     DynamicSet.bind(binder(), ProjectDeletedListener.class).to(ReplicationQueue.class);
     DynamicSet.bind(binder(), HeadUpdatedListener.class).to(ReplicationQueue.class);
 
