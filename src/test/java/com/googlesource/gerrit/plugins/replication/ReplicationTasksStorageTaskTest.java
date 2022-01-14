@@ -25,6 +25,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.Task;
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Files;
+import java.util.Set;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.After;
 import org.junit.Before;
@@ -36,7 +37,7 @@ public class ReplicationTasksStorageTaskTest {
   protected static final String REMOTE = "myDest";
   protected static final URIish URISH = getUrish("http://example.com/" + PROJECT + ".git");
   protected static final ReplicateRefUpdate REF_UPDATE =
-      ReplicateRefUpdate.create(PROJECT, REF, URISH, REMOTE);
+      ReplicateRefUpdate.create(PROJECT, Set.of(REF), URISH, REMOTE);
 
   protected ReplicationTasksStorage tasksStorage;
   protected FileSystem fileSystem;
@@ -200,8 +201,10 @@ public class ReplicationTasksStorageTaskTest {
 
   @Test
   public void canHaveTwoWaitingTasksForDifferentRefs() throws Exception {
-    Task updateA = tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, "refA", URISH, REMOTE));
-    Task updateB = tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, "refB", URISH, REMOTE));
+    Task updateA =
+        tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, Set.of("refA"), URISH, REMOTE));
+    Task updateB =
+        tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, Set.of("refB"), URISH, REMOTE));
     updateA.create();
     updateB.create();
     assertIsWaiting(updateA);
@@ -210,8 +213,10 @@ public class ReplicationTasksStorageTaskTest {
 
   @Test
   public void canHaveTwoRunningTasksForDifferentRefs() throws Exception {
-    Task updateA = tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, "refA", URISH, REMOTE));
-    Task updateB = tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, "refB", URISH, REMOTE));
+    Task updateA =
+        tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, Set.of("refA"), URISH, REMOTE));
+    Task updateB =
+        tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, Set.of("refB"), URISH, REMOTE));
     updateA.create();
     updateB.create();
     updateA.start();
@@ -226,12 +231,12 @@ public class ReplicationTasksStorageTaskTest {
         tasksStorage
         .new Task(
             ReplicateRefUpdate.create(
-                "projectA", REF, getUrish("http://example.com/projectA.git"), REMOTE));
+                "projectA", Set.of(REF), getUrish("http://example.com/projectA.git"), REMOTE));
     Task updateB =
         tasksStorage
         .new Task(
             ReplicateRefUpdate.create(
-                "projectB", REF, getUrish("http://example.com/projectB.git"), REMOTE));
+                "projectB", Set.of(REF), getUrish("http://example.com/projectB.git"), REMOTE));
     updateA.create();
     updateB.create();
     assertIsWaiting(updateA);
@@ -244,12 +249,12 @@ public class ReplicationTasksStorageTaskTest {
         tasksStorage
         .new Task(
             ReplicateRefUpdate.create(
-                "projectA", REF, getUrish("http://example.com/projectA.git"), REMOTE));
+                "projectA", Set.of(REF), getUrish("http://example.com/projectA.git"), REMOTE));
     Task updateB =
         tasksStorage
         .new Task(
             ReplicateRefUpdate.create(
-                "projectB", REF, getUrish("http://example.com/projectB.git"), REMOTE));
+                "projectB", Set.of(REF), getUrish("http://example.com/projectB.git"), REMOTE));
     updateA.create();
     updateB.create();
     updateA.start();
@@ -260,8 +265,10 @@ public class ReplicationTasksStorageTaskTest {
 
   @Test
   public void canHaveTwoWaitingTasksForDifferentRemotes() throws Exception {
-    Task updateA = tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, REF, URISH, "remoteA"));
-    Task updateB = tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, REF, URISH, "remoteB"));
+    Task updateA =
+        tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, Set.of(REF), URISH, "remoteA"));
+    Task updateB =
+        tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, Set.of(REF), URISH, "remoteB"));
     updateA.create();
     updateB.create();
     assertIsWaiting(updateA);
@@ -270,8 +277,10 @@ public class ReplicationTasksStorageTaskTest {
 
   @Test
   public void canHaveTwoRunningTasksForDifferentRemotes() throws Exception {
-    Task updateA = tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, REF, URISH, "remoteA"));
-    Task updateB = tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, REF, URISH, "remoteB"));
+    Task updateA =
+        tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, Set.of(REF), URISH, "remoteA"));
+    Task updateB =
+        tasksStorage.new Task(ReplicateRefUpdate.create(PROJECT, Set.of(REF), URISH, "remoteB"));
     updateA.create();
     updateB.create();
     updateA.start();

@@ -61,7 +61,7 @@ public class ReplicationStorageDaemon extends ReplicationDaemon {
     Pattern refmaskPattern = Pattern.compile(refRegex);
     return tasksStorage
         .streamWaiting()
-        .filter(task -> refmaskPattern.matcher(task.ref()).matches())
+        .filter(task -> refmaskPattern.matcher(task.refs().toArray()[0].toString()).matches())
         .collect(toList());
   }
 

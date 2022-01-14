@@ -47,7 +47,7 @@ public interface PushResultProcessing {
       RemoteRefUpdate.Status refStatus) {}
 
   /**
-   * Invoked when a ref has been replicated to all nodes.
+   * Invoked when refs have been replicated to all nodes.
    *
    * @param project the project name
    * @param ref the ref name
@@ -108,7 +108,7 @@ public interface PushResultProcessing {
       StringBuilder sb = new StringBuilder();
       sb.append("Replicate ");
       sb.append(project);
-      sb.append(" ref ");
+      sb.append(" refs ");
       sb.append(ref);
       sb.append(" to ");
       sb.append(resolveNodeName(uri));

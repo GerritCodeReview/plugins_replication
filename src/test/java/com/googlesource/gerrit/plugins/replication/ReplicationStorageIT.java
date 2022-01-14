@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import org.eclipse.jgit.transport.URIish;
@@ -96,7 +97,7 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
         .forEach(
             (update) -> {
               try {
-                UriUpdates uriUpdates = TestUriUpdates.create(update);
+                UriUpdates uriUpdates = new TestUriUpdates(update);
                 tasksStorage.start(uriUpdates);
                 tasksStorage.finish(uriUpdates);
               } catch (URISyntaxException e) {
@@ -125,7 +126,7 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
         .forEach(
             (update) -> {
               try {
-                UriUpdates uriUpdates = TestUriUpdates.create(update);
+                UriUpdates uriUpdates = new TestUriUpdates(update);
                 tasksStorage.start(uriUpdates);
                 tasksStorage.finish(uriUpdates);
               } catch (URISyntaxException e) {
@@ -211,7 +212,7 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
         .forEach(
             (task) -> {
               assertThat(task.uri()).isEqualTo(expectedURI);
-              assertThat(task.ref()).isEqualTo(PushOne.ALL_REFS);
+              assertThat(task.refs()).isEqualTo(Set.of(PushOne.ALL_REFS));
             });
   }
 
@@ -236,7 +237,7 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
         .forEach(
             (task) -> {
               assertThat(task.uri()).isEqualTo(expectedURI);
-              assertThat(task.ref()).isEqualTo(PushOne.ALL_REFS);
+              assertThat(task.refs()).isEqualTo(Set.of(PushOne.ALL_REFS));
             });
   }
 
@@ -351,14 +352,14 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
       String changeRef, String remote) {
     return tasksStorage
         .streamWaiting()
-        .filter(task -> changeRef.equals(task.ref()))
+        .filter(task -> task.refs().stream().anyMatch(ref -> changeRef.equals(ref)))
         .filter(task -> remote.equals(task.remote()));
   }
 
   private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(
       Stream<ReplicateRefUpdate> updates, String changeRef, String remote) {
     return updates
-        .filter(task -> changeRef.equals(task.ref()))
+        .filter(task -> task.refs().stream().anyMatch(ref -> changeRef.equals(ref)))
         .filter(task -> remote.equals(task.remote()));
   }
 }
