@@ -24,6 +24,7 @@ import static java.util.stream.Collectors.toMap;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
@@ -119,7 +120,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
   private final Project.NameKey projectName;
   private final URIish uri;
-  private final Set<String> delta = Sets.newHashSetWithExpectedSize(4);
+  private final Set<ImmutableSet<String>> refBundlesToPush = Sets.newHashSetWithExpectedSize(4);
   private boolean pushAllRefs;
   private Repository git;
   private boolean isCollision;
@@ -240,12 +241,16 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
    *     config.
    */
   protected String getLimitedRefs() {
-    Set<String> refs = getRefs();
+    Set<ImmutableSet<String>> refs = getRefs();
     int maxRefsToShow = replConfig.getMaxRefsToShow();
     if (maxRefsToShow == 0) {
       maxRefsToShow = refs.size();
     }
-    String refsString = refs.stream().limit(maxRefsToShow).collect(Collectors.joining(" "));
+    String refsString =
+        refs.stream()
+            .flatMap(Collection::stream)
+            .limit(maxRefsToShow)
+            .collect(Collectors.joining(" "));
     int hiddenRefs = refs.size() - maxRefsToShow;
     if (hiddenRefs > 0) {
       refsString += " (+" + hiddenRefs + ")";
@@ -281,52 +286,60 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   }
 
   void addRef(String ref) {
-    if (ALL_REFS.equals(ref)) {
-      delta.clear();
+    addRefBundle(ImmutableSet.of(ref));
+  }
+
+  void addRefBundle(ImmutableSet<String> refBundle) {
+    if (refBundle.size() == 1 && refBundle.contains(ALL_REFS)) {
+      refBundlesToPush.clear();
       pushAllRefs = true;
       repLog.atFinest().log("Added all refs for replication to %s", uri);
-    } else if (!pushAllRefs && delta.add(ref)) {
-      repLog.atFinest().log("Added ref %s for replication to %s", ref, uri);
+    } else if (!pushAllRefs && refBundlesToPush.add(refBundle)) {
+      repLog.atFinest().log("Added ref %s for replication to %s", refBundle, uri);
     }
   }
 
   @Override
-  public Set<String> getRefs() {
-    return pushAllRefs ? Sets.newHashSet(ALL_REFS) : delta;
+  public Set<ImmutableSet<String>> getRefs() {
+    return pushAllRefs ? Set.of(ImmutableSet.of(ALL_REFS)) : refBundlesToPush;
   }
 
-  void addRefs(Set<String> refs) {
+  void addRefBundles(Set<ImmutableSet<String>> refBundles) {
     if (!pushAllRefs) {
-      for (String ref : refs) {
-        addRef(ref);
+      for (ImmutableSet<String> refBundle : refBundles) {
+        addRefBundle(refBundle);
       }
     }
   }
 
-  Set<String> setStartedRefs(Set<String> startedRefs) {
-    Set<String> notAttemptedRefs = Sets.difference(delta, startedRefs);
+  Set<ImmutableSet<String>> setStartedRefs(Set<ImmutableSet<String>> startedRefs) {
+    Set<ImmutableSet<String>> notAttemptedRefs = Sets.difference(refBundlesToPush, startedRefs);
     pushAllRefs = false;
-    delta.clear();
-    addRefs(startedRefs);
+    refBundlesToPush.clear();
+    addRefBundles(startedRefs);
     return notAttemptedRefs;
   }
 
-  void notifyNotAttempted(Set<String> notAttemptedRefs) {
-    notAttemptedRefs.forEach(
-        ref ->
-            Arrays.asList(getStatesByRef(ref))
-                .forEach(
-                    state ->
-                        state.notifyRefReplicated(
-                            projectName.get(),
-                            ref,
-                            uri,
-                            RefPushResult.NOT_ATTEMPTED,
-                            RemoteRefUpdate.Status.UP_TO_DATE)));
+  void notifyNotAttempted(Set<ImmutableSet<String>> notAttemptedRefs) {
+    notAttemptedRefs.stream()
+        .flatMap(Collection::stream)
+        .forEach(
+            ref ->
+                Arrays.asList(getStatesByRef(ref))
+                    .forEach(
+                        state ->
+                            state.notifyRefReplicated(
+                                projectName.get(),
+                                ref,
+                                uri,
+                                RefPushResult.NOT_ATTEMPTED,
+                                RemoteRefUpdate.Status.UP_TO_DATE)));
   }
 
-  void addState(String ref, ReplicationState state) {
-    stateMap.put(ref, state);
+  void addState(Set<String> refs, ReplicationState state) {
+    for (String ref : refs) {
+      stateMap.put(ref, state);
+    }
   }
 
   ListMultimap<String, ReplicationState> getStates() {
@@ -645,10 +658,12 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
         // to only the references we will update during this operation.
         //
         Map<String, Ref> n = new HashMap<>();
-        for (String src : delta) {
-          Ref r = local.get(src);
-          if (r != null) {
-            n.put(src, r);
+        for (ImmutableSet<String> refBundle : refBundlesToPush) {
+          for (String src : refBundle) {
+            Ref r = local.get(src);
+            if (r != null) {
+              n.put(src, r);
+            }
           }
         }
         local = n;
@@ -707,21 +722,23 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private List<RemoteRefUpdate> doPushDelta(Map<String, Ref> local) throws IOException {
     List<RemoteRefUpdate> cmds = new ArrayList<>();
     boolean noPerms = !pool.isReplicatePermissions();
-    for (String src : delta) {
-      RefSpec spec = matchSrc(src);
-      if (spec != null) {
-        // If the ref still exists locally, send it, otherwise delete it.
-        Ref srcRef = local.get(src);
+    for (ImmutableSet<String> refBundle : refBundlesToPush) {
+      for (String src : refBundle) {
+        RefSpec spec = matchSrc(src);
+        if (spec != null) {
+          // If the ref still exists locally, send it, otherwise delete it.
+          Ref srcRef = local.get(src);
 
-        // Second try to ensure that the ref is truly not found locally
-        if (srcRef == null) {
-          srcRef = git.exactRef(src);
-        }
+          // Second try to ensure that the ref is truly not found locally
+          if (srcRef == null) {
+            srcRef = git.exactRef(src);
+          }
 
-        if (srcRef != null && canPushRef(src, noPerms)) {
-          push(cmds, spec, srcRef);
-        } else if (config.isMirror()) {
-          delete(cmds, spec);
+          if (srcRef != null && canPushRef(src, noPerms)) {
+            push(cmds, spec, srcRef);
+          } else if (config.isMirror()) {
+            delete(cmds, spec);
+          }
         }
       }
     }

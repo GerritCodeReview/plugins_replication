@@ -18,15 +18,20 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.flogger.FluentLogger;
 import com.google.common.hash.Hashing;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+import com.google.gson.stream.JsonWriter;
 import com.google.inject.Inject;
 import com.google.inject.ProvisionException;
 import com.google.inject.Singleton;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.NotDirectoryException;
@@ -82,27 +87,46 @@ public class ReplicationTasksStorage {
       return gson.fromJson(json, ReplicateRefUpdate.class);
     }
 
-    public static ReplicateRefUpdate create(String project, String ref, URIish uri, String remote) {
+    public static ReplicateRefUpdate create(
+        String project, Set<String> refs, URIish uri, String remote) {
       return new AutoValue_ReplicationTasksStorage_ReplicateRefUpdate(
-          project, ref, uri.toASCIIString(), remote);
+          project, ImmutableSet.copyOf(refs), uri.toASCIIString(), remote);
+    }
+
+    public static ReplicateRefUpdate create(
+        String project, ImmutableSet<String> refs, URIish uri, String remote) {
+      return new AutoValue_ReplicationTasksStorage_ReplicateRefUpdate(
+          project, refs, uri.toASCIIString(), remote);
     }
 
     public abstract String project();
 
-    public abstract String ref();
+    public abstract ImmutableSet<String> refs();
 
     public abstract String uri();
 
     public abstract String remote();
 
+    public Set<String> refsSet() {
+      return Set.copyOf(refs());
+    }
+
     public String sha1() {
-      return ReplicationTasksStorage.sha1(project() + "\n" + ref() + "\n" + uri() + "\n" + remote())
+      return ReplicationTasksStorage.sha1(
+              project() + "\n" + refs().toString() + "\n" + uri() + "\n" + remote())
           .name();
     }
 
     @Override
     public final String toString() {
-      return "ref-update " + project() + ":" + ref() + " uri:" + uri() + " remote:" + remote();
+      return "ref-update "
+          + project()
+          + ":"
+          + refs().toString()
+          + " uri:"
+          + uri()
+          + " remote:"
+          + remote();
     }
 
     public static TypeAdapter<ReplicateRefUpdate> typeAdapter(Gson gson) {
@@ -127,19 +151,21 @@ public class ReplicationTasksStorage {
     runningUpdates = refUpdates.resolve("running");
     waitingUpdates = refUpdates.resolve("waiting");
     gson =
-        new GsonBuilder().registerTypeAdapterFactory(AutoValueTypeAdapterFactory.create()).create();
+        new GsonBuilder()
+            .registerTypeAdapter(ReplicateRefUpdate.class, new ReplicateRefUpdateTypeAdapter())
+            .create();
   }
 
   public synchronized String create(ReplicateRefUpdate r) {
     return new Task(r).create();
   }
 
-  public synchronized Set<String> start(UriUpdates uriUpdates) {
-    Set<String> startedRefs = new HashSet<>();
+  public synchronized Set<ImmutableSet<String>> start(UriUpdates uriUpdates) {
+    Set<ImmutableSet<String>> startedRefs = new HashSet<>();
     for (ReplicateRefUpdate update : uriUpdates.getReplicateRefUpdates()) {
       Task t = new Task(update);
       if (t.start()) {
-        startedRefs.add(t.update.ref());
+        startedRefs.add(t.update.refs());
       }
     }
     return startedRefs;
@@ -203,6 +229,86 @@ public class ReplicationTasksStorage {
       return Files.createDirectories(dir);
     } catch (IOException e) {
       throw new ProvisionException(String.format("Couldn't create %s", dir), e);
+    }
+  }
+
+  static class ReplicateRefUpdateTypeAdapter extends TypeAdapter<ReplicateRefUpdate> {
+
+    @Override
+    public void write(JsonWriter out, ReplicateRefUpdate value) throws IOException {
+      if (value == null) {
+        out.nullValue();
+        return;
+      }
+      out.beginObject();
+
+      out.name("project");
+      out.value(value.project());
+
+      out.name("refs");
+      out.beginArray();
+      for (String ref : value.refs()) {
+        out.value(ref);
+      }
+      out.endArray();
+
+      out.name("uri");
+      out.value(value.uri());
+
+      out.name("remote");
+      out.value(value.remote());
+
+      out.endObject();
+    }
+
+    @Override
+    public ReplicateRefUpdate read(JsonReader in) throws IOException {
+      if (in.peek() == JsonToken.NULL) {
+        in.nextNull();
+        return null;
+      }
+      String project = null;
+      Set<String> refs = new HashSet<>();
+      URIish uri = null;
+      String remote = null;
+
+      String fieldname = null;
+      in.beginObject();
+
+      while (in.hasNext()) {
+        JsonToken token = in.peek();
+
+        if (token.equals(JsonToken.NAME)) {
+          fieldname = in.nextName();
+        }
+
+        if ("project".equals(fieldname)) {
+          project = in.nextString();
+        }
+
+        if ("refs".equals(fieldname)) {
+          in.beginArray();
+          while (in.hasNext()) {
+            refs.add(in.nextString());
+          }
+          in.endArray();
+        }
+
+        if ("uri".equals(fieldname)) {
+          try {
+            uri = new URIish(in.nextString());
+          } catch (URISyntaxException e) {
+            throw new IOException("Unable to parse remote URI", e);
+          }
+        }
+
+        if ("remote".equals(fieldname)) {
+          remote = in.nextString();
+        }
+      }
+
+      in.endObject();
+      return ReplicateRefUpdate.create(project, refs, uri, remote);
     }
   }
 
@@ -275,7 +381,7 @@ public class ReplicationTasksStorage {
     }
 
     private String updateLog() {
-      return String.format("(%s:%s => %s)", update.project(), update.ref(), update.uri());
+      return String.format("(%s:%s => %s)", update.project(), update.refs(), update.uri());
     }
   }
 }
