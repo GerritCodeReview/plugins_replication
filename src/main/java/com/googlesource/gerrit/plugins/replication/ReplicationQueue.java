@@ -173,10 +173,10 @@ public class ReplicationQueue
     }
   }
 
-  private void fire(URIish uri, Project.NameKey project, String refName) {
+  private void fire(URIish uri, Project.NameKey project, ImmutableSet<String> refNames) {
     ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
-    for (Destination dest : destinations.get().getDestinations(uri, project, refName)) {
-      dest.schedule(project, refName, uri, state);
+    for (Destination dest : destinations.get().getDestinations(uri, project, refNames)) {
+      dest.schedule(project, refNames, uri, state);
     }
     state.markAllPushTasksScheduled();
   }
@@ -197,15 +197,20 @@ public class ReplicationQueue
     if (withoutState) {
       state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
     }
+    Set<String> refNamesToPush = new HashSet<>();
     for (String refName : refNames) {
       if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
-        for (URIish uri : cfg.getURIs(project, urlMatch)) {
-          replicationTasksStorage.create(
-              ReplicateRefUpdate.create(project.get(), refName, uri, cfg.getRemoteConfigName()));
-          cfg.schedule(project, refName, uri, state, now);
-        }
+        refNamesToPush.add(refName);
       } else {
         repLog.atFine().log("Skipping ref %s on project %s", refName, project.get());
+      }
+    }
+    if (!refNamesToPush.isEmpty()) {
+      for (URIish uri : cfg.getURIs(project, urlMatch)) {
+        replicationTasksStorage.create(
+            ReplicateRefUpdate.create(
+                project.get(), refNamesToPush, uri, cfg.getRemoteConfigName()));
+        cfg.schedule(project, refNamesToPush, uri, state, now);
       }
     }
     if (withoutState) {
@@ -229,7 +234,7 @@ public class ReplicationQueue
             @Override
             public void run(ReplicationTasksStorage.ReplicateRefUpdate u) {
               try {
-                fire(new URIish(u.uri()), Project.nameKey(u.project()), u.ref());
+                fire(new URIish(u.uri()), Project.nameKey(u.project()), u.refs());
                 if (Prune.TRUE.equals(prune)) {
                   taskNamesByReplicateRefUpdate.remove(u);
                 }
@@ -251,7 +256,7 @@ public class ReplicationQueue
 
             @Override
             public String toString(ReplicationTasksStorage.ReplicateRefUpdate u) {
-              return "Scheduling push to " + String.format("%s:%s", u.project(), u.ref());
+              return "Scheduling push to " + String.format("%s:%s", u.project(), u.refs());
             }
           });
     }
