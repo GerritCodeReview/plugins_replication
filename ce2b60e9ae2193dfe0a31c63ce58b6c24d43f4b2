@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ff0cf5b_dfddd5d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-25T20:51:28Z",
+      "side": 1,
+      "message": "This CR just shows the fragility of the algorithm used to detect whether a repository should be created.\n\nI hope that this CR and the description in the related monorail makes the problem clear.\n\nI can suggest two possible approaches for this:\n\n1 - rather than trying to cover the possible spectrum of possible errors to match against, we could default to the current set of strings and then allow admins to configure an additional set of regexes to match the way their system raise such errors.\n\n2 - Extends the AdminApi[1] with an additional method, which can be used to test whether the remote has a project or not. for example:\n\n```\npublic boolean hasProject(Project.NameKey project);\n```\n\nwhich we can then be used at [2], in case an exception arise:\n\n```\n...\n    } catch (RemoteRepositoryException e) {\n      if (!adminApi.hasProject(project) {\n        createRepository();\n      } else {\n        repLog.atSevere().log(\"Cannot replicate %s; Remote repository error: %s\", projectName, msg);\n      }\n...\n```\n\nI tend to prefer change 2, which has a cleaner API and it requires no extra configuration, even though it will require one extra call in case of RemoteRepositoryException.\n\nThoughts anyone?\n\n[1]https://gerrit.googlesource.com/plugins/replication/+/refs/tags/v3.5.0.1/src/main/java/com/googlesource/gerrit/plugins/replication/AdminApi.java#19\n\n[2]https://gerrit.googlesource.com/plugins/replication/+/refs/tags/v3.5.0.1/src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java#444",
+      "revId": "ce2b60e9ae2193dfe0a31c63ce58b6c24d43f4b2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
