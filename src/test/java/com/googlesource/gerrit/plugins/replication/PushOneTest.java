@@ -23,6 +23,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.google.common.collect.ImmutableList;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.metrics.Timer1;
@@ -46,6 +47,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.eclipse.jgit.errors.NotSupportedException;
+import org.eclipse.jgit.errors.RemoteRepositoryException;
 import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.lib.ObjectId;
@@ -95,6 +97,7 @@ public class PushOneTest {
   private ProjectState projectStateMock;
   private RefUpdate refUpdateMock;
   private CreateProjectTask.Factory createProjectTaskFactoryMock;
+  private CreateProjectTask createProjectTaskMock;
   private ReplicationConfig replicationConfigMock;
   private RefDatabase refDatabaseMock;
 
@@ -160,12 +163,42 @@ public class PushOneTest {
 
     setupProjectCacheMock();
 
+    setupCreateProjectTaskFactoryMock();
+
     replicationConfigMock = mock(ReplicationConfig.class);
   }
 
   @Test
   public void shouldPushAllRefsWhenNoFilters() throws InterruptedException, IOException {
     shouldPushAllRefsWithDynamicItemFilter(DynamicItem.itemOf(ReplicationPushFilter.class, null));
+  }
+
+  @Test
+  public void shouldCreateProjectWhenRemoteGitRepositoryNotFoundExceptionMessage()
+      throws NotSupportedException, TransportException {
+    PushOne pushOne = createPushOne();
+    when(transportMock.push(any(), any()))
+        .thenThrow(new RemoteRepositoryException(urish, "Git repository not found"));
+    when(destinationMock.isCreateMissingRepos()).thenReturn(true);
+
+    pushOne.addRef(PushOne.ALL_REFS);
+    pushOne.run();
+
+    verify(createProjectTaskMock).create();
+  }
+
+  @Test
+  public void shouldCreateProjectWhenNotFoundExceptionMessage()
+      throws NotSupportedException, TransportException {
+    PushOne pushOne = createPushOne();
+    when(transportMock.push(any(), any()))
+        .thenThrow(new RemoteRepositoryException(urish, "not found"));
+    when(destinationMock.isCreateMissingRepos()).thenReturn(true);
+
+    pushOne.addRef(PushOne.ALL_REFS);
+    pushOne.run();
+
+    verify(createProjectTaskMock).create();
   }
 
   @Test
@@ -223,7 +256,8 @@ public class PushOneTest {
     verify(transportMock, never()).push(any(), any());
   }
 
-  private PushOne createPushOne(DynamicItem<ReplicationPushFilter> replicationPushFilter) {
+  private PushOne createPushOne(
+      @Nullable DynamicItem<ReplicationPushFilter> replicationPushFilter) {
     PushOne push =
         new PushOne(
             gitRepositoryManagerMock,
@@ -242,13 +276,27 @@ public class PushOneTest {
             projectNameKey,
             urish);
 
-    push.setReplicationPushFilter(replicationPushFilter);
+    if (replicationPushFilter != null) {
+      push.setReplicationPushFilter(replicationPushFilter);
+    }
     return push;
+  }
+
+  private PushOne createPushOne() {
+    return createPushOne(null);
   }
 
   private void setupProjectCacheMock() {
     projectCacheMock = mock(ProjectCache.class);
     when(projectCacheMock.get(projectNameKey)).thenReturn(Optional.of(projectStateMock));
+  }
+
+  private void setupCreateProjectTaskFactoryMock() {
+    createProjectTaskMock = mock(CreateProjectTask.class);
+    when(createProjectTaskMock.create()).thenReturn(true);
+    createProjectTaskFactoryMock = mock(CreateProjectTask.Factory.class);
+    when(createProjectTaskFactoryMock.create(eq(projectNameKey), any()))
+        .thenReturn(createProjectTaskMock);
   }
 
   private void setupTransportMock() throws NotSupportedException, TransportException {
