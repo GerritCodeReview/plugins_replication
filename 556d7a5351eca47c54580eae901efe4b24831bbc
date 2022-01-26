@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de7cb565_161a5fde",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritRestApi.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-26T15:52:59Z",
+      "side": 1,
+      "message": "this is wrong",
+      "range": {
+        "startLine": 117,
+        "startChar": 67,
+        "endLine": 117,
+        "endChar": 75
+      },
+      "revId": "556d7a5351eca47c54580eae901efe4b24831bbc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52117ffb_b0e7e5c6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritRestApi.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-26T15:52:59Z",
+      "side": 1,
+      "message": "Check this is a good default.",
+      "range": {
+        "startLine": 118,
+        "startChar": 13,
+        "endLine": 118,
+        "endChar": 18
+      },
+      "revId": "556d7a5351eca47c54580eae901efe4b24831bbc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f995485_07401f26",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/LocalFS.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-26T15:52:59Z",
+      "side": 1,
+      "message": "What if this is a symlink?",
+      "range": {
+        "startLine": 83,
+        "startChar": 15,
+        "endLine": 84,
+        "endChar": 3
+      },
+      "revId": "556d7a5351eca47c54580eae901efe4b24831bbc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a844b6ff_309415ce",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteSsh.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-26T15:52:59Z",
+      "side": 1,
+      "message": "should use `test -d` here",
+      "range": {
+        "startLine": 101,
+        "startChar": 18,
+        "endLine": 101,
+        "endChar": 20
+      },
+      "revId": "556d7a5351eca47c54580eae901efe4b24831bbc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
