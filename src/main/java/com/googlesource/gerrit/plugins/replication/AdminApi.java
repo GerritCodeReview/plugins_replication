@@ -22,4 +22,6 @@ public interface AdminApi {
   public boolean deleteProject(Project.NameKey project);
 
   public boolean updateHead(Project.NameKey project, String newHead);
+
+  public boolean hasProject(Project.NameKey project);
 }

@@ -23,7 +23,7 @@ import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.QuotedString;
 
 public class RemoteSsh implements AdminApi {
-
+  private static final int SSH_COMMAND_SUCCESS = 0;
   private final SshHelper sshHelper;
   private URIish uri;
 
@@ -93,5 +93,23 @@ public class RemoteSsh implements AdminApi {
       return false;
     }
     return true;
+  }
+
+  @Override
+  public boolean hasProject(Project.NameKey project) {
+    String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
+    String cmd = "cd " + quotedPath;
+    OutputStream errStream = sshHelper.newErrorBufferStream();
+    try {
+      return sshHelper.executeRemoteSsh(uri, cmd, errStream) == SSH_COMMAND_SUCCESS;
+    } catch (IOException e) {
+      repLog.atSevere().log(
+          "Error checking remote repository at %s:\n"
+              + "  Exception: %s\n"
+              + "  Command: %s\n"
+              + "  Output: %s",
+          uri, e, cmd, errStream);
+      return false;
+    }
   }
 }

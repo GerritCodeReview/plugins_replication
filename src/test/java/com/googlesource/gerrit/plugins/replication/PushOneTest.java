@@ -98,6 +98,7 @@ public class PushOneTest {
   private ProjectState projectStateMock;
   private RefUpdate refUpdateMock;
   private CreateProjectTask.Factory createProjectTaskFactoryMock;
+  private HasProjectTask.Factory hasProjectFactoryMock;
   private ReplicationConfig replicationConfigMock;
   private RefDatabase refDatabaseMock;
 
@@ -289,6 +290,7 @@ public class PushOneTest {
             projectCacheMock,
             createProjectTaskFactoryMock,
             transportFactoryMock,
+            hasProjectFactoryMock,
             projectNameKey,
             urish);
 
