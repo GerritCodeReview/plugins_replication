@@ -135,6 +135,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private final ReplicationMetrics metrics;
   private final ProjectCache projectCache;
   private final CreateProjectTask.Factory createProjectFactory;
+  private final HasProjectTask.Factory hasProjectFactory;
   private final AtomicBoolean canceledWhileRunning;
   private final TransportFactory transportFactory;
   private DynamicItem<ReplicationPushFilter> replicationPushFilter;
@@ -154,6 +155,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       ProjectCache pc,
       CreateProjectTask.Factory cpf,
       TransportFactory tf,
+      HasProjectTask.Factory hpf,
       @Assisted Project.NameKey d,
       @Assisted URIish u) {
     gitManager = grm;
@@ -176,6 +178,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     canceledWhileRunning = new AtomicBoolean(false);
     maxRetries = p.getMaxRetries();
     transportFactory = tf;
+    hasProjectFactory = hpf;
   }
 
   @Inject(optional = true)
@@ -440,10 +443,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       // does not exist.  In this case NoRemoteRepositoryException is not
       // raised.
       String msg = e.getMessage();
-      if (msg.contains("access denied")
-          || msg.contains("no such repository")
-          || msg.contains("Git repository not found")
-          || msg.contains("unavailable")) {
+      if (requiresProjectCreation()) {
         createRepository();
       } else {
         repLog.atSevere().log("Cannot replicate %s; Remote repository error: %s", projectName, msg);
@@ -494,6 +494,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
   private void logCanceledWhileRunningException(TransportException e) {
     repLog.atInfo().withCause(e).log("Cannot replicate to %s. It was canceled while running", uri);
+  }
+
+  private boolean requiresProjectCreation() {
+    return pool.isCreateMissingRepos() && !hasProjectFactory.create(projectName).hasProject();
   }
 
   private void createRepository() {

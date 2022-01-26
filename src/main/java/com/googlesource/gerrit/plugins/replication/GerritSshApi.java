@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.ssh.SshAddressesModule;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
@@ -89,6 +90,20 @@ public class GerritSshApi implements AdminApi {
     return true;
   }
 
+  @Override
+  public boolean hasProject(Project.NameKey project) {
+    OutputStream errStream = sshHelper.newErrorBufferStream();
+    String cmd = String.format("gerrit ls-projects -r '^%s$' -n 1", project.get());
+    try {
+      int exitStatus = execute(uri, cmd, errStream);
+      String output = stringify(errStream);
+      return exitStatus != SSH_COMMAND_FAILED && !output.isEmpty();
+    } catch (IOException e) {
+      logError("checking existence of", uri, errStream, cmd, e);
+      return false;
+    }
+  }
+
   private URIish toSshUri(URIish uri) throws URISyntaxException {
     String uriStr = uri.toString();
     if (uri.getHost() != null && uriStr.startsWith(GERRIT_ADMIN_PROTOCOL_PREFIX)) {
@@ -119,5 +134,12 @@ public class GerritSshApi implements AdminApi {
     logger.atSevere().withCause(e).log(
         "Error %s remote repository at %s:\n  Exception: %s\n  Command: %s\n  Output: %s",
         msg, uri, e, cmd, errStream);
+  }
+
+  private String stringify(OutputStream outputStream) throws IOException {
+    try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+      outputStream.write(baos.toByteArray());
+      return baos.toString();
+    }
   }
 }

@@ -186,6 +186,7 @@ public class Destination {
                 install(new FactoryModuleBuilder().build(CreateProjectTask.Factory.class));
                 install(new FactoryModuleBuilder().build(DeleteProjectTask.Factory.class));
                 install(new FactoryModuleBuilder().build(UpdateHeadTask.Factory.class));
+                install(new FactoryModuleBuilder().build(HasProjectTask.Factory.class));
 
                 DynamicItem.itemOf(binder(), AdminApiFactory.class);
                 DynamicItem.bind(binder(), AdminApiFactory.class)

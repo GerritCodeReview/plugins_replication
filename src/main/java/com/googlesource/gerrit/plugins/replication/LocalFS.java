@@ -78,6 +78,11 @@ public class LocalFS implements AdminApi {
     return true;
   }
 
+  @Override
+  public boolean hasProject(Project.NameKey project) {
+    return new File(uri.getPath()).isDirectory();
+  }
+
   private static void recursivelyDelete(File dir) throws IOException {
     File[] contents = dir.listFiles();
     if (contents != null) {
