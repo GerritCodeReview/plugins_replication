@@ -27,6 +27,7 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.entity.StringEntity;
@@ -101,6 +102,21 @@ public class GerritRestApi implements AdminApi {
       repLog.atSevere().withCause(e).log("Couldn't perform update head on %s", uri);
     }
     return false;
+  }
+
+  @Override
+  public boolean hasProject(Project.NameKey project) {
+    repLog.atInfo().log("Checking existence of project %s on %s", project, uri);
+    String url = String.format("%s/a/projects/%s", toHttpUri(uri), Url.encode(project.get()));
+
+    try {
+      return httpClient
+          .execute(new HttpGet(url), new HttpResponseHandler(), getContext())
+          .isSuccessful();
+    } catch (IOException e) {
+      repLog.atSevere().withCause(e).log("Couldn't perform project creation on %s", uri);
+      return false;
+    }
   }
 
   private HttpClientContext getContext() {
