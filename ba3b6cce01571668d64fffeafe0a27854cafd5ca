@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ee1267a_f6e32c53",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-27T18:40:19Z",
+      "side": 1,
+      "message": "\u003e \u003e Although my hope is that we will not maintain this in the future, but rather change the approach altogether.\n\u003e \u003e \n\u003e \u003e Do you have any opinion on the approach (note, not on the implementation, which is still a skinny draft), I proposed here [1] for master?\n\u003e \n\u003e I think its a nice approach, but maybe I don\u0027t understand how that would work as a general solution? It appears specific to situations where Gerrit is the endpoint only though (and a modern enough one)?\n\nThe idea is to provide the implementation for the 4 available incarnations of AdminApi (RemoteSsh, GerritSshApi, GerritRestApi, LocalFS), so that the endpoint could be any of the supported ones, not just Gerrit.",
+      "parentUuid": "b8e4e30d_940dbabf",
+      "range": {
+        "startLine": 392,
+        "startChar": 26,
+        "endLine": 392,
+        "endChar": 62
+      },
+      "revId": "ba3b6cce01571668d64fffeafe0a27854cafd5ca",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6c90659_37be80e5",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
         "patchSetId": 1
