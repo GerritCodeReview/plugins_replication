@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fd4e5a9_19c7e1f1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-01-27T09:49:54Z",
+      "side": 1,
+      "message": "If we just look for \u0027not found\u0027 at L390, it would still do the job and potentially catching more future variations.",
+      "range": {
+        "startLine": 392,
+        "startChar": 26,
+        "endLine": 392,
+        "endChar": 62
+      },
+      "revId": "ba3b6cce01571668d64fffeafe0a27854cafd5ca",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
