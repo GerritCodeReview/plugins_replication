@@ -46,6 +46,53 @@
       },
       "revId": "ba3b6cce01571668d64fffeafe0a27854cafd5ca",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae8c3b8e_baa71194",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2022-01-27T17:39:48Z",
+      "side": 1,
+      "message": "\u003e I was thinking \u0027not found\u0027 being too generic, as literally _anything_ could be not found, if there is no discriminating subject, such as \"repository\" or \"git repository\".\n\nI believe the consequence of over matching is worse than the consequence of under matching? Therefore I would match as precisely as possible for the known existing use cases.\n\nTo help future maintainers, could you add a comment next to the new format explaining which server (and version if possible) creates it, that makes it easier to maintain in the future.",
+      "parentUuid": "24207430_1b7325f2",
+      "range": {
+        "startLine": 392,
+        "startChar": 26,
+        "endLine": 392,
+        "endChar": 62
+      },
+      "revId": "ba3b6cce01571668d64fffeafe0a27854cafd5ca",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6c90659_37be80e5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2022-01-27T17:39:48Z",
+      "side": 1,
+      "message": "Better to name this after the server?",
+      "range": {
+        "startLine": 182,
+        "startChar": 14,
+        "endLine": 182,
+        "endChar": 61
+      },
+      "revId": "ba3b6cce01571668d64fffeafe0a27854cafd5ca",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
