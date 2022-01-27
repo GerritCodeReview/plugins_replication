@@ -388,7 +388,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       if (msg.contains("access denied")
           || msg.contains("no such repository")
           || msg.contains("Git repository not found")
-          || msg.contains("unavailable")) {
+          || msg.contains("unavailable")
+          || msg.contains(String.format("%s: not found", uri))) {
         createRepository();
       } else {
         repLog.atSevere().log("Cannot replicate %s; Remote repository error: %s", projectName, msg);
