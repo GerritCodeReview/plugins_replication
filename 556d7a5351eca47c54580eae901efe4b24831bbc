@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "601bafa4_b8af6abf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritRestApi.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-01-27T09:55:36Z",
+      "side": 1,
+      "message": "Well, if we cannot check if the project exist, we don\u0027t really know if that exists or not, isn\u0027t it? I would prefer to re-thrown the exception",
+      "parentUuid": "52117ffb_b0e7e5c6",
+      "range": {
+        "startLine": 118,
+        "startChar": 13,
+        "endLine": 118,
+        "endChar": 18
+      },
+      "revId": "556d7a5351eca47c54580eae901efe4b24831bbc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f995485_07401f26",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/LocalFS.java",
         "patchSetId": 2
