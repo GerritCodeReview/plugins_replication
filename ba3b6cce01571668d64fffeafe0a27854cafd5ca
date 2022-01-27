@@ -22,6 +22,30 @@
       },
       "revId": "ba3b6cce01571668d64fffeafe0a27854cafd5ca",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24207430_1b7325f2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-01-27T09:52:10Z",
+      "side": 1,
+      "message": "I was thinking \u0027not found\u0027 being too generic, as literally _anything_ could be not found, if there is no discriminating subject, such as \"repository\" or \"git repository\".\n\nI think the same applies to the generic \u0027unavailable\u0027 for example.\n\nWDYT?",
+      "parentUuid": "7fd4e5a9_19c7e1f1",
+      "range": {
+        "startLine": 392,
+        "startChar": 26,
+        "endLine": 392,
+        "endChar": 62
+      },
+      "revId": "ba3b6cce01571668d64fffeafe0a27854cafd5ca",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
