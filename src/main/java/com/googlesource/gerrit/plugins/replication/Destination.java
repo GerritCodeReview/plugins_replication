@@ -459,6 +459,7 @@ public class Destination {
     synchronized (stateLock) {
       URIish uri = pushOp.getURI();
       pending.remove(uri);
+      pushOp.notifyNotAttempted(pushOp.getRefs());
     }
   }
 
