@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "981b93ca_78804409",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-03-03T19:36:36Z",
+      "side": 1,
+      "message": "I confirmed using the SSH \u0027kill\u0027 command on a replication task scheduled by running \u0027replication start --wait\u0027 now results in the \u0027replication start\u0027 completing with a NOT_ATTEMPTED message. I also confirmed the same behavior when removing the waiting replication task storage file with the replication distributor enabled.",
+      "revId": "e9561b121d110f6e31594d0659efa8bf6d3809bc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
