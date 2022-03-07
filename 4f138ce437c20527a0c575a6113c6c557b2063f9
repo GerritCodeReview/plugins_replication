@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f027329_a9d875d6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2022-03-07T15:08:55Z",
+      "side": 1,
+      "message": "what\u0027s the purpose of having two methods returning a set of ref names ?\nI think it\u0027s not obvious from their names what\u0027s the difference",
+      "revId": "4f138ce437c20527a0c575a6113c6c557b2063f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
