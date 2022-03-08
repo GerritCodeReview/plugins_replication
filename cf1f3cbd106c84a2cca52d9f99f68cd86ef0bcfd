@@ -33,6 +33,42 @@
       "message": "Needs a rebase with conflict resolution after the move.",
       "revId": "cf1f3cbd106c84a2cca52d9f99f68cd86ef0bcfd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4589c97f_026d8906",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-03-08T08:40:24Z",
+      "side": 1,
+      "message": "I moved it to stable-3.3. I am not sure though, whether the issue calls for having an intermittent workaround, since it does not seem to affect a lot of people.",
+      "parentUuid": "25abe888_c5cd53d3",
+      "revId": "cf1f3cbd106c84a2cca52d9f99f68cd86ef0bcfd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cb432f6_77b787f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-03-08T08:40:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4d9b849_027a59b6",
+      "revId": "cf1f3cbd106c84a2cca52d9f99f68cd86ef0bcfd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
