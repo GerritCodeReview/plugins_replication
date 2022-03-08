@@ -16,6 +16,24 @@
       "message": "Can it be unit tested?",
       "revId": "331e24a54e25c11eb1fe60c24f23297c623ddaa6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45f7f84e_1f710fed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-03-08T20:17:05Z",
+      "side": 1,
+      "message": "Added for the cancel case. I\u0027ll also try to add a distributor case later. Also confirmed the one new test fails if run without the Destination code change:\n\n Time: 157.955\n There was 1 failure:\n 1) pushAllWaitCancelNotRunningTask(com.googlesource.gerrit.plugins.replication.ReplicationIT)\n expected to be true\n \tat com.googlesource.gerrit.plugins.replication.ReplicationIT.pushAllWaitCancelNotRunningTask(ReplicationIT.java:288)\n FAILURES!!!\n Tests run: 15,  Failures: 1",
+      "parentUuid": "757f4af6_33f0c38b",
+      "revId": "331e24a54e25c11eb1fe60c24f23297c623ddaa6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
