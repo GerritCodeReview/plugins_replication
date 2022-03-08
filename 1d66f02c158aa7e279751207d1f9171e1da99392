@@ -16,6 +16,24 @@
       "message": "Why not fix the basenameOnly. Obviously, what you describe here is a bug\nin the basenameOnly implementation. We do not need a new option",
       "revId": "1d66f02c158aa7e279751207d1f9171e1da99392",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b076ad9f_44302af6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-03-08T09:01:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20c17d80_08f6d318",
+      "revId": "1d66f02c158aa7e279751207d1f9171e1da99392",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
