@@ -16,6 +16,24 @@
       "message": "what\u0027s the purpose of having two methods returning a set of ref names ?\nI think it\u0027s not obvious from their names what\u0027s the difference",
       "revId": "4f138ce437c20527a0c575a6113c6c557b2063f9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abe69522_569aae69",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-03-08T08:23:51Z",
+      "side": 1,
+      "message": "This method was not even used anymore. Likely a leftover from a previous patchset.",
+      "parentUuid": "0f027329_a9d875d6",
+      "revId": "4f138ce437c20527a0c575a6113c6c557b2063f9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
