@@ -16,6 +16,23 @@
       "message": "I believe this was discussed on the mailing list [1] and the solution was to introduce a new event (refs-updated)?\n\nWhilst this solution would also work, it looks a bit of a workaround to me. I would use this solution for a stable branch (e.g. stable-3.3) and go with the new event for master.\n\nWDYT?\n\n[1] https://groups.google.com/g/repo-discuss/c/g4FOoiayLcA/m/lYyg1b1BAQAJ\n",
       "revId": "cf1f3cbd106c84a2cca52d9f99f68cd86ef0bcfd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4d9b849_027a59b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-03-08T08:29:24Z",
+      "side": 1,
+      "message": "Needs a rebase with conflict resolution after the move.",
+      "revId": "cf1f3cbd106c84a2cca52d9f99f68cd86ef0bcfd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
