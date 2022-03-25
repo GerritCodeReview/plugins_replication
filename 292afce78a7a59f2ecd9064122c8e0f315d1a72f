@@ -34,6 +34,23 @@
       "parentUuid": "31b6053b_d48caa5e",
       "revId": "292afce78a7a59f2ecd9064122c8e0f315d1a72f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c4c4559_52b63364",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-03-25T07:19:02Z",
+      "side": 1,
+      "message": "Ping @Saša - should we merge it?",
+      "revId": "292afce78a7a59f2ecd9064122c8e0f315d1a72f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
