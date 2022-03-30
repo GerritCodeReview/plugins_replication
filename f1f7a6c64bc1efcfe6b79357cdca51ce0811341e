@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a379ec95_67598ac4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-03-30T10:01:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "023862aa_34421040",
+      "range": {
+        "startLine": 290,
+        "startChar": 5,
+        "endLine": 290,
+        "endChar": 16
+      },
+      "revId": "f1f7a6c64bc1efcfe6b79357cdca51ce0811341e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d47a6431_185366ec",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-29T13:05:59Z",
       "side": 1,
       "message": "This should not be required if the Set of Sets is flattened before",
+      "range": {
+        "startLine": 664,
+        "startChar": 12,
+        "endLine": 666,
+        "endChar": 13
+      },
+      "revId": "f1f7a6c64bc1efcfe6b79357cdca51ce0811341e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d7f7766_1f17f48d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-03-30T10:01:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d47a6431_185366ec",
       "range": {
         "startLine": 664,
         "startChar": 12,
@@ -64,6 +112,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bba2ed9b_6db06eb1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-03-30T10:01:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef618d1b_d5f9ac48",
+      "revId": "f1f7a6c64bc1efcfe6b79357cdca51ce0811341e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d476c97f_0645b2e0",
@@ -77,6 +143,30 @@
       "writtenOn": "2022-03-29T13:05:59Z",
       "side": 1,
       "message": "add getRefNames() method",
+      "range": {
+        "startLine": 316,
+        "startChar": 24,
+        "endLine": 316,
+        "endChar": 46
+      },
+      "revId": "f1f7a6c64bc1efcfe6b79357cdca51ce0811341e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa15a24e_e5cc2ba5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-03-30T10:01:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d476c97f_0645b2e0",
       "range": {
         "startLine": 316,
         "startChar": 24,
