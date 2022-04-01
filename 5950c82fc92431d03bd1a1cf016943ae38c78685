@@ -86,6 +86,24 @@
       "message": "\u003e Abandoned\n\u003e \n\u003e Moved to stable-3.3\n\nTry to use Move Change next time please 😊",
       "revId": "5950c82fc92431d03bd1a1cf016943ae38c78685",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1b782d0_1067b930",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2022-04-01T20:45:17Z",
+      "side": 1,
+      "message": "I remember that Move Change caused implicit merge of master into a stable branch in the past and no one noticed. Maybe that\u0027s fixed in the meantime?",
+      "parentUuid": "464dc465_789d03ba",
+      "revId": "5950c82fc92431d03bd1a1cf016943ae38c78685",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [
