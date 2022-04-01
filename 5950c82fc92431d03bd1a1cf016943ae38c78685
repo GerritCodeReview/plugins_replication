@@ -69,6 +69,23 @@
       "parentUuid": "3ce24ef2_39d70535",
       "revId": "5950c82fc92431d03bd1a1cf016943ae38c78685",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "464dc465_789d03ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-04-01T15:04:16Z",
+      "side": 1,
+      "message": "\u003e Abandoned\n\u003e \n\u003e Moved to stable-3.3\n\nTry to use Move Change next time please 😊",
+      "revId": "5950c82fc92431d03bd1a1cf016943ae38c78685",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [
