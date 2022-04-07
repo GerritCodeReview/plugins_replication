@@ -27,6 +27,7 @@ import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.git.WorkQueue;
+import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.util.logging.NamedFluentLogger;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -59,6 +60,7 @@ public class ReplicationQueue
   private final DynamicItem<EventDispatcher> dispatcher;
   private final Provider<ReplicationDestinations> destinations; // For Guice circular dependency
   private final ReplicationTasksStorage replicationTasksStorage;
+  private final ProjectCache projectCache;
   private volatile boolean running;
   private volatile boolean replaying;
   private final Queue<ReferenceUpdatedEvent> beforeStartupEventsQueue;
@@ -71,13 +73,15 @@ public class ReplicationQueue
       Provider<ReplicationDestinations> rd,
       DynamicItem<EventDispatcher> dis,
       ReplicationStateListeners sl,
-      ReplicationTasksStorage rts) {
+      ReplicationTasksStorage rts,
+      ProjectCache pc) {
     replConfig = rc;
     workQueue = wq;
     dispatcher = dis;
     destinations = rd;
     stateLog = sl;
     replicationTasksStorage = rts;
+    projectCache = pc;
     beforeStartupEventsQueue = Queues.newConcurrentLinkedQueue();
   }
 
@@ -194,7 +198,12 @@ public class ReplicationQueue
       replaying = true;
       for (ReplicationTasksStorage.ReplicateRefUpdate t : replicationTasksStorage.listWaiting()) {
         try {
-          fire(new URIish(t.uri), Project.nameKey(t.project), t.ref);
+          Project.NameKey projectName = Project.nameKey(t.project);
+          if (!projectCache.get(projectName).isPresent()) {
+            repLog.atSevere().log("Cannot replicate %s; Local repository does not exist");
+            replicationTasksStorage.finish(t);
+          }
+          fire(new URIish(t.uri), projectName, t.ref);
         } catch (URISyntaxException e) {
           repLog.atSevere().withCause(e).log("Encountered malformed URI for persisted event %s", t);
         }

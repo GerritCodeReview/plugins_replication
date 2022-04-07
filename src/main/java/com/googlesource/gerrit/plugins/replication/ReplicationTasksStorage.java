@@ -148,6 +148,10 @@ public class ReplicationTasksStorage {
     }
   }
 
+  public void finish(ReplicateRefUpdate update) {
+    new Task(update).finish();
+  }
+
   public List<ReplicateRefUpdate> listWaiting() {
     return list(createDir(waitingUpdates));
   }
@@ -237,9 +241,16 @@ public class ReplicationTasksStorage {
     }
 
     public void finish() {
+      logger.atFine().log("DELETE %s %s", running, updateLog());
+      deleteTask(running);
+
+      logger.atFine().log("DELETE %s %s", waiting, updateLog());
+      deleteTask(waiting);
+    }
+
+    private void deleteTask(Path p) {
       try {
-        logger.atFine().log("DELETE %s %s", running, updateLog());
-        Files.delete(running);
+        Files.delete(p);
       } catch (IOException e) {
         logger.atSevere().withCause(e).log("Error while deleting task %s", taskKey);
       }
