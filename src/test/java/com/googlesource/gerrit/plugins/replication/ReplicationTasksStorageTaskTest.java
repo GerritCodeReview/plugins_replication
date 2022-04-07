@@ -281,6 +281,19 @@ public class ReplicationTasksStorageTaskTest {
   }
 
   @Test
+  public void canCancelWaitingTask() throws Exception {
+    Task task = tasksStorage.new Task(REF_UPDATE);
+
+    task.create();
+    assertIsWaiting(task);
+
+    task.cancelWaiting();
+
+    assertNotWaiting(task);
+    assertNotRunning(task);
+  }
+
+  @Test
   public void illegalFinishNonRunningTaskIsGraceful() throws Exception {
     Task task = tasksStorage.new Task(REF_UPDATE);
     task.finish();
