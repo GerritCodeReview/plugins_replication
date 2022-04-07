@@ -430,8 +430,12 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
           "Replication to %s completed in %dms, %dms delay, %d retries",
           uri, elapsed, delay, retryCount);
     } catch (RepositoryNotFoundException e) {
+      retryDone();
       stateLog.error(
-          "Cannot replicate " + projectName + "; Local repository error: " + e.getMessage(),
+          "Cannot replicate "
+              + projectName
+              + "; Local repository does not exist: "
+              + e.getMessage(),
           getStatesAsArray());
 
     } catch (RemoteRepositoryException e) {
