@@ -57,7 +57,6 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.Provides;
-import com.google.inject.Scopes;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.servlet.RequestScoped;
@@ -80,7 +79,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -192,9 +190,6 @@ public class Destination {
                     .to(AdminApiFactory.DefaultAdminApiFactory.class);
 
                 install(new FactoryModuleBuilder().build(GerritRestApi.Factory.class));
-                bind(CloseableHttpClient.class)
-                    .toProvider(HttpClientProvider.class)
-                    .in(Scopes.SINGLETON);
               }
 
               @Provides
