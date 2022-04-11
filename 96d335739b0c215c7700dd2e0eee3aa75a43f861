@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "98f686b7_58b8bed1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-04-11T14:59:22Z",
+      "side": 1,
+      "message": "You might need to explain how we could get such a task created. I think you had that explanation in a previous commit message.",
+      "range": {
+        "startLine": 9,
+        "startChar": 10,
+        "endLine": 9,
+        "endChar": 44
+      },
+      "revId": "96d335739b0c215c7700dd2e0eee3aa75a43f861",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d4761885_b6afbd5c",
@@ -31,6 +54,29 @@
       "writtenOn": "2022-04-11T14:47:26Z",
       "side": 1,
       "message": ".",
+      "revId": "96d335739b0c215c7700dd2e0eee3aa75a43f861",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86bba505_51382fd3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-04-11T14:59:22Z",
+      "side": 1,
+      "message": "This is not safe. We don\u0027t want to remove a waiting task because that likely represents new updates that have not been pushed yet (such as those queued while the current task was running).\n\nMaybe for the specific case of \"this task is no longer valid\", we should have an \u0027unschedule()\u0027 method that deletes from waiting? We\u0027d want a javadoc with that to explain the specific circumstance it should be used in.",
+      "range": {
+        "startLine": 248,
+        "startChar": 6,
+        "endLine": 248,
+        "endChar": 26
+      },
       "revId": "96d335739b0c215c7700dd2e0eee3aa75a43f861",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
