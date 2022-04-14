@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cdbfade_9adf4a98",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-04-14T14:41:46Z",
+      "side": 1,
+      "message": "Can you add a short javadoc with a usage warning for this to reduce the chance it\u0027s misused? Something like \"Should only be used when it\u0027s impossible for the waiting task to become running, such as when the project no longer exists.\"\n\nIt would also be great to add test coverage for this method in the existing ReplicationTaskStorage tests.\n\nShould the deleteProject path call this too? Or is it sufficient to clean up on startup as you do now?",
+      "range": {
+        "startLine": 248,
+        "startChar": 16,
+        "endLine": 248,
+        "endChar": 29
+      },
+      "revId": "41653a8b7e409e8bd6ec416eb559ba12a4a81bab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
