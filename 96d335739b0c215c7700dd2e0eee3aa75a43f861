@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e8bb4243_f702b9f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2022-04-14T09:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d31ee064_d25809c9",
+      "range": {
+        "startLine": 9,
+        "startChar": 10,
+        "endLine": 9,
+        "endChar": 44
+      },
+      "revId": "96d335739b0c215c7700dd2e0eee3aa75a43f861",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d4761885_b6afbd5c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -119,6 +143,30 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "86bba505_51382fd3",
+      "range": {
+        "startLine": 248,
+        "startChar": 6,
+        "endLine": 248,
+        "endChar": 26
+      },
+      "revId": "96d335739b0c215c7700dd2e0eee3aa75a43f861",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6981026b_b697a432",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2022-04-14T09:57:22Z",
+      "side": 1,
+      "message": "Introduced a cancelWaiting method",
+      "parentUuid": "f658fd10_687f687a",
       "range": {
         "startLine": 248,
         "startChar": 6,
