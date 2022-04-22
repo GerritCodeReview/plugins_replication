@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "639849ea_5cf19505",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-04-22T20:50:16Z",
+      "side": 1,
+      "message": "The Zuul verification is unrelated: it looks like it validates changes using Java 8.\n\njava.lang.UnsupportedClassVersionError: src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationFanoutITTestSuite has been compiled by a more recent version of the Java Runtime (class file version 55.0), this version of the Java Runtime only recognizes class file versions up to 52.0\n\tat java.lang.ClassLoader.defineClass1(Native Method)\n\tat java.lang.ClassLoader.defineClass(ClassLoader.java:756)\n\tat java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142)\n\tat java.net.URLClassLoader.defineClass(URLClassLoader.java:473)\n\tat java.net.URLClassLoader.access$100(URLClassLoader.java:74)\n\tat java.net.URLClassLoader$1.run(URLClassLoader.java:369)\n\tat java.net.URLClassLoader$1.run(URLClassLoader.java:363)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat java.net.URLClassLoader.findClass(URLClassLoader.java:362)\n\tat java.lang.ClassLoader.loadClass(ClassLoader.java:418)\n\tat sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:352)\n\tat java.lang.ClassLoader.loadClass(ClassLoader.java:351)\n\tat java.lang.Class.forName0(Native Method)\n\tat java.lang.Class.forName(Class.java:264)\n\tat com.google.testing.junit.runner.PersistentTestRunner.getTestClass(PersistentTestRunner.java:206)\n\tat com.google.testing.junit.runner.BazelTestRunner.runTestsInSuite(BazelTestRunner.java:142)\n\tat com.google.testing.junit.runner.BazelTestRunner.main(BazelTestRunner.java:85)\n\n@Matthias can you verify manually?",
+      "revId": "9fa3fca28639a3d1266bd62aaa1d3270ce35c3ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
