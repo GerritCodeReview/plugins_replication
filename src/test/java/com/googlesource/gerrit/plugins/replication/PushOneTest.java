@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.eclipse.jgit.lib.Ref.Storage.NEW;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -46,6 +47,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.eclipse.jgit.errors.NotSupportedException;
+import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.lib.ObjectId;
@@ -221,6 +223,17 @@ public class PushOneTest {
     isCallFinished.await(10, TimeUnit.SECONDS);
 
     verify(transportMock, never()).push(any(), any());
+  }
+
+  @Test
+  public void shouldNotKeepRetryingWhenRepositoryNotFound() throws Exception {
+    when(gitRepositoryManagerMock.openRepository(projectNameKey))
+        .thenThrow(new RepositoryNotFoundException("not found"));
+    PushOne pushOne = createPushOne(null);
+    pushOne.addRef(PushOne.ALL_REFS);
+    pushOne.setToRetry();
+    pushOne.run();
+    assertThat(pushOne.isRetrying()).isFalse();
   }
 
   private PushOne createPushOne(DynamicItem<ReplicationPushFilter> replicationPushFilter) {
