@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f9ba475_950a0030",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-04-26T08:20:09Z",
+      "side": 1,
+      "message": "Zuul is flaky, I\u0027ve verified the change locally",
+      "revId": "0e1effafeeb9ee468e13c2af028fac5e019e9c25",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
