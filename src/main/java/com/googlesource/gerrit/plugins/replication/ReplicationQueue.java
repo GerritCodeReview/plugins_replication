@@ -17,7 +17,6 @@ package com.googlesource.gerrit.plugins.replication;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 import com.google.auto.value.AutoValue;
-import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Queues;
 import com.google.gerrit.common.UsedAt;
