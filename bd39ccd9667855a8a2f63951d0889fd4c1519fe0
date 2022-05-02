@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "fdf16944_c707bba1",
         "filename": "/COMMIT_MSG",
@@ -20,10 +21,34 @@
         "endChar": 58
       },
       "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b57b94b2_dce79f2a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2022-05-02T13:25:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdf16944_c707bba1",
+      "range": {
+        "startLine": 11,
+        "startChar": 35,
+        "endLine": 11,
+        "endChar": 58
+      },
+      "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "8b93203c_25e74852",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/OnStartStop.java",
@@ -43,10 +68,10 @@
         "endChar": 13
       },
       "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "a46c8f44_794b5ced",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/OnStartStop.java",
@@ -67,10 +92,10 @@
         "endChar": 13
       },
       "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "40208397_c1d5e312",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
@@ -90,10 +115,10 @@
         "endChar": 40
       },
       "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "d8c2cc4c_7f4bd56d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
@@ -113,10 +138,10 @@
         "endChar": 73
       },
       "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "17f3a48a_f0227ed0",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
@@ -137,10 +162,10 @@
         "endChar": 40
       },
       "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "da8bc53d_8d9e42ab",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfig.java",
@@ -161,10 +186,10 @@
         "endChar": 73
       },
       "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "257566c1_285ce325",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
@@ -178,10 +203,10 @@
       "side": 1,
       "message": "Static imports should be a the top.  Google-java-format will fix this",
       "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "0a98e6be_a78b8f97",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
@@ -196,10 +221,10 @@
       "message": "Done",
       "parentUuid": "257566c1_285ce325",
       "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": false
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "71894d2a_11a8d060",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
@@ -219,10 +244,10 @@
         "endChar": 27
       },
       "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "36f96459_795f7fdc",
         "filename": "src/main/resources/Documentation/config.md",
@@ -242,8 +267,7 @@
         "endChar": 8
       },
       "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
