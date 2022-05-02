@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bb152bb_7c101caf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2022-05-02T12:03:37Z",
+      "side": 1,
+      "message": "optional: maybe a cleaner way would be to use RefNames.changeMetaRef(Change.Id) method",
+      "revId": "b2360c10ca4d86593dcfd4cf7bf2b8597e796e5f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
