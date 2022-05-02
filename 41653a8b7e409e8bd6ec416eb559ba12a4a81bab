@@ -22,6 +22,30 @@
       },
       "revId": "41653a8b7e409e8bd6ec416eb559ba12a4a81bab",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32db1df6_35584b9b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2022-05-02T14:23:36Z",
+      "side": 1,
+      "message": "Done.\n\n\u003e Should the deleteProject path call this too? Or is it sufficient to clean up on startup as you do now?\n\nI think it is sufficient to clean up on startup for now.",
+      "parentUuid": "9cdbfade_9adf4a98",
+      "range": {
+        "startLine": 248,
+        "startChar": 16,
+        "endLine": 248,
+        "endChar": 29
+      },
+      "revId": "41653a8b7e409e8bd6ec416eb559ba12a4a81bab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
