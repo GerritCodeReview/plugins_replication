@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35a3202f_cf72a50b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2022-05-03T10:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edeae033_0d682f89",
+      "range": {
+        "startLine": 11,
+        "startChar": 56,
+        "endLine": 11,
+        "endChar": 61
+      },
+      "revId": "bd47f4b97b49fb7bebdb22b5cea13b16bbba4411",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6087c88_1256b156",
@@ -71,6 +95,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96c457fc_6b233da8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2022-05-03T10:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b27d492b_b5d4eeac",
+      "range": {
+        "startLine": 13,
+        "startChar": 48,
+        "endLine": 13,
+        "endChar": 60
+      },
+      "revId": "bd47f4b97b49fb7bebdb22b5cea13b16bbba4411",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1f61772_a00b42aa",
@@ -108,6 +156,30 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "b1f61772_a00b42aa",
+      "range": {
+        "startLine": 14,
+        "startChar": 18,
+        "endLine": 14,
+        "endChar": 29
+      },
+      "revId": "bd47f4b97b49fb7bebdb22b5cea13b16bbba4411",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71e62cc8_297b1044",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2022-05-03T10:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "addc0a71_824ae43c",
       "range": {
         "startLine": 14,
         "startChar": 18,
