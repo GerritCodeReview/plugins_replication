@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "8af0f3c3_cc2ad0b3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
@@ -20,8 +21,31 @@
         "endChar": 49
       },
       "revId": "5f857045e68655679ec7554a2bdfaed5a4d6ba1e",
-      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
-      "unresolved": true
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53d0128c_d4a63083",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2022-05-10T10:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8af0f3c3_cc2ad0b3",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 49
+      },
+      "revId": "5f857045e68655679ec7554a2bdfaed5a4d6ba1e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }

@@ -247,6 +247,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dfdc97f_6e001552",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1014257
+      },
+      "writtenOn": "2022-05-10T10:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71894d2a_11a8d060",
+      "range": {
+        "startLine": 53,
+        "startChar": 89,
+        "endLine": 54,
+        "endChar": 27
+      },
+      "revId": "bd39ccd9667855a8a2f63951d0889fd4c1519fe0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36f96459_795f7fdc",
