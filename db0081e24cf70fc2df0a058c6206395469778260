@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "872db88d_756884bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1144862
+      },
+      "writtenOn": "2022-05-12T13:56:12Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "91e6ca17_66f0141d",
+      "revId": "db0081e24cf70fc2df0a058c6206395469778260",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "930f28fe_55652268",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-05-12T13:52:26Z",
       "side": 1,
       "message": "remove this spurious whitespace by running google-java-format ?",
+      "revId": "db0081e24cf70fc2df0a058c6206395469778260",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baecba75_888c9bf2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1144862
+      },
+      "writtenOn": "2022-05-12T13:56:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "930f28fe_55652268",
       "revId": "db0081e24cf70fc2df0a058c6206395469778260",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
