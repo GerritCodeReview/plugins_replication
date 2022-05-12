@@ -42,6 +42,7 @@ import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -93,13 +94,15 @@ public class ReplicationQueue
     beforeStartupEventsQueue = Queues.newConcurrentLinkedQueue();
     projectDeletionStateFactory = pd;
   }
-
+ 
   @Override
   public void start() {
     if (!running) {
       destinations.get().startup(workQueue);
       running = true;
-      replicationTasksStorage.recoverAll();
+      @SuppressWarnings("unused")
+      Future<?> possiblyIgnoredError =
+          workQueue.getDefaultQueue().submit(() -> replicationTasksStorage.recoverAll());
       synchronizePendingEvents(Prune.FALSE);
       fireBeforeStartupEvents();
       distributor = new Distributor(workQueue);
