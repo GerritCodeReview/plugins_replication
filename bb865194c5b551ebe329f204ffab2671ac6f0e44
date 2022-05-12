@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bce427d_d447472b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2022-05-12T13:56:35Z",
+      "side": 1,
+      "message": "A more compact lambda expression here is to use instance method reference:\n\n  replicationTasksStorage::recoverAll",
+      "range": {
+        "startLine": 105,
+        "startChar": 45,
+        "endLine": 105,
+        "endChar": 87
+      },
+      "revId": "bb865194c5b551ebe329f204ffab2671ac6f0e44",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
