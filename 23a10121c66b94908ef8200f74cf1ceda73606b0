@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd8ede1d_7c59cf56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-05-12T18:43:28Z",
+      "side": 1,
+      "message": "How long is the recoverAll method actually taking to run? How many running tasks are in storage?",
+      "range": {
+        "startLine": 11,
+        "startChar": 24,
+        "endLine": 11,
+        "endChar": 50
+      },
+      "revId": "23a10121c66b94908ef8200f74cf1ceda73606b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d153e0_211994ee",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-05-12T18:43:28Z",
+      "side": 1,
+      "message": "This method expects all tasks to already have been recovered from storage by the time of its first scheduled run (because it tries to fire/start any task found in \u0027waiting\u0027). Making the storage recovery async will break that expectation.",
+      "range": {
+        "startLine": 106,
+        "startChar": 6,
+        "endLine": 106,
+        "endChar": 30
+      },
+      "revId": "23a10121c66b94908ef8200f74cf1ceda73606b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bde563b_ebb3bbd4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-05-12T18:43:28Z",
+      "side": 1,
+      "message": "This object expects all tasks to already have been recovered from storage and fired/started by the time of its first scheduled run (because it then calls synchronizePendingEvents(Prune.TRUE)). Making the storage recovery async will break that expectation.",
+      "range": {
+        "startLine": 108,
+        "startChar": 6,
+        "endLine": 108,
+        "endChar": 17
+      },
+      "revId": "23a10121c66b94908ef8200f74cf1ceda73606b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
