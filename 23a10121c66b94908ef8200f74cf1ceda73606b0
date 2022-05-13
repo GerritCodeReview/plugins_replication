@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07d25bbd_3c1fa2e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2022-05-13T17:55:36Z",
+      "side": 1,
+      "message": "\u003e \u003e How long is the recoverAll method actually taking to run? How many running tasks are in storage?\n\u003e \n\u003e About 30K tasks. \n\nIn theory that would mean that you had 30K replication tasks running when the server shutdown, is that correct? It seems that can only happen if you have at least 30K replication threads configured, which seems enormous?\n\n\u003e Recovering tasks synchronously keeps Gerrit start blocked.\n\nTo do this asynchronously and safely not delay the server startup, then I think you would need to put all of the replication startup code which follows this also in the background, and ensure that it runs serially after the recoverAll(), and ensure that no replication tasks start before the recoverAll() completes.",
+      "parentUuid": "d90a4033_ad8c6edc",
+      "range": {
+        "startLine": 11,
+        "startChar": 24,
+        "endLine": 11,
+        "endChar": 50
+      },
+      "revId": "23a10121c66b94908ef8200f74cf1ceda73606b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13d153e0_211994ee",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 8
@@ -61,6 +85,30 @@
       "writtenOn": "2022-05-12T18:43:28Z",
       "side": 1,
       "message": "This method expects all tasks to already have been recovered from storage by the time of its first scheduled run (because it tries to fire/start any task found in \u0027waiting\u0027). Making the storage recovery async will break that expectation.",
+      "range": {
+        "startLine": 106,
+        "startChar": 6,
+        "endLine": 106,
+        "endChar": 30
+      },
+      "revId": "23a10121c66b94908ef8200f74cf1ceda73606b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db85bc49_f5d6bb91",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2022-05-13T17:55:36Z",
+      "side": 1,
+      "message": "Also, replicationTasksStorage.recoveAll() will move stored running tasks to waiting, so it can cause tasks that get started to be put back in waiting, which can cause them to run again if the synchronizePendingEvents(Prune.FALSE) is still running distributor is running (which will call synchronizePendingEvents(Prune.TRUE)).",
+      "parentUuid": "13d153e0_211994ee",
       "range": {
         "startLine": 106,
         "startChar": 6,
