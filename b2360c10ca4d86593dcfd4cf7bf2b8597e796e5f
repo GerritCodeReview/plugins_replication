@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ccf0cdf_a1cf347b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-05-13T13:04:53Z",
+      "side": 1,
+      "message": "Is this still actual for stable-3.3? Can we abandon it?",
+      "revId": "b2360c10ca4d86593dcfd4cf7bf2b8597e796e5f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bb152bb_7c101caf",
