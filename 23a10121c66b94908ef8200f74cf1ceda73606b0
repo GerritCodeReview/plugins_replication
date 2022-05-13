@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d90a4033_ad8c6edc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2022-05-13T07:58:00Z",
+      "side": 1,
+      "message": "\u003e How long is the recoverAll method actually taking to run? How many running tasks are in storage?\n\nAbout 30K tasks. Recovering tasks synchronously keeps Gerrit start blocked.",
+      "parentUuid": "dd8ede1d_7c59cf56",
+      "range": {
+        "startLine": 11,
+        "startChar": 24,
+        "endLine": 11,
+        "endChar": 50
+      },
+      "revId": "23a10121c66b94908ef8200f74cf1ceda73606b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13d153e0_211994ee",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 8
