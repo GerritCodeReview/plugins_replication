@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5fc5afd_6794cce7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2022-05-16T22:40:24Z",
+      "side": 1,
+      "message": "While I think it wouldn\u0027t hurt the plugin to do so, I am not sure that it si a good solution for your problem. It seems like it will mostly shift your problem to the replication plugin startup then. Would it make more sense to try and make the plugin scale better? If you indeed have 30K threads configured to do replication, would it make sense to try and take advantage of those threads somehow to do the recovery faster? This way you not only make Gerrit startup faster, but you make replication available faster?",
+      "parentUuid": "14f46a1d_f30bf43c",
+      "range": {
+        "startLine": 106,
+        "startChar": 6,
+        "endLine": 106,
+        "endChar": 30
+      },
+      "revId": "23a10121c66b94908ef8200f74cf1ceda73606b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9bde563b_ebb3bbd4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 8
