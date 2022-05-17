@@ -428,6 +428,25 @@ public class ReplicationTasksStorageTaskTest {
         () -> gson.fromJson("{\"unknownKey\":\"someValue\"}", ReplicateRefUpdate.class));
   }
 
+  @Test
+  public void ReadOldFormatReplicateRefUpdateTypeAdapter() throws Exception {
+    Gson gson =
+        new GsonBuilder()
+            .registerTypeAdapterFactory(new ReplicateRefUpdateTypeAdapterFactory())
+            .create();
+    ReplicateRefUpdate update =
+        ReplicateRefUpdate.create(
+            "someProject",
+            ImmutableSet.of("ref1"),
+            new URIish("git://host1/someRepo.git"),
+            "someRemote");
+    assertEquals(
+        gson.fromJson(
+            "{\"project\":\"someProject\",\"ref\":\"ref1\",\"uri\":\"git://host1/someRepo.git\",\"remote\":\"someRemote\"}",
+            ReplicateRefUpdate.class),
+        update);
+  }
+
   protected static void assertIsWaiting(Task task) {
     assertTrue(task.isWaiting());
   }

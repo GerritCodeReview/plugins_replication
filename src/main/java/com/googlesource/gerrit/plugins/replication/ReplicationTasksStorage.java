@@ -289,6 +289,8 @@ public class ReplicationTasksStorage {
               refs.add(in.nextString());
             }
             in.endArray();
+          } else if ("ref".equals(fieldname)) {
+            refs.add(in.nextString());
           } else if ("uri".equals(fieldname)) {
             try {
               uri = new URIish(in.nextString());
