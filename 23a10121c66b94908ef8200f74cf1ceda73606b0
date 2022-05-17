@@ -72,6 +72,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a40d6c5_64097c38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-05-17T07:36:49Z",
+      "side": 1,
+      "message": "I found that the issue is actually a different one. We recently started to use a downported version of my change introducing the refs-updated plugin (Ic0534d03dee6759ba4cb6b19ae87fd75269b437b). This change also changes the format of the stored tasks:\n\nBefore:\n  {\n    \"project\": \"All-Users\",\n    \"ref\": \"refs/users/85/1029885\",\n    \"uri\": \"example.com:/gerrit/git/All-Users.git\",\n    \"remote\": \"example.com\"\n  }\n\nAfter:\n  {\n    \"project\": \"All-Users\",\n    \"refs\": [\n        \"refs/users/85/1029885\"\n    ],\n    \"uri\": \"example.com:/gerrit/git/All-Users.git\",\n    \"remote\": \"example.com\"\n  }\n\nThe tasks in our case were still in the old format. It seems that GSON endlessly tries to parse the file and thus the start is stuck. I will open a bug immediately and work on a fix.",
+      "revId": "23a10121c66b94908ef8200f74cf1ceda73606b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13d153e0_211994ee",
@@ -180,6 +197,30 @@
       "writtenOn": "2022-05-17T07:21:55Z",
       "side": 1,
       "message": "\u003e If you indeed have 30K threads configured to do replication...\n\nWe do not need/have 30K threads to do replication. What I wrote was that we had 30K replication tasks waiting to be (re)scheduled (this was caused by an outage of a replica for a longer time).",
+      "parentUuid": "c5fc5afd_6794cce7",
+      "range": {
+        "startLine": 106,
+        "startChar": 6,
+        "endLine": 106,
+        "endChar": 30
+      },
+      "revId": "23a10121c66b94908ef8200f74cf1ceda73606b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e4bdcfe_34d8bb13",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-05-17T07:36:49Z",
+      "side": 1,
+      "message": "A note on the number of 30k tasks. This happened on one of our test servers. This server was recently updated from Gerrit 3.2 to 3.4 and had replication configured for a remote that was offline. Thus, after the upgrade the replication plugin started replication for all refs that were updated as part of the schema migration. Since the remote was offline, replication failed for all of them and were stuck in a retry loop.\nWe don\u0027t have 30k threads configured.\n\nYes, this was caused by a system that was not running as it was supposed to, but it highlighted the issue due to the unusual large number of tasks.\n\nI agree that it would make sense to use all the threads that were configured for a replication to a given remote would improve the situation.",
       "parentUuid": "c5fc5afd_6794cce7",
       "range": {
         "startLine": 106,
