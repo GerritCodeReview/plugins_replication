@@ -169,6 +169,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90b8fe2c_16093a4b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2022-05-17T07:21:55Z",
+      "side": 1,
+      "message": "\u003e If you indeed have 30K threads configured to do replication...\n\nWe do not need/have 30K threads to do replication. What I wrote was that we had 30K replication tasks waiting to be (re)scheduled (this was caused by an outage of a replica for a longer time).",
+      "parentUuid": "c5fc5afd_6794cce7",
+      "range": {
+        "startLine": 106,
+        "startChar": 6,
+        "endLine": 106,
+        "endChar": 30
+      },
+      "revId": "23a10121c66b94908ef8200f74cf1ceda73606b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9bde563b_ebb3bbd4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 8
