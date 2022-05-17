@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbed2f09_4bda152b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2022-05-17T09:12:55Z",
+      "side": 1,
+      "message": "This is not nice for reading, I mean the backslash-doublequote combinations.",
+      "revId": "5a5175280743ce3da0e6267a1f04db55bbc7c779",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
