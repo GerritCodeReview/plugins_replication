@@ -283,26 +283,22 @@ public class ReplicationTasksStorage {
 
           if ("project".equals(fieldname)) {
             project = in.nextString();
-          }
-
-          if ("refs".equals(fieldname)) {
+          } else if ("refs".equals(fieldname)) {
             in.beginArray();
             while (in.hasNext()) {
               refs.add(in.nextString());
             }
             in.endArray();
-          }
-
-          if ("uri".equals(fieldname)) {
+          } else if ("uri".equals(fieldname)) {
             try {
               uri = new URIish(in.nextString());
             } catch (URISyntaxException e) {
               throw new IOException("Unable to parse remote URI", e);
             }
-          }
-
-          if ("remote".equals(fieldname)) {
+          } else if ("remote".equals(fieldname)) {
             remote = in.nextString();
+          } else {
+            throw new IOException(String.format("Unknown field in stored task: %s", fieldname));
           }
         }
 

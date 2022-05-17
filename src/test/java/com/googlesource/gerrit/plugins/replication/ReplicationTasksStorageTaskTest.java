@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.gerrit.testing.GerritJUnit.assertThrows;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -23,6 +24,7 @@ import com.google.common.jimfs.Configuration;
 import com.google.common.jimfs.Jimfs;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdateTypeAdapterFactory;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.Task;
@@ -413,6 +415,17 @@ public class ReplicationTasksStorageTaskTest {
             "{\"project\":\"someProject\",\"refs\":[\"ref1\",\"ref2\"],\"uri\":\"git://host1/someRepo.git\",\"remote\":\"someRemote\"}",
             ReplicateRefUpdate.class),
         update2);
+  }
+
+  @Test
+  public void ReplicateRefUpdateTypeAdapter_FailWithUnknownField() throws Exception {
+    Gson gson =
+        new GsonBuilder()
+            .registerTypeAdapterFactory(new ReplicateRefUpdateTypeAdapterFactory())
+            .create();
+    assertThrows(
+        JsonSyntaxException.class,
+        () -> gson.fromJson("{\"unknownKey\":\"someValue\"}", ReplicateRefUpdate.class));
   }
 
   protected static void assertIsWaiting(Task task) {
