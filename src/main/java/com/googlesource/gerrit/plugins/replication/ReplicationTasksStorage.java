@@ -95,12 +95,6 @@ public class ReplicationTasksStorage {
           project, ImmutableSet.copyOf(refs), uri.toASCIIString(), remote);
     }
 
-    public static ReplicateRefUpdate create(
-        String project, ImmutableSet<String> refs, URIish uri, String remote) {
-      return new AutoValue_ReplicationTasksStorage_ReplicateRefUpdate(
-          project, refs, uri.toASCIIString(), remote);
-    }
-
     public abstract String project();
 
     public abstract ImmutableSet<String> refs();
