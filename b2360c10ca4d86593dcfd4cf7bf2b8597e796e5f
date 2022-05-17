@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c42b48a_d2ad7e15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-05-17T06:34:41Z",
+      "side": 1,
+      "message": "This was my original implementation that is not introducing a new event as I did for 3.6. Since the issue apparently did not hit a lot of users, I would abandon this workaround until specifically requested. Otherwise, versions 3.3-3.5 would diverge from 3.6 and master. This will make maintaining those branches more difficult.",
+      "parentUuid": "1ccf0cdf_a1cf347b",
+      "revId": "b2360c10ca4d86593dcfd4cf7bf2b8597e796e5f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bb152bb_7c101caf",
