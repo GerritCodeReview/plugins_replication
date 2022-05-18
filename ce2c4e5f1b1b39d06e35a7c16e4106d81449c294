@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fdc71a3_7f88b3f3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2022-05-18T07:42:46Z",
+      "side": 1,
+      "message": "This is unnecessary, remove.",
+      "range": {
+        "startLine": 90,
+        "startChar": 13,
+        "endLine": 90,
+        "endChar": 32
+      },
+      "revId": "ce2c4e5f1b1b39d06e35a7c16e4106d81449c294",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2afe1b5_bc5fb242",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2022-05-18T07:42:46Z",
+      "side": 1,
+      "message": "exposing both taskKey and sha1 from this class, exposes the complexity of preserving the initially computed sha1 to the caller. I think we shouldn\u0027t introduce a new method here. The sha1() is enough. The sha1 for a newly created ReplicateRefUpdate should be computed in the create method (between 95-96) and passed to the constructor. The sha1() becomes an abstract method like all other methods in this class.",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 26
+      },
+      "revId": "ce2c4e5f1b1b39d06e35a7c16e4106d81449c294",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
