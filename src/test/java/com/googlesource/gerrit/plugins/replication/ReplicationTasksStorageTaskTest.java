@@ -15,11 +15,13 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.gerrit.testing.GerritJUnit.assertThrows;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.hash.Hashing;
 import com.google.common.jimfs.Configuration;
 import com.google.common.jimfs.Jimfs;
 import com.google.gson.Gson;
@@ -31,7 +33,9 @@ import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.Task;
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Set;
+import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.After;
 import org.junit.Before;
@@ -410,11 +414,16 @@ public class ReplicationTasksStorageTaskTest {
             ImmutableSet.of("ref1", "ref2"),
             new URIish("git://host1/someRepo.git"),
             "someRemote");
-    assertEquals(
+    ReplicateRefUpdate restoredUpdate2 =
         gson.fromJson(
             "{\"project\":\"someProject\",\"refs\":[\"ref1\",\"ref2\"],\"uri\":\"git://host1/someRepo.git\",\"remote\":\"someRemote\"}",
-            ReplicateRefUpdate.class),
-        update2);
+            ReplicateRefUpdate.class);
+    // ReplicateRefUpdate.sha() might be different for the compared objects, since
+    // the order of refs() might differ.
+    assertEquals(update2.project(), restoredUpdate2.project());
+    assertEquals(update2.uri(), restoredUpdate2.uri());
+    assertEquals(update2.remote(), restoredUpdate2.remote());
+    assertEquals(update2.refs(), restoredUpdate2.refs());
   }
 
   @Test
@@ -445,6 +454,39 @@ public class ReplicationTasksStorageTaskTest {
             "{\"project\":\"someProject\",\"ref\":\"ref1\",\"uri\":\"git://host1/someRepo.git\",\"remote\":\"someRemote\"}",
             ReplicateRefUpdate.class),
         update);
+  }
+
+  @SuppressWarnings("deprecation")
+  @Test
+  public void schedulingTaskFromOldFormatTasksIsSuccessful() throws Exception {
+    Gson gson =
+        new GsonBuilder()
+            .registerTypeAdapterFactory(new ReplicateRefUpdateTypeAdapterFactory())
+            .create();
+    ReplicateRefUpdate update =
+        gson.fromJson(
+            "{\"project\":\"someProject\",\"ref\":\"ref1\",\"uri\":\"git://host1/someRepo.git\",\"remote\":\"someRemote\"}",
+            ReplicateRefUpdate.class);
+
+    String oldTaskKey =
+        ObjectId.fromRaw(
+                Hashing.sha1()
+                    .hashString("someProject\nref1\ngit://host1/someRepo.git\nsomeRemote", UTF_8)
+                    .asBytes())
+            .name();
+    String json = gson.toJson(update) + "\n";
+    Path tmp =
+        Files.createTempFile(
+            Files.createDirectories(fileSystem.getPath("replication_site").resolve("building")),
+            oldTaskKey,
+            null);
+    Files.write(tmp, json.getBytes(UTF_8));
+
+    Task task = tasksStorage.new Task(update);
+    task.rename(tmp, task.waiting);
+
+    task.start();
+    assertIsRunning(task);
   }
 
   protected static void assertIsWaiting(Task task) {

@@ -43,8 +43,12 @@ public class ReplicationTasksStorageTest {
   protected static final URIish URISH = getUrish("http://example.com/" + PROJECT + ".git");
   protected static final ReplicateRefUpdate REF_UPDATE =
       ReplicateRefUpdate.create(PROJECT, Set.of(REF), URISH, REMOTE);
+  protected static final ReplicateRefUpdate STORED_REF_UPDATE =
+      ReplicateRefUpdate.create(REF_UPDATE, REF_UPDATE.sha1());
   protected static final ReplicateRefUpdate REFS_UPDATE =
       ReplicateRefUpdate.create(PROJECT, Set.of(REF, REF_2), URISH, REMOTE);
+  protected static final ReplicateRefUpdate STORED_REFS_UPDATE =
+      ReplicateRefUpdate.create(REFS_UPDATE, REFS_UPDATE.sha1());
 
   protected ReplicationTasksStorage storage;
   protected FileSystem fileSystem;
@@ -73,7 +77,7 @@ public class ReplicationTasksStorageTest {
   @Test
   public void canListWaitingUpdate() throws Exception {
     storage.create(REF_UPDATE);
-    assertThatStream(storage.streamWaiting()).containsExactly(REF_UPDATE);
+    assertThatStream(storage.streamWaiting()).containsExactly(STORED_REF_UPDATE);
   }
 
   @Test
@@ -91,7 +95,7 @@ public class ReplicationTasksStorageTest {
     assertThat(storage.start(uriUpdates)).containsExactly(REF_UPDATE.refs());
     assertThatStream(storage.streamWaiting()).isEmpty();
     assertFalse(storage.isWaiting(uriUpdates));
-    assertThatStream(storage.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(storage.streamRunning()).containsExactly(STORED_REF_UPDATE);
   }
 
   @Test
@@ -101,7 +105,7 @@ public class ReplicationTasksStorageTest {
     assertThat(storage.start(updates)).containsExactly(REFS_UPDATE.refs());
     assertThatStream(storage.streamWaiting()).isEmpty();
     assertFalse(storage.isWaiting(updates));
-    assertThatStream(storage.streamRunning()).containsExactly(REFS_UPDATE);
+    assertThatStream(storage.streamRunning()).containsExactly(STORED_REFS_UPDATE);
   }
 
   @Test
@@ -120,14 +124,14 @@ public class ReplicationTasksStorageTest {
     assertThatStream(persistedView.streamWaiting()).isEmpty();
 
     storage.create(REF_UPDATE);
-    assertThatStream(storage.streamWaiting()).containsExactly(REF_UPDATE);
-    assertThatStream(persistedView.streamWaiting()).containsExactly(REF_UPDATE);
+    assertThatStream(storage.streamWaiting()).containsExactly(STORED_REF_UPDATE);
+    assertThatStream(persistedView.streamWaiting()).containsExactly(STORED_REF_UPDATE);
 
     storage.start(uriUpdates);
     assertThatStream(storage.streamWaiting()).isEmpty();
     assertThatStream(persistedView.streamWaiting()).isEmpty();
-    assertThatStream(storage.streamRunning()).containsExactly(REF_UPDATE);
-    assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(storage.streamRunning()).containsExactly(STORED_REF_UPDATE);
+    assertThatStream(persistedView.streamRunning()).containsExactly(STORED_REF_UPDATE);
 
     storage.finish(uriUpdates);
     assertThatStream(storage.streamRunning()).isEmpty();
@@ -139,7 +143,7 @@ public class ReplicationTasksStorageTest {
     String key = storage.create(REF_UPDATE);
     String secondKey = storage.create(REF_UPDATE);
     assertEquals(key, secondKey);
-    assertThatStream(storage.streamWaiting()).containsExactly(REF_UPDATE);
+    assertThatStream(storage.streamWaiting()).containsExactly(STORED_REF_UPDATE);
   }
 
   @Test
@@ -171,13 +175,14 @@ public class ReplicationTasksStorageTest {
     storage.create(REF_UPDATE);
     storage.create(updateB);
 
+    ReplicateRefUpdate storedUpdateB = ReplicateRefUpdate.create(updateB, updateB.sha1());
     storage.start(uriUpdates);
-    assertThatStream(storage.streamWaiting()).containsExactly(updateB);
-    assertThatStream(storage.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(storage.streamWaiting()).containsExactly(storedUpdateB);
+    assertThatStream(storage.streamRunning()).containsExactly(STORED_REF_UPDATE);
 
     storage.start(uriUpdatesB);
     assertThatStream(storage.streamWaiting()).isEmpty();
-    assertThatStream(storage.streamRunning()).containsExactly(REF_UPDATE, updateB);
+    assertThatStream(storage.streamRunning()).containsExactly(STORED_REF_UPDATE, storedUpdateB);
   }
 
   @Test
@@ -195,7 +200,8 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
 
     storage.finish(uriUpdates);
-    assertThatStream(storage.streamRunning()).containsExactly(updateB);
+    assertThatStream(storage.streamRunning())
+        .containsExactly(ReplicateRefUpdate.create(updateB, updateB.sha1()));
 
     storage.finish(uriUpdatesB);
     assertThatStream(storage.streamRunning()).isEmpty();
@@ -246,7 +252,8 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
 
     storage.finish(uriUpdatesA);
-    assertThatStream(storage.streamRunning()).containsExactly(refUpdateB);
+    assertThatStream(storage.streamRunning())
+        .containsExactly(ReplicateRefUpdate.create(refUpdateB, refUpdateB.sha1()));
 
     storage.finish(uriUpdatesB);
     assertThatStream(storage.streamRunning()).isEmpty();
@@ -258,7 +265,7 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdates);
 
     storage.reset(uriUpdates);
-    assertThatStream(storage.streamWaiting()).containsExactly(REF_UPDATE);
+    assertThatStream(storage.streamWaiting()).containsExactly(STORED_REF_UPDATE);
     assertThatStream(storage.streamRunning()).isEmpty();
   }
 
@@ -269,7 +276,7 @@ public class ReplicationTasksStorageTest {
     storage.reset(uriUpdates);
 
     storage.start(uriUpdates);
-    assertThatStream(storage.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(storage.streamRunning()).containsExactly(STORED_REF_UPDATE);
     assertThatStream(storage.streamWaiting()).isEmpty();
     assertFalse(storage.isWaiting(uriUpdates));
 
@@ -289,7 +296,7 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdates);
 
     storage.recoverAll();
-    assertThatStream(storage.streamWaiting()).containsExactly(REF_UPDATE);
+    assertThatStream(storage.streamWaiting()).containsExactly(STORED_REF_UPDATE);
     assertThatStream(storage.streamRunning()).isEmpty();
     assertTrue(storage.isWaiting(uriUpdates));
   }
@@ -301,7 +308,7 @@ public class ReplicationTasksStorageTest {
     storage.recoverAll();
 
     storage.start(uriUpdates);
-    assertThatStream(storage.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(storage.streamRunning()).containsExactly(STORED_REF_UPDATE);
     assertThatStream(storage.streamWaiting()).isEmpty();
     assertFalse(storage.isWaiting(uriUpdates));
 
@@ -324,7 +331,8 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
 
     storage.recoverAll();
-    assertThatStream(storage.streamWaiting()).containsExactly(REF_UPDATE, updateB);
+    assertThatStream(storage.streamWaiting())
+        .containsExactly(STORED_REF_UPDATE, ReplicateRefUpdate.create(updateB, updateB.sha1()));
   }
 
   @Test
@@ -342,12 +350,13 @@ public class ReplicationTasksStorageTest {
     storage.start(uriUpdatesB);
     storage.recoverAll();
 
+    ReplicateRefUpdate storedUpdateB = ReplicateRefUpdate.create(updateB, updateB.sha1());
     storage.start(uriUpdates);
-    assertThatStream(storage.streamRunning()).containsExactly(REF_UPDATE);
-    assertThatStream(storage.streamWaiting()).containsExactly(updateB);
+    assertThatStream(storage.streamRunning()).containsExactly(STORED_REF_UPDATE);
+    assertThatStream(storage.streamWaiting()).containsExactly(storedUpdateB);
 
     storage.start(uriUpdatesB);
-    assertThatStream(storage.streamRunning()).containsExactly(REF_UPDATE, updateB);
+    assertThatStream(storage.streamRunning()).containsExactly(STORED_REF_UPDATE, storedUpdateB);
     assertThatStream(storage.streamWaiting()).isEmpty();
 
     storage.finish(uriUpdates);
