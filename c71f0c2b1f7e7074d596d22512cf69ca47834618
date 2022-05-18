@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "348a81e4_37d2166b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-05-18T02:47:04Z",
+      "side": 1,
+      "message": "Should this get converted to a switch statement instead (with a default that throws the IOException)?",
+      "range": {
+        "startLine": 284,
+        "startChar": 10,
+        "endLine": 284,
+        "endChar": 12
+      },
+      "revId": "c71f0c2b1f7e7074d596d22512cf69ca47834618",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
