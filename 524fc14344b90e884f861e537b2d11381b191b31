@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eca13f5_bf493987",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2022-05-18T11:42:14Z",
+      "side": 1,
+      "message": "optional: this is only used from one create method and could have been inlined there.",
+      "revId": "524fc14344b90e884f861e537b2d11381b191b31",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d33dd290_b31ac9b3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorageTaskTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2022-05-18T11:42:14Z",
+      "side": 1,
+      "message": "Why is this not using the ReplicationTasksStorage.sha1?",
+      "revId": "524fc14344b90e884f861e537b2d11381b191b31",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
