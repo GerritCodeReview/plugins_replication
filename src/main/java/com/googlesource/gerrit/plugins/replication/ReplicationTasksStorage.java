@@ -275,26 +275,32 @@ public class ReplicationTasksStorage {
             fieldname = in.nextName();
           }
 
-          if ("project".equals(fieldname)) {
-            project = in.nextString();
-          } else if ("refs".equals(fieldname)) {
-            in.beginArray();
-            while (in.hasNext()) {
+          switch (fieldname) {
+            case "project":
+              project = in.nextString();
+              break;
+            case "refs":
+              in.beginArray();
+              while (in.hasNext()) {
+                refs.add(in.nextString());
+              }
+              in.endArray();
+              break;
+            case "ref":
               refs.add(in.nextString());
-            }
-            in.endArray();
-          } else if ("ref".equals(fieldname)) {
-            refs.add(in.nextString());
-          } else if ("uri".equals(fieldname)) {
-            try {
-              uri = new URIish(in.nextString());
-            } catch (URISyntaxException e) {
-              throw new IOException("Unable to parse remote URI", e);
-            }
-          } else if ("remote".equals(fieldname)) {
-            remote = in.nextString();
-          } else {
-            throw new IOException(String.format("Unknown field in stored task: %s", fieldname));
+              break;
+            case "uri":
+              try {
+                uri = new URIish(in.nextString());
+              } catch (URISyntaxException e) {
+                throw new IOException("Unable to parse remote URI", e);
+              }
+              break;
+            case "remote":
+              remote = in.nextString();
+              break;
+            default:
+              throw new IOException(String.format("Unknown field in stored task: %s", fieldname));
           }
         }
 
