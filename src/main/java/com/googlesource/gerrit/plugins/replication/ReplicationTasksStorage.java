@@ -43,6 +43,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
 
@@ -86,13 +87,19 @@ public class ReplicationTasksStorage {
 
     public static ReplicateRefUpdate create(Path file, Gson gson) throws IOException {
       String json = new String(Files.readAllBytes(file), UTF_8);
-      return gson.fromJson(json, ReplicateRefUpdate.class);
+      return ReplicateRefUpdate.create(
+          gson.fromJson(json, ReplicateRefUpdate.class), file.getFileName().toString());
     }
 
     public static ReplicateRefUpdate create(
         String project, Set<String> refs, URIish uri, String remote) {
       return new AutoValue_ReplicationTasksStorage_ReplicateRefUpdate(
-          project, ImmutableSet.copyOf(refs), uri.toASCIIString(), remote);
+          project, ImmutableSet.copyOf(refs), uri.toASCIIString(), remote, null);
+    }
+
+    public static ReplicateRefUpdate create(ReplicateRefUpdate u, String filename) {
+      return new AutoValue_ReplicationTasksStorage_ReplicateRefUpdate(
+          u.project(), u.refs(), u.uri(), u.remote(), filename);
     }
 
     public abstract String project();
@@ -102,6 +109,9 @@ public class ReplicationTasksStorage {
     public abstract String uri();
 
     public abstract String remote();
+
+    @Nullable
+    public abstract String taskKey();
 
     public String sha1() {
       return ReplicationTasksStorage.sha1(
@@ -329,7 +339,7 @@ public class ReplicationTasksStorage {
 
     public Task(ReplicateRefUpdate update) {
       this.update = update;
-      taskKey = update.sha1();
+      taskKey = Optional.ofNullable(update.taskKey()).orElse(update.sha1());
       running = createDir(runningUpdates).resolve(taskKey);
       waiting = createDir(waitingUpdates).resolve(taskKey);
     }
@@ -377,7 +387,8 @@ public class ReplicationTasksStorage {
       }
     }
 
-    private boolean rename(Path from, Path to) {
+    @VisibleForTesting
+    boolean rename(Path from, Path to) {
       try {
         logger.atFine().log("RENAME %s to %s %s", from, to, updateLog());
         Files.move(from, to, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);

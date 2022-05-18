@@ -38,6 +38,8 @@ public class ReplicationTasksStorageMPTest {
       ReplicationTasksStorageTest.getUrish("http://example.com/" + PROJECT + ".git");
   protected static final ReplicateRefUpdate REF_UPDATE =
       ReplicateRefUpdate.create(PROJECT, Set.of(REF), URISH, REMOTE);
+  protected static final ReplicateRefUpdate STORED_REF_UPDATE =
+      ReplicateRefUpdate.create(REF_UPDATE, REF_UPDATE.sha1());
   protected static final UriUpdates URI_UPDATES = getUriUpdates(REF_UPDATE);
 
   protected ReplicationTasksStorage nodeA;
@@ -67,7 +69,7 @@ public class ReplicationTasksStorageMPTest {
     nodeA.create(REF_UPDATE);
 
     nodeB.create(REF_UPDATE);
-    assertThatStream(persistedView.streamWaiting()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamWaiting()).containsExactly(STORED_REF_UPDATE);
   }
 
   @Test
@@ -75,7 +77,7 @@ public class ReplicationTasksStorageMPTest {
     nodeA.create(REF_UPDATE);
 
     nodeB.start(URI_UPDATES);
-    assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamRunning()).containsExactly(STORED_REF_UPDATE);
 
     nodeB.finish(URI_UPDATES);
     assertNoIncompleteTasks(persistedView);
@@ -87,10 +89,10 @@ public class ReplicationTasksStorageMPTest {
     nodeA.start(URI_UPDATES);
 
     nodeA.reset(URI_UPDATES);
-    assertThatStream(persistedView.streamWaiting()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamWaiting()).containsExactly(STORED_REF_UPDATE);
 
     nodeB.start(URI_UPDATES);
-    assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamRunning()).containsExactly(STORED_REF_UPDATE);
 
     nodeB.finish(URI_UPDATES);
     assertNoIncompleteTasks(persistedView);
@@ -104,10 +106,10 @@ public class ReplicationTasksStorageMPTest {
     nodeB.start(URI_UPDATES);
 
     nodeB.reset(URI_UPDATES);
-    assertThatStream(persistedView.streamWaiting()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamWaiting()).containsExactly(STORED_REF_UPDATE);
 
     nodeB.start(URI_UPDATES);
-    assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamRunning()).containsExactly(STORED_REF_UPDATE);
 
     nodeB.finish(URI_UPDATES);
     assertNoIncompleteTasks(persistedView);
@@ -122,7 +124,7 @@ public class ReplicationTasksStorageMPTest {
     nodeB.reset(URI_UPDATES);
 
     nodeA.start(URI_UPDATES);
-    assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamRunning()).containsExactly(STORED_REF_UPDATE);
 
     nodeA.finish(URI_UPDATES);
     assertNoIncompleteTasks(persistedView);
@@ -134,10 +136,10 @@ public class ReplicationTasksStorageMPTest {
     nodeA.start(URI_UPDATES);
 
     nodeB.recoverAll();
-    assertThatStream(persistedView.streamWaiting()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamWaiting()).containsExactly(STORED_REF_UPDATE);
 
     nodeB.start(URI_UPDATES);
-    assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamRunning()).containsExactly(STORED_REF_UPDATE);
 
     nodeA.finish(URI_UPDATES);
     // Bug: https://crbug.com/gerrit/12973
@@ -154,10 +156,10 @@ public class ReplicationTasksStorageMPTest {
     nodeB.recoverAll();
 
     nodeA.finish(URI_UPDATES);
-    assertThatStream(persistedView.streamWaiting()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamWaiting()).containsExactly(STORED_REF_UPDATE);
 
     nodeB.start(URI_UPDATES);
-    assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamRunning()).containsExactly(STORED_REF_UPDATE);
 
     nodeB.finish(URI_UPDATES);
     assertNoIncompleteTasks(persistedView);
@@ -170,7 +172,7 @@ public class ReplicationTasksStorageMPTest {
     nodeB.recoverAll();
 
     nodeB.start(URI_UPDATES);
-    assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamRunning()).containsExactly(STORED_REF_UPDATE);
 
     nodeB.finish(URI_UPDATES);
     ReplicationTasksStorageTest.assertNoIncompleteTasks(persistedView);
@@ -183,14 +185,14 @@ public class ReplicationTasksStorageMPTest {
   public void multipleNodesCanReplicateSameRef() {
     nodeA.create(REF_UPDATE);
     nodeA.start(URI_UPDATES);
-    assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamRunning()).containsExactly(STORED_REF_UPDATE);
 
     nodeA.finish(URI_UPDATES);
     assertNoIncompleteTasks(persistedView);
 
     nodeB.create(REF_UPDATE);
     nodeB.start(URI_UPDATES);
-    assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamRunning()).containsExactly(STORED_REF_UPDATE);
 
     nodeB.finish(URI_UPDATES);
     assertNoIncompleteTasks(persistedView);
@@ -202,10 +204,10 @@ public class ReplicationTasksStorageMPTest {
     nodeB.create(REF_UPDATE);
 
     assertThat(nodeA.start(URI_UPDATES)).containsExactly(REF_UPDATE.refs());
-    assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamRunning()).containsExactly(STORED_REF_UPDATE);
 
     assertThat(nodeB.start(URI_UPDATES)).isEmpty();
-    assertThatStream(persistedView.streamRunning()).containsExactly(REF_UPDATE);
+    assertThatStream(persistedView.streamRunning()).containsExactly(STORED_REF_UPDATE);
   }
 
   public static UriUpdates getUriUpdates(ReplicationTasksStorage.ReplicateRefUpdate refUpdate) {
