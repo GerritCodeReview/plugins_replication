@@ -86,13 +86,22 @@ public class ReplicationTasksStorage {
 
     public static ReplicateRefUpdate create(Path file, Gson gson) throws IOException {
       String json = new String(Files.readAllBytes(file), UTF_8);
-      return gson.fromJson(json, ReplicateRefUpdate.class);
+      return create(gson.fromJson(json, ReplicateRefUpdate.class), file.getFileName().toString());
     }
 
     public static ReplicateRefUpdate create(
         String project, Set<String> refs, URIish uri, String remote) {
       return new AutoValue_ReplicationTasksStorage_ReplicateRefUpdate(
-          project, ImmutableSet.copyOf(refs), uri.toASCIIString(), remote);
+          project,
+          ImmutableSet.copyOf(refs),
+          uri.toASCIIString(),
+          remote,
+          sha1(project, ImmutableSet.copyOf(refs), uri.toASCIIString(), remote));
+    }
+
+    public static ReplicateRefUpdate create(ReplicateRefUpdate u, String filename) {
+      return new AutoValue_ReplicationTasksStorage_ReplicateRefUpdate(
+          u.project(), u.refs(), u.uri(), u.remote(), filename);
     }
 
     public abstract String project();
@@ -103,9 +112,11 @@ public class ReplicationTasksStorage {
 
     public abstract String remote();
 
-    public String sha1() {
+    public abstract String sha1();
+
+    private static String sha1(String project, Set<String> refs, String uri, String remote) {
       return ReplicationTasksStorage.sha1(
-              project() + "\n" + refs().toString() + "\n" + uri() + "\n" + remote())
+              project + "\n" + refs.toString() + "\n" + uri + "\n" + remote)
           .name();
     }
 
@@ -264,7 +275,6 @@ public class ReplicationTasksStorage {
         Set<String> refs = new HashSet<>();
         URIish uri = null;
         String remote = null;
-
         String fieldname = null;
         in.beginObject();
 
@@ -377,7 +387,8 @@ public class ReplicationTasksStorage {
       }
     }
 
-    private boolean rename(Path from, Path to) {
+    @VisibleForTesting
+    boolean rename(Path from, Path to) {
       try {
         logger.atFine().log("RENAME %s to %s %s", from, to, updateLog());
         Files.move(from, to, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
