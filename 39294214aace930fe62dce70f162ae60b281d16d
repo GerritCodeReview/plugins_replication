@@ -16,6 +16,24 @@
       "message": "unrelated",
       "revId": "39294214aace930fe62dce70f162ae60b281d16d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "112ef76d_bff6f25a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-05-19T07:10:55Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "6093b99b_03f2c2d3",
+      "revId": "39294214aace930fe62dce70f162ae60b281d16d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
