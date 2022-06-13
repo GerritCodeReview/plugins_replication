@@ -31,19 +31,19 @@ public class ReplicationStateLogger implements ReplicationStateListener {
   @Override
   public void warn(String msg, ReplicationState... states) {
     stateWriteErr("Warning: " + msg, states);
-    repLog.atWarning().log(msg);
+    repLog.atWarning().log("%s", msg);
   }
 
   @Override
   public void error(String msg, ReplicationState... states) {
     stateWriteErr("Error: " + msg, states);
-    repLog.atSevere().log(msg);
+    repLog.atSevere().log("%s", msg);
   }
 
   @Override
   public void error(String msg, Throwable t, ReplicationState... states) {
     stateWriteErr("Error: " + msg, states);
-    repLog.atSevere().withCause(t).log(msg);
+    repLog.atSevere().withCause(t).log("%s", msg);
   }
 
   private void stateWriteErr(String msg, ReplicationState[] states) {
