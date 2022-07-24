@@ -650,8 +650,8 @@ public class Destination {
     return matches;
   }
 
-  boolean isSingleProjectMatch() {
-    return config.isSingleProjectMatch();
+  boolean requireRemoteUrlTemplate() {
+    return config.requireRemoteUrlTemplate();
   }
 
   boolean wouldPushRef(String ref) {
@@ -719,7 +719,7 @@ public class Destination {
     } else if (!remoteNameStyle.equals("slash")) {
       repLog.atFine().log("Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
     }
-    String replacedPath = replaceName(template.getPath(), name, isSingleProjectMatch());
+    String replacedPath = replaceName(template.getPath(), name, requireRemoteUrlTemplate());
     return (replacedPath != null) ? template.setPath(replacedPath) : template;
   }
 
