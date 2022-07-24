@@ -20,6 +20,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.io.IOException;
 import java.util.List;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.junit.Test;
 
 public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
@@ -43,6 +44,29 @@ public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
     assertThat(destinations).hasSize(1);
 
     assertThatIsDestination(destinations.get(0), remoteName, remoteUrl);
+  }
+
+  @Test(expected = ConfigInvalidException.class)
+  public void shoulNotAllowManyToOneReplication() throws Exception {
+    String remoteName1 = "foo";
+    String remoteUrl1 = "ssh://git@git.somewhere.com/foo";
+    FileBasedConfig config = newReplicationConfig();
+    config.setString("remote", remoteName1, "url", remoteUrl1);
+    config.save();
+
+    newDestinationsCollections(newReplicationFileBasedConfig());
+  }
+
+  @Test
+  public void allowManyToOneReplication() throws Exception {
+    String remoteName1 = "foo";
+    String remoteUrl1 = "ssh://git@git.somewhere.com/foo";
+    FileBasedConfig config = newReplicationConfig();
+    config.setString("remote", remoteName1, "url", remoteUrl1);
+    config.setString("remote", remoteName1, "allowManyToOneReplication", "true");
+    config.save();
+
+    newDestinationsCollections(newReplicationFileBasedConfig());
   }
 
   @Test
