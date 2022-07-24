@@ -149,10 +149,10 @@ public class PushOneTest {
     setupWithUserMock();
     setupPermissionBackedMock();
 
-    setupDestinationMock();
-
     setupRefSpecMock();
     setupRemoteConfigMock();
+
+    setupDestinationMock();
 
     credentialsFactory = mock(CredentialsFactory.class);
 
@@ -421,11 +421,14 @@ public class PushOneTest {
     when(refSpecMock.expandFromSource(any(String.class))).thenReturn(refSpecMock);
     when(refSpecMock.getDestination()).thenReturn("fooProject");
     when(refSpecMock.isForceUpdate()).thenReturn(false);
+    when(refSpecMock.setDestination(any())).thenReturn(refSpecMock);
   }
 
   private void setupDestinationMock() {
     destinationMock = mock(Destination.class);
+    when(destinationMock.cloneRemoteConfig(any())).thenReturn(remoteConfigMock);
     when(destinationMock.requestRunway(any())).thenReturn(RunwayStatus.allowed());
+    when(destinationMock.getRemoteNameStyle()).thenReturn("slash");
   }
 
   private void setupPermissionBackedMock() {

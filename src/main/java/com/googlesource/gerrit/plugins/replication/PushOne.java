@@ -162,7 +162,6 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     gitManager = grm;
     this.permissionBackend = permissionBackend;
     pool = p;
-    config = c;
     replConfig = rc;
     credentialsProvider = cpFactory.create(c.getName());
     threadScoper = ts;
@@ -179,6 +178,16 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     canceledWhileRunning = new AtomicBoolean(false);
     maxRetries = p.getMaxRetries();
     transportFactory = tf;
+
+    config = p.cloneRemoteConfig(c);
+    config.setPushRefSpecs(
+        config.getPushRefSpecs().stream()
+            .map(
+                e ->
+                    e.setDestination(
+                        ReplicationFileBasedConfig.replaceName(
+                            p.getRemoteNameStyle(), e.getDestination(), projectName.get(), false)))
+            .collect(Collectors.toList()));
   }
 
   @Inject(optional = true)
@@ -199,6 +208,14 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
         "Replication [%s] to %s was canceled while being executed",
         HexFormat.fromInt(id), getURI());
     canceledWhileRunning.set(true);
+  }
+
+  public static String formatKey(Project.NameKey projectName, URIish uri) {
+    return projectName.get() + "/" + uri.toString();
+  }
+
+  public String getKey() {
+    return formatKey(projectName, uri);
   }
 
   @Override

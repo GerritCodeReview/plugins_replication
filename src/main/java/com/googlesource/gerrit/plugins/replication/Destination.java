@@ -24,7 +24,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
-import com.google.common.io.Files;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.AccountGroup;
 import com.google.gerrit.entities.BranchNameKey;
@@ -68,6 +67,7 @@ import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.HashMap;
@@ -83,6 +83,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -104,8 +105,8 @@ public class Destination {
   private final Object stateLock = new Object();
   // writes are covered by the stateLock, but some reads are still
   // allowed without the lock
-  private final ConcurrentMap<URIish, PushOne> pending = new ConcurrentHashMap<>();
-  private final Map<URIish, PushOne> inFlight = new HashMap<>();
+  private final ConcurrentMap<String, PushOne> pending = new ConcurrentHashMap<>();
+  private final Map<String, PushOne> inFlight = new HashMap<>();
   private final PushOne.Factory opFactory;
   private final DeleteProjectTask.Factory deleteProjectFactory;
   private final UpdateHeadTask.Factory updateHeadFactory;
@@ -126,10 +127,10 @@ public class Destination {
   }
 
   public static class QueueInfo {
-    public final Map<URIish, PushOne> pending;
-    public final Map<URIish, PushOne> inFlight;
+    public final Map<String, PushOne> pending;
+    public final Map<String, PushOne> inFlight;
 
-    public QueueInfo(Map<URIish, PushOne> pending, Map<URIish, PushOne> inFlight) {
+    public QueueInfo(Map<String, PushOne> pending, Map<String, PushOne> inFlight) {
       this.pending = ImmutableMap.copyOf(pending);
       this.inFlight = ImmutableMap.copyOf(inFlight);
     }
@@ -215,6 +216,16 @@ public class Destination {
     threadScoper = child.getInstance(PerThreadRequestScope.Scoper.class);
   }
 
+  public RemoteConfig cloneRemoteConfig(RemoteConfig remoteConfig) {
+    try {
+      Config config = new Config();
+      remoteConfig.update(config);
+      return new RemoteConfig(config, remoteConfig.getName());
+    } catch (URISyntaxException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   private void addRecursiveParents(
       AccountGroup.UUID g,
       ImmutableSet.Builder<AccountGroup.UUID> builder,
@@ -273,7 +284,7 @@ public class Destination {
     return cnt;
   }
 
-  private void foreachPushOp(Map<URIish, PushOne> opsMap, Function<PushOne, Void> pushOneFunction) {
+  private void foreachPushOp(Map<String, PushOne> opsMap, Function<PushOne, Void> pushOneFunction) {
     // Callers may modify the provided opsMap concurrently, hence make a defensive copy of the
     // values to loop over them.
     for (PushOne pushOne : ImmutableList.copyOf(opsMap.values())) {
@@ -406,7 +417,7 @@ public class Destination {
     if (!config.replicatePermissions()) {
       PushOne e;
       synchronized (stateLock) {
-        e = getPendingPush(uri);
+        e = getPendingPush(project, uri);
       }
       if (e == null) {
         try (Repository git = gitManager.openRepository(project)) {
@@ -429,7 +440,7 @@ public class Destination {
     }
 
     synchronized (stateLock) {
-      PushOne task = getPendingPush(uri);
+      PushOne task = getPendingPush(project, uri);
       if (task == null) {
         task = opFactory.create(project, uri);
         addRefs(task, ImmutableSet.copyOf(refsToSchedule));
@@ -437,7 +448,7 @@ public class Destination {
         @SuppressWarnings("unused")
         ScheduledFuture<?> ignored =
             pool.schedule(task, now ? 0 : config.getDelay(), TimeUnit.SECONDS);
-        pending.put(uri, task);
+        pending.put(task.getKey(), task);
         repLog.atInfo().log(
             "scheduled %s:%s => %s to run %s",
             project, refsToSchedule, task, now ? "now" : "after " + config.getDelay() + "s");
@@ -455,8 +466,18 @@ public class Destination {
   }
 
   @Nullable
-  private PushOne getPendingPush(URIish uri) {
-    PushOne e = pending.get(uri);
+  private PushOne getPendingPush(PushOne pushOne) {
+    return getPendingPush(pushOne.getKey());
+  }
+
+  @Nullable
+  private PushOne getPendingPush(Project.NameKey project, URIish uri) {
+    return getPendingPush(PushOne.formatKey(project, uri));
+  }
+
+  @Nullable
+  private PushOne getPendingPush(String key) {
+    PushOne e = pending.get(key);
     if (e != null && !e.wasCanceled()) {
       return e;
     }
@@ -465,8 +486,7 @@ public class Destination {
 
   void pushWasCanceled(PushOne pushOp) {
     synchronized (stateLock) {
-      URIish uri = pushOp.getURI();
-      pending.remove(uri);
+      pending.remove(pushOp.getKey());
       pushOp.notifyNotAttempted(pushOp.getRefs());
     }
   }
@@ -513,8 +533,7 @@ public class Destination {
    */
   void reschedule(PushOne pushOp, RetryReason reason) {
     synchronized (stateLock) {
-      URIish uri = pushOp.getURI();
-      PushOne pendingPushOp = getPendingPush(uri);
+      PushOne pendingPushOp = getPendingPush(pushOp);
 
       if (pendingPushOp != null) {
         // There is one PushOp instance already pending to same URI.
@@ -548,7 +567,7 @@ public class Destination {
           // it will see it was canceled and then it will do nothing with
           // pending list and it will not execute its run implementation.
           pendingPushOp.canceledByReplication();
-          pending.remove(uri);
+          pending.remove(pushOp.getKey());
 
           pushOp.addRefBatches(pendingPushOp.getRefs());
           pushOp.addStates(pendingPushOp.getStates());
@@ -557,7 +576,7 @@ public class Destination {
       }
 
       if (pendingPushOp == null || !pendingPushOp.isRetrying()) {
-        pending.put(uri, pushOp);
+        pending.put(pushOp.getKey(), pushOp);
         switch (reason) {
           case COLLISION:
             @SuppressWarnings("unused")
@@ -581,7 +600,7 @@ public class Destination {
             } else {
               pushOp.canceledByReplication();
               pushOp.retryDone();
-              pending.remove(uri);
+              pending.remove(pushOp.getKey());
               stateLog.error(
                   "Push to " + pushOp.getURI() + " cancelled after maximum number of retries",
                   pushOp.getStatesAsArray());
@@ -597,13 +616,13 @@ public class Destination {
       if (op.wasCanceled()) {
         return RunwayStatus.canceled();
       }
-      pending.remove(op.getURI());
-      PushOne inFlightOp = inFlight.get(op.getURI());
+      pending.remove(op.getKey());
+      PushOne inFlightOp = inFlight.get(op.getKey());
       if (inFlightOp != null) {
         return RunwayStatus.denied(inFlightOp.getId());
       }
       op.notifyNotAttempted(op.setStartedRefs(replicationTasksStorage.get().start(op)));
-      inFlight.put(op.getURI(), op);
+      inFlight.put(op.getKey(), op);
     }
     return RunwayStatus.allowed();
   }
@@ -613,7 +632,7 @@ public class Destination {
       if (!op.isRetrying()) {
         replicationTasksStorage.get().finish(op);
       }
-      inFlight.remove(op.getURI());
+      inFlight.remove(op.getKey());
     }
   }
 
@@ -650,10 +669,6 @@ public class Destination {
           "Skipping replication of project %s; does not match filter", project.get());
     }
     return matches;
-  }
-
-  boolean isSingleProjectMatch() {
-    return config.isSingleProjectMatch();
   }
 
   boolean wouldPushRef(String ref) {
@@ -711,17 +726,9 @@ public class Destination {
     if (needsUrlEncoding(template)) {
       name = encode(name);
     }
-    String remoteNameStyle = config.getRemoteNameStyle();
-    if (remoteNameStyle.equals("dash")) {
-      name = name.replace("/", "-");
-    } else if (remoteNameStyle.equals("underscore")) {
-      name = name.replace("/", "_");
-    } else if (remoteNameStyle.equals("basenameOnly")) {
-      name = Files.getNameWithoutExtension(name);
-    } else if (!remoteNameStyle.equals("slash")) {
-      repLog.atFine().log("Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
-    }
-    String replacedPath = replaceName(template.getPath(), name, isSingleProjectMatch());
+    String replacedPath =
+        replaceName(
+            config.getRemoteNameStyle(), template.getPath(), name, requireRemoteUrlTemplate());
     return (replacedPath != null) ? template.setPath(replacedPath) : template;
   }
 
@@ -778,6 +785,14 @@ public class Destination {
 
   public long getReplicationDelayMilliseconds() {
     return config.getDelay() * 1000L;
+  }
+
+  public String getRemoteNameStyle() {
+    return config.getRemoteNameStyle();
+  }
+
+  boolean requireRemoteUrlTemplate() {
+    return config.requireRemoteUrlTemplate();
   }
 
   int getSlowLatencyThreshold() {
