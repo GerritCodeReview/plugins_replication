@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "464e9df9_edc4af7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-07-24T23:17:04Z",
+      "side": 1,
+      "message": "Interesting idea, thanks @Alon for proposing it.",
+      "revId": "b1368ad3b5f905778ee382b2df2c956b37b7d145",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a1586c_6a61b2fe",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-07-24T23:17:04Z",
+      "side": 1,
+      "message": "Well, yes, but it will also create a very large remote repository with unconnected histories.\n\nHave you analysed the associated inefficiencies and performance implications?\nWhat about the remote repository growth?",
+      "range": {
+        "startLine": 542,
+        "startChar": 1,
+        "endLine": 542,
+        "endChar": 36
+      },
+      "revId": "b1368ad3b5f905778ee382b2df2c956b37b7d145",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
