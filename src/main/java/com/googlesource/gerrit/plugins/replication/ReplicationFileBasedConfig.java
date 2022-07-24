@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
 import com.google.common.base.Strings;
+import com.google.common.io.Files;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
@@ -61,13 +62,25 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   }
 
   @Nullable
-  public static String replaceName(String in, String name, boolean keyIsOptional) {
+  public static String replaceName(
+      String remoteNameStyle, String in, String name, boolean keyIsMandatory) {
+
+    if (remoteNameStyle.equals("dash")) {
+      name = name.replace("/", "-");
+    } else if (remoteNameStyle.equals("underscore")) {
+      name = name.replace("/", "_");
+    } else if (remoteNameStyle.equals("basenameOnly")) {
+      name = Files.getNameWithoutExtension(name);
+    } else if (!remoteNameStyle.equals("slash")) {
+      repLog.atFine().log("Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
+    }
+
     String key = "${name}";
     int n = in.indexOf(key);
     if (0 <= n) {
       return in.substring(0, n) + name + in.substring(n + key.length());
     }
-    if (keyIsOptional) {
+    if (!keyIsMandatory) {
       return in;
     }
     return null;
