@@ -78,6 +78,12 @@ public interface RemoteConfiguration {
    */
   boolean replicatePermissions();
   /**
+   * If true, allow replicating several repositories into a single one.
+   *
+   * @return if allow to replicate to a single project.
+   */
+  boolean allowManyToOneReplication();
+  /**
    * the JGIT remote configuration representing the replication for this endpoint
    *
    * @return The remote config {@link RemoteConfig}
@@ -105,23 +111,28 @@ public interface RemoteConfiguration {
   int getPushBatchSize();
 
   /**
-   * Whether the remote configuration is for a single project only
+   * Whether the remote configuration requires a template of `${name}`.
    *
-   * @return true, when configuration is for a single project, false otherwise
+   * @return true, when configuration requires a template.
    */
-  default boolean isSingleProjectMatch() {
-    List<String> projects = getProjects();
-    boolean ret = (projects.size() == 1);
-    if (ret) {
-      String projectMatch = projects.get(0);
-      if (ReplicationFilter.getPatternType(projectMatch)
-          != ReplicationFilter.PatternType.EXACT_MATCH) {
-        // projectMatch is either regular expression, or wild-card.
-        //
-        // Even though they might refer to a single project now, they need not
-        // after new projects have been created. Hence, we do not treat them as
-        // matching a single project.
-        ret = false;
+  default boolean requireRemoteUrlTemplate() {
+    boolean ret = false;
+
+    if (!allowManyToOneReplication()) {
+      List<String> projects = getProjects();
+      ret = (projects.size() > 1);
+
+      if (!ret) {
+        String projectMatch = projects.get(0);
+        if (ReplicationFilter.getPatternType(projectMatch)
+            != ReplicationFilter.PatternType.EXACT_MATCH) {
+          // projectMatch is either regular expression, or wild-card.
+          //
+          // Even though they might refer to a single project now, they need not
+          // after new projects have been created. Hence, we do not treat them as
+          // matching a single project.
+          ret = true;
+        }
       }
     }
     return ret;

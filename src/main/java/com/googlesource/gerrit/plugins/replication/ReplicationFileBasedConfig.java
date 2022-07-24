@@ -59,13 +59,13 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     this.pluginDataDir = pluginDataDir;
   }
 
-  public static String replaceName(String in, String name, boolean keyIsOptional) {
+  public static String replaceName(String in, String name, boolean keyIsMandatory) {
     String key = "${name}";
     int n = in.indexOf(key);
     if (0 <= n) {
       return in.substring(0, n) + name + in.substring(n + key.length());
     }
-    if (keyIsOptional) {
+    if (!keyIsMandatory) {
       return in;
     }
     return null;
