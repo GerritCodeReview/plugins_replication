@@ -38,6 +38,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final int updateRefErrorMaxRetries;
   private final ImmutableList<String> adminUrls;
   private final int poolThreads;
+  private final boolean allowSingleProject;
   private final boolean createMissingRepos;
   private final boolean replicatePermissions;
   private final boolean replicateProjectDeletions;
@@ -70,6 +71,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
             "replication",
             "updateRefErrorMaxRetries",
             cfg.getInt("replication", "lockErrorMaxRetries", 0));
+    allowSingleProject = cfg.getBoolean("remote", name, "allowSingleProject", false);
     createMissingRepos = cfg.getBoolean("remote", name, "createMissingRepositories", true);
     replicatePermissions = cfg.getBoolean("remote", name, "replicatePermissions", true);
     replicateProjectDeletions = cfg.getBoolean("remote", name, "replicateProjectDeletions", false);
@@ -171,6 +173,11 @@ public class DestinationConfiguration implements RemoteConfiguration {
   @Override
   public boolean replicatePermissions() {
     return replicatePermissions;
+  }
+
+  @Override
+  public boolean allowSingleProject() {
+    return allowSingleProject;
   }
 
   public boolean createMissingRepos() {

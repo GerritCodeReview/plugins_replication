@@ -78,6 +78,12 @@ public interface RemoteConfiguration {
    */
   boolean replicatePermissions();
   /**
+   * If true, allow replicating several repositories into a single one.
+   *
+   * @return if allow to replicate to a single project.
+   */
+  boolean allowSingleProject();
+  /**
    * the JGIT remote configuration representing the replication for this endpoint
    *
    * @return The remote config {@link RemoteConfig}
@@ -110,6 +116,9 @@ public interface RemoteConfiguration {
    * @return true, when configuration is for a single project, false otherwise
    */
   default boolean isSingleProjectMatch() {
+    if (allowSingleProject()) {
+      return true;
+    }
     List<String> projects = getProjects();
     boolean ret = (projects.size() == 1);
     if (ret) {
