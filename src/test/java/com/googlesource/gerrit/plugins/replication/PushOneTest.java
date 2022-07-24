@@ -344,7 +344,6 @@ public class PushOneTest {
             gitRepositoryManagerMock,
             permissionBackendMock,
             destinationMock,
-            remoteConfigMock,
             replicationConfigMock,
             credentialsFactory,
             threadRequestScoperMock,
@@ -354,6 +353,7 @@ public class PushOneTest {
             projectCacheMock,
             createProjectTaskFactoryMock,
             transportFactoryMock,
+            remoteConfigMock,
             projectNameKey,
             urish);
 
@@ -426,6 +426,8 @@ public class PushOneTest {
   private void setupDestinationMock() {
     destinationMock = mock(Destination.class);
     when(destinationMock.requestRunway(any())).thenReturn(RunwayStatus.allowed());
+    when(destinationMock.cloneRemoteConfig(any())).thenReturn(remoteConfigMock);
+    when(destinationMock.getRemoteNameStyle()).thenReturn("slash");
   }
 
   private void setupPermissionBackedMock() {

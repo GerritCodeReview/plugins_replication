@@ -168,7 +168,27 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
       Optional<Integer> pushBatchSize)
       throws IOException {
     setReplicationDestination(
-        config, remoteName, replicaSuffixes, project, replicationDelay, mirror, pushBatchSize);
+        remoteName, replicaSuffixes, project, replicationDelay, mirror, pushBatchSize, null);
+  }
+
+  protected void setReplicationDestination(
+      String remoteName,
+      List<String> replicaSuffixes,
+      Optional<String> project,
+      int replicationDelay,
+      boolean mirror,
+      Optional<Integer> pushBatchSize,
+      List<String> push)
+      throws IOException {
+    setReplicationDestination(
+        config,
+        remoteName,
+        replicaSuffixes,
+        project,
+        replicationDelay,
+        mirror,
+        pushBatchSize,
+        push);
     config.setBoolean("gerrit", null, "autoReload", true);
     config.save();
   }
@@ -192,6 +212,20 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
       boolean mirror,
       Optional<Integer> pushBatchSize)
       throws IOException {
+    setReplicationDestination(
+        config, null, replicaSuffixes, project, replicationDelay, false, pushBatchSize, null);
+  }
+
+  protected void setReplicationDestination(
+      FileBasedConfig remoteConfig,
+      String remoteName,
+      List<String> replicaSuffixes,
+      Optional<String> project,
+      int replicationDelay,
+      boolean mirror,
+      Optional<Integer> pushBatchSize,
+      List<String> push)
+      throws IOException {
 
     List<String> replicaUrls =
         replicaSuffixes.stream()
@@ -203,6 +237,9 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
     remoteConfig.setBoolean("remote", remoteName, "mirror", mirror);
     project.ifPresent(prj -> remoteConfig.setString("remote", remoteName, "projects", prj));
     pushBatchSize.ifPresent(pbs -> remoteConfig.setInt("remote", remoteName, "pushBatchSize", pbs));
+    if (push != null) {
+      remoteConfig.setStringList("remote", remoteName, "push", push);
+    }
     remoteConfig.save();
   }
 
