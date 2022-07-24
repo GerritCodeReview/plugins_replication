@@ -537,6 +537,18 @@ remote.NAME.remoteNameStyle
 	By default, `slash`, i.e. remote names will contain slashes as
 	they do in Gerrit.
 
+remote.NAME.allowManyToOneReplication
+:	Enanle to use a single destination project to multiple local ones.
+	This is usable when refs are unique (such as per change/revision) and
+	a remote repository is triggering CI. For example
+	`push = +refs/changes/*:refs/heads/gerrit/changes/*`.
+
+	> **NOTE**: The use of this option may lead to dangerous situations
+	> if you do not know exactly what you are doing.
+
+	By default, false, do not allow to replicate several repositories into
+	a single one.
+
 <a name="remote.NAME.projects">remote.NAME.projects</a>
 :	Specifies which repositories should be replicated to the
 	remote. It can be provided more than once, and supports three
