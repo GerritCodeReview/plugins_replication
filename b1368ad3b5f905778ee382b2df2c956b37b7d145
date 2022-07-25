@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db7aabfa_58ce0b92",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-07-25T07:07:41Z",
+      "side": 1,
+      "message": "This return is basically a lie, if you believe the method name and javadoc. Either move that conditional to the caller of this method or rename the method.",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 5
+      },
+      "revId": "b1368ad3b5f905778ee382b2df2c956b37b7d145",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec2b6e3f_e062a888",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-07-25T07:07:41Z",
+      "side": 1,
+      "message": "More descriptive: allowManyToOneReplication",
+      "range": {
+        "startLine": 540,
+        "startChar": 12,
+        "endLine": 540,
+        "endChar": 30
+      },
+      "revId": "b1368ad3b5f905778ee382b2df2c956b37b7d145",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95a1586c_6a61b2fe",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
@@ -31,6 +77,30 @@
       "writtenOn": "2022-07-24T23:17:04Z",
       "side": 1,
       "message": "Well, yes, but it will also create a very large remote repository with unconnected histories.\n\nHave you analysed the associated inefficiencies and performance implications?\nWhat about the remote repository growth?",
+      "range": {
+        "startLine": 542,
+        "startChar": 1,
+        "endLine": 542,
+        "endChar": 36
+      },
+      "revId": "b1368ad3b5f905778ee382b2df2c956b37b7d145",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c696801_a8c7ace4",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2022-07-25T07:07:41Z",
+      "side": 1,
+      "message": "I share Luca\u0027s concerns here.\n\nAlso what about permissions, if the target is a Gerrit replica?",
+      "parentUuid": "95a1586c_6a61b2fe",
       "range": {
         "startLine": 542,
         "startChar": 1,
