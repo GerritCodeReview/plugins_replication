@@ -18,6 +18,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daccde3a_1e29ab78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-07-25T12:13:29Z",
+      "side": 1,
+      "message": "Thank you for the review, I will upload a fix shortly.",
+      "revId": "b1368ad3b5f905778ee382b2df2c956b37b7d145",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db7aabfa_58ce0b92",
@@ -43,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24fa18dc_1a9ad453",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-07-25T12:13:29Z",
+      "side": 1,
+      "message": "I will rename the method.",
+      "parentUuid": "db7aabfa_58ce0b92",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 5
+      },
+      "revId": "b1368ad3b5f905778ee382b2df2c956b37b7d145",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec2b6e3f_e062a888",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
@@ -54,6 +95,30 @@
       "writtenOn": "2022-07-25T07:07:41Z",
       "side": 1,
       "message": "More descriptive: allowManyToOneReplication",
+      "range": {
+        "startLine": 540,
+        "startChar": 12,
+        "endLine": 540,
+        "endChar": 30
+      },
+      "revId": "b1368ad3b5f905778ee382b2df2c956b37b7d145",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c301280_663d3a15",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-07-25T12:13:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec2b6e3f_e062a888",
       "range": {
         "startLine": 540,
         "startChar": 12,
@@ -101,6 +166,30 @@
       "side": 1,
       "message": "I share Luca\u0027s concerns here.\n\nAlso what about permissions, if the target is a Gerrit replica?",
       "parentUuid": "95a1586c_6a61b2fe",
+      "range": {
+        "startLine": 542,
+        "startChar": 1,
+        "endLine": 542,
+        "endChar": 36
+      },
+      "revId": "b1368ad3b5f905778ee382b2df2c956b37b7d145",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb733720_29f9c08c",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-07-25T12:13:29Z",
+      "side": 1,
+      "message": "As far as I know, git have an issue with number of files in a commit, but it is efficient with having many heads.\n\nThe decision of how many repositories to replicate to this one is per the size and nature of the repository.\n\nMost git repositories I manage are small in size, for these I prefer to replicate into a single one, it is easier to maintain this and not create a CI shadow repository per repository.\n\nFor now I replicate all, and it seems to work fine.\n\n@thomas: the target of this use case is *not* Gerrit replica, it is GitHub/GitLab/BitBucket only to trigger a CI for gerrit changes.",
+      "parentUuid": "7c696801_a8c7ace4",
       "range": {
         "startLine": 542,
         "startChar": 1,
