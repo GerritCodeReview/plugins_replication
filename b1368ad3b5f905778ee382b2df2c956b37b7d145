@@ -82,6 +82,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d2ffdb0_f3228ae2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-07-25T13:36:54Z",
+      "side": 1,
+      "message": "Renamed to requireRemoteUrlTemplate() and inverted return code.",
+      "parentUuid": "24fa18dc_1a9ad453",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 5
+      },
+      "revId": "b1368ad3b5f905778ee382b2df2c956b37b7d145",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec2b6e3f_e062a888",

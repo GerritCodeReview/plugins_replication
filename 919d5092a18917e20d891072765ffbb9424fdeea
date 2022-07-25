@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18c8e78d_cf55ac0a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-07-25T13:36:54Z",
+      "side": 1,
+      "message": "Inverted the keyIsOptional to simplify readability of caller as we inverted the return of isSingleXXX",
+      "revId": "919d5092a18917e20d891072765ffbb9424fdeea",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
