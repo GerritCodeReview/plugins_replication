@@ -222,6 +222,30 @@
       },
       "revId": "b1368ad3b5f905778ee382b2df2c956b37b7d145",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a51179f7_ce7d045a",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-07-25T23:16:48Z",
+      "side": 1,
+      "message": "\u003e As far as I know, git have an issue with number of files in a commit, but it is efficient with having many heads.\n\nFrom what I know, the Git negotiation isn\u0027t very effective with many heads because of the increased advertisement of refs with the attempt to find a common root between the server and the client. \n\n\u003e The decision of how many repositories to replicate to this one is per the size and nature of the repository.\n\u003e \n\u003e Most git repositories I manage are small in size, for these I prefer to replicate into a single one, it is easier to maintain this and not create a CI shadow repository per repository.\n\u003e \n\u003e For now I replicate all, and it seems to work fine.\n\nCan you share some stats of:\n- how many repositories you are pushing\n- how many refs per repository\n\n\u003e @thomas: the target of this use case is *not* Gerrit replica, it is GitHub/GitLab/BitBucket only to trigger a CI for gerrit changes.\n\nHow do you manage the CI to that repository? Would that have to manage the CI build logic for all repos?\n\nI am very interested in this use-case :-)",
+      "parentUuid": "bb733720_29f9c08c",
+      "range": {
+        "startLine": 542,
+        "startChar": 1,
+        "endLine": 542,
+        "endChar": 36
+      },
+      "revId": "b1368ad3b5f905778ee382b2df2c956b37b7d145",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
