@@ -246,6 +246,30 @@
       },
       "revId": "b1368ad3b5f905778ee382b2df2c956b37b7d145",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50ea54ad_3d2375fc",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-07-26T07:57:05Z",
+      "side": 1,
+      "message": "\u003e From what I know, the Git negotiation isn\u0027t very effective with many heads\n\u003e because of the increased advertisement of refs with the attempt to find a\n\u003e common root between the server and the client. \n\nYes, the git negotiation sends all heads.\nGerrit already abuses it with the `changes/` refs, so a potential of a problem exists.\n\n\u003e how many repositories you are pushing\n\nI am currently pushing 50 repositories. All are relatively small in size.\n\n\u003e how many refs per repository \n\nThis is the actual question...\n\nThe worse case of refs will be the # of revision in Gerrit. As Gerrit manages the `changes/` in each repository and the union of `changes/` in all repositories will be the traffic in Gerrit.\n\nThe variable is how much activity is in Gerrit, it can be a single repository that is very active or many which are have lower activity.\n\nWhat I basically saying is that provided Gerrit already manages `changes/` refs so the issue of many refs inherently exists in Gerrit, pushing multiple repositories contributes but not the cause of any scaling issue (Remains factor of N).\n\nThis options is an enabler for sysadmin to balance between easier to mange peers and the load implications. For now, it is working to us very nicely.\n\nI will soon publish my setup in the list, I implemented some modules to help me integrate Gerrit nicely/easily to 3rd party CI, maybe you will find these as interesting as well, I need this bit in order to complete the setup.\n\n* https://github.com/alonbl/gerrit-checks-mock\n* https://github.com/alonbl/gerrit_checks_mock_fetch_endpoint\n* https://github.com/alonbl/gerrit-utils/\n* https://github.com/alonbl/gerrit-action/",
+      "parentUuid": "a51179f7_ce7d045a",
+      "range": {
+        "startLine": 542,
+        "startChar": 1,
+        "endLine": 542,
+        "endChar": 36
+      },
+      "revId": "b1368ad3b5f905778ee382b2df2c956b37b7d145",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
