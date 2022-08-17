@@ -11,14 +11,14 @@ could potentially be considerably big.
 Project level
 -------------
 
-* plugins_replication_latency_slower_than_<threshold>_<destinationName>_<ProjectName> - Time spent pushing <ProjectName> to remote <destinationName> (in ms)
+* `plugins_replication_latency_slower_than_<threshold>_<destinationName>_<ProjectName>` - Time spent pushing `<ProjectName>` to remote `<destinationName>` (in ms)
 
 Destination level
 -----------------
 
-* plugins_replication_replication_delay_<destinationName> - Time spent waiting before pushing to remote <destinationName> (in ms)
-* plugins_replication_replication_retries_<destinationName> - Number of retries when pushing to remote <destinationName>
-* plugins_replication_replication_latency_<destinationName> - Time spent pushing to remote <destinationName> (in ms)
+* `plugins_replication_replication_delay_<destinationName>` - Time spent waiting before pushing to remote `<destinationName>` (in ms)
+* `plugins_replication_replication_retries_<destinationName>` - Number of retries when pushing to remote `<destinationName>`
+* `plugins_replication_replication_latency_<destinationName>` - Time spent pushing to remote `<destinationName>` (in ms)
 
 Example
 -------
