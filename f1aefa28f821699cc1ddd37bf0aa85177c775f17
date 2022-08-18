@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "zuul-check:plugins_replication": {
+      "state": "SCHEDULED",
+      "message": "Change has been enqueued in check",
+      "url": "https://ci.gerritcodereview.com/t/gerrit/status/change/324295,4",
+      "started": "2022-08-18T16:06:53Z",
+      "created": "2022-08-18T16:06:53Z",
+      "updated": "2022-08-18T16:06:53Z"
+    }
+  }
+}
