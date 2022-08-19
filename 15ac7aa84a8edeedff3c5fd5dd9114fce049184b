@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3533bb72_07db2a0c",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-08-19T13:03:09Z",
+      "side": 1,
+      "message": "jgit already enforces it with a warning message if you try to push several refspecs to the same refspec in a single push session.",
+      "parentUuid": "003325c7_5d9837e6",
+      "range": {
+        "startLine": 544,
+        "startChar": 1,
+        "endLine": 544,
+        "endChar": 54
+      },
+      "revId": "15ac7aa84a8edeedff3c5fd5dd9114fce049184b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33d87b79_19d86e44",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 3
@@ -71,6 +95,30 @@
       "writtenOn": "2022-08-19T12:57:15Z",
       "side": 1,
       "message": "If we enforce the push refspecs restrictions, this isn\u0027t needed.",
+      "range": {
+        "startLine": 546,
+        "startChar": 0,
+        "endLine": 547,
+        "endChar": 49
+      },
+      "revId": "15ac7aa84a8edeedff3c5fd5dd9114fce049184b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3683bd16_ad5f4bb0",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-08-19T13:03:09Z",
+      "side": 1,
+      "message": "I was thinking more of misuse of invalid destinations within the git tree or multiple push sessions (multiple lines, multiple gerrit instances).",
+      "parentUuid": "33d87b79_19d86e44",
       "range": {
         "startLine": 546,
         "startChar": 0,
