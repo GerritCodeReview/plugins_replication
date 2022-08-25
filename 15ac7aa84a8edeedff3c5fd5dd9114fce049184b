@@ -108,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff116aa5_265c7fa3",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-08-25T09:45:07Z",
+      "side": 1,
+      "message": "Hi Luca,\nIs the reference to jgit validation sufficient to progress?\nThanks,",
+      "parentUuid": "e8a2f785_8b26fa62",
+      "range": {
+        "startLine": 544,
+        "startChar": 1,
+        "endLine": 544,
+        "endChar": 54
+      },
+      "revId": "15ac7aa84a8edeedff3c5fd5dd9114fce049184b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33d87b79_19d86e44",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 3
