@@ -165,6 +165,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3da71ae3_d2905724",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-08-28T07:36:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff116aa5_265c7fa3",
+      "range": {
+        "startLine": 544,
+        "startChar": 1,
+        "endLine": 544,
+        "endChar": 54
+      },
+      "revId": "15ac7aa84a8edeedff3c5fd5dd9114fce049184b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33d87b79_19d86e44",
@@ -250,6 +274,30 @@
       "side": 1,
       "message": "Sure, see documentation, in github for example I set:\n\n push \u003d +refs/changes/*:refs/heads/gerrit/changes/*\n \nSo for github each patchset revision is a branch.",
       "parentUuid": "1ce317f5_f7b0e3b8",
+      "range": {
+        "startLine": 546,
+        "startChar": 0,
+        "endLine": 547,
+        "endChar": 49
+      },
+      "revId": "15ac7aa84a8edeedff3c5fd5dd9114fce049184b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18557482_1597c533",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-08-28T07:36:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4b2011b_186da118",
       "range": {
         "startLine": 546,
         "startChar": 0,
