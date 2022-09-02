@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05d6b485_ceb8266d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-09-02T05:52:34Z",
+      "side": 1,
+      "message": "Hello @luca,\nIs there any action item left that blocks merge?\nThanks!",
+      "revId": "4f6ef820a19089c487e8f26d5ab2d7df443f11d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e8e0859_b7086f9b",
