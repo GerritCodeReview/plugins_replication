@@ -72,6 +72,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa078065_9b1a8e2c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-09-12T21:39:17Z",
+      "side": 1,
+      "message": "I am sorry, fixed here and in the markdown.",
+      "parentUuid": "6a2ff481_c032585e",
+      "range": {
+        "startLine": 81,
+        "startChar": 53,
+        "endLine": 81,
+        "endChar": 59
+      },
+      "revId": "5952451a0c3c51c24593d35d6aca47e315f71a22",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3da1876e_aea34063",
