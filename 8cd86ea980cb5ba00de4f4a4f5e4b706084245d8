@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4f43dcf_da3d9f8a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-09-14T07:47:11Z",
+      "side": 1,
+      "message": "most cases",
+      "range": {
+        "startLine": 14,
+        "startChar": 27,
+        "endLine": 14,
+        "endChar": 44
+      },
+      "revId": "8cd86ea980cb5ba00de4f4a4f5e4b706084245d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48786b23_6006910a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-09-14T07:47:11Z",
+      "side": 1,
+      "message": "Vat?",
+      "range": {
+        "startLine": 21,
+        "startChar": 62,
+        "endLine": 21,
+        "endChar": 65
+      },
+      "revId": "8cd86ea980cb5ba00de4f4a4f5e4b706084245d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fb2788e_d2483394",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-09-14T07:47:11Z",
+      "side": 1,
+      "message": "I would rather say __change refs do not conflicts between each others across repositories__.\n\nBear in mind though that this *may* change very soon, as we are planning to allow merging different repositories into the same Gerrit instance and therefore consider the change number unique only in the scope of a single repo.\n\nHowever, that is the __future__ (v3.7 or v3.8).",
+      "range": {
+        "startLine": 30,
+        "startChar": 3,
+        "endLine": 30,
+        "endChar": 21
+      },
+      "revId": "8cd86ea980cb5ba00de4f4a4f5e4b706084245d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eade614_6b48ec79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-09-14T07:47:11Z",
+      "side": 1,
+      "message": "I believe this use-case refers to the integration with GitHub or GitLab CI isn\u0027t it? You wouldn\u0027t normally push the `refs/changes` into `refs/heads/gerrit/changes`",
+      "range": {
+        "startLine": 36,
+        "startChar": 31,
+        "endLine": 36,
+        "endChar": 48
+      },
+      "revId": "8cd86ea980cb5ba00de4f4a4f5e4b706084245d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e21911_52c618e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-09-14T07:47:11Z",
+      "side": 1,
+      "message": "Adding Matthias and DavidO for another opinion on it: we are planning to allow the merging of multiple Gerrit repos into a single one by \"tolerating\" other changes with potentially conflicting numbers.\n\nIf we allow this use-case now on the replication plugin, we may not be able to make the move. What do you think?",
+      "revId": "8cd86ea980cb5ba00de4f4a4f5e4b706084245d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
