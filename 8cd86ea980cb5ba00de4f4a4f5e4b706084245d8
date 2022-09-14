@@ -222,6 +222,24 @@
       "parentUuid": "27e21911_52c618e7",
       "revId": "8cd86ea980cb5ba00de4f4a4f5e4b706084245d8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1dba967_d310fbad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-09-14T21:44:52Z",
+      "side": 1,
+      "message": "\u003e which move ?\n\nThe move of JGit repository across Gerrit servers (Eclipse one to GerritHub.io) by keeping the change history and render the old changes.\n\nIf you have two repositories coming from two different Gerrit servers, both of them having the ref `refs/changes/12/5612/*`, the assumption that all refs are unique across repos won\u0027t be valid anymore.",
+      "parentUuid": "364a048c_2866198f",
+      "revId": "8cd86ea980cb5ba00de4f4a4f5e4b706084245d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
