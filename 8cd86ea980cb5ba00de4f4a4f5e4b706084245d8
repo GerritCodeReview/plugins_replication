@@ -204,6 +204,24 @@
       "message": "Adding Matthias and DavidO for another opinion on it: we are planning to allow the merging of multiple Gerrit repos into a single one by \"tolerating\" other changes with potentially conflicting numbers.\n\nIf we allow this use-case now on the replication plugin, we may not be able to make the move. What do you think?",
       "revId": "8cd86ea980cb5ba00de4f4a4f5e4b706084245d8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "364a048c_2866198f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2022-09-14T11:24:57Z",
+      "side": 1,
+      "message": "which move ?",
+      "parentUuid": "27e21911_52c618e7",
+      "revId": "8cd86ea980cb5ba00de4f4a4f5e4b706084245d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
