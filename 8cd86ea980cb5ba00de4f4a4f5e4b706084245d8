@@ -240,6 +240,24 @@
       "parentUuid": "364a048c_2866198f",
       "revId": "8cd86ea980cb5ba00de4f4a4f5e4b706084245d8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e335fc39_019e5ffb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-09-15T06:07:18Z",
+      "side": 1,
+      "message": "Won\u0027t it break the entire restapi model?\n\nAs I wrote, when this happens we can add `${source}` variable similar to `${name}` environment to add source project uniqueness. I do not think this should block this patch for now.",
+      "parentUuid": "e1dba967_d310fbad",
+      "revId": "8cd86ea980cb5ba00de4f4a4f5e4b706084245d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
