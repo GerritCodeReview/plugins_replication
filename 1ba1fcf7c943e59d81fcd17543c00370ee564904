@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1acda693_e9752efe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-10-10T14:35:35Z",
+      "side": 1,
+      "message": "Should something about \"expected\" be appended to the message when we\u0027re MP?",
+      "revId": "1ba1fcf7c943e59d81fcd17543c00370ee564904",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
