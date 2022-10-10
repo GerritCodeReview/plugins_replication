@@ -34,6 +34,24 @@
       "parentUuid": "1acda693_e9752efe",
       "revId": "1ba1fcf7c943e59d81fcd17543c00370ee564904",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f44b587d_f1060674",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2022-10-10T16:04:22Z",
+      "side": 1,
+      "message": "On second thought, I was able to modify this so that it no longer looks 100%.",
+      "parentUuid": "443401ef_3d674d51",
+      "revId": "1ba1fcf7c943e59d81fcd17543c00370ee564904",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
