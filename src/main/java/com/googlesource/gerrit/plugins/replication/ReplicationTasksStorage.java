@@ -116,9 +116,12 @@ public class ReplicationTasksStorage {
   private final Path runningUpdates;
   private final Path waitingUpdates;
 
+  private boolean isMultiPrimary;
+
   @Inject
   ReplicationTasksStorage(ReplicationConfig config) {
     this(config.getEventsDirectory().resolve("ref-updates"));
+    isMultiPrimary = config.getDistributionInterval() != 0;
   }
 
   @VisibleForTesting
@@ -128,6 +131,10 @@ public class ReplicationTasksStorage {
     waitingUpdates = refUpdates.resolve("waiting");
     gson =
         new GsonBuilder().registerTypeAdapterFactory(AutoValueTypeAdapterFactory.create()).create();
+  }
+
+  private boolean isMultiPrimary() {
+    return isMultiPrimary;
   }
 
   public synchronized String create(ReplicateRefUpdate r) {
@@ -269,7 +276,14 @@ public class ReplicationTasksStorage {
         Files.move(from, to, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
         return true;
       } catch (IOException e) {
-        logger.atSevere().withCause(e).log("Error while renaming task %s", taskKey);
+        String message = "Error while renaming task %s";
+        if (isMultiPrimary() && e instanceof NoSuchFileException) {
+          logger.atFine().log(
+              message + " (expected regularly with multi-primaries and distributor enabled)",
+              taskKey);
+        } else {
+          logger.atSevere().withCause(e).log(message, taskKey);
+        }
         return false;
       }
     }
