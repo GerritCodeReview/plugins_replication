@@ -21,6 +21,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.flogger.FluentLogger;
 import com.google.common.hash.Hashing;
+import com.google.gerrit.common.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
@@ -265,6 +266,7 @@ public class ReplicationTasksStorage {
         out.endObject();
       }
 
+      @Nullable
       @Override
       public ReplicateRefUpdate read(JsonReader in) throws IOException {
         if (in.peek() == JsonToken.NULL) {
@@ -321,6 +323,7 @@ public class ReplicationTasksStorage {
     }
 
     @SuppressWarnings("unchecked")
+    @Nullable
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
       if (type.equals(TypeToken.get(AutoValue_ReplicationTasksStorage_ReplicateRefUpdate.class))

@@ -25,6 +25,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.AccountGroup;
 import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.GroupReference;
@@ -453,6 +454,7 @@ public class Destination {
     }
   }
 
+  @Nullable
   private PushOne getPendingPush(URIish uri) {
     PushOne e = pending.get(uri);
     if (e != null && !e.wasCanceled()) {

@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.gerrit.common.Nullable;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -103,6 +104,7 @@ public class FakeExecutorService implements ScheduledExecutorService {
     return null;
   }
 
+  @Nullable
   @Override
   public ScheduledFuture<?> scheduleAtFixedRate(
       Runnable command, long initialDelay, long period, TimeUnit unit) {
@@ -110,6 +112,7 @@ public class FakeExecutorService implements ScheduledExecutorService {
     return null;
   }
 
+  @Nullable
   @Override
   public ScheduledFuture<?> scheduleWithFixedDelay(
       Runnable command, long initialDelay, long delay, TimeUnit unit) {

@@ -30,6 +30,7 @@ import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.entities.RefNames;
 import com.google.gerrit.extensions.events.GitBatchRefUpdateListener;
@@ -755,6 +756,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     }
   }
 
+  @Nullable
   private RefSpec matchSrc(String ref) {
     for (RefSpec s : config.getPushRefSpecs()) {
       if (s.matchSource(ref)) {
@@ -764,6 +766,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     return null;
   }
 
+  @Nullable
   private RefSpec matchDst(String ref) {
     for (RefSpec s : config.getPushRefSpecs()) {
       if (s.matchDestination(ref)) {

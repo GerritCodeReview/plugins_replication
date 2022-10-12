@@ -18,6 +18,7 @@ import static com.googlesource.gerrit.plugins.replication.GerritSshApi.GERRIT_AD
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.restapi.Url;
 import com.google.inject.Inject;
@@ -109,6 +110,7 @@ public class GerritRestApi implements AdminApi {
     return ctx;
   }
 
+  @Nullable
   private CredentialsProvider adapt(org.eclipse.jgit.transport.CredentialsProvider cp) {
     CredentialItem.Username user = new CredentialItem.Username();
     CredentialItem.Password pass = new CredentialItem.Password();

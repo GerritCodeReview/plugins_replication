@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.gerrit.common.Nullable;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -55,6 +56,7 @@ public class ForwardingProxy {
       return method.invoke(delegate, args);
     }
 
+    @Nullable
     protected Method getOverriden(Method method) {
       try {
         Method implementedByOverrider =

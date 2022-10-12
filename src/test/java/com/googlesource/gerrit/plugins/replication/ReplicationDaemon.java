@@ -22,6 +22,7 @@ import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
@@ -245,6 +246,7 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
     return true;
   }
 
+  @Nullable
   protected Ref checkedGetRef(Repository repo, String branchName) {
     try {
       return repo.getRefDatabase().exactRef(branchName);

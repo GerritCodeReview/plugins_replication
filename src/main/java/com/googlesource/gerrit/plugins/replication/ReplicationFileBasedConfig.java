@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
 import com.google.common.base.Strings;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
@@ -59,6 +60,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     this.pluginDataDir = pluginDataDir;
   }
 
+  @Nullable
   public static String replaceName(String in, String name, boolean keyIsOptional) {
     String key = "${name}";
     int n = in.indexOf(key);
