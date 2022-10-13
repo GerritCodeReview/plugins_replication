@@ -189,13 +189,19 @@ public class ReplicationTasksStorage {
         .map(Optional::get);
   }
 
-  private static Stream<Path> walkNonDirs(Path path) {
+  private Stream<Path> walkNonDirs(Path path) {
     try {
       return Files.list(path).flatMap(sub -> walkNonDirs(sub));
     } catch (NotDirectoryException e) {
       return Stream.of(path);
     } catch (Exception e) {
-      logger.atSevere().withCause(e).log("Error while walking directory %s", path);
+      String message = "Error while walking directory %s";
+      if (isMultiPrimary() && e instanceof NoSuchFileException) {
+        logger.atFine().log(
+            message + " (expected regularly with multi-primaries and distributor enabled)", path);
+      } else {
+        logger.atSevere().withCause(e).log(message, path);
+      }
       return Stream.empty();
     }
   }
