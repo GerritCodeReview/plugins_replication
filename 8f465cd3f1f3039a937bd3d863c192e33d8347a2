@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcce4b70_34fb5338",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-10-21T15:45:04Z",
+      "side": 1,
+      "message": "Built and verified locally:\nINFO: Elapsed time: 226.080s, Critical Path: 208.04s\nINFO: 198 processes: 33 internal, 73 darwin-sandbox, 92 worker.\nINFO: Build completed successfully, 198 total actions\n//plugins/replication:replication_tests                                  PASSED in 15.1s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationDistributorIT PASSED in 39.0s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationEventsIT PASSED in 55.5s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationFanoutIT PASSED in 39.4s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationIT PASSED in 174.5s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationPushInBatchesIT PASSED in 35.7s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationStorageIT PASSED in 109.9s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationStorageMPIT PASSED in 61.4s",
+      "revId": "8f465cd3f1f3039a937bd3d863c192e33d8347a2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
