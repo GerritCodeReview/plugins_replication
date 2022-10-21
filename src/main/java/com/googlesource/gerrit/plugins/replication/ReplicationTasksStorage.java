@@ -144,9 +144,12 @@ public class ReplicationTasksStorage {
   private final Path runningUpdates;
   private final Path waitingUpdates;
 
+  private boolean isMultiPrimary;
+
   @Inject
   ReplicationTasksStorage(ReplicationConfig config) {
     this(config.getEventsDirectory().resolve("ref-updates"));
+    isMultiPrimary = config.getDistributionInterval() != 0;
   }
 
   @VisibleForTesting
@@ -158,6 +161,10 @@ public class ReplicationTasksStorage {
         new GsonBuilder()
             .registerTypeAdapterFactory(new ReplicateRefUpdateTypeAdapterFactory())
             .create();
+  }
+
+  private boolean isMultiPrimary() {
+    return isMultiPrimary;
   }
 
   public synchronized String create(ReplicateRefUpdate r) {
@@ -212,13 +219,19 @@ public class ReplicationTasksStorage {
         .map(Optional::get);
   }
 
-  private static Stream<Path> walkNonDirs(Path path) {
+  private Stream<Path> walkNonDirs(Path path) {
     try {
       return Files.list(path).flatMap(sub -> walkNonDirs(sub));
     } catch (NotDirectoryException e) {
       return Stream.of(path);
     } catch (Exception e) {
-      logger.atSevere().withCause(e).log("Error while walking directory %s", path);
+      String message = "Error while walking directory %s";
+      if (isMultiPrimary() && e instanceof NoSuchFileException) {
+        logger.atFine().log(
+            message + " (expected regularly with multi-primaries and distributor enabled)", path);
+      } else {
+        logger.atSevere().withCause(e).log(message, path);
+      }
       return Stream.empty();
     }
   }
@@ -398,7 +411,14 @@ public class ReplicationTasksStorage {
         Files.move(from, to, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
         return true;
       } catch (IOException e) {
-        logger.atSevere().withCause(e).log("Error while renaming task %s", taskKey);
+        String message = "Error while renaming task %s";
+        if (isMultiPrimary() && e instanceof NoSuchFileException) {
+          logger.atFine().log(
+              message + " (expected regularly with multi-primaries and distributor enabled)",
+              taskKey);
+        } else {
+          logger.atSevere().withCause(e).log(message, taskKey);
+        }
         return false;
       }
     }
