@@ -36,6 +36,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43582632_8f9581ce",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-11-02T19:50:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76583087_44730f06",
+      "revId": "6e246a522ef19613ee8277b4d3a019efbb26bc8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "132ea4a9_b7954d9a",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "File names won\u0027t change. The \u0027uri\u0027 value stored on disk in the task does change as it currently could be double-escaped. Those are broken without this change and won\u0027t be automatically fixed by the change, so I agree there should be a note explaining to remove those broken tasks.",
       "parentUuid": "132ea4a9_b7954d9a",
+      "revId": "6e246a522ef19613ee8277b4d3a019efbb26bc8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "200cb875_4057d891",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushReplicationTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-11-02T19:50:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cff8f8aa_05ed6b4d",
       "revId": "6e246a522ef19613ee8277b4d3a019efbb26bc8e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
