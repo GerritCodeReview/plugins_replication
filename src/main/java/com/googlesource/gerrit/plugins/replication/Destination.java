@@ -19,12 +19,14 @@ import static com.googlesource.gerrit.plugins.replication.ReplicationFileBasedCo
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.NON_EXISTING;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.REJECTED_OTHER_REASON;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
+import com.google.common.net.UrlEscapers;
 import com.google.gerrit.entities.AccountGroup;
 import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.GroupReference;
@@ -67,8 +69,7 @@ import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -678,9 +679,15 @@ public class Destination {
 
   private boolean matches(URIish uri, Project.NameKey project) {
     for (URIish configUri : config.getRemoteConfig().getURIs()) {
-      URIish projectUri = getURI(configUri, project);
-      if (uri.equals(projectUri)) {
-        return true;
+      try {
+        URIish projectUri = getURI(configUri, project);
+        if (uri.equals(projectUri)) {
+          return true;
+        }
+      } catch (URISyntaxException e) {
+        repLog.atSevere().withCause(e).log(
+            String.format(
+                "remote config uri %s has invalid syntax with project %s", configUri, project));
       }
     }
     return false;
@@ -689,20 +696,36 @@ public class Destination {
   List<URIish> getURIs(Project.NameKey project, String urlMatch) {
     List<URIish> r = Lists.newArrayListWithCapacity(config.getRemoteConfig().getURIs().size());
     for (URIish configUri : config.getRemoteConfig().getURIs()) {
-      URIish uri = getURI(configUri, project);
-      if (matches(configUri, urlMatch) || matches(uri, urlMatch)) {
-        r.add(uri);
+      try {
+        URIish uri = getURI(configUri, project);
+        if (matches(configUri, urlMatch) || matches(uri, urlMatch)) {
+          r.add(uri);
+        }
+      } catch (URISyntaxException e) {
+        repLog.atSevere().withCause(e).log(
+            String.format(
+                "remote config uri %s has invalid syntax with project %s", configUri, project));
       }
     }
     return r;
   }
 
-  URIish getURI(URIish template, Project.NameKey project) {
+  URIish getURI(URIish template, Project.NameKey project) throws URISyntaxException {
+    return getURI(template, project, config.getRemoteNameStyle(), config.isSingleProjectMatch());
+  }
+
+  @VisibleForTesting
+  static URIish getURI(
+      URIish template,
+      Project.NameKey project,
+      String remoteNameStyle,
+      boolean isSingleProjectMatch)
+      throws URISyntaxException {
     String name = project.get();
-    if (needsUrlEncoding(template)) {
-      name = encode(name);
+    if (needsUrlEscaping(template)) {
+      name = escape(name);
     }
-    String remoteNameStyle = config.getRemoteNameStyle();
+
     if (remoteNameStyle.equals("dash")) {
       name = name.replace("/", "-");
     } else if (remoteNameStyle.equals("underscore")) {
@@ -712,27 +735,21 @@ public class Destination {
     } else if (!remoteNameStyle.equals("slash")) {
       repLog.atFine().log("Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
     }
-    String replacedPath = replaceName(template.getPath(), name, isSingleProjectMatch());
-    return (replacedPath != null) ? template.setPath(replacedPath) : template;
+    String replacedPath = replaceName(template.getPath(), name, isSingleProjectMatch);
+    return (replacedPath != null) ? template.setRawPath(replacedPath) : template;
   }
 
-  static boolean needsUrlEncoding(URIish uri) {
+  static boolean needsUrlEscaping(URIish uri) {
     return "http".equalsIgnoreCase(uri.getScheme())
         || "https".equalsIgnoreCase(uri.getScheme())
         || "amazon-s3".equalsIgnoreCase(uri.getScheme());
   }
 
-  static String encode(String str) {
-    try {
-      // Some cleanup is required. The '/' character is always encoded as %2F
-      // however remote servers will expect it to be not encoded as part of the
-      // path used to the repository. Space is incorrectly encoded as '+' for this
-      // context. In the path part of a URI space should be %20, but in form data
-      // space is '+'. Our cleanup replace fixes these two issues.
-      return URLEncoder.encode(str, "UTF-8").replaceAll("%2[fF]", "/").replace("+", "%20");
-    } catch (UnsupportedEncodingException e) {
-      throw new RuntimeException(e);
-    }
+  static String escape(String str) {
+    // The '/' character is always encoded as %2F however, remote servers will expect it to be not
+    // encoded as part of the path used to the repository. The fix to avoid this would be to build
+    // up the path and escape each segment separately.
+    return UrlEscapers.urlPathSegmentEscaper().escape(str).replaceAll("%2[fF]", "/");
   }
 
   ImmutableList<String> getAdminUrls() {
