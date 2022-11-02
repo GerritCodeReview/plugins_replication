@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "714532ec_a5a2a647",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2022-11-02T19:25:01Z",
+      "side": 1,
+      "message": "I think we need to swallow this, or it could interrupt other operations? But it\u0027s hard to tell here, because this is not policy code, that likely means the exception needs to bubble up.",
+      "revId": "6e246a522ef19613ee8277b4d3a019efbb26bc8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "132ea4a9_b7954d9a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushReplicationTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2022-11-02T19:25:01Z",
+      "side": 1,
+      "message": "Will the on disk format, or file names change with this change, as that would likely merit release-notes explaining that they should be deleted manually during an upgrade?",
+      "revId": "6e246a522ef19613ee8277b4d3a019efbb26bc8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
