@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76583087_44730f06",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-11-02T19:42:51Z",
+      "side": 1,
+      "message": "Oops, yes. This was debug that I forgot to restore. The actual code I intended to go here and in the catch below is:\n```\n        repLog.atSevere().withCause(e).log(\n            String.format(\n                \"remote config uri %s has invalid syntax with project %s\", configUri, project));\n```",
+      "parentUuid": "714532ec_a5a2a647",
+      "revId": "6e246a522ef19613ee8277b4d3a019efbb26bc8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "132ea4a9_b7954d9a",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushReplicationTest.java",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2022-11-02T19:25:01Z",
       "side": 1,
       "message": "Will the on disk format, or file names change with this change, as that would likely merit release-notes explaining that they should be deleted manually during an upgrade?",
+      "revId": "6e246a522ef19613ee8277b4d3a019efbb26bc8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cff8f8aa_05ed6b4d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushReplicationTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-11-02T19:42:51Z",
+      "side": 1,
+      "message": "File names won\u0027t change. The \u0027uri\u0027 value stored on disk in the task does change as it currently could be double-escaped. Those are broken without this change and won\u0027t be automatically fixed by the change, so I agree there should be a note explaining to remove those broken tasks.",
+      "parentUuid": "132ea4a9_b7954d9a",
       "revId": "6e246a522ef19613ee8277b4d3a019efbb26bc8e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
