@@ -23,6 +23,7 @@ import static org.junit.Assert.assertTrue;
 import com.google.common.jimfs.Configuration;
 import com.google.common.jimfs.Jimfs;
 import com.google.common.truth.IterableSubject;
+import com.google.gerrit.entities.Project;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
@@ -143,6 +144,25 @@ public class ReplicationTasksStorageTest {
     assertTrue(storage.isWaiting(uriUpdates));
     assertTrue(storage.isWaiting(TestUriUpdates.create(updateB)));
     assertNotEquals(keyA, keyB);
+  }
+
+  @Test
+  public void canStoreAndReadUrisWithEncodedChars() throws Exception {
+    String urlBase = "https://git.server.example.com";
+    String url = urlBase + "/${name}.git";
+    URIish template = new URIish(url);
+    String strangeValidName =
+        "project/with/a/strange/name key=a-value=1, --option1 \"OPTION_VALUE_1\" --option-2 <option_VALUE-2> --option-without-value";
+    Project.NameKey project = Project.nameKey(strangeValidName);
+    URIish expanded = Destination.getURI(template, project, "slash", false);
+    ReplicateRefUpdate update = ReplicateRefUpdate.create(strangeValidName, REF, expanded, REMOTE);
+    storage.create(update);
+
+    assertThat(new URIish(update.uri())).isEqualTo(expanded);
+    assertThatStream(storage.streamWaiting()).hasSize(1);
+    for (ReplicateRefUpdate rru : storage.streamWaiting().collect(Collectors.toList())) {
+      assertThat(new URIish(rru.uri())).isEqualTo(expanded);
+    }
   }
 
   @Test
