@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25876826_23b5d03d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-11-07T16:56:46Z",
+      "side": 0,
+      "message": "we need this logic both per any project name substitution.",
+      "revId": "8f465cd3f1f3039a937bd3d863c192e33d8347a2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}

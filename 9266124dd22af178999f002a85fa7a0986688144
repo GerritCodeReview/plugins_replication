@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd118394_dfe52316",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-11-07T16:56:46Z",
+      "side": 1,
+      "message": "Does anyone know a better way to clone `RemoteConfig`? I could use java serialization as well.",
+      "revId": "9266124dd22af178999f002a85fa7a0986688144",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c3cb53f_6d2148d3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-11-07T16:56:46Z",
+      "side": 1,
+      "message": "do not assume that destination uri is unique per configuration, we should combine tasks only if both source project and target uri are the same.",
+      "revId": "9266124dd22af178999f002a85fa7a0986688144",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8158b90_bd7e400d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-11-07T16:56:46Z",
+      "side": 1,
+      "message": "I wanted to duplicate the `RemoteConfig` here and substitute the `${name}` before creating the `PushOne`, however, I could not understand how to use `@Assisted` parameter with `RemoteConfig` the lifecycle complains that the `RemoteConfig` has no default constructor so it cannot be used.",
+      "revId": "9266124dd22af178999f002a85fa7a0986688144",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c2e1234_b984aeaf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2022-11-07T16:56:46Z",
+      "side": 1,
+      "message": "should this logic of substituting the push URL be here or at `Destination` before creating the `PushOne`?",
+      "revId": "9266124dd22af178999f002a85fa7a0986688144",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
