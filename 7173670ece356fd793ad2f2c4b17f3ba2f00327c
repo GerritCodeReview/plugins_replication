@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8104ec85_b661e69e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-11-07T00:14:25Z",
+      "side": 1,
+      "message": "Gerrit stable-3.7 and master will allow to have two projects with the same change number, hence this change would potentially push to changes to the same refs.\n\nWhy don\u0027t you just allow to use the project name in the ref-space if you want to push all repos to a single one? Would that be feasible?",
+      "revId": "7173670ece356fd793ad2f2c4b17f3ba2f00327c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
