@@ -686,8 +686,7 @@ public class Destination {
         }
       } catch (URISyntaxException e) {
         repLog.atSevere().withCause(e).log(
-            String.format(
-                "remote config uri %s has invalid syntax with project %s", configUri, project));
+            "remote config uri %s has invalid syntax with project %s", configUri, project);
       }
     }
     return false;
@@ -703,8 +702,7 @@ public class Destination {
         }
       } catch (URISyntaxException e) {
         repLog.atSevere().withCause(e).log(
-            String.format(
-                "remote config uri %s has invalid syntax with project %s", configUri, project));
+            "remote config uri %s has invalid syntax with project %s", configUri, project);
       }
     }
     return r;
