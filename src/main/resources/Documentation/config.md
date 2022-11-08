@@ -361,6 +361,11 @@ remote.NAME.push
 	and `refs/tags/*`, but excludes all others, including
 	`refs/changes/*`.
 
+	Within each destination value the magic placeholder `${name}` is
+	replaced with the Gerrit project name. This is a Gerrit
+	specific extension to the otherwise standard Git reference syntax
+	should be specified.
+
 	Defaults to `refs/*:refs/*` (push all refs) if not specified,
 	or `+refs/*:refs/*` (force push all refs) if not specified and
 	`gerrit.defaultForceUpdate` is true.
@@ -536,6 +541,18 @@ remote.NAME.remoteNameStyle
 
 	By default, `slash`, i.e. remote names will contain slashes as
 	they do in Gerrit.
+
+remote.NAME.allowManyToOneReplication
+:	Enable to use a single destination project to multiple local ones.
+	This is usable when a remote repository is triggering CI when a branch is
+	created or modified.
+	For example `push = +refs/changes/*:refs/heads/gerrit/${name}/changes/*`.
+
+	> **NOTE**: The use of this option may lead to dangerous situations
+	> if you do not know exactly what you are doing.
+
+	By default, false, do not allow to replicate several repositories to a
+	single one.
 
 <a name="remote.NAME.projects">remote.NAME.projects</a>
 :	Specifies which repositories should be replicated to the
