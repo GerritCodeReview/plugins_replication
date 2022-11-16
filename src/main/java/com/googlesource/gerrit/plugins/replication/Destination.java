@@ -391,8 +391,23 @@ public class Destination {
     schedule(project, ref, uri, state, false);
   }
 
+  void scheduleFromStorage(
+      Project.NameKey project, String ref, URIish uri, ReplicationState state) {
+    schedule(project, ref, uri, state, false, true);
+  }
+
   void schedule(
       Project.NameKey project, String ref, URIish uri, ReplicationState state, boolean now) {
+    schedule(project, ref, uri, state, now, false);
+  }
+
+  void schedule(
+      Project.NameKey project,
+      String ref,
+      URIish uri,
+      ReplicationState state,
+      boolean now,
+      boolean fromStorage) {
     if (!shouldReplicate(project, ref, state)) {
       repLog.atFine().log("Not scheduling replication %s:%s => %s", project, ref, uri);
       return;
@@ -438,10 +453,14 @@ public class Destination {
             "scheduled %s:%s => %s to run %s",
             project, ref, task, now ? "now" : "after " + config.getDelay() + "s");
       } else {
-        addRef(task, ref);
+        boolean added = addRef(task, ref);
         task.addState(ref, state);
-        repLog.atInfo().log(
-            "consolidated %s:%s => %s with an existing pending push", project, ref, task);
+        String message = "consolidated %s:%s => %s with an existing pending push";
+        if (added || !fromStorage) {
+          repLog.atInfo().log(message, project, ref, task);
+        } else {
+          repLog.atFine().log(message, project, ref, task);
+        }
       }
       state.increasePushTaskCount(project.get(), ref);
     }
@@ -477,9 +496,10 @@ public class Destination {
         pool.schedule(updateHeadFactory.create(uri, project, newHead), 0, TimeUnit.SECONDS);
   }
 
-  private void addRef(PushOne e, String ref) {
-    e.addRef(ref);
+  private boolean addRef(PushOne e, String ref) {
+    boolean added = e.addRef(ref);
     postReplicationScheduledEvent(e, ref);
+    return added;
   }
 
   /**

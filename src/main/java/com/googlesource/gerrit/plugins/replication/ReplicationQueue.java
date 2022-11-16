@@ -161,10 +161,10 @@ public class ReplicationQueue
     }
   }
 
-  private void fire(URIish uri, Project.NameKey project, String refName) {
+  private void fireFromStorage(URIish uri, Project.NameKey project, String refName) {
     ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
     for (Destination dest : destinations.get().getDestinations(uri, project, refName)) {
-      dest.schedule(project, refName, uri, state);
+      dest.scheduleFromStorage(project, refName, uri, state);
     }
     state.markAllPushTasksScheduled();
   }
@@ -201,7 +201,8 @@ public class ReplicationQueue
 
   private void synchronizePendingEvents(Prune prune) {
     if (replaying.compareAndSet(false, true)) {
-      final Map<ReplicateRefUpdate, String> taskNamesByReplicateRefUpdate = new ConcurrentHashMap<>();
+      final Map<ReplicateRefUpdate, String> taskNamesByReplicateRefUpdate =
+          new ConcurrentHashMap<>();
       if (Prune.TRUE.equals(prune)) {
         for (Destination destination : destinations.get().getAll(FilterType.ALL)) {
           taskNamesByReplicateRefUpdate.putAll(destination.getTaskNamesByReplicateRefUpdate());
@@ -214,7 +215,7 @@ public class ReplicationQueue
             @Override
             public void run(ReplicationTasksStorage.ReplicateRefUpdate u) {
               try {
-                fire(new URIish(u.uri()), Project.nameKey(u.project()), u.ref());
+                fireFromStorage(new URIish(u.uri()), Project.nameKey(u.project()), u.ref());
                 if (Prune.TRUE.equals(prune)) {
                   taskNamesByReplicateRefUpdate.remove(u);
                 }
