@@ -224,6 +224,15 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     return print;
   }
 
+  public String toStringForLogging() {
+    String print = "[" + HexFormat.fromInt(id) + "] push " + uri + " " + getLoggingLimitedRefs();
+
+    if (retryCount > 0) {
+      print = "(retry " + retryCount + ") " + print;
+    }
+    return print;
+  }
+
   /**
    * Returns a string of refs limited to the maxRefsToShow config with count of total refs hidden
    * when there are more refs than maxRefsToShow config.
@@ -241,13 +250,20 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
    *     config.
    */
   protected String getLimitedRefs() {
+    return getLimitedRefs(replConfig.getMaxRefsToShow());
+  }
+
+  protected String getLoggingLimitedRefs() {
+    return getLimitedRefs(replConfig.getMaxRefsToLog());
+  }
+
+  protected String getLimitedRefs(int refsToShow) {
     Set<String> refs = getRefs();
-    int maxRefsToShow = replConfig.getMaxRefsToShow();
-    if (maxRefsToShow == 0) {
-      maxRefsToShow = refs.size();
+    if (refsToShow == 0) {
+      refsToShow = refs.size();
     }
-    String refsString = refs.stream().limit(maxRefsToShow).collect(Collectors.joining(" "));
-    int hiddenRefs = refs.size() - maxRefsToShow;
+    String refsString = refs.stream().limit(refsToShow).collect(Collectors.joining(" "));
+    int hiddenRefs = refs.size() - refsToShow;
     if (hiddenRefs > 0) {
       refsString += " (+" + hiddenRefs + ")";
     }

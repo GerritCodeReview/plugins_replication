@@ -457,9 +457,9 @@ public class Destination {
         task.addState(ref, state);
         String message = "consolidated %s:%s => %s with an existing pending push";
         if (added || !fromStorage) {
-          repLog.atInfo().log(message, project, ref, task);
+          repLog.atInfo().log(message, project, ref, task.toStringForLogging());
         } else {
-          repLog.atFine().log(message, project, ref, task);
+          repLog.atFine().log(message, project, ref, task.toStringForLogging());
         }
       }
       state.increasePushTaskCount(project.get(), ref);
