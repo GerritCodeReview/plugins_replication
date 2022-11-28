@@ -105,6 +105,13 @@ public interface RemoteConfiguration {
   int getPushBatchSize();
 
   /**
+   * Whether to replicate the NoteDb meta refs or not.
+   *
+   * @return boolean, true by default
+   */
+  boolean replicateNoteDbMetaRefs();
+
+  /**
    * Whether the remote configuration is for a single project only
    *
    * @return true, when configuration is for a single project, false otherwise
