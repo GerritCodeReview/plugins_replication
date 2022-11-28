@@ -39,6 +39,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final ImmutableList<String> adminUrls;
   private final int poolThreads;
   private final boolean createMissingRepos;
+  private final boolean replicateNoteDbMetaRefs;
   private final boolean replicatePermissions;
   private final boolean replicateProjectDeletions;
   private final boolean replicateHiddenProjects;
@@ -71,6 +72,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
             "updateRefErrorMaxRetries",
             cfg.getInt("replication", "lockErrorMaxRetries", 0));
     createMissingRepos = cfg.getBoolean("remote", name, "createMissingRepositories", true);
+    replicateNoteDbMetaRefs = cfg.getBoolean("remote", name, "replicateNoteDbMetaRefs", true);
     replicatePermissions = cfg.getBoolean("remote", name, "replicatePermissions", true);
     replicateProjectDeletions = cfg.getBoolean("remote", name, "replicateProjectDeletions", false);
     replicateHiddenProjects = cfg.getBoolean("remote", name, "replicateHiddenProjects", false);
@@ -175,6 +177,11 @@ public class DestinationConfiguration implements RemoteConfiguration {
 
   public boolean createMissingRepos() {
     return createMissingRepos;
+  }
+
+  @Override
+  public boolean replicateNoteDbMetaRefs() {
+    return replicateNoteDbMetaRefs;
   }
 
   public boolean replicateProjectDeletions() {
