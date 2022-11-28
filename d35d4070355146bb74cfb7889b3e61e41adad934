@@ -16,6 +16,24 @@
       "message": "While this is similar in config to isMirror, I am not a fan of \"inducing\" the intended behavior from the actor as opposed to using a config name which explains the behavior. I would propose instead remote.NAME.replicateNoteDbRefs, this is more consistent with replicate.permission, projectDeletions, and hiddenProjects,",
       "revId": "d35d4070355146bb74cfb7889b3e61e41adad934",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d1152fd_6121c93a",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1096442
+      },
+      "writtenOn": "2022-11-28T17:14:42Z",
+      "side": 1,
+      "message": "Ack. I see Gerrit is calling these NoteDb meta refs, shall we call the switch replicateNoteDbMetaRefs ?",
+      "parentUuid": "f848bfdf_a1976c7f",
+      "revId": "d35d4070355146bb74cfb7889b3e61e41adad934",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
