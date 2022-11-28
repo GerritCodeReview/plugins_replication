@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f848bfdf_a1976c7f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2022-11-28T16:48:41Z",
+      "side": 1,
+      "message": "While this is similar in config to isMirror, I am not a fan of \"inducing\" the intended behavior from the actor as opposed to using a config name which explains the behavior. I would propose instead remote.NAME.replicateNoteDbRefs, this is more consistent with replicate.permission, projectDeletions, and hiddenProjects,",
+      "revId": "d35d4070355146bb74cfb7889b3e61e41adad934",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
