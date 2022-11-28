@@ -587,6 +587,15 @@ remote.NAME.pushBatchSize
 	Note that `pushBatchSize` is ignored when *Cluster Replication* is configured
 	- when `replication.distributionInterval` has value > 0.
 
+remote.NAME.isGerritReplica
+: Whether the remote replica runs a Gerrit instance or not. When set to false,
+  replication is skipped on NoteDb meta refs (`refs/changes/*/meta`,
+  `refs/changes/*/robot-comments`, `refs/draft-comments/*`, `refs/starred-changes/*`)
+  since the remote does not run a Gerrit instance.
+
+  By default, true.
+
+
 Directory `replication`
 --------------------
 The optional directory `$site_path/etc/replication` contains Git-style

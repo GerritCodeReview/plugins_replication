@@ -105,6 +105,13 @@ public interface RemoteConfiguration {
   int getPushBatchSize();
 
   /**
+   * Whether the remote replica runs a Gerrit instance or not.
+   *
+   * @return boolean, true by default
+   */
+  boolean isGerritReplica();
+
+  /**
    * Whether the remote configuration is for a single project only
    *
    * @return true, when configuration is for a single project, false otherwise

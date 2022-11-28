@@ -794,6 +794,10 @@ public class Destination {
     return config.getPushBatchSize();
   }
 
+  boolean isGerritReplica() {
+    return config.isGerritReplica();
+  }
+
   private static boolean matches(URIish uri, String urlMatch) {
     if (urlMatch == null || urlMatch.equals("") || urlMatch.equals("*")) {
       return true;

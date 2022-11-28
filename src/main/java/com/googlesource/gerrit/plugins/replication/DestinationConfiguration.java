@@ -50,6 +50,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final int maxRetries;
   private final int slowLatencyThreshold;
   private final Supplier<Integer> pushBatchSize;
+  private final boolean isGerritReplica;
 
   protected DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
@@ -114,6 +115,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
               }
               return 0;
             });
+    isGerritReplica = cfg.getBoolean("remote", name, "isGerritReplica", true);
   }
 
   @Override
@@ -207,5 +209,10 @@ public class DestinationConfiguration implements RemoteConfiguration {
   @Override
   public int getPushBatchSize() {
     return pushBatchSize.get();
+  }
+
+  @Override
+  public boolean isGerritReplica() {
+    return isGerritReplica;
   }
 }
