@@ -234,6 +234,7 @@ public class PushOneTest {
 
   @Test
   public void shouldPushMetaRefTogetherWithChangeRef() throws InterruptedException, IOException {
+    when(destinationMock.replicateNoteDbMetaRefs()).thenReturn(true);
     PushOne pushOne = Mockito.spy(createPushOne(null));
 
     Ref newLocalChangeRef =
@@ -258,6 +259,36 @@ public class PushOneTest {
     isCallFinished.await(10, TimeUnit.SECONDS);
     verify(transportMock, atLeastOnce()).push(any(), any());
     verify(pushOne, times(2)).push(any(), any(), any());
+  }
+
+  @Test
+  public void skipPushingMetaRefWhenReplicateNoteDbMetaRefsIsSetToFalse()
+      throws InterruptedException, IOException {
+    when(destinationMock.replicateNoteDbMetaRefs()).thenReturn(false);
+    PushOne pushOne = Mockito.spy(createPushOne(null));
+
+    Ref newLocalChangeRef =
+        new ObjectIdRef.Unpeeled(
+            NEW,
+            "refs/changes/11/11111/1",
+            ObjectId.fromString("0000000000000000000000000000000000000002"));
+
+    Ref newLocalChangeMetaRef =
+        new ObjectIdRef.Unpeeled(
+            NEW,
+            "refs/changes/11/11111/meta",
+            ObjectId.fromString("0000000000000000000000000000000000000003"));
+
+    localRefs.add(newLocalChangeRef);
+    localRefs.add(newLocalChangeMetaRef);
+
+    pushOne.addRefBatch(
+        ImmutableSet.of(newLocalChangeRef.getName(), newLocalChangeMetaRef.getName()));
+    pushOne.run();
+
+    isCallFinished.await(10, TimeUnit.SECONDS);
+    verify(transportMock, atLeastOnce()).push(any(), any());
+    verify(pushOne, times(1)).push(any(), any(), any());
   }
 
   @Test
