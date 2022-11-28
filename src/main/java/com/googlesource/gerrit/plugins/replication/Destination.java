@@ -794,6 +794,10 @@ public class Destination {
     return config.getPushBatchSize();
   }
 
+  boolean replicateNoteDbMetaRefs() {
+    return config.replicateNoteDbMetaRefs();
+  }
+
   private static boolean matches(URIish uri, String urlMatch) {
     if (urlMatch == null || urlMatch.equals("") || urlMatch.equals("*")) {
       return true;
