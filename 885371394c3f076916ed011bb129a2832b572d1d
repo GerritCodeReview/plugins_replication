@@ -51,6 +51,24 @@
       "parentUuid": "ee578a9b_51eb6cd6",
       "revId": "885371394c3f076916ed011bb129a2832b572d1d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f82b31d1_0d158f51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-11-29T14:31:27Z",
+      "side": 1,
+      "message": "\u003e I see it is additionally filtering merged + abandoned + Corrupted changes, and we can\u0027t achieve this change\u0027s *exact* behaviour?\n\nSure, just propose a change to the libModule, it should be an easy one :-)\nHappy to review/approve it, it makes sense to me.",
+      "parentUuid": "5639d01b_56da29f1",
+      "revId": "885371394c3f076916ed011bb129a2832b572d1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
