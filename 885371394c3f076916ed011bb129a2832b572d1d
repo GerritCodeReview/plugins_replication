@@ -69,6 +69,42 @@
       "parentUuid": "5639d01b_56da29f1",
       "revId": "885371394c3f076916ed011bb129a2832b572d1d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23738281_5fee4f9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-11-30T04:50:02Z",
+      "side": 1,
+      "message": "I\u0027m also on the fence about this. Given it\u0027s not obviously appropriate for stable, @prudhvi.alahari@linaro.org can you move it to master?",
+      "parentUuid": "dbffa2b8_96232156",
+      "revId": "885371394c3f076916ed011bb129a2832b572d1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af41ee4b_b8618c6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-11-30T04:50:02Z",
+      "side": 1,
+      "message": "@luca.milanesio@gmail.com that module doesn\u0027t look like it\u0027s applicable to this scenario. Here we\u0027re only trying to impact what refs are replicated to destinations that specifically want this behavior. The module seems to affect ref advertisement and not replication. Am I understanding it correctly?",
+      "parentUuid": "f82b31d1_0d158f51",
+      "revId": "885371394c3f076916ed011bb129a2832b572d1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
