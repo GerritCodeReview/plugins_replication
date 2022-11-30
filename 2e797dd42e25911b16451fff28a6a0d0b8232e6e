@@ -22,6 +22,30 @@
       },
       "revId": "2e797dd42e25911b16451fff28a6a0d0b8232e6e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b64cd25_9cf8f59d",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2022-11-30T14:50:51Z",
+      "side": 1,
+      "message": "I think the idea it to not be generic for this specific feature; i.e. the intent is to make it easy for someone to configure this without them having to have deep Gerrit knowledge about which refs to filter to avoid replicating noteDb refs (our admins don\u0027t have this knowledge). \n\nAlso, the way this is implemented, it will also filter out any new refs which core decides are part of noteDb without having to change the plugin or the configuration.",
+      "parentUuid": "9f54b293_cbefd948",
+      "range": {
+        "startLine": 590,
+        "startChar": 12,
+        "endLine": 590,
+        "endChar": 35
+      },
+      "revId": "2e797dd42e25911b16451fff28a6a0d0b8232e6e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
