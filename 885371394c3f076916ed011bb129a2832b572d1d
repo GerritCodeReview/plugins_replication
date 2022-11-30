@@ -123,6 +123,42 @@
       "parentUuid": "23738281_5fee4f9d",
       "revId": "885371394c3f076916ed011bb129a2832b572d1d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a80dd438_7eadd84d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-11-30T10:25:35Z",
+      "side": 1,
+      "message": "Thanks @prudhvi.alahari@linaro.org.",
+      "parentUuid": "5a91edc6_2d70cdb9",
+      "revId": "885371394c3f076916ed011bb129a2832b572d1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21060778_9a24a764",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-11-30T10:25:35Z",
+      "side": 1,
+      "message": "\u003e @luca.milanesio@gmail.com that module doesn\u0027t look like it\u0027s applicable to this scenario. Here we\u0027re only trying to impact what refs are replicated to destinations that specifically want this behavior.\n\nThe `git-refs-filter` is filtering refs for whatever use you would like to make out of it, including replication.\n\n\u003e The module seems to affect ref advertisement and not replication. Am I understanding it correctly?\n\nRefs advertisement is just one of the uses. The replication plugin can have a user associated with it which is then responsible for defining which refs and projects you should replicate.\n\nThe `git-refs-filter` module defines a new backend that is able to __hide__ refs for a specific user, which could be one made ad-hoc for replication.\nAs a matter of fact, many people use `git-refs-filter` to speedup replication already today :-)\n\nHowever, it is up to you if you would like to use it, contribute to it or not. It isn\u0027t core and therefore it is optional by definition.",
+      "parentUuid": "af41ee4b_b8618c6e",
+      "revId": "885371394c3f076916ed011bb129a2832b572d1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }

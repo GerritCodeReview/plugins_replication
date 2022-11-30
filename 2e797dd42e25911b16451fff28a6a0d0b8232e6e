@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f54b293_cbefd948",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-11-30T10:25:35Z",
+      "side": 1,
+      "message": "Have you thought about a generic exclusion mechanism instead? That would allow to achieve the same result with a more generic and flexible use-case.",
+      "range": {
+        "startLine": 590,
+        "startChar": 12,
+        "endLine": 590,
+        "endChar": 35
+      },
+      "revId": "2e797dd42e25911b16451fff28a6a0d0b8232e6e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
