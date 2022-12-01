@@ -159,6 +159,24 @@
       "parentUuid": "af41ee4b_b8618c6e",
       "revId": "885371394c3f076916ed011bb129a2832b572d1d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97366e36_8d5a43d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-12-01T02:43:57Z",
+      "side": 1,
+      "message": "\u003e \u003e @luca.milanesio@gmail.com that module doesn\u0027t look like it\u0027s applicable to this scenario. Here we\u0027re only trying to impact what refs are replicated to destinations that specifically want this behavior.\n\u003e \n\u003e The `git-refs-filter` is filtering refs for whatever use you would like to make out of it, including replication.\n\u003e \n\u003e \u003e The module seems to affect ref advertisement and not replication. Am I understanding it correctly?\n\u003e \n\u003e Refs advertisement is just one of the uses. The replication plugin can have a user associated with it which is then responsible for defining which refs and projects you should replicate.\n\u003e \n\u003e The `git-refs-filter` module defines a new backend that is able to __hide__ refs for a specific user, which could be one made ad-hoc for replication.\n\u003e As a matter of fact, many people use `git-refs-filter` to speedup replication already today :-)\n\u003e \n\u003e However, it is up to you if you would like to use it, contribute to it or not. It isn\u0027t core and therefore it is optional by definition.\n\nInteresting. Are there examples of how to configure it like that? I had read through the docs, but what you explained here wasn\u0027t clear to me from them.",
+      "parentUuid": "21060778_9a24a764",
+      "revId": "885371394c3f076916ed011bb129a2832b572d1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
