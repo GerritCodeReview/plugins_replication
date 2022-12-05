@@ -177,6 +177,24 @@
       "parentUuid": "21060778_9a24a764",
       "revId": "885371394c3f076916ed011bb129a2832b572d1d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab484381_25e6546f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096442
+      },
+      "writtenOn": "2022-12-05T09:03:27Z",
+      "side": 1,
+      "message": "\u003e The replication plugin can have a user associated with it which is then responsible for defining which refs and projects you should replicate.\n\nAs I understand, since we want this behaviour for a specific remote, we would have different replication users for different remotes then? can you kindly share an example how we can do that?",
+      "parentUuid": "97366e36_8d5a43d7",
+      "revId": "885371394c3f076916ed011bb129a2832b572d1d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
