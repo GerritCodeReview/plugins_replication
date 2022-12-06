@@ -70,6 +70,30 @@
       },
       "revId": "2e797dd42e25911b16451fff28a6a0d0b8232e6e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52266b93_693053d8",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-12-06T17:10:54Z",
+      "side": 1,
+      "message": "I am fine with this, however the name is a bit misleading: you may think it is related to `/meta` but actually also applies to `robot-comments`, `draft-comments` and `starred-changes`.\n\nCould you think about a more meaningful name?",
+      "parentUuid": "e08eccff_29ac4235",
+      "range": {
+        "startLine": 590,
+        "startChar": 12,
+        "endLine": 590,
+        "endChar": 35
+      },
+      "revId": "2e797dd42e25911b16451fff28a6a0d0b8232e6e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
