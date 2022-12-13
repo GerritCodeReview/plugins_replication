@@ -166,6 +166,30 @@
       },
       "revId": "2e797dd42e25911b16451fff28a6a0d0b8232e6e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b58e06ef_edcd6b9e",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-12-13T23:35:19Z",
+      "side": 1,
+      "message": "\u003e I thought that `MetaRef` was referring to the refs having `/meta` in its name. I believe here you mean refs that contain meta-data?\n\nThey are refs having `meta` in their names.\n\n\u003e Can you think about a name that would avoid the same mistake I made by interpreting it?\n\nI think you\u0027re referring to a specific kind of meta ref: the change meta ref. That\u0027s fine, but there are many other meta refs (`refs/meta/config` being the first that was introduced to Gerrit). I don\u0027t think there\u0027s a better name for what Prudhvi intends, but if you mean only change meta refs, there\u0027s probably a good specific name we could determine for that when you have a use case for it.",
+      "parentUuid": "f901a2dd_75608738",
+      "range": {
+        "startLine": 590,
+        "startChar": 12,
+        "endLine": 590,
+        "endChar": 35
+      },
+      "revId": "2e797dd42e25911b16451fff28a6a0d0b8232e6e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
