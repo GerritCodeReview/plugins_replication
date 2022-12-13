@@ -142,6 +142,30 @@
       },
       "revId": "2e797dd42e25911b16451fff28a6a0d0b8232e6e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f901a2dd_75608738",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-12-13T22:59:45Z",
+      "side": 1,
+      "message": "I thought that `MetaRef` was referring to the refs having `/meta` in its name. I believe here you mean refs that contain meta-data?\nCan you think about a name that would avoid the same mistake I made by interpreting it?",
+      "parentUuid": "75ae05fd_fe92b310",
+      "range": {
+        "startLine": 590,
+        "startChar": 12,
+        "endLine": 590,
+        "endChar": 35
+      },
+      "revId": "2e797dd42e25911b16451fff28a6a0d0b8232e6e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
