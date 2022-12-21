@@ -190,6 +190,30 @@
       },
       "revId": "2e797dd42e25911b16451fff28a6a0d0b8232e6e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0c220ca_1256932c",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2022-12-21T22:29:18Z",
+      "side": 1,
+      "message": "I\u0027m going to mark this as resolved since I think there\u0027s sufficient core documentation of meta refs to disambiguate the meaning (though a consolidated doc would be a nice improvement that I would be happy to review).",
+      "parentUuid": "b58e06ef_edcd6b9e",
+      "range": {
+        "startLine": 590,
+        "startChar": 12,
+        "endLine": 590,
+        "endChar": 35
+      },
+      "revId": "2e797dd42e25911b16451fff28a6a0d0b8232e6e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
