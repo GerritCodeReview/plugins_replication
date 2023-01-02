@@ -201,6 +201,14 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     canceledWhileRunning.set(true);
   }
 
+  public static String formatKey(Project.NameKey projectName, URIish uri) {
+    return projectName.get() + "@" + uri.toString();
+  }
+
+  public String getKey() {
+    return formatKey(projectName, uri);
+  }
+
   @Override
   public Project.NameKey getProjectNameKey() {
     return projectName;
