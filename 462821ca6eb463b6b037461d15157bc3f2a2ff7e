@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "06871d08_a7b11395",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-01-02T13:48:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bfcc579_5152360c",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 39
+      },
+      "revId": "462821ca6eb463b6b037461d15157bc3f2a2ff7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "379b1418_3421b76f",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 15
@@ -58,6 +82,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86651830_ce5641e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-01-02T13:48:15Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "revId": "462821ca6eb463b6b037461d15157bc3f2a2ff7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f5006ed_0767f0fa",
@@ -81,6 +122,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc539500_1162daad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-01-02T13:48:15Z",
+      "side": 1,
+      "message": "OK, added conditional.",
+      "parentUuid": "7f5006ed_0767f0fa",
+      "range": {
+        "startLine": 445,
+        "startChar": 0,
+        "endLine": 457,
+        "endChar": 47
+      },
+      "revId": "462821ca6eb463b6b037461d15157bc3f2a2ff7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41673b49_255a3af4",
@@ -94,6 +159,30 @@
       "writtenOn": "2023-01-02T12:42:58Z",
       "side": 1,
       "message": "Is this really needed? Why is that dangerous if you have `${name}` in the ref part?",
+      "range": {
+        "startLine": 551,
+        "startChar": 0,
+        "endLine": 552,
+        "endChar": 49
+      },
+      "revId": "462821ca6eb463b6b037461d15157bc3f2a2ff7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd1f0c88_7f1eac87",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-01-02T13:48:15Z",
+      "side": 1,
+      "message": "Happily removed.",
+      "parentUuid": "41673b49_255a3af4",
       "range": {
         "startLine": 551,
         "startChar": 0,

@@ -16,6 +16,24 @@
       "message": "we need this logic both per any project name substitution.",
       "revId": "8f465cd3f1f3039a937bd3d863c192e33d8347a2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fd7b44f_7f6fed86",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-01-02T13:48:15Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "25876826_23b5d03d",
+      "revId": "8f465cd3f1f3039a937bd3d863c192e33d8347a2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }

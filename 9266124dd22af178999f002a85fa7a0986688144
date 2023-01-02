@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2939863b_3339988a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-01-02T13:48:15Z",
+      "side": 1,
+      "message": "I think a `clone()` method can be added, or maybe use `Serializable`?\n\nI would like to avoid modifying upstream jgit, it is very difficult to do this, may I submit a patch and update this when merged?\n\nFor now I added a conditional to skip this if not `${name}` as you implied down.",
+      "parentUuid": "c252a419_446fcc23",
+      "revId": "9266124dd22af178999f002a85fa7a0986688144",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c3cb53f_6d2148d3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 10
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Good point, actually that may have also applied before, if anyone would have had two remotes with the same URI.\n\nWould it make sense to have this extracted in its own change?",
       "parentUuid": "1c3cb53f_6d2148d3",
+      "revId": "9266124dd22af178999f002a85fa7a0986688144",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b70cff66_71dd2046",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-01-02T13:48:15Z",
+      "side": 1,
+      "message": "Done\n\nhttps://gerrit-review.googlesource.com/c/plugins/replication/+/355763",
+      "parentUuid": "f8f9ec3b_463a22f2",
       "revId": "9266124dd22af178999f002a85fa7a0986688144",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
