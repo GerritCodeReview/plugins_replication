@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bfcc579_5152360c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-01-02T12:42:58Z",
+      "side": 1,
+      "message": "add _as long as the ${name} is included in the destination ref, so that any possibility of conflicting refs can be avoided_",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 39
+      },
+      "revId": "462821ca6eb463b6b037461d15157bc3f2a2ff7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "379b1418_3421b76f",
@@ -14,6 +37,69 @@
       "writtenOn": "2023-01-02T11:15:21Z",
       "side": 1,
       "message": "Hello,\nI will appreciate if someone review this, it is very important for a simple CI integration.\nThanks,",
+      "revId": "462821ca6eb463b6b037461d15157bc3f2a2ff7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49fb4b9a_85bf0aa1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-01-02T12:42:58Z",
+      "side": 1,
+      "message": "Thanks for the adaptations, I\u0027d suggest *if you can* to break this down into separate smaller and more reviewable chunks.\n\nSome suggestions:\n1. Introduce the matching by key vs. by URIsh for PushOps lookups\n2. Allow replacement of ${name} in the push refs\n3. Allow push many repos to the same URI",
+      "revId": "462821ca6eb463b6b037461d15157bc3f2a2ff7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f5006ed_0767f0fa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-01-02T12:42:58Z",
+      "side": 1,
+      "message": "Do we *really* need to clone the repository destination when not using the `${name}` replacement in the refs?",
+      "range": {
+        "startLine": 445,
+        "startChar": 0,
+        "endLine": 457,
+        "endChar": 47
+      },
+      "revId": "462821ca6eb463b6b037461d15157bc3f2a2ff7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41673b49_255a3af4",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-01-02T12:42:58Z",
+      "side": 1,
+      "message": "Is this really needed? Why is that dangerous if you have `${name}` in the ref part?",
+      "range": {
+        "startLine": 551,
+        "startChar": 0,
+        "endLine": 552,
+        "endChar": 49
+      },
       "revId": "462821ca6eb463b6b037461d15157bc3f2a2ff7e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }

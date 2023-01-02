@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c252a419_446fcc23",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-01-02T12:42:58Z",
+      "side": 1,
+      "message": "I believe this would do the job, but at a cost of re-parsing it.\nAlternatively, you could implement a new constructor of RemoteConfig that receives all fields.\n\nI see that you are doing this every time that a new push occurs, which is a significant penalty IMHO.\n\nFor very busy servers, this is definitely an issue.",
+      "parentUuid": "dd118394_dfe52316",
+      "revId": "9266124dd22af178999f002a85fa7a0986688144",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c3cb53f_6d2148d3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 10
@@ -66,6 +84,24 @@
       "writtenOn": "2022-11-07T16:56:46Z",
       "side": 1,
       "message": "do not assume that destination uri is unique per configuration, we should combine tasks only if both source project and target uri are the same.",
+      "revId": "9266124dd22af178999f002a85fa7a0986688144",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8f9ec3b_463a22f2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-01-02T12:42:58Z",
+      "side": 1,
+      "message": "Good point, actually that may have also applied before, if anyone would have had two remotes with the same URI.\n\nWould it make sense to have this extracted in its own change?",
+      "parentUuid": "1c3cb53f_6d2148d3",
       "revId": "9266124dd22af178999f002a85fa7a0986688144",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
