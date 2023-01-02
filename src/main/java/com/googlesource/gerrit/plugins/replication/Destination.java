@@ -25,7 +25,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
-import com.google.common.io.Files;
 import com.google.common.net.UrlEscapers;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.AccountGroup;
@@ -84,6 +83,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -215,6 +215,16 @@ public class Destination {
     deleteProjectFactory = child.getInstance(DeleteProjectTask.Factory.class);
     updateHeadFactory = child.getInstance(UpdateHeadTask.Factory.class);
     threadScoper = child.getInstance(PerThreadRequestScope.Scoper.class);
+  }
+
+  public RemoteConfig cloneRemoteConfig(RemoteConfig remoteConfig) {
+    try {
+      Config config = new Config();
+      remoteConfig.update(config);
+      return new RemoteConfig(config, remoteConfig.getName());
+    } catch (URISyntaxException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   private void addRecursiveParents(
@@ -437,7 +447,23 @@ public class Destination {
       PushOne task = getPendingPush(pushOneKey);
       if (task == null) {
 
-        task = opFactory.create(project, uri);
+        RemoteConfig taskRemoteConfig = config.getRemoteConfig();
+        if (config.requireRemoteUrlTemplate()) {
+          taskRemoteConfig = cloneRemoteConfig(taskRemoteConfig);
+          taskRemoteConfig.setPushRefSpecs(
+              taskRemoteConfig.getPushRefSpecs().stream()
+                  .map(
+                      e ->
+                          e.setDestination(
+                              ReplicationFileBasedConfig.replaceName(
+                                  config.getRemoteNameStyle(),
+                                  e.getDestination(),
+                                  project.get(),
+                                  false)))
+                  .collect(Collectors.toList()));
+        }
+
+        task = opFactory.create(taskRemoteConfig, project, uri);
         addRefs(task, ImmutableSet.copyOf(refsToSchedule));
         task.addState(refsToSchedule, state);
         @SuppressWarnings("unused")
@@ -656,10 +682,6 @@ public class Destination {
     return matches;
   }
 
-  boolean isSingleProjectMatch() {
-    return config.isSingleProjectMatch();
-  }
-
   boolean wouldPushRef(String ref) {
     if (!config.replicatePermissions() && RefNames.REFS_CONFIG.equals(ref)) {
       repLog.atFine().log("Skipping push of ref %s; it is a meta ref", ref);
@@ -721,7 +743,8 @@ public class Destination {
   }
 
   URIish getURI(URIish template, Project.NameKey project) throws URISyntaxException {
-    return getURI(template, project, config.getRemoteNameStyle(), config.isSingleProjectMatch());
+    return getURI(
+        template, project, config.getRemoteNameStyle(), config.requireRemoteUrlTemplate());
   }
 
   @VisibleForTesting
@@ -729,23 +752,14 @@ public class Destination {
       URIish template,
       Project.NameKey project,
       String remoteNameStyle,
-      boolean isSingleProjectMatch)
+      boolean requireRemoteUrlTemplate)
       throws URISyntaxException {
     String name = project.get();
     if (needsUrlEscaping(template)) {
       name = escape(name);
     }
-
-    if (remoteNameStyle.equals("dash")) {
-      name = name.replace("/", "-");
-    } else if (remoteNameStyle.equals("underscore")) {
-      name = name.replace("/", "_");
-    } else if (remoteNameStyle.equals("basenameOnly")) {
-      name = Files.getNameWithoutExtension(name);
-    } else if (!remoteNameStyle.equals("slash")) {
-      repLog.atFine().log("Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
-    }
-    String replacedPath = replaceName(template.getPath(), name, isSingleProjectMatch);
+    String replacedPath =
+        replaceName(remoteNameStyle, template.getPath(), name, requireRemoteUrlTemplate);
     return (replacedPath != null) ? template.setRawPath(replacedPath) : template;
   }
 
@@ -796,6 +810,14 @@ public class Destination {
 
   public long getReplicationDelayMilliseconds() {
     return config.getDelay() * 1000L;
+  }
+
+  public String getRemoteNameStyle() {
+    return config.getRemoteNameStyle();
+  }
+
+  boolean requireRemoteUrlTemplate() {
+    return config.requireRemoteUrlTemplate();
   }
 
   int getSlowLatencyThreshold() {
