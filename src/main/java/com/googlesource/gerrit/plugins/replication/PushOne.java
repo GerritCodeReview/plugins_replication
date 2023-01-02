@@ -109,7 +109,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   static final String UPDATE_REF_FAILURE = "failed to update ref";
 
   interface Factory {
-    PushOne create(Project.NameKey d, URIish u);
+    PushOne create(RemoteConfig c, Project.NameKey d, URIish u);
   }
 
   private final GitRepositoryManager gitManager;
@@ -199,6 +199,14 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
         "Replication [%s] to %s was canceled while being executed",
         HexFormat.fromInt(id), getURI());
     canceledWhileRunning.set(true);
+  }
+
+  public static String formatKey(Project.NameKey projectName, URIish uri) {
+    return projectName.get() + "/" + uri.toString();
+  }
+
+  public String getKey() {
+    return formatKey(projectName, uri);
   }
 
   @Override
