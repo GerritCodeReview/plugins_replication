@@ -178,6 +178,51 @@ public class ReplicationIT extends ReplicationDaemon {
   }
 
   @Test
+  public void shouldReplicateNewBranchToURLWithMultipileConfiguration() throws Exception {
+    setReplicationDestination(
+        "foo1",
+        Arrays.asList("replica"),
+        ALL_PROJECTS,
+        TEST_REPLICATION_DELAY_SECONDS,
+        false,
+        Optional.empty(),
+        Arrays.asList("+refs/*:refs/foo1/*"));
+    setReplicationDestination(
+        "foo2",
+        Arrays.asList("replica"),
+        ALL_PROJECTS,
+        TEST_REPLICATION_DELAY_SECONDS,
+        false,
+        Optional.empty(),
+        Arrays.asList("+refs/*:refs/foo2/*"));
+    reloadConfig();
+
+    Project.NameKey targetProject = createTestProject(project + "replica");
+
+    String newBranch = "refs/heads/mybranch";
+    String expectedFoo1Branch = "refs/foo1/heads/mybranch";
+    String expectedFoo2Branch = "refs/foo2/heads/mybranch";
+    String master = "refs/heads/master";
+
+    BranchInput input = new BranchInput();
+    input.revision = master;
+    gApi.projects().name(project.get()).branch(newBranch).create(input);
+    try (Repository repo = repoManager.openRepository(targetProject);
+        Repository sourceRepo = repoManager.openRepository(project)) {
+      waitUntil(
+          () ->
+              checkedGetRef(repo, expectedFoo1Branch) != null
+                  && checkedGetRef(repo, expectedFoo2Branch) != null);
+      Ref masterRef = getRef(sourceRepo, master);
+      for (String expectedBranch : new String[] {expectedFoo1Branch, expectedFoo2Branch}) {
+        Ref targetBranchRef = getRef(repo, expectedBranch);
+        assertThat(targetBranchRef).isNotNull();
+        assertThat(targetBranchRef.getObjectId()).isEqualTo(masterRef.getObjectId());
+      }
+    }
+  }
+
+  @Test
   public void shouldMatchTemplatedURL() throws Exception {
     Project.NameKey targetProject = createTestProject(project + "replica");
 
