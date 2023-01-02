@@ -77,7 +77,7 @@ public class DestinationConfigParser implements ConfigParser {
 
       DestinationConfiguration destinationConfiguration = new DestinationConfiguration(c, config);
 
-      if (!destinationConfiguration.isSingleProjectMatch()) {
+      if (destinationConfiguration.requiresRemoteUrlTemplate()) {
         for (URIish u : c.getURIs()) {
           if (u.getPath() == null || !u.getPath().contains("${name}")) {
             throw new ConfigInvalidException(
