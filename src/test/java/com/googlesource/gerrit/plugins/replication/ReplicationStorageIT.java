@@ -302,12 +302,15 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
 
     createTestProject(projectName);
 
+    PushOne.PushOneKey taskKey =
+        PushOne.PushOneKey.create(Project.NameKey.parse(projectName), urish);
+
     WaitUtil.waitUntil(
-        () -> isTaskRescheduled(destination.getQueueInfo(), urish), TEST_NEW_PROJECT_TIMEOUT);
+        () -> isTaskRescheduled(destination.getQueueInfo(), taskKey), TEST_NEW_PROJECT_TIMEOUT);
     // replicationRetry is set to 1 minute which is the minimum value. That's why
     // should be safe to get the pushOne object from pending because it should be
     // here for one minute
-    PushOne pushOp = destination.getQueueInfo().pending.get(urish);
+    PushOne pushOp = destination.getQueueInfo().pending.get(taskKey);
 
     WaitUtil.waitUntil(() -> pushOp.wasCanceled(), MAX_RETRY_WITH_TOLERANCE_TIMEOUT);
     WaitUtil.waitUntil(() -> isTaskCleanedUp(), TEST_TASK_FINISH_TIMEOUT);
@@ -333,8 +336,8 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     assertThat(listWaitingReplicationTasks(branchToDelete)).hasSize(1);
   }
 
-  private boolean isTaskRescheduled(QueueInfo queue, URIish uri) {
-    PushOne pushOne = queue.pending.get(uri);
+  private boolean isTaskRescheduled(QueueInfo queue, PushOne.PushOneKey key) {
+    PushOne pushOne = queue.pending.get(key);
     return pushOne == null ? false : pushOne.isRetrying();
   }
 
