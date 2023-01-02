@@ -147,7 +147,6 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       GitRepositoryManager grm,
       PermissionBackend permissionBackend,
       Destination p,
-      RemoteConfig c,
       ReplicationConfig rc,
       CredentialsFactory cpFactory,
       PerThreadRequestScope.Scoper ts,
@@ -157,6 +156,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       ProjectCache pc,
       CreateProjectTask.Factory cpf,
       TransportFactory tf,
+      @Assisted RemoteConfig c,
       @Assisted Project.NameKey d,
       @Assisted URIish u) {
     gitManager = grm;

@@ -113,7 +113,11 @@ public class DestinationsCollection implements ReplicationDestinations {
 
         if (!isGerrit(uri) && !isGerritHttp(uri)) {
           String path =
-              replaceName(uri.getPath(), projectName.get(), config.isSingleProjectMatch());
+              replaceName(
+                  config.getRemoteNameStyle(),
+                  uri.getPath(),
+                  projectName.get(),
+                  config.requireRemoteUrlTemplate());
           if (path == null) {
             repLog.atWarning().log("adminURL %s does not contain ${name}", uri);
             continue;
