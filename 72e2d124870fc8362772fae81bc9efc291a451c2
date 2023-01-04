@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f71e8848_f64616b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-01-04T00:29:01Z",
+      "side": 1,
+      "message": "You don\u0027t explain why you think they should be treated as separate entries, so I\u0027m left trying to make big guesses. Please help me avoid guessing and fill in what use case you have that doesn\u0027t work correctly without this change.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 11
+      },
+      "revId": "72e2d124870fc8362772fae81bc9efc291a451c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb1102ce_4b6ca836",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-01-04T00:29:01Z",
+      "side": 1,
+      "message": "We need to be sure this doesn\u0027t break the logic that avoids pushing to the same project at the same URI simultaneously. I think because you\u0027re including the project in the key it will be safe, but it would be good to check that there\u0027s test coverage for it. I would also worry about consolidations working correctly still too.",
+      "revId": "72e2d124870fc8362772fae81bc9efc291a451c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed1b84de_ba2102c3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-01-04T00:29:01Z",
+      "side": 1,
+      "message": "Why do you need to pass this config instead of letting it be injected? Should it become `@Assisted` [in the constructor](https://gerrit-review.googlesource.com/c/plugins/replication/+/355763/1/src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java#150)?",
+      "range": {
+        "startLine": 436,
+        "startChar": 32,
+        "endLine": 436,
+        "endChar": 56
+      },
+      "revId": "72e2d124870fc8362772fae81bc9efc291a451c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
