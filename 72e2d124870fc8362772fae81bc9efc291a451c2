@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b60963d8_c9375e3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-01-04T09:36:41Z",
+      "side": 1,
+      "message": "I tried to describe it better, it was split from the allowManyToOneReplication requested by @luca.milanesio@gmail.com as it may be helpful by its own.",
+      "parentUuid": "f71e8848_f64616b2",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 11
+      },
+      "revId": "72e2d124870fc8362772fae81bc9efc291a451c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb1102ce_4b6ca836",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91c4c8e1_5b4ed9a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-01-04T09:36:41Z",
+      "side": 1,
+      "message": "I added an integration test.",
+      "parentUuid": "bb1102ce_4b6ca836",
+      "revId": "72e2d124870fc8362772fae81bc9efc291a451c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed1b84de_ba2102c3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
         "patchSetId": 1
@@ -54,6 +96,30 @@
       "writtenOn": "2023-01-04T00:29:01Z",
       "side": 1,
       "message": "Why do you need to pass this config instead of letting it be injected? Should it become `@Assisted` [in the constructor](https://gerrit-review.googlesource.com/c/plugins/replication/+/355763/1/src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java#150)?",
+      "range": {
+        "startLine": 436,
+        "startChar": 32,
+        "endLine": 436,
+        "endChar": 56
+      },
+      "revId": "72e2d124870fc8362772fae81bc9efc291a451c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32dc7e60_0a6fc0e9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-01-04T09:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed1b84de_ba2102c3",
       "range": {
         "startLine": 436,
         "startChar": 32,
