@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "501e0ce0_0516281b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-01-11T10:03:30Z",
+      "side": 1,
+      "message": "Hi, can someone look into Zuul, it seems that it fails to create the build environment for plugins.",
+      "revId": "e65491345aaeb43871dfd679985472230874c7cf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
