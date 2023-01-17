@@ -96,6 +96,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da18967e_dc8f8be5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-01-17T16:31:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "19b9373c_89adc179",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 11
+      },
+      "revId": "72e2d124870fc8362772fae81bc9efc291a451c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb1102ce_4b6ca836",
@@ -127,6 +151,24 @@
       "side": 1,
       "message": "I added an integration test.",
       "parentUuid": "bb1102ce_4b6ca836",
+      "revId": "72e2d124870fc8362772fae81bc9efc291a451c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43d66a22_0fbb3b06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-01-17T16:31:12Z",
+      "side": 1,
+      "message": "Thanks! That test looks to cover the new/fixed functionality. I\u0027m also concerned about the existing functionality I mentioned. Do we have sufficient test coverage for that existing functionality to ensure your new key logic doesn\u0027t break it?",
+      "parentUuid": "91c4c8e1_5b4ed9a7",
       "revId": "72e2d124870fc8362772fae81bc9efc291a451c2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },

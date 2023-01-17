@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94f23c99_1918028f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-01-17T16:31:12Z",
+      "side": 1,
+      "message": "Did you have any particular criteria in mind for why you used this format for the key? I understand why you have both project and uri, so I\u0027m looking for any criteria beyond that.",
+      "range": {
+        "startLine": 205,
+        "startChar": 11,
+        "endLine": 205,
+        "endChar": 51
+      },
+      "revId": "4c4b28a91e0cc4ff2286f0be7d2437826f983f39",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ee88b14_57db32c0",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-01-17T16:31:12Z",
+      "side": 1,
+      "message": "nit: I think we would prefer `List.of(expectedFoo1Branch, expectedFoo2Branch)` instead of creating a String array.",
+      "range": {
+        "startLine": 217,
+        "startChar": 35,
+        "endLine": 217,
+        "endChar": 88
+      },
+      "revId": "4c4b28a91e0cc4ff2286f0be7d2437826f983f39",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
