@@ -253,7 +253,9 @@ public class ReplicationIT extends ReplicationDaemon {
   public void pushAllWaitCancelNotRunningTask() throws Exception {
     createTestProject(project + "replica");
 
-    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    // pushing to the same replica should result in a single task
+    setReplicationDestination("foo1", "replica", ALL_PROJECTS);
+    setReplicationDestination("foo2", "replica", ALL_PROJECTS);
     reloadConfig();
 
     ReplicationState state = new ReplicationState(NO_OP);
@@ -282,7 +284,7 @@ public class ReplicationIT extends ReplicationDaemon {
         });
 
     // Cancel the replication task
-    waitUntil(() -> getProjectTasks().size() != 0);
+    waitUntil(() -> getProjectTasks().size() == 1);
     WorkQueue.Task<?> task = getProjectTasks().get(0);
     assertThat(task.getState()).isAnyOf(WorkQueue.Task.State.READY, WorkQueue.Task.State.SLEEPING);
     task.cancel(false);
