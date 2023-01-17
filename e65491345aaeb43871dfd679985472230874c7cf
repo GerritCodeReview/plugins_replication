@@ -16,6 +16,24 @@
       "message": "Hi, can someone look into Zuul, it seems that it fails to create the build environment for plugins.",
       "revId": "e65491345aaeb43871dfd679985472230874c7cf",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0f118cc_3db3dbd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096442
+      },
+      "writtenOn": "2023-01-17T11:36:54Z",
+      "side": 1,
+      "message": "Yes, fixed the CI now. re-ran the CI job.",
+      "parentUuid": "501e0ce0_0516281b",
+      "revId": "e65491345aaeb43871dfd679985472230874c7cf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
