@@ -173,6 +173,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f178acd9_711b0626",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-01-17T17:55:03Z",
+      "side": 1,
+      "message": "Please checkout https://gerrit-review.googlesource.com/c/plugins/replication/+/356408 I hope this what you mean.",
+      "parentUuid": "43d66a22_0fbb3b06",
+      "revId": "72e2d124870fc8362772fae81bc9efc291a451c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed1b84de_ba2102c3",

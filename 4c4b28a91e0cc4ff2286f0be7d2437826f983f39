@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "004efa06_191ed4b8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-01-17T17:55:03Z",
+      "side": 1,
+      "message": "Mainly because this what `Destination::getPendingPush()` already gets... I am opened for any other suggestion.",
+      "parentUuid": "94f23c99_1918028f",
+      "range": {
+        "startLine": 205,
+        "startChar": 11,
+        "endLine": 205,
+        "endChar": 51
+      },
+      "revId": "4c4b28a91e0cc4ff2286f0be7d2437826f983f39",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ee88b14_57db32c0",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-17T16:31:12Z",
       "side": 1,
       "message": "nit: I think we would prefer `List.of(expectedFoo1Branch, expectedFoo2Branch)` instead of creating a String array.",
+      "range": {
+        "startLine": 217,
+        "startChar": 35,
+        "endLine": 217,
+        "endChar": 88
+      },
+      "revId": "4c4b28a91e0cc4ff2286f0be7d2437826f983f39",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f3a9ee4_81d3cf04",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-01-17T17:55:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee88b14_57db32c0",
       "range": {
         "startLine": 217,
         "startChar": 35,
