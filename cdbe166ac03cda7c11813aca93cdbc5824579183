@@ -36,6 +36,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "877f3e90_9bc50c8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-02-20T09:14:58Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "revId": "cdbe166ac03cda7c11813aca93cdbc5824579183",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "521ff34d_51ba0f85",
@@ -59,6 +76,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aab7266_488bc0c8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-02-20T09:14:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "521ff34d_51ba0f85",
+      "range": {
+        "startLine": 460,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 3
+      },
+      "revId": "cdbe166ac03cda7c11813aca93cdbc5824579183",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57be3ea7_7748bee9",
@@ -72,6 +113,30 @@
       "writtenOn": "2023-02-20T08:56:39Z",
       "side": 1,
       "message": "`getPendingPushByKey(pushOp.getKey())`",
+      "range": {
+        "startLine": 527,
+        "startChar": 30,
+        "endLine": 527,
+        "endChar": 52
+      },
+      "revId": "cdbe166ac03cda7c11813aca93cdbc5824579183",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d1f18c5_adfb6c1a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-02-20T09:14:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57be3ea7_7748bee9",
       "range": {
         "startLine": 527,
         "startChar": 30,
