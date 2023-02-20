@@ -34,6 +34,52 @@
       "parentUuid": "8f9f5d2e_8160a809",
       "revId": "cdbe166ac03cda7c11813aca93cdbc5824579183",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "521ff34d_51ba0f85",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-02-20T08:56:39Z",
+      "side": 1,
+      "message": "I am not sure the overall intention of this method is clear by his name.\n\nExample:\n```\nPushOne fooPush\nPushOne barPush \u003d getPendingPush(fooPush)\n```\n\nBy reading the above caller code, what do you believe it will do?\nThe `getPendingPush` isn\u0027t telling the full story.\n\nI\u0027d just rename `getPendingPush` to `getPendingPushByKey` at L470 and remove this method altogether.",
+      "range": {
+        "startLine": 460,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 3
+      },
+      "revId": "cdbe166ac03cda7c11813aca93cdbc5824579183",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57be3ea7_7748bee9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-02-20T08:56:39Z",
+      "side": 1,
+      "message": "`getPendingPushByKey(pushOp.getKey())`",
+      "range": {
+        "startLine": 527,
+        "startChar": 30,
+        "endLine": 527,
+        "endChar": 52
+      },
+      "revId": "cdbe166ac03cda7c11813aca93cdbc5824579183",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
