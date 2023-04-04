@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6566b7f7_972b85e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-04T20:51:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66c026e5_8d6a8ecd",
+      "range": {
+        "startLine": 9,
+        "startChar": 67,
+        "endLine": 9,
+        "endChar": 74
+      },
+      "revId": "44b68fd02326038d3552895463155e3ae4a4391a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d71c9c6_8dc9a1e0",
@@ -47,6 +71,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7de7f982_2e067d53",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-04T20:51:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d71c9c6_8dc9a1e0",
+      "range": {
+        "startLine": 287,
+        "startChar": 45,
+        "endLine": 287,
+        "endChar": 49
+      },
+      "revId": "44b68fd02326038d3552895463155e3ae4a4391a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5cfb432_e74a0e75",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-04-04T20:22:48Z",
       "side": 1,
       "message": "This can be avoided because of the check for `\u003d\u003d 1` on L287",
+      "range": {
+        "startLine": 288,
+        "startChar": 4,
+        "endLine": 288,
+        "endChar": 54
+      },
+      "revId": "44b68fd02326038d3552895463155e3ae4a4391a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "465a5611_ff5d8954",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-04T20:51:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5cfb432_e74a0e75",
       "range": {
         "startLine": 288,
         "startChar": 4,
