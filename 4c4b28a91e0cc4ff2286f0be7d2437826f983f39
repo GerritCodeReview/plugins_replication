@@ -120,6 +120,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7b677d5_5297fa5a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-04T20:51:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdfe8237_ebd6210f",
+      "range": {
+        "startLine": 205,
+        "startChar": 11,
+        "endLine": 205,
+        "endChar": 51
+      },
+      "revId": "4c4b28a91e0cc4ff2286f0be7d2437826f983f39",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ee88b14_57db32c0",
