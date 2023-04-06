@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f653b560_1bde6796",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T19:35:18Z",
+      "side": 1,
+      "message": "I don\u0027t think this statement is true, there are plenty of reasons to have separate repositories. Maybe what you mean is \"There is no reason to enforce that so many repositories be used for this purpose\"?",
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4646eb18_98b6a812",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T19:35:18Z",
+      "side": 1,
+      "message": "Without an enforcement method to avoid conflicts, this could result in an \"infinite\" replication scenario where two different remote entries keep overwriting each other. Can you think of some way to configure this so that the plugin can sanity check this and prevent that problem?",
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba8ef7e3_117ee6dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T19:35:18Z",
+      "side": 1,
+      "message": "nit: s/monitor/monitors/",
+      "range": {
+        "startLine": 37,
+        "startChar": 13,
+        "endLine": 37,
+        "endChar": 21
+      },
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0312b6fa_4d6d3109",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T19:35:18Z",
+      "side": 1,
+      "message": "This isn\u0027t safe as project names can contain all sorts of characters which are not legal in ref names. Perhaps this should use a different variable here then name (${name} should really have been ${project}), maybe something like ${ref_encoded_project}?",
+      "range": {
+        "startLine": 41,
+        "startChar": 51,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
