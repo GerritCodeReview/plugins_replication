@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ddcf222_1c5372c3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T20:43:21Z",
+      "side": 1,
+      "message": "s/allow/allowed/",
+      "range": {
+        "startLine": 83,
+        "startChar": 16,
+        "endLine": 83,
+        "endChar": 22
+      },
+      "revId": "ff03b0fd598a1d9dfcc75d7081af8a9b411d6004",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7fee4e7_91d97254",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T20:43:21Z",
+      "side": 1,
+      "message": "s/requireRemoteUrlTemplate/requiresRemoteUrlTemplate/",
+      "range": {
+        "startLine": 125,
+        "startChar": 18,
+        "endLine": 125,
+        "endChar": 42
+      },
+      "revId": "ff03b0fd598a1d9dfcc75d7081af8a9b411d6004",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6715ff0_c4440e4a",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T20:43:21Z",
+      "side": 1,
+      "message": "s/value/refspec/ ?",
+      "range": {
+        "startLine": 364,
+        "startChar": 25,
+        "endLine": 364,
+        "endChar": 31
+      },
+      "revId": "ff03b0fd598a1d9dfcc75d7081af8a9b411d6004",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f45cd20_99137414",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T20:43:21Z",
+      "side": 1,
+      "message": "d/should be specified/ (I don\u0027t think that makes sense in this sentence)?",
+      "revId": "ff03b0fd598a1d9dfcc75d7081af8a9b411d6004",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "830d0f6f_fd227f19",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T20:43:21Z",
+      "side": 1,
+      "message": "It is not clear to me what this actually enables. How is the behavior of the plugin changing when this is enabled? i.e. if I have a configuration that works with \u0027allowManyToOneReplication\u0027 set to \u0027true\u0027, what happens if I then change it to \u0027false\u0027?",
+      "range": {
+        "startLine": 545,
+        "startChar": 12,
+        "endLine": 545,
+        "endChar": 37
+      },
+      "revId": "ff03b0fd598a1d9dfcc75d7081af8a9b411d6004",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0253026_69f6499d",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T20:43:21Z",
+      "side": 1,
+      "message": "s/to/for/",
+      "range": {
+        "startLine": 546,
+        "startChar": 45,
+        "endLine": 546,
+        "endChar": 48
+      },
+      "revId": "ff03b0fd598a1d9dfcc75d7081af8a9b411d6004",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b09d4192_0503eaea",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T20:43:21Z",
+      "side": 1,
+      "message": "s/usable/useful/",
+      "range": {
+        "startLine": 547,
+        "startChar": 9,
+        "endLine": 547,
+        "endChar": 16
+      },
+      "revId": "ff03b0fd598a1d9dfcc75d7081af8a9b411d6004",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b33eaae_6c61ae77",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T20:43:21Z",
+      "side": 1,
+      "message": "Maybe \"manyToOne\" isn\u0027t the best term for this. Multi",
+      "revId": "ff03b0fd598a1d9dfcc75d7081af8a9b411d6004",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
