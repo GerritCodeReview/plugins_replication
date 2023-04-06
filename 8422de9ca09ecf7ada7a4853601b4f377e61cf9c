@@ -70,6 +70,30 @@
       },
       "revId": "8422de9ca09ecf7ada7a4853601b4f377e61cf9c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e42ac18_58820363",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-06T19:02:42Z",
+      "side": 1,
+      "message": "As far as I understand printing the `AutoValue` it will be semi json format[1], which is decent, in the past it was mostly URI as string:\n\n assertEquals(\"Animal{name\u003ddog, numberOfLegs\u003d4}\", dog.toString());\n \n[1] https://github.com/google/auto/blob/main/value/userguide/index.md#usage",
+      "parentUuid": "21545ff5_7f48a1fc",
+      "range": {
+        "startLine": 205,
+        "startChar": 31,
+        "endLine": 205,
+        "endChar": 35
+      },
+      "revId": "8422de9ca09ecf7ada7a4853601b4f377e61cf9c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
