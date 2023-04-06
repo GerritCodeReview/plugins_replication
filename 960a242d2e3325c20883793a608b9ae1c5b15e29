@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d2e21e0_bb0f1c50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-06T20:04:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f653b560_1bde6796",
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4646eb18_98b6a812",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be1a1142_300fd0ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-06T20:04:12Z",
+      "side": 1,
+      "message": "I do not think we can do this safely, however, as this is default off and will be turned on only if sysadmin uses it, I believe it is safe to assume that whoever uses this configures the system correctly.",
+      "parentUuid": "4646eb18_98b6a812",
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba8ef7e3_117ee6dd",
         "filename": "/COMMIT_MSG",
         "patchSetId": 21
@@ -48,6 +84,30 @@
       "writtenOn": "2023-04-06T19:35:18Z",
       "side": 1,
       "message": "nit: s/monitor/monitors/",
+      "range": {
+        "startLine": 37,
+        "startChar": 13,
+        "endLine": 37,
+        "endChar": 21
+      },
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff27a183_1756eaa0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-06T20:04:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba8ef7e3_117ee6dd",
       "range": {
         "startLine": 37,
         "startChar": 13,
@@ -77,6 +137,47 @@
         "endLine": 41,
         "endChar": 55
       },
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17183e8d_e15abfe7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-06T20:04:12Z",
+      "side": 1,
+      "message": "`${name}` is already supported in current implementation as destination name, it is encoded based on the gerrit encoded roles, see `config.md`.\n\ncurrently the problem is that no `${name}` transfomration is reversible, after this merged I will submit a new patch for more transformation schemas.",
+      "parentUuid": "0312b6fa_4d6d3109",
+      "range": {
+        "startLine": 41,
+        "startChar": 51,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31a79b4e_81f6ae64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-06T20:04:12Z",
+      "side": 1,
+      "message": "Thank you for reviewing.",
       "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
