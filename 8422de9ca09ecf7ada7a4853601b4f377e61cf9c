@@ -94,6 +94,30 @@
       },
       "revId": "8422de9ca09ecf7ada7a4853601b4f377e61cf9c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45de5f6d_b0cd498f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T19:34:42Z",
+      "side": 1,
+      "message": "I don\u0027t know that the toString() matters, do you know if it is actually used anywhere? Does it appear in the show-queue output? It it isn\u0027t used anywhere, then it should be fine.",
+      "parentUuid": "6e42ac18_58820363",
+      "range": {
+        "startLine": 205,
+        "startChar": 31,
+        "endLine": 205,
+        "endChar": 35
+      },
+      "revId": "8422de9ca09ecf7ada7a4853601b4f377e61cf9c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
