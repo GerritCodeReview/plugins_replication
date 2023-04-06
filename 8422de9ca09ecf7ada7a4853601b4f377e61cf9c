@@ -46,6 +46,30 @@
       },
       "revId": "8422de9ca09ecf7ada7a4853601b4f377e61cf9c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21545ff5_7f48a1fc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T18:52:56Z",
+      "side": 1,
+      "message": "\u003e I was not familiar with the `AutoValue` concept.\n\u003e I tried my best to leverage it in the new revision, I hope I\u0027ve done this OK.\n\nYes, approach looks good!\n\n\u003e Please also tell me what you think regarding the log print of the string representation of the `AutoValue` in the logs, or should I manually format it to some other notation.\n\nI\u0027m not sure, do you have a sample of the format somewhere?",
+      "parentUuid": "71e0eb5a_f6be0545",
+      "range": {
+        "startLine": 205,
+        "startChar": 31,
+        "endLine": 205,
+        "endChar": 35
+      },
+      "revId": "8422de9ca09ecf7ada7a4853601b4f377e61cf9c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }

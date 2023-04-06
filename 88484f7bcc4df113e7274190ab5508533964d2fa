@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25a48931_4d9ac855",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T18:52:56Z",
+      "side": 1,
+      "message": "I\u0027m not sure that using the above type of configuration is a good idea. It seems that will prevent ref consolidation to to the same URI and thus will result in more pushes. This also will make it likely that these pushes will conflict with each other if they have to update the packedrefs file (for deletes). But I can understand why you might want to do this, and don\u0027t see any reason why we shouldn\u0027t support it.",
+      "revId": "88484f7bcc4df113e7274190ab5508533964d2fa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14dc2935_13b562ec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-06T18:52:56Z",
+      "side": 1,
+      "message": "Should be public (it is returned by a public API).\n\nI would just call this Key, no need to repeat PushOne in the name.",
+      "revId": "88484f7bcc4df113e7274190ab5508533964d2fa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
