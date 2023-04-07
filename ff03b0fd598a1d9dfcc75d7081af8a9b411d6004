@@ -226,6 +226,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d57e1ed8_dee436af",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-07T12:25:21Z",
+      "side": 1,
+      "message": "\u003e If you change it to false the plugin behaves as it currently behaves, it will require a template based on name if multiple projects match the configuration entry, this is a safeguard that is applied, refer to `RemoteConfiguration::requiresRemoteUrlTemplate`.\n\nThis is unclear to me. My suggestion is to use to name this after what it does, not after what you suggest it be used for. You seem to be suggesting that I refer to the code? We want the docs to be clear so that people don\u0027t have to refer to the code.",
+      "parentUuid": "4ba91d3d_d072f9c0",
+      "range": {
+        "startLine": 545,
+        "startChar": 12,
+        "endLine": 545,
+        "endChar": 37
+      },
+      "revId": "ff03b0fd598a1d9dfcc75d7081af8a9b411d6004",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0253026_69f6499d",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 22
@@ -349,6 +373,24 @@
       "side": 1,
       "message": "multiToOne?",
       "parentUuid": "3b33eaae_6c61ae77",
+      "revId": "ff03b0fd598a1d9dfcc75d7081af8a9b411d6004",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f77de86d_47e075a7",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-07T12:25:21Z",
+      "side": 1,
+      "message": "I\u0027m sorry, this comment got cut-off. Ignore it for now.",
+      "parentUuid": "f69fa8e2_4d90d505",
       "revId": "ff03b0fd598a1d9dfcc75d7081af8a9b411d6004",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
