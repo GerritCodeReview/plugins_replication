@@ -297,6 +297,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "538d115a_67f76611",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-07T13:51:38Z",
+      "side": 1,
+      "message": "\u003e thanks for the reference after template transformation, I will apply URL enode for these cases, will it be ok?\n\nNo, I don\u0027t, see above. We are not likely the first people that want to be able to encode arbitrary strings into refnames, so perhaps some extra research will yield a reliable solution?",
+      "parentUuid": "a46e2d39_75f01823",
+      "range": {
+        "startLine": 41,
+        "startChar": 51,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "31a79b4e_81f6ae64",
