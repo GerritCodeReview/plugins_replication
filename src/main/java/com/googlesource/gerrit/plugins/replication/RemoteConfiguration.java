@@ -112,25 +112,24 @@ public interface RemoteConfiguration {
   boolean replicateNoteDbMetaRefs();
 
   /**
-   * Whether the remote configuration is for a single project only
+   * Whether the remote configuration requires a template of `${name}`.
    *
-   * @return true, when configuration is for a single project, false otherwise
+   * @return true, when configuration requires a template.
    */
-  default boolean isSingleProjectMatch() {
+  default boolean requiresRemoteUrlTemplate() {
+
     List<String> projects = getProjects();
-    boolean ret = (projects.size() == 1);
-    if (ret) {
-      String projectMatch = projects.get(0);
-      if (ReplicationFilter.getPatternType(projectMatch)
-          != ReplicationFilter.PatternType.EXACT_MATCH) {
-        // projectMatch is either regular expression, or wild-card.
-        //
-        // Even though they might refer to a single project now, they need not
-        // after new projects have been created. Hence, we do not treat them as
-        // matching a single project.
-        ret = false;
-      }
+
+    if (projects.size() != 1) {
+      return true;
     }
-    return ret;
+
+    // The project is either regular expression, or wild-card.
+    //
+    // Even though they might refer to a single project now, they need not
+    // after new projects have been created. Hence, we do not treat them as
+    // matching a single project.
+    return ReplicationFilter.getPatternType(projects.get(0))
+        != ReplicationFilter.PatternType.EXACT_MATCH;
   }
 }

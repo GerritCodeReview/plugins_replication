@@ -15,7 +15,6 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.gerrit.server.project.ProjectCache.noSuchProject;
-import static com.googlesource.gerrit.plugins.replication.ReplicationFileBasedConfig.replaceName;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.NON_EXISTING;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.REJECTED_OTHER_REASON;
 
@@ -25,7 +24,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
-import com.google.common.io.Files;
 import com.google.common.net.UrlEscapers;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.AccountGroup;
@@ -655,10 +653,6 @@ public class Destination {
     return matches;
   }
 
-  boolean isSingleProjectMatch() {
-    return config.isSingleProjectMatch();
-  }
-
   boolean wouldPushRef(String ref) {
     if (!config.replicatePermissions() && RefNames.REFS_CONFIG.equals(ref)) {
       repLog.atFine().log("Skipping push of ref %s; it is a meta ref", ref);
@@ -720,31 +714,18 @@ public class Destination {
   }
 
   URIish getURI(URIish template, Project.NameKey project) throws URISyntaxException {
-    return getURI(template, project, config.getRemoteNameStyle(), config.isSingleProjectMatch());
+    return getURI(config, template, project);
   }
 
   @VisibleForTesting
-  static URIish getURI(
-      URIish template,
-      Project.NameKey project,
-      String remoteNameStyle,
-      boolean isSingleProjectMatch)
+  static URIish getURI(DestinationConfiguration config, URIish template, Project.NameKey project)
       throws URISyntaxException {
     String name = project.get();
     if (needsUrlEscaping(template)) {
       name = escape(name);
     }
-
-    if (remoteNameStyle.equals("dash")) {
-      name = name.replace("/", "-");
-    } else if (remoteNameStyle.equals("underscore")) {
-      name = name.replace("/", "_");
-    } else if (remoteNameStyle.equals("basenameOnly")) {
-      name = Files.getNameWithoutExtension(name);
-    } else if (!remoteNameStyle.equals("slash")) {
-      repLog.atFine().log("Unknown remoteNameStyle: %s, falling back to slash", remoteNameStyle);
-    }
-    String replacedPath = replaceName(template.getPath(), name, isSingleProjectMatch);
+    String replacedPath =
+        Template.substitute(config, template.getPath(), name, config.requiresRemoteUrlTemplate());
     return (replacedPath != null) ? template.setRawPath(replacedPath) : template;
   }
 
@@ -795,6 +776,10 @@ public class Destination {
 
   public long getReplicationDelayMilliseconds() {
     return config.getDelay() * 1000L;
+  }
+
+  String substitute(String in, String name) {
+    return Template.substitute(config, in, name, config.requiresRemoteUrlTemplate());
   }
 
   int getSlowLatencyThreshold() {

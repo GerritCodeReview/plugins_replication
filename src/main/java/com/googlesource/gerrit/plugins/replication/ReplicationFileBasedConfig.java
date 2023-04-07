@@ -16,7 +16,6 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
 import com.google.common.base.Strings;
-import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
@@ -58,19 +57,6 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     this.maxRefsToLog = config.getInt("gerrit", "maxRefsToLog", 0);
     this.maxRefsToShow = config.getInt("gerrit", "maxRefsToShow", 2);
     this.pluginDataDir = pluginDataDir;
-  }
-
-  @Nullable
-  public static String replaceName(String in, String name, boolean keyIsOptional) {
-    String key = "${name}";
-    int n = in.indexOf(key);
-    if (0 <= n) {
-      return in.substring(0, n) + name + in.substring(n + key.length());
-    }
-    if (keyIsOptional) {
-      return in;
-    }
-    return null;
   }
 
   /**

@@ -77,13 +77,12 @@ public class DestinationConfigParser implements ConfigParser {
 
       DestinationConfiguration destinationConfiguration = new DestinationConfiguration(c, config);
 
-      if (!destinationConfiguration.isSingleProjectMatch()) {
+      if (destinationConfiguration.requiresRemoteUrlTemplate()) {
         for (URIish u : c.getURIs()) {
-          if (u.getPath() == null || !u.getPath().contains("${name}")) {
+          if (u.getPath() == null || !Template.isTemplate(u.getPath())) {
             throw new ConfigInvalidException(
                 String.format(
-                    "remote.%s.url \"%s\" lacks ${name} placeholder in %s",
-                    c.getName(), u, config));
+                    "remote.%s.url \"%s\" is empty or not template in %s", c.getName(), u, config));
           }
         }
       }

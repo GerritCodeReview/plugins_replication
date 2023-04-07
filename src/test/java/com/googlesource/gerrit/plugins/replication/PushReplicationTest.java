@@ -17,13 +17,27 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.truth.Truth.assertThat;
 import static com.googlesource.gerrit.plugins.replication.Destination.escape;
 import static com.googlesource.gerrit.plugins.replication.Destination.needsUrlEscaping;
+import static org.mockito.Mockito.when;
 
 import com.google.gerrit.entities.Project;
 import java.net.URISyntaxException;
 import org.eclipse.jgit.transport.URIish;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class PushReplicationTest {
+
+  @Mock private DestinationConfiguration destinationConfiguration;
+
+  @Before
+  public void setUp() {
+    when(destinationConfiguration.getRemoteNameStyle()).thenReturn("slash");
+    when(destinationConfiguration.requiresRemoteUrlTemplate()).thenReturn(false);
+  }
 
   @Test
   public void testNeedsUrlEscaping() throws URISyntaxException {
@@ -62,7 +76,7 @@ public class PushReplicationTest {
     String expectedEscapedName =
         "key=a-value=1,%20--option1%20%22OPTION_VALUE_1%22%20--option-2%20%3Coption_VALUE-2%3E%20--option-without-value";
     Project.NameKey project = Project.nameKey(name);
-    URIish expanded = Destination.getURI(template, project, "slash", false);
+    URIish expanded = Destination.getURI(destinationConfiguration, template, project);
 
     assertThat(expanded.getPath()).isEqualTo("/" + name + ".git");
     assertThat(expanded.toString()).isEqualTo(urlBase + "/" + expectedEscapedName + ".git");

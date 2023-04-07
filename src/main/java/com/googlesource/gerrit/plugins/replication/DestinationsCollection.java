@@ -17,7 +17,6 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerrit;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerritHttp;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isSSH;
-import static com.googlesource.gerrit.plugins.replication.ReplicationFileBasedConfig.replaceName;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static java.util.stream.Collectors.toList;
 
@@ -112,10 +111,9 @@ public class DestinationsCollection implements ReplicationDestinations {
         }
 
         if (!isGerrit(uri) && !isGerritHttp(uri)) {
-          String path =
-              replaceName(uri.getPath(), projectName.get(), config.isSingleProjectMatch());
+          String path = config.substitute(uri.getPath(), projectName.get());
           if (path == null) {
-            repLog.atWarning().log("adminURL %s does not contain ${name}", uri);
+            repLog.atWarning().log("adminURL %s is not template", uri);
             continue;
           }
 

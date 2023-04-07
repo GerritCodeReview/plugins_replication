@@ -19,6 +19,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 import com.google.common.jimfs.Configuration;
 import com.google.common.jimfs.Jimfs;
@@ -35,7 +36,11 @@ import org.eclipse.jgit.transport.URIish;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ReplicationTasksStorageTest {
   protected static final String PROJECT = "myProject";
   protected static final String REF = "myRef";
@@ -56,8 +61,12 @@ public class ReplicationTasksStorageTest {
   protected Path storageSite;
   protected UriUpdates uriUpdates;
 
+  @Mock private DestinationConfiguration destinationConfiguration;
+
   @Before
   public void setUp() throws Exception {
+    when(destinationConfiguration.getRemoteNameStyle()).thenReturn("slash");
+    when(destinationConfiguration.requiresRemoteUrlTemplate()).thenReturn(false);
     fileSystem = Jimfs.newFileSystem(Configuration.unix());
     storageSite = fileSystem.getPath("replication_site");
     storage = new ReplicationTasksStorage(storageSite);
@@ -172,7 +181,7 @@ public class ReplicationTasksStorageTest {
     String strangeValidName =
         "project/with/a/strange/name key=a-value=1, --option1 \"OPTION_VALUE_1\" --option-2 <option_VALUE-2> --option-without-value";
     Project.NameKey project = Project.nameKey(strangeValidName);
-    URIish expanded = Destination.getURI(template, project, "slash", false);
+    URIish expanded = Destination.getURI(destinationConfiguration, template, project);
     ReplicateRefUpdate update =
         ReplicateRefUpdate.create(strangeValidName, Set.of(REF), expanded, REMOTE);
     storage.create(update);
