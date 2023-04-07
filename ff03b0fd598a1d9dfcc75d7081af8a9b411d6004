@@ -250,6 +250,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb4e92fd_4fba0630",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-07T12:39:32Z",
+      "side": 1,
+      "message": "I thought you mean technically what it does, this why I rferred you to the code.\n\nPer documentation I outlined that this enables a configuration that may replicate multiple project into a single one, in other words it removes the safeguard of requiring a template.\n\nI will be happy to modify it to anything that better describes it.",
+      "parentUuid": "d57e1ed8_dee436af",
+      "range": {
+        "startLine": 545,
+        "startChar": 12,
+        "endLine": 545,
+        "endChar": 37
+      },
+      "revId": "ff03b0fd598a1d9dfcc75d7081af8a9b411d6004",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0253026_69f6499d",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 22
