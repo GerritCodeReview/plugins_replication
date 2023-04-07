@@ -274,6 +274,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c7ce2ff_77d19688",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-07T13:28:14Z",
+      "side": 1,
+      "message": "\u003e I thought you mean technically what it does,\n\nI did, and the docs should do that.\n \n\u003e Per documentation I outlined that this enables a configuration that may replicate multiple project into a single one, in other words it removes the safeguard of requiring a template.\n\nBy template, you mean it removes the requirement that the URL have ${name} in it?\n \nPerhaps a different approach should be taken here? Instead of removing this requirement, maybe the requirement should become \"either the URL or the destination refspec need to have a ${name} (or some other variable) in them\"? This would be safer and not require a special configuration switch.",
+      "parentUuid": "fb4e92fd_4fba0630",
+      "range": {
+        "startLine": 545,
+        "startChar": 12,
+        "endLine": 545,
+        "endChar": 37
+      },
+      "revId": "ff03b0fd598a1d9dfcc75d7081af8a9b411d6004",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0253026_69f6499d",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 22
