@@ -82,6 +82,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -212,6 +213,16 @@ public class Destination {
     deleteProjectFactory = child.getInstance(DeleteProjectTask.Factory.class);
     updateHeadFactory = child.getInstance(UpdateHeadTask.Factory.class);
     threadScoper = child.getInstance(PerThreadRequestScope.Scoper.class);
+  }
+
+  public RemoteConfig cloneRemoteConfig(RemoteConfig remoteConfig) {
+    try {
+      Config config = new Config();
+      remoteConfig.update(config);
+      return new RemoteConfig(config, remoteConfig.getName());
+    } catch (URISyntaxException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   private void addRecursiveParents(
@@ -434,7 +445,24 @@ public class Destination {
       PushOne task = getPendingPush(pushOneKey);
       if (task == null) {
 
-        task = opFactory.create(project, uri);
+        RemoteConfig taskRemoteConfig = config.getRemoteConfig();
+        if (taskRemoteConfig.getPushRefSpecs().stream()
+            .anyMatch(e -> Template.isTemplate(e.getDestination()))) {
+          taskRemoteConfig = cloneRemoteConfig(taskRemoteConfig);
+          taskRemoteConfig.setPushRefSpecs(
+              taskRemoteConfig.getPushRefSpecs().stream()
+                  .map(
+                      e ->
+                          e.setDestination(
+                              Template.substitute(
+                                  config,
+                                  e.getDestination(),
+                                  Repository.normalizeBranchName(project.get()),
+                                  false)))
+                  .collect(Collectors.toList()));
+        }
+
+        task = opFactory.create(taskRemoteConfig, project, uri);
         addRefs(task, ImmutableSet.copyOf(refsToSchedule));
         task.addState(refsToSchedule, state);
         @SuppressWarnings("unused")

@@ -19,6 +19,7 @@ import static com.google.common.truth.Truth.assertThat;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.io.IOException;
 import java.util.List;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.junit.Test;
 
@@ -43,6 +44,30 @@ public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
     assertThat(destinations).hasSize(1);
 
     assertThatIsDestination(destinations.get(0), remoteName, remoteUrl);
+  }
+
+  @Test(expected = ConfigInvalidException.class)
+  public void shouldRequireDestinationTemplate() throws Exception {
+    String remoteUrl = "ssh://git@git.somewhere.com/foobar";
+    String remoteName = "foo";
+    FileBasedConfig config = newReplicationConfig();
+    config.setString("remote", remoteName, "url", remoteUrl);
+    config.save();
+
+    newDestinationsCollections(newReplicationFileBasedConfig());
+  }
+
+  @Test
+  public void shouldNotRequireDestinationTemplateAsRefspecHasTemplate() throws Exception {
+    String remoteUrl = "ssh://git@git.somewhere.com/foobar";
+    String remoteName = "foo";
+    String pushTemplate = "+refs/*:refs/${name}/*";
+    FileBasedConfig config = newReplicationConfig();
+    config.setString("remote", remoteName, "url", remoteUrl);
+    config.setString("remote", remoteName, "push", pushTemplate);
+    config.save();
+
+    newDestinationsCollections(newReplicationFileBasedConfig());
   }
 
   @Test

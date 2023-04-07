@@ -361,6 +361,11 @@ remote.NAME.push
 	and `refs/tags/*`, but excludes all others, including
 	`refs/changes/*`.
 
+	Within each destination refspec the magic placeholder `${name}` is
+	replaced with the Gerrit project name using the rules specified in
+	`remoteNameStyle` option and normalized by jgit's
+	`normalizeBranchName`.
+
 	Defaults to `refs/*:refs/*` (push all refs) if not specified,
 	or `+refs/*:refs/*` (force push all refs) if not specified and
 	`gerrit.defaultForceUpdate` is true.

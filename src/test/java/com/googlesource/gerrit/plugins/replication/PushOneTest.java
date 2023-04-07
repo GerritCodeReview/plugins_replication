@@ -375,7 +375,6 @@ public class PushOneTest {
             gitRepositoryManagerMock,
             permissionBackendMock,
             destinationMock,
-            remoteConfigMock,
             replicationConfigMock,
             credentialsFactory,
             threadRequestScoperMock,
@@ -385,6 +384,7 @@ public class PushOneTest {
             projectCacheMock,
             createProjectTaskFactoryMock,
             transportFactoryMock,
+            remoteConfigMock,
             projectNameKey,
             urish);
 

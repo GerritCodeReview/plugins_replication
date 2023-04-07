@@ -149,6 +149,38 @@ public class ReplicationIT extends ReplicationDaemon {
   }
 
   @Test
+  public void shouldReplicateNewBranchWithTemplate() throws Exception {
+    setReplicationDestination(
+        "foo",
+        Arrays.asList("replica"),
+        ALL_PROJECTS,
+        TEST_REPLICATION_DELAY_SECONDS,
+        false,
+        Optional.empty(),
+        Arrays.asList("+refs/*:refs/${name}/*"));
+    reloadConfig();
+
+    Project.NameKey targetProject = createTestProject(project + "replica");
+    String newBranch = "refs/heads/mybranch";
+    String expectedBranch =
+        String.format("refs/%s/heads/mybranch", Repository.normalizeBranchName(project.get()));
+    String master = "refs/heads/master";
+    BranchInput input = new BranchInput();
+    input.revision = master;
+    gApi.projects().name(project.get()).branch(newBranch).create(input);
+
+    try (Repository repo = repoManager.openRepository(targetProject);
+        Repository sourceRepo = repoManager.openRepository(project)) {
+      waitUntil(() -> checkedGetRef(repo, expectedBranch) != null);
+
+      Ref masterRef = getRef(sourceRepo, master);
+      Ref targetBranchRef = getRef(repo, expectedBranch);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(masterRef.getObjectId());
+    }
+  }
+
+  @Test
   public void shouldReplicateNewBranchToTwoRemotes() throws Exception {
     Project.NameKey targetProject1 = createTestProject(project + "replica1");
     Project.NameKey targetProject2 = createTestProject(project + "replica2");

@@ -118,6 +118,11 @@ public interface RemoteConfiguration {
    */
   default boolean requiresRemoteUrlTemplate() {
 
+    if (getRemoteConfig().getPushRefSpecs().stream()
+        .allMatch(e -> Template.isTemplate(e.getDestination()))) {
+      return false;
+    }
+
     List<String> projects = getProjects();
 
     if (projects.size() != 1) {
