@@ -321,6 +321,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b61b6d5_0ba9e79a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-07T13:58:41Z",
+      "side": 1,
+      "message": "I mean that after replaceing the `${name}`, and if I have for example a `..` I will replace it with `%2e%2e` as `%` is allowed, and in similar do this for all the other exceptions.",
+      "parentUuid": "538d115a_67f76611",
+      "range": {
+        "startLine": 41,
+        "startChar": 51,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "31a79b4e_81f6ae64",
