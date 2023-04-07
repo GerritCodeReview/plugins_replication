@@ -189,6 +189,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "41971288_2a8c8e58",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-07T12:10:34Z",
+      "side": 1,
+      "message": "I do not think it is broken, it can be improved.\n\nCurrently I use it with `remoteNameStyle \u003d underscore` and it works nicely, it will work nicely also with dash, basenameOnly.\n\nI thought of extending this to generic function such as regular expression or uri encode and I thought of doing that later after the reorg if you prefer I can do this now.",
+      "parentUuid": "645ce814_cb3106ef",
+      "range": {
+        "startLine": 41,
+        "startChar": 51,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "31a79b4e_81f6ae64",
