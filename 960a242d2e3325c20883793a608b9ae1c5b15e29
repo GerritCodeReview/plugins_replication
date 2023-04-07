@@ -417,6 +417,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "004fbb04_75cd447c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-07T15:35:06Z",
+      "side": 1,
+      "message": "Thank you @matthias.sohn@gmail.com,\nI will use the `Repository#normalizeBranchName`.",
+      "parentUuid": "084fff90_57afcaa9",
+      "range": {
+        "startLine": 41,
+        "startChar": 51,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "31a79b4e_81f6ae64",
