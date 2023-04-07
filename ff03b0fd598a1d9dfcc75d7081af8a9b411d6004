@@ -298,6 +298,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a1c6be3_b32f9db2",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-07T13:42:33Z",
+      "side": 1,
+      "message": "I wanted to preserve current behavior as-is, but if you feel comfortable with this rule I will remove the configuration and apply the restriction.",
+      "parentUuid": "2c7ce2ff_77d19688",
+      "range": {
+        "startLine": 545,
+        "startChar": 12,
+        "endLine": 545,
+        "endChar": 37
+      },
+      "revId": "ff03b0fd598a1d9dfcc75d7081af8a9b411d6004",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0253026_69f6499d",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 22

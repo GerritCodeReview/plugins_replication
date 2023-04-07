@@ -89,6 +89,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d69c7007_9255325f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-07T13:42:33Z",
+      "side": 1,
+      "message": "ok, I will do that.",
+      "parentUuid": "34e3967b_b11e4ffa",
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba8ef7e3_117ee6dd",
@@ -245,6 +263,30 @@
       "side": 1,
       "message": "\u003e I do not think it is broken, it can be improved.\n\u003e \n\u003e Currently I use it with `remoteNameStyle \u003d underscore` and it works nicely, it will work nicely also with dash, basenameOnly.\n\nI was not aware of that setting, thanks for the pointer.\n\n\u003e I thought of extending this to generic function such as regular expression or uri encode and I thought of doing that later after the reorg if you prefer I can do this now.\n\nI think that ${name} already is being URI encoded also, is it not? (it happens that slash \"/\" is legal in URIs, just not in github? I was not worried about slashes, they are legal in ref names. However I believe many other, even URI encoded characters are illegal. I quick search got me here:\n\nhttps://stackoverflow.com/questions/3651860/which-characters-are-illegal-within-a-branch-name\n\nwhich seems to indicate that even dots (\".\") in the wrong places can be problematic. I do think you need to figure out a safe encoding that can be applied automatically for refs before this change can be merged.",
       "parentUuid": "41971288_2a8c8e58",
+      "range": {
+        "startLine": 41,
+        "startChar": 51,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "960a242d2e3325c20883793a608b9ae1c5b15e29",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a46e2d39_75f01823",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-07T13:42:33Z",
+      "side": 1,
+      "message": "thanks for the reference after template transformation, I will apply URL enode for these cases, will it be ok?",
+      "parentUuid": "f1783be7_a1f17dfa",
       "range": {
         "startLine": 41,
         "startChar": 51,

@@ -16,6 +16,24 @@
       "message": "This belongs in the previous paragraph (it does not stand on its own).",
       "revId": "14c43b3aa65c6b366a25622e63041ff83f01277f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50787ee3_2cd187e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-07T13:42:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c721800_cebfdeae",
+      "revId": "14c43b3aa65c6b366a25622e63041ff83f01277f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
