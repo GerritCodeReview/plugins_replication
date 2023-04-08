@@ -46,6 +46,30 @@
       },
       "revId": "c847b714453f5812a221ad09a6cf2892d0432c4b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2aca6ff_bf539946",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-08T19:33:45Z",
+      "side": 1,
+      "message": "\u003e Reversible is important as the changeid is not unique any more... \n\nI don\u0027t think this is true, and you are pointing out one more reason why making this true would not work very well.",
+      "parentUuid": "09272969_85d1e20b",
+      "range": {
+        "startLine": 460,
+        "startChar": 45,
+        "endLine": 460,
+        "endChar": 64
+      },
+      "revId": "c847b714453f5812a221ad09a6cf2892d0432c4b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
