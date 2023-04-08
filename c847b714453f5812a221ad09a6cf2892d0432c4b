@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e3b2bd4_2adac657",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-08T18:58:46Z",
+      "side": 1,
+      "message": "Unfortunately, normalizeBranchName() does not guarantee uniqueness and it could map multiple projects to the same name. Alone it likely is not safe for this purpose. Also the docs say that it can even return non valid refspecs, that the output needs to be retested for validity. 😞 I don\u0027t know what you are supposed to do if it is not valid?\n\nPersonally, I do like that normalizeBranchName() at least looks like the original project name versus something like 64encoding which makes the project unrecognizable. I don\u0027t think you should have to provide a perfect solution, but I do think that as a minimum bar we need to ensure uniqueness.\n\nSince you are the user for this feature, I think you should be able to determined what \"pretty enough\" is, so if you would be happy with something like base64 encoding, that would likely be good enough. bas64 encoding would  be reversible, if you don\u0027t need that, a sha1 could be used. Also, you could potentially use something like a combination of semi human readable, like using normalizeBranchName() (and checking for validity), and then appending or prepending either a sha1, or base64 (if you need reverse ability). Making it pretty (human readable) should not be something required in this change and I believe should be acceptable in later changes if someone desires.it.",
+      "range": {
+        "startLine": 460,
+        "startChar": 45,
+        "endLine": 460,
+        "endChar": 64
+      },
+      "revId": "c847b714453f5812a221ad09a6cf2892d0432c4b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
