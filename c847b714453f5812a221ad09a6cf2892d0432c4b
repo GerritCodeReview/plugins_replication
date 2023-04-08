@@ -70,6 +70,30 @@
       },
       "revId": "c847b714453f5812a221ad09a6cf2892d0432c4b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4917e7f4_4494173e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-08T19:37:11Z",
+      "side": 1,
+      "message": "\"Import Projects’ Changes from other Gerrit servers\"\n\nhttps://www.gerritcodereview.com/3.7.html#import-projects-changes-from-other-gerrit-servers\n\nhttps://gerrit.googlesource.com/summit/2022/+/refs/heads/master/sessions/import-gerrit-projects-across-servers.md",
+      "parentUuid": "c2aca6ff_bf539946",
+      "range": {
+        "startLine": 460,
+        "startChar": 45,
+        "endLine": 460,
+        "endChar": 64
+      },
+      "revId": "c847b714453f5812a221ad09a6cf2892d0432c4b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
