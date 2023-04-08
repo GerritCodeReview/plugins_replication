@@ -22,6 +22,30 @@
       },
       "revId": "c847b714453f5812a221ad09a6cf2892d0432c4b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09272969_85d1e20b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-08T19:18:47Z",
+      "side": 1,
+      "message": "\u003e Also the docs say that it can even return non valid refspecs, that the output needs to be retested for validity. 😞 I don\u0027t know what you are supposed to do if it is not valid?\n\nyes, I saw this note, it does not make much sense 😊\n\nReversible is important as the changeid is not unique any more... so in order to post back to gerrit the CI result we need project name and change id.\n\nI think it was a mistake not to add the project name into `changes/` reference so within the refname you get all the information required to call back.\n\nI can probably modify this to base64 for now, I will be glad to receive any other comments so I can fix all.",
+      "parentUuid": "8e3b2bd4_2adac657",
+      "range": {
+        "startLine": 460,
+        "startChar": 45,
+        "endLine": 460,
+        "endChar": 64
+      },
+      "revId": "c847b714453f5812a221ad09a6cf2892d0432c4b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
