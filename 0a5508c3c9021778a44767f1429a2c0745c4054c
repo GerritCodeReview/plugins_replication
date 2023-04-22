@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ec181ba_f10985b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2023-04-22T21:12:42Z",
+      "side": 1,
+      "message": "Hi @martin.fick@linaro.org,\nIs there anything I can do here or we can merge this?\nCan you please review also[1] which should be fairly trivial?\nThanks,\n\n[1] https://gerrit-review.googlesource.com/c/plugins/replication/+/368175/1?usp\u003drelated-change",
+      "revId": "0a5508c3c9021778a44767f1429a2c0745c4054c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
