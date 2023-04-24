@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae4f8935_0a121574",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-24T14:09:28Z",
+      "side": 1,
+      "message": "Can you explain the intent of this change better.",
+      "revId": "84d73e98b0f162857b2a68181bb8713712a5a91b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aedd9541_90a9415d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-24T14:09:28Z",
+      "side": 1,
+      "message": "This seems like a new test with a different intent than the test you are modifying. If that is indeed the case, it would be better to add a new test then to modify this one to ensure that this one is kept a simple as possible to test what it is intending to test.",
+      "revId": "84d73e98b0f162857b2a68181bb8713712a5a91b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
