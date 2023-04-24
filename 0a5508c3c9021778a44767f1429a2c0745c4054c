@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c8d8ca7_7cc7a051",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-24T14:04:47Z",
+      "side": 1,
+      "message": "It is my understanding that this is currently an illegal setup since ${name} is not included in the urls above. Since this is needed by the features that follow, but does not provide value without those features, can you make this  dependent on the feature which will make use of it so that it does not get merged without that feature?",
+      "revId": "0a5508c3c9021778a44767f1429a2c0745c4054c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8ec181ba_f10985b2",
