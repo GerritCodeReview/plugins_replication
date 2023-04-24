@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa629122_a2f374a6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfigParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-24T14:28:14Z",
+      "side": 1,
+      "message": "Would it makes sense to take this one step further and move this \"if\" statement into Template itself so that this becomes UrlTemplate.requireValid(u.getPath())?",
+      "revId": "222bcc45aba6de4a154568588cb9190322a2c880",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c582533_8c82c06a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-24T14:28:14Z",
+      "side": 1,
+      "message": "This feels like it makes this issue less obvious to admins, but I understand the desire to encapsulate the reason it is not a template in the new class. Can you figure out a way to push the warning into the new class instead so that it does not have to lose its precision?",
+      "range": {
+        "startLine": 116,
+        "startChar": 36,
+        "endLine": 116,
+        "endChar": 63
+      },
+      "revId": "222bcc45aba6de4a154568588cb9190322a2c880",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "466ae1e6_842aff3e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-24T14:28:14Z",
+      "side": 1,
+      "message": "It seems like this logic should now be in the new class.",
+      "revId": "222bcc45aba6de4a154568588cb9190322a2c880",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "303a5c20_8f09358b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Template.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-24T14:28:14Z",
+      "side": 1,
+      "message": "UrlTemplate?",
+      "revId": "222bcc45aba6de4a154568588cb9190322a2c880",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
