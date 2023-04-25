@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "46fc77df_05e4fd9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-25T14:54:21Z",
+      "side": 1,
+      "message": "\u003e It is not illegal, it is valid and accepted by gerrit, this patch fixes the behavior when this setup is applied.\n\nOK great, (because of the \u0027single project match\u0027 exception right?) let\u0027s merge it then.",
+      "parentUuid": "0724c884_e291cd35",
+      "revId": "0a5508c3c9021778a44767f1429a2c0745c4054c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8ec181ba_f10985b2",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 7
