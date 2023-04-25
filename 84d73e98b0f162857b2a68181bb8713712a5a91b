@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e9ae6b9_b92b6f90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-04-25T15:02:17Z",
+      "side": 1,
+      "message": "Some things this CM needs:\n\n1) What it is doing (\"add new test...\", or \"fix existing test to...\", ...)\n2) Why (\"a valid UC is not currently covered\", \"an existing test is wrong/broken...\", ...)\n\nI mention those two things because those are the most prominent questions I currently have for this change. There are likely other things that would help, and fortunately there are some good guides out there to help, here is an example https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/ that is probably worth reading. But I would be able to review the change better and offer better advice on it if it had just those 2 extra things.",
+      "parentUuid": "69c105e9_c896a47d",
+      "revId": "84d73e98b0f162857b2a68181bb8713712a5a91b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aedd9541_90a9415d",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
         "patchSetId": 2
