@@ -137,11 +137,11 @@ public class ReplicationTasksStorage {
     return isMultiPrimary;
   }
 
-  public synchronized String create(ReplicateRefUpdate r) {
+  public String create(ReplicateRefUpdate r) {
     return new Task(r).create();
   }
 
-  public synchronized Set<String> start(UriUpdates uriUpdates) {
+  public Set<String> start(UriUpdates uriUpdates) {
     Set<String> startedRefs = new HashSet<>();
     for (ReplicateRefUpdate update : uriUpdates.getReplicateRefUpdates()) {
       Task t = new Task(update);
@@ -152,13 +152,13 @@ public class ReplicationTasksStorage {
     return startedRefs;
   }
 
-  public synchronized void reset(UriUpdates uriUpdates) {
+  public void reset(UriUpdates uriUpdates) {
     for (ReplicateRefUpdate update : uriUpdates.getReplicateRefUpdates()) {
       new Task(update).reset();
     }
   }
 
-  public synchronized void recoverAll() {
+  public void recoverAll() {
     streamRunning().forEach(r -> new Task(r).recover());
   }
 
