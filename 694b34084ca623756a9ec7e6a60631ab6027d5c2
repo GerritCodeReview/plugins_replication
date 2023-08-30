@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05b8bd9f_e8b5b8f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-08-30T17:47:39Z",
+      "side": 1,
+      "message": "From my research, removing these should not result in any extra single primary error messages in the logs.",
+      "revId": "694b34084ca623756a9ec7e6a60631ab6027d5c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
