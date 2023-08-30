@@ -229,10 +229,13 @@ public class ReplicationQueue
 
             @Override
             public void onDone() {
-              if (Prune.TRUE.equals(prune)) {
-                pruneNoLongerPending(new HashSet<>(taskNamesByReplicateRefUpdate.values()));
+              try {
+                if (Prune.TRUE.equals(prune)) {
+                  pruneNoLongerPending(new HashSet<>(taskNamesByReplicateRefUpdate.values()));
+                }
+              } finally {
+                replaying.set(false);
               }
-              replaying.set(false);
             }
 
             @Override
