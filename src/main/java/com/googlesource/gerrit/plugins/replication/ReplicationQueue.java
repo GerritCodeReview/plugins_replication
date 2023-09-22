@@ -199,20 +199,16 @@ public class ReplicationQueue
     if (withoutState) {
       state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
     }
-    Set<String> refNamesToPush = new HashSet<>();
-    for (String refName : refNames) {
-      if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
-        refNamesToPush.add(refName);
-      } else {
-        repLog.atFine().log("Skipping ref %s on project %s", refName, project.get());
-      }
-    }
-    if (!refNamesToPush.isEmpty()) {
+    // We must filter now before writing to disk to avoid leaking files on
+    // disk later. This happens if the tasks that are scheduled don't match
+    // the tasks we initially write here.
+    Set<String> refsToSchedule = cfg.refsToReplicate(project, refNames, state);
+    if (!refsToSchedule.isEmpty()) {
       for (URIish uri : cfg.getURIs(project, urlMatch)) {
         replicationTasksStorage.create(
             ReplicateRefUpdate.create(
-                project.get(), refNamesToPush, uri, cfg.getRemoteConfigName()));
-        cfg.schedule(project, refNamesToPush, uri, state, now);
+                project.get(), refsToSchedule, uri, cfg.getRemoteConfigName()));
+        cfg.schedule(project, refsToSchedule, uri, state, now);
       }
     }
     if (withoutState) {
