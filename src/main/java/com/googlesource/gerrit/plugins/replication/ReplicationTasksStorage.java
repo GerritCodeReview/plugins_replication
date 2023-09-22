@@ -172,12 +172,15 @@ public class ReplicationTasksStorage {
   }
 
   public synchronized Set<ImmutableSet<String>> start(UriUpdates uriUpdates) {
-    Set<ImmutableSet<String>> startedRefs = new HashSet<>();
+    // This isn't quite right. But we need to start the ReplicateRefUpdate objects
+    // in order to move our on disk files from waiting/ to running/ then
+    // add only the filtered replication refs to our started refs set to
+    // avoid replicating too many refs. THis isn't quite right because it seems
+    // to replicate too much stuff.
+    Set<ImmutableSet<String>> startedRefs = ImmutableSet.copyOf(uriUpdates.getRefs());
     for (ReplicateRefUpdate update : uriUpdates.getReplicateRefUpdates()) {
       Task t = new Task(update);
-      if (t.start()) {
-        startedRefs.add(t.update.refs());
-      }
+      t.start();
     }
     return startedRefs;
   }

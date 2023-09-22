@@ -376,6 +376,36 @@ public class Destination {
                 } catch (StorageException e) {
                   return false;
                 }
+                if (!config.replicatePermissions()) {
+                  if (projectState.isAllProjects() || projectState.isAllUsers()) {
+                    repLog.atFine().log(
+                        "Project %s is a config project and replication of config projects is disabled",
+                        project);
+                    return false;
+                  } else {
+                    // May still be a config project but we have to check the repo HEAD to be sure.
+                    try (Repository git = gitManager.openRepository(project)) {
+                      try {
+                        Ref head = git.exactRef(Constants.HEAD);
+                        if (head != null
+                            && head.isSymbolic()
+                            && RefNames.REFS_CONFIG.equals(head.getLeaf().getName())) {
+                          repLog.atFine().log(
+                              "Project %s is a config project and replication of config projects is disabled",
+                              project);
+                          return false;
+                        }
+                      } catch (IOException err) {
+                        stateLog.error(
+                            String.format("cannot check type of project %s", project), err, states);
+                        return false;
+                      }
+                    } catch (IOException err) {
+                      stateLog.error(String.format(PROJECT_NOT_AVAILABLE, project), err, states);
+                      return false;
+                    }
+                  }
+                }
                 return shouldReplicate(projectState, userProvider.get());
               })
           .call();
@@ -388,53 +418,40 @@ public class Destination {
     return false;
   }
 
+  private Set<String> refsToReplicate(
+      Project.NameKey project, Set<String> refNames, ReplicationState state) {
+    Set<String> refNamesToReplicate = new HashSet<>();
+    if (wouldPushProject(project)) {
+      for (String refName : refNames) {
+        if (wouldPushRef(refName) && shouldReplicate(project, refName, state)) {
+          refNamesToReplicate.add(refName);
+        } else {
+          repLog.atFine().log("Skipping ref %s on project %s", refName, project.get());
+        }
+      }
+    }
+    return refNamesToReplicate;
+  }
+
   void schedule(Project.NameKey project, Set<String> refs, URIish uri, ReplicationState state) {
     schedule(project, refs, uri, state, false);
   }
 
   void schedule(
       Project.NameKey project, Set<String> refs, URIish uri, ReplicationState state, boolean now) {
-    Set<String> refsToSchedule = new HashSet<>();
-    for (String ref : refs) {
-      if (!shouldReplicate(project, ref, state)) {
-        repLog.atFine().log("Not scheduling replication %s:%s => %s", project, ref, uri);
-        continue;
-      }
-      refsToSchedule.add(ref);
-    }
-    repLog.atInfo().log("scheduling replication %s:%s => %s", project, refs, uri);
-
-    if (!config.replicatePermissions()) {
-      PushOne e;
-      synchronized (stateLock) {
-        e = getPendingPush(uri);
-      }
-      if (e == null) {
-        try (Repository git = gitManager.openRepository(project)) {
-          try {
-            Ref head = git.exactRef(Constants.HEAD);
-            if (head != null
-                && head.isSymbolic()
-                && RefNames.REFS_CONFIG.equals(head.getLeaf().getName())) {
-              return;
-            }
-          } catch (IOException err) {
-            stateLog.error(String.format("cannot check type of project %s", project), err, state);
-            return;
-          }
-        } catch (IOException err) {
-          stateLog.error(String.format(PROJECT_NOT_AVAILABLE, project), err, state);
-          return;
-        }
-      }
-    }
+    // Prior to scheduling replication we get a current set of refs to
+    // replicate based on the requested refs. This ensures we are as close
+    // to any config updates as possible.
+    Set<String> refsToSchedule = refsToReplicate(project, refs, state);
+    repLog.atInfo().log(
+        "scheduling replication %s requested:%s scheduled:%s => %s",
+        project, refs, refsToSchedule, uri);
 
     synchronized (stateLock) {
       PushOne task = getPendingPush(uri);
       if (task == null) {
         task = opFactory.create(project, uri);
-        addRefs(task, ImmutableSet.copyOf(refsToSchedule));
-        task.addState(refsToSchedule, state);
+        addRefs(task, state, ImmutableSet.copyOf(refs), ImmutableSet.copyOf(refsToSchedule));
         @SuppressWarnings("unused")
         ScheduledFuture<?> ignored =
             pool.schedule(task, now ? 0 : config.getDelay(), TimeUnit.SECONDS);
@@ -443,8 +460,7 @@ public class Destination {
             "scheduled %s:%s => %s to run %s",
             project, refsToSchedule, task, now ? "now" : "after " + config.getDelay() + "s");
       } else {
-        addRefs(task, ImmutableSet.copyOf(refsToSchedule));
-        task.addState(refsToSchedule, state);
+        addRefs(task, state, ImmutableSet.copyOf(refs), ImmutableSet.copyOf(refsToSchedule));
         repLog.atInfo().log(
             "consolidated %s:%s => %s with an existing pending push",
             project, refsToSchedule, task);
@@ -486,9 +502,17 @@ public class Destination {
         pool.schedule(updateHeadFactory.create(uri, project, newHead), 0, TimeUnit.SECONDS);
   }
 
-  private void addRefs(PushOne e, ImmutableSet<String> refs) {
-    e.addRefBatch(refs);
-    postReplicationScheduledEvent(e, refs);
+  private void addRefs(
+      PushOne e,
+      ReplicationState state,
+      ImmutableSet<String> refsRequested,
+      ImmutableSet<String> refsToPush) {
+    e.addRequestedRefBatch(refsRequested);
+    if (!refsToPush.isEmpty()) {
+      e.addRefBatch(refsToPush);
+      e.addState(refsToPush, state);
+      postReplicationScheduledEvent(e, refsToPush);
+    }
   }
 
   /**
@@ -603,6 +627,11 @@ public class Destination {
       if (inFlightOp != null) {
         return RunwayStatus.denied(inFlightOp.getId());
       }
+      // The logging this creates says NOT_ATTEMPTED which really means NOT_ATTEMPTED
+      // right now/at this point in time. We do eventually later attempt the
+      // replication when the runway is clear. It might be a good idea to make
+      // this more understandable for operators in the future as this can be
+      // confusing.
       op.notifyNotAttempted(op.setStartedRefs(replicationTasksStorage.get().start(op)));
       inFlight.put(op.getURI(), op);
     }
@@ -618,6 +647,11 @@ public class Destination {
     }
   }
 
+  // Calls to getReplicateRefUpdates() here and elsewhere are how we map the
+  // refs in a PushOne back to the ReplicateRefUpdate which is serialized to
+  // disk. We need PushOne to carry two sets of refs. The requested refs
+  // and the actually replicated refs. Then we can always serialize and map on
+  // the requested refs but when we take action we operate on the other set.
   public Map<ReplicateRefUpdate, String> getTaskNamesByReplicateRefUpdate() {
     Map<ReplicateRefUpdate, String> taskNameByReplicateRefUpdate = new HashMap<>();
     for (PushOne push : pending.values()) {

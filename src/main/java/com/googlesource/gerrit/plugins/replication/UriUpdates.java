@@ -31,9 +31,11 @@ public interface UriUpdates {
 
   Set<ImmutableSet<String>> getRefs();
 
+  Set<ImmutableSet<String>> getRequestedRefs();
+
   default List<ReplicationTasksStorage.ReplicateRefUpdate> getReplicateRefUpdates() {
     // TODO: keep batch refs together
-    return getRefs().stream()
+    return getRequestedRefs().stream()
         .map(
             (refs) ->
                 ReplicationTasksStorage.ReplicateRefUpdate.create(

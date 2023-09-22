@@ -53,4 +53,9 @@ public class TestUriUpdates implements UriUpdates {
   public Set<ImmutableSet<String>> getRefs() {
     return refs;
   }
+
+  @Override
+  public Set<ImmutableSet<String>> getRequestedRefs() {
+    return refs;
+  }
 }
