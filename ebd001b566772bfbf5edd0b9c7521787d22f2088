@@ -18,6 +18,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "040b8960_79436584",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-09-22T20:10:12Z",
+      "side": 1,
+      "message": "Thanks for taking a stab at this. I\u0027ll try to keep up with reviews or see if @martin.fick@linaro.org can help out too.",
+      "revId": "ebd001b566772bfbf5edd0b9c7521787d22f2088",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ff9b1f0_ca35c7c9",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-09-22T19:02:07Z",
       "side": 1,
       "message": "I don\u0027t really understand that API in here as there are a lot of overlapping methods \"would/should\" $VERB methods some public and others private. In this case we actually need to run this same check elsewhere so I made the method public. However, I\u0027m happy for feedback on making this cleaner.",
+      "range": {
+        "startLine": 342,
+        "startChar": 2,
+        "endLine": 342,
+        "endChar": 8
+      },
+      "revId": "ebd001b566772bfbf5edd0b9c7521787d22f2088",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "078547ee_72b9ef33",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-09-22T20:10:12Z",
+      "side": 1,
+      "message": "I think it\u0027s fine to make this public.\n\nThere is a vast amount of refactoring needed in this plugin, particularly in how scheduling and keeping track of scheduled/running replication happens. It\u0027s bad enough that it\u0027s hard to even give suggestions on where to start 😞",
+      "parentUuid": "2ff9b1f0_ca35c7c9",
       "range": {
         "startLine": 342,
         "startChar": 2,
@@ -60,6 +101,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "771be7f3_aabfae9a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-09-22T20:10:12Z",
+      "side": 1,
+      "message": "It\u0027s not modified in the remaining code below (or the methods its passed to), so you can do what lines 438/448 do with it:\n\n```\nSet\u003cString\u003e refsToSchedule \u003d ImmutableSet.copyOf(refs);\n```\n\nand then you can remove that wrapping from those lines.",
+      "parentUuid": "ee1103cb_1494c46e",
+      "revId": "ebd001b566772bfbf5edd0b9c7521787d22f2088",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f7f4041_71e7a53e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 1
@@ -71,6 +130,24 @@
       "writtenOn": "2023-09-22T19:02:07Z",
       "side": 1,
       "message": "One thing I\u0027m not completely sure about is if this is the only place we call schedule where we need to filter things. I see elsewhere we do call fire() which calls schedule() so I know there is a risk there. I\u0027m just not sure if we need to filter above and in Destination.schedule() again.",
+      "revId": "ebd001b566772bfbf5edd0b9c7521787d22f2088",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "308a0447_5bc31221",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-09-22T20:10:12Z",
+      "side": 1,
+      "message": "I think you probably need to filter everywhere the code currently filters. You\u0027re adding the code to avoid writing tasks to disk when they will be filtered, but I think you also need to handle the cases where you have an existing task on disk and it\u0027s now been filtered out.",
+      "parentUuid": "1f7f4041_71e7a53e",
       "revId": "ebd001b566772bfbf5edd0b9c7521787d22f2088",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
