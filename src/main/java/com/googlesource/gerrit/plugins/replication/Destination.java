@@ -285,6 +285,36 @@ public class Destination {
   private boolean shouldReplicate(ProjectState state, CurrentUser user)
       throws PermissionBackendException {
     String name = state.getProject().getName();
+    Project.NameKey namekey = state.getNameKey();
+    if (!config.replicatePermissions()) {
+      if (state.isAllProjects() || state.isAllUsers()) {
+        repLog.atFine().log(
+            "Project %s is a config project and replication of config projects is disabled", name);
+        return false;
+      } else {
+        // May still be a config project but we have to check the repo HEAD to be sure.
+        try (Repository git = gitManager.openRepository(namekey)) {
+          try {
+            Ref head = git.exactRef(Constants.HEAD);
+            if (head != null
+                && head.isSymbolic()
+                && RefNames.REFS_CONFIG.equals(head.getLeaf().getName())) {
+              repLog.atFine().log(
+                  "Project %s is a config project and replication of config projects is disabled",
+                  name);
+              return false;
+            }
+          } catch (IOException err) {
+            repLog.atSevere().log("cannot check type of project %s", namekey);
+            return false;
+          }
+        } catch (IOException err) {
+          repLog.atSevere().log(PROJECT_NOT_AVAILABLE, namekey);
+          return false;
+        }
+      }
+    }
+
     if (!config.replicateHiddenProjects()
         && state.getProject().getState()
             == com.google.gerrit.extensions.client.ProjectState.HIDDEN) {
@@ -309,7 +339,7 @@ public class Destination {
     }
   }
 
-  private boolean shouldReplicate(
+  public boolean shouldReplicate(
       final Project.NameKey project, String ref, ReplicationState... states) {
     try {
       return threadScoper
@@ -394,40 +424,12 @@ public class Destination {
 
   void schedule(
       Project.NameKey project, Set<String> refs, URIish uri, ReplicationState state, boolean now) {
-    Set<String> refsToSchedule = new HashSet<>();
-    for (String ref : refs) {
-      if (!shouldReplicate(project, ref, state)) {
-        repLog.atFine().log("Not scheduling replication %s:%s => %s", project, ref, uri);
-        continue;
-      }
-      refsToSchedule.add(ref);
-    }
+    // Note we cannot filter projects/refs here because we've already written
+    // waiting tasks to disk at this point. If we filter further now those waiting
+    // tasks on disk won't match the resulting tasks created below and we'll leak
+    // those tasks on disk.
+    Set<String> refsToSchedule = new HashSet<>(refs);
     repLog.atInfo().log("scheduling replication %s:%s => %s", project, refs, uri);
-
-    if (!config.replicatePermissions()) {
-      PushOne e;
-      synchronized (stateLock) {
-        e = getPendingPush(uri);
-      }
-      if (e == null) {
-        try (Repository git = gitManager.openRepository(project)) {
-          try {
-            Ref head = git.exactRef(Constants.HEAD);
-            if (head != null
-                && head.isSymbolic()
-                && RefNames.REFS_CONFIG.equals(head.getLeaf().getName())) {
-              return;
-            }
-          } catch (IOException err) {
-            stateLog.error(String.format("cannot check type of project %s", project), err, state);
-            return;
-          }
-        } catch (IOException err) {
-          stateLog.error(String.format(PROJECT_NOT_AVAILABLE, project), err, state);
-          return;
-        }
-      }
-    }
 
     synchronized (stateLock) {
       PushOne task = getPendingPush(uri);
@@ -603,6 +605,11 @@ public class Destination {
       if (inFlightOp != null) {
         return RunwayStatus.denied(inFlightOp.getId());
       }
+      // The logging this creates says NOT_ATTEMPTED which really means NOT_ATTEMPTED
+      // right now/at this point in time. We do eventually later attempt the
+      // replication when the runway is clear. It might be a good idea to make
+      // this more understandable for operators in the future as this can be
+      // confusing.
       op.notifyNotAttempted(op.setStartedRefs(replicationTasksStorage.get().start(op)));
       inFlight.put(op.getURI(), op);
     }
