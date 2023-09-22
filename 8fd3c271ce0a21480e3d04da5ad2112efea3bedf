@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fed58ed8_bb37fe08",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-09-22T19:02:07Z",
+      "side": 0,
+      "message": "Related to my comment in the other file It isn\u0027t clear to me if we need to keep doing this filtration here because there may be events that are scheduled that are not part of the write to disk first path. Perhaps when manually triggering schedule via ssh or the http API? I\u0027m happy to add this code back in which should cover all the bases but I didn\u0027t want it here if it was no longer necessary.",
+      "revId": "8fd3c271ce0a21480e3d04da5ad2112efea3bedf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
