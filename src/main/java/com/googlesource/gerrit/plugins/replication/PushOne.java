@@ -123,6 +123,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private final Project.NameKey projectName;
   private final URIish uri;
   private final Set<ImmutableSet<String>> refBatchesToPush = Sets.newHashSetWithExpectedSize(4);
+  private final Set<ImmutableSet<String>> refBatchesRequested = Sets.newHashSetWithExpectedSize(4);
   private boolean pushAllRefs;
   private Repository git;
   private boolean isCollision;
@@ -301,9 +302,19 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     }
   }
 
+  void addRequestedRefBatch(ImmutableSet<String> refBatch) {
+    refBatchesRequested.add(refBatch);
+    repLog.atFinest().log("Requested ref %s for replication to %s", refBatch, uri);
+  }
+
   @Override
   public Set<ImmutableSet<String>> getRefs() {
     return pushAllRefs ? Set.of(ImmutableSet.of(ALL_REFS)) : refBatchesToPush;
+  }
+
+  @Override
+  public Set<ImmutableSet<String>> getRequestedRefs() {
+    return refBatchesRequested;
   }
 
   void addRefBatches(Set<ImmutableSet<String>> refBatches) {

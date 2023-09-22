@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
+import com.google.common.collect.Multimap;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.inject.Inject;
@@ -51,10 +52,15 @@ public class CreateProjectTask {
   }
 
   public boolean create() {
-    return destinations.getURIs(Optional.of(config.getName()), project, FilterType.PROJECT_CREATION)
-        .values().stream()
-        .map(u -> createProject(u, project, head))
-        .reduce(true, (a, b) -> a && b);
+    Multimap<Destination, URIish> uris =
+        destinations.getURIs(Optional.of(config.getName()), project, FilterType.PROJECT_CREATION);
+    if (uris.isEmpty()) {
+      return false;
+    } else {
+      return uris.values().stream()
+          .map(u -> createProject(u, project, head))
+          .reduce(true, (a, b) -> a && b);
+    }
   }
 
   private boolean createProject(URIish replicateURI, Project.NameKey projectName, String head) {

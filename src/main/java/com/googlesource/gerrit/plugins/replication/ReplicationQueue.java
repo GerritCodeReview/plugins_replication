@@ -199,21 +199,12 @@ public class ReplicationQueue
     if (withoutState) {
       state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
     }
-    Set<String> refNamesToPush = new HashSet<>();
-    for (String refName : refNames) {
-      if (cfg.wouldPushProject(project) && cfg.wouldPushRef(refName)) {
-        refNamesToPush.add(refName);
-      } else {
-        repLog.atFine().log("Skipping ref %s on project %s", refName, project.get());
-      }
-    }
-    if (!refNamesToPush.isEmpty()) {
-      for (URIish uri : cfg.getURIs(project, urlMatch)) {
-        replicationTasksStorage.create(
-            ReplicateRefUpdate.create(
-                project.get(), refNamesToPush, uri, cfg.getRemoteConfigName()));
-        cfg.schedule(project, refNamesToPush, uri, state, now);
-      }
+    // We do not filter anything now. All tasks written to disk contain complete
+    // information then are filtered prior to processing.
+    for (URIish uri : cfg.getURIs(project, urlMatch)) {
+      replicationTasksStorage.create(
+          ReplicateRefUpdate.create(project.get(), refNames, uri, cfg.getRemoteConfigName()));
+      cfg.schedule(project, refNames, uri, state, now);
     }
     if (withoutState) {
       state.markAllPushTasksScheduled();
@@ -236,6 +227,9 @@ public class ReplicationQueue
             @Override
             public void run(ReplicationTasksStorage.ReplicateRefUpdate u) {
               try {
+                // Now that ReplicateRefUpdate always returns the complete
+                // requested refs set will we end up filtering that later in
+                // schedule() when called through fire() here?
                 fire(new URIish(u.uri()), Project.nameKey(u.project()), u.refs());
                 if (Prune.TRUE.equals(prune)) {
                   taskNamesByReplicateRefUpdate.remove(u);

@@ -172,12 +172,13 @@ public class ReplicationTasksStorage {
   }
 
   public synchronized Set<ImmutableSet<String>> start(UriUpdates uriUpdates) {
-    Set<ImmutableSet<String>> startedRefs = new HashSet<>();
+    // This isn't quite right because we want to map the requested refs on disk
+    // to the actually replicated refs in startedRefs. This way we only
+    // record startedRefs if their on disk location moved to running/
+    Set<ImmutableSet<String>> startedRefs = ImmutableSet.copyOf(uriUpdates.getRefs());
     for (ReplicateRefUpdate update : uriUpdates.getReplicateRefUpdates()) {
       Task t = new Task(update);
-      if (t.start()) {
-        startedRefs.add(t.update.refs());
-      }
+      t.start();
     }
     return startedRefs;
   }
