@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0432858c_a5f36308",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-09-25T21:06:26Z",
+      "side": 1,
+      "message": "Testing on this patchset looks good to me. \n\nThis is the replication configuration that I used:\n\n```\n[gerrit]\ndefaultForceUpdate \u003d true\nautoReload \u003d true\nreplicateOnStartup \u003d false\n\n[remote \"localhost\"]\n\turl \u003d file:///var/gerrit/data/replication_repos/${name}.git\n\treplicationDelay \u003d 1\n\treplicatePermissions \u003d false\n\tauthGroup \u003d Anonymous Users\n\tmirror \u003d true\n\tthreads \u003d 4\n\ttimeout \u003d 900\n```\n\nI tested two scenarios that previously leaked files. First is editing a patchset via the web UI. This produces user specific edit refs that are not visible to Anonymous Users. Previously these refs got filtered out after we wrote the task to disk resulting in that task file leaking in the waiting/ directory. Now we filter before writing and replication completes for the other refs and this edit ref is ignored:\n\n```\n[2023-09-25 20:55:00,317] Ref refs/users/02/1000002/edit-3/1 on project x/test-project is not visible to calling user unknown [CONTEXT PLUGIN\u003d\"replication\" project\u003d\"x/test-project\" request\u003d\"REST /changes/*/edit:publish\" ]\n[2023-09-25 20:55:00,318] Skipping ref refs/users/02/1000002/edit-3/1 on project x/test-project [CONTEXT PLUGIN\u003d\"replication\" project\u003d\"x/test-project\" request\u003d\"REST /changes/*/edit:publish\" ]\n[2023-09-25 20:55:00,341] scheduling replication x/test-project:[refs/changes/03/3/2, refs/changes/03/3/meta] \u003d\u003e file:///var/gerrit/data/replication_repos/x/test-project.git [CONTEXT PLUGIN\u003d\"replication\" project\u003d\"x/test-project\" request\u003d\"REST /changes/*/edit:publish\" ]\n[2023-09-25 20:55:00,347] Added ref [refs/changes/03/3/2, refs/changes/03/3/meta] for replication to file:///var/gerrit/data/replication_repos/x/test-project.git [CONTEXT PLUGIN\u003d\"replication\" project\u003d\"x/test-project\" request\u003d\"REST /changes/*/edit:publish\" ]\n[2023-09-25 20:55:00,353] scheduled x/test-project:[refs/changes/03/3/2, refs/changes/03/3/meta] \u003d\u003e [21b9d715] push file:///var/gerrit/data/replication_repos/x/test-project.git [refs/changes/03/3/2 refs/changes/03/3/meta] to run after 1s [CONTEXT PLUGIN\u003d\"replication\" project\u003d\"x/test-project\" request\u003d\"REST /changes/*/edit:publish\" ]\n[2023-09-25 20:55:01,355] Added ref [refs/changes/03/3/2, refs/changes/03/3/meta] for replication to file:///var/gerrit/data/replication_repos/x/test-project.git [CONTEXT PLUGIN\u003d\"replication\" project\u003d\"x/test-project\" pushOneId\u003d\"21b9d715\" request\u003d\"REST /changes/*/edit:publish\" ]\n[2023-09-25 20:55:01,356] Replication to file:///var/gerrit/data/replication_repos/x/test-project.git started... [CONTEXT PLUGIN\u003d\"replication\" project\u003d\"x/test-project\" pushOneId\u003d\"21b9d715\" request\u003d\"REST /changes/*/edit:publish\" ]\n[2023-09-25 20:55:01,413] Push to file:///var/gerrit/data/replication_repos/x/test-project.git references: RemoteRefUpdate{refSpec\u003drefs/changes/03/3/2:refs/changes/03/3/2, status\u003dNOT_ATTEMPTED, id\u003d(null)..AnyObjectId[04903b9d3cd1ef85f49f99793d3c5e9d96d2c7e6], force\u003dyes, delete\u003dno, ffwd\u003dno}, RemoteRefUpdate{refSpec\u003drefs/changes/03/3/meta:refs/changes/03/3/meta, status\u003dNOT_ATTEMPTED, id\u003d(null)..AnyObjectId[64d80c2172d78356bdc3e1aaf7bb4a8131ed7e3d], force\u003dyes, delete\u003dno, ffwd\u003dno} [CONTEXT PLUGIN\u003d\"replication\" project\u003d\"x/test-project\" pushOneId\u003d\"21b9d715\" request\u003d\"REST /changes/*/edit:publish\" ]\n[2023-09-25 20:55:01,482] Replication to file:///var/gerrit/data/replication_repos/x/test-project.git completed in 124ms, 1009ms delay, 0 retries [CONTEXT PLUGIN\u003d\"replication\" project\u003d\"x/test-project\" pushOneId\u003d\"21b9d715\" request\u003d\"REST /changes/*/edit:publish\" ]\n```\n\nSecond I edited the Full Name field of a user which modifies All-Users. Previously a task was written to disk as we didn\u0027t check for configuration repo updates until after this was written. Now we check before and replication is skipped without leaking a waiting/ task file:\n\n```\n[2023-09-25 20:55:32,810] Project All-Users is a config project and replication of config projects is disabled [CONTEXT PLUGIN\u003d\"replication\" request\u003d\"REST /accounts/*/displayname\" ]\n[2023-09-25 20:55:32,810] Skipping replication of project All-Users [CONTEXT PLUGIN\u003d\"replication\" request\u003d\"REST /accounts/*/displayname\" ]\n```\n\n```\nroot@review99:~# ls -l /home/gerrit2/review_site/data/replication/ref-updates/waiting/\ntotal 0\n```",
+      "revId": "2567f31f81610a2e0e468082ee90a328d2026d68",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e41604e_fa0b097d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-09-25T21:06:26Z",
+      "side": 1,
+      "message": "I moved this check into this method from the other shouldReplicate definition because it gives me access to the ReplicationState states which allows me to preserve the old stateLog.error() logging that was used previously in permissions checking.\n\nI think this is otherwise equivalent as we called the other method on line 409 below next. So order of operations etc should all be the same here.",
+      "revId": "2567f31f81610a2e0e468082ee90a328d2026d68",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
