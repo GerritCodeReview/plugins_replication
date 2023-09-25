@@ -82,6 +82,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0afc1ecc_89c77bad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-09-25T15:52:47Z",
+      "side": 1,
+      "message": "I ended up doing a small refactor to make it cleaner to have both sides of the replication scheduling use the same filtration path. That allowed me to keep this method private and mark the common one public.",
+      "parentUuid": "078547ee_72b9ef33",
+      "range": {
+        "startLine": 342,
+        "startChar": 2,
+        "endLine": 342,
+        "endChar": 8
+      },
+      "revId": "ebd001b566772bfbf5edd0b9c7521787d22f2088",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee1103cb_1494c46e",
@@ -119,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0a9617f_359608ae",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-09-25T15:52:47Z",
+      "side": 1,
+      "message": "I think this might be better as a potential followon just to make it clearer where the file leak related code is and is not.",
+      "parentUuid": "771be7f3_aabfae9a",
+      "revId": "ebd001b566772bfbf5edd0b9c7521787d22f2088",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f7f4041_71e7a53e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 1
@@ -148,6 +190,24 @@
       "side": 1,
       "message": "I think you probably need to filter everywhere the code currently filters. You\u0027re adding the code to avoid writing tasks to disk when they will be filtered, but I think you also need to handle the cases where you have an existing task on disk and it\u0027s now been filtered out.",
       "parentUuid": "1f7f4041_71e7a53e",
+      "revId": "ebd001b566772bfbf5edd0b9c7521787d22f2088",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c70a43c_ae44cff1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-09-25T15:52:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "308a0447_5bc31221",
       "revId": "ebd001b566772bfbf5edd0b9c7521787d22f2088",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }

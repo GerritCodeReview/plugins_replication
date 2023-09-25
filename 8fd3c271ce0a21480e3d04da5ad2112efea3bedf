@@ -34,6 +34,24 @@
       "parentUuid": "fed58ed8_bb37fe08",
       "revId": "8fd3c271ce0a21480e3d04da5ad2112efea3bedf",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5c379f1_a15e3051",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-09-25T15:52:47Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "2ff047e0_258550aa",
+      "revId": "8fd3c271ce0a21480e3d04da5ad2112efea3bedf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
