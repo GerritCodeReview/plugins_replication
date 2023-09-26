@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfde4e52_bed530f3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-09-26T22:38:26Z",
+      "side": 1,
+      "message": "task.refs appears to be of the form `[\"refs/changes/05/5/meta\", \"refs/changes/05/5/1\"]` In `listWaitingReplicationTasks` we run a `regex matches()` against `task.refs[0]`. The old regex matches up to the final `/` in `\"refs/changes/05/5/meta\"` but does not match `meta`. Since matches() does a full match with a `^` prefix and `$` suffix we don\u0027t match any tasks.\n\nI have updated the regex to match both refs currently found in the refs list. This way the order the refs are listed in does not matter. What I am concerned about is this test did not fail on the parent change. I believe this test did not run at all on that parent change. Is the test suite being properly exercised by the CI jobs?\n\nIt is possible that the parent change does affect the order of refs that ultimately end up in the tasks as it is filtering them ahead of time. However, I really would\u0027ve expected this test case to fail on the parent change if that were the case.",
+      "revId": "ca7972dc3d6fcffdfbe8004b7058eefbc612066a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aef8ab4_b1a87d71",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-09-26T22:38:26Z",
+      "side": 1,
+      "message": "I think this TODO is necessary to fully cover the concern in this test case; however what I have written should be better than nothing. Also, there doesn\u0027t appear to be any manipulation of permissions at all in this test suite and I\u0027m very quickly lost at how to do that.\n\nIn this case the change we make to the permissions doesn\u0027t really matter. We just need to change the values so that they would replicate but then don\u0027t. Is there an easy way to do that here?",
+      "revId": "ca7972dc3d6fcffdfbe8004b7058eefbc612066a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
