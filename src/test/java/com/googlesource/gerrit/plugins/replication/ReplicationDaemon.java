@@ -210,6 +210,10 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
     return projectOperations.newProject().name(name).create();
   }
 
+  protected Project.NameKey createTestPermissionsProject(String name) throws Exception {
+    return projectOperations.newProject().name(name).permissionOnly(true).create();
+  }
+
   protected boolean isPushCompleted(Project.NameKey project, String ref, Duration timeOut) {
     try (Repository repo = repoManager.openRepository(project)) {
       WaitUtil.waitUntil(() -> checkedGetRef(repo, ref) != null, timeOut);
@@ -307,6 +311,12 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
   protected void setProjectDeletionReplication(String remoteName, boolean replicateProjectDeletion)
       throws IOException {
     config.setBoolean("remote", remoteName, "replicateProjectDeletions", replicateProjectDeletion);
+    config.save();
+  }
+
+  protected void setPermissionsReplication(String remoteName, boolean replicatePermissions)
+      throws IOException {
+    config.setBoolean("remote", remoteName, "replicatePermissions", replicatePermissions);
     config.save();
   }
 }
