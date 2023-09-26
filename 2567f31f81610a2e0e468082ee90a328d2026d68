@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a7bf4aa_fb02364e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-09-26T19:08:05Z",
+      "side": 1,
+      "message": "I totally understand wanting to add test cases when adding features or fixing bugs. This helps avoid future regressions.\n\nI have pushed three test cases, but have done so in a followup change. The reason for this there is a complete lack of documentation on how to run tests in plugins (even the main Gerrit test execution docs are pretty sparse imo) so I haven\u0027t run them yet. I\u0027m not even sure if they compile as `bazel build release` seems to skip compiling the tests. Side note `bazel build release` does not work for me locally without patching jgit and lucene errorprone errors. Not sure what is going on there.\n\nAdditionally the third test case is incomplete because I haven\u0027t sorted out how to modify permissions on the test repository to cover the case where refs are filtered out due to a lack of permissions. The current plugin appears to have zero testing for this today. Honestly it feels a bit unfair to me (someone trying to fix a relatively small bug) to be expected to figure out and implement such a major miss in the test suite.\n\nI think the first two test cases are close if not there already. I\u0027m happy to figure those out and squash them back into this change. For the third test case I\u0027d love some help or even for someone else to push an updated patchset that completes the TODO in that test case.\n\nI may not be the target audience for most of this stuff as I\u0027m not a day to day Java developer. But I am willing to dive in occasionally and fix problems that we and our users run into with Gerrit. I would personally find it super helpful if the documentation that exists around building and testing gerrit (and its plugins) could have a Java tools for dummies section.",
+      "parentUuid": "687243ed_a7187d9a",
+      "revId": "2567f31f81610a2e0e468082ee90a328d2026d68",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0432858c_a5f36308",
