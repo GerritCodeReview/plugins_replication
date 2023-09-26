@@ -22,6 +22,7 @@ import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.projects.BranchInput;
+import com.google.gerrit.extensions.common.ProjectInfo;
 import com.googlesource.gerrit.plugins.replication.Destination.QueueInfo;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
@@ -37,6 +38,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.URIish;
 import org.junit.Test;
 
@@ -311,6 +314,106 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
 
     WaitUtil.waitUntil(() -> pushOp.wasCanceled(), MAX_RETRY_WITH_TOLERANCE_TIMEOUT);
     WaitUtil.waitUntil(() -> isTaskCleanedUp(), TEST_TASK_FINISH_TIMEOUT);
+  }
+
+  @Test
+  public void shouldNotLeakTasksForSkippedConfigProjectReplication() throws Exception {
+    String testRemote = "test_remote";
+    setReplicationDestination(testRemote, "replica", ALL_PROJECTS);
+    setPermissionsReplication(testRemote, false);
+    reloadConfig();
+    Project.NameKey permsProject = createTestPermissionsProject("test_permissions_only_project");
+    Project.NameKey sourceProject = createTestProject("test_replication_source_project");
+
+    WaitUtil.waitUntil(
+        () -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")),
+        TEST_NEW_PROJECT_TIMEOUT);
+    ProjectInfo replicaProject = gApi.projects().name(sourceProject + "replica").get();
+    assertThat(replicaProject).isNotNull();
+
+    // We now know that the regular project creation replicated properly.
+    // Next we check that the permissions only project did not replicate
+    // as we have disabled replication for permissions only projects.
+    ProjectInfo replicaPermsProject = gApi.projects().name(permsProject + "replica").get();
+    assertThat(replicaPermsProject).isNull();
+
+    // Finally we check that both the waiting and running queues are empty
+    // to ensure that permissions replication isn't somehow still in flight
+    // which would represent a leaked task file on disk.
+    assertThat(listWaiting()).hasSize(0);
+    assertThat(listRunning()).hasSize(0);
+  }
+
+  @Test
+  public void shouldNotLeakTasksForSkippedRefMatchReplication() throws Exception {
+    Project.NameKey targetProject = createTestProject(project + "replica");
+    String testRemote = "doNotLeakTasksForUnMatchedRefs";
+
+    setReplicationDestination(testRemote, "replica", ALL_PROJECTS);
+    // Only replicate refs/heads/* so that we know when replication has
+    // completed after creating a new change while not replicating the change
+    // ref. Master would be created for us when creating the repo so we
+    // need a second branch to check.
+    config.setString("remote", testRemote, "push", "+refs/heads/*:refs/heads/*");
+    reloadConfig();
+
+    // Create a new change first then create a new branch. This way we can
+    // see that the change is not replicated when the branch is replicated.
+    String changeRef = createChange().getPatchSet().refName();
+    String newBranch = "refs/heads/newBranch";
+    String master = "refs/heads/master";
+    BranchInput input = new BranchInput();
+    input.revision = master;
+    gApi.projects().name(project.get()).branch(newBranch).create(input);
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      WaitUtil.waitUntil(() -> checkedGetRef(repo, newBranch) != null);
+      assertThat(checkedGetRef(repo, changeRef)).isNull();
+    }
+
+    // Finally ensure that there are new queued tasks to disks. We don't
+    // want to leak them when work is complete.
+    assertThat(listWaiting()).hasSize(0);
+    assertThat(listRunning()).hasSize(0);
+  }
+
+  @Test
+  public void shouldNotLeakTasksForSkippedRefPermsReplication() throws Exception {
+    Project.NameKey targetProject = createTestProject(project + "replica");
+    String testRemote = "doNotLeakTasksForNoPermsRefs";
+
+    setReplicationDestination(testRemote, "replica", ALL_PROJECTS);
+    // Set authGroup to Anonymous Users so that when we update refs/meta/config
+    // with replicatePermissions set to True (default) we will filter on user
+    // access rules not replicatePermissions settings.
+    config.setString("remote", testRemote, "authGroup", "Anonymous Users");
+    reloadConfig();
+
+    // TODO: Update refs/meta/config then create a new branch. The new branch
+    // should replicate but updated refs/meta/config will not.
+
+    String changeRef = createChange().getPatchSet().refName();
+    String newBranch = "refs/heads/newBranch";
+    String master = "refs/heads/master";
+    BranchInput input = new BranchInput();
+    input.revision = master;
+    gApi.projects().name(project.get()).branch(newBranch).create(input);
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      WaitUtil.waitUntil(() -> checkedGetRef(repo, newBranch) != null);
+      Ref targetConfigHead = checkedGetRef(repo, "refs/meta/config");
+    }
+    try (Repository repo = repoManager.openRepository(project)) {
+      Ref sourceConfigHead = checkedGetRef(repo, "refs/meta/config");
+    }
+    assertThat(sourceConfigHead).isNotNull();
+    assertThat(targetConfigHead).isNotNull();
+    assertThat(sourceConfigHead.getObjectId()).isNotEqualTo(targetConfigHead.getObjectId());
+
+    // Finally ensure that there are new queued tasks to disks. We don't
+    // want to leak them when work is complete.
+    assertThat(listWaiting()).hasSize(0);
+    assertThat(listRunning()).hasSize(0);
   }
 
   private void replicateBranchDeletion(boolean mirror) throws Exception {
