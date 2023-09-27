@@ -54,6 +54,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cc4beba_2a30a900",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-09-27T23:45:26Z",
+      "side": 1,
+      "message": "\u003e I would personally find it super helpful if the documentation that exists around building and testing gerrit (and its plugins) could have a Java tools for dummies section.\n\nI took my own suggestion and put together https://gerrit-review.googlesource.com/c/gerrit/+/387736 after sorting out how the tools work. Good news is that switching to Bazelisk seems to make this far more reliable on my local machine. I\u0027m sure this is incomplete, but I think it would\u0027ve helped me get up and running more quickly.",
+      "parentUuid": "0a736a89_03cd1f1d",
+      "revId": "2567f31f81610a2e0e468082ee90a328d2026d68",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0432858c_a5f36308",
