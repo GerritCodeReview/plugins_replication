@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e95bb476_ce0fd90e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-09-28T23:10:28Z",
+      "side": 1,
+      "message": "task.refs appears to be of the form [\"refs/changes/05/5/meta\", \"refs/changes/05/5/1\"] In listWaitingReplicationTasks we run a regex matches() against task.refs[0]. The old regex matches up to the final / in \"refs/changes/05/5/meta\" but does not match meta. Since matches() does a full match with a ^ prefix and $ suffix we don\u0027t match any tasks.\n\nI have updated the regex to match both refs currently found in the refs list. This way the order the refs are listed in does not matter. It isn\u0027t clear to me why this was failing in the (now abandoned) child change. Perhaps the new test cases change runtime dynamics such that the order of the entries in those lists is swapped? Either way this should be fine as long as the specific order isn\u0027t important and I don\u0027t think it is.",
+      "revId": "37c865fbcc589cd7b2a5ac925acfc51ee29d268b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ea9a62a_718e56b1",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-09-28T23:10:28Z",
+      "side": 1,
+      "message": "Note this case actually passes against the previous and current code. The other two test cases fail against the previous commit but pass under this one.\n\nThe old code actually handled this case just fine. But in the interest of avoiding future regressions I added a test case for this scenario as well since it is related to the others.",
+      "revId": "37c865fbcc589cd7b2a5ac925acfc51ee29d268b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
