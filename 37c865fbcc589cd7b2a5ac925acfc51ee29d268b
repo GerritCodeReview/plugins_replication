@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ce46e84_16c1970a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003883
+      },
+      "writtenOn": "2023-10-06T01:31:31Z",
+      "side": 1,
+      "message": "This approach feels faulty and fragile to me since the permissions can change between restarts (or worse, across primaries in a multi-primary setup). I think that a better approach is to never write a \"filtered\" subset in the first place. This would require that a pointer to the appropriate non filtered ID (or a way to recreate that ID) for the stored task file be kept in memory along with the filtered refs so that we can always reference the same file names, before and after filtering.",
+      "revId": "37c865fbcc589cd7b2a5ac925acfc51ee29d268b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e95bb476_ce0fd90e",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
         "patchSetId": 4
