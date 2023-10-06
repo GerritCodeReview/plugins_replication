@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d340f5c_7bb5defe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-10-06T19:40:03Z",
+      "side": 1,
+      "message": "\u003e This approach feels faulty and fragile to me since the permissions can change between restarts (or worse, across primaries in a multi-primary setup).\n\nJust to be clear that is a problem with the existing design. Yes, my change doesn\u0027t correct that, but it does improve the consistency with the existing design preventing it from needlessly leaking files in most situations.\n\n\u003e I think that a better approach is to never write a \"filtered\" subset in the first place. This would require that a pointer to the appropriate non filtered ID (or a way to recreate that ID) for the stored task file be kept in memory along with the filtered refs so that we can always reference the same file names, before and after filtering.\n\nI\u0027ve spent a couple of hours trying to make this work. Essentially start by writing the full set of refs for all projects without any filtering. This adds entries into waiting/. Then in Destination.schedule() we filter and try to track two batches of refs on PushOne. The first are the requested refs to replicate and the second are the filtered refs to actually replicate.\n\nWhat I am struggling with is that the entire system seems built around the idea that once refs are in running/ the written refs will be replicated. At least that seems to be what is happening in my testing. There is a lot of coupling between that written refs list once we get to the running stages.\n\nOne approach around this would be to update the written data to have a new field which is the refs requested independent of the refs and only hash things uses refs requested. But I am not sure how to make that backward compatible with existing files on disk across an upgrade.\n\nI\u0027m also not sure if this will need to accommodate the merging of push batches. Essentially our on disk representation is many requests. Our internal representation is a single PushOne which can consolidate many of those on disk requests. We somehow need to map between a single PushOne with many refs and many requests on disk while still differentiating between refs on disk that shouldn\u0027t run and those that should. I think it is doable but as mentioned above I\u0027m getting stuck on how keep track of that and get things working.",
+      "parentUuid": "8ce46e84_16c1970a",
+      "revId": "37c865fbcc589cd7b2a5ac925acfc51ee29d268b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e95bb476_ce0fd90e",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
         "patchSetId": 4
