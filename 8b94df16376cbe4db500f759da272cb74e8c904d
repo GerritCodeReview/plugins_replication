@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ed536f1_8b6e77f2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-10-06T21:44:28Z",
+      "side": 1,
+      "message": "Does anyone know how to get access to the repLog when running tests? It would be really helpful to see the flow of all the interwoven tasks via logging, but instead I seem to only get the main server log.",
+      "revId": "8b94df16376cbe4db500f759da272cb74e8c904d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
