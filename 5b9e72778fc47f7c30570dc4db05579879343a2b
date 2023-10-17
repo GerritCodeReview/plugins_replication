@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a8749d7_59c6ec4f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/CreateProjectTask.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-10-17T17:48:13Z",
+      "side": 1,
+      "message": "The expectation for create() is that it will return True if the project is created and false otherwise. The old code returned true in the default case even if there were no projects to create. This later resulted in retried attempts to replicate because the plugin thought there was a target created for it when there isn\u0027t one.\n\nTo fix this we modify the method to only return true when something is actually created. I think this may be an existing bug and can split this out into another change if we want to review it separately. However, this update was necessary for the filtration after request to work at all.",
+      "revId": "5b9e72778fc47f7c30570dc4db05579879343a2b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f9ca59a_6deaf806",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-10-17T17:48:13Z",
+      "side": 1,
+      "message": "I think this is the major piece that I\u0027m not quite sure how to address right now. Before tackling this further it would be helpful to get feedback on whether the overall approach makes sense and maybe some help with accessing repLogs during testing so that I can better understand the operation of the plugin when running tests?\n\nI think what I\u0027ve got today does work (the new tests I added pass), but we need to resolve the issue noted in this comment before I\u0027d be comfortable merging this. Then when that is done we can update the existing test cases for the new behavior. All of that assumes we are happy with this approach.",
+      "revId": "5b9e72778fc47f7c30570dc4db05579879343a2b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}

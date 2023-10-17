@@ -139,6 +139,24 @@
       "message": "I moved this check into this method from the other shouldReplicate definition because it gives me access to the ReplicationState states which allows me to preserve the old stateLog.error() logging that was used previously in permissions checking.\n\nI think this is otherwise equivalent as we called the other method on line 409 below next. So order of operations etc should all be the same here.",
       "revId": "2567f31f81610a2e0e468082ee90a328d2026d68",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e61224d_37cc1849",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1011217
+      },
+      "writtenOn": "2023-10-17T17:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e41604e_fa0b097d",
+      "revId": "2567f31f81610a2e0e468082ee90a328d2026d68",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
