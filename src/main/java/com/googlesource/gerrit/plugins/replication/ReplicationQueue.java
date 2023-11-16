@@ -303,7 +303,8 @@ public class ReplicationQueue
 
   private void fireBeforeStartupEvents() {
     Set<String> eventsReplayed = new HashSet<>();
-    for (ReferencesUpdatedEvent event : beforeStartupEventsQueue) {
+    ReferencesUpdatedEvent event;
+    while ((event = beforeStartupEventsQueue.poll()) != null) {
       String eventKey = String.format("%s:%s", event.projectName(), event.getRefNames());
       if (!eventsReplayed.contains(eventKey)) {
         repLog.atInfo().log("Firing pending task %s", event);
