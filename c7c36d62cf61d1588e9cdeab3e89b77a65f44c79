@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9aed6f7_5c06661a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-11-17T00:10:19Z",
+      "side": 1,
+      "message": "Hmm, is this racy? i.e. if someone triggers a reload after `poll()` but before `fire()`, do we lose the event?\n\nIf yes, we do have a concurrent queue here, so I think it would be safe to get an iterator and remove from the queue after firing.",
+      "revId": "c7c36d62cf61d1588e9cdeab3e89b77a65f44c79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b97780f_7d1880df",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-11-17T00:10:19Z",
+      "side": 1,
+      "message": "Not related to your code, but I noticed that we\u0027re creating a key that\u0027s nearly identical to the AutoValue `ReferencesUpdatedEvent` class. Isn\u0027t the whole point of AutoValue that we can use it directly in a case like this?",
+      "range": {
+        "startLine": 308,
+        "startChar": 13,
+        "endLine": 308,
+        "endChar": 21
+      },
+      "revId": "c7c36d62cf61d1588e9cdeab3e89b77a65f44c79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
