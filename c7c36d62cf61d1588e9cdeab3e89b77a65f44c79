@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "619ce09f_0bf5ac10",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1161425
+      },
+      "writtenOn": "2023-11-21T08:32:57Z",
+      "side": 1,
+      "message": "Thank you Nasser, in case the plugin is restarted before `fire()`, the queue will obviously become empty, losing the event.\n\nWhen the plugin is reloaded instead, as you say we could lose the event if that happens between the `poll()` and the `fire()`, on the other hand, if the plugin is constantly being reloaded, we might end up in a situation where the event is finally `fired` at a much later time than it was intended to, actually causing to possibly send an old ref value.\nWDYT?",
+      "parentUuid": "f9aed6f7_5c06661a",
+      "revId": "c7c36d62cf61d1588e9cdeab3e89b77a65f44c79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5b97780f_7d1880df",
