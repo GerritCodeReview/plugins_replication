@@ -71,6 +71,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9837d329_6cf5bcda",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-11-24T01:05:06Z",
+      "side": 1,
+      "message": "\u003e @nasser.grainawi@linaro.org any thoughts on this comment?\n\nMy 2c: if the plugin is reloaded, the in-memory data is lost anyway. So, even if we keep the element in the queue, the reloaded plugin will start with an empty memory area.",
+      "parentUuid": "8108dec9_55fe87a5",
+      "revId": "c7c36d62cf61d1588e9cdeab3e89b77a65f44c79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5b97780f_7d1880df",
