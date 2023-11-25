@@ -91,6 +91,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1b62f2d4_ce9a0a3e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-11-25T00:21:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9837d329_6cf5bcda",
+      "revId": "c7c36d62cf61d1588e9cdeab3e89b77a65f44c79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5b97780f_7d1880df",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 2
