@@ -18,6 +18,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e85ec05_7fbd1b06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-12-02T12:26:30Z",
+      "side": 1,
+      "message": "Feel free to address the comments in a follow-up change, as this one has been merged already.",
+      "revId": "c7c36d62cf61d1588e9cdeab3e89b77a65f44c79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9aed6f7_5c06661a",
@@ -121,6 +138,24 @@
       "side": 1,
       "message": "\u003e Nasser any thoughts on this comment?\n\nSorry, I was on vacation last week.\n\n\u003e we might end up in a situation where the event is finally fired at a much later time than it was intended to, actually causing to possibly send an old ref value.\n\nWhat do you mean \"send an old ref value\"? We would call fire() with the UpdatedRef set, but if you look at line 172 where those are used, we only use the ref names. Even if we did use them, if we weren\u0027t sanity checking to see if the event was stale, I think that would be buggy. So I don\u0027t see any downside to the approach I suggested.\n\n\u003e My 2c: if the plugin is reloaded, the in-memory data is lost anyway. So, even if we keep the element in the queue, the reloaded plugin will start with an empty memory area.\n\nThis doesn\u0027t make sense to me. The whole bug report is about the plugin auto-reloading due to config changes. If that clears the in-memory data, how does the bug exist?",
       "parentUuid": "1b62f2d4_ce9a0a3e",
+      "revId": "c7c36d62cf61d1588e9cdeab3e89b77a65f44c79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e1f6cc1_e87c3226",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-12-02T12:26:30Z",
+      "side": 1,
+      "message": "\u003e \u003e we might end up in a situation where the event is finally fired at a much later time than it was intended to, actually causing to possibly send an old ref value.\n\u003e \n\u003e What do you mean \"send an old ref value\"? We would call fire() with the UpdatedRef set, but if you look at line 172 where those are used, we only use the ref names. Even if we did use them, if we weren\u0027t sanity checking to see if the event was stale, I think that would be buggy. So I don\u0027t see any downside to the approach I suggested.\n\nI believe your approach would also work, I don\u0027t see any problems or downsides either.\n \n\u003e \u003e My 2c: if the plugin is reloaded, the in-memory data is lost anyway. So, even if we keep the element in the queue, the reloaded plugin will start with an empty memory area.\n\nI see, you meant if the configuration is reloaded without the plugin being reloaded. Yes, it could be racy in that case.\n\n\u003e This doesn\u0027t make sense to me. The whole bug report is about the plugin auto-reloading due to config changes. If that clears the in-memory data, how does the bug exist?\n\nAcked.",
+      "parentUuid": "67ca572c_9afa6bc2",
       "revId": "c7c36d62cf61d1588e9cdeab3e89b77a65f44c79",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
