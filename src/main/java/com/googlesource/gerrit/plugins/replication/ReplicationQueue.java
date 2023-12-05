@@ -304,13 +304,14 @@ public class ReplicationQueue
   private void fireBeforeStartupEvents() {
     Set<String> eventsReplayed = new HashSet<>();
     ReferencesUpdatedEvent event;
-    while ((event = beforeStartupEventsQueue.poll()) != null) {
+    while ((event = beforeStartupEventsQueue.peek()) != null) {
       String eventKey = String.format("%s:%s", event.projectName(), event.getRefNames());
       if (!eventsReplayed.contains(eventKey)) {
         repLog.atInfo().log("Firing pending task %s", event);
         fire(event.projectName(), event.updatedRefs());
         eventsReplayed.add(eventKey);
       }
+      beforeStartupEventsQueue.remove(event);
     }
   }
 
