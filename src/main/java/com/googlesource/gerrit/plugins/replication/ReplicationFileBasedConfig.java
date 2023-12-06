@@ -115,10 +115,6 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     return pluginDataDir;
   }
 
-  Path getCfgPath() {
-    return cfgPath;
-  }
-
   @Override
   public Config getConfig() {
     return config;
