@@ -14,6 +14,8 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.googlesource.gerrit.plugins.replication.FileConfigResource.CONFIG_NAME;
+
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.AbstractModule;
@@ -37,7 +39,7 @@ public class ReplicationConfigModule extends AbstractModule {
   @Inject
   ReplicationConfigModule(SitePaths site) {
     this.site = site;
-    this.cfgPath = site.etc_dir.resolve("replication.config");
+    this.cfgPath = site.etc_dir.resolve(CONFIG_NAME);
   }
 
   @Override
