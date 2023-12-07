@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ecc1111_43dae536",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-12-07T21:34:40Z",
+      "side": 1,
+      "message": "nit: you\u0027re wrapping these lines a little early 😊 It\u0027s fine to go to 72 characters for the commit message body.",
+      "revId": "2880b11652afe1e6c2c969bd8b810e1030205001",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b63eed8_e16a4c32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-12-07T21:34:40Z",
+      "side": 1,
+      "message": "Thanks for doing this follow up change!",
+      "revId": "2880b11652afe1e6c2c969bd8b810e1030205001",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2dfccaac_badda55a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 2
