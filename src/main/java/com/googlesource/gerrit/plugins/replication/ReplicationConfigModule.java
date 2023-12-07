@@ -1,0 +1,75 @@
+// Copyright (C) 2023 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package com.googlesource.gerrit.plugins.replication;
+
+import com.google.gerrit.extensions.events.LifecycleListener;
+import com.google.gerrit.server.config.SitePaths;
+import com.google.inject.AbstractModule;
+import com.google.inject.Inject;
+import com.google.inject.ProvisionException;
+import com.google.inject.Scopes;
+import com.google.inject.internal.UniqueAnnotations;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.storage.file.FileBasedConfig;
+import org.eclipse.jgit.util.FS;
+
+public class ReplicationConfigModule extends AbstractModule {
+
+  private final SitePaths site;
+  private final Path cfgPath;
+
+  @Inject
+  ReplicationConfigModule(SitePaths site) {
+    this.site = site;
+    this.cfgPath = site.etc_dir.resolve("replication.config");
+  }
+
+  @Override
+  protected void configure() {
+    if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
+      bind(ReplicationConfig.class)
+          .annotatedWith(MainReplicationConfig.class)
+          .to(getReplicationConfigClass());
+      bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class).in(Scopes.SINGLETON);
+      bind(LifecycleListener.class)
+          .annotatedWith(UniqueAnnotations.create())
+          .to(AutoReloadConfigDecorator.class);
+    } else {
+      bind(ReplicationConfig.class).to(getReplicationConfigClass()).in(Scopes.SINGLETON);
+    }
+  }
+
+  public FileBasedConfig getReplicationConfig() {
+    File replicationConfigFile = cfgPath.toFile();
+    FileBasedConfig config = new FileBasedConfig(replicationConfigFile, FS.DETECTED);
+    try {
+      config.load();
+    } catch (IOException | ConfigInvalidException e) {
+      throw new ProvisionException("Unable to load " + replicationConfigFile.getAbsolutePath(), e);
+    }
+    return config;
+  }
+
+  private Class<? extends ReplicationConfig> getReplicationConfigClass() {
+    if (Files.exists(site.etc_dir.resolve("replication"))) {
+      return FanoutReplicationConfig.class;
+    }
+    return ReplicationFileBasedConfig.class;
+  }
+}

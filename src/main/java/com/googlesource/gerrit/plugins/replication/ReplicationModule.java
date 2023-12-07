@@ -24,11 +24,9 @@ import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
-import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.events.EventTypes;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
-import com.google.inject.ProvisionException;
 import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
@@ -40,29 +38,22 @@ import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicationDoneEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.eclipse.jgit.errors.ConfigInvalidException;
-import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.transport.SshSessionFactory;
-import org.eclipse.jgit.util.FS;
 
 class ReplicationModule extends AbstractModule {
-  private final SitePaths site;
-  private final Path cfgPath;
+
+  private final ReplicationConfigModule configModule;
 
   @Inject
-  public ReplicationModule(SitePaths site) {
-    this.site = site;
-    cfgPath = site.etc_dir.resolve("replication.config");
+  public ReplicationModule(ReplicationConfigModule configModule) {
+    this.configModule = configModule;
   }
 
   @Override
   protected void configure() {
     install(new FactoryModuleBuilder().build(Destination.Factory.class));
+    install(configModule);
     bind(ReplicationQueue.class).in(Scopes.SINGLETON);
     bind(ObservableQueue.class).to(ReplicationQueue.class);
     bind(LifecycleListener.class)
@@ -92,18 +83,6 @@ class ReplicationModule extends AbstractModule {
     bind(ReplicationDestinations.class).to(DestinationsCollection.class);
     bind(ConfigParser.class).to(DestinationConfigParser.class).in(Scopes.SINGLETON);
 
-    if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
-      bind(ReplicationConfig.class)
-          .annotatedWith(MainReplicationConfig.class)
-          .to(getReplicationConfigClass());
-      bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class).in(Scopes.SINGLETON);
-      bind(LifecycleListener.class)
-          .annotatedWith(UniqueAnnotations.create())
-          .to(AutoReloadConfigDecorator.class);
-    } else {
-      bind(ReplicationConfig.class).to(getReplicationConfigClass()).in(Scopes.SINGLETON);
-    }
-
     DynamicSet.setOf(binder(), ReplicationStateListener.class);
     DynamicSet.bind(binder(), ReplicationStateListener.class).to(ReplicationStateLogger.class);
 
@@ -124,23 +103,5 @@ class ReplicationModule extends AbstractModule {
 
     bind(TransportFactory.class).to(TransportFactoryImpl.class).in(Scopes.SINGLETON);
     bind(CloseableHttpClient.class).toProvider(HttpClientProvider.class).in(Scopes.SINGLETON);
-  }
-
-  private FileBasedConfig getReplicationConfig() {
-    File replicationConfigFile = cfgPath.toFile();
-    FileBasedConfig config = new FileBasedConfig(replicationConfigFile, FS.DETECTED);
-    try {
-      config.load();
-    } catch (IOException | ConfigInvalidException e) {
-      throw new ProvisionException("Unable to load " + replicationConfigFile.getAbsolutePath(), e);
-    }
-    return config;
-  }
-
-  private Class<? extends ReplicationConfig> getReplicationConfigClass() {
-    if (Files.exists(site.etc_dir.resolve("replication"))) {
-      return FanoutReplicationConfig.class;
-    }
-    return ReplicationFileBasedConfig.class;
   }
 }
