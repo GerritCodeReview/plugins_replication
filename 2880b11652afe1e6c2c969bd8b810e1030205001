@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dfccaac_badda55a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2023-12-07T21:33:50Z",
+      "side": 1,
+      "message": "You want to remove outside this if, otherwise you\u0027ll never fully empty the queue.",
+      "range": {
+        "startLine": 312,
+        "startChar": 8,
+        "endLine": 312,
+        "endChar": 47
+      },
+      "revId": "2880b11652afe1e6c2c969bd8b810e1030205001",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
