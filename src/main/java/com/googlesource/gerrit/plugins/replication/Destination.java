@@ -15,7 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.gerrit.server.project.ProjectCache.noSuchProject;
-import static com.googlesource.gerrit.plugins.replication.ReplicationFileBasedConfig.replaceName;
+import static com.googlesource.gerrit.plugins.replication.FileReplicationConfig.replaceName;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.NON_EXISTING;
 import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.REJECTED_OTHER_REASON;
 

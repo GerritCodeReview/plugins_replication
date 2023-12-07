@@ -27,9 +27,9 @@ import org.eclipse.jgit.util.FS;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FanoutReplicationConfigTest extends AbstractConfigTest {
+public class FanoutConfigResourceTest extends AbstractConfigTest {
 
-  public FanoutReplicationConfigTest() throws IOException {
+  public FanoutConfigResourceTest() throws IOException {
     super();
   }
 
@@ -62,7 +62,7 @@ public class FanoutReplicationConfigTest extends AbstractConfigTest {
     config.save();
 
     DestinationsCollection destinationsCollections =
-        newDestinationsCollections(new FanoutReplicationConfig(sitePaths, pluginDataPath));
+        newDestinationsCollections(new FanoutConfigResource(sitePaths));
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
 
@@ -81,7 +81,7 @@ public class FanoutReplicationConfigTest extends AbstractConfigTest {
     config.save();
 
     DestinationsCollection destinationsCollections =
-        newDestinationsCollections(new FanoutReplicationConfig(sitePaths, pluginDataPath));
+        newDestinationsCollections(new FanoutConfigResource(sitePaths));
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(2);
 
@@ -101,7 +101,7 @@ public class FanoutReplicationConfigTest extends AbstractConfigTest {
     config.save();
 
     DestinationsCollection destinationsCollections =
-        newDestinationsCollections(new FanoutReplicationConfig(sitePaths, pluginDataPath));
+        newDestinationsCollections(new FanoutConfigResource(sitePaths));
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
 
@@ -123,7 +123,7 @@ public class FanoutReplicationConfigTest extends AbstractConfigTest {
     config.save();
 
     DestinationsCollection destinationsCollections =
-        newDestinationsCollections(new FanoutReplicationConfig(sitePaths, pluginDataPath));
+        newDestinationsCollections(new FanoutConfigResource(sitePaths));
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(1);
 
@@ -136,7 +136,7 @@ public class FanoutReplicationConfigTest extends AbstractConfigTest {
     config.setString("remote", null, "url", "ssh://git@git.elsewhere.com/name");
     config.save();
 
-    newDestinationsCollections(new FanoutReplicationConfig(sitePaths, pluginDataPath));
+    newDestinationsCollections(new FanoutConfigResource(sitePaths));
   }
 
   @Test
@@ -145,7 +145,7 @@ public class FanoutReplicationConfigTest extends AbstractConfigTest {
     config.save();
 
     DestinationsCollection destinationsCollections =
-        newDestinationsCollections(new FanoutReplicationConfig(sitePaths, pluginDataPath));
+        newDestinationsCollections(new FanoutConfigResource(sitePaths));
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(0);
   }
@@ -158,7 +158,7 @@ public class FanoutReplicationConfigTest extends AbstractConfigTest {
     config.save();
 
     DestinationsCollection destinationsCollections =
-        newDestinationsCollections(new FanoutReplicationConfig(sitePaths, pluginDataPath));
+        newDestinationsCollections(new FanoutConfigResource(sitePaths));
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(0);
   }
@@ -170,7 +170,7 @@ public class FanoutReplicationConfigTest extends AbstractConfigTest {
     config.save();
 
     DestinationsCollection destinationsCollections =
-        newDestinationsCollections(new FanoutReplicationConfig(sitePaths, pluginDataPath));
+        newDestinationsCollections(new FanoutConfigResource(sitePaths));
     List<Destination> destinations = destinationsCollections.getAll(FilterType.ALL);
     assertThat(destinations).hasSize(0);
   }
@@ -186,12 +186,11 @@ public class FanoutReplicationConfigTest extends AbstractConfigTest {
     config.setString("remote", null, "url", remoteUrl2);
     config.save();
 
-    FanoutReplicationConfig objectUnderTest =
-        new FanoutReplicationConfig(sitePaths, pluginDataPath);
+    FanoutConfigResource objectUnderTest = new FanoutConfigResource(sitePaths);
 
     String version = objectUnderTest.getVersion();
 
-    objectUnderTest = new FanoutReplicationConfig(sitePaths, pluginDataPath);
+    objectUnderTest = new FanoutConfigResource(sitePaths);
 
     assertThat(objectUnderTest.getVersion()).isEqualTo(version);
   }
@@ -203,8 +202,7 @@ public class FanoutReplicationConfigTest extends AbstractConfigTest {
     config.setString("remote", null, "url", remoteUrl1);
     config.save();
 
-    FanoutReplicationConfig objectUnderTest =
-        new FanoutReplicationConfig(sitePaths, pluginDataPath);
+    FanoutConfigResource objectUnderTest = new FanoutConfigResource(sitePaths);
 
     String version = objectUnderTest.getVersion();
 
@@ -222,8 +220,7 @@ public class FanoutReplicationConfigTest extends AbstractConfigTest {
     config.setString("remote", null, "url", remoteUrl1);
     config.save();
 
-    FanoutReplicationConfig objectUnderTest =
-        new FanoutReplicationConfig(sitePaths, pluginDataPath);
+    FanoutConfigResource objectUnderTest = new FanoutConfigResource(sitePaths);
 
     String version = objectUnderTest.getVersion();
 
@@ -244,8 +241,7 @@ public class FanoutReplicationConfigTest extends AbstractConfigTest {
     config.setString("remote", null, "url", remoteUrl2);
     config.save();
 
-    FanoutReplicationConfig objectUnderTest =
-        new FanoutReplicationConfig(sitePaths, pluginDataPath);
+    FanoutConfigResource objectUnderTest = new FanoutConfigResource(sitePaths);
 
     String version = objectUnderTest.getVersion();
     assertThat(
@@ -267,11 +263,10 @@ public class FanoutReplicationConfigTest extends AbstractConfigTest {
     config.setString("remote", null, "url", remoteUrl2);
     config.save();
 
-    FanoutReplicationConfig objectUnderTest =
-        new FanoutReplicationConfig(sitePaths, pluginDataPath);
+    FanoutConfigResource objectUnderTest = new FanoutConfigResource(sitePaths);
 
     String replicationConfigVersion =
-        new ReplicationFileBasedConfig(sitePaths, pluginDataPath).getVersion();
+        new FileReplicationConfig(sitePaths, pluginDataPath).getVersion();
 
     MoreFiles.deleteRecursively(sitePaths.etc_dir.resolve("replication"), ALLOW_INSECURE);
 

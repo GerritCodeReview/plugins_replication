@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.googlesource.gerrit.plugins.replication.FanoutConfigResource.CONFIG_DIR;
 import static com.googlesource.gerrit.plugins.replication.FileConfigResource.CONFIG_NAME;
 
 import com.google.gerrit.extensions.events.LifecycleListener;
@@ -44,16 +45,15 @@ public class ReplicationConfigModule extends AbstractModule {
 
   @Override
   protected void configure() {
+    bind(ConfigResource.class).to(getConfigResourceClass());
+
     if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
-      bind(ReplicationConfig.class)
-          .annotatedWith(MainReplicationConfig.class)
-          .to(getReplicationConfigClass());
       bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class).in(Scopes.SINGLETON);
       bind(LifecycleListener.class)
           .annotatedWith(UniqueAnnotations.create())
           .to(AutoReloadConfigDecorator.class);
     } else {
-      bind(ReplicationConfig.class).to(getReplicationConfigClass()).in(Scopes.SINGLETON);
+      bind(ReplicationConfig.class).to(FileReplicationConfig.class).in(Scopes.SINGLETON);
     }
   }
 
@@ -68,10 +68,10 @@ public class ReplicationConfigModule extends AbstractModule {
     return config;
   }
 
-  private Class<? extends ReplicationConfig> getReplicationConfigClass() {
-    if (Files.exists(site.etc_dir.resolve("replication"))) {
-      return FanoutReplicationConfig.class;
+  private Class<? extends ConfigResource> getConfigResourceClass() {
+    if (Files.exists(site.etc_dir.resolve(CONFIG_DIR))) {
+      return FanoutConfigResource.class;
     }
-    return ReplicationFileBasedConfig.class;
+    return FileConfigResource.class;
   }
 }

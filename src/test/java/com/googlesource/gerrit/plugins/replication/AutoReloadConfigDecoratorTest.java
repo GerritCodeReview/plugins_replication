@@ -75,12 +75,14 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     remoteConfig.setString("remote", null, "url", remoteUrl1);
     remoteConfig.save();
 
-    replicationConfig = new FanoutReplicationConfig(sitePaths, pluginDataPath);
+    replicationConfig =
+        new FileReplicationConfig(new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
 
     newAutoReloadConfig(
             () -> {
               try {
-                return new FanoutReplicationConfig(sitePaths, pluginDataPath);
+                return new FileReplicationConfig(
+                    new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
               } catch (IOException | ConfigInvalidException e) {
                 throw new RuntimeException(e);
               }
@@ -122,12 +124,14 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     remoteConfig.setString("remote", null, "url", remoteUrl2);
     remoteConfig.save();
 
-    replicationConfig = new FanoutReplicationConfig(sitePaths, pluginDataPath);
+    replicationConfig =
+        new FileReplicationConfig(new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
 
     newAutoReloadConfig(
             () -> {
               try {
-                return new FanoutReplicationConfig(sitePaths, pluginDataPath);
+                return new FileReplicationConfig(
+                    new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
               } catch (IOException | ConfigInvalidException e) {
                 throw new RuntimeException(e);
               }
@@ -168,12 +172,14 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     remoteConfig.setString("remote", null, "url", remoteUrl2);
     remoteConfig.save();
 
-    replicationConfig = new FanoutReplicationConfig(sitePaths, pluginDataPath);
+    replicationConfig =
+        new FileReplicationConfig(new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
 
     newAutoReloadConfig(
             () -> {
               try {
-                return new FanoutReplicationConfig(sitePaths, pluginDataPath);
+                return new FileReplicationConfig(
+                    new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
               } catch (IOException | ConfigInvalidException e) {
                 throw new RuntimeException(e);
               }
@@ -228,14 +234,14 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
   }
 
   private AutoReloadConfigDecorator newAutoReloadConfig(
-      Supplier<ReplicationConfig> configSupplier) {
+      Supplier<FileReplicationConfig> configSupplier) {
     AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
             configParser,
-            new Provider<ReplicationConfig>() {
+            new Provider<FileReplicationConfig>() {
 
               @Override
-              public ReplicationConfig get() {
+              public FileReplicationConfig get() {
                 return configSupplier.get();
               }
             },

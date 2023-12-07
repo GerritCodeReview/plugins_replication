@@ -22,7 +22,7 @@ import com.google.inject.Inject;
 import java.nio.file.Path;
 import org.eclipse.jgit.lib.Config;
 
-public class ReplicationFileBasedConfig implements ReplicationConfig {
+public class FileReplicationConfig implements ReplicationConfig {
   private static final int DEFAULT_SSH_CONNECTION_TIMEOUT_MS = 2 * 60 * 1000; // 2 minutes
 
   private final SitePaths site;
@@ -35,14 +35,16 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private final ConfigResource configResource;
   private final Path pluginDataDir;
 
+  // TODO: remove in follow-up change, as this was added to reduce the diff size
+  // for change Ic6a5c5b8ab5
   @VisibleForTesting
-  public ReplicationFileBasedConfig(SitePaths paths, @PluginData Path pluginDataDir) {
+  public FileReplicationConfig(SitePaths paths, @PluginData Path pluginDataDir) {
     this(new FileConfigResource(paths), paths, pluginDataDir);
   }
 
   @Inject
-  public ReplicationFileBasedConfig(
-      FileConfigResource configResource, SitePaths site, @PluginData Path pluginDataDir) {
+  public FileReplicationConfig(
+      ConfigResource configResource, SitePaths site, @PluginData Path pluginDataDir) {
     this.site = site;
     this.configResource = configResource;
     Config config = configResource.getConfig();

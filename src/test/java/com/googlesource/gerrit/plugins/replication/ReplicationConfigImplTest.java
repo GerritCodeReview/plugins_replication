@@ -22,9 +22,9 @@ import java.util.List;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.junit.Test;
 
-public class ReplicationFileBasedConfigTest extends AbstractConfigTest {
+public class ReplicationConfigImplTest extends AbstractConfigTest {
 
-  public ReplicationFileBasedConfigTest() throws IOException {
+  public ReplicationConfigImplTest() throws IOException {
     super();
   }
 

@@ -128,6 +128,12 @@ public abstract class AbstractConfigTest {
     assertThatIsDestination(matchingDestinations.get(0), remoteName, remoteUrls);
   }
 
+  protected DestinationsCollection newDestinationsCollections(ConfigResource configResource)
+      throws ConfigInvalidException {
+    return newDestinationsCollections(
+        new FileReplicationConfig(configResource, sitePaths, pluginDataPath));
+  }
+
   protected DestinationsCollection newDestinationsCollections(ReplicationConfig replicationConfig)
       throws ConfigInvalidException {
     return new DestinationsCollection(
@@ -138,7 +144,7 @@ public abstract class AbstractConfigTest {
         eventBus);
   }
 
-  protected ReplicationConfig newReplicationFileBasedConfig() {
-    return new ReplicationFileBasedConfig(sitePaths, pluginDataPath);
+  protected FileReplicationConfig newReplicationFileBasedConfig() {
+    return new FileReplicationConfig(sitePaths, pluginDataPath);
   }
 }
