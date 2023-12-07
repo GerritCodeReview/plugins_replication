@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.io.Files.getNameWithoutExtension;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import com.google.common.flogger.FluentLogger;
 import com.google.common.hash.Hasher;
@@ -43,12 +44,21 @@ public class FanoutReplicationConfig implements ReplicationConfig {
   private final Config config;
   private final Path remoteConfigsDirPath;
 
+  @VisibleForTesting
+  public FanoutReplicationConfig(SitePaths sitePaths, @PluginData Path pluginDataDir)
+      throws IOException, ConfigInvalidException {
+    this(
+        new ReplicationFileBasedConfig(
+            new FileConfigResource(sitePaths), sitePaths, pluginDataDir),
+        sitePaths);
+  }
+
   @Inject
-  public FanoutReplicationConfig(SitePaths site, @PluginData Path pluginDataDir)
+  public FanoutReplicationConfig(ReplicationFileBasedConfig replicationConfig, SitePaths site)
       throws IOException, ConfigInvalidException {
 
     remoteConfigsDirPath = site.etc_dir.resolve("replication");
-    replicationConfig = new ReplicationFileBasedConfig(site, pluginDataDir);
+    this.replicationConfig = replicationConfig;
     config = replicationConfig.getConfig();
     removeRemotes(config);
 
