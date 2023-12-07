@@ -27,7 +27,7 @@ import org.eclipse.jgit.util.FS;
 
 public class FileConfigResource implements ConfigResource {
   public static final String CONFIG_NAME = "replication.config";
-  private final FileBasedConfig config;
+  protected final FileBasedConfig config;
 
   @Inject
   FileConfigResource(SitePaths site) {
@@ -40,7 +40,6 @@ public class FileConfigResource implements ConfigResource {
     } catch (IOException e) {
       repLog.atSevere().withCause(e).log("Cannot read %s: %s", cfgPath, e.getMessage());
     }
-
   }
 
   @Override

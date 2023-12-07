@@ -1,4 +1,4 @@
-// Copyright (C) 2020 The Android Open Source Project
+// Copyright (C) 2023 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,12 +17,10 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.io.Files.getNameWithoutExtension;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import com.google.common.flogger.FluentLogger;
 import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
-import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import java.io.IOException;
@@ -37,39 +35,26 @@ import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 
-public class FanoutReplicationConfig implements ReplicationConfig {
+public class FanoutConfigResource extends FileConfigResource {
+  public static String CONFIG_DIR = "replication";
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  private final ReplicationFileBasedConfig replicationConfig;
-  private final Config config;
   private final Path remoteConfigsDirPath;
 
-  @VisibleForTesting
-  public FanoutReplicationConfig(SitePaths sitePaths, @PluginData Path pluginDataDir)
-      throws IOException, ConfigInvalidException {
-    this(
-        new ReplicationFileBasedConfig(
-            new FileConfigResource(sitePaths), sitePaths, pluginDataDir),
-        sitePaths);
-  }
-
   @Inject
-  public FanoutReplicationConfig(ReplicationFileBasedConfig replicationConfig, SitePaths site)
-      throws IOException, ConfigInvalidException {
-
-    remoteConfigsDirPath = site.etc_dir.resolve("replication");
-    this.replicationConfig = replicationConfig;
-    config = replicationConfig.getConfig();
+  FanoutConfigResource(SitePaths site) throws IOException, ConfigInvalidException {
+    super(site);
+    this.remoteConfigsDirPath = site.etc_dir.resolve(CONFIG_DIR);
     removeRemotes(config);
 
     try (Stream<Path> files = Files.list(remoteConfigsDirPath)) {
       files
           .filter(Files::isRegularFile)
-          .filter(FanoutReplicationConfig::isConfig)
-          .map(FanoutReplicationConfig::loadConfig)
+          .filter(FanoutConfigResource::isConfig)
+          .map(FanoutConfigResource::loadConfig)
           .filter(Optional::isPresent)
           .map(Optional::get)
-          .filter(FanoutReplicationConfig::isValid)
+          .filter(FanoutConfigResource::isValid)
           .forEach(cfg -> addRemoteConfig(cfg, config));
     } catch (IllegalStateException e) {
       throw new ConfigInvalidException(e.getMessage());
@@ -80,7 +65,8 @@ public class FanoutReplicationConfig implements ReplicationConfig {
     Set<String> remoteNames = config.getSubsections("remote");
     if (remoteNames.size() > 0) {
       logger.atSevere().log(
-          "When replication directory is present replication.config file cannot contain remote configuration. Ignoring: %s",
+          "When replication directory is present replication.config file cannot contain remote"
+              + " configuration. Ignoring: %s",
           String.join(",", remoteNames));
 
       for (String name : remoteNames) {
@@ -132,53 +118,14 @@ public class FanoutReplicationConfig implements ReplicationConfig {
   }
 
   @Override
-  public boolean isReplicateAllOnPluginStart() {
-    return replicationConfig.isReplicateAllOnPluginStart();
-  }
-
-  @Override
-  public boolean isDefaultForceUpdate() {
-    return replicationConfig.isDefaultForceUpdate();
-  }
-
-  @Override
-  public int getMaxRefsToLog() {
-    return replicationConfig.getMaxRefsToLog();
-  }
-
-  @Override
-  public int getMaxRefsToShow() {
-    return replicationConfig.getMaxRefsToShow();
-  }
-
-  @Override
-  public Path getEventsDirectory() {
-    return replicationConfig.getEventsDirectory();
-  }
-
-  @Override
-  public int getSshConnectionTimeout() {
-    return replicationConfig.getSshConnectionTimeout();
-  }
-
-  @Override
-  public int getSshCommandTimeout() {
-    return replicationConfig.getSshCommandTimeout();
-  }
-
-  @Override
-  public int getDistributionInterval() {
-    return replicationConfig.getDistributionInterval();
-  }
-
-  @Override
   public String getVersion() {
+    String parentVersion = super.getVersion();
     Hasher hasher = Hashing.murmur3_128().newHasher();
-    hasher.putString(replicationConfig.getVersion(), UTF_8);
+    hasher.putString(parentVersion, UTF_8);
     try (Stream<Path> files = Files.list(remoteConfigsDirPath)) {
       files
           .filter(Files::isRegularFile)
-          .filter(FanoutReplicationConfig::isConfig)
+          .filter(FanoutConfigResource::isConfig)
           .sorted()
           .map(Path::toFile)
           .map(FileSnapshot::save)
@@ -189,14 +136,10 @@ public class FanoutReplicationConfig implements ReplicationConfig {
       return hasher.hash().toString();
     } catch (IOException e) {
       logger.atSevere().withCause(e).log(
-          "Cannot list remote configuration files from %s. Returning replication.config file version",
+          "Cannot list remote configuration files from %s. Returning replication.config file"
+              + " version",
           remoteConfigsDirPath);
-      return replicationConfig.getVersion();
+      return parentVersion;
     }
-  }
-
-  @Override
-  public Config getConfig() {
-    return config;
   }
 }
