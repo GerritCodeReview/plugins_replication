@@ -162,6 +162,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "fc08ed26_4a638325",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1161425
+      },
+      "writtenOn": "2023-12-07T20:47:27Z",
+      "side": 1,
+      "message": "@nasser.grainawi@linaro.org please note the follow up on [change 396480](https://gerrit-review.googlesource.com/c/plugins/replication/+/396480)",
+      "parentUuid": "8e1f6cc1_e87c3226",
+      "revId": "c7c36d62cf61d1588e9cdeab3e89b77a65f44c79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5b97780f_7d1880df",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 2
