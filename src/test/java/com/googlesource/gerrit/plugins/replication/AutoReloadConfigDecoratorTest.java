@@ -76,13 +76,18 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     remoteConfig.save();
 
     replicationConfig =
-        new FileReplicationConfig(new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
+        new ReplicationConfigImpl(
+            MergedConfigResource.withBaseOnly(new FanoutConfigResource(sitePaths)),
+            sitePaths,
+            pluginDataPath);
 
     newAutoReloadConfig(
             () -> {
               try {
-                return new FileReplicationConfig(
-                    new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
+                return new ReplicationConfigImpl(
+                    MergedConfigResource.withBaseOnly(new FanoutConfigResource(sitePaths)),
+                    sitePaths,
+                    pluginDataPath);
               } catch (IOException | ConfigInvalidException e) {
                 throw new RuntimeException(e);
               }
@@ -125,13 +130,18 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     remoteConfig.save();
 
     replicationConfig =
-        new FileReplicationConfig(new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
+        new ReplicationConfigImpl(
+            MergedConfigResource.withBaseOnly(new FanoutConfigResource(sitePaths)),
+            sitePaths,
+            pluginDataPath);
 
     newAutoReloadConfig(
             () -> {
               try {
-                return new FileReplicationConfig(
-                    new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
+                return new ReplicationConfigImpl(
+                    MergedConfigResource.withBaseOnly(new FanoutConfigResource(sitePaths)),
+                    sitePaths,
+                    pluginDataPath);
               } catch (IOException | ConfigInvalidException e) {
                 throw new RuntimeException(e);
               }
@@ -173,13 +183,18 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
     remoteConfig.save();
 
     replicationConfig =
-        new FileReplicationConfig(new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
+        new ReplicationConfigImpl(
+            MergedConfigResource.withBaseOnly(new FanoutConfigResource(sitePaths)),
+            sitePaths,
+            pluginDataPath);
 
     newAutoReloadConfig(
             () -> {
               try {
-                return new FileReplicationConfig(
-                    new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
+                return new ReplicationConfigImpl(
+                    MergedConfigResource.withBaseOnly(new FanoutConfigResource(sitePaths)),
+                    sitePaths,
+                    pluginDataPath);
               } catch (IOException | ConfigInvalidException e) {
                 throw new RuntimeException(e);
               }
@@ -234,14 +249,14 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
   }
 
   private AutoReloadConfigDecorator newAutoReloadConfig(
-      Supplier<FileReplicationConfig> configSupplier) {
+      Supplier<ReplicationConfigImpl> configSupplier) {
     AutoReloadRunnable autoReloadRunnable =
         new AutoReloadRunnable(
             configParser,
-            new Provider<FileReplicationConfig>() {
+            new Provider<ReplicationConfigImpl>() {
 
               @Override
-              public FileReplicationConfig get() {
+              public ReplicationConfigImpl get() {
                 return configSupplier.get();
               }
             },

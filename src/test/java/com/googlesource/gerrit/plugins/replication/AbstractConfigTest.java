@@ -131,7 +131,8 @@ public abstract class AbstractConfigTest {
   protected DestinationsCollection newDestinationsCollections(ConfigResource configResource)
       throws ConfigInvalidException {
     return newDestinationsCollections(
-        new FileReplicationConfig(configResource, sitePaths, pluginDataPath));
+        new ReplicationConfigImpl(
+            MergedConfigResource.withBaseOnly(configResource), sitePaths, pluginDataPath));
   }
 
   protected DestinationsCollection newDestinationsCollections(ReplicationConfig replicationConfig)
@@ -144,7 +145,7 @@ public abstract class AbstractConfigTest {
         eventBus);
   }
 
-  protected FileReplicationConfig newReplicationFileBasedConfig() {
-    return new FileReplicationConfig(sitePaths, pluginDataPath);
+  protected ReplicationConfigImpl newReplicationFileBasedConfig() {
+    return new ReplicationConfigImpl(sitePaths, pluginDataPath);
   }
 }
