@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80a78dd5_6f1c9d0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-08T23:03:47Z",
+      "side": 1,
+      "message": "Just a POC of the _replication external configuration_. We can decide if this implementation belongs here.\n\nBy no means it is a finish version, it still would require the \"fanout\" option for the git repo configuration and a `commit-msg` hook to prevent pushing broken `*.config` files.\n\nThis is only to demonstrate that the current approach works.",
+      "revId": "f0380f3d35d2d3289c06dbe6d8814c7d2cd86d10",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
