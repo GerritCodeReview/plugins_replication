@@ -81,11 +81,11 @@ public class AutoReloadRunnableTest {
     autoReloadRunnable.run();
   }
 
-  private Provider<FileReplicationConfig> newVersionConfigProvider() {
+  private Provider<ReplicationConfigImpl> newVersionConfigProvider() {
     return new Provider<>() {
       @Override
-      public FileReplicationConfig get() {
-        return new FileReplicationConfig(sitePaths, sitePaths.data_dir) {
+      public ReplicationConfigImpl get() {
+        return new ReplicationConfigImpl(sitePaths, sitePaths.data_dir) {
           @Override
           public String getVersion() {
             return String.format("%s", System.nanoTime());

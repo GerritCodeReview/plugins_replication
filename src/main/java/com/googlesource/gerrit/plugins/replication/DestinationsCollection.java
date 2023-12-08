@@ -17,7 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerrit;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isGerritHttp;
 import static com.googlesource.gerrit.plugins.replication.AdminApiFactory.isSSH;
-import static com.googlesource.gerrit.plugins.replication.FileReplicationConfig.replaceName;
+import static com.googlesource.gerrit.plugins.replication.ReplicationConfigImpl.replaceName;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 import static java.util.stream.Collectors.toList;
 

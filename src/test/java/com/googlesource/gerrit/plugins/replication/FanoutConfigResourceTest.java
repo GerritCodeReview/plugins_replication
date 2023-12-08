@@ -266,7 +266,7 @@ public class FanoutConfigResourceTest extends AbstractConfigTest {
     FanoutConfigResource objectUnderTest = new FanoutConfigResource(sitePaths);
 
     String replicationConfigVersion =
-        new FileReplicationConfig(sitePaths, pluginDataPath).getVersion();
+        new ReplicationConfigImpl(sitePaths, pluginDataPath).getVersion();
 
     MoreFiles.deleteRecursively(sitePaths.etc_dir.resolve("replication"), ALLOW_INSECURE);
 
