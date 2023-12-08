@@ -13,7 +13,6 @@
 // limitations under the License.
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.annotations.PluginData;
@@ -22,7 +21,7 @@ import com.google.inject.Inject;
 import java.nio.file.Path;
 import org.eclipse.jgit.lib.Config;
 
-public class FileReplicationConfig implements ReplicationConfig {
+public class ReplicationConfigImpl implements ReplicationConfig {
   private static final int DEFAULT_SSH_CONNECTION_TIMEOUT_MS = 2 * 60 * 1000; // 2 minutes
 
   private final SitePaths site;
@@ -32,19 +31,18 @@ public class FileReplicationConfig implements ReplicationConfig {
   private final int maxRefsToShow;
   private int sshCommandTimeout;
   private int sshConnectionTimeout = DEFAULT_SSH_CONNECTION_TIMEOUT_MS;
-  private final ConfigResource configResource;
+  private final MergedConfigResource configResource;
   private final Path pluginDataDir;
 
   // TODO: remove in follow-up change, as this was added to reduce the diff size
   // for change Ic6a5c5b8ab5
-  @VisibleForTesting
-  public FileReplicationConfig(SitePaths paths, @PluginData Path pluginDataDir) {
-    this(new FileConfigResource(paths), paths, pluginDataDir);
+  public ReplicationConfigImpl(SitePaths paths, @PluginData Path pluginDataDir) {
+    this(MergedConfigResource.withBaseOnly(new FileConfigResource(paths)), paths, pluginDataDir);
   }
 
   @Inject
-  public FileReplicationConfig(
-      ConfigResource configResource, SitePaths site, @PluginData Path pluginDataDir) {
+  public ReplicationConfigImpl(
+      MergedConfigResource configResource, SitePaths site, @PluginData Path pluginDataDir) {
     this.site = site;
     this.configResource = configResource;
     Config config = configResource.getConfig();
