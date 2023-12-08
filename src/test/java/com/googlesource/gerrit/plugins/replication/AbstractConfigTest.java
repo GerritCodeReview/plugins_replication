@@ -128,10 +128,10 @@ public abstract class AbstractConfigTest {
     assertThatIsDestination(matchingDestinations.get(0), remoteName, remoteUrls);
   }
 
-  protected DestinationsCollection newDestinationsCollections(
-      ConfigResource configResource) throws ConfigInvalidException {
+  protected DestinationsCollection newDestinationsCollections(ConfigResource configResource)
+      throws ConfigInvalidException {
     return newDestinationsCollections(
-        new ReplicationConfigImpl(configResource, sitePaths, pluginDataPath));
+        new ReplicationConfigImpl(MergedConfigResource.withBaseOnly(configResource), sitePaths, pluginDataPath));
   }
 
   protected DestinationsCollection newDestinationsCollections(ReplicationConfig replicationConfig)
