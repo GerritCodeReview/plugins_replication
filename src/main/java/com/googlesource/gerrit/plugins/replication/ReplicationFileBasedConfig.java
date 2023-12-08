@@ -32,17 +32,17 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private final int maxRefsToShow;
   private int sshCommandTimeout;
   private int sshConnectionTimeout = DEFAULT_SSH_CONNECTION_TIMEOUT_MS;
-  private final ConfigResource configResource;
+  private final MergedConfigResource configResource;
   private final Path pluginDataDir;
 
   @VisibleForTesting
   public ReplicationFileBasedConfig(SitePaths paths, @PluginData Path pluginDataDir) {
-    this(new FileConfigResource(paths), paths, pluginDataDir);
+    this(MergedConfigResource.withBaseOnly(new FileConfigResource(paths)), paths, pluginDataDir);
   }
 
   @Inject
   public ReplicationFileBasedConfig(
-      ConfigResource configResource, SitePaths site, @PluginData Path pluginDataDir) {
+      MergedConfigResource configResource, SitePaths site, @PluginData Path pluginDataDir) {
     this.site = site;
     this.configResource = configResource;
     Config config = configResource.getConfig();
