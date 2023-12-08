@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e2464a0_e3b523b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-08T21:26:43Z",
+      "side": 1,
+      "message": "This is a base for providing `replication` configuration from external sources (Issue 310510978).\n\nIt decouples the `ReplicationConfig` from the actual `Config` resource, which allows \"low-level\" git config operations like merging two configurations. The responsibility of `ReplicationConfig` is now to provide values for pre-defined options, which should be disconnected from where the raw `Config` object is coming from. By adding a \"resource\" layer, I was able to simplify Guice bindings and the \"fanout\" implementation.\n\nThe `ReplicationConfigOverrides` provides an easy way to modify the `replication` plugin configuration on the fly. The overrides can be as simple as a single property, or as complex as a \"fanout\" full `replication.config` overrides.\n\nThe open question is \"who should provide the git-based implementation\". Should it be included in the `replication` plugin (and eg use `refs/meta/replication` branch of `All-Projects`)? Or maybe, it belongs in the `multi-site` plugin, where we can create a new `All-Sites` repository to keep sites-wide configurations?\n\nAs a consequence of the former approach, in order to provide another configuration source (eg. zookeeper based) one would need to create a plugin that would depend on the `replication` (similarly to what `pull-replication` does).\n\nThe latter would require `Gerrit-ApiModule` in the `replication` plugin and then other plugins can bind `DynamicItem\u003cReplicationConfigOverrides\u003e`. I\u0027m not sure what would happen when multiple plugins would bind that class, probably the last one would win, but that could create potentially race conditions or inconsistencies after restarts.\n\nWHYT? Where the implementation of `git` based replication configuration overrides should belong?",
+      "revId": "6a842428d959585e27d7e4415066a55c528a89e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
