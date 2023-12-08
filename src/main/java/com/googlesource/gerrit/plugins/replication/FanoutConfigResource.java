@@ -61,7 +61,7 @@ public class FanoutConfigResource extends FileConfigResource {
     }
   }
 
-  private static void removeRemotes(Config config) {
+  static void removeRemotes(Config config) {
     Set<String> remoteNames = config.getSubsections("remote");
     if (remoteNames.size() > 0) {
       logger.atSevere().log(
@@ -76,7 +76,11 @@ public class FanoutConfigResource extends FileConfigResource {
   }
 
   private static void addRemoteConfig(FileBasedConfig source, Config destination) {
-    String remoteName = getNameWithoutExtension(source.getFile().getName());
+    addRemoteConfig(source.getFile().getName(), source, destination);
+  }
+
+  public static void addRemoteConfig(String fileName, Config source, Config destination) {
+    String remoteName = getNameWithoutExtension(fileName);
     for (String name : source.getNames("remote")) {
       destination.setStringList(
           "remote",
