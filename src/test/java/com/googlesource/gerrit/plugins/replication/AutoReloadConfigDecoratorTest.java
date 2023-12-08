@@ -77,13 +77,17 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
 
     replicationConfig =
         new ConfigResourceBasedReplicationConfig(
-            new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
+            MergedConfigResource.withBaseOnly(new FanoutConfigResource(sitePaths)),
+            sitePaths,
+            pluginDataPath);
 
     newAutoReloadConfig(
             () -> {
               try {
                 return new ConfigResourceBasedReplicationConfig(
-                    new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
+                    MergedConfigResource.withBaseOnly(new FanoutConfigResource(sitePaths)),
+                    sitePaths,
+                    pluginDataPath);
               } catch (IOException | ConfigInvalidException e) {
                 throw new RuntimeException(e);
               }
@@ -127,13 +131,17 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
 
     replicationConfig =
         new ConfigResourceBasedReplicationConfig(
-            new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
+            MergedConfigResource.withBaseOnly(new FanoutConfigResource(sitePaths)),
+            sitePaths,
+            pluginDataPath);
 
     newAutoReloadConfig(
             () -> {
               try {
                 return new ConfigResourceBasedReplicationConfig(
-                    new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
+                    MergedConfigResource.withBaseOnly(new FanoutConfigResource(sitePaths)),
+                    sitePaths,
+                    pluginDataPath);
               } catch (IOException | ConfigInvalidException e) {
                 throw new RuntimeException(e);
               }
@@ -176,13 +184,17 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
 
     replicationConfig =
         new ConfigResourceBasedReplicationConfig(
-            new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
+            MergedConfigResource.withBaseOnly(new FanoutConfigResource(sitePaths)),
+            sitePaths,
+            pluginDataPath);
 
     newAutoReloadConfig(
             () -> {
               try {
                 return new ConfigResourceBasedReplicationConfig(
-                    new FanoutConfigResource(sitePaths), sitePaths, pluginDataPath);
+                    MergedConfigResource.withBaseOnly(new FanoutConfigResource(sitePaths)),
+                    sitePaths,
+                    pluginDataPath);
               } catch (IOException | ConfigInvalidException e) {
                 throw new RuntimeException(e);
               }
