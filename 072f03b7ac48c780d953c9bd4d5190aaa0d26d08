@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d504598e_7bbe9070",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2023-12-11T09:45:40Z",
+      "side": 1,
+      "message": "Why do we need ConfigResource as additional abstraction? Isn\u0027t the ReplicationConfig interface enough?",
+      "revId": "072f03b7ac48c780d953c9bd4d5190aaa0d26d08",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
