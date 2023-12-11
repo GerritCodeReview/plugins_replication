@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03be3ab1_7f60d468",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2023-12-11T13:25:25Z",
+      "side": 1,
+      "message": "Actually I am still not convinced that ConfigResource based design is the better approach. For example we may have data in ZooKeeper which describes a Gerrit cluster. This data may not contain replication.config but we can implement ReplicationConfig without the need to generate replication.config.",
+      "parentUuid": "ba8e9800_49e7ec99",
+      "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ca568b6_55ddc805",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
