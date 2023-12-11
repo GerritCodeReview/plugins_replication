@@ -19,7 +19,9 @@ import static com.googlesource.gerrit.plugins.replication.FileConfigResource.CON
 
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
+import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.config.SitePaths;
+import com.google.gerrit.server.git.validators.CommitValidationListener;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.ProvisionException;
@@ -50,6 +52,8 @@ public class ReplicationConfigModule extends AbstractModule {
     DynamicItem.itemOf(binder(), ReplicationConfigOverrides.class);
     DynamicItem.bind(binder(), ReplicationConfigOverrides.class)
         .to(GitReplicationConfigOverrides.class);
+    DynamicSet.bind(binder(), CommitValidationListener.class)
+        .to(GitReplicationConfigOverridesValidator.class);
 
     if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
       bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class).in(Scopes.SINGLETON);
