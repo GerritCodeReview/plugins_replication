@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77587448_f2c1511c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-11T13:22:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ba8e9800_49e7ec99",
+      "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ca568b6_55ddc805",
@@ -77,6 +95,24 @@
       "writtenOn": "2023-12-11T12:24:46Z",
       "side": 1,
       "message": "Doesn\u0027t this make the AutoReload* feature bound to only file based config? In my understanding, AutoReload* was orthogonal to the implementations of the ReplicationConfig i.e. it could be used with any ReplicationConfig implementation.",
+      "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eee8c465_8b45848e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-11T13:22:54Z",
+      "side": 1,
+      "message": "\u003e Doesn\u0027t this make the AutoReload* feature bound to only file based config? \n\nThe `RepilcationFileBasedConfig` uses `Provider\u003cConfigResource\u003e` to read the configuration file in _dirrefernt_ ways. This makes the auto-reload feature work the same way it used to do and will work for the file-based, \"fanout\" and git based configurations.\n\nProbably, we could simplify this even more by removing the `ReplicationConfig` interface and renaming `ReplicationFileBasedConfig` to just `ReplicationConfig`.\n\nDoes this makes sense?",
+      "parentUuid": "b6ec47cb_e5fedcb1",
       "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
