@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04cbe917_b37c8b91",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2023-12-11T23:10:38Z",
+      "side": 1,
+      "message": "nit: `s/ssCommandTimeout/sshCommandTimeout`",
+      "range": {
+        "startLine": 9,
+        "startChar": 52,
+        "endLine": 9,
+        "endChar": 68
+      },
+      "revId": "5764b64bc23e866bd213bcd91e7d12eb197febf7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f36ef1d3_0faa9db7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2023-12-11T23:10:38Z",
+      "side": 1,
+      "message": "LGTM, @luca.milanesio@gmail.com?",
+      "revId": "5764b64bc23e866bd213bcd91e7d12eb197febf7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
