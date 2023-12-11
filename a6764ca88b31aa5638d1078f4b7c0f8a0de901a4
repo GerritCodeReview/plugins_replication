@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25b89cf7_2d14a99f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-11T14:03:45Z",
+      "side": 1,
+      "message": "The `ReplicationConfig` makes more sense when multiple different formats (eg `xml`, `yaml`and `ini`) are supported and each would use different keys for the configuration properties. Sure, the ZooKeeper falls into this scenario, but hear me out ;)\n\nTo get the replication destination, `ReplicationConfig` is already forcing you to build the JGit `Config` object. As all of the Gerrit configuration files use JGit `Config` I\u0027ve decided this would be the lowest common denominator for all replication configuration-related options.\n\nThe added benefit is that we can reduce code duplication between the regular file-based configuration and \"fanout\".\n\n\nWith the `ConfigReesource` you can implement `ZooKeeperConfigResource` that would get all of the configuration options from ZooKeeper, build a `Config` object in memory and return that to `ReplicationConfig`.\n\n\u003e This data may not contain replication.config but we can implement ReplicationConfig without the need to generate replication.config.\n\nThis actually, has nothing to do with the `ConfigResource`, but it\u0027s a feature of `MergedConfigResource`. This is where we assume that `replication.config` still exists on the file system and will use it as a base configuration. On the one side, this adds a bit of complexity (as there are potentially two places where the configuration option could be set). On the other, it makes things backwards compatible and doesn\u0027t require any upgrade steps.\n\nWe can potentially drop that feature, but then we need to figure out upgrade steps and how to move existing `$gerrit_site/etc/replication.config` to a git repository and inform all of the users to use the git version instead.",
+      "parentUuid": "03be3ab1_7f60d468",
+      "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ca568b6_55ddc805",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -167,6 +185,24 @@
       "side": 1,
       "message": "\u003e This makes the auto-reload feature work the same way it used to do and will work for the file-based, \"fanout\" and git based configurations\n\nYou also wrote that the `@MainReplicationConfig` can be eliminated? But the auto-reload actually wraps the `@MainReplicationConfig`",
       "parentUuid": "c912dc02_8af1d07f",
+      "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e06f18a_b9301604",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-11T14:03:45Z",
+      "side": 1,
+      "message": "\u003e You also wrote that the @MainReplicationConfig can be eliminated? But the auto-reload actually wraps the @MainReplicationConfig\n\nWhat do you mean? This commit is removing `@MainReplicationConfig` so it cannot be wrapped anywhere. Right now we only have a single `ReplicationConfig`.",
+      "parentUuid": "85c22280_0c7ec17c",
       "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
