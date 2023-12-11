@@ -151,6 +151,24 @@
       "parentUuid": "eee8c465_8b45848e",
       "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85c22280_0c7ec17c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2023-12-11T13:31:08Z",
+      "side": 1,
+      "message": "\u003e This makes the auto-reload feature work the same way it used to do and will work for the file-based, \"fanout\" and git based configurations\n\nYou also wrote that the `@MainReplicationConfig` can be eliminated? But the auto-reload actually wraps the `@MainReplicationConfig`",
+      "parentUuid": "c912dc02_8af1d07f",
+      "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
