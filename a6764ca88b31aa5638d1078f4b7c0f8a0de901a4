@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dbe6d21e_816aa964",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-11T14:38:17Z",
+      "side": 1,
+      "message": "What\u0027s the outcome here? Do you agree that `ConfigResource` abstraction would be enough to implement the ZooKeeper-based config resource?",
+      "parentUuid": "4b7abcf8_f6658de1",
+      "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ca568b6_55ddc805",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -239,6 +257,24 @@
       "side": 1,
       "message": "I see that the `@MainReplicationConfig` gets removed with this commit and I am commenting on that decision. The `AutoReloadConfigDecorator` now wraps `ReplicationFileBasedConfig` instead of the `@MainReplicationConfig ReplicationConfig`. It is still the same, just using different names.\n\nDepending on the `autoReload` parameter the `ReplicationConfig` interface is bound to `AutoReloadConfigDecorator` or to the `ReplicationFileBasedConfig`, right? So we cannot eliminate the `ReplicationConfig` interface (as proposed in your previous comment)?",
       "parentUuid": "2e06f18a_b9301604",
+      "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "024fece8_21e0ac58",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-11T14:38:17Z",
+      "side": 1,
+      "message": "Yes, you\u0027re right, we cannot remove `ReplicationConfig` interface. Shall we then rename `ReplicationFileBasedConfig` to `ConfigResourceBasedReplicationConfig` (as you already suggested above), and mark this as resolved?",
+      "parentUuid": "2ff7e589_cca73763",
       "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
