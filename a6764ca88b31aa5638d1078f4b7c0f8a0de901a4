@@ -133,6 +133,24 @@
       "parentUuid": "b6ec47cb_e5fedcb1",
       "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c912dc02_8af1d07f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2023-12-11T13:27:00Z",
+      "side": 1,
+      "message": "In that case the `ReplicationFileBasedConfig` shall be named `ConfigResourceBasedReplicationConfig`",
+      "parentUuid": "eee8c465_8b45848e",
+      "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
