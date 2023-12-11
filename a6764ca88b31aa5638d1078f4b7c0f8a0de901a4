@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47cd3977_6925bbb4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2023-12-11T14:46:29Z",
+      "side": 1,
+      "message": "Since we are anyway forced to provide a Config from the ReplicationConfig, I agree that the ConfigResource abstraction is OK.",
+      "parentUuid": "dbe6d21e_816aa964",
+      "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ca568b6_55ddc805",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -275,6 +293,24 @@
       "side": 1,
       "message": "Yes, you\u0027re right, we cannot remove `ReplicationConfig` interface. Shall we then rename `ReplicationFileBasedConfig` to `ConfigResourceBasedReplicationConfig` (as you already suggested above), and mark this as resolved?",
       "parentUuid": "2ff7e589_cca73763",
+      "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97dd66a9_0ba18990",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadRunnable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2023-12-11T14:46:29Z",
+      "side": 1,
+      "message": "Yes",
+      "parentUuid": "024fece8_21e0ac58",
       "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
