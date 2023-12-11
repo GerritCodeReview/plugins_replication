@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba8e9800_49e7ec99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2023-12-11T09:58:40Z",
+      "side": 1,
+      "message": "OK, I start to see how ConfigResource can make sense :-)",
+      "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da8e9f1d_da9721c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2023-12-11T09:58:40Z",
+      "side": 1,
+      "message": "ConfigResource",
+      "range": {
+        "startLine": 20,
+        "startChar": 32,
+        "endLine": 20,
+        "endChar": 45
+      },
+      "revId": "a6764ca88b31aa5638d1078f4b7c0f8a0de901a4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
