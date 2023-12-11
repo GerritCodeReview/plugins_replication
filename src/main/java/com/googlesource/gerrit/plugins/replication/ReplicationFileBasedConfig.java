@@ -14,14 +14,18 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 import com.google.common.base.Strings;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.annotations.PluginData;
+import com.google.gerrit.server.config.ConfigUtil;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.concurrent.TimeUnit;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
@@ -37,7 +41,7 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
   private int maxRefsToLog;
   private final int maxRefsToShow;
   private int sshCommandTimeout;
-  private int sshConnectionTimeout = DEFAULT_SSH_CONNECTION_TIMEOUT_MS;
+  private int sshConnectionTimeout;
   private final FileBasedConfig config;
   private final Path pluginDataDir;
 
@@ -57,6 +61,17 @@ public class ReplicationFileBasedConfig implements ReplicationConfig {
     this.defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);
     this.maxRefsToLog = config.getInt("gerrit", "maxRefsToLog", 0);
     this.maxRefsToShow = config.getInt("gerrit", "maxRefsToShow", 2);
+    this.sshCommandTimeout =
+        (int) ConfigUtil.getTimeUnit(config, "gerrit", null, "sshCommandTimeout", 0, SECONDS);
+    this.sshConnectionTimeout =
+        (int)
+            ConfigUtil.getTimeUnit(
+                config,
+                "gerrit",
+                null,
+                "sshConnectionTimeout",
+                DEFAULT_SSH_CONNECTION_TIMEOUT_MS,
+                MILLISECONDS);
     this.pluginDataDir = pluginDataDir;
   }
 
