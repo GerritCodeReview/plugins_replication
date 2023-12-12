@@ -16,6 +16,24 @@
       "message": "what\u0027s the difference between `ConfigUtil.getTimeUnit` and the `config.getTimeUnit` provided by jgit?",
       "revId": "51dd04beaee4d89fefa93e738236650fae211487",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3072bbfb_959e5e08",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T11:21:26Z",
+      "side": 1,
+      "message": "Good catch! I\u0027ve just copied the exact code that was removed by the change mentioned in the commit message.\n\nI guess that Gerrit\u0027s `CofigUtil.getTimeUnit` predates the jgit\u0027s `Config.getTimeUnit`. Implementation-wise, they look the same so we can use the jgit version instead.",
+      "parentUuid": "d76b42ee_9058912d",
+      "revId": "51dd04beaee4d89fefa93e738236650fae211487",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
