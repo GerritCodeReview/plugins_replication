@@ -249,6 +249,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "046e8990_8285fec3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T16:50:47Z",
+      "side": 1,
+      "message": "The difference is similar to the difference between _plain text file_ and _xml file_. The plain text doesn\u0027t prescribe the \"schema\" of the content, whereas with XML there are expectations about the content (you can also define XML Schema, which will be even more specific).\n\nSimilarly, the `ConfigResource` does not prescribe what sections and options should be present in the config file. The `ReplicationConfig` on the other side, assumes that the config file would have options for `replicate all on plugin start`, `default force update`, etc.\n\nDoes this make sense now?",
+      "parentUuid": "619bf2bc_10a8594b",
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45e3b29b_ef89a982",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
         "patchSetId": 2
