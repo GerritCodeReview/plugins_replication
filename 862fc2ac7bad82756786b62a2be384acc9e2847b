@@ -231,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "619bf2bc_10a8594b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T16:39:52Z",
+      "side": 1,
+      "message": "Something else that I noticed; what\u0027s the difference between the `ConfigResource` and `ReplicationConfig` interfaces? Seems the water is muddied here?",
+      "parentUuid": "32ef457a_f1327ba4",
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45e3b29b_ef89a982",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
         "patchSetId": 2
