@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db9cbb72_d7a1bfae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T14:50:36Z",
+      "side": 1,
+      "message": "verified locally with `bazel test --test_tag_filters\u003dreplication //...` - no test failures.",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
