@@ -35,6 +35,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23876c4c_329b7a3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T17:54:37Z",
+      "side": 1,
+      "message": "yeah, naming things is hard 😐\n\nI couldn\u0027t come up with better names, as \"ConfigFile\" is misleading, \"Config\" is clashing with JGit, and \"RawReplicationConfig\" sounds odd. For now, the best thing that I could come up with is `ConfigResource` as it\u0027s abstract and short enough.",
+      "parentUuid": "d7aaf562_dd95aac3",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c2b9542_c1b28528",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-12-12T17:12:07Z",
       "side": 1,
       "message": "why is the type changing here? Why not keep the `ReplicationConfig` type?",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b19f5ebf_c5e53427",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T17:54:37Z",
+      "side": 1,
+      "message": "because in `ReplicationConfigModule` L51 we bind `ReplicationConfig` to `AutoReloadConfigDecorator` and injecting here `ReplicationConfig` would create a cyclic dependency and break the injection.",
+      "parentUuid": "9c2b9542_c1b28528",
       "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -105,6 +141,60 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c303b386_1a0fbb5e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResourceBasedReplicationConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T17:54:37Z",
+      "side": 1,
+      "message": "Think about `ReplicationConfig` like it is a `JDBC` and `ConfigResource` a driver. The JDBC provides you a common high-level API to interact with DBMS, you don\u0027t think about the underlying protocol implementation and you can switch between drivers to use different databases.\n\nThe `ConfigResource` provides you with a raw \"table\" of configuration options. From this, the `RepilcationConfig` picks those that are interesting for it.\n\nNaming could be off a bit, but I think the separation of concerns between the \"data source\" and \"data format\" is the way to go here.",
+      "parentUuid": "15f01a04_33d13281",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e73b878e_92462cd5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResourceBasedReplicationConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T17:54:37Z",
+      "side": 1,
+      "message": "This chain is already long and complicated enough ;) spanning across multiple projects and commits, let\u0027s not make it even more complex ;)",
+      "parentUuid": "517c6bdd_46260c18",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4eb36cb_83e7faaa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResourceBasedReplicationConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T17:54:37Z",
+      "side": 1,
+      "message": "Maybe `DefaultReplicationConfig`? WDYT? @sasa.zivkov@sap.com?",
+      "parentUuid": "a68e0625_7864994f",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f18b1faa_ded11525",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResourceBasedReplicationConfig.java",
         "patchSetId": 3
@@ -116,6 +206,24 @@
       "writtenOn": "2023-12-12T17:12:07Z",
       "side": 1,
       "message": "theoretically this class is agnostic to the implementation details, yet here we are forcing a FileConfigResource. Perhaps this class was named correctly after all.",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5697df8_2b1d745e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResourceBasedReplicationConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T17:54:37Z",
+      "side": 1,
+      "message": "this was added to limit the amount of changes in the patch set. It is only used in tests, without this we\u0027d have a longer list of modified files. So, this is only for convenience.",
+      "parentUuid": "f18b1faa_ded11525",
       "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
