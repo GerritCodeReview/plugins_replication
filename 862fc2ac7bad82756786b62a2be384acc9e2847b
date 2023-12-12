@@ -1,0 +1,210 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1de99659_188cd891",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T13:23:02Z",
+      "side": 1,
+      "message": "nit: together",
+      "range": {
+        "startLine": 10,
+        "startChar": 49,
+        "endLine": 10,
+        "endChar": 56
+      },
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23209be4_15f09d03",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T13:23:02Z",
+      "side": 1,
+      "message": "nit: Additionally",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 11
+      },
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0db8fdf_39434bf1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T13:23:02Z",
+      "side": 1,
+      "message": "nit: This could be",
+      "range": {
+        "startLine": 21,
+        "startChar": 47,
+        "endLine": 21,
+        "endChar": 56
+      },
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea038b6a_ba30be16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T13:23:02Z",
+      "side": 1,
+      "message": "mainly nits",
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31d781ab_175e054b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T13:23:02Z",
+      "side": 1,
+      "message": "nit: I believe a javadoc explaining the purpose of this interface (basically, what you cover in the description of the change) will be beneficial.",
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45476ec9_6a2bb28d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T13:23:02Z",
+      "side": 1,
+      "message": "nit: A better name might be `ReplicationConfigResource`, i find `ConfigResource` too generic. But that\u0027s just personal preference, feel free to resolve.",
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45e3b29b_ef89a982",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T13:23:02Z",
+      "side": 1,
+      "message": "nit: I suspect this class represents the \"existing\" state of play, ie the config file within the gerrit server? Maybe `LocalFileConfigResource` is a better name here?",
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c637d236_8358c3f3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T13:23:02Z",
+      "side": 1,
+      "message": "I think errors related with the plugin configuration should go to the `error_log` file, not the `replication_log`.",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 12
+      },
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d975ea6_d854e5b0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T13:23:02Z",
+      "side": 1,
+      "message": "nit: `getConfig()`",
+      "range": {
+        "startLine": 89,
+        "startChar": 11,
+        "endLine": 89,
+        "endChar": 32
+      },
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c200e08_c3356bc1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T13:23:02Z",
+      "side": 1,
+      "message": "nit: `getConfig()`",
+      "range": {
+        "startLine": 105,
+        "startChar": 8,
+        "endLine": 105,
+        "endChar": 29
+      },
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
