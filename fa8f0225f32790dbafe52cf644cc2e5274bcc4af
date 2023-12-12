@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2cb09a2_d922b019",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T12:10:43Z",
+      "side": 1,
+      "message": "nit: implementation",
+      "range": {
+        "startLine": 10,
+        "startChar": 38,
+        "endLine": 10,
+        "endChar": 53
+      },
+      "revId": "fa8f0225f32790dbafe52cf644cc2e5274bcc4af",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beb4cf69_d188161b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T12:10:43Z",
+      "side": 1,
+      "message": "Missing `Bug: Issue XXX`",
+      "revId": "fa8f0225f32790dbafe52cf644cc2e5274bcc4af",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40da32fe_1e2a3c7c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T12:10:43Z",
+      "side": 1,
+      "message": "2023",
+      "revId": "fa8f0225f32790dbafe52cf644cc2e5274bcc4af",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b0a743f_d6bd2a22",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T12:10:43Z",
+      "side": 1,
+      "message": "should be private",
+      "revId": "fa8f0225f32790dbafe52cf644cc2e5274bcc4af",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
