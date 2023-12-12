@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "701c38b7_5652dbe6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T14:41:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1de99659_188cd891",
+      "range": {
+        "startLine": 10,
+        "startChar": 49,
+        "endLine": 10,
+        "endChar": 56
+      },
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23209be4_15f09d03",
@@ -47,6 +71,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea854d01_db391789",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T14:41:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23209be4_15f09d03",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 11
+      },
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0db8fdf_39434bf1",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-12-12T13:23:02Z",
       "side": 1,
       "message": "nit: This could be",
+      "range": {
+        "startLine": 21,
+        "startChar": 47,
+        "endLine": 21,
+        "endChar": 56
+      },
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c37f38ad_dcda51c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T14:41:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0db8fdf_39434bf1",
       "range": {
         "startLine": 21,
         "startChar": 47,
@@ -121,6 +193,42 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eac5bc0_f48ec926",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T14:41:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31d781ab_175e054b",
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32ef457a_f1327ba4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T14:41:17Z",
+      "side": 1,
+      "message": "I had a hard time coming up with a \"proper\" name for this class. It started as `RawReplicationConfig`, then I\u0027ve changed it to `ConfigResource`.\n\nTBH, I liked that it\u0027s generic, as it\u0027s not \"connected\" to the replication. It doesn\u0027t have any assumptions about where the configuration is stored or how it is named. It is just bundling the JGit `Config` object with its _version_.\n\nI don\u0027t mind renaming it if more people find the more verbose name better.",
+      "parentUuid": "45476ec9_6a2bb28d",
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45e3b29b_ef89a982",
@@ -140,6 +248,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4e9ee5f7_9c646b9d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T14:41:17Z",
+      "side": 1,
+      "message": "Personally, I don\u0027t like adding more adjectives than it\u0027s needed. We don\u0027t have \"remote file\" or \"cached file\" or \"nfs file\" configuration resources, therefore don\u0027t see a need to have the \"local\" prefix. I find shorter names better and easier to remember, but that\u0027s only me.\n\nSame as with `ReplicationConfigResource`, if more people find it better, I don\u0027t mind changing it.",
+      "parentUuid": "45e3b29b_ef89a982",
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c637d236_8358c3f3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
         "patchSetId": 2
@@ -151,6 +277,30 @@
       "writtenOn": "2023-12-12T13:23:02Z",
       "side": 1,
       "message": "I think errors related with the plugin configuration should go to the `error_log` file, not the `replication_log`.",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 12
+      },
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f4346ef_3425930d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T14:41:17Z",
+      "side": 1,
+      "message": "this is moved from `ReplicationFileBasedConfig` L52, IMO this is out of the scope of for this change. We can have a follow-up on it.",
+      "parentUuid": "c637d236_8358c3f3",
       "range": {
         "startLine": 39,
         "startChar": 6,
@@ -184,6 +334,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d64f2b44_b9414c15",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T14:41:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d975ea6_d854e5b0",
+      "range": {
+        "startLine": 89,
+        "startChar": 11,
+        "endLine": 89,
+        "endChar": 32
+      },
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c200e08_c3356bc1",
@@ -197,6 +371,30 @@
       "writtenOn": "2023-12-12T13:23:02Z",
       "side": 1,
       "message": "nit: `getConfig()`",
+      "range": {
+        "startLine": 105,
+        "startChar": 8,
+        "endLine": 105,
+        "endChar": 29
+      },
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d950d9b_eff6a871",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationFileBasedConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T14:41:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c200e08_c3356bc1",
       "range": {
         "startLine": 105,
         "startChar": 8,
