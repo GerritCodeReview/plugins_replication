@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5648661_fb76a44f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T17:12:07Z",
+      "side": 1,
+      "message": "I think you should explain here what the `FanoutConfigResource` is, in a short, succint way. You actually do that towards the end, with a pretty good level of detail, but it\u0027s not immediately obvious. Something like \"The FanoutConfigResource essentially allows to assemble the final replication config from multiple remote configs, no matter where they reside.\"",
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0159b10c_c3366f98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T17:12:07Z",
+      "side": 1,
+      "message": "Actually, I would rephrase this:\nThe \"fanout\" replication configuration ignores any `remote` sections from the `replication.config` in favour of one remote section per file for all files located in the `replication/` directory.",
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d28924df_9b329a21",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T17:12:07Z",
+      "side": 1,
+      "message": "nit: remote",
+      "range": {
+        "startLine": 12,
+        "startChar": 50,
+        "endLine": 12,
+        "endChar": 57
+      },
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1590cd99_d2eab040",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T17:12:07Z",
+      "side": 1,
+      "message": "nit: the final config",
+      "range": {
+        "startLine": 16,
+        "startChar": 37,
+        "endLine": 16,
+        "endChar": 54
+      },
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e43ef2f8_3eec0115",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T17:12:07Z",
+      "side": 1,
+      "message": "nit: by the",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 11
+      },
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf1772f4_8d27357d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T17:12:07Z",
+      "side": 1,
+      "message": "nit: simplifies",
+      "range": {
+        "startLine": 24,
+        "startChar": 44,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b10cad6_42534e1b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-12T17:12:07Z",
+      "side": 1,
+      "message": "This is surprising to me. I would expect `FanoutConfigResource` to extend `ConfigResource`, why is it bound to file-based implementations? Unless we are saying that we absolutely rely on the presence of the `replication/` directory in order to infer usage of the fanout approach, and that the fanout approach does not make sense unless its file based. But then, why do we need the change in the first place?\n\nTL;DR: I think the `FanoutConfigResource` should be an abstraction, an interface, that extends the ConfigResource. And then the FanoutReplicationConfig (maybe with a different name) becomes a (file-based) implementation of that FanoutConfigResource. WDYT?",
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
