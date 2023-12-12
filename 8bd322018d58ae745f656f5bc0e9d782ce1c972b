@@ -243,6 +243,24 @@
       "message": "this change is not necessary",
       "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a713ce17_a0ed52c7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-12T18:40:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a1c6fbc_3233586b",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
