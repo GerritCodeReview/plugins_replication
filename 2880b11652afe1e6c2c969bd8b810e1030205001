@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9dc1a291_9770dcfe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1161425
+      },
+      "writtenOn": "2023-12-13T08:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ecc1111_43dae536",
+      "revId": "2880b11652afe1e6c2c969bd8b810e1030205001",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0b63eed8_e16a4c32",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "2dfccaac_badda55a",
+      "range": {
+        "startLine": 312,
+        "startChar": 8,
+        "endLine": 312,
+        "endChar": 47
+      },
+      "revId": "2880b11652afe1e6c2c969bd8b810e1030205001",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7435fafb_6d9d80d0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1161425
+      },
+      "writtenOn": "2023-12-13T08:11:58Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2508095b_29eea87f",
       "range": {
         "startLine": 312,
         "startChar": 8,
