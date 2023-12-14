@@ -292,6 +292,24 @@
       "parentUuid": "9b10cad6_42534e1b",
       "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07316555_51766637",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2023-12-14T09:37:35Z",
+      "side": 1,
+      "message": "I support the effort of Christoforos here to reach an as simple as possible design. I believe we all agree that the support for different sources of the ConfigResource shall go into the implementation(s) of that interface and that it must not be replicated in the implementation(s) of the ReplicationConfig interface. Basically, in the end we only need one, or two, implementations of the ReplicationConfig interface: one depending on ConfigResource and one as a wrapper of itself, to support auto-reload feature.",
+      "parentUuid": "2ea09c16_11d692e6",
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
