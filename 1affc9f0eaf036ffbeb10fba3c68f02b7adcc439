@@ -310,6 +310,24 @@
       "parentUuid": "2ea09c16_11d692e6",
       "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e979a2fe_83187420",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-20T10:21:06Z",
+      "side": 1,
+      "message": "I believe this is what we have right now. The naming is probably a bit off, as the `ConfigResourceBasedReplicationConfig` is the \"non-reloadable\" version of the configuration file and, `AutoReloadCondifDecorator` is the \"reloadable\" version.\n\nIMO, we can rename `ConfigResourceBasedReplicationConfig` to something like `DefaultReplicationConfig` or `StaticReplicationConfig` or `CachedReplicationConfig` or `ReplicationConfigSnapshot` ... don\u0027t know, naming things is hard 😐",
+      "parentUuid": "07316555_51766637",
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
