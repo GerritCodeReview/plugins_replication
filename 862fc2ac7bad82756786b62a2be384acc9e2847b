@@ -265,6 +265,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f2a4f53_3fa0781a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-27T11:43:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "046e8990_8285fec3",
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45e3b29b_ef89a982",
@@ -296,6 +314,24 @@
       "side": 1,
       "message": "Personally, I don\u0027t like adding more adjectives than it\u0027s needed. We don\u0027t have \"remote file\" or \"cached file\" or \"nfs file\" configuration resources, therefore don\u0027t see a need to have the \"local\" prefix. I find shorter names better and easier to remember, but that\u0027s only me.\n\nSame as with `ReplicationConfigResource`, if more people find it better, I don\u0027t mind changing it.",
       "parentUuid": "45e3b29b_ef89a982",
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5ef13f2_d5008e87",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-27T11:43:22Z",
+      "side": 1,
+      "message": "Fair enough, it may evolve organically if more `ConfigResource`s are added.",
+      "parentUuid": "4e9ee5f7_9c646b9d",
       "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -337,6 +373,30 @@
       "side": 1,
       "message": "this is moved from `ReplicationFileBasedConfig` L52, IMO this is out of the scope of for this change. We can have a follow-up on it.",
       "parentUuid": "c637d236_8358c3f3",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 12
+      },
+      "revId": "862fc2ac7bad82756786b62a2be384acc9e2847b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b9d0769_0298c497",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-27T11:43:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6f4346ef_3425930d",
       "range": {
         "startLine": 39,
         "startChar": 6,

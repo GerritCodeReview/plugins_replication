@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdc00fb9_170586b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-27T11:43:22Z",
+      "side": 1,
+      "message": "nit: configuration",
+      "range": {
+        "startLine": 19,
+        "startChar": 22,
+        "endLine": 19,
+        "endChar": 35
+      },
+      "revId": "7774531a099319dd11f0effe680cf1d34a7705de",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9b3d3e4_03ac6be8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-27T11:43:22Z",
+      "side": 1,
+      "message": "nit: be from",
+      "range": {
+        "startLine": 21,
+        "startChar": 58,
+        "endLine": 21,
+        "endChar": 64
+      },
+      "revId": "7774531a099319dd11f0effe680cf1d34a7705de",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d62179d9_79e932f2",
@@ -14,6 +60,29 @@
       "writtenOn": "2023-12-12T14:50:27Z",
       "side": 1,
       "message": "verified locally with `bazel test --test_tag_filters\u003dreplication //...` - no test failures.",
+      "revId": "7774531a099319dd11f0effe680cf1d34a7705de",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7f237a4_c18276f2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-27T11:43:22Z",
+      "side": 1,
+      "message": "This sentence does not make sense to me, can you rephrase it a bit? I actually find your explanation in the commit message and in [1] very good, perhaps reuse it here? Might be worth explaining the difference of this class to the `ReplicationConfig` interface, as its not immediately obvious.\n\n[1] https://gerrit-review.googlesource.com/c/plugins/replication/+/396997/comment/45476ec9_6a2bb28d/",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 86
+      },
       "revId": "7774531a099319dd11f0effe680cf1d34a7705de",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
