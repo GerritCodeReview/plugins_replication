@@ -36,6 +36,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d83861e3_02010fdf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-27T13:29:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a103b4a0_5f15c9ef",
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0159b10c_c3366f98",
@@ -114,6 +132,24 @@
         "endLine": 12,
         "endChar": 57
       },
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d22e2f87_aab38869",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-27T13:29:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e16d495b_5145f136",
       "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -326,6 +362,24 @@
       "side": 1,
       "message": "I believe this is what we have right now. The naming is probably a bit off, as the `ConfigResourceBasedReplicationConfig` is the \"non-reloadable\" version of the configuration file and, `AutoReloadCondifDecorator` is the \"reloadable\" version.\n\nIMO, we can rename `ConfigResourceBasedReplicationConfig` to something like `DefaultReplicationConfig` or `StaticReplicationConfig` or `CachedReplicationConfig` or `ReplicationConfigSnapshot` ... don\u0027t know, naming things is hard 😐",
       "parentUuid": "07316555_51766637",
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d01db0b_162d6b25",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-27T13:29:46Z",
+      "side": 1,
+      "message": "\u003e This is exactly how \"fanout\" replication is implemented. See the log message in FanoutConfigResource L68\n\nThis is how \"fanout\" replication was implemented, prior to introducing the concept of the config residing _externally_. If someone wants to scatter their replication config in non-filebased repositories, which is a perfectly valid example of what a fanout strategy should support, why shouldn\u0027t they be able to do so?\n\n\u003e IMO, this would result in a more complex design and more code duplication.\n\nNot necessarily, depends on how you code it I guess. You could have the `FanoutConfigResource` defined as an interface or abstract class, with the `FanoutReplicationConfig` being a concrete (file-based) implementation. Modelling this in the right way is more important IMO.",
+      "parentUuid": "e979a2fe_83187420",
       "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }

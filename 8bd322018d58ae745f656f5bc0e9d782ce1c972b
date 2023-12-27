@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d80fb81e_207e6790",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-27T13:29:46Z",
+      "side": 1,
+      "message": "Sorry, I don\u0027t follow, even in the previous implementation this should have been a problem then? Or you are saying the `MainReplicationConfig` annotation prevented this from happening? \n\nThe problem here though here is that you are somewhat breaking up the concept of the auto-reload being able to work with _any_ config resource. For example prior to your change, auto-reload would work with a fanout resource, now it won\u0027t.",
+      "parentUuid": "b19f5ebf_c5e53427",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a68e0625_7864994f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResourceBasedReplicationConfig.java",
         "patchSetId": 3
@@ -193,6 +211,60 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03eef214_4c5366c9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResourceBasedReplicationConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-27T13:29:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c303b386_1a0fbb5e",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc110862_fd52cad0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResourceBasedReplicationConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-27T13:29:46Z",
+      "side": 1,
+      "message": "`ReplicationConfigImpl` is the most generic and unambiguous name I can think of.",
+      "parentUuid": "d4eb36cb_83e7faaa",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a75ad35_89d3b855",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResourceBasedReplicationConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-27T13:29:46Z",
+      "side": 1,
+      "message": "Yet reviewing this change is already hard enough ;)",
+      "parentUuid": "e73b878e_92462cd5",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f18b1faa_ded11525",
@@ -224,6 +296,24 @@
       "side": 1,
       "message": "this was added to limit the amount of changes in the patch set. It is only used in tests, without this we\u0027d have a longer list of modified files. So, this is only for convenience.",
       "parentUuid": "f18b1faa_ded11525",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "971defe3_533dda08",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResourceBasedReplicationConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-27T13:29:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b5697df8_2b1d745e",
       "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
