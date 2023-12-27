@@ -382,6 +382,24 @@
       "parentUuid": "e979a2fe_83187420",
       "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdbfc380_3b4475a5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-27T21:17:22Z",
+      "side": 1,
+      "message": "\u003e This is how \"fanout\" replication was implemented, prior to introducing the concept of the config residing externally. If someone wants to scatter their replication config in non-filebased repositories, which is a perfectly valid example of what a fanout strategy should support, why shouldn\u0027t they be able to do so?\n\nThis use case is still supported, even if you want to \"fanout\" to an external system (aka. ZooKeeper).\n\n\u003e Not necessarily, depends on how you code it I guess. You could have the FanoutConfigResource defined as an interface or abstract class, with the FanoutReplicationConfig being a concrete (file-based) implementation. Modelling this in the right way is more important IMO.\n\nHave a look at the `FileBasedReplicationConfig` and `FanoutBasedReplicationConfig` and how much of the code duplication they both had. Both were extracting the same configuration values to be compatible with each other.\n\nWith the `ConfigResource` we separate the \"storage\" from the \"schema\". The \"schema\" is defined in the documentation (by the sections, subsections and options) and then implemented in `ReplicationConfig`. Below that we have a JGit `Config` with _verison_, you can fill that `Config` object however you want, and then `ReplicationConfig` would extract configuration options according to the plugin documentation.\n\nWe preserve all of the features of the current configuration of the replication plugin and give an _easy_ way to externalise the configuration options.",
+      "parentUuid": "3d01db0b_162d6b25",
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }

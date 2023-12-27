@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a8ab78e_21f7009a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-27T21:17:22Z",
+      "side": 1,
+      "message": "\u003e Sorry, I don\u0027t follow, even in the previous implementation this should have been a problem then? Or you are saying the MainReplicationConfig annotation prevented this from happening?\n\nI\u0027m saying that `@MainReplicationConfig` is not necessary anymore, as we don\u0027t have to differentiate between \"main\" and \"secondary\" configs, as we only have one type of `ReplicationConfig` now.\n\n\u003e The problem here though here is that you are somewhat breaking up the concept of the auto-reload being able to work with any config resource. For example prior to your change, auto-reload would work with a fanout resource, now it won\u0027t.\n\nThe auto-reload concept is based on periodically checking the `ReplicationConfig.getVersion()`. Now this method delegates to `ConfigResource.getVersion()`, so nothing is broken, we just moved that responsibility into the lower layer.\n\nIf you look at `FanoutConfigResource` you\u0027ll see that it has the same code as `FanoutBasedReplicationConfig`, minus the code for extracting configuration options.\n\nNow the auto-reload will work for any `ConfigResource` implementation, provided it implements `getVersion()` correctly.",
+      "parentUuid": "d80fb81e_207e6790",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a68e0625_7864994f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResourceBasedReplicationConfig.java",
         "patchSetId": 3
@@ -261,6 +279,24 @@
       "side": 1,
       "message": "Yet reviewing this change is already hard enough ;)",
       "parentUuid": "e73b878e_92462cd5",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b00ca2e_7d44390b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResourceBasedReplicationConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-27T21:17:22Z",
+      "side": 1,
+      "message": "Although the idea of `ConfigResource` (now) looks simple and easy, it took me some time to figure that out ;)\n\nI may not be able to convey it in a easy to understand way 😞",
+      "parentUuid": "0a75ad35_89d3b855",
       "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
