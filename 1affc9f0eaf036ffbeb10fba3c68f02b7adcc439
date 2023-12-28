@@ -418,6 +418,24 @@
       "parentUuid": "bdbfc380_3b4475a5",
       "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05fed4de_95cfb52e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-28T13:35:23Z",
+      "side": 1,
+      "message": "\u003e Maybe its me but I don\u0027t see how eg a ZK fanout is easily supported.\n\nI don\u0027t see it either, the \"fanout\" is specific for the file-based configuration. ZK is a separate data source and I\u0027d keep it like that.\n\nHaving said that, I can imagine `ComplexConfigResource` implementation, that would mix the local `replication.config`, \"fanout\", ZK, `etcd` etc. The thing with `ConfigResource` is that it can be implemented in any way one like. It can mix local files, and remote services or even have logic when to choose which source (albeit, I\u0027d prefer it to be as simple as possible). As long as it gives us JGit `Config` and a _version_, we don\u0027t care.\n\nIMO, we can simplify the \"local file-based\" configuration, drop separate implementations for a \"single file\" and \"fanout\", simplify the Guice bindings, and have one `LocalFileConfigResource` that will deal with both... but this is something for another change, let\u0027s not get distracted too much ;)",
+      "parentUuid": "ddc6b3fe_ade47879",
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
