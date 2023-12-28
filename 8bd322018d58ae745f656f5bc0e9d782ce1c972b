@@ -124,6 +124,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59ec5503_030a0280",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadConfigDecorator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-28T10:40:08Z",
+      "side": 1,
+      "message": "ah i see it now, the `ConfigResourceBasedReplicationConfig` inherits the `ConfigResource` via composition. Sorry this was the part I was missing!",
+      "parentUuid": "0a8ab78e_21f7009a",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a68e0625_7864994f",
@@ -297,6 +315,24 @@
       "side": 1,
       "message": "Although the idea of `ConfigResource` (now) looks simple and easy, it took me some time to figure that out ;)\n\nI may not be able to convey it in a easy to understand way 😞",
       "parentUuid": "0a75ad35_89d3b855",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41e7c04c_7b98986b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResourceBasedReplicationConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-28T10:40:08Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0b00ca2e_7d44390b",
       "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },

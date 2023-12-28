@@ -400,6 +400,24 @@
       "parentUuid": "3d01db0b_162d6b25",
       "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddc6b3fe_ade47879",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1157810
+      },
+      "writtenOn": "2023-12-28T10:40:08Z",
+      "side": 1,
+      "message": "Maybe its me but I don\u0027t see how eg a ZK fanout is easily supported. How can it be when the `FanoutConfigResource` is just the old fanout implementation (albeit with a bit of refactoring) which is a file-based implementation?",
+      "parentUuid": "bdbfc380_3b4475a5",
+      "revId": "1affc9f0eaf036ffbeb10fba3c68f02b7adcc439",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
