@@ -16,6 +16,24 @@
       "message": "This change making whole solution complex. We already have interface which represents configuration `com.googlesource.gerrit.plugins.replication.ReplicationConfig` which has two implementation: \n`ReplicationFileBasedConfig` - represents single file config based on replication.config\n\n`FanoutReplicationConfig` - represents combination of replication.config and remotes from replication directory\n\nWhy we cannot add another implementation of `ReplicationConfig` which reads data from external sources?\nI don\u0027t see much boilerplate code between `ReplicationFileBasedConfig` and `FanoutReplicationConfig` but introducing `ConfigResources` adding another level of abstraction which is difficult to justify",
       "revId": "d32bc85d3392da91473bca27b65d6d75ac3368bd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42255020_cd625d83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2023-12-28T23:06:42Z",
+      "side": 1,
+      "message": "\u003e Why we cannot add another implementation of ReplicationConfig which reads data from external sources?\n\nOne of the goals here is to make this extendable so that we don\u0027t need to implement all of the possible \"external\" sources in the plugin. That was one of the reasons why I opted to add another layer of abstraction.\n\nLet me explain why this makes more sense compared to have multiple `ReplicationConfig` implementations.\n\nWe already have a \"specification\" of plugin configuration options in `config.md`, then the `ReplicationConfig` implements part of it, and the other part for the remotes is returned as JGit `Config` object.\n\nIn order to configure the plugin and remotes, you already need to look into `config.md` and check the section/subsection/option values to provide in the configuraiton file. Also the `pull-replication` uses the same configuration options. This makes the JGit `Config` object the lowest common denominator.\n\nWe also want to make the auto-reloading work, so we also need to bind a _version_ with the configuration file.\n\nThis gives us the `ConfigResource` interface, the simplest most basic thing to provide the configuration (in a single file, fanout or _external_ resource) to the replication plugin.\n\nThen the `ReplicationConfig` extracts those options and provides them to the plugin without the need of hardcoding section/subsection/option all over the codebase.\n\nWhat this approach also gives us for free, is the \"mergeability\" of configurations. Similarly to how `git config` work, we can use `$gerrit_site/etc/replication.config` as the base configuration, then override/add anything on top of that from git repository or ZooKeeper. This also simplifies the migration between configuration sources. Even when there\u0027s no configuration in git or no connection to ZK, we can still operate with the default configuration. Sure we can implement \"mergeability\" from scratch for the `ReplicationConfig`, but JGit `Config` gives us this for free.\n\n\u003eI don\u0027t see much boilerplate code between ReplicationFileBasedConfig and FanoutReplicationConfig but introducing ConfigResources adding another level of abstraction which is difficult to justify\n\nThat amount of boilerplate will grow with additon of new implementations of `ReplicationConfig`. Have a look at the follow-up changes, how they simplify the code as we won\u0027t need separate implementations of `ReplicationConfig` nor the `MainReplicationConfig` annotation.\n\nI know that this is (yet) another layer of abstraction, but it simplifies things in the long run and adds more functionality to the plugin. \n\nIn the JDBC term, this is separating the JDBC API from the database driver. The `ReplicationConfig` is the JDBC, and `ConfigResource` the driver interface ;)",
+      "parentUuid": "7dfedfff_74b20662",
+      "revId": "d32bc85d3392da91473bca27b65d6d75ac3368bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
