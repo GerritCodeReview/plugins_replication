@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dfedfff_74b20662",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2023-12-28T16:20:52Z",
+      "side": 1,
+      "message": "This change making whole solution complex. We already have interface which represents configuration `com.googlesource.gerrit.plugins.replication.ReplicationConfig` which has two implementation: \n`ReplicationFileBasedConfig` - represents single file config based on replication.config\n\n`FanoutReplicationConfig` - represents combination of replication.config and remotes from replication directory\n\nWhy we cannot add another implementation of `ReplicationConfig` which reads data from external sources?\nI don\u0027t see much boilerplate code between `ReplicationFileBasedConfig` and `FanoutReplicationConfig` but introducing `ConfigResources` adding another level of abstraction which is difficult to justify",
+      "revId": "d32bc85d3392da91473bca27b65d6d75ac3368bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
