@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b6778b7_c2deea62",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-12-30T02:21:30Z",
+      "side": 1,
+      "message": "I find the code more explicative than the commit message.\n\nI believe the _schema_ here is an overstatement: we do not have a schema definition or abstraction anywhere.\n\nCan you just mention that the parsing of the config is provided directly by the `ReplicationFileBasedConfig`? That would be easier to understand IMHO and it would match what the code does.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 28
+      },
+      "revId": "d32bc85d3392da91473bca27b65d6d75ac3368bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "7dfedfff_74b20662",
