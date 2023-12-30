@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a6510ad_6b7632bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-12-30T02:15:31Z",
+      "side": 1,
+      "message": "The Zuul pipeline is currently broken, verified manually.",
+      "revId": "5c4fd7bf6e644f42073acb60ab804170e6eab9e5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
