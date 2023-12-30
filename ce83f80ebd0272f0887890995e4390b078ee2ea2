@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "400eba0d_40071a27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2023-12-30T02:24:15Z",
+      "side": 1,
+      "message": "Whilst I understand the need to start using the abstraction introduced in the `ConfigResource` interface, I do not fully grasp yet the need of this change.\n\nCan we possible have a live discussion and/or a short design to describe why we need this and what we want to achieve with it?",
+      "revId": "ce83f80ebd0272f0887890995e4390b078ee2ea2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
