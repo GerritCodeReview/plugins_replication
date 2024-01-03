@@ -371,7 +371,6 @@ public class ReplicationIT extends ReplicationDaemon {
     Result pushResult = createChange();
     shutdownDestinations();
 
-    pushResult.getCommit();
     String sourceRef = pushResult.getPatchSet().refName();
 
     assertThrows(
