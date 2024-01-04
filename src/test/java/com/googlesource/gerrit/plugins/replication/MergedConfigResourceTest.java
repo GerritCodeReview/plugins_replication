@@ -52,9 +52,10 @@ public class MergedConfigResourceTest {
             new AbstractModule() {
               @Override
               protected void configure() {
+                install(new ApiModule());
+
                 bind(ConfigResource.class).to(TestBaseConfigResource.class);
 
-                DynamicItem.itemOf(binder(), ReplicationConfigOverrides.class);
                 if (overrides != null) {
                   DynamicItem.bind(binder(), ReplicationConfigOverrides.class).to(overrides);
                 }

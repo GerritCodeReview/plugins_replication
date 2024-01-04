@@ -52,7 +52,7 @@ import org.junit.Test;
 @UseLocalDisk
 @TestPlugin(
     name = "replication",
-    sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
+    sysModule = "com.googlesource.gerrit.plugins.replication.TestReplicationModule")
 public class ReplicationIT extends ReplicationDaemon {
   private static final int TEST_REPLICATION_DELAY = 1;
   private static final int TEST_REPLICATION_RETRY = 1;
