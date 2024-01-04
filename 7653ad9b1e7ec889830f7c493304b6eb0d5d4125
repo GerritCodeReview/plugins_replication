@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03b338b7_a267f279",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2024-01-04T14:19:40Z",
+      "side": 1,
+      "message": "my understanding was that want to expose use new `Gerrit-API-Module` functionality to enable cross plugins dependency[1][2]\n\n1. https://www.youtube.com/watch?v\u003dXPAA_06XVGc\n2. https://gerrit-review.googlesource.com/c/gerrit/+/299472",
+      "revId": "7653ad9b1e7ec889830f7c493304b6eb0d5d4125",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
