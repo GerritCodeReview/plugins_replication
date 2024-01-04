@@ -1,4 +1,4 @@
-// Copyright (C) 2019 The Android Open Source Project
+// Copyright (C) 2024 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,17 +17,9 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.inject.AbstractModule;
 
-/**
- * Gerrit libModule for applying a ref-filter for outgoing replications.
- *
- * <p>It should be used only when an actual filter is defined, otherwise the default replication
- * plugin behaviour will be pushing all refs without any filtering.
- */
-public class ReplicationExtensionPointModule extends AbstractModule {
-
+public class ApiModule extends AbstractModule {
   @Override
   protected void configure() {
-    install(new ApiModule());
-    DynamicItem.itemOf(binder(), ReplicationPushFilter.class);
+    DynamicItem.itemOf(binder(), ReplicationConfigOverrides.class);
   }
 }
