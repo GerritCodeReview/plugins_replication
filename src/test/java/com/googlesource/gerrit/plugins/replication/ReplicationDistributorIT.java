@@ -39,7 +39,7 @@ import org.junit.Test;
 @UseLocalDisk
 @TestPlugin(
     name = "replication",
-    sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
+    sysModule = "com.googlesource.gerrit.plugins.replication.TestReplicationModule")
 public class ReplicationDistributorIT extends ReplicationStorageDaemon {
   private static final int TEST_DISTRIBUTION_INTERVAL_SECONDS = 3;
   private static final int TEST_DISTRIBUTION_DURATION_SECONDS = 1;

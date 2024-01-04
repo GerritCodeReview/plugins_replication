@@ -18,7 +18,6 @@ import static com.googlesource.gerrit.plugins.replication.FanoutConfigResource.C
 import static com.googlesource.gerrit.plugins.replication.FileConfigResource.CONFIG_NAME;
 
 import com.google.gerrit.extensions.events.LifecycleListener;
-import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
@@ -47,7 +46,6 @@ public class ReplicationConfigModule extends AbstractModule {
   @Override
   protected void configure() {
     bind(ConfigResource.class).to(getConfigResourceClass());
-    DynamicItem.itemOf(binder(), ReplicationConfigOverrides.class);
 
     if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
       bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class).in(Scopes.SINGLETON);

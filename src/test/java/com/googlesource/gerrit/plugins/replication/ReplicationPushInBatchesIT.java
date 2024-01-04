@@ -29,7 +29,7 @@ import org.junit.Test;
 
 @TestPlugin(
     name = "replication",
-    sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
+    sysModule = "com.googlesource.gerrit.plugins.replication.TestReplicationModule")
 public class ReplicationPushInBatchesIT extends ReplicationDaemon {
 
   @Override

@@ -49,7 +49,7 @@ import org.junit.Test;
 @UseLocalDisk
 @TestPlugin(
     name = "replication",
-    sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
+    sysModule = "com.googlesource.gerrit.plugins.replication.TestReplicationModule")
 public class ReplicationStorageIT extends ReplicationStorageDaemon {
 
   @Test

@@ -58,7 +58,7 @@ import org.junit.Test;
 @Sandboxed
 @TestPlugin(
     name = "replication",
-    sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
+    sysModule = "com.googlesource.gerrit.plugins.replication.TestReplicationModule")
 public class ReplicationEventsIT extends ReplicationDaemon {
   private static final Duration TEST_POST_EVENT_TIMEOUT = Duration.ofSeconds(1);
 

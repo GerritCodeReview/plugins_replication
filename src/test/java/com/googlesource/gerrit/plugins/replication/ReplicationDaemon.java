@@ -49,7 +49,7 @@ import org.eclipse.jgit.util.FS;
 @UseLocalDisk
 @TestPlugin(
     name = "replication",
-    sysModule = "com.googlesource.gerrit.plugins.replication.ReplicationModule")
+    sysModule = "com.googlesource.gerrit.plugins.replication.TestReplicationModule")
 public class ReplicationDaemon extends LightweightPluginDaemonTest {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   protected static final Optional<String> ALL_PROJECTS = Optional.empty();
