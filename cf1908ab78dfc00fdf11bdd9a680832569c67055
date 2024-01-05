@@ -52,6 +52,24 @@
       "parentUuid": "d2f7d8a2_a3f70732",
       "revId": "cf1908ab78dfc00fdf11bdd9a680832569c67055",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83a78de9_3fd50066",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/MainReplicationConfig.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-05T13:49:31Z",
+      "side": 0,
+      "message": "Sure, got this, I do believe in more self-contained changes. If I do remove that annotation in a separate change, then if, for any reason, we need to revert this change, we end up in a broken state, as the annotation will still be removed.\n\nSure, that\u0027s _easy_ to fix, just rever another change, but one needs to remember that this refactoring was split into two separate commits.\n\nThat\u0027s the reason why I tend to \"put more changes\" into commits, as I do believe in the mantra that each commit should be atomic and move the repository from one stable state to the next one, and not break it when a single commit is reverted.",
+      "parentUuid": "e8f2ff0c_d1e2e1c5",
+      "revId": "cf1908ab78dfc00fdf11bdd9a680832569c67055",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
