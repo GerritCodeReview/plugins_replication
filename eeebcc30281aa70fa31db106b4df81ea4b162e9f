@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76dfebd3_01eb5429",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-01-05T19:08:51Z",
+      "side": 1,
+      "message": "also",
+      "range": {
+        "startLine": 15,
+        "startChar": 6,
+        "endLine": 15,
+        "endChar": 10
+      },
+      "revId": "eeebcc30281aa70fa31db106b4df81ea4b162e9f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fff436e5_2efc57f3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationExtensionPointModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-01-05T19:08:51Z",
+      "side": 1,
+      "message": "Have you thought about moving this also to the ApiModule as a follow-up change?",
+      "revId": "eeebcc30281aa70fa31db106b4df81ea4b162e9f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1ea1b62_f0fcbd07",
+        "filename": "src/main/resources/Documentation/api-module.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-01-05T19:08:51Z",
+      "side": 1,
+      "message": "There is already a documentation file with all the extension points [1], why not using that one and add a section of the ones available as apiModule?\n\n[1] src/main/resources/Documentation/extension-point.md",
+      "revId": "eeebcc30281aa70fa31db106b4df81ea4b162e9f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
