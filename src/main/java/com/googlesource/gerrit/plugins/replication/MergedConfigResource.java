@@ -17,6 +17,8 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
+import com.google.gerrit.common.UsedAt;
+import com.google.gerrit.common.UsedAt.Project;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -26,7 +28,8 @@ import org.eclipse.jgit.lib.Config;
 
 public class MergedConfigResource {
   @VisibleForTesting
-  static MergedConfigResource withBaseOnly(ConfigResource base) {
+  @UsedAt(Project.PLUGIN_PULL_REPLICATION)
+  public static MergedConfigResource withBaseOnly(ConfigResource base) {
     return new MergedConfigResource(Providers.of(base), null);
   }
 

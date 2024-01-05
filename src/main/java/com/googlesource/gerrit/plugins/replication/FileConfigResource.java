@@ -16,6 +16,9 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
+import com.google.common.annotations.VisibleForTesting;
+import com.google.gerrit.common.UsedAt;
+import com.google.gerrit.common.UsedAt.Project;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import java.io.IOException;
@@ -30,7 +33,9 @@ public class FileConfigResource implements ConfigResource {
   protected final FileBasedConfig config;
 
   @Inject
-  FileConfigResource(SitePaths site) {
+  @VisibleForTesting
+  @UsedAt(Project.PLUGIN_PULL_REPLICATION)
+  public FileConfigResource(SitePaths site) {
     Path cfgPath = site.etc_dir.resolve(CONFIG_NAME);
     this.config = new FileBasedConfig(cfgPath.toFile(), FS.DETECTED);
     try {
