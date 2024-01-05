@@ -34,6 +34,24 @@
       "parentUuid": "27ce8805_0353ca23",
       "revId": "cf1908ab78dfc00fdf11bdd9a680832569c67055",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8f2ff0c_d1e2e1c5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/MainReplicationConfig.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-01-05T13:33:59Z",
+      "side": 0,
+      "message": "\u003e You say that you would prefer to have a \"dangling\" not used annotation\n\nNo, I meant the annotation and its use are not part of this change IMHO.\nYou don\u0027t need it anymore just because you specify explicitly that you want to inject the implementation instead of the annotated interface.\n\nI do not disagree with the small refactoring, I just believe that one change should do one thing and one refactoring.\n\n\u003e and remove it in a separate change?\n\nYes, the removal of the annotation and its use in a separate change.",
+      "parentUuid": "d2f7d8a2_a3f70732",
+      "revId": "cf1908ab78dfc00fdf11bdd9a680832569c67055",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }

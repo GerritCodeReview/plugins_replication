@@ -46,6 +46,30 @@
       },
       "revId": "75714b317e949af52f18a3e9ffaf0e4c5d9cf007",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcdb891e_b75a3cbd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigImpl.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-01-05T13:33:59Z",
+      "side": 1,
+      "message": "Sure, any change can rename things if they have a different meaning or context or implementation.\n\nIn this change, I believe it still file-based.",
+      "parentUuid": "05d0f248_eb7ab3a2",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 34
+      },
+      "revId": "75714b317e949af52f18a3e9ffaf0e4c5d9cf007",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
