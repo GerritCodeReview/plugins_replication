@@ -337,6 +337,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82d8a6e7_96841ad2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResourceBasedReplicationConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-05T21:21:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc110862_fd52cad0",
+      "revId": "8bd322018d58ae745f656f5bc0e9d782ce1c972b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f18b1faa_ded11525",
