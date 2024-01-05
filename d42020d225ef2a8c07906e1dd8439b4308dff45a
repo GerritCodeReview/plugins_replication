@@ -16,6 +16,24 @@
       "message": "I like the idea of configuration overrides with the MergedConfigResource. I see that the ability to add the overrides with injection isn\u0027t tested anywhere, or am I mistaken?\n\nCan you add one test to make sure that the override actually works?",
       "revId": "d42020d225ef2a8c07906e1dd8439b4308dff45a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "554bb812_2022240a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-05T16:40:33Z",
+      "side": 1,
+      "message": "see the added `MergedConfigResourceTest` that will test the injection without and with overrides.",
+      "parentUuid": "b4d0bf48_8c151127",
+      "revId": "d42020d225ef2a8c07906e1dd8439b4308dff45a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
