@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "612bb242_46953e6a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigImpl.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-01-05T12:48:38Z",
+      "side": 1,
+      "message": "I believe we should keep `File` somewhere in the name for allowing the reader to identify that this is the file-based implementation.",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 34
+      },
+      "revId": "75714b317e949af52f18a3e9ffaf0e4c5d9cf007",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
