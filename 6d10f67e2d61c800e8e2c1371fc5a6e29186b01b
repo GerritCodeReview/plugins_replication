@@ -58,6 +58,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e0cb0a2_35a505ef",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-05T11:47:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0e7dfd8_c6e2a3ab",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 8
+      },
+      "revId": "6d10f67e2d61c800e8e2c1371fc5a6e29186b01b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87bef9b2_d1449850",
@@ -71,6 +95,30 @@
       "writtenOn": "2024-01-05T08:53:31Z",
       "side": 1,
       "message": "What is the scenario where you would like to continue with default configuration values if the config cannot be read or is invalid? Don\u0027t you prefer to just fail the load of the plugin instead?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 5
+      },
+      "revId": "6d10f67e2d61c800e8e2c1371fc5a6e29186b01b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaabcd73_b7d202a0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-05T11:47:29Z",
+      "side": 1,
+      "message": "Those exceptions may not only be thrown on the plugin start but also when the configuration is auto-reloaded.\n\nFailing on start-up makes sense, but not on auto-reload. In this case, we should keep the previous good configuration. Let me check how it is now.",
+      "parentUuid": "87bef9b2_d1449850",
       "range": {
         "startLine": 36,
         "startChar": 0,
