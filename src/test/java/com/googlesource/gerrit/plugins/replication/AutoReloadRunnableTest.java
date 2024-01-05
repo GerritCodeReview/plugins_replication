@@ -85,7 +85,10 @@ public class AutoReloadRunnableTest {
     return new Provider<>() {
       @Override
       public ReplicationConfigImpl get() {
-        return new ReplicationConfigImpl(sitePaths, sitePaths.data_dir) {
+        return new ReplicationConfigImpl(
+            MergedConfigResource.withBaseOnly(new FileConfigResource(sitePaths)),
+            sitePaths,
+            sitePaths.data_dir) {
           @Override
           public String getVersion() {
             return String.format("%s", System.nanoTime());
