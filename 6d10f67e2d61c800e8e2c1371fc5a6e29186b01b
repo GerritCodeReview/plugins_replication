@@ -151,6 +151,30 @@
       },
       "revId": "6d10f67e2d61c800e8e2c1371fc5a6e29186b01b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcbcbe92_a43689c2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-01-05T12:46:35Z",
+      "side": 1,
+      "message": "Ack, let\u0027s keep the same code and behaviour as before.",
+      "parentUuid": "e5905d4b_55f4b3bf",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 5
+      },
+      "revId": "6d10f67e2d61c800e8e2c1371fc5a6e29186b01b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
