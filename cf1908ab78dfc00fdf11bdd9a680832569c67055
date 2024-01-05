@@ -70,6 +70,24 @@
       "parentUuid": "e8f2ff0c_d1e2e1c5",
       "revId": "cf1908ab78dfc00fdf11bdd9a680832569c67055",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9665993_25db34eb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/MainReplicationConfig.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-05T14:11:47Z",
+      "side": 0,
+      "message": "I\u0027m going to keep the deletion of `MainReplicationConfig` in this change, as splitting it into separate ones will make this change not atomic, in the sense that reverting it (without the deletion) will break the code.",
+      "parentUuid": "83a78de9_3fd50066",
+      "revId": "cf1908ab78dfc00fdf11bdd9a680832569c67055",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
