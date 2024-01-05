@@ -20,6 +20,7 @@ import com.google.inject.AbstractModule;
 public class ApiModule extends AbstractModule {
   @Override
   protected void configure() {
+    DynamicItem.itemOf(binder(), ReplicationPushFilter.class);
     DynamicItem.itemOf(binder(), ReplicationConfigOverrides.class);
   }
 }

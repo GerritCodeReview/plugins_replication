@@ -26,19 +26,6 @@ Example:
 Extension points
 ----------------
 
-* `com.googlesource.gerrit.plugins.replication.ReplicationPushFilter`
-
-  Filter out the ref updates pushed to a remote instance.
-  Only one filter at a time is supported. Filter implementation needs to bind a `DynamicItem`.
-
-  Default: no filtering
-
-  Example:
-
-  ```java
-  DynamicItem.bind(binder(), ReplicationPushFilter.class).to(ReplicationPushFilterImpl.class);
-  ```
-
 * `com.googlesource.gerrit.plugins.replication.AdminApiFactory`
 
   Create an instance of `AdminApi` for a given remote URL. The default implementation
@@ -89,4 +76,17 @@ Exposed API
 
   ```java
   DynamicItem.bind(binder(), ReplicationConfigOverrides.class).to(ReplicationConfigOverridesImpl.class);
+  ```
+
+* `com.googlesource.gerrit.plugins.replication.ReplicationPushFilter`
+
+  Filter out the ref updates pushed to a remote instance.
+  Only one filter at a time is supported. Filter implementation needs to bind a `DynamicItem`.
+
+  Default: no filtering
+
+  Example:
+
+  ```java
+  DynamicItem.bind(binder(), ReplicationPushFilter.class).to(ReplicationPushFilterImpl.class);
   ```
