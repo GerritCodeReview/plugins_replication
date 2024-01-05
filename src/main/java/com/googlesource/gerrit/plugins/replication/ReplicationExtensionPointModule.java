@@ -14,7 +14,6 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.inject.AbstractModule;
 
 /**
@@ -28,6 +27,5 @@ public class ReplicationExtensionPointModule extends AbstractModule {
   @Override
   protected void configure() {
     install(new ApiModule());
-    DynamicItem.itemOf(binder(), ReplicationPushFilter.class);
   }
 }
