@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e7d9ffa_000625f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-05T22:54:39Z",
+      "side": 1,
+      "message": "verified locally with:\n`bazel build plugins/replication \u0026\u0026 bazel test plugins/replication:replication_tests \u0026\u0026 bazel test --test_tag_filters\u003dreplication //...z",
+      "revId": "d9917ac85283223bed731ddc8c3a652cb2678d65",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
