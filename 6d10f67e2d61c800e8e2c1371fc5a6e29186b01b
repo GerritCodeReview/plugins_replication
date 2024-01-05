@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35696696_b5d2cd71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-01-05T08:53:31Z",
+      "side": 1,
+      "message": "Run the tests locally and it is all green. Not sure why Zuul is complaining though 😞",
+      "revId": "6d10f67e2d61c800e8e2c1371fc5a6e29186b01b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0e7dfd8_c6e2a3ab",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutReplicationConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-01-05T08:53:31Z",
+      "side": 1,
+      "message": "This could be package protected as there are no further references to it from other classes.",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 8
+      },
+      "revId": "6d10f67e2d61c800e8e2c1371fc5a6e29186b01b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87bef9b2_d1449850",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-01-05T08:53:31Z",
+      "side": 1,
+      "message": "What is the scenario where you would like to continue with default configuration values if the config cannot be read or is invalid? Don\u0027t you prefer to just fail the load of the plugin instead?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 5
+      },
+      "revId": "6d10f67e2d61c800e8e2c1371fc5a6e29186b01b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
