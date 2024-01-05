@@ -266,7 +266,11 @@ public class FanoutConfigResourceTest extends AbstractConfigTest {
     FanoutConfigResource objectUnderTest = new FanoutConfigResource(sitePaths);
 
     String replicationConfigVersion =
-        new ReplicationConfigImpl(sitePaths, pluginDataPath).getVersion();
+        new ReplicationConfigImpl(
+                MergedConfigResource.withBaseOnly(new FileConfigResource(sitePaths)),
+                sitePaths,
+                pluginDataPath)
+            .getVersion();
 
     MoreFiles.deleteRecursively(sitePaths.etc_dir.resolve("replication"), ALLOW_INSECURE);
 
