@@ -16,6 +16,75 @@
       "message": "verified locally with:\n`bazel build plugins/replication \u0026\u0026 bazel test plugins/replication:replication_tests \u0026\u0026 bazel test --test_tag_filters\u003dreplication //...`",
       "revId": "22f9882524767a10b56f3ba8830e0d3b09a7658d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80a80e8e_5676b616",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigOverrides.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-01-05T19:08:29Z",
+      "side": 1,
+      "message": "```suggestion\n// Copyright (C) 2024 The Android Open Source Project\n```",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "22f9882524767a10b56f3ba8830e0d3b09a7658d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22f8265a_7d198df0",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/MergedConfigResourceTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-01-05T19:08:29Z",
+      "side": 1,
+      "message": "Avoid magic values in tests.\n\n\n```suggestion\n    assertThat(getMaxRetires(configResource)).isEqualTo(BASE_CONFIG_MAX_RETRIES);\n```",
+      "range": {
+        "startLine": 32,
+        "startChar": 56,
+        "endLine": 32,
+        "endChar": 58
+      },
+      "revId": "22f9882524767a10b56f3ba8830e0d3b09a7658d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89ed4581_2f6dc808",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/MergedConfigResourceTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-01-05T19:08:29Z",
+      "side": 1,
+      "message": "Avoid magic values in tests.\n\n\n```suggestion\n    assertThat(getMaxRetires(configResource)).isEqualTo(OVERRIDDEN_CONFIG_MAX_RETRIES);\n```",
+      "range": {
+        "startLine": 41,
+        "startChar": 56,
+        "endLine": 41,
+        "endChar": 57
+      },
+      "revId": "22f9882524767a10b56f3ba8830e0d3b09a7658d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
