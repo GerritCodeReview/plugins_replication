@@ -127,6 +127,30 @@
       },
       "revId": "6d10f67e2d61c800e8e2c1371fc5a6e29186b01b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5905d4b_55f4b3bf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-05T12:13:46Z",
+      "side": 1,
+      "message": "With this change, I believe that we don\u0027t change how the `replication` plugin behaves when the configuration file is not valid.\n\nThe plugin will still fail to load when `replication.config` is invalid, see `ReplicationConfigModule.java` L66.\n\nIn the case of this code snippet, it was simply moved from `ReplicationFileBasedConfig.java` L49-55.\n\nThere\u0027s no change in behaviour, only the code was moved around ;) We can improve this, especially in case of failing auto-reload. But let\u0027s keep things separate.",
+      "parentUuid": "aaabcd73_b7d202a0",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 5
+      },
+      "revId": "6d10f67e2d61c800e8e2c1371fc5a6e29186b01b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
