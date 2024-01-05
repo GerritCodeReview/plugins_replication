@@ -146,6 +146,9 @@ public abstract class AbstractConfigTest {
   }
 
   protected ReplicationConfigImpl newReplicationFileBasedConfig() {
-    return new ReplicationConfigImpl(sitePaths, pluginDataPath);
+    return new ReplicationConfigImpl(
+        MergedConfigResource.withBaseOnly(new FileConfigResource(sitePaths)),
+        sitePaths,
+        pluginDataPath);
   }
 }
