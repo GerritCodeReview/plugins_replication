@@ -34,12 +34,6 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   private final MergedConfigResource configResource;
   private final Path pluginDataDir;
 
-  // TODO: remove in follow-up change, as this was added to reduce the diff size
-  // for change Ic6a5c5b8ab5
-  public ReplicationConfigImpl(SitePaths paths, @PluginData Path pluginDataDir) {
-    this(MergedConfigResource.withBaseOnly(new FileConfigResource(paths)), paths, pluginDataDir);
-  }
-
   @Inject
   public ReplicationConfigImpl(
       MergedConfigResource configResource, SitePaths site, @PluginData Path pluginDataDir) {
