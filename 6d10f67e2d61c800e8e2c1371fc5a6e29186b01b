@@ -18,6 +18,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a96243fb_db86781a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-01-05T08:54:04Z",
+      "side": 1,
+      "message": "We should be adding a test case where we specify an invalid configuration file and see what is the expected behaviour",
+      "revId": "6d10f67e2d61c800e8e2c1371fc5a6e29186b01b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0e7dfd8_c6e2a3ab",
