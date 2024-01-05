@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "754aaa38_7dfa9e49",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-05T19:32:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76dfebd3_01eb5429",
+      "range": {
+        "startLine": 15,
+        "startChar": 6,
+        "endLine": 15,
+        "endChar": 10
+      },
+      "revId": "eeebcc30281aa70fa31db106b4df81ea4b162e9f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fff436e5_2efc57f3",
@@ -41,6 +65,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "686b686a_cde38fbb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationExtensionPointModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-05T19:32:09Z",
+      "side": 1,
+      "message": "Yes, I thought about migrating all of the extensions points to _ApiModules_. This would simplify the deployment, as you won\u0027t need to put the jar into `lib/` and add `gerrit.installModule` to `gerrit.config`\n\nAs long, as we keep the `ApiModule()` installed in `ReplicationExtensionPointModule`, we\u0027ll be backwards compatible. At some point, we can discuss breaking that backward compatibility.\n\nI\u0027ll move it in the follow-up change, and keep the documentation unchanged. We can decide later when we migrate `ReplicationPushFilter` to be an _ApiModule_ client.",
+      "parentUuid": "fff436e5_2efc57f3",
+      "revId": "eeebcc30281aa70fa31db106b4df81ea4b162e9f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1ea1b62_f0fcbd07",
@@ -54,6 +96,24 @@
       "writtenOn": "2024-01-05T19:08:51Z",
       "side": 1,
       "message": "There is already a documentation file with all the extension points [1], why not using that one and add a section of the ones available as apiModule?\n\n[1] src/main/resources/Documentation/extension-point.md",
+      "revId": "eeebcc30281aa70fa31db106b4df81ea4b162e9f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0643e27_6bc7e5e9",
+        "filename": "src/main/resources/Documentation/api-module.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-05T19:32:09Z",
+      "side": 1,
+      "message": "Yes, I\u0027ve seen the `extension-point.md`, but I felt that _ApiModules_ are a different beast and deserve its own file. Especially when things will blow up if you put `replication.jar` into `lib/` and `plugins/`.\n\nI can move this to `extension-point.md` for better discoverability.",
+      "parentUuid": "d1ea1b62_f0fcbd07",
       "revId": "eeebcc30281aa70fa31db106b4df81ea4b162e9f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
