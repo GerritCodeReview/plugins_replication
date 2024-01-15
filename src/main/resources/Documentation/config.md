@@ -302,7 +302,7 @@ remote.NAME.adminUrl
 	to create/remove projects and update repository HEAD references.
 
 	NOTE: In order to replicate project deletion, the
-	link:https://gerrit-review.googlesource.com/admin/projects/plugins/delete-project delete-project[delete-project]
+	[delete-project](https://gerrit-review.googlesource.com/admin/projects/plugins/delete-project)
 	plugin must be installed on the other Gerrit.
 
 	*Backward compatibility notice*
