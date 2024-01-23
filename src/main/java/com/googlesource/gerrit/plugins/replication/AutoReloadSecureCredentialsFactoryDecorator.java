@@ -24,21 +24,23 @@ import java.nio.file.Files;
 import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.transport.CredentialsProvider;
+import com.google.gerrit.server.securestore.SecureStore;
 
 public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsFactory {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-
   private final AtomicReference<SecureCredentialsFactory> secureCredentialsFactory;
   private volatile long secureCredentialsFactoryLoadTs;
   private final SitePaths site;
   private ReplicationConfig config;
+  private final SecureStore secureStore;
 
   @Inject
-  public AutoReloadSecureCredentialsFactoryDecorator(SitePaths site, ReplicationConfig config)
+  public AutoReloadSecureCredentialsFactoryDecorator(SitePaths site, ReplicationConfig config, SecureStore secureStore)
       throws ConfigInvalidException, IOException {
     this.site = site;
     this.config = config;
-    this.secureCredentialsFactory = new AtomicReference<>(new SecureCredentialsFactory(site));
+    this.secureStore = secureStore;
+    this.secureCredentialsFactory = new AtomicReference<>(new SecureCredentialsFactory(secureStore));
     this.secureCredentialsFactoryLoadTs = getSecureConfigLastEditTs();
   }
 
@@ -54,7 +56,7 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsF
     try {
       if (needsReload()) {
         secureCredentialsFactory.compareAndSet(
-            secureCredentialsFactory.get(), new SecureCredentialsFactory(site));
+            secureCredentialsFactory.get(), new SecureCredentialsFactory(secureStore));
         secureCredentialsFactoryLoadTs = getSecureConfigLastEditTs();
         logger.atInfo().log("secure.config reloaded as it was updated on the file system");
       }

@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import java.io.IOException;
@@ -24,36 +25,48 @@ import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.eclipse.jgit.util.FS;
+import com.google.gerrit.server.securestore.SecureStore;
+
 
 /** Looks up a remote's password in secure.config. */
 public class SecureCredentialsFactory implements CredentialsFactory {
-  private final Config config;
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+
+  private final SecureStore secureStore;
 
   @Inject
-  public SecureCredentialsFactory(SitePaths site) throws ConfigInvalidException, IOException {
-    config = load(site);
-  }
+  public SecureCredentialsFactory(SecureStore secureStore) throws ConfigInvalidException, IOException {
+    this.secureStore = secureStore;
 
-  private static Config load(SitePaths site) throws ConfigInvalidException, IOException {
-    FileBasedConfig cfg = new FileBasedConfig(site.secure_config.toFile(), FS.DETECTED);
-    if (cfg.getFile().exists() && cfg.getFile().length() > 0) {
-      try {
-        cfg.load();
-      } catch (ConfigInvalidException e) {
-        throw new ConfigInvalidException(
-            String.format("Config file %s is invalid: %s", cfg.getFile(), e.getMessage()), e);
-      } catch (IOException e) {
-        throw new IOException(
-            String.format("Cannot read %s: %s", cfg.getFile(), e.getMessage()), e);
-      }
-    }
-    return cfg;
+    secureStore.reload();
   }
 
   @Override
   public CredentialsProvider create(String remoteName) {
-    String user = Objects.toString(config.getString("remote", remoteName, "username"), "");
-    String pass = Objects.toString(config.getString("remote", remoteName, "password"), "");
+    String user = Objects.toString(getConfigValue("remote", remoteName, "username"), "");
+    String pass = Objects.toString(getConfigValue("remote", remoteName, "password"), "");
+
     return new UsernamePasswordCredentialsProvider(user, pass);
+  }
+
+  private String getConfigValue(String section, String subsection, String name) {
+    try {
+      String value = secureStore.get(section, subsection, name);
+
+      if (value == null)  {
+        logger.atWarning().log(
+            "SecureStore information for section: %s, "
+                + "subsection: %s, name: %s was not provided. Assuming blank.", section, subsection, name);
+      }
+
+      return value;
+    } catch (Exception e) {
+      logger.atSevere().withCause(e).log(
+          "Unexpected error while trying to load "
+              + "SecureStore information for section: %s, "
+              + "subsection: %s, name: %s.d ", section, subsection, name);
+      // To distinguish between the value not set and an encryption problem
+      throw e;
+    }
   }
 }
