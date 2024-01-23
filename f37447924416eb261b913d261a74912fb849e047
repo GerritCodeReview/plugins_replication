@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4761540f_fa9784ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-23T20:02:56Z",
+      "side": 1,
+      "message": "could you please elaborate more? IMO it\u0027s worth mentioning that the `$gerrit_site/etc/secure.config` was used by the plugin, but it was assumed that values are in the plain text format. It maybe also worth mentioning that Gerrit core already has `SecureConfig` API that should be used here instead.",
+      "revId": "f37447924416eb261b913d261a74912fb849e047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11a9cf73_37681e1c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-23T20:02:56Z",
+      "side": 1,
+      "message": "If there\u0027s no username or password the authorization for replication should fail anyway. Shall we be more _informative_ and log a warning about missing secure configuration for the given remote?\n\nWe can also throw an exception here and break the replication process as it doesn\u0027t make sense to continue when the authorization will fail because of missing credentials.",
+      "revId": "f37447924416eb261b913d261a74912fb849e047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
