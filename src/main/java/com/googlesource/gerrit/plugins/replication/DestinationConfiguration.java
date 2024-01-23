@@ -51,6 +51,8 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final int maxRetries;
   private final int slowLatencyThreshold;
   private final Supplier<Integer> pushBatchSize;
+  private final String username;
+  private final String password;
 
   protected DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
@@ -81,6 +83,8 @@ public class DestinationConfiguration implements RemoteConfiguration {
     maxRetries =
         getInt(
             remoteConfig, cfg, "replicationMaxRetries", cfg.getInt("replication", "maxRetries", 0));
+    username = cfg.getString("remote", name, "username");
+    password = cfg.getString("remote", name, "password");
 
     slowLatencyThreshold =
         (int)
@@ -214,5 +218,15 @@ public class DestinationConfiguration implements RemoteConfiguration {
   @Override
   public int getPushBatchSize() {
     return pushBatchSize.get();
+  }
+
+  @Override
+  public String getUsername() {
+    return username;
+  }
+
+  @Override
+  public String getPassword() {
+    return password;
   }
 }
