@@ -686,6 +686,10 @@ remote.NAME.username
 remote.NAME.password
 :	Password to use for HTTP authentication on this remote.
 
+NOTE: If the secure config plugin is used, ensure that this information
+is encrypted. For this purpose, please use the server side administrative
+tool [passwd](../../../Documentation/pgm-passwd.html).
+
 File `~/.ssh/config`
 --------------------
 
