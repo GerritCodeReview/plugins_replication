@@ -19,26 +19,48 @@ import static com.google.gerrit.common.FileUtil.lastModified;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.transport.CredentialsProvider;
 
+import com.google.gerrit.server.securestore.DefaultSecureStore;
+import com.google.gerrit.server.securestore.SecureStore;
+
 public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsFactory {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-
   private final AtomicReference<SecureCredentialsFactory> secureCredentialsFactory;
   private volatile long secureCredentialsFactoryLoadTs;
   private final SitePaths site;
   private ReplicationConfig config;
+  private final SecureStore secureStore;
+  private final Provider<DefaultSecureStore> defaultSecureStore;
+  private final Provider<ReplicationConfig> replicationConfigProvider;
+  private final Provider<ConfigParser> configParserProvider;
 
   @Inject
-  public AutoReloadSecureCredentialsFactoryDecorator(SitePaths site, ReplicationConfig config)
+  public AutoReloadSecureCredentialsFactoryDecorator(
+      SitePaths site,
+      ReplicationConfig config,
+      SecureStore secureStore,
+      Provider<DefaultSecureStore> defaultSecureStore,
+      Provider<ConfigParser> configParserProvider,
+      Provider<ReplicationConfig> replicationConfigProvider)
       throws ConfigInvalidException, IOException {
     this.site = site;
     this.config = config;
-    this.secureCredentialsFactory = new AtomicReference<>(new SecureCredentialsFactory(site));
+    this.secureStore = secureStore;
+    this.defaultSecureStore = defaultSecureStore;
+    this.configParserProvider = configParserProvider;
+    this.replicationConfigProvider = replicationConfigProvider;
+
+    this.secureCredentialsFactory =
+        new AtomicReference<>(
+            new SecureCredentialsFactory(
+                secureStore, defaultSecureStore, configParserProvider, replicationConfigProvider));
     this.secureCredentialsFactoryLoadTs = getSecureConfigLastEditTs();
   }
 
@@ -54,7 +76,9 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsF
     try {
       if (needsReload()) {
         secureCredentialsFactory.compareAndSet(
-            secureCredentialsFactory.get(), new SecureCredentialsFactory(site));
+            secureCredentialsFactory.get(),
+            new SecureCredentialsFactory(
+                secureStore, defaultSecureStore, configParserProvider, replicationConfigProvider));
         secureCredentialsFactoryLoadTs = getSecureConfigLastEditTs();
         logger.atInfo().log("secure.config reloaded as it was updated on the file system");
       }

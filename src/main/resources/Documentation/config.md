@@ -596,6 +596,15 @@ remote.NAME.replicateNoteDbMetaRefs
 
   By default, true.
 
+remote.NAME.username
+: Username to use for HTTP authentication on this remote. Can be used in replacement of the
+  secure.config information. In case of also existing in the secure.config, this information
+  is ignored.
+
+remote.NAME.password
+: Password to use for HTTP authentication on this remote. Can be used in replacement of the
+  secure.config information. In case of also existing in the secure.config, this information
+  is ignored.
 
 Directory `replication`
 --------------------
@@ -685,6 +694,12 @@ remote.NAME.username
 
 remote.NAME.password
 :	Password to use for HTTP authentication on this remote.
+
+NOTE: If the [secure-config][5] plugin is used, ensure that this information
+is encrypted. For this purpose, please use the server side administrative
+tool [passwd](../../../Documentation/pgm-passwd.html).
+
+[5]: https://gerrit.googlesource.com/plugins/secure-config/
 
 File `~/.ssh/config`
 --------------------
