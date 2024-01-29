@@ -54,6 +54,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77ba072d_fed97f1e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-01-29T09:29:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "383d8b32_412674f1",
+      "revId": "f37447924416eb261b913d261a74912fb849e047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11a9cf73_37681e1c",
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "I see the point, nevertheless if you notice the old code, it already worked with an assumption of blank if the variable was not there, so the change was made to emulate that behavior. \n\nRegarding the logging part, there is on the getConfigValue a logging in case of failed encription. I will add one additional logging to mention the case were there is no value (as warning).",
       "parentUuid": "11a9cf73_37681e1c",
+      "revId": "f37447924416eb261b913d261a74912fb849e047",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83167bc6_845a5039",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-01-29T09:29:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82667c05_0e038532",
       "revId": "f37447924416eb261b913d261a74912fb849e047",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
