@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02a2b9ac_926c3cf8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-29T14:05:40Z",
+      "side": 1,
+      "message": "nit: how about something among the lines of \"Use SecureStore instead of accessing secure.config directly\", as we replace here the direct access to `secure.config` with usage of the `SecureStore` API.\n\nThe \"add support\" sounds like both methods will be supported simultaneously.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c139aaf_473c1cbd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-29T14:05:40Z",
+      "side": 1,
+      "message": "nit: `SecureConfig` is an API provided by Gerrit core that don\u0027t require any _plugin_, it may be implemented by a plugin to externalise storage and access of secrets.",
+      "range": {
+        "startLine": 9,
+        "startChar": 33,
+        "endLine": 9,
+        "endChar": 53
+      },
+      "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5616dc5_4db25b21",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-29T14:05:40Z",
+      "side": 1,
+      "message": "this is the case of the \"default\" `SecureStore` _plugin_, which will still use the `secure.config` but can optionally encrypt values. The `SecureStore` API do not prescribe where the secrets should be stored. It\u0027s a \"deliberate coincidence\" that the `replication` plugin uses the same file as the default secure config ;)",
+      "range": {
+        "startLine": 11,
+        "startChar": 58,
+        "endLine": 12,
+        "endChar": 20
+      },
+      "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6890959b_dc5a8b95",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-29T14:05:40Z",
+      "side": 1,
+      "message": "nit: the mention about changes in documentation sounds like it should be in a new paragraph",
+      "range": {
+        "startLine": 12,
+        "startChar": 64,
+        "endLine": 12,
+        "endChar": 65
+      },
+      "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d46d464_98d33530",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-29T14:05:40Z",
+      "side": 1,
+      "message": "please remote the empty line between `Bug` and `Change-Id`, as there should be no empty lines between commit footers",
+      "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a222cf6f_39f4ea89",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-29T14:05:40Z",
+      "side": 1,
+      "message": "this is an implementation detail of the _default secure store_ implementation. We should not assume that other `SecureStore` implementations will also use the `secure.config`, it may use external _valu_ service instead.",
+      "range": {
+        "startLine": 58,
+        "startChar": 13,
+        "endLine": 58,
+        "endChar": 27
+      },
+      "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa9c5539_bec384d7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-01-29T14:05:40Z",
+      "side": 1,
+      "message": "same as line 58",
+      "range": {
+        "startLine": 66,
+        "startChar": 17,
+        "endLine": 66,
+        "endChar": 30
+      },
+      "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
