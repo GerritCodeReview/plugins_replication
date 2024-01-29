@@ -72,6 +72,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07c3bd78_7877d057",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-01-29T11:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38f44a62_7df773e0",
+      "range": {
+        "startLine": 15,
+        "startChar": 30,
+        "endLine": 15,
+        "endChar": 49
+      },
+      "revId": "65325c1a306f2801e9c9976550938ffc4dc7d68e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97491f2a_da7befe3",
@@ -119,6 +143,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea8575a3_8ea103f4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-01-29T11:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f01be30_da1aa1db",
+      "range": {
+        "startLine": 63,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 27
+      },
+      "revId": "65325c1a306f2801e9c9976550938ffc4dc7d68e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb9e480a_ea3a6a2d",
@@ -156,6 +204,30 @@
       "side": 1,
       "message": "Yes, I can add the link to the plugin. Other part, no, because the secure config plugin is not a \"plugin\" per se, but a lib. There is neither a RestApi nor a ssh command to encript data. Only the passwd has that functionality",
       "parentUuid": "fb9e480a_ea3a6a2d",
+      "range": {
+        "startLine": 689,
+        "startChar": 13,
+        "endLine": 689,
+        "endChar": 33
+      },
+      "revId": "65325c1a306f2801e9c9976550938ffc4dc7d68e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecbda360_69d4ddea",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-01-29T11:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9b9699e_f30e1944",
       "range": {
         "startLine": 689,
         "startChar": 13,
