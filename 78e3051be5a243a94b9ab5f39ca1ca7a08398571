@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac6d498f_4cc0759f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-01-30T09:59:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02a2b9ac_926c3cf8",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c139aaf_473c1cbd",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-29T14:05:40Z",
       "side": 1,
       "message": "nit: `SecureConfig` is an API provided by Gerrit core that don\u0027t require any _plugin_, it may be implemented by a plugin to externalise storage and access of secrets.",
+      "range": {
+        "startLine": 9,
+        "startChar": 33,
+        "endLine": 9,
+        "endChar": 53
+      },
+      "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a142d66_9d3e1a70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-01-30T09:59:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c139aaf_473c1cbd",
       "range": {
         "startLine": 9,
         "startChar": 33,
@@ -93,6 +141,54 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57920d36_46bed84b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-01-30T09:59:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6890959b_dc5a8b95",
+      "range": {
+        "startLine": 12,
+        "startChar": 64,
+        "endLine": 12,
+        "endChar": 65
+      },
+      "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9f59148_b3b0caa5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-01-30T09:59:26Z",
+      "side": 1,
+      "message": "True. Noted",
+      "parentUuid": "c5616dc5_4db25b21",
+      "range": {
+        "startLine": 11,
+        "startChar": 58,
+        "endLine": 12,
+        "endChar": 20
+      },
+      "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d46d464_98d33530",
@@ -106,6 +202,24 @@
       "writtenOn": "2024-01-29T14:05:40Z",
       "side": 1,
       "message": "please remote the empty line between `Bug` and `Change-Id`, as there should be no empty lines between commit footers",
+      "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6c9d4e7_038dc263",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-01-30T09:59:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d46d464_98d33530",
       "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -133,6 +247,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd1fd757_a7b6fd43",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-01-30T09:59:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a222cf6f_39f4ea89",
+      "range": {
+        "startLine": 58,
+        "startChar": 13,
+        "endLine": 58,
+        "endChar": 27
+      },
+      "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa9c5539_bec384d7",
@@ -146,6 +284,30 @@
       "writtenOn": "2024-01-29T14:05:40Z",
       "side": 1,
       "message": "same as line 58",
+      "range": {
+        "startLine": 66,
+        "startChar": 17,
+        "endLine": 66,
+        "endChar": 30
+      },
+      "revId": "78e3051be5a243a94b9ab5f39ca1ca7a08398571",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62c9c385_43dc1ae8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-01-30T09:59:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa9c5539_bec384d7",
       "range": {
         "startLine": 66,
         "startChar": 17,
