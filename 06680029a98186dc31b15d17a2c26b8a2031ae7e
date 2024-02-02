@@ -26,6 +26,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "022d68b9_41099944",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-02T18:15:16Z",
+      "side": 1,
+      "message": "the `username` usually is not _sensitive_ information, and should be accessed from the regular configuration file, so something like `replicationConfig.getConfig().getString(\"remote\", remoteName, \"username\")` should be enough here.",
+      "revId": "06680029a98186dc31b15d17a2c26b8a2031ae7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ec2f426_00563275",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
         "patchSetId": 4
