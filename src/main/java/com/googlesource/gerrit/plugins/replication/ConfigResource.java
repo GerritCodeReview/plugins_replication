@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import java.io.IOException;
 import org.eclipse.jgit.lib.Config;
 
 /**
@@ -35,6 +36,20 @@ public interface ConfigResource {
    * @return current configuration
    */
   Config getConfig();
+
+  /**
+   * Fully or partially update the configuration resource.
+   *
+   * <p>Allows to persist changes to the configuration resource. The implementation may return
+   * {@link Config} instance containing options that were not persisted, this pay pushing these to
+   * the other configuration resource, eg. when the fanout configuration is used, the
+   * <em>remote</em> configuration should be stored in the <em>replication</em> directory, but other
+   * options should be stored in the <em>replication.config</em> file.
+   *
+   * @param config updated configuration
+   * @return configuration options not accepted by this implementation
+   */
+  Config update(Config config) throws IOException;
 
   /**
    * Current logical version string of the current configuration loaded in memory, depending on the

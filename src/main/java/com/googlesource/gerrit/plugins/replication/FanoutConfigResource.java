@@ -23,9 +23,11 @@ import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -59,6 +61,33 @@ public class FanoutConfigResource extends FileConfigResource {
     } catch (IllegalStateException e) {
       throw new ConfigInvalidException(e.getMessage());
     }
+  }
+
+  @Override
+  public Config update(Config updates) throws IOException {
+    Set<String> remotes = updates.getSubsections("remote");
+    for (String remote : remotes) {
+      File remoteFile = remoteConfigsDirPath.resolve(remote + ".config").toFile();
+      FileBasedConfig remoteConfig = new FileBasedConfig(remoteFile, FS.DETECTED);
+      if (remoteFile.exists()) {
+        try {
+          remoteConfig.load();
+        } catch (ConfigInvalidException e) {
+          logger.atSevere().withCause(e).log(
+              "could not load '%s', will override it with new configuration",
+              remoteFile.getAbsolutePath());
+        }
+      }
+      Set<String> options = updates.getNames("remote", remote);
+      for (String option : options) {
+        List<String> values = List.of(updates.getStringList("remote", remote, option));
+        remoteConfig.setStringList("remote", remote, option, values);
+      }
+      remoteConfig.save();
+    }
+
+    removeRemotes(updates);
+    return super.update(updates);
   }
 
   private static void removeRemotes(Config config) {
