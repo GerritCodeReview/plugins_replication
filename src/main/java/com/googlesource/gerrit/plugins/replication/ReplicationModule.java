@@ -52,10 +52,7 @@ class ReplicationModule extends AbstractModule {
 
   @Override
   protected void configure() {
-    install(new FactoryModuleBuilder().build(Destination.Factory.class));
     install(configModule);
-    bind(ReplicationQueue.class).in(Scopes.SINGLETON);
-    bind(ObservableQueue.class).to(ReplicationQueue.class);
     bind(LifecycleListener.class)
         .annotatedWith(UniqueAnnotations.create())
         .to(ReplicationQueue.class);
@@ -77,10 +74,8 @@ class ReplicationModule extends AbstractModule {
         .to(StartReplicationCapability.class);
 
     install(new FactoryModuleBuilder().build(PushAll.Factory.class));
-    install(new FactoryModuleBuilder().build(ProjectDeletionState.Factory.class));
 
     bind(EventBus.class).in(Scopes.SINGLETON);
-    bind(ReplicationDestinations.class).to(DestinationsCollection.class);
     bind(ConfigParser.class).to(DestinationConfigParser.class).in(Scopes.SINGLETON);
 
     DynamicSet.setOf(binder(), ReplicationStateListener.class);
