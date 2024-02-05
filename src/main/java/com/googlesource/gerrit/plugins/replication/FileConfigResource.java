@@ -17,12 +17,14 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.Lists;
 import com.google.gerrit.common.UsedAt;
 import com.google.gerrit.common.UsedAt.Project;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
@@ -50,6 +52,27 @@ public class FileConfigResource implements ConfigResource {
   @Override
   public Config getConfig() {
     return config;
+  }
+
+  @Override
+  public Config update(Config updates) throws IOException {
+    for (String section : updates.getSections()) {
+      for (String subsection : updates.getSubsections(section)) {
+        for (String name : updates.getNames(section, subsection, true)) {
+          List<String> values =
+              Lists.newArrayList(updates.getStringList(section, subsection, name));
+          config.setStringList(section, subsection, name, values);
+        }
+      }
+
+      for (String name : updates.getNames(section, true)) {
+        List<String> values = Lists.newArrayList(updates.getStringList(section, null, name));
+        config.setStringList(section, null, name, values);
+      }
+    }
+    config.save();
+
+    return new Config();
   }
 
   @Override
