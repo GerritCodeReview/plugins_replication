@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import java.io.IOException;
 import org.eclipse.jgit.lib.Config;
 
 /**
@@ -35,6 +36,16 @@ public interface ConfigResource {
    * @return current configuration
    */
   Config getConfig();
+
+  /**
+   * Update the configuration resource.
+   *
+   * <p>Allows to persist changes to the configuration resource.
+   *
+   * @param config updated configuration
+   * @throws IOException when configuration cannot be persisted
+   */
+  void update(Config config) throws IOException;
 
   /**
    * Current logical version string of the current configuration loaded in memory, depending on the

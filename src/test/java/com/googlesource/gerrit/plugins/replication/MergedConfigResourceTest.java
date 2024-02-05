@@ -19,6 +19,7 @@ import static com.google.common.truth.Truth.assertThat;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
+import org.apache.commons.lang3.NotImplementedException;
 import org.eclipse.jgit.lib.Config;
 import org.junit.Test;
 
@@ -75,6 +76,11 @@ public class MergedConfigResourceTest {
     }
 
     @Override
+    public void update(Config config) {
+      throw new NotImplementedException("not implemented");
+    }
+
+    @Override
     public String getVersion() {
       return "base";
     }
@@ -87,6 +93,11 @@ public class MergedConfigResourceTest {
       setMaxRetires(config, OVERRIDDEN_CONFIG_MAX_RETIRES);
       setUseGcClient(config, true);
       return config;
+    }
+
+    @Override
+    public void update(Config config) {
+      throw new NotImplementedException("not implemented");
     }
 
     @Override
