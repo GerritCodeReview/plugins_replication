@@ -16,12 +16,14 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.io.RecursiveDeleteOption.ALLOW_INSECURE;
 import static com.google.common.truth.Truth.assertThat;
+import static com.googlesource.gerrit.plugins.replication.FanoutConfigResource.CONFIG_DIR;
 
 import com.google.common.io.MoreFiles;
 import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import java.io.IOException;
 import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 import org.junit.Before;
@@ -46,6 +48,7 @@ public class FanoutConfigResourceTest extends AbstractConfigTest {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+    assertThat(sitePaths.etc_dir.resolve(CONFIG_DIR).toFile().mkdir()).isTrue();
   }
 
   @Test
@@ -277,9 +280,69 @@ public class FanoutConfigResourceTest extends AbstractConfigTest {
     assertThat(objectUnderTest.getVersion()).isEqualTo(replicationConfigVersion);
   }
 
+  @Test
+  public void shouldAddConfigOptionToMainConfig() throws Exception {
+    FanoutConfigResource objectUnderTest = new FanoutConfigResource(sitePaths);
+    Config update = new Config();
+    update.setString("new", null, "value", "set");
+
+    objectUnderTest.update(update);
+    Config updatedConfig = objectUnderTest.getConfig();
+
+    assertThat(updatedConfig.getString("new", null, "value")).isEqualTo("set");
+  }
+
+  @Test
+  public void shouldUpdateConfigOptionInMainConfig() throws Exception {
+    FileBasedConfig config = new FileBasedConfig(sitePaths.gerrit_config.toFile(), FS.DETECTED);
+    config.setString("updatable", null, "value", "orig");
+    config.save();
+    FanoutConfigResource objectUnderTest = new FanoutConfigResource(sitePaths);
+    Config update = new Config();
+    update.setString("updatable", null, "value", "updated");
+
+    objectUnderTest.update(update);
+    Config updatedConfig = objectUnderTest.getConfig();
+
+    assertThat(updatedConfig.getString("updatable", null, "value")).isEqualTo("updated");
+  }
+
+  @Test
+  public void shouldAddNewRemoteFile() throws Exception {
+    FanoutConfigResource objectUnderTest = new FanoutConfigResource(sitePaths);
+    Config update = new Config();
+    update.setString("remote", remoteName1, "url", remoteUrl1);
+
+    objectUnderTest.update(update);
+
+    Config actual = loadRemoteConfig(remoteName1);
+    assertThat(actual.getString("remote", remoteName1, "url")).isEqualTo(remoteUrl1);
+  }
+
+  @Test
+  public void shouldUpdateExistingRemote() throws Exception {
+    FileBasedConfig rawRemoteConfig = newRemoteConfig(remoteName1);
+    rawRemoteConfig.setString("remote", remoteName1, "url", remoteUrl1);
+    rawRemoteConfig.save();
+    FanoutConfigResource objectUnderTest = new FanoutConfigResource(sitePaths);
+    Config update = new Config();
+    update.setString("remote", remoteName1, "url", remoteUrl2);
+
+    objectUnderTest.update(update);
+
+    Config actual = loadRemoteConfig(remoteName1);
+    assertThat(actual.getString("remote", remoteName1, "url")).isEqualTo(remoteUrl2);
+  }
+
   protected FileBasedConfig newRemoteConfig(String configFileName) {
     return new FileBasedConfig(
         sitePaths.etc_dir.resolve("replication/" + configFileName + ".config").toFile(),
         FS.DETECTED);
+  }
+
+  private Config loadRemoteConfig(String siteName) throws Exception {
+    FileBasedConfig config = newRemoteConfig(siteName);
+    config.load();
+    return config;
   }
 }
