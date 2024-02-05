@@ -75,6 +75,11 @@ public class MergedConfigResourceTest {
     }
 
     @Override
+    public Config update(Config config) {
+      return config;
+    }
+
+    @Override
     public String getVersion() {
       return "base";
     }
@@ -86,6 +91,11 @@ public class MergedConfigResourceTest {
       Config config = new Config();
       setMaxRetires(config, OVERRIDDEN_CONFIG_MAX_RETIRES);
       setUseGcClient(config, true);
+      return config;
+    }
+
+    @Override
+    public Config update(Config config) {
       return config;
     }
 
