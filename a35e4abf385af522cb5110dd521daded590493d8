@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c0db0f8_b1d403d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-06T08:13:26Z",
+      "side": 1,
+      "message": "_remotes\u0027_",
+      "range": {
+        "startLine": 7,
+        "startChar": 21,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66fb702f_fe9f027b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-06T08:13:26Z",
+      "side": 1,
+      "message": "_and where_",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 18
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2505719_69e1fbb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-06T08:13:26Z",
+      "side": 1,
+      "message": "Good stuff @dariusz.luksza@gmail.com",
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87159ae2_072449c7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-06T08:13:26Z",
+      "side": 1,
+      "message": "```suggestion\n   * Update, fully or partially, the configuration resource.\n```",
+      "range": {
+        "startLine": 41,
+        "startChar": 5,
+        "endLine": 41,
+        "endChar": 30
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f955cee_e93c7a7f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-06T08:13:26Z",
+      "side": 1,
+      "message": "Although these details could be informative, do they change anything in the way the client would call this API? If not, consider removing it, if yes, feel free to leave them inside.",
+      "range": {
+        "startLine": 45,
+        "startChar": 39,
+        "endLine": 47,
+        "endChar": 69
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35fae142_a33b953e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-06T08:13:26Z",
+      "side": 1,
+      "message": "I believe we should leave this exception going through the caller: if we update an invalid configuration, the update operation should fail IMHO.",
+      "range": {
+        "startLine": 76,
+        "startChar": 10,
+        "endLine": 78,
+        "endChar": 44
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a9a246f_0fa6da84",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-06T08:13:26Z",
+      "side": 1,
+      "message": "What is the rationale of returning a new empty config?",
+      "range": {
+        "startLine": 75,
+        "startChar": 11,
+        "endLine": 75,
+        "endChar": 23
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17e39dbf_3aaf2b3c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesUpdater.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-06T08:13:26Z",
+      "side": 1,
+      "message": "AFAIK we are planning to use it with the GitHub plugin at the moment.",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 32,
+        "endChar": 19
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
