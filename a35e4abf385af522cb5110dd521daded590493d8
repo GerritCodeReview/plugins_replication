@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4cda4ab_8a972ad8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-06T08:51:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0db0f8_b1d403d1",
+      "range": {
+        "startLine": 7,
+        "startChar": 21,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66fb702f_fe9f027b",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-06T08:13:26Z",
       "side": 1,
       "message": "_and where_",
+      "range": {
+        "startLine": 17,
+        "startChar": 13,
+        "endLine": 17,
+        "endChar": 18
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "603a9991_6283cac0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-06T08:51:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66fb702f_fe9f027b",
       "range": {
         "startLine": 17,
         "startChar": 13,
@@ -87,6 +135,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9715502e_8274b22d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-06T08:51:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87159ae2_072449c7",
+      "range": {
+        "startLine": 41,
+        "startChar": 5,
+        "endLine": 41,
+        "endChar": 30
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ad3d216_a6a491d4",
@@ -110,6 +182,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9422b51_08cf88cf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-06T08:51:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ad3d216_a6a491d4",
+      "range": {
+        "startLine": 44,
+        "startChar": 78,
+        "endLine": 44,
+        "endChar": 81
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f955cee_e93c7a7f",
@@ -123,6 +219,30 @@
       "writtenOn": "2024-02-06T08:13:26Z",
       "side": 1,
       "message": "Although these details could be informative, do they change anything in the way the client would call this API? If not, consider removing it, if yes, feel free to leave them inside.",
+      "range": {
+        "startLine": 45,
+        "startChar": 39,
+        "endLine": 47,
+        "endChar": 69
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eeb9340_065dfb7c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-06T08:51:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f955cee_e93c7a7f",
       "range": {
         "startLine": 45,
         "startChar": 39,
