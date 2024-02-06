@@ -89,6 +89,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ad3d216_a6a491d4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-06T08:46:52Z",
+      "side": 1,
+      "message": "s/pay/will/",
+      "range": {
+        "startLine": 44,
+        "startChar": 78,
+        "endLine": 44,
+        "endChar": 81
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9f955cee_e93c7a7f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
         "patchSetId": 1
@@ -135,6 +158,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ad4d763_25f81770",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-06T08:46:52Z",
+      "side": 1,
+      "message": "That was my initial idea as well, to just include `ConfigInvalidException` in the `update()` signature. But in this case, it\u0027s an implementation detail that it was unable to parse config file. Also, the implementation may not deal with git config files and this `ConfigInvalidException` kinda doesn\u0027t make sense.\n\nThat\u0027s why the `config()` declares only `IOException` in its signature. We can wrap `ConfigInvalidException` into the `IOException` and bubble it this way. But this then would create an \"unrecoverable error\" that would require someone to manually fix it on the server file system.\n\nFor that reason, I\u0027ve decided to just log the exception and override the config, which now TBH sounds too harsh and can lead to other types of problems, especially when we only \"patch\" the config file.\n\nIf we do rethrow here, we may end up in an inconsistent state, where _some_ remotes are updated and others are not. Depending on the \"API consumer implementation\" this may lead to potential \"configuration loss\" if the consumer doesn\u0027t retry the operation or temporarily persist configuration data or verify what was saved.\n\nWDYT?",
+      "parentUuid": "35fae142_a33b953e",
+      "range": {
+        "startLine": 76,
+        "startChar": 10,
+        "endLine": 78,
+        "endChar": 44
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a9a246f_0fa6da84",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
         "patchSetId": 1
@@ -158,6 +205,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df6c899c_bacc6b3f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-06T08:46:52Z",
+      "side": 1,
+      "message": "This is a part of the `update` method contract to return `Config` object with options that were not persisted.\n\nAs the `FileConfigResource` is the last layer of config files, we always persist all options in it. To fulfil the API contract, we return an empty `Config` object.\n\nPotentially we can return `null`, but returning _empty objects_ is sell error-prone and does not require additional `if` statements for handling (unnecessary) corner cases. Sure, this can be potentially a private static member, but as it\u0027s mutable I prefer to just create it on the spot and return it, creating objects in JVM is _cheap_ so this should not be a problem.\n\nWDYT?",
+      "parentUuid": "3a9a246f_0fa6da84",
+      "range": {
+        "startLine": 75,
+        "startChar": 11,
+        "endLine": 75,
+        "endChar": 23
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "17e39dbf_3aaf2b3c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesUpdater.java",
         "patchSetId": 1
@@ -169,6 +240,30 @@
       "writtenOn": "2024-02-06T08:13:26Z",
       "side": 1,
       "message": "AFAIK we are planning to use it with the GitHub plugin at the moment.",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 32,
+        "endChar": 19
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac4598b5_366d97a1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesUpdater.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-06T08:46:52Z",
+      "side": 1,
+      "message": "The `UsedAt.Project` enum doesn\u0027t have a `github` option, adding it would require a change in Gerrit core which will only be then used in the `replication` plugin (so probably it would also require a `@UsedAt` annotation).\n\nYes, we do intend to use this API from the `github` plugin, but it\u0027s not specific to `github`.\n\nAlso, on second though, this annotation has a different intention, as it should mark APIs that need to be exposed for other plugins to work. Here we just marking an API to be a _public_ API. If we go this route, we should also mark the `ReplicationConfigOverrides` interface with `@UsedAt`.",
+      "parentUuid": "17e39dbf_3aaf2b3c",
       "range": {
         "startLine": 32,
         "startChar": 8,
