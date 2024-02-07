@@ -39,7 +39,9 @@ public class MergedConfigResource {
   @Nullable private final DynamicItem<ReplicationConfigOverrides> overrides;
 
   @Inject
-  MergedConfigResource(
+  @VisibleForTesting
+  @UsedAt(Project.PLUGIN_PULL_REPLICATION)
+  public MergedConfigResource(
       Provider<ConfigResource> base, @Nullable DynamicItem<ReplicationConfigOverrides> overrides) {
     this.base = base;
     this.overrides = overrides;
