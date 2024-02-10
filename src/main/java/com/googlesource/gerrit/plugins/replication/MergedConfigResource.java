@@ -23,6 +23,8 @@ import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.util.Providers;
+import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
 
@@ -30,20 +32,18 @@ public class MergedConfigResource {
   @VisibleForTesting
   @UsedAt(Project.PLUGIN_PULL_REPLICATION)
   public static MergedConfigResource withBaseOnly(ConfigResource base) {
-    return new MergedConfigResource(Providers.of(base), null);
+    MergedConfigResource mergedConfigResource = new MergedConfigResource();
+    mergedConfigResource.base = Providers.of(base);
+    return mergedConfigResource;
   }
 
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  private final Provider<ConfigResource> base;
-  @Nullable private final DynamicItem<ReplicationConfigOverrides> overrides;
+  @Inject private Provider<ConfigResource> base;
 
-  @Inject
-  MergedConfigResource(
-      Provider<ConfigResource> base, @Nullable DynamicItem<ReplicationConfigOverrides> overrides) {
-    this.base = base;
-    this.overrides = overrides;
-  }
+  @Inject(optional = true)
+  @Nullable
+  private DynamicItem<ReplicationConfigOverrides> overrides;
 
   public Config getConfig() {
     Config config = base.get().getConfig();
@@ -51,12 +51,14 @@ public class MergedConfigResource {
       return config;
     }
 
-    String overridesText = overrides.get().getConfig().toText();
-    if (!overridesText.isEmpty()) {
-      try {
-        config.fromText(overridesText);
-      } catch (ConfigInvalidException e) {
-        logger.atWarning().withCause(e).log("Failed to merge replication config overrides");
+    if (overrides != null) {
+      String overridesText = overrides.get().getConfig().toText();
+      if (!overridesText.isEmpty()) {
+        try {
+          config.fromText(overridesText);
+        } catch (ConfigInvalidException e) {
+          logger.atWarning().withCause(e).log("Failed to merge replication config overrides");
+        }
       }
     }
 

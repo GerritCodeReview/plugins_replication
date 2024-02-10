@@ -18,6 +18,7 @@ import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.annotations.PluginData;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.nio.file.Path;
 import org.eclipse.jgit.lib.Config;
 
@@ -62,7 +63,7 @@ public class ReplicationConfigImpl implements ReplicationConfig {
 
   /**
    * See {@link
-   * com.googlesource.gerrit.plugins.replication.ReplicationConfig#isReplicateAllOnPluginStart()}
+   * com.googlesource.gerrit.plugins.replication.api.ReplicationConfig#isReplicateAllOnPluginStart()}
    */
   @Override
   public boolean isReplicateAllOnPluginStart() {
@@ -71,7 +72,7 @@ public class ReplicationConfigImpl implements ReplicationConfig {
 
   /**
    * See {@link
-   * com.googlesource.gerrit.plugins.replication.ReplicationConfig#isDefaultForceUpdate()}
+   * com.googlesource.gerrit.plugins.replication.api.ReplicationConfig#isDefaultForceUpdate()}
    */
   @Override
   public boolean isDefaultForceUpdate() {
