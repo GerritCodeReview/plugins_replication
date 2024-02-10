@@ -21,6 +21,7 @@ import com.google.gerrit.common.UsedAt;
 import com.google.gerrit.common.UsedAt.Project;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
 import java.io.IOException;
 import java.nio.file.Path;
 import org.eclipse.jgit.errors.ConfigInvalidException;
