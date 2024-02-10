@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "078bb7ba_30a925f8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/MergedConfigResource.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-10T22:35:45Z",
+      "side": 1,
+      "message": "This needs to become an optional injection, because when the replication plugin is used standalone without any ApiModule, the `DynamicItem\u003cReplicationConfigOverrides\u003e` won\u0027t be defined.",
+      "range": {
+        "startLine": 45,
+        "startChar": 37,
+        "endLine": 45,
+        "endChar": 96
+      },
+      "revId": "14d6debd35d16af74fbc2666b60646cb0916f48a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
