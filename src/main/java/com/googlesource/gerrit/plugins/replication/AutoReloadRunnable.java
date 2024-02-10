@@ -18,6 +18,7 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.flogger.FluentLogger;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.util.List;
 
 public class AutoReloadRunnable implements Runnable {
