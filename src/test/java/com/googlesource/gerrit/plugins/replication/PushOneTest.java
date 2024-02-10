@@ -39,6 +39,8 @@ import com.google.gerrit.server.permissions.PermissionBackend.WithUser;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectState;
 import com.google.gerrit.server.util.IdGenerator;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationPushFilter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

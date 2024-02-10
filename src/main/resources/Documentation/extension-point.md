@@ -62,7 +62,7 @@ steps and make sure that `replication.jar` is only present in `lib/` directory.
 Exposed API
 -----------
 
-* `com.googlesource.gerrit.plugins.replication.ReplicationConfigOverrides`
+* `com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides`
 
   Override current replication configuration from external source (eg. git
   repository, ZooKeeper).
@@ -78,7 +78,7 @@ Exposed API
   DynamicItem.bind(binder(), ReplicationConfigOverrides.class).to(ReplicationConfigOverridesImpl.class);
   ```
 
-* `com.googlesource.gerrit.plugins.replication.ReplicationPushFilter`
+* `com.googlesource.gerrit.plugins.replication.api.ReplicationPushFilter`
 
   Filter out the ref updates pushed to a remote instance.
   Only one filter at a time is supported. Filter implementation needs to bind a `DynamicItem`.
