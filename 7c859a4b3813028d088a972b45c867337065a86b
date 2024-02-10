@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2d8488e_92c11492",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-10T22:43:21Z",
+      "side": 1,
+      "message": "Tested E2E and verified that:\n- replication plugin can always be reloaded, with or without the api extension\n- replication plugin with the api extension can be extended and still reloaded",
+      "revId": "7c859a4b3813028d088a972b45c867337065a86b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
