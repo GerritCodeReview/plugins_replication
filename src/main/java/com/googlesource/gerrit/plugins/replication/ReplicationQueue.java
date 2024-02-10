@@ -33,8 +33,9 @@ import com.google.gerrit.util.logging.NamedFluentLogger;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
-import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig.FilterType;
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import java.net.URISyntaxException;
 import java.util.Collection;
@@ -62,7 +63,7 @@ public class ReplicationQueue
 
   private final ReplicationStateListener stateLog;
 
-  private final ReplicationConfig replConfig;
+  private final com.googlesource.gerrit.plugins.replication.api.ReplicationConfig replConfig;
   private final WorkQueue workQueue;
   private final DynamicItem<EventDispatcher> dispatcher;
   private final Provider<ReplicationDestinations> destinations; // For Guice circular dependency

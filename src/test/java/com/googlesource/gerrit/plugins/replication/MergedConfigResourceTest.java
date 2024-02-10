@@ -19,6 +19,9 @@ import static com.google.common.truth.Truth.assertThat;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
+import com.googlesource.gerrit.plugins.replication.api.ApiModule;
+import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides;
 import org.eclipse.jgit.lib.Config;
 import org.junit.Test;
 
@@ -56,10 +59,15 @@ public class MergedConfigResourceTest {
               protected void configure() {
                 install(new ApiModule());
 
-                bind(ConfigResource.class).to(TestBaseConfigResource.class);
+                bind(com.googlesource.gerrit.plugins.replication.api.ConfigResource.class)
+                    .to(TestBaseConfigResource.class);
 
                 if (overrides != null) {
-                  DynamicItem.bind(binder(), ReplicationConfigOverrides.class).to(overrides);
+                  DynamicItem.bind(
+                          binder(),
+                          com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides
+                              .class)
+                      .to(overrides);
                 }
               }
             })
@@ -80,7 +88,8 @@ public class MergedConfigResourceTest {
     }
   }
 
-  private static class TestReplicationConfigOverrides implements ReplicationConfigOverrides {
+  private static class TestReplicationConfigOverrides
+      implements com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides {
     @Override
     public Config getConfig() {
       Config config = new Config();

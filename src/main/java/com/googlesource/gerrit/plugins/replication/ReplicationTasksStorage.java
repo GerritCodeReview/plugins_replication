@@ -33,6 +33,7 @@ import com.google.gson.stream.JsonWriter;
 import com.google.inject.Inject;
 import com.google.inject.ProvisionException;
 import com.google.inject.Singleton;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;

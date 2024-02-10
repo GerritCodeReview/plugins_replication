@@ -21,6 +21,7 @@ import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.nio.file.Path;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -28,11 +29,13 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.jgit.lib.Config;
 
 @Singleton
-public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleListener {
+public class AutoReloadConfigDecorator
+    implements com.googlesource.gerrit.plugins.replication.api.ReplicationConfig,
+        LifecycleListener {
   private static final long RELOAD_DELAY = 120;
   private static final long RELOAD_INTERVAL = 60;
 
-  private volatile ReplicationConfig currentConfig;
+  private volatile com.googlesource.gerrit.plugins.replication.api.ReplicationConfig currentConfig;
 
   private final ScheduledExecutorService autoReloadExecutor;
   private ScheduledFuture<?> autoReloadRunnable;

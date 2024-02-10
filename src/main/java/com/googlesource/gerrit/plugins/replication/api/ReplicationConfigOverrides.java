@@ -12,15 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.replication;
+package com.googlesource.gerrit.plugins.replication.api;
 
-import com.google.gerrit.extensions.registration.DynamicItem;
-import com.google.inject.AbstractModule;
-
-public class ApiModule extends AbstractModule {
-  @Override
-  protected void configure() {
-    DynamicItem.itemOf(binder(), ReplicationPushFilter.class);
-    DynamicItem.itemOf(binder(), ReplicationConfigOverrides.class);
-  }
-}
+/**
+ * Provide a way to override or extend replication configuration from other sources, like git
+ * repository or external configuration management tool.
+ */
+public interface ReplicationConfigOverrides extends ConfigResource {}

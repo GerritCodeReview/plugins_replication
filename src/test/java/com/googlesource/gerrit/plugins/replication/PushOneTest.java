@@ -39,6 +39,8 @@ import com.google.gerrit.server.permissions.PermissionBackend.WithUser;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectState;
 import com.google.gerrit.server.util.IdGenerator;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationPushFilter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -103,7 +105,7 @@ public class PushOneTest {
   private ProjectState projectStateMock;
   private RefUpdate refUpdateMock;
   private CreateProjectTask.Factory createProjectTaskFactoryMock;
-  private ReplicationConfig replicationConfigMock;
+  private com.googlesource.gerrit.plugins.replication.api.ReplicationConfig replicationConfigMock;
   private RefDatabase refDatabaseMock;
 
   private Project.NameKey projectNameKey;
@@ -174,7 +176,9 @@ public class PushOneTest {
 
   @Test
   public void shouldPushAllRefsWhenNoFilters() throws InterruptedException, IOException {
-    shouldPushAllRefsWithDynamicItemFilter(DynamicItem.itemOf(ReplicationPushFilter.class, null));
+    shouldPushAllRefsWithDynamicItemFilter(
+        DynamicItem.itemOf(
+            com.googlesource.gerrit.plugins.replication.api.ReplicationPushFilter.class, null));
   }
 
   @Test
@@ -183,7 +187,8 @@ public class PushOneTest {
   }
 
   private void shouldPushAllRefsWithDynamicItemFilter(
-      DynamicItem<ReplicationPushFilter> replicationPushFilter)
+      DynamicItem<com.googlesource.gerrit.plugins.replication.api.ReplicationPushFilter>
+          replicationPushFilter)
       throws IOException, NotSupportedException, TransportException, InterruptedException {
     List<RemoteRefUpdate> expectedUpdates =
         Arrays.asList(
@@ -210,17 +215,18 @@ public class PushOneTest {
 
   @Test
   public void shouldBlockReplicationUsingPushFilter() throws InterruptedException, IOException {
-    DynamicItem<ReplicationPushFilter> replicationPushFilter =
-        DynamicItem.itemOf(
-            ReplicationPushFilter.class,
-            new ReplicationPushFilter() {
+    DynamicItem<com.googlesource.gerrit.plugins.replication.api.ReplicationPushFilter>
+        replicationPushFilter =
+            DynamicItem.itemOf(
+                com.googlesource.gerrit.plugins.replication.api.ReplicationPushFilter.class,
+                new ReplicationPushFilter() {
 
-              @Override
-              public List<RemoteRefUpdate> filter(
-                  String projectName, List<RemoteRefUpdate> remoteUpdatesList) {
-                return Collections.emptyList();
-              }
-            });
+                  @Override
+                  public List<RemoteRefUpdate> filter(
+                      String projectName, List<RemoteRefUpdate> remoteUpdatesList) {
+                    return Collections.emptyList();
+                  }
+                });
 
     PushOne pushOne = createPushOne(replicationPushFilter);
 
@@ -369,7 +375,9 @@ public class PushOneTest {
     isCallFinished.await(TEST_PUSH_TIMEOUT_SECS, TimeUnit.SECONDS);
   }
 
-  private PushOne createPushOne(DynamicItem<ReplicationPushFilter> replicationPushFilter) {
+  private PushOne createPushOne(
+      DynamicItem<com.googlesource.gerrit.plugins.replication.api.ReplicationPushFilter>
+          replicationPushFilter) {
     PushOne push =
         new PushOne(
             gitRepositoryManagerMock,

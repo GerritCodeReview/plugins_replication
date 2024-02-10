@@ -19,6 +19,7 @@ import static com.google.gerrit.common.FileUtil.lastModified;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.concurrent.atomic.AtomicReference;
@@ -31,7 +32,7 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsF
   private final AtomicReference<SecureCredentialsFactory> secureCredentialsFactory;
   private volatile long secureCredentialsFactoryLoadTs;
   private final SitePaths site;
-  private ReplicationConfig config;
+  private com.googlesource.gerrit.plugins.replication.api.ReplicationConfig config;
 
   @Inject
   public AutoReloadSecureCredentialsFactoryDecorator(SitePaths site, ReplicationConfig config)

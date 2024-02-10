@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static java.util.stream.Collectors.toList;
 
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,7 +42,7 @@ public class ReplicationStorageDaemon extends ReplicationDaemon {
               + 10);
   protected ReplicationTasksStorage tasksStorage;
   protected DestinationsCollection destinationCollection;
-  protected ReplicationConfig replicationConfig;
+  protected com.googlesource.gerrit.plugins.replication.api.ReplicationConfig replicationConfig;
 
   @Override
   public void setUpTestPlugin() throws Exception {

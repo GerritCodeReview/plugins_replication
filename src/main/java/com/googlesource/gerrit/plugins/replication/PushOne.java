@@ -54,6 +54,8 @@ import com.google.gerrit.server.util.IdGenerator;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.replication.ReplicationState.RefPushResult;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationPushFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -116,7 +118,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private final PermissionBackend permissionBackend;
   private final Destination pool;
   private final RemoteConfig config;
-  private final ReplicationConfig replConfig;
+  private final com.googlesource.gerrit.plugins.replication.api.ReplicationConfig replConfig;
   private final CredentialsProvider credentialsProvider;
   private final PerThreadRequestScope.Scoper threadScoper;
 
@@ -140,7 +142,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private final CreateProjectTask.Factory createProjectFactory;
   private final AtomicBoolean canceledWhileRunning;
   private final TransportFactory transportFactory;
-  private DynamicItem<ReplicationPushFilter> replicationPushFilter;
+  private DynamicItem<com.googlesource.gerrit.plugins.replication.api.ReplicationPushFilter>
+      replicationPushFilter;
 
   @Inject
   PushOne(
