@@ -27,6 +27,7 @@ import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.securestore.SecureStore;
 import com.google.inject.util.Providers;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

@@ -44,7 +44,25 @@ Extension points
 ===================================
 
 The @PLUGIN@ plugin exposes _ApiModule_ that allows to provide _Cross Plugin
-Communication_.
+Communication_.  Extension points can be defined from the replication plugin when it is loaded
+as [ApiModule](../../../Documentation/dev-plugins.html#_cross_plugin_communication) and
+implemented by another plugin by declaring a `provided` dependency from the replication plugin api.
+
+Build the @plugin@'s API jar
+----------------------------
+
+The replication plugin's extension points are defined in the `c.g.g.p.r.a.ApiModule`
+that needs to be built from source and loaded in Gerrit as ApiModule.
+
+```
+$ bazelisk build plugins/replication:replication-api
+$ cp bazel-bin/plugins/replication/replication-api.jar $GERRIT_SITE/plugins
+```
+
+> **NOTE**: Use and configuration of the replication-api as ApiModule is compatible with
+> Gerrit v3.9 onwards and requires a Gerrit server restart; it does not support hot plugin install
+> or upgrade.
+
 
 Setup
 -----
@@ -62,7 +80,7 @@ steps and make sure that `replication.jar` is only present in `lib/` directory.
 Exposed API
 -----------
 
-* `com.googlesource.gerrit.plugins.replication.ReplicationConfigOverrides`
+* `com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides`
 
   Override current replication configuration from external source (eg. git
   repository, ZooKeeper).
@@ -78,7 +96,7 @@ Exposed API
   DynamicItem.bind(binder(), ReplicationConfigOverrides.class).to(ReplicationConfigOverridesImpl.class);
   ```
 
-* `com.googlesource.gerrit.plugins.replication.ReplicationPushFilter`
+* `com.googlesource.gerrit.plugins.replication.api.ReplicationPushFilter`
 
   Filter out the ref updates pushed to a remote instance.
   Only one filter at a time is supported. Filter implementation needs to bind a `DynamicItem`.
