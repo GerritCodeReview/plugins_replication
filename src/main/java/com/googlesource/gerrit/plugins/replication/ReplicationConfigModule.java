@@ -24,6 +24,8 @@ import com.google.inject.Inject;
 import com.google.inject.ProvisionException;
 import com.google.inject.Scopes;
 import com.google.inject.internal.UniqueAnnotations;
+import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -45,10 +47,13 @@ public class ReplicationConfigModule extends AbstractModule {
 
   @Override
   protected void configure() {
-    bind(ConfigResource.class).to(getConfigResourceClass());
+    bind(com.googlesource.gerrit.plugins.replication.api.ConfigResource.class)
+        .to(getConfigResourceClass());
 
     if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
-      bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class).in(Scopes.SINGLETON);
+      bind(com.googlesource.gerrit.plugins.replication.api.ReplicationConfig.class)
+          .to(AutoReloadConfigDecorator.class)
+          .in(Scopes.SINGLETON);
       bind(LifecycleListener.class)
           .annotatedWith(UniqueAnnotations.create())
           .to(AutoReloadConfigDecorator.class);

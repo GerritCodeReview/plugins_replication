@@ -21,6 +21,7 @@ import com.google.gerrit.extensions.systemstatus.ServerInformation;
 import com.google.gerrit.server.events.EventDispatcher;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -29,7 +30,7 @@ public class OnStartStop implements LifecycleListener {
   private final AtomicReference<Future<?>> pushAllFuture;
   private final ServerInformation srvInfo;
   private final PushAll.Factory pushAll;
-  private final ReplicationConfig config;
+  private final com.googlesource.gerrit.plugins.replication.api.ReplicationConfig config;
   private final DynamicItem<EventDispatcher> eventDispatcher;
 
   @Inject
