@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.replication.api.ApiModule;
 
 public class TestReplicationModule extends AbstractModule {
   private final ReplicationModule replicationModule;

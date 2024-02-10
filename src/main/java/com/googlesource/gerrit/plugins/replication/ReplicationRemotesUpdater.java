@@ -23,6 +23,8 @@ import com.google.gerrit.server.securestore.SecureStore;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides;
 import java.io.IOException;
 import java.util.List;
 import org.eclipse.jgit.lib.Config;
