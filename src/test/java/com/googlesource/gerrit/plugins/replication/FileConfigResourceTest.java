@@ -19,6 +19,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.google.common.io.MoreFiles;
 import com.google.gerrit.server.config.SitePaths;
+import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.eclipse.jgit.lib.Config;

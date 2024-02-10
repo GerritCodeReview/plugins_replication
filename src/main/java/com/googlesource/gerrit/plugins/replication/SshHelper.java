@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.io.IOException;
 import java.io.OutputStream;
 import org.eclipse.jgit.errors.TransportException;

@@ -19,7 +19,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static com.googlesource.gerrit.plugins.replication.FanoutConfigResource.CONFIG_DIR;
 
 import com.google.common.io.MoreFiles;
-import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig.FilterType;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
