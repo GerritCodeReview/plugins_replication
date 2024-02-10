@@ -23,6 +23,8 @@ import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.util.Providers;
+import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
 

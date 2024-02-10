@@ -18,7 +18,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.google.inject.Provider;
 import com.google.inject.util.Providers;
-import com.googlesource.gerrit.plugins.replication.ReplicationConfig.FilterType;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig.FilterType;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
