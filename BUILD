@@ -9,12 +9,25 @@ gerrit_plugin(
         "Implementation-Title: Replication plugin",
         "Implementation-URL: https://gerrit-review.googlesource.com/#/admin/projects/plugins/replication",
         "Gerrit-PluginName: replication",
-        "Gerrit-ApiModule: com.googlesource.gerrit.plugins.replication.ApiModule",
         "Gerrit-InitStep: com.googlesource.gerrit.plugins.replication.Init",
         "Gerrit-Module: com.googlesource.gerrit.plugins.replication.ReplicationModule",
         "Gerrit-SshModule: com.googlesource.gerrit.plugins.replication.SshModule",
     ],
     resources = glob(["src/main/resources/**/*"]),
+)
+
+gerrit_plugin(
+    name = "replication-api",
+    srcs = glob(
+        ["src/main/java/com/googlesource/gerrit/plugins/replication/api/*.java"],
+    ),
+    dir_name = "replication",
+    manifest_entries = [
+        "Implementation-Title: Replication plugin API",
+        "Implementation-URL: https://gerrit-review.googlesource.com/#/admin/projects/plugins/replication",
+        "Gerrit-PluginName: replication-api",
+        "Gerrit-ApiModule: com.googlesource.gerrit.plugins.replication.api.ApiModule",
+    ],
 )
 
 junit_tests(

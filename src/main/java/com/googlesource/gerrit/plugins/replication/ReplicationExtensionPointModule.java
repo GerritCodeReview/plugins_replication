@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.inject.AbstractModule;
+import com.googlesource.gerrit.plugins.replication.api.ApiModule;
 
 /**
  * Gerrit libModule for applying a ref-filter for outgoing replications.

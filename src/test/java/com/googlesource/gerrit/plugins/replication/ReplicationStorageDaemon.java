@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static java.util.stream.Collectors.toList;
 
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
