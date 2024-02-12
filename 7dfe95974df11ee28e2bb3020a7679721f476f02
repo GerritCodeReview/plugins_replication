@@ -22,6 +22,30 @@
       },
       "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd3cdd04_5707603f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-12T11:37:49Z",
+      "side": 1,
+      "message": "Right, some APIs do that, but I find it not useful in this case, as then we need to do a diff of what was requested to store and what got stored.\n\nIMO it\u0027s easier on both sides to return that diff from `update()`, as we do expect it anyway and don\u0027t need to reiterate once again through the config.",
+      "parentUuid": "59c490cd_2aa1dadc",
+      "range": {
+        "startLine": 48,
+        "startChar": 13,
+        "endLine": 48,
+        "endChar": 70
+      },
+      "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
