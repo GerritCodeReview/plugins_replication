@@ -43,6 +43,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e45cd7c_a7207753",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-12T08:57:37Z",
+      "side": 1,
+      "message": "We should keep the existing behaviour, which is:\n- Take it from secure config (1st)\n- Take it from replication.config (2nd) if not found in the credentials",
+      "parentUuid": "022d68b9_41099944",
+      "revId": "06680029a98186dc31b15d17a2c26b8a2031ae7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ec2f426_00563275",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
         "patchSetId": 4
