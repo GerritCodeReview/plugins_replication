@@ -302,6 +302,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dca8fff7_eb9fb64b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-12T00:24:18Z",
+      "side": 1,
+      "message": "If we just overwrite an invalid configuration, that is still acceptable but needs to be documented in the Javadoc.\n\nThinking aloud, I believe the caller should decide what to do in that situation and, if requested, overwrite it.\n\nWhat about an extra option that decides what to do in case of invalid existing configuraiton?\n- Fail\n- Overwrite",
+      "parentUuid": "2ad4d763_25f81770",
+      "range": {
+        "startLine": 76,
+        "startChar": 10,
+        "endLine": 78,
+        "endChar": 44
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a9a246f_0fa6da84",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
         "patchSetId": 1
@@ -384,6 +408,30 @@
       "side": 1,
       "message": "The `UsedAt.Project` enum doesn\u0027t have a `github` option, adding it would require a change in Gerrit core which will only be then used in the `replication` plugin (so probably it would also require a `@UsedAt` annotation).\n\nYes, we do intend to use this API from the `github` plugin, but it\u0027s not specific to `github`.\n\nAlso, on second though, this annotation has a different intention, as it should mark APIs that need to be exposed for other plugins to work. Here we just marking an API to be a _public_ API. If we go this route, we should also mark the `ReplicationConfigOverrides` interface with `@UsedAt`.",
       "parentUuid": "17e39dbf_3aaf2b3c",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 32,
+        "endChar": 19
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d3ad196_804787ca",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesUpdater.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-12T00:24:18Z",
+      "side": 1,
+      "message": "\u003e The `UsedAt.Project` enum doesn\u0027t have a `github` option, adding it would require a change in Gerrit core which will only be then used in the `replication` plugin (so probably it would also require a `@UsedAt` annotation).\n\nMakes sense, can we add the `github` option in core?\n\n\u003e Yes, we do intend to use this API from the `github` plugin, but it\u0027s not specific to `github`.\n\nSure, but `@UsedAt` means who is using it, outside Gerrit, for preventing its removal, not who _will potentially_ use it in the future.\n\n\u003e Also, on second though, this annotation has a different intention, as it should mark APIs that need to be exposed for other plugins to work. Here we just marking an API to be a _public_ API. If we go this route, we should also mark the `ReplicationConfigOverrides` interface with `@UsedAt`.\n\nTrue.",
+      "parentUuid": "ac4598b5_366d97a1",
       "range": {
         "startLine": 32,
         "startChar": 8,

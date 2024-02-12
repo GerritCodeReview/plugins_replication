@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59c490cd_2aa1dadc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-12T00:24:18Z",
+      "side": 1,
+      "message": "I would expect the update to return the new status of the configuration.",
+      "range": {
+        "startLine": 48,
+        "startChar": 13,
+        "endLine": 48,
+        "endChar": 70
+      },
+      "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
