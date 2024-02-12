@@ -18,6 +18,40 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b97eea74_ea244eab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-12T15:39:11Z",
+      "side": 1,
+      "message": "I do understand the reasoning behind this change, that it\u0027s fixing a regression introduced by adding `ApiModule`, and it\u0027s also the _simplest_ and _quickest_ way to fix that but...\n\nBut, one of the reasons why the `ApiModules` were introduced was to reduce the complexity of plugin deployment as it doesn\u0027t require plugin JARs being put in `lib/` and manual registration of `gerrit.installModule`. I feel that now we\u0027re adding even more complexity with a custom build target and an `replication-api.jar` in `plugins/`. This may lead to \"version mismatch\" when only the `replication.jar` will be updated.\n\nI get the reasoning behind it and also understand the technical limitations, but it doesn\u0027t feel good. 😐\n\nI don\u0027t have any better ideas, just wanted to be open about this, maybe someone will have a better idea for fixing this or maybe there\u0027s a better path forward.",
+      "revId": "7c859a4b3813028d088a972b45c867337065a86b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00846c78_cc038048",
+        "filename": "BUILD",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-12T15:39:11Z",
+      "side": 1,
+      "message": "now the API classes will be loaded twice, once from the `replication-api.jar`, and a second time from `replicaiton.jar` (as the `replication` target does not exclude them). \n\nThis should not be a problem as long as both `replication-api.jar` and `replication.jar` are kept in the same version.",
+      "revId": "7c859a4b3813028d088a972b45c867337065a86b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d59ad05_270dc8c8",
@@ -31,6 +65,23 @@
       "writtenOn": "2024-02-12T15:04:01Z",
       "side": 1,
       "message": "This check is unnecessary because this line is unreachable when `overrides \u003d\u003d null` in which case this method exits at the line 51.",
+      "revId": "7c859a4b3813028d088a972b45c867337065a86b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3af14be1_54d2c350",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-12T15:39:11Z",
+      "side": 1,
+      "message": "documentation needs to be updated to include the new building steps.",
       "revId": "7c859a4b3813028d088a972b45c867337065a86b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
