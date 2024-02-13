@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d5e402d_da11b054",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2024-02-13T17:27:30Z",
+      "side": 1,
+      "message": "Thanks for pushing this change. Just to add to this point, I think we discovered this bullet as an issue for us because in one of our internal plugins we inject the injector and use it to get an instance of a module we want to install only when the plugin isn\u0027t running on a replica. That started failing when the replication plugin was updated in core to declare an ApiModule with an error about `@PluginName` already being bound.\n\nWe probably needs some tests in core for usage of `Gerrit-ApiModule`. Right now the `TestPlugin` interface doesn\u0027t even know about it.",
+      "revId": "7c859a4b3813028d088a972b45c867337065a86b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e2d8488e_92c11492",
