@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e379257_dfcc1ea0",
+        "filename": "BUILD",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2024-02-13T10:32:24Z",
+      "side": 1,
+      "message": "Can it be avoided to load those classes twice? I also do not feel good about those classes being loaded twice but also do not have a good proposal what to do.",
+      "parentUuid": "00846c78_cc038048",
+      "revId": "7c859a4b3813028d088a972b45c867337065a86b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d59ad05_270dc8c8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/MergedConfigResource.java",
         "patchSetId": 6
