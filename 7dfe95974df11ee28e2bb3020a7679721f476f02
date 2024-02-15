@@ -70,6 +70,30 @@
       },
       "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2599a7f1_90ab1236",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-15T09:34:23Z",
+      "side": 1,
+      "message": "What you\u0027d expect when only part of the configuration is \"compatible\"?\n\nAlso, from the caller of `update()`, we don\u0027t know which parts of the configuration are \"compatible\" with the given resource, so we can\u0027t prevent the exception from happening.",
+      "parentUuid": "f59612ad_ec9090ff",
+      "range": {
+        "startLine": 48,
+        "startChar": 13,
+        "endLine": 48,
+        "endChar": 70
+      },
+      "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
