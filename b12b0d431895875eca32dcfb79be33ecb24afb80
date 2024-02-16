@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7a413ce_2b99f9b4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesUpdater.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-16T08:46:00Z",
+      "side": 1,
+      "message": "If you do not have any utilisation inside Gerrit core or its core plugins, this would be most likely to be removed because it is unused.\n\nEither add one utilisation of this in Gerrit or keep the `@UsedAt` mentioning the plugin that you are defining this class for.",
+      "revId": "b12b0d431895875eca32dcfb79be33ecb24afb80",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}

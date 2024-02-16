@@ -94,6 +94,30 @@
       },
       "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68716f45_2944e800",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-16T08:46:00Z",
+      "side": 1,
+      "message": "I struggle to understand the contract of this method, I see two situations:\n\n1. The `Config config` object provided contains a configuration that is compatible with the expected values of the replication plugin.\n\n2. The `Config config` object provided contains a configuration that is NOT compatible with the expected values of the replication plugin (either missing configuration entries or unrecognised parameters)\n\nI do understand and I do agree that in case 2. the caller would like to understand what was not compatible and why, but that is typically an information that you would add to the exception raised.\n\nWith regards to case 1, typically the APIs that perform an update of a resource, return the new status of the resource. That is because at times the update itself could _auto-generate_ some additional info. If we just return what was NOT updated and we follow the normal way APIs work (return in case of success, raise an exception in case of failure), then the results would always be an empty Config object, therefore why not just define this method as void?",
+      "parentUuid": "2599a7f1_90ab1236",
+      "range": {
+        "startLine": 48,
+        "startChar": 13,
+        "endLine": 48,
+        "endChar": 70
+      },
+      "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
