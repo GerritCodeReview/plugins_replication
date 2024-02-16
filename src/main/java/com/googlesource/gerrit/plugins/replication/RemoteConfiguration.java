@@ -14,7 +14,6 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.ImmutableList;
-import java.util.List;
 import org.eclipse.jgit.transport.RemoteConfig;
 
 /** Remote configuration for a replication endpoint */
@@ -117,7 +116,7 @@ public interface RemoteConfiguration {
    * @return true, when configuration is for a single project, false otherwise
    */
   default boolean isSingleProjectMatch() {
-    List<String> projects = getProjects();
+    ImmutableList<String> projects = getProjects();
     boolean ret = (projects.size() == 1);
     if (ret) {
       String projectMatch = projects.get(0);

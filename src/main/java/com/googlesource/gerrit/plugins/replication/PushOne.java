@@ -355,7 +355,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   }
 
   ReplicationState[] getStatesByRef(String ref) {
-    Collection<ReplicationState> states = stateMap.get(ref);
+    List<ReplicationState> states = stateMap.get(ref);
     return states.toArray(new ReplicationState[states.size()]);
   }
 

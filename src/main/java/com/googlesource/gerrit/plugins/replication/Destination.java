@@ -127,8 +127,8 @@ public class Destination {
   }
 
   public static class QueueInfo {
-    public final Map<URIish, PushOne> pending;
-    public final Map<URIish, PushOne> inFlight;
+    public final ImmutableMap<URIish, PushOne> pending;
+    public final ImmutableMap<URIish, PushOne> inFlight;
 
     public QueueInfo(Map<URIish, PushOne> pending, Map<URIish, PushOne> inFlight) {
       this.pending = ImmutableMap.copyOf(pending);
@@ -640,7 +640,7 @@ public class Destination {
     }
 
     // by default push all projects
-    List<String> projects = config.getProjects();
+    ImmutableList<String> projects = config.getProjects();
     if (projects.isEmpty()) {
       return true;
     }

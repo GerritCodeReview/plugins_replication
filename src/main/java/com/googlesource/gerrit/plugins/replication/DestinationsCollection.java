@@ -52,7 +52,7 @@ public class DestinationsCollection implements ReplicationDestinations {
 
   private final Destination.Factory destinationFactory;
   private final Provider<ReplicationQueue> replicationQueue;
-  private volatile List<Destination> destinations;
+  private volatile ImmutableList<Destination> destinations;
   private boolean shuttingDown;
 
   public static class EventQueueNotEmptyException extends Exception {
@@ -258,7 +258,7 @@ public class DestinationsCollection implements ReplicationDestinations {
     }
   }
 
-  private List<Destination> allDestinations(
+  private ImmutableList<Destination> allDestinations(
       Destination.Factory destinationFactory, List<RemoteConfiguration> remoteConfigurations) {
 
     ImmutableList.Builder<Destination> dest = ImmutableList.builder();
