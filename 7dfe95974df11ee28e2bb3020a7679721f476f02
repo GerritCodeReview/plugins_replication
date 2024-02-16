@@ -118,6 +118,30 @@
       },
       "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e4e343_a4ff3a43",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-16T10:48:08Z",
+      "side": 1,
+      "message": "\u003e I struggle to understand the contract of this method, I see two situations:\n\nYes, this is quite convoluted, as overall we\u0027re dealing with multiple configuration layers, where some of them could be readonly[1].\n\nIt\u0027s worth remembering that `ConfigResource` is the base layer for the configuration abstraction and it is internal to the `replication` plugin, which means it must not be used outside of it. The public API is split into three interfaces:\n* `ReplicationConfigOverrides` - for reading (and now also) persisting the configuration\n* `MergedReplicationConfig` - for accessing the combined configuration\n* `ReplicationConfigUpdater` - for modifying the combined configuration\n\nThe intention here is that `ReplicationConfigUpdater` will be used from the `github` plugin. It\u0027s the responsibility of that class to ensure that proper configuration is passed down (including \"_auto-generate_ some additional info) to the `ConfigResource` and `ReplicationConfigOverrides`.\n\nThe `ConfigResource` _should be_ a _dumb_ persistence layer. The `getConfig()` reads the configuration from _somewhere_, it doesn\u0027t verify if it\u0027s a valid replication configuration, just passes the read value to the higher layer. Similarly the `update()` should not \"reason\" about what it\u0027s storing, just persist, at least in the ideal world. In \"our\" world, with the `ReplicationConfigOverrides` potentially not having write access, we need a way to communicate that we can\u0027t write all or _some_ of the configuration down. And here we arrive at the \"return value\" vs. \"exception\" ;)\n\n\u003e caller would like to understand what was not compatible and why, but that is typically an information that you would add to the exception raised.\n\nExactly that\u0027s the point. I see one more dimension when the `ReplicationConfigOverride` can only write part of the configuration file eg. the `remote` sections. Unfortunately, we can\u0027t ensure what sections are present in the input `Config` object. We have two options here:\n\n1. throw an exception - and do not apply any of the updates. We can then progress to the next \"configuration\" layer and _maybe_ store everything there, but IMO this may not be what was intended. We can propagate that exception back to the `github` plugin (or any other API consumer), but on the retry, the call will fail again, which will leave us in a broken state.\n2. return what was not persisted - this way we \"cascade\" configuration options some may end up in the external configuration and some in `replication.config`. No need for exception handling, no ambiguity.\n\n\u003e If we just return what was NOT updated and we follow the normal way APIs work (return in case of success, raise an exception in case of failure), then the results would always be an empty Config object, therefore why not just define this method as void?\n\nIMO, the worst thing we could do is to apply part of the configuration and throw an exception with options that were skipped. Exceptions should indicate a failure, not a \"partial success\".\n\nIf we throw an exception, we should not (intentionally) mutate the \"outside world\" (aka. write the configuration file) but then we will end up in a deadlock (see #1 above).\n\nAgain, this is an \"internal\" API, sure the same will be used for the `ReplicationConfigOverrides`, but the intention here is to persist the values _somewhere_ without _any_ computations (apart from filtering out props that cannot be persisted).\n\nSure, this feels overengineered, but that\u0027s because we\u0027re dealing with the \"layered\" configuration and the fact that part of the \"layer\" may be readonly. Maybe that\u0027s too much of a stretch for the requirements.\n\n[1] External sources like zookeeper, in that case, it may not be desired to update the configuration programmatically or only part could be updated. For example, new `remote`s can be added or updated, but global plugin configuration should not be changed.",
+      "parentUuid": "68716f45_2944e800",
+      "range": {
+        "startLine": 48,
+        "startChar": 13,
+        "endLine": 48,
+        "endChar": 70
+      },
+      "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
