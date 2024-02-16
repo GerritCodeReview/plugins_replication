@@ -79,6 +79,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e204c0ce_da309004",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-02-16T11:23:16Z",
+      "side": 1,
+      "message": "Seems like a bit of a convoluted way to do it, but will implement it as such to maintain compatibility on the current configurations being applied. This would mean nevertheless that the secure config would still be read directly from the plugin. Will use the DefaultSecureStore for this purpose as a workaround, as the support for the configurations in plain text should use this.\n\nThe documentation for this plugin does not mention that the replication.config can have the user and password and the code does not support this as well. Will change the configuration documentation and code for this.",
+      "parentUuid": "007603a4_4db9a5e3",
+      "revId": "06680029a98186dc31b15d17a2c26b8a2031ae7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ec2f426_00563275",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
         "patchSetId": 4
