@@ -142,6 +142,30 @@
       },
       "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36a96c53_a3eb64de",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-17T01:20:37Z",
+      "side": 1,
+      "message": "I believe the discussion is becoming very hard to follow in a review discussion :-) I\u0027ll propose to discuss in a call.\n\nI\u0027ll try to summarise here my point of view in simple points:\n\n1. This is a public interface with JavaDoc: it is a new API that other plugins will use\n\n2. If the API is successful, it should persist *ALL* the configuration passed as a parameter\n\n3. If the API fails, I am expecting an exception and *NONE* of the configuration persisted\n\n4. The fact that this new API may persist half of the configuration, it is just not acceptable, it doesn\u0027t look right. Why a half-persisted configuration should be OK? What should the caller do with a half-baked pie?\n\n[...]\n\n\u003e [1] External sources like zookeeper, in that case, it may not be desired to update the configuration programmatically or only part could be updated. For example, new `remote`s can be added or updated, but global plugin configuration should not be changed.\n\nWhere is zookeeper in this change?",
+      "parentUuid": "31e4e343_a4ff3a43",
+      "range": {
+        "startLine": 48,
+        "startChar": 13,
+        "endLine": 48,
+        "endChar": 70
+      },
+      "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
