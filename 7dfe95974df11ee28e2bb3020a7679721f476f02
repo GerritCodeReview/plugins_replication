@@ -166,6 +166,30 @@
       },
       "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfab7139_f4e3377d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-18T09:56:29Z",
+      "side": 1,
+      "message": "\u003e Where is zookeeper in this change?\n\nThe `ReplicatioConfigOverrides` is only a \"markup interface\", it only extends `ConfigResource` and does not add any methods. So, whatever contract we add to `ConfigResource` will also be required from `ReplicationConfigOverrides`, which could potentially access the zookeeper configuration.",
+      "parentUuid": "36a96c53_a3eb64de",
+      "range": {
+        "startLine": 48,
+        "startChar": 13,
+        "endLine": 48,
+        "endChar": 70
+      },
+      "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
