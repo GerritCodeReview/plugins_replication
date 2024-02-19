@@ -27,11 +27,11 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.util.Providers;
+import com.googlesource.gerrit.plugins.replication.ConfigParser.ReplicationConfigurationException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 import org.junit.Before;
@@ -129,14 +129,14 @@ public abstract class AbstractConfigTest {
   }
 
   protected DestinationsCollection newDestinationsCollections(ConfigResource configResource)
-      throws ConfigInvalidException {
+      throws ReplicationConfigurationException {
     return newDestinationsCollections(
         new ReplicationConfigImpl(
             MergedConfigResource.withBaseOnly(configResource), sitePaths, pluginDataPath));
   }
 
   protected DestinationsCollection newDestinationsCollections(ReplicationConfig replicationConfig)
-      throws ConfigInvalidException {
+      throws ReplicationConfigurationException {
     return new DestinationsCollection(
         destinationFactoryMock,
         Providers.of(replicationQueueMock),
