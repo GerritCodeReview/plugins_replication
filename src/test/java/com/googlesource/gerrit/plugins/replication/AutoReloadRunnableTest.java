@@ -28,7 +28,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
-import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
 import org.junit.Before;
 import org.junit.Test;
@@ -118,8 +117,8 @@ public class AutoReloadRunnableTest {
   private static class TestInvalidConfigurationListener implements ConfigParser {
     @Override
     public List<RemoteConfiguration> parseRemotes(Config configurationChangeEvent)
-        throws ConfigInvalidException {
-      throw new ConfigInvalidException("expected test failure");
+        throws ReplicationConfigInvalidException {
+      throw new ReplicationConfigInvalidException("expected test failure");
     }
   }
 }
