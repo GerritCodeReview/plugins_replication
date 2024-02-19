@@ -15,7 +15,6 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import java.util.List;
-import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
 
 /** Parser for parsing {@link Config} to a collection of {@link RemoteConfiguration} objects */
@@ -26,7 +25,23 @@ public interface ConfigParser {
    *
    * @param config new configuration to parse
    * @return List of parsed {@link RemoteConfiguration}
-   * @throws ConfigInvalidException if the new configuration is not valid.
+   * @throws ReplicationConfigurationException if the new configuration is not valid.
    */
-  List<RemoteConfiguration> parseRemotes(Config config) throws ConfigInvalidException;
+  List<RemoteConfiguration> parseRemotes(Config config) throws ReplicationConfigurationException;
+
+  /**
+   * Exception to be thrown when configuration options are not valid or contradicting from the
+   * replication domain perspective.
+   */
+  static class ReplicationConfigurationException extends Exception {
+    private static final long serialVersionUID = 1L;
+
+    public ReplicationConfigurationException(String msg) {
+      super(msg);
+    }
+
+    public ReplicationConfigurationException(String msg, Throwable cause) {
+      super(msg, cause);
+    }
+  }
 }

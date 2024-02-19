@@ -23,7 +23,6 @@ import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
@@ -41,7 +40,8 @@ public class DestinationConfigParser implements ConfigParser {
    * @see com.googlesource.gerrit.plugins.replication.ConfigParser#parseRemotes(org.eclipse.jgit.lib.Config)
    */
   @Override
-  public List<RemoteConfiguration> parseRemotes(Config config) throws ConfigInvalidException {
+  public List<RemoteConfiguration> parseRemotes(Config config)
+      throws ReplicationConfigurationException {
 
     if (config.getSections().isEmpty()) {
       logger.atWarning().log("Replication config does not exist or it's empty; not replicating");
@@ -80,7 +80,7 @@ public class DestinationConfigParser implements ConfigParser {
       if (!destinationConfiguration.isSingleProjectMatch()) {
         for (URIish u : c.getURIs()) {
           if (u.getPath() == null || !u.getPath().contains("${name}")) {
-            throw new ConfigInvalidException(
+            throw new ReplicationConfigurationException(
                 String.format(
                     "remote.%s.url \"%s\" lacks ${name} placeholder in %s",
                     c.getName(), u, config));
@@ -94,14 +94,15 @@ public class DestinationConfigParser implements ConfigParser {
     return confs.build();
   }
 
-  private static List<RemoteConfig> allRemotes(Config cfg) throws ConfigInvalidException {
+  private static List<RemoteConfig> allRemotes(Config cfg)
+      throws ReplicationConfigurationException {
     Set<String> names = cfg.getSubsections("remote");
     List<RemoteConfig> result = Lists.newArrayListWithCapacity(names.size());
     for (String name : names) {
       try {
         result.add(new RemoteConfig(cfg, name));
       } catch (URISyntaxException e) {
-        throw new ConfigInvalidException(
+        throw new ReplicationConfigurationException(
             String.format("remote %s has invalid URL in %s", name, cfg), e);
       }
     }
