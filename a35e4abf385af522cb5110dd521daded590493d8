@@ -348,6 +348,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb0e9fdb_372da272",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-19T12:59:58Z",
+      "side": 1,
+      "message": "I\u0027m going to rethrow this wrapped in `IOException`, as this is an unrecoverable scenario.",
+      "parentUuid": "f55a53b5_fbe1f7b5",
+      "range": {
+        "startLine": 76,
+        "startChar": 10,
+        "endLine": 78,
+        "endChar": 44
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a9a246f_0fa6da84",
@@ -385,6 +409,30 @@
       "side": 1,
       "message": "This is a part of the `update` method contract to return `Config` object with options that were not persisted.\n\nAs the `FileConfigResource` is the last layer of config files, we always persist all options in it. To fulfil the API contract, we return an empty `Config` object.\n\nPotentially we can return `null`, but returning _empty objects_ is sell error-prone and does not require additional `if` statements for handling (unnecessary) corner cases. Sure, this can be potentially a private static member, but as it\u0027s mutable I prefer to just create it on the spot and return it, creating objects in JVM is _cheap_ so this should not be a problem.\n\nWDYT?",
       "parentUuid": "3a9a246f_0fa6da84",
+      "range": {
+        "startLine": 75,
+        "startChar": 11,
+        "endLine": 75,
+        "endChar": 23
+      },
+      "revId": "a35e4abf385af522cb5110dd521daded590493d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78c399c6_0d4732f1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FileConfigResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-19T12:59:58Z",
+      "side": 1,
+      "message": "Now `ConfigResource.update()` returns `void`",
+      "parentUuid": "df6c899c_bacc6b3f",
       "range": {
         "startLine": 75,
         "startChar": 11,

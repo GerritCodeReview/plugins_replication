@@ -190,6 +190,30 @@
       },
       "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dbcc46f_51656ddc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-19T12:59:58Z",
+      "side": 1,
+      "message": "As agreeded, I\u0027m going to change return type of `update()` to `void`",
+      "parentUuid": "bfab7139_f4e3377d",
+      "range": {
+        "startLine": 48,
+        "startChar": 13,
+        "endLine": 48,
+        "endChar": 70
+      },
+      "revId": "7dfe95974df11ee28e2bb3020a7679721f476f02",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
