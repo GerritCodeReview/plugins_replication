@@ -37,6 +37,7 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig.FilterType;
+import com.googlesource.gerrit.plugins.replication.ConfigParser.ReplicationConfigurationException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
-import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.transport.URIish;
 
 @Singleton
@@ -71,7 +71,7 @@ public class DestinationsCollection implements ReplicationDestinations {
       ReplicationConfig replicationConfig,
       ConfigParser configParser,
       EventBus eventBus)
-      throws ConfigInvalidException {
+      throws ReplicationConfigurationException {
     this.destinationFactory = destinationFactory;
     this.replicationQueue = replicationQueue;
     this.destinations =

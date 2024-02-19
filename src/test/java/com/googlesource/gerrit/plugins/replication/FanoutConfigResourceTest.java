@@ -21,9 +21,9 @@ import static com.googlesource.gerrit.plugins.replication.FanoutConfigResource.C
 import com.google.common.io.MoreFiles;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig.FilterType;
 import java.io.File;
+import com.googlesource.gerrit.plugins.replication.ConfigParser.ReplicationConfigurationException;
 import java.io.IOException;
 import java.util.List;
-import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 import org.junit.Before;
@@ -138,8 +138,8 @@ public class FanoutConfigResourceTest extends AbstractConfigTest {
     assertThatIsDestination(destinations.get(0), remoteName1, remoteUrl1);
   }
 
-  @Test(expected = ConfigInvalidException.class)
-  public void shouldThrowConfigInvalidExceptionWhenUrlIsMissingName() throws Exception {
+  @Test(expected = ReplicationConfigurationException.class)
+  public void shouldThrowReplicationConfigInvalidExceptionWhenUrlIsMissingName() throws Exception {
     FileBasedConfig config = newRemoteConfig(remoteName1);
     config.setString("remote", null, "url", "ssh://git@git.elsewhere.com/name");
     config.save();
