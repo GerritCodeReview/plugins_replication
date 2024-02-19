@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25b4891f_324f0358",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-19T09:50:38Z",
+      "side": 1,
+      "message": "s/config/file/",
+      "range": {
+        "startLine": 13,
+        "startChar": 34,
+        "endLine": 13,
+        "endChar": 40
+      },
+      "revId": "08f09ad5f7cb06a1adea508fd05391b59e325d32",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d2aa761_470249d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-19T09:50:38Z",
+      "side": 1,
+      "message": "s/documentation/configuration file/",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 13
+      },
+      "revId": "08f09ad5f7cb06a1adea508fd05391b59e325d32",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1b51549_1ccd498f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-19T09:50:38Z",
+      "side": 1,
+      "message": "IMO, the config is still valid, only the chosen configuration options in combination are not \"valid\", so I\u0027d rather say something among the lines \"Introduce a dedicated `ReplicationConfigurationInvalidException` that should be thrown when configuration options are not valid or contradicting\".\n\nBTW. how about renaming the exception to Replication**Configuration**InvalidException or just ReplicationConfigurationException ?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 12
+      },
+      "revId": "08f09ad5f7cb06a1adea508fd05391b59e325d32",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cea3a5e6_12073c4f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-19T09:50:38Z",
+      "side": 1,
+      "message": "nit: it can be a `static` class as it doesn\u0027t access any parts of its parent",
+      "revId": "08f09ad5f7cb06a1adea508fd05391b59e325d32",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
