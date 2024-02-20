@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d88b85c1_f6c816c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-02-20T13:03:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36d223ef_e7d24fdb",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 9
+      },
+      "revId": "06680029a98186dc31b15d17a2c26b8a2031ae7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "022d68b9_41099944",
@@ -95,6 +119,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "343c6301_615a4c8f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-02-20T13:03:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e204c0ce_da309004",
+      "revId": "06680029a98186dc31b15d17a2c26b8a2031ae7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ec2f426_00563275",
@@ -112,6 +154,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1abbb06_12338343",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-02-20T13:03:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ec2f426_00563275",
+      "revId": "06680029a98186dc31b15d17a2c26b8a2031ae7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c14d0d21_81914dd6",
@@ -125,6 +185,24 @@
       "writtenOn": "2024-02-02T16:39:35Z",
       "side": 1,
       "message": "Since we are re-throwing and we know why, maybe we can be more specific with the exception. We can maybe rethrow a `ConfigInvalidException`.",
+      "revId": "06680029a98186dc31b15d17a2c26b8a2031ae7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2a036d7_dcfed721",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-02-20T13:03:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c14d0d21_81914dd6",
       "revId": "06680029a98186dc31b15d17a2c26b8a2031ae7e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
