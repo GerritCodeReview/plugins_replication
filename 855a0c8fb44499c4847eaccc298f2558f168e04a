@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3732c0e_a2a42be3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadSecureCredentialsFactoryDecorator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-21T13:22:57Z",
+      "side": 1,
+      "message": "the `SecureCredentialsFactory` is now injectable, so we can just inject `Provider\u003cSecureCredentialsFactory\u003e`, and call `get()` on it here and in L80. Then we won\u0027t need to inject all of `SecureCredentialsFactory` dependencies and let guice resolve them for us.",
+      "range": {
+        "startLine": 62,
+        "startChar": 12,
+        "endLine": 63,
+        "endChar": 97
+      },
+      "revId": "855a0c8fb44499c4847eaccc298f2558f168e04a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a00baa4_561a5229",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-21T13:22:57Z",
+      "side": 1,
+      "message": "nit: unrelated formatting changes",
+      "revId": "855a0c8fb44499c4847eaccc298f2558f168e04a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
