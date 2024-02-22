@@ -263,6 +263,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34c5d3c6_405646df",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-22T12:44:23Z",
+      "side": 1,
+      "message": "\u003e I am trying to understand why we need to call the super.update() at all?\n\nWe need that for consistency with the \"read\" operation, let me explain. When a new `FanoutConfigResource` is created, the `replication.conf` and configs in `replication/` are read and combined into one `Config` object. To have the consistent \"write\" (aka. `update()`), we must also update \"all replication configuration files\", meaning we need to split \"remotes\" into files in `replication/` and everything else should go to `replication.config`.\n\nThe method is called `update` not `updateRemotes`, and it\u0027s on the \"resource\" class, so it should not differentiate on what sections should be persisted.\n\nAlso, it\u0027s an \"implementation\" detail that the \"fanout\" config version splits configuration into multiple files. From the caller\u0027s perspective, they just expect a complete `Config` object with the configuration. Similarly, when the caller is updating the configuration the behaviour should be the same as in `FileConfigResource`, and all configuration options must be persisted. The fact that some are stored in separate files in `replication/` and others in the `replication.config` is again an implementation detail of the `FanoutConfigResource`.\n\nHope that this makes more sense now.",
+      "parentUuid": "dfad473e_2b8f8cf4",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 27
+      },
+      "revId": "34af6a132eacc07018a29eb53da34d88d88a6b6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4fe3843_bf5d4700",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesUpdater.java",
         "patchSetId": 5
