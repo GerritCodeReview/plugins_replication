@@ -285,6 +285,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47d46f9f_af6b636b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2024-02-22T14:09:31Z",
+      "side": 1,
+      "message": "Yes it does make sense, thanks @dariusz.luksza@gmail.com.\nThe `ReplicationRemotesUpdater.update()` _does_ the filtering and it does ignore anything that it is not a remote.\n\nThe `FanoutConfigResource.update()` and `FileConfigResource.update()` methods however (even though, as today are _only_ called by the `ReplicationRemotesUpdater.update()`) should take care of updating the entire configuration resource, not just remotes.\n\nArguably, as we discussed f2f they could be made package-protected, but I think it does make sense to have them publicly available so that they can be used independently too.\n\nResolving this.",
+      "parentUuid": "34c5d3c6_405646df",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 27
+      },
+      "revId": "34af6a132eacc07018a29eb53da34d88d88a6b6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4fe3843_bf5d4700",
