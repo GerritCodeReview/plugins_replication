@@ -16,6 +16,52 @@
       "message": "LGTM @dariusz.luksza@gmail.com, leaving @luca.milanesio@gmail.com to give his final blessing 😊",
       "revId": "79eba7b75c937d028ffd9aa16b63b8997ed78e7c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8d3c9f3_7e738efe",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResourceTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2024-02-22T16:21:21Z",
+      "side": 1,
+      "message": "why we have assert in @Before method. This method should be used to setup test environment",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 80
+      },
+      "revId": "79eba7b75c937d028ffd9aa16b63b8997ed78e7c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3792b61_93a7ce4c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FileConfigResourceTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1083454
+      },
+      "writtenOn": "2024-02-22T16:21:21Z",
+      "side": 1,
+      "message": "Could you elaborate what this test does, if I read it correctly:\n1. Create config with UPDATED \u003d 1\n2. Create config with UPDATED \u003d 1 and store it in a file\n3. Use ConfigResoure.update to update the file with UPDATED \u003d 1 generated in point 1\n4. Read config and check if UPDATE \u003d 1\n\nI believe in point 2 we should store different value and then update it to 1 and check",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 3
+      },
+      "revId": "79eba7b75c937d028ffd9aa16b63b8997ed78e7c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
