@@ -309,6 +309,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb5463c1_3dfed618",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-22T14:46:32Z",
+      "side": 1,
+      "message": "\u003e Arguably, as we discussed f2f they could be made package-protected, but I think it does make sense to have them publicly available so that they can be used independently too.\n\nWe\u0027re slowly building a public API for accessing and contributing to the `replication` plugin configuration. IMO `ConfigResource`, `FileConfigResource` and `FanoutConfigResource` should be package-protected as they are \"implementation\" (and configuration) details. Instead:\n* `MergedReplicationConfig`\n* `ReplicationConfigOverrides`\n* `ReplicationRemotesUpdater`\n\nshould be used be used by others and be considered as public API. Using those \"implementation details\" classes may give an inconsistent view of the current replication configuration.\n\nBut this is a completely different discussion ;)",
+      "parentUuid": "47d46f9f_af6b636b",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 27
+      },
+      "revId": "34af6a132eacc07018a29eb53da34d88d88a6b6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4fe3843_bf5d4700",
