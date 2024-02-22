@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcd2078e_d13a5abc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-22T10:49:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "daa608e0_b89801e6",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 30
+      },
+      "revId": "34af6a132eacc07018a29eb53da34d88d88a6b6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f890739d_6b1140c7",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8db1b05_7ef7563d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-22T10:49:18Z",
+      "side": 1,
+      "message": "\u003e if the current $remote.config contained a [remote \"foo\"] configuration and updates no longer had that, wouldn\u0027t that remote just be left stale in the $remote.config?\n\nYes, the `[remote \"foo\"]` will stay unchanged. In the current implementation, there\u0027s no way to fully remove the remote configuration. Probably the only way to \"remove\" a remote configuration is to reset all of its options to `null` or empty string.\n\nProbably we\u0027d need a separate `remove(String subSectionName)` method to facilitate the remote removal. But that should go on the `ReplicationRemoteUpdate` class.\n\n\u003e Same question for the `FileConfigResource.update`.\n\nThe same applies to the `FileConfigResource.update`, it won\u0027t \"remove\" sections it will just \"update\" them, where _update_ means modify or add.",
+      "parentUuid": "f890739d_6b1140c7",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 63
+      },
+      "revId": "34af6a132eacc07018a29eb53da34d88d88a6b6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c96ca455_ce5a28e6",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
         "patchSetId": 5
@@ -60,6 +108,30 @@
       "writtenOn": "2024-02-21T17:36:53Z",
       "side": 1,
       "message": "nit: I think I understand why we are always using `setStringList` and `setStringList` here, as opposed to `setInt`, `setBool`, etc, because it allows us to cope with all types in any cardinality. \n\nHowever I think it might be misleading (it was for me 😊), because it looks like we are always getting and setting list of values here, which is not the case.\n\nPerhaps a quick comment explaining this gotcha would help, feel free to ignore though.",
+      "range": {
+        "startLine": 84,
+        "startChar": 8,
+        "endLine": 84,
+        "endChar": 69
+      },
+      "revId": "34af6a132eacc07018a29eb53da34d88d88a6b6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a89c6a9_030c86f7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-22T10:49:18Z",
+      "side": 1,
+      "message": "It\u0027s not only different cardinality but also different types ;) At the end everything is a `String` (as it\u0027s read and written to a file), the `setInt`/`getInt` specialized methods are just helpers.\n\nThe same pattern is already used in a few places in Gerrit, don\u0027t think that here we need to explain it with a comment ;)",
+      "parentUuid": "c96ca455_ce5a28e6",
       "range": {
         "startLine": 84,
         "startChar": 8,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f24de7b7_c99e066f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-22T10:49:18Z",
+      "side": 1,
+      "message": "_Right now_, no it\u0027s not possible that we\u0027ll have anything else in the updates, as the `update()` method is only called from `ReplicationRemotesUpdater.update()` that also ensures that only remote sections are passed to `ConfigResource.update()`.\n\nBut, as we are on the lowest level that doesn\u0027t know from where it\u0027s called and with what data in the `Config` object, we should approach the input as it potentially can have everything.\n\nIf we don\u0027t remove the remotes here, we\u0027ll end up with duplicated remote sections, one being stored in the \"fanout\" style, and the other in the \"replication.config\", as we call `suer.update(updates)` in the next line.",
+      "parentUuid": "bd1bcd00_117cf1ca",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 27
+      },
+      "revId": "34af6a132eacc07018a29eb53da34d88d88a6b6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4fe3843_bf5d4700",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesUpdater.java",
         "patchSetId": 5
@@ -106,6 +202,30 @@
       "writtenOn": "2024-02-21T17:36:53Z",
       "side": 1,
       "message": "updates",
+      "range": {
+        "startLine": 50,
+        "startChar": 13,
+        "endLine": 50,
+        "endChar": 19
+      },
+      "revId": "34af6a132eacc07018a29eb53da34d88d88a6b6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a9a3efe_c5ec1d88",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesUpdater.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-22T10:49:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4fe3843_bf5d4700",
       "range": {
         "startLine": 50,
         "startChar": 13,
@@ -141,6 +261,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6cc77879_84d2d237",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesUpdater.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-22T10:49:18Z",
+      "side": 1,
+      "message": "IMO, it\u0027s nuanced in conditional. In the `update(Config remoteConfig)` L60, it serves a purpose of documenting the intent, that the `Config` object should only have remote sections. Here we do the _validation_ part for the input, so we don\u0027t know what\u0027s actually inside of the `Config` that\u0027s why it has more generic name.\n\nIf we want to keep the consistency, I\u0027d rather go with more generic names like `updates`, `config` or `input`. WDYT? Does the above makes any sense?",
+      "parentUuid": "3b8e7a77_bd795bd7",
+      "range": {
+        "startLine": 76,
+        "startChar": 74,
+        "endLine": 76,
+        "endChar": 94
+      },
+      "revId": "34af6a132eacc07018a29eb53da34d88d88a6b6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "71e9636c_82fb8484",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesUpdater.java",
         "patchSetId": 5
@@ -152,6 +296,30 @@
       "writtenOn": "2024-02-21T17:36:53Z",
       "side": 1,
       "message": "nit: Given this method only sets passwords to the `secureStore`, it does not need access to all the `remotes`.\n\nConsider passing only `configs.passwords` rather than the entire `SeparatedRemoveConfigs` object.",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 72
+      },
+      "revId": "34af6a132eacc07018a29eb53da34d88d88a6b6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05d20e6e_78cec8b2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesUpdater.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-22T10:49:18Z",
+      "side": 1,
+      "message": "Actually that was how I initially implemented it as:\n```\nprivate void persistRemotePasswords(Cofnfig config)\n```\n\nBut then it\u0027s possible to call this method with any config so:\n```\npersistRemotesPasswords(configs.remotes)\npersistRemotesPasswords(configs.passwords)\npersistRemtoesPasswords(updates)\n```\nwhich is error-prone, and as we\u0027re dealing here with potentially sensitive information IMO it\u0027s better to use `SeparetedRemoteConfigs` as argument. Sure it\u0027s a private method, but it\u0027s better be safe then sorry ;), hope this makes sense.",
+      "parentUuid": "71e9636c_82fb8484",
       "range": {
         "startLine": 92,
         "startChar": 2,
@@ -185,6 +353,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d33a6a6f_4045e724",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesUpdater.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-22T10:49:18Z",
+      "side": 1,
+      "message": "\u003e Did you mean SeparatedRemoteConfigs, as opposed to Removed?\n\nyes, that\u0027s typo 😕, good catch!\n\n\u003e I wonder if we need this container at all, can we just not use instantiate passwords and remotes config separately?\n\nThis is used as a return type for `onlyRemoteSectionsWithSeparatedPasswords`, so we need to bundle those two together (or need to iterate twice over the `updates`), we can potentially use some kind of a tuple, eg. a two-element array, but that adds ambiguity and doesn\u0027t feel right. That\u0027s why I went with the _object oriented paradigm_ ;)",
+      "parentUuid": "04f406ea_d7057133",
+      "range": {
+        "startLine": 104,
+        "startChar": 23,
+        "endLine": 104,
+        "endChar": 45
+      },
+      "revId": "34af6a132eacc07018a29eb53da34d88d88a6b6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae900240_5a084f63",
@@ -198,6 +390,30 @@
       "writtenOn": "2024-02-21T17:36:53Z",
       "side": 1,
       "message": "Did you actually mean to save this in the `gerrit.config`?\n\nShouldn\u0027t this be `newReplicationConfig()` [1]?\n\n[1] https://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/test/java/com/googlesource/gerrit/plugins/replication/AbstractConfigTest.java#100",
+      "range": {
+        "startLine": 297,
+        "startChar": 49,
+        "endLine": 297,
+        "endChar": 72
+      },
+      "revId": "34af6a132eacc07018a29eb53da34d88d88a6b6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e48bcd17_64a96043",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResourceTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-22T10:49:18Z",
+      "side": 1,
+      "message": "Good catch!\n\nDone",
+      "parentUuid": "ae900240_5a084f63",
       "range": {
         "startLine": 297,
         "startChar": 49,
