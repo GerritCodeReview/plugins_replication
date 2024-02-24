@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08dd4473_05b0041b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-24T00:58:41Z",
+      "side": 1,
+      "message": "You should also document the `throws` condition.",
+      "revId": "79eba7b75c937d028ffd9aa16b63b8997ed78e7c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8d3c9f3_7e738efe",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResourceTest.java",
         "patchSetId": 6
@@ -31,6 +48,30 @@
       "writtenOn": "2024-02-22T16:21:21Z",
       "side": 1,
       "message": "why we have assert in @Before method. This method should be used to setup test environment",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 80
+      },
+      "revId": "79eba7b75c937d028ffd9aa16b63b8997ed78e7c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc90b774_6ba3e296",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResourceTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-24T00:58:41Z",
+      "side": 1,
+      "message": "True, why don\u0027t you just throw an exception as you did at L49 instead?\nAssertions should be done only in the tests methods.",
+      "parentUuid": "f8d3c9f3_7e738efe",
       "range": {
         "startLine": 51,
         "startChar": 4,
