@@ -139,6 +139,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70f1f75c_e67622b4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-02-24T00:53:51Z",
+      "side": 1,
+      "message": "We should fallback to the replication.config.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 107
+      },
+      "revId": "06680029a98186dc31b15d17a2c26b8a2031ae7e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ec2f426_00563275",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
         "patchSetId": 4
