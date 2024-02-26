@@ -35,6 +35,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e6a646b_58cd81d7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ConfigResource.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-26T13:27:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08dd4473_05b0041b",
+      "revId": "79eba7b75c937d028ffd9aa16b63b8997ed78e7c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8d3c9f3_7e738efe",
@@ -82,6 +100,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "609f2794_9566c2ef",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResourceTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-26T13:27:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc90b774_6ba3e296",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 80
+      },
+      "revId": "79eba7b75c937d028ffd9aa16b63b8997ed78e7c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3792b61_93a7ce4c",
@@ -95,6 +137,30 @@
       "writtenOn": "2024-02-22T16:21:21Z",
       "side": 1,
       "message": "Could you elaborate what this test does, if I read it correctly:\n1. Create config with UPDATED \u003d 1\n2. Create config with UPDATED \u003d 1 and store it in a file\n3. Use ConfigResoure.update to update the file with UPDATED \u003d 1 generated in point 1\n4. Read config and check if UPDATE \u003d 1\n\nI believe in point 2 we should store different value and then update it to 1 and check",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 3
+      },
+      "revId": "79eba7b75c937d028ffd9aa16b63b8997ed78e7c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8811aa9a_d08c2945",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FileConfigResourceTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-26T13:27:04Z",
+      "side": 1,
+      "message": "good catch! it should verify that the existing value gets updated eg. when it\u0027s initially set to `1`, then gets updated to `20`. But apparently, this was lost somewhere during the refactoring. It should be fixed now.",
+      "parentUuid": "f3792b61_93a7ce4c",
       "range": {
         "startLine": 81,
         "startChar": 0,
