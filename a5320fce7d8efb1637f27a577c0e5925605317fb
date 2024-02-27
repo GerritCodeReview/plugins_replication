@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb11ab39_ed329d22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2024-02-27T10:17:34Z",
+      "side": 1,
+      "message": "The name of the exception implemented is actually `ReplicationConfigurationException`, rather than `ReplicationConfigInvalidException`.\n\nCan you align to one of the two names?",
+      "range": {
+        "startLine": 7,
+        "startChar": 11,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "a5320fce7d8efb1637f27a577c0e5925605317fb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
