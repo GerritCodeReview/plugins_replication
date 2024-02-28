@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cab5c5a5_650ca87d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadSecureCredentialsFactoryDecorator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-02-28T11:17:56Z",
+      "side": 1,
+      "message": "Agreed",
+      "parentUuid": "c3732c0e_a2a42be3",
+      "range": {
+        "startLine": 62,
+        "startChar": 12,
+        "endLine": 63,
+        "endChar": 97
+      },
+      "revId": "855a0c8fb44499c4847eaccc298f2558f168e04a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a00baa4_561a5229",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-02-21T13:22:57Z",
       "side": 1,
       "message": "nit: unrelated formatting changes",
+      "revId": "855a0c8fb44499c4847eaccc298f2558f168e04a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dad2355d_07a3845f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-02-28T11:17:56Z",
+      "side": 1,
+      "message": "The lines were introduced by the google formatting on the file. If there are comments, there should be a new line introduced before the comment",
+      "parentUuid": "1a00baa4_561a5229",
       "revId": "855a0c8fb44499c4847eaccc298f2558f168e04a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
