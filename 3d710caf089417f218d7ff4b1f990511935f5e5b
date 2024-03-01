@@ -22,6 +22,30 @@
       },
       "revId": "3d710caf089417f218d7ff4b1f990511935f5e5b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5701c923_64f67c5c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResourceTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-03-01T11:02:14Z",
+      "side": 1,
+      "message": "Good catch!",
+      "parentUuid": "70f9cae1_7647104e",
+      "range": {
+        "startLine": 55,
+        "startChar": 85,
+        "endLine": 55,
+        "endChar": 95
+      },
+      "revId": "3d710caf089417f218d7ff4b1f990511935f5e5b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
