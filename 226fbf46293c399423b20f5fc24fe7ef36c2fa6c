@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ffd19efd_6149f921",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-03-02T11:24:51Z",
+      "side": 1,
+      "message": "\u003e the `replication` plugin was accessing `secure.config` directly, without any encryption, which means that existing installations will have secrets stored there in plain text, even if the encrypted secure store was enabled.\n\nNo, Gerrit will encrypt them either during the init phase, using the passwd program or the switch-secure-store utility.\n\n\u003e Without that fallback mechanism, we\u0027d need a migration step that will encrypt everything in `secure.config`.\n\nHave you tried switch-secure-store site program? It was written by a passionate 😎 Gerrit contributor 10 years ago https://gerrit-review.googlesource.com/c/gerrit/+/65104.\n\nIt works as expected.",
+      "parentUuid": "99f31f6b_3b0a8b4e",
+      "range": {
+        "startLine": 11,
+        "startChar": 37,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "226fbf46293c399423b20f5fc24fe7ef36c2fa6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47d927b5_77db62e4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
         "patchSetId": 8
