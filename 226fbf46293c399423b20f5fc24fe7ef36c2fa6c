@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "124933dc_6ae0e287",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-03-04T09:43:58Z",
+      "side": 1,
+      "message": "\u003e No, Gerrit will encrypt them either during the init phase, using the passwd program or the switch-secure-store utility.\n\nReally? How then, does the replication plugin handle the encrypted value? From what I can tell from the code it won\u0027t as it reads the `secure.config` as it\u0027s a plain text file:\n\n```java\n    FileBasedConfig cfg \u003d new FileBasedConfig(site.secure_config.toFile(), FS.DETECTED);\n    if (cfg.getFile().exists() \u0026\u0026 cfg.getFile().length() \u003e 0) {\n      try {\n        cfg.load();\n```\n\nThe above is a snipped from the old `SecureCredentialsFactory` that now will use the SecureStore.\n\nMy point here is that to make the replication work, the password for the remote must be put into `secure.config` in plain text, otherwise when it\u0027s encrypted, `replication` will use that value as as a password without attempting to decrypt it.\n\nWhen we change that behaviour, we either:\n1. need to document the migration step (aka usage of `switch-secure-store` or,\n2. fallback to reading the password as plain text\n\nIf we go with #1, since 3.10, it won\u0027t be possible to drop a new `replication.jar` into `plugins/` as the passwords need to be encrypted.\n\nWith #2 we keep the same upgrade procedure, but still can support fully encrypted `secure.config`.\n\n\u003e Have you tried switch-secure-store site program?\n\nIt was a long time ago, and AFAIR was implemented during one of the hackathons at Google ;) \n\nBut this won\u0027t _magically_ migrate the `secure.config` as it must be manually executed by the Gerrit admin.",
+      "parentUuid": "ffd19efd_6149f921",
+      "range": {
+        "startLine": 11,
+        "startChar": 37,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "226fbf46293c399423b20f5fc24fe7ef36c2fa6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47d927b5_77db62e4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
         "patchSetId": 8
