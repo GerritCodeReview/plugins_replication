@@ -89,6 +89,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d840e3_651f015c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-03-07T10:02:21Z",
+      "side": 1,
+      "message": "It depends on the `UsedAt.Project.PLUGIN_GITHUB` enum change https://gerrit-review.googlesource.com/c/gerrit/+/409750 which is not merged yet",
+      "parentUuid": "801d80ab_6a6e32a7",
+      "revId": "5095a0062e725845ba3c03d48cfce9e21029da17",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c381d260_ea0cc5e7",
