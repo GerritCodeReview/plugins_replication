@@ -48,6 +48,47 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d94514f9_4fd1c674",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-03-07T08:52:11Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "9d5025f6_acd0cfe1",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 57
+      },
+      "revId": "5095a0062e725845ba3c03d48cfce9e21029da17",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "801d80ab_6a6e32a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-03-07T08:52:11Z",
+      "side": 1,
+      "message": "Have you checked why the build is failing?",
+      "revId": "5095a0062e725845ba3c03d48cfce9e21029da17",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c381d260_ea0cc5e7",
@@ -61,6 +102,24 @@
       "writtenOn": "2024-03-01T11:04:31Z",
       "side": 1,
       "message": "all those bindings are required to be able to inject `ReplicationRemotesUpdater` in other plugins and were moved from `ReplicationModule`.\n\nFor end-to-end testing, https://github.com/dluksza/replication-remote-updates can be used.",
+      "revId": "5095a0062e725845ba3c03d48cfce9e21029da17",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdc7c535_527976e2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigModule.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-03-07T08:52:11Z",
+      "side": 1,
+      "message": "Acknowledged, maybe include that in the commit message on the rationale behind this move?",
+      "parentUuid": "c381d260_ea0cc5e7",
       "revId": "5095a0062e725845ba3c03d48cfce9e21029da17",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
