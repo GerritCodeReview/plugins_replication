@@ -122,7 +122,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
   private final Project.NameKey projectName;
   private final URIish uri;
-  private final Set<ImmutableSet<String>> refBatchesToPush = Sets.newHashSetWithExpectedSize(4);
+  private final Set<ImmutableSet<String>> refBatchesToPush = Sets.newConcurrentHashSet();
   private boolean pushAllRefs;
   private Repository git;
   private boolean isCollision;
