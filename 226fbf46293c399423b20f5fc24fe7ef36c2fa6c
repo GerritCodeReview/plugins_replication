@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "85a0ddb3_cc4f9037",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-03-11T11:12:25Z",
+      "side": 1,
+      "message": "The replication plugin does not ask in the init step for passwords. This is all handled by hand. Additionally, the passwd command does not know how to encrypt items with subsections, which is what is used in the replication plugin. \nSee https://issues.gerritcodereview.com/issues/321784728\nThe switch-secure-store works when there is the need to do the transition from plain to encrypted of all the information, not when there is already a hybrid of secure/non secure data in the secure.config. The fallback strategy aims to allow a way to still read the plain text data, if encountered.",
+      "parentUuid": "124933dc_6ae0e287",
+      "range": {
+        "startLine": 11,
+        "startChar": 37,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "226fbf46293c399423b20f5fc24fe7ef36c2fa6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47d927b5_77db62e4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
         "patchSetId": 8
@@ -126,6 +150,30 @@
       "writtenOn": "2024-03-02T00:34:32Z",
       "side": 1,
       "message": "Why do we need this? Can you elaborate?",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 0
+      },
+      "revId": "226fbf46293c399423b20f5fc24fe7ef36c2fa6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ae66374_5863e495",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-03-11T11:12:25Z",
+      "side": 1,
+      "message": "During the previous comments, it was mentioned in the #46, the following:\n\nTake it from replication.config (2nd) if not found in the credentials\n\nAs of now, the replication.config does not support having properties for username and password, as it depended solely on the secure.config. This code is needed to support the property read in the replication.config.",
+      "parentUuid": "cdb30fb1_b2a341ac",
       "range": {
         "startLine": 123,
         "startChar": 0,
