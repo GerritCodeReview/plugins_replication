@@ -1,6 +1,11 @@
 load("@rules_java//java:defs.bzl", "java_library")
+load("//:version.bzl", "GERRIT_VERSION")
 load("//tools/bzl:junit.bzl", "junit_tests")
 load("//tools/bzl:plugin.bzl", "PLUGIN_DEPS", "PLUGIN_TEST_DEPS", "gerrit_plugin")
+
+MAVEN_REPOSITORY = "sonatype-nexus-staging"
+
+URL = "https://oss.sonatype.org/content/repositories/snapshots" if GERRIT_VERSION.endswith("-SNAPSHOT") else "https://oss.sonatype.org/service/local/staging/deploy/maven2"
 
 gerrit_plugin(
     name = "replication",
@@ -15,6 +20,10 @@ gerrit_plugin(
         "Gerrit-SshModule: com.googlesource.gerrit.plugins.replication.SshModule",
     ],
     resources = glob(["src/main/resources/**/*"]),
+    pom_file = "replication-plugin_pom.xml",
+    repository = MAVEN_REPOSITORY,
+    url = URL,
+    version = GERRIT_VERSION,
 )
 
 junit_tests(
