@@ -34,7 +34,6 @@ import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplica
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationFailedEvent;
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationScheduledEvent;
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationSucceededEvent;
-import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicationDoneEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
