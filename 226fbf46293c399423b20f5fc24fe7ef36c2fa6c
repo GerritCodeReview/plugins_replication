@@ -122,6 +122,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "941e9ee0_3c692079",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-03-19T23:49:04Z",
+      "side": 1,
+      "message": "\u003e The replication plugin does not ask in the init step for passwords.\n\nTrue, that\u0027s because it does not ask for replication configs during init.\n\n\u003e This is all handled by hand.\n\nYep, the Gerrit admin is supposed to be capable of managing config files.\n\n\u003e Additionally, the passwd command does not know how to encrypt items with subsections, which is what is used in the replication plugin. \n\u003e See https://issues.gerritcodereview.com/issues/321784728\n\nPoint taken, the above issue needs to be sorted out *before* this change can be merged.\n\n\u003e The switch-secure-store works when there is the need to do the transition from plain to encrypted of all the information, not when there is already a hybrid of secure/non secure data in the secure.config. The fallback strategy aims to allow a way to still read the plain text data, if encountered.\n\nIMHO the fallback mechanism is a security risk: if you decide to go with the encrypted secure.config, it must be *all encrypted*. The Gerrit admin has to sort this out.",
+      "parentUuid": "85a0ddb3_cc4f9037",
+      "range": {
+        "startLine": 11,
+        "startChar": 37,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "226fbf46293c399423b20f5fc24fe7ef36c2fa6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dc555b3_937018be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-03-19T23:49:04Z",
+      "side": 1,
+      "message": "IMHO this is blocked by Issue 321784728: we need first to enable the Gerrit admin to set the replication passwords using the passwd program.",
+      "revId": "226fbf46293c399423b20f5fc24fe7ef36c2fa6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47d927b5_77db62e4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
         "patchSetId": 8
