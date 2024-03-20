@@ -144,6 +144,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e5c9d98_cf4a722a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-03-20T09:29:44Z",
+      "side": 1,
+      "message": "\u003e \u003e The replication plugin does not ask in the init step for passwords.\n\u003e \n\u003e True, that\u0027s because it does not ask for replication configs during init.\n\u003e \n\u003e \u003e This is all handled by hand.\n\u003e \n\u003e Yep, the Gerrit admin is supposed to be capable of managing config files.\n\u003e \n\u003e \u003e Additionally, the passwd command does not know how to encrypt items with subsections, which is what is used in the replication plugin. \n\u003e \u003e See https://issues.gerritcodereview.com/issues/321784728\n\u003e \n\u003e Point taken, the above issue needs to be sorted out *before* this change can be merged.\n\u003e \n\u003e \u003e The switch-secure-store works when there is the need to do the transition from plain to encrypted of all the information, not when there is already a hybrid of secure/non secure data in the secure.config. The fallback strategy aims to allow a way to still read the plain text data, if encountered.\n\u003e \n\u003e IMHO the fallback mechanism is a security risk: if you decide to go with the encrypted secure.config, it must be *all encrypted*. The Gerrit admin has to sort this out.\n\nIn that case I suggest that we continue raising the exception if the secure.config is used with plain text and if the users want to use plain text for the replication together with the secure-config plugin, then they need to use the parameters in the replication.config, as now implemented.",
+      "parentUuid": "941e9ee0_3c692079",
+      "range": {
+        "startLine": 11,
+        "startChar": 37,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "226fbf46293c399423b20f5fc24fe7ef36c2fa6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2dc555b3_937018be",
