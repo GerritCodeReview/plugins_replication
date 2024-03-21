@@ -36,7 +36,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ReplicationRemotesUpdaterTest {
+public class ReplicationRemotesUpdaterImplTest {
 
   private Path testSite;
   private SecureStore secureStoreMock;
@@ -57,7 +57,7 @@ public class ReplicationRemotesUpdaterTest {
   @Test
   public void shouldThrowWhenNoRemotesInTheUpdate() {
     Config update = new Config();
-    ReplicationRemotesUpdater objectUnderTest = newReplicationConfigUpdater();
+    ReplicationRemotesUpdaterImpl objectUnderTest = newReplicationConfigUpdater();
 
     assertThrows(IllegalArgumentException.class, () -> objectUnderTest.update(update));
 
@@ -71,7 +71,7 @@ public class ReplicationRemotesUpdaterTest {
     String url = "fake_url";
     Config update = new Config();
     setRemoteSite(update, "url", url);
-    ReplicationRemotesUpdater objectUnderTest = newReplicationConfigUpdater();
+    ReplicationRemotesUpdaterImpl objectUnderTest = newReplicationConfigUpdater();
 
     objectUnderTest.update(update);
 
@@ -84,7 +84,7 @@ public class ReplicationRemotesUpdaterTest {
     String url = "fake_url";
     Config update = new Config();
     setRemoteSite(update, "url", url);
-    ReplicationRemotesUpdater objectUnderTest = newReplicationConfigUpdater(testOverrides);
+    ReplicationRemotesUpdaterImpl objectUnderTest = newReplicationConfigUpdater(testOverrides);
 
     objectUnderTest.update(update);
 
@@ -98,7 +98,7 @@ public class ReplicationRemotesUpdaterTest {
     Config update = new Config();
     String password = "my_secret_password";
     setRemoteSite(update, "password", password);
-    ReplicationRemotesUpdater objectUnderTest = newReplicationConfigUpdater(testOverrides);
+    ReplicationRemotesUpdaterImpl objectUnderTest = newReplicationConfigUpdater(testOverrides);
 
     objectUnderTest.update(update);
 
@@ -107,7 +107,7 @@ public class ReplicationRemotesUpdaterTest {
     assertRemoteSite(testOverrides.getConfig(), "password").isNull();
   }
 
-  private ReplicationRemotesUpdater newReplicationConfigUpdater() {
+  private ReplicationRemotesUpdaterImpl newReplicationConfigUpdater() {
     return newReplicationConfigUpdater(null);
   }
 
@@ -119,12 +119,12 @@ public class ReplicationRemotesUpdaterTest {
     return assertThat(config.getString("remote", "site", name));
   }
 
-  private ReplicationRemotesUpdater newReplicationConfigUpdater(
+  private ReplicationRemotesUpdaterImpl newReplicationConfigUpdater(
       ReplicationConfigOverrides overrides) {
     DynamicItem<ReplicationConfigOverrides> dynamicItemMock = mock(DynamicItem.class);
     when(dynamicItemMock.get()).thenReturn(overrides);
 
-    return new ReplicationRemotesUpdater(
+    return new ReplicationRemotesUpdaterImpl(
         secureStoreMock, Providers.of(baseConfig), dynamicItemMock);
   }
 
