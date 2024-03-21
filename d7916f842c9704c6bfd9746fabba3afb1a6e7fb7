@@ -16,6 +16,24 @@
       "message": "nit: unneeded",
       "revId": "d7916f842c9704c6bfd9746fabba3afb1a6e7fb7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a014f5c_acea681c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-03-21T00:12:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abb0c8a5_4655e68b",
+      "revId": "d7916f842c9704c6bfd9746fabba3afb1a6e7fb7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
