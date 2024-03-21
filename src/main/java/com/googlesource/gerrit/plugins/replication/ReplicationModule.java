@@ -52,6 +52,7 @@ class ReplicationModule extends AbstractModule {
   @Override
   protected void configure() {
     install(configModule);
+
     bind(LifecycleListener.class)
         .annotatedWith(UniqueAnnotations.create())
         .to(ReplicationQueue.class);

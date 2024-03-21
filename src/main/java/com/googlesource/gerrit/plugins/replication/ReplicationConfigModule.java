@@ -25,12 +25,11 @@ import com.google.inject.ProvisionException;
 import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
+import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
@@ -62,7 +61,6 @@ public class ReplicationConfigModule extends AbstractModule {
     bind(ReplicationQueue.class).in(Scopes.SINGLETON);
     bind(ObservableQueue.class).to(ReplicationQueue.class);
     bind(ReplicationDestinations.class).to(DestinationsCollection.class);
-    bind(ConfigParser.class).to(DestinationConfigParser.class).in(Scopes.SINGLETON);
 
     install(new FactoryModuleBuilder().build(Destination.Factory.class));
     install(new FactoryModuleBuilder().build(ProjectDeletionState.Factory.class));
