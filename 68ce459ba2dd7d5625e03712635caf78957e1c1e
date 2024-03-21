@@ -1,5 +1,46 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47f61e85_c2c59ffe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-03-21T00:02:45Z",
+      "side": 1,
+      "message": "I missed that one refactoring of the modules made the config unusable for the pull-replication plugin. Going to address this with a follow-up fix.",
+      "revId": "68ce459ba2dd7d5625e03712635caf78957e1c1e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c4f728_74cf1ede",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigModule.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-03-21T00:02:45Z",
+      "side": 1,
+      "message": "This is incorrect and it should stay in the replication plugin module.\nThe replication config is also used for pull-replication where the parsing is assigned to a different class.",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 84
+      },
+      "revId": "68ce459ba2dd7d5625e03712635caf78957e1c1e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
