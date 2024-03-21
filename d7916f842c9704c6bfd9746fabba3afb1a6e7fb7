@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a694fb18_7a009cb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-03-21T10:39:25Z",
+      "side": 1,
+      "message": "This breaks updating replication remotes\u0027 from other plugins, here\u0027s the error:\n```\n[2024-03-21T10:37:09.495Z] [main] WARN  com.google.gerrit.server.plugins.PluginLoader : Cannot load plugin replication-remote-updates\ncom.google.inject.CreationException: Unable to create injector, see the following errors:\n\n1) [Guice/MissingImplementation]: No implementation for ConfigParser was bound.\n\nRequested by:\n1  : DestinationsCollection.\u003cinit\u003e(DestinationsCollection.java:73)\n      \\_ for 4th parameter configParser\n     at ReplicationConfigModule.configure(ReplicationConfigModule.java:63)\n      \\_ installed by: Module -\u003e ReplicationConfigModule\n\nLearn more:\n  https://github.com/google/guice/wiki/MISSING_IMPLEMENTATION\n```\n\nI\u0027ve used the simple [replication-remote-updates](https://github.com/dluksza/replication-remote-updates) for testing",
+      "revId": "d7916f842c9704c6bfd9746fabba3afb1a6e7fb7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abb0c8a5_4655e68b",
