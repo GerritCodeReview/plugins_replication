@@ -22,5 +22,6 @@ public class ApiModule extends AbstractModule {
   protected void configure() {
     DynamicItem.itemOf(binder(), ReplicationPushFilter.class);
     DynamicItem.itemOf(binder(), ReplicationConfigOverrides.class);
+    DynamicItem.itemOf(binder(), ReplicationRemotesUpdater.class);
   }
 }
