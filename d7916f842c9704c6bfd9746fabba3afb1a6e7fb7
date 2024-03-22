@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "040ff1be_6e93f467",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-03-22T00:42:40Z",
+      "side": 1,
+      "message": "I see, I have missed during the review of the ReplicationConfigUpdater that we coupled the x-plugin dependency with the implementation instead of the interface through DynamicItem\u003c\u003e, that\u0027s why you were forced in the replication-remote-updates plugin to install the replication config module explicitly, breaking the encapsulation.\n\nThe PS2 of this fix should also address that concern and I\u0027ve simplified your sample [replication-remote-updates with a PR](https://github.com/dluksza/replication-remote-updates/pull/1/files).",
+      "parentUuid": "a694fb18_7a009cb2",
+      "revId": "d7916f842c9704c6bfd9746fabba3afb1a6e7fb7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abb0c8a5_4655e68b",
