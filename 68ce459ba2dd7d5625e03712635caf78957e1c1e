@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "df6d6f9c_6df785cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-03-22T09:38:49Z",
+      "side": 1,
+      "message": "I believe we should instead publish an API in the ApiModule and have other plugins relying on an interface rather than a concrete implementation, with the exposure to the issues associated to the Guice pre-requisites of the updater class.",
+      "range": {
+        "startLine": 9,
+        "startChar": 10,
+        "endLine": 9,
+        "endChar": 43
+      },
+      "revId": "68ce459ba2dd7d5625e03712635caf78957e1c1e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d406eb_5c95c734",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-03-22T09:38:49Z",
+      "side": 1,
+      "message": "This broke the pull-replication plugin.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 65
+      },
+      "revId": "68ce459ba2dd7d5625e03712635caf78957e1c1e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "47f61e85_c2c59ffe",
