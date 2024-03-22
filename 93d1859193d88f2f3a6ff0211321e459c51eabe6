@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87be042e_472ac99b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-03-22T11:15:17Z",
+      "side": 1,
+      "message": "The `ReplicationRemotesUpdater` was never meant to be an extension point. Therefore it should not be bound using `DynamicItem\u003c\u003e`. Doing so make the API of `ReplicationConfigOverrides` and `ReplicationRemotesUpdater` ambiguous.",
+      "revId": "93d1859193d88f2f3a6ff0211321e459c51eabe6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1625da5b_e1d53b66",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ApiModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-03-22T11:15:17Z",
+      "side": 1,
+      "message": "The `ReplicationRemotesUpdater` is not an extension point, it\u0027s a public API, that must not be replaced by anyone. It uses `ReplicationConfigOverrides` to propagate the changes to the configuration storage.\n\nWith this approach, we now create two ways of handling the configuration updates. One with `ReplicationConfigOverrides.update(Config)`, the second with `ReplicationRemtoesUpdater.update(Config)`. This is ambiguous and bad design for an API.",
+      "range": {
+        "startLine": 25,
+        "startChar": 3,
+        "endLine": 25,
+        "endChar": 66
+      },
+      "revId": "93d1859193d88f2f3a6ff0211321e459c51eabe6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
