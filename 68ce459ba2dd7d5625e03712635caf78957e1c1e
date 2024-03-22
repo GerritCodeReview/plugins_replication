@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1cf2c7fb_a8778f19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-03-22T15:22:34Z",
+      "side": 1,
+      "message": "\u003e If we _publish the API in ApiModule_ using `DynamicItem` it can be swapped by another plugin and potentially update different configuration that is used by `MerggedConfigResource`.\n\nTrue, however, at the moment, that\u0027s the only way x-plugin communication can work:\n- DynamicItem\u003c\u003e\n- DynamicSet\u003c\u003e\n- DynamicMap\u003c\u003e\n\nWe should need a non-swappable DynamicItem\u003c\u003e in Gerrit, which is a good idea but isn\u0027t there yet.\n\nPossibly mention that as a TODO?\n\n\u003e The `ReplicationRemotesUpdater` was never meant to be an extension point. It is a concrete implementation and as such must be used by consumers.\n\nIf you inject a concrete implementation, Guice will try to inject it by creating a instance for it in its binding table, with all its internal implementation references.\n\nNever ever use concrete implementations between plugins, for x-plugin communication, otherwise you\u0027ll be very likely to break all the time that any internal implementation details will change.\n\n\u003e We can still have `ReplicationConfigUpdater` as an interface, with a package-protected default (non-swappable) implementation. But it must not be bound as `DynamicItem` in ApiModule\n\nThat would still have the problem to discover it without binding its module that associated that to an interface.",
+      "parentUuid": "84b4a307_372ff027",
+      "range": {
+        "startLine": 9,
+        "startChar": 10,
+        "endLine": 9,
+        "endChar": 43
+      },
+      "revId": "68ce459ba2dd7d5625e03712635caf78957e1c1e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13d406eb_5c95c734",
         "filename": "/COMMIT_MSG",
         "patchSetId": 9
