@@ -71,6 +71,7 @@ import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEv
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -465,11 +466,13 @@ public class Destination {
   }
 
   void pushWasCanceled(PushOne pushOp) {
+    Set<ImmutableSet<String>> notAttemptedRefs = Collections.emptySet();
     synchronized (stateLock) {
       URIish uri = pushOp.getURI();
       pending.remove(uri);
-      pushOp.notifyNotAttempted(pushOp.getRefs());
+      notAttemptedRefs = pushOp.getRefs();
     }
+    pushOp.notifyNotAttempted(notAttemptedRefs);
   }
 
   void scheduleDeleteProject(URIish uri, Project.NameKey project, ProjectDeletionState state) {
