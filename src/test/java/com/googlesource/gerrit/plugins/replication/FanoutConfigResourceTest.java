@@ -52,7 +52,8 @@ public class FanoutConfigResourceTest extends AbstractConfigTest {
     File replicationConfig = sitePaths.etc_dir.resolve(CONFIG_DIR).toFile();
     if (!replicationConfig.mkdir()) {
       throw new IOException(
-          "Cannot create test replication config directory in: " + replicationConfig.toPath().toAbsolutePath());
+          "Cannot create test replication config directory in: "
+              + replicationConfig.toPath().toAbsolutePath());
     }
   }
 
