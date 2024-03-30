@@ -62,8 +62,7 @@ class ReplicationModule extends AbstractModule {
     DynamicSet.bind(binder(), GitBatchRefUpdateListener.class).to(ReplicationQueue.class);
     DynamicSet.bind(binder(), ProjectDeletedListener.class).to(ReplicationQueue.class);
     DynamicSet.bind(binder(), HeadUpdatedListener.class).to(ReplicationQueue.class);
-    DynamicItem.bind(binder(), ReplicationRemotesApi.class)
-        .to(ReplicationRemotesApiImpl.class);
+    DynamicItem.bind(binder(), ReplicationRemotesApi.class).to(ReplicationRemotesApiImpl.class);
 
     bind(OnStartStop.class).in(Scopes.SINGLETON);
     bind(LifecycleListener.class).annotatedWith(UniqueAnnotations.create()).to(OnStartStop.class);

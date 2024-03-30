@@ -28,12 +28,11 @@ import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.securestore.SecureStore;
 import com.google.inject.util.Providers;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationRemotesApi;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
-import com.googlesource.gerrit.plugins.replication.api.ReplicationRemotesApi;
 import org.eclipse.jgit.lib.Config;
 import org.junit.After;
 import org.junit.Before;
@@ -122,8 +121,7 @@ public class ReplicationRemotesApiTest {
     return assertThat(config.getString("remote", "site", name));
   }
 
-  private ReplicationRemotesApi newReplicationConfigUpdater(
-      ReplicationConfigOverrides overrides) {
+  private ReplicationRemotesApi newReplicationConfigUpdater(ReplicationConfigOverrides overrides) {
     DynamicItem<ReplicationConfigOverrides> dynamicItemMock = mock(DynamicItem.class);
     when(dynamicItemMock.get()).thenReturn(overrides);
 
