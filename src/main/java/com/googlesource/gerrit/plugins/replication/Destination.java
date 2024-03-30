@@ -22,11 +22,11 @@ import static org.eclipse.jgit.transport.RemoteRefUpdate.Status.REJECTED_OTHER_R
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.common.net.UrlEscapers;
+import com.google.common.util.concurrent.Striped;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.AccountGroup;
 import com.google.gerrit.entities.BranchNameKey;
@@ -82,6 +82,8 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.eclipse.jgit.lib.Constants;
@@ -94,6 +96,7 @@ import org.eclipse.jgit.transport.URIish;
 
 public class Destination {
   private static final NamedFluentLogger repLog = ReplicationQueue.repLog;
+  private static final int MAX_STRIPES = 16;
 
   private static final String PROJECT_NOT_AVAILABLE = "source project %s not available";
 
@@ -104,11 +107,10 @@ public class Destination {
   }
 
   private final ReplicationStateListener stateLog;
-  private final Object stateLock = new Object();
+  private final Striped<ReadWriteLock> stateLock;
   // writes are covered by the stateLock, but some reads are still
   // allowed without the lock
-  private final ConcurrentMap<URIish, PushOne> pending = new ConcurrentHashMap<>();
-  private final Map<URIish, PushOne> inFlight = new HashMap<>();
+  private final Queue queue;
   private final PushOne.Factory opFactory;
   private final DeleteProjectTask.Factory deleteProjectFactory;
   private final UpdateHeadTask.Factory updateHeadFactory;
@@ -128,13 +130,13 @@ public class Destination {
     REPOSITORY_MISSING;
   }
 
-  public static class QueueInfo {
-    public final ImmutableMap<URIish, PushOne> pending;
-    public final ImmutableMap<URIish, PushOne> inFlight;
+  public static class Queue {
+    public final ConcurrentMap<URIish, PushOne> pending;
+    public final ConcurrentMap<URIish, PushOne> inFlight;
 
-    public QueueInfo(Map<URIish, PushOne> pending, Map<URIish, PushOne> inFlight) {
-      this.pending = ImmutableMap.copyOf(pending);
-      this.inFlight = ImmutableMap.copyOf(inFlight);
+    public Queue() {
+      this.pending = new ConcurrentHashMap<>();
+      this.inFlight = new ConcurrentHashMap<>();
     }
   }
 
@@ -155,6 +157,7 @@ public class Destination {
       @Assisted DestinationConfiguration cfg) {
     this.eventDispatcher = eventDispatcher;
     gitManager = gitRepositoryManager;
+    this.queue = new Queue();
     this.permissionBackend = permissionBackend;
     this.userProvider = userProvider;
     this.projectCache = projectCache;
@@ -162,6 +165,11 @@ public class Destination {
     this.replicationTasksStorage = rts;
     this.credentialsFactory = credentialsFactory;
     config = cfg;
+
+    ImmutableList<String> projects = cfg.getProjects();
+    int numStripes = projects.isEmpty() ? MAX_STRIPES : Math.min(projects.size(), MAX_STRIPES);
+    stateLock = Striped.readWriteLock(numStripes);
+
     CurrentUser remoteUser;
     if (!cfg.getAuthGroupNames().isEmpty()) {
       ImmutableSet.Builder<AccountGroup.UUID> builder = ImmutableSet.builder();
@@ -237,10 +245,8 @@ public class Destination {
     }
   }
 
-  public QueueInfo getQueueInfo() {
-    synchronized (stateLock) {
-      return new QueueInfo(pending, inFlight);
-    }
+  public Queue getQueue() {
+    return queue;
   }
 
   public void start(WorkQueue workQueue) {
@@ -251,33 +257,31 @@ public class Destination {
   public int shutdown() {
     int cnt = 0;
     if (pool != null) {
-      synchronized (stateLock) {
-        int numPending = pending.size();
-        int numInFlight = inFlight.size();
+      int numPending = queue.pending.size();
+      int numInFlight = queue.inFlight.size();
 
-        if (numPending > 0 || numInFlight > 0) {
-          repLog.atWarning().log(
-              "Cancelling replication events (pending=%d, inFlight=%d) for destination %s",
-              numPending, numInFlight, getRemoteConfigName());
+      if (numPending > 0 || numInFlight > 0) {
+        repLog.atWarning().log(
+            "Cancelling replication events (pending=%d, inFlight=%d) for destination %s",
+            numPending, numInFlight, getRemoteConfigName());
 
-          foreachPushOp(
-              pending,
-              push -> {
-                push.cancel();
-                return null;
-              });
-          pending.clear();
-          foreachPushOp(
-              inFlight,
-              push -> {
-                push.setCanceledWhileRunning();
-                return null;
-              });
-          inFlight.clear();
-        }
-        cnt = pool.shutdownNow().size();
-        pool = null;
+        foreachPushOp(
+            queue.pending,
+            push -> {
+              push.cancel();
+              return null;
+            });
+        queue.pending.clear();
+        foreachPushOp(
+            queue.inFlight,
+            push -> {
+              push.setCanceledWhileRunning();
+              return null;
+            });
+        queue.inFlight.clear();
       }
+      cnt = pool.shutdownNow().size();
+      pool = null;
     }
     return cnt;
   }
@@ -286,7 +290,13 @@ public class Destination {
     // Callers may modify the provided opsMap concurrently, hence make a defensive copy of the
     // values to loop over them.
     for (PushOne pushOne : ImmutableList.copyOf(opsMap.values())) {
-      pushOneFunction.apply(pushOne);
+      Lock lock = stateLock.get(pushOne.getURI()).writeLock();
+      lock.lock();
+      try {
+        pushOneFunction.apply(pushOne);
+      } finally {
+        lock.unlock();
+      }
     }
   }
 
@@ -414,8 +424,12 @@ public class Destination {
 
     if (!config.replicatePermissions()) {
       PushOne e;
-      synchronized (stateLock) {
+      Lock lock = stateLock.get(uri).readLock();
+      lock.lock();
+      try {
         e = getPendingPush(uri);
+      } finally {
+        lock.unlock();
       }
       if (e == null) {
         try (Repository git = gitManager.openRepository(project)) {
@@ -439,7 +453,9 @@ public class Destination {
 
     ImmutableSet<String> refsToSchedule = toSchedule.build();
     PushOne task;
-    synchronized (stateLock) {
+    Lock lock = stateLock.get(uri).writeLock();
+    lock.lock();
+    try {
       task = getPendingPush(uri);
       if (task == null) {
         task = opFactory.create(project, uri);
@@ -448,7 +464,7 @@ public class Destination {
         @SuppressWarnings("unused")
         ScheduledFuture<?> ignored =
             pool.schedule(task, now ? 0 : config.getDelay(), TimeUnit.SECONDS);
-        pending.put(uri, task);
+        queue.pending.put(uri, task);
         repLog.atInfo().log(
             "scheduled %s:%s => %s to run %s",
             project, refsToSchedule, task, now ? "now" : "after " + config.getDelay() + "s");
@@ -462,13 +478,15 @@ public class Destination {
       for (String ref : refsToSchedule) {
         state.increasePushTaskCount(project.get(), ref);
       }
+    } finally {
+      lock.unlock();
     }
     postReplicationScheduledEvent(task, refsToSchedule);
   }
 
   @Nullable
   private PushOne getPendingPush(URIish uri) {
-    PushOne e = pending.get(uri);
+    PushOne e = queue.pending.get(uri);
     if (e != null && !e.wasCanceled()) {
       return e;
     }
@@ -477,10 +495,14 @@ public class Destination {
 
   void pushWasCanceled(PushOne pushOp) {
     Set<ImmutableSet<String>> notAttemptedRefs = Collections.emptySet();
-    synchronized (stateLock) {
+    Lock lock = stateLock.get(pushOp.getURI()).writeLock();
+    lock.lock();
+    try {
       URIish uri = pushOp.getURI();
-      pending.remove(uri);
+      queue.pending.remove(uri);
       notAttemptedRefs = pushOp.getRefs();
+    } finally {
+      lock.unlock();
     }
     pushOp.notifyNotAttempted(notAttemptedRefs);
   }
@@ -525,7 +547,9 @@ public class Destination {
     boolean isFailed = false;
     RemoteRefUpdate.Status failedStatus = null;
 
-    synchronized (stateLock) {
+    Lock lock = stateLock.get(pushOp.getURI()).writeLock();
+    lock.lock();
+    try {
       URIish uri = pushOp.getURI();
       PushOne pendingPushOp = getPendingPush(uri);
 
@@ -561,7 +585,7 @@ public class Destination {
           // it will see it was canceled and then it will do nothing with
           // pending list and it will not execute its run implementation.
           pendingPushOp.canceledByReplication();
-          pending.remove(uri);
+          queue.pending.remove(uri);
 
           pushOp.addRefBatches(pendingPushOp.getRefs());
           pushOp.addStates(pendingPushOp.getStates());
@@ -570,7 +594,7 @@ public class Destination {
       }
 
       if (pendingPushOp == null || !pendingPushOp.isRetrying()) {
-        pending.put(uri, pushOp);
+        queue.pending.put(uri, pushOp);
         switch (reason) {
           case COLLISION:
             @SuppressWarnings("unused")
@@ -594,7 +618,7 @@ public class Destination {
             } else {
               pushOp.canceledByReplication();
               pushOp.retryDone();
-              pending.remove(uri);
+              queue.pending.remove(uri);
               stateLog.error(
                   "Push to " + pushOp.getURI() + " cancelled after maximum number of retries",
                   pushOp.getStatesAsArray());
@@ -602,6 +626,8 @@ public class Destination {
             break;
         }
       }
+    } finally {
+      lock.unlock();
     }
     if (isFailed) {
       postReplicationFailedEvent(pushOp, failedStatus);
@@ -612,33 +638,41 @@ public class Destination {
   }
 
   RunwayStatus requestRunway(PushOne op) {
-    synchronized (stateLock) {
+    Lock lock = stateLock.get(op.getURI()).writeLock();
+    lock.lock();
+    try {
       if (op.wasCanceled()) {
         return RunwayStatus.canceled();
       }
-      pending.remove(op.getURI());
-      PushOne inFlightOp = inFlight.get(op.getURI());
+      queue.pending.remove(op.getURI());
+      PushOne inFlightOp = queue.inFlight.get(op.getURI());
       if (inFlightOp != null) {
         return RunwayStatus.denied(inFlightOp.getId());
       }
       op.notifyNotAttempted(op.setStartedRefs(replicationTasksStorage.get().start(op)));
-      inFlight.put(op.getURI(), op);
+      queue.inFlight.put(op.getURI(), op);
+    } finally {
+      lock.unlock();
     }
     return RunwayStatus.allowed();
   }
 
   void notifyFinished(PushOne op) {
-    synchronized (stateLock) {
+    Lock lock = stateLock.get(op.getURI()).writeLock();
+    lock.lock();
+    try {
       if (!op.isRetrying()) {
         replicationTasksStorage.get().finish(op);
       }
-      inFlight.remove(op.getURI());
+      queue.inFlight.remove(op.getURI());
+    } finally {
+      lock.unlock();
     }
   }
 
   public Map<ReplicateRefUpdate, String> getTaskNamesByReplicateRefUpdate() {
     Map<ReplicateRefUpdate, String> taskNameByReplicateRefUpdate = new HashMap<>();
-    for (PushOne push : pending.values()) {
+    for (PushOne push : queue.pending.values()) {
       String taskName = push.toString();
       for (ReplicateRefUpdate refUpdate : push.getReplicateRefUpdates()) {
         taskNameByReplicateRefUpdate.put(refUpdate, taskName);
