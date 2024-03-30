@@ -35,6 +35,7 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.googlesource.gerrit.plugins.replication.Destination.Queue;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig.FilterType;
 import java.net.URISyntaxException;
@@ -227,8 +228,9 @@ public class DestinationsCollection implements ReplicationDestinations {
     if (drainQueueAttempts == 0) {
       return;
     }
-    int pending = destination.getQueueInfo().pending.size();
-    int inFlight = destination.getQueueInfo().inFlight.size();
+    Queue queue = destination.getQueue();
+    int pending = queue.pending.size();
+    int inFlight = queue.inFlight.size();
     while ((inFlight > 0 || pending > 0) && drainQueueAttempts > 0) {
       try {
         logger.atInfo().log(
@@ -239,8 +241,8 @@ public class DestinationsCollection implements ReplicationDestinations {
         logger.atWarning().withCause(ie).log(
             "Wait for replication events to drain has been interrupted");
       }
-      pending = destination.getQueueInfo().pending.size();
-      inFlight = destination.getQueueInfo().inFlight.size();
+      pending = queue.pending.size();
+      inFlight = queue.inFlight.size();
       drainQueueAttempts--;
     }
     if (pending > 0 || inFlight > 0) {
