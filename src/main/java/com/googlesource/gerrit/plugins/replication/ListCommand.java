@@ -90,7 +90,7 @@ final class ListCommand extends SshCommand {
         addProperty(obj, "AdminUrl", d.getAdminUrls());
         addProperty(obj, "AuthGroup", d.getAuthGroupNames());
         addProperty(obj, "Project", d.getProjects());
-        Destination.QueueInfo q = d.getQueueInfo();
+        Destination.Queue q = d.getQueue();
         addQueueDetails(obj, "InFlight", q.inFlight.values());
         addQueueDetails(obj, "Pending", q.pending.values());
       }
@@ -115,7 +115,7 @@ final class ListCommand extends SshCommand {
           out.append("Project: ").append(project).append("\n");
         }
 
-        Destination.QueueInfo q = d.getQueueInfo();
+        Destination.Queue q = d.getQueue();
         out.append("In Flight: ").append(q.inFlight.size()).append("\n");
         addQueueDetails(out, q.inFlight.values());
         out.append("Pending: ").append(q.pending.size()).append("\n");
