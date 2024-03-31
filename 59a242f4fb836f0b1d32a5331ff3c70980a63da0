@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64213791_88d5be62",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2024-03-31T19:23:57Z",
+      "side": 1,
+      "message": "Considering that the max number of locks is limited to 16, I don\u0027t see any need for lazy-week locks. GC-ing them will really bring nothing to the memory usage. Simply instantiate all locks and keep them for the lifetime of the process: `Striped.lock(numStripes)` or `Striped.readWriteLock(numStripes)` if r/w lock is needed.",
+      "range": {
+        "startLine": 169,
+        "startChar": 24,
+        "endLine": 169,
+        "endChar": 45
+      },
+      "revId": "59a242f4fb836f0b1d32a5331ff3c70980a63da0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3784d9d9_9776a6fd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2024-03-31T19:23:57Z",
+      "side": 1,
+      "message": "this must contains project name, I guess you checked it?",
+      "range": {
+        "startLine": 287,
+        "startChar": 40,
+        "endLine": 287,
+        "endChar": 48
+      },
+      "revId": "59a242f4fb836f0b1d32a5331ff3c70980a63da0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c8fe78e_e4919229",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2024-03-31T19:23:57Z",
+      "side": 1,
+      "message": "This still synchronizes on the `stateLock` object, like before your change. Forgot this place?",
+      "revId": "59a242f4fb836f0b1d32a5331ff3c70980a63da0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79f6aa81_d7cfd58c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2024-03-31T19:23:57Z",
+      "side": 1,
+      "message": "This coding pattern is repeat many times through this change. Maybe it could be extracted into a utility method/class where we pass the the `uri`, `stateLock` and a lambda to execute in the context of the lock. Could also be done in a follow-up change.\nExample usage, assuming the code is moved into a new `StateLock` class:\n```\n  stateLock.withReadLock(uri, () -\u003e {\n    if (!op.isRetrying()) {\n      replicationTasksStorage.get().finish(op);\n    }\n    queue.inFlight.remove(op.getURI());\n  });\n```",
+      "revId": "59a242f4fb836f0b1d32a5331ff3c70980a63da0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
