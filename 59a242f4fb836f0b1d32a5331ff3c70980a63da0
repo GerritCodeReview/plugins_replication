@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fef197da_8a9ae525",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-04-01T23:09:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64213791_88d5be62",
+      "range": {
+        "startLine": 169,
+        "startChar": 24,
+        "endLine": 169,
+        "endChar": 45
+      },
+      "revId": "59a242f4fb836f0b1d32a5331ff3c70980a63da0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3784d9d9_9776a6fd",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-31T19:23:57Z",
       "side": 1,
       "message": "this must contains project name, I guess you checked it?",
+      "range": {
+        "startLine": 287,
+        "startChar": 40,
+        "endLine": 287,
+        "endChar": 48
+      },
+      "revId": "59a242f4fb836f0b1d32a5331ff3c70980a63da0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f25f310_2c0a709d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-04-01T23:09:38Z",
+      "side": 1,
+      "message": "yes, I checked, it\u0027s the full url to the repo, e.g. `http://localhost:8080/a/All-Projects.git`",
+      "parentUuid": "3784d9d9_9776a6fd",
       "range": {
         "startLine": 287,
         "startChar": 40,
@@ -64,6 +112,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61a4f0cb_75b59153",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-04-01T23:09:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c8fe78e_e4919229",
+      "revId": "59a242f4fb836f0b1d32a5331ff3c70980a63da0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79f6aa81_d7cfd58c",
@@ -77,6 +143,24 @@
       "writtenOn": "2024-03-31T19:23:57Z",
       "side": 1,
       "message": "This coding pattern is repeat many times through this change. Maybe it could be extracted into a utility method/class where we pass the the `uri`, `stateLock` and a lambda to execute in the context of the lock. Could also be done in a follow-up change.\nExample usage, assuming the code is moved into a new `StateLock` class:\n```\n  stateLock.withReadLock(uri, () -\u003e {\n    if (!op.isRetrying()) {\n      replicationTasksStorage.get().finish(op);\n    }\n    queue.inFlight.remove(op.getURI());\n  });\n```",
+      "revId": "59a242f4fb836f0b1d32a5331ff3c70980a63da0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1998cc1c_2f2d1aae",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-04-01T23:09:38Z",
+      "side": 1,
+      "message": "Done in If46d2b1ece73e32a7463c02988ccd1d4e2f769aa",
+      "parentUuid": "79f6aa81_d7cfd58c",
       "revId": "59a242f4fb836f0b1d32a5331ff3c70980a63da0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
