@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8286ec8_0cb77c90",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-04-02T16:37:11Z",
+      "side": 1,
+      "message": "should we also mention that `Api-Modules` are supported from Gerrit 3.9? Just in case someone will try to build replication `master` and load it into eg. 3.8",
+      "revId": "5221be03950560484ac9c257f8cc51b77e644f91",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
