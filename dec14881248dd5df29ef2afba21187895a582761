@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a061c1ba_3c593170",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2024-04-02T12:19:23Z",
+      "side": 1,
+      "message": "Considering the lack of tests in this plugin and the potential effects of this change, I am giving CR+1 until we try this code in production.\nOtherwise this would be CR+2.",
+      "revId": "dec14881248dd5df29ef2afba21187895a582761",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
