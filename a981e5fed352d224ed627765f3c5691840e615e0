@@ -16,6 +16,24 @@
       "message": "this method can now be inlined",
       "revId": "a981e5fed352d224ed627765f3c5691840e615e0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f48c42c_b1c026f2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2024-04-02T11:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d569a9d0_a801c356",
+      "revId": "a981e5fed352d224ed627765f3c5691840e615e0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
