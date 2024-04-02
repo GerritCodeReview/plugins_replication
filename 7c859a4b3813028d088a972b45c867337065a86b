@@ -173,6 +173,24 @@
       "message": "documentation needs to be updated to include the new building steps.",
       "revId": "7c859a4b3813028d088a972b45c867337065a86b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9258f2ba_1c7b32c5",
+        "filename": "src/main/resources/Documentation/extension-point.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-04-02T13:50:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3af14be1_54d2c350",
+      "revId": "7c859a4b3813028d088a972b45c867337065a86b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
