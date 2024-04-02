@@ -73,7 +73,6 @@ import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -395,13 +394,13 @@ public class Destination {
 
   void schedule(
       Project.NameKey project, Set<String> refs, URIish uri, ReplicationState state, boolean now) {
-    Set<String> refsToSchedule = new HashSet<>();
+    ImmutableSet.Builder<String> toSchedule = ImmutableSet.builder();
     for (String ref : refs) {
       if (!shouldReplicate(project, ref, state)) {
         repLog.atFine().log("Not scheduling replication %s:%s => %s", project, ref, uri);
         continue;
       }
-      refsToSchedule.add(ref);
+      toSchedule.add(ref);
     }
     repLog.atInfo().log("scheduling replication %s:%s => %s", project, refs, uri);
 
@@ -430,8 +429,10 @@ public class Destination {
       }
     }
 
+    ImmutableSet<String> refsToSchedule = toSchedule.build();
+    PushOne task;
     synchronized (stateLock) {
-      PushOne task = getPendingPush(uri);
+      task = getPendingPush(uri);
       if (task == null) {
         task = opFactory.create(project, uri);
         addRefs(task, ImmutableSet.copyOf(refsToSchedule));
@@ -454,6 +455,7 @@ public class Destination {
         state.increasePushTaskCount(project.get(), ref);
       }
     }
+    postReplicationScheduledEvent(task, refsToSchedule);
   }
 
   @Nullable
@@ -491,7 +493,6 @@ public class Destination {
 
   private void addRefs(PushOne e, ImmutableSet<String> refs) {
     e.addRefBatch(refs);
-    postReplicationScheduledEvent(e, refs);
   }
 
   /**
@@ -516,6 +517,10 @@ public class Destination {
    * @param pushOp The PushOp instance to be scheduled.
    */
   void reschedule(PushOne pushOp, RetryReason reason) {
+    boolean isRescheduled = false;
+    boolean isFailed = false;
+    RemoteRefUpdate.Status failedStatus = null;
+
     synchronized (stateLock) {
       URIish uri = pushOp.getURI();
       PushOne pendingPushOp = getPendingPush(uri);
@@ -571,13 +576,13 @@ public class Destination {
           case TRANSPORT_ERROR:
           case REPOSITORY_MISSING:
           default:
-            RemoteRefUpdate.Status status =
+            failedStatus =
                 RetryReason.REPOSITORY_MISSING.equals(reason)
                     ? NON_EXISTING
                     : REJECTED_OTHER_REASON;
-            postReplicationFailedEvent(pushOp, status);
+            isFailed = true;
             if (pushOp.setToRetry()) {
-              postReplicationScheduledEvent(pushOp);
+              isRescheduled = true;
               replicationTasksStorage.get().reset(pushOp);
               @SuppressWarnings("unused")
               ScheduledFuture<?> ignored2 =
@@ -593,6 +598,12 @@ public class Destination {
             break;
         }
       }
+    }
+    if (isFailed) {
+      postReplicationFailedEvent(pushOp, failedStatus);
+    }
+    if (isRescheduled) {
+      postReplicationScheduledEvent(pushOp);
     }
   }
 
