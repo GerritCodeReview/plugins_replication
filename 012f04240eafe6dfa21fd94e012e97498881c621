@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a37d7dd7_54b57f1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-04-02T12:03:15Z",
+      "side": 1,
+      "message": "verified locally since Zuul didn\u0027t start a job",
+      "revId": "012f04240eafe6dfa21fd94e012e97498881c621",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
