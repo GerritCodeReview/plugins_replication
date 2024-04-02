@@ -39,6 +39,30 @@
       },
       "revId": "93d1859193d88f2f3a6ff0211321e459c51eabe6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b40a047_b1dcb0c4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ApiModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-04-02T12:40:13Z",
+      "side": 1,
+      "message": "\u003e The `ReplicationRemotesUpdater` is not an extension point, it\u0027s a public API, that must not be replaced by anyone.\n\nThat looks like similar to what we do with GerritApi interface:\ncom.google.gerrit.extensions.api.GerritApi\n\nWe need to do something similar here.\n\n\u003e It uses `ReplicationConfigOverrides` to propagate the changes to the configuration storage.\n\u003e \n\u003e With this approach, we now create two ways of handling the configuration updates. One with `ReplicationConfigOverrides.update(Config)`, the second with `ReplicationRemtoesUpdater.update(Config)`. This is ambiguous and bad design for an API.\n\nThe ReplicationRemotesUpdater is basically a wrapper that does:\n- Trivial input validation of the `Config` object\n- Extraction of the passwords settings of the `Config` object and storage as secrets\n- Delegation to `ConfigResource` or `ReplicationConfigOverrides` of the remaining section.\n\nMaybe the API needs rethinking or renaming, but we should definitely not be mixing in the implementation logic in the other plugins using the API.\n\nAt the moment, we don\u0027t have any x-plugin dependency on API directly, without having an `DynamicItem\u003c\u003e, DynamicSet\u003c\u003e` or `DynamicMap\u003c\u003e`. Maybe that is what we need to introduce in Gerrit master?",
+      "parentUuid": "1625da5b_e1d53b66",
+      "range": {
+        "startLine": 25,
+        "startChar": 3,
+        "endLine": 25,
+        "endChar": 66
+      },
+      "revId": "93d1859193d88f2f3a6ff0211321e459c51eabe6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
