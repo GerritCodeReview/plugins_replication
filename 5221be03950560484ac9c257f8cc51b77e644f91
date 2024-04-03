@@ -82,6 +82,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d4d671d_4936b355",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-04-03T19:50:27Z",
+      "side": 1,
+      "message": "I did a bit of analysis and, yes, it will *indirectly* fix the Issue 332512505. I still need to understand, however, how an `injector.getInstance(BazModule.class)` can define a new binding, which is unexpected IMHO. I need to dig deeper into that, at Guice level.\n\nLet\u0027s continue the investigation in the Issue 332512505, as this change is non directly related to the strange Guice behaviour.",
+      "parentUuid": "ee4245c4_ac31b4e3",
+      "revId": "5221be03950560484ac9c257f8cc51b77e644f91",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8b2711e_6d1eff3f",
