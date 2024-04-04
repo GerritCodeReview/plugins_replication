@@ -23,11 +23,9 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.ProvisionException;
 import com.google.inject.Scopes;
-import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
 import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
-import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -59,14 +57,6 @@ public class ReplicationConfigModule extends AbstractModule {
     } else {
       bind(ReplicationConfig.class).to(ReplicationConfigImpl.class).in(Scopes.SINGLETON);
     }
-
-    bind(ReplicationQueue.class).in(Scopes.SINGLETON);
-    bind(ObservableQueue.class).to(ReplicationQueue.class);
-    bind(ReplicationDestinations.class).to(DestinationsCollection.class);
-    bind(ConfigParser.class).to(DestinationConfigParser.class).in(Scopes.SINGLETON);
-
-    install(new FactoryModuleBuilder().build(Destination.Factory.class));
-    install(new FactoryModuleBuilder().build(ProjectDeletionState.Factory.class));
   }
 
   public FileBasedConfig getReplicationConfig() {
