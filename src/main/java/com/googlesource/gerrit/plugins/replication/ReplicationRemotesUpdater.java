@@ -1,3 +1,5 @@
+<<<<<<< PATCH SET (86d75b Revert "Expose API to update remotes' configurations")
+=======
 // Copyright (C) 2024 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -108,3 +110,4 @@ public class ReplicationRemotesUpdater {
     private final Config passwords = new Config();
   }
 }
+>>>>>>> BASE      (5e33f8 Decouple replication-api.jar from the main replication plugi)
