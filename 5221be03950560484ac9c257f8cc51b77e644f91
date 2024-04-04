@@ -100,6 +100,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53ac60b1_261fb756",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-04-04T14:23:32Z",
+      "side": 1,
+      "message": "I have completed the analysis of Issue 332512505 and I confirm that this change *does not directly* fix the issue; however, not having an `ApiModule` in the replication plugin would make the plugin injector non-hierarchical and therefore the direct injection of `Injector` as mention in Issue 332512505 would work as you expected.\n\nMarking this as resolved, as Issue 332512505 needs to be investigated further at Guice level.",
+      "parentUuid": "8d4d671d_4936b355",
+      "revId": "5221be03950560484ac9c257f8cc51b77e644f91",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8b2711e_6d1eff3f",
