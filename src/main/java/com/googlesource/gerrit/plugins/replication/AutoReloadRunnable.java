@@ -61,6 +61,10 @@ public class AutoReloadRunnable implements Runnable {
     reload();
   }
 
+  public ReplicationConfig getCurrentReplicationConfig() {
+    return loadedConfig;
+  }
+
   synchronized void reload() {
     String pendingConfigVersion = loadedConfig.getVersion();
     try {

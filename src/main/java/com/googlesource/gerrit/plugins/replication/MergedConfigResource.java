@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Suppliers;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.common.UsedAt;
@@ -25,6 +26,7 @@ import com.google.inject.Provider;
 import com.google.inject.util.Providers;
 import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides;
+import java.util.function.Supplier;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
 
@@ -33,13 +35,16 @@ public class MergedConfigResource {
   @UsedAt(Project.PLUGIN_PULL_REPLICATION)
   public static MergedConfigResource withBaseOnly(ConfigResource base) {
     MergedConfigResource mergedConfigResource = new MergedConfigResource();
-    mergedConfigResource.base = Providers.of(base);
+    mergedConfigResource.baseConfigProvider = Providers.of(base);
     return mergedConfigResource;
   }
 
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  @Inject private Provider<ConfigResource> base;
+  @Inject private Provider<ConfigResource> baseConfigProvider;
+
+  private final Supplier<ConfigResource> base =
+      Suppliers.memoize(() -> this.baseConfigProvider.get());
 
   @Inject(optional = true)
   @Nullable

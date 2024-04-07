@@ -43,10 +43,9 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleLi
   public AutoReloadConfigDecorator(
       @PluginName String pluginName,
       WorkQueue workQueue,
-      ReplicationConfigImpl replicationConfig,
       AutoReloadRunnable reloadRunner,
       EventBus eventBus) {
-    this.currentConfig = replicationConfig;
+    this.currentConfig = reloadRunner.getCurrentReplicationConfig();
     this.autoReloadExecutor = workQueue.createQueue(1, pluginName + "_auto-reload-config");
     this.reloadRunner = reloadRunner;
     eventBus.register(this);
