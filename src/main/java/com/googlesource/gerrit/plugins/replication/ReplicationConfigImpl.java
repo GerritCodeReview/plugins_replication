@@ -36,15 +36,16 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   private final int maxRefsToShow;
   private int sshCommandTimeout;
   private int sshConnectionTimeout;
-  private final MergedConfigResource configResource;
   private final Path pluginDataDir;
+  private final Config config;
+  private final String configVersion;
 
   @Inject
   public ReplicationConfigImpl(
       MergedConfigResource configResource, SitePaths site, @PluginData Path pluginDataDir) {
     this.site = site;
-    this.configResource = configResource;
-    Config config = configResource.getConfig();
+    config = configResource.getConfig();
+    configVersion = configResource.getVersion();
     this.replicateAllOnPluginStart = config.getBoolean("gerrit", "replicateOnStartup", false);
     this.defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);
     this.maxRefsToLog = config.getInt("gerrit", "maxRefsToLog", 0);
@@ -120,12 +121,12 @@ public class ReplicationConfigImpl implements ReplicationConfig {
 
   @Override
   public Config getConfig() {
-    return configResource.getConfig();
+    return config;
   }
 
   @Override
   public String getVersion() {
-    return configResource.getVersion();
+    return configVersion;
   }
 
   @Override
