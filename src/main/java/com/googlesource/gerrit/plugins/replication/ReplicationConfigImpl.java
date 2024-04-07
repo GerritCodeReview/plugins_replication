@@ -30,21 +30,22 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   private static final int DEFAULT_SSH_CONNECTION_TIMEOUT_MS = 2 * 60 * 1000; // 2 minutes
 
   private final SitePaths site;
+  private final MergedConfigResource configResource;
   private boolean replicateAllOnPluginStart;
   private boolean defaultForceUpdate;
   private int maxRefsToLog;
   private final int maxRefsToShow;
   private int sshCommandTimeout;
   private int sshConnectionTimeout;
-  private final MergedConfigResource configResource;
   private final Path pluginDataDir;
+  private final Config config;
 
   @Inject
   public ReplicationConfigImpl(
       MergedConfigResource configResource, SitePaths site, @PluginData Path pluginDataDir) {
     this.site = site;
+    config = configResource.getConfig();
     this.configResource = configResource;
-    Config config = configResource.getConfig();
     this.replicateAllOnPluginStart = config.getBoolean("gerrit", "replicateOnStartup", false);
     this.defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);
     this.maxRefsToLog = config.getInt("gerrit", "maxRefsToLog", 0);
@@ -120,7 +121,7 @@ public class ReplicationConfigImpl implements ReplicationConfig {
 
   @Override
   public Config getConfig() {
-    return configResource.getConfig();
+    return config;
   }
 
   @Override
