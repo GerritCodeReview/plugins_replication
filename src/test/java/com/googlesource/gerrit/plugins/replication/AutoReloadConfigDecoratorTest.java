@@ -264,10 +264,6 @@ public class AutoReloadConfigDecoratorTest extends AbstractConfigTest {
             eventBus,
             Providers.of(replicationQueueMock));
     return new AutoReloadConfigDecorator(
-        "replication",
-        workQueueMock,
-        newReplicationFileBasedConfig(),
-        autoReloadRunnable,
-        eventBus);
+        "replication", workQueueMock, autoReloadRunnable, eventBus);
   }
 }

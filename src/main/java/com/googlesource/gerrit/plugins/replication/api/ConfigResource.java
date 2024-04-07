@@ -37,10 +37,9 @@ public interface ConfigResource {
   Config getConfig();
 
   /**
-   * Current logical version string of the current configuration loaded in memory, depending on the
-   * actual implementation of the configuration on the persistent storage.
+   * Current logical version string of the current configuration on the persistent storage.
    *
-   * @return current logical version number.
+   * @return latest logical version number on the persistent storage
    */
   String getVersion();
 }
