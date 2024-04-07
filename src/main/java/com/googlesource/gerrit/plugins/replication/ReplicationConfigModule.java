@@ -47,7 +47,7 @@ public class ReplicationConfigModule extends AbstractModule {
 
   @Override
   protected void configure() {
-    bind(ConfigResource.class).to(getConfigResourceClass());
+    bind(ConfigResource.class).to(getConfigResourceClass()).in(Scopes.SINGLETON);
 
     if (getReplicationConfig().getBoolean("gerrit", "autoReload", false)) {
       bind(ReplicationConfig.class).to(AutoReloadConfigDecorator.class).in(Scopes.SINGLETON);
