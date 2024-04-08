@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f6a7ba8_6b2fe4d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2024-04-08T02:16:01Z",
+      "side": 1,
+      "message": "A few lines are wrapped a lot sooner than they need to be",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "1a7713cb4015dafd5a13dcadad9ec54aa2827e0c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41a437a1_8f32164b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2024-04-08T02:16:01Z",
+      "side": 1,
+      "message": "What about: Reuse the same instance across requests in ReplicationConfigImpl. This avoids reloading the configuration from disk continuously.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 34
+      },
+      "revId": "1a7713cb4015dafd5a13dcadad9ec54aa2827e0c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6d4fc08_24363bd2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2024-04-08T02:16:01Z",
+      "side": 1,
+      "message": "nit:`it\u0027s`",
+      "range": {
+        "startLine": 18,
+        "startChar": 43,
+        "endLine": 18,
+        "endChar": 45
+      },
+      "revId": "1a7713cb4015dafd5a13dcadad9ec54aa2827e0c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70e0cbb5_7d5ad938",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2024-04-08T02:16:01Z",
+      "side": 1,
+      "message": "nit: `replication`",
+      "range": {
+        "startLine": 19,
+        "startChar": 44,
+        "endLine": 19,
+        "endChar": 54
+      },
+      "revId": "1a7713cb4015dafd5a13dcadad9ec54aa2827e0c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6aa0059c_10a598a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2024-04-08T02:16:01Z",
+      "side": 1,
+      "message": "Assuming there wasn\u0027t a reason to reload config from disk anyway.",
+      "revId": "1a7713cb4015dafd5a13dcadad9ec54aa2827e0c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
