@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfe641c1_e21047e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-04-08T05:59:10Z",
+      "side": 1,
+      "message": "Tested E2E on GerritHub.io and I confirm that replication is loaded only once per plugin startup.",
+      "revId": "56b8ffbab5bf619c0b6b5d44f0255fd41b9e1c89",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
