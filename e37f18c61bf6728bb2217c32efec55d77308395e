@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74748669_314ae0e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-04-15T17:19:00Z",
+      "side": 1,
+      "message": "The verification build is failing due to Issue 334773326\n\nI\u0027ve run `bazel test --cache_test_results\u003dNO --test_tag_filters\u003dreplication //...`, `bazel test plugins/replication:replication_tests` and `bazel build plugins/replication` locally, all without any issues.",
+      "revId": "e37f18c61bf6728bb2217c32efec55d77308395e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
