@@ -16,6 +16,23 @@
       "message": "The verification build is failing due to Issue 334773326\n\nI\u0027ve run `bazel test --cache_test_results\u003dNO --test_tag_filters\u003dreplication //...`, `bazel test plugins/replication:replication_tests` and `bazel build plugins/replication` locally, all without any issues.",
       "revId": "e37f18c61bf6728bb2217c32efec55d77308395e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12c8b09c_526d799f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-04-16T22:24:01Z",
+      "side": 1,
+      "message": "Can you also make the equivalent changes on the pull-replication plugin and set to the same topic?\n\n(push-)replication and pull-replication plugin are pretty much one the shadow of the other.",
+      "revId": "e37f18c61bf6728bb2217c32efec55d77308395e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
