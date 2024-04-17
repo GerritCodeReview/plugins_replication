@@ -51,6 +51,24 @@
       "parentUuid": "12c8b09c_526d799f",
       "revId": "e37f18c61bf6728bb2217c32efec55d77308395e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b5517fc_2ac5cedc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-04-17T09:23:14Z",
+      "side": 1,
+      "message": "Additionally, we should also change the dependency of `pull-replication`, to use the `replication-api` target, instead of `replication`. This will also force us to move loads of classes into `.api` package.",
+      "parentUuid": "60625018_32b52908",
+      "revId": "e37f18c61bf6728bb2217c32efec55d77308395e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
