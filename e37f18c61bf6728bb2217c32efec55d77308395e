@@ -33,6 +33,24 @@
       "message": "Can you also make the equivalent changes on the pull-replication plugin and set to the same topic?\n\n(push-)replication and pull-replication plugin are pretty much one the shadow of the other.",
       "revId": "e37f18c61bf6728bb2217c32efec55d77308395e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60625018_32b52908",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-04-17T09:19:12Z",
+      "side": 1,
+      "message": "I\u0027m afraid it won\u0027t be that straightforward, as after `replication-api` target was introduced, we need to move the `ReplicationConfigModule` into `.api` package to make the `pull-replication` work.\n\nI can create a change that will fix compilation errors and test failures, but the `pull-replication` will not start until we _solve_ the problem with `ReplicationConfigModule`.\n\nAlso moving that module into `.api`, would bring a lot of classes into that package as we need to move all of the dependencies to build `replication-api` target.",
+      "parentUuid": "12c8b09c_526d799f",
+      "revId": "e37f18c61bf6728bb2217c32efec55d77308395e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
