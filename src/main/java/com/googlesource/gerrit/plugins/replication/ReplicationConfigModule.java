@@ -61,9 +61,7 @@ public class ReplicationConfigModule extends AbstractModule {
     }
 
     bind(ReplicationQueue.class).in(Scopes.SINGLETON);
-    bind(ObservableQueue.class).to(ReplicationQueue.class);
     bind(ReplicationDestinations.class).to(DestinationsCollection.class);
-    bind(ConfigParser.class).to(DestinationConfigParser.class).in(Scopes.SINGLETON);
 
     install(new FactoryModuleBuilder().build(Destination.Factory.class));
     install(new FactoryModuleBuilder().build(ProjectDeletionState.Factory.class));
