@@ -14,10 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import static com.google.gerrit.common.UsedAt.Project.PLUGIN_GITHUB;
-
 import com.google.gerrit.common.Nullable;
-import com.google.gerrit.common.UsedAt;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.server.securestore.SecureStore;
 import com.google.inject.Inject;
@@ -25,21 +22,20 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationRemotesUpdater;
 import java.io.IOException;
 import java.util.List;
 import org.eclipse.jgit.lib.Config;
 
-/** Public API to update replication plugin remotes configurations programmatically. */
 @Singleton
-@UsedAt(PLUGIN_GITHUB)
-public class ReplicationRemotesUpdater {
+class ReplicationRemotesUpdaterImpl implements ReplicationRemotesUpdater {
 
   private final SecureStore secureStore;
   private final Provider<ConfigResource> baseConfigProvider;
   private final DynamicItem<ReplicationConfigOverrides> configOverridesItem;
 
   @Inject
-  ReplicationRemotesUpdater(
+  ReplicationRemotesUpdaterImpl(
       SecureStore secureStore,
       Provider<ConfigResource> baseConfigProvider,
       @Nullable DynamicItem<ReplicationConfigOverrides> configOverridesItem) {
@@ -48,17 +44,7 @@ public class ReplicationRemotesUpdater {
     this.configOverridesItem = configOverridesItem;
   }
 
-  /**
-   * Adds or updates the remote configuration for the replication plugin.
-   *
-   * <p>Provided JGit {@link Config} object should contain at least one named <em>remote</em>
-   * section. All other configurations will be ignored.
-   *
-   * <p>NOTE: The {@code remote.$name.password} will be stored using {@link SecureStore}.
-   *
-   * @param remoteConfig remotes to add or update
-   * @throws IOException when persisting fails
-   */
+  @Override
   public void update(Config remoteConfig) throws IOException {
     if (remoteConfig.getSubsections("remote").isEmpty()) {
       throw new IllegalArgumentException(
