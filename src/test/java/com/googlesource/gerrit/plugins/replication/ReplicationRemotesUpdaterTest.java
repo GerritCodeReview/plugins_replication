@@ -32,6 +32,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+
+import com.googlesource.gerrit.plugins.replication.api.ReplicationRemotesUpdater;
 import org.eclipse.jgit.lib.Config;
 import org.junit.After;
 import org.junit.Before;
@@ -125,7 +127,7 @@ public class ReplicationRemotesUpdaterTest {
     DynamicItem<ReplicationConfigOverrides> dynamicItemMock = mock(DynamicItem.class);
     when(dynamicItemMock.get()).thenReturn(overrides);
 
-    return new ReplicationRemotesUpdater(
+    return new ReplicationRemotesUpdaterImpl(
         secureStoreMock, Providers.of(baseConfig), dynamicItemMock);
   }
 
