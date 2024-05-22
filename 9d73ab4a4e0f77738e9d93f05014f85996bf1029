@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9a165b9_8ce470a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-05-22T21:46:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2afc7f86_a2ea6ad8",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 64
+      },
+      "revId": "9d73ab4a4e0f77738e9d93f05014f85996bf1029",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27ae1bb6_d489b79c",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-22T07:50:03Z",
       "side": 1,
       "message": "Do you have a draft change to review?",
+      "range": {
+        "startLine": 20,
+        "startChar": 65,
+        "endLine": 21,
+        "endChar": 9
+      },
+      "revId": "9d73ab4a4e0f77738e9d93f05014f85996bf1029",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93c66fbb_187f5d51",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-05-22T21:46:34Z",
+      "side": 1,
+      "message": "nope, nothing to share as of yet. Initially I hoped to have it accomplished without any _guice magic_, but unfortunately it requires changes to `PluginGuiceEnvironemnt` and Guice _rebinding wizardry_.",
+      "parentUuid": "27ae1bb6_d489b79c",
       "range": {
         "startLine": 20,
         "startChar": 65,
