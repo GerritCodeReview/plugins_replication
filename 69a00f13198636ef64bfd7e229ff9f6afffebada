@@ -16,6 +16,24 @@
       "message": "Missing `Bug: Issue NNNN`",
       "revId": "69a00f13198636ef64bfd7e229ff9f6afffebada",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0932fe6_2e3b23a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-06-10T21:04:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8c70302_bea90901",
+      "revId": "69a00f13198636ef64bfd7e229ff9f6afffebada",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
