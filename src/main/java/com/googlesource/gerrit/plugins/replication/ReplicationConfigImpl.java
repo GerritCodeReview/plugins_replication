@@ -31,6 +31,7 @@ public class ReplicationConfigImpl implements ReplicationConfig {
 
   private final SitePaths site;
   private final MergedConfigResource configResource;
+  private final boolean useLegacyCredentials;
   private boolean replicateAllOnPluginStart;
   private boolean defaultForceUpdate;
   private int maxRefsToLog;
@@ -62,6 +63,7 @@ public class ReplicationConfigImpl implements ReplicationConfig {
                 DEFAULT_SSH_CONNECTION_TIMEOUT_MS,
                 MILLISECONDS);
     this.pluginDataDir = pluginDataDir;
+    this.useLegacyCredentials = config.getBoolean("gerrit", "useLegacyCredentials", false);
   }
 
   @Nullable
@@ -122,6 +124,11 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   @Override
   public Config getConfig() {
     return config;
+  }
+
+  @Override
+  public boolean useLegacyCredentials() {
+    return useLegacyCredentials;
   }
 
   @Override
