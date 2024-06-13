@@ -102,4 +102,7 @@ public interface ReplicationConfig {
    * @return the config.
    */
   Config getConfig();
+
+  /** Use legacy credentials for migrating existing sites. */
+  boolean useLegacyCredentials();
 }
