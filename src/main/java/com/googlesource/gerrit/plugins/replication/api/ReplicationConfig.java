@@ -102,4 +102,16 @@ public interface ReplicationConfig {
    * @return the config.
    */
   Config getConfig();
+
+  /**
+   * Use legacy credentials for migrating existing sites.
+   *
+   * <p>Existing installations may have used a mix of encrypted and clear text credentials in
+   * secure.config, leveraging the replication plugin bug that was not accessing it using the
+   * correct API. The legacy feature flag 'gerrit.useLegacyCredentials' allows Gerrit to still use
+   * direct access to secure.config without decrypting its values.
+   *
+   * @return true if the secure.config should be read always directly and without decryption
+   */
+  boolean useLegacyCredentials();
 }

@@ -14,14 +14,12 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import static com.google.gerrit.common.FileUtil.lastModified;
-
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.server.config.SitePaths;
+import com.google.gerrit.server.securestore.SecureStore;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.transport.CredentialsProvider;
@@ -29,34 +27,44 @@ import org.eclipse.jgit.transport.CredentialsProvider;
 class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsFactory {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  private final AtomicReference<SecureCredentialsFactory> secureCredentialsFactory;
-  private volatile long secureCredentialsFactoryLoadTs;
+  private final AtomicReference<CredentialsFactory> secureCredentialsFactory;
+  private final SecureStore secureStore;
   private final SitePaths site;
-  private ReplicationConfig config;
+  private final ReplicationConfig config;
 
   @Inject
-  public AutoReloadSecureCredentialsFactoryDecorator(SitePaths site, ReplicationConfig config)
+  public AutoReloadSecureCredentialsFactoryDecorator(
+      SitePaths site, SecureStore secureStore, ReplicationConfig config)
       throws ConfigInvalidException, IOException {
     this.site = site;
+    this.secureStore = secureStore;
     this.config = config;
-    this.secureCredentialsFactory = new AtomicReference<>(new SecureCredentialsFactory(site));
-    this.secureCredentialsFactoryLoadTs = getSecureConfigLastEditTs();
+    this.secureCredentialsFactory =
+        new AtomicReference<>(newSecureCredentialsFactory(site, secureStore, config));
+    if (config.useLegacyCredentials()) {
+      logger.atWarning().log(
+          "Using legacy credentials in clear text in secure.config. Please encrypt your credentials using "
+              + "'java -jar gerrit.war passwd' for each remote, remove the gerrit.useLegacyCredentials in replication.config "
+              + "and then reload the replication plugin.");
+    }
   }
 
-  private long getSecureConfigLastEditTs() {
-    if (!Files.exists(site.secure_config)) {
-      return 0L;
+  private static CredentialsFactory newSecureCredentialsFactory(
+      SitePaths site, SecureStore secureStore, ReplicationConfig config)
+      throws ConfigInvalidException, IOException {
+    if (config.useLegacyCredentials()) {
+      return new LegacyCredentialsFactory(site);
     }
-    return lastModified(site.secure_config);
+    return new SecureCredentialsFactory(secureStore);
   }
 
   @Override
   public CredentialsProvider create(String remoteName) {
     try {
       if (needsReload()) {
+        secureStore.reload();
         secureCredentialsFactory.compareAndSet(
-            secureCredentialsFactory.get(), new SecureCredentialsFactory(site));
-        secureCredentialsFactoryLoadTs = getSecureConfigLastEditTs();
+            secureCredentialsFactory.get(), newSecureCredentialsFactory(site, secureStore, config));
         logger.atInfo().log("secure.config reloaded as it was updated on the file system");
       }
     } catch (Exception e) {
@@ -69,7 +77,6 @@ class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsFactory 
   }
 
   private boolean needsReload() {
-    return config.getConfig().getBoolean("gerrit", "autoReload", false)
-        && getSecureConfigLastEditTs() != secureCredentialsFactoryLoadTs;
+    return config.getConfig().getBoolean("gerrit", "autoReload", false) && secureStore.isOutdated();
   }
 }

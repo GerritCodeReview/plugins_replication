@@ -78,7 +78,7 @@ public abstract class AbstractConfigTest {
   }
 
   @Before
-  public void setup() {
+  public void setup() throws IOException {
     when(destinationFactoryMock.create(any(DestinationConfiguration.class)))
         .thenAnswer(
             new Answer<Destination>() {
@@ -101,6 +101,10 @@ public abstract class AbstractConfigTest {
 
   protected FileBasedConfig newReplicationConfig() {
     return newReplicationConfig("replication.config");
+  }
+
+  protected FileBasedConfig newSecureConfig() {
+    return newReplicationConfig("secure.config");
   }
 
   protected FileBasedConfig newReplicationConfig(String path) {
