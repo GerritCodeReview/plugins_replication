@@ -17,12 +17,14 @@ package com.googlesource.gerrit.plugins.replication.api;
 import static com.google.gerrit.common.UsedAt.Project.PLUGIN_GITHUB;
 
 import com.google.gerrit.common.UsedAt;
+import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.server.securestore.SecureStore;
 import java.io.IOException;
 import org.eclipse.jgit.lib.Config;
 
 /** Public API to update replication plugin remotes configurations programmatically. */
 @UsedAt(PLUGIN_GITHUB)
+@DynamicItem.Final(implementedByPlugin = "replication")
 public interface ReplicationRemotesUpdater {
 
   /**
