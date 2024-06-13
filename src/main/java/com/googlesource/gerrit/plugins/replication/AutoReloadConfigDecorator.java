@@ -128,4 +128,9 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleLi
   public Config getConfig() {
     return currentConfig.getConfig();
   }
+
+  @Override
+  public boolean useLegacyCredentials() {
+    return currentConfig.useLegacyCredentials();
+  }
 }
