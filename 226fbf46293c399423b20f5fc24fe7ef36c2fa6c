@@ -185,6 +185,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "992223b9_01977583",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-13T17:05:41Z",
+      "side": 1,
+      "message": "I believe this is the wrong solution: it must be a lot simpler and reduce the impact with the current code.\n\nI\u0027ve attempted an easier solution with Ie5b6339d65d that only touches the reading of the file and replace it with the SecureStore.",
+      "revId": "226fbf46293c399423b20f5fc24fe7ef36c2fa6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47d927b5_77db62e4",
@@ -244,6 +261,52 @@
         "startChar": 0,
         "endLine": 139,
         "endChar": 0
+      },
+      "revId": "226fbf46293c399423b20f5fc24fe7ef36c2fa6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "498b7f2d_1caaf193",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-13T17:05:41Z",
+      "side": 1,
+      "message": "There isn\u0027t any change in the way the configuration is stored on the filesystem, we just use the proper API instead of reading the file directly. We do not need this fallback at all.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 7
+      },
+      "revId": "226fbf46293c399423b20f5fc24fe7ef36c2fa6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25eafbe7_806ad2e3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-13T17:05:41Z",
+      "side": 1,
+      "message": "This is unneeded.",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 3
       },
       "revId": "226fbf46293c399423b20f5fc24fe7ef36c2fa6c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
