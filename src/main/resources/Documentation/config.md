@@ -170,6 +170,14 @@ gerrit.sshConnectionTimeout
 :	Timeout for SSH connections. If 0, there is no timeout and
         the client waits indefinitely. By default, 2 minutes.
 
+gerrit.useLegacyCredentials
+:	Use legacy credentials on secure.config which did not allow encryption
+	through a SecureStore provider. Legacy credentials should not be used in
+	production and are provided purely for backward compatibility with existing
+	secure.config files. When enabling the SecureStore in Gerrit, for instance,
+	the secure-config.jar libModule, make sure that all existing replication
+	credentials are encrypted. By default, false.
+
 replication.distributionInterval
 :	Interval in seconds for running the replication distributor. When
 	run, the replication distributor will add all persisted waiting tasks
