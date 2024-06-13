@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.server.config.SitePaths;
+import com.google.gerrit.server.securestore.SecureStore;
 import com.google.inject.Inject;
 import java.io.IOException;
 import java.util.Objects;
@@ -26,34 +27,23 @@ import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.eclipse.jgit.util.FS;
 
 /** Looks up a remote's password in secure.config. */
+<<<<<<< PATCH SET (1dfb79 Use SecureStore to access replication credentials)
+public class SecureCredentialsFactory implements CredentialsFactory {
+  private final SecureStore secureStore;
+=======
 class SecureCredentialsFactory implements CredentialsFactory {
   private final Config config;
+>>>>>>> BASE      (8276a0 Reduce visibility of *CredentialsFactory* classes)
 
   @Inject
-  public SecureCredentialsFactory(SitePaths site) throws ConfigInvalidException, IOException {
-    config = load(site);
-  }
-
-  private static Config load(SitePaths site) throws ConfigInvalidException, IOException {
-    FileBasedConfig cfg = new FileBasedConfig(site.secure_config.toFile(), FS.DETECTED);
-    if (cfg.getFile().exists() && cfg.getFile().length() > 0) {
-      try {
-        cfg.load();
-      } catch (ConfigInvalidException e) {
-        throw new ConfigInvalidException(
-            String.format("Config file %s is invalid: %s", cfg.getFile(), e.getMessage()), e);
-      } catch (IOException e) {
-        throw new IOException(
-            String.format("Cannot read %s: %s", cfg.getFile(), e.getMessage()), e);
-      }
-    }
-    return cfg;
+  public SecureCredentialsFactory(SecureStore secureStore) throws ConfigInvalidException, IOException {
+    this.secureStore = secureStore;
   }
 
   @Override
   public CredentialsProvider create(String remoteName) {
-    String user = Objects.toString(config.getString("remote", remoteName, "username"), "");
-    String pass = Objects.toString(config.getString("remote", remoteName, "password"), "");
+    String user = Objects.toString(secureStore.get("remote", remoteName, "username"), "");
+    String pass = Objects.toString(secureStore.get("remote", remoteName, "password"), "");
     return new UsernamePasswordCredentialsProvider(user, pass);
   }
 }
