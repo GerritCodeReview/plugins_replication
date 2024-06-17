@@ -19,21 +19,23 @@ import static com.google.common.truth.Truth.assertThat;
 import static com.google.gerrit.testing.GerritJUnit.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import com.google.common.io.MoreFiles;
 import com.google.common.truth.StringSubject;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.securestore.SecureStore;
-import com.google.inject.util.Providers;
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationRemotesApi;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
-import com.googlesource.gerrit.plugins.replication.api.ReplicationRemotesApi;
+import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.jgit.lib.Config;
 import org.junit.After;
 import org.junit.Before;
@@ -44,12 +46,28 @@ public class ReplicationRemotesApiTest {
   private Path testSite;
   private SecureStore secureStoreMock;
   private FileConfigResource baseConfig;
+  private Injector testInjector;
+  private AtomicReference<ReplicationConfigOverrides> testOverrides;
 
   @Before
   public void setUp() throws Exception {
     testSite = Files.createTempDirectory("replicationRemotesUpdateTest");
     secureStoreMock = mock(SecureStore.class);
     baseConfig = new FileConfigResource(new SitePaths(testSite));
+    testOverrides = new AtomicReference(new TestReplicationConfigOverrides());
+    testInjector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(ConfigResource.class).toInstance(baseConfig);
+                bind(SecureStore.class).toInstance(secureStoreMock);
+                bind(ReplicationRemotesApi.class).to(ReplicationRemotesApiImpl.class);
+                DynamicItem.itemOf(binder(), ReplicationConfigOverrides.class);
+                DynamicItem.bind(binder(), ReplicationConfigOverrides.class)
+                    .toProvider(testOverrides::get);
+              }
+            });
   }
 
   @After
@@ -71,6 +89,7 @@ public class ReplicationRemotesApiTest {
 
   @Test
   public void addRemoteSectionToBaseConfigWhenNoOverrides() throws Exception {
+    testOverrides.set(null);
     String url = "fake_url";
     Config update = new Config();
     setRemoteSite(update, "url", url);
@@ -83,35 +102,29 @@ public class ReplicationRemotesApiTest {
 
   @Test
   public void addRemoteSectionToBaseOverridesConfig() throws Exception {
-    TestReplicationConfigOverrides testOverrides = new TestReplicationConfigOverrides();
     String url = "fake_url";
     Config update = new Config();
     setRemoteSite(update, "url", url);
-    ReplicationRemotesApi objectUnderTest = newReplicationConfigUpdater(testOverrides);
+    ReplicationRemotesApi objectUnderTest = newReplicationConfigUpdater();
 
     objectUnderTest.update(update);
 
-    assertRemoteSite(testOverrides.getConfig(), "url").isEqualTo(url);
+    assertRemoteSite(testOverrides.get().getConfig(), "url").isEqualTo(url);
     assertRemoteSite(baseConfig.getConfig(), "url").isNull();
   }
 
   @Test
   public void encryptPassword() throws Exception {
-    TestReplicationConfigOverrides testOverrides = new TestReplicationConfigOverrides();
     Config update = new Config();
     String password = "my_secret_password";
     setRemoteSite(update, "password", password);
-    ReplicationRemotesApi objectUnderTest = newReplicationConfigUpdater(testOverrides);
+    ReplicationRemotesApi objectUnderTest = newReplicationConfigUpdater();
 
     objectUnderTest.update(update);
 
     verify(secureStoreMock).setList("remote", "site", "password", List.of(password));
     assertRemoteSite(baseConfig.getConfig(), "password").isNull();
-    assertRemoteSite(testOverrides.getConfig(), "password").isNull();
-  }
-
-  private ReplicationRemotesApi newReplicationConfigUpdater() {
-    return newReplicationConfigUpdater(null);
+    assertRemoteSite(testOverrides.get().getConfig(), "password").isNull();
   }
 
   private void setRemoteSite(Config config, String name, String value) {
@@ -122,13 +135,8 @@ public class ReplicationRemotesApiTest {
     return assertThat(config.getString("remote", "site", name));
   }
 
-  private ReplicationRemotesApi newReplicationConfigUpdater(
-      ReplicationConfigOverrides overrides) {
-    DynamicItem<ReplicationConfigOverrides> dynamicItemMock = mock(DynamicItem.class);
-    when(dynamicItemMock.get()).thenReturn(overrides);
-
-    return new ReplicationRemotesApiImpl(
-        secureStoreMock, Providers.of(baseConfig), dynamicItemMock);
+  private ReplicationRemotesApi newReplicationConfigUpdater() {
+    return testInjector.getInstance(ReplicationRemotesApi.class);
   }
 
   static class TestReplicationConfigOverrides implements ReplicationConfigOverrides {
