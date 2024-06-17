@@ -28,6 +28,19 @@ import org.eclipse.jgit.lib.Config;
 public interface ReplicationRemotesApi {
 
   /**
+   * Retrieves the configuration for a remote by name.
+   *
+   * <p>Builds a JGit {@link Config} with the remote's configuration obtained by parsing the
+   * replication configuration sources.
+   *
+   * <p>NOTE: The remotes secrets are excluded for security reasons.
+   *
+   * @param remoteNames the remote names to retrieve.
+   * @return {@link Config} associated with the remoteName(s)
+   */
+  Config get(String... remoteNames);
+
+  /**
    * Adds or updates the remote configuration for the replication plugin.
    *
    * <p>Provided JGit {@link Config} object should contain at least one named <em>remote</em>

@@ -14,34 +14,42 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import com.google.gerrit.common.Nullable;
-import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.server.securestore.SecureStore;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
-import com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationRemotesApi;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.jgit.lib.Config;
 
 @Singleton
 class ReplicationRemotesApiImpl implements ReplicationRemotesApi {
 
   private final SecureStore secureStore;
-  private final Provider<ConfigResource> baseConfigProvider;
-  private final DynamicItem<ReplicationConfigOverrides> configOverridesItem;
+  private final MergedConfigResource mergedConfigResource;
 
   @Inject
-  ReplicationRemotesApiImpl(
-      SecureStore secureStore,
-      Provider<ConfigResource> baseConfigProvider,
-      @Nullable DynamicItem<ReplicationConfigOverrides> configOverridesItem) {
+  ReplicationRemotesApiImpl(SecureStore secureStore, MergedConfigResource mergedConfigResource) {
     this.secureStore = secureStore;
-    this.baseConfigProvider = baseConfigProvider;
-    this.configOverridesItem = configOverridesItem;
+    this.mergedConfigResource = mergedConfigResource;
+  }
+
+  @Override
+  public Config get(String... remoteNames) {
+    Config replicationConfig = mergedConfigResource.getConfig();
+    Config remoteConfig = new Config();
+    for (String remoteName : remoteNames) {
+      Set<String> configNames = replicationConfig.getNames("remote", remoteName);
+      for (String configName : configNames) {
+        String[] values = replicationConfig.getStringList("remote", remoteName, configName);
+        if (values.length > 0) {
+          remoteConfig.setStringList("remote", remoteName, configName, Arrays.asList(values));
+        }
+      }
+    }
+    return remoteConfig;
   }
 
   @Override
@@ -54,11 +62,7 @@ class ReplicationRemotesApiImpl implements ReplicationRemotesApi {
     SeparatedRemoteConfigs configs = onlyRemoteSectionsWithSeparatedPasswords(remoteConfig);
     persistRemotesPasswords(configs);
 
-    if (hasConfigOverrides()) {
-      configOverridesItem.get().update(configs.remotes);
-    } else {
-      baseConfigProvider.get().update(configs.remotes);
-    }
+    mergedConfigResource.update(configs.remotes);
   }
 
   private SeparatedRemoteConfigs onlyRemoteSectionsWithSeparatedPasswords(Config configUpdates) {
@@ -83,10 +87,6 @@ class ReplicationRemotesApiImpl implements ReplicationRemotesApi {
           List.of(configs.passwords.getStringList("remote", subSection, "password"));
       secureStore.setList("remote", subSection, "password", values);
     }
-  }
-
-  private boolean hasConfigOverrides() {
-    return configOverridesItem != null && configOverridesItem.get() != null;
   }
 
   private static class SeparatedRemoteConfigs {
