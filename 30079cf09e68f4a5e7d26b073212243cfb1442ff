@@ -70,6 +70,30 @@
       },
       "revId": "30079cf09e68f4a5e7d26b073212243cfb1442ff",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "612c588e_ffc8cbe0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/api/ReplicationRemotesApi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-17T23:36:44Z",
+      "side": 1,
+      "message": "\u003e ReplicationApi class that would then have a getter for RemotesCaonfig\n\nThat\u0027s a good idea, actually, and it would allow also to add in the future the other replication APIs to be used by other plugins.\n\nWill do as a separate follow-up change.",
+      "parentUuid": "a775c260_c1804d80",
+      "range": {
+        "startLine": 28,
+        "startChar": 35,
+        "endLine": 28,
+        "endChar": 39
+      },
+      "revId": "30079cf09e68f4a5e7d26b073212243cfb1442ff",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [
