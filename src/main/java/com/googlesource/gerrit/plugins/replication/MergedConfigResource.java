@@ -77,7 +77,16 @@ public class MergedConfigResource {
     return baseVersion + overrides.get().getVersion();
   }
 
-  private boolean noOverrides() {
+  boolean noOverrides() {
     return overrides == null || overrides.get() == null;
+  }
+
+  @Nullable
+  ConfigResource getConfigOverrides() {
+    return noOverrides() ? null : overrides.get();
+  }
+
+  ConfigResource getBase() {
+    return base.get();
   }
 }
