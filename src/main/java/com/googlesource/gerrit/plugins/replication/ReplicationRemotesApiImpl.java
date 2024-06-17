@@ -45,6 +45,11 @@ class ReplicationRemotesApiImpl implements ReplicationRemotesApi {
   }
 
   @Override
+  public Config get(String remoteName) {
+    return null;
+  }
+
+  @Override
   public void update(Config remoteConfig) throws IOException {
     if (remoteConfig.getSubsections("remote").isEmpty()) {
       throw new IllegalArgumentException(
