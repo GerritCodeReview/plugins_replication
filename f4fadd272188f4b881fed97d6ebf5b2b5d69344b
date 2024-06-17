@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "581ce950_1ce999e0",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2024-06-17T14:34:08Z",
+      "side": 1,
+      "message": "Should we add a test to ensure that the behaviour described in the javadocs is honoured in the implementation?\n\n```\nNOTE: The remotes secrets are excluded for security reasons.\n```",
+      "range": {
+        "startLine": 44,
+        "startChar": 13,
+        "endLine": 44,
+        "endChar": 38
+      },
+      "revId": "f4fadd272188f4b881fed97d6ebf5b2b5d69344b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "617c2324_98f7ef8c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2024-06-17T14:34:08Z",
+      "side": 1,
+      "message": "warning: Raw use of parameterized class \u0027AtomicReference\u0027 \n\n\n```suggestion\n    testOverrides \u003d new AtomicReference\u003c\u003e(new TestReplicationConfigOverrides());\n```",
+      "revId": "f4fadd272188f4b881fed97d6ebf5b2b5d69344b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb616553_57747f27",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2024-06-17T14:34:08Z",
+      "side": 1,
+      "message": "I struggle to understand the meaning of this test, there is no call of the `update()` api as the name suggests: isn\u0027t this just testing that calling `get()` on an unexisting remote returns a config with no sections?",
+      "range": {
+        "startLine": 91,
+        "startChar": 14,
+        "endLine": 91,
+        "endChar": 61
+      },
+      "revId": "f4fadd272188f4b881fed97d6ebf5b2b5d69344b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71dd72d2_121d7b91",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2024-06-17T14:34:08Z",
+      "side": 1,
+      "message": "Sorry, I didn\u0027t spot this in the parent change, but this should probably be renamed to `newReplicationConfigApi`, since it no longer returns an Updater.",
+      "range": {
+        "startLine": 93,
+        "startChar": 44,
+        "endLine": 93,
+        "endChar": 71
+      },
+      "revId": "f4fadd272188f4b881fed97d6ebf5b2b5d69344b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce1ae51d_5a683c92",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2024-06-17T14:34:08Z",
+      "side": 1,
+      "message": "```suggestion\n  public void shouldReturnRemoteFromBaseConfigWhenNoOverrides() {\n```",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 82
+      },
+      "revId": "f4fadd272188f4b881fed97d6ebf5b2b5d69344b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
