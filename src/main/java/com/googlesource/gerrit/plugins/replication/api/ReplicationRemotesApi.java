@@ -25,7 +25,7 @@ import org.eclipse.jgit.lib.Config;
 /** Public API to update replication plugin remotes configurations programmatically. */
 @UsedAt(PLUGIN_GITHUB)
 @DynamicItem.Final(implementedByPlugin = "replication")
-public interface ReplicationRemotesUpdater {
+public interface ReplicationRemotesApi {
 
   /**
    * Adds or updates the remote configuration for the replication plugin.

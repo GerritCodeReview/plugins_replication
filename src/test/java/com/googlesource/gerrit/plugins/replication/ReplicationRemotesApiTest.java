@@ -33,13 +33,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-import com.googlesource.gerrit.plugins.replication.api.ReplicationRemotesUpdater;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationRemotesApi;
 import org.eclipse.jgit.lib.Config;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ReplicationRemotesUpdaterTest {
+public class ReplicationRemotesApiTest {
 
   private Path testSite;
   private SecureStore secureStoreMock;
@@ -60,7 +60,7 @@ public class ReplicationRemotesUpdaterTest {
   @Test
   public void shouldThrowWhenNoRemotesInTheUpdate() {
     Config update = new Config();
-    ReplicationRemotesUpdater objectUnderTest = newReplicationConfigUpdater();
+    ReplicationRemotesApi objectUnderTest = newReplicationConfigUpdater();
 
     assertThrows(IllegalArgumentException.class, () -> objectUnderTest.update(update));
 
@@ -74,7 +74,7 @@ public class ReplicationRemotesUpdaterTest {
     String url = "fake_url";
     Config update = new Config();
     setRemoteSite(update, "url", url);
-    ReplicationRemotesUpdater objectUnderTest = newReplicationConfigUpdater();
+    ReplicationRemotesApi objectUnderTest = newReplicationConfigUpdater();
 
     objectUnderTest.update(update);
 
@@ -87,7 +87,7 @@ public class ReplicationRemotesUpdaterTest {
     String url = "fake_url";
     Config update = new Config();
     setRemoteSite(update, "url", url);
-    ReplicationRemotesUpdater objectUnderTest = newReplicationConfigUpdater(testOverrides);
+    ReplicationRemotesApi objectUnderTest = newReplicationConfigUpdater(testOverrides);
 
     objectUnderTest.update(update);
 
@@ -101,7 +101,7 @@ public class ReplicationRemotesUpdaterTest {
     Config update = new Config();
     String password = "my_secret_password";
     setRemoteSite(update, "password", password);
-    ReplicationRemotesUpdater objectUnderTest = newReplicationConfigUpdater(testOverrides);
+    ReplicationRemotesApi objectUnderTest = newReplicationConfigUpdater(testOverrides);
 
     objectUnderTest.update(update);
 
@@ -110,7 +110,7 @@ public class ReplicationRemotesUpdaterTest {
     assertRemoteSite(testOverrides.getConfig(), "password").isNull();
   }
 
-  private ReplicationRemotesUpdater newReplicationConfigUpdater() {
+  private ReplicationRemotesApi newReplicationConfigUpdater() {
     return newReplicationConfigUpdater(null);
   }
 
@@ -122,12 +122,12 @@ public class ReplicationRemotesUpdaterTest {
     return assertThat(config.getString("remote", "site", name));
   }
 
-  private ReplicationRemotesUpdater newReplicationConfigUpdater(
+  private ReplicationRemotesApi newReplicationConfigUpdater(
       ReplicationConfigOverrides overrides) {
     DynamicItem<ReplicationConfigOverrides> dynamicItemMock = mock(DynamicItem.class);
     when(dynamicItemMock.get()).thenReturn(overrides);
 
-    return new ReplicationRemotesUpdaterImpl(
+    return new ReplicationRemotesApiImpl(
         secureStoreMock, Providers.of(baseConfig), dynamicItemMock);
   }
 

@@ -31,7 +31,7 @@ import com.google.inject.Inject;
 import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.internal.UniqueAnnotations;
-import com.googlesource.gerrit.plugins.replication.api.ReplicationRemotesUpdater;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationRemotesApi;
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationDoneEvent;
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationFailedEvent;
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionReplicationScheduledEvent;
@@ -62,8 +62,8 @@ class ReplicationModule extends AbstractModule {
     DynamicSet.bind(binder(), GitBatchRefUpdateListener.class).to(ReplicationQueue.class);
     DynamicSet.bind(binder(), ProjectDeletedListener.class).to(ReplicationQueue.class);
     DynamicSet.bind(binder(), HeadUpdatedListener.class).to(ReplicationQueue.class);
-    DynamicItem.bind(binder(), ReplicationRemotesUpdater.class)
-        .to(ReplicationRemotesUpdaterImpl.class);
+    DynamicItem.bind(binder(), ReplicationRemotesApi.class)
+        .to(ReplicationRemotesApiImpl.class);
 
     bind(OnStartStop.class).in(Scopes.SINGLETON);
     bind(LifecycleListener.class).annotatedWith(UniqueAnnotations.create()).to(OnStartStop.class);

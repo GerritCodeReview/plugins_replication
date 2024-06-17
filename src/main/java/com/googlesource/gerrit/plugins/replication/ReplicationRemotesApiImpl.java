@@ -22,20 +22,20 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides;
-import com.googlesource.gerrit.plugins.replication.api.ReplicationRemotesUpdater;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationRemotesApi;
 import java.io.IOException;
 import java.util.List;
 import org.eclipse.jgit.lib.Config;
 
 @Singleton
-class ReplicationRemotesUpdaterImpl implements ReplicationRemotesUpdater {
+class ReplicationRemotesApiImpl implements ReplicationRemotesApi {
 
   private final SecureStore secureStore;
   private final Provider<ConfigResource> baseConfigProvider;
   private final DynamicItem<ReplicationConfigOverrides> configOverridesItem;
 
   @Inject
-  ReplicationRemotesUpdaterImpl(
+  ReplicationRemotesApiImpl(
       SecureStore secureStore,
       Provider<ConfigResource> baseConfigProvider,
       @Nullable DynamicItem<ReplicationConfigOverrides> configOverridesItem) {
