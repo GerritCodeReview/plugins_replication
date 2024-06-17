@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7384282a_b08bb70a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiImpl.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-17T23:30:59Z",
+      "side": 1,
+      "message": "True, but I\u0027d suggest to address as a separate change.",
+      "parentUuid": "a16f5c09_9e41db72",
+      "range": {
+        "startLine": 63,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 5
+      },
+      "revId": "70d1241d43ca923c2af95e44eb85e14ba76ec3f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6100fcc3_6aeed624",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/api/ReplicationRemotesApi.java",
         "patchSetId": 5
@@ -60,6 +84,30 @@
       "writtenOn": "2024-06-17T22:01:25Z",
       "side": 1,
       "message": "an example usage feels kinda ackward:\n\n```java\nString remoteName \u003d \"testRemote\";\n\nreplicationRemotesApi.get(remoteName).getStringList(\"remote\", remoteName, \"projects\");\n```\n\n😐",
+      "range": {
+        "startLine": 41,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 32
+      },
+      "revId": "70d1241d43ca923c2af95e44eb85e14ba76ec3f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1216dfa3_8d3d068c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/api/ReplicationRemotesApi.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-17T23:30:59Z",
+      "side": 1,
+      "message": "Because the `update()` at L54 supports a `remoteConfig` with multiple remotes, possibly here I should include a list of remoteName?\n\nI know it seems strange to return the `[remote \"name\"]` sections but it is actually the easiest and more convenient way for the caller that wants to read the current remotes, change something and store them using the `update()` at L54, otherwise the caller would be forced to generate those sections.",
+      "parentUuid": "6100fcc3_6aeed624",
       "range": {
         "startLine": 41,
         "startChar": 2,
