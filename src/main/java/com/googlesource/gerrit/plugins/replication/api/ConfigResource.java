@@ -37,7 +37,7 @@ public interface ConfigResource {
    */
   Config getConfig();
 
-   /**
+  /**
    * Update the configuration resource.
    *
    * <p>Allows to persist changes to the configuration resource.
@@ -47,7 +47,7 @@ public interface ConfigResource {
    */
   void update(Config config) throws IOException;
 
-   /**
+  /**
    * Current logical version string of the current configuration on the persistent storage.
    *
    * @return latest logical version number on the persistent storage
