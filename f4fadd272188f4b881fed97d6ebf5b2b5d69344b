@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d85d438d_629c273b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-17T20:19:03Z",
+      "side": 1,
+      "message": "True, added now at L144.",
+      "parentUuid": "581ce950_1ce999e0",
+      "range": {
+        "startLine": 44,
+        "startChar": 13,
+        "endLine": 44,
+        "endChar": 38
+      },
+      "revId": "f4fadd272188f4b881fed97d6ebf5b2b5d69344b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "617c2324_98f7ef8c",
@@ -41,6 +65,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43561823_7432947c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-17T20:19:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "617c2324_98f7ef8c",
+      "revId": "f4fadd272188f4b881fed97d6ebf5b2b5d69344b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb616553_57747f27",
@@ -54,6 +96,30 @@
       "writtenOn": "2024-06-17T14:34:08Z",
       "side": 1,
       "message": "I struggle to understand the meaning of this test, there is no call of the `update()` api as the name suggests: isn\u0027t this just testing that calling `get()` on an unexisting remote returns a config with no sections?",
+      "range": {
+        "startLine": 91,
+        "startChar": 14,
+        "endLine": 91,
+        "endChar": 61
+      },
+      "revId": "f4fadd272188f4b881fed97d6ebf5b2b5d69344b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "947db02c_a907dedb",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-17T20:19:03Z",
+      "side": 1,
+      "message": "I\u0027ve missed the call, fixed now.",
+      "parentUuid": "cb616553_57747f27",
       "range": {
         "startLine": 91,
         "startChar": 14,
@@ -87,6 +153,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfc6f899_a4f49842",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-17T20:19:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71dd72d2_121d7b91",
+      "range": {
+        "startLine": 93,
+        "startChar": 44,
+        "endLine": 93,
+        "endChar": 71
+      },
+      "revId": "f4fadd272188f4b881fed97d6ebf5b2b5d69344b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce1ae51d_5a683c92",
@@ -100,6 +190,30 @@
       "writtenOn": "2024-06-17T14:34:08Z",
       "side": 1,
       "message": "```suggestion\n  public void shouldReturnRemoteFromBaseConfigWhenNoOverrides() {\n```",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 82
+      },
+      "revId": "f4fadd272188f4b881fed97d6ebf5b2b5d69344b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be28be25_71177e0d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-17T20:19:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce1ae51d_5a683c92",
       "range": {
         "startLine": 116,
         "startChar": 0,
