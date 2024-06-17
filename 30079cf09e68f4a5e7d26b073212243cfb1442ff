@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51a08671_3a53789d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/api/ReplicationRemotesApi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-06-17T10:24:15Z",
+      "side": 1,
+      "message": "can we drop the `Api` from the class name? IMO it doesn\u0027t add anything, as everything is the \"api\"",
+      "range": {
+        "startLine": 28,
+        "startChar": 35,
+        "endLine": 28,
+        "endChar": 39
+      },
+      "revId": "30079cf09e68f4a5e7d26b073212243cfb1442ff",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
