@@ -22,6 +22,30 @@
       },
       "revId": "30079cf09e68f4a5e7d26b073212243cfb1442ff",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aff5f751_d4f822fa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/api/ReplicationRemotesApi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-17T11:31:24Z",
+      "side": 1,
+      "message": "I added the `Api` to be consistent with the other `Api` we have in Gerrit, such as `com.google.gerrit.extensions.api.GerritApi`",
+      "parentUuid": "51a08671_3a53789d",
+      "range": {
+        "startLine": 28,
+        "startChar": 35,
+        "endLine": 28,
+        "endChar": 39
+      },
+      "revId": "30079cf09e68f4a5e7d26b073212243cfb1442ff",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [
