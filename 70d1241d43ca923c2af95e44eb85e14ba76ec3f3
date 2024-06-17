@@ -45,6 +45,29 @@
       },
       "revId": "70d1241d43ca923c2af95e44eb85e14ba76ec3f3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6100fcc3_6aeed624",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/api/ReplicationRemotesApi.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-06-17T22:01:25Z",
+      "side": 1,
+      "message": "an example usage feels kinda ackward:\n\n```java\nString remoteName \u003d \"testRemote\";\n\nreplicationRemotesApi.get(remoteName).getStringList(\"remote\", remoteName, \"projects\");\n```\n\n😐",
+      "range": {
+        "startLine": 41,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 32
+      },
+      "revId": "70d1241d43ca923c2af95e44eb85e14ba76ec3f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
