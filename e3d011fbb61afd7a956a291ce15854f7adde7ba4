@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d780b955_f6cde4f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-18T14:11:41Z",
+      "side": 1,
+      "message": "TODO: Add new tests to cover that credentials aren\u0027t read from replication.config but only from secure.config, which was the documented behaviour.",
+      "revId": "e3d011fbb61afd7a956a291ce15854f7adde7ba4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
