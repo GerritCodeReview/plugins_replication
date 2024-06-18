@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e010c00_081f2d01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-06-18T22:15:55Z",
+      "side": 1,
+      "message": "IMO the current approach with `gerrit.useLegacyCredentials` configuration option is counter intuitive (as commented on the `AutoReloadSecureCredentialsFactoryDecorator).\n\nI\u0027d suggest, we use a fallback mechanism, when we can\u0027t decrypt value form `SecureStore` we log that as warning, with the migration steps, but then assume that value is in plain text and use it as-is.",
+      "revId": "6e0127a215ed8536bee549830c187f5c53f45466",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f64a5c_8959e894",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadSecureCredentialsFactoryDecorator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-06-18T22:15:55Z",
+      "side": 1,
+      "message": "s/remote/remvoe/",
+      "range": {
+        "startLine": 47,
+        "startChar": 64,
+        "endLine": 47,
+        "endChar": 70
+      },
+      "revId": "6e0127a215ed8536bee549830c187f5c53f45466",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d05d0ad0_911e9687",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadSecureCredentialsFactoryDecorator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-06-18T22:15:55Z",
+      "side": 1,
+      "message": "this behaviour is bit counter intuitive. I can see the _real world_ events unfolding in this way:\n\n1. the `replication` plugin JAR is updated\n1. the plugin is reloaded\n1. on the firs replication attempt the job fails with a _credentials error_\n1. now the googling for a fix is starting, maybe even someone reaches out to repo-discuss\n1. the `gerrit.useLegacyCredentials` is set to `true`\n1. finally this warning is produced\n\nDo I miss something here?\n\nIf no, then we should probably warn the user that we couldn\u0027t decrypt the credentials and then inform about the procedure with the migration (and potentially about `gerrit.useLegacyCredentials`).",
+      "range": {
+        "startLine": 47,
+        "startChar": 64,
+        "endLine": 48,
+        "endChar": 56
+      },
+      "revId": "6e0127a215ed8536bee549830c187f5c53f45466",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59b85dcf_8424f584",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-06-18T22:15:55Z",
+      "side": 1,
+      "message": "IMO the remote username should not be read from `secureStore` but rather from the `replication.config`",
+      "range": {
+        "startLine": 34,
+        "startChar": 35,
+        "endLine": 34,
+        "endChar": 84
+      },
+      "revId": "6e0127a215ed8536bee549830c187f5c53f45466",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
