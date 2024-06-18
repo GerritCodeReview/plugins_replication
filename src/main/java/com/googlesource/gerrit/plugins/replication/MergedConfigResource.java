@@ -26,6 +26,7 @@ import com.google.inject.Provider;
 import com.google.inject.util.Providers;
 import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfigOverrides;
+import java.io.IOException;
 import java.util.function.Supplier;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
@@ -79,5 +80,13 @@ public class MergedConfigResource {
 
   private boolean noOverrides() {
     return overrides == null || overrides.get() == null;
+  }
+
+  void update(Config remotesConfig) throws IOException {
+    if (noOverrides()) {
+      base.get().update(remotesConfig);
+    } else {
+      overrides.get().update(remotesConfig);
+    }
   }
 }
