@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7884cb67_2bbbdb4f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2024-06-18T16:21:47Z",
+      "side": 0,
+      "message": "This is not necessarily reading from the `secure.config` anymore, it depends on what `SecureStore` has been bound.",
+      "range": {
+        "startLine": 28,
+        "startChar": 36,
+        "endLine": 28,
+        "endChar": 50
+      },
+      "revId": "499bbea5a16ec443cafb8da95ccdc33f6e381d55",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
