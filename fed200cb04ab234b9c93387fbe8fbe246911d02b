@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50800b74_44a4a05c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-18T17:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "710c7a1b_c6ebd792",
+      "range": {
+        "startLine": 33,
+        "startChar": 5,
+        "endLine": 33,
+        "endChar": 48
+      },
+      "revId": "fed200cb04ab234b9c93387fbe8fbe246911d02b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "494f97ec_6cf459da",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-18T16:21:47Z",
       "side": 1,
       "message": "Is reading the `username` from the `replication.config`, rather than the `SecureStore` an intentional change?\n\nIf so, I think this is arguably a separate change (this change only `uses SecureStore to access replication credentials`) and I think it should be addressed separately.\n\nthe documentation still states that both `username` and `password` should come from `the secure.config` [1]\n \nLastly, since this constitutes a breaking change compared to the previous implementation,how do we make sure this doesn\u0027t go unnoticed and it gets mentioned in the release notes (since this is a `core` plugin) as a breaking change?\n\n[1] https://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/resources/Documentation/config.md#file-2",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 90
+      },
+      "revId": "fed200cb04ab234b9c93387fbe8fbe246911d02b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5700aa40_abb4faac",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-18T17:59:13Z",
+      "side": 1,
+      "message": "\u003e Is reading the `username` from the `replication.config`, rather than the `SecureStore` an intentional change?\n\u003e \n\u003e If so, I think this is arguably a separate change (this change only `uses SecureStore to access replication credentials`) and I think it should be addressed separately.\n\u003e \n\u003e the documentation still states that both `username` and `password` should come from `the secure.config` [1]\n\nYou are right, let me check if we ever stated that credentials are coming from replication.config.\n\n\u003e Lastly, since this constitutes a breaking change compared to the previous implementation,\n\nI don\u0027t believe this is a breaking change: we just change the API we use to read the credentials from the same place they were before.\n\n\u003e how do we make sure this doesn\u0027t go unnoticed and it gets mentioned in the release notes (since this is a `core` plugin) as a breaking change?\n\nWe can add the `Release-Notes:` footer here, even if not enforced. However, I will double-check that before and after the change the same secure.config works as it was before this change.\n\n\u003e [1] https://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/resources/Documentation/config.md#file-2",
+      "parentUuid": "494f97ec_6cf459da",
       "range": {
         "startLine": 40,
         "startChar": 0,
