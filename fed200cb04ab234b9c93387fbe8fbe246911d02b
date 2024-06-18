@@ -93,6 +93,30 @@
       },
       "revId": "fed200cb04ab234b9c93387fbe8fbe246911d02b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57f603b8_99bd452e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-18T18:22:51Z",
+      "side": 1,
+      "message": "I was wrong and the documentation was correct: the replication plugin would never read username or password from the replication.config but always from secure.config only. I\u0027ve reverted the change to its initial version where both are retrieved from `SecureStore`.",
+      "parentUuid": "5700aa40_abb4faac",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 90
+      },
+      "revId": "fed200cb04ab234b9c93387fbe8fbe246911d02b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
