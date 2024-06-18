@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "778507b8_b44f131a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-18T18:49:24Z",
+      "side": 1,
+      "message": "I have tested that it was possible before this change having a _partially encrypted_ secure.config, where everything was encrypted apart from the remote credentials.\n\nI believe, instead of replacing the SecureCredentialsFactory, we have to deprecate the old one but *still* allow to use it, at least for migration purposes and with a warning on the error_log IMHO",
+      "revId": "d6e4d9856a7b77c4c34db571f159f95a33011324",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
