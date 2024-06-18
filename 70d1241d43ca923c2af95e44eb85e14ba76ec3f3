@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f74c3dba_f53a4bf4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiImpl.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-18T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "917815c9_7e190106",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "70d1241d43ca923c2af95e44eb85e14ba76ec3f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a16f5c09_9e41db72",
