@@ -119,6 +119,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "825b7d2c_d6836762",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2024-06-18T09:49:13Z",
+      "side": 1,
+      "message": "Looks good now, glitch in the UI?",
+      "parentUuid": "3b80f251_db92bf66",
+      "revId": "f4fadd272188f4b881fed97d6ebf5b2b5d69344b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb616553_57747f27",
