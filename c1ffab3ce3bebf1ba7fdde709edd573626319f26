@@ -48,6 +48,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63817666_c083b707",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadSecureCredentialsFactoryDecorator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-18T13:58:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f0496fd_dd4ba969",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 9
+      },
+      "revId": "c1ffab3ce3bebf1ba7fdde709edd573626319f26",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c2e37bc_07e1dcd9",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Sure, but it was already public. I\u0027ll address as a separate change and it isn\u0027t directly related.",
       "parentUuid": "7c2e37bc_07e1dcd9",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 10
+      },
+      "revId": "c1ffab3ce3bebf1ba7fdde709edd573626319f26",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29472a11_3dbefde3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-18T13:58:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b441669_ccfb5ed4",
       "range": {
         "startLine": 34,
         "startChar": 2,
