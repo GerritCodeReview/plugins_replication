@@ -39,6 +39,30 @@
       },
       "revId": "d6e4d9856a7b77c4c34db571f159f95a33011324",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16e6d228_5392da07",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadSecureCredentialsFactoryDecorator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-18T20:12:09Z",
+      "side": 1,
+      "message": "Still needed, because we have to support the legacy credentials provider that did not provide any encryption in any case.",
+      "parentUuid": "ab142041_80bf7269",
+      "range": {
+        "startLine": 36,
+        "startChar": 6,
+        "endLine": 36,
+        "endChar": 48
+      },
+      "revId": "d6e4d9856a7b77c4c34db571f159f95a33011324",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }

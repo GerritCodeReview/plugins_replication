@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63f75bfe_ec273c48",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/LegacyCredentialsFactory.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-18T20:12:09Z",
+      "side": 1,
+      "message": "I am leaving 2011 because this is a pure renaming of the old credentials factory into a legacy named prefix.",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "d6c8d638f2d7fa605ce524a3a0c56d022556f827",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24a58529_1a665708",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-18T20:12:09Z",
+      "side": 1,
+      "message": "Updating the year because this is basically a brand-new implementation.",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "d6c8d638f2d7fa605ce524a3a0c56d022556f827",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
