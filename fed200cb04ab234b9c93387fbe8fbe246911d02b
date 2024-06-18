@@ -141,6 +141,30 @@
       },
       "revId": "fed200cb04ab234b9c93387fbe8fbe246911d02b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cd79d48_2bb66f8a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2024-06-18T18:53:54Z",
+      "side": 1,
+      "message": "awesome, thanks @luca.milanesio@gmail.com!",
+      "parentUuid": "a730a22c_23f2ed14",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 90
+      },
+      "revId": "fed200cb04ab234b9c93387fbe8fbe246911d02b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
