@@ -79,4 +79,9 @@ class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsFactory 
   private boolean needsReload() {
     return config.getConfig().getBoolean("gerrit", "autoReload", false) && secureStore.isOutdated();
   }
+
+  @Override
+  public boolean validate(String remoteConfigName) {
+    return secureCredentialsFactory.get().validate(remoteConfigName);
+  }
 }
