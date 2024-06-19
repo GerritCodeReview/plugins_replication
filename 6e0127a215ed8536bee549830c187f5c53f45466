@@ -41,6 +41,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f03e952_7ffc2ab0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadSecureCredentialsFactoryDecorator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-19T07:56:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37f64a5c_8959e894",
+      "range": {
+        "startLine": 47,
+        "startChar": 64,
+        "endLine": 47,
+        "endChar": 70
+      },
+      "revId": "6e0127a215ed8536bee549830c187f5c53f45466",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d05d0ad0_911e9687",
@@ -64,6 +88,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99c51b8d_4b73ad24",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadSecureCredentialsFactoryDecorator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-19T07:56:03Z",
+      "side": 1,
+      "message": "I\u0027ll add a follow-up change when the remote\u0027s credentials are checked at plugin startup, so that it won\u0027t load if they cannot be decrypted.\n\nAlso, the Gerrit admin should read the release notes I believe: there could be many other things that have changed in Gerrit v3.11 and he would be hit if he doesn\u0027t check them carefully.\n\nWe cannot fix in code the lack of care, we can just document and expect the admins and read the docs.\n\nAddressed with follow-up change I12842267.",
+      "parentUuid": "d05d0ad0_911e9687",
+      "range": {
+        "startLine": 47,
+        "startChar": 64,
+        "endLine": 48,
+        "endChar": 56
+      },
+      "revId": "6e0127a215ed8536bee549830c187f5c53f45466",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59b85dcf_8424f584",
@@ -77,6 +125,30 @@
       "writtenOn": "2024-06-18T22:15:55Z",
       "side": 1,
       "message": "IMO the remote username should not be read from `secureStore` but rather from the `replication.config`",
+      "range": {
+        "startLine": 34,
+        "startChar": 35,
+        "endLine": 34,
+        "endChar": 84
+      },
+      "revId": "6e0127a215ed8536bee549830c187f5c53f45466",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3535f2fa_b8472e20",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/SecureCredentialsFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-19T07:56:03Z",
+      "side": 1,
+      "message": "That\u0027s not the way if works though. Maybe a discussion for a new change? It is out of scope of this one which is purely on using the right API to read from the existing storage.",
+      "parentUuid": "59b85dcf_8424f584",
       "range": {
         "startLine": 34,
         "startChar": 35,
