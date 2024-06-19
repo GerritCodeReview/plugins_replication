@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8899de0d_7541d56a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/api/ReplicationConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2024-06-19T11:28:54Z",
+      "side": 1,
+      "message": "It would be useful to specify _what_ migration is intended here.\nPerhaps something similar to what is explained in the `config.md` file.\n\nAlso, since this is a public interface we should consider adding it as Javadocs",
+      "range": {
+        "startLine": 106,
+        "startChar": 29,
+        "endLine": 106,
+        "endChar": 58
+      },
+      "revId": "3f84659d03904e26fa32314b793f1cfae7044f9f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebc8b49a_681e139e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadSecureCredentialsFactoryDecoratorTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2024-06-19T11:28:54Z",
+      "side": 1,
+      "message": "nit: this could be moved at L60",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 39
+      },
+      "revId": "3f84659d03904e26fa32314b793f1cfae7044f9f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
