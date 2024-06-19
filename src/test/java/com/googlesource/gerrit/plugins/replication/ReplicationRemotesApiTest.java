@@ -163,6 +163,22 @@ public class ReplicationRemotesApiTest {
     assertRemoteSite(objectUnderTest.get(remoteName), remoteName, "password").isNull();
   }
 
+  @Test
+  public void shouldEncryptUsernameButNotStoreInConfig() throws Exception {
+    Config update = new Config();
+    String username = "my_secret_username";
+    String remoteName = "site";
+    setRemoteSite(update, remoteName, "username", username);
+    ReplicationRemotesApi objectUnderTest = getReplicationRemotesApi();
+
+    objectUnderTest.update(update);
+
+    verify(secureStoreMock).setList("remote", remoteName, "username", List.of(username));
+    assertRemoteSite(baseConfig.getConfig(), remoteName, "username").isNull();
+    assertRemoteSite(testOverrides.get().getConfig(), remoteName, "username").isNull();
+    assertRemoteSite(objectUnderTest.get(remoteName), remoteName, "username").isNull();
+  }
+
   private void setRemoteSite(Config config, String remoteName, String name, String value) {
     config.setString("remote", remoteName, name, value);
   }
