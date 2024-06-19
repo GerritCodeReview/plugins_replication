@@ -180,6 +180,9 @@ public class DestinationsCollection implements ReplicationDestinations {
   public synchronized void startup(WorkQueue workQueue) {
     shuttingDown = false;
     for (Destination cfg : destinations) {
+      if (cfg.validate()) {
+        throw new IllegalStateException("Unable to start replication plugin because remote " + cfg.getRemoteConfigName() + " is not valid");
+      }
       cfg.start(workQueue);
     }
   }

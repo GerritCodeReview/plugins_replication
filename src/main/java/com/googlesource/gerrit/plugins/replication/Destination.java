@@ -97,6 +97,8 @@ public class Destination {
 
   private static final String PROJECT_NOT_AVAILABLE = "source project %s not available";
 
+  private final CredentialsFactory credentialsFactory;
+
   public interface Factory {
     Destination create(DestinationConfiguration config);
   }
@@ -149,6 +151,7 @@ public class Destination {
       GroupIncludeCache groupIncludeCache,
       DynamicItem<EventDispatcher> eventDispatcher,
       Provider<ReplicationTasksStorage> rts,
+      CredentialsFactory credentialsFactory,
       @Assisted DestinationConfiguration cfg) {
     this.eventDispatcher = eventDispatcher;
     gitManager = gitRepositoryManager;
@@ -157,6 +160,7 @@ public class Destination {
     this.projectCache = projectCache;
     this.stateLog = stateLog;
     this.replicationTasksStorage = rts;
+    this.credentialsFactory = credentialsFactory;
     config = cfg;
     CurrentUser remoteUser;
     if (!cfg.getAuthGroupNames().isEmpty()) {
@@ -214,6 +218,10 @@ public class Destination {
     deleteProjectFactory = child.getInstance(DeleteProjectTask.Factory.class);
     updateHeadFactory = child.getInstance(UpdateHeadTask.Factory.class);
     threadScoper = child.getInstance(PerThreadRequestScope.Scoper.class);
+  }
+
+  public boolean validate() {
+      return credentialsFactory.validate(getRemoteConfigName());
   }
 
   private void addRecursiveParents(
