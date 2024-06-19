@@ -148,9 +148,9 @@ public class ReplicationRemotesApiTest {
   }
 
   @Test
-  public void shouldEncryptPasswordButNotStoreInConfig() throws Exception {
+  public void shouldSetPasswordViaSecureStoreButNotStoreInConfig() throws Exception {
     Config update = new Config();
-    String password = "my_secret_password";
+    String password = "encrypted-password";
     String remoteName = "site";
     setRemoteSite(update, remoteName, "password", password);
     ReplicationRemotesApi objectUnderTest = getReplicationRemotesApi();
@@ -161,6 +161,22 @@ public class ReplicationRemotesApiTest {
     assertRemoteSite(baseConfig.getConfig(), remoteName, "password").isNull();
     assertRemoteSite(testOverrides.get().getConfig(), remoteName, "password").isNull();
     assertRemoteSite(objectUnderTest.get(remoteName), remoteName, "password").isNull();
+  }
+
+  @Test
+  public void shouldSetUsernameViaSecureStoreButNotStoreInConfig() throws Exception {
+    Config update = new Config();
+    String username = "encrypted-username";
+    String remoteName = "site";
+    setRemoteSite(update, remoteName, "username", username);
+    ReplicationRemotesApi objectUnderTest = getReplicationRemotesApi();
+
+    objectUnderTest.update(update);
+
+    verify(secureStoreMock).setList("remote", remoteName, "username", List.of(username));
+    assertRemoteSite(baseConfig.getConfig(), remoteName, "username").isNull();
+    assertRemoteSite(testOverrides.get().getConfig(), remoteName, "username").isNull();
+    assertRemoteSite(objectUnderTest.get(remoteName), remoteName, "username").isNull();
   }
 
   private void setRemoteSite(Config config, String remoteName, String name, String value) {

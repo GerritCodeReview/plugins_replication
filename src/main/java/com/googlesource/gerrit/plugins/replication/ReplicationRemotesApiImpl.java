@@ -59,19 +59,19 @@ class ReplicationRemotesApiImpl implements ReplicationRemotesApi {
           "configuration update must have at least one 'remote' section");
     }
 
-    SeparatedRemoteConfigs configs = onlyRemoteSectionsWithSeparatedPasswords(remoteConfig);
-    persistRemotesPasswords(configs);
+    SeparatedRemoteConfigs configs = onlyRemoteSectionsWithSeparatedCredentials(remoteConfig);
+    persistRemotesCredentials(configs);
 
     mergedConfigResource.update(configs.remotes);
   }
 
-  private SeparatedRemoteConfigs onlyRemoteSectionsWithSeparatedPasswords(Config configUpdates) {
+  private SeparatedRemoteConfigs onlyRemoteSectionsWithSeparatedCredentials(Config configUpdates) {
     SeparatedRemoteConfigs configs = new SeparatedRemoteConfigs();
     for (String subSection : configUpdates.getSubsections("remote")) {
       for (String name : configUpdates.getNames("remote", subSection)) {
         List<String> values = List.of(configUpdates.getStringList("remote", subSection, name));
-        if ("password".equals(name)) {
-          configs.passwords.setStringList("remote", subSection, "password", values);
+        if ("password".equals(name) || "username".equals(name)) {
+          configs.credentials.setStringList("remote", subSection, name, values);
         } else {
           configs.remotes.setStringList("remote", subSection, name, values);
         }
@@ -81,16 +81,20 @@ class ReplicationRemotesApiImpl implements ReplicationRemotesApi {
     return configs;
   }
 
-  private void persistRemotesPasswords(SeparatedRemoteConfigs configs) {
-    for (String subSection : configs.passwords.getSubsections("remote")) {
-      List<String> values =
-          List.of(configs.passwords.getStringList("remote", subSection, "password"));
-      secureStore.setList("remote", subSection, "password", values);
+  private void persistRemotesCredentials(SeparatedRemoteConfigs configs) {
+    for (String subSection : configs.credentials.getSubsections("remote")) {
+      copyRemoteStringList(configs.credentials, subSection, "username");
+      copyRemoteStringList(configs.credentials, subSection, "password");
     }
+  }
+
+  private void copyRemoteStringList(Config config, String subSection, String key) {
+    secureStore.setList(
+        "remote", subSection, key, List.of(config.getStringList("remote", subSection, key)));
   }
 
   private static class SeparatedRemoteConfigs {
     private final Config remotes = new Config();
-    private final Config passwords = new Config();
+    private final Config credentials = new Config();
   }
 }
