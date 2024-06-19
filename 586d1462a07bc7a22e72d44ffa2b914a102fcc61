@@ -16,6 +16,52 @@
       "message": "Tested locally and working E2E",
       "revId": "586d1462a07bc7a22e72d44ffa2b914a102fcc61",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58c0e914_01520c9a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-06-19T18:18:13Z",
+      "side": 1,
+      "message": "Since we are also storing the username, maybe rename to `persistRemotesCredentials`.",
+      "range": {
+        "startLine": 84,
+        "startChar": 15,
+        "endLine": 84,
+        "endChar": 38
+      },
+      "revId": "586d1462a07bc7a22e72d44ffa2b914a102fcc61",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed585adc_1e64d1d4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationRemotesApiTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-06-19T18:18:13Z",
+      "side": 1,
+      "message": "The test name suggests we are encrypting the usernname, so I think we should assert it in the test, or else remove it from the test name.",
+      "range": {
+        "startLine": 167,
+        "startChar": 14,
+        "endLine": 167,
+        "endChar": 54
+      },
+      "revId": "586d1462a07bc7a22e72d44ffa2b914a102fcc61",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
