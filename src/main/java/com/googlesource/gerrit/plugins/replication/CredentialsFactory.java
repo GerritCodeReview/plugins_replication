@@ -18,4 +18,8 @@ import org.eclipse.jgit.transport.CredentialsProvider;
 public interface CredentialsFactory {
 
   CredentialsProvider create(String remoteName);
+
+  default boolean validate(String remoteConfigName) {
+    return true;
+  }
 }
