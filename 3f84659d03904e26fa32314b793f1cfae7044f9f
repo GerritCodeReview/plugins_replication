@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf9e8f8f_fd0116d9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/api/ReplicationConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-19T11:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8899de0d_7541d56a",
+      "range": {
+        "startLine": 106,
+        "startChar": 29,
+        "endLine": 106,
+        "endChar": 58
+      },
+      "revId": "3f84659d03904e26fa32314b793f1cfae7044f9f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebc8b49a_681e139e",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-19T11:28:54Z",
       "side": 1,
       "message": "nit: this could be moved at L60",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 39
+      },
+      "revId": "3f84659d03904e26fa32314b793f1cfae7044f9f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec1a4392_5b7ec374",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/AutoReloadSecureCredentialsFactoryDecoratorTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-19T11:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebc8b49a_681e139e",
       "range": {
         "startLine": 46,
         "startChar": 0,
