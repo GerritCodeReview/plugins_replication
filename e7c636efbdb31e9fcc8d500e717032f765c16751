@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a8aedfc_efd1ed13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-19T11:21:32Z",
+      "side": 1,
+      "message": "I have verified E2E that:\n- with an invalid secure.config having non-encrypted secrets, the replication plugin fails to load\n- with a valid encrypted secure.config the replication loads as expected",
+      "revId": "e7c636efbdb31e9fcc8d500e717032f765c16751",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
