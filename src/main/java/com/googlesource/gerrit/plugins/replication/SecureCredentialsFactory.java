@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.server.securestore.SecureStore;
 import com.google.inject.Inject;
 import java.util.Objects;
@@ -22,6 +23,7 @@ import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 /** Looks up a remote's password in SecureStore */
 class SecureCredentialsFactory implements CredentialsFactory {
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final SecureStore secureStore;
 
   @Inject
@@ -34,5 +36,18 @@ class SecureCredentialsFactory implements CredentialsFactory {
     String user = Objects.toString(secureStore.get("remote", remoteName, "username"), "");
     String pass = Objects.toString(secureStore.get("remote", remoteName, "password"), "");
     return new UsernamePasswordCredentialsProvider(user, pass);
+  }
+
+  @Override
+  public boolean validate(String remoteName) {
+    try {
+      String unused = secureStore.get("remote", remoteName, "username");
+      unused = secureStore.get("remote", remoteName, "password");
+      return true;
+    } catch (Throwable t) {
+      log.atSevere().withCause(t).log(
+          "Credentials for replication remote %s are invalid", remoteName);
+      return false;
+    }
   }
 }

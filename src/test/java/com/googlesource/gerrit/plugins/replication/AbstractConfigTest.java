@@ -57,7 +57,8 @@ public abstract class AbstractConfigTest {
     public final DestinationConfiguration config;
 
     protected FakeDestination(DestinationConfiguration config) {
-      super(injectorMock(), null, null, null, null, null, null, null, null, null, null, config);
+      super(
+          injectorMock(), null, null, null, null, null, null, null, null, null, null, null, config);
       this.config = config;
     }
 
