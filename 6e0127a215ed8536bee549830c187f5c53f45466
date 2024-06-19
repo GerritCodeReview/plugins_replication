@@ -112,6 +112,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec430787_ccf18252",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoReloadSecureCredentialsFactoryDecorator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-06-19T07:59:39Z",
+      "side": 1,
+      "message": "\u003e Also, the Gerrit admin should read the release notes I believe: there could be many other things that have changed in Gerrit v3.11 and he would be hit if he doesn\u0027t check them carefully.\n\nWe\u0027re here in the `replication` plugin, that doesn\u0027t publish the release notes (AFAIR) and changes to plugins are not included in the Gerrit, aren\u0027t they?",
+      "parentUuid": "99c51b8d_4b73ad24",
+      "range": {
+        "startLine": 47,
+        "startChar": 64,
+        "endLine": 48,
+        "endChar": 56
+      },
+      "revId": "6e0127a215ed8536bee549830c187f5c53f45466",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59b85dcf_8424f584",
