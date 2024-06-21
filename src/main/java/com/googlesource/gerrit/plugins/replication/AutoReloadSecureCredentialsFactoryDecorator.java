@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.transport.CredentialsProvider;
 
-class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsFactory {
+public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsFactory {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final AtomicReference<CredentialsFactory> secureCredentialsFactory;

@@ -22,7 +22,7 @@ import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 /** Looks up a remote's password in SecureStore */
-class SecureCredentialsFactory implements CredentialsFactory {
+public class SecureCredentialsFactory implements CredentialsFactory {
   private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final SecureStore secureStore;
 
