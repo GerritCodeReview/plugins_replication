@@ -21,10 +21,16 @@ import java.util.Objects;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
+<<<<<<< PATCH SET (8dbb65 Revert "Reduce visibility of *CredentialsFactory* classes")
+/** Looks up a remote's password in secure.config. */
+public class SecureCredentialsFactory implements CredentialsFactory {
+  private final Config config;
+=======
 /** Looks up a remote's password in SecureStore */
 class SecureCredentialsFactory implements CredentialsFactory {
   private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final SecureStore secureStore;
+>>>>>>> BASE      (6b4bc7 Fix updating replication credentials using te RepicationRemo)
 
   @Inject
   public SecureCredentialsFactory(SecureStore secureStore) {
