@@ -15,6 +15,8 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.common.UsedAt;
+import com.google.gerrit.common.UsedAt.Project;
 import com.google.gerrit.server.securestore.SecureStore;
 import com.google.inject.Inject;
 import java.util.Objects;
@@ -22,6 +24,7 @@ import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 /** Looks up a remote's password in SecureStore */
+@UsedAt(Project.PLUGIN_PULL_REPLICATION)
 public class SecureCredentialsFactory implements CredentialsFactory {
   private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final SecureStore secureStore;
