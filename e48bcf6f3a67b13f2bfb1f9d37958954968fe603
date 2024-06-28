@@ -16,6 +16,23 @@
       "message": "The failure from Zuul is unrelated: `NODE_FAILURE`",
       "revId": "e48bcf6f3a67b13f2bfb1f9d37958954968fe603",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2abb66c8_22608480",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-28T16:23:31Z",
+      "side": 1,
+      "message": "Ran the tests manually:\n\n//plugins/replication:replication_tests                                  PASSED in 11.2s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationDistributorIT PASSED in 22.6s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationEventsIT PASSED in 27.1s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationFanoutIT PASSED in 18.7s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationIT PASSED in 153.6s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationPushInBatchesIT PASSED in 13.6s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationStorageIT PASSED in 87.4s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationStorageMPIT PASSED in 45.3s\n\nExecuted 8 out of 8 tests: 8 tests pass.",
+      "revId": "e48bcf6f3a67b13f2bfb1f9d37958954968fe603",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
