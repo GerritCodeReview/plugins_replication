@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe5d49af_69acf030",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-06-28T16:17:19Z",
+      "side": 1,
+      "message": "The failure from Zuul is unrelated: `NODE_FAILURE`",
+      "revId": "e48bcf6f3a67b13f2bfb1f9d37958954968fe603",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
