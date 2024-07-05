@@ -128,30 +128,30 @@ public class FanoutConfigResource extends FileConfigResource {
     }
   }
 
-  private static Config filterRemotes(Config config) {
-    Config filteredConfig = new Config();
-    Set<String> sections = config.getSections();
-    sections.forEach(
-        section -> {
-          for (String name : config.getNames(section)) {
-            filteredConfig.setStringList(
-                section, null, name, Arrays.asList(config.getStringList(section, null, name)));
-          }
+	private static Config filterRemotes(Config config) {
+		Config filteredConfig = new Config();
+		Set<String> sections = config.getSections();
+		sections.forEach(
+			section -> {
+				for (String name : config.getNames(section)) {
+					filteredConfig.setStringList(
+						section, null, name, Arrays.asList(config.getStringList(section, null, name)));
+				}
 
-          if (!section.equals("remote")) {
-            for (String subsection : config.getSubsections(section)) {
-              for (String name : config.getNames(section, subsection)) {
-                filteredConfig.setStringList(
-                    section,
-                    subsection,
-                    name,
-                    Arrays.asList(config.getStringList(section, subsection, name)));
-              }
-            }
-          }
-        });
-    return filteredConfig;
-  }
+				if (!section.equals("remote")) {
+					for (String subsection : config.getSubsections(section)) {
+						for (String name : config.getNames(section, subsection)) {
+							filteredConfig.setStringList(
+								section,
+								subsection,
+								name,
+								Arrays.asList(config.getStringList(section, subsection, name)));
+						}
+					}
+				}
+			});
+		return filteredConfig;
+	}
 
   private static boolean isValid(Path path, List<String> remoteConfigLines) {
     int numRemoteSections = 0;
