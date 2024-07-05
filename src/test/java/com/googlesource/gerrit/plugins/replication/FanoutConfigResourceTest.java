@@ -321,6 +321,8 @@ public class FanoutConfigResourceTest extends AbstractConfigTest {
 
     objectUnderTest.update(update);
 
+    assertThat(objectUnderTest.getConfig().getString("remote", remoteName1, "url"))
+        .isEqualTo(remoteUrl1);
     Config actual = loadRemoteConfig(remoteName1);
     assertThat(actual.getString("remote", remoteName1, "url")).isEqualTo(remoteUrl1);
   }
@@ -336,6 +338,8 @@ public class FanoutConfigResourceTest extends AbstractConfigTest {
 
     objectUnderTest.update(update);
 
+    assertThat(objectUnderTest.getConfig().getString("remote", remoteName1, "url"))
+        .isEqualTo(remoteUrl2);
     Config actual = loadRemoteConfig(remoteName1);
     assertThat(actual.getString("remote", remoteName1, "url")).isEqualTo(remoteUrl2);
   }
