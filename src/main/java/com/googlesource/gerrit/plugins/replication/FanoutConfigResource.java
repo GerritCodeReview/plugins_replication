@@ -100,7 +100,7 @@ public class FanoutConfigResource extends FileConfigResource {
     }
   }
 
-  private static void addRemoteConfig(FileBasedConfig source, Config destination) {
+	private static void addRemoteConfig(FileBasedConfig source, Config destination) {
     String remoteName = getNameWithoutExtension(source.getFile().getName());
     for (String name : source.getNames("remote")) {
       destination.setStringList(
@@ -119,22 +119,22 @@ public class FanoutConfigResource extends FileConfigResource {
           for (String name : config.getNames(section)) {
             filteredConfig.setStringList(
                 section, null, name, List.of(config.getStringList(section, null, name)));
-          }
+				}
 
-          if (!section.equals("remote")) {
-            for (String subsection : config.getSubsections(section)) {
-              for (String name : config.getNames(section, subsection)) {
-                filteredConfig.setStringList(
-                    section,
-                    subsection,
-                    name,
-                    List.of(config.getStringList(section, subsection, name)));
-              }
-            }
-          }
-        });
-    return filteredConfig;
-  }
+				if (!section.equals("remote")) {
+					for (String subsection : config.getSubsections(section)) {
+						for (String name : config.getNames(section, subsection)) {
+							filteredConfig.setStringList(
+								section,
+								subsection,
+								name,
+								List.of(config.getStringList(section, subsection, name)));
+						}
+					}
+				}
+			});
+		return filteredConfig;
+	}
 
   private static boolean isValid(Config cfg) {
     if (cfg.getSections().size() != 1 || !cfg.getSections().contains("remote")) {
