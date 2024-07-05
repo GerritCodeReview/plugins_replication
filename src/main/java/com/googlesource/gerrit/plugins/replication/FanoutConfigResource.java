@@ -65,6 +65,8 @@ public class FanoutConfigResource extends FileConfigResource {
 
   @Override
   public void update(Config updates) throws IOException {
+    super.update(filterRemotes(updates));
+
     Set<String> remotes = updates.getSubsections("remote");
     for (String remote : remotes) {
       File remoteFile = remoteConfigsDirPath.resolve(remote + ".config").toFile();
@@ -79,12 +81,10 @@ public class FanoutConfigResource extends FileConfigResource {
       for (String option : options) {
         List<String> values = List.of(updates.getStringList("remote", remote, option));
         remoteConfig.setStringList("remote", remote, option, values);
+        config.setStringList("remote", remote, option, values);
       }
       remoteConfig.save();
     }
-
-    removeRemotes(updates);
-    super.update(updates);
   }
 
   private static void removeRemotes(Config config) {
@@ -109,6 +109,31 @@ public class FanoutConfigResource extends FileConfigResource {
           name,
           Lists.newArrayList(source.getStringList("remote", null, name)));
     }
+  }
+
+  private static Config filterRemotes(Config config) {
+    Config filteredConfig = new Config();
+    Set<String> sections = config.getSections();
+    sections.forEach(
+        section -> {
+          for (String name : config.getNames(section)) {
+            filteredConfig.setStringList(
+                section, null, name, List.of(config.getStringList(section, null, name)));
+          }
+
+          if (!section.equals("remote")) {
+            for (String subsection : config.getSubsections(section)) {
+              for (String name : config.getNames(section, subsection)) {
+                filteredConfig.setStringList(
+                    section,
+                    subsection,
+                    name,
+                    List.of(config.getStringList(section, subsection, name)));
+              }
+            }
+          }
+        });
+    return filteredConfig;
   }
 
   private static boolean isValid(Config cfg) {
