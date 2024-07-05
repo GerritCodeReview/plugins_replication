@@ -17,7 +17,6 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.io.Files.getNameWithoutExtension;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import com.google.common.collect.Lists;
 import com.google.common.flogger.FluentLogger;
 import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
@@ -28,9 +27,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.internal.storage.file.FileSnapshot;
@@ -43,6 +43,7 @@ public class FanoutConfigResource extends FileConfigResource {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final Path remoteConfigsDirPath;
+  private final Config fanoutConfig;
 
   @Inject
   FanoutConfigResource(SitePaths site) throws IOException, ConfigInvalidException {
@@ -51,16 +52,42 @@ public class FanoutConfigResource extends FileConfigResource {
     removeRemotes(config);
 
     try (Stream<Path> files = Files.list(remoteConfigsDirPath)) {
-      files
-          .filter(Files::isRegularFile)
-          .filter(FanoutConfigResource::isConfig)
-          .map(FanoutConfigResource::loadConfig)
-          .filter(Optional::isPresent)
-          .map(Optional::get)
-          .filter(FanoutConfigResource::isValid)
-          .forEach(cfg -> addRemoteConfig(cfg, config));
-    } catch (IllegalStateException e) {
-      throw new ConfigInvalidException(e.getMessage());
+      Stream<String> mergedConfigs =
+          files
+              .filter(Files::isRegularFile)
+              .filter(FanoutConfigResource::isConfig)
+              .flatMap(
+                  path ->
+                      getConfigLines(
+                          path,
+                          (line) -> {
+                            if (line.contains("[remote]")) {
+                              return line.replace(
+                                  "[remote]",
+                                  "[remote \""
+                                      + getNameWithoutExtension(path.toFile().getName())
+                                      + "\"]");
+                            } else {
+                              return line;
+                            }
+                          }));
+
+      fanoutConfig = new Config(config);
+      fanoutConfig.fromText(mergedConfigs.collect(Collectors.joining("\n")));
+    }
+  }
+
+  private static Stream<String> getConfigLines(
+      Path path, Function<String, String> configLineMapping) {
+    try {
+      List<String> configLines = Files.readAllLines(path);
+      if (!isValid(path, configLines)) {
+        return Stream.empty();
+      }
+      return configLines.stream().map(configLineMapping);
+    } catch (IOException e) {
+      logger.atSevere().withCause(e).log("Unable to access replication config %s", path);
+      return Stream.empty();
     }
   }
 
@@ -101,17 +128,6 @@ public class FanoutConfigResource extends FileConfigResource {
     }
   }
 
-  private static void addRemoteConfig(FileBasedConfig source, Config destination) {
-    String remoteName = getNameWithoutExtension(source.getFile().getName());
-    for (String name : source.getNames("remote")) {
-      destination.setStringList(
-          "remote",
-          remoteName,
-          name,
-          Lists.newArrayList(source.getStringList("remote", null, name)));
-    }
-  }
-
   private static Config filterOutRemotes(Config config) {
     Config filteredConfig = new Config();
     Set<String> sections = config.getSections();
@@ -146,31 +162,32 @@ public class FanoutConfigResource extends FileConfigResource {
     return filteredConfig;
   }
 
-  private static boolean isValid(Config cfg) {
-    if (cfg.getSections().size() != 1 || !cfg.getSections().contains("remote")) {
+  private static boolean isValid(Path path, List<String> remoteConfigLines) {
+    int numRemoteSections = 0;
+    int numRemoteSectionsWithName = 0;
+    for (String configLine : remoteConfigLines) {
+      if (configLine.contains("[remote]")) {
+        numRemoteSections++;
+      }
+
+      if (configLine.contains("[remote \"")) {
+        numRemoteSectionsWithName++;
+      }
+    }
+
+    if (numRemoteSectionsWithName > 0) {
       logger.atSevere().log(
-          "Remote replication configuration file %s must contain only one remote section.", cfg);
+          "Remote replication configuration file %s cannot contain remote subsections.", path);
       return false;
     }
-    if (cfg.getSubsections("remote").size() > 0) {
+
+    if (numRemoteSections != 1) {
       logger.atSevere().log(
-          "Remote replication configuration file %s cannot contain remote subsections.", cfg);
+          "Remote replication configuration file %s must contain only one remote section.", path);
       return false;
     }
 
     return true;
-  }
-
-  private static Optional<FileBasedConfig> loadConfig(Path path) {
-    FileBasedConfig cfg = new FileBasedConfig(path.toFile(), FS.DETECTED);
-    try {
-      cfg.load();
-    } catch (IOException | ConfigInvalidException e) {
-      logger.atSevere().withCause(e).log(
-          "Cannot load remote replication configuration file %s.", path);
-      return Optional.empty();
-    }
-    return Optional.of(cfg);
   }
 
   private static boolean isConfig(Path p) {
@@ -200,5 +217,10 @@ public class FanoutConfigResource extends FileConfigResource {
           remoteConfigsDirPath);
       return parentVersion;
     }
+  }
+
+  @Override
+  public Config getConfig() {
+    return fanoutConfig;
   }
 }
