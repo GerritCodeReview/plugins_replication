@@ -79,7 +79,6 @@ import org.eclipse.jgit.lib.NullProgressMonitor;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.FetchConnection;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RefSpec;
@@ -119,7 +118,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private final Destination pool;
   private final RemoteConfig config;
   private final ReplicationConfig replConfig;
-  private final CredentialsProvider credentialsProvider;
+  private final CredentialsFactory credentialsFactory;
   private final PerThreadRequestScope.Scoper threadScoper;
 
   private final Project.NameKey projectName;
@@ -166,7 +165,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     pool = p;
     config = c;
     replConfig = rc;
-    credentialsProvider = cpFactory.create(c.getName());
+    credentialsFactory = cpFactory;
     threadScoper = ts;
     projectName = d;
     uri = u;
@@ -561,7 +560,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
   private PushResult pushVia(Transport tn) throws IOException, PermissionBackendException {
     tn.applyConfig(config);
-    tn.setCredentialsProvider(credentialsProvider);
+    tn.setCredentialsProvider(credentialsFactory.create(config.getName()));
 
     List<RemoteRefUpdate> todo = generateUpdates(tn);
     if (todo.isEmpty()) {
