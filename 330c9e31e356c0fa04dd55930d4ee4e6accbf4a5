@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af666c8c_8ad3a4bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2024-07-08T07:12:51Z",
+      "side": 1,
+      "message": "nit: `s/sale/stale`",
+      "range": {
+        "startLine": 15,
+        "startChar": 33,
+        "endLine": 15,
+        "endChar": 37
+      },
+      "revId": "330c9e31e356c0fa04dd55930d4ee4e6accbf4a5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a46ba65_550712ad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/FanoutConfigResource.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2024-07-08T07:12:51Z",
+      "side": 1,
+      "message": "question: do we need to copy `remote` section without any sub-section as that is currently performed. I guess not. If that assumption is correct then config could be filtered prior to copy. WDYT?:\n\n```suggestion\n    sections.stream()\n        .filter(section -\u003e !section.equals(\"remote\"))\n        .forEach(\n            section -\u003e {\n              for (String name : config.getNames(section)) {\n                filteredConfig.setStringList(\n                    section, null, name, List.of(config.getStringList(section, null, name)));\n              }\n\n              for (String subsection : config.getSubsections(section)) {\n                for (String name : config.getNames(section, subsection)) {\n                  filteredConfig.setStringList(\n                      section,\n                      subsection,\n                      name,\n                      List.of(config.getStringList(section, subsection, name)));\n                }\n              }\n            });\n```",
+      "range": {
+        "startLine": 117,
+        "startChar": 4,
+        "endLine": 135,
+        "endChar": 11
+      },
+      "revId": "330c9e31e356c0fa04dd55930d4ee4e6accbf4a5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
