@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3ed7b3c_c863007f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2024-07-09T07:05:55Z",
+      "side": 1,
+      "message": "nit: `s/be made pass/pass`?",
+      "range": {
+        "startLine": 22,
+        "startChar": 17,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "24a4c09ca2aea5f53a2e92feca2f826f9173b0d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
