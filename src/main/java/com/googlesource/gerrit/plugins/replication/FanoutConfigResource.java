@@ -101,7 +101,7 @@ public class FanoutConfigResource extends FileConfigResource {
       Set<String> options = updates.getNames("remote", remote);
       for (String option : options) {
         List<String> values = List.of(updates.getStringList("remote", remote, option));
-        remoteConfig.setStringList("remote", remote, option, values);
+        remoteConfig.setStringList("remote", null, option, values);
         config.setStringList("remote", remote, option, values);
       }
       remoteConfig.save();
