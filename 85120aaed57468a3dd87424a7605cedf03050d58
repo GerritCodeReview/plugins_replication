@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04bfac11_70f7a221",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2024-07-29T20:27:32Z",
+      "side": 1,
+      "message": "This should be removed before this merge. Done in change 434158",
+      "range": {
+        "startLine": 290,
+        "startChar": 7,
+        "endLine": 290,
+        "endChar": 13
+      },
+      "revId": "85120aaed57468a3dd87424a7605cedf03050d58",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75c1723d_efbb935a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2024-07-29T20:27:32Z",
+      "side": 1,
+      "message": "This should stay removed like it is in stable-3.5",
+      "range": {
+        "startLine": 185,
+        "startChar": 9,
+        "endLine": 185,
+        "endChar": 21
+      },
+      "revId": "85120aaed57468a3dd87424a7605cedf03050d58",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
