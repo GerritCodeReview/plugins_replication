@@ -202,7 +202,7 @@ public class PushOneTest {
 
     PushOne pushOne = createPushOne(replicationPushFilter);
 
-    pushOne.addRef(PushOne.ALL_REFS);
+    pushOne.addRefBatch(ImmutableSet.of(PushOne.ALL_REFS));
     pushOne.run();
 
     isCallFinished.await(TEST_PUSH_TIMEOUT_SECS, TimeUnit.SECONDS);
@@ -224,7 +224,7 @@ public class PushOneTest {
 
     PushOne pushOne = createPushOne(replicationPushFilter);
 
-    pushOne.addRef(PushOne.ALL_REFS);
+    pushOne.addRefBatch(ImmutableSet.of(PushOne.ALL_REFS));
     pushOne.run();
 
     isCallFinished.await(10, TimeUnit.SECONDS);
@@ -351,7 +351,7 @@ public class PushOneTest {
     when(gitRepositoryManagerMock.openRepository(projectNameKey))
         .thenThrow(new RepositoryNotFoundException("not found"));
     PushOne pushOne = createPushOne(null);
-    pushOne.addRef(PushOne.ALL_REFS);
+    pushOne.addRefBatch(ImmutableSet.of(PushOne.ALL_REFS));
     pushOne.setToRetry();
     pushOne.run();
     assertThat(pushOne.isRetrying()).isFalse();
@@ -363,7 +363,7 @@ public class PushOneTest {
             NEW, "bar", ObjectId.fromString("0000000000000000000000000000000000000001"));
     localRefs.add(barLocalRef);
 
-    pushOne.addRef(PushOne.ALL_REFS);
+    pushOne.addRefBatch(ImmutableSet.of(PushOne.ALL_REFS));
     pushOne.run();
 
     isCallFinished.await(TEST_PUSH_TIMEOUT_SECS, TimeUnit.SECONDS);
