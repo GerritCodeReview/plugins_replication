@@ -168,11 +168,11 @@ public class ReplicationTasksStorage {
     return isMultiPrimary;
   }
 
-  public synchronized String create(ReplicateRefUpdate r) {
+  public String create(ReplicateRefUpdate r) {
     return new Task(r).create();
   }
 
-  public synchronized Set<ImmutableSet<String>> start(UriUpdates uriUpdates) {
+  public Set<ImmutableSet<String>> start(UriUpdates uriUpdates) {
     Set<ImmutableSet<String>> startedRefs = new HashSet<>();
     for (ReplicateRefUpdate update : uriUpdates.getReplicateRefUpdates()) {
       Task t = new Task(update);
@@ -183,13 +183,13 @@ public class ReplicationTasksStorage {
     return startedRefs;
   }
 
-  public synchronized void reset(UriUpdates uriUpdates) {
+  public void reset(UriUpdates uriUpdates) {
     for (ReplicateRefUpdate update : uriUpdates.getReplicateRefUpdates()) {
       new Task(update).reset();
     }
   }
 
-  public synchronized void recoverAll() {
+  public void recoverAll() {
     streamRunning().forEach(r -> new Task(r).recover());
   }
 
@@ -401,7 +401,15 @@ public class ReplicationTasksStorage {
         logger.atFine().log("DELETE %s %s", running, updateLog());
         Files.delete(running);
       } catch (IOException e) {
-        logger.atSevere().withCause(e).log("Error while deleting task %s", taskKey);
+        String message = "Error while deleting task %s";
+        if (isMultiPrimary() && e instanceof NoSuchFileException) {
+          logger.atFine().log(
+              message
+                  + " (expected after recovery from another node's startup with multi-primaries and distributor enabled)",
+              taskKey);
+        } else {
+          logger.atSevere().withCause(e).log(message, taskKey);
+        }
       }
     }
 

@@ -288,18 +288,20 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     return uri;
   }
 
-  void addRef(String ref) {
-    addRefBatch(ImmutableSet.of(ref));
-  }
-
-  void addRefBatch(ImmutableSet<String> refBatch) {
+  /** Returns false if all refs were already included in the push, true otherwise */
+  boolean addRefBatch(ImmutableSet<String> refBatch) {
     if (refBatch.size() == 1 && refBatch.contains(ALL_REFS)) {
       refBatchesToPush.clear();
+      boolean pushAllRefsChanged = !pushAllRefs;
       pushAllRefs = true;
       repLog.atFinest().log("Added all refs for replication to %s", uri);
-    } else if (!pushAllRefs && refBatchesToPush.add(refBatch)) {
-      repLog.atFinest().log("Added ref %s for replication to %s", refBatch, uri);
+      return pushAllRefsChanged;
     }
+    if (!pushAllRefs && refBatchesToPush.add(refBatch)) {
+      repLog.atFinest().log("Added ref %s for replication to %s", refBatch, uri);
+      return true;
+    }
+    return false;
   }
 
   @Override

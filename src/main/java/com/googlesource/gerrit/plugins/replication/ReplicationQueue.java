@@ -176,10 +176,10 @@ public class ReplicationQueue
     }
   }
 
-  private void fire(URIish uri, Project.NameKey project, ImmutableSet<String> refNames) {
+  private void fireFromStorage(URIish uri, Project.NameKey project, ImmutableSet<String> refNames) {
     ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
     for (Destination dest : destinations.get().getDestinations(uri, project, refNames)) {
-      dest.schedule(project, refNames, uri, state);
+      dest.scheduleFromStorage(project, refNames, uri, state);
     }
     state.markAllPushTasksScheduled();
   }
@@ -237,7 +237,7 @@ public class ReplicationQueue
             @Override
             public void run(ReplicationTasksStorage.ReplicateRefUpdate u) {
               try {
-                fire(new URIish(u.uri()), Project.nameKey(u.project()), u.refs());
+                fireFromStorage(new URIish(u.uri()), Project.nameKey(u.project()), u.refs());
                 if (Prune.TRUE.equals(prune)) {
                   taskNamesByReplicateRefUpdate.remove(u);
                 }
@@ -251,10 +251,13 @@ public class ReplicationQueue
 
             @Override
             public void onDone() {
-              if (Prune.TRUE.equals(prune)) {
-                pruneNoLongerPending(new HashSet<>(taskNamesByReplicateRefUpdate.values()));
+              try {
+                if (Prune.TRUE.equals(prune)) {
+                  pruneNoLongerPending(new HashSet<>(taskNamesByReplicateRefUpdate.values()));
+                }
+              } finally {
+                replaying.set(false);
               }
-              replaying.set(false);
             }
 
             @Override

@@ -400,8 +400,23 @@ public class Destination {
     schedule(project, refs, uri, state, false);
   }
 
+  void scheduleFromStorage(
+      Project.NameKey project, Set<String> refs, URIish uri, ReplicationState state) {
+    schedule(project, refs, uri, state, false, true);
+  }
+
   void schedule(
       Project.NameKey project, Set<String> refs, URIish uri, ReplicationState state, boolean now) {
+    schedule(project, refs, uri, state, now, false);
+  }
+
+  void schedule(
+      Project.NameKey project,
+      Set<String> refs,
+      URIish uri,
+      ReplicationState state,
+      boolean now,
+      boolean fromStorage) {
     ImmutableSet.Builder<String> toSchedule = ImmutableSet.builder();
     for (String ref : refs) {
       if (!shouldReplicate(project, ref, state)) {
@@ -453,11 +468,14 @@ public class Destination {
             "scheduled %s:%s => %s to run %s",
             project, refsToSchedule, task, now ? "now" : "after " + config.getDelay() + "s");
       } else {
-        task.addRefBatch(refsToSchedule);
+        boolean added = task.addRefBatch(refsToSchedule);
         task.addState(refsToSchedule, state);
-        repLog.atInfo().log(
-            "consolidated %s:%s => %s with an existing pending push",
-            project, refsToSchedule, task);
+        String message = "consolidated %s:%s => %s with an existing pending push";
+        if (added || !fromStorage) {
+          repLog.atInfo().log(message, project, refsToSchedule, task);
+        } else {
+          repLog.atFine().log(message, project, refsToSchedule, task);
+        }
       }
       for (String ref : refsToSchedule) {
         state.increasePushTaskCount(project.get(), ref);
