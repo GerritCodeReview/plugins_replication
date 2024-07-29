@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ba8ed1_e439358e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2024-07-29T23:14:42Z",
+      "side": 1,
+      "message": "In case it\u0027s confusing, the stable-3.9 branch exists, but isn\u0027t used for anything, so it\u0027s actually behind the stable-3.8 branch right now. Gerrit core stable-3.8 and stable-3.9 both currently use the replication stable-3.8 branch.",
+      "range": {
+        "startLine": 8,
+        "startChar": 14,
+        "endLine": 8,
+        "endChar": 24
+      },
+      "revId": "445cd037108a9ad478c187aeb31cb14a8e889a0f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
