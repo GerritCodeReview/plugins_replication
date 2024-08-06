@@ -75,6 +75,24 @@
       "parentUuid": "69790d0b_e58327c9",
       "revId": "445cd037108a9ad478c187aeb31cb14a8e889a0f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "867fee16_9053dea9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2024-08-06T15:31:50Z",
+      "side": 1,
+      "message": "\u003e We could, but there is the danger of _forgetting_ to bump the submodule in Gerrit stable-3.9 when we update the replication plugin on stable-3.8 (which would be shared with stable-3.9).\n\nSince the submodule is pinned to the same commit, a regular merge in the superproject (core) will do it without conflicts, so I think the risk of using only a stable-3.8 replication branch is currently minimal. The trick will be remembering to update and switch to using the replication stable-3.9 branch when 3.8 is EOL. 😊",
+      "parentUuid": "18541e5d_0e04ac59",
+      "revId": "445cd037108a9ad478c187aeb31cb14a8e889a0f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [
