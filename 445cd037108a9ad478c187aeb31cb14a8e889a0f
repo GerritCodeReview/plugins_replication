@@ -57,6 +57,24 @@
       "parentUuid": "2c0be20f_07933457",
       "revId": "445cd037108a9ad478c187aeb31cb14a8e889a0f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18541e5d_0e04ac59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-08-06T15:19:02Z",
+      "side": 1,
+      "message": "\u003e Yes, sorry, I explained it a bit in the commit message of change 434160 and in the [comment](https://gerrit-review.googlesource.com/c/plugins/replication/+/434161/comment/13ba8ed1_e439358e/) on this change, but I can see now that\u0027s probably not enough to explain it all.\n\u003e \n\u003e Core stable-3.8 and stable-3.9 both used the same submodule commit for replication, so they can both share the new replication stable-3.8 branch. However, Kaushik had created the replication stable-3.9 branch before we realized that and we don\u0027t have a way to upload a fast-forward merge for review, so it\u0027s not easy to maintain both branches at the same commit (which is what we would want to do). If it helps, we could delete the (unused) replication stable-3.9 branch for now until there\u0027s a need for it to diverge from the stable-3.8 branch?\n\nWe could, but there is the danger of _forgetting_ to bump the submodule in Gerrit stable-3.9 when we update the replication plugin on stable-3.8 (which would be shared with stable-3.9).\n\nIMHO the _pain_ of maintaining the stable-3.9 branch on the replication plugin is worth the _risk_ of having making the above mistake. However, there is always a _pain_ or a _risk_ involved in either choice.",
+      "parentUuid": "69790d0b_e58327c9",
+      "revId": "445cd037108a9ad478c187aeb31cb14a8e889a0f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [
