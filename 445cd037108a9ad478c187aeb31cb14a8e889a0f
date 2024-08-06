@@ -39,6 +39,24 @@
       "message": "Hello @nasser.grainawi@linaro.org, @kaushik.lingarkar@linaro.org, any reason why 3.9 was skipped and 3.8 was merged directly to 3.10?\nWas this intentional?",
       "revId": "445cd037108a9ad478c187aeb31cb14a8e889a0f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69790d0b_e58327c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2024-08-06T15:14:58Z",
+      "side": 1,
+      "message": "Yes, sorry, I explained it a bit in the commit message of change 434160 and in the [comment](https://gerrit-review.googlesource.com/c/plugins/replication/+/434161/comment/13ba8ed1_e439358e/) on this change, but I can see now that\u0027s probably not enough to explain it all.\n\nCore stable-3.8 and stable-3.9 both used the same submodule commit for replication, so they can both share the new replication stable-3.8 branch. However, Kaushik had created the replication stable-3.9 branch before we realized that and we don\u0027t have a way to upload a fast-forward merge for review, so it\u0027s not easy to maintain both branches at the same commit (which is what we would want to do). If it helps, we could delete the (unused) replication stable-3.9 branch for now until there\u0027s a need for it to diverge from the stable-3.8 branch?",
+      "parentUuid": "2c0be20f_07933457",
+      "revId": "445cd037108a9ad478c187aeb31cb14a8e889a0f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [
