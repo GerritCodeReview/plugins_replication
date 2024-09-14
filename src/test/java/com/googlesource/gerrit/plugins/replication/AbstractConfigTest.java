@@ -79,7 +79,7 @@ public abstract class AbstractConfigTest {
   }
 
   @Before
-  public void setup() throws IOException {
+  public void setup() {
     when(destinationFactoryMock.create(any(DestinationConfiguration.class)))
         .thenAnswer(
             new Answer<Destination>() {
