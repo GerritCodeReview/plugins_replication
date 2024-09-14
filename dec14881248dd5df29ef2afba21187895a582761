@@ -16,6 +16,24 @@
       "message": "Considering the lack of tests in this plugin and the potential effects of this change, I am giving CR+1 until we try this code in production.\nOtherwise this would be CR+2.",
       "revId": "dec14881248dd5df29ef2afba21187895a582761",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8248cf5e_e6c8df41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-09-14T20:05:44Z",
+      "side": 1,
+      "message": "We now run this in production since a couple of weeks without issues. Hence I think we can safely submit this change.",
+      "parentUuid": "a061c1ba_3c593170",
+      "revId": "dec14881248dd5df29ef2afba21187895a582761",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
