@@ -226,8 +226,13 @@ public class ReplicationQueue
       final Map<ReplicateRefUpdate, String> taskNamesByReplicateRefUpdate =
           new ConcurrentHashMap<>();
       if (Prune.TRUE.equals(prune)) {
-        for (Destination destination : destinations.get().getAll(FilterType.ALL)) {
-          taskNamesByReplicateRefUpdate.putAll(destination.getTaskNamesByReplicateRefUpdate());
+        try {
+          for (Destination destination : destinations.get().getAll(FilterType.ALL)) {
+            taskNamesByReplicateRefUpdate.putAll(destination.getTaskNamesByReplicateRefUpdate());
+          }
+        } catch (Throwable e) {
+          repLog.atWarning().withCause(e).log(
+              "Unexpected error while accumulating prunable replication tasks");
         }
       }
       new ChainedScheduler.StreamScheduler<>(
