@@ -34,6 +34,24 @@
       "parentUuid": "aef7a6f3_07496332",
       "revId": "9a750e2384ccb8975560b4ca76b9b92c535362af",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91d93f77_a026fbe7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2024-10-15T21:48:58Z",
+      "side": 1,
+      "message": "There is one here: https://gerrit.googlesource.com/plugins/replication/+/refs/heads/stable-3.9 should that be deleted?",
+      "parentUuid": "ec2964dd_853441f1",
+      "revId": "9a750e2384ccb8975560b4ca76b9b92c535362af",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [
