@@ -16,6 +16,24 @@
       "message": "Should there be a merge into 3.9 first?",
       "revId": "9a750e2384ccb8975560b4ca76b9b92c535362af",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec2964dd_853441f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2024-10-15T20:19:53Z",
+      "side": 1,
+      "message": "There\u0027s no 3.9 branch. core stable-3.8 and stable-3.9 both use the same replication stable-3.8 branch.",
+      "parentUuid": "aef7a6f3_07496332",
+      "revId": "9a750e2384ccb8975560b4ca76b9b92c535362af",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
