@@ -246,18 +246,18 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   protected String getLimitedRefs() {
     Set<ImmutableSet<String>> refs = getRefs();
     int maxRefsToShow = replConfig.getMaxRefsToShow();
-    if (maxRefsToShow == 0) {
-      maxRefsToShow = refs.size();
-    }
-    String refsString =
-        refs.stream()
-            .flatMap(Collection::stream)
-            .limit(maxRefsToShow)
-            .collect(Collectors.joining(" "));
-    int hiddenRefs = refs.size() - maxRefsToShow;
-    if (hiddenRefs > 0) {
+
+    List<String> allRefsList = refs.stream().flatMap(Collection::stream).collect(Collectors.toList());
+
+    String refsString = (maxRefsToShow == 0)
+        ? String.join(" ", allRefsList)
+        : allRefsList.stream().limit(maxRefsToShow).collect(Collectors.joining(" "));
+
+    if (maxRefsToShow > 0 && allRefsList.size() > maxRefsToShow) {
+      int hiddenRefs = allRefsList.size() - maxRefsToShow;
       refsString += " (+" + hiddenRefs + ")";
     }
+
     return "[" + refsString + "]";
   }
 
