@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6125772a_ca7a02d8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-11-13T16:19:06Z",
+      "side": 1,
+      "message": "This would make two streams navigation: one at L251 and another at L252",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 71
+      },
+      "revId": "d88578276a309f74424e30b26d25a8bf62792d72",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0904ea2_05a1974f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-11-13T16:19:06Z",
+      "side": 1,
+      "message": "Can the `collect(Collectors.joining(\" \"))` be dried out?",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 79
+      },
+      "revId": "d88578276a309f74424e30b26d25a8bf62792d72",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
