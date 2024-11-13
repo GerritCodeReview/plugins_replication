@@ -33,6 +33,24 @@
       "message": "nit: empty line unrelated change",
       "revId": "6568154c6f36476f0ebb764a905f2e8dcaeeea2b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62fea33d_8219d855",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1149185
+      },
+      "writtenOn": "2024-11-13T16:38:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "460dd437_f23d6984",
+      "revId": "6568154c6f36476f0ebb764a905f2e8dcaeeea2b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
