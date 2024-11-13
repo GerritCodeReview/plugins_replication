@@ -69,6 +69,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.eclipse.jgit.errors.NoRemoteRepositoryException;
 import org.eclipse.jgit.errors.NotSupportedException;
 import org.eclipse.jgit.errors.RemoteRepositoryException;
@@ -246,16 +247,17 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   protected String getLimitedRefs() {
     Set<ImmutableSet<String>> refs = getRefs();
     int maxRefsToShow = replConfig.getMaxRefsToShow();
-    if (maxRefsToShow == 0) {
-      maxRefsToShow = refs.size();
-    }
-    String refsString =
-        refs.stream()
-            .flatMap(Collection::stream)
-            .limit(maxRefsToShow)
-            .collect(Collectors.joining(" "));
-    int hiddenRefs = refs.size() - maxRefsToShow;
-    if (hiddenRefs > 0) {
+
+    long totalRefs = refs.stream().mapToInt(Set::size).sum();
+    Stream<String> refsStream = refs.stream().flatMap(Collection::stream);
+
+    Stream<String> refsFiltered =
+        (maxRefsToShow == 0) ? refsStream : refsStream.limit(maxRefsToShow);
+
+    String refsString = refsFiltered.collect(Collectors.joining(" "));
+
+    if (maxRefsToShow > 0 && totalRefs > maxRefsToShow) {
+      int hiddenRefs = (int) (totalRefs - maxRefsToShow);
       refsString += " (+" + hiddenRefs + ")";
     }
     return "[" + refsString + "]";
