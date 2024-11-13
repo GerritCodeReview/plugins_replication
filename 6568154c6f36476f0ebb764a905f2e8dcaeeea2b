@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "278dfd58_e267627a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1149185
+      },
+      "writtenOn": "2024-11-13T16:03:53Z",
+      "side": 1,
+      "message": "**E2E tests:**\n\nI have deployed locally Gerrit v3.11:\n\n\n**First test: gerrit.maxRefsToShow \u003d 3**\n\nreplication plugin configutation:\n\n\n```\n  [gerrit]\n    maxRefsToShow \u003d 3\n\n  [remote \"pubmirror\"]\n    url \u003d file:///tmp/git/${name}.git\n    push \u003d +refs/heads/*:refs/heads/*\n    push \u003d +refs/tags/*:refs/tags/*\n    push \u003d +refs/changes/*:refs/changes/*\n\n    threads \u003d 3\n```    \n\nI have created 2 changes locally and I have pushed them together with the following log:\n\n```\n[2024-11-13 15:53:20,113] scheduled alvaro:[refs/changes/21/121/meta, refs/changes/22/122/1, refs/changes/22/122/meta, refs/changes/21/121/1] \u003d\u003e [d320af86] push file:///tmp/git/alvaro.git [refs/changes/21/121/meta refs/changes/22/122/1 refs/changes/22/122/meta (+1)] to run after 15s [CONTEXT PLUGIN\u003d\"replication\" RECEIVE_ID\u003d\"alvaro-1731513199914-19756180\" project\u003d\"alvaro\" request\u003d\"GIT_RECEIVE\" ]\n```\n\nWe can see that 4 refs have been scheduled but only 3 are shown and there 1 hidden.\n\n**Second test: gerrit.maxRefsToShow \u003d 0**\n\nreplication plugin configutation:\n\n\n```\n  [gerrit]\n    maxRefsToShow \u003d 0\n\n  [remote \"pubmirror\"]\n    url \u003d file:///tmp/git/${name}.git\n    push \u003d +refs/heads/*:refs/heads/*\n    push \u003d +refs/tags/*:refs/tags/*\n    push \u003d +refs/changes/*:refs/changes/*\n\n    threads \u003d 3\n```\n\nI have created 2 changes locally and I have pushed them together with the following log:\n\n```\n[2024-11-13 15:57:56,027] scheduled alvaro:[refs/changes/42/142/1, refs/changes/41/141/1, refs/changes/42/142/meta, refs/changes/41/141/meta] \u003d\u003e [38c592b3] push file:///tmp/git/alvaro.git [refs/changes/42/142/1 refs/changes/41/141/1 refs/changes/42/142/meta refs/changes/41/141/meta] to run after 15s [CONTEXT PLUGIN\u003d\"replication\" RECEIVE_ID\u003d\"alvaro-1731513475864-93e6d8a5\" project\u003d\"alvaro\" request\u003d\"GIT_RECEIVE\" ]\n```\n\nWe can see that 4 refs have been scheduled but 4 are shown and no hidden.",
+      "revId": "6568154c6f36476f0ebb764a905f2e8dcaeeea2b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
