@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef3e64ba_bb323030",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1149185
+      },
+      "writtenOn": "2024-11-14T16:24:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a17dd944_89210d74",
+      "range": {
+        "startLine": 9,
+        "startChar": 13,
+        "endLine": 9,
+        "endChar": 64
+      },
+      "revId": "fefe2bf5f9b5aeb9af324c23da0e40271eb2ae53",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1264bdc_c04fafc0",
@@ -47,6 +71,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "049ae99f_fc99fe90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1149185
+      },
+      "writtenOn": "2024-11-14T16:24:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1264bdc_c04fafc0",
+      "range": {
+        "startLine": 10,
+        "startChar": 15,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "fefe2bf5f9b5aeb9af324c23da0e40271eb2ae53",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95f3e797_580c3e02",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-11-14T13:57:44Z",
       "side": 1,
       "message": "I would put this as a separate paragraph below, to indicate that it is a second concern addressed with this change.",
+      "range": {
+        "startLine": 13,
+        "startChar": 9,
+        "endLine": 15,
+        "endChar": 0
+      },
+      "revId": "fefe2bf5f9b5aeb9af324c23da0e40271eb2ae53",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c4796bc_08cfeb48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1149185
+      },
+      "writtenOn": "2024-11-14T16:24:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95f3e797_580c3e02",
       "range": {
         "startLine": 13,
         "startChar": 9,
