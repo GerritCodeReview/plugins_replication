@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ec236ce_dc4add8d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-11-14T11:55:06Z",
+      "side": 1,
+      "message": "I\u0027d try to avoid traversing all refs if possible. We have repos with millions of refs hosted on NFS, in case there are thousands of loose refs this will be very slow. I think it\u0027s more important to ensure good performance instead of ensuring the limit is enforced exactly on the configured number. Hence I would not count loose refs to enforce this limit.",
+      "parentUuid": "05f3f100_03c4121a",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 71
+      },
+      "revId": "d88578276a309f74424e30b26d25a8bf62792d72",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0904ea2_05a1974f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 2
