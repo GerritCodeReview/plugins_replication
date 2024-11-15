@@ -194,6 +194,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4942add0_ec0330fb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2024-11-15T23:20:03Z",
+      "side": 1,
+      "message": "\u003e Is the data structure `Set\u003cImmutableSet\u003cString\u003e\u003e refs \u003d getRefs()` very big?\n\nIt can be large.\n\nI would modify L248 to immediately flatten `getRefs()` into a single Set, which also protects us from changes to the set. Then `totalRefs` is just `.size()` and you can still do the other stream operations after that.",
+      "parentUuid": "28aabd2a_8e0d8f9c",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 71
+      },
+      "revId": "d88578276a309f74424e30b26d25a8bf62792d72",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0904ea2_05a1974f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
         "patchSetId": 2
