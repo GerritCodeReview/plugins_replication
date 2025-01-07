@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d46eda2_6eb511fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3806520
+      },
+      "writtenOn": "2025-01-07T02:59:10Z",
+      "side": 1,
+      "message": "441049: Update google-java-format to 1.24.0 | https://gerrit-review.googlesource.com/c/gerrit/+/441049",
+      "revId": "f447543ba5493bae04cc9a5a2844f2745541e27a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
