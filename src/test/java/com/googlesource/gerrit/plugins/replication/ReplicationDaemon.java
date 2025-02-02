@@ -70,6 +70,7 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
 
   @Inject protected SitePaths sitePaths;
   @Inject private ProjectOperations projectOperations;
+  @Inject private LocalDiskRepositoryManager localDiskRepositoryManager;
   protected Path gitPath;
   protected FileBasedConfig config;
 
@@ -79,7 +80,7 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
   }
 
   protected String getProjectUri(Project.NameKey project) throws Exception {
-    return ((LocalDiskRepositoryManager) repoManager)
+    return localDiskRepositoryManager
         .getBasePath(project)
         .resolve(project.get() + ".git")
         .toString();
