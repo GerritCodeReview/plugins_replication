@@ -68,7 +68,6 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
           (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60)
               + TEST_PROJECT_CREATION_SECONDS);
 
-  @Inject protected SitePaths sitePaths;
   @Inject private ProjectOperations projectOperations;
   @Inject private LocalDiskRepositoryManager localDiskRepositoryManager;
   protected Path gitPath;
