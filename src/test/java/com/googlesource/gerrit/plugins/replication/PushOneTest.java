@@ -260,7 +260,7 @@ public class PushOneTest {
 
     isCallFinished.await(10, TimeUnit.SECONDS);
     verify(transportMock, atLeastOnce()).push(any(), any());
-    verify(pushOne, times(2)).push(any(), any(), any());
+    verify(pushOne, times(2)).push(any(), any(), any(), any());
   }
 
   @Test
@@ -290,7 +290,7 @@ public class PushOneTest {
 
     isCallFinished.await(10, TimeUnit.SECONDS);
     verify(transportMock, atLeastOnce()).push(any(), any());
-    verify(pushOne, times(1)).push(any(), any(), any());
+    verify(pushOne, times(1)).push(any(), any(), any(), any());
   }
 
   @Test
@@ -311,7 +311,7 @@ public class PushOneTest {
 
     isCallFinished.await(10, TimeUnit.SECONDS);
     verify(transportMock, times(1)).push(any(), any());
-    verify(pushOne, times(1)).push(any(), any(), any());
+    verify(pushOne, times(1)).push(any(), any(), any(), any());
   }
 
   @Test
