@@ -126,7 +126,6 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private final URIish uri;
   private final Set<ImmutableSet<String>> refBatchesToPush = Sets.newConcurrentHashSet();
   private boolean pushAllRefs;
-  private Repository git;
   private boolean isCollision;
   private boolean retrying;
   private int retryCount;
@@ -429,12 +428,11 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
     repLog.atInfo().log("Replication to %s started...", uri);
     Timer1.Context<String> destinationContext = metrics.start(config.getName());
-    try {
+    try (Repository git = gitManager.openRepository(projectName)) {
       long startedAt = destinationContext.getStartTime();
       long delay = NANOSECONDS.toMillis(startedAt - createdAt);
       metrics.record(config.getName(), delay, retryCount);
-      git = gitManager.openRepository(projectName);
-      runImpl();
+      runImpl(git);
       long elapsed = NANOSECONDS.toMillis(destinationContext.stop());
 
       if (elapsed > SECONDS.toMillis(pool.getSlowLatencyThreshold())) {
@@ -505,9 +503,6 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       stateLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
     } finally {
       pool.notifyFinished(this);
-      if (git != null) {
-        git.close();
-      }
     }
   }
 
@@ -518,13 +513,16 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private void createRepository() {
     if (pool.isCreateMissingRepos()) {
       try {
-        Ref head = git.exactRef(Constants.HEAD);
-        if (createProject(projectName, head != null ? getName(head) : null)) {
-          repLog.atWarning().log("Missing repository created; retry replication to %s", uri);
-          pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
-        } else {
-          repLog.atWarning().log(
-              "Missing repository could not be created when replicating %s", uri);
+        try (Repository git = gitManager.openRepository(projectName)) {
+          Ref head = git.exactRef(Constants.HEAD);
+
+          if (createProject(projectName, head != null ? getName(head) : null)) {
+            repLog.atWarning().log("Missing repository created; retry replication to %s", uri);
+            pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
+          } else {
+            repLog.atWarning().log(
+                "Missing repository could not be created when replicating %s", uri);
+          }
         }
       } catch (IOException ioe) {
         stateLog.error(
@@ -549,19 +547,20 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     return target.getName();
   }
 
-  private void runImpl() throws IOException, PermissionBackendException {
+  private void runImpl(Repository git) throws IOException, PermissionBackendException {
     PushResult res;
     try (Transport tn = transportFactory.open(git, uri)) {
-      res = pushVia(tn);
+      res = pushVia(git, tn);
     }
     updateStates(res.getRemoteUpdates());
   }
 
-  private PushResult pushVia(Transport tn) throws IOException, PermissionBackendException {
+  private PushResult pushVia(Repository git, Transport tn)
+      throws IOException, PermissionBackendException {
     tn.applyConfig(config);
     tn.setCredentialsProvider(credentialsFactory.create(config.getName()));
 
-    List<RemoteRefUpdate> todo = generateUpdates(tn);
+    List<RemoteRefUpdate> todo = generateUpdates(git, tn);
     if (todo.isEmpty()) {
       // If we have no commands selected, we have nothing to do.
       // Calling JGit at this point would just redo the work we
@@ -640,7 +639,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     return b ? "yes" : "no";
   }
 
-  private List<RemoteRefUpdate> generateUpdates(Transport tn)
+  private List<RemoteRefUpdate> generateUpdates(Repository git, Transport tn)
       throws IOException, PermissionBackendException {
     Optional<ProjectState> projectState = projectCache.get(projectName);
     if (!projectState.isPresent()) {
@@ -680,14 +679,15 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     }
 
     List<RemoteRefUpdate> remoteUpdatesList =
-        pushAllRefs ? doPushAll(tn, local) : doPushDelta(local);
+        pushAllRefs ? doPushAll(git, tn, local) : doPushDelta(git, local);
 
     return replicationPushFilter == null || replicationPushFilter.get() == null
         ? remoteUpdatesList
         : replicationPushFilter.get().filter(projectName.get(), remoteUpdatesList);
   }
 
-  private List<RemoteRefUpdate> doPushAll(Transport tn, Map<String, Ref> local) throws IOException {
+  private List<RemoteRefUpdate> doPushAll(Repository git, Transport tn, Map<String, Ref> local)
+      throws IOException {
     List<RemoteRefUpdate> cmds = new ArrayList<>();
     boolean noPerms = !pool.isReplicatePermissions();
     Map<String, Ref> remote = listRemote(tn);
@@ -702,7 +702,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
         Ref dst = remote.get(spec.getDestination());
         if (dst == null || !src.getObjectId().equals(dst.getObjectId())) {
           // Doesn't exist yet, or isn't the same value, request to push.
-          push(cmds, spec, src);
+          push(git, cmds, spec, src);
         }
       }
     }
@@ -716,14 +716,15 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
         RefSpec spec = matchDst(ref.getName());
         if (spec != null && !local.containsKey(spec.getSource())) {
           // No longer on local side, request removal.
-          delete(cmds, spec);
+          delete(git, cmds, spec);
         }
       }
     }
     return cmds;
   }
 
-  private List<RemoteRefUpdate> doPushDelta(Map<String, Ref> local) throws IOException {
+  private List<RemoteRefUpdate> doPushDelta(Repository git, Map<String, Ref> local)
+      throws IOException {
     List<RemoteRefUpdate> cmds = new ArrayList<>();
     boolean noPerms = !pool.isReplicatePermissions();
     Set<String> refs = flattenRefBatchesToPush();
@@ -739,9 +740,9 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
         }
 
         if (srcRef != null && canPushRef(src, noPerms)) {
-          push(cmds, spec, srcRef);
+          push(git, cmds, spec, srcRef);
         } else if (config.isMirror()) {
-          delete(cmds, spec);
+          delete(git, cmds, spec);
         }
       }
     }
@@ -782,13 +783,13 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   }
 
   @VisibleForTesting
-  void push(List<RemoteRefUpdate> cmds, RefSpec spec, Ref src) throws IOException {
+  void push(Repository git, List<RemoteRefUpdate> cmds, RefSpec spec, Ref src) throws IOException {
     String dst = spec.getDestination();
     boolean force = spec.isForceUpdate();
     cmds.add(new RemoteRefUpdate(git, src, dst, force, null, null));
   }
 
-  private void delete(List<RemoteRefUpdate> cmds, RefSpec spec) throws IOException {
+  private void delete(Repository git, List<RemoteRefUpdate> cmds, RefSpec spec) throws IOException {
     String dst = spec.getDestination();
     boolean force = spec.isForceUpdate();
     cmds.add(new RemoteRefUpdate(git, (Ref) null, dst, force, null, null));
