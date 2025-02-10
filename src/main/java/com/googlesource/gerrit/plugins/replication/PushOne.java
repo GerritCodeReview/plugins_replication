@@ -126,7 +126,6 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private final URIish uri;
   private final Set<ImmutableSet<String>> refBatchesToPush = Sets.newConcurrentHashSet();
   private boolean pushAllRefs;
-  private Repository git;
   private boolean isCollision;
   private boolean retrying;
   private int retryCount;
@@ -429,85 +428,85 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
     repLog.atInfo().log("Replication to %s started...", uri);
     Timer1.Context<String> destinationContext = metrics.start(config.getName());
-    try {
-      long startedAt = destinationContext.getStartTime();
-      long delay = NANOSECONDS.toMillis(startedAt - createdAt);
-      metrics.record(config.getName(), delay, retryCount);
-      git = gitManager.openRepository(projectName);
-      runImpl(git);
-      long elapsed = NANOSECONDS.toMillis(destinationContext.stop());
+    try (Repository git = gitManager.openRepository(projectName)) {
+      try {
+        long startedAt = destinationContext.getStartTime();
+        long delay = NANOSECONDS.toMillis(startedAt - createdAt);
+        metrics.record(config.getName(), delay, retryCount);
+        runImpl(git);
+        long elapsed = NANOSECONDS.toMillis(destinationContext.stop());
 
-      if (elapsed > SECONDS.toMillis(pool.getSlowLatencyThreshold())) {
-        metrics.recordSlowProjectReplication(
-            config.getName(), projectName.get(), pool.getSlowLatencyThreshold(), elapsed);
-      }
-      retryDone();
-      repLog.atInfo().log(
-          "Replication to %s completed in %dms, %dms delay, %d retries",
-          uri, elapsed, delay, retryCount);
-    } catch (RepositoryNotFoundException e) {
-      retryDone();
-      stateLog.error(
-          "Cannot replicate "
-              + projectName
-              + "; Local repository does not exist: "
-              + e.getMessage(),
-          getStatesAsArray());
+        if (elapsed > SECONDS.toMillis(pool.getSlowLatencyThreshold())) {
+          metrics.recordSlowProjectReplication(
+              config.getName(), projectName.get(), pool.getSlowLatencyThreshold(), elapsed);
+        }
+        retryDone();
+        repLog.atInfo().log(
+            "Replication to %s completed in %dms, %dms delay, %d retries",
+            uri, elapsed, delay, retryCount);
+      } catch (RepositoryNotFoundException e) {
+        retryDone();
+        stateLog.error(
+            "Cannot replicate "
+                + projectName
+                + "; Local repository does not exist: "
+                + e.getMessage(),
+            getStatesAsArray());
 
-    } catch (RemoteRepositoryException e) {
-      // Tried to replicate to a remote via anonymous git:// but the repository
-      // does not exist.  In this case NoRemoteRepositoryException is not
-      // raised.
-      String msg = e.getMessage();
-      if (msg.contains("access denied")
-          || msg.contains("no such repository")
-          || msg.contains("Git repository not found")
-          || msg.contains("unavailable")) {
+      } catch (RemoteRepositoryException e) {
+        // Tried to replicate to a remote via anonymous git:// but the repository
+        // does not exist.  In this case NoRemoteRepositoryException is not
+        // raised.
+        String msg = e.getMessage();
+        if (msg.contains("access denied")
+            || msg.contains("no such repository")
+            || msg.contains("Git repository not found")
+            || msg.contains("unavailable")) {
+          createRepository(git);
+        } else {
+          repLog.atSevere().log(
+              "Cannot replicate %s; Remote repository error: %s", projectName, msg);
+        }
+
+      } catch (NoRemoteRepositoryException e) {
         createRepository(git);
-      } else {
-        repLog.atSevere().log("Cannot replicate %s; Remote repository error: %s", projectName, msg);
-      }
+      } catch (NotSupportedException e) {
+        stateLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
+      } catch (TransportException e) {
+        if (e instanceof UpdateRefFailureException) {
+          updateRefRetryCount++;
+          repLog.atSevere().log("Cannot replicate to %s due to a lock or write ref failure", uri);
 
-    } catch (NoRemoteRepositoryException e) {
-      createRepository(git);
-    } catch (NotSupportedException e) {
-      stateLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
-    } catch (TransportException e) {
-      if (e instanceof UpdateRefFailureException) {
-        updateRefRetryCount++;
-        repLog.atSevere().log("Cannot replicate to %s due to a lock or write ref failure", uri);
-
-        // The remote push operation should be retried.
-        if (updateRefRetryCount <= maxUpdateRefRetries) {
+          // The remote push operation should be retried.
+          if (updateRefRetryCount <= maxUpdateRefRetries) {
+            if (canceledWhileRunning.get()) {
+              logCanceledWhileRunningException(e);
+            } else {
+              pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
+            }
+          } else {
+            retryDone();
+            repLog.atSevere().log(
+                "Giving up after %d '%s' failures during replication to %s",
+                updateRefRetryCount, e.getMessage(), uri);
+          }
+        } else {
           if (canceledWhileRunning.get()) {
             logCanceledWhileRunningException(e);
           } else {
+            repLog.atSevere().withCause(e).log("Cannot replicate to %s", uri);
+            // The remote push operation should be retried.
             pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
           }
-        } else {
-          retryDone();
-          repLog.atSevere().log(
-              "Giving up after %d '%s' failures during replication to %s",
-              updateRefRetryCount, e.getMessage(), uri);
         }
-      } else {
-        if (canceledWhileRunning.get()) {
-          logCanceledWhileRunningException(e);
-        } else {
-          repLog.atSevere().withCause(e).log("Cannot replicate to %s", uri);
-          // The remote push operation should be retried.
-          pool.reschedule(this, Destination.RetryReason.TRANSPORT_ERROR);
-        }
+      } catch (PermissionBackendException | RuntimeException | Error e) {
+        stateLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
+      } finally {
+        pool.notifyFinished(this);
+        git.close();
       }
     } catch (IOException e) {
       stateLog.error("Cannot replicate to " + uri, e, getStatesAsArray());
-    } catch (PermissionBackendException | RuntimeException | Error e) {
-      stateLog.error("Unexpected error during replication to " + uri, e, getStatesAsArray());
-    } finally {
-      pool.notifyFinished(this);
-      if (git != null) {
-        git.close();
-      }
     }
   }
 
