@@ -45,7 +45,8 @@ public class PushReplicationTest {
     assertThat(escape("name\nwith-LF")).isEqualTo("name%0Awith-LF");
     assertThat(
             escape(
-                "key=a-value=1, --option1 \"OPTION_VALUE_1\" --option-2 <option_VALUE-2> --option-without-value"))
+                "key=a-value=1, --option1 \"OPTION_VALUE_1\" --option-2 <option_VALUE-2>"
+                    + " --option-without-value"))
         .isEqualTo(
             "key=a-value=1,%20--option1%20%22OPTION_VALUE_1%22%20--option-2%20%3Coption_VALUE-2%3E%20--option-without-value");
   }
@@ -56,7 +57,8 @@ public class PushReplicationTest {
     String url = urlBase + "/${name}.git";
     URIish template = new URIish(url);
     String name =
-        "key=a-value=1, --option1 \"OPTION_VALUE_1\" --option-2 <option_VALUE-2> --option-without-value";
+        "key=a-value=1, --option1 \"OPTION_VALUE_1\" --option-2 <option_VALUE-2>"
+            + " --option-without-value";
     String expectedAsciiName =
         "key=a-value=1,%20--option1%20\"OPTION_VALUE_1\"%20--option-2%20<option_VALUE-2>%20--option-without-value";
     String expectedEscapedName =

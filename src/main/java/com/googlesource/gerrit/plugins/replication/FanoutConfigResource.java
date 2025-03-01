@@ -112,7 +112,8 @@ public class FanoutConfigResource extends FileConfigResource {
     Set<String> remoteNames = config.getSubsections("remote");
     if (remoteNames.size() > 0) {
       logger.atSevere().log(
-          "When replication directory is present replication.config file cannot contain remote configuration. Ignoring: %s",
+          "When replication directory is present replication.config file cannot contain remote"
+              + " configuration. Ignoring: %s",
           String.join(",", remoteNames));
 
       for (String name : remoteNames) {
@@ -207,7 +208,8 @@ public class FanoutConfigResource extends FileConfigResource {
       return hasher.hash().toString();
     } catch (IOException e) {
       logger.atSevere().withCause(e).log(
-          "Cannot list remote configuration files from %s. Returning replication.config file version",
+          "Cannot list remote configuration files from %s. Returning replication.config file"
+              + " version",
           remoteConfigsDirPath);
       return parentVersion;
     }

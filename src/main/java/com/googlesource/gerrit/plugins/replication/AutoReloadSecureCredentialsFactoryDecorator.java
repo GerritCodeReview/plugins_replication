@@ -46,9 +46,10 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsF
         new AtomicReference<>(newSecureCredentialsFactory(site, secureStore, config));
     if (config.useLegacyCredentials()) {
       logger.atWarning().log(
-          "Using legacy credentials in clear text in secure.config. Please encrypt your credentials using "
-              + "'java -jar gerrit.war passwd' for each remote, remove the gerrit.useLegacyCredentials in replication.config "
-              + "and then reload the replication plugin.");
+          "Using legacy credentials in clear text in secure.config. Please encrypt your credentials"
+              + " using 'java -jar gerrit.war passwd' for each remote, remove the"
+              + " gerrit.useLegacyCredentials in replication.config and then reload the replication"
+              + " plugin.");
     }
   }
 

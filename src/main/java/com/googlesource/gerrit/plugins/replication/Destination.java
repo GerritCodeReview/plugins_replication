@@ -332,8 +332,7 @@ public class Destination {
       throws PermissionBackendException {
     String name = state.getProject().getName();
     if (!config.replicateHiddenProjects()
-        && state.getProject().getState()
-            == com.google.gerrit.extensions.client.ProjectState.HIDDEN) {
+        && state.getProject().state() == com.google.gerrit.extensions.client.ProjectState.HIDDEN) {
       repLog.atFine().log(
           "Project %s is hidden and replication of hidden projects is disabled", name);
       return false;

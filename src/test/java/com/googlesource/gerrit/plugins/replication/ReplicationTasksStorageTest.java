@@ -170,7 +170,8 @@ public class ReplicationTasksStorageTest {
     String url = urlBase + "/${name}.git";
     URIish template = new URIish(url);
     String strangeValidName =
-        "project/with/a/strange/name key=a-value=1, --option1 \"OPTION_VALUE_1\" --option-2 <option_VALUE-2> --option-without-value";
+        "project/with/a/strange/name key=a-value=1, --option1 \"OPTION_VALUE_1\" --option-2"
+            + " <option_VALUE-2> --option-without-value";
     Project.NameKey project = Project.nameKey(strangeValidName);
     URIish expanded = Destination.getURI(template, project, "slash", false);
     ReplicateRefUpdate update =
