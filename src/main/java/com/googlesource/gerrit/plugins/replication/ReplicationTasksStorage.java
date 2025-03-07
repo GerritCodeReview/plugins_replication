@@ -405,7 +405,8 @@ public class ReplicationTasksStorage {
         if (isMultiPrimary() && e instanceof NoSuchFileException) {
           logger.atFine().log(
               message
-                  + " (expected after recovery from another node's startup with multi-primaries and distributor enabled)",
+                  + " (expected after recovery from another node's startup with multi-primaries and"
+                  + " distributor enabled)",
               taskKey);
         } else {
           logger.atSevere().withCause(e).log(message, taskKey);
