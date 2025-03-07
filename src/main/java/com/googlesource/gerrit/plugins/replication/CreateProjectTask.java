@@ -51,8 +51,10 @@ public class CreateProjectTask {
   }
 
   public boolean create() {
-    return destinations.getURIs(Optional.of(config.getName()), project, FilterType.PROJECT_CREATION)
-        .values().stream()
+    return destinations
+        .getURIs(Optional.of(config.getName()), project, FilterType.PROJECT_CREATION)
+        .values()
+        .stream()
         .map(u -> createProject(u, project, head))
         .reduce(true, (a, b) -> a && b);
   }

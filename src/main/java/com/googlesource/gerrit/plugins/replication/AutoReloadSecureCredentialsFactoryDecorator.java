@@ -39,8 +39,29 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsF
       throws ConfigInvalidException, IOException {
     this.site = site;
     this.config = config;
+<<<<<<< HEAD   (9a750e Merge branch 'stable-3.8' into stable-3.10)
     this.secureCredentialsFactory = new AtomicReference<>(new SecureCredentialsFactory(site));
     this.secureCredentialsFactoryLoadTs = getSecureConfigLastEditTs();
+||||||| BASE
+    this.secureCredentialsFactory =
+        new AtomicReference<>(newSecureCredentialsFactory(site, secureStore, config));
+    if (config.useLegacyCredentials()) {
+      logger.atWarning().log(
+          "Using legacy credentials in clear text in secure.config. Please encrypt your credentials using "
+              + "'java -jar gerrit.war passwd' for each remote, remove the gerrit.useLegacyCredentials in replication.config "
+              + "and then reload the replication plugin.");
+    }
+=======
+    this.secureCredentialsFactory =
+        new AtomicReference<>(newSecureCredentialsFactory(site, secureStore, config));
+    if (config.useLegacyCredentials()) {
+      logger.atWarning().log(
+          "Using legacy credentials in clear text in secure.config. Please encrypt your credentials"
+              + " using 'java -jar gerrit.war passwd' for each remote, remove the"
+              + " gerrit.useLegacyCredentials in replication.config and then reload the replication"
+              + " plugin.");
+    }
+>>>>>>> CHANGE (729e56 Auto-format source code using gjf)
   }
 
   private long getSecureConfigLastEditTs() {
