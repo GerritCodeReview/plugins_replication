@@ -34,7 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -266,30 +266,32 @@ public class ReplicationIT extends ReplicationDaemon {
             .schedule(0, TimeUnit.SECONDS);
 
     CountDownLatch latch = new CountDownLatch(1);
-    Executor service = Executors.newSingleThreadExecutor();
-    service.execute(
-        new Runnable() {
-          @Override
-          public void run() {
-            try {
-              future.get();
-              state.waitForReplication();
-              latch.countDown();
-            } catch (Exception e) {
-              // fails the test because we don't countDown
+    try (ExecutorService service = Executors.newSingleThreadExecutor()) {
+      service.execute(
+          new Runnable() {
+            @Override
+            public void run() {
+              try {
+                future.get();
+                state.waitForReplication();
+                latch.countDown();
+              } catch (Exception e) {
+                // fails the test because we don't countDown
+              }
             }
-          }
-        });
+          });
 
-    // Cancel the replication task
-    waitUntil(() -> getProjectTasks().size() != 0);
-    WorkQueue.Task<?> task = getProjectTasks().get(0);
-    assertThat(task.getState()).isAnyOf(WorkQueue.Task.State.READY, WorkQueue.Task.State.SLEEPING);
-    task.cancel(false);
+      // Cancel the replication task
+      waitUntil(() -> getProjectTasks().size() != 0);
+      WorkQueue.Task<?> task = getProjectTasks().get(0);
+      assertThat(task.getState())
+          .isAnyOf(WorkQueue.Task.State.READY, WorkQueue.Task.State.SLEEPING);
+      task.cancel(false);
 
-    // Confirm our waiting thread completed
-    boolean receivedSignal = latch.await(5, TimeUnit.SECONDS); // FIXME Choose a good timeout
-    assertThat(receivedSignal).isTrue();
+      // Confirm our waiting thread completed
+      boolean receivedSignal = latch.await(5, TimeUnit.SECONDS); // FIXME Choose a good timeout
+      assertThat(receivedSignal).isTrue();
+    }
   }
 
   private List<WorkQueue.Task<?>> getProjectTasks() {
