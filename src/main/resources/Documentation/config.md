@@ -546,10 +546,13 @@ remote.NAME.remoteNameStyle
 	they do in Gerrit.
 
 <a name="remote.NAME.projects">remote.NAME.projects</a>
-:	Specifies which repositories should be replicated to the
-	remote. It can be provided more than once, and supports three
-	formats: regular expressions, wildcard matching, and single
-	project matching. All three formats match case-sensitive.
+:	Specifies which repositories should be replicated to the remote. It
+	can be provided more than once, if any matches, the repository will
+	be replicated.
+
+	Projects supports three formats: regular expressions, wildcard
+	matching, and single project matching. All three formats match
+	case-sensitive.
 
 	Values starting with a caret `^` are treated as regular
 	expressions. `^foo/(bar|baz)` would match the projects
@@ -559,7 +562,12 @@ remote.NAME.remoteNameStyle
 
 	Projects may be excluded from replication by using a regular
 	expression with inverse match. `^(?:(?!PATTERN).)*$` will
-	exclude any project that matches.
+	exclude any project that matches. Beware: if another project pattern
+	matches the project, it will be replicated. You can not provide
+	multiple inverted matches since they will cancel each other (a
+	project `foo` would not be matched by `^(?:(?!foo).)*$` but would be
+	matched if a second inverted match `^(?:(?!bar).)*$` is also provided
+	since it matches `foo`).
 
 	Values that are not regular expressions and end in `*` are
 	treated as wildcard matches. Wildcards match projects whose
