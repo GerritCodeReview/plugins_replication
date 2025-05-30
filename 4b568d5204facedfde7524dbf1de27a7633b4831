@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a3f5ed7_5b6bafe9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2025-05-30T22:45:18Z",
+      "side": 1,
+      "message": "I think you can skip the `isEmpty()` and remove the negation using [`noneMatch()`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Stream.html#noneMatch(java.util.function.Predicate)) as that returns `true` when the stream is empty.\n\n```suggestion\n        \u0026\u0026 pool.excludedRefsPattern().stream().noneMatch(p -\u003e p.matcher(ref).matches());\n```",
+      "range": {
+        "startLine": 759,
+        "startChar": 0,
+        "endLine": 760,
+        "endChar": 92
+      },
+      "revId": "4b568d5204facedfde7524dbf1de27a7633b4831",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fb41c27_ee7cb256",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2025-05-30T22:45:18Z",
+      "side": 1,
+      "message": "Looks like Matthias reformatted on master, but not on 3.10: https://gerrit-review.googlesource.com/c/plugins/replication/+/458941\n\nI\u0027ll push a change for that now.",
+      "revId": "4b568d5204facedfde7524dbf1de27a7633b4831",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
