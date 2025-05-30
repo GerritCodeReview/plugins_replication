@@ -14,6 +14,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.ImmutableList;
+import java.util.regex.Pattern;
 import org.eclipse.jgit.transport.RemoteConfig;
 
 /** Remote configuration for a replication endpoint */
@@ -142,4 +143,11 @@ public interface RemoteConfiguration {
     }
     return ret;
   }
+
+  /**
+   * List of patterns that will be used to exclude refs from being replicated
+   *
+   * @return list of successfully compiled patterns
+   */
+  ImmutableList<Pattern> excludedRefsPattern();
 }

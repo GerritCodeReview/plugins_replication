@@ -53,6 +53,7 @@ import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 import org.eclipse.jgit.errors.NotSupportedException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.errors.TransportException;
@@ -237,6 +238,7 @@ public class PushOneTest {
   @Test
   public void shouldPushMetaRefTogetherWithChangeRef() throws InterruptedException, IOException {
     when(destinationMock.replicateNoteDbMetaRefs()).thenReturn(true);
+    when(destinationMock.excludedRefsPattern()).thenReturn(ImmutableList.of());
     PushOne pushOne = Mockito.spy(createPushOne(null));
 
     Ref newLocalChangeRef =
@@ -267,6 +269,7 @@ public class PushOneTest {
   public void skipPushingMetaRefWhenReplicateNoteDbMetaRefsIsSetToFalse()
       throws InterruptedException, IOException {
     when(destinationMock.replicateNoteDbMetaRefs()).thenReturn(false);
+    when(destinationMock.excludedRefsPattern()).thenReturn(ImmutableList.of());
     PushOne pushOne = Mockito.spy(createPushOne(null));
 
     Ref newLocalChangeRef =
@@ -294,8 +297,40 @@ public class PushOneTest {
   }
 
   @Test
+  public void skipPushingExcludedRefs() throws InterruptedException, IOException {
+    when(destinationMock.excludedRefsPattern())
+        .thenReturn(
+            ImmutableList.of(Pattern.compile("refs/foo/.*"), Pattern.compile("refs/bar/.*")));
+    PushOne pushOne = Mockito.spy(createPushOne(null));
+
+    Ref ref1 =
+        new ObjectIdRef.Unpeeled(
+            NEW,
+            "refs/heads/master",
+            ObjectId.fromString("0000000000000000000000000000000000000002"));
+    Ref ref2 =
+        new ObjectIdRef.Unpeeled(
+            NEW, "refs/foo/test", ObjectId.fromString("0000000000000000000000000000000000000003"));
+    Ref ref3 =
+        new ObjectIdRef.Unpeeled(
+            NEW, "refs/bar/test", ObjectId.fromString("0000000000000000000000000000000000000004"));
+
+    localRefs.add(ref1);
+    localRefs.add(ref2);
+    localRefs.add(ref3);
+
+    pushOne.addRefBatch(ImmutableSet.of(ref1.getName(), ref2.getName(), ref3.getName()));
+    pushOne.run();
+
+    isCallFinished.await(10, TimeUnit.SECONDS);
+    verify(transportMock, atLeastOnce()).push(any(), any());
+    verify(pushOne, times(1)).push(any(), any(), any());
+  }
+
+  @Test
   public void shouldNotAttemptDuplicateRemoteRefUpdate() throws InterruptedException, IOException {
     PushOne pushOne = Mockito.spy(createPushOne(null));
+    when(destinationMock.excludedRefsPattern()).thenReturn(ImmutableList.of());
 
     Ref newLocalChangeRef =
         new ObjectIdRef.Unpeeled(
@@ -317,6 +352,7 @@ public class PushOneTest {
   @Test
   public void shouldPushInSingleOperationWhenPushBatchSizeIsNotConfigured()
       throws InterruptedException, IOException {
+    when(destinationMock.excludedRefsPattern()).thenReturn(ImmutableList.of());
     replicateTwoRefs(createPushOne(null));
     verify(transportMock).push(any(), any());
   }
@@ -325,6 +361,7 @@ public class PushOneTest {
   public void shouldPushInBatchesWhenPushBatchSizeIsConfigured()
       throws InterruptedException, IOException {
     when(destinationMock.getPushBatchSize()).thenReturn(1);
+    when(destinationMock.excludedRefsPattern()).thenReturn(ImmutableList.of());
     replicateTwoRefs(createPushOne(null));
     verify(transportMock, times(2)).push(any(), any());
   }
@@ -333,6 +370,7 @@ public class PushOneTest {
   public void shouldStopPushingInBatchesWhenPushOperationGetsCanceled()
       throws InterruptedException, IOException {
     when(destinationMock.getPushBatchSize()).thenReturn(1);
+    when(destinationMock.excludedRefsPattern()).thenReturn(ImmutableList.of());
     PushOne pushOne = createPushOne(null);
 
     // cancel replication during the first push
