@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8fc43cf_8bb06dd4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2025-05-30T23:33:52Z",
+      "side": 1,
+      "message": "Should this go into a `setupExcludedRefsPatternMock()` method and get called from `setupMocks()`?",
+      "revId": "c88452db2d636c9018c28bd3944725a29424742e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "723ab8b1_82635908",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2025-05-30T23:33:52Z",
+      "side": 1,
+      "message": "Any way to verify the 1 push was for ref1?",
+      "revId": "c88452db2d636c9018c28bd3944725a29424742e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
