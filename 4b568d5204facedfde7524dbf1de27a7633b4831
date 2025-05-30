@@ -39,6 +39,24 @@
       "message": "Looks like Matthias reformatted on master, but not on 3.10: https://gerrit-review.googlesource.com/c/plugins/replication/+/458941\n\nI\u0027ll push a change for that now.",
       "revId": "4b568d5204facedfde7524dbf1de27a7633b4831",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e098735b_7f520dde",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2025-05-30T22:55:07Z",
+      "side": 1,
+      "message": "Done in 480221: Auto-format source code using gjf | https://gerrit-review.googlesource.com/c/plugins/replication/+/480221\nCan you rebase on top?",
+      "parentUuid": "0fb41c27_ee7cb256",
+      "revId": "4b568d5204facedfde7524dbf1de27a7633b4831",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
