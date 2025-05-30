@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9ceff7c_dd25af0a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2025-05-30T23:27:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a3f5ed7_5b6bafe9",
+      "range": {
+        "startLine": 759,
+        "startChar": 0,
+        "endLine": 760,
+        "endChar": 92
+      },
+      "revId": "4b568d5204facedfde7524dbf1de27a7633b4831",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fb41c27_ee7cb256",
@@ -55,6 +79,24 @@
       "side": 1,
       "message": "Done in 480221: Auto-format source code using gjf | https://gerrit-review.googlesource.com/c/plugins/replication/+/480221\nCan you rebase on top?",
       "parentUuid": "0fb41c27_ee7cb256",
+      "revId": "4b568d5204facedfde7524dbf1de27a7633b4831",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ad7f79d_67e94346",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2025-05-30T23:27:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e098735b_7f520dde",
       "revId": "4b568d5204facedfde7524dbf1de27a7633b4831",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
