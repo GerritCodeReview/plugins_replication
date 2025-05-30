@@ -83,6 +83,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
@@ -833,6 +834,10 @@ public class Destination {
 
   boolean replicateNoteDbMetaRefs() {
     return config.replicateNoteDbMetaRefs();
+  }
+
+  ImmutableList<Pattern> excludedRefsPattern() {
+    return config.excludedRefsPattern();
   }
 
   private static boolean matches(URIish uri, String urlMatch) {
