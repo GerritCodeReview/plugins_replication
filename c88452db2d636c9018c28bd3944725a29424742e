@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4520b4b_9a482b97",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2025-06-02T18:13:34Z",
+      "side": 1,
+      "message": "Added to `setupDestinationMock`.",
+      "parentUuid": "a8fc43cf_8bb06dd4",
+      "revId": "c88452db2d636c9018c28bd3944725a29424742e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "723ab8b1_82635908",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-05-30T23:33:52Z",
       "side": 1,
       "message": "Any way to verify the 1 push was for ref1?",
+      "revId": "c88452db2d636c9018c28bd3944725a29424742e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "154a0ecf_6cc04260",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/PushOneTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1012457
+      },
+      "writtenOn": "2025-06-02T18:13:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "723ab8b1_82635908",
       "revId": "c88452db2d636c9018c28bd3944725a29424742e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
