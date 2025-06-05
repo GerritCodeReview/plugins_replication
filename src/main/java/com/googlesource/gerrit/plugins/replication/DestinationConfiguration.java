@@ -20,8 +20,12 @@ import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLo
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
 import com.google.gerrit.server.config.ConfigUtil;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.transport.RemoteConfig;
 
@@ -51,6 +55,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final int maxRetries;
   private final int slowLatencyThreshold;
   private final Supplier<Integer> pushBatchSize;
+  private final ImmutableList<Pattern> excludedRefsPattern;
 
   protected DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
@@ -116,6 +121,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
               }
               return 0;
             });
+    excludedRefsPattern = getExcludedRefsPattern(cfg, name);
   }
 
   @Override
@@ -214,5 +220,22 @@ public class DestinationConfiguration implements RemoteConfiguration {
   @Override
   public int getPushBatchSize() {
     return pushBatchSize.get();
+  }
+
+  @Override
+  public ImmutableList<Pattern> excludedRefsPattern() {
+    return excludedRefsPattern;
+  }
+
+  private ImmutableList<Pattern> getExcludedRefsPattern(Config cfg, String name) {
+    List<Pattern> patterns = new ArrayList<>();
+    for (String regex : cfg.getStringList("remote", name, "excludedRefsPattern")) {
+      try {
+        patterns.add(Pattern.compile(regex));
+      } catch (PatternSyntaxException e) {
+        repLog.atWarning().log("Invalid excludedRefsPattern '%s' is ignored", regex);
+      }
+    }
+    return ImmutableList.copyOf(patterns);
   }
 }

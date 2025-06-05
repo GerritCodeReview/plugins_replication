@@ -53,6 +53,7 @@ import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 import org.eclipse.jgit.errors.NotSupportedException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.errors.TransportException;
@@ -75,6 +76,7 @@ import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -294,6 +296,40 @@ public class PushOneTest {
   }
 
   @Test
+  public void skipPushingExcludedRefs() throws InterruptedException, IOException {
+    when(destinationMock.excludedRefsPattern())
+        .thenReturn(
+            ImmutableList.of(Pattern.compile("refs/foo/.*"), Pattern.compile("refs/bar/.*")));
+    PushOne pushOne = Mockito.spy(createPushOne(null));
+
+    Ref ref1 =
+        new ObjectIdRef.Unpeeled(
+            NEW,
+            "refs/heads/master",
+            ObjectId.fromString("0000000000000000000000000000000000000002"));
+    Ref ref2 =
+        new ObjectIdRef.Unpeeled(
+            NEW, "refs/foo/test", ObjectId.fromString("0000000000000000000000000000000000000003"));
+    Ref ref3 =
+        new ObjectIdRef.Unpeeled(
+            NEW, "refs/bar/test", ObjectId.fromString("0000000000000000000000000000000000000004"));
+
+    localRefs.add(ref1);
+    localRefs.add(ref2);
+    localRefs.add(ref3);
+
+    pushOne.addRefBatch(ImmutableSet.of(ref1.getName(), ref2.getName(), ref3.getName()));
+    pushOne.run();
+
+    isCallFinished.await(10, TimeUnit.SECONDS);
+
+    ArgumentCaptor<Ref> refCaptor = ArgumentCaptor.forClass(Ref.class);
+    verify(transportMock, atLeastOnce()).push(any(), any());
+    verify(pushOne, times(1)).push(any(), any(), refCaptor.capture());
+    assertThat(refCaptor.getValue().getName()).isEqualTo("refs/heads/master");
+  }
+
+  @Test
   public void shouldNotAttemptDuplicateRemoteRefUpdate() throws InterruptedException, IOException {
     PushOne pushOne = Mockito.spy(createPushOne(null));
 
@@ -459,6 +495,7 @@ public class PushOneTest {
   private void setupDestinationMock() {
     destinationMock = mock(Destination.class);
     when(destinationMock.requestRunway(any())).thenReturn(RunwayStatus.allowed());
+    when(destinationMock.excludedRefsPattern()).thenReturn(ImmutableList.of());
   }
 
   private void setupPermissionBackedMock() {

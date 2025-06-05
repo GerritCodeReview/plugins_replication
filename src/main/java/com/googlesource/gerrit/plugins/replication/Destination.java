@@ -85,6 +85,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
@@ -888,6 +889,10 @@ public class Destination {
 
   boolean replicateNoteDbMetaRefs() {
     return config.replicateNoteDbMetaRefs();
+  }
+
+  ImmutableList<Pattern> excludedRefsPattern() {
+    return config.excludedRefsPattern();
   }
 
   private static boolean matches(URIish uri, String urlMatch) {
