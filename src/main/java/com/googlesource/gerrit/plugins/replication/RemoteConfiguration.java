@@ -14,6 +14,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.ImmutableList;
+import java.util.regex.Pattern;
 import org.eclipse.jgit.transport.RemoteConfig;
 
 /** Remote configuration for a replication endpoint */
@@ -25,6 +26,7 @@ public interface RemoteConfiguration {
    * @return the delay value in seconds
    */
   int getDelay();
+
   /**
    * Time to wait before rescheduling a remote replication operation, which might have failed the
    * first time round. Setting to 0 effectively disables the delay.
@@ -32,6 +34,7 @@ public interface RemoteConfiguration {
    * @return the delay value in seconds
    */
   int getRescheduleDelay();
+
   /**
    * Time to wait before retrying a failed remote replication operation, Setting to 0 effectively
    * disables the delay.
@@ -39,12 +42,14 @@ public interface RemoteConfiguration {
    * @return the delay value in seconds
    */
   int getRetryDelay();
+
   /**
    * List of the remote endpoint addresses used for replication.
    *
    * @return list of remote URL strings
    */
   ImmutableList<String> getUrls();
+
   /**
    * List of alternative remote endpoint addresses, used for admin operations, such as repository
    * creation
@@ -52,36 +57,42 @@ public interface RemoteConfiguration {
    * @return list of remote URL strings
    */
   ImmutableList<String> getAdminUrls();
+
   /**
    * List of repositories that should be replicated
    *
    * @return list of project strings
    */
   ImmutableList<String> getProjects();
+
   /**
    * List of groups that should be used to access the repositories.
    *
    * @return list of group strings
    */
   ImmutableList<String> getAuthGroupNames();
+
   /**
    * Influence how the name of the remote repository should be computed.
    *
    * @return a string representing a remote style name
    */
   String getRemoteNameStyle();
+
   /**
    * If true, permissions-only projects and the refs/meta/config branch will also be replicated
    *
    * @return a string representing a remote style name
    */
   boolean replicatePermissions();
+
   /**
    * the JGIT remote configuration representing the replication for this endpoint
    *
    * @return The remote config {@link RemoteConfig}
    */
   RemoteConfig getRemoteConfig();
+
   /**
    * Number of times to retry a replication operation
    *
@@ -132,4 +143,11 @@ public interface RemoteConfiguration {
     }
     return ret;
   }
+
+  /**
+   * List of patterns that will be used to exclude refs from being replicated
+   *
+   * @return list of successfully compiled patterns
+   */
+  ImmutableList<Pattern> excludedRefsPattern();
 }
