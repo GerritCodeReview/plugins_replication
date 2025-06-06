@@ -742,8 +742,12 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
           srcRef = git.exactRef(src);
         }
 
-        if (srcRef != null && canPushRef(src, noPerms)) {
-          push(cmds, spec, srcRef);
+        if (srcRef != null) {
+          if (canPushRef(srcRef.getName(), noPerms)) {
+            push(cmds, spec, srcRef);
+          } else {
+            repLog.atFine().log("Skipping push of ref %s", srcRef.getName());
+          }
         } else if (config.isMirror()) {
           delete(cmds, spec);
         }
