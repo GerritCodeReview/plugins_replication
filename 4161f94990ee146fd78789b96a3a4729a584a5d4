@@ -1,6 +1,86 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "76c8abe0_8ea46d28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-06-19T22:23:41Z",
+      "side": 1,
+      "message": "All concerns are addressed with https://gerrit-review.googlesource.com/c/plugins/replication/+/485301, @kaushikl@qti.qualcomm.com can you have a look?",
+      "revId": "4161f94990ee146fd78789b96a3a4729a584a5d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fabfa432_935b15cb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-06-19T22:23:41Z",
+      "side": 1,
+      "message": "Default is empty, correct?",
+      "range": {
+        "startLine": 231,
+        "startChar": 4,
+        "endLine": 231,
+        "endChar": 47
+      },
+      "revId": "4161f94990ee146fd78789b96a3a4729a584a5d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1635cde_25e81941",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-06-19T22:23:41Z",
+      "side": 1,
+      "message": "This is one on a stable release and a public interface, hence we should make sure to make it backwards compatible to existing plugins implementing this interface (e.g. the pull-replication plugin)\n\n\n\n\n\n```suggestion\n  default ImmutableList\u003cPattern\u003e excludedRefsPattern() {\n    return ImmutableList.of();\n  }\n```",
+      "range": {
+        "startLine": 152,
+        "startChar": 2,
+        "endLine": 152,
+        "endChar": 47
+      },
+      "revId": "4161f94990ee146fd78789b96a3a4729a584a5d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00e91e0f_c7547492",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-06-19T22:23:41Z",
+      "side": 1,
+      "message": "What\u0027s the default value?",
+      "revId": "4161f94990ee146fd78789b96a3a4729a584a5d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fc1eeb39_b8ff039b",
