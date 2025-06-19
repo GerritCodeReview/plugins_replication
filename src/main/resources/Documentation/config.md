@@ -602,6 +602,8 @@ remote.NAME.excludedRefsPattern
   example refs created by plugins. Multiple excludedRefsPattern keys can be
   supplied, to specify multiple patterns to match against.
 
+  Do not exclude any refs pattern by default.
+
 Directory `replication`
 --------------------
 The optional directory `$site_path/etc/replication` contains Git-style
