@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e30801db_a39bebf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-06-20T21:04:52Z",
+      "side": 1,
+      "message": "The Zuul build failure is unrelated: the tests are all passing.\n\n//plugins/replication:replication_tests                                  PASSED in 15.6s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationDistributorIT PASSED in 26.2s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationEventsIT PASSED in 35.7s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationFanoutIT PASSED in 25.4s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationIT PASSED in 159.9s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationPushInBatchesIT PASSED in 20.9s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationStorageIT PASSED in 94.0s\n//plugins/replication:src_test_java_com_googlesource_gerrit_plugins_replication_ReplicationStorageMPIT PASSED in 49.9s\n\nExecuted 8 out of 8 tests: 8 tests pass.",
+      "revId": "38a79f76b4432679b69736dd7cea4ed254a6f09d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
