@@ -604,6 +604,13 @@ remote.NAME.replicateNoteDbMetaRefs
 
   By default, true.
 
+remote.NAME.excludedRefsPattern
+: Refs that match the pattern provided using this config will not be replicated.
+  This option is useful when admins want to skip replicating certain refs, for
+  example refs created by plugins. Multiple excludedRefsPattern keys can be
+  supplied, to specify multiple patterns to match against.
+
+  Do not exclude any refs pattern by default.
 
 Directory `replication`
 --------------------
