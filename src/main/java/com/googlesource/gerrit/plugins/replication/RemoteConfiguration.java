@@ -149,5 +149,7 @@ public interface RemoteConfiguration {
    *
    * @return list of successfully compiled patterns
    */
-  ImmutableList<Pattern> excludedRefsPattern();
+  default ImmutableList<Pattern> excludedRefsPattern() {
+    return ImmutableList.of();
+  }
 }
