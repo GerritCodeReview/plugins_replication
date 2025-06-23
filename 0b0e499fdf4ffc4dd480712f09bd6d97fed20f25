@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bd59b32_e432c262",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2025-06-23T21:39:06Z",
+      "side": 1,
+      "message": "couple nits\n```suggestion\n\tmultiple inverted matches since they will cancel each other (a\n\tproject `foo` would not be matched by `^(?:(?!foo).)*$` but would be\n\tmatched if a second inverted match `^(?:(?!bar).)*$` is also provided\n\tsince it matches `foo`).\n```",
+      "range": {
+        "startLine": 567,
+        "startChar": 55,
+        "endLine": 570,
+        "endChar": 24
+      },
+      "revId": "0b0e499fdf4ffc4dd480712f09bd6d97fed20f25",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
