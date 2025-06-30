@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4718236c_83508f24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-06-30T18:23:26Z",
+      "side": 1,
+      "message": "After this fix, I see that with slow pushes and continuous scheduled replication tasks, the concurrent pushes are avoided again:\n\n```\n[2025-06-30 19:22:11,285] Rescheduling replication to file:///Users/lucamilanesio/gerrit-3.11/consumer-mirror/project-1.git to avoid collision with the in-flight push [1328cd8b]. [CONTEXT PLUGIN\u003d\"replication\" RECEIVE_ID\u003d\"project-1-1751307716270-bce00c2f\" project\u003d\"project-1\" pushOneId\u003d\"536de514\" request\u003d\"GIT_RECEIVE\" ]\n```",
+      "revId": "7bc8730b66a0ccfdbcc6b5dd7aaf10019be8da0b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
