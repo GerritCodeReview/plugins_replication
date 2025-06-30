@@ -672,7 +672,7 @@ public class Destination {
   }
 
   RunwayStatus requestRunway(PushOne op) {
-    stateLock.withWriteLock(
+    return stateLock.withWriteLock(
         op.getURI(),
         () -> {
           if (op.wasCanceled()) {
@@ -685,9 +685,8 @@ public class Destination {
           }
           op.notifyNotAttempted(op.setStartedRefs(replicationTasksStorage.get().start(op)));
           queue.inFlight.put(op.getURI(), op);
-          return null;
+          return RunwayStatus.allowed();
         });
-    return RunwayStatus.allowed();
   }
 
   void notifyFinished(PushOne op) {
