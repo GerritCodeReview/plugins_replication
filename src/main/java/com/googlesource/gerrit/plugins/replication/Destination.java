@@ -116,11 +116,14 @@ public class Destination {
 
     <V> V withWriteLock(URIish uri, Supplier<V> task) {
       Lock lock = stateLock.get(uri).writeLock();
+      repLog.atInfo().log("Trying to lock %s ... ", uri);
       lock.lock();
       try {
+        repLog.atInfo().log("Locked %s ... ", uri);
         return task.get();
       } finally {
         lock.unlock();
+        repLog.atInfo().log("Unlocked %s ... ", uri);
       }
     }
 
@@ -672,7 +675,7 @@ public class Destination {
   }
 
   RunwayStatus requestRunway(PushOne op) {
-    stateLock.withWriteLock(
+    return stateLock.withWriteLock(
         op.getURI(),
         () -> {
           if (op.wasCanceled()) {
@@ -685,9 +688,8 @@ public class Destination {
           }
           op.notifyNotAttempted(op.setStartedRefs(replicationTasksStorage.get().start(op)));
           queue.inFlight.put(op.getURI(), op);
-          return null;
+          return RunwayStatus.allowed();
         });
-    return RunwayStatus.allowed();
   }
 
   void notifyFinished(PushOne op) {

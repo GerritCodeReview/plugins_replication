@@ -561,7 +561,14 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     tn.applyConfig(config);
     tn.setCredentialsProvider(credentialsFactory.create(config.getName()));
 
-    List<RemoteRefUpdate> todo = generateUpdates(tn);
+    repLog.atInfo().log("** SLEEPING FOR 30 sec **");
+	  try {
+		  Thread.sleep(30000L);
+	  } catch (InterruptedException e) {
+		  throw new RuntimeException(e);
+	  }
+
+          List<RemoteRefUpdate> todo = generateUpdates(tn);
     if (todo.isEmpty()) {
       // If we have no commands selected, we have nothing to do.
       // Calling JGit at this point would just redo the work we
