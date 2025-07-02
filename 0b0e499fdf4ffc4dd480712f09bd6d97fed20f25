@@ -22,6 +22,30 @@
       },
       "revId": "0b0e499fdf4ffc4dd480712f09bd6d97fed20f25",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cf08a8d_a38abe27",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1010788
+      },
+      "writtenOn": "2025-07-02T08:03:43Z",
+      "side": 1,
+      "message": "I still need to set up a spellchecker in `vim`. Thank you!",
+      "parentUuid": "2bd59b32_e432c262",
+      "range": {
+        "startLine": 567,
+        "startChar": 55,
+        "endLine": 570,
+        "endChar": 24
+      },
+      "revId": "0b0e499fdf4ffc4dd480712f09bd6d97fed20f25",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
