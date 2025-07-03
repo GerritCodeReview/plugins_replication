@@ -582,6 +582,15 @@ remote.NAME.remoteNameStyle
 	By default, replicates without matching, i.e. replicates
 	everything to all remotes.
 
+remote.NAME.excludeProjects
+:	Specifies which repositories should NOT be replicated to the
+	remote. It can be provided more than once, and supports the same
+	formats as `projects`, and may be specified in combination with
+	`projects`.
+
+	By default, replicates without matching, i.e. replicates
+	everything to all remotes.
+
 <a name="remote.NAME.slowLatencyThreshold">remote.NAME.slowLatencyThreshold</a>
 :	the time duration after which the replication of a project to this
 	destination will be considered "slow". A slow project replication

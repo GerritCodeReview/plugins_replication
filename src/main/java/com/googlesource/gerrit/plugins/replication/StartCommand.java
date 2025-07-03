@@ -20,6 +20,7 @@ import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.CommandProcessing;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -66,7 +67,7 @@ final class StartCommand extends SshCommand {
     if (all) {
       projectFilter = ReplicationFilter.all();
     } else {
-      projectFilter = new ReplicationFilter(projectPatterns);
+      projectFilter = new ReplicationFilter(projectPatterns, Collections.<String>emptyList());
     }
 
     Future<?> future =
