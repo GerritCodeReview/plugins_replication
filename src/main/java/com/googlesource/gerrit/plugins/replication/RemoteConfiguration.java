@@ -66,6 +66,13 @@ public interface RemoteConfiguration {
   ImmutableList<String> getProjects();
 
   /**
+   * List of repositories that should be NOT replicated
+   *
+   * @return list of excluded project strings
+   */
+  ImmutableList<String> getExcludeProjects();
+
+  /**
    * List of groups that should be used to access the repositories.
    *
    * @return list of group strings

@@ -724,11 +724,12 @@ public class Destination {
 
     // by default push all projects
     ImmutableList<String> projects = config.getProjects();
-    if (projects.isEmpty()) {
+    ImmutableList<String> excludeProjects = config.getExcludeProjects();
+    if (projects.isEmpty() && excludeProjects.isEmpty()) {
       return true;
     }
 
-    boolean matches = new ReplicationFilter(projects).matches(project);
+    boolean matches = new ReplicationFilter(projects, excludeProjects).matches(project);
     if (!matches) {
       repLog.atFine().log(
           "Skipping replication of project %s; does not match filter", project.get());
