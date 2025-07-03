@@ -18,6 +18,7 @@ import com.google.gerrit.entities.AccessSection;
 import com.google.gerrit.entities.Project;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class ReplicationFilter {
   public enum PatternType {
@@ -27,7 +28,7 @@ public class ReplicationFilter {
   }
 
   public static ReplicationFilter all() {
-    return new ReplicationFilter(Collections.<String>emptyList());
+    return new ReplicationFilter(null, null);
   }
 
   public static PatternType getPatternType(String pattern) {
@@ -41,18 +42,38 @@ public class ReplicationFilter {
   }
 
   private final List<String> projectPatterns;
+  private final List<String> excludePatterns;
 
-  public ReplicationFilter(List<String> patterns) {
-    projectPatterns = patterns;
+  public ReplicationFilter(List<String> includePatterns, List<String> excludePatterns) {
+    projectPatterns = Objects.requireNonNullElse(includePatterns, Collections.<>emptyList());
+    this.excludePatterns = Objects.requireNonNullElse(excludePatterns, Collections.<>emptyList());
   }
 
   public boolean matches(Project.NameKey name) {
+    return matchesProjectPatterns(name) && ! matchesExcludePatterns(name);
+  }
+
+  public boolean matchesProjectPatterns(Project.NameKey name) {
     if (projectPatterns.isEmpty()) {
       return true;
     }
     String projectName = name.get();
 
     for (String pattern : projectPatterns) {
+      if (matchesPattern(projectName, pattern)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean matchesExcludePatterns(Project.NameKey name) {
+    if (excludePatterns.isEmpty()) {
+      return false;
+    }
+    String projectName = name.get();
+
+    for (String pattern : excludePatterns) {
       if (matchesPattern(projectName, pattern)) {
         return true;
       }
