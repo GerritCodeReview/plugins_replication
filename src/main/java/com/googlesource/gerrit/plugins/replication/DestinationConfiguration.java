@@ -50,6 +50,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final String remoteNameStyle;
   private final ImmutableList<String> urls;
   private final ImmutableList<String> projects;
+  private final ImmutableList<String> excludeProjects;
   private final ImmutableList<String> authGroupNames;
   private final RemoteConfig remoteConfig;
   private final int maxRetries;
@@ -65,6 +66,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
     rescheduleDelay =
         Math.max(3, getInt(remoteConfig, cfg, "rescheduledelay", DEFAULT_RESCHEDULE_DELAY));
     projects = ImmutableList.copyOf(cfg.getStringList("remote", name, "projects"));
+    excludeProjects = ImmutableList.copyOf(cfg.getStringList("remote", name, "excludeProjects"));
     adminUrls = ImmutableList.copyOf(cfg.getStringList("remote", name, "adminUrl"));
     retryDelay = Math.max(0, getInt(remoteConfig, cfg, "replicationretry", 1));
     drainQueueAttempts =
@@ -164,6 +166,11 @@ public class DestinationConfiguration implements RemoteConfiguration {
   @Override
   public ImmutableList<String> getProjects() {
     return projects;
+  }
+
+  @Override
+  public ImmutableList<String> getExcludeProjects() {
+    return excludeProjects;
   }
 
   @Override
