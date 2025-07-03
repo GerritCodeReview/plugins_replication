@@ -19,6 +19,7 @@ import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -63,7 +64,9 @@ final class StartCommand extends SshCommand implements PushResultProcessing.SshO
     }
 
     ReplicationFilter projectFilter =
-        all ? ReplicationFilter.all() : new ReplicationFilter(projectPatterns);
+        all
+            ? ReplicationFilter.all()
+            : new ReplicationFilter(projectPatterns, Collections.emptyList());
 
     replicationStarter.start(urlMatch, remotesToConsider, projectFilter, now, wait, this);
   }

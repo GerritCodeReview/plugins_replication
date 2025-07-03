@@ -48,6 +48,7 @@ gerrit_plugin_tests(
 
 [gerrit_plugin_tests(
     name = f[:f.index(".")].replace("/", "_"),
+    timeout = "long" if f.endswith("/ReplicationIT.java") else "moderate",
     srcs = [f],
     tags = ["replication"],
     visibility = ["//visibility:public"],
