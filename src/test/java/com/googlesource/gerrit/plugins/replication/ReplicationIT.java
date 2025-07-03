@@ -242,7 +242,7 @@ public class ReplicationIT extends ReplicationDaemon {
         plugin
             .getSysInjector()
             .getInstance(PushAll.Factory.class)
-            .create(null, new ReplicationFilter(Arrays.asList(project.get())), state, false)
+            .create(null, new ReplicationFilter(Arrays.asList(project.get()), null), state, false)
             .schedule(0, TimeUnit.SECONDS);
 
     future.get();
@@ -262,7 +262,7 @@ public class ReplicationIT extends ReplicationDaemon {
         plugin
             .getSysInjector()
             .getInstance(PushAll.Factory.class)
-            .create(null, new ReplicationFilter(Arrays.asList(project.get())), state, false)
+            .create(null, new ReplicationFilter(Arrays.asList(project.get()), null), state, false)
             .schedule(0, TimeUnit.SECONDS);
 
     CountDownLatch latch = new CountDownLatch(1);

@@ -27,7 +27,7 @@ public class ReplicationFilter {
   }
 
   public static ReplicationFilter all() {
-    return new ReplicationFilter(Collections.<String>emptyList());
+    return new ReplicationFilter(Collections.<String>emptyList(), Collections.<String>emptyList());
   }
 
   public static PatternType getPatternType(String pattern) {
@@ -40,19 +40,39 @@ public class ReplicationFilter {
     }
   }
 
-  private final List<String> projectPatterns;
+  private final List<String> projectPatterns = Collections.<String>emptyList();
+  private final List<String> excludePatterns = Collections.<String>emptyList();
 
-  public ReplicationFilter(List<String> patterns) {
-    projectPatterns = patterns;
+  public ReplicationFilter(List<String> includePatterns, List<String> excludePatterns) {
+    projectPatterns = Objects.requireNonNullElse(includePatterns, projectPatterns);
+    this.excludePatterns = Objects.requireNonNullElse(excludePatterns, this.excludePatterns);
   }
 
   public boolean matches(Project.NameKey name) {
+    return matchesProjectPatterns(name) && ! matchesExcludePatterns(name);
+  }
+
+  public boolean matchesProjectPatterns(Project.NameKey name) {
     if (projectPatterns.isEmpty()) {
       return true;
     }
     String projectName = name.get();
 
     for (String pattern : projectPatterns) {
+      if (matchesPattern(projectName, pattern)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean matchesExcludePatterns(Project.NameKey name) {
+    if (excludePatterns.isEmpty()) {
+      return false;
+    }
+    String projectName = name.get();
+
+    for (String pattern : excludePatterns) {
       if (matchesPattern(projectName, pattern)) {
         return true;
       }
