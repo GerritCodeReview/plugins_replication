@@ -30,6 +30,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -99,7 +100,7 @@ final class RepairCommand extends SshCommand implements PushResultProcessing.Ssh
     replicationStarter.start(
         urlMatch,
         Set.of(),
-        new ReplicationFilter(List.of(project.get())),
+        new ReplicationFilter(List.of(project.get()), Collections.emptyList()),
         /* now= */ true,
         /* wait= */ true,
         this);

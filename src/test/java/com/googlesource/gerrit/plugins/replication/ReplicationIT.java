@@ -283,7 +283,11 @@ public class ReplicationIT extends ReplicationDaemon {
             .getSysInjector()
             .getInstance(PushAll.Factory.class)
             .create(
-                null, Set.of(), new ReplicationFilter(Arrays.asList(project.get())), state, false)
+                null,
+                Set.of(),
+                new ReplicationFilter(Arrays.asList(project.get()), null),
+                state,
+                false)
             .schedule(0, TimeUnit.SECONDS);
 
     future.get();
@@ -304,7 +308,11 @@ public class ReplicationIT extends ReplicationDaemon {
             .getSysInjector()
             .getInstance(PushAll.Factory.class)
             .create(
-                null, Set.of(), new ReplicationFilter(Arrays.asList(project.get())), state, false)
+                null,
+                Set.of(),
+                new ReplicationFilter(Arrays.asList(project.get()), null),
+                state,
+                false)
             .schedule(0, TimeUnit.SECONDS);
 
     CountDownLatch latch = new CountDownLatch(1);
@@ -520,6 +528,95 @@ public class ReplicationIT extends ReplicationDaemon {
   }
 
   @Test
+  public void shouldReplicateWhenProjectNotExcluded() throws Exception {
+    Project.NameKey targetProject = createTestProject(project + "replica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    config.setString("remote", "foo", "excludeProjects", "excluded-prj");
+    config.save();
+    reloadConfig();
+
+    Result pushResult = createChange();
+    RevCommit sourceCommit = pushResult.getCommit();
+    String sourceRef = pushResult.getPatchSet().refName();
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
+
+      Ref targetBranchRef = getRef(repo, sourceRef);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
+    }
+  }
+
+  @Test
+  public void shouldNotReplicateProjectMatchingExcludeProjects() throws Exception {
+    Project.NameKey prj1 = createTestProject("excludePrj1");
+    Project.NameKey prj2 = createTestProject("excludePrj2");
+    Project.NameKey prj3 = createTestProject("replicatePrj1");
+    Project.NameKey prj4 = createTestProject("replicatePrj2");
+
+    Project.NameKey targetPrj1 = createTestProject(prj1.get() + "replica");
+    Project.NameKey targetPrj2 = createTestProject(prj2.get() + "replica");
+    Project.NameKey targetPrj3 = createTestProject(prj3.get() + "replica");
+    Project.NameKey targetPrj4 = createTestProject(prj4.get() + "replica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    config.setString("remote", "foo", "excludeProjects", "^excludePrj.*");
+    config.save();
+    reloadConfig();
+
+    String newRef = "refs/heads/testBranch";
+    createNewBranchWithoutPush(prj1, newRef);
+    createNewBranchWithoutPush(prj2, newRef);
+    ObjectId replicateTip1 = createNewBranchWithoutPush(prj3, newRef);
+    ObjectId replicateTip2 = createNewBranchWithoutPush(prj4, newRef);
+
+    ReplicationQueue replicationQueue = plugin.getSysInjector().getInstance(ReplicationQueue.class);
+    ReplicationState state = new ReplicationState(NO_OP);
+    replicationQueue.scheduleFullSync(prj1, null, Set.of("foo"), state, true);
+    replicationQueue.scheduleFullSync(prj2, null, Set.of("foo"), state, true);
+    replicationQueue.scheduleFullSync(prj3, null, Set.of("foo"), state, true);
+    replicationQueue.scheduleFullSync(prj4, null, Set.of("foo"), state, true);
+
+    try (Repository excludeRepo1 = repoManager.openRepository(targetPrj1);
+        Repository excludeRepo2 = repoManager.openRepository(targetPrj2);
+        Repository replicateRepo1 = repoManager.openRepository(targetPrj3);
+        Repository replicateRepo2 = repoManager.openRepository(targetPrj4)) {
+      waitUntil(
+          () ->
+              checkedGetRef(replicateRepo1, newRef) != null
+                  && checkedGetRef(replicateRepo2, newRef) != null
+                  && checkedGetRef(excludeRepo1, newRef) == null
+                  && checkedGetRef(excludeRepo2, newRef) == null);
+
+      assertThat(getRef(replicateRepo1, newRef).getObjectId()).isEqualTo(replicateTip1);
+      assertThat(getRef(replicateRepo2, newRef).getObjectId()).isEqualTo(replicateTip2);
+      assertThat(getRef(excludeRepo1, newRef)).isNull();
+      assertThat(getRef(excludeRepo2, newRef)).isNull();
+    }
+  }
+
+  @Test
+  public void shouldNotReplicateProjectListedInProjectsAndExcludeProjects() throws Exception {
+    Project.NameKey targetProject = createTestProject(project + "replica");
+
+    setReplicationDestination("foo", "replica", Optional.of(project.get()));
+    config.setString("remote", "foo", "excludeProjects", project.get());
+    config.save();
+    reloadConfig();
+
+    Result pushResult = createChange();
+    String sourceRef = pushResult.getPatchSet().refName();
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      assertThrows(
+          InterruptedException.class,
+          () -> waitUntil(() -> checkedGetRef(repo, sourceRef) != null));
+    }
+  }
+
+  @Test
   public void shouldNotReplicateToNonMatchingRemote() throws Exception {
     Project.NameKey targetProject = createTestProject(project + "replica");
 
@@ -563,6 +660,27 @@ public class ReplicationIT extends ReplicationDaemon {
   private ObjectId createNewBranchWithoutPush(String fromBranch, String newBranch)
       throws Exception {
     try (Repository repo = repoManager.openRepository(project);
+        RevWalk walk = new RevWalk(repo)) {
+      Ref ref = repo.exactRef(fromBranch);
+      RevCommit tip = null;
+      if (ref != null) {
+        tip = walk.parseCommit(ref.getObjectId());
+      }
+      RefUpdate update = repo.updateRef(newBranch);
+      update.setNewObjectId(tip);
+      update.update(walk);
+      return update.getNewObjectId();
+    }
+  }
+
+  private ObjectId createNewBranchWithoutPush(Project.NameKey projectKey, String newBranch)
+      throws Exception {
+    return createNewBranchWithoutPush(projectKey, "refs/heads/master", newBranch);
+  }
+
+  private ObjectId createNewBranchWithoutPush(
+      Project.NameKey projectKey, String fromBranch, String newBranch) throws Exception {
+    try (Repository repo = repoManager.openRepository(projectKey);
         RevWalk walk = new RevWalk(repo)) {
       Ref ref = repo.exactRef(fromBranch);
       RevCommit tip = null;
