@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6499ff69_6ec5dcf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2025-07-09T03:08:49Z",
+      "side": 1,
+      "message": "Test failures are real:\n\n```\nplugins/replication/src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java:245: error: constructor ReplicationFilter in class ReplicationFilter cannot be applied to given types;\n            .create(null, new ReplicationFilter(Arrays.asList(project.get())), state, false)\n                          ^\n  required: List\u003cString\u003e,List\u003cString\u003e\n  found:    List\u003cString\u003e\n  reason: actual and formal argument lists differ in length\nplugins/replication/src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java:265: error: constructor ReplicationFilter in class ReplicationFilter cannot be applied to given types;\n            .create(null, new ReplicationFilter(Arrays.asList(project.get())), state, false)\n                          ^\n  required: List\u003cString\u003e,List\u003cString\u003e\n  found:    List\u003cString\u003e\n  reason: actual and formal argument lists differ in length\n```",
+      "revId": "568804c2a6f0d32cf1589d9524d960d21c547d4b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
