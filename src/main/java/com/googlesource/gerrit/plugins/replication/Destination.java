@@ -911,11 +911,7 @@ public class Destination {
     for (String ref : flattenSetOfRefBatches(refBatches)) {
       ReplicationScheduledEvent event =
           new ReplicationScheduledEvent(project.get(), ref, pushOp.getURI());
-      try {
-        eventDispatcher.get().postEvent(BranchNameKey.create(project, ref), event);
-      } catch (PermissionBackendException e) {
-        repLog.atSevere().withCause(e).log("error posting event");
-      }
+      eventDispatcher.get().postEvent(BranchNameKey.create(project, ref), event);
     }
   }
 
@@ -924,11 +920,7 @@ public class Destination {
     for (String ref : flattenSetOfRefBatches(pushOp.getRefs())) {
       RefReplicatedEvent event =
           new RefReplicatedEvent(project.get(), ref, pushOp.getURI(), RefPushResult.FAILED, status);
-      try {
-        eventDispatcher.get().postEvent(BranchNameKey.create(project, ref), event);
-      } catch (PermissionBackendException e) {
-        repLog.atSevere().withCause(e).log("error posting event");
-      }
+      eventDispatcher.get().postEvent(BranchNameKey.create(project, ref), event);
     }
   }
 
