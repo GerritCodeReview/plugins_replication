@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "475239fe_3981c635",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-08-19T05:58:24Z",
+      "side": 1,
+      "message": "True, this is when the repository does not exist, I\u0027ll amend the commit message.",
+      "parentUuid": "bfced12e_dbc3e35e",
+      "range": {
+        "startLine": 9,
+        "startChar": 54,
+        "endLine": 10,
+        "endChar": 47
+      },
+      "revId": "efa6d7bbfb81ac782ea9a007a364d8a53e9ac5e1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a35bb578_3f9c2fbf",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
