@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfced12e_dbc3e35e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2025-08-19T05:52:11Z",
+      "side": 1,
+      "message": "Not having permissions doesn\u0027t result in a PermissionBackendException, but in an AuthException. PermissionBackendException is thrown if checking whether the user has permissions failed with an error.",
+      "range": {
+        "startLine": 9,
+        "startChar": 54,
+        "endLine": 10,
+        "endChar": 47
+      },
+      "revId": "efa6d7bbfb81ac782ea9a007a364d8a53e9ac5e1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a35bb578_3f9c2fbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2025-08-19T05:52:11Z",
+      "side": 1,
+      "message": "At Google we do not use the replication plugin, hence we have no stakes here.",
+      "revId": "efa6d7bbfb81ac782ea9a007a364d8a53e9ac5e1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
