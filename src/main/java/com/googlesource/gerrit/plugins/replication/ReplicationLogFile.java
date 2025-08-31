@@ -22,8 +22,9 @@ import com.google.gerrit.util.logging.JsonLayout;
 import com.google.gerrit.util.logging.JsonLogEntry;
 import com.google.gson.annotations.SerializedName;
 import com.google.inject.Inject;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.spi.LoggingEvent;
+import java.nio.charset.StandardCharsets;
+import org.apache.logging.log4j.core.LogEvent;
+import org.apache.logging.log4j.core.layout.PatternLayout;
 
 public class ReplicationLogFile extends PluginLogFile {
 
@@ -33,12 +34,22 @@ public class ReplicationLogFile extends PluginLogFile {
         systemLog,
         serverInfo,
         ReplicationQueue.REPLICATION_LOG_NAME,
-        new PatternLayout("[%d] %m%n"),
+        PatternLayout.newBuilder().withPattern("[%d] %m%n").build(),
         new ReplicationJsonLayout(),
         config);
   }
 
   static class ReplicationJsonLayout extends JsonLayout {
+
+    public ReplicationJsonLayout() {
+      super(StandardCharsets.UTF_8);
+    }
+
+    @Override
+    public JsonLogEntry toJsonLogEntry(LogEvent event) {
+      return new ReplicationJsonLogEntry(event);
+    }
+
     @SuppressWarnings("unused")
     private class ReplicationJsonLogEntry extends JsonLogEntry {
       public String timestamp;
@@ -47,15 +58,10 @@ public class ReplicationLogFile extends PluginLogFile {
       @SerializedName("@version")
       public final int version = 1;
 
-      public ReplicationJsonLogEntry(LoggingEvent event) {
-        timestamp = timestampFormatter.format(event.getTimeStamp());
-        message = (String) event.getMessage();
+      public ReplicationJsonLogEntry(LogEvent event) {
+        timestamp = timestampFormatter.format(event.getTimeMillis());
+        message = event.getMessage().getFormattedMessage();
       }
-    }
-
-    @Override
-    public JsonLogEntry toJsonLogEntry(LoggingEvent event) {
-      return new ReplicationJsonLogEntry(event);
     }
   }
 }
