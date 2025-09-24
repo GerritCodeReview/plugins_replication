@@ -33,6 +33,24 @@
       "message": "From 79b50b0020bfc69d863bbd5811baadec3c8a19d2 Mon Sep 17 00:00:00 2001\nFrom: Antoine Musso \u003chashar@free.fr\u003e\nDate: Thu, 17 Apr 2025 12:37:00 +0200\nSubject: [PATCH] docs/config: document inverted matches cancel each others\n\nOur config had two inverted matches to exclude projects:\n\n  [remote \"github\"]\n    projects \u003d ^(?:(?!apps\\\\/android\\\\/).)*$\n    projects \u003d ^(?:(?!apps\\\\/ios\\\\/).)*$\n\nI have been wondering why `apps/android/wikipedia` is excluded given it\nmatches the first regex. The reason is ReplicationFilter applies each\npattern and when one matches it accepts the project. In this case, the\nproject is matched by the second and is thus accepted.\n\nRef: https://phabricator.wikimedia.org/T392198\nChange-Id: I2846a40d2aabe80c0db305dc4f64dd1aa885b07d\n---\n\ndiff --git a/src/main/resources/Documentation/config.md b/src/main/resources/Documentation/config.md\nindex bb4be9a..b5c4b36 100644\n--- a/src/main/resources/Documentation/config.md\n+++ b/src/main/resources/Documentation/config.md\n@@ -546,10 +546,13 @@\n \tthey do in Gerrit.\n \n \u003ca name\u003d\"remote.NAME.projects\"\u003eremote.NAME.projects\u003c/a\u003e\n-:\tSpecifies which repositories should be replicated to the\n-\tremote. It can be provided more than once, and supports three\n-\tformats: regular expressions, wildcard matching, and single\n-\tproject matching. All three formats match case-sensitive.\n+:\tSpecifies which repositories should be replicated to the remote. It\n+\tcan be provided more than once, if any matches, the repository will\n+\tbe replicated.\n+\n+\tProjects supports three formats: regular expressions, wildcard\n+\tmatching, and single project matching. All three formats match\n+\tcase-sensitive.\n \n \tValues starting with a caret `^` are treated as regular\n \texpressions. `^foo/(bar|baz)` would match the projects\n@@ -559,7 +562,12 @@\n \n \tProjects may be excluded from replication by using a regular\n \texpression with inverse match. `^(?:(?!PATTERN).)* will\n-\texclude any project that matches.\n+\texclude any project that matches. Beware: if another project pattern\n+\tmatches the project, it will be replicated. You can not provide\n+\tmultiple inverted matches since they will cancel each other (a\n+\tproject `foo` would not be matched by `^(?:(?!foo).)* but would be\n+\tmatched if a second inverted match `^(?:(?!bar).)* is also provided\n+\tsince it matches `foo`).\n \n \tValues that are not regular expressions and end in `*` are\n \ttreated as wildcard matches. Wildcards match projects whose\n```suggestion\na name\"remote.NAME.projects remote.NAME.projects a\n```suggestion\na name\"remote.NAME.projects remote.NAME.projects a",
       "revId": "79b50b0020bfc69d863bbd5811baadec3c8a19d2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8cc679f_686ac8c4",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 4319976
+      },
+      "writtenOn": "2025-09-24T02:26:34Z",
+      "side": 1,
+      "message": "suggestion\n\u003ca name\u003d\"remote.NAME.projects\"\u003eremote.NAME.projects\u003c/a\u003e",
+      "parentUuid": "131087d4_2f25fbe4",
+      "revId": "79b50b0020bfc69d863bbd5811baadec3c8a19d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [
