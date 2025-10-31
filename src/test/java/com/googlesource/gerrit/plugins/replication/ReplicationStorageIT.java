@@ -26,7 +26,6 @@ import com.googlesource.gerrit.plugins.replication.Destination.Queue;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig.FilterType;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -96,12 +95,9 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     changeReplicationTasksForRemote(tasksStorage.streamWaiting(), changeRef, remote1)
         .forEach(
             (update) -> {
-              try {
-                UriUpdates uriUpdates = new TestUriUpdates(update);
-                tasksStorage.start(uriUpdates);
-                tasksStorage.finish(uriUpdates);
-              } catch (URISyntaxException e) {
-              }
+              UriUpdates uriUpdates = new TestUriUpdates(update);
+              tasksStorage.start(uriUpdates);
+              tasksStorage.finish(uriUpdates);
             });
     reloadConfig();
 
@@ -125,12 +121,9 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     changeReplicationTasksForRemote(tasksStorage.streamWaiting(), changeRef, remote1)
         .forEach(
             (update) -> {
-              try {
-                UriUpdates uriUpdates = new TestUriUpdates(update);
-                tasksStorage.start(uriUpdates);
-                tasksStorage.finish(uriUpdates);
-              } catch (URISyntaxException e) {
-              }
+              UriUpdates uriUpdates = new TestUriUpdates(update);
+              tasksStorage.start(uriUpdates);
+              tasksStorage.finish(uriUpdates);
             });
 
     setReplicationDestination(remote1, suffix1, ALL_PROJECTS);

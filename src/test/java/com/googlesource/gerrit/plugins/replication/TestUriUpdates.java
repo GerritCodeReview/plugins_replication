@@ -27,11 +27,15 @@ public class TestUriUpdates implements UriUpdates {
   private final String remote;
   private final Set<ImmutableSet<String>> refs;
 
-  public TestUriUpdates(ReplicateRefUpdate update) throws URISyntaxException {
-    project = Project.nameKey(update.project());
-    uri = new URIish(update.uri());
-    remote = update.remote();
-    refs = Set.of(update.refs());
+  public TestUriUpdates(ReplicateRefUpdate update) {
+    try {
+      project = Project.nameKey(update.project());
+      uri = new URIish(update.uri());
+      remote = update.remote();
+      refs = Set.of(update.refs());
+    } catch (URISyntaxException e) {
+      throw new RuntimeException("TestUriUpdates init failed.", e);
+    }
   }
 
   @Override

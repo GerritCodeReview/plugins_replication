@@ -21,7 +21,6 @@ import static com.googlesource.gerrit.plugins.replication.ReplicationTasksStorag
 import com.google.common.jimfs.Configuration;
 import com.google.common.jimfs.Jimfs;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
-import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
 import java.util.Set;
@@ -40,7 +39,7 @@ public class ReplicationTasksStorageMPTest {
       ReplicateRefUpdate.create(PROJECT, Set.of(REF), URISH, REMOTE);
   protected static final ReplicateRefUpdate STORED_REF_UPDATE =
       ReplicateRefUpdate.create(REF_UPDATE, REF_UPDATE.sha1());
-  protected static final UriUpdates URI_UPDATES = getUriUpdates(REF_UPDATE);
+  protected static final UriUpdates URI_UPDATES = new TestUriUpdates(REF_UPDATE);
 
   protected ReplicationTasksStorage nodeA;
   protected ReplicationTasksStorage nodeB;
@@ -208,13 +207,5 @@ public class ReplicationTasksStorageMPTest {
 
     assertThat(nodeB.start(URI_UPDATES)).isEmpty();
     assertThatStream(persistedView.streamRunning()).containsExactly(STORED_REF_UPDATE);
-  }
-
-  public static UriUpdates getUriUpdates(ReplicationTasksStorage.ReplicateRefUpdate refUpdate) {
-    try {
-      return new TestUriUpdates(refUpdate);
-    } catch (URISyntaxException e) {
-      throw new RuntimeException("Cannot instantiate UriUpdates object", e);
-    }
   }
 }
