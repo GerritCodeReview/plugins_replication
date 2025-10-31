@@ -68,6 +68,30 @@
       },
       "revId": "e280165bd4dd42b185a3c08764416ed63849a630",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2626538e_757b0fdb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2025-10-31T15:08:45Z",
+      "side": 1,
+      "message": "This is accurate. My understanding is that these come from the new errorprone with bzlmod.",
+      "parentUuid": "d5453b85_b45a7dc4",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 59
+      },
+      "revId": "e280165bd4dd42b185a3c08764416ed63849a630",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
