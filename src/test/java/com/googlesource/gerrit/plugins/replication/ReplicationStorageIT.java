@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.NO_OP;
 
 import com.google.gerrit.acceptance.TestPlugin;
@@ -101,6 +102,7 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
                 tasksStorage.start(uriUpdates);
                 tasksStorage.finish(uriUpdates);
               } catch (URISyntaxException e) {
+                assertWithMessage("should never happen").fail();
               }
             });
     reloadConfig();
@@ -130,6 +132,7 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
                 tasksStorage.start(uriUpdates);
                 tasksStorage.finish(uriUpdates);
               } catch (URISyntaxException e) {
+                assertWithMessage("should never happen").fail();
               }
             });
 
