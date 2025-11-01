@@ -94,6 +94,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b09a05cd_7995c763",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-11-01T08:02:05Z",
+      "side": 1,
+      "message": "Nasser is right.",
+      "parentUuid": "2626538e_757b0fdb",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 59
+      },
+      "revId": "e280165bd4dd42b185a3c08764416ed63849a630",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0ee3cb7_6fff79b2",
@@ -107,6 +131,30 @@
       "writtenOn": "2025-10-31T15:13:55Z",
       "side": 1,
       "message": "This is a common pattern, should we just have a different constructor of `TestUriUpdates()` that doesn\u0027t throw a checked exception?",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 15
+      },
+      "revId": "e280165bd4dd42b185a3c08764416ed63849a630",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "258df0b5_3c47529b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-11-01T08:02:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0ee3cb7_6fff79b2",
       "range": {
         "startLine": 104,
         "startChar": 0,
