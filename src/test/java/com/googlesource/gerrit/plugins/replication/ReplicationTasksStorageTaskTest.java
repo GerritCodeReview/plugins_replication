@@ -378,8 +378,8 @@ public class ReplicationTasksStorageTaskTest {
             new URIish("git://host1/someRepo.git"),
             "someRemote");
     assertEquals(
-        gson.toJson(update),
-        "{\"project\":\"someProject\",\"refs\":[\"ref1\"],\"uri\":\"git://host1/someRepo.git\",\"remote\":\"someRemote\"}");
+        /* expected= */ "{\"project\":\"someProject\",\"refs\":[\"ref1\"],\"uri\":\"git://host1/someRepo.git\",\"remote\":\"someRemote\"}",
+        /* actual= */ gson.toJson(update));
     ReplicateRefUpdate update2 =
         ReplicateRefUpdate.create(
             "someProject",
@@ -387,8 +387,8 @@ public class ReplicationTasksStorageTaskTest {
             new URIish("git://host1/someRepo.git"),
             "someRemote");
     assertEquals(
-        gson.toJson(update2),
-        "{\"project\":\"someProject\",\"refs\":[\"ref1\",\"ref2\"],\"uri\":\"git://host1/someRepo.git\",\"remote\":\"someRemote\"}");
+        /* expected= */ "{\"project\":\"someProject\",\"refs\":[\"ref1\",\"ref2\"],\"uri\":\"git://host1/someRepo.git\",\"remote\":\"someRemote\"}",
+        /* actual= */ gson.toJson(update2));
   }
 
   @Test
