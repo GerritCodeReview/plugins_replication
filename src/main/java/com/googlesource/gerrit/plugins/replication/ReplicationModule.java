@@ -81,6 +81,8 @@ class ReplicationModule extends AbstractModule {
 
     bind(EventBus.class).in(Scopes.SINGLETON);
     bind(ConfigParser.class).to(DestinationConfigParser.class).in(Scopes.SINGLETON);
+    // Eagerly bind ReplicationMetrics to ensure metrics are registered during plugin startup
+    bind(ReplicationMetrics.class).asEagerSingleton();
 
     DynamicSet.setOf(binder(), ReplicationStateListener.class);
     DynamicSet.bind(binder(), ReplicationStateListener.class).to(ReplicationStateLogger.class);

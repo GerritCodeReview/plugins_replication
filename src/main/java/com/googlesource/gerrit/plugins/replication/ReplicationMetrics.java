@@ -19,8 +19,8 @@ import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.Field;
 import com.google.gerrit.metrics.Histogram1;
 import com.google.gerrit.metrics.Histogram3;
-import com.google.gerrit.metrics.MetricMaker;
 import com.google.gerrit.metrics.Timer1;
+import com.google.gerrit.metrics.dropwizard.DropWizardMetricMaker;
 import com.google.gerrit.server.logging.PluginMetadata;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -33,7 +33,7 @@ public class ReplicationMetrics {
   private final Histogram3<Integer, String, String> slowProjectReplicationLatency;
 
   @Inject
-  ReplicationMetrics(@PluginName String pluginName, MetricMaker metricMaker) {
+  ReplicationMetrics(@PluginName String pluginName, DropWizardMetricMaker metricMaker) {
     Field<String> DEST_FIELD =
         Field.ofString(
                 "destination",
@@ -62,9 +62,13 @@ public class ReplicationMetrics {
                             PluginMetadata.create("slow_threshold", fieldValue.toString())))
             .build();
 
+    // Inject DropWizardMetricMaker directly (not PluginMetricMaker) to bypass the cleanup
+    // mechanism that removes metrics during plugin reload. We manually add the plugin prefix.
+    String prefix = "plugins/" + pluginName + "/";
+
     executionTime =
         metricMaker.newTimer(
-            "replication_latency",
+            prefix + "replication_latency",
             new Description("Time spent pushing to remote destination.")
                 .setCumulative()
                 .setUnit(Description.Units.MILLISECONDS),
@@ -72,7 +76,7 @@ public class ReplicationMetrics {
 
     executionDelay =
         metricMaker.newHistogram(
-            "replication_delay",
+            prefix + "replication_delay",
             new Description("Time spent waiting before pushing to remote destination")
                 .setCumulative()
                 .setUnit(Description.Units.MILLISECONDS),
@@ -80,7 +84,7 @@ public class ReplicationMetrics {
 
     executionRetries =
         metricMaker.newHistogram(
-            "replication_retries",
+            prefix + "replication_retries",
             new Description("Number of retries when pushing to remote destination")
                 .setCumulative()
                 .setUnit("retries"),
@@ -88,7 +92,7 @@ public class ReplicationMetrics {
 
     slowProjectReplicationLatency =
         metricMaker.newHistogram(
-            "latency_slower_than_threshold" + "",
+            prefix + "latency_slower_than_threshold",
             new Description(
                     "latency for project to destination, where latency was slower than threshold")
                 .setCumulative()
@@ -131,5 +135,16 @@ public class ReplicationMetrics {
   void recordSlowProjectReplication(
       String destinationName, String projectName, Integer slowThreshold, long latency) {
     slowProjectReplicationLatency.record(slowThreshold, destinationName, projectName, latency);
+  }
+
+  /**
+   * Initialize metrics for a destination so they appear in metrics output even when no replication
+   * tasks have run yet. This ensures metrics are present after plugin reload.
+   *
+   * @param name the destination name.
+   */
+  void initializeDestinationMetrics(String name) {
+    executionDelay.record(name, 0);
+    executionRetries.record(name, 0);
   }
 }
