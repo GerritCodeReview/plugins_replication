@@ -54,6 +54,7 @@ public class DestinationsCollection implements ReplicationDestinations {
 
   private final Destination.Factory destinationFactory;
   private final Provider<ReplicationQueue> replicationQueue;
+  private final ReplicationMetrics metrics;
   private volatile ImmutableList<Destination> destinations;
   private boolean shuttingDown;
 
@@ -71,10 +72,12 @@ public class DestinationsCollection implements ReplicationDestinations {
       Provider<ReplicationQueue> replicationQueue,
       ReplicationConfig replicationConfig,
       ConfigParser configParser,
-      EventBus eventBus)
+      EventBus eventBus,
+      ReplicationMetrics metrics)
       throws ConfigInvalidException {
     this.destinationFactory = destinationFactory;
     this.replicationQueue = replicationQueue;
+    this.metrics = metrics;
     this.destinations =
         allDestinations(
             destinationFactory, configParser.parseRemotes(replicationConfig.getConfig()));
@@ -188,6 +191,7 @@ public class DestinationsCollection implements ReplicationDestinations {
                 + " is not valid");
       }
       cfg.start(workQueue);
+      metrics.initializeDestinationMetrics(cfg.getRemoteConfigName());
     }
   }
 

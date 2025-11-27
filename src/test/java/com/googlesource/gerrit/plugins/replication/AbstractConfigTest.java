@@ -27,6 +27,7 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.util.Providers;
+import com.googlesource.gerrit.plugins.replication.AbstractConfigTest.FakeDestination;
 import com.googlesource.gerrit.plugins.replication.api.ConfigResource;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.io.IOException;
@@ -38,6 +39,7 @@ import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
@@ -48,6 +50,7 @@ public abstract class AbstractConfigTest {
   protected final Destination.Factory destinationFactoryMock;
   protected final Path pluginDataPath;
   protected ReplicationQueue replicationQueueMock;
+  protected ReplicationMetrics metricsMock;
   protected WorkQueue workQueueMock;
   protected EventBus eventBus = new EventBus();
   protected FakeExecutorService executorService = new FakeExecutorService();
@@ -91,6 +94,8 @@ public abstract class AbstractConfigTest {
 
     replicationQueueMock = mock(ReplicationQueue.class);
     when(replicationQueueMock.isRunning()).thenReturn(Boolean.TRUE);
+
+    metricsMock = mock(ReplicationMetrics.class);
 
     workQueueMock = mock(WorkQueue.class);
     when(workQueueMock.createQueue(anyInt(), any(String.class))).thenReturn(executorService);
@@ -149,7 +154,8 @@ public abstract class AbstractConfigTest {
         Providers.of(replicationQueueMock),
         replicationConfig,
         configParser,
-        eventBus);
+        eventBus,
+        metricsMock);
   }
 
   protected ReplicationConfigImpl newReplicationFileBasedConfig() {
