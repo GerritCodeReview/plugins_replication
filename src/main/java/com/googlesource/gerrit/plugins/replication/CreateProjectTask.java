@@ -53,15 +53,16 @@ public class CreateProjectTask {
   public boolean create() {
     return destinations
         .getURIs(Optional.of(config.getName()), project, FilterType.PROJECT_CREATION)
-        .values()
+        .entries()
         .stream()
-        .map(u -> createProject(u, project, head))
+        .map(entry -> createProject(entry.getValue(), project, head, entry.getKey().storeRefLog()))
         .reduce(true, (a, b) -> a && b);
   }
 
-  private boolean createProject(URIish replicateURI, Project.NameKey projectName, String head) {
+  private boolean createProject(
+      URIish replicateURI, Project.NameKey projectName, String head, boolean storeRefLog) {
     Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI);
-    if (adminApi.isPresent() && adminApi.get().createProject(projectName, head)) {
+    if (adminApi.isPresent() && adminApi.get().createProject(projectName, head, storeRefLog)) {
       return true;
     }
 

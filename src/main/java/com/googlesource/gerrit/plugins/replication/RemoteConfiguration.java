@@ -152,4 +152,11 @@ public interface RemoteConfiguration {
   default ImmutableList<Pattern> excludedRefsPattern() {
     return ImmutableList.of();
   }
+
+  /**
+   * Store ref-updates logs into the server reflog when creating new repositories
+   *
+   * @return true if new repositories should store ref-updates in their reflog
+   */
+  boolean storeRefLog();
 }
