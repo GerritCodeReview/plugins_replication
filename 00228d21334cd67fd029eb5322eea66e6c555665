@@ -16,6 +16,24 @@
       "message": "I wonder if other plugins would be facing the same problem with this class.\n\nI suppose plugins that reload almost instantly, do not have this issue, but with this plugin\u0027s drainQueue option, it almost always hits this issue?\n\nPerhaps this class should be fixed, instead of bypassing it using the DropWizardMetricMaker class.",
       "revId": "00228d21334cd67fd029eb5322eea66e6c555665",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28821ec1_7d02dd38",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationMetrics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3911711
+      },
+      "writtenOn": "2025-11-28T10:19:50Z",
+      "side": 0,
+      "message": "Proposed fix for this: https://gerrit-review.googlesource.com/c/gerrit/+/531401",
+      "parentUuid": "22c9b394_59253243",
+      "revId": "00228d21334cd67fd029eb5322eea66e6c555665",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }

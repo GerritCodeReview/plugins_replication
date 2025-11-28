@@ -16,6 +16,24 @@
       "message": "tests are failing because of this added option, will update this CR to fix the tests as well.",
       "revId": "72fb48952ed810dd5a552292e2f374923a3d694d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c266737_abeeeb50",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 3911711
+      },
+      "writtenOn": "2025-11-28T10:19:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50d08593_a68fe170",
+      "revId": "72fb48952ed810dd5a552292e2f374923a3d694d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
