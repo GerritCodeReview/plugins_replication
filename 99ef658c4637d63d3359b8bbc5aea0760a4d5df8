@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15b3b6df_37f3271a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-11-28T21:17:22Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "6f589147_9c73620e",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 22
+      },
+      "revId": "99ef658c4637d63d3359b8bbc5aea0760a4d5df8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "076bcb0d_ef3cf89d",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-11-28T21:15:27Z",
       "side": 1,
       "message": "Disabled accidentally?\n\n\n\n```suggestion\n  @Test\n```",
+      "range": {
+        "startLine": 129,
+        "startChar": 2,
+        "endLine": 129,
+        "endChar": 9
+      },
+      "revId": "99ef658c4637d63d3359b8bbc5aea0760a4d5df8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b71d7aac_2c8de91a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-11-28T21:17:22Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "076bcb0d_ef3cf89d",
       "range": {
         "startLine": 129,
         "startChar": 2,
