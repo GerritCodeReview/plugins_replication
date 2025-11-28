@@ -17,7 +17,13 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.gerrit.entities.Project;
 
 public interface AdminApi {
-  boolean createProject(Project.NameKey project, String head);
+  default boolean createProject(Project.NameKey project, String head) {
+    return createProject(project, head, false);
+  }
+
+  default boolean createProject(Project.NameKey project, String head, boolean enableRefLog) {
+    return createProject(project, head);
+  }
 
   boolean deleteProject(Project.NameKey project);
 
