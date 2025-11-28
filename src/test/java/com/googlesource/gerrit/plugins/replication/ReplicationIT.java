@@ -29,6 +29,7 @@ import com.google.gerrit.extensions.events.ProjectDeletedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
@@ -38,13 +39,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import org.eclipse.jgit.lib.ConfigConstants;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.RefUpdate;
 import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.StoredConfig;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.junit.Test;
@@ -72,18 +76,53 @@ public class ReplicationIT extends ReplicationDaemon {
   }
 
   @Test
-  public void shouldReplicateNewProject() throws Exception {
+  public void shouldReplicateNewProjectWithoutRefLog() throws Exception {
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
 
-    Project.NameKey sourceProject = createTestProject("foo");
+    Project.NameKey sourceProject = createTestProject("no_reflog_project");
+    Project.NameKey replicaProject = Project.nameKey(sourceProject + "replica.git");
 
-    WaitUtil.waitUntil(
-        () -> nonEmptyProjectExists(Project.nameKey(sourceProject + "replica.git")),
-        TEST_NEW_PROJECT_TIMEOUT);
+    waitForProjectCreated(replicaProject);
 
-    ProjectInfo replicaProject = gApi.projects().name(sourceProject + "replica").get();
-    assertThat(replicaProject).isNotNull();
+    ProjectInfo replicaProjectInfo = gApi.projects().name(replicaProject.get()).get();
+    assertThat(replicaProjectInfo).isNotNull();
+    applyToRepositoryConfig(replicaProject, assertStoreRefLog(false));
+  }
+
+  @Test
+  public void shouldCreateNewProjectWithRefLog() throws Exception {
+    config.setBoolean("remote", "foo", "storeRefLog", true);
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    Project.NameKey sourceProject = createTestProject("reflog_project");
+    Project.NameKey replicaProject = Project.nameKey(sourceProject + "replica.git");
+
+    waitForProjectCreated(replicaProject);
+
+    applyToRepositoryConfig(replicaProject, assertStoreRefLog(true));
+  }
+
+  private void waitForProjectCreated(Project.NameKey replicaProject) throws InterruptedException {
+    WaitUtil.waitUntil(() -> nonEmptyProjectExists(replicaProject), TEST_NEW_PROJECT_TIMEOUT);
+  }
+
+  private static Consumer<StoredConfig> assertStoreRefLog(boolean expectedValue) {
+    return conf ->
+        assertThat(
+                conf.getBoolean(
+                    ConfigConstants.CONFIG_CORE_SECTION,
+                    null,
+                    ConfigConstants.CONFIG_KEY_LOGALLREFUPDATES))
+            .isEqualTo(expectedValue);
+  }
+
+  private void applyToRepositoryConfig(
+      Project.NameKey projectName, Consumer<StoredConfig> functionToApply) throws IOException {
+    try (Repository repo = repoManager.openRepository(projectName)) {
+      functionToApply.accept(repo.getConfig());
+    }
   }
 
   @Test

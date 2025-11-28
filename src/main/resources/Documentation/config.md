@@ -344,6 +344,17 @@ remote.NAME.receivepack
 
 	Defaults to `git-receive-pack`.
 
+remote.NAME.storeRefLog
+:	`true` if the remote repositories should be enabled for storing
+	ref updates in the reflog once they are created by replication.
+
+	NOTE: Enabling the reflog would prevent the unreferenced objects
+	from being garbage collected, potentially impacting the post-gc
+	repository size. Also, the ref updates may take additional time
+	because of the need to store the old and new SHA1s in the reflog.
+
+	Defaults to `false`.
+
 remote.NAME.uploadpack
 :	Path of the `git-upload-pack` executable on the remote system,
 	if using the SSH transport.
