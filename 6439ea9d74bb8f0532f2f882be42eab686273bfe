@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eccc1132_56ce4468",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-11-28T17:44:05Z",
+      "side": 1,
+      "message": "```suggestion\nRemove redundant public modifier in AdminApi interface\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 45,
+        "endLine": 7,
+        "endChar": 55
+      },
+      "revId": "6439ea9d74bb8f0532f2f882be42eab686273bfe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
