@@ -17,7 +17,24 @@ package com.googlesource.gerrit.plugins.replication;
 import com.google.gerrit.entities.Project;
 
 public interface AdminApi {
-  boolean createProject(Project.NameKey project, String head);
+
+  /**
+   * Create a new project without honouring the reflog configuration.
+   *
+   * @param project the new project to create
+   * @param head initial value for the HEAD
+   * @return true if the project was created
+   * @deprecated this method should not be used as it does not respect the reflog settings
+   * <p> Use {@link AdminApi#createProject(Project.NameKey,String,boolean)} instead.
+   */
+  @Deprecated(since = "3.14", forRemoval = true)
+  default boolean createProject(Project.NameKey project, String head) {
+    return createProject(project, head, false);
+  }
+
+  default boolean createProject(Project.NameKey project, String head, boolean enableRefLog) {
+    return createProject(project, head);
+  }
 
   boolean deleteProject(Project.NameKey project);
 
