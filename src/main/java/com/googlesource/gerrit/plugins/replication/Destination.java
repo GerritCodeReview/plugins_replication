@@ -894,6 +894,10 @@ public class Destination {
     return config.excludedRefsPattern();
   }
 
+  boolean storeRefLog() {
+    return config.storeRefLog();
+  }
+
   private static boolean matches(URIish uri, String urlMatch) {
     if (urlMatch == null || urlMatch.equals("") || urlMatch.equals("*")) {
       return true;
