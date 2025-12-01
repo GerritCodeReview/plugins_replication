@@ -34,6 +34,24 @@
       "parentUuid": "7487c8fa_2ea064d2",
       "revId": "64506f6b6981721b58b77a218f5a4c9376a30964",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0858f8a3_d27618e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-12-01T22:39:31Z",
+      "side": 1,
+      "message": "Then you should add:\n\n```\nBug: Issue 465176572\n```",
+      "parentUuid": "8b686757_5125f365",
+      "revId": "64506f6b6981721b58b77a218f5a4c9376a30964",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
