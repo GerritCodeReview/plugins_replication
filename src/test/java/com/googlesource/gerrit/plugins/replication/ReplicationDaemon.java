@@ -26,7 +26,6 @@ import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
-import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.LocalDiskRepositoryManager;
 import com.google.inject.Inject;
 import java.io.IOException;
@@ -68,7 +67,6 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
           (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60)
               + TEST_PROJECT_CREATION_SECONDS);
 
-  @Inject protected SitePaths sitePaths;
   @Inject private ProjectOperations projectOperations;
   protected Path gitPath;
   protected FileBasedConfig config;
