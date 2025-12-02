@@ -33,6 +33,98 @@
       "message": "Yes",
       "revId": "f10efc65fb3847d67834dea7be20d8c424b95ac5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee49446f_a7c5e9a3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-12-02T13:55:14Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be `true` to be consistent with the setting of the project created on the main node? I understand it will introduce a breaking change, but logically I think it should default to `true`.",
+      "range": {
+        "startLine": 126,
+        "startChar": 64,
+        "endLine": 126,
+        "endChar": 69
+      },
+      "revId": "f10efc65fb3847d67834dea7be20d8c424b95ac5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87be64c0_1dc70443",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-12-02T13:55:14Z",
+      "side": 1,
+      "message": "maybe say something like: \"storing ref updates in the reflog\" ?",
+      "range": {
+        "startLine": 348,
+        "startChar": 58,
+        "endLine": 348,
+        "endChar": 65
+      },
+      "revId": "f10efc65fb3847d67834dea7be20d8c424b95ac5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "750d4d34_08064b2b",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-12-02T13:55:14Z",
+      "side": 1,
+      "message": "they",
+      "range": {
+        "startLine": 349,
+        "startChar": 17,
+        "endLine": 349,
+        "endChar": 20
+      },
+      "revId": "f10efc65fb3847d67834dea7be20d8c424b95ac5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96600662_8482ed8e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-12-02T13:55:14Z",
+      "side": 1,
+      "message": "expectedValue",
+      "range": {
+        "startLine": 111,
+        "startChar": 66,
+        "endLine": 111,
+        "endChar": 80
+      },
+      "revId": "f10efc65fb3847d67834dea7be20d8c424b95ac5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
