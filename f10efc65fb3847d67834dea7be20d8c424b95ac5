@@ -58,6 +58,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79b03f94_97b729d1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-12-04T12:47:09Z",
+      "side": 1,
+      "message": "\u003e Shouldn\u0027t this be `true` to be consistent with the setting of the project created on the main node?\n\nWell, I would say the opposite: it looks like that setting this to `false` was intentional, therefore we should be keeping that intention by default.\n\n\u003e I understand it will introduce a breaking change, but logically I think it should default to `true`.\n\nSure, but we have two issues here:\n\n1. We cannot contact the people that had that intention, so we can just _\"guess\"_ of what intention\u0027s rationale was\n\n2. Enabling the ref-log by default would have a performance implication by default, which isn\u0027t a good thing IMHO.\n\nI would prefer the Gerrit admin to make a *conscious* decision about the change, rather than changing the default and then wondering why it is slower than before.\n\nLastly, keeping the reflog has an impact on the effectiveness of the `git gc` process because all of a sudden, you cannot get rid of the unreferenced objects anymore because they are pointed to by the reflog.\n\nAgain, the above is my _\"guesswork\"_ on the rationale behind that *intentional conscious decision* and I\u0027m not 100% sure about it.\nIt seems plausible, though.",
+      "parentUuid": "ee49446f_a7c5e9a3",
+      "range": {
+        "startLine": 126,
+        "startChar": 64,
+        "endLine": 126,
+        "endChar": 69
+      },
+      "revId": "f10efc65fb3847d67834dea7be20d8c424b95ac5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87be64c0_1dc70443",
@@ -81,6 +105,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1250c629_56444d75",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-12-04T12:47:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87be64c0_1dc70443",
+      "range": {
+        "startLine": 348,
+        "startChar": 58,
+        "endLine": 348,
+        "endChar": 65
+      },
+      "revId": "f10efc65fb3847d67834dea7be20d8c424b95ac5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "750d4d34_08064b2b",
@@ -94,6 +142,30 @@
       "writtenOn": "2025-12-02T13:55:14Z",
       "side": 1,
       "message": "they",
+      "range": {
+        "startLine": 349,
+        "startChar": 17,
+        "endLine": 349,
+        "endChar": 20
+      },
+      "revId": "f10efc65fb3847d67834dea7be20d8c424b95ac5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f360fd0_f95ea572",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-12-04T12:47:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "750d4d34_08064b2b",
       "range": {
         "startLine": 349,
         "startChar": 17,
