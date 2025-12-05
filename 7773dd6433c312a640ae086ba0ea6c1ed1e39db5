@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44fd3620_062319a9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-12-05T09:00:16Z",
+      "side": 1,
+      "message": "nit: this doesn\u0027t actually store anything, it is just a setting on **whether** ref-updates should land on the reflog. Consider rephrasing.",
+      "range": {
+        "startLine": 157,
+        "startChar": 5,
+        "endLine": 157,
+        "endChar": 51
+      },
+      "revId": "7773dd6433c312a640ae086ba0ea6c1ed1e39db5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
