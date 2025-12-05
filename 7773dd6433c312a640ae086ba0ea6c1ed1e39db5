@@ -3,6 +3,92 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04ebeb35_dc0e9c00",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AdminApi.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-12-05T11:47:40Z",
+      "side": 1,
+      "message": "nit: shall we add a link to the new method to be used instead?",
+      "revId": "7773dd6433c312a640ae086ba0ea6c1ed1e39db5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca51de7_db7d09ea",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AdminApi.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-12-05T11:47:40Z",
+      "side": 1,
+      "message": "Can you add javaDocs to this new interface?",
+      "range": {
+        "startLine": 34,
+        "startChar": 1,
+        "endLine": 36,
+        "endChar": 3
+      },
+      "revId": "7773dd6433c312a640ae086ba0ea6c1ed1e39db5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "347a6f23_eacfc9b4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AdminApi.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-12-05T11:47:40Z",
+      "side": 1,
+      "message": "`createProject(Project.NameKey project, String head)` L30 calls `createProject(Project.NameKey project, String head, boolean enableRefLog)` L34.\n\nThen `createProject(Project.NameKey project, String head, boolean enableRefLog)` L34 calls back `createProject(Project.NameKey project, String head)` at L30.\n\nThis is fine if these methods are **always** overridden (and we know they are by the current implementations); however, these `defaults` per se could lead to an infinite recursion if a new implementation of the AdminApi were choosing not to override them.\n\nWDYT?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 3
+      },
+      "revId": "7773dd6433c312a640ae086ba0ea6c1ed1e39db5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c88024b_64e5aaf5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/LocalFS.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-12-05T11:47:40Z",
+      "side": 1,
+      "message": "We are ignoring the `enableRefLog` for HEAD. Is this right? If so, can you document why?",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 26
+      },
+      "revId": "7773dd6433c312a640ae086ba0ea6c1ed1e39db5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44fd3620_062319a9",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
         "patchSetId": 10
@@ -19,6 +105,29 @@
         "startChar": 5,
         "endLine": 157,
         "endChar": 51
+      },
+      "revId": "7773dd6433c312a640ae086ba0ea6c1ed1e39db5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "964ab131_fa386828",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-12-05T11:47:40Z",
+      "side": 1,
+      "message": "I think this name is a bit misleading because it seems it manipulates a config, not that it applies an assertion to the repo configuration.\n\nMaybe `verifyRepositoryConfig` or `assertRepositoryConfig`?",
+      "range": {
+        "startLine": 121,
+        "startChar": 15,
+        "endLine": 121,
+        "endChar": 35
       },
       "revId": "7773dd6433c312a640ae086ba0ea6c1ed1e39db5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
