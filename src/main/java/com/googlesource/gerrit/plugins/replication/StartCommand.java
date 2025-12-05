@@ -37,7 +37,7 @@ final class StartCommand extends SshCommand {
   @Option(name = "--all", usage = "push all known projects")
   private boolean all;
 
-  @Option(name = "--url", metaVar = "PATTERN", usage = "pattern to match URL on")
+  @Option(name = "--url", metaVar = "PATTERN", usage = "pattern URL must contain, or * to match everything")
   private String urlMatch;
 
   @Option(name = "--wait", usage = "wait for replication to finish before exiting")
