@@ -177,6 +177,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b6034c0_58f75172",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/LocalFS.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-12-06T10:20:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e446a8a_ab0309ad",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 26
+      },
+      "revId": "7773dd6433c312a640ae086ba0ea6c1ed1e39db5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44fd3620_062319a9",
@@ -190,6 +214,30 @@
       "writtenOn": "2025-12-05T09:00:16Z",
       "side": 1,
       "message": "nit: this doesn\u0027t actually store anything, it is just a setting on **whether** ref-updates should land on the reflog. Consider rephrasing.",
+      "range": {
+        "startLine": 157,
+        "startChar": 5,
+        "endLine": 157,
+        "endChar": 51
+      },
+      "revId": "7773dd6433c312a640ae086ba0ea6c1ed1e39db5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8355bba9_a7bdb27b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-12-06T10:20:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44fd3620_062319a9",
       "range": {
         "startLine": 157,
         "startChar": 5,
