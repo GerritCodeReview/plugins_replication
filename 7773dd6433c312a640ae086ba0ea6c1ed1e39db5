@@ -221,6 +221,30 @@
       },
       "revId": "7773dd6433c312a640ae086ba0ea6c1ed1e39db5",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6e22967_2ab9db0b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-12-06T10:16:31Z",
+      "side": 1,
+      "message": "\u003e I think this name is a bit misleading because it seems it manipulates a config, not that it applies an assertion to the repo configuration.\n\u003e \n\u003e Maybe `verifyRepositoryConfig` or `assertRepositoryConfig`?\n\nActually there are no assertions in the body of this method, so `verify` or `assert` would be both misleading.\n\nI\u0027ll rename it to `applyToRepositoryConfig` because it is what is actually doing: applying the lambda to the config.",
+      "parentUuid": "964ab131_fa386828",
+      "range": {
+        "startLine": 121,
+        "startChar": 15,
+        "endLine": 121,
+        "endChar": 35
+      },
+      "revId": "7773dd6433c312a640ae086ba0ea6c1ed1e39db5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
