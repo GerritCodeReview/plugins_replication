@@ -16,6 +16,24 @@
       "message": "```suggestion\n  @Option(name \u003d \"--url\", metaVar \u003d \"PATTERN\", usage \u003d \"pattern URL must match, or * to match everything\")\n```",
       "revId": "a65e6709b18af725d509ec796d6d39f9a3bc46ed",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71f56522_dbb677db",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2025-12-09T02:59:23Z",
+      "side": 1,
+      "message": "The reason I am making this change is because unfortunately, when the word MATCH and PATTERN are together, you would expect some sort of PATTERN such as a glob, or a regular expression, and everytime I try all those things and it doesn\u0027t work. This is literally using String.contains() on the \"PATTERN\". We could use the term STRING instead of PATTERN to make that clearer, but it does support one pattern, \"*\".",
+      "parentUuid": "5555683f_31756421",
+      "revId": "a65e6709b18af725d509ec796d6d39f9a3bc46ed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
