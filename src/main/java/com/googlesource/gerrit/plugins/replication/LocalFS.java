@@ -46,6 +46,11 @@ public class LocalFS implements AdminApi {
       repo.create(true /* bare */);
 
       if (head != null && head.startsWith(Constants.R_REFS)) {
+        // It is unclear why the reflog is disabled when updating the HEAD. It has been like that
+        // for over a decade and does not cause issues so far.
+        // One educated guess is that it follows the default of the git config option
+        // core.logAllRefUpdates which is false by default for bare repositories and by default
+        // stores reflogs only for repositories which have a working tree.
         RefUpdate u = repo.updateRef(Constants.HEAD);
         u.disableRefLog();
         u.link(head);
