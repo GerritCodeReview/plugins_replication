@@ -16,6 +16,24 @@
       "message": "I think this follows the default of the git config option [core.logAllRefUpdates](https://git-scm.com/docs/git-config#Documentation/git-config.txt-corelogAllRefUpdates) which is false by default for bare repositories and by default stores reflogs only for repositories which have a working tree.",
       "revId": "8db89dd53ce624e90c47af9220a89fb8563a9882",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed0e4f60_fb9ea9fa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/LocalFS.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-12-11T08:34:25Z",
+      "side": 1,
+      "message": "Thanks, let me move this comment editing into its own change, as it isn\u0027t directly related to the new feature.",
+      "parentUuid": "1c455387_34c33839",
+      "revId": "8db89dd53ce624e90c47af9220a89fb8563a9882",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
