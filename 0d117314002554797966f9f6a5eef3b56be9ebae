@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9f4f6e7_17e5ed60",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-12-11T08:59:27Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "7559b39b_edbfc065",
+      "range": {
+        "startLine": 10,
+        "startChar": 48,
+        "endLine": 10,
+        "endChar": 53
+      },
+      "revId": "0d117314002554797966f9f6a5eef3b56be9ebae",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00385654_97694286",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-12-11T08:40:36Z",
       "side": 1,
       "message": "```suggestion\n        // for over a decade and has not caused issues so far.\n```",
+      "range": {
+        "startLine": 50,
+        "startChar": 29,
+        "endLine": 50,
+        "endChar": 37
+      },
+      "revId": "0d117314002554797966f9f6a5eef3b56be9ebae",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "183a8a57_cd3a1b86",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/LocalFS.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-12-11T08:59:27Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "00385654_97694286",
       "range": {
         "startLine": 50,
         "startChar": 29,
