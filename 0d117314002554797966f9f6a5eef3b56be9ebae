@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7559b39b_edbfc065",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1155610
+      },
+      "writtenOn": "2025-12-11T08:40:36Z",
+      "side": 1,
+      "message": "```suggestion\nreplica side. Add a comment explaining why that choice was possibly made\n```",
+      "range": {
+        "startLine": 10,
+        "startChar": 48,
+        "endLine": 10,
+        "endChar": 53
+      },
+      "revId": "0d117314002554797966f9f6a5eef3b56be9ebae",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00385654_97694286",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/LocalFS.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1155610
+      },
+      "writtenOn": "2025-12-11T08:40:36Z",
+      "side": 1,
+      "message": "```suggestion\n        // for over a decade and has not caused issues so far.\n```",
+      "range": {
+        "startLine": 50,
+        "startChar": 29,
+        "endLine": 50,
+        "endChar": 37
+      },
+      "revId": "0d117314002554797966f9f6a5eef3b56be9ebae",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a45b490e_f5826518",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/LocalFS.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1155610
+      },
+      "writtenOn": "2025-12-11T08:40:36Z",
+      "side": 1,
+      "message": "```suggestion\n        // One educated guess is that it follows the default of the git config option\n```",
+      "range": {
+        "startLine": 51,
+        "startChar": 33,
+        "endLine": 51,
+        "endChar": 45
+      },
+      "revId": "0d117314002554797966f9f6a5eef3b56be9ebae",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
