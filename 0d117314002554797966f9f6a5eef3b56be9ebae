@@ -116,6 +116,30 @@
       },
       "revId": "0d117314002554797966f9f6a5eef3b56be9ebae",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66789f48_2c97d71b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/LocalFS.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-12-11T09:56:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a45b490e_f5826518",
+      "range": {
+        "startLine": 51,
+        "startChar": 33,
+        "endLine": 51,
+        "endChar": 45
+      },
+      "revId": "0d117314002554797966f9f6a5eef3b56be9ebae",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
