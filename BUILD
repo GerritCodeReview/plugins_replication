@@ -1,6 +1,5 @@
 load("@rules_java//java:defs.bzl", "java_library")
-load("//tools/bzl:junit.bzl", "junit_tests")
-load("//tools/bzl:plugin.bzl", "PLUGIN_DEPS", "PLUGIN_TEST_DEPS", "gerrit_plugin")
+load("@com_googlesource_gerrit_bazlets//:gerrit_plugin.bzl", "gerrit_plugin", "gerrit_plugin_tests")
 
 gerrit_plugin(
     name = "replication",
@@ -33,7 +32,7 @@ gerrit_plugin(
     ],
 )
 
-junit_tests(
+gerrit_plugin_tests(
     name = "replication_tests",
     timeout = "long",
     srcs = glob([
@@ -41,18 +40,18 @@ junit_tests(
     ]),
     tags = ["replication"],
     visibility = ["//visibility:public"],
-    deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
+    deps = [
         ":replication__plugin",
         ":replication_util",
     ],
 )
 
-[junit_tests(
+[gerrit_plugin_tests(
     name = f[:f.index(".")].replace("/", "_"),
     srcs = [f],
     tags = ["replication"],
     visibility = ["//visibility:public"],
-    deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
+    deps = [
         ":replication__plugin",
         ":replication_util",
     ],
@@ -65,7 +64,9 @@ java_library(
         ["src/test/java/**/*.java"],
         exclude = ["src/test/java/**/*Test.java"],
     ),
-    deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
+    deps = [
         ":replication__plugin",
+        "//java/com/google/gerrit/acceptance:lib",
+        "//plugins:plugin-lib",
     ],
 )
