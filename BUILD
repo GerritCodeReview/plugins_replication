@@ -1,6 +1,6 @@
 load("@rules_java//java:defs.bzl", "java_library")
 load("@com_googlesource_gerrit_bazlets//tools:junit.bzl", "junit_tests")
-load("//tools/bzl:plugin.bzl", "PLUGIN_DEPS", "PLUGIN_TEST_DEPS", "gerrit_plugin")
+load("@com_googlesource_gerrit_bazlets//:gerrit_plugin.bzl", "gerrit_plugin")
 
 gerrit_plugin(
     name = "replication",
@@ -41,7 +41,7 @@ junit_tests(
     ]),
     tags = ["replication"],
     visibility = ["//visibility:public"],
-    deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
+    deps = [
         ":replication__plugin",
         ":replication_util",
     ],
@@ -52,7 +52,7 @@ junit_tests(
     srcs = [f],
     tags = ["replication"],
     visibility = ["//visibility:public"],
-    deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
+    deps = [
         ":replication__plugin",
         ":replication_util",
     ],
@@ -65,7 +65,13 @@ java_library(
         ["src/test/java/**/*.java"],
         exclude = ["src/test/java/**/*Test.java"],
     ),
-    deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
+    exports = [
+        "//java/com/google/gerrit/acceptance:lib",
+        "//plugins:plugin-lib",
+    ],
+    deps = [
         ":replication__plugin",
+        "//java/com/google/gerrit/acceptance:lib",
+        "//plugins:plugin-lib",
     ],
 )
