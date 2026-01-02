@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "351ef60b_f1c9b831",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4001008
+      },
+      "writtenOn": "2026-01-02T21:30:12Z",
+      "side": 1,
+      "message": "src/main/resources/Documentation/cmd-start.md",
+      "revId": "cd25cdc51cee8b0e42fcbad82680446adaf4f006",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
@@ -16,23 +34,15 @@
       },
       "applicabilityExpressionResult": {},
       "submittabilityExpressionResult": {
-        "expression": {
-          "expressionString": "label:Code-Review\u003dMAX,user\u003dnon_uploader AND -label:Code-Review\u003dMIN"
-        },
-        "status": "PASS",
-        "errorMessage": {},
-        "passingAtoms": [
-          "label:Code-Review\u003dMAX,user\u003dnon_uploader"
-        ],
-        "failingAtoms": [
-          "label:Code-Review\u003dMIN"
-        ]
+        "value": {"expression":{"expressionString":"label:Code-Review=MAX,user=non_uploader AND -label:Code-Review=MIN"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":["label:Code-Review=MAX,user=non_uploader"],"failingAtoms":["label:Code-Review=MIN"],"atomExplanations":{"value":null}}
       },
       "overrideExpressionResult": {},
       "patchSetCommitId": "cd25cdc51cee8b0e42fcbad82680446adaf4f006",
       "legacy": {
         "value": false
-      }
+      },
+      "forced": {},
+      "hidden": {}
     },
     {
       "submitRequirement": {
@@ -52,36 +62,18 @@
         "allowOverrideInChildProjects": true
       },
       "applicabilityExpressionResult": {
-        "value": {
-          "expression": {
-            "expressionString": "-branch:refs/meta/config"
-          },
-          "status": "PASS",
-          "errorMessage": {},
-          "passingAtoms": [],
-          "failingAtoms": [
-            "branch:refs/meta/config"
-          ]
-        }
+        "value": {"expression":{"expressionString":"-branch:refs/meta/config"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["branch:refs/meta/config"],"atomExplanations":{"value":null}}
       },
       "submittabilityExpressionResult": {
-        "expression": {
-          "expressionString": "label:Verified\u003dMAX AND -label:Verified\u003dMIN"
-        },
-        "status": "PASS",
-        "errorMessage": {},
-        "passingAtoms": [
-          "label:Verified\u003dMAX"
-        ],
-        "failingAtoms": [
-          "label:Verified\u003dMIN"
-        ]
+        "value": {"expression":{"expressionString":"label:Verified=MAX AND -label:Verified=MIN"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":["label:Verified=MAX"],"failingAtoms":["label:Verified=MIN"],"atomExplanations":{"value":null}}
       },
       "overrideExpressionResult": {},
       "patchSetCommitId": "cd25cdc51cee8b0e42fcbad82680446adaf4f006",
       "legacy": {
         "value": false
-      }
+      },
+      "forced": {},
+      "hidden": {}
     }
   ]
 }
