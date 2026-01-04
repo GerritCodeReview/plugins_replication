@@ -18,6 +18,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37f81ba0_52ef2253",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4565510
+      },
+      "writtenOn": "2026-01-04T06:39:33Z",
+      "side": 1,
+      "message": "You are a highly experienced code reviewer specializing in Git patches. Your\ntask is to analyze the provided Git patch (`patch`) and provide comprehensive\nfeedback.  Focus on identifying potential bugs, inconsistencies, security\nvulnerabilities, and areas for improvement in code style and readability.\nYour response should be detailed and constructive, offering specific suggestions\nfor remediation where applicable. Prioritize clarity and conciseness in your\nfeedback.\n\n# Step by Step Instructions\n\n1.  Read the provided `patch` carefully.  Understand the changes it introduces to the codebase.\n\n2.  Analyze the `patch` for potential issues:\n    * **Functionality:** Does the code work as intended? Are there any bugs or unexpected behavior?\n    * **Security:** Are there any security vulnerabilities introduced by the patch?\n    * **Style:** Does the code adhere to the project\u0027s coding style guidelines? Is it readable and maintainable?\n    * **Consistency:** Are there any inconsistencies with existing code or design patterns?\n    * **Testing:** Does the patch include sufficient tests to cover the changes?\n\n3.  Formulate concise and constructive feedback for each identified issue.  Provide specific suggestions for remediation where possible.\n\n4.  Summarize your findings in a clear and organized manner.  Prioritize critical issues over minor ones.\n\n5.  Review the feedback written so far. Is the feedback comprehensive and sufficiently detailed?\nIf not, go back to step 2, focusing on any areas that require further analysis or clarification.\n If yes, proceed to step 6.\n\n6.  Output the complete review.\n\n\nPatch: \n\"\"\"\nFrom cfeacabccb5c40645d9bd837768d171ab4ef1c74 Mon Sep 17 00:00:00 2001\nFrom: Nasser Grainawi \u003cnasser@codeaurora.org\u003e\nDate: Fri, 05 Feb 2021 15:30:32 -0700\nSubject: [PATCH] ReplicationState: Streamline getRefStatus()\n\nDon\u0027t call contains() and then get(), use the result from get() to infer\ncontains().\n\nChange-Id: Ia42f7c552a3408133934616c818b2b39cdc009c3\n---\n\ndiff --git a/src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java b/src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java\nindex 871ed52..fa65803 100644\n--- a/src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java\n+++ b/src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationState.java\n@@ -140,12 +140,12 @@\n   }\n \n   private RefReplicationStatus getRefStatus(String project, String ref) {\n-    if (!statusByProjectRef.contains(project, ref)) {\n-      RefReplicationStatus refStatus \u003d new RefReplicationStatus(project, ref);\n+    RefReplicationStatus refStatus \u003d statusByProjectRef.get(project, ref);\n+    if (refStatus \u003d\u003d null) {\n+      refStatus \u003d new RefReplicationStatus(project, ref);\n       statusByProjectRef.put(project, ref, refStatus);\n-      return refStatus;\n     }\n-    return statusByProjectRef.get(project, ref);\n+    return refStatus;\n   }\n \n   public void waitForReplication() throws InterruptedException {\n\n\"\"\"\nIMPORTANT NOTE: Start directly with the output, do not output any delimiters.\nTake a Deep Breath, read the instructions again, read the inputs again. Each instruction is crucial and must be executed with utmost care and attention to detail.\n\nReview:",
+      "revId": "0811d8d6d3883d014011f8a8d8f12bc4c743ccb9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eac60698_00d982b6",
