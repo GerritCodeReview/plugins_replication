@@ -34,8 +34,11 @@ import org.eclipse.jgit.lib.Config;
 public class MergedConfigResource {
   @VisibleForTesting
   @UsedAt(Project.PLUGIN_PULL_REPLICATION)
+  @SuppressWarnings("UnnecessaryAssignment")
   public static MergedConfigResource withBaseOnly(ConfigResource base) {
     MergedConfigResource mergedConfigResource = new MergedConfigResource();
+    // This assigns an @Inject field explicitly, which is intentional here.
+    // Suppress UnnecessaryAssignment as DI is bypassed on this code path.
     mergedConfigResource.baseConfigProvider = Providers.of(base);
     return mergedConfigResource;
   }
