@@ -37,9 +37,7 @@ public class DestinationConfigParser implements ConfigParser {
 
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  /* (non-Javadoc)
-   * @see com.googlesource.gerrit.plugins.replication.ConfigParser#parseRemotes(org.eclipse.jgit.lib.Config)
-   */
+  /** {@inheritDoc} */
   @Override
   public List<RemoteConfiguration> parseRemotes(Config config) throws ConfigInvalidException {
 
