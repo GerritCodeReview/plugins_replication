@@ -1,13 +1,13 @@
 {
   "checks": {
     "zuul-check:plugins_replication": {
-      "state": "SUCCESSFUL",
-      "message": "Change passed all voting jobs",
-      "url": "https://ci.gerritcodereview.com/t/gerrit/buildset/842b14376a044259a30a6cbfe60f23a8",
-      "started": "2026-01-06T17:30:10Z",
+      "state": "SCHEDULED",
+      "message": "Change has been enqueued in check",
+      "url": "https://ci.gerritcodereview.com/t/gerrit/status/change/502731,10",
+      "started": "2026-02-12T18:14:00Z",
       "finished": "2026-01-06T17:57:12Z",
       "created": "2026-01-06T17:28:09Z",
-      "updated": "2026-01-06T17:57:20Z"
+      "updated": "2026-02-12T18:14:01Z"
     }
   }
 }
