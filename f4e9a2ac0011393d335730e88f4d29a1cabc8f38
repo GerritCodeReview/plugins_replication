@@ -34,6 +34,23 @@
       "parentUuid": "1697b1b8_9c265a12",
       "revId": "f4e9a2ac0011393d335730e88f4d29a1cabc8f38",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e674d269_16f519f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010788
+      },
+      "writtenOn": "2026-02-23T23:00:55Z",
+      "side": 1,
+      "message": "For reference: https://phabricator.wikimedia.org/T418084 which is to improve our monitoring of replication ;)",
+      "revId": "f4e9a2ac0011393d335730e88f4d29a1cabc8f38",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
