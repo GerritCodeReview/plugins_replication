@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70ab7c72_c7f21708",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1010788
+      },
+      "writtenOn": "2026-02-24T14:21:13Z",
+      "side": 1,
+      "message": "I definitely will!  I started our dashboard before discovering the `gerrit-monitoring` project and imported them on the side. They can be seen on our public Grafana at suffixed with `-upstream` https://grafana.wikimedia.org/dashboards/f/5AnaHr2Mk/gerrit\n\nI ended up deleting the one for `replica` because I was not happy with the graphs. The `quantile` labels keep the same value which results in graph for delay and latency to show plateau.  I have use a trick to turn those to zero to when the rate of the associated counter is zero (ie there is no associated replication event at that time), this way we see the gaps.\n\nI also found a way to find the last timestamp a replication happened which let me get some nice panels at the top:\n```\ngithub: an hour ago\nreplica: a few seconds ago\nspare: an hour ago\n```\n(we don\u0027t replicate everything to github, I think the spare is ongoing maintenance).\n\nAnyway I digress, but surely I will upstream my findings when things have settled :-]",
+      "parentUuid": "8b1df9e3_0dc9b040",
+      "revId": "f4e9a2ac0011393d335730e88f4d29a1cabc8f38",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1697b1b8_9c265a12",
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "There is a generic mechanism to prefix plugin metrics, see https://gerrit-review.googlesource.com/Documentation/dev-plugins.html#_providing_own_metrics.\n\nThough it seems this doesn\u0027t work for plugin contributed queue metrics, I guess `WorkQueue` could be enhanced to support this prefixing. The plugin name would need to be passed to another `createQueue()` method so that WorkQueue can read the config option `plugin.\u003cplugin name\u003e.metricsPrefix`. I think that\u0027s beyond the scope of this change and could be done in another change. So for now I would document the behavior in the plugin config documentation.",
       "parentUuid": "9af5dbde_b8e362ea",
+      "revId": "f4e9a2ac0011393d335730e88f4d29a1cabc8f38",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82b9b164_9b3e2b1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010788
+      },
+      "writtenOn": "2026-02-24T14:21:13Z",
+      "side": 1,
+      "message": "Cool thank you for the insights.  I probably lack the knowledge to add the proposed enhancement so I will just stick to document the behavior and amend the doc in this change. Thank you Matthias!",
+      "parentUuid": "e128e6f6_d0b55d9c",
       "revId": "f4e9a2ac0011393d335730e88f4d29a1cabc8f38",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
