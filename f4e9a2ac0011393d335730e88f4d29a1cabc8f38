@@ -174,6 +174,24 @@
       "parentUuid": "df27b45a_a847d2a1",
       "revId": "f4e9a2ac0011393d335730e88f4d29a1cabc8f38",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16951756_1aedc6f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2026-02-24T15:54:47Z",
+      "side": 1,
+      "message": "I agree, it sounds like this is the way to go\n\nThe replication plugin already injects a `MetricMaker` into `ReplicationMetrics`. I guess it gets a `PluginMetricMaker` injected which already namespaces the metrics reported via the `PluginMetricMaker`. I would try to add another `WorkQueue.createQueue()` method accepting a plugin\u0027s `MetricMaker` instance and then use that in the replication plugin to pass the replication plugin\u0027s metric maker to `WorkQueue` and teach it to use that for metrics of that replication specific queue.",
+      "parentUuid": "db49f032_290a2c93",
+      "revId": "f4e9a2ac0011393d335730e88f4d29a1cabc8f38",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
