@@ -139,6 +139,23 @@
       "parentUuid": "e128e6f6_d0b55d9c",
       "revId": "f4e9a2ac0011393d335730e88f4d29a1cabc8f38",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df27b45a_a847d2a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010788
+      },
+      "writtenOn": "2026-02-24T15:13:18Z",
+      "side": 1,
+      "message": "While iterating on the doc I found out the plugin can not be reloaded via `gerrit plugin reload replication` because the `WorkQueue` metric already exists :-(\n\n```\nINFO  com.google.gerrit.server.git.WorkQueue : Adding metrics for \u0027ReplicateTo-GitHub\u0027 queue\n``\n```\nWARN  com.google.gerrit.lifecycle.LifecycleManager : Failed to stop class com.googlesource.gerrit.plugins.replication.ReplicationQueue\n```\n```\njava.lang.NullPointerException: Cannot invoke \"com.googlesource.gerrit.plugins.replication.ReplicationQueue$Distributor.stop()\" because \"this.distributor\" is null\n\tat com.googlesource.gerrit.plugins.replication.ReplicationQueue.stop(ReplicationQueue.java:116)\n\tat com.google.gerrit.lifecycle.LifecycleManager.stop(LifecycleManager.java:109)\n\tat com.google.gerrit.server.plugins.ServerPlugin.stop(ServerPlugin.java:309)\n\tat com.google.gerrit.server.plugins.PluginLoader.runPlugin(PluginLoader.java:525)\n\tat com.google.gerrit.server.plugins.PluginLoader.reload(PluginLoader.java:391)\n\tat com.google.gerrit.sshd.commands.PluginReloadCommand.doRun(PluginReloadCommand.java:36)\n```\n\nThe replication queue is not properly stopped, I imagine the WorkQueue object does not have an opportunity to unregister/clear the metric and then starting it fail:\n\n```\n[2026-02-24T15:53:45.123+01:00] [SSH gerrit plugin reload replication (hashar)] WARN  com.google.gerrit.server.plugins.PluginLoader : Cannot reload plugin replication [CONTEXT request\u003d\"SSH\" ]\njava.lang.IllegalArgumentException: A metric named queue/replicate_to_git_hub/max_pool_size already exists\n...\n```\n\nFun times :]",
+      "revId": "f4e9a2ac0011393d335730e88f4d29a1cabc8f38",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
