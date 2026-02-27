@@ -69,6 +69,24 @@
       "message": "yes, that\u0027s better, so we have something like:\n\n```suggestion\n  @Option(name \u003d \"--url\", metaVar \u003d \"SUBSTRING\", usage \u003d \"substring URL must contain, or * to match everything\")\n```",
       "revId": "a65e6709b18af725d509ec796d6d39f9a3bc46ed",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16738567_632e9135",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-02-27T19:43:44Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "d181de2e_a4e039de",
+      "revId": "a65e6709b18af725d509ec796d6d39f9a3bc46ed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
