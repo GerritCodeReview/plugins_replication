@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2ef7bee_9be0054d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-03-12T19:46:20Z",
+      "side": 1,
+      "message": "With queue metrics enabled, reloading the plugin can cause the reload to fail due to duplicate metrics. This is because core plugin loader starts the new plugin before stopping the old plugin which results in duplicate metrics being created as the old plugin won\u0027t deregister the metrics in time before the new plugin registers them.",
+      "revId": "19ea0cdd2b761869b63db806cd445c20624609a6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
