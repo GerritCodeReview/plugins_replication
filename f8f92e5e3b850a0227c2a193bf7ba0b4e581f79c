@@ -16,6 +16,23 @@
       "message": "xf664ertgsr6r@gmail.com",
       "revId": "f8f92e5e3b850a0227c2a193bf7ba0b4e581f79c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "714f8df8_9f06f1b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4698178
+      },
+      "writtenOn": "2026-03-12T04:15:45Z",
+      "side": 1,
+      "message": "84215: Upgrade JGit to 4.4.1.201607150455-r.118-g1096652 | https://gerrit-review.googlesource.com/c/gitiles/+/84215",
+      "revId": "f8f92e5e3b850a0227c2a193bf7ba0b4e581f79c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
