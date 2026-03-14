@@ -192,6 +192,24 @@
       "parentUuid": "db49f032_290a2c93",
       "revId": "f4e9a2ac0011393d335730e88f4d29a1cabc8f38",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16fac89b_f3d5c326",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010788
+      },
+      "writtenOn": "2026-03-14T14:33:32Z",
+      "side": 1,
+      "message": "While reading the release notes for Gerrit 3.11.8, I have noticed:\n\n\u003e Bug Fixes\n\u003e \n\u003e (Issue 461836624) Deregister queue metrics upon unload, allowing plugins to enable metrics on executors.\n\u003e \n\u003e Previously, the `WorkQueue` did not deregister metrics upon shutdown. This prevented plugins from effectively creating queues with associated metrics, often resulting in reloading or restarting failures due to duplicated metric names.\n\nSolved by I9ed45cedd00d39beb3f514d23ed2e08c853aae72\n\nIt looks like that matches the problem I had with my change. I\u0027ll try it later with 3.11.8.",
+      "parentUuid": "16951756_1aedc6f1",
+      "revId": "f4e9a2ac0011393d335730e88f4d29a1cabc8f38",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
