@@ -245,6 +245,24 @@
       "parentUuid": "88ee335d_3546a992",
       "revId": "f4e9a2ac0011393d335730e88f4d29a1cabc8f38",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98668ec8_28dc0ae8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010788
+      },
+      "writtenOn": "2026-03-21T13:38:25Z",
+      "side": 1,
+      "message": "@klingarkar@nvidia.com I think the reloading of the plugin might have been fixed with 3.11.8 (see my previous comment).  We run EOL 3.10.6 and I think I was locally running an older version of 3.11.\n\nIt is entirely possible that with 3.11.8+ the plugin WorkQueue metrics get unregistered properly and thus the plugin can be reloaded.  That needs to be verified, which is somewhere on my backlog but feel free to check it and report back here :]",
+      "parentUuid": "16fac89b_f3d5c326",
+      "revId": "f4e9a2ac0011393d335730e88f4d29a1cabc8f38",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
