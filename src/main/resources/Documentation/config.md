@@ -519,6 +519,16 @@ remote.NAME.gitPath
 
 	Default: `git` (resolved via the remote's `PATH`)
 
+remote.NAME.rsyncPath
+:	Path to the `rsync` binary on the host running Gerrit, used by the
+	`@PLUGIN@ repair --copy-packs` command when transferring pack files
+	to this SSH destination. Set this when the Gerrit runtime user's
+	`PATH` does not contain `rsync`, or to pin a specific build.
+
+	Only applies to SSH destinations.
+
+	Default: `rsync` (resolved via the Gerrit runtime user's `PATH`)
+
 remote.NAME.replicatePermissions
 :	If true, permissions-only projects and the refs/meta/config
 	branch will also be replicated to the remote site.  These

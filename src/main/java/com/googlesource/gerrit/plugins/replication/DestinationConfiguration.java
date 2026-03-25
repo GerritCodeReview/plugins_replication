@@ -34,6 +34,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   static final int DEFAULT_RESCHEDULE_DELAY = 3;
   static final int DEFAULT_DRAIN_QUEUE_ATTEMPTS = 0;
   private static final int DEFAULT_SLOW_LATENCY_THRESHOLD_SECS = 900;
+  private static final String DEFAULT_RSYNC_PATH = "rsync";
 
   private final int delay;
   private final int rescheduleDelay;
@@ -60,6 +61,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final String uploadPack;
   private final String receivePack;
   private final String gitPath;
+  private final String rsyncPath;
 
   protected DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
@@ -130,6 +132,8 @@ public class DestinationConfiguration implements RemoteConfiguration {
     uploadPack = cfg.getString("remote", name, "uploadpack");
     receivePack = cfg.getString("remote", name, "receivepack");
     gitPath = cfg.getString("remote", name, "gitPath");
+    rsyncPath =
+        MoreObjects.firstNonNull(cfg.getString("remote", name, "rsyncPath"), DEFAULT_RSYNC_PATH);
   }
 
   @Override
@@ -250,6 +254,10 @@ public class DestinationConfiguration implements RemoteConfiguration {
 
   public String getGitPath() {
     return gitPath;
+  }
+
+  public String getRsyncPath() {
+    return rsyncPath;
   }
 
   private ImmutableList<Pattern> getExcludedRefsPattern(Config cfg, String name) {
