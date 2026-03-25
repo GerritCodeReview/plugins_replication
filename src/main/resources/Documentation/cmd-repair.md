@@ -1,0 +1,96 @@
+@PLUGIN@ repair
+===============
+
+NAME
+----
+@PLUGIN@ repair - Repair a project on replication destinations
+
+SYNOPSIS
+--------
+
+```console
+ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ repair
+  [--url <PATTERN>]
+  [--full | --copy-packs]
+  <PROJECT>
+```
+
+DESCRIPTION
+-----------
+Repairs a project on its replication destinations, then runs a
+`@PLUGIN@ start` for that project (with `--now --wait`) so
+any refs that diverged during the repair are replicated. The command
+blocks until replication finishes.
+
+If no repair action flag is supplied, `--full` is assumed.
+
+REQUIREMENTS
+------------
+The Gerrit runtime user must have `ssh` on `PATH`, plus `rsync` either on
+`PATH` or pointed at via [`replication.rsyncPath`](config.md#replication.rsyncPath).
+
+ACCESS
+------
+Caller must be a member of the privileged 'Administrators' group,
+or have been granted the 'Start Replication' plugin-owned capability.
+
+SCRIPTING
+---------
+This command is intended to be used to repair repositories on the mirror.
+Exit status is non-zero if the project is missing, or if the repair fails
+for some reason.
+
+OPTIONS
+-------
+
+`--url <PATTERN>`
+: Restrict both the repair action(s) and the follow-up replication to
+destinations whose configured URL, or expanded project URL, contains the
+substring `PATTERN`.
+
+`--full`
+: Run every supported repair action.
+
+`--copy-packs`
+: rsync regular files in `objects/pack/` whose names end with `.pack`,
+`.idx`, `.bitmap`, or `.rev` to each matching destination. Only plain
+SSH URLs are used (for example `user@host:/path/to/repo.git`).
+Destinations that use `gerrit+ssh`, HTTP(S), or local paths are skipped.
+
+`PROJECT`
+: Exact Gerrit project name.
+
+EXAMPLES
+--------
+Run every supported repair action for `tools/gerrit` against every
+eligible destination, then replicate refs (`--full` is implied since no
+action flag is given):
+
+```console
+  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ repair tools/gerrit
+```
+
+Equivalent, with `--full` stated explicitly:
+
+```console
+  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ repair --full tools/gerrit
+```
+
+Only copy packs (no other repair actions, even if more are added later):
+
+```console
+  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ repair --copy-packs tools/gerrit
+```
+
+Repair only against destinations whose URL mentions `replica1`:
+
+```console
+  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ repair --url replica1 tools/gerrit
+```
+
+SEE ALSO
+--------
+
+* [@PLUGIN@ start](cmd-start.md)
+* [Replication Configuration](config.md)
+* [Access Control](../../../Documentation/access-control.html)

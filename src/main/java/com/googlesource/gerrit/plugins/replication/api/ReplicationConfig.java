@@ -89,6 +89,14 @@ public interface ReplicationConfig {
   int getSshCommandTimeout();
 
   /**
+   * Path of the {@code rsync} binary on the host running Gerrit, used by the {@code replication
+   * repair} command.
+   *
+   * @return the rsync binary path, or {@code "rsync"} to resolve via {@code PATH}.
+   */
+  String getRsyncPath();
+
+  /**
    * Current logical version string of the current configuration loaded in memory, depending on the
    * actual implementation of the configuration on the persistent storage.
    *

@@ -125,6 +125,11 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleLi
   }
 
   @Override
+  public String getRsyncPath() {
+    return currentConfig.getRsyncPath();
+  }
+
+  @Override
   public Config getConfig() {
     return currentConfig.getConfig();
   }

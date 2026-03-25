@@ -90,11 +90,17 @@ public interface PushResultProcessing {
     return sb.toString();
   }
 
+  public interface SshOutputCommand {
+    void writeStdOutSync(String message);
+
+    void writeStdErrSync(String message);
+  }
+
   public static class CommandProcessing implements PushResultProcessing {
-    private WeakReference<StartCommand> sshCommand;
+    private WeakReference<SshOutputCommand> sshCommand;
     private AtomicBoolean hasError = new AtomicBoolean();
 
-    CommandProcessing(StartCommand sshCommand) {
+    CommandProcessing(SshOutputCommand sshCommand) {
       this.sshCommand = new WeakReference<>(sshCommand);
     }
 
@@ -162,7 +168,7 @@ public interface PushResultProcessing {
 
     @Override
     public void writeStdOut(String message) {
-      StartCommand command = sshCommand.get();
+      SshOutputCommand command = sshCommand.get();
       if (command != null) {
         command.writeStdOutSync(message);
       }
@@ -170,7 +176,7 @@ public interface PushResultProcessing {
 
     @Override
     public void writeStdErr(String message) {
-      StartCommand command = sshCommand.get();
+      SshOutputCommand command = sshCommand.get();
       if (command != null) {
         command.writeStdErrSync(message);
       }
