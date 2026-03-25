@@ -28,6 +28,7 @@ import org.eclipse.jgit.lib.Config;
 
 public class ReplicationConfigImpl implements ReplicationConfig {
   private static final int DEFAULT_SSH_CONNECTION_TIMEOUT_MS = 2 * 60 * 1000; // 2 minutes
+  private static final String DEFAULT_RSYNC_PATH = "rsync";
 
   private final SitePaths site;
   private final MergedConfigResource configResource;
@@ -144,5 +145,11 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   @Override
   public int getSshCommandTimeout() {
     return sshCommandTimeout;
+  }
+
+  @Override
+  public String getRsyncPath() {
+    String rsyncPath = getConfig().getString("replication", null, "rsyncPath");
+    return Strings.isNullOrEmpty(rsyncPath) ? DEFAULT_RSYNC_PATH : rsyncPath;
   }
 }

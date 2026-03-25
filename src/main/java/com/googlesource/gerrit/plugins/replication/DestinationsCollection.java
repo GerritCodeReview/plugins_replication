@@ -30,6 +30,7 @@ import com.google.common.collect.SetMultimap;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
@@ -83,7 +84,10 @@ public class DestinationsCollection implements ReplicationDestinations {
 
   @Override
   public Multimap<Destination, URIish> getURIs(
-      Optional<String> remoteName, Project.NameKey projectName, FilterType filterType) {
+      Optional<String> remoteName,
+      Project.NameKey projectName,
+      FilterType filterType,
+      @Nullable String urlMatch) {
     if (getAll(filterType).isEmpty()) {
       return ImmutableMultimap.of();
     }
@@ -113,6 +117,7 @@ public class DestinationsCollection implements ReplicationDestinations {
           continue;
         }
 
+        boolean matchesConfigUrl = Destination.matches(uri, urlMatch);
         if (!isGerrit(uri) && !isGerritHttp(uri)) {
           String path =
               replaceName(uri.getPath(), projectName.get(), config.isSingleProjectMatch());
@@ -128,12 +133,14 @@ public class DestinationsCollection implements ReplicationDestinations {
             continue;
           }
         }
-        uris.put(config, uri);
-        adminURLUsed = true;
+        if (matchesConfigUrl || Destination.matches(uri, urlMatch)) {
+          uris.put(config, uri);
+          adminURLUsed = true;
+        }
       }
 
       if (!adminURLUsed) {
-        for (URIish uri : config.getURIs(projectName, "*")) {
+        for (URIish uri : config.getURIs(projectName, urlMatch)) {
           uris.put(config, uri);
         }
       }

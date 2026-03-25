@@ -910,7 +910,7 @@ public class Destination {
     return config.getGitPath();
   }
 
-  private static boolean matches(URIish uri, String urlMatch) {
+  static boolean matches(URIish uri, String urlMatch) {
     if (urlMatch == null || urlMatch.equals("") || urlMatch.equals("*")) {
       return true;
     }

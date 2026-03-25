@@ -18,14 +18,10 @@ import com.google.gerrit.extensions.annotations.RequiresCapability;
 import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
-import com.googlesource.gerrit.plugins.replication.PushResultProcessing.CommandProcessing;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
 
@@ -33,9 +29,7 @@ import org.kohsuke.args4j.Option;
 @CommandMetaData(
     name = "start",
     description = "Start replication for specific project or all projects")
-final class StartCommand extends SshCommand {
-  @Inject private ReplicationStateLogger stateLog;
-
+final class StartCommand extends SshCommand implements PushResultProcessing.SshOutputCommand {
   @Option(name = "--all", usage = "push all known projects")
   private boolean all;
 
@@ -58,7 +52,7 @@ final class StartCommand extends SshCommand {
   @Argument(index = 0, multiValued = true, metaVar = "PATTERN", usage = "project name pattern")
   private List<String> projectPatterns = new ArrayList<>(2);
 
-  @Inject private PushAll.Factory pushFactory;
+  @Inject private ReplicationStarter replicationStarter;
 
   private final Object lock = new Object();
 
@@ -68,47 +62,13 @@ final class StartCommand extends SshCommand {
       throw new UnloggedFailure(1, "error: cannot combine --all and PROJECT");
     }
 
-    ReplicationState state = new ReplicationState(new CommandProcessing(this));
+    ReplicationFilter projectFilter =
+        all ? ReplicationFilter.all() : new ReplicationFilter(projectPatterns);
 
-    ReplicationFilter projectFilter;
-
-    if (all) {
-      projectFilter = ReplicationFilter.all();
-    } else {
-      projectFilter = new ReplicationFilter(projectPatterns);
-    }
-
-    Future<?> future =
-        pushFactory
-            .create(urlMatch, remotesToConsider, projectFilter, state, now)
-            .schedule(0, TimeUnit.SECONDS);
-
-    if (wait) {
-      if (future != null) {
-        try {
-          future.get();
-        } catch (InterruptedException e) {
-          stateLog.error(
-              "Thread was interrupted while waiting for PushAll operation to finish", e, state);
-          return;
-        } catch (ExecutionException e) {
-          stateLog.error("An exception was thrown in PushAll operation", e, state);
-          return;
-        }
-      }
-
-      if (state.hasPushTask()) {
-        try {
-          state.waitForReplication();
-        } catch (InterruptedException e) {
-          writeStdErrSync("We are interrupted while waiting replication to complete");
-        }
-      } else {
-        writeStdOutSync("Nothing to replicate");
-      }
-    }
+    replicationStarter.start(urlMatch, remotesToConsider, projectFilter, now, wait, this);
   }
 
+  @Override
   public void writeStdOutSync(String message) {
     if (wait) {
       synchronized (lock) {
@@ -118,6 +78,7 @@ final class StartCommand extends SshCommand {
     }
   }
 
+  @Override
   public void writeStdErrSync(String message) {
     if (wait) {
       synchronized (lock) {

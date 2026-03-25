@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.Multimap;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.WorkQueue;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig.FilterType;
@@ -32,10 +33,19 @@ public interface ReplicationDestinations {
    * @param remoteName name of the replication end or empty if selecting all ends.
    * @param projectName name of the project
    * @param filterType type of filter criteria for selecting projects
+   * @param urlMatch optional substring filter on configuration or expanded URLs; null matches all
    * @return the multi-map of destinations and the associated replication URIs
    */
   Multimap<Destination, URIish> getURIs(
-      Optional<String> remoteName, Project.NameKey projectName, FilterType filterType);
+      Optional<String> remoteName,
+      Project.NameKey projectName,
+      FilterType filterType,
+      @Nullable String urlMatch);
+
+  default Multimap<Destination, URIish> getURIs(
+      Optional<String> remoteName, Project.NameKey projectName, FilterType filterType) {
+    return getURIs(remoteName, projectName, filterType, null);
+  }
 
   /**
    * List of currently active replication destinations.
