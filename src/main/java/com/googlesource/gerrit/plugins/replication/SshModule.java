@@ -20,6 +20,7 @@ class SshModule extends PluginCommandModule {
   @Override
   protected void configureCommands() {
     command(StartCommand.class);
+    command(CopyPacksCommand.class);
     command(ListCommand.class);
   }
 }
