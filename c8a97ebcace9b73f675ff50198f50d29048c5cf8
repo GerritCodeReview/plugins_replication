@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8f0ab13_c393ba22",
+        "filename": "src/main/resources/Documentation/cmd-copy-packs.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-01T21:15:19Z",
+      "side": 1,
+      "message": "I can imagine that we will want to offer more ways to repair repos, so having a more generic command such as \"repair\" with all sorts of switches such as copy-packs, copy packed-refs (this likely should be next) would make more sense? However, if we had something like \"repair\", then I would expect it to be smarter, to know what to do instead of having to mention switches. However, \"smarter\" does not feel like a good incremental step. Perhaps what makes more sense is to treat this like some sort of replication (instead of repair) command in itself. It is sort of a non-git protocol approach to replication (after all, the pull-replication plugin does all sorts of non-git protocol replication). So, what if we added these switches directly to the \u0027replication start\u0027 command? \n\nIf we add these switches to the \u0027replication start\u0027 command, one could imagine even a --copy-all-on-init switch that could be used to \"seed\" new repos more quickly than a git push (which currently cannot really be used for new repos with large ref counts anyway). Also, one could imagine someday working with the git community to move or replace these \"out-of-band\" approaches to faster replication (and repair) into the git protocol itself. I can envision the replication plugin being a driver to get protocol V2 implemented in git, and these could then eventually become options which protocol V2 could implement.\n\nThat being said, I have no objection to a new command, but if we have one, then maybe it should be more like start-out-of-band, or \"copy\"?",
+      "revId": "c8a97ebcace9b73f675ff50198f50d29048c5cf8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
