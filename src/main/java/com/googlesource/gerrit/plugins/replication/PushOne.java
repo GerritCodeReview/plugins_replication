@@ -66,6 +66,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.eclipse.jgit.errors.NoRemoteRepositoryException;
 import org.eclipse.jgit.errors.NotSupportedException;
@@ -77,12 +78,15 @@ import org.eclipse.jgit.lib.NullProgressMonitor;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.FetchConnection;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.eclipse.jgit.transport.ReplicationSshTransport;
 import org.eclipse.jgit.transport.Transport;
 import org.eclipse.jgit.transport.URIish;
 
@@ -590,6 +594,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       throws NotSupportedException, TransportException {
     int batchSize = pool.getPushBatchSize();
     if (batchSize == 0 || todo.size() <= batchSize) {
+      configureRefFilter(tn, todo);
       return tn.push(NullProgressMonitor.INSTANCE, todo);
     }
 
@@ -600,6 +605,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     for (List<RemoteRefUpdate> batch : batches) {
       repLog.atInfo().log(
           "Pushing %d/%d batches for replication to %s", completedBatch, batches.size(), uri);
+      configureRefFilter(tn, batch);
       result.addResult(tn.push(NullProgressMonitor.INSTANCE, batch));
 
       //  check if push should be no longer continued
@@ -613,6 +619,45 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       completedBatch++;
     }
     return result;
+  }
+
+  private void configureRefFilter(Transport tn, Collection<RemoteRefUpdate> updates) {
+    if (!(tn instanceof ReplicationSshTransport)) {
+      return;
+    }
+    Set<String> refNames =
+        updates.stream().map(RemoteRefUpdate::getRemoteName).collect(Collectors.toSet());
+    Set<ObjectId> parentObjIds = getParents(updates);
+    Predicate<Ref> predicate =
+        ref ->
+            !RefNames.isRefsChanges(ref.getName())
+                || refNames.contains(ref.getName())
+                || parentObjIds.contains(ref.getObjectId());
+    ((ReplicationSshTransport) tn).setUninterestingObjectsRefFilter(predicate);
+  }
+
+  private Set<ObjectId> getParents(Collection<RemoteRefUpdate> updates) {
+    Set<ObjectId> parents = new HashSet<>();
+    try (RevWalk rw = new RevWalk(git)) {
+      for (RemoteRefUpdate u : updates) {
+        if (!RefNames.isRefsChanges(u.getRemoteName()) || u.isDelete()) {
+          continue;
+        }
+        ObjectId objectId = u.getNewObjectId();
+        if (objectId == null) {
+          continue;
+        }
+        try {
+          RevCommit c = rw.parseCommit(objectId);
+          for (int p = 0; p < c.getParentCount(); p++) {
+            parents.add(c.getParent(p));
+          }
+        } catch (IOException ignored) {
+          // Ignore for now. Log a warning?
+        }
+      }
+    }
+    return parents;
   }
 
   private static String refUpdatesForLogging(List<RemoteRefUpdate> refUpdates) {

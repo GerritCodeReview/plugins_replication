@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
 import org.eclipse.jgit.errors.NoRemoteRepositoryException;
 import org.eclipse.jgit.errors.NotSupportedException;
 import org.eclipse.jgit.errors.PackProtocolException;
@@ -44,12 +45,21 @@ import org.eclipse.jgit.util.io.StreamCopyThread;
 public class ReplicationSshTransport extends SshTransport {
 
   private final TransportGitSsh delegate;
+  private Predicate<Ref> uninterestingObjectsRefFilter;
 
   public ReplicationSshTransport(TransportGitSsh delegate) {
     super(
         JGitReplicationAccess.transportLocal(delegate),
         JGitReplicationAccess.transportUri(delegate));
     this.delegate = delegate;
+  }
+
+  public void setUninterestingObjectsRefFilter(Predicate<Ref> filter) {
+    this.uninterestingObjectsRefFilter = filter;
+  }
+
+  Predicate<Ref> getUninterestingObjectsRefFilter() {
+    return uninterestingObjectsRefFilter;
   }
 
   @Override
@@ -304,12 +314,13 @@ public class ReplicationSshTransport extends SshTransport {
         throws IOException {
       Set<ObjectId> remoteObjects = new HashSet<>();
       Set<ObjectId> newObjects = new HashSet<>();
+      Predicate<Ref> filter = ReplicationSshTransport.this.getUninterestingObjectsRefFilter();
 
       try (PackWriter writer = new PackWriter(transport.getPackConfig(), local.newObjectReader())) {
 
         for (Ref r : getRefs()) {
           ObjectId oid = r.getObjectId();
-          if (local.getObjectDatabase().has(oid)) {
+          if ((filter == null || filter.test(r)) && local.getObjectDatabase().has(oid)) {
             remoteObjects.add(oid);
           }
         }
