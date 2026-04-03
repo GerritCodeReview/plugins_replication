@@ -21,11 +21,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import org.eclipse.jgit.errors.NoRemoteRepositoryException;
 import org.eclipse.jgit.errors.NotSupportedException;
 import org.eclipse.jgit.errors.PackProtocolException;
@@ -44,12 +46,18 @@ import org.eclipse.jgit.util.io.StreamCopyThread;
 public class ReplicationSshTransport extends SshTransport {
 
   private final TransportGitSsh delegate;
+  private Function<Collection<Ref>, Collection<Ref>> uninterestingObjectsRefFilter;
 
   public ReplicationSshTransport(TransportGitSsh delegate) {
     super(
         JGitReplicationAccess.transportLocal(delegate),
         JGitReplicationAccess.transportUri(delegate));
     this.delegate = delegate;
+  }
+
+  public void setUninterestingObjectsRefFilter(
+      Function<Collection<Ref>, Collection<Ref>> uninterestingObjectsRefFilter) {
+    this.uninterestingObjectsRefFilter = uninterestingObjectsRefFilter;
   }
 
   @Override
@@ -304,10 +312,16 @@ public class ReplicationSshTransport extends SshTransport {
         throws IOException {
       Set<ObjectId> remoteObjects = new HashSet<>();
       Set<ObjectId> newObjects = new HashSet<>();
+      Function<Collection<Ref>, Collection<Ref>> filter =
+          ReplicationSshTransport.this.uninterestingObjectsRefFilter;
+      Collection<Ref> refsForRemoteBaseline = getRefs();
+      if (filter != null) {
+        refsForRemoteBaseline = filter.apply(new ArrayList<>(refsForRemoteBaseline));
+      }
 
       try (PackWriter writer = new PackWriter(transport.getPackConfig(), local.newObjectReader())) {
 
-        for (Ref r : getRefs()) {
+        for (Ref r : refsForRemoteBaseline) {
           ObjectId oid = r.getObjectId();
           if (local.getObjectDatabase().has(oid)) {
             remoteObjects.add(oid);

@@ -17,7 +17,10 @@ package com.googlesource.gerrit.plugins.replication;
 import org.eclipse.jgit.errors.NotSupportedException;
 import org.eclipse.jgit.errors.TransportException;
 import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.transport.ReplicationSshTransport;
+import org.eclipse.jgit.transport.SshTransport;
 import org.eclipse.jgit.transport.Transport;
+import org.eclipse.jgit.transport.TransportGitSsh;
 import org.eclipse.jgit.transport.URIish;
 
 public class TransportFactoryImpl implements TransportFactory {
@@ -25,6 +28,13 @@ public class TransportFactoryImpl implements TransportFactory {
   @Override
   public Transport open(Repository git, URIish uri)
       throws NotSupportedException, TransportException {
-    return Transport.open(git, uri);
+    Transport tn = Transport.open(git, uri);
+    if (tn instanceof TransportGitSsh) {
+      tn = new ReplicationSshTransport((TransportGitSsh) tn);
+    }
+    if (tn instanceof SshTransport) {
+      ((SshTransport) tn).setSshSessionFactory(sshSessionFactoryProvider.get());
+    }
+    return tn;
   }
 }
