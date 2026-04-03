@@ -86,6 +86,7 @@ import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.eclipse.jgit.transport.SshTransport;
 import org.eclipse.jgit.transport.Transport;
 import org.eclipse.jgit.transport.URIish;
 
@@ -595,13 +596,14 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
           lazy(() -> refUpdatesForLogging(todo.subList(0, replConfig.getMaxRefsToLog()))));
     }
 
-    return pushInBatches(tn, todo);
+    return pushInBatches(git, tn, todo);
   }
 
-  private PushResult pushInBatches(Transport tn, List<RemoteRefUpdate> todo)
+  private PushResult pushInBatches(Repository git, Transport tn, List<RemoteRefUpdate> todo)
       throws NotSupportedException, TransportException {
     int batchSize = pool.getPushBatchSize();
     if (batchSize == 0 || todo.size() <= batchSize) {
+      configurePushHaveRefFilter(git, tn, todo);
       return tn.push(NullProgressMonitor.INSTANCE, todo);
     }
 
@@ -614,6 +616,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
         batchProgress = " (batch " + completedBatch + "/" + batches.size() + ")";
         repLog.atInfo().log(
             "Pushing %d/%d batches for replication to %s", completedBatch, batches.size(), uri);
+        configurePushHaveRefFilter(git, tn, batch);
         result.addResult(tn.push(NullProgressMonitor.INSTANCE, batch));
 
         //  check if push should be no longer continued
@@ -630,6 +633,14 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       batchProgress = "";
     }
     return result;
+  }
+
+  private void configurePushHaveRefFilter(
+      Repository git, Transport tn, Collection<RemoteRefUpdate> updates) {
+    if (!(tn instanceof SshTransport)) {
+      return;
+    }
+    tn.setPushHaveRefFilter(new PushHaveRefFilter(git, updates));
   }
 
   private void setUploadAndReceivePack(Transport tn) {
