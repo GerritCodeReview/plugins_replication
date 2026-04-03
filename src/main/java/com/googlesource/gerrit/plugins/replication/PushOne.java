@@ -83,6 +83,7 @@ import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.eclipse.jgit.transport.ReplicationSshTransport;
 import org.eclipse.jgit.transport.Transport;
 import org.eclipse.jgit.transport.URIish;
 
@@ -590,6 +591,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       throws NotSupportedException, TransportException {
     int batchSize = pool.getPushBatchSize();
     if (batchSize == 0 || todo.size() <= batchSize) {
+      configureRefFilter(tn, todo);
       return tn.push(NullProgressMonitor.INSTANCE, todo);
     }
 
@@ -600,6 +602,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     for (List<RemoteRefUpdate> batch : batches) {
       repLog.atInfo().log(
           "Pushing %d/%d batches for replication to %s", completedBatch, batches.size(), uri);
+      configureRefFilter(tn, batch);
       result.addResult(tn.push(NullProgressMonitor.INSTANCE, batch));
 
       //  check if push should be no longer continued
@@ -613,6 +616,16 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       completedBatch++;
     }
     return result;
+  }
+
+  private void configureRefFilter(Transport tn, Collection<RemoteRefUpdate> updates) {
+    if (!(tn instanceof ReplicationSshTransport)) {
+      return;
+    }
+    AdvertisedRefsForPackFilter advertisedRefsForPackFilter =
+        new AdvertisedRefsForPackFilter(git, updates);
+    ((ReplicationSshTransport) tn)
+        .setUninterestingObjectsRefFilter(advertisedRefsForPackFilter::filter);
   }
 
   private static String refUpdatesForLogging(List<RemoteRefUpdate> refUpdates) {
