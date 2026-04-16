@@ -97,7 +97,9 @@ class PushHaveRefFilter implements RefFilter {
       // worth caring about?
       neededRefs.addAll(
           remoteRefs.stream()
-              .filter(r -> !RefNames.isRefsChanges(r.getName()))
+              .filter(
+                  r ->
+                      !RefNames.isRefsChanges(r.getName()) && !RefNames.isAutoMergeRef(r.getName()))
               .collect(Collectors.toSet()));
     }
 
