@@ -118,6 +118,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private final Destination pool;
   private final RemoteConfig config;
   private final ReplicationConfig replConfig;
+  private final AdvertisedRefsForPackFilter.Factory advertisedRefsForPackFilterFactory;
   private final CredentialsProvider credentialsProvider;
   private final PerThreadRequestScope.Scoper threadScoper;
 
@@ -150,6 +151,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       Destination p,
       RemoteConfig c,
       ReplicationConfig rc,
+      AdvertisedRefsForPackFilter.Factory advertisedRefsForPackFilterFactory,
       CredentialsFactory cpFactory,
       PerThreadRequestScope.Scoper ts,
       IdGenerator ig,
@@ -165,6 +167,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     pool = p;
     config = c;
     replConfig = rc;
+    this.advertisedRefsForPackFilterFactory = advertisedRefsForPackFilterFactory;
     credentialsProvider = cpFactory.create(c.getName());
     threadScoper = ts;
     projectName = d;
@@ -623,7 +626,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       return;
     }
     AdvertisedRefsForPackFilter advertisedRefsForPackFilter =
-        new AdvertisedRefsForPackFilter(git, updates);
+        advertisedRefsForPackFilterFactory.create(git, projectName, updates);
     ((ReplicationSshTransport) tn)
         .setUninterestingObjectsRefFilter(advertisedRefsForPackFilter::filter);
   }

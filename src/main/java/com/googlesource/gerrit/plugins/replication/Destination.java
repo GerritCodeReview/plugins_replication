@@ -186,6 +186,8 @@ public class Destination {
                 bind(Destination.class).toInstance(Destination.this);
                 bind(RemoteConfig.class).toInstance(config.getRemoteConfig());
                 install(new FactoryModuleBuilder().build(PushOne.Factory.class));
+                install(
+                    new FactoryModuleBuilder().build(AdvertisedRefsForPackFilter.Factory.class));
                 install(new FactoryModuleBuilder().build(CreateProjectTask.Factory.class));
                 install(new FactoryModuleBuilder().build(DeleteProjectTask.Factory.class));
                 install(new FactoryModuleBuilder().build(UpdateHeadTask.Factory.class));
