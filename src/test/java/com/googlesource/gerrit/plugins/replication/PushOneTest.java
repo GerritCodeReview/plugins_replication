@@ -107,6 +107,7 @@ public class PushOneTest {
   private RefUpdate refUpdateMock;
   private CreateProjectTask.Factory createProjectTaskFactoryMock;
   private ReplicationConfig replicationConfigMock;
+  private AdvertisedRefsForPackFilter.Factory advertisedRefsForPackFilterFactoryMock;
   private RefDatabase refDatabaseMock;
 
   private Project.NameKey projectNameKey;
@@ -173,6 +174,7 @@ public class PushOneTest {
     setupProjectCacheMock();
 
     replicationConfigMock = mock(ReplicationConfig.class);
+    advertisedRefsForPackFilterFactoryMock = mock(AdvertisedRefsForPackFilter.Factory.class);
   }
 
   @Test
@@ -413,6 +415,7 @@ public class PushOneTest {
             destinationMock,
             remoteConfigMock,
             replicationConfigMock,
+            advertisedRefsForPackFilterFactoryMock,
             credentialsFactory,
             threadRequestScoperMock,
             idGeneratorMock,
