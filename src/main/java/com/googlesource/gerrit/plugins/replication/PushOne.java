@@ -122,6 +122,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private final RemoteConfig config;
   private final ReplicationConfig replConfig;
   private final CredentialsFactory credentialsFactory;
+  private final PushHaveRefFilter.Factory pushHaveRefFilterFactory;
   private final PerThreadRequestScope.Scoper threadScoper;
 
   private final Project.NameKey projectName;
@@ -154,6 +155,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       Destination p,
       RemoteConfig c,
       ReplicationConfig rc,
+      PushHaveRefFilter.Factory pushHaveRefFilterFactory,
       CredentialsFactory cpFactory,
       PerThreadRequestScope.Scoper ts,
       IdGenerator ig,
@@ -171,6 +173,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     config = c;
     replConfig = rc;
     credentialsFactory = cpFactory;
+    this.pushHaveRefFilterFactory = pushHaveRefFilterFactory;
     threadScoper = ts;
     projectName = d;
     uri = u;
@@ -640,7 +643,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     if (!(tn instanceof SshTransport)) {
       return;
     }
-    tn.setPushHaveRefFilter(new PushHaveRefFilter(git, updates));
+    tn.setPushHaveRefFilter(pushHaveRefFilterFactory.create(git, projectName, updates));
   }
 
   private void setUploadAndReceivePack(Transport tn) {

@@ -14,17 +14,29 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.gerrit.entities.RefNames.isNoteDbMetaRef;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.SetMultimap;
 import com.google.gerrit.common.Nullable;
+import com.google.gerrit.entities.Change;
+import com.google.gerrit.entities.PatchSet;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.entities.RefNames;
+import com.google.gerrit.exceptions.StorageException;
+import com.google.gerrit.server.notedb.ChangeNotes;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.NavigableMap;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
@@ -37,21 +49,38 @@ import org.eclipse.jgit.transport.RefFilter;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 
 class PushHaveRefFilter implements RefFilter {
+  interface Factory {
+    PushHaveRefFilter create(
+        Repository git, Project.NameKey project, Collection<RemoteRefUpdate> updates);
+  }
+
+  private final ChangeNotes.Factory changeNotesFactory;
+  private final Project.NameKey project;
   private final Repository git;
   private final Collection<RemoteRefUpdate> updates;
   private Collection<Ref> remoteRefs;
   private final Map<ObjectId, Ref> remoteRefByObjectId = new HashMap<>();
+  private final NavigableMap<String, Ref> remoteRefsByName = new TreeMap<>();
+  private final SetMultimap<Change.Id, Ref> remotePatchSetRefsByChangeId = HashMultimap.create();
+
   private Set<String> toPushRefNames;
   private Set<Ref> neededRefs;
 
-  PushHaveRefFilter(Repository git, Collection<RemoteRefUpdate> updates) {
+  @Inject
+  PushHaveRefFilter(
+      ChangeNotes.Factory changeNotesFactory,
+      @Assisted Repository git,
+      @Assisted Project.NameKey project,
+      @Assisted Collection<RemoteRefUpdate> updates) {
+    this.changeNotesFactory = changeNotesFactory;
     this.git = git;
+    this.project = project;
     this.updates = updates;
   }
 
   Collection<Ref> filter(Collection<Ref> remoteRefs) {
     this.remoteRefs = remoteRefs;
-    buildRemoteRefByObjectId();
+    buildRemoteRefsMaps();
     toPushRefNames =
         updates.stream().map(RemoteRefUpdate::getRemoteName).collect(Collectors.toSet());
     neededRefs =
@@ -68,7 +97,8 @@ class PushHaveRefFilter implements RefFilter {
         }
         if (!hasExistingTipShortCut(newObjectId)) {
           Set<ObjectId> parents = getParents(rw, toPush);
-          if (!hasChildOfExistingTipShortCut(parents)) {
+          if (!hasChildOfExistingTipShortCut(parents)
+              && !hasChangeDestinationShortCut(toPush, parents)) {
             hasNoShortcut.add(toPush);
           }
         }
@@ -150,6 +180,41 @@ class PushHaveRefFilter implements RefFilter {
     return allParentsOnRemote;
   }
 
+  private boolean hasChangeDestinationShortCut(
+      RemoteRefUpdate toPush, @Nullable Set<ObjectId> parents) {
+    String name = toPush.getRemoteName();
+
+    if (isNoteDbMetaRef(name)) {
+      return false;
+    }
+
+    Change.Id changeId = Change.Id.fromRef(name);
+    if (changeId == null) {
+      return false;
+    }
+
+    // TODO: actually do the revwalk to ensure we have a merge-base
+    boolean hasChangeDestShortCut = false;
+    try {
+      ChangeNotes notes = changeNotesFactory.create(git, project, changeId);
+      Ref changeDest = remoteRefsByName.get(notes.getChange().getDest().branch());
+      if (changeDest != null) {
+        neededRefs.add(changeDest);
+        hasChangeDestShortCut = true;
+      }
+    } catch (StorageException e) {
+      repLog.atFine().withCause(e).log(
+          "Could not read change metadata for %s to add destination ref", changeId);
+    }
+
+    PatchSet.Id patchsetId = PatchSet.Id.fromRef(name);
+    if (patchsetId != null && patchsetId.get() > 1) {
+      neededRefs.addAll(remotePatchSetRefsByChangeId.get(changeId));
+    }
+
+    return hasChangeDestShortCut && parents != null && parents.size() == 1;
+  }
+
   @Nullable
   private Set<ObjectId> getParents(RevWalk rw, RemoteRefUpdate update) {
     try {
@@ -175,7 +240,7 @@ class PushHaveRefFilter implements RefFilter {
     }
   }
 
-  private void buildRemoteRefByObjectId() {
+  private void buildRemoteRefsMaps() {
     for (Ref ref : remoteRefs) {
       ObjectId oid = ref.getObjectId();
       if (oid != null) {
@@ -184,6 +249,11 @@ class PushHaveRefFilter implements RefFilter {
         if (peeledId != null) {
           remoteRefByObjectId.putIfAbsent(peeledId, ref);
         }
+      }
+      remoteRefsByName.put(ref.getName(), ref);
+      PatchSet.Id psId = PatchSet.Id.fromRef(ref.getName());
+      if (psId != null) {
+        remotePatchSetRefsByChangeId.put(psId.changeId(), ref);
       }
     }
   }
