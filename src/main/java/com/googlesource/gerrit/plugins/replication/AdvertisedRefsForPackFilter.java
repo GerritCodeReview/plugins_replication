@@ -16,15 +16,26 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.SetMultimap;
 import com.google.gerrit.common.Nullable;
+import com.google.gerrit.entities.Change;
+import com.google.gerrit.entities.PatchSet;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.entities.RefNames;
+import com.google.gerrit.exceptions.StorageException;
+import com.google.gerrit.server.notedb.ChangeNotes;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.NavigableMap;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
@@ -36,21 +47,38 @@ import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 
 class AdvertisedRefsForPackFilter {
+  interface Factory {
+    AdvertisedRefsForPackFilter create(
+        Repository git, Project.NameKey project, Collection<RemoteRefUpdate> updates);
+  }
+
+  protected final ChangeNotes.Factory changeNotesFactory;
+  protected final Project.NameKey project;
   protected final Repository git;
   protected final Collection<RemoteRefUpdate> updates;
   protected Collection<Ref> advertisedRefs;
   protected Map<ObjectId, Ref> advertisedRefByObjectId = new HashMap<>();
+  protected NavigableMap<String, Ref> advertisedRefsByName = new TreeMap<>();
+  protected SetMultimap<Change.Id, Ref> advertisedPatchSetRefsByChangeId = HashMultimap.create();
+
   protected Set<String> toPushRefNames;
   protected Set<Ref> neededRefs;
 
-  AdvertisedRefsForPackFilter(Repository git, Collection<RemoteRefUpdate> updates) {
+  @Inject
+  AdvertisedRefsForPackFilter(
+      ChangeNotes.Factory changeNotesFactory,
+      @Assisted Repository git,
+      @Assisted Project.NameKey project,
+      @Assisted Collection<RemoteRefUpdate> updates) {
+    this.changeNotesFactory = changeNotesFactory;
     this.git = git;
+    this.project = project;
     this.updates = updates;
   }
 
   Collection<Ref> filter(Collection<Ref> advertisedRefs) {
     this.advertisedRefs = advertisedRefs;
-    buildAdvertisedRefByObjectId();
+    buildAdvertisedRefsMaps();
     toPushRefNames =
         updates.stream().map(RemoteRefUpdate::getRemoteName).collect(Collectors.toSet());
     neededRefs =
@@ -67,7 +95,8 @@ class AdvertisedRefsForPackFilter {
         }
         if (!hasExistingTipShortCut(newObjectId)) {
           Set<ObjectId> parents = getParents(rw, toPush);
-          if (!hasChildOfExistingTipShortCut(parents)) {
+          if (!hasChildOfExistingTipShortCut(parents)
+              && !hasChangeDestinationShortCut(toPush, parents)) {
             hasNoShortcut.add(toPush);
           }
         }
@@ -130,6 +159,35 @@ class AdvertisedRefsForPackFilter {
     return allParentsAdvertised;
   }
 
+  protected boolean hasChangeDestinationShortCut(
+      RemoteRefUpdate toPush, @Nullable Set<ObjectId> parents) {
+    String name = toPush.getRemoteName();
+    PatchSet.Id patchsetId = PatchSet.Id.fromRef(name);
+    if (patchsetId == null) {
+      return false;
+    }
+    // TODO: actually do the revwalk to ensure we have a merge-base
+    boolean hasChangeDestShortCut = false;
+    Change.Id changeId = patchsetId.changeId();
+    try {
+      ChangeNotes notes = changeNotesFactory.create(git, project, changeId);
+      Ref changeDest = advertisedRefsByName.get(notes.getChange().getDest().branch());
+      if (changeDest != null) {
+        neededRefs.add(changeDest);
+        hasChangeDestShortCut = true;
+      }
+    } catch (StorageException e) {
+      repLog.atFine().withCause(e).log(
+          "Could not read change metadata for %s to add destination ref", changeId);
+    }
+
+    if (patchsetId.get() > 1) {
+      neededRefs.addAll(advertisedPatchSetRefsByChangeId.get(changeId));
+    }
+
+    return hasChangeDestShortCut && parents != null && parents.size() == 1;
+  }
+
   @Nullable
   private Set<ObjectId> getParents(RevWalk rw, RemoteRefUpdate update) {
     try {
@@ -155,7 +213,7 @@ class AdvertisedRefsForPackFilter {
     }
   }
 
-  private void buildAdvertisedRefByObjectId() {
+  private void buildAdvertisedRefsMaps() {
     for (Ref ref : advertisedRefs) {
       ObjectId oid = ref.getObjectId();
       if (oid != null) {
@@ -163,6 +221,11 @@ class AdvertisedRefsForPackFilter {
         if (ref.isPeeled()) {
           advertisedRefByObjectId.putIfAbsent(ref.getPeeledObjectId(), ref);
         }
+      }
+      advertisedRefsByName.put(ref.getName(), ref);
+      PatchSet.Id psId = PatchSet.Id.fromRef(ref.getName());
+      if (psId != null) {
+        advertisedPatchSetRefsByChangeId.put(psId.changeId(), ref);
       }
     }
   }
