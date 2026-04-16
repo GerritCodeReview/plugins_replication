@@ -94,7 +94,9 @@ class AdvertisedRefsForPackFilter {
       // worth caring about?
       neededRefs.addAll(
           advertisedRefs.stream()
-              .filter(r -> !RefNames.isRefsChanges(r.getName()))
+              .filter(
+                  r ->
+                      !RefNames.isRefsChanges(r.getName()) && !RefNames.isAutoMergeRef(r.getName()))
               .collect(Collectors.toSet()));
     }
 
