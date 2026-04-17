@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.gerrit.entities.RefNames.isNoteDbMetaRef;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
 import com.google.gerrit.common.Nullable;
@@ -91,7 +92,14 @@ class AdvertisedRefsForPackFilter {
       if (!hasExistingTipShortCut(newObjectId)) {
         Set<ObjectId> parents = getParents(toPush);
         if (!hasChildOfExistingTipShortCut(parents)
-            && !hasChangeDestinationShortCut(toPush, parents)) {
+            && !hasChangeDestinationShortCut(toPush, parents)
+            // Meta refs should never share real history with other meta refs so they
+            // really don't need a shortcut, or extra refs. They aren't great delta
+            // candidates either, except for project.config and group files are, but
+            // those aren't in the same project. Familiar CI votes might be the best
+            // candidates to actually delta. Replication overall would have to be much
+            // faster for that to likely be worth it.
+            && !isNoteDbMetaRef(toPush.getRemoteName())) {
           hasNoShortcut.add(toPush);
         }
       }
