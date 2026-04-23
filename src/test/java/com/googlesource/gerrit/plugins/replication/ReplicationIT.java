@@ -33,6 +33,7 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -242,7 +243,7 @@ public class ReplicationIT extends ReplicationDaemon {
         plugin
             .getSysInjector()
             .getInstance(PushAll.Factory.class)
-            .create(null, new ReplicationFilter(Arrays.asList(project.get())), state, false)
+            .create(null, Set.of(), new ReplicationFilter(Arrays.asList(project.get())), state, false)
             .schedule(0, TimeUnit.SECONDS);
 
     future.get();
@@ -262,7 +263,7 @@ public class ReplicationIT extends ReplicationDaemon {
         plugin
             .getSysInjector()
             .getInstance(PushAll.Factory.class)
-            .create(null, new ReplicationFilter(Arrays.asList(project.get())), state, false)
+            .create(null, Set.of(), new ReplicationFilter(Arrays.asList(project.get())), state, false)
             .schedule(0, TimeUnit.SECONDS);
 
     CountDownLatch latch = new CountDownLatch(1);
@@ -448,6 +449,51 @@ public class ReplicationIT extends ReplicationDaemon {
       Ref targetBranchRef = getRef(repo, sourceRef);
       assertThat(targetBranchRef).isNotNull();
       assertThat(targetBranchRef.getObjectId()).isEqualTo(sourceCommit.getId());
+    }
+  }
+
+  @Test
+  public void shouldReplicateToMatchingRemote() throws Exception {
+    Project.NameKey targetProject = createTestProject(project + "replica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    String newRef = "refs/heads/newForTest";
+    ObjectId newRefTip = createNewBranchWithoutPush("refs/heads/master", newRef);
+
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, null, Set.of("foo"), new ReplicationState(NO_OP), true);
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, newRef) != null);
+
+      Ref targetBranchRef = getRef(repo, newRef);
+      assertThat(targetBranchRef).isNotNull();
+      assertThat(targetBranchRef.getObjectId()).isEqualTo(newRefTip);
+    }
+  }
+
+  @Test
+  public void shouldNotReplicateToNonMatchingRemote() throws Exception {
+    Project.NameKey targetProject = createTestProject(project + "replica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    String newRef = "refs/heads/newForTest";
+    createNewBranchWithoutPush("refs/heads/master", newRef);
+
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, null, Set.of("bar"), new ReplicationState(NO_OP), true);
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      assertThrows(
+          InterruptedException.class, () -> waitUntil(() -> checkedGetRef(repo, newRef) != null));
     }
   }
 

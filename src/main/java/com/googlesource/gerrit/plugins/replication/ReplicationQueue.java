@@ -132,9 +132,19 @@ public class ReplicationQueue
 
   public void scheduleFullSync(
       Project.NameKey project, String urlMatch, ReplicationState state, boolean now) {
+    scheduleFullSync(project, urlMatch, null, state, now);
+  }
+
+  public void scheduleFullSync(
+      Project.NameKey project,
+      String urlMatch,
+      Set<String> remotesToConsider,
+      ReplicationState state,
+      boolean now) {
     fire(
         project,
         urlMatch,
+        remotesToConsider,
         Set.of(new GitReferenceUpdated.UpdatedRef(PushOne.ALL_REFS, null, null, null)),
         state,
         now);
@@ -157,6 +167,16 @@ public class ReplicationQueue
       Set<UpdatedRef> updatedRefs,
       ReplicationState state,
       boolean now) {
+    fire(project, urlMatch, null, updatedRefs, state, now);
+  }
+
+  private void fire(
+      Project.NameKey project,
+      String urlMatch,
+      Set<String> remotesToConsider,
+      Set<UpdatedRef> updatedRefs,
+      ReplicationState state,
+      boolean now) {
     if (!running) {
       stateLog.warn(
           "Replication plugin did not finish startup before event, event replication is postponed",
@@ -166,13 +186,17 @@ public class ReplicationQueue
     }
 
     for (Destination cfg : destinations.get().getAll(FilterType.ALL)) {
-      pushReferences(
-          cfg,
-          project,
-          urlMatch,
-          updatedRefs.stream().map(UpdatedRef::getRefName).collect(Collectors.toSet()),
-          state,
-          now);
+      if (remotesToConsider == null
+          || remotesToConsider.isEmpty()
+          || remotesToConsider.contains(cfg.getRemoteConfigName())) {
+        pushReferences(
+            cfg,
+            project,
+            urlMatch,
+            updatedRefs.stream().map(UpdatedRef::getRefName).collect(Collectors.toSet()),
+            state,
+            now);
+      }
     }
   }
 
