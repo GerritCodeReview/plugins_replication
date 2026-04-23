@@ -53,7 +53,7 @@ public class OnStartStop implements LifecycleListener {
       ReplicationState state = new ReplicationState(new GitUpdateProcessing(eventDispatcher.get()));
       pushAllFuture.set(
           pushAll
-              .create(null, ReplicationFilter.all(), state, false)
+              .create(null, null, ReplicationFilter.all(), state, false)
               .schedule(30, TimeUnit.SECONDS));
     }
   }

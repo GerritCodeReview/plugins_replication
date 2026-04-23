@@ -898,6 +898,7 @@ public class Destination {
     if (urlMatch == null || urlMatch.equals("") || urlMatch.equals("*")) {
       return true;
     }
+
     return uri.toString().contains(urlMatch);
   }
 
