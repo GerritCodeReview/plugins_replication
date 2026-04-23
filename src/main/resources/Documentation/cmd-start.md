@@ -12,6 +12,7 @@ SYNOPSIS
 ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start
   [--now]
   [--wait]
+  [--remote <REMOTE> ...]
   {--url <PATTERN> | [--url <PATTERN>] --all | [--url <PATTERN>] <PROJECT PATTERN> ...}
 ```
 
@@ -102,6 +103,12 @@ URL contains the substring `PATTERN`, or whose expanded project
 URL contains `PATTERN`. This can be useful to replicate only to
 a previously down node, which has been brought back online.
 
+`--remote <REMOTE>`
+: Replicate only to the destination whose remote name exactly matches
+`REMOTE`. May be specified multiple times to target several remotes.
+Remote names correspond to the `[remote "name"]` sections in
+`replication.config`.
+
 EXAMPLES
 --------
 Replicate every project, to every configured remote:
@@ -140,6 +147,18 @@ Replicate to only one specific destination URL:
 
 ```console
   $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --url https://example.com/tools/gerrit.git
+```
+
+Replicate all projects to a specific named remote:
+
+```console
+  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --remote replica1 --all
+```
+
+Replicate all projects to two named remotes:
+
+```console
+  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --remote replica1 --remote replica2 --all
 ```
 
 SEE ALSO
