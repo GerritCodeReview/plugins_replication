@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73bf7ae5_4da2c707",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-04-23T22:06:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bfaa611_16ea62cf",
+      "revId": "818777b8d253a27c8a3f12b6ad8380424e15e337",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7df5496_6ca2bd62",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-04-23T21:41:27Z",
       "side": 1,
       "message": "I generally try to be very terse, so maybe slightly shorter with: \"name of remote to replicate to\" (no \"the\") or maybe be even just \"remote to replicate to\".",
+      "range": {
+        "startLine": 45,
+        "startChar": 58,
+        "endLine": 45,
+        "endChar": 92
+      },
+      "revId": "818777b8d253a27c8a3f12b6ad8380424e15e337",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d148942_ccadf260",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-04-23T22:06:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7df5496_6ca2bd62",
       "range": {
         "startLine": 45,
         "startChar": 58,
