@@ -69,6 +69,24 @@
       "parentUuid": "908dbb51_ed8d0440",
       "revId": "701d163a2d1b1960e0620371efcf6d46276b4407",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "787ef0af_d7de72bf",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-24T18:47:54Z",
+      "side": 1,
+      "message": "\u003e But we should not allow having url and roundRobinUrl for the same uri.\n\nI don\u0027t think it would be problematic? Why not allow?\n\n```\n[remote \"multipleSites\"]\n  url \u003d singlehostsite1\n  url \u003d singlehostsite2\n  roundRobinUrl \u003d site3:host1\n  roundRobinUrl \u003d site3:host2\n```",
+      "parentUuid": "378f1ad5_1b44cc77",
+      "revId": "701d163a2d1b1960e0620371efcf6d46276b4407",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
