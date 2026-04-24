@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af1eff40_74230f1b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-04-24T18:42:48Z",
+      "side": 1,
+      "message": "This is probably not true. Did you test it?\nAdd a test-case for it also.",
+      "range": {
+        "startLine": 158,
+        "startChar": 41,
+        "endLine": 158,
+        "endChar": 91
+      },
+      "revId": "d01f2c36947f7a3c593d663d9be957abca1813ad",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
