@@ -309,4 +309,9 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
     config.setBoolean("remote", remoteName, "replicateProjectDeletions", replicateProjectDeletion);
     config.save();
   }
+
+  protected void setRoundRobin(String remoteName, boolean roundRobin) throws IOException {
+    config.setBoolean("remote", remoteName, "roundRobin", roundRobin);
+    config.save();
+  }
 }

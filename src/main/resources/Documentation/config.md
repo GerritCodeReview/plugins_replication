@@ -612,6 +612,21 @@ remote.NAME.excludedRefsPattern
 
   Do not exclude any refs pattern by default.
 
+remote.NAME.roundRobin
+: When set to `true`, replication pushes to one URL at a time in round-robin
+  order rather than pushing to all configured URLs simultaneously. Each push
+  event selects the next URL in the rotation.
+
+  This is particularly useful in high-availability setups where multiple
+  replica hosts share a single NFS backend. In such configurations, pushing
+  to all URLs simultaneously would cause redundant writes to the same
+  underlying storage. Round-robin ensures only one host receives each push,
+  distributing load evenly across replicas while avoiding duplicate work.
+
+  Has no effect if only one URL is configured.
+
+  Defaults to `false`.
+
 Directory `replication`
 --------------------
 The optional directory `$site_path/etc/replication` contains Git-style
