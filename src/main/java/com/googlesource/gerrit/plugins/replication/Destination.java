@@ -74,6 +74,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -81,6 +82,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.function.Function;
@@ -158,6 +160,7 @@ public class Destination {
   private final DestinationConfiguration config;
   private final DynamicItem<EventDispatcher> eventDispatcher;
   private final Provider<ReplicationTasksStorage> replicationTasksStorage;
+  private final AtomicInteger roundRobinIndex = new AtomicInteger(0);
 
   protected enum RetryReason {
     TRANSPORT_ERROR,
@@ -798,6 +801,19 @@ public class Destination {
       }
     }
     return r;
+  }
+
+  boolean isRoundRobin() {
+    return config.isRoundRobin();
+  }
+
+  Optional<URIish> nextRoundRobinUri(Project.NameKey project, String urlMatch) {
+    List<URIish> uris = getURIs(project, urlMatch);
+    if(uris.isEmpty()) {
+      return Optional.empty();
+    }
+    int index = Math.floorMod(roundRobinIndex.getAndIncrement(), uris.size());
+    return Optional.of(uris.get(index));
   }
 
   URIish getURI(URIish template, Project.NameKey project) throws URISyntaxException {
