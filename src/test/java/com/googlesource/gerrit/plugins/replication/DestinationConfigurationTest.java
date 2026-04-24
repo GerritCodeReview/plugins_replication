@@ -98,4 +98,19 @@ public class DestinationConfigurationTest {
     // then
     assertThat(actual).isEqualTo(globalPushBatchSize);
   }
+
+  @Test
+  public void shouldDefaultRoundRobinToFalse() {
+    assertThat(objectUnderTest.isRoundRobin()).isFalse();
+  }
+
+  @Test
+  public void shouldEnableRoundRobinWhenConfigured() {
+    // given
+    when(cfgMock.getBoolean("remote", REMOTE, "roundRobin", false)).thenReturn(true);
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
+
+    // when / then
+    assertThat(objectUnderTest.isRoundRobin()).isTrue();
+  }
 }

@@ -152,4 +152,14 @@ public interface RemoteConfiguration {
   default ImmutableList<Pattern> excludedRefsPattern() {
     return ImmutableList.of();
   }
+
+  /**
+   * When true, replication pushes to one URL at a time in round-robin order rather than pushing to
+   * all configured URLs simultaneously. On failure, the next URL in the rotation is tried.
+   *
+   * @return true if round-robin URL selection is enabled
+   */
+  default boolean isRoundRobin() {
+    return false;
+  }
 }
