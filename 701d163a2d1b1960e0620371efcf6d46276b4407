@@ -87,6 +87,24 @@
       "parentUuid": "378f1ad5_1b44cc77",
       "revId": "701d163a2d1b1960e0620371efcf6d46276b4407",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c20cfed6_2052b81e",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-24T18:51:24Z",
+      "side": 1,
+      "message": "Currently multiple sites are supported in the same remote with multiple Urls like this:\n```\n[remote \"multipleSites\"]\n  url \u003d site1\n  url \u003d site2\n```",
+      "parentUuid": "787ef0af_d7de72bf",
+      "revId": "701d163a2d1b1960e0620371efcf6d46276b4407",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
