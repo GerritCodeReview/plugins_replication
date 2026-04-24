@@ -158,6 +158,7 @@ public class Destination {
   private final DestinationConfiguration config;
   private final DynamicItem<EventDispatcher> eventDispatcher;
   private final Provider<ReplicationTasksStorage> replicationTasksStorage;
+  private final UrlDistributionStrategy.Instance urlDistributor;
 
   protected enum RetryReason {
     TRANSPORT_ERROR,
@@ -200,6 +201,7 @@ public class Destination {
     this.replicationTasksStorage = rts;
     this.credentialsFactory = credentialsFactory;
     config = cfg;
+    urlDistributor = cfg.getUrlDistributionStrategy().newInstance();
 
     ImmutableList<String> projects = cfg.getProjects();
     int numStripes = projects.isEmpty() ? MAX_STRIPES : Math.min(projects.size(), MAX_STRIPES);
@@ -798,6 +800,14 @@ public class Destination {
       }
     }
     return r;
+  }
+
+  List<URIish> getDistributedUris(Project.NameKey project, String urlMatch) {
+    return getDistributedUris(getURIs(project, urlMatch));
+  }
+
+  List<URIish> getDistributedUris(List<URIish> candidates) {
+    return urlDistributor.select(candidates);
   }
 
   URIish getURI(URIish template, Project.NameKey project) throws URISyntaxException {
