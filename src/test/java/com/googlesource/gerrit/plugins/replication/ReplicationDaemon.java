@@ -309,4 +309,10 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
     config.setBoolean("remote", remoteName, "replicateProjectDeletions", replicateProjectDeletion);
     config.save();
   }
+
+  protected void setUrlDistribution(String remoteName, UrlDistribution distribution)
+      throws IOException {
+    config.setString("remote", remoteName, "urlDistribution", distribution.name());
+    config.save();
+  }
 }

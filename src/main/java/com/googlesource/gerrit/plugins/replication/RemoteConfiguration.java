@@ -152,4 +152,9 @@ public interface RemoteConfiguration {
   default ImmutableList<Pattern> excludedRefsPattern() {
     return ImmutableList.of();
   }
+
+  /** Returns the URL distribution strategy configured for this remote. */
+  default UrlDistribution getUrlDistribution() {
+    return UrlDistribution.ALL;
+  }
 }

@@ -56,6 +56,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final int slowLatencyThreshold;
   private final Supplier<Integer> pushBatchSize;
   private final ImmutableList<Pattern> excludedRefsPattern;
+  private final UrlDistribution urlDistribution;
 
   protected DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
@@ -122,6 +123,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
               return 0;
             });
     excludedRefsPattern = getExcludedRefsPattern(cfg, name);
+    urlDistribution = UrlDistribution.fromConfig(cfg.getString("remote", name, "urlDistribution"));
   }
 
   @Override
@@ -225,6 +227,11 @@ public class DestinationConfiguration implements RemoteConfiguration {
   @Override
   public ImmutableList<Pattern> excludedRefsPattern() {
     return excludedRefsPattern;
+  }
+
+  @Override
+  public UrlDistribution getUrlDistribution() {
+    return urlDistribution;
   }
 
   private ImmutableList<Pattern> getExcludedRefsPattern(Config cfg, String name) {
