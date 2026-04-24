@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21c9a401_412b562b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-24T18:16:32Z",
+      "side": 1,
+      "message": "Also name isRoundRobin?",
+      "revId": "701d163a2d1b1960e0620371efcf6d46276b4407",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba0564df_dd965209",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-24T18:16:32Z",
+      "side": 1,
+      "message": "There currently are use cases for multiple URLs sharing a single thread pool, for example imagine multiple low priority sites which should only get a single thread for all of them. With the current proposed approach, those sites could never use the roundRobin strategy.\n\nI wonder if we should maybe allow something like roundRobinUrl \u003d instead which could then later be expanded to roundRobinUrl[N] if need be? This would look like this instead:\n```\n[remote \"multipleSites\"]\n  roundRobinUrl \u003d site0:host1\n  roundRobinUrl \u003d site0:host2\n  roundRobinUrl1 \u003d site1:host1\n  roundRobinUrl1 \u003d site1:host2\n ```",
+      "revId": "701d163a2d1b1960e0620371efcf6d46276b4407",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
