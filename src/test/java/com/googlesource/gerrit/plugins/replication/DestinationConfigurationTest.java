@@ -98,4 +98,19 @@ public class DestinationConfigurationTest {
     // then
     assertThat(actual).isEqualTo(globalPushBatchSize);
   }
+
+  @Test
+  public void shouldDefaultUrlDistributionToAll() {
+    assertThat(objectUnderTest.getUrlDistributionStrategy()).isEqualTo(UrlDistributionStrategy.ALL);
+  }
+
+  @Test
+  public void shouldSetUrlDistributionToRoundRobinWhenConfigured() {
+    // given
+    when(cfgMock.getString("remote", REMOTE, "urlDistribution")).thenReturn("RR");
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
+
+    // when / then
+    assertThat(objectUnderTest.getUrlDistributionStrategy()).isEqualTo(UrlDistributionStrategy.ROUND_ROBIN);
+  }
 }

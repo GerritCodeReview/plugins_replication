@@ -40,6 +40,7 @@ import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
@@ -231,7 +232,7 @@ public class ReplicationQueue
       }
     }
     if (!refNamesToPush.isEmpty()) {
-      for (URIish uri : cfg.getURIs(project, urlMatch)) {
+      for (URIish uri : cfg.getDistributedUris(project, urlMatch)) {
         replicationTasksStorage.create(
             ReplicateRefUpdate.create(
                 project.get(), refNamesToPush, uri, cfg.getRemoteConfigName()));
