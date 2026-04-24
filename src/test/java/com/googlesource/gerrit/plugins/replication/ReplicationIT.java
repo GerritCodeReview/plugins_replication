@@ -455,6 +455,78 @@ public class ReplicationIT extends ReplicationDaemon {
   }
 
   @Test
+  public void shouldReplicateToOnlyOneUrlWhenRoundRobinEnabled() throws Exception {
+    Project.NameKey replica1Project = createTestProject(project + "replica1");
+    Project.NameKey replica2Project = createTestProject(project + "replica2");
+
+    setReplicationDestination(
+        "foo", List.of("replica1", "replica2"), ALL_PROJECTS, TEST_REPLICATION_DELAY_SECONDS);
+    setUrlDistribution("foo", UrlDistributionStrategy.ROUND_ROBIN);
+    reloadConfig();
+
+    String newRef = "refs/heads/newForTest";
+    createNewBranchWithoutPush("refs/heads/master", newRef);
+
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, null, new ReplicationState(NO_OP), true);
+
+    // Wait for the push to land in at least one replica
+    try (Repository r1 = repoManager.openRepository(replica1Project);
+        Repository r2 = repoManager.openRepository(replica2Project)) {
+      waitUntil(() -> checkedGetRef(r1, newRef) != null || checkedGetRef(r2, newRef) != null);
+
+      // Exactly one replica should have received the push
+      boolean r1HasRef = checkedGetRef(r1, newRef) != null;
+      boolean r2HasRef = checkedGetRef(r2, newRef) != null;
+      assertThat(r1HasRef ^ r2HasRef).isTrue();
+    }
+  }
+
+  @Test
+  public void shouldRotateAcrossUrlsOnConsecutivePushesWhenRoundRobinEnabled() throws Exception {
+    Project.NameKey replica1Project = createTestProject(project + "replica1");
+    Project.NameKey replica2Project = createTestProject(project + "replica2");
+
+    setReplicationDestination(
+        "foo", List.of("replica1", "replica2"), ALL_PROJECTS, TEST_REPLICATION_DELAY_SECONDS);
+    setUrlDistribution("foo", UrlDistributionStrategy.ROUND_ROBIN);
+    reloadConfig();
+
+    String branch1 = "refs/heads/branch1";
+    String branch2 = "refs/heads/branch2";
+    createNewBranchWithoutPush("refs/heads/master", branch1);
+
+    ReplicationQueue queue = plugin.getSysInjector().getInstance(ReplicationQueue.class);
+
+    // First sync - goes to replica1 (index 0)
+    queue.scheduleFullSync(project, null, new ReplicationState(NO_OP), true);
+
+    try (Repository r1 = repoManager.openRepository(replica1Project)) {
+      waitUntil(() -> checkedGetRef(r1, branch1) != null);
+    }
+
+    // replica2 should not have received branch1 yet
+    try (Repository r2 = repoManager.openRepository(replica2Project)) {
+      assertThat(checkedGetRef(r2, branch1)).isNull();
+    }
+
+    // Second sync - goes to replica2 (index 1), includes branch1 and branch2
+    createNewBranchWithoutPush("refs/heads/master", branch2);
+    queue.scheduleFullSync(project, null, new ReplicationState(NO_OP), true);
+
+    try (Repository r2 = repoManager.openRepository(replica2Project)) {
+      waitUntil(() -> checkedGetRef(r2, branch1) != null);
+    }
+
+    // replica1 should not have received branch2 (it was only in the second sync)
+    try (Repository r1 = repoManager.openRepository(replica1Project)) {
+      assertThat(checkedGetRef(r1, branch2)).isNull();
+    }
+  }
+
+  @Test
   public void shouldReplicateToMatchingRemote() throws Exception {
     Project.NameKey targetProject = createTestProject(project + "replica");
 
