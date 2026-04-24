@@ -612,6 +612,24 @@ remote.NAME.excludedRefsPattern
 
   Do not exclude any refs pattern by default.
 
+remote.NAME.urlDistributionStrategy
+: URL distribution strategy to use when a remote has multiple configured URLs.
+  Applies to both push URLs (`url`) and admin URLs (`adminUrl`).
+
+  `all` (default)
+  : Push to all configured URLs simultaneously. This is the standard
+    replication behaviour.
+
+  `roundRobin`
+  : Push to one URL at a time, rotating through the list on each push event.
+    Particularly useful in high-availability setups where multiple replica
+    hosts share a single NFS backend. Pushing to all URLs simultaneously
+    would cause redundant writes to the same underlying storage; round-robin
+    distributes load evenly and ensures each push is written exactly once.
+    Has no effect if only one URL is configured.
+
+  Defaults to `all`.
+
 Directory `replication`
 --------------------
 The optional directory `$site_path/etc/replication` contains Git-style
