@@ -87,7 +87,6 @@ class AdvertisedRefsForPackFilter {
             .filter(ref -> toPushRefNames.contains(ref.getName()))
             .collect(Collectors.toSet());
 
-    Set<RemoteRefUpdate> hasNoShortcut = new HashSet<>();
     try (RevWalk rw = new RevWalk(git)) {
       for (RemoteRefUpdate toPush : updates) {
         ObjectId newObjectId = toPush.getNewObjectId();
@@ -105,38 +104,23 @@ class AdvertisedRefsForPackFilter {
               // candidates to actually delta. Replication overall would have to be much
               // faster for that to likely be worth it.
               && !isNoteDbMetaRef(toPush.getRemoteName())) {
-            hasNoShortcut.add(toPush);
+            // A push which avoids adding fallback refs will at most push a single commit per ref
+            // update.
+            // It is possible that pushing even one commit could be more than was necessary if that
+            // commit were already on another ref on the remote. The larger the commit, the more
+            // impactful this could be. For perspective, we recently saw a 28GB commit being pushed
+            // (via a 4GB packfile)! Since normal change refs only contain a single commit not on
+            // another change, or another ref, this situation is possible only if that commit is on
+            // a ref which is not a normal change ref.
+            //
+            // Note: a "normal" change ref has a single parent, and was not pushed with special
+            // flags
+            // preventing parent changes from being created, and it has not had its destination ref
+            // rewound to remove its parent.
+            addRefsKnownToHelp(rw, toPush);
           }
         }
       }
-    }
-
-    // A push which avoids the 'if' below will at most push a single commit per ref update.
-    // It is possible that pushing even one commit could be more than was necessary if that
-    // commit were already on another ref on the remote. The larger the commit, the more
-    // impactful this could be. For perspective, we recently saw a 28GB commit being pushed
-    // (via a 4GB packfile)! Since normal change refs only contain a single commit not on
-    // another change, or another ref, this situation is possible only if that commit is on
-    // a ref which is not a normal change ref.
-    //
-    // Note: a "normal" change ref has a single parent, and was not pushed with special flags
-    // preventing parent changes from being created, and it has not had its destination ref
-    // rewound to remove its parent.
-    if (!hasNoShortcut.isEmpty()) {
-      // A ref with no shortcut must be pushing more than one commit, so there is no upper
-      // bound on how large this push could be. Such pushes could push the entire history
-      // of the ref being pushed if no merge-bases can be identified on another remote ref.
-
-      // New refs whose non tip commits point to commits which contain changes which contain
-      // commits not on other refs (which can only be unmerged or non-normal changes), could get
-      // slower when change refs are filtered. These are not normal situations and are not likely
-      // worth caring about?
-      neededRefs.addAll(
-          advertisedRefs.stream()
-              .filter(
-                  r ->
-                      !RefNames.isRefsChanges(r.getName()) && !RefNames.isAutoMergeRef(r.getName()))
-              .collect(Collectors.toSet()));
     }
 
     return neededRefs;
@@ -194,6 +178,72 @@ class AdvertisedRefsForPackFilter {
     }
 
     return hasChangeDestShortCut && parents != null && parents.size() == 1;
+  }
+
+  protected void addRefsKnownToHelp(RevWalk rw, RemoteRefUpdate toPush) {
+    String toPushRefName = toPush.getRemoteName();
+    ObjectId newObjectId = toPush.getNewObjectId();
+    try {
+      RevObject newObj = rw.parseAny(newObjectId);
+      if (newObj instanceof RevTag) {
+        newObj = rw.peel(newObj);
+      }
+      if (!(newObj instanceof RevCommit)) {
+        repLog.atWarning().log("Object %s is not a commit", newObj.getId().getName());
+        addFallBackRefs();
+        return;
+      }
+
+      rw.reset();
+      rw.markStart((RevCommit) newObj);
+      Ref replicaRef = advertisedRefsByName.get(toPushRefName);
+      if (replicaRef != null) {
+        ObjectId oldObjectId = replicaRef.getObjectId();
+        RevObject oldObj = rw.parseAny(oldObjectId);
+        if (oldObj instanceof RevTag) {
+          oldObj = rw.peel(oldObj);
+        }
+        if (oldObj instanceof RevCommit) {
+          rw.markUninteresting((RevCommit) oldObj);
+        }
+      }
+
+      // Tags are likely to be particularly helpful when pushing new refs which do not match
+      // existing tips. These new refs likely have some shared history with other refs, however most
+      // branch tips are unlikely to be shared history (or why would they be branches?). Tags on the
+      // other hand, tend to not branch, to not veer off in history. Tags are usually "checkpoints"
+      // along a history graph, so their peeled values are very likely to match a commit somewhere
+      // in the history of new refs. This is fairly cheap, a single walk can find these matches, and
+      // if it does, this can drastically shorten the history needed to be push without actually
+      // walking any other refs.
+      for (RevCommit c : rw) {
+        Ref shortcut = advertisedRefByObjectId.get(c.getId());
+        if (shortcut != null) {
+          neededRefs.add(shortcut);
+          break;
+        }
+      }
+    } catch (IOException e) {
+      repLog.atWarning().withCause(e).log(
+          "Unable to walk from %s for %s", newObjectId, toPushRefName);
+      addFallBackRefs();
+    }
+  }
+
+  private void addFallBackRefs() {
+    // A ref with no shortcut must be pushing more than one commit, so there is no upper
+    // bound on how large this push could be. Such pushes could push the entire history
+    // of the ref being pushed if no merge-bases can be identified on another remote ref.
+
+    // New refs whose non tip commits point to commits which contain changes which contain
+    // commits not on other refs (which can only be unmerged or non-normal changes), could get
+    // slower when change refs are filtered. These are not normal situations and are not likely
+    // worth caring about?
+    neededRefs.addAll(
+        advertisedRefs.stream()
+            .filter(
+                r -> !RefNames.isRefsChanges(r.getName()) && !RefNames.isAutoMergeRef(r.getName()))
+            .collect(Collectors.toSet()));
   }
 
   @Nullable
