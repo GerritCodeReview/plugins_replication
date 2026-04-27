@@ -20,7 +20,9 @@ import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.CommandProcessing;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -39,6 +41,9 @@ final class StartCommand extends SshCommand {
 
   @Option(name = "--url", metaVar = "PATTERN", usage = "pattern to match URL on")
   private String urlMatch;
+
+  @Option(name = "--remote", metaVar = "REMOTE", usage = "name of remote to replicate to")
+  private Set<String> remotesToConsider = new HashSet<>();
 
   @Option(name = "--wait", usage = "wait for replication to finish before exiting")
   private boolean wait;
@@ -70,7 +75,9 @@ final class StartCommand extends SshCommand {
     }
 
     Future<?> future =
-        pushFactory.create(urlMatch, projectFilter, state, now).schedule(0, TimeUnit.SECONDS);
+        pushFactory
+            .create(urlMatch, remotesToConsider, projectFilter, state, now)
+            .schedule(0, TimeUnit.SECONDS);
 
     if (wait) {
       if (future != null) {
