@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "072c0544_be02672c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-04-27T18:14:11Z",
+      "side": 1,
+      "message": "not reened now.",
+      "parentUuid": "21c9a401_412b562b",
+      "revId": "701d163a2d1b1960e0620371efcf6d46276b4407",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba0564df_dd965209",
@@ -121,6 +139,24 @@
       "side": 1,
       "message": "\u003e I don\u0027t think it would be problematic? Why not allow?\n\nI meant, don\u0027t allow it for the exact same uri, i.e below should not be allowed.\n\n```\n[remote \"multipleSites\"]\n  url \u003d singlehostsite1\n  roundRobinUrl \u003d singlehostsite1\n```",
       "parentUuid": "c20cfed6_2052b81e",
+      "revId": "701d163a2d1b1960e0620371efcf6d46276b4407",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ccf7e89_d1e95160",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-04-27T18:14:11Z",
+      "side": 1,
+      "message": "[remote \"site\"]\n  url \u003d site-1-host-1\n  url \u003d site-1-host-2\n  adminUrl \u003d site-1-host-1\n  adminUrl \u003d site-1-host-2\n  algo \u003d lc/rr\n\n[remote \"pune-and-hyd\"]\n  url \u003d hyd host-1\n  url \u003d hyd host-2\n  url \u003d pune host-1\n  url \u003d pune host-2\n  adminUrl \u003d hyd host-1\n  adminUrl \u003d hyd host-2\n  adminUrl \u003d pune site-1-host-2\n  algo \u003d hyd lc\n  algo \u003d pune rr\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\n[remote \"pune-and-hyd\"]\n  url \u003d hyd host-1\n  url \u003d hyd host-2\n  adminUrl \u003d pune site-1-host-2\n  algo \u003d pune rr",
+      "parentUuid": "9e17f436_0765c9b6",
       "revId": "701d163a2d1b1960e0620371efcf6d46276b4407",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }

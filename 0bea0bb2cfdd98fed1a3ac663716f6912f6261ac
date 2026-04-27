@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8ed446e_7602f402",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-04-27T18:14:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b04c1c2c_5307ca7d",
+      "revId": "0bea0bb2cfdd98fed1a3ac663716f6912f6261ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06137b4e_ebf36f0d",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-04-24T18:35:33Z",
       "side": 1,
       "message": "```suggestion\neach push is executed exactly once.\n```",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 34
+      },
+      "revId": "0bea0bb2cfdd98fed1a3ac663716f6912f6261ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62c8ef3d_3c7b0c6d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-04-27T18:14:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06137b4e_ebf36f0d",
       "range": {
         "startLine": 17,
         "startChar": 0,
