@@ -165,6 +165,35 @@ public class ReplicationIT extends ReplicationDaemon {
   }
 
   @Test
+  public void shouldReplicateOnlySpecificRef() throws Exception {
+    Project.NameKey targetProject = createTestProject(project + "replica");
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    Result pushResult = createChange();
+    String masterRef = pushResult.getPatchSet().refName();
+
+    String secondBranch = "refs/heads/branch2";
+    BranchInput input = new BranchInput();
+    input.revision = "refs/heads/master";
+    gApi.projects().name(project.get()).branch(secondBranch).create(input);
+    createPayload(project, secondBranch, "branch2 content");
+
+    ReplicationState state = new ReplicationState(NO_OP);
+    plugin
+        .getSysInjector()
+        .getInstance(PushAll.Factory.class)
+        .create(null, masterRef, new ReplicationFilter(Arrays.asList(project.get())), state, true)
+        .schedule(0, TimeUnit.SECONDS);
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, masterRef) != null);
+      assertThat(getRef(repo, masterRef)).isNotNull();
+      assertThat(getRef(repo, secondBranch)).isNull();
+    }
+  }
+
+  @Test
   public void shouldReplicateNewBranch() throws Exception {
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
