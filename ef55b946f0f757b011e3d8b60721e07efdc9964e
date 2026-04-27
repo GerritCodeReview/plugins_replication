@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ea3af39_1b782d90",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-27T14:56:20Z",
+      "side": 1,
+      "message": "Better to avoid the possibility of null, make callers pass in ALL_REFS instead?",
+      "revId": "ef55b946f0f757b011e3d8b60721e07efdc9964e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
