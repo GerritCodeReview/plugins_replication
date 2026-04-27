@@ -131,11 +131,11 @@ public class ReplicationQueue
   }
 
   public void scheduleFullSync(
-      Project.NameKey project, String urlMatch, ReplicationState state, boolean now) {
+      Project.NameKey project, String urlMatch, String ref, ReplicationState state, boolean now) {
     fire(
         project,
         urlMatch,
-        Set.of(new GitReferenceUpdated.UpdatedRef(PushOne.ALL_REFS, null, null, null)),
+        Set.of(new GitReferenceUpdated.UpdatedRef(ref, null, null, null)),
         state,
         now);
   }
