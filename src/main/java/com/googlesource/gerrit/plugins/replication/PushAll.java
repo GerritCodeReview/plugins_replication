@@ -27,13 +27,14 @@ public class PushAll implements Runnable {
   private final ReplicationStateListener stateLog;
 
   public interface Factory {
-    PushAll create(String urlMatch, ReplicationFilter filter, ReplicationState state, boolean now);
+    PushAll create(String urlMatch, @Nullable String refMatch, ReplicationFilter filter, ReplicationState state, boolean now);
   }
 
   private final WorkQueue workQueue;
   private final ProjectCache projectCache;
   private final ReplicationQueue replication;
   private final String urlMatch;
+  private final String refMatch;
   private final ReplicationFilter filter;
   private final ReplicationState state;
   private final boolean now;
@@ -45,6 +46,7 @@ public class PushAll implements Runnable {
       ReplicationQueue rq,
       ReplicationStateListeners stateLog,
       @Assisted @Nullable String urlMatch,
+      @Assisted @Nullable String refMatch,
       @Assisted ReplicationFilter filter,
       @Assisted ReplicationState state,
       @Assisted boolean now) {
@@ -53,6 +55,7 @@ public class PushAll implements Runnable {
     this.replication = rq;
     this.stateLog = stateLog;
     this.urlMatch = urlMatch;
+    this.refMatch = refMatch;
     this.filter = filter;
     this.state = state;
     this.now = now;
@@ -67,7 +70,7 @@ public class PushAll implements Runnable {
     try {
       for (Project.NameKey nameKey : projectCache.all()) {
         if (filter.matches(nameKey)) {
-          replication.scheduleFullSync(nameKey, urlMatch, state, now);
+          replication.scheduleFullSync(nameKey, urlMatch, refMatch state, now);
         }
       }
     } catch (Exception e) {
@@ -79,6 +82,9 @@ public class PushAll implements Runnable {
   @Override
   public String toString() {
     String s = "Replicate All Projects";
+    if (refMatch != null) {
+      s = "Replicate [" + refMatch + "] for projects";
+    }
     if (urlMatch != null) {
       s = s + " to " + urlMatch;
     }
