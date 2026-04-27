@@ -40,6 +40,9 @@ final class StartCommand extends SshCommand {
   @Option(name = "--url", metaVar = "PATTERN", usage = "pattern to match URL on")
   private String urlMatch;
 
+  @Option(name = "--ref", metaVar = "PATTERN", usage = "pattern to match ref on")
+  private String refMatch;
+
   @Option(name = "--wait", usage = "wait for replication to finish before exiting")
   private boolean wait;
 
@@ -70,7 +73,7 @@ final class StartCommand extends SshCommand {
     }
 
     Future<?> future =
-        pushFactory.create(urlMatch, projectFilter, state, now).schedule(0, TimeUnit.SECONDS);
+        pushFactory.create(urlMatch, refMatch, projectFilter, state, now).schedule(0, TimeUnit.SECONDS);
 
     if (wait) {
       if (future != null) {

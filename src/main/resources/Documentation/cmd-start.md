@@ -12,6 +12,7 @@ SYNOPSIS
 ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start
   [--now]
   [--wait]
+  [--ref <PATTERN>]
   {--url <PATTERN> | [--url <PATTERN>] --all | [--url <PATTERN>] <PROJECT PATTERN> ...}
 ```
 
@@ -22,7 +23,7 @@ replication destinations, or only those whose URLs match the pattern
 given on the command line.
 
 Normally Gerrit automatically schedules replication whenever it
-makes a change to a managed Git repository.  However, there are
+makes a change to a managed Git repository.  However, there are[cmd-list.md](cmd-list.md)
 other reasons why an administrator may wish to trigger replication:
 
 * Destination disappears, then later comes back online.
@@ -96,6 +97,13 @@ replication delay.
 `--all`
 : Schedule replication for all projects.
 
+`--ref <PATTERN>`
+: Replicate only the references that match the pattern `PATTERN`.
+This can be a specific ref name (e.g., `refs/heads/master`) or
+a pattern. This is useful for manually triggering the sync of
+a single branch without pushing all other pending changes in
+the project.
+
 `--url <PATTERN>`
 : Replicate only to replication destinations whose configuration
 URL contains the substring `PATTERN`, or whose expanded project
@@ -122,6 +130,12 @@ locally by hand:
 ```console
   $ git --git-dir=/home/git/tools/gerrit.git update-ref -d refs/changes/00/100/1
   $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start tools/gerrit
+```
+
+Replicate only the `master` branch of the `tools/gerrit` project:
+
+```console
+  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --ref refs/heads/master tools/gerrit
 ```
 
 Replicate only projects located in the `documentation` subdirectory:
