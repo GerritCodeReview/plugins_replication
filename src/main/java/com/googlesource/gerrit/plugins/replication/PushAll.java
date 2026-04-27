@@ -20,6 +20,7 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import java.util.Set;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -27,13 +28,19 @@ public class PushAll implements Runnable {
   private final ReplicationStateListener stateLog;
 
   public interface Factory {
-    PushAll create(String urlMatch, ReplicationFilter filter, ReplicationState state, boolean now);
+    PushAll create(
+        String urlMatch,
+        Set<String> remotesToConsider,
+        ReplicationFilter filter,
+        ReplicationState state,
+        boolean now);
   }
 
   private final WorkQueue workQueue;
   private final ProjectCache projectCache;
   private final ReplicationQueue replication;
   private final String urlMatch;
+  private final Set<String> remotesToConsider;
   private final ReplicationFilter filter;
   private final ReplicationState state;
   private final boolean now;
@@ -45,6 +52,7 @@ public class PushAll implements Runnable {
       ReplicationQueue rq,
       ReplicationStateListeners stateLog,
       @Assisted @Nullable String urlMatch,
+      @Assisted Set<String> remotesToConsider,
       @Assisted ReplicationFilter filter,
       @Assisted ReplicationState state,
       @Assisted boolean now) {
@@ -53,6 +61,7 @@ public class PushAll implements Runnable {
     this.replication = rq;
     this.stateLog = stateLog;
     this.urlMatch = urlMatch;
+    this.remotesToConsider = remotesToConsider;
     this.filter = filter;
     this.state = state;
     this.now = now;
@@ -67,7 +76,7 @@ public class PushAll implements Runnable {
     try {
       for (Project.NameKey nameKey : projectCache.all()) {
         if (filter.matches(nameKey)) {
-          replication.scheduleFullSync(nameKey, urlMatch, state, now);
+          replication.scheduleFullSync(nameKey, urlMatch, remotesToConsider, state, now);
         }
       }
     } catch (Exception e) {
