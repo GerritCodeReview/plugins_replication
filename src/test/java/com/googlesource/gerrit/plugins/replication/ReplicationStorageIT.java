@@ -82,6 +82,30 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
   }
 
   @Test
+  public void shouldCreateOneReplicationTaskWhenSchedulingSpecificRefSync() throws Exception {
+    createTestProject(project + "replica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS, Integer.MAX_VALUE);
+    reloadConfig();
+
+    String specificRef = "refs/heads/master";
+
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, null, specificRef, new ReplicationState(NO_OP), false);
+
+    assertThat(listWaitingReplicationTasks(Pattern.quote(specificRef))).hasSize(1);
+
+    tasksStorage
+        .streamWaiting()
+        .forEach(
+            (task) -> {
+              assertThat(task.refs()).containsExactly(specificRef);
+            });
+  }
+
+  @Test
   public void shouldFirePendingOnlyToIncompleteUri() throws Exception {
     String suffix1 = "replica1";
     String suffix2 = "replica2";
