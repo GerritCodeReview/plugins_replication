@@ -12,6 +12,7 @@ SYNOPSIS
 ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start
   [--now]
   [--wait]
+  [--ref <PATTERN>]
   {--url <PATTERN> | [--url <PATTERN>] --all | [--url <PATTERN>] <PROJECT PATTERN> ...}
 ```
 
@@ -96,6 +97,21 @@ replication delay.
 `--all`
 : Schedule replication for all projects.
 
+`--ref <REF>`
+: Replicate only the references that match the specified string.
+Matching is handled by JGit and supports both literal names and
+standard Git prefix wildcards.
+This is useful for manually triggering the sync of a specific
+branch or category of refs without pushing all other pending
+changes in the project.
+
+**Examples:**
+* `refs/heads/master`: Replicates only the master branch.
+* `refs/tags/*`: Replicates all tags.
+* `refs/changes/01/123/1`: Replicates a specific Gerrit patch set.
+* `refs/heads/release/*`: Replicates all branches under the release/ folder.
+* **Note**: If omitted, the command defaults to all references (`..*`).
+
 `--url <PATTERN>`
 : Replicate only to replication destinations whose configuration
 URL contains the substring `PATTERN`, or whose expanded project
@@ -122,6 +138,12 @@ locally by hand:
 ```console
   $ git --git-dir=/home/git/tools/gerrit.git update-ref -d refs/changes/00/100/1
   $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start tools/gerrit
+```
+
+Replicate only the `master` branch of the `tools/gerrit` project:
+
+```console
+  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --ref refs/heads/master tools/gerrit
 ```
 
 Replicate only projects located in the `documentation` subdirectory:
