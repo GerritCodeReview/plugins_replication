@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95ff36a0_b5373e24",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-04-28T19:06:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45fbc7de_776264d2",
+      "revId": "edff137e95a440f8bb4e2d525037ffb93cc11287",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98e84b4a_74e2a751",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-27T18:58:35Z",
       "side": 1,
       "message": "It might make sense to add \"Strategy\" here and related methods?",
+      "revId": "edff137e95a440f8bb4e2d525037ffb93cc11287",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20445ab2_3892455e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistribution.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-04-28T19:06:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98e84b4a_74e2a751",
       "revId": "edff137e95a440f8bb4e2d525037ffb93cc11287",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -52,6 +88,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c6f9c94_34034857",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistribution.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-04-28T19:06:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c3c0b02_1b56b8d1",
+      "revId": "edff137e95a440f8bb4e2d525037ffb93cc11287",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82261b44_cc493000",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-04-27T18:58:35Z",
       "side": 1,
       "message": "s/a single NFS backend/a single backend (likely via NFS)/",
+      "revId": "edff137e95a440f8bb4e2d525037ffb93cc11287",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e6bd7b3_66cbf200",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistribution.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-04-28T19:06:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82261b44_cc493000",
       "revId": "edff137e95a440f8bb4e2d525037ffb93cc11287",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -86,6 +158,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1963212_5cd854a8",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-04-28T19:06:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5397366_2bf2cb6a",
+      "revId": "edff137e95a440f8bb4e2d525037ffb93cc11287",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1f57c53_18872519",
@@ -99,6 +189,30 @@
       "writtenOn": "2026-04-27T18:58:35Z",
       "side": 1,
       "message": "We may want to also support this syntax?",
+      "range": {
+        "startLine": 627,
+        "startChar": 65,
+        "endLine": 627,
+        "endChar": 76
+      },
+      "revId": "edff137e95a440f8bb4e2d525037ffb93cc11287",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "010dadf8_ffc9ad61",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-04-28T19:06:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1f57c53_18872519",
       "range": {
         "startLine": 627,
         "startChar": 65,
