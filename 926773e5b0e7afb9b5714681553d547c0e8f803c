@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7f92a14_0b99dc99",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2026-04-29T13:19:03Z",
+      "side": 1,
+      "message": "Why did you remove these from the enum?",
+      "revId": "926773e5b0e7afb9b5714681553d547c0e8f803c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
