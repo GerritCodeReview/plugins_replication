@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05340b4f_b48c64a3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-04-30T16:17:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "222bc6fe_bba4759d",
+      "revId": "f45c7af6d7fc9d0059f1a2db76f0d4b90ab40626",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9d41c92_86a5c0a5",
@@ -35,6 +53,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c553dc58_19a92666",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-04-30T16:17:34Z",
+      "side": 1,
+      "message": "added by mistake, removed.",
+      "parentUuid": "f9d41c92_86a5c0a5",
+      "revId": "f45c7af6d7fc9d0059f1a2db76f0d4b90ab40626",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e9112c5_b5bba681",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-04-30T13:20:42Z",
       "side": 1,
       "message": "Is it true that this matches patterns, and if so, what sort of pattern, is it regexp, refspec, glob...?",
+      "revId": "f45c7af6d7fc9d0059f1a2db76f0d4b90ab40626",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61375db2_965ad6ad",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-04-30T16:17:34Z",
+      "side": 1,
+      "message": "Specifically, it uses the JGit matching engine. \nLike:-\nSupported: refs/heads/* (matches all branches)\nSupported: refs/tags/* (matches all tags)\nSupported: refs/heads/feature-* (matches all feature branches)\nUnsupported: refs/*/master (wildcards in the middle are generally not supported in standard Git refspecs).",
+      "parentUuid": "0e9112c5_b5bba681",
       "revId": "f45c7af6d7fc9d0059f1a2db76f0d4b90ab40626",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
