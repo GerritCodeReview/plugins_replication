@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c61114a8_ba79c2ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-30T19:08:07Z",
+      "side": 1,
+      "message": "s/\u003cPATTERN\u003e/\u003cRefSpec\u003e/",
+      "revId": "72f2db80ab42f823e04ea07242232c4c1f739492",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0605bfbd_bbf3936c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-30T19:08:07Z",
+      "side": 1,
+      "message": "Generally, it is better to avoid identifying alterations to the code which are sort of implied by the objective of the change, so I would eliminate the last two bullet points, but the first one is nice because it helps the reviewer understand that you do not intend to change any default behavior. I would probably just roll the first point into the paragraph above it.",
+      "revId": "72f2db80ab42f823e04ea07242232c4c1f739492",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aed53ca6_41bb38f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-30T19:08:07Z",
+      "side": 1,
+      "message": "Add a Release-Notes: footer (probably with the same content as line 7)",
+      "revId": "72f2db80ab42f823e04ea07242232c4c1f739492",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d57463c_7eb680e1",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-30T19:08:07Z",
+      "side": 1,
+      "message": "RefSpec",
+      "revId": "72f2db80ab42f823e04ea07242232c4c1f739492",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea767a66_bea66087",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-30T19:08:07Z",
+      "side": 1,
+      "message": "RefSpec",
+      "revId": "72f2db80ab42f823e04ea07242232c4c1f739492",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bff925d_39bdccf3",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-30T19:08:07Z",
+      "side": 1,
+      "message": "\"literal names\" are also considered refspecs, so I don\u0027t think this sentence is needed: \"This supports both literal reference names and standard Git wildcard patterns (e.g., `refs/heads/*`)\"",
+      "revId": "72f2db80ab42f823e04ea07242232c4c1f739492",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ef1e2d4_c3c2fe8b",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-30T19:08:07Z",
+      "side": 1,
+      "message": "s/(`..*`)/(`refs/*`)/",
+      "revId": "72f2db80ab42f823e04ea07242232c4c1f739492",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
