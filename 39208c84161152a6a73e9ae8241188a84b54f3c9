@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66e34505_8a72d1a0",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-30T17:43:54Z",
+      "side": 1,
+      "message": "This probably should become \u003cRefSpec\u003e instead of \u003cREF\u003e. A RefSpec is a well understood concept in the git world, so no need to provide a bunch of examples of what a refspec is, one should probably do, I suggest \"refs/heads/*\". Can you also ensure it is called that everywhere else in this change (including the commit message)?",
+      "revId": "39208c84161152a6a73e9ae8241188a84b54f3c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
