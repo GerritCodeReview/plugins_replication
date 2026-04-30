@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d57b2859_cb853451",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-04-30T22:41:28Z",
+      "side": 1,
+      "message": "Use lowercase to be consistent?\n\n```suggestion\n  Defaults to `all`.\n```",
+      "range": {
+        "startLine": 631,
+        "startChar": 0,
+        "endLine": 631,
+        "endChar": 20
+      },
+      "revId": "d7889f0fe8784abb2389293771c373bb3ce11ef5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
