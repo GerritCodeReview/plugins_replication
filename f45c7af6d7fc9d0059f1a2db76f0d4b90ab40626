@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "222bc6fe_bba4759d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-30T13:20:42Z",
+      "side": 1,
+      "message": "Share the \u0027for All Projects\u0027 part?",
+      "revId": "f45c7af6d7fc9d0059f1a2db76f0d4b90ab40626",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9d41c92_86a5c0a5",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-30T13:20:42Z",
+      "side": 1,
+      "message": "Is it intentional to add this cmd-list here?",
+      "revId": "f45c7af6d7fc9d0059f1a2db76f0d4b90ab40626",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e9112c5_b5bba681",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-04-30T13:20:42Z",
+      "side": 1,
+      "message": "Is it true that this matches patterns, and if so, what sort of pattern, is it regexp, refspec, glob...?",
+      "revId": "f45c7af6d7fc9d0059f1a2db76f0d4b90ab40626",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
