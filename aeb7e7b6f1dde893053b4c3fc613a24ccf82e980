@@ -68,6 +68,40 @@
       },
       "revId": "aeb7e7b6f1dde893053b4c3fc613a24ccf82e980",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d3bf6a4_e6075c48",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-04-30T23:10:43Z",
+      "side": 1,
+      "message": "Do we already have test coverage for `ALL`? If not, we should try to add some here or in a predecessor change.",
+      "revId": "aeb7e7b6f1dde893053b4c3fc613a24ccf82e980",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41645a4a_2bf35081",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-04-30T23:10:43Z",
+      "side": 1,
+      "message": "Also assert that `branch2` was replicated?\n```suggestion\n    waitUntil(\n        () -\u003e checkedGetRef(r2, branch1) !\u003d null \u0026\u0026 checkedGetRef(r2, branch2) !\u003d null);\n```",
+      "revId": "aeb7e7b6f1dde893053b4c3fc613a24ccf82e980",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
