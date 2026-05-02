@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb67fd14_f70cf44c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/CopyPacksCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-02T23:46:35Z",
+      "side": 1,
+      "message": "I think the path is not necessarily the filesystem path on the remote ?",
+      "revId": "c8a97ebcace9b73f675ff50198f50d29048c5cf8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8f0ab13_c393ba22",
         "filename": "src/main/resources/Documentation/cmd-copy-packs.md",
         "patchSetId": 2
