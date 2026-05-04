@@ -71,6 +71,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b217ee18_d21d4056",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-04T19:47:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "978da285_a10fa355",
+      "range": {
+        "startLine": 59,
+        "startChar": 22,
+        "endLine": 59,
+        "endChar": 32
+      },
+      "revId": "aeb7e7b6f1dde893053b4c3fc613a24ccf82e980",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3b2b860_e1ec3726",
