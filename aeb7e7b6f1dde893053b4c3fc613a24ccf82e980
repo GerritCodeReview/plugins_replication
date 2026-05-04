@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7072c41c_65c8b7e6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-04T19:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5d21e5d_16b92b76",
+      "range": {
+        "startLine": 138,
+        "startChar": 10,
+        "endLine": 138,
+        "endChar": 19
+      },
+      "revId": "aeb7e7b6f1dde893053b4c3fc613a24ccf82e980",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "978da285_a10fa355",
@@ -70,6 +94,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1478e9dd_4a1dfa18",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-04T19:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3b2b860_e1ec3726",
+      "range": {
+        "startLine": 615,
+        "startChar": 0,
+        "endLine": 615,
+        "endChar": 35
+      },
+      "revId": "aeb7e7b6f1dde893053b4c3fc613a24ccf82e980",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d3bf6a4_e6075c48",
@@ -87,6 +135,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36bc1f8f_bfc8f49c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-04T19:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d3bf6a4_e6075c48",
+      "revId": "aeb7e7b6f1dde893053b4c3fc613a24ccf82e980",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41645a4a_2bf35081",
@@ -100,6 +166,24 @@
       "writtenOn": "2026-04-30T23:10:43Z",
       "side": 1,
       "message": "Also assert that `branch2` was replicated?\n```suggestion\n    waitUntil(\n        () -\u003e checkedGetRef(r2, branch1) !\u003d null \u0026\u0026 checkedGetRef(r2, branch2) !\u003d null);\n```",
+      "revId": "aeb7e7b6f1dde893053b4c3fc613a24ccf82e980",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa43a091_a69841e3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-04T19:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41645a4a_2bf35081",
       "revId": "aeb7e7b6f1dde893053b4c3fc613a24ccf82e980",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
