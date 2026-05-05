@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3e6a150_eb707dc4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-05-05T05:01:21Z",
+      "side": 1,
+      "message": "https://gerrit-review.googlesource.com/c/plugins/replication/+/577142\n\nTest coverage have been pushed to the above change",
+      "parentUuid": "6dd9c7f3_0333009c",
+      "revId": "0a8a26512d1cb92ea9c838b9b08024e2228445ab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ccc63b2_33dd301f",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-05-05T00:26:34Z",
       "side": 1,
       "message": "I think, we cannot have two assisted injects with the same type, i.e `urlMatch` and `refMatch` are `String`. We have to use named assists to get around this.\n\n```suggestion\n      @Assisted(\"urlMatch\") @Nullable String urlMatch,\n      @Assisted(\"refMatch\") String refMatch,\n```",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 32
+      },
+      "revId": "0a8a26512d1cb92ea9c838b9b08024e2228445ab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "124b7c10_a4c2e55d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-05-05T05:01:21Z",
+      "side": 1,
+      "message": "Acknowledged. I wasn\u0027t aware of that Guice behavior. I\u0027ve now applied named assisted injections to distinguish between the two string parameters. Updated in the latest patchset.",
+      "parentUuid": "9ccc63b2_33dd301f",
       "range": {
         "startLine": 48,
         "startChar": 0,
@@ -58,6 +100,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b68f19fe_e0787b6f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-05-05T05:01:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87d444a6_0cf46059",
+      "revId": "0a8a26512d1cb92ea9c838b9b08024e2228445ab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f73247d_fc78bcc3",
@@ -71,6 +131,30 @@
       "writtenOn": "2026-05-05T00:26:34Z",
       "side": 1,
       "message": "Should the metaVar be RefSpec too?\n```suggestion\n  @Option(name \u003d \"--ref\", metaVar \u003d \"RefSpec\", usage \u003d \"pattern to match ref on\")\n```",
+      "range": {
+        "startLine": 43,
+        "startChar": 37,
+        "endLine": 43,
+        "endChar": 44
+      },
+      "revId": "0a8a26512d1cb92ea9c838b9b08024e2228445ab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b4e1a6f_493eafb2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-05-05T05:01:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f73247d_fc78bcc3",
       "range": {
         "startLine": 43,
         "startChar": 37,
