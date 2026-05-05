@@ -110,6 +110,7 @@ final class RepairCommand extends SshCommand implements PushResultProcessing.Ssh
             "\nRunning replication start for " + project.get() + " to " + uri.toString() + " ...");
         replicationStarter.start(
             uri.toString(),
+            PushOne.ALL_REFS,
             Set.of(),
             new ReplicationFilter(List.of(project.get()), Collections.emptyList()),
             /* now= */ true,

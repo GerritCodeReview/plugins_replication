@@ -13,6 +13,7 @@ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start
   [--now]
   [--wait]
   [--remote <REMOTE> ...]
+  [--ref <RefSpec>]
   {--url <PATTERN> | [--url <PATTERN>] --all | [--url <PATTERN>] <PROJECT PATTERN> ...}
 ```
 
@@ -97,6 +98,10 @@ replication delay.
 `--all`
 : Schedule replication for all projects.
 
+`--ref <RefSpec>`
+: Replicate only the references that match the specified RefSpec.
+If omitted, the command defaults to all references (`refs/*`).
+
 `--url <PATTERN>`
 : Replicate only to replication destinations whose configuration
 URL contains the substring `PATTERN`, or whose expanded project
@@ -129,6 +134,12 @@ locally by hand:
 ```console
   $ git --git-dir=/home/git/tools/gerrit.git update-ref -d refs/changes/00/100/1
   $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start tools/gerrit
+```
+
+Replicate only the `master` branch of the `tools/gerrit` project:
+
+```console
+  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ start --ref refs/heads/master tools/gerrit
 ```
 
 Replicate only projects located in the `documentation` subdirectory:

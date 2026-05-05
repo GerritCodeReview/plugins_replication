@@ -189,6 +189,64 @@ public class ReplicationIT extends ReplicationDaemon {
   }
 
   @Test
+  public void shouldReplicateOnlySpecificRef() throws Exception {
+    Project.NameKey targetProject = createTestProject(project + "replica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    String branch1 = "refs/heads/branch1";
+    String branch2 = "refs/heads/branch2";
+    createNewBranchWithoutPush("refs/heads/master", branch1);
+    createNewBranchWithoutPush("refs/heads/master", branch2);
+
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, null, branch1, new ReplicationState(NO_OP), true);
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, branch1) != null);
+      assertThat(getRef(repo, branch1)).isNotNull();
+      assertThat(getRef(repo, branch2)).isNull();
+    }
+  }
+
+  @Test
+  public void shouldReplicateMatchingGlobRef() throws Exception {
+    Project.NameKey targetProject = createTestProject(project + "replica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    String branch1 = "refs/heads/feature/task-a";
+    String branch2 = "refs/heads/feature/task-b";
+    String branch3 = "refs/heads/bugfix/issue-1";
+
+    createNewBranchWithoutPush("refs/heads/master", branch1);
+    createNewBranchWithoutPush("refs/heads/master", branch2);
+    createNewBranchWithoutPush("refs/heads/master", branch3);
+
+    // Trigger a sync specifically for the 'feature/*' glob pattern
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, null, "refs/heads/feature/*", new ReplicationState(NO_OP), true);
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      // Both feature branches should be replicated
+      waitUntil(() -> checkedGetRef(repo, branch1) != null);
+      waitUntil(() -> checkedGetRef(repo, branch2) != null);
+
+      assertThat(getRef(repo, branch1)).isNotNull();
+      assertThat(getRef(repo, branch2)).isNotNull();
+
+      // The bugfix branch should not be replicated
+      assertThat(getRef(repo, branch3)).isNull();
+    }
+  }
+
+  @Test
   public void shouldReplicateNewBranchToTwoRemotes() throws Exception {
     Project.NameKey targetProject1 = createTestProject(project + "replica1");
     Project.NameKey targetProject2 = createTestProject(project + "replica2");
@@ -232,7 +290,7 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
+        .scheduleFullSync(project, urlMatch, PushOne.ALL_REFS, new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
@@ -258,7 +316,7 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
+        .scheduleFullSync(project, urlMatch, PushOne.ALL_REFS, new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
@@ -284,6 +342,7 @@ public class ReplicationIT extends ReplicationDaemon {
             .getInstance(PushAll.Factory.class)
             .create(
                 null,
+                PushOne.ALL_REFS,
                 Set.of(),
                 new ReplicationFilter(Arrays.asList(project.get()), null),
                 state,
@@ -309,6 +368,7 @@ public class ReplicationIT extends ReplicationDaemon {
             .getInstance(PushAll.Factory.class)
             .create(
                 null,
+                PushOne.ALL_REFS,
                 Set.of(),
                 new ReplicationFilter(Arrays.asList(project.get()), null),
                 state,
@@ -516,7 +576,7 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, Set.of("foo"), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(project, null, PushOne.ALL_REFS, Set.of("foo"), new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
@@ -574,10 +634,10 @@ public class ReplicationIT extends ReplicationDaemon {
 
     ReplicationQueue replicationQueue = plugin.getSysInjector().getInstance(ReplicationQueue.class);
     ReplicationState state = new ReplicationState(NO_OP);
-    replicationQueue.scheduleFullSync(prj1, null, Set.of("foo"), state, true);
-    replicationQueue.scheduleFullSync(prj2, null, Set.of("foo"), state, true);
-    replicationQueue.scheduleFullSync(prj3, null, Set.of("foo"), state, true);
-    replicationQueue.scheduleFullSync(prj4, null, Set.of("foo"), state, true);
+    replicationQueue.scheduleFullSync(prj1, null, PushOne.ALL_REFS, Set.of("foo"), state, true);
+    replicationQueue.scheduleFullSync(prj2, null, PushOne.ALL_REFS, Set.of("foo"), state, true);
+    replicationQueue.scheduleFullSync(prj3, null, PushOne.ALL_REFS, Set.of("foo"), state, true);
+    replicationQueue.scheduleFullSync(prj4, null, PushOne.ALL_REFS, Set.of("foo"), state, true);
 
     try (Repository excludeRepo1 = repoManager.openRepository(targetPrj1);
         Repository excludeRepo2 = repoManager.openRepository(targetPrj2);
@@ -629,7 +689,8 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, Set.of("bar"), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(
+            project, null, PushOne.ALL_REFS, Set.of("bar"), new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       assertThrows(
