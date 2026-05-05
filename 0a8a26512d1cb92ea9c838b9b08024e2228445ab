@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d49b2f02_dfe8216d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-05T16:36:54Z",
+      "side": 1,
+      "message": "If the tests add coverage for the feature introduced in this change, they should be moved into this commit.",
+      "parentUuid": "b3e6a150_eb707dc4",
+      "revId": "0a8a26512d1cb92ea9c838b9b08024e2228445ab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ccc63b2_33dd301f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
         "patchSetId": 6
