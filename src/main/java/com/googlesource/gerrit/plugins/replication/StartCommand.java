@@ -37,6 +37,9 @@ final class StartCommand extends SshCommand implements PushResultProcessing.SshO
   @Option(name = "--url", metaVar = "SUBSTRING", usage = "substring URL must match (or * to match everything)")
   private String urlMatch;
 
+  @Option(name = "--ref", metaVar = "RefName", usage = "pattern to match ref on")
+  private String refName = PushOne.ALL_REFS;
+
   private final Set<String> remotesToConsider = new HashSet<>();
 
   @Option(name = "--remote", metaVar = "REMOTE", usage = "name of remote to replicate to")
@@ -68,7 +71,7 @@ final class StartCommand extends SshCommand implements PushResultProcessing.SshO
             ? ReplicationFilter.all()
             : new ReplicationFilter(projectPatterns, Collections.emptyList());
 
-    replicationStarter.start(urlMatch, remotesToConsider, projectFilter, now, wait, this);
+    replicationStarter.start(urlMatch, refName, remotesToConsider, projectFilter, now, wait, this);
   }
 
   @Override
