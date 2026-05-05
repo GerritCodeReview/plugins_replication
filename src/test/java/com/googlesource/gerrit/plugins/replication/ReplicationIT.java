@@ -166,6 +166,33 @@ public class ReplicationIT extends ReplicationDaemon {
   }
 
   @Test
+  public void shouldReplicateOnlySpecificRef() throws Exception {
+    Project.NameKey targetProject = createTestProject(project + "replica");
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    Result pushResult = createChange();
+    String masterRef = pushResult.getPatchSet().refName();
+    String secondBranch = "refs/heads/branch2";
+    BranchInput input = new BranchInput();
+    input.revision = "refs/heads/master";
+    gApi.projects().name(project.get()).branch(secondBranch).create(input);
+
+    ReplicationState state = new ReplicationState(NO_OP);
+    plugin
+        .getSysInjector()
+        .getInstance(PushAll.Factory.class)
+        .create(null, masterRef, Set.of(), new ReplicationFilter(Arrays.asList(project.get())), state, true)
+        .schedule(0, TimeUnit.SECONDS);
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, masterRef) != null);
+      assertThat(getRef(repo, masterRef)).isNotNull();
+      assertThat(getRef(repo, secondBranch)).isNull();
+    }
+  }
+
+  @Test
   public void shouldReplicateNewBranch() throws Exception {
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
     reloadConfig();
@@ -232,7 +259,7 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
+        .scheduleFullSync(project, urlMatch, PushOne.ALL_REFS, new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
@@ -258,7 +285,7 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
+        .scheduleFullSync(project, urlMatch, PushOne.ALL_REFS, new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
@@ -283,7 +310,7 @@ public class ReplicationIT extends ReplicationDaemon {
             .getSysInjector()
             .getInstance(PushAll.Factory.class)
             .create(
-                null, Set.of(), new ReplicationFilter(Arrays.asList(project.get())), state, false)
+                null, PushOne.ALL_REFS, Set.of(), new ReplicationFilter(Arrays.asList(project.get())), state, false)
             .schedule(0, TimeUnit.SECONDS);
 
     future.get();
@@ -304,7 +331,7 @@ public class ReplicationIT extends ReplicationDaemon {
             .getSysInjector()
             .getInstance(PushAll.Factory.class)
             .create(
-                null, Set.of(), new ReplicationFilter(Arrays.asList(project.get())), state, false)
+                null, PushOne.ALL_REFS, Set.of(), new ReplicationFilter(Arrays.asList(project.get())), state, false)
             .schedule(0, TimeUnit.SECONDS);
 
     CountDownLatch latch = new CountDownLatch(1);
@@ -508,7 +535,7 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, Set.of("foo"), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(project, null, PushOne.ALL_REFS, Set.of("foo"), new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
@@ -532,7 +559,7 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, Set.of("bar"), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(project, null, PushOne.ALL_REFS, Set.of("bar"), new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       assertThrows(
