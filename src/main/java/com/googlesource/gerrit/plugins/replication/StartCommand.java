@@ -42,8 +42,12 @@ final class StartCommand extends SshCommand {
   @Option(name = "--url", metaVar = "PATTERN", usage = "pattern to match URL on")
   private String urlMatch;
 
+  private final Set<String> remotesToConsider = new HashSet<>();
+
   @Option(name = "--remote", metaVar = "REMOTE", usage = "name of remote to replicate to")
-  private Set<String> remotesToConsider = new HashSet<>();
+  void addRemote(String remote) {
+    remotesToConsider.add(remote);
+  }
 
   @Option(name = "--wait", usage = "wait for replication to finish before exiting")
   private boolean wait;
