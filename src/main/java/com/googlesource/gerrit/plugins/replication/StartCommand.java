@@ -42,8 +42,15 @@ final class StartCommand extends SshCommand {
   @Option(name = "--url", metaVar = "PATTERN", usage = "pattern to match URL on")
   private String urlMatch;
 
+  private final Set<String> remotesToConsider = new HashSet<>();
+
   @Option(name = "--remote", metaVar = "REMOTE", usage = "name of remote to replicate to")
-  private Set<String> remotesToConsider = new HashSet<>();
+  void addRemote(String remote) {
+    remotesToConsider.add(remote);
+  }
+
+  @Option(name = "--ref", metaVar = "RefSpec", usage = "pattern to match ref on")
+  private String refMatch = PushOne.ALL_REFS;
 
   @Option(name = "--wait", usage = "wait for replication to finish before exiting")
   private boolean wait;
@@ -76,7 +83,7 @@ final class StartCommand extends SshCommand {
 
     Future<?> future =
         pushFactory
-            .create(urlMatch, remotesToConsider, projectFilter, state, now)
+            .create(urlMatch, refMatch, remotesToConsider, projectFilter, state, now)
             .schedule(0, TimeUnit.SECONDS);
 
     if (wait) {

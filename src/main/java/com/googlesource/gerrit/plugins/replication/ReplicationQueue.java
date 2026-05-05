@@ -131,13 +131,14 @@ public class ReplicationQueue
   }
 
   public void scheduleFullSync(
-      Project.NameKey project, String urlMatch, ReplicationState state, boolean now) {
-    scheduleFullSync(project, urlMatch, Set.of(), state, now);
+      Project.NameKey project, String urlMatch, String ref, ReplicationState state, boolean now) {
+    scheduleFullSync(project, urlMatch, ref, Set.of(), state, now);
   }
 
   public void scheduleFullSync(
       Project.NameKey project,
       String urlMatch,
+      String ref,
       Set<String> remotesToConsider,
       ReplicationState state,
       boolean now) {
@@ -145,7 +146,7 @@ public class ReplicationQueue
         project,
         urlMatch,
         remotesToConsider,
-        Set.of(new GitReferenceUpdated.UpdatedRef(PushOne.ALL_REFS, null, null, null)),
+        Set.of(new GitReferenceUpdated.UpdatedRef(ref, null, null, null)),
         state,
         now);
   }
