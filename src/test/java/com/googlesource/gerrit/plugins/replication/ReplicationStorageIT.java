@@ -76,9 +76,33 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, new ReplicationState(NO_OP), false);
+        .scheduleFullSync(project, null, PushOne.ALL_REFS, new ReplicationState(NO_OP), false);
 
     assertThat(listWaitingReplicationTasks(Pattern.quote(PushOne.ALL_REFS))).hasSize(1);
+  }
+
+  @Test
+  public void shouldCreateOneReplicationTaskWhenSchedulingSpecificRefSync() throws Exception {
+    createTestProject(project + "replica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS, Integer.MAX_VALUE);
+    reloadConfig();
+
+    String specificRef = "refs/heads/master";
+
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, null, specificRef, new ReplicationState(NO_OP), false);
+
+    assertThat(listWaitingReplicationTasks(Pattern.quote(specificRef))).hasSize(1);
+
+    tasksStorage
+        .streamWaiting()
+        .forEach(
+            (task) -> {
+              assertThat(task.refs()).containsExactly(specificRef);
+            });
   }
 
   @Test
@@ -197,7 +221,7 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), false);
+        .scheduleFullSync(project, urlMatch, PushOne.ALL_REFS, new ReplicationState(NO_OP), false);
 
     assertThat(listWaiting()).hasSize(1);
     tasksStorage
@@ -222,7 +246,7 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), false);
+        .scheduleFullSync(project, urlMatch, PushOne.ALL_REFS, new ReplicationState(NO_OP), false);
 
     assertThat(listWaiting()).hasSize(1);
     tasksStorage
