@@ -37,6 +37,7 @@ class ReplicationStarter {
 
   void start(
       @Nullable String urlMatch,
+      String refName,
       Set<String> remotesToConsider,
       ReplicationFilter filter,
       boolean now,
@@ -46,7 +47,7 @@ class ReplicationStarter {
 
     Future<?> future =
         pushFactory
-            .create(urlMatch, remotesToConsider, filter, state, now)
+            .create(urlMatch, refName, remotesToConsider, filter, state, now)
             .schedule(0, TimeUnit.SECONDS);
 
     if (wait) {
