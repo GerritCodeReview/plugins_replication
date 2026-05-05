@@ -189,6 +189,30 @@ public class ReplicationIT extends ReplicationDaemon {
   }
 
   @Test
+  public void shouldReplicateOnlySpecificRef() throws Exception {
+    Project.NameKey targetProject = createTestProject(project + "replica");
+
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    reloadConfig();
+
+    String branch1 = "refs/heads/branch1";
+    String branch2 = "refs/heads/branch2";
+    createNewBranchWithoutPush("refs/heads/master", branch1);
+    createNewBranchWithoutPush("refs/heads/master", branch2);
+
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, null, branch1, new ReplicationState(NO_OP), true);
+
+    try (Repository repo = repoManager.openRepository(targetProject)) {
+      waitUntil(() -> checkedGetRef(repo, branch1) != null);
+      assertThat(getRef(repo, branch1)).isNotNull();
+      assertThat(getRef(repo, branch2)).isNull();
+    }
+  }
+
+  @Test
   public void shouldReplicateNewBranchToTwoRemotes() throws Exception {
     Project.NameKey targetProject1 = createTestProject(project + "replica1");
     Project.NameKey targetProject2 = createTestProject(project + "replica2");
@@ -232,7 +256,7 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
+        .scheduleFullSync(project, urlMatch, PushOne.ALL_REFS, new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
@@ -258,7 +282,7 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, new ReplicationState(NO_OP), true);
+        .scheduleFullSync(project, urlMatch, PushOne.ALL_REFS, new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
@@ -283,7 +307,12 @@ public class ReplicationIT extends ReplicationDaemon {
             .getSysInjector()
             .getInstance(PushAll.Factory.class)
             .create(
-                null, Set.of(), new ReplicationFilter(Arrays.asList(project.get())), state, false)
+                null,
+                PushOne.ALL_REFS,
+                Set.of(),
+                new ReplicationFilter(Arrays.asList(project.get())),
+                state,
+                false)
             .schedule(0, TimeUnit.SECONDS);
 
     future.get();
@@ -304,7 +333,12 @@ public class ReplicationIT extends ReplicationDaemon {
             .getSysInjector()
             .getInstance(PushAll.Factory.class)
             .create(
-                null, Set.of(), new ReplicationFilter(Arrays.asList(project.get())), state, false)
+                null,
+                PushOne.ALL_REFS,
+                Set.of(),
+                new ReplicationFilter(Arrays.asList(project.get())),
+                state,
+                false)
             .schedule(0, TimeUnit.SECONDS);
 
     CountDownLatch latch = new CountDownLatch(1);
@@ -508,7 +542,8 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, Set.of("foo"), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(
+            project, null, PushOne.ALL_REFS, Set.of("foo"), new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
@@ -532,7 +567,8 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, Set.of("bar"), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(
+            project, null, PushOne.ALL_REFS, Set.of("bar"), new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       assertThrows(

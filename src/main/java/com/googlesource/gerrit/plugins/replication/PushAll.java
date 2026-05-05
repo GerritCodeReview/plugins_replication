@@ -29,7 +29,8 @@ public class PushAll implements Runnable {
 
   public interface Factory {
     PushAll create(
-        String urlMatch,
+        @Assisted("urlMatch") String urlMatch,
+        @Assisted("refMatch") String refMatch,
         Set<String> remotesToConsider,
         ReplicationFilter filter,
         ReplicationState state,
@@ -41,6 +42,7 @@ public class PushAll implements Runnable {
   private final ReplicationQueue replication;
   private final String urlMatch;
   private final Set<String> remotesToConsider;
+  private final String refMatch;
   private final ReplicationFilter filter;
   private final ReplicationState state;
   private final boolean now;
@@ -51,7 +53,8 @@ public class PushAll implements Runnable {
       ProjectCache projectCache,
       ReplicationQueue rq,
       ReplicationStateListeners stateLog,
-      @Assisted @Nullable String urlMatch,
+      @Assisted("urlMatch") @Nullable String urlMatch,
+      @Assisted("refMatch") String refMatch,
       @Assisted Set<String> remotesToConsider,
       @Assisted ReplicationFilter filter,
       @Assisted ReplicationState state,
@@ -61,6 +64,7 @@ public class PushAll implements Runnable {
     this.replication = rq;
     this.stateLog = stateLog;
     this.urlMatch = urlMatch;
+    this.refMatch = refMatch;
     this.remotesToConsider = remotesToConsider;
     this.filter = filter;
     this.state = state;
@@ -76,7 +80,7 @@ public class PushAll implements Runnable {
     try {
       for (Project.NameKey nameKey : projectCache.all()) {
         if (filter.matches(nameKey)) {
-          replication.scheduleFullSync(nameKey, urlMatch, remotesToConsider, state, now);
+          replication.scheduleFullSync(nameKey, urlMatch, refMatch, remotesToConsider, state, now);
         }
       }
     } catch (Exception e) {
@@ -87,7 +91,9 @@ public class PushAll implements Runnable {
 
   @Override
   public String toString() {
-    String s = "Replicate All Projects";
+    String refs = PushOne.ALL_REFS.equals(refMatch) ? "All Refs" : "[" + refMatch + "]";
+    String s = "Replicate " + refs + " for All Projects";
+
     if (urlMatch != null) {
       s = s + " to " + urlMatch;
     }
