@@ -24,6 +24,7 @@ import static java.util.stream.Collectors.toMap;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
+import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedListMultimap;
@@ -558,6 +559,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private PushResult pushVia(Repository git, Transport tn)
       throws IOException, PermissionBackendException {
     tn.applyConfig(config);
+    setUploadAndReceivePack(tn);
     tn.setCredentialsProvider(credentialsFactory.create(config.getName()));
 
     List<RemoteRefUpdate> todo = generateUpdates(git, tn);
@@ -610,6 +612,24 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       completedBatch++;
     }
     return result;
+  }
+
+  private void setUploadAndReceivePack(Transport tn) {
+    String gitPath = pool.getGitPath();
+    if (Strings.isNullOrEmpty(gitPath)) {
+      return;
+    }
+    int lastSlash = gitPath.lastIndexOf('/');
+    if (lastSlash < 0) {
+      return;
+    }
+    String binDir = gitPath.substring(0, lastSlash + 1);
+    if (RemoteConfig.DEFAULT_UPLOAD_PACK.equals(config.getUploadPack())) {
+      tn.setOptionUploadPack(binDir + "git-upload-pack");
+    }
+    if (RemoteConfig.DEFAULT_RECEIVE_PACK.equals(config.getReceivePack())) {
+      tn.setOptionReceivePack(binDir + "git-receive-pack");
+    }
   }
 
   private static String refUpdatesForLogging(List<RemoteRefUpdate> refUpdates) {
