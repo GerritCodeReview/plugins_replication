@@ -898,6 +898,18 @@ public class Destination {
     return config.storeRefLog();
   }
 
+  String getUploadPack() {
+    return config.getUploadPack();
+  }
+
+  String getReceivePack() {
+    return config.getReceivePack();
+  }
+
+  String getGitPath() {
+    return config.getGitPath();
+  }
+
   private static boolean matches(URIish uri, String urlMatch) {
     if (urlMatch == null || urlMatch.equals("") || urlMatch.equals("*")) {
       return true;

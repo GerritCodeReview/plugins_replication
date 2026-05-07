@@ -57,6 +57,9 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final Supplier<Integer> pushBatchSize;
   private final ImmutableList<Pattern> excludedRefsPattern;
   private final boolean storeRefLog;
+  private final String uploadPack;
+  private final String receivePack;
+  private final String gitPath;
 
   protected DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
@@ -124,6 +127,9 @@ public class DestinationConfiguration implements RemoteConfiguration {
             });
     excludedRefsPattern = getExcludedRefsPattern(cfg, name);
     storeRefLog = cfg.getBoolean("remote", name, "storeRefLog", false);
+    uploadPack = cfg.getString("remote", name, "uploadpack");
+    receivePack = cfg.getString("remote", name, "receivepack");
+    gitPath = cfg.getString("remote", name, "gitPath");
   }
 
   @Override
@@ -232,6 +238,18 @@ public class DestinationConfiguration implements RemoteConfiguration {
   @Override
   public boolean storeRefLog() {
     return storeRefLog;
+  }
+
+  public String getUploadPack() {
+    return uploadPack;
+  }
+
+  public String getReceivePack() {
+    return receivePack;
+  }
+
+  public String getGitPath() {
+    return gitPath;
   }
 
   private ImmutableList<Pattern> getExcludedRefsPattern(Config cfg, String name) {
