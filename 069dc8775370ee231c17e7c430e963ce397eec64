@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfee9ca7_a88ab72f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-07T19:25:49Z",
+      "side": 1,
+      "message": "s/on/in/?",
+      "revId": "069dc8775370ee231c17e7c430e963ce397eec64",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e76fdf02_d58283a4",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-07T19:25:49Z",
+      "side": 1,
+      "message": "We probably want this to also be the default for receive and upload packs.",
+      "revId": "069dc8775370ee231c17e7c430e963ce397eec64",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
