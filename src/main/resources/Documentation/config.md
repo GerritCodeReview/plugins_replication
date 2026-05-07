@@ -342,7 +342,9 @@ remote.NAME.receivepack
 :	Path of the `git-receive-pack` executable on the remote
 	system, if using the SSH transport.
 
-	Defaults to `git-receive-pack`.
+	If not set and `remote.NAME.gitPath` is configured, defaults to
+	`git-receive-pack` in the directory of `gitPath`. Otherwise defaults
+	to `git-receive-pack`.
 
 remote.NAME.storeRefLog
 :	`true` if the remote repositories should be enabled for storing
@@ -359,7 +361,9 @@ remote.NAME.uploadpack
 :	Path of the `git-upload-pack` executable on the remote system,
 	if using the SSH transport.
 
-	Defaults to `git-upload-pack`.
+	If not set and `remote.NAME.gitPath` is configured, defaults to
+	`git-upload-pack` in the directory of `gitPath`. Otherwise defaults
+	to `git-upload-pack`.
 
 remote.NAME.push
 :	Standard Git refspec denoting what should be replicated.
@@ -499,6 +503,21 @@ remote.NAME.createMissingRepositories
 	remote.
 
 	By default, true, missing repositories are created.
+
+remote.NAME.gitPath
+:	Absolute path to the `git` binary on this SSH destination, used when
+	creating a missing repository or updating its HEAD. Set this when the
+	non-interactive SSH session on the remote host does not have `git`
+	on its `PATH`.
+
+	When set, the directory of `gitPath` is also used as the default
+	location for `git-upload-pack` and `git-receive-pack`, unless
+	`remote.NAME.uploadpack` or `remote.NAME.receivepack` are configured
+	explicitly.
+
+	Only applies to SSH destinations.
+
+	Default: `git` (resolved via the remote's `PATH`)
 
 remote.NAME.replicatePermissions
 :	If true, permissions-only projects and the refs/meta/config

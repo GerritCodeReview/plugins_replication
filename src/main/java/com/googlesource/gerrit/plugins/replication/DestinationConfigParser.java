@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.flogger.FluentLogger;
@@ -97,6 +98,7 @@ public class DestinationConfigParser implements ConfigParser {
     List<RemoteConfig> result = Lists.newArrayListWithCapacity(names.size());
     for (String name : names) {
       try {
+        deriveUploadAndReceivePackFromGitPath(cfg, name);
         result.add(new RemoteConfig(cfg, name));
       } catch (URISyntaxException e) {
         throw new ConfigInvalidException(
@@ -104,5 +106,23 @@ public class DestinationConfigParser implements ConfigParser {
       }
     }
     return result;
+  }
+
+  private static void deriveUploadAndReceivePackFromGitPath(Config cfg, String name) {
+    String gitPath = cfg.getString("remote", name, "gitPath");
+    if (Strings.isNullOrEmpty(gitPath)) {
+      return;
+    }
+    int lastSlash = gitPath.lastIndexOf('/');
+    if (lastSlash < 0) {
+      return;
+    }
+    String binDir = gitPath.substring(0, lastSlash + 1);
+    if (cfg.getString("remote", name, "uploadpack") == null) {
+      cfg.setString("remote", name, "uploadpack", binDir + "git-upload-pack");
+    }
+    if (cfg.getString("remote", name, "receivepack") == null) {
+      cfg.setString("remote", name, "receivepack", binDir + "git-receive-pack");
+    }
   }
 }
