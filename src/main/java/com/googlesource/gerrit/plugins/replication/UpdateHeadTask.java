@@ -23,10 +23,12 @@ import com.google.gerrit.server.util.IdGenerator;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.util.Optional;
+import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.URIish;
 
 public class UpdateHeadTask implements Runnable {
   private final DynamicItem<AdminApiFactory> adminApiFactory;
+  private final RemoteConfig remoteConfig;
   private final int id;
   private final URIish replicateURI;
   private final Project.NameKey project;
@@ -39,11 +41,13 @@ public class UpdateHeadTask implements Runnable {
   @Inject
   UpdateHeadTask(
       DynamicItem<AdminApiFactory> adminApiFactory,
+      RemoteConfig remoteConfig,
       IdGenerator ig,
       @Assisted URIish replicateURI,
       @Assisted Project.NameKey project,
       @Assisted String newHead) {
     this.adminApiFactory = adminApiFactory;
+    this.remoteConfig = remoteConfig;
     this.id = ig.next();
     this.replicateURI = replicateURI;
     this.project = project;
@@ -52,7 +56,8 @@ public class UpdateHeadTask implements Runnable {
 
   @Override
   public void run() {
-    Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI);
+    Optional<AdminApi> adminApi =
+        adminApiFactory.get().create(replicateURI, remoteConfig.getName());
     if (adminApi.isPresent()) {
       adminApi.get().updateHead(project, newHead);
       return;

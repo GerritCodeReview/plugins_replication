@@ -24,6 +24,7 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import java.util.Optional;
+import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.URIish;
 
 public class DeleteProjectTask implements Runnable {
@@ -33,6 +34,7 @@ public class DeleteProjectTask implements Runnable {
         URIish replicateURI, Project.NameKey project, ProjectDeletionState state);
   }
 
+  private final RemoteConfig config;
   private final DynamicItem<AdminApiFactory> adminApiFactory;
   private final int id;
   private final URIish replicateURI;
@@ -41,11 +43,13 @@ public class DeleteProjectTask implements Runnable {
 
   @Inject
   DeleteProjectTask(
+      RemoteConfig config,
       DynamicItem<AdminApiFactory> adminApiFactory,
       IdGenerator ig,
       @Assisted ProjectDeletionState state,
       @Assisted URIish replicateURI,
       @Assisted Project.NameKey project) {
+    this.config = config;
     this.adminApiFactory = adminApiFactory;
     this.id = ig.next();
     this.replicateURI = replicateURI;
@@ -55,7 +59,7 @@ public class DeleteProjectTask implements Runnable {
 
   @Override
   public void run() {
-    Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI);
+    Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI, config.getName());
     if (adminApi.isPresent()) {
       if (adminApi.get().deleteProject(project)) {
         state.setSucceeded(replicateURI);
