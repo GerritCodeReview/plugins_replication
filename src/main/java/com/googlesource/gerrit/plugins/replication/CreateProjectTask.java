@@ -61,7 +61,7 @@ public class CreateProjectTask {
 
   private boolean createProject(
       URIish replicateURI, Project.NameKey projectName, String head, boolean storeRefLog) {
-    Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI);
+    Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI, config.getName());
     if (adminApi.isPresent() && adminApi.get().createProject(projectName, head, storeRefLog)) {
       return true;
     }
