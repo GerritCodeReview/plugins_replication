@@ -16,6 +16,8 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
+import com.google.common.base.Strings;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -26,18 +28,25 @@ public class RemoteSsh implements AdminApi {
 
   private final SshHelper sshHelper;
   private URIish uri;
+  private final String git;
 
   RemoteSsh(SshHelper sshHelper, URIish uri) {
+    this(sshHelper, uri, null);
+  }
+
+  RemoteSsh(SshHelper sshHelper, URIish uri, @Nullable String gitPath) {
     this.sshHelper = sshHelper;
     this.uri = uri;
+    this.git = Strings.isNullOrEmpty(gitPath) ? "git" : QuotedString.BOURNE.quote(gitPath);
   }
 
   @Override
   public boolean createProject(Project.NameKey project, String head) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
-    String cmd = "mkdir -p " + quotedPath + " && cd " + quotedPath + " && git init --bare";
+    String cmd =
+        "mkdir -p " + quotedPath + " && cd " + quotedPath + " && " + git + " init --bare";
     if (head != null) {
-      cmd = cmd + " && git symbolic-ref HEAD " + QuotedString.BOURNE.quote(head);
+      cmd = cmd + " && " + git + " symbolic-ref HEAD " + QuotedString.BOURNE.quote(head);
     }
     OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
@@ -79,7 +88,12 @@ public class RemoteSsh implements AdminApi {
   public boolean updateHead(Project.NameKey project, String newHead) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
     String cmd =
-        "cd " + quotedPath + " && git symbolic-ref HEAD " + QuotedString.BOURNE.quote(newHead);
+        "cd "
+            + quotedPath
+            + " && "
+            + git
+            + " symbolic-ref HEAD "
+            + QuotedString.BOURNE.quote(newHead);
     OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
       sshHelper.executeRemoteSsh(uri, cmd, errStream);

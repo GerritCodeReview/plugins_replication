@@ -500,6 +500,16 @@ remote.NAME.createMissingRepositories
 
 	By default, true, missing repositories are created.
 
+remote.NAME.gitPath
+:	Absolute path to the `git` binary on this SSH destination, used when
+	creating a missing repository or updating its HEAD. Set this when the
+	non-interactive SSH session on the remote host does not have `git`
+	on its `PATH`.
+
+	Only applies to SSH destinations.
+
+	Default: `git` (resolved via the remote's `PATH`)
+
 remote.NAME.replicatePermissions
 :	If true, permissions-only projects and the refs/meta/config
 	branch will also be replicated to the remote site.  These

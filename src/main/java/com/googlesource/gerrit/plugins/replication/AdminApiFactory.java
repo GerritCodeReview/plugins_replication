@@ -14,9 +14,12 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.gerrit.common.Nullable;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Optional;
+
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import org.eclipse.jgit.transport.URIish;
 
 /** Factory for creating an {@link AdminApi} instance for a remote URI. */
@@ -30,25 +33,52 @@ public interface AdminApiFactory {
    */
   Optional<AdminApi> create(URIish uri);
 
+  /**
+   * Create an {@link AdminApi} for the given remote URI with knowledge of which {@code
+   * remote.<remoteName>} section in {@code replication.config} the URI belongs to.
+   *
+   * @param uri the remote URI.
+   * @param remoteName the name of the {@code remote} section, or {@code null} when unknown.
+   * @return An API for the given remote URI, or {@code Optional.empty} if there is no appropriate
+   *     API for the URI.
+   */
+  default Optional<AdminApi> create(URIish uri, @Nullable String remoteName) {
+    return create(uri);
+  }
+
   @Singleton
   static class DefaultAdminApiFactory implements AdminApiFactory {
     protected final SshHelper sshHelper;
     private final GerritRestApi.Factory gerritRestApiFactory;
+    private final ReplicationConfig replicationConfig;
 
     @Inject
-    public DefaultAdminApiFactory(SshHelper sshHelper, GerritRestApi.Factory gerritRestApiFactory) {
+    public DefaultAdminApiFactory(
+        SshHelper sshHelper,
+        GerritRestApi.Factory gerritRestApiFactory,
+        ReplicationConfig replicationConfig) {
       this.sshHelper = sshHelper;
       this.gerritRestApiFactory = gerritRestApiFactory;
+      this.replicationConfig = replicationConfig;
     }
 
     @Override
     public Optional<AdminApi> create(URIish uri) {
+      return create(uri, null);
+    }
+
+    @Override
+    public Optional<AdminApi> create(URIish uri, @Nullable String remoteName) {
       if (isGerrit(uri)) {
         return Optional.of(new GerritSshApi(sshHelper, uri));
       } else if (!uri.isRemote()) {
         return Optional.of(new LocalFS(uri));
       } else if (isSSH(uri)) {
-        return Optional.of(new RemoteSsh(sshHelper, uri));
+        String gitPath =
+            remoteName == null
+                ? null
+                : replicationConfig.getConfig().getString("remote", remoteName, "gitPath");
+        return Optional.of(new RemoteSsh(sshHelper, uri, gitPath));
       } else if (isGerritHttp(uri)) {
         return Optional.of(gerritRestApiFactory.create(uri));
       }
