@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "652bb4a4_a0bec5da",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-08T22:14:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfee9ca7_a88ab72f",
+      "revId": "069dc8775370ee231c17e7c430e963ce397eec64",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e76fdf02_d58283a4",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-07T19:25:49Z",
       "side": 1,
       "message": "We probably want this to also be the default for receive and upload packs.",
+      "revId": "069dc8775370ee231c17e7c430e963ce397eec64",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85683997_5c32885f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-08T22:14:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e76fdf02_d58283a4",
       "revId": "069dc8775370ee231c17e7c430e963ce397eec64",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
