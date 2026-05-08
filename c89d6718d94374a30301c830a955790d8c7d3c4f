@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b495ffcf_32c5a682",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AdminApiFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-08T22:27:39Z",
+      "side": 1,
+      "message": "Hmm, this feels a bit weird to ignore the remoteName by default.",
+      "revId": "c89d6718d94374a30301c830a955790d8c7d3c4f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "173f54df_b2be596d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-08T22:27:39Z",
+      "side": 1,
+      "message": "Use setString here feels really weird too.",
+      "revId": "c89d6718d94374a30301c830a955790d8c7d3c4f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
