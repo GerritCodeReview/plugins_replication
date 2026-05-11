@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad8139b_ba7f0832",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AdminApiFactory.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-11T23:09:39Z",
+      "side": 1,
+      "message": "`DeleteProjectTask` does need the remote name, but, we can still send it, as it will be consistent with `CreateProjectTask`.",
+      "parentUuid": "b495ffcf_32c5a682",
+      "revId": "c89d6718d94374a30301c830a955790d8c7d3c4f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "173f54df_b2be596d",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-08T22:27:39Z",
       "side": 1,
       "message": "Use setString here feels really weird too.",
+      "revId": "c89d6718d94374a30301c830a955790d8c7d3c4f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62e98893_6a5ad8ea",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-11T23:09:39Z",
+      "side": 1,
+      "message": "`uploadpack` and `receivepack` are consumed directly in JGit, and its `RemoteConfig` does not provide setters for them. So, we have to resort to using setString on the config here to override the defaults.\n\nWould you prefer to drop the logic where `gitPath` influences the defaults of `uploadpack` and `receivepack` instead?",
+      "parentUuid": "173f54df_b2be596d",
       "revId": "c89d6718d94374a30301c830a955790d8c7d3c4f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
