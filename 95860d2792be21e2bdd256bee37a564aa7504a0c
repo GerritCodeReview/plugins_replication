@@ -35,6 +35,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50600a5f_695a849d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-05-11T06:09:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ec378fe_9a56858f",
+      "revId": "95860d2792be21e2bdd256bee37a564aa7504a0c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05655f30_97966183",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-05-08T16:35:36Z",
       "side": 1,
       "message": "could be null too ?",
+      "revId": "95860d2792be21e2bdd256bee37a564aa7504a0c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d73961e2_9c70022a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushAll.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-05-11T06:09:25Z",
+      "side": 1,
+      "message": "In the `StartCommand.java` it is already mentioned to a default value.\nIf the user doesn\u0027t provide a ref, the code should pass PushOne.ALL_REFS into the constructor and not a null value.",
+      "parentUuid": "05655f30_97966183",
       "revId": "95860d2792be21e2bdd256bee37a564aa7504a0c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -118,6 +154,24 @@
       "writtenOn": "2026-05-08T16:35:36Z",
       "side": 1,
       "message": "use formatter.",
+      "revId": "95860d2792be21e2bdd256bee37a564aa7504a0c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a6f6e8a_2eaa13bb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-05-11T06:09:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "436c6761_2155b8a1",
       "revId": "95860d2792be21e2bdd256bee37a564aa7504a0c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
