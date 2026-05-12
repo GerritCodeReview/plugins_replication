@@ -87,6 +87,24 @@
       "parentUuid": "62e98893_6a5ad8ea",
       "revId": "c89d6718d94374a30301c830a955790d8c7d3c4f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd047391_42734e57",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfigParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-12T15:28:55Z",
+      "side": 1,
+      "message": "I moved the logic to PushOne which seems better and avoids the `setString`s.",
+      "parentUuid": "ac7c93b0_037e4860",
+      "revId": "c89d6718d94374a30301c830a955790d8c7d3c4f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
