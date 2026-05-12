@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e226a172_789d1fbf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-12T15:30:16Z",
+      "side": 1,
+      "message": "I am worried that this might override the setting if it is explicitly set to the default in the config file?",
+      "revId": "3c99c31ea1d803a2a01fef7a0cd7f1480de5221c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
