@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74c3236c_241c301b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2026-05-13T11:29:41Z",
+      "side": 1,
+      "message": "This is needed to update Bazel top 10.x version, that also updates rules_java to 9.5.0 and has new error-prone version.",
+      "revId": "ddc48d221f2fbfe60b638844ab84130216fdd55a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
