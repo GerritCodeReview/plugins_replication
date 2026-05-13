@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05f12ac6_71c50395",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2026-05-13T17:41:24Z",
+      "side": 1,
+      "message": "I think we can do this and still keep error prone happy. If not, I would suppress it. The [intent](https://errorprone.info/bugpattern/FloggerStringConcatenation) is to avoid work at the logging site and concatenating two strings isn\u0027t the kind of work they\u0027re trying to flag.\n```suggestion\n      String message \u003d \"Error while walking directory\";\n      if (isMultiPrimary() \u0026\u0026 e instanceof NoSuchFileException) {\n        logger.atFine().log(\n            \"%s %s (expected regularly with multi-primaries and distributor enabled)\",\n            message, path);\n      } else {\n        logger.atSevere().withCause(e).log(\"%s %s\", message, path);\n```",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 85
+      },
+      "revId": "d7aab686673522364f7324b5f7a334e0c72398ea",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
