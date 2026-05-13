@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c7abfd4_58269dbe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/CopyPacksCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-13T05:56:32Z",
+      "side": 1,
+      "message": "It should be, `uri.getPath()` is used to create the project for example.",
+      "parentUuid": "fb67fd14_f70cf44c",
+      "revId": "c8a97ebcace9b73f675ff50198f50d29048c5cf8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8f0ab13_c393ba22",
         "filename": "src/main/resources/Documentation/cmd-copy-packs.md",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-01T21:15:19Z",
       "side": 1,
       "message": "I can imagine that we will want to offer more ways to repair repos, so having a more generic command such as \"repair\" with all sorts of switches such as copy-packs, copy packed-refs (this likely should be next) would make more sense? However, if we had something like \"repair\", then I would expect it to be smarter, to know what to do instead of having to mention switches. However, \"smarter\" does not feel like a good incremental step. Perhaps what makes more sense is to treat this like some sort of replication (instead of repair) command in itself. It is sort of a non-git protocol approach to replication (after all, the pull-replication plugin does all sorts of non-git protocol replication). So, what if we added these switches directly to the \u0027replication start\u0027 command? \n\nIf we add these switches to the \u0027replication start\u0027 command, one could imagine even a --copy-all-on-init switch that could be used to \"seed\" new repos more quickly than a git push (which currently cannot really be used for new repos with large ref counts anyway). Also, one could imagine someday working with the git community to move or replace these \"out-of-band\" approaches to faster replication (and repair) into the git protocol itself. I can envision the replication plugin being a driver to get protocol V2 implemented in git, and these could then eventually become options which protocol V2 could implement.\n\nThat being said, I have no objection to a new command, but if we have one, then maybe it should be more like start-out-of-band, or \"copy\"?",
+      "revId": "c8a97ebcace9b73f675ff50198f50d29048c5cf8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe2a53ab_726c15b9",
+        "filename": "src/main/resources/Documentation/cmd-copy-packs.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-13T05:56:32Z",
+      "side": 1,
+      "message": "\u003eThat being said, I have no objection to a new command, but if we have one, then maybe it should be more like start-out-of-band, or \"copy\"?\n\n\nA standalone replication \u0027copy\u0027 without a follow-up \u0027replication start\u0027 is not something we want in practice, so combining them into a single \u0027repair\u0027 command seems like the right approach. \u0027Repair\u0027 seems like the appropriate term because the user-visible operation is \u0027make the destination consistent for this project\u0027, which conceptually is object-copy + start. The repair command also leaves room for future extensions such as --copy-loose-objects, --all, and eventually a smarter \u0027send-only-whats-missing\u0027 variant.",
+      "parentUuid": "a8f0ab13_c393ba22",
       "revId": "c8a97ebcace9b73f675ff50198f50d29048c5cf8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
