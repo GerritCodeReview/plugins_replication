@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eba46625_36c86e1e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-13T16:42:11Z",
+      "side": 1,
+      "message": "error msg seems confusing when copy-packs is specified with false. (skipping repair ?)",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7f2adb2_e7828e7e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-13T16:42:11Z",
+      "side": 1,
+      "message": "ignore logging ? (same as `replication start`)",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dc82491_73c05ffe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-13T16:42:11Z",
+      "side": 1,
+      "message": "is listing needed ? Can we just give the rsync pattern ?",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08c4117c_9ba63d08",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-13T16:42:11Z",
+      "side": 1,
+      "message": "safe to consider everything in the else ? \n```suggestion\n        } else {\n```",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6edf1f9_1974a237",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-13T16:42:11Z",
+      "side": 1,
+      "message": "check if rsync is available or take the executable path as a config option ?",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49c5f437_2c4a9247",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-13T16:42:11Z",
+      "side": 1,
+      "message": "provide options via config ? (could be later on)",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e0e2f06_3add3bd0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-13T16:42:11Z",
+      "side": 1,
+      "message": "Already interrupted ?",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61ab9276_34ea6832",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-13T16:42:11Z",
+      "side": 1,
+      "message": "s/getOutputStream/getFlushingOutputStream/",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b691d68c_0ddc40a0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-13T16:42:11Z",
+      "side": 1,
+      "message": "create dir on remote if necessary ?",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ed4607c_9b5c0aea",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-13T16:42:11Z",
+      "side": 1,
+      "message": "why to lock ? I see that its already there but not sure why.",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5716068_669c757a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationStarter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-13T16:42:11Z",
+      "side": 1,
+      "message": "Do we want logs of repair command in stateLog ? Since we are already routing some to stdout/err",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}

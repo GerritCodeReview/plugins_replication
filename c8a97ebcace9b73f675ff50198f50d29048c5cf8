@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de7faae3_e32f1b9e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/CopyPacksCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-13T16:42:11Z",
+      "side": 1,
+      "message": "I wonder how no one ever faced into it. If it already used, we can fix it later.",
+      "parentUuid": "7c7abfd4_58269dbe",
+      "revId": "c8a97ebcace9b73f675ff50198f50d29048c5cf8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8f0ab13_c393ba22",
         "filename": "src/main/resources/Documentation/cmd-copy-packs.md",
         "patchSetId": 2
