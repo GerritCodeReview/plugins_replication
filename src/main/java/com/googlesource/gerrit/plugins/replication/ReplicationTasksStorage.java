@@ -226,12 +226,13 @@ public class ReplicationTasksStorage {
     } catch (NotDirectoryException e) {
       return Stream.of(path);
     } catch (Exception e) {
-      String message = "Error while walking directory %s";
+      String message = "Error while walking directory";
       if (isMultiPrimary() && e instanceof NoSuchFileException) {
         logger.atFine().log(
-            message + " (expected regularly with multi-primaries and distributor enabled)", path);
+            "%s %s (expected regularly with multi-primaries and distributor enabled)",
+            message, path);
       } else {
-        logger.atSevere().withCause(e).log(message, path);
+        logger.atSevere().withCause(e).log("%s %s", message, path);
       }
       return Stream.empty();
     }
@@ -401,15 +402,14 @@ public class ReplicationTasksStorage {
         logger.atFine().log("DELETE %s %s", running, updateLog());
         Files.delete(running);
       } catch (IOException e) {
-        String message = "Error while deleting task %s";
         if (isMultiPrimary() && e instanceof NoSuchFileException) {
           logger.atFine().log(
-              message
+              "Error while deleting task %s"
                   + " (expected after recovery from another node's startup with multi-primaries and"
                   + " distributor enabled)",
               taskKey);
         } else {
-          logger.atSevere().withCause(e).log(message, taskKey);
+          logger.atSevere().withCause(e).log("Error while deleting task %s", taskKey);
         }
       }
     }
@@ -421,13 +421,13 @@ public class ReplicationTasksStorage {
         Files.move(from, to, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
         return true;
       } catch (IOException e) {
-        String message = "Error while renaming task %s";
         if (isMultiPrimary() && e instanceof NoSuchFileException) {
           logger.atFine().log(
-              message + " (expected regularly with multi-primaries and distributor enabled)",
+              "Error while renaming task %s"
+                  + " (expected regularly with multi-primaries and distributor enabled)",
               taskKey);
         } else {
-          logger.atSevere().withCause(e).log(message, taskKey);
+          logger.atSevere().withCause(e).log("Error while renaming task %s", taskKey);
         }
         return false;
       }
