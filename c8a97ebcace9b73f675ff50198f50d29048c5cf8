@@ -54,6 +54,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfa0ab24_519f3215",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/CopyPacksCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-14T19:34:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "de7faae3_e32f1b9e",
+      "revId": "c8a97ebcace9b73f675ff50198f50d29048c5cf8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8f0ab13_c393ba22",
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "\u003eThat being said, I have no objection to a new command, but if we have one, then maybe it should be more like start-out-of-band, or \"copy\"?\n\n\nA standalone replication \u0027copy\u0027 without a follow-up \u0027replication start\u0027 is not something we want in practice, so combining them into a single \u0027repair\u0027 command seems like the right approach. \u0027Repair\u0027 seems like the appropriate term because the user-visible operation is \u0027make the destination consistent for this project\u0027, which conceptually is object-copy + start. The repair command also leaves room for future extensions such as --copy-loose-objects, --all, and eventually a smarter \u0027send-only-whats-missing\u0027 variant.",
       "parentUuid": "a8f0ab13_c393ba22",
+      "revId": "c8a97ebcace9b73f675ff50198f50d29048c5cf8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb7e097a_f676200a",
+        "filename": "src/main/resources/Documentation/cmd-copy-packs.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-14T19:34:00Z",
+      "side": 1,
+      "message": "Marking as resolved.",
+      "parentUuid": "fe2a53ab_726c15b9",
       "revId": "c8a97ebcace9b73f675ff50198f50d29048c5cf8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }

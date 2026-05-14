@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e853210f_1714a3af",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-14T19:34:00Z",
+      "side": 1,
+      "message": "I added a new `--full` option now which is the default.",
+      "parentUuid": "eba46625_36c86e1e",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7f2adb2_e7828e7e",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-13T16:42:11Z",
       "side": 1,
       "message": "ignore logging ? (same as `replication start`)",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcf43140_fb0466f5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-14T19:34:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7f2adb2_e7828e7e",
       "revId": "237ae963dc7323a84e95186b7547984166335c12",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -52,6 +88,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa168fd5_96bd57e3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-14T19:34:00Z",
+      "side": 1,
+      "message": "Using a pattern now.",
+      "parentUuid": "0dc82491_73c05ffe",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08c4117c_9ba63d08",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-05-13T16:42:11Z",
       "side": 1,
       "message": "safe to consider everything in the else ? \n```suggestion\n        } else {\n```",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "071c1291_653fe5e9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-14T19:34:00Z",
+      "side": 1,
+      "message": "There might be other files in there such as .nfsXXX. We don\u0027t want to copy those.",
+      "parentUuid": "08c4117c_9ba63d08",
       "revId": "237ae963dc7323a84e95186b7547984166335c12",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -86,6 +158,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d4bad3e_8bfc1ee4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-14T19:34:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6edf1f9_1974a237",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49c5f437_2c4a9247",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-05-13T16:42:11Z",
       "side": 1,
       "message": "provide options via config ? (could be later on)",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c4ddca1_6d85e7fa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-14T19:34:00Z",
+      "side": 1,
+      "message": "We probably dont want too much flexibility w.r.t options. Lets tackle that in future changes if needed.",
+      "parentUuid": "49c5f437_2c4a9247",
       "revId": "237ae963dc7323a84e95186b7547984166335c12",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -120,6 +228,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad64073_09af3d8f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-14T19:34:00Z",
+      "side": 1,
+      "message": "Removed now.",
+      "parentUuid": "4e0e2f06_3add3bd0",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61ab9276_34ea6832",
@@ -133,6 +259,24 @@
       "writtenOn": "2026-05-13T16:42:11Z",
       "side": 1,
       "message": "s/getOutputStream/getFlushingOutputStream/",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44ef188e_e1885a72",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-14T19:34:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61ab9276_34ea6832",
       "revId": "237ae963dc7323a84e95186b7547984166335c12",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -154,6 +298,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c65fb39_c4f698d5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-14T19:34:00Z",
+      "side": 1,
+      "message": "rsync should create the pack dir if it does not exist. If the objects dir itself is missing, then it means the repo is really in a bad state and a git init should be run on it. Maybe the repair cmd can do that too, but for now, lets scope it to fixing an already init project.",
+      "parentUuid": "b691d68c_0ddc40a0",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ed4607c_9b5c0aea",
@@ -171,6 +333,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e46cdbe4_d8cfc5f6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-14T19:34:00Z",
+      "side": 1,
+      "message": "It is meant to serialize concurrent writes during the replication start phase after the rsync.",
+      "parentUuid": "7ed4607c_9b5c0aea",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5716068_669c757a",
@@ -184,6 +364,24 @@
       "writtenOn": "2026-05-13T16:42:11Z",
       "side": 1,
       "message": "Do we want logs of repair command in stateLog ? Since we are already routing some to stdout/err",
+      "revId": "237ae963dc7323a84e95186b7547984166335c12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35798eb3_93c4c492",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationStarter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-14T19:34:00Z",
+      "side": 1,
+      "message": "I think we need it because it helps write replication failures triggered by the repair to the replication_log which is useful for triage later.",
+      "parentUuid": "c5716068_669c757a",
       "revId": "237ae963dc7323a84e95186b7547984166335c12",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
