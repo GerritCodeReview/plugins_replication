@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93bf1f26_b2826cbb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-15T22:27:34Z",
+      "side": 1,
+      "message": "Yeah, thats the `--remote` option you added, I think.",
+      "parentUuid": "0c78ad05_267c10f3",
+      "revId": "0eb6146818bea676323f48ec9be5c5ec36b4e314",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c21fca4_9fb32e7d",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-15T20:17:00Z",
       "side": 1,
       "message": "`rsyncPath` should be from primary.",
+      "revId": "0eb6146818bea676323f48ec9be5c5ec36b4e314",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47738a46_e861d0d0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-15T22:27:34Z",
+      "side": 1,
+      "message": "Right, done.",
+      "parentUuid": "3c21fca4_9fb32e7d",
       "revId": "0eb6146818bea676323f48ec9be5c5ec36b4e314",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -52,6 +88,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff0fe798_4ff3b649",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-15T22:27:34Z",
+      "side": 1,
+      "message": "I don\u0027t think we\u0027d benefit much from using it. We don\u0027t expect repair to happen as often as pushes, needing url distribution. Moreover the url distribution change is not on this branch yet.",
+      "parentUuid": "940cda75_37bba529",
+      "revId": "0eb6146818bea676323f48ec9be5c5ec36b4e314",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92d92464_dd6a6dd0",
@@ -69,6 +123,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb53ff0f_93fe495c",
+        "filename": "src/main/resources/Documentation/cmd-repair.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-15T22:27:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92d92464_dd6a6dd0",
+      "revId": "0eb6146818bea676323f48ec9be5c5ec36b4e314",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26724de1_f9b0c0ef",
@@ -82,6 +154,24 @@
       "writtenOn": "2026-05-15T20:17:00Z",
       "side": 1,
       "message": "`Start Replication` capability seems different than repair ?",
+      "revId": "0eb6146818bea676323f48ec9be5c5ec36b4e314",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c10a0875_a0e95a36",
+        "filename": "src/main/resources/Documentation/cmd-repair.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-15T22:27:34Z",
+      "side": 1,
+      "message": "repair writes the same kind of data to the same destinations using the same credentials as start, and also finishes by literally invoking \u0027replication start\u0027. The current capability seems apt for repair too. Creating a new one might make it more complicated without any added benefit.",
+      "parentUuid": "26724de1_f9b0c0ef",
       "revId": "0eb6146818bea676323f48ec9be5c5ec36b4e314",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
