@@ -29,10 +29,12 @@ import com.google.gerrit.server.notedb.ChangeNotes;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Set;
@@ -54,6 +56,8 @@ class PushHaveRefFilter implements RefFilter {
         Repository git, Project.NameKey project, Collection<RemoteRefUpdate> updates);
   }
 
+  private static final int MAX_FALLBACK_REFS = 500;
+
   private final ChangeNotes.Factory changeNotesFactory;
   private final Project.NameKey project;
   private final Repository git;
@@ -62,6 +66,7 @@ class PushHaveRefFilter implements RefFilter {
   private final Map<ObjectId, Ref> remoteRefByObjectId = new HashMap<>();
   private final NavigableMap<String, Ref> remoteRefsByName = new TreeMap<>();
   private final SetMultimap<Change.Id, Ref> remotePatchSetRefsByChangeId = HashMultimap.create();
+  private final Set<RemoteRefUpdate> needShortcutRefsFor = new HashSet<>();
 
   private Set<String> toPushRefNames;
   private Set<Ref> neededRefs;
@@ -116,9 +121,31 @@ class PushHaveRefFilter implements RefFilter {
             // Note: a "normal" change ref has a single parent, and was not pushed with special
             // flags preventing parent changes from being created, and it has not had its
             // destination ref rewound to remove its parent.
-            addRefsKnownToHelp(rw, toPush);
+            if (!addRefsKnownToHelp(rw, toPush)) {
+              needShortcutRefsFor.add(toPush);
+            }
           }
         }
+      }
+    }
+
+    if (!needShortcutRefsFor.isEmpty()) {
+      List<Ref> refsToConsiderForShortCuts =
+          remoteRefs.stream()
+              .filter(
+                  ref -> {
+                    String name = ref.getName();
+                    return !RefNames.isRefsChanges(name) && !RefNames.isAutoMergeRef(name);
+                  })
+              .toList();
+
+      if (refsToConsiderForShortCuts.size() < MAX_FALLBACK_REFS) {
+        neededRefs.addAll(refsToConsiderForShortCuts);
+      } else {
+        Set<Ref> neighborRefs = findBestNeighborsFor();
+        repLog.atFine().log("Using neighbor refs %s as push haves for %s", neighborRefs, project);
+        neededRefs.addAll(neighborRefs);
+        neededRefs.addAll(getStripedRefs(refsToConsiderForShortCuts, neighborRefs));
       }
     }
 
@@ -204,9 +231,10 @@ class PushHaveRefFilter implements RefFilter {
     return hasChangeDestShortCut && parents != null && parents.size() == 1;
   }
 
-  private void addRefsKnownToHelp(RevWalk rw, RemoteRefUpdate toPush) {
+  private boolean addRefsKnownToHelp(RevWalk rw, RemoteRefUpdate toPush) {
     String toPushRefName = toPush.getRemoteName();
     ObjectId newObjectId = toPush.getNewObjectId();
+    Ref shortcut = null;
     try {
       RevObject newObj = rw.parseAny(newObjectId);
       if (newObj instanceof RevTag) {
@@ -215,7 +243,7 @@ class PushHaveRefFilter implements RefFilter {
       if (!(newObj instanceof RevCommit)) {
         repLog.atWarning().log("Object %s is not a commit", newObj.getId().getName());
         addFallBackRefs();
-        return;
+        return false;
       }
 
       rw.reset();
@@ -241,7 +269,7 @@ class PushHaveRefFilter implements RefFilter {
       // if it does, this can drastically shorten the history needed to be pushed without actually
       // walking any other refs.
       for (RevCommit c : rw) {
-        Ref shortcut = remoteRefByObjectId.get(c.getId());
+        shortcut = remoteRefByObjectId.get(c.getId());
         if (shortcut != null) {
           neededRefs.add(shortcut);
           break;
@@ -252,6 +280,8 @@ class PushHaveRefFilter implements RefFilter {
           "Unable to walk from %s for %s", newObjectId, toPushRefName);
       addFallBackRefs();
     }
+
+    return shortcut != null;
   }
 
   private void addFallBackRefs() {
@@ -293,6 +323,52 @@ class PushHaveRefFilter implements RefFilter {
       repLog.atWarning().withCause(e).log("Unable to get parents of %s", update.getRemoteName());
       return null;
     }
+  }
+
+  private Set<Ref> findBestNeighborsFor() {
+    Set<Ref> neighborRefs = new HashSet<>();
+    for (RemoteRefUpdate u : needShortcutRefsFor) {
+      String name = u.getRemoteName();
+      addAlphabeticalNeighborRefs(remoteRefsByName, name, neighborRefs);
+    }
+    return neighborRefs;
+  }
+
+  private static void addAlphabeticalNeighborRefs(
+      NavigableMap<String, Ref> refsByName, String name, Set<Ref> result) {
+    Map.Entry<String, Ref> lower = refsByName.lowerEntry(name);
+    Map.Entry<String, Ref> higher = refsByName.higherEntry(name);
+    if (lower != null) {
+      result.add(lower.getValue());
+    }
+    if (higher != null) {
+      result.add(higher.getValue());
+    }
+  }
+
+  private List<Ref> getStripedRefs(
+      List<Ref> refsToConsiderForShortCuts, Collection<Ref> neighborRefs) {
+    Set<String> neighborRefNames =
+        neighborRefs.stream().map(Ref::getName).collect(Collectors.toSet());
+    List<Ref> refsToStripe =
+        refsToConsiderForShortCuts.stream()
+            .filter(ref -> !neighborRefNames.contains(ref.getName()))
+            .toList();
+
+    int poolSize = refsToStripe.size();
+    List<Ref> stripedRefs = new ArrayList<>();
+    if (poolSize <= MAX_FALLBACK_REFS) {
+      stripedRefs.addAll(refsToStripe);
+    } else {
+      int skipCount = (poolSize + MAX_FALLBACK_REFS - 1) / MAX_FALLBACK_REFS;
+      for (int i = 0; i < poolSize; i++) {
+        Ref ref = refsToStripe.get(i);
+        if ((i + 1) % skipCount == 0) {
+          stripedRefs.add(ref);
+        }
+      }
+    }
+    return stripedRefs;
   }
 
   private void buildRemoteRefsMaps() {
