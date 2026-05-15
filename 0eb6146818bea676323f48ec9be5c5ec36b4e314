@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c21fca4_9fb32e7d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-15T20:17:00Z",
+      "side": 1,
+      "message": "`rsyncPath` should be from primary.",
+      "revId": "0eb6146818bea676323f48ec9be5c5ec36b4e314",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "940cda75_37bba529",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-15T20:17:00Z",
+      "side": 1,
+      "message": "Do we want it to support the `roundRobin` flag ?",
+      "revId": "0eb6146818bea676323f48ec9be5c5ec36b4e314",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92d92464_dd6a6dd0",
+        "filename": "src/main/resources/Documentation/cmd-repair.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-15T20:17:00Z",
+      "side": 1,
+      "message": "or configure them on `destination.rsynPath`...",
+      "revId": "0eb6146818bea676323f48ec9be5c5ec36b4e314",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26724de1_f9b0c0ef",
+        "filename": "src/main/resources/Documentation/cmd-repair.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-15T20:17:00Z",
+      "side": 1,
+      "message": "`Start Replication` capability seems different than repair ?",
+      "revId": "0eb6146818bea676323f48ec9be5c5ec36b4e314",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
