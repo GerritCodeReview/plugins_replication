@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9824b8b_224efc13",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-15T23:34:09Z",
+      "side": 1,
+      "message": "Something for later as you add more stages. I think it would be nice to separate each repair stage as a class (could be nested here).\n\n```\ninterface Step {\n   public boolean run(Project p);\n}\n```",
+      "revId": "fa48c74a718967e0e7f588ed7d654a8c802fd429",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75fd8cbb_352165d5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-15T23:34:09Z",
+      "side": 1,
+      "message": "Do we need outputLock here ?",
+      "revId": "fa48c74a718967e0e7f588ed7d654a8c802fd429",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86cdbcd5_ed4b19af",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-15T23:34:09Z",
+      "side": 1,
+      "message": "Do we instead want to just override flush ?",
+      "revId": "fa48c74a718967e0e7f588ed7d654a8c802fd429",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cea9712_5815295c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-15T23:34:09Z",
+      "side": 1,
+      "message": "can we consistently use either stdout or out. Do we need both ?",
+      "revId": "fa48c74a718967e0e7f588ed7d654a8c802fd429",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
