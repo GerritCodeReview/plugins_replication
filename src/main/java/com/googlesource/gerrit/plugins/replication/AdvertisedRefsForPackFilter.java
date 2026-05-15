@@ -29,10 +29,12 @@ import com.google.gerrit.server.notedb.ChangeNotes;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Set;
@@ -62,6 +64,7 @@ class AdvertisedRefsForPackFilter implements RefFilter {
   protected Map<ObjectId, Ref> advertisedRefByObjectId = new HashMap<>();
   protected NavigableMap<String, Ref> advertisedRefsByName = new TreeMap<>();
   protected SetMultimap<Change.Id, Ref> advertisedPatchSetRefsByChangeId = HashMultimap.create();
+  protected Set<RemoteRefUpdate> needShortcutRefsFor = new HashSet<>();
 
   protected Set<String> toPushRefNames;
   protected Set<Ref> neededRefs;
@@ -118,9 +121,31 @@ class AdvertisedRefsForPackFilter implements RefFilter {
             // flags
             // preventing parent changes from being created, and it has not had its destination ref
             // rewound to remove its parent.
-            addRefsKnownToHelp(rw, toPush);
+            if (!addRefsKnownToHelp(rw, toPush)) {
+              needShortcutRefsFor.add(toPush);
+            }
           }
         }
+      }
+    }
+
+    if (!needShortcutRefsFor.isEmpty()) {
+      List<Ref> refsToConsiderForShortCuts =
+          advertisedRefs.stream()
+              .filter(
+                  ref -> {
+                    String name = ref.getName();
+                    return !RefNames.isRefsChanges(name) && !RefNames.isAutoMergeRef(name);
+                  })
+              .toList();
+
+      if (refsToConsiderForShortCuts.size() < 500) {
+        neededRefs.addAll(refsToConsiderForShortCuts);
+      } else {
+        Set<Ref> neighborRefs = findBestNeighborsFor();
+        repLog.atInfo().log("neighborRefs: %s", neighborRefs);
+        neededRefs.addAll(neighborRefs);
+        neededRefs.addAll(getStripedRefs(refsToConsiderForShortCuts, neighborRefs));
       }
     }
 
@@ -196,9 +221,10 @@ class AdvertisedRefsForPackFilter implements RefFilter {
     return hasChangeDestShortCut && parents != null && parents.size() == 1;
   }
 
-  protected void addRefsKnownToHelp(RevWalk rw, RemoteRefUpdate toPush) {
+  protected boolean addRefsKnownToHelp(RevWalk rw, RemoteRefUpdate toPush) {
     String toPushRefName = toPush.getRemoteName();
     ObjectId newObjectId = toPush.getNewObjectId();
+    Ref shortcut = null;
     try {
       RevObject newObj = rw.parseAny(newObjectId);
       if (newObj instanceof RevTag) {
@@ -207,7 +233,7 @@ class AdvertisedRefsForPackFilter implements RefFilter {
       if (!(newObj instanceof RevCommit)) {
         repLog.atWarning().log("Object %s is not a commit", newObj.getId().getName());
         addFallBackRefs();
-        return;
+        return false;
       }
 
       rw.reset();
@@ -233,7 +259,7 @@ class AdvertisedRefsForPackFilter implements RefFilter {
       // if it does, this can drastically shorten the history needed to be push without actually
       // walking any other refs.
       for (RevCommit c : rw) {
-        Ref shortcut = advertisedRefByObjectId.get(c.getId());
+        shortcut = advertisedRefByObjectId.get(c.getId());
         if (shortcut != null) {
           neededRefs.add(shortcut);
           break;
@@ -244,6 +270,8 @@ class AdvertisedRefsForPackFilter implements RefFilter {
           "Unable to walk from %s for %s", newObjectId, toPushRefName);
       addFallBackRefs();
     }
+
+    return shortcut != null;
   }
 
   private void addFallBackRefs() {
@@ -285,6 +313,53 @@ class AdvertisedRefsForPackFilter implements RefFilter {
       repLog.atWarning().withCause(e).log("Unable to get parents of %s", update.getRemoteName());
       return null;
     }
+  }
+
+  private Set<Ref> findBestNeighborsFor() {
+    Set<Ref> neighborRefs = new HashSet<>();
+    for (RemoteRefUpdate u : needShortcutRefsFor) {
+      String name = u.getRemoteName();
+      addAlphabeticalNeighborRefs(advertisedRefsByName, name, neighborRefs);
+    }
+    return neighborRefs;
+  }
+
+  private static void addAlphabeticalNeighborRefs(
+      NavigableMap<String, Ref> refsByName, String name, Set<Ref> result) {
+    Map.Entry<String, Ref> lower = refsByName.lowerEntry(name);
+    Map.Entry<String, Ref> higher = refsByName.higherEntry(name);
+    if (lower != null) {
+      result.add(lower.getValue());
+    }
+    if (higher != null) {
+      result.add(higher.getValue());
+    }
+  }
+
+  private List<Ref> getStripedRefs(
+      List<Ref> refsToConsiderForShortCuts, Collection<Ref> neighborRefs) {
+    Set<String> neighborRefNames =
+        neighborRefs.stream().map(Ref::getName).collect(Collectors.toSet());
+    List<Ref> refsToStripe =
+        refsToConsiderForShortCuts.stream()
+            .filter(ref -> !neighborRefNames.contains(ref.getName()))
+            .toList();
+    int maxUninterestingObjectIdRefs = 500;
+
+    int poolSize = refsToStripe.size();
+    List<Ref> stripedRefs = new ArrayList<>();
+    if (poolSize <= maxUninterestingObjectIdRefs) {
+      stripedRefs.addAll(refsToStripe);
+    } else {
+      int skipCount = (poolSize + maxUninterestingObjectIdRefs - 1) / maxUninterestingObjectIdRefs;
+      for (int i = 0; i < poolSize; i++) {
+        Ref ref = refsToStripe.get(i);
+        if ((i + 1) % skipCount == 0) {
+          stripedRefs.add(ref);
+        }
+      }
+    }
+    return stripedRefs;
   }
 
   private void buildAdvertisedRefsMaps() {
