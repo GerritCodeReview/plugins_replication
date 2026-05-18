@@ -269,6 +269,26 @@ replication.rsyncPath
 
 	Default: `rsync` (resolved via the Gerrit runtime user's `PATH`)
 
+replication.autoRepairIntervalDays
+:	Minimum number of days between automatic repair attempts for the same
+	project on the same destination URL. When replication push fails with
+	a `missing necessary objects` error from `git-receive-pack`, the plugin
+	can attempt a repair to the affected SSH destination.
+
+	Default: `3`
+
+replication.autoRepairMaxAttempts
+:	Maximum number of automatic repair attempts per project on each
+	destination URL. After this limit is reached for a given project and
+	destination, further `missing necessary objects` errors for that pair
+	are logged but no additional automatic repairs are attempted.
+
+	Auto-repair state is kept in memory and is reset whenever the plugin is
+	reloaded or Gerrit restarts. Enabling auto-repair in a clustered deployment
+	can lead to redundant repairs as the state is not shared between them.
+
+	Default: `0` (auto-repair disabled)
+
 remote.NAME.url
 :	Address of the remote server to push to.  Multiple URLs may be
 	specified within a single remote block, listing different
