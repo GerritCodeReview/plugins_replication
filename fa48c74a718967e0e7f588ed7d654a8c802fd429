@@ -38,6 +38,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "273722c2_7edb7a40",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-18T15:15:00Z",
+      "side": 1,
+      "message": "copyPack() (Not seeing the value of adding \"run\" here)",
+      "revId": "fa48c74a718967e0e7f588ed7d654a8c802fd429",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "725e89a5_7b2a3180",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-18T15:15:00Z",
+      "side": 1,
+      "message": "I don\u0027t love having runCopy() and copy(). Maybe runCopy() can be copyWithDie()",
+      "revId": "fa48c74a718967e0e7f588ed7d654a8c802fd429",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75fd8cbb_352165d5",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
         "patchSetId": 5
@@ -155,6 +189,23 @@
       "side": 1,
       "message": "We cannot use stdout in getFlushingOutputStream as it is a PrintWriter, and we need a OutputStream to pipe rsync\u0027s raw bytes.",
       "parentUuid": "6cea9712_5815295c",
+      "revId": "fa48c74a718967e0e7f588ed7d654a8c802fd429",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1ab1221_abd83893",
+        "filename": "src/main/resources/Documentation/cmd-repair.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-18T15:15:00Z",
+      "side": 1,
+      "message": "Plain URLs for adminUls?",
       "revId": "fa48c74a718967e0e7f588ed7d654a8c802fd429",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
