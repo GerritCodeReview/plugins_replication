@@ -29,6 +29,8 @@ import org.eclipse.jgit.lib.Config;
 public class ReplicationConfigImpl implements ReplicationConfig {
   private static final int DEFAULT_SSH_CONNECTION_TIMEOUT_MS = 2 * 60 * 1000; // 2 minutes
   private static final String DEFAULT_RSYNC_PATH = "rsync";
+  private static final int DEFAULT_AUTO_REPAIR_INTERVAL_DAYS = 3;
+  private static final int DEFAULT_AUTO_REPAIR_MAX_ATTEMPTS = 0;
 
   private final SitePaths site;
   private final MergedConfigResource configResource;
@@ -39,6 +41,8 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   private final int maxRefsToShow;
   private int sshCommandTimeout;
   private int sshConnectionTimeout;
+  private final int autoRepairIntervalDays;
+  private final int autoRepairMaxAttempts;
   private final Path pluginDataDir;
   private final Config config;
 
@@ -63,6 +67,10 @@ public class ReplicationConfigImpl implements ReplicationConfig {
                 "sshConnectionTimeout",
                 DEFAULT_SSH_CONNECTION_TIMEOUT_MS,
                 MILLISECONDS);
+    this.autoRepairIntervalDays =
+        config.getInt("replication", "autoRepairIntervalDays", DEFAULT_AUTO_REPAIR_INTERVAL_DAYS);
+    this.autoRepairMaxAttempts =
+        config.getInt("replication", "autoRepairMaxAttempts", DEFAULT_AUTO_REPAIR_MAX_ATTEMPTS);
     this.pluginDataDir = pluginDataDir;
     this.useLegacyCredentials = config.getBoolean("gerrit", "useLegacyCredentials", false);
   }
@@ -151,5 +159,15 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   public String getRsyncPath() {
     String rsyncPath = getConfig().getString("replication", null, "rsyncPath");
     return Strings.isNullOrEmpty(rsyncPath) ? DEFAULT_RSYNC_PATH : rsyncPath;
+  }
+
+  @Override
+  public int getAutoRepairIntervalDays() {
+    return autoRepairIntervalDays;
+  }
+
+  @Override
+  public int getAutoRepairMaxAttempts() {
+    return autoRepairMaxAttempts;
   }
 }
