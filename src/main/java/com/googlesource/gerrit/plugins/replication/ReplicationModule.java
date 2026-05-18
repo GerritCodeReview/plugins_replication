@@ -110,6 +110,8 @@ class ReplicationModule extends AbstractModule {
     bind(ReplicationQueue.class).in(Scopes.SINGLETON);
     bind(ReplicationDestinations.class).to(DestinationsCollection.class);
 
+    bind(AutoRepairHandler.class).in(Scopes.SINGLETON);
+    bind(AutoRepairTracker.class).in(Scopes.SINGLETON);
     bind(ProjectRepairer.class).in(Scopes.SINGLETON);
 
     install(new FactoryModuleBuilder().build(Destination.Factory.class));

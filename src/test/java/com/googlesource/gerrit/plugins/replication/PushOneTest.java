@@ -423,6 +423,7 @@ public class PushOneTest {
             projectCacheMock,
             createProjectTaskFactoryMock,
             transportFactoryMock,
+            mock(AutoRepairHandler.class),
             projectNameKey,
             urish);
 

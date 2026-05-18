@@ -142,6 +142,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private final CreateProjectTask.Factory createProjectFactory;
   private final AtomicBoolean canceledWhileRunning;
   private final TransportFactory transportFactory;
+  private final AutoRepairHandler autoRepairHandler;
   private DynamicItem<ReplicationPushFilter> replicationPushFilter;
 
   @Inject
@@ -159,6 +160,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       ProjectCache pc,
       CreateProjectTask.Factory cpf,
       TransportFactory tf,
+      AutoRepairHandler autoRepairHandler,
       @Assisted Project.NameKey d,
       @Assisted URIish u) {
     gitManager = grm;
@@ -181,6 +183,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     canceledWhileRunning = new AtomicBoolean(false);
     maxRetries = p.getMaxRetries();
     transportFactory = tf;
+    this.autoRepairHandler = autoRepairHandler;
   }
 
   @Inject(optional = true)
@@ -824,6 +827,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       throws UpdateRefFailureException {
     Set<String> doneRefs = new HashSet<>();
     boolean anyRefFailed = false;
+    boolean autoRepairNeeded = false;
     RemoteRefUpdate.Status lastRefStatusError = RemoteRefUpdate.Status.OK;
 
     for (RemoteRefUpdate u : refUpdates) {
@@ -869,6 +873,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
               || UPDATE_REF_FAILURE.equals(u.getMessage())) {
             throw new UpdateRefFailureException(uri, u.getMessage());
           } else {
+            if (!autoRepairNeeded
+                && AutoRepairHandler.isMissingNecessaryObjectsError(u.getMessage())) {
+              autoRepairNeeded = true;
+            }
             stateLog.error(
                 String.format(
                     "Failed replicate of %s to %s, reason: %s",
@@ -902,6 +910,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
             .notifyRefReplicated(
                 projectName.get(), entry.getKey(), uri, RefPushResult.NOT_ATTEMPTED, null);
       }
+    }
+    if (autoRepairNeeded) {
+      autoRepairHandler.handle(
+          projectName, uri, pool.getRemoteConfigName(), pool.getUrlDistributionStrategy());
     }
     stateMap.clear();
   }

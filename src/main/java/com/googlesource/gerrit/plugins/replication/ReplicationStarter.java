@@ -41,8 +41,8 @@ class ReplicationStarter {
       ReplicationFilter filter,
       boolean now,
       boolean wait,
-      SshOutputCommand sink) {
-    ReplicationState state = new ReplicationState(new CommandProcessing(sink));
+      PushResultProcessing processing) {
+    ReplicationState state = new ReplicationState(processing);
 
     Future<?> future =
         pushFactory
@@ -67,11 +67,21 @@ class ReplicationStarter {
         try {
           state.waitForReplication();
         } catch (InterruptedException e) {
-          sink.writeStdErrSync("We are interrupted while waiting replication to complete");
+          processing.writeStdErr("We are interrupted while waiting replication to complete");
         }
       } else {
-        sink.writeStdOutSync("Nothing to replicate");
+        processing.writeStdOut("Nothing to replicate");
       }
     }
+  }
+
+  void start(
+      @Nullable String urlMatch,
+      Set<String> remotesToConsider,
+      ReplicationFilter filter,
+      boolean now,
+      boolean wait,
+      SshOutputCommand sink) {
+    start(urlMatch, remotesToConsider, filter, now, wait, new CommandProcessing(sink));
   }
 }

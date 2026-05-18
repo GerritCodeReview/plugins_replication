@@ -97,6 +97,29 @@ public interface ReplicationConfig {
   String getRsyncPath();
 
   /**
+   * Minimum number of days between automatic repair attempts for the same project on the same
+   * destination.
+   *
+   * @return interval in days, zero for no minimum interval between attempts.
+   */
+  int getAutoRepairIntervalDays();
+
+  /**
+   * Maximum number of automatic repair attempts per project on each destination.
+   *
+   * @return maximum attempts, zero to disable auto-repair.
+   */
+  int getAutoRepairMaxAttempts();
+
+  /**
+   * Maximum number of automatic repair tasks allowed to run concurrently. Changing this value
+   * requires a plugin reload to take effect.
+   *
+   * @return concurrency limit, minimum 1.
+   */
+  int getAutoRepairConcurrencyLimit();
+
+  /**
    * Current logical version string of the current configuration loaded in memory, depending on the
    * actual implementation of the configuration on the persistent storage.
    *
