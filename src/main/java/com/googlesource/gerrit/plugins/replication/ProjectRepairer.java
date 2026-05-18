@@ -22,6 +22,7 @@ import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
+import com.googlesource.gerrit.plugins.replication.events.dispatcher.EventDispatcher;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
@@ -37,11 +38,19 @@ import org.eclipse.jgit.util.io.StreamCopyThread;
 public class ProjectRepairer {
   private final GitRepositoryManager gitManager;
   private final ReplicationConfig replicationConfig;
+  private final ReplicationQueue replicationQueue;
+  private final EventDispatcher eventDispatcher;
 
   @Inject
-  ProjectRepairer(GitRepositoryManager gitManager, ReplicationConfig replicationConfig) {
+  ProjectRepairer(
+      GitRepositoryManager gitManager,
+      ReplicationConfig replicationConfig,
+      ReplicationQueue replicationQueue,
+      EventDispatcher eventDispatcher) {
     this.gitManager = gitManager;
     this.replicationConfig = replicationConfig;
+    this.replicationQueue = replicationQueue;
+    this.eventDispatcher = eventDispatcher;
   }
 
   public boolean repair(Project.NameKey project, URIish uri, OutputStream out, boolean copyPacks) {
@@ -80,6 +89,14 @@ public class ProjectRepairer {
     }
 
     return copyInOrder(packDir, uri, out);
+  }
+
+  public void scheduleReplication(Project.NameKey project, URIish uri) {
+    ReplicationState state =
+        new ReplicationState(new PushResultProcessing.GitUpdateProcessing(eventDispatcher));
+    replicationQueue.scheduleFullSync(project, uri.toString(), state, /* now= */ true);
+    state.markAllPushTasksScheduled();
+    repLog.atInfo().log("Scheduled full replication of %s to %s", project.get(), uri);
   }
 
   private boolean copyInOrder(Path packDir, URIish uri, OutputStream out) {
