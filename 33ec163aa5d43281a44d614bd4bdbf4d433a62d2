@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d43fb642_dbfbc7a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-18T17:57:04Z",
+      "side": 1,
+      "message": "This section can be removed? Tests are expected to be added for new features, so mentioning all this explicitly in the commit message is not required.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 29
+      },
+      "revId": "33ec163aa5d43281a44d614bd4bdbf4d433a62d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0b3644f_0b338cfa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-18T17:57:04Z",
+      "side": 1,
+      "message": "Keep a scheduleFullSync overload that does not need the refMatch? This way you won\u0027t have to touch all places where the refMatch is not needed.",
+      "revId": "33ec163aa5d43281a44d614bd4bdbf4d433a62d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad883fab_ef3efb91",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-18T17:57:04Z",
+      "side": 1,
+      "message": "Rename to refMatch?",
+      "range": {
+        "startLine": 134,
+        "startChar": 55,
+        "endLine": 134,
+        "endChar": 58
+      },
+      "revId": "33ec163aa5d43281a44d614bd4bdbf4d433a62d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c83be91f_709f94fc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-18T17:57:04Z",
+      "side": 1,
+      "message": "Rename to refMatch?",
+      "revId": "33ec163aa5d43281a44d614bd4bdbf4d433a62d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e90605e6_90ce0a9d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-18T17:57:04Z",
+      "side": 1,
+      "message": "Also add a test for glob?",
+      "revId": "33ec163aa5d43281a44d614bd4bdbf4d433a62d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
