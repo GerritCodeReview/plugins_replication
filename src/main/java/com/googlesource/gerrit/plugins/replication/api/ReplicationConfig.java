@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication.api;
 
 import java.nio.file.Path;
+import java.time.Duration;
 import org.eclipse.jgit.lib.Config;
 
 /** Configuration of all the replication end points. */
@@ -95,6 +96,30 @@ public interface ReplicationConfig {
    * @return the rsync binary path, or {@code "rsync"} to resolve via {@code PATH}.
    */
   String getRsyncPath();
+
+  /**
+   * Minimum interval between automatic repair attempts for the same project on the same
+   * destination.
+   *
+   * @return interval as a {@link Duration}, {@link Duration#ZERO} for no minimum interval between
+   *     attempts.
+   */
+  Duration getAutoRepairInterval();
+
+  /**
+   * Maximum number of automatic repair attempts per project on each destination.
+   *
+   * @return maximum attempts, zero to disable auto-repair.
+   */
+  int getAutoRepairMaxAttempts();
+
+  /**
+   * Maximum number of automatic repair tasks allowed to run concurrently. Changing this value
+   * requires a plugin reload to take effect.
+   *
+   * @return concurrency limit, minimum 1.
+   */
+  int getAutoRepairConcurrencyLimit();
 
   /**
    * Current logical version string of the current configuration loaded in memory, depending on the

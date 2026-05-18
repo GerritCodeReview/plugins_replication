@@ -23,6 +23,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.nio.file.Path;
+import java.time.Duration;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -127,6 +128,21 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleLi
   @Override
   public String getRsyncPath() {
     return currentConfig.getRsyncPath();
+  }
+
+  @Override
+  public Duration getAutoRepairInterval() {
+    return currentConfig.getAutoRepairInterval();
+  }
+
+  @Override
+  public int getAutoRepairMaxAttempts() {
+    return currentConfig.getAutoRepairMaxAttempts();
+  }
+
+  @Override
+  public int getAutoRepairConcurrencyLimit() {
+    return currentConfig.getAutoRepairConcurrencyLimit();
   }
 
   @Override
