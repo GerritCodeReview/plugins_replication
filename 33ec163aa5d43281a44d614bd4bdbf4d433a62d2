@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16109cb8_d06bd6b3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-18T18:11:31Z",
+      "side": 1,
+      "message": "It is my understanding that this is actually a refSpec, so that might be better than refMatch? (The urlMatch one should really be urlContains, but obviously don\u0027t change that here)",
+      "parentUuid": "ad883fab_ef3efb91",
+      "range": {
+        "startLine": 134,
+        "startChar": 55,
+        "endLine": 134,
+        "endChar": 58
+      },
+      "revId": "33ec163aa5d43281a44d614bd4bdbf4d433a62d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c83be91f_709f94fc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 18
