@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe7c0e2b_fae5d7f7",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-18T21:51:20Z",
+      "side": 1,
+      "message": "I suppose we should define precedence here, i.e. if a project matches both this and projects, it will be excluded.",
+      "revId": "34ed7ddb4eae784610536c1d4aa6623779766c05",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
