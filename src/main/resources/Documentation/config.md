@@ -269,6 +269,44 @@ replication.rsyncPath
 
 	Default: `rsync` (resolved via the Gerrit runtime user's `PATH`)
 
+replication.autoRepairIntervalDays
+:	Minimum number of days between automatic repair attempts for the same
+	project on the same destination URL.
+
+	Auto-repair is event-driven and each attempt is initiated by a failing
+	replication push and is not retried on its own. When a push fails with
+	a `missing necessary objects` error from `git-receive-pack`, the plugin
+	schedules a repair attempt for the affected SSH destination. Unlike
+	normal replication failures (which the plugin retries automatically),
+	repair attempts are not retried by themselves. If a repair completes
+	but the destination is still broken, the next repair runs only when
+	another replication push to the same destination fails with the
+	same missing objects error, and only after this interval has elapsed.
+
+	Default: `3`
+
+replication.autoRepairMaxAttempts
+:	Maximum number of automatic repair attempts per project on each
+	destination URL. After this limit is reached for a given project and
+	destination, further `missing necessary objects` errors for that pair
+	are logged but no additional automatic repairs are attempted.
+
+	Auto-repair state is kept in memory and is reset whenever the plugin is
+	reloaded or Gerrit restarts. Enabling auto-repair in a clustered deployment
+	can lead to redundant repairs as the state is not shared between them.
+
+	Default: `0` (auto-repair disabled)
+
+replication.autoRepairThreads
+:	Number of worker threads in the dedicated `@PLUGIN@_auto-repair` work
+	queue used to execute automatic repair tasks. Increase this if multiple
+	destinations are expected to require auto-repair concurrently. Each
+	repair holds a thread for the duration of its repair and follow-up
+	full replication. The value is read once at plugin start, so changes
+	to this setting only take effect after a plugin reload.
+
+	Minimum: `1`. Default: `2`.
+
 remote.NAME.url
 :	Address of the remote server to push to.  Multiple URLs may be
 	specified within a single remote block, listing different

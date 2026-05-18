@@ -130,6 +130,21 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleLi
   }
 
   @Override
+  public int getAutoRepairIntervalDays() {
+    return currentConfig.getAutoRepairIntervalDays();
+  }
+
+  @Override
+  public int getAutoRepairMaxAttempts() {
+    return currentConfig.getAutoRepairMaxAttempts();
+  }
+
+  @Override
+  public int getAutoRepairThreads() {
+    return currentConfig.getAutoRepairThreads();
+  }
+
+  @Override
   public Config getConfig() {
     return currentConfig.getConfig();
   }
