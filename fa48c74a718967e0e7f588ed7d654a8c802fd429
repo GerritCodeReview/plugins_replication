@@ -53,6 +53,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58c9e0ff_8aa00b9b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-18T19:56:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "273722c2_7edb7a40",
+      "revId": "fa48c74a718967e0e7f588ed7d654a8c802fd429",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "725e89a5_7b2a3180",
@@ -66,6 +84,24 @@
       "writtenOn": "2026-05-18T15:15:00Z",
       "side": 1,
       "message": "I don\u0027t love having runCopy() and copy(). Maybe runCopy() can be copyWithDie()",
+      "revId": "fa48c74a718967e0e7f588ed7d654a8c802fd429",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c96ada24_2c6d9dac",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-18T19:56:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "725e89a5_7b2a3180",
       "revId": "fa48c74a718967e0e7f588ed7d654a8c802fd429",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -206,6 +242,24 @@
       "writtenOn": "2026-05-18T15:15:00Z",
       "side": 1,
       "message": "Plain URLs for adminUls?",
+      "revId": "fa48c74a718967e0e7f588ed7d654a8c802fd429",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05f89f03_d423ed9e",
+        "filename": "src/main/resources/Documentation/cmd-repair.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-18T19:56:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1ab1221_abd83893",
       "revId": "fa48c74a718967e0e7f588ed7d654a8c802fd429",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
