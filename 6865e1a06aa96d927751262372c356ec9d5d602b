@@ -16,6 +16,24 @@
       "message": "This feels like it should come with said \"additions\"?",
       "revId": "6865e1a06aa96d927751262372c356ec9d5d602b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "787d5f06_973099bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-19T19:43:05Z",
+      "side": 1,
+      "message": "Ack. Folded into https://gerrit-review.googlesource.com/c/plugins/replication/+/488501",
+      "parentUuid": "c5ed7f68_e698d8d1",
+      "revId": "6865e1a06aa96d927751262372c356ec9d5d602b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
