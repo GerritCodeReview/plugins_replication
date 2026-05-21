@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "047dc645_ca1e0a33",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-21T20:23:53Z",
+      "side": 1,
+      "message": "Why 2? Should this be configurable? Should this perhaps be limited by remote? I think we want to start programming with unlimited queues, and using semaphores to limit concurrency from now on so that we will be closer to the model which makes sense once we can use virtual threads.",
+      "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eec8ded_6e146e4a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-21T20:23:53Z",
+      "side": 1,
+      "message": "s/states/statesByProject/",
+      "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19fee200_bb9de2de",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-21T20:23:53Z",
+      "side": 1,
+      "message": "This is not thread safe, use a concurrent API.",
+      "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f5b3c5a_da40f2b6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-21T20:23:53Z",
+      "side": 1,
+      "message": "Nit: this feels like it should live above the function above it.",
+      "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a712e18d_e8bdd5e2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-21T20:23:53Z",
+      "side": 1,
+      "message": "Does something need to update this when the config changes?",
+      "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a64c4ca_ce5a914f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-21T20:23:53Z",
+      "side": 1,
+      "message": "I think that one concept that might be missing from here is that each repair attempt is only initiated by failed replication. I think we need to explain this a bit because replication failures normally get retried automatically, but repair attempts are not retried automatically.",
+      "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
