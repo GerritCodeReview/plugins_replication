@@ -54,6 +54,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "979c000a_01920e9f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-22T20:17:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "590d6886_5d1b2d47",
+      "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2eec8ded_6e146e4a",
