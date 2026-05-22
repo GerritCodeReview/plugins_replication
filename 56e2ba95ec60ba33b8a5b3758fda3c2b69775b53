@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ba3fa9f_157791d2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-22T19:14:44Z",
+      "side": 1,
+      "message": "This should probably instead live on the \"state\" object?",
+      "revId": "56e2ba95ec60ba33b8a5b3758fda3c2b69775b53",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac8e20a_1d33d698",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/api/ReplicationConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-22T19:14:44Z",
+      "side": 1,
+      "message": "Let\u0027s approach things as \"concurrency limits\" (maxConcurrentRepairs?) instead of threads to be more ready for virtual Threads https://docs.oracle.com/en/java/javase/21/core/virtual-threads.html#GUID-E695A4C5-D335-4FA4-B886-FEB88C73F23E",
+      "revId": "56e2ba95ec60ba33b8a5b3758fda3c2b69775b53",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
