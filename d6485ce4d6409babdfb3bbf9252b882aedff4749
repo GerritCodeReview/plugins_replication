@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c3f9837_28a8a609",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-22T18:58:26Z",
+      "side": 1,
+      "message": "For auto-repair, which we expect to be rare and gated, adding the complexity of per-destination queues is probably overkill. A single queue with a configurable thread count should be good a good start. I have made it configurable now and I chose 2 threads (as the default) as a long running auto repair won\u0027t block others.",
+      "parentUuid": "047dc645_ca1e0a33",
+      "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2eec8ded_6e146e4a",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-21T20:23:53Z",
       "side": 1,
       "message": "s/states/statesByProject/",
+      "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8132d913_eb74dfd0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-22T18:58:26Z",
+      "side": 1,
+      "message": "Renamed to statesByDestination",
+      "parentUuid": "2eec8ded_6e146e4a",
       "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -52,6 +88,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcf93d16_9a68e8ec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-22T18:58:26Z",
+      "side": 1,
+      "message": "Do we need it to be thread safe? We won\u0027t have parallel pushes to the same key (project+destination). I tried to do it anyways.",
+      "parentUuid": "19fee200_bb9de2de",
+      "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f5b3c5a_da40f2b6",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-05-21T20:23:53Z",
       "side": 1,
       "message": "Nit: this feels like it should live above the function above it.",
+      "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42589d9a_444eb24c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-22T18:58:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f5b3c5a_da40f2b6",
       "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -86,6 +158,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17c3c489_f4a69d75",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationModule.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-22T18:58:26Z",
+      "side": 1,
+      "message": "I think, no explicit changes are needed here. AutoRepairTracker and ProjectRepairer call the ReplicationConfig getters on every relevant access (not at construction), so they read through AutoReloadConfigDecorator.currentConfig, which is updated whenever the config file is reloaded.",
+      "parentUuid": "a712e18d_e8bdd5e2",
+      "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a64c4ca_ce5a914f",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-05-21T20:23:53Z",
       "side": 1,
       "message": "I think that one concept that might be missing from here is that each repair attempt is only initiated by failed replication. I think we need to explain this a bit because replication failures normally get retried automatically, but repair attempts are not retried automatically.",
+      "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8694359e_21fb374f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-05-22T18:58:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a64c4ca_ce5a914f",
       "revId": "d6485ce4d6409babdfb3bbf9252b882aedff4749",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
