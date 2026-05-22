@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f09c0a1_6aed2535",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-22T22:40:38Z",
+      "side": 1,
+      "message": "I think that if you use the compute to just determine whether you need a new state, and outside of the compute you ask canBeginRepair, this will be much simpler.",
+      "revId": "47e1f011ee0003a18e818703c67165065dc640f2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
