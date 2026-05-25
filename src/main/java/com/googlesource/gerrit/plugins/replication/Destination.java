@@ -867,6 +867,10 @@ public class Destination {
     return config.getRemoteConfig().getName();
   }
 
+  RemoteConfig getRemoteConfig() {
+    return config.getRemoteConfig();
+  }
+
   public int getMaxRetries() {
     return config.getMaxRetries();
   }
