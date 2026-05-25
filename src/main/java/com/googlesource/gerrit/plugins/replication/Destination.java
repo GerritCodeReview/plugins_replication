@@ -867,6 +867,10 @@ public class Destination {
     return config.getRemoteConfig().getName();
   }
 
+  RemoteConfig getRemoteConfig() {
+    return config.getRemoteConfig();
+  }
+
   public int getMaxRetries() {
     return config.getMaxRetries();
   }
@@ -889,6 +893,13 @@ public class Destination {
 
   boolean replicateNoteDbMetaRefs() {
     return config.replicateNoteDbMetaRefs();
+  }
+
+  boolean canPushRef(String ref) {
+    return !(!isReplicatePermissions() && RefNames.REFS_CONFIG.equals(ref))
+        && !ref.startsWith(RefNames.REFS_CACHE_AUTOMERGE)
+        && !(!replicateNoteDbMetaRefs() && RefNames.isNoteDbMetaRef(ref))
+        && excludedRefsPattern().stream().noneMatch(p -> p.matcher(ref).matches());
   }
 
   ImmutableList<Pattern> excludedRefsPattern() {

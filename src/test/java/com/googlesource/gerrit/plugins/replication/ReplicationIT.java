@@ -21,6 +21,7 @@ import static com.googlesource.gerrit.plugins.replication.PushResultProcessing.N
 import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
+import com.google.gerrit.acceptance.UseSsh;
 import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.projects.BranchInput;
@@ -43,9 +44,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import org.eclipse.jgit.lib.CommitBuilder;
 import org.eclipse.jgit.lib.ConfigConstants;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.ObjectInserter;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.RefUpdate;
 import org.eclipse.jgit.lib.Repository;
@@ -57,7 +60,8 @@ import org.junit.Test;
 @UseLocalDisk
 @TestPlugin(
     name = "replication",
-    sysModule = "com.googlesource.gerrit.plugins.replication.TestReplicationModule")
+    sysModule = "com.googlesource.gerrit.plugins.replication.TestReplicationModule",
+    sshModule = "com.googlesource.gerrit.plugins.replication.SshModule")
 public class ReplicationIT extends ReplicationDaemon {
   private static final int TEST_REPLICATION_DELAY = 1;
   private static final int TEST_REPLICATION_RETRY = 1;
@@ -653,6 +657,68 @@ public class ReplicationIT extends ReplicationDaemon {
     getReplicationQueueInstance().stop();
   }
 
+  @Test
+  @UseSsh
+  public void shouldListOutdatedRefs() throws Exception {
+    createTestProject(project + "replica");
+    setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    config.setString("remote", "foo", "push", "+refs/heads/*:refs/heads/*");
+    config.setBoolean("remote", "foo", "mirror", true);
+    config.save();
+    reloadConfig();
+
+    ReplicationState state = new ReplicationState(NO_OP);
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, null, Set.of("foo"), state, true);
+    state.markAllPushTasksScheduled();
+    state.waitForReplication();
+
+    String featureRef = "refs/heads/feature";
+    ObjectId initialTip = createNewBranchWithoutPush("refs/heads/master", featureRef);
+    String listCmd =
+        "replication list-outdated --project " + project.get() + " --remote foo --by-ref";
+
+    // new ref shows up with zero id, implying new ref not synced
+    assertThat(adminSshSession.exec(listCmd))
+        .contains(
+            featureRef
+                + "\t"
+                + featureRef
+                + "\t"
+                + initialTip.name()
+                + "\t"
+                + ObjectId.zeroId().name());
+
+    // synced up
+    state = new ReplicationState(NO_OP);
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, null, Set.of("foo"), state, true);
+    state.markAllPushTasksScheduled();
+    state.waitForReplication();
+    assertThat(adminSshSession.exec(listCmd)).doesNotContain(featureRef);
+
+    // Create a new commit on source's feature without pushing — replica still has old tip.
+    ObjectId newTip = commitWithoutPush(featureRef);
+    assertThat(adminSshSession.exec(listCmd))
+        .contains(featureRef + "\t" + featureRef + "\t" + newTip.name() + "\t" + initialTip.name());
+
+    // Delete feature locally without replicating — replica still has the older tip.
+    deleteBranchWithoutPush(featureRef);
+    assertThat(adminSshSession.exec(listCmd))
+        .contains(
+            featureRef
+                + "\t"
+                + featureRef
+                + "\t"
+                + ObjectId.zeroId().name()
+                + "\t"
+                + initialTip.name());
+  }
+
   private ReplicationQueue getReplicationQueueInstance() {
     return getInstance(ReplicationQueue.class);
   }
@@ -670,6 +736,36 @@ public class ReplicationIT extends ReplicationDaemon {
       update.setNewObjectId(tip);
       update.update(walk);
       return update.getNewObjectId();
+    }
+  }
+
+  private void deleteBranchWithoutPush(String branch) throws Exception {
+    try (Repository repo = repoManager.openRepository(project)) {
+      RefUpdate update = repo.updateRef(branch);
+      update.setForceUpdate(true);
+      update.delete();
+    }
+  }
+
+  private ObjectId commitWithoutPush(String branch) throws Exception {
+    try (Repository repo = repoManager.openRepository(project);
+        RevWalk walk = new RevWalk(repo);
+        ObjectInserter inserter = repo.newObjectInserter()) {
+      RevCommit parent = walk.parseCommit(repo.exactRef(branch).getObjectId());
+      CommitBuilder cb = new CommitBuilder();
+      cb.setTreeId(parent.getTree().getId());
+      cb.setParentId(parent.getId());
+      cb.setAuthor(parent.getAuthorIdent());
+      cb.setCommitter(parent.getCommitterIdent());
+      cb.setMessage("update " + branch);
+      ObjectId newCommit = inserter.insert(cb);
+      inserter.flush();
+
+      RefUpdate update = repo.updateRef(branch);
+      update.setNewObjectId(newCommit);
+      update.setForceUpdate(true);
+      update.update(walk);
+      return newCommit;
     }
   }
 

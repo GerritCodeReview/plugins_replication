@@ -33,7 +33,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
-import com.google.gerrit.entities.RefNames;
 import com.google.gerrit.extensions.events.GitBatchRefUpdateListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.extensions.restapi.AuthException;
@@ -709,15 +708,14 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private List<RemoteRefUpdate> doPushAll(Repository git, Transport tn, Map<String, Ref> local)
       throws IOException {
     List<RemoteRefUpdate> cmds = new ArrayList<>();
-    boolean noPerms = !pool.isReplicatePermissions();
     Map<String, Ref> remote = listRemote(tn);
     for (Ref src : local.values()) {
-      if (!canPushRef(src.getName(), noPerms)) {
+      if (!pool.canPushRef(src.getName())) {
         repLog.atFine().log("Skipping push of ref %s", src.getName());
         continue;
       }
 
-      RefSpec spec = matchSrc(src.getName());
+      RefSpec spec = RefSpecMatcher.matchSource(src.getName(), config.getPushRefSpecs());
       if (spec != null) {
         Ref dst = remote.get(spec.getDestination());
         if (dst == null || !src.getObjectId().equals(dst.getObjectId())) {
@@ -733,7 +731,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
           repLog.atFine().log("Skipping deletion of %s", ref.getName());
           continue;
         }
-        RefSpec spec = matchDst(ref.getName());
+        RefSpec spec = RefSpecMatcher.matchDestination(ref.getName(), config.getPushRefSpecs());
         if (spec != null && !local.containsKey(spec.getSource())) {
           // No longer on local side, request removal.
           delete(git, cmds, spec);
@@ -746,10 +744,9 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private List<RemoteRefUpdate> doPushDelta(Repository git, Map<String, Ref> local)
       throws IOException {
     List<RemoteRefUpdate> cmds = new ArrayList<>();
-    boolean noPerms = !pool.isReplicatePermissions();
     Set<String> refs = flattenRefBatchesToPush();
     for (String src : refs) {
-      RefSpec spec = matchSrc(src);
+      RefSpec spec = RefSpecMatcher.matchSource(src, config.getPushRefSpecs());
       if (spec != null) {
         // If the ref still exists locally, send it, otherwise delete it.
         Ref srcRef = local.get(src);
@@ -760,7 +757,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
         }
 
         if (srcRef != null) {
-          if (canPushRef(src, noPerms)) {
+          if (pool.canPushRef(src)) {
             push(git, cmds, spec, srcRef);
           } else {
             repLog.atFine().log("Skipping push of ref %s", srcRef.getName());
@@ -773,38 +770,11 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     return cmds;
   }
 
-  private boolean canPushRef(String ref, boolean noPerms) {
-    return !(noPerms && RefNames.REFS_CONFIG.equals(ref))
-        && !ref.startsWith(RefNames.REFS_CACHE_AUTOMERGE)
-        && !(!pool.replicateNoteDbMetaRefs() && RefNames.isNoteDbMetaRef(ref))
-        && pool.excludedRefsPattern().stream().noneMatch(p -> p.matcher(ref).matches());
-  }
-
   private Map<String, Ref> listRemote(Transport tn)
       throws NotSupportedException, TransportException {
     try (FetchConnection fc = tn.openFetch()) {
       return fc.getRefsMap();
     }
-  }
-
-  @Nullable
-  private RefSpec matchSrc(String ref) {
-    for (RefSpec s : config.getPushRefSpecs()) {
-      if (s.matchSource(ref)) {
-        return s.expandFromSource(ref);
-      }
-    }
-    return null;
-  }
-
-  @Nullable
-  private RefSpec matchDst(String ref) {
-    for (RefSpec s : config.getPushRefSpecs()) {
-      if (s.matchDestination(ref)) {
-        return s.expandFromDestination(ref);
-      }
-    }
-    return null;
   }
 
   @VisibleForTesting
