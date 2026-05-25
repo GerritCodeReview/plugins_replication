@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.truth.Truth.assertThat;
 import static org.eclipse.jgit.lib.Ref.Storage.NEW;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doAnswer;
@@ -496,6 +497,7 @@ public class PushOneTest {
     destinationMock = mock(Destination.class);
     when(destinationMock.requestRunway(any())).thenReturn(RunwayStatus.allowed());
     when(destinationMock.excludedRefsPattern()).thenReturn(ImmutableList.of());
+    when(destinationMock.canPushRef(anyString())).thenCallRealMethod();
   }
 
   private void setupPermissionBackedMock() {

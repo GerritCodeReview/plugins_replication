@@ -29,5 +29,6 @@ class SshModule extends PluginCommandModule {
     command(StartCommand.class);
     command(RepairCommand.class);
     command(ListCommand.class);
+    command(ListOutdatedCommand.class);
   }
 }
