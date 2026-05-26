@@ -46,6 +46,30 @@
       },
       "revId": "94690cc96906835e27e2972caced73d5c46fd221",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "523174e4_49845e3d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListOutdatedCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2026-05-26T18:00:05Z",
+      "side": 1,
+      "message": "\u003e that is fine since we are iterating the refs from master and not the mirror.\n\nWell, then what about the other way around?\nImagine you have `mirror \u003d true` but somehow the ref was deleted on the master but not on the replica.\n\nHow would you realize that it wasn\u0027t removed on the replica?\n\nI believe the list of refs need to be checked both ways",
+      "parentUuid": "393708db_1444c439",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 9
+      },
+      "revId": "94690cc96906835e27e2972caced73d5c46fd221",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
