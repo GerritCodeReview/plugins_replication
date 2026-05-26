@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39fbdf28_a6ffc192",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-05-26T09:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d43fb642_dbfbc7a5",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 29
+      },
+      "revId": "33ec163aa5d43281a44d614bd4bdbf4d433a62d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0b3644f_0b338cfa",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-05-18T17:57:04Z",
       "side": 1,
       "message": "Keep a scheduleFullSync overload that does not need the refMatch? This way you won\u0027t have to touch all places where the refMatch is not needed.",
+      "revId": "33ec163aa5d43281a44d614bd4bdbf4d433a62d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a39b09ca_832689a8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-05-26T09:03:45Z",
+      "side": 1,
+      "message": "I think Overloading will make it look like a lot especially when we have more parameters in future. Scaling will pose a problem then.",
+      "parentUuid": "c0b3644f_0b338cfa",
       "revId": "33ec163aa5d43281a44d614bd4bdbf4d433a62d2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -88,6 +130,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9edffaf2_bd2d4130",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-05-26T09:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16109cb8_d06bd6b3",
+      "range": {
+        "startLine": 134,
+        "startChar": 55,
+        "endLine": 134,
+        "endChar": 58
+      },
+      "revId": "33ec163aa5d43281a44d614bd4bdbf4d433a62d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c83be91f_709f94fc",
@@ -105,6 +171,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ad8f23c_d336395c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-05-26T09:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c83be91f_709f94fc",
+      "revId": "33ec163aa5d43281a44d614bd4bdbf4d433a62d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e90605e6_90ce0a9d",
@@ -118,6 +202,24 @@
       "writtenOn": "2026-05-18T17:57:04Z",
       "side": 1,
       "message": "Also add a test for glob?",
+      "revId": "33ec163aa5d43281a44d614bd4bdbf4d433a62d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db296d5c_7f74d40c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-05-26T09:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e90605e6_90ce0a9d",
       "revId": "33ec163aa5d43281a44d614bd4bdbf4d433a62d2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
