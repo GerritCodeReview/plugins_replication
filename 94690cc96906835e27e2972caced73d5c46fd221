@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea2d30e7_09b985d9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListOutdatedCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2026-05-26T07:31:57Z",
+      "side": 1,
+      "message": "Is this enough? You may have also `mirror \u003d false` in the remote and therefore you don\u0027t replicate the deletions.",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 9
+      },
+      "revId": "94690cc96906835e27e2972caced73d5c46fd221",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
