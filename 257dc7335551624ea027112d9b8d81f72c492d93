@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f10f498_58c427f0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-26T16:59:40Z",
+      "side": 1,
+      "message": "One line the two above to avoid a single use variable.",
+      "revId": "257dc7335551624ea027112d9b8d81f72c492d93",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e213370_d8133562",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-05-26T16:59:40Z",
+      "side": 1,
+      "message": "I think that this probably doesn\u0027t deserves its own function, just add line 87-88 before 109?\n\nAlso, since this is synchronized, the time should likely be taken in the synchronized?",
+      "revId": "257dc7335551624ea027112d9b8d81f72c492d93",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
