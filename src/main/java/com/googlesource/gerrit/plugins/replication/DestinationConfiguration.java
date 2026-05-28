@@ -57,6 +57,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final Supplier<Integer> pushBatchSize;
   private final ImmutableList<Pattern> excludedRefsPattern;
   private final boolean storeRefLog;
+  private final UrlDistributionStrategy urlDistributionStrategy;
 
   protected DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
@@ -124,6 +125,9 @@ public class DestinationConfiguration implements RemoteConfiguration {
             });
     excludedRefsPattern = getExcludedRefsPattern(cfg, name);
     storeRefLog = cfg.getBoolean("remote", name, "storeRefLog", false);
+    urlDistributionStrategy =
+        UrlDistributionStrategy.fromConfig(
+            cfg.getString("remote", name, "urlDistributionStrategy"));
   }
 
   @Override
@@ -232,6 +236,10 @@ public class DestinationConfiguration implements RemoteConfiguration {
   @Override
   public boolean storeRefLog() {
     return storeRefLog;
+  }
+
+  public UrlDistributionStrategy getUrlDistributionStrategy() {
+    return urlDistributionStrategy;
   }
 
   private ImmutableList<Pattern> getExcludedRefsPattern(Config cfg, String name) {

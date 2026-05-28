@@ -99,6 +99,7 @@ public class DestinationsCollection implements ReplicationDestinations {
       }
 
       boolean adminURLUsed = false;
+      List<URIish> validUris = new ArrayList<>();
 
       for (String url : config.getAdminUrls()) {
         if (Strings.isNullOrEmpty(url)) {
@@ -128,15 +129,16 @@ public class DestinationsCollection implements ReplicationDestinations {
             continue;
           }
         }
-        uris.put(config, uri);
+        validUris.add(uri);
         adminURLUsed = true;
       }
 
       if (!adminURLUsed) {
         for (URIish uri : config.getURIs(projectName, "*")) {
-          uris.put(config, uri);
+          validUris.add(uri);
         }
       }
+      config.getDistributedUris(validUris).forEach(uri -> uris.put(config, uri));
     }
     return uris;
   }
