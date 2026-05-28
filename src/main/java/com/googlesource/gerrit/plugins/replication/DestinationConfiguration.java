@@ -61,6 +61,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final String uploadPack;
   private final String receivePack;
   private final String gitPath;
+  private final UrlDistributionStrategy urlDistributionStrategy;
 
   protected DestinationConfiguration(RemoteConfig remoteConfig, Config cfg) {
     this.remoteConfig = remoteConfig;
@@ -132,6 +133,9 @@ public class DestinationConfiguration implements RemoteConfiguration {
     uploadPack = cfg.getString("remote", name, "uploadpack");
     receivePack = cfg.getString("remote", name, "receivepack");
     gitPath = cfg.getString("remote", name, "gitPath");
+    urlDistributionStrategy =
+        UrlDistributionStrategy.fromConfig(
+            cfg.getString("remote", name, "urlDistributionStrategy"));
   }
 
   @Override
@@ -257,6 +261,11 @@ public class DestinationConfiguration implements RemoteConfiguration {
 
   public String getGitPath() {
     return gitPath;
+  }
+
+  @Override
+  public UrlDistributionStrategy getUrlDistributionStrategy() {
+    return urlDistributionStrategy;
   }
 
   private ImmutableList<Pattern> getExcludedRefsPattern(Config cfg, String name) {
