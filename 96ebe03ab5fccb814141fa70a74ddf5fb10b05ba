@@ -22,6 +22,30 @@
       },
       "revId": "96ebe03ab5fccb814141fa70a74ddf5fb10b05ba",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41b1d2b4_1a8922a9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2026-05-28T20:20:23Z",
+      "side": 1,
+      "message": "I was wrong: actually the formatting change is related to the mergeup.",
+      "parentUuid": "8d21b3f2_95f2664c",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 68
+      },
+      "revId": "96ebe03ab5fccb814141fa70a74ddf5fb10b05ba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
