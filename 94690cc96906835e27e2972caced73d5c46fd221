@@ -70,6 +70,30 @@
       },
       "revId": "94690cc96906835e27e2972caced73d5c46fd221",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4296605_1d450be6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ListOutdatedCommand.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-28T04:28:08Z",
+      "side": 1,
+      "message": "Thanks for the catch, done.",
+      "parentUuid": "523174e4_49845e3d",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 9
+      },
+      "revId": "94690cc96906835e27e2972caced73d5c46fd221",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
