@@ -166,4 +166,9 @@ public interface RemoteConfiguration {
    * @return true if new repositories should store ref-updates in their reflog
    */
   boolean storeRefLog();
+
+  /** Returns the URL distribution strategy configured for this remote. */
+  default UrlDistributionStrategy getUrlDistributionStrategy() {
+    return UrlDistributionStrategy.ALL;
+  }
 }

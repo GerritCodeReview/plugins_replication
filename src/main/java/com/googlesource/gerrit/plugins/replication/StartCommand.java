@@ -34,7 +34,7 @@ final class StartCommand extends SshCommand implements PushResultProcessing.SshO
   @Option(name = "--all", usage = "push all known projects")
   private boolean all;
 
-  @Option(name = "--url", metaVar = "PATTERN", usage = "pattern to match URL on")
+  @Option(name = "--url", metaVar = "SUBSTRING", usage = "substring URL must match (or * to match everything)")
   private String urlMatch;
 
   private final Set<String> remotesToConsider = new HashSet<>();
