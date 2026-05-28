@@ -41,6 +41,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f79f038b_5966d344",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationConfiguration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-28T23:28:30Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "c3598770_fecef7f9",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 63
+      },
+      "revId": "96ebe03ab5fccb814141fa70a74ddf5fb10b05ba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d21b3f2_95f2664c",
