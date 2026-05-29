@@ -261,6 +261,19 @@ replication.eventsDirectory
 
 	When not set, defaults to the plugin's data directory.
 
+replication.emitEvents
+:	Whether to emit replication events to Gerrit's event dispatcher.
+
+	When disabled, all replication events are dropped before reaching the
+	event bus, which also prevents any downstream listeners (stream-events,
+	plugins, etc.) from receiving them. The replication work itself is not
+	affected.
+
+	The value is read at plugin load time; toggling it requires a plugin
+	reload.
+
+	Default: true
+
 replication.rsyncPath
 :	Path to the `rsync` binary on the host running Gerrit, used by the
 	`@PLUGIN@ repair --copy-packs` command when transferring pack files

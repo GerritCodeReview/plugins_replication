@@ -25,8 +25,6 @@ import com.google.gerrit.extensions.events.GitBatchRefUpdateListener;
 import com.google.gerrit.extensions.events.HeadUpdatedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.ProjectDeletedListener;
-import com.google.gerrit.extensions.registration.DynamicItem;
-import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.extensions.events.GitReferenceUpdated;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.util.logging.NamedFluentLogger;
@@ -37,6 +35,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.Repli
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig.FilterType;
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
+import com.googlesource.gerrit.plugins.replication.events.dispatcher.EventDispatcher;
 import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashSet;
@@ -65,7 +64,7 @@ public class ReplicationQueue
 
   private final ReplicationConfig replConfig;
   private final WorkQueue workQueue;
-  private final DynamicItem<EventDispatcher> dispatcher;
+  private final EventDispatcher dispatcher;
   private final Provider<ReplicationDestinations> destinations; // For Guice circular dependency
   private final ReplicationTasksStorage replicationTasksStorage;
   private final ProjectDeletionState.Factory projectDeletionStateFactory;
@@ -84,7 +83,7 @@ public class ReplicationQueue
       ReplicationConfig rc,
       WorkQueue wq,
       Provider<ReplicationDestinations> rd,
-      DynamicItem<EventDispatcher> dis,
+      EventDispatcher dis,
       ReplicationStateListeners sl,
       ReplicationTasksStorage rts,
       ProjectDeletionState.Factory pd) {
@@ -156,7 +155,7 @@ public class ReplicationQueue
   }
 
   private void fire(String projectName, Set<UpdatedRef> updatedRefs) {
-    ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
+    ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher));
     fire(Project.nameKey(projectName), null, updatedRefs, state, false);
     state.markAllPushTasksScheduled();
   }
@@ -199,7 +198,7 @@ public class ReplicationQueue
   }
 
   private void fireFromStorage(URIish uri, Project.NameKey project, ImmutableSet<String> refNames) {
-    ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
+    ReplicationState state = new ReplicationState(new GitUpdateProcessing(dispatcher));
     for (Destination dest : destinations.get().getDestinations(uri, project, refNames)) {
       dest.scheduleFromStorage(project, refNames, uri, state);
     }
@@ -220,7 +219,7 @@ public class ReplicationQueue
       boolean now) {
     boolean withoutState = state == null;
     if (withoutState) {
-      state = new ReplicationState(new GitUpdateProcessing(dispatcher.get()));
+      state = new ReplicationState(new GitUpdateProcessing(dispatcher));
     }
     Set<String> refNamesToPush = new HashSet<>();
     for (String refName : refNames) {

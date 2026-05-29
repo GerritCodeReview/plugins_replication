@@ -16,12 +16,11 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.util.concurrent.Atomics;
 import com.google.gerrit.extensions.events.LifecycleListener;
-import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.extensions.systemstatus.ServerInformation;
-import com.google.gerrit.server.events.EventDispatcher;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
+import com.googlesource.gerrit.plugins.replication.events.dispatcher.EventDispatcher;
 import java.util.Set;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -32,14 +31,14 @@ public class OnStartStop implements LifecycleListener {
   private final ServerInformation srvInfo;
   private final PushAll.Factory pushAll;
   private final ReplicationConfig config;
-  private final DynamicItem<EventDispatcher> eventDispatcher;
+  private final EventDispatcher eventDispatcher;
 
   @Inject
   protected OnStartStop(
       ServerInformation srvInfo,
       PushAll.Factory pushAll,
       ReplicationConfig config,
-      DynamicItem<EventDispatcher> eventDispatcher) {
+      EventDispatcher eventDispatcher) {
     this.srvInfo = srvInfo;
     this.pushAll = pushAll;
     this.config = config;
@@ -51,7 +50,7 @@ public class OnStartStop implements LifecycleListener {
   public void start() {
     if (srvInfo.getState() == ServerInformation.State.STARTUP
         && config.isReplicateAllOnPluginStart()) {
-      ReplicationState state = new ReplicationState(new GitUpdateProcessing(eventDispatcher.get()));
+      ReplicationState state = new ReplicationState(new GitUpdateProcessing(eventDispatcher));
       pushAllFuture.set(
           pushAll
               .create(null, Set.of(), ReplicationFilter.all(), state, false)
