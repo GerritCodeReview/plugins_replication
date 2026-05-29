@@ -33,6 +33,24 @@
       "message": "mga gagoo",
       "revId": "46f1097a4b482742a5cab2a57327175d39995a24",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "647dd137_fa5377c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2026-05-29T19:37:22Z",
+      "side": 1,
+      "message": "Removed spam comment.",
+      "parentUuid": "26eff1d5_9bbca20f",
+      "revId": "46f1097a4b482742a5cab2a57327175d39995a24",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
