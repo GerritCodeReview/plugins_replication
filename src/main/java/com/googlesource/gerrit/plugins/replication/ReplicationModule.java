@@ -40,6 +40,9 @@ import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicationDoneEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
+import com.googlesource.gerrit.plugins.replication.events.dispatcher.EventDispatcher;
+import com.googlesource.gerrit.plugins.replication.events.dispatcher.ForwardingEventDispatcher;
+import com.googlesource.gerrit.plugins.replication.events.dispatcher.NoopEventDispatcher;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.eclipse.jgit.transport.SshSessionFactory;
 
@@ -55,6 +58,7 @@ class ReplicationModule extends AbstractModule {
   @Override
   protected void configure() {
     install(configModule);
+    bindEventDispatcher();
     bind(ObservableQueue.class).to(ReplicationQueue.class);
     bind(LifecycleListener.class)
         .annotatedWith(UniqueAnnotations.create())
@@ -110,5 +114,15 @@ class ReplicationModule extends AbstractModule {
 
     install(new FactoryModuleBuilder().build(Destination.Factory.class));
     install(new FactoryModuleBuilder().build(ProjectDeletionState.Factory.class));
+  }
+
+  private void bindEventDispatcher() {
+    boolean emitEvents =
+        configModule.getReplicationConfig().getBoolean("replication", "emitEvents", true);
+    if (emitEvents) {
+      bind(EventDispatcher.class).to(ForwardingEventDispatcher.class).in(Scopes.SINGLETON);
+    } else {
+      bind(EventDispatcher.class).to(NoopEventDispatcher.class).in(Scopes.SINGLETON);
+    }
   }
 }

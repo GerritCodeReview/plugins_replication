@@ -20,11 +20,10 @@ import static com.googlesource.gerrit.plugins.replication.events.ProjectDeletion
 import static com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState.ProjectDeletionStatus.TO_PROCESS;
 
 import com.google.gerrit.entities.Project;
-import com.google.gerrit.extensions.registration.DynamicItem;
-import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.events.ProjectEvent;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import com.googlesource.gerrit.plugins.replication.events.dispatcher.EventDispatcher;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import org.eclipse.jgit.transport.URIish;
@@ -34,14 +33,13 @@ public class ProjectDeletionState {
     ProjectDeletionState create(Project.NameKey project);
   }
 
-  private final DynamicItem<EventDispatcher> eventDispatcher;
+  private final EventDispatcher eventDispatcher;
   private final Project.NameKey project;
   private final ConcurrentMap<URIish, ProjectDeletionStatus> statusByURI =
       new ConcurrentHashMap<>();
 
   @Inject
-  public ProjectDeletionState(
-      DynamicItem<EventDispatcher> eventDispatcher, @Assisted Project.NameKey project) {
+  public ProjectDeletionState(EventDispatcher eventDispatcher, @Assisted Project.NameKey project) {
     this.eventDispatcher = eventDispatcher;
     this.project = project;
   }
@@ -70,7 +68,7 @@ public class ProjectDeletionState {
   private void setStatusAndBroadcastEvent(
       URIish uri, ProjectDeletionStatus status, ProjectEvent event) {
     statusByURI.put(uri, status);
-    eventDispatcher.get().postEvent(project, event);
+    eventDispatcher.postEvent(project, event);
   }
 
   public void notifyIfDeletionDoneOnAllNodes() {
@@ -80,9 +78,7 @@ public class ProjectDeletionState {
               .noneMatch(s -> s.equals(TO_PROCESS) || s.equals(SCHEDULED))) {
 
         statusByURI.clear();
-        eventDispatcher
-            .get()
-            .postEvent(project, new ProjectDeletionReplicationDoneEvent(project.get()));
+        eventDispatcher.postEvent(project, new ProjectDeletionReplicationDoneEvent(project.get()));
       }
     }
   }

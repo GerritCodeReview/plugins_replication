@@ -43,7 +43,6 @@ import com.google.gerrit.server.account.GroupBackend;
 import com.google.gerrit.server.account.GroupBackends;
 import com.google.gerrit.server.account.GroupIncludeCache;
 import com.google.gerrit.server.account.ListGroupMembership;
-import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.PerThreadRequestScope;
 import com.google.gerrit.server.git.WorkQueue;
@@ -68,6 +67,7 @@ import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.Repli
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import com.googlesource.gerrit.plugins.replication.events.RefReplicatedEvent;
 import com.googlesource.gerrit.plugins.replication.events.ReplicationScheduledEvent;
+import com.googlesource.gerrit.plugins.replication.events.dispatcher.EventDispatcher;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Collection;
@@ -156,7 +156,7 @@ public class Destination {
   private volatile ScheduledExecutorService pool;
   private final PerThreadRequestScope.Scoper threadScoper;
   private final DestinationConfiguration config;
-  private final DynamicItem<EventDispatcher> eventDispatcher;
+  private final EventDispatcher eventDispatcher;
   private final Provider<ReplicationTasksStorage> replicationTasksStorage;
   private final UrlDistributionStrategy.Instance urlDistributor;
 
@@ -187,7 +187,7 @@ public class Destination {
       GroupBackend groupBackend,
       ReplicationStateListeners stateLog,
       GroupIncludeCache groupIncludeCache,
-      DynamicItem<EventDispatcher> eventDispatcher,
+      EventDispatcher eventDispatcher,
       Provider<ReplicationTasksStorage> rts,
       CredentialsFactory credentialsFactory,
       @Assisted DestinationConfiguration cfg) {
@@ -939,7 +939,7 @@ public class Destination {
       ReplicationScheduledEvent event =
           new ReplicationScheduledEvent(project.get(), ref, pushOp.getURI());
       try {
-        eventDispatcher.get().postEvent(BranchNameKey.create(project, ref), event);
+        eventDispatcher.postEvent(BranchNameKey.create(project, ref), event);
       } catch (PermissionBackendException e) {
         repLog.atSevere().withCause(e).log("error posting event");
       }
@@ -952,7 +952,7 @@ public class Destination {
       RefReplicatedEvent event =
           new RefReplicatedEvent(project.get(), ref, pushOp.getURI(), RefPushResult.FAILED, status);
       try {
-        eventDispatcher.get().postEvent(BranchNameKey.create(project, ref), event);
+        eventDispatcher.postEvent(BranchNameKey.create(project, ref), event);
       } catch (PermissionBackendException e) {
         repLog.atSevere().withCause(e).log("error posting event");
       }
