@@ -16,6 +16,24 @@
       "message": "```suggestion\n        for (URIish uri : config.getURIs(projectName, urlMatch)) {\n```",
       "revId": "074e242ae12e487f3f59a2a751df4d384be606de",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c2aa316_f8cd5c52",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DestinationsCollection.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-05-29T00:09:07Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "7653d6a7_8418a1d2",
+      "revId": "074e242ae12e487f3f59a2a751df4d384be606de",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
