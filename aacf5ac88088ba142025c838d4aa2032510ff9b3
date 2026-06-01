@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6561e095_dd992e85",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/dispatcher/ForwardingEventDispatcher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-06-01T21:53:41Z",
+      "side": 1,
+      "message": "Very cool. I would make this protected. nit: Remove blank line above this.",
+      "revId": "aacf5ac88088ba142025c838d4aa2032510ff9b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "831316f4_e3ec24fb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/dispatcher/NoopEventDispatcher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-06-01T21:53:41Z",
+      "side": 1,
+      "message": "Nit (styleguide): no blank lines at the beginning or end of blocks.",
+      "revId": "aacf5ac88088ba142025c838d4aa2032510ff9b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
