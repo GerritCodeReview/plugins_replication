@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7c68168_8142be58",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/dispatcher/EventDispatcher.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-06-01T22:17:43Z",
+      "side": 1,
+      "message": "nit: extra blank line.",
+      "revId": "d4cf30324ebce2b0c0b1a802efd13a3c203922d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
