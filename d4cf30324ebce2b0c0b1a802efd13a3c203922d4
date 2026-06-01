@@ -16,6 +16,24 @@
       "message": "nit: extra blank line.",
       "revId": "d4cf30324ebce2b0c0b1a802efd13a3c203922d4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "049a7a5d_0235ddad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/dispatcher/EventDispatcher.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-01T22:22:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7c68168_8142be58",
+      "revId": "d4cf30324ebce2b0c0b1a802efd13a3c203922d4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
