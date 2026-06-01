@@ -83,6 +83,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a5dd67a_9f178741",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-06-01T19:03:58Z",
+      "side": 1,
+      "message": "Overloading is likely not a good idea because there is no intrinsic way to know which arguments are missing, i.e. there is no natural ordering of the args, so it would be arbitrary and historic only, and would not make good APIs.",
+      "parentUuid": "a39b09ca_832689a8",
+      "revId": "33ec163aa5d43281a44d614bd4bdbf4d433a62d2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad883fab_ef3efb91",
