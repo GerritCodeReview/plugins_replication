@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d2900c_bd6212df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-06-01T22:21:42Z",
+      "side": 1,
+      "message": "This likely should be integrated into the replication start command so that it benefits from all its framework (threading, filtering...). And vice versa, \"start\" should benefit from having this data, that keeps it from being \"racy\", and makes doing both things faster.",
+      "revId": "985374bf6a9d1eecae5d9217a9428922f4130a17",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
