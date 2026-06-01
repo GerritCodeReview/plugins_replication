@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f17ee22e_bf37c9cd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/dispatcher/ForwardingEventDispatcher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-01T22:14:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6561e095_dd992e85",
+      "revId": "aacf5ac88088ba142025c838d4aa2032510ff9b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "831316f4_e3ec24fb",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-01T21:53:41Z",
       "side": 1,
       "message": "Nit (styleguide): no blank lines at the beginning or end of blocks.",
+      "revId": "aacf5ac88088ba142025c838d4aa2032510ff9b3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2cbe379_4a33510c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/events/dispatcher/NoopEventDispatcher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-01T22:14:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "831316f4_e3ec24fb",
       "revId": "aacf5ac88088ba142025c838d4aa2032510ff9b3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
