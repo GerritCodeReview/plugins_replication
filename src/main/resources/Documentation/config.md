@@ -700,7 +700,10 @@ remote.NAME.urlDistributionStrategy
     hosts share a single NFS backend. Pushing to all URLs simultaneously
     would cause redundant writes to the same underlying storage; round-robin
     distributes load evenly and ensures each push is written exactly once.
-    Has no effect if only one URL is configured.
+    On a transport error during retry, the next push attempt fails over to a
+    different URL in the rotation (bounded by `replicationRetry`), so a single
+    unreachable host does not block replication. Has no effect if only one URL
+    is configured.
 
   Defaults to `all`.
 

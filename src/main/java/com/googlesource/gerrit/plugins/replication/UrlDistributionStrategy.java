@@ -41,17 +41,36 @@ public enum UrlDistributionStrategy {
    * Push to one URL at a time, rotating through the list on each push event. Particularly useful
    * when multiple replica hosts share a single backend (likely via NFS): pushing to all URLs would
    * cause redundant writes to the same underlying storage, while round-robin distributes load
-   * evenly and ensures each push is executed exactly once.
+   * evenly and ensures each push is executed exactly once. On transport failure {@link
+   * Instance#failover} hands the push over to the next URL in the rotation.
    */
   ROUND_ROBIN("roundRobin") {
     @Override
     public Instance newInstance() {
-      final AtomicInteger index = new AtomicInteger();
-      return candidates -> {
-        if (candidates.isEmpty()) {
-          return List.of();
+      return new Instance() {
+        private final AtomicInteger index = new AtomicInteger();
+
+        @Override
+        public List<URIish> select(List<URIish> candidates) {
+          if (candidates.isEmpty()) {
+            return List.of();
+          }
+          return List.of(candidates.get(Math.floorMod(index.getAndIncrement(), candidates.size())));
         }
-        return List.of(candidates.get(Math.floorMod(index.getAndIncrement(), candidates.size())));
+
+        @Override
+        public URIish failover(List<URIish> candidates, URIish failed) {
+          if (candidates.size() < 2) {
+            return failed;
+          }
+          for (int attempt = 0; attempt < candidates.size(); attempt++) {
+            URIish next = candidates.get(Math.floorMod(index.getAndIncrement(), candidates.size()));
+            if (!next.equals(failed)) {
+              return next;
+            }
+          }
+          return failed;
+        }
       };
     }
   };
@@ -79,6 +98,15 @@ public enum UrlDistributionStrategy {
   /** A stateful executor for a {@link UrlDistributionStrategy} strategy. */
   @FunctionalInterface
   public interface Instance {
+    /** Select the URLs to push to for this scheduling event. */
     List<URIish> select(List<URIish> candidates);
+
+    /**
+     * If a push to any URI returned by {@link #select(List)} fails, {@link #failover(List,
+     * URIish)}} is invoked to select the next URI for retry.
+     */
+    default URIish failover(List<URIish> candidates, URIish failed) {
+      return failed;
+    }
   }
 }
