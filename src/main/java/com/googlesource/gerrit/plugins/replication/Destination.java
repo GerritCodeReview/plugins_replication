@@ -439,18 +439,14 @@ public class Destination {
 
   void scheduleFromStorage(
       Project.NameKey project, Set<String> refs, URIish uri, ReplicationState state) {
-    schedule(project, refs, uri, state, false, true);
-  }
-
-  void schedule(
-      Project.NameKey project, Set<String> refs, URIish uri, ReplicationState state, boolean now) {
-    schedule(project, refs, uri, state, now, false);
+    schedule(project, refs, uri, null, state, false, true);
   }
 
   void schedule(
       Project.NameKey project,
       Set<String> refs,
       URIish uri,
+      @Nullable String urlMatch,
       ReplicationState state,
       boolean now,
       boolean fromStorage) {
@@ -493,7 +489,7 @@ public class Destination {
             () -> {
               PushOne t = getPendingPush(uri);
               if (t == null) {
-                t = opFactory.create(project, uri);
+                t = opFactory.create(project, uri, urlMatch);
                 t.addRefBatch(refsToSchedule);
                 t.addState(refsToSchedule, state);
                 @SuppressWarnings("unused")
@@ -600,9 +596,7 @@ public class Destination {
               // second one fails, it will also be rescheduled and then,
               // here, find out replication to its URI is already pending
               // for retry (blocking).
-              pendingPushOp.addRefBatches(pushOp.getRefs());
-              pendingPushOp.addStates(pushOp.getStates());
-              pushOp.removeStates();
+              consolidateOnto(pendingPushOp, pushOp);
 
             } else {
               // The one pending is one that is NOT retrying, it was just
@@ -619,9 +613,7 @@ public class Destination {
               pendingPushOp.canceledByReplication();
               queue.pending.remove(uri);
 
-              pushOp.addRefBatches(pendingPushOp.getRefs());
-              pushOp.addStates(pendingPushOp.getStates());
-              pendingPushOp.removeStates();
+              consolidateOnto(pushOp, pendingPushOp);
             }
           }
 
@@ -642,11 +634,21 @@ public class Destination {
                         : REJECTED_OTHER_REASON;
                 status.isFailed = true;
                 if (pushOp.setToRetry()) {
-                  status.isRescheduled = true;
-                  replicationTasksStorage.get().reset(pushOp);
-                  @SuppressWarnings("unused")
-                  ScheduledFuture<?> ignored2 =
-                      pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
+                  URIish nextUri = urlDistributor.failover(
+                              getURIs(pushOp.getProjectNameKey(), pushOp.getUrlMatch()),
+                              pushOp.getURI());
+                  if (!nextUri.equals(pushOp.getURI())) {
+                    pushOp.canceledByReplication();
+                    queue.pending.remove(uri);
+                    failoverTo(pushOp, nextUri);
+                    replicationTasksStorage.get().finish(pushOp);
+                  } else {
+                    status.isRescheduled = true;
+                    replicationTasksStorage.get().reset(pushOp);
+                    @SuppressWarnings("unused")
+                    ScheduledFuture<?> ignored2 =
+                        pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
+                  }
                 } else {
                   pushOp.canceledByReplication();
                   pushOp.retryDone();
@@ -667,6 +669,47 @@ public class Destination {
     if (status.isRescheduled) {
       postReplicationScheduledEvent(pushOp);
     }
+  }
+
+  private void failoverTo(PushOne pushOp, URIish newUri) {
+    PushOne replacement =
+        opFactory.create(pushOp.getProjectNameKey(), newUri, pushOp.getUrlMatch());
+    replacement.addRefBatches(pushOp.getRefs());
+    replacement.addStates(pushOp.getStates());
+    replacement.setToRetryWithCount(pushOp.getRetryCount());
+    pushOp.removeStates();
+
+    boolean installed =
+        stateLock.withWriteLock(
+            newUri,
+            () -> {
+              PushOne existing = getPendingPush(newUri);
+              if (existing != null) {
+                consolidateOnto(existing, replacement);
+                return false;
+              }
+              for (ReplicationTasksStorage.ReplicateRefUpdate u :
+                  replacement.getReplicateRefUpdates()) {
+                replicationTasksStorage.get().create(u);
+              }
+              queue.pending.put(newUri, replacement);
+              @SuppressWarnings("unused")
+              ScheduledFuture<?> ignored =
+                  pool.schedule(replacement, config.getRetryDelay(), TimeUnit.MINUTES);
+              return true;
+            });
+    repLog.atInfo().log(
+        "Failover: replication for %s rerouted from %s to %s (retry %d)",
+        pushOp.getProjectNameKey(), pushOp.getURI(), newUri, replacement.getRetryCount());
+    if (installed) {
+      postReplicationScheduledEvent(replacement);
+    }
+  }
+
+  private static void consolidateOnto(PushOne into, PushOne from) {
+    into.addRefBatches(from.getRefs());
+    into.addStates(from.getStates());
+    from.removeStates();
   }
 
   RunwayStatus requestRunway(PushOne op) {

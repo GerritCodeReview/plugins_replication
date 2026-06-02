@@ -112,7 +112,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   static final String UPDATE_REF_FAILURE = "failed to update ref";
 
   interface Factory {
-    PushOne create(Project.NameKey d, URIish u);
+    PushOne create(Project.NameKey d, URIish u, @Nullable String urlMatch);
   }
 
   private final GitRepositoryManager gitManager;
@@ -125,6 +125,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
   private final Project.NameKey projectName;
   private final URIish uri;
+  @Nullable private final String urlMatch;
   private final Set<ImmutableSet<String>> refBatchesToPush = Sets.newConcurrentHashSet();
   private boolean pushAllRefs;
   private boolean isCollision;
@@ -160,7 +161,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
       CreateProjectTask.Factory cpf,
       TransportFactory tf,
       @Assisted Project.NameKey d,
-      @Assisted URIish u) {
+      @Assisted URIish u,
+      @Assisted @Nullable String um) {
     gitManager = grm;
     this.permissionBackend = permissionBackend;
     pool = p;
@@ -170,6 +172,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     threadScoper = ts;
     projectName = d;
     uri = u;
+    urlMatch = um;
     updateRefRetryCount = 0;
     maxUpdateRefRetries = pool.getUpdateRefErrorMaxRetries();
     id = ig.next();
@@ -263,9 +266,17 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   }
 
   boolean setToRetry() {
+    return setToRetryWithCount(retryCount + 1);
+  }
+
+  boolean setToRetryWithCount(int count) {
     retrying = true;
-    retryCount++;
+    retryCount = count;
     return maxRetries == 0 || retryCount <= maxRetries;
+  }
+
+  int getRetryCount() {
+    return retryCount;
   }
 
   void retryDone() {
@@ -283,6 +294,10 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   @Override
   public URIish getURI() {
     return uri;
+  }
+
+  String getUrlMatch() {
+    return urlMatch;
   }
 
   /** Returns false if all refs were already included in the push, true otherwise */
