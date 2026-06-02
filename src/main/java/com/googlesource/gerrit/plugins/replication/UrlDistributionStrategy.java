@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gerrit.entities.Project;
+import com.google.gerrit.entities.Project.NameKey;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -44,17 +45,36 @@ public enum UrlDistributionStrategy {
    * Push to one URL at a time, rotating through the list on each push event. Particularly useful
    * when multiple replica hosts share a single backend (likely via NFS): pushing to all URLs would
    * cause redundant writes to the same underlying storage, while round-robin distributes load
-   * evenly and ensures each push is executed exactly once.
+   * evenly and ensures each push is executed exactly once. On transport failure {@link
+   * Instance#failover} hands the push over to the next URL in the rotation.
    */
   ROUND_ROBIN("roundRobin") {
     @Override
     public Instance newInstance() {
-      final AtomicInteger index = new AtomicInteger();
-      return (project, candidates) -> {
-        if (candidates.isEmpty()) {
-          return List.of();
+      return new Instance() {
+        private final AtomicInteger index = new AtomicInteger();
+
+        @Override
+        public List<URIish> select(NameKey project, List<URIish> candidates) {
+          if (candidates.isEmpty()) {
+            return List.of();
+          }
+          return List.of(candidates.get(Math.floorMod(index.getAndIncrement(), candidates.size())));
         }
-        return List.of(candidates.get(Math.floorMod(index.getAndIncrement(), candidates.size())));
+
+        @Override
+        public URIish failover(List<URIish> candidates, URIish failed) {
+          if (candidates.size() < 2) {
+            return failed;
+          }
+          for (int attempt = 0; attempt < candidates.size(); attempt++) {
+            URIish next = candidates.get(Math.floorMod(index.getAndIncrement(), candidates.size()));
+            if (!next.equals(failed)) {
+              return next;
+            }
+          }
+          return failed;
+        }
       };
     }
   },
@@ -76,13 +96,32 @@ public enum UrlDistributionStrategy {
   PROJECT_SHARDED("projectSharded") {
     @Override
     public Instance newInstance() {
-      return (project, candidates) -> {
-        if (candidates.isEmpty()) {
-          return List.of();
+      return new Instance() {
+        @Override
+        public List<URIish> select(NameKey project, List<URIish> candidates) {
+          if (candidates.isEmpty()) {
+            return List.of();
+          }
+          ImmutableList<URIish> sorted = sortedByUrl(candidates);
+          return List.of(sorted.get(Math.floorMod(project.hashCode(), sorted.size())));
         }
-        ImmutableList<URIish> sorted =
-            ImmutableList.sortedCopyOf(Comparator.comparing(URIish::toString), candidates);
-        return List.of(sorted.get(Math.floorMod(project.hashCode(), sorted.size())));
+
+        @Override
+        public URIish failover(List<URIish> candidates, URIish failed) {
+          if (candidates.size() < 2) {
+            return failed;
+          }
+          ImmutableList<URIish> sorted = sortedByUrl(candidates);
+          int failedIndex = sorted.indexOf(failed);
+          if (failedIndex < 0) {
+            return failed;
+          }
+          return sorted.get((failedIndex + 1) % sorted.size());
+        }
+
+        private ImmutableList<URIish> sortedByUrl(List<URIish> candidates) {
+          return ImmutableList.sortedCopyOf(Comparator.comparing(URIish::toString), candidates);
+        }
       };
     }
   };
@@ -118,5 +157,13 @@ public enum UrlDistributionStrategy {
      * @return the subset of candidates to push to.
      */
     List<URIish> select(Project.NameKey project, List<URIish> candidates);
+
+    /**
+     * If a push to any URI returned by {@link #select(Project.NameKey, List)} fails, {@link
+     * #failover(List, URIish)}} is invoked to select the next URI for retry.
+     */
+    default URIish failover(List<URIish> candidates, URIish failed) {
+      return failed;
+    }
   }
 }
