@@ -263,9 +263,17 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   }
 
   boolean setToRetry() {
+    return setToRetryWithCount(retryCount + 1);
+  }
+
+  boolean setToRetryWithCount(int count) {
     retrying = true;
-    retryCount++;
+    retryCount = count;
     return maxRetries == 0 || retryCount <= maxRetries;
+  }
+
+  int getRetryCount() {
+    return retryCount;
   }
 
   void retryDone() {

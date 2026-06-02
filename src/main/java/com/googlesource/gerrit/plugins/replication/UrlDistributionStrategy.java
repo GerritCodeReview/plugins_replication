@@ -44,17 +44,48 @@ public enum UrlDistributionStrategy {
    * Push to one URL at a time, rotating through the list on each push event. Particularly useful
    * when multiple replica hosts share a single backend (likely via NFS): pushing to all URLs would
    * cause redundant writes to the same underlying storage, while round-robin distributes load
-   * evenly and ensures each push is executed exactly once.
+   * evenly and ensures each push is executed exactly once. On transport failure {@link
+   * Instance#failover} hands the push over to the next URL in the rotation.
    */
   ROUND_ROBIN("roundRobin") {
     @Override
     public Instance newInstance() {
+<<<<<<< HEAD   (f0d19065d6810d82d239d8b6805d5aeeda603e0a Merge "Add projectSharded URL selection per remote" into sta)
       final AtomicInteger index = new AtomicInteger();
       return (project, candidates) -> {
         if (candidates.isEmpty()) {
           return List.of();
+||||||| BASE   (681d9ab03db4d2ac3b7bfc81f64e490ddaceebfb Merge "Destination: remove unused method")
+      final AtomicInteger index = new AtomicInteger();
+      return candidates -> {
+        if (candidates.isEmpty()) {
+          return List.of();
+=======
+      return new Instance() {
+        private final AtomicInteger index = new AtomicInteger();
+
+        @Override
+        public List<URIish> select(List<URIish> candidates) {
+          if (candidates.isEmpty()) {
+            return List.of();
+          }
+          return List.of(candidates.get(Math.floorMod(index.getAndIncrement(), candidates.size())));
+>>>>>>> CHANGE (28ee207f72e3acb7910ab39d0a033c9da38b699c Retry failovers by applying url distribution strategy)
         }
-        return List.of(candidates.get(Math.floorMod(index.getAndIncrement(), candidates.size())));
+
+        @Override
+        public URIish failover(List<URIish> candidates, URIish failed) {
+          if (candidates.size() < 2) {
+            return failed;
+          }
+          for (int attempt = 0; attempt < candidates.size(); attempt++) {
+            URIish next = candidates.get(Math.floorMod(index.getAndIncrement(), candidates.size()));
+            if (!next.equals(failed)) {
+              return next;
+            }
+          }
+          return failed;
+        }
       };
     }
   },
@@ -110,6 +141,7 @@ public enum UrlDistributionStrategy {
   /** A stateful executor for a {@link UrlDistributionStrategy} strategy. */
   @FunctionalInterface
   public interface Instance {
+<<<<<<< HEAD   (f0d19065d6810d82d239d8b6805d5aeeda603e0a Merge "Add projectSharded URL selection per remote" into sta)
     /**
      * Selects the URLs to push to out of the candidates for the given project.
      *
@@ -118,5 +150,19 @@ public enum UrlDistributionStrategy {
      * @return the subset of candidates to push to.
      */
     List<URIish> select(Project.NameKey project, List<URIish> candidates);
+||||||| BASE   (681d9ab03db4d2ac3b7bfc81f64e490ddaceebfb Merge "Destination: remove unused method")
+    List<URIish> select(List<URIish> candidates);
+=======
+    /** Select the URLs to push to for this scheduling event. */
+    List<URIish> select(List<URIish> candidates);
+
+    /**
+     * If a push to any URI returned by {@link #select(List)} fails, {@link #failover(List,
+     * URIish)}} is invoked to select the next URI for retry.
+     */
+    default URIish failover(List<URIish> candidates, URIish failed) {
+      return failed;
+    }
+>>>>>>> CHANGE (28ee207f72e3acb7910ab39d0a033c9da38b699c Retry failovers by applying url distribution strategy)
   }
 }
