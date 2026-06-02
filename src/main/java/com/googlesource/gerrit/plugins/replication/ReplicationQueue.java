@@ -235,7 +235,7 @@ public class ReplicationQueue
         replicationTasksStorage.create(
             ReplicateRefUpdate.create(
                 project.get(), refNamesToPush, uri, cfg.getRemoteConfigName()));
-        cfg.schedule(project, refNamesToPush, uri, state, now);
+        cfg.schedule(project, refNamesToPush, uri, urlMatch, state, now);
       }
     }
     if (withoutState) {

@@ -424,7 +424,8 @@ public class PushOneTest {
             createProjectTaskFactoryMock,
             transportFactoryMock,
             projectNameKey,
-            urish);
+            urish,
+            null);
 
     push.setReplicationPushFilter(replicationPushFilter);
     return push;
