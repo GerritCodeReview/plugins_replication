@@ -14,9 +14,9 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import static javax.servlet.http.HttpServletResponse.SC_CREATED;
-import static javax.servlet.http.HttpServletResponse.SC_NO_CONTENT;
-import static javax.servlet.http.HttpServletResponse.SC_OK;
+import static com.google.gerrit.extensions.restapi.HttpStatusCode.SC_CREATED;
+import static com.google.gerrit.extensions.restapi.HttpStatusCode.SC_NO_CONTENT;
+import static com.google.gerrit.extensions.restapi.HttpStatusCode.SC_OK;
 
 import com.google.common.flogger.FluentLogger;
 import com.googlesource.gerrit.plugins.replication.HttpResponseHandler.HttpResult;
