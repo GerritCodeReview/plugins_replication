@@ -16,6 +16,24 @@
       "message": "As a rule, don\u0027t repeat the code in the comments, it clutters the code, and it becomes a maintenance problem which will likely contradict the code at some point.",
       "revId": "2802a472b0ac7aea111ae42a36a1774af7068501",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b125c90_488c306c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-06-04T14:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99735a1f_18e089e6",
+      "revId": "2802a472b0ac7aea111ae42a36a1774af7068501",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
