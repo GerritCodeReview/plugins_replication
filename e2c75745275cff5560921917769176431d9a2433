@@ -33,6 +33,24 @@
       "message": "Can this change be merged to other stable-3.x branches?\nhttps://issues.gerritcodereview.com/516212618\n\nAs it stands, I9db7a195d7a1ea8bef92d008a76386a01d0c9286 broke \u0027replication start\u0027 in all stable releases (3.11.11, 3.12.7, 3.13.6, and 3.14.0)\n\nAny workaround pending a future release including this fix? (we use \u0027replication start\u0027 for the initial replication after modifying the replication.config; we\u0027re using the replication plugin to replicate some specific projects to github or some gitlab instances)",
       "revId": "e2c75745275cff5560921917769176431d9a2433",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec24ba93_fd1cc55a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2026-06-04T19:55:02Z",
+      "side": 1,
+      "message": "Looks like the merges were done: 588321: Merge branch \u0027stable-3.13\u0027 | https://gerrit-review.googlesource.com/c/plugins/replication/+/588321",
+      "parentUuid": "aec93203_d0e66abc",
+      "revId": "e2c75745275cff5560921917769176431d9a2433",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [
