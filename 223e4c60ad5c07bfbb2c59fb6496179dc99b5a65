@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51b0421c_917d6865",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-06-08T20:10:11Z",
+      "side": 1,
+      "message": "I don\u0027t think we should add anymore of these methods (we should probably be getting rid of them), can you adjust the callers instead?",
+      "revId": "223e4c60ad5c07bfbb2c59fb6496179dc99b5a65",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96eb5677_af0d690a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-06-08T20:10:11Z",
+      "side": 1,
+      "message": "This doesn\u0027t feel appropriate in here, but I guess it depends if we want this behavior to \"trickle up\" to the start command. @klingarkar@nvidia.com what do you think?",
+      "revId": "223e4c60ad5c07bfbb2c59fb6496179dc99b5a65",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
