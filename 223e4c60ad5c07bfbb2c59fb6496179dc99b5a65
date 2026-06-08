@@ -33,6 +33,24 @@
       "message": "This doesn\u0027t feel appropriate in here, but I guess it depends if we want this behavior to \"trickle up\" to the start command. @klingarkar@nvidia.com what do you think?",
       "revId": "223e4c60ad5c07bfbb2c59fb6496179dc99b5a65",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78c4e7bf_af94d707",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-06-08T23:26:35Z",
+      "side": 1,
+      "message": "It will be inconsistent if we did the failover only in the case of ref-updated events, so I think we have to do it for start too. That said, it does feel odd to have urlMatch in this class. Should we instead store the resolved \u0027failoverUris\u0027 in PushOne?",
+      "parentUuid": "96eb5677_af0d690a",
+      "revId": "223e4c60ad5c07bfbb2c59fb6496179dc99b5a65",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
