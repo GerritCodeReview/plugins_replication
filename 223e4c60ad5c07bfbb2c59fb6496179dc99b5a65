@@ -51,6 +51,24 @@
       "parentUuid": "96eb5677_af0d690a",
       "revId": "223e4c60ad5c07bfbb2c59fb6496179dc99b5a65",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0702e933_2075475a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-09T20:28:23Z",
+      "side": 1,
+      "message": "what if we reload the config with a new url ? (we are stuck on same old set or uris)",
+      "parentUuid": "78c4e7bf_af94d707",
+      "revId": "223e4c60ad5c07bfbb2c59fb6496179dc99b5a65",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
