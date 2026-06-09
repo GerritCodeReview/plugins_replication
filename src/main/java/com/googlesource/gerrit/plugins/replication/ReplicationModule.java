@@ -71,6 +71,8 @@ class ReplicationModule extends AbstractModule {
 
     bind(OnStartStop.class).in(Scopes.SINGLETON);
     bind(LifecycleListener.class).annotatedWith(UniqueAnnotations.create()).to(OnStartStop.class);
+
+    bind(ReplicateAllRunner.class).in(Scopes.SINGLETON);
     bind(LifecycleListener.class)
         .annotatedWith(UniqueAnnotations.create())
         .to(ReplicationLogFile.class);

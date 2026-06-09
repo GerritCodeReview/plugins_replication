@@ -291,6 +291,10 @@ public class Destination {
     pool = workQueue.createQueue(config.getPoolThreads(), poolName);
   }
 
+  ScheduledExecutorService getExecutor() {
+    return pool;
+  }
+
   public int shutdown() {
     int cnt = 0;
     if (pool != null) {

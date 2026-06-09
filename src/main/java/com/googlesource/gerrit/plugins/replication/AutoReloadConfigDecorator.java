@@ -62,6 +62,11 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleLi
   }
 
   @Override
+  public synchronized boolean isReplicateAllInBackground() {
+    return currentConfig.isReplicateAllInBackground();
+  }
+
+  @Override
   public synchronized boolean isDefaultForceUpdate() {
     return currentConfig.isDefaultForceUpdate();
   }

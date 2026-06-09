@@ -274,6 +274,20 @@ replication.emitEvents
 
 	Default: true
 
+replication.replicateAllInBackground
+:	If true, a runner continuously replicates every project to every configured
+	remote. When a full pass over all projects completes, another pass begins
+	immediately.
+
+	Each remote's sweep runs on its own replication thread pool
+	(`remote.NAME.threads`). The sweep shares that pool with regular
+	replication to the same remote.
+
+	The value is read when the replication plugin starts and toggling it
+	requires a plugin reload.
+
+	Default: false
+
 replication.rsyncPath
 :	Path to the `rsync` binary on the host running Gerrit, used by the
 	`@PLUGIN@ repair --copy-packs` command when transferring pack files

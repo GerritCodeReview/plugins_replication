@@ -34,6 +34,7 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   private final MergedConfigResource configResource;
   private final boolean useLegacyCredentials;
   private boolean replicateAllOnPluginStart;
+  private boolean replicateAllInBackground;
   private boolean defaultForceUpdate;
   private int maxRefsToLog;
   private final int maxRefsToShow;
@@ -49,6 +50,8 @@ public class ReplicationConfigImpl implements ReplicationConfig {
     config = configResource.getConfig();
     this.configResource = configResource;
     this.replicateAllOnPluginStart = config.getBoolean("gerrit", "replicateOnStartup", false);
+    this.replicateAllInBackground =
+        config.getBoolean("replication", "replicateAllInBackground", false);
     this.defaultForceUpdate = config.getBoolean("gerrit", "defaultForceUpdate", false);
     this.maxRefsToLog = config.getInt("gerrit", "maxRefsToLog", 0);
     this.maxRefsToShow = config.getInt("gerrit", "maxRefsToShow", 2);
@@ -87,6 +90,15 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   @Override
   public boolean isReplicateAllOnPluginStart() {
     return replicateAllOnPluginStart;
+  }
+
+  /**
+   * See {@link
+   * com.googlesource.gerrit.plugins.replication.api.ReplicationConfig#isReplicateAllInBackground()}
+   */
+  @Override
+  public boolean isReplicateAllInBackground() {
+    return replicateAllInBackground;
   }
 
   /**

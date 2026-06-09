@@ -36,6 +36,13 @@ public interface ReplicationConfig {
   boolean isReplicateAllOnPluginStart();
 
   /**
+   * Whether to continuously replicate all projects to all configured remotes in the background.
+   *
+   * @return true if the background replicate-all sweep is enabled, false otherwise.
+   */
+  boolean isReplicateAllInBackground();
+
+  /**
    * Returns the default behaviour of the replication plugin when pushing to remote replication
    * ends. Even though the property name has the 'update' suffix, it actually refers to Git push
    * operation and not to a Git update.

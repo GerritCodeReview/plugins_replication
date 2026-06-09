@@ -66,6 +66,7 @@ public class ReplicationQueue
   private final WorkQueue workQueue;
   private final EventDispatcher dispatcher;
   private final Provider<ReplicationDestinations> destinations; // For Guice circular dependency
+  private final Provider<ReplicateAllRunner> replicateAllRunner; // For Guice circular dependency
   private final ReplicationTasksStorage replicationTasksStorage;
   private final ProjectDeletionState.Factory projectDeletionStateFactory;
   private volatile boolean running;
@@ -83,6 +84,7 @@ public class ReplicationQueue
       ReplicationConfig rc,
       WorkQueue wq,
       Provider<ReplicationDestinations> rd,
+      Provider<ReplicateAllRunner> rar,
       EventDispatcher dis,
       ReplicationStateListeners sl,
       ReplicationTasksStorage rts,
@@ -91,6 +93,7 @@ public class ReplicationQueue
     workQueue = wq;
     dispatcher = dis;
     destinations = rd;
+    replicateAllRunner = rar;
     stateLog = sl;
     replicationTasksStorage = rts;
     beforeStartupEventsQueue = Queues.newConcurrentLinkedQueue();
@@ -106,11 +109,13 @@ public class ReplicationQueue
       synchronizePendingEvents(Prune.FALSE);
       fireBeforeStartupEvents();
       distributor = new Distributor(workQueue);
+      replicateAllRunner.get().start();
     }
   }
 
   @Override
   public void stop() {
+    replicateAllRunner.get().stop();
     running = false;
     distributor.stop();
     int discarded = destinations.get().shutdown();
