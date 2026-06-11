@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c73884ce_d491124e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-06-11T09:18:13Z",
+      "side": 1,
+      "message": "better to keep ref in all places as we support only a single ref for now?",
+      "parentUuid": "db0faf38_b85b9765",
+      "revId": "f8174cb8b11e91fffda52f54a794a486338af3e8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcd6886d_5e4bcebe",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-10T15:47:06Z",
       "side": 1,
       "message": "`refSpec` could not be directly placed as `ref`. We should extract the source refs here and fire multiple events or check in PushOne if its a ref spec (ends with `/*` ? ) and then consolidate all the refs. @mfick@nvidia.com Do you have any suggestions here ?",
+      "revId": "f8174cb8b11e91fffda52f54a794a486338af3e8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be221695_1e20bbed",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-06-11T09:18:13Z",
+      "side": 1,
+      "message": "PushOne seems to be collecting all refs and iterating individually to replicate I believe. Correct me if I am wrong. We might need to process a refSepc the same way when passed through argument.",
+      "parentUuid": "bcd6886d_5e4bcebe",
       "revId": "f8174cb8b11e91fffda52f54a794a486338af3e8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -58,6 +94,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f05bbf31_d509ee55",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-06-11T09:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e24cd904_1f118c8f",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 0
+      },
+      "revId": "f8174cb8b11e91fffda52f54a794a486338af3e8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e642ddfa_db89ea2c",
@@ -71,6 +131,24 @@
       "writtenOn": "2026-06-10T15:47:06Z",
       "side": 1,
       "message": "use formatter.",
+      "revId": "f8174cb8b11e91fffda52f54a794a486338af3e8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b63159e_afd6f922",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-06-11T09:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e642ddfa_db89ea2c",
       "revId": "f8174cb8b11e91fffda52f54a794a486338af3e8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
