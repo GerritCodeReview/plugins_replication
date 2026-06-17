@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "682797f6_a7f1a7a5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-17T01:19:55Z",
+      "side": 1,
+      "message": "This doesn\u0027t look like atomic. Do we want to schedule inside hashmap lock ?",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb19291b_92a44407",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-17T01:19:55Z",
+      "side": 1,
+      "message": "tracking is combined for all uris when round robin is enabled but shouldn\u0027t we also pick an appropriate URI instead of repairing on same URI ?",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e58661_45f06f21",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-17T01:19:55Z",
+      "side": 1,
+      "message": "Do you want to log all rsync output on successful things too ?",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76e2da6e_15034497",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-17T01:19:55Z",
+      "side": 1,
+      "message": "s/tryBeginRepair/canBeginRepair ?",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfbc3bc4_333d7561",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-17T01:19:55Z",
+      "side": 1,
+      "message": "Can you use Instant here and Duration for intervalDays below to simplify?\n\n```\nif (Instant.now().isBefore(lastAttempt.plus(intervalDays))) {\n  ...\n}\n```",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d03dbd50_05f4435b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-17T01:19:55Z",
+      "side": 1,
+      "message": "This class scheduling replication doesn\u0027t seem right. We already have `ReplicationStarter`",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68d77236_ea0bb6b7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-17T01:19:55Z",
+      "side": 1,
+      "message": "```suggestion\n            if (!autoRepairNeeded \u0026\u0026 AutoRepairHandler.isMissingNecessaryObjectsError(u.getMessage())) {\n```",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
