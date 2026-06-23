@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23d4fc80_51c2f6ca",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-06-23T01:01:50Z",
+      "side": 1,
+      "message": "`AutoRepairTracker` intentionally records attempts, not repair outcomes. `tryBeginRepair` increments the attempt count when we decide to initiate repair, which is why the config is named `autoRepairMaxAttempts`, i.e it gates attempt frequency, not successful repairs. Making reservation and executor submission atomic would matter if we defined an attempt as \u0027repair successfully queued/executed\u0027 which we don\u0027t. Essentially, we have an attempt-based tracker, not an outcome-based one.",
+      "parentUuid": "682797f6_a7f1a7a5",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb19291b_92a44407",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
         "patchSetId": 14
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-17T01:19:55Z",
       "side": 1,
       "message": "tracking is combined for all uris when round robin is enabled but shouldn\u0027t we also pick an appropriate URI instead of repairing on same URI ?",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cca9f9c_cc5bc61c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-06-23T01:01:50Z",
+      "side": 1,
+      "message": "I don\u0027t think we should failover to another URI, as the repair is attempted only when we encounter a possible corruption (i.e on \u0027missing necessary objects\u0027 error), not a transport error for which we generally want to failover when round-robin is enabled.",
+      "parentUuid": "eb19291b_92a44407",
       "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -52,6 +88,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9933a365_36eecd87",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-06-23T01:01:50Z",
+      "side": 1,
+      "message": "Rsync shows some useful details like transfer speed and total size. It can help us triage slow repairs by looking back at older ones.",
+      "parentUuid": "73e58661_45f06f21",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76e2da6e_15034497",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-06-17T01:19:55Z",
       "side": 1,
       "message": "s/tryBeginRepair/canBeginRepair ?",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ba79c2e_e91fd1f7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-06-23T01:01:50Z",
+      "side": 1,
+      "message": "It’s intentionally named `tryBeginRepair` because it reserves an attempt when it returns true, not just checks whether repair is allowed.",
+      "parentUuid": "76e2da6e_15034497",
       "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -86,6 +158,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16fc2f7d_4b94f72d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-06-23T01:01:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfbc3bc4_333d7561",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d03dbd50_05f4435b",
@@ -103,6 +193,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b27b61ad_c373882c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-06-23T01:01:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d03dbd50_05f4435b",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68d77236_ea0bb6b7",
@@ -116,6 +224,24 @@
       "writtenOn": "2026-06-17T01:19:55Z",
       "side": 1,
       "message": "```suggestion\n            if (!autoRepairNeeded \u0026\u0026 AutoRepairHandler.isMissingNecessaryObjectsError(u.getMessage())) {\n```",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bce6d25b_e8ab14c1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-06-23T01:01:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68d77236_ea0bb6b7",
       "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
