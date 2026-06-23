@@ -33,6 +33,23 @@
       "message": "git commit",
       "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e4a6ba0_a9523f02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4933260
+      },
+      "writtenOn": "2026-06-23T14:41:41Z",
+      "side": 1,
+      "message": "I815f620af93b484fa801d0c953d56b6a6b00be66",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
