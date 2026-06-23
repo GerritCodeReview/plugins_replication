@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c046992_c2101d69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4933260
+      },
+      "writtenOn": "2026-06-23T03:37:27Z",
+      "side": 1,
+      "message": "git push origin HEAD:refs/for/refs/meta/config",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
