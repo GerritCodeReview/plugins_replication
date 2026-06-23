@@ -36,6 +36,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "145217f3_b0f7442b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 4933260
+      },
+      "writtenOn": "2026-06-23T14:40:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23d4fc80_51c2f6ca",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb19291b_92a44407",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "I don\u0027t think we should failover to another URI, as the repair is attempted only when we encounter a possible corruption (i.e on \u0027missing necessary objects\u0027 error), not a transport error for which we generally want to failover when round-robin is enabled.",
       "parentUuid": "eb19291b_92a44407",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ba31b1a_d5af38bc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4933260
+      },
+      "writtenOn": "2026-06-23T14:40:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cca9f9c_cc5bc61c",
       "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
