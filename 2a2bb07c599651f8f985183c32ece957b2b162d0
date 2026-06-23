@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba56c9b3_609dfcd5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-23T17:33:12Z",
+      "side": 1,
+      "message": "I think RR is generalized (its not restricted to only all/specific errors.) ?",
+      "parentUuid": "1ba31b1a_d5af38bc",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73e58661_45f06f21",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
         "patchSetId": 14
