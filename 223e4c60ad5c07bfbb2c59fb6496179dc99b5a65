@@ -123,6 +123,24 @@
       "parentUuid": "451c3955_e9012652",
       "revId": "223e4c60ad5c07bfbb2c59fb6496179dc99b5a65",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fd4e27c_9c33e955",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-29T19:55:04Z",
+      "side": 1,
+      "message": "Ignoring this for now. failed `replications start` would not consider the urlmatch for now. We can improve it later (and also make it mp compatabile).",
+      "parentUuid": "b62fa6e7_6b33e207",
+      "revId": "223e4c60ad5c07bfbb2c59fb6496179dc99b5a65",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
