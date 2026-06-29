@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13fba32b_33f705c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-29T18:33:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72259fae_6ede548a",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 49
+      },
+      "revId": "109051fd439e19e84b405b81d8329313cb06ea44",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8aee2fe3_bb0cf52f",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-06-08T23:26:35Z",
       "side": 1,
       "message": "It looks like the retry reason is TRANSPORT_ERROR, even when we have update ref errors like LOCK_FAILURE or a UPDATE_REF_FAILURE (see L500 in PushOne). With the current logic we retry for them too. Should we only do this failover for real transport errors?",
+      "revId": "109051fd439e19e84b405b81d8329313cb06ea44",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc97626f_f5070a2a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-29T18:33:01Z",
+      "side": 1,
+      "message": "I think we should RR for any error kind.",
+      "parentUuid": "8aee2fe3_bb0cf52f",
       "revId": "109051fd439e19e84b405b81d8329313cb06ea44",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -58,6 +100,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7f2cec6_dfe14b30",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-29T18:33:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dccb936d_da3863d3",
+      "revId": "109051fd439e19e84b405b81d8329313cb06ea44",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aef6ab8b_7609ce7d",
@@ -71,6 +131,24 @@
       "writtenOn": "2026-06-08T23:26:35Z",
       "side": 1,
       "message": "This method seems to be doing more than what its name suggests?",
+      "revId": "109051fd439e19e84b405b81d8329313cb06ea44",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aff4b75c_e264531e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-06-29T18:33:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aef6ab8b_7609ce7d",
       "revId": "109051fd439e19e84b405b81d8329313cb06ea44",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
