@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8695ee35_8d897958",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-07-01T15:21:27Z",
+      "side": 0,
+      "message": "No need to remove this. It is still a functional interface?",
+      "range": {
+        "startLine": 80,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 22
+      },
+      "revId": "681d9ab03db4d2ac3b7bfc81f64e490ddaceebfb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
