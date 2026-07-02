@@ -35,6 +35,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fb86e57_06161bf0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-07-02T15:40:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80658240_11c32130",
+      "revId": "2a517cb63020312a4d9321cdb10c47ffb12a1ef0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1262e77_9ce54606",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-07-02T12:03:30Z",
       "side": 1,
       "message": "s/RReplicate/Replicate/",
+      "revId": "2a517cb63020312a4d9321cdb10c47ffb12a1ef0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24ae86d0_e07501dc",
+        "filename": "src/main/resources/Documentation/cmd-start.md",
+        "patchSetId": 23
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-07-02T15:40:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1262e77_9ce54606",
       "revId": "2a517cb63020312a4d9321cdb10c47ffb12a1ef0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
