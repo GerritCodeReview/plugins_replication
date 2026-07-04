@@ -1,9 +1,10 @@
-load("@rules_java//java:defs.bzl", "java_library")
 load("@com_googlesource_gerrit_bazlets//:gerrit_plugin.bzl", "gerrit_plugin", "gerrit_plugin_tests")
+load("@rules_java//java:defs.bzl", "java_library")
 
 gerrit_plugin(
     name = "replication",
     srcs = glob(["src/main/java/**/*.java"]),
+    flavour = "any",
     manifest_entries = [
         "Implementation-Title: Replication plugin",
         "Implementation-URL: https://gerrit-review.googlesource.com/#/admin/projects/plugins/replication",
@@ -24,6 +25,7 @@ gerrit_plugin(
         ["src/main/java/com/googlesource/gerrit/plugins/replication/api/*.java"],
     ),
     dir_name = "replication",
+    flavour = "any",
     manifest_entries = [
         "Implementation-Title: Replication plugin API",
         "Implementation-URL: https://gerrit-review.googlesource.com/#/admin/projects/plugins/replication",
