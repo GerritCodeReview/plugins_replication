@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa5149d8_0119533d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-07-06T21:10:05Z",
+      "side": 1,
+      "message": "It\u0027s not really as pattern right? So no matching?\"ref to replicate\"?",
+      "revId": "3a3f58122e2ad910244a51a5ca702db839fe34ec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
