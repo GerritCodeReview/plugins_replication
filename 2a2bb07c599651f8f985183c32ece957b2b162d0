@@ -125,6 +125,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1984679_afb7161f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairHandler.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-07-10T21:06:47Z",
+      "side": 1,
+      "message": "If the repair happens on the same url it has a greater chance of succeeding since the url just worked.",
+      "parentUuid": "ba56c9b3_609dfcd5",
+      "revId": "2a2bb07c599651f8f985183c32ece957b2b162d0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73e58661_45f06f21",
