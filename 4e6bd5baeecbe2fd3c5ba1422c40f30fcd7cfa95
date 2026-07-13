@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78c97599_a0581c74",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-07-13T23:32:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11e9d3f3_fc440406",
+      "range": {
+        "startLine": 646,
+        "startChar": 86,
+        "endLine": 646,
+        "endChar": 87
+      },
+      "revId": "4e6bd5baeecbe2fd3c5ba1422c40f30fcd7cfa95",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cdfee6c_8a1c2da2",
@@ -47,6 +71,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e94cee87_48c732ff",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-07-13T23:32:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cdfee6c_8a1c2da2",
+      "range": {
+        "startLine": 699,
+        "startChar": 0,
+        "endLine": 702,
+        "endChar": 15
+      },
+      "revId": "4e6bd5baeecbe2fd3c5ba1422c40f30fcd7cfa95",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1bf75b3_6d604711",
@@ -60,6 +108,24 @@
       "writtenOn": "2026-07-13T23:10:02Z",
       "side": 1,
       "message": "Now that we are failing over, should we update this doc recommending that maxretries be configured to a value greater than the number of URIs so that all URIs are attempted?",
+      "revId": "4e6bd5baeecbe2fd3c5ba1422c40f30fcd7cfa95",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db27c73a_2aa73e07",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-07-13T23:32:40Z",
+      "side": 1,
+      "message": "It doesn\u0027t work that way. We roundrobin based on all on-going requests not specific to this particular retry.",
+      "parentUuid": "c1bf75b3_6d604711",
       "revId": "4e6bd5baeecbe2fd3c5ba1422c40f30fcd7cfa95",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
