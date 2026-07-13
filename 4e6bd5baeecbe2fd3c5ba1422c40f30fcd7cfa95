@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11e9d3f3_fc440406",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-07-13T23:10:02Z",
+      "side": 1,
+      "message": "```suggestion\n                    // Defer actual failoverTo until after this write lock is released\n```",
+      "range": {
+        "startLine": 646,
+        "startChar": 86,
+        "endLine": 646,
+        "endChar": 87
+      },
+      "revId": "4e6bd5baeecbe2fd3c5ba1422c40f30fcd7cfa95",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cdfee6c_8a1c2da2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-07-13T23:10:02Z",
+      "side": 1,
+      "message": "We need the task storage create to happen for consolidation too? i.e L699-702 should be done before the `if` on L694?",
+      "range": {
+        "startLine": 699,
+        "startChar": 0,
+        "endLine": 702,
+        "endChar": 15
+      },
+      "revId": "4e6bd5baeecbe2fd3c5ba1422c40f30fcd7cfa95",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1bf75b3_6d604711",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-07-13T23:10:02Z",
+      "side": 1,
+      "message": "Now that we are failing over, should we update this doc recommending that maxretries be configured to a value greater than the number of URIs so that all URIs are attempted?",
+      "revId": "4e6bd5baeecbe2fd3c5ba1422c40f30fcd7cfa95",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
