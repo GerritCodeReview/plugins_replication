@@ -50,6 +50,125 @@
       "message": "I815f620af93b484fa801d0c953d56b6a6b00be66",
       "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "620c16f8_6608f992",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-07-13T03:28:37Z",
+      "side": 1,
+      "message": "Do we need to log at warn here ? (since it is already documented that plain ssh is not supported.)",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c32663a_c2ffe1a0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-07-13T03:28:37Z",
+      "side": 1,
+      "message": "logging repairAttemptCount is not needed here ?",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f03f3cb_bde37db2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-07-13T03:28:37Z",
+      "side": 1,
+      "message": "I think it would be good to just print `nextAllowed` than the `remaining`. Could find all the failures in the log with matching timestamp too.",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c8dc402_86c38e73",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-07-13T03:28:37Z",
+      "side": 1,
+      "message": "toHours() can be called directly.",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cd7ca34_fbdc7589",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-07-13T03:28:37Z",
+      "side": 1,
+      "message": "update lastAttempt and repairAttemptCount together ?",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6287c5b_4d7949d7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigImpl.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-07-13T03:28:37Z",
+      "side": 1,
+      "message": "```suggestion\n        config.getTimeUnit(...);\n```\n\nAnd would be easier to have it as duration all along.",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c602c6a_5a5dfa52",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-07-13T03:28:37Z",
+      "side": 1,
+      "message": "Why hard code to just days ? when gerrit does allow duration with timeunit specified in the config.",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
