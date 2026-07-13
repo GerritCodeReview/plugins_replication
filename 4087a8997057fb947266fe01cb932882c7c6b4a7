@@ -69,6 +69,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e652519_6996259f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-07-13T20:18:12Z",
+      "side": 1,
+      "message": "Yes. If repair is explicitly enabled in the config, but the destination uri wont support it, then a warn makes sense.",
+      "parentUuid": "620c16f8_6608f992",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c32663a_c2ffe1a0",
@@ -82,6 +100,24 @@
       "writtenOn": "2026-07-13T03:28:37Z",
       "side": 1,
       "message": "logging repairAttemptCount is not needed here ?",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85f56717_073b9d66",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-07-13T20:18:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c32663a_c2ffe1a0",
       "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -103,6 +139,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce87fa26_8ccf640b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-07-13T20:18:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f03f3cb_bde37db2",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c8dc402_86c38e73",
@@ -116,6 +170,24 @@
       "writtenOn": "2026-07-13T03:28:37Z",
       "side": 1,
       "message": "toHours() can be called directly.",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a1624af_d92b92f0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-07-13T20:18:12Z",
+      "side": 1,
+      "message": "Using nextAllowedAt now.",
+      "parentUuid": "9c8dc402_86c38e73",
       "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -137,6 +209,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ce1cd29_cbc96ed8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AutoRepairTracker.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-07-13T20:18:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cd7ca34_fbdc7589",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6287c5b_4d7949d7",
@@ -154,6 +244,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "483b7d85_0e9b42e6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationConfigImpl.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-07-13T20:18:12Z",
+      "side": 1,
+      "message": "Using `ConfigUtil.getTimeUnit` now.",
+      "parentUuid": "f6287c5b_4d7949d7",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c602c6a_5a5dfa52",
@@ -167,6 +275,24 @@
       "writtenOn": "2026-07-13T03:28:37Z",
       "side": 1,
       "message": "Why hard code to just days ? when gerrit does allow duration with timeunit specified in the config.",
+      "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd0d9650_ef212c26",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-07-13T20:18:12Z",
+      "side": 1,
+      "message": "Good point. Done. We don\u0027t expect users to have an interval less than a day, but they can choose to if they want.",
+      "parentUuid": "0c602c6a_5a5dfa52",
       "revId": "4087a8997057fb947266fe01cb932882c7c6b4a7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
