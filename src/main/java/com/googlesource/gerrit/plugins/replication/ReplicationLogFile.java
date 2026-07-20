@@ -22,8 +22,11 @@ import com.google.gerrit.util.logging.JsonLayout;
 import com.google.gerrit.util.logging.JsonLogEntry;
 import com.google.gson.annotations.SerializedName;
 import com.google.inject.Inject;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.spi.LoggingEvent;
+import org.apache.log4j.spi.ThrowableInformation;
 
 public class ReplicationLogFile extends PluginLogFile {
 
@@ -43,19 +46,44 @@ public class ReplicationLogFile extends PluginLogFile {
     private class ReplicationJsonLogEntry extends JsonLogEntry {
       public String timestamp;
       public String message;
+      public Map<String, String> exception;
 
       @SerializedName("@version")
-      public final int version = 1;
+      public final int version = 2;
 
       public ReplicationJsonLogEntry(LoggingEvent event) {
         timestamp = timestampFormatter.format(event.getTimeStamp());
         message = (String) event.getMessage();
+
+        if (event.getThrowableInformation() != null) {
+          this.exception = getException(event.getThrowableInformation());
+        }
       }
     }
 
     @Override
     public JsonLogEntry toJsonLogEntry(LoggingEvent event) {
       return new ReplicationJsonLogEntry(event);
+    }
+
+    private Map<String, String> getException(ThrowableInformation throwable) {
+      HashMap<String, String> exceptionInformation = new HashMap<>();
+
+      String throwableName = throwable.getThrowable().getClass().getCanonicalName();
+      if (throwableName != null) {
+        exceptionInformation.put("exception_class", throwableName);
+      }
+
+      String throwableMessage = throwable.getThrowable().getMessage();
+      if (throwableMessage != null) {
+        exceptionInformation.put("exception_message", throwableMessage);
+      }
+
+      String[] stackTrace = throwable.getThrowableStrRep();
+      if (stackTrace != null) {
+        exceptionInformation.put("stacktrace", String.join("\n", stackTrace));
+      }
+      return exceptionInformation;
     }
   }
 }
