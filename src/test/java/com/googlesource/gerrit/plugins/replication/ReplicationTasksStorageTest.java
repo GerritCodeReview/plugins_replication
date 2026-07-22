@@ -358,6 +358,23 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
+  public void recoverAllRecoversOnlyUpdatesMatchingFilter() throws Exception {
+    ReplicateRefUpdate otherRefUpdate =
+        ReplicateRefUpdate.create(PROJECT, Set.of(REF), URISH, "otherRemote");
+    UriUpdates otherUriUpdates = new TestUriUpdates(otherRefUpdate);
+    storage.create(REF_UPDATE);
+    storage.create(otherRefUpdate);
+    storage.start(uriUpdates);
+    storage.start(otherUriUpdates);
+
+    storage.recoverAll(r -> REMOTE.equals(r.remote()));
+
+    assertThatStream(storage.streamWaiting()).containsExactly(STORED_REF_UPDATE);
+    assertThatStream(storage.streamRunning())
+        .containsExactly(ReplicateRefUpdate.create(otherRefUpdate, otherRefUpdate.sha1()));
+  }
+
+  @Test
   public void canCompleteMultipleRecoveredUpdates() throws Exception {
     ReplicateRefUpdate updateB =
         ReplicateRefUpdate.create(
