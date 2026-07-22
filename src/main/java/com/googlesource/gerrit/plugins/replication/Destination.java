@@ -287,9 +287,21 @@ public class Destination {
     return queue;
   }
 
+  /**
+   * Whether this destination performs pushes.
+   *
+   * <p>When {@code remote.NAME.threads} is set to 0, no pushes will be done, but the tasks are
+   * still persisted to the {@link ReplicationTasksStorage}.
+   */
+  public boolean isPushEnabled() {
+    return config.getPoolThreads() > 0;
+  }
+
   public void start(WorkQueue workQueue) {
-    String poolName = "ReplicateTo-" + config.getRemoteConfig().getName();
-    pool = workQueue.createQueue(config.getPoolThreads(), poolName);
+    if (isPushEnabled()) {
+      String poolName = "ReplicateTo-" + config.getRemoteConfig().getName();
+      pool = workQueue.createQueue(config.getPoolThreads(), poolName);
+    }
   }
 
   public int shutdown() {
@@ -455,6 +467,9 @@ public class Destination {
       ReplicationState state,
       boolean now,
       boolean fromStorage) {
+    if (!isPushEnabled()) {
+      return;
+    }
     ImmutableSet.Builder<String> toSchedule = ImmutableSet.builder();
     for (String ref : refs) {
       if (!shouldReplicate(project, ref, state)) {
@@ -544,17 +559,21 @@ public class Destination {
   }
 
   void scheduleDeleteProject(URIish uri, Project.NameKey project, ProjectDeletionState state) {
-    repLog.atFine().log("scheduling deletion of project %s at %s", project, uri);
-    @SuppressWarnings("unused")
-    ScheduledFuture<?> ignored =
-        pool.schedule(deleteProjectFactory.create(uri, project, state), 0, TimeUnit.SECONDS);
-    state.setScheduled(uri);
+    if (isPushEnabled()) {
+      repLog.atFine().log("scheduling deletion of project %s at %s", project, uri);
+      @SuppressWarnings("unused")
+      ScheduledFuture<?> ignored =
+          pool.schedule(deleteProjectFactory.create(uri, project, state), 0, TimeUnit.SECONDS);
+      state.setScheduled(uri);
+    }
   }
 
   void scheduleUpdateHead(URIish uri, Project.NameKey project, String newHead) {
-    @SuppressWarnings("unused")
-    ScheduledFuture<?> ignored =
-        pool.schedule(updateHeadFactory.create(uri, project, newHead), 0, TimeUnit.SECONDS);
+    if (isPushEnabled()) {
+      @SuppressWarnings("unused")
+      ScheduledFuture<?> ignored =
+          pool.schedule(updateHeadFactory.create(uri, project, newHead), 0, TimeUnit.SECONDS);
+    }
   }
 
   /**
@@ -579,6 +598,9 @@ public class Destination {
    * @param pushOp The PushOp instance to be scheduled.
    */
   void reschedule(PushOne pushOp, RetryReason reason) {
+    if (!isPushEnabled()) {
+      return;
+    }
     RescheduleStatus status = new RescheduleStatus();
     stateLock.withWriteLock(
         pushOp.getURI(),

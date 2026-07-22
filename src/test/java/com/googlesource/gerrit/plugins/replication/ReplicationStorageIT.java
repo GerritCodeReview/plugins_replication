@@ -67,6 +67,30 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
   }
 
   @Test
+  public void shouldPersistTaskButNotPushWhenRemoteHasZeroThreads() throws Exception {
+    String remote = "persistOnly";
+    Project.NameKey target = createTestProject(project + "replica");
+    setReplicationDestination(remote, "replica", ALL_PROJECTS);
+    config.setInt("remote", remote, "threads", 0);
+    config.save();
+    reloadConfig();
+
+    String changeRef = createChange().getPatchSet().refName();
+
+    assertThat(waitingChangeReplicationTasksForRemote(changeRef, remote).count()).isEqualTo(1);
+
+    Destination destination =
+        destinationCollection.getAll(FilterType.ALL).stream()
+            .filter(dest -> remote.equals(dest.getRemoteConfigName()))
+            .findFirst()
+            .get();
+
+    assertThat(destination.isPushEnabled()).isFalse();
+    assertThat(destination.getQueue().pending).isEmpty();
+    assertThat(isPushCompleted(target, changeRef, TEST_PUSH_TIMEOUT)).isFalse();
+  }
+
+  @Test
   public void shouldCreateOneReplicationTaskWhenSchedulingRepoFullSync() throws Exception {
     createTestProject(project + "replica");
 
@@ -76,7 +100,8 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), false);
+        .scheduleFullSync(
+            project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), false);
 
     assertThat(listWaitingReplicationTasks(Pattern.quote(PushOne.ALL_REFS))).hasSize(1);
   }
@@ -221,7 +246,8 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), false);
+        .scheduleFullSync(
+            project, urlMatch, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), false);
 
     assertThat(listWaiting()).hasSize(1);
     tasksStorage
@@ -246,7 +272,8 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), false);
+        .scheduleFullSync(
+            project, urlMatch, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), false);
 
     assertThat(listWaiting()).hasSize(1);
     tasksStorage

@@ -44,6 +44,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
@@ -189,8 +190,13 @@ public class ReplicationTasksStorage {
     }
   }
 
+  @VisibleForTesting
   public void recoverAll() {
-    streamRunning().forEach(r -> new Task(r).recover());
+    recoverAll(r -> true);
+  }
+
+  public void recoverAll(Predicate<ReplicateRefUpdate> shouldRecover) {
+    streamRunning().filter(shouldRecover).forEach(r -> new Task(r).recover());
   }
 
   public boolean isWaiting(UriUpdates uriUpdates) {

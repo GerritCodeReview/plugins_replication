@@ -536,6 +536,15 @@ remote.NAME.threads
 	remote block describes 4 URLs, allocating 4 threads in the
 	pool will permit some level of parallel pushing.
 
+	A value of `0` puts this remote into a persist-only mode. No thread
+	pool is created and this node performs no pushes. Replication tasks
+	are still written to the replication task storage, so that other
+	nodes in the cluster sharing the same storage (with `threads` > 0 and
+        `replication.distributionInterval` enabled) pick them up and perform
+	the actual pushes. Note that, in this mode project deletions and HEAD
+	updates originating on this node cannot	be replicated by other nodes,
+	as they are not persisted to the task storage.
+
 	By default, 1 thread.
 
 remote.NAME.authGroup

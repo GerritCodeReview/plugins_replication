@@ -102,8 +102,11 @@ public class ReplicationQueue
     if (!running) {
       destinations.get().startup(workQueue);
       running = true;
-      replicationTasksStorage.recoverAll();
-      synchronizePendingEvents(Prune.FALSE);
+      Set<String> pushEnabledRemoteNames = getPushEnabledRemoteNames();
+      if (!pushEnabledRemoteNames.isEmpty()) {
+        replicationTasksStorage.recoverAll(r -> pushEnabledRemoteNames.contains(r.remote()));
+        synchronizePendingEvents(Prune.FALSE);
+      }
       fireBeforeStartupEvents();
       distributor = new Distributor(workQueue);
     }
@@ -148,6 +151,13 @@ public class ReplicationQueue
   @Override
   public void onGitBatchRefUpdate(GitBatchRefUpdateListener.Event event) {
     fire(event.getProjectName(), event.getUpdatedRefs());
+  }
+
+  private Set<String> getPushEnabledRemoteNames() {
+    return destinations.get().getAll(FilterType.ALL).stream()
+        .filter(Destination::isPushEnabled)
+        .map(Destination::getRemoteConfigName)
+        .collect(Collectors.toSet());
   }
 
   private void fire(String projectName, Set<UpdatedRef> updatedRefs) {
