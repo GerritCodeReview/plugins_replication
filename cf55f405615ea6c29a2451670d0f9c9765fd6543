@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1da17a3e_31acf2d8",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2026-07-23T18:36:18Z",
+      "side": 1,
+      "message": "```suggestion\n\t\u003e **NOTE**: In persist-only mode, project deletions and HEAD updates\n\t\u003e originating on this node cannot be replicated by other nodes, as\n\t\u003e they are not persisted to the task storage.\n```",
+      "range": {
+        "startLine": 546,
+        "startChar": 0,
+        "endLine": 548,
+        "endChar": 44
+      },
+      "revId": "cf55f405615ea6c29a2451670d0f9c9765fd6543",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
