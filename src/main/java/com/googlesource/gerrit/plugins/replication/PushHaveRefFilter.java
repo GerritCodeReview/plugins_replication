@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static com.google.gerrit.entities.RefNames.REFS_CHANGES;
 import static com.google.gerrit.entities.RefNames.isNoteDbMetaRef;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
@@ -109,7 +110,9 @@ class PushHaveRefFilter implements RefFilter {
               // those aren't in the same project. Familiar CI votes might be the best
               // candidates to actually delta. Replication overall would have to be much
               // faster for that to likely be worth it.
-              && !isNoteDbMetaRef(toPush.getRemoteName())) {
+              && !isNoteDbMetaRef(toPush.getRemoteName())
+              // Treat notedb checks refs like meta refs
+              && !isNoteDbChecksRef(toPush.getRemoteName())) {
             // A push which avoids adding fallback refs will at most push a single commit per ref
             // update. It is possible that pushing even one commit could be more than was necessary
             // if that commit were already on another ref on the remote. The larger the commit, the
@@ -387,5 +390,9 @@ class PushHaveRefFilter implements RefFilter {
         remotePatchSetRefsByChangeId.put(psId.changeId(), ref);
       }
     }
+  }
+
+  private static boolean isNoteDbChecksRef(String ref) {
+    return ref.startsWith(REFS_CHANGES) && ref.endsWith("checks");
   }
 }
