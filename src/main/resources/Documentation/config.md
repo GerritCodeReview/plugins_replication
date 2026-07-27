@@ -731,12 +731,14 @@ remote.NAME.replicateNoteDbMetaRefs
   By default, true.
 
 remote.NAME.excludedRefsPattern
-: Refs that match the pattern provided using this config will not be replicated.
-  This option is useful when admins want to skip replicating certain refs, for
-  example refs created by plugins. Multiple excludedRefsPattern keys can be
-  supplied, to specify multiple patterns to match against.
+: Refs that match the regular expression provided using this config will not
+  be replicated. Only Java regular expressions are supported. The expression
+  must fully match the ref name. This option is useful when admins want to
+  skip replicating certain refs, for example refs created by plugins. Multiple
+  `excludedRefsPattern` keys can be supplied, to specify multiple regular
+  expressions to match against.
 
-  Do not exclude any refs pattern by default.
+  Do not exclude any refs by default.
 
 remote.NAME.urlDistributionStrategy
 : URL distribution strategy to use when a remote has multiple configured URLs.
