@@ -144,6 +144,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private final TransportFactory transportFactory;
   private final AutoRepairHandler autoRepairHandler;
   private DynamicItem<ReplicationPushFilter> replicationPushFilter;
+  private volatile String batchProgress = "";
 
   @Inject
   PushOne(
@@ -223,7 +224,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
   @Override
   public String toString() {
-    String print = "[" + HexFormat.fromInt(id) + "] push " + uri + " " + getLimitedRefs();
+    String print =
+        "[" + HexFormat.fromInt(id) + "] push " + uri + " " + getLimitedRefs() + batchProgress;
 
     if (retryCount > 0) {
       print = "(retry " + retryCount + ") " + print;
@@ -606,21 +608,26 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     List<List<RemoteRefUpdate>> batches = Lists.partition(todo, batchSize);
     repLog.atInfo().log("Push to %s in %d batches", uri, batches.size());
     AggregatedPushResult result = new AggregatedPushResult();
-    int completedBatch = 1;
-    for (List<RemoteRefUpdate> batch : batches) {
-      repLog.atInfo().log(
-          "Pushing %d/%d batches for replication to %s", completedBatch, batches.size(), uri);
-      result.addResult(tn.push(NullProgressMonitor.INSTANCE, batch));
-
-      //  check if push should be no longer continued
-      if (wasCanceled()) {
+    try {
+      int completedBatch = 1;
+      for (List<RemoteRefUpdate> batch : batches) {
+        batchProgress = " (batch " + completedBatch + "/" + batches.size() + ")";
         repLog.atInfo().log(
-            "Push for replication to %s was canceled after %d completed batch and thus won't be"
-                + " rescheduled",
-            uri, completedBatch);
-        break;
+            "Pushing %d/%d batches for replication to %s", completedBatch, batches.size(), uri);
+        result.addResult(tn.push(NullProgressMonitor.INSTANCE, batch));
+
+        //  check if push should be no longer continued
+        if (wasCanceled()) {
+          repLog.atInfo().log(
+              "Push for replication to %s was canceled after %d completed batch and thus won't be"
+                  + " rescheduled",
+              uri, completedBatch);
+          break;
+        }
+        completedBatch++;
       }
-      completedBatch++;
+    } finally {
+      batchProgress = "";
     }
     return result;
   }
