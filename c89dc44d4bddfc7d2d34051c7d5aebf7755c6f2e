@@ -33,6 +33,24 @@
       "message": "This is a very useful addition, thanks!\n\nOptional: It would be nice to also provide an ETA for the whole batch completion, based on the current progress. However, this can be addressed as a separate change.",
       "revId": "c89dc44d4bddfc7d2d34051c7d5aebf7755c6f2e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "605fa05f_8344ea06",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-07-29T07:09:39Z",
+      "side": 1,
+      "message": "\u003e This is a very useful addition, thanks!\n\u003e \n\u003e Optional: It would be nice to also provide an ETA for the whole batch completion, based on the current progress. However, this can be addressed as a separate change.\n\nInteresting suggestion. It might also be nice to show when a batch started executing in show-queue somehow.",
+      "parentUuid": "343f012d_3767aa06",
+      "revId": "c89dc44d4bddfc7d2d34051c7d5aebf7755c6f2e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [
