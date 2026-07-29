@@ -821,6 +821,10 @@ public class Destination {
     if (PushOne.ALL_REFS.equals(ref)) {
       return true;
     }
+    if (config.excludedRefsPattern().stream().anyMatch(p -> p.matcher(ref).matches())) {
+      repLog.atFine().log("Skipping push of ref %s; it matches excludedRefsPattern", ref);
+      return false;
+    }
     for (RefSpec s : config.getRemoteConfig().getPushRefSpecs()) {
       if (s.matchSource(ref)) {
         return true;
