@@ -53,7 +53,6 @@ import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 import org.eclipse.jgit.errors.NotSupportedException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.errors.TransportException;
@@ -297,9 +296,8 @@ public class PushOneTest {
 
   @Test
   public void skipPushingExcludedRefs() throws InterruptedException, IOException {
-    when(destinationMock.excludedRefsPattern())
-        .thenReturn(
-            ImmutableList.of(Pattern.compile("refs/foo/.*"), Pattern.compile("refs/bar/.*")));
+    when(destinationMock.isRefExcluded("refs/foo/test")).thenReturn(true);
+    when(destinationMock.isRefExcluded("refs/bar/test")).thenReturn(true);
     PushOne pushOne = Mockito.spy(createPushOne(null));
 
     Ref ref1 =
@@ -496,7 +494,6 @@ public class PushOneTest {
   private void setupDestinationMock() {
     destinationMock = mock(Destination.class);
     when(destinationMock.requestRunway(any())).thenReturn(RunwayStatus.allowed());
-    when(destinationMock.excludedRefsPattern()).thenReturn(ImmutableList.of());
   }
 
   private void setupPermissionBackedMock() {

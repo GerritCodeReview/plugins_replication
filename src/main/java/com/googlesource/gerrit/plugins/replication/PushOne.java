@@ -795,7 +795,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     return !(noPerms && RefNames.REFS_CONFIG.equals(ref))
         && !ref.startsWith(RefNames.REFS_CACHE_AUTOMERGE)
         && !(!pool.replicateNoteDbMetaRefs() && RefNames.isNoteDbMetaRef(ref))
-        && pool.excludedRefsPattern().stream().noneMatch(p -> p.matcher(ref).matches());
+        && !pool.isRefExcluded(ref);
   }
 
   private Map<String, Ref> listRemote(Transport tn)

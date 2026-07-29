@@ -161,6 +161,16 @@ public interface RemoteConfiguration {
   }
 
   /**
+   * Whether a ref is excluded from replication by any of the {@link #excludedRefsPattern()}
+   *
+   * @param ref name of the ref to check
+   * @return true if the ref should not be replicated, false otherwise
+   */
+  default boolean isRefExcluded(String ref) {
+    return excludedRefsPattern().stream().anyMatch(p -> p.matcher(ref).matches());
+  }
+
+  /**
    * reflog storage flag for newly created repositories
    *
    * @return true if new repositories should store ref-updates in their reflog

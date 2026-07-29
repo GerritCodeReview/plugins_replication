@@ -738,6 +738,9 @@ remote.NAME.excludedRefsPattern
   `excludedRefsPattern` keys can be supplied, to specify multiple regular
   expressions to match against.
 
+  Excluded refs are filtered out before a replication task is scheduled, so they
+  do not appear in the replication queue or in the persisted task storage.
+
   Do not exclude any refs by default.
 
 remote.NAME.urlDistributionStrategy

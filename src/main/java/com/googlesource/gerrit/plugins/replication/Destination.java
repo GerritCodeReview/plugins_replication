@@ -85,7 +85,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Ref;
@@ -821,6 +820,10 @@ public class Destination {
     if (PushOne.ALL_REFS.equals(ref)) {
       return true;
     }
+    if (isRefExcluded(ref)) {
+      repLog.atFine().log("Skipping push of ref %s; it matches excludedRefsPattern", ref);
+      return false;
+    }
     for (RefSpec s : config.getRemoteConfig().getPushRefSpecs()) {
       if (s.matchSource(ref)) {
         return true;
@@ -975,8 +978,8 @@ public class Destination {
     return config.replicateNoteDbMetaRefs();
   }
 
-  ImmutableList<Pattern> excludedRefsPattern() {
-    return config.excludedRefsPattern();
+  boolean isRefExcluded(String ref) {
+    return config.isRefExcluded(ref);
   }
 
   boolean storeRefLog() {

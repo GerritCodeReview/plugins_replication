@@ -131,6 +131,21 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
   }
 
   @Test
+  public void shouldNotCreateReplicationTaskForRefMatchingExcludedRefsPattern() throws Exception {
+    createTestProject(project + "replica");
+    setExcludedRefsPattern("foo", "refs/heads/excluded.*");
+
+    scheduleFullSync("refs/heads/excluded-branch");
+
+    assertThat(listWaiting()).isEmpty();
+
+    String replicatedRef = "refs/heads/replicated-branch";
+    scheduleFullSync(replicatedRef);
+
+    assertThat(listWaitingReplicationTasks(Pattern.quote(replicatedRef))).hasSize(1);
+  }
+
+  @Test
   public void shouldFirePendingOnlyToIncompleteUri() throws Exception {
     String suffix1 = "replica1";
     String suffix2 = "replica2";
@@ -375,6 +390,20 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     gApi.projects().name(project.get()).branch(branchToDelete).delete();
 
     assertThat(listWaitingReplicationTasks(branchToDelete)).hasSize(1);
+  }
+
+  private void setExcludedRefsPattern(String remote, String pattern) throws Exception {
+    setReplicationDestination(remote, "replica", ALL_PROJECTS, Integer.MAX_VALUE);
+    config.setString("remote", remote, "excludedRefsPattern", pattern);
+    config.save();
+    reloadConfig();
+  }
+
+  private void scheduleFullSync(String ref) {
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, null, ref, Set.of(), new ReplicationState(NO_OP), false);
   }
 
   private boolean isTaskRescheduled(Queue queue, URIish uri) {
