@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36a8e213_f3e392a6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicateAllRunner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-08-04T19:23:58Z",
+      "side": 1,
+      "message": "use AtomicBoolean instead.",
+      "revId": "292d62aac59f5d08ab144cea1b19611524c01142",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2185780b_7c918f78",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicateAllRunner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-08-04T19:23:58Z",
+      "side": 1,
+      "message": "too noisy if it s always running ?",
+      "revId": "292d62aac59f5d08ab144cea1b19611524c01142",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4969d2bc_9ce56ab4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicateAllRunner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-08-04T19:23:58Z",
+      "side": 1,
+      "message": "I guess this is submitting tasks to executor. Even with now\u003dtrue, It schedules now, but we should wait for it complete for chainedscheduler to work correctly ?",
+      "revId": "292d62aac59f5d08ab144cea1b19611524c01142",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
