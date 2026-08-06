@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7ff6b3fd_8b9839cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-08-06T21:38:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07982098_de9aab9c",
+      "revId": "fabc4b75d2a245d9e9a699caaeb5690d8d633456",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "48e1f01c_e1fbd837",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Claude\u0027s suggestions for adding unit tests:\n- A task present in the snapshot (`taskNamesByReplicateRefUpdate`) is not re-fired (the core new behavior).\n- A task absent from the snapshot is fired (the non-regression case).\n- With `prune\u003dFALSE`, tasks are still always fired (regression guard).",
       "parentUuid": "8532c34f_aff80cb7",
+      "revId": "fabc4b75d2a245d9e9a699caaeb5690d8d633456",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72196fe3_ab2cb8c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-08-06T21:38:30Z",
+      "side": 1,
+      "message": "I added some tests now.",
+      "parentUuid": "323f5a34_840cd639",
       "revId": "fabc4b75d2a245d9e9a699caaeb5690d8d633456",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -119,6 +155,24 @@
       "side": 1,
       "message": "I think keeping `Prune.FALSE` for the startup replay makes sense. I think you can keep the code as-is and just update the commit message.",
       "parentUuid": "ec6c8de7_ab592873",
+      "revId": "fabc4b75d2a245d9e9a699caaeb5690d8d633456",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0139fd52_9b307ce6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-08-06T21:38:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "349f91c3_4f9ccdb7",
       "revId": "fabc4b75d2a245d9e9a699caaeb5690d8d633456",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
