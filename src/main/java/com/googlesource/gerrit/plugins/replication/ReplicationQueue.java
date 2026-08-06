@@ -269,10 +269,13 @@ public class ReplicationQueue
             @Override
             public void run(ReplicationTasksStorage.ReplicateRefUpdate u) {
               try {
-                fireFromStorage(new URIish(u.uri()), Project.nameKey(u.project()), u.refs());
                 if (Prune.TRUE.equals(prune)) {
-                  taskNamesByReplicateRefUpdate.remove(u);
+                  if (taskNamesByReplicateRefUpdate.remove(u) != null) {
+                    repLog.atFine().log("Task %s is already scheduled, not re-firing", u);
+                    return;
+                  }
                 }
+                fireFromStorage(new URIish(u.uri()), Project.nameKey(u.project()), u.refs());
               } catch (URISyntaxException e) {
                 repLog.atSevere().withCause(e).log(
                     "Encountered malformed URI for persisted event %s", u);
