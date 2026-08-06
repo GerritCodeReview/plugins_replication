@@ -50,6 +50,41 @@
       "message": "Can you show this working correctly with a test? Or is there an existing test you can point to that demonstrates the desired distributor behavior?",
       "revId": "fabc4b75d2a245d9e9a699caaeb5690d8d633456",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "323f5a34_840cd639",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2026-08-06T17:34:23Z",
+      "side": 1,
+      "message": "Claude\u0027s suggestions for adding unit tests:\n- A task present in the snapshot (`taskNamesByReplicateRefUpdate`) is not re-fired (the core new behavior).\n- A task absent from the snapshot is fired (the non-regression case).\n- With `prune\u003dFALSE`, tasks are still always fired (regression guard).",
+      "parentUuid": "8532c34f_aff80cb7",
+      "revId": "fabc4b75d2a245d9e9a699caaeb5690d8d633456",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c46b454_40cf21e3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2026-08-06T17:34:23Z",
+      "side": 1,
+      "message": "When `prune\u003d\u003dPrune.False`, the skip-on-already-pending logic is entirely bypassed, and the stateMap growth problem is still present in that path. It\u0027s ok if you want to defer fixing that until a later change, but the commit message makes it sound like the problem is entirely solved and that\u0027s not accurate if it\u0027s only solved when `prune\u003d\u003dPrune.True`.",
+      "revId": "fabc4b75d2a245d9e9a699caaeb5690d8d633456",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
