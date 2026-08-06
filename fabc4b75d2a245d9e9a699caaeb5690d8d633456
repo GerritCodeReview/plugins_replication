@@ -33,6 +33,23 @@
       "message": "Very cool, thank you!",
       "revId": "fabc4b75d2a245d9e9a699caaeb5690d8d633456",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8532c34f_aff80cb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2026-08-06T16:26:39Z",
+      "side": 1,
+      "message": "Can you show this working correctly with a test? Or is there an existing test you can point to that demonstrates the desired distributor behavior?",
+      "revId": "fabc4b75d2a245d9e9a699caaeb5690d8d633456",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
