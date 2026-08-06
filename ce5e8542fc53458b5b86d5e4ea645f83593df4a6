@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5338db3_7da84834",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2026-08-06T21:48:21Z",
+      "side": 1,
+      "message": "nit: extra leading space\n```suggestion\nTasks written by another primary are absent from the snapshot and\n```",
+      "revId": "ce5e8542fc53458b5b86d5e4ea645f83593df4a6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fd51269_b3223fd0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2026-08-06T21:48:21Z",
+      "side": 1,
+      "message": "couple wording nits\n```suggestion\nThis change removes the repeat re-fires when Prune.TRUE rather than every possible source of stateMap\n```",
+      "revId": "ce5e8542fc53458b5b86d5e4ea645f83593df4a6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87ca8fb6_7e0eac8e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationQueueTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2026-08-06T21:48:21Z",
+      "side": 1,
+      "message": "If you\u0027re willing, can you add this in a separate change with all the tests that pass before this change? It would make it clearer what\u0027s here for regression testing vs change in behavior.",
+      "revId": "ce5e8542fc53458b5b86d5e4ea645f83593df4a6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
