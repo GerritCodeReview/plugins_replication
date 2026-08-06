@@ -103,6 +103,24 @@
       "parentUuid": "0c46b454_40cf21e3",
       "revId": "fabc4b75d2a245d9e9a699caaeb5690d8d633456",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "349f91c3_4f9ccdb7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2026-08-06T18:16:05Z",
+      "side": 1,
+      "message": "I think keeping `Prune.FALSE` for the startup replay makes sense. I think you can keep the code as-is and just update the commit message.",
+      "parentUuid": "ec6c8de7_ab592873",
+      "revId": "fabc4b75d2a245d9e9a699caaeb5690d8d633456",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
