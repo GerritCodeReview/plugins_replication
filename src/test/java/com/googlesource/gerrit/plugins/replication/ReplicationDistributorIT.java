@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.gerrit.testing.GerritJUnit.assertThrows;
 
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
@@ -22,6 +23,7 @@ import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.WorkQueue;
+import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig.FilterType;
 import java.time.Duration;
 import java.util.List;
 import java.util.Set;
@@ -85,6 +87,40 @@ public class ReplicationDistributorIT extends ReplicationStorageDaemon {
   }
 
   @Test
+  public void distributorDoesNotReFirePendingTask() throws Exception {
+    String remote = "foo";
+    String replica = "replica";
+    String master = "refs/heads/master";
+    String pendingBranch = "refs/heads/pending_branch";
+    String otherPrimaryBranch = "refs/heads/other_primary_branch";
+    Project.NameKey targetProject = createTestProject(project + replica);
+    URIish targetUri = new URIish(getProjectUri(targetProject));
+    setReplicationDestination(remote, replica, ALL_PROJECTS, TEST_LONG_REPLICATION_DELAY_SECONDS);
+    reloadConfig();
+
+    createBranch(BranchNameKey.create(project, pendingBranch));
+    assertThat(listWaitingReplicationTasks(pendingBranch)).hasSize(1);
+    PushOne pendingPush = getPendingPush(remote, targetUri);
+    assertThat(pendingPush.getStatesByRef(pendingBranch)).hasLength(1);
+
+    createBranch(project, master, otherPrimaryBranch);
+    tasksStorage.create(
+        ReplicationTasksStorage.ReplicateRefUpdate.create(
+            project.get(), Set.of(otherPrimaryBranch), targetUri, remote));
+
+    WaitUtil.waitUntil(
+        () -> pendingPush.getStatesByRef(otherPrimaryBranch).length == 1,
+        Duration.ofSeconds(TEST_DISTRIBUTION_CYCLE_SECONDS));
+
+    assertThrows(
+        InterruptedException.class,
+        () ->
+            WaitUtil.waitUntil(
+                () -> pendingPush.getStatesByRef(pendingBranch).length > 1,
+                Duration.ofSeconds(TEST_DISTRIBUTION_CYCLE_SECONDS)));
+  }
+
+  @Test
   public void distributorPrunesTaskFromWorkQueue() throws Exception {
     createTestProject(project + "replica");
     setReplicationDestination("foo", "replica", ALL_PROJECTS, Integer.MAX_VALUE);
@@ -98,6 +134,16 @@ public class ReplicationDistributorIT extends ReplicationStorageDaemon {
 
     assertThat(waitForProjectTaskCount(0, Duration.ofSeconds(TEST_DISTRIBUTION_CYCLE_SECONDS)))
         .isTrue();
+  }
+
+  private PushOne getPendingPush(String remote, URIish uri) {
+    return destinationCollection.getAll(FilterType.ALL).stream()
+        .filter(dest -> remote.equals(dest.getRemoteConfigName()))
+        .findFirst()
+        .get()
+        .getQueue()
+        .pending
+        .get(uri);
   }
 
   private List<WorkQueue.Task<?>> getProjectTasks() {

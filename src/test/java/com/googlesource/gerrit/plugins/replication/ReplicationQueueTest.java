@@ -99,6 +99,16 @@ public class ReplicationQueueTest {
   }
 
   @Test
+  public void distributorDoesNotFireTaskPendingOnThisNode() throws Exception {
+    start();
+    waitingTasks.add(update);
+    taskNamesByReplicateRefUpdate.put(update, "pending push task");
+    runDistributor();
+
+    verify(destination, never()).scheduleFromStorage(any(), any(), any(), any());
+  }
+
+  @Test
   public void distributorFiresTaskNotPendingOnThisNode() throws Exception {
     start();
     waitingTasks.add(update);
