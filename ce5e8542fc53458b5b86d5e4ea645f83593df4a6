@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8095905_6f1c2fa7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-08-06T22:47:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5338db3_7da84834",
+      "revId": "ce5e8542fc53458b5b86d5e4ea645f83593df4a6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fd51269_b3223fd0",
@@ -35,6 +53,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f5da868_fbe862f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-08-06T22:47:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fd51269_b3223fd0",
+      "revId": "ce5e8542fc53458b5b86d5e4ea645f83593df4a6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87ca8fb6_7e0eac8e",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-08-06T21:48:21Z",
       "side": 1,
       "message": "If you\u0027re willing, can you add this in a separate change with all the tests that pass before this change? It would make it clearer what\u0027s here for regression testing vs change in behavior.",
+      "revId": "ce5e8542fc53458b5b86d5e4ea645f83593df4a6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2fa8496_74663b02",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationQueueTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-08-06T22:47:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87ca8fb6_7e0eac8e",
       "revId": "ce5e8542fc53458b5b86d5e4ea645f83593df4a6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
