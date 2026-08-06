@@ -85,6 +85,24 @@
       "message": "When `prune\u003d\u003dPrune.False`, the skip-on-already-pending logic is entirely bypassed, and the stateMap growth problem is still present in that path. It\u0027s ok if you want to defer fixing that until a later change, but the commit message makes it sound like the problem is entirely solved and that\u0027s not accurate if it\u0027s only solved when `prune\u003d\u003dPrune.True`.",
       "revId": "fabc4b75d2a245d9e9a699caaeb5690d8d633456",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec6c8de7_ab592873",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-08-06T18:02:11Z",
+      "side": 1,
+      "message": "I did think about it, but I wanted to keep the diff small. The Prune.FALSE path is the startup replay, which walks each waiting/ file exactly once, so no task is ever fired twice into the same pending push. So I don\u0027t think the stateMap growth is reachable there today. That said, Prune.FALSE can be used in another path in the future, so maybe I should just drop the Prune.TRUE condition at L255 and L272. WDYT? \n\nI\u0027ll also update the commit msg to not try to imply that the growth problem is fully solved, and instead describe the change as removing one source of it.",
+      "parentUuid": "0c46b454_40cf21e3",
+      "revId": "fabc4b75d2a245d9e9a699caaeb5690d8d633456",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
