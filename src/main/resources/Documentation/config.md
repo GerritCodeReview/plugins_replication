@@ -276,9 +276,10 @@ replication.emitEvents
 
 replication.rsyncPath
 :	Path to the `rsync` binary on the host running Gerrit, used by the
-	`@PLUGIN@ repair --copy-packs` command when transferring pack files
-	to SSH destinations. Set this when the Gerrit runtime user's `PATH`
-	does not contain `rsync`, or to pin a specific build.
+	[`@PLUGIN@ repair`](cmd-repair.md) command when transferring loose
+	objects and pack files to SSH destinations. Set this when the Gerrit
+	runtime user's `PATH` does not contain `rsync`, or to pin a specific
+	build.
 
 	Default: `rsync` (resolved via the Gerrit runtime user's `PATH`)
 
