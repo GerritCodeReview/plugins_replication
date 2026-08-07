@@ -23,6 +23,7 @@ import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Collections;
@@ -62,7 +63,7 @@ final class RepairCommand extends SshCommand implements PushResultProcessing.Ssh
   private final Object outputLock = new Object();
 
   @Override
-  protected void run() throws Failure {
+  protected void run() throws Failure, InterruptedIOException {
     Project.NameKey project = Project.nameKey(projectName);
     try {
       if (projectCache.get(project).isEmpty()) {
@@ -82,7 +83,7 @@ final class RepairCommand extends SshCommand implements PushResultProcessing.Ssh
     }
   }
 
-  private Set<URIish> repair(Project.NameKey project) throws Failure {
+  private Set<URIish> repair(Project.NameKey project) throws Failure, InterruptedIOException {
     Set<URIish> copyTargets = new HashSet<>();
     Collection<URIish> destUris =
         destinations

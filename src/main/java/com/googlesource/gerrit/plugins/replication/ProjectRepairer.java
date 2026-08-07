@@ -23,6 +23,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -44,7 +45,8 @@ public class ProjectRepairer {
     this.replicationConfig = replicationConfig;
   }
 
-  public boolean repair(Project.NameKey project, URIish uri, OutputStream out, boolean copyPacks) {
+  public boolean repair(Project.NameKey project, URIish uri, OutputStream out, boolean copyPacks)
+      throws InterruptedIOException {
     if (copyPacks && !copyPackTo(project, uri, out)) {
       repLog.atSevere().log("Repair failed for %s on %s", project.get(), uri);
       return false;
@@ -56,7 +58,8 @@ public class ProjectRepairer {
     return AdminApiFactory.isSSH(uri) && !AdminApiFactory.isGerrit(uri);
   }
 
-  private boolean copyPackTo(Project.NameKey project, URIish uri, OutputStream out) {
+  private boolean copyPackTo(Project.NameKey project, URIish uri, OutputStream out)
+      throws InterruptedIOException {
     if (Strings.isNullOrEmpty(uri.getHost())) {
       repLog.atSevere().log("Cannot repair %s: URI has no host: %s", project.get(), uri);
       return false;
@@ -82,18 +85,14 @@ public class ProjectRepairer {
     return copyInOrder(packDir, uri, out);
   }
 
-  private boolean copyInOrder(Path packDir, URIish uri, OutputStream out) {
-    try {
-      return copy(packDir, uri, out, "*.pack") == 0
-          && copy(packDir, uri, out, "*.idx", "*.bitmap", "*.rev") == 0;
-    } catch (InterruptedException e) {
-      repLog.atWarning().withCause(e).log("Interrupted during copy to %s", uri);
-      return false;
-    }
+  private boolean copyInOrder(Path packDir, URIish uri, OutputStream out)
+      throws InterruptedIOException {
+    return copy(packDir, uri, out, "*.pack") == 0
+        && copy(packDir, uri, out, "*.idx", "*.bitmap", "*.rev") == 0;
   }
 
   private int copy(Path src, URIish uri, OutputStream out, String... includes)
-      throws InterruptedException {
+      throws InterruptedIOException {
     List<String> cmd = new ArrayList<>();
     cmd.add(replicationConfig.getRsyncPath());
     cmd.add("-av");
@@ -131,8 +130,13 @@ public class ProjectRepairer {
       return code;
     } catch (InterruptedException e) {
       p.destroyForcibly();
-      outStream.halt();
-      return -1;
+      try {
+        outStream.halt();
+      } catch (InterruptedException ignored) {
+        // ignore
+      }
+      throw (InterruptedIOException)
+          new InterruptedIOException("Interrupted during copy to " + uri).initCause(e);
     }
   }
 
