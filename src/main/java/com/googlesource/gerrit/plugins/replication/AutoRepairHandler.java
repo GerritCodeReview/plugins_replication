@@ -21,6 +21,7 @@ import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.googlesource.gerrit.plugins.replication.ProjectRepairer.Action;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import com.googlesource.gerrit.plugins.replication.events.dispatcher.EventDispatcher;
 import java.io.ByteArrayOutputStream;
@@ -89,7 +90,7 @@ public class AutoRepairHandler {
     @Override
     public void run() {
       ByteArrayOutputStream buf = new ByteArrayOutputStream();
-      boolean isRepaired = projectRepairer.repair(project, uri, buf, true);
+      boolean isRepaired = projectRepairer.repair(project, uri, buf, Action.all());
       (isRepaired ? repLog.atInfo() : repLog.atWarning())
           .log(
               "Auto-repair %s for project %s to %s:%s",
