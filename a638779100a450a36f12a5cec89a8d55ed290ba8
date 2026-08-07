@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0db8045a_03a6129e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-07T17:19:06Z",
+      "side": 1,
+      "message": "This might be overkill since we already have atSevere()s for each the conditions leading to this.",
+      "revId": "a638779100a450a36f12a5cec89a8d55ed290ba8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
