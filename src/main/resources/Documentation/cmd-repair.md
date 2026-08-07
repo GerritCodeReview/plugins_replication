@@ -11,7 +11,7 @@ SYNOPSIS
 ```console
 ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ repair
   [--url <PATTERN>]
-  [--full | --copy-packs]
+  [--full | [--copy-loose-objects] [--copy-packs]]
   <PROJECT>
 ```
 
@@ -23,6 +23,13 @@ any refs that diverged during the repair are replicated. The command
 blocks until replication finishes.
 
 If no repair action flag is supplied, `--full` is assumed.
+
+For each remote, [remote.NAME.adminUrl](config.md#remote.NAME.adminUrl) is
+preferred when set (same as repository creation); otherwise
+[remote.NAME.url](config.md#remote.NAME.url) is used. Only plain SSH
+destinations are eligible (for example `user@host:/path/to/repo.git`).
+Destinations whose URL uses `gerrit+ssh`, HTTP(S), or a local path are
+skipped.
 
 REQUIREMENTS
 ------------
@@ -51,15 +58,13 @@ replication destinations whose configuration URL contains the substring
 `--full`
 : Run every supported repair action.
 
+`--copy-loose-objects`
+: rsync the loose objects. Everything else under `objects/`, such as
+`pack/` and `info/`, is left untouched.
+
 `--copy-packs`
 : rsync regular files in `objects/pack/` whose names end with `.pack`,
-`.idx`, `.bitmap`, or `.rev` to each matching destination. For each
-remote, [remote.NAME.adminUrl](config.md#remote.NAME.adminUrl) is preferred
-when set (same as repository creation); otherwise
-[remote.NAME.url](config.md#remote.NAME.url) is used. Only plain SSH
-destinations are eligible (for example `user@host:/path/to/repo.git`).
-Destinations whose URL uses `gerrit+ssh`, HTTP(S), or a local path are
-skipped.
+`.idx`, `.bitmap`, or `.rev` to each matching destination.
 
 `PROJECT`
 : Exact Gerrit project name.
@@ -84,6 +89,12 @@ Only copy packs (no other repair actions, even if more are added later):
 
 ```console
   $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ repair --copy-packs tools/gerrit
+```
+
+Only copy loose objects:
+
+```console
+  $ ssh -p @SSH_PORT@ @SSH_HOST@ @PLUGIN@ repair --copy-loose-objects tools/gerrit
 ```
 
 Repair only against destinations whose URL mentions `replica1`:
