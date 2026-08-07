@@ -21,6 +21,7 @@ import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.googlesource.gerrit.plugins.replication.ProjectRepairer.Action;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import com.googlesource.gerrit.plugins.replication.events.dispatcher.EventDispatcher;
 import java.io.ByteArrayOutputStream;
@@ -92,7 +93,7 @@ public class AutoRepairHandler {
       ByteArrayOutputStream buf = new ByteArrayOutputStream();
       boolean isRepaired;
       try {
-        isRepaired = projectRepairer.repair(project, uri, buf, true);
+        isRepaired = projectRepairer.repair(project, uri, buf, Action.all());
       } catch (InterruptedIOException e) {
         repLog.atWarning().withCause(e).log(
             "Auto-repair interrupted for project %s to %s", project.get(), uri);
