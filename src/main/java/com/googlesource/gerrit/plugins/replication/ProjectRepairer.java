@@ -28,6 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.QuotedString;
@@ -47,7 +48,17 @@ public class ProjectRepairer {
   }
 
   public boolean repair(Project.NameKey project, URIish uri, OutputStream out, boolean copyPacks) {
-    if (copyPacks && !copyPackTo(project, uri, out)) {
+    if (!copyPacks) {
+      return true;
+    }
+
+    Optional<Path> objectsDir = objectsDir(project, uri);
+    if (objectsDir.isEmpty()) {
+      repLog.atSevere().log("Repair failed for %s on %s", project.get(), uri);
+      return false;
+    }
+
+    if (!copyPacksTo(objectsDir.get().resolve("pack"), uri, out)) {
       repLog.atSevere().log("Repair failed for %s on %s", project.get(), uri);
       return false;
     }
@@ -58,33 +69,30 @@ public class ProjectRepairer {
     return AdminApiFactory.isSSH(uri) && !AdminApiFactory.isGerrit(uri);
   }
 
-  private boolean copyPackTo(Project.NameKey project, URIish uri, OutputStream out) {
+  private Optional<Path> objectsDir(Project.NameKey project, URIish uri) {
     if (Strings.isNullOrEmpty(uri.getHost())) {
       repLog.atSevere().log("Cannot repair %s: URI has no host: %s", project.get(), uri);
-      return false;
+      return Optional.empty();
     }
     if (Strings.isNullOrEmpty(uri.getPath())) {
       repLog.atSevere().log("Cannot repair %s: URI has no path: %s", project.get(), uri);
-      return false;
+      return Optional.empty();
     }
 
-    Path packDir;
     try (Repository repo = gitManager.openRepository(project)) {
-      packDir = repo.getDirectory().toPath().resolve("objects").resolve("pack");
+      return Optional.of(repo.getDirectory().toPath().resolve("objects"));
     } catch (IOException e) {
       repLog.atSevere().withCause(e).log("Cannot open repository %s for repair", project.get());
-      return false;
+      return Optional.empty();
     }
-
-    if (!Files.isDirectory(packDir)) {
-      repLog.atSevere().log("No objects/pack directory for project %s", project.get());
-      return false;
-    }
-
-    return copyInOrder(packDir, uri, out);
   }
 
-  private boolean copyInOrder(Path packDir, URIish uri, OutputStream out) {
+  private boolean copyPacksTo(Path packDir, URIish uri, OutputStream out) {
+    if (!Files.isDirectory(packDir)) {
+      repLog.atSevere().log("No objects/pack directory %s", packDir);
+      return false;
+    }
+
     return copy(packDir, uri, out, PACK_DIR, "*.pack") == 0
         && copy(packDir, uri, out, PACK_DIR, "*.idx", "*.bitmap", "*.rev") == 0;
   }
