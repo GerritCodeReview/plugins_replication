@@ -21,11 +21,13 @@ import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.replication.ProjectRepairer.Action;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -72,17 +74,21 @@ final class RepairCommand extends SshCommand implements PushResultProcessing.Ssh
       throw die(e);
     }
 
-    if (!copyPacks) {
-      full = true;
-    }
-
-    Set<URIish> failedUris = repair(project);
+    Set<URIish> failedUris = repair(project, repairActions());
     if (!failedUris.isEmpty()) {
       throw new UnloggedFailure(1, "Repair failed for " + failedUris.size() + " destination(s)");
     }
   }
 
-  private Set<URIish> repair(Project.NameKey project) throws Failure {
+  private Set<Action> repairActions() {
+    EnumSet<Action> actions = EnumSet.noneOf(Action.class);
+    if (copyPacks) {
+      actions.add(Action.COPY_PACKS);
+    }
+    return full || actions.isEmpty() ? Action.all() : actions;
+  }
+
+  private Set<URIish> repair(Project.NameKey project, Set<Action> actions) throws Failure {
     Set<URIish> copyTargets = new HashSet<>();
     Collection<URIish> destUris =
         destinations
@@ -91,7 +97,7 @@ final class RepairCommand extends SshCommand implements PushResultProcessing.Ssh
     for (URIish uri : destUris) {
       if (!ProjectRepairer.canCopy(uri)) {
         writeStdErrSync(
-            "Warning: skipping " + uri + " as copy-packs only supports plain SSH destinations");
+            "Warning: skipping " + uri + " as repair only supports plain SSH destinations");
         continue;
       }
       copyTargets.add(uri);
@@ -105,7 +111,7 @@ final class RepairCommand extends SshCommand implements PushResultProcessing.Ssh
     OutputStream out = getFlushingOutputStream();
     for (URIish uri : copyTargets) {
       writeStdOutSync("\nRepairing " + uri + " ...");
-      if (projectRepairer.repair(project, uri, out, full || copyPacks)) {
+      if (projectRepairer.repair(project, uri, out, actions)) {
         writeStdOutSync(
             "\nRunning replication start for " + project.get() + " to " + uri.toString() + " ...");
         replicationStarter.start(
