@@ -83,17 +83,11 @@ public class ProjectRepairer {
   }
 
   private boolean copyInOrder(Path packDir, URIish uri, OutputStream out) {
-    try {
-      return copy(packDir, uri, out, "*.pack") == 0
-          && copy(packDir, uri, out, "*.idx", "*.bitmap", "*.rev") == 0;
-    } catch (InterruptedException e) {
-      repLog.atWarning().withCause(e).log("Interrupted during copy to %s", uri);
-      return false;
-    }
+    return copy(packDir, uri, out, "*.pack") == 0
+        && copy(packDir, uri, out, "*.idx", "*.bitmap", "*.rev") == 0;
   }
 
-  private int copy(Path src, URIish uri, OutputStream out, String... includes)
-      throws InterruptedException {
+  private int copy(Path src, URIish uri, OutputStream out, String... includes) {
     List<String> cmd = new ArrayList<>();
     cmd.add(replicationConfig.getRsyncPath());
     cmd.add("-av");
@@ -130,9 +124,22 @@ public class ProjectRepairer {
       }
       return code;
     } catch (InterruptedException e) {
+      repLog.atWarning().withCause(e).log("Interrupted during copy to %s", uri);
       p.destroyForcibly();
-      outStream.halt();
+      halt(outStream);
       return -1;
+    }
+  }
+
+  /**
+   * Stops the thread draining the output of a copy. Terminate the process being drained first,
+   * otherwise there is no bound on how long this waits.
+   */
+  private static void halt(StreamCopyThread outStream) {
+    try {
+      outStream.halt();
+    } catch (InterruptedException e) {
+      repLog.atFine().withCause(e).log("Interrupted while stopping the copy output thread");
     }
   }
 
