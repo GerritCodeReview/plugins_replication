@@ -35,6 +35,8 @@ import org.eclipse.jgit.util.io.StreamCopyThread;
 
 @Singleton
 public class ProjectRepairer {
+  private static final String PACK_DIR = "objects/pack/";
+
   private final GitRepositoryManager gitManager;
   private final ReplicationConfig replicationConfig;
 
@@ -83,11 +85,11 @@ public class ProjectRepairer {
   }
 
   private boolean copyInOrder(Path packDir, URIish uri, OutputStream out) {
-    return copy(packDir, uri, out, "*.pack") == 0
-        && copy(packDir, uri, out, "*.idx", "*.bitmap", "*.rev") == 0;
+    return copy(packDir, uri, out, PACK_DIR, "*.pack") == 0
+        && copy(packDir, uri, out, PACK_DIR, "*.idx", "*.bitmap", "*.rev") == 0;
   }
 
-  private int copy(Path src, URIish uri, OutputStream out, String... includes) {
+  private int copy(Path src, URIish uri, OutputStream out, String destDir, String... includes) {
     List<String> cmd = new ArrayList<>();
     cmd.add(replicationConfig.getRsyncPath());
     cmd.add("-av");
@@ -99,7 +101,7 @@ public class ProjectRepairer {
     }
     cmd.add("--exclude=*");
     cmd.add(src.toAbsolutePath().normalize() + "/");
-    cmd.add(buildCopyDestination(uri));
+    cmd.add(buildCopyDestination(uri, destDir));
 
     repLog.atInfo().log("Running repair cmd: %s", String.join(" ", cmd));
 
@@ -114,7 +116,7 @@ public class ProjectRepairer {
     }
 
     StreamCopyThread outStream = new StreamCopyThread(p.getInputStream(), out);
-    outStream.setName("copy-packs-output");
+    outStream.setName("repair-copy-output");
     outStream.start();
     try {
       int code = p.waitFor();
@@ -144,15 +146,15 @@ public class ProjectRepairer {
     }
   }
 
-  private static String buildCopyDestination(URIish uri) {
+  private static String buildCopyDestination(URIish uri, String destDir) {
     String host = uri.getHost();
     String path = uri.getPath();
-    String remotePackPath = QuotedString.BOURNE.quote(path + "/objects/pack/");
+    String remotePath = QuotedString.BOURNE.quote(path + "/" + destDir);
     String user = uri.getUser();
     if (user != null && !user.isEmpty()) {
-      return user + "@" + host + ":" + remotePackPath;
+      return user + "@" + host + ":" + remotePath;
     }
-    return host + ":" + remotePackPath;
+    return host + ":" + remotePath;
   }
 
   private static String buildSshTransport(URIish uri) {
