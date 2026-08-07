@@ -29,6 +29,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.URIish;
@@ -37,6 +38,14 @@ import org.eclipse.jgit.util.io.StreamCopyThread;
 
 @Singleton
 public class ProjectRepairer {
+  public enum Action {
+    COPY_PACKS;
+
+    public static List<Action> all() {
+      return List.of(values());
+    }
+  }
+
   private static final String PACK_DIR = "objects/pack/";
 
   private final GitRepositoryManager gitManager;
@@ -48,9 +57,10 @@ public class ProjectRepairer {
     this.replicationConfig = replicationConfig;
   }
 
-  public boolean repair(Project.NameKey project, URIish uri, OutputStream out, boolean copyPacks)
+  public boolean repair(
+      Project.NameKey project, URIish uri, OutputStream out, Collection<Action> actions)
       throws InterruptedIOException {
-    if (!copyPacks) {
+    if (actions.isEmpty()) {
       return true;
     }
 
@@ -59,11 +69,24 @@ public class ProjectRepairer {
       return false;
     }
 
-    if (!copyPacksTo(objectsDir.resolve("pack"), uri, out)) {
-      repLog.atSevere().log("Repair failed for %s on %s", project.get(), uri);
-      return false;
+    boolean isRepaired = true;
+    for (Action action : actions) {
+      isRepaired &= repair(project, uri, out, objectsDir, action);
     }
-    return true;
+    return isRepaired;
+  }
+
+  private boolean repair(
+      Project.NameKey project, URIish uri, OutputStream out, Path objectsDir, Action action)
+      throws InterruptedIOException {
+    boolean isRepaired =
+        switch (action) {
+          case COPY_PACKS -> copyPacksTo(objectsDir.resolve("pack"), uri, out);
+        };
+    if (!isRepaired) {
+      repLog.atSevere().log("Repair (%s) failed for %s on %s", action, project.get(), uri);
+    }
+    return isRepaired;
   }
 
   public static boolean canCopy(URIish uri) {
