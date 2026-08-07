@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
 import com.google.common.base.Strings;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
@@ -49,7 +50,16 @@ public class ProjectRepairer {
 
   public boolean repair(Project.NameKey project, URIish uri, OutputStream out, boolean copyPacks)
       throws InterruptedIOException {
-    if (copyPacks && !copyPackTo(project, uri, out)) {
+    if (!copyPacks) {
+      return true;
+    }
+
+    Path objectsDir = objectsDir(project, uri);
+    if (objectsDir == null) {
+      return false;
+    }
+
+    if (!copyPacksTo(objectsDir.resolve("pack"), uri, out)) {
       repLog.atSevere().log("Repair failed for %s on %s", project.get(), uri);
       return false;
     }
@@ -60,35 +70,32 @@ public class ProjectRepairer {
     return AdminApiFactory.isSSH(uri) && !AdminApiFactory.isGerrit(uri);
   }
 
-  private boolean copyPackTo(Project.NameKey project, URIish uri, OutputStream out)
-      throws InterruptedIOException {
+  @Nullable
+  private Path objectsDir(Project.NameKey project, URIish uri) {
     if (Strings.isNullOrEmpty(uri.getHost())) {
       repLog.atSevere().log("Cannot repair %s: URI has no host: %s", project.get(), uri);
-      return false;
+      return null;
     }
     if (Strings.isNullOrEmpty(uri.getPath())) {
       repLog.atSevere().log("Cannot repair %s: URI has no path: %s", project.get(), uri);
-      return false;
+      return null;
     }
 
-    Path packDir;
     try (Repository repo = gitManager.openRepository(project)) {
-      packDir = repo.getDirectory().toPath().resolve("objects").resolve("pack");
+      return repo.getDirectory().toPath().resolve("objects");
     } catch (IOException e) {
       repLog.atSevere().withCause(e).log("Cannot open repository %s for repair", project.get());
-      return false;
+      return null;
     }
-
-    if (!Files.isDirectory(packDir)) {
-      repLog.atSevere().log("No objects/pack directory for project %s", project.get());
-      return false;
-    }
-
-    return copyInOrder(packDir, uri, out);
   }
 
-  private boolean copyInOrder(Path packDir, URIish uri, OutputStream out)
+  private boolean copyPacksTo(Path packDir, URIish uri, OutputStream out)
       throws InterruptedIOException {
+    if (!Files.isDirectory(packDir)) {
+      repLog.atSevere().log("No objects/pack directory %s", packDir);
+      return false;
+    }
+
     return copy(packDir, uri, out, PACK_DIR, "*.pack") == 0
         && copy(packDir, uri, out, PACK_DIR, "*.idx", "*.bitmap", "*.rev") == 0;
   }
