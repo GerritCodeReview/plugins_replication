@@ -27,8 +27,10 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.QuotedString;
@@ -36,6 +38,18 @@ import org.eclipse.jgit.util.io.StreamCopyThread;
 
 @Singleton
 public class ProjectRepairer {
+  /**
+   * A repair action. Actions are performed in the order declared here, irrespective of the order
+   * they were requested in, so declare a new one at the position it has to run in.
+   */
+  public enum Action {
+    COPY_PACKS;
+
+    public static Set<Action> all() {
+      return EnumSet.allOf(Action.class);
+    }
+  }
+
   private static final String PACK_DIR = "objects/pack/";
 
   private final GitRepositoryManager gitManager;
@@ -47,8 +61,9 @@ public class ProjectRepairer {
     this.replicationConfig = replicationConfig;
   }
 
-  public boolean repair(Project.NameKey project, URIish uri, OutputStream out, boolean copyPacks) {
-    if (!copyPacks) {
+  public boolean repair(
+      Project.NameKey project, URIish uri, OutputStream out, Set<Action> actions) {
+    if (actions.isEmpty()) {
       return true;
     }
 
@@ -57,9 +72,18 @@ public class ProjectRepairer {
       return false;
     }
 
-    if (!copyPacksTo(objectsDir.get().resolve("pack"), uri, out)) {
-      repLog.atSevere().log("Repair failed for %s on %s", project.get(), uri);
-      return false;
+    for (Action action : Action.values()) {
+      if (!actions.contains(action)) {
+        continue;
+      }
+      boolean isRepaired =
+          switch (action) {
+            case COPY_PACKS -> copyPacksTo(objectsDir.get().resolve("pack"), uri, out);
+          };
+      if (!isRepaired) {
+        repLog.atSevere().log("Repair (%s) failed for %s on %s", action, project.get(), uri);
+        return false;
+      }
     }
     return true;
   }
