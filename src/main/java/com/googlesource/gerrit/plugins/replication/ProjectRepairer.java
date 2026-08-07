@@ -96,7 +96,8 @@ public class ProjectRepairer {
       throws InterruptedException {
     List<String> cmd = new ArrayList<>();
     cmd.add(replicationConfig.getRsyncPath());
-    cmd.add("-avP");
+    cmd.add("-av");
+    cmd.add("--progress");
     cmd.add("-e");
     cmd.add(buildSshTransport(uri));
     for (String inc : includes) {
