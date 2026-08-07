@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56e8bb18_bf2feb4f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-07T18:09:17Z",
+      "side": 1,
+      "message": "Use OBJECTS_DIR from above.",
+      "revId": "57b02f2841cbdcb7b4894e8620b10e244d31816b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
