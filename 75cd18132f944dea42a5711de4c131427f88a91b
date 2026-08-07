@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8812520a_5a7e298c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-07T18:03:21Z",
+      "side": 1,
+      "message": "Iterate over actions instead so the check below can be removed?",
+      "revId": "75cd18132f944dea42a5711de4c131427f88a91b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eeefd228_0efd8ae4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
         "patchSetId": 2
