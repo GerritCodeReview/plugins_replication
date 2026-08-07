@@ -51,6 +51,13 @@ final class RepairCommand extends SshCommand implements PushResultProcessing.Ssh
   private final EnumSet<Action> actions = EnumSet.noneOf(Action.class);
 
   @Option(
+      name = "--copy-loose-objects",
+      usage = "rsync loose object files to SSH destinations before triggering replication")
+  void setCopyLooseObjects(@SuppressWarnings("unused") boolean arg) {
+    actions.add(Action.COPY_LOOSE_OBJECTS);
+  }
+
+  @Option(
       name = "--copy-packs",
       usage = "rsync objects/pack files to SSH destinations before triggering replication")
   void setCopyPacks(@SuppressWarnings("unused") boolean arg) {

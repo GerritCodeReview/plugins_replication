@@ -43,6 +43,7 @@ public class ProjectRepairer {
    * they were requested in, so declare a new one at the position it has to run in.
    */
   public enum Action {
+    COPY_LOOSE_OBJECTS,
     COPY_PACKS;
 
     public static Set<Action> all() {
@@ -50,7 +51,8 @@ public class ProjectRepairer {
     }
   }
 
-  private static final String PACK_DIR = "objects/pack/";
+  private static final String OBJECTS_DIR = "objects/";
+  private static final String PACK_DIR = OBJECTS_DIR + "pack/";
 
   private final GitRepositoryManager gitManager;
   private final ReplicationConfig replicationConfig;
@@ -78,6 +80,7 @@ public class ProjectRepairer {
       }
       boolean isRepaired =
           switch (action) {
+            case COPY_LOOSE_OBJECTS -> copyLooseObjectsTo(objectsDir.get(), uri, out);
             case COPY_PACKS -> copyPacksTo(objectsDir.get().resolve("pack"), uri, out);
           };
       if (!isRepaired) {
@@ -108,6 +111,15 @@ public class ProjectRepairer {
       repLog.atSevere().withCause(e).log("Cannot open repository %s for repair", project.get());
       return Optional.empty();
     }
+  }
+
+  private boolean copyLooseObjectsTo(Path objectsDir, URIish uri, OutputStream out) {
+    if (!Files.isDirectory(objectsDir)) {
+      repLog.atSevere().log("No objects directory %s", objectsDir);
+      return false;
+    }
+
+    return copy(objectsDir, uri, out, OBJECTS_DIR, "/??/", "/??/*") == 0;
   }
 
   private boolean copyPacksTo(Path packDir, URIish uri, OutputStream out) {
