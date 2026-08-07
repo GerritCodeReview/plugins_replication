@@ -38,6 +38,7 @@ import org.eclipse.jgit.util.io.StreamCopyThread;
 @Singleton
 public class ProjectRepairer {
   public enum Action {
+    COPY_LOOSE_OBJECTS,
     COPY_PACKS;
 
     public static List<Action> all() {
@@ -45,7 +46,8 @@ public class ProjectRepairer {
     }
   }
 
-  private static final String PACK_DIR = "objects/pack/";
+  private static final String OBJECTS_DIR = "objects/";
+  private static final String PACK_DIR = OBJECTS_DIR + "pack/";
 
   private final GitRepositoryManager gitManager;
   private final ReplicationConfig replicationConfig;
@@ -68,6 +70,7 @@ public class ProjectRepairer {
               for (Action action : actions) {
                 boolean isRepaired =
                     switch (action) {
+                      case COPY_LOOSE_OBJECTS -> copyLooseObjectsTo(objectsDir, uri, out);
                       case COPY_PACKS -> copyPacksTo(objectsDir.resolve("pack"), uri, out);
                     };
                 if (!isRepaired) {
@@ -101,6 +104,15 @@ public class ProjectRepairer {
       repLog.atSevere().withCause(e).log("Cannot open repository %s for repair", project.get());
       return Optional.empty();
     }
+  }
+
+  private boolean copyLooseObjectsTo(Path objectsDir, URIish uri, OutputStream out) {
+    if (!Files.isDirectory(objectsDir)) {
+      repLog.atSevere().log("No objects directory %s", objectsDir);
+      return false;
+    }
+
+    return copy(objectsDir, uri, out, OBJECTS_DIR, "/??/", "/??/*") == 0;
   }
 
   private boolean copyPacksTo(Path packDir, URIish uri, OutputStream out) {
