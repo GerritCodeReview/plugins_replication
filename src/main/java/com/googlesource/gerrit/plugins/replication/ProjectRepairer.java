@@ -27,6 +27,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import org.eclipse.jgit.lib.Repository;
@@ -36,6 +37,14 @@ import org.eclipse.jgit.util.io.StreamCopyThread;
 
 @Singleton
 public class ProjectRepairer {
+  public enum Action {
+    COPY_PACKS;
+
+    public static List<Action> all() {
+      return List.of(values());
+    }
+  }
+
   private static final String PACK_DIR = "objects/pack/";
 
   private final GitRepositoryManager gitManager;
@@ -47,21 +56,39 @@ public class ProjectRepairer {
     this.replicationConfig = replicationConfig;
   }
 
-  public boolean repair(Project.NameKey project, URIish uri, OutputStream out, boolean copyPacks) {
-    if (!copyPacks) {
+  public boolean repair(
+      Project.NameKey project, URIish uri, OutputStream out, Collection<Action> actions) {
+    if (actions.isEmpty()) {
       return true;
     }
 
     return objectsDir(project, uri)
         .map(
-            dir -> {
-              if (!copyPacksTo(dir.resolve("pack"), uri, out)) {
-                repLog.atSevere().log("Repair failed for %s on %s", project.get(), uri);
-                return false;
+            objectsDir -> {
+              boolean isRepaired = true;
+              for (Action action : actions) {
+                if (Thread.currentThread().isInterrupted()) {
+                  repLog.atWarning().log(
+                      "Interrupted, skipping remaining repair of %s on %s", project.get(), uri);
+                  return false;
+                }
+                isRepaired &= repair(project, uri, out, objectsDir, action);
               }
-              return true;
+              return isRepaired;
             })
         .orElse(false);
+  }
+
+  private boolean repair(
+      Project.NameKey project, URIish uri, OutputStream out, Path objectsDir, Action action) {
+    boolean isRepaired =
+        switch (action) {
+          case COPY_PACKS -> copyPacksTo(objectsDir.resolve("pack"), uri, out);
+        };
+    if (!isRepaired) {
+      repLog.atSevere().log("Repair (%s) failed for %s on %s", action, project.get(), uri);
+    }
+    return isRepaired;
   }
 
   public static boolean canCopy(URIish uri) {
