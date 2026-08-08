@@ -16,6 +16,24 @@
       "message": "Use OBJECTS_DIR from above.",
       "revId": "57b02f2841cbdcb7b4894e8620b10e244d31816b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10d33cb6_bf4e4d0c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-08-08T00:47:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56e8bb18_bf2feb4f",
+      "revId": "57b02f2841cbdcb7b4894e8620b10e244d31816b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
