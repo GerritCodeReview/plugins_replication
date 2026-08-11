@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02bc2d30_e02c1376",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-11T21:11:43Z",
+      "side": 1,
+      "message": "Use Enum also here?",
+      "revId": "6bd9d947f440517c01b915e1fb0832bc066e461b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
