@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6923f0b1_ab33987d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-11T21:07:16Z",
+      "side": 1,
+      "message": "It is better to avoid calling isEmpty() follow by get() whenever possible. I believe there are methods on Optional that can help you avoid this pattern.",
+      "revId": "4a5abc9967455acd6bd6c8a15d5e7989c441dbd4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
