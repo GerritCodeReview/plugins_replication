@@ -16,6 +16,24 @@
       "message": "Since this is being called inside an interrupt, I believe that this exception will always get thrown right away.",
       "revId": "60cc80fb16ba9eb794f35c2d97be90f90d559808",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34d19642_816ea3e1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-08-11T22:50:00Z",
+      "side": 1,
+      "message": "The thread\u0027s interrupt status should be cleared in the catch. \n\nhttps://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Thread.html#interrupt()\n\n\n\u003e If this thread is blocked in an invocation of the wait(), wait(long), or wait(long, int)\nmethods of the Object class, or of the join(), join(long), join(long, int), sleep(long),\nor sleep(long, int) methods of this class, then its interrupt status will be cleared and\nit will receive an InterruptedException.",
+      "parentUuid": "412824f5_0b545abc",
+      "revId": "60cc80fb16ba9eb794f35c2d97be90f90d559808",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
