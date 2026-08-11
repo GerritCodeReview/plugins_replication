@@ -34,6 +34,24 @@
       "parentUuid": "412824f5_0b545abc",
       "revId": "60cc80fb16ba9eb794f35c2d97be90f90d559808",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2436226_2994c87b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-11T22:55:45Z",
+      "side": 1,
+      "message": "I can\u0027t see how that applied to this situation though since you aren\u0027t in one of those methods?",
+      "parentUuid": "34d19642_816ea3e1",
+      "revId": "60cc80fb16ba9eb794f35c2d97be90f90d559808",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
