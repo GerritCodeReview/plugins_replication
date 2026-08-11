@@ -16,6 +16,24 @@
       "message": "Use Enum also here?",
       "revId": "6bd9d947f440517c01b915e1fb0832bc066e461b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "251d6310_628a0e72",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-08-11T22:50:38Z",
+      "side": 1,
+      "message": "Done, in previous change",
+      "parentUuid": "02bc2d30_e02c1376",
+      "revId": "6bd9d947f440517c01b915e1fb0832bc066e461b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
