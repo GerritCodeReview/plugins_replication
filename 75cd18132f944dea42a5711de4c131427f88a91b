@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8cd8ccfa_2ad38630",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-11T21:10:07Z",
+      "side": 1,
+      "message": "I\u0027ll be honest, I don\u0027t love this behavior. When I invoke a command, I generally want it to do what I ask it, so reordering feels wrong. I could imagine someone potentially specifying a switch twice even, and expecting that switch to get executed twice. Give that all() could be made to have the most desirable default ordering, is there a reason to not allow alternative orderings to be specified?",
+      "parentUuid": "219cbba6_3f90c261",
+      "revId": "75cd18132f944dea42a5711de4c131427f88a91b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eeefd228_0efd8ae4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
         "patchSetId": 2
