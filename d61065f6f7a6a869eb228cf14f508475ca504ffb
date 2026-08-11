@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f29e973_c95c72bd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RepairCommand.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-11T23:02:22Z",
+      "side": 1,
+      "message": "I would skip the clear() so that this can be combined with other explicit actions?",
+      "revId": "d61065f6f7a6a869eb228cf14f508475ca504ffb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
