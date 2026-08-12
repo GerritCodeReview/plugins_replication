@@ -70,6 +70,24 @@
       "parentUuid": "e2436226_2994c87b",
       "revId": "60cc80fb16ba9eb794f35c2d97be90f90d559808",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "867dc7db_bfca8e4d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-12T23:24:07Z",
+      "side": 1,
+      "message": "After more research, I agree. Since that is the case, then it seems like this is now covering up the interrupt and not stopping the command. Instead it will fail the currently running action, but it will allow new actions to start.",
+      "parentUuid": "47632e5e_718764dd",
+      "revId": "60cc80fb16ba9eb794f35c2d97be90f90d559808",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
