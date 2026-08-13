@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb18d07d_a7244768",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-13T18:08:19Z",
+      "side": 1,
+      "message": "Since the thread was indirectly waiting for I/O to complete, I think this should throw whatever I/O APIs throw when interrupted.",
+      "revId": "515cddedc532e713e44954022266b6ae309edda7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "342dadfe_976b71d5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-13T18:08:19Z",
+      "side": 1,
+      "message": "It\u0027s no longer clear to me what the purpose of this method is, to add log output (doesn\u0027t seem worth it for that)?",
+      "revId": "515cddedc532e713e44954022266b6ae309edda7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
