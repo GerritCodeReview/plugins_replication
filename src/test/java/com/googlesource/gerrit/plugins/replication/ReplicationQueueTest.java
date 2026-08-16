@@ -76,7 +76,7 @@ public class ReplicationQueueTest {
     when(destinations.getDestinations(any(), any(), any())).thenReturn(List.of(destination));
 
     ReplicationTasksStorage tasksStorage = mock(ReplicationTasksStorage.class);
-    when(tasksStorage.streamWaiting()).thenAnswer(_ -> List.copyOf(waitingTasks).stream());
+    when(tasksStorage.streamWaiting()).thenAnswer(invocation -> List.copyOf(waitingTasks).stream());
 
     defaultQueue = new ScheduledThreadPoolExecutor(1);
     workQueue = mock(WorkQueue.class);
