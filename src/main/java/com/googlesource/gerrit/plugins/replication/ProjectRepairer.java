@@ -30,6 +30,8 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -56,6 +58,7 @@ public class ProjectRepairer {
   private static final String OBJECTS_DIR = "objects/";
   private static final String PACK_DIR = OBJECTS_DIR + "pack/";
   private static final String SNAPSHOT_PREFIX = "replication-repair-snapshot-";
+  private static final Duration SNAPSHOT_MAX_AGE = Duration.ofDays(1);
 
   private final GitRepositoryManager gitManager;
   private final ReplicationConfig replicationConfig;
@@ -77,6 +80,7 @@ public class ProjectRepairer {
     if (objectsDir == null) {
       return false;
     }
+    sweepStaleSnapshots(objectsDir);
 
     boolean isRepaired = true;
     for (Action action : actions) {
@@ -189,6 +193,21 @@ public class ProjectRepairer {
 
   private static Path createSnapshot(Path objectsDir) throws IOException {
     return Files.createDirectory(objectsDir.resolveSibling(SNAPSHOT_PREFIX + UUID.randomUUID()));
+  }
+
+  private static void sweepStaleSnapshots(Path objectsDir) {
+    Instant cutoff = Instant.now().minus(SNAPSHOT_MAX_AGE);
+    try (DirectoryStream<Path> snapshotDirs =
+        Files.newDirectoryStream(objectsDir.getParent(), SNAPSHOT_PREFIX + "*")) {
+      for (Path snapshotDir : snapshotDirs) {
+        if (Files.getLastModifiedTime(snapshotDir).toInstant().isBefore(cutoff)) {
+          repLog.atWarning().log("Deleting stale repair snapshot %s", snapshotDir);
+          deleteSnapshot(snapshotDir);
+        }
+      }
+    } catch (IOException e) {
+      repLog.atWarning().withCause(e).log("Cannot sweep repair snapshots of %s", objectsDir);
+    }
   }
 
   private static void deleteSnapshot(Path snapshotDir) {
