@@ -392,7 +392,7 @@ public class ReplicationQueue
       }
       try {
         synchronizePendingEvents(Prune.TRUE);
-      } catch (Exception e) {
+      } catch (RuntimeException e) {
         repLog.atSevere().withCause(e).log("error distributing tasks");
       }
     }

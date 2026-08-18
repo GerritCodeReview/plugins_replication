@@ -83,7 +83,7 @@ public class PushAll implements Runnable {
           replication.scheduleFullSync(nameKey, urlMatch, refName, remotesToConsider, state, now);
         }
       }
-    } catch (Exception e) {
+    } catch (RuntimeException e) {
       stateLog.error("Cannot enumerate known projects", e, state);
     }
     state.markAllPushTasksScheduled();
