@@ -34,7 +34,7 @@ public class OnStartStop implements LifecycleListener {
   private final EventDispatcher eventDispatcher;
 
   @Inject
-  protected OnStartStop(
+  OnStartStop(
       ServerInformation srvInfo,
       PushAll.Factory pushAll,
       ReplicationConfig config,

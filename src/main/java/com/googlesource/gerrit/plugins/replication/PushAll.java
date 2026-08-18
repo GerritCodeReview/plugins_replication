@@ -48,7 +48,7 @@ public class PushAll implements Runnable {
   private final boolean now;
 
   @Inject
-  protected PushAll(
+  PushAll(
       WorkQueue wq,
       ProjectCache projectCache,
       ReplicationQueue rq,

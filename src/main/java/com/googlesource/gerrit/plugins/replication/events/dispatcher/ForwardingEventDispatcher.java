@@ -27,7 +27,7 @@ public class ForwardingEventDispatcher implements EventDispatcher {
   protected final DynamicItem<com.google.gerrit.server.events.EventDispatcher> delegate;
 
   @Inject
-  public ForwardingEventDispatcher(
+  ForwardingEventDispatcher(
       DynamicItem<com.google.gerrit.server.events.EventDispatcher> delegate) {
     this.delegate = delegate;
   }

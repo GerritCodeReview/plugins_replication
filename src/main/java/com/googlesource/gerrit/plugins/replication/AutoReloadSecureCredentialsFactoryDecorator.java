@@ -36,7 +36,7 @@ public class AutoReloadSecureCredentialsFactoryDecorator implements CredentialsF
   private final ReplicationConfig config;
 
   @Inject
-  public AutoReloadSecureCredentialsFactoryDecorator(
+  AutoReloadSecureCredentialsFactoryDecorator(
       SitePaths site, SecureStore secureStore, ReplicationConfig config)
       throws ConfigInvalidException, IOException {
     this.site = site;

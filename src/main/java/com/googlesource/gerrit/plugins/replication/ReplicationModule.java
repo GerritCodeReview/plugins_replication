@@ -51,7 +51,7 @@ class ReplicationModule extends AbstractModule {
   private final ReplicationConfigModule configModule;
 
   @Inject
-  public ReplicationModule(ReplicationConfigModule configModule) {
+  ReplicationModule(ReplicationConfigModule configModule) {
     this.configModule = configModule;
   }
 

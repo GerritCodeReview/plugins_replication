@@ -41,7 +41,7 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleLi
   private final AutoReloadRunnable reloadRunner;
 
   @Inject
-  public AutoReloadConfigDecorator(
+  AutoReloadConfigDecorator(
       @PluginName String pluginName,
       WorkQueue workQueue,
       AutoReloadRunnable reloadRunner,

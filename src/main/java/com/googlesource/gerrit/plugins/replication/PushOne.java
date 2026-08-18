@@ -188,7 +188,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   }
 
   @Inject(optional = true)
-  public void setReplicationPushFilter(DynamicItem<ReplicationPushFilter> replicationPushFilter) {
+  void setReplicationPushFilter(DynamicItem<ReplicationPushFilter> replicationPushFilter) {
     this.replicationPushFilter = replicationPushFilter;
   }
 

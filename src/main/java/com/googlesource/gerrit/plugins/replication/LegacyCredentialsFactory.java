@@ -37,7 +37,7 @@ class LegacyCredentialsFactory implements CredentialsFactory {
   private final Config config;
 
   @Inject
-  public LegacyCredentialsFactory(SitePaths site) throws ConfigInvalidException, IOException {
+  LegacyCredentialsFactory(SitePaths site) throws ConfigInvalidException, IOException {
     config = load(site);
   }
 

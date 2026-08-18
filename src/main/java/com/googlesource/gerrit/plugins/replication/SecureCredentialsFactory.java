@@ -30,7 +30,7 @@ public class SecureCredentialsFactory implements CredentialsFactory {
   private final SecureStore secureStore;
 
   @Inject
-  public SecureCredentialsFactory(SecureStore secureStore) {
+  SecureCredentialsFactory(SecureStore secureStore) {
     this.secureStore = secureStore;
   }
 

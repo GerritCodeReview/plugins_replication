@@ -33,7 +33,7 @@ public class AutoReloadRunnable implements Runnable {
   private String lastFailedConfigVersion;
 
   @Inject
-  public AutoReloadRunnable(
+  AutoReloadRunnable(
       ConfigParser configParser,
       Provider<ReplicationConfigImpl> replicationConfigProvider,
       EventBus eventBus,

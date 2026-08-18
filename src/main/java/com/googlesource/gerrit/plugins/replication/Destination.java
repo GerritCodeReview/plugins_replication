@@ -177,7 +177,7 @@ public class Destination {
   }
 
   @Inject
-  protected Destination(
+  Destination(
       Injector injector,
       PluginUser pluginUser,
       GitRepositoryManager gitRepositoryManager,
@@ -247,7 +247,7 @@ public class Destination {
               }
 
               @Provides
-              public PerThreadRequestScope.Scoper provideScoper(
+              PerThreadRequestScope.Scoper provideScoper(
                   final PerThreadRequestScope.Propagator propagator) {
                 final RequestContext requestContext = () -> remoteUser;
                 return new PerThreadRequestScope.Scoper() {

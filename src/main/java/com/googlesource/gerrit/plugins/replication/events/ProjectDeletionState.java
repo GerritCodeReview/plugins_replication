@@ -39,7 +39,7 @@ public class ProjectDeletionState {
       new ConcurrentHashMap<>();
 
   @Inject
-  public ProjectDeletionState(EventDispatcher eventDispatcher, @Assisted Project.NameKey project) {
+  ProjectDeletionState(EventDispatcher eventDispatcher, @Assisted Project.NameKey project) {
     this.eventDispatcher = eventDispatcher;
     this.project = project;
   }

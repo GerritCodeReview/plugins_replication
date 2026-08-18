@@ -31,7 +31,7 @@ import org.apache.log4j.spi.ThrowableInformation;
 public class ReplicationLogFile extends PluginLogFile {
 
   @Inject
-  public ReplicationLogFile(SystemLog systemLog, ServerInformation serverInfo, LogConfig config) {
+  ReplicationLogFile(SystemLog systemLog, ServerInformation serverInfo, LogConfig config) {
     super(
         systemLog,
         serverInfo,

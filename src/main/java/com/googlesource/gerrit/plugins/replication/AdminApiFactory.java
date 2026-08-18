@@ -41,7 +41,7 @@ public interface AdminApiFactory {
     private final ReplicationConfig replicationConfig;
 
     @Inject
-    public DefaultAdminApiFactory(
+    DefaultAdminApiFactory(
         SshHelper sshHelper,
         GerritRestApi.Factory gerritRestApiFactory,
         ReplicationConfig replicationConfig) {

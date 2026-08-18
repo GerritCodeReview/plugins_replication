@@ -67,7 +67,7 @@ public class DestinationsCollection implements ReplicationDestinations {
   }
 
   @Inject
-  public DestinationsCollection(
+  DestinationsCollection(
       Destination.Factory destinationFactory,
       Provider<ReplicationQueue> replicationQueue,
       ReplicationConfig replicationConfig,

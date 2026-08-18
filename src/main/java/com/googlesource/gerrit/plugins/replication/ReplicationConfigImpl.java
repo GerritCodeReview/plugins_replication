@@ -50,7 +50,7 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   private final Config config;
 
   @Inject
-  public ReplicationConfigImpl(
+  ReplicationConfigImpl(
       MergedConfigResource configResource, SitePaths site, @PluginData Path pluginDataDir) {
     this.site = site;
     config = configResource.getConfig();

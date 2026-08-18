@@ -33,7 +33,7 @@ public class SshHelper {
   private final int connectionTimeout;
 
   @Inject
-  protected SshHelper(
+  SshHelper(
       ReplicationConfig replicationConfig, Provider<SshSessionFactory> sshSessionFactoryProvider) {
     this.sshSessionFactoryProvider = sshSessionFactoryProvider;
     this.commandTimeout = replicationConfig.getSshCommandTimeout();
