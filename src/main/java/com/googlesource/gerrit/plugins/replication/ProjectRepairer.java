@@ -26,13 +26,19 @@ import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.OutputStream;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
+import org.eclipse.jgit.internal.storage.file.PackFile;
+import org.eclipse.jgit.internal.storage.pack.PackExt;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.URIish;
+import org.eclipse.jgit.util.FileUtils;
 import org.eclipse.jgit.util.QuotedString;
 import org.eclipse.jgit.util.io.StreamCopyThread;
 
@@ -49,6 +55,7 @@ public class ProjectRepairer {
 
   private static final String OBJECTS_DIR = "objects/";
   private static final String PACK_DIR = OBJECTS_DIR + "pack/";
+  private static final String SNAPSHOT_PREFIX = "replication-repair-snapshot-";
 
   private final GitRepositoryManager gitManager;
   private final ReplicationConfig replicationConfig;
@@ -81,11 +88,32 @@ public class ProjectRepairer {
   private boolean repair(
       Project.NameKey project, URIish uri, OutputStream out, Path objectsDir, Action action)
       throws InterruptedIOException {
-    boolean isRepaired =
-        switch (action) {
-          case COPY_LOOSE_OBJECTS -> copyLooseObjectsTo(objectsDir, uri, out);
-          case COPY_PACKS -> copyPacksTo(objectsDir.resolve("pack"), uri, out);
-        };
+    Path snapshotDir;
+    try {
+      snapshotDir = createSnapshot(objectsDir);
+    } catch (IOException e) {
+      repLog.atSevere().withCause(e).log(
+          "Cannot create snapshot directory for repair (%s) of %s", action, project.get());
+      return false;
+    }
+
+    boolean isRepaired;
+    try {
+      isRepaired =
+          switch (action) {
+            case COPY_LOOSE_OBJECTS ->
+                copyLooseObjectsTo(objectsDir, snapshotDir.resolve("objects"), uri, out);
+            case COPY_PACKS ->
+                copyPacksTo(
+                    objectsDir.resolve("pack"),
+                    snapshotDir.resolve("objects").resolve("pack"),
+                    uri,
+                    out);
+          };
+    } finally {
+      deleteSnapshot(snapshotDir);
+    }
+
     if (!isRepaired) {
       repLog.atSevere().log("Repair (%s) failed for %s on %s", action, project.get(), uri);
     }
@@ -115,25 +143,131 @@ public class ProjectRepairer {
     }
   }
 
-  private boolean copyLooseObjectsTo(Path objectsDir, URIish uri, OutputStream out)
+  private boolean copyLooseObjectsTo(
+      Path objectsDir, Path snapshotObjectsDir, URIish uri, OutputStream out)
       throws InterruptedIOException {
     if (!Files.isDirectory(objectsDir)) {
       repLog.atSevere().log("No objects directory %s", objectsDir);
       return false;
     }
 
-    return copy(objectsDir, uri, out, OBJECTS_DIR, "/??/", "/??/*") == 0;
+    try {
+      linkLooseObjects(objectsDir, snapshotObjectsDir);
+    } catch (IOException e) {
+      repLog.atSevere().withCause(e).log("Cannot snapshot loose objects of %s", objectsDir);
+      return false;
+    }
+
+    return copy(snapshotObjectsDir, uri, out, OBJECTS_DIR, "/??/", "/??/*") == 0;
   }
 
-  private boolean copyPacksTo(Path packDir, URIish uri, OutputStream out)
+  private boolean copyPacksTo(Path packDir, Path snapshotPackDir, URIish uri, OutputStream out)
       throws InterruptedIOException {
     if (!Files.isDirectory(packDir)) {
       repLog.atSevere().log("No objects/pack directory %s", packDir);
       return false;
     }
 
-    return copy(packDir, uri, out, PACK_DIR, "*.pack") == 0
-        && copy(packDir, uri, out, PACK_DIR, "*.idx", "*.bitmap", "*.rev") == 0;
+    try {
+      linkPacks(packDir, snapshotPackDir);
+    } catch (IOException e) {
+      repLog.atSevere().withCause(e).log("Cannot snapshot packs of %s", packDir);
+      return false;
+    }
+
+    return copy(snapshotPackDir, uri, out, PACK_DIR, glob(PackExt.PACK)) == 0
+        && copy(
+                snapshotPackDir,
+                uri,
+                out,
+                PACK_DIR,
+                glob(PackExt.INDEX),
+                glob(PackExt.BITMAP_INDEX),
+                glob(PackExt.REVERSE_INDEX))
+            == 0;
+  }
+
+  private static Path createSnapshot(Path objectsDir) throws IOException {
+    return Files.createDirectory(objectsDir.resolveSibling(SNAPSHOT_PREFIX + UUID.randomUUID()));
+  }
+
+  private static void deleteSnapshot(Path snapshotDir) {
+    try {
+      FileUtils.delete(
+          snapshotDir.toFile(), FileUtils.RECURSIVE | FileUtils.SKIP_MISSING | FileUtils.RETRY);
+    } catch (IOException e) {
+      repLog.atSevere().withCause(e).log("Cannot delete snapshot directory %s", snapshotDir);
+    }
+  }
+
+  private static void linkLooseObjects(Path objectsDir, Path snapshotObjectsDir)
+      throws IOException {
+    Files.createDirectories(snapshotObjectsDir);
+    try (DirectoryStream<Path> fanoutDirs = Files.newDirectoryStream(objectsDir)) {
+      for (Path fanoutDir : fanoutDirs) {
+        String name = fanoutDir.getFileName().toString();
+        if (name.length() == 2 && Files.isDirectory(fanoutDir)) {
+          linkLooseObjectsIn(fanoutDir, snapshotObjectsDir.resolve(name));
+        }
+      }
+    }
+  }
+
+  private static void linkLooseObjectsIn(Path fanoutDir, Path snapshotFanoutDir)
+      throws IOException {
+    try (DirectoryStream<Path> objects = Files.newDirectoryStream(fanoutDir)) {
+      Files.createDirectory(snapshotFanoutDir);
+      for (Path object : objects) {
+        if (Files.isRegularFile(object)) {
+          link(object, snapshotFanoutDir.resolve(object.getFileName().toString()));
+        }
+      }
+    } catch (NoSuchFileException e) {
+      // ignore as objects may vanish
+    }
+  }
+
+  private static void linkPacks(Path packDir, Path snapshotPackDir) throws IOException {
+    Files.createDirectories(snapshotPackDir);
+    try (DirectoryStream<Path> packs = Files.newDirectoryStream(packDir, glob(PackExt.PACK))) {
+      for (Path pack : packs) {
+        PackFile packFile = new PackFile(pack.toFile());
+        if (packFile.create(PackExt.INDEX).exists()) {
+          linkPackSet(packFile, snapshotPackDir);
+        }
+      }
+    }
+  }
+
+  private static void linkPackSet(PackFile pack, Path snapshotPackDir) throws IOException {
+    Path snapshotPack = snapshotPackDir.resolve(pack.getName());
+    if (!link(pack.toPath(), snapshotPack)) {
+      return;
+    }
+
+    PackFile idx = pack.create(PackExt.INDEX);
+    if (!link(idx.toPath(), snapshotPackDir.resolve(idx.getName()))) {
+      Files.deleteIfExists(snapshotPack);
+      return;
+    }
+
+    PackFile bitmap = pack.create(PackExt.BITMAP_INDEX);
+    link(bitmap.toPath(), snapshotPackDir.resolve(bitmap.getName()));
+    PackFile rev = pack.create(PackExt.REVERSE_INDEX);
+    link(rev.toPath(), snapshotPackDir.resolve(rev.getName()));
+  }
+
+  private static boolean link(Path src, Path dest) throws IOException {
+    try {
+      Files.createLink(dest, src);
+      return true;
+    } catch (NoSuchFileException e) {
+      return false;
+    }
+  }
+
+  private static String glob(PackExt ext) {
+    return "*." + ext.getExtension();
   }
 
   private int copy(Path src, URIish uri, OutputStream out, String destDir, String... includes)
