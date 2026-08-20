@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d32eb17_f8bbd805",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-20T22:09:28Z",
+      "side": 1,
+      "message": "This interface feels a bit weird to pass in the snapshotDir. Any reason to not create that inside here instead (I think it\u0027s OK to have different dir for loose vs. packs)? Such an approach would also open the door for parallelism is we ever wanted.",
+      "revId": "728f4ce5fca2dd3d2c7883f1eba063db9523df39",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
