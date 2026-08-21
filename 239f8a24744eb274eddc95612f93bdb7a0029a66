@@ -52,6 +52,24 @@
       "parentUuid": "e7399bf7_fda1d528",
       "revId": "239f8a24744eb274eddc95612f93bdb7a0029a66",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6b270b8_f8afcbff",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-08-21T20:28:47Z",
+      "side": 1,
+      "message": "I created an AutoCloseable object now.",
+      "parentUuid": "bea92e45_7202b0cc",
+      "revId": "239f8a24744eb274eddc95612f93bdb7a0029a66",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
