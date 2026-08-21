@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6423c6ea_8c120b01",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-21T17:19:38Z",
+      "side": 1,
+      "message": "Use an Optional instead of null here. Or, instead of returning a Path, return an AutoCloseable SnapshotDir which knows how to clean itself up so it can be used in a try-with-resource? The SnapshotDir could then be queried with isOpen() or something to test if it succeeded?",
+      "revId": "c80a79b2d8e0b28a4e037b4172b7eaec9f7e58b8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
