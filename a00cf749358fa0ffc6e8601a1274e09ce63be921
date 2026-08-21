@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e29d1d2d_773b9f3a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-21T20:47:21Z",
+      "side": 1,
+      "message": "Is there a lot of value in covering up the exception inside the snapshot create() method, only to have to test for an error here? It feels very C-like, and catching an exception here instead would probably be more appropriate?",
+      "revId": "a00cf749358fa0ffc6e8601a1274e09ce63be921",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1af2eafd_9140d9be",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-21T20:47:21Z",
+      "side": 1,
+      "message": "Feels wrong to have a generically name object (which itself I think is good) with custom link methods. My advice would be to add generic linking methods to this Snapshot object, and then either override the Snapshot to have specific ones for loose vs/packs, or just call the generic link methods with details specific to the tasks being performed.",
+      "revId": "a00cf749358fa0ffc6e8601a1274e09ce63be921",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "670ec07f_03360499",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-21T20:47:21Z",
+      "side": 1,
+      "message": "Is it really worth making this non generic instead of just linking every file in the dir?",
+      "revId": "a00cf749358fa0ffc6e8601a1274e09ce63be921",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4463a594_83753064",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-21T20:47:21Z",
+      "side": 1,
+      "message": "linkNoExcetion() or quietLink()? don\u0027t bother with unused return value?",
+      "revId": "a00cf749358fa0ffc6e8601a1274e09ce63be921",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
