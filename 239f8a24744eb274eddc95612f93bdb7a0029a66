@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "491ed02a_001c3d82",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-21T19:26:41Z",
+      "side": 1,
+      "message": "I really don\u0027t like having all these static methods, to me that is a code smell. It likely means passing around a lot more arguments and not using enough encapsulation. This is another reason I suggested having a SnaphshotDir object. Can you figure out some ways to make this more OO? As it, it just feels like a significant amount of code for what it is doing.",
+      "revId": "239f8a24744eb274eddc95612f93bdb7a0029a66",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
