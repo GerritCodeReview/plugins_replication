@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "309e1de3_4af25ebe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2026-08-23T22:40:10Z",
+      "side": 1,
+      "message": "Even though we typically do not use the `Release-Notes` on this project, I believe this change is worth being mentioned in the next release.",
+      "revId": "5fcc88b6760196ce58280d8937708acca1604821",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
