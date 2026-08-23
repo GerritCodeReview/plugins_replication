@@ -59,10 +59,18 @@ import org.junit.Test;
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.TestReplicationModule")
 public class ReplicationIT extends ReplicationDaemon {
-  private static final int TEST_REPLICATION_DELAY = 1;
-  private static final int TEST_REPLICATION_RETRY = 1;
   private static final Duration TEST_TIMEOUT =
-      Duration.ofSeconds((TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) + 1);
+      Duration.ofSeconds(TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60 + 1);
+
+  // Timeout for asserting that a ref is *not* replicated. Unlike TEST_TIMEOUT it
+  // deliberately excludes the retry cycle: a push that is going to happen at all
+  // completes within the replication delay plus the push time, so if the ref has
+  // not appeared within that window (plus a small cushion) it never will
+  // (destination shut down / project excluded / non-matching remote). Sized in
+  // seconds rather than the ~60s retry quantum so these negative tests do not each
+  // burn a full retry window while proving a negative.
+  private static final Duration TEST_NOT_REPLICATED_TIMEOUT =
+      Duration.ofSeconds(TEST_REPLICATION_DELAY_SECONDS + TEST_PUSH_TIME_SECONDS + 5);
 
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
 
@@ -256,7 +264,8 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(
+            project, urlMatch, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
@@ -282,7 +291,8 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(
+            project, urlMatch, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
@@ -455,7 +465,7 @@ public class ReplicationIT extends ReplicationDaemon {
         InterruptedException.class,
         () -> {
           try (Repository repo = repoManager.openRepository(targetProject)) {
-            waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
+            waitUntil(() -> checkedGetRef(repo, sourceRef) != null, TEST_NOT_REPLICATED_TIMEOUT);
           }
         });
   }
@@ -544,7 +554,8 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(
+            project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
 
     // Wait for the push to land on both the refs
     try (Repository r1 = repoManager.openRepository(replica1Project);
@@ -569,7 +580,8 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(
+            project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
 
     // Wait for the push to land in at least one replica
     try (Repository r1 = repoManager.openRepository(replica1Project);
@@ -600,7 +612,8 @@ public class ReplicationIT extends ReplicationDaemon {
     ReplicationQueue queue = plugin.getSysInjector().getInstance(ReplicationQueue.class);
 
     // First sync - goes to replica1 (index 0)
-    queue.scheduleFullSync(project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
+    queue.scheduleFullSync(
+        project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
 
     try (Repository r1 = repoManager.openRepository(replica1Project)) {
       waitUntil(() -> checkedGetRef(r1, branch1) != null);
@@ -613,7 +626,8 @@ public class ReplicationIT extends ReplicationDaemon {
 
     // Second sync - goes to replica2 (index 1), includes branch1 and branch2
     createNewBranchWithoutPush("refs/heads/master", branch2);
-    queue.scheduleFullSync(project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
+    queue.scheduleFullSync(
+        project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
 
     try (Repository r2 = repoManager.openRepository(replica2Project)) {
       waitUntil(() -> checkedGetRef(r2, branch1) != null && checkedGetRef(r2, branch2) != null);
@@ -638,7 +652,8 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, PushOne.ALL_REFS, Set.of("foo"), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(
+            project, null, PushOne.ALL_REFS, Set.of("foo"), new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
@@ -734,7 +749,8 @@ public class ReplicationIT extends ReplicationDaemon {
     try (Repository repo = repoManager.openRepository(targetProject)) {
       assertThrows(
           InterruptedException.class,
-          () -> waitUntil(() -> checkedGetRef(repo, sourceRef) != null));
+          () ->
+              waitUntil(() -> checkedGetRef(repo, sourceRef) != null, TEST_NOT_REPLICATED_TIMEOUT));
     }
   }
 
@@ -756,12 +772,18 @@ public class ReplicationIT extends ReplicationDaemon {
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       assertThrows(
-          InterruptedException.class, () -> waitUntil(() -> checkedGetRef(repo, newRef) != null));
+          InterruptedException.class,
+          () -> waitUntil(() -> checkedGetRef(repo, newRef) != null, TEST_NOT_REPLICATED_TIMEOUT));
     }
   }
 
   private void waitUntil(Supplier<Boolean> waitCondition) throws InterruptedException {
-    WaitUtil.waitUntil(waitCondition, TEST_TIMEOUT);
+    waitUntil(waitCondition, TEST_TIMEOUT);
+  }
+
+  private void waitUntil(Supplier<Boolean> waitCondition, Duration timeout)
+      throws InterruptedException {
+    WaitUtil.waitUntil(waitCondition, timeout);
   }
 
   private void shutdownDestinations() {
