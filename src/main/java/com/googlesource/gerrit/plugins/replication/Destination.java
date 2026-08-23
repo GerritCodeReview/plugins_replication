@@ -672,8 +672,7 @@ public class Destination {
                     status.isRescheduled = true;
                     replicationTasksStorage.get().reset(pushOp);
                     @SuppressWarnings("unused")
-                    ScheduledFuture<?> ignored2 =
-                        pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
+                    ScheduledFuture<?> ignored2 = scheduleRetry(pushOp, reason);
                   }
                 } else {
                   pushOp.canceledByReplication();
@@ -696,11 +695,28 @@ public class Destination {
       postReplicationScheduledEvent(pushOp);
     }
     if (status.failoverTo != null) {
-      failoverTo(pushOp, status.failoverTo);
+      failoverTo(pushOp, status.failoverTo, reason);
     }
   }
 
-  private void failoverTo(PushOne pushOp, URIish newUri) {
+  /**
+   * Schedules a failed push for retry. When a push's first retry is due to {@link
+   * RetryReason#REPOSITORY_MISSING} -- which is emitted only after the missing repository has just
+   * been created on the replica (see {@link PushOne#createRepository()}) -- it is expected to
+   * succeed quickly and is retried on the seconds-scale reschedule delay rather than the
+   * minutes-scale retry delay, so that replicating a newly created project does not stall for a
+   * full minute before its first ref. The fast path is bounded to that first retry ({@code
+   * retryCount == 1}); any later retry, whatever the reason, falls back to the minutes-scale retry
+   * delay, so a destination that stays unreachable is not retried every few seconds indefinitely.
+   */
+  private ScheduledFuture<?> scheduleRetry(PushOne pushOp, RetryReason reason) {
+    if (reason == RetryReason.REPOSITORY_MISSING && pushOp.getRetryCount() == 1) {
+      return pool.schedule(pushOp, config.getRescheduleDelay(), TimeUnit.SECONDS);
+    }
+    return pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
+  }
+
+  private void failoverTo(PushOne pushOp, URIish newUri, RetryReason reason) {
     PushOne replacement = opFactory.create(pushOp.getProjectNameKey(), newUri);
     replacement.addRefBatches(pushOp.getRefs());
     replacement.addStates(pushOp.getStates());
@@ -724,8 +740,7 @@ public class Destination {
               replicationTasksStorage.get().finish(pushOp);
               queue.pending.put(newUri, replacement);
               @SuppressWarnings("unused")
-              ScheduledFuture<?> ignored =
-                  pool.schedule(replacement, config.getRetryDelay(), TimeUnit.MINUTES);
+              ScheduledFuture<?> ignored = scheduleRetry(replacement, reason);
               return true;
             });
     repLog.atInfo().log(

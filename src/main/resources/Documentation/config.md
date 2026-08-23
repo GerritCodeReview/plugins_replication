@@ -483,6 +483,10 @@ remote.NAME.rescheduleDelay
 :	Delay when rescheduling a push operation due to an in-flight push
 	running for the same project.
 
+	This delay is also used when the first retry for a push follows
+	successful creation of a missing repository on a replica (see
+	`remote.NAME.createMissingRepositories`).
+
 	Cannot be set to a value lower than 3 seconds to avoid a tight loop
 	of schedule/run which could cause 1K+ retries per second.
 
@@ -572,6 +576,10 @@ remote.NAME.createMissingRepositories
 	If the remote site was not available at the moment when a new
 	project was created, it will be created if during the replication
 	of a ref it is found to be missing.
+
+	If the missing repository is created during the first failed push
+	attempt, that push is retried after `remote.NAME.rescheduleDelay`;
+	later retry attempts use `remote.NAME.replicationRetry`.
 
 	If false, repositories are never created automatically on this
 	remote.
