@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84758192_43518347",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDaemon.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-23T17:29:00Z",
+      "side": 1,
+      "message": "This move seems unrelated to this fix?",
+      "revId": "8ae8987b52e6bb780ddc83ff2bb3008af1c96dcf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
