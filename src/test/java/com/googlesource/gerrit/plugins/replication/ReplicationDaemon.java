@@ -36,6 +36,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
@@ -207,6 +208,11 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
 
   protected Project.NameKey createTestProject(String name) throws Exception {
     return projectOperations.newProject().name(name).create();
+  }
+
+  protected void waitUntil(Supplier<Boolean> waitCondition, Duration timeout)
+      throws InterruptedException {
+    WaitUtil.waitUntil(waitCondition, timeout);
   }
 
   protected boolean isPushCompleted(Project.NameKey project, String ref, Duration timeOut) {

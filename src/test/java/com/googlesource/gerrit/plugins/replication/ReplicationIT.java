@@ -59,10 +59,19 @@ import org.junit.Test;
     name = "replication",
     sysModule = "com.googlesource.gerrit.plugins.replication.TestReplicationModule")
 public class ReplicationIT extends ReplicationDaemon {
-  private static final int TEST_REPLICATION_DELAY = 1;
-  private static final int TEST_REPLICATION_RETRY = 1;
   private static final Duration TEST_TIMEOUT =
-      Duration.ofSeconds((TEST_REPLICATION_DELAY + TEST_REPLICATION_RETRY * 60) + 1);
+      Duration.ofSeconds(
+          TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60 + 1);
+
+  // Timeout for asserting that a ref is *not* replicated. Unlike TEST_TIMEOUT it
+  // deliberately excludes the retry cycle: a push that is going to happen at all
+  // completes within the replication delay plus the push time, so if the ref has
+  // not appeared within that window (plus a small cushion) it never will
+  // (destination shut down / project excluded / non-matching remote). Sized in
+  // seconds rather than the ~60s retry quantum so these negative tests do not each
+  // burn a full retry window while proving a negative.
+  private static final Duration TEST_NOT_REPLICATED_TIMEOUT =
+      Duration.ofSeconds(TEST_REPLICATION_DELAY_SECONDS + TEST_PUSH_TIME_SECONDS + 5);
 
   @Inject private DynamicSet<ProjectDeletedListener> deletedListeners;
 
@@ -455,7 +464,7 @@ public class ReplicationIT extends ReplicationDaemon {
         InterruptedException.class,
         () -> {
           try (Repository repo = repoManager.openRepository(targetProject)) {
-            waitUntil(() -> checkedGetRef(repo, sourceRef) != null);
+            waitUntil(() -> checkedGetRef(repo, sourceRef) != null, TEST_NOT_REPLICATED_TIMEOUT);
           }
         });
   }
@@ -734,7 +743,7 @@ public class ReplicationIT extends ReplicationDaemon {
     try (Repository repo = repoManager.openRepository(targetProject)) {
       assertThrows(
           InterruptedException.class,
-          () -> waitUntil(() -> checkedGetRef(repo, sourceRef) != null));
+          () -> waitUntil(() -> checkedGetRef(repo, sourceRef) != null, TEST_NOT_REPLICATED_TIMEOUT));
     }
   }
 
@@ -756,12 +765,13 @@ public class ReplicationIT extends ReplicationDaemon {
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       assertThrows(
-          InterruptedException.class, () -> waitUntil(() -> checkedGetRef(repo, newRef) != null));
+          InterruptedException.class,
+          () -> waitUntil(() -> checkedGetRef(repo, newRef) != null, TEST_NOT_REPLICATED_TIMEOUT));
     }
   }
 
   private void waitUntil(Supplier<Boolean> waitCondition) throws InterruptedException {
-    WaitUtil.waitUntil(waitCondition, TEST_TIMEOUT);
+    waitUntil(waitCondition, TEST_TIMEOUT);
   }
 
   private void shutdownDestinations() {
