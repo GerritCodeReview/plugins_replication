@@ -16,6 +16,24 @@
       "message": "This move seems unrelated to this fix?",
       "revId": "8ae8987b52e6bb780ddc83ff2bb3008af1c96dcf",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fca3bbf_2234ff4b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationDaemon.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2026-08-23T18:08:20Z",
+      "side": 1,
+      "message": "Done.\n\nThe base class ReplicationDaemon is untouched now; I kept the new waitUntil(Supplier, Duration) overload private in ReplicationIT next to the existing one, since no other IT needs it.",
+      "parentUuid": "84758192_43518347",
+      "revId": "8ae8987b52e6bb780ddc83ff2bb3008af1c96dcf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
