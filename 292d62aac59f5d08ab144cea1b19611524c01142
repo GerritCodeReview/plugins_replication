@@ -50,6 +50,24 @@
       "message": "I guess this is submitting tasks to executor. Even with now\u003dtrue, It schedules now, but we should wait for it complete for chainedscheduler to work correctly ?",
       "revId": "292d62aac59f5d08ab144cea1b19611524c01142",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0888bd5_d0a93b0e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicateAllRunner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-23T15:30:39Z",
+      "side": 1,
+      "message": "For this to work properly, this needs to run, not schedule a PushOne. But that might be really complicated to implement. We might need to reimplement the chain scheduling logic inside PushOne somehow, this is really tricky.",
+      "parentUuid": "4969d2bc_9ce56ab4",
+      "revId": "292d62aac59f5d08ab144cea1b19611524c01142",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
