@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c0629f7_6be9d309",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1013267
+      },
+      "writtenOn": "2026-08-24T10:57:42Z",
+      "side": 1,
+      "message": "you use 343s below. it would make it easier to correlate the numbers if you used the same units throughout.",
+      "range": {
+        "startLine": 9,
+        "startChar": 20,
+        "endLine": 9,
+        "endChar": 26
+      },
+      "revId": "cd9f7281efce1943cd5d471db0992b51e7ed95a8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99fc42e3_8546828d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1013267
+      },
+      "writtenOn": "2026-08-24T10:57:42Z",
+      "side": 1,
+      "message": "no idea whether that\u0027s realistic, but one could also make it fully dynamic by scheduling a parallel replication that should succeed, and time out after maybe twice the time that it actually took.",
+      "revId": "cd9f7281efce1943cd5d471db0992b51e7ed95a8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "825d94a0_6dc2ed49",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1013267
+      },
+      "writtenOn": "2026-08-24T10:57:42Z",
+      "side": 1,
+      "message": "this seems a bit meaningless at first, because it\u0027s not immediately obvious how it connects with the other cited numbers. i guess it\u0027s ~2\\*60+24\\*2. i suggest putting it at the end after \"building up to it\".",
+      "range": {
+        "startLine": 27,
+        "startChar": 20,
+        "endLine": 27,
+        "endChar": 25
+      },
+      "revId": "cd9f7281efce1943cd5d471db0992b51e7ed95a8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
