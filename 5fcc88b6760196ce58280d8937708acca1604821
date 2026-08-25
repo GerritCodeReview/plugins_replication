@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a222b871_698cf72f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2026-08-25T16:15:10Z",
+      "side": 1,
+      "message": "Are there timeouts in those tests that should be updated too?",
+      "revId": "5fcc88b6760196ce58280d8937708acca1604821",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "309e1de3_4af25ebe",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -14,6 +31,46 @@
       "writtenOn": "2026-08-23T22:40:10Z",
       "side": 1,
       "message": "Even though we typically do not use the `Release-Notes` on this project, I believe this change is worth being mentioned in the next release.",
+      "revId": "5fcc88b6760196ce58280d8937708acca1604821",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29f29662_22920ebc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2026-08-25T16:15:10Z",
+      "side": 1,
+      "message": "This is a bit wordy for a javadoc and repeats a lot from the commit message. I would focus on using `getRescheduleDelay()` for \"first time retry\", like its [javadoc mentions](https://gerrit.googlesource.com/plugins/replication/+/refs/changes/62/621462/2/src/main/java/com/googlesource/gerrit/plugins/replication/RemoteConfiguration.java#31), and `getRetryDelay()` for other retries.",
+      "revId": "5fcc88b6760196ce58280d8937708acca1604821",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74ea8ddb_6afbf206",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1002666
+      },
+      "writtenOn": "2026-08-25T16:15:10Z",
+      "side": 1,
+      "message": "nit: join the statements with \"and\" instead of a semicolon.\n\n```suggestion\n\tattempt, that push is retried after `remote.NAME.rescheduleDelay` and\n\tany later retry attempts use `remote.NAME.replicationRetry`.\n```",
+      "range": {
+        "startLine": 581,
+        "startChar": 0,
+        "endLine": 582,
+        "endChar": 57
+      },
       "revId": "5fcc88b6760196ce58280d8937708acca1604821",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
