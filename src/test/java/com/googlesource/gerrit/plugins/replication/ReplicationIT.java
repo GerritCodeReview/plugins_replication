@@ -87,6 +87,7 @@ public class ReplicationIT extends ReplicationDaemon {
   @Test
   public void shouldReplicateNewProjectWithoutRefLog() throws Exception {
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    setSubMinuteReplicationRetry("foo");
     reloadConfig();
 
     Project.NameKey sourceProject = createTestProject("no_reflog_project");
@@ -103,6 +104,7 @@ public class ReplicationIT extends ReplicationDaemon {
   public void shouldCreateNewProjectWithRefLog() throws Exception {
     config.setBoolean("remote", "foo", "storeRefLog", true);
     setReplicationDestination("foo", "replica", ALL_PROJECTS);
+    setSubMinuteReplicationRetry("foo");
     reloadConfig();
 
     Project.NameKey sourceProject = createTestProject("reflog_project");
@@ -115,6 +117,14 @@ public class ReplicationIT extends ReplicationDaemon {
 
   private void waitForProjectCreated(Project.NameKey replicaProject) throws InterruptedException {
     WaitUtil.waitUntil(() -> nonEmptyProjectExists(replicaProject), TEST_NEW_PROJECT_TIMEOUT);
+  }
+
+  // Overrides the minute-scale replicationRetry set by setReplicationDestination with a sub-minute
+  // value, so the first-ref retry to a just-created project fires in seconds rather than a minute.
+  private void setSubMinuteReplicationRetry(String remoteName) throws IOException {
+    config.setString(
+        "remote", remoteName, "replicationRetry", TEST_REPLICATION_RETRY_SECONDS + "s");
+    config.save();
   }
 
   private static Consumer<StoredConfig> assertStoreRefLog(boolean expectedValue) {
