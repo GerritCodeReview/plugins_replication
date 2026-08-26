@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.when;
 
 import org.eclipse.jgit.lib.Config;
@@ -97,6 +98,96 @@ public class DestinationConfigurationTest {
 
     // then
     assertThat(actual).isEqualTo(globalPushBatchSize);
+  }
+
+  @Test
+  public void shouldDefaultReplicationRetryToOneMinute() {
+    assertThat(objectUnderTest.getRetryDelay()).isEqualTo(60);
+  }
+
+  @Test
+  public void shouldTreatBareReplicationRetryAsMinutes() {
+    // given
+    when(cfgMock.getString("remote", REMOTE, "replicationRetry")).thenReturn("2");
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
+
+    // when / then
+    assertThat(objectUnderTest.getRetryDelay()).isEqualTo(120);
+  }
+
+  @Test
+  public void shouldParseReplicationRetryWithSecondsSuffix() {
+    // given
+    when(cfgMock.getString("remote", REMOTE, "replicationRetry")).thenReturn("30 s");
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
+
+    // when / then
+    assertThat(objectUnderTest.getRetryDelay()).isEqualTo(30);
+  }
+
+  @Test
+  public void shouldParseReplicationRetryWithMinutesSuffix() {
+    // given
+    when(cfgMock.getString("remote", REMOTE, "replicationRetry")).thenReturn("2 m");
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
+
+    // when / then
+    assertThat(objectUnderTest.getRetryDelay()).isEqualTo(120);
+  }
+
+  @Test
+  public void shouldTreatZeroReplicationRetryAsNoDelay() {
+    // given
+    when(cfgMock.getString("remote", REMOTE, "replicationRetry")).thenReturn("0");
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
+
+    // when / then
+    assertThat(objectUnderTest.getRetryDelay()).isEqualTo(0);
+  }
+
+  @Test
+  public void shouldClampNegativeBareReplicationRetryToZero() {
+    // given: a bare negative was accepted historically (cfg.getInt) and clamped to zero
+    when(cfgMock.getString("remote", REMOTE, "replicationRetry")).thenReturn("-1");
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
+
+    // when / then
+    assertThat(objectUnderTest.getRetryDelay()).isEqualTo(0);
+  }
+
+  @Test
+  public void shouldDefaultReplicationRetryWhenEmpty() {
+    // given
+    when(cfgMock.getString("remote", REMOTE, "replicationRetry")).thenReturn("  ");
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
+
+    // when / then
+    assertThat(objectUnderTest.getRetryDelay()).isEqualTo(60);
+  }
+
+  @Test
+  public void shouldClampHugeReplicationRetryToIntMax() {
+    // given: a value whose seconds exceed Integer.MAX_VALUE must not overflow to a negative int
+    when(cfgMock.getString("remote", REMOTE, "replicationRetry")).thenReturn("999999999999 s");
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
+
+    // when / then
+    assertThat(objectUnderTest.getRetryDelay()).isEqualTo(Integer.MAX_VALUE);
+  }
+
+  @Test
+  public void shouldRejectInvalidReplicationRetry() {
+    // given
+    when(cfgMock.getString("remote", REMOTE, "replicationRetry")).thenReturn("banana");
+
+    // when
+    IllegalArgumentException thrown =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> new DestinationConfiguration(remoteConfigMock, cfgMock));
+
+    // then: the error names the offending config key
+    assertThat(thrown).hasMessageThat().contains("remote." + REMOTE + ".replicationRetry");
   }
 
   @Test

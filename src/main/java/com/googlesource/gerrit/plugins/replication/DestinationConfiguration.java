@@ -32,6 +32,7 @@ import org.eclipse.jgit.transport.RemoteConfig;
 public class DestinationConfiguration implements RemoteConfiguration {
   static final int DEFAULT_REPLICATION_DELAY = 15;
   static final int DEFAULT_RESCHEDULE_DELAY = 3;
+  static final int DEFAULT_REPLICATION_RETRY_MINUTES = 1;
   static final int DEFAULT_DRAIN_QUEUE_ATTEMPTS = 0;
   private static final int DEFAULT_SLOW_LATENCY_THRESHOLD_SECS = 900;
 
@@ -73,7 +74,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
     projects = ImmutableList.copyOf(cfg.getStringList("remote", name, "projects"));
     excludeProjects = ImmutableList.copyOf(cfg.getStringList("remote", name, "excludeProjects"));
     adminUrls = ImmutableList.copyOf(cfg.getStringList("remote", name, "adminUrl"));
-    retryDelay = Math.max(0, getInt(remoteConfig, cfg, "replicationretry", 1));
+    retryDelay = getRetryDelaySeconds(remoteConfig, cfg);
     drainQueueAttempts =
         Math.max(0, getInt(remoteConfig, cfg, "drainQueueAttempts", DEFAULT_DRAIN_QUEUE_ATTEMPTS));
     poolThreads = Math.max(0, getInt(remoteConfig, cfg, "threads", 1));
@@ -229,6 +230,33 @@ public class DestinationConfiguration implements RemoteConfiguration {
 
   private static int getInt(RemoteConfig rc, Config cfg, String name, int defValue) {
     return cfg.getInt("remote", rc.getName(), name, defValue);
+  }
+
+  /**
+   * Parses {@code remote.NAME.replicationRetry} into seconds. For backwards compatibility a value
+   * without a time-unit suffix keeps its historical meaning of minutes -- including a negative bare
+   * number, which the historical {@code cfg.getInt(...)} parsing also accepted and which is clamped
+   * to zero below -- so existing configurations are unchanged. A value with a time-unit suffix --
+   * e.g. {@code 30 s}, {@code 90 s} or {@code 2 m} -- is honoured as written, letting an admin
+   * configure a sub-minute offline-retry backoff. The result is clamped to {@code [0,
+   * Integer.MAX_VALUE]} so it never overflows the {@code int} the scheduler expects.
+   */
+  private static int getRetryDelaySeconds(RemoteConfig rc, Config cfg) {
+    String value = cfg.getString("remote", rc.getName(), "replicationRetry");
+    long defaultSeconds = TimeUnit.MINUTES.toSeconds(DEFAULT_REPLICATION_RETRY_MINUTES);
+    long seconds;
+    if (value == null || value.trim().isEmpty()) {
+      seconds = defaultSeconds;
+    } else if (value.trim().matches("-?[0-9]+")) {
+      seconds = TimeUnit.MINUTES.toSeconds(Long.parseLong(value.trim()));
+    } else {
+      // Use the config overload so an invalid value is reported against
+      // remote.NAME.replicationRetry rather than just the raw string.
+      seconds =
+          ConfigUtil.getTimeUnit(
+              cfg, "remote", rc.getName(), "replicationRetry", defaultSeconds, TimeUnit.SECONDS);
+    }
+    return (int) Math.max(0, Math.min(seconds, Integer.MAX_VALUE));
   }
 
   @Override
