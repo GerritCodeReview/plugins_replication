@@ -56,15 +56,23 @@ public class ReplicationDaemon extends LightweightPluginDaemonTest {
   protected static final int TEST_REPLICATION_DELAY_SECONDS = 1;
   protected static final int TEST_LONG_REPLICATION_DELAY_SECONDS = 30;
   protected static final int TEST_REPLICATION_RETRY_MINUTES = 1;
+  // Sub-minute replicationRetry used by the new-project cases so their missing-repository retry
+  // fires in a second instead of waiting the full minute (see remote.NAME.replicationRetry).
+  protected static final int TEST_REPLICATION_RETRY_SECONDS = 1;
   protected static final int TEST_PUSH_TIME_SECONDS = 1;
   protected static final int TEST_PROJECT_CREATION_SECONDS = 10;
   protected static final Duration TEST_PUSH_TIMEOUT =
       Duration.ofSeconds(TEST_REPLICATION_DELAY_SECONDS + TEST_PUSH_TIME_SECONDS);
   protected static final Duration TEST_PUSH_TIMEOUT_LONG =
       Duration.ofSeconds(TEST_LONG_REPLICATION_DELAY_SECONDS + TEST_PUSH_TIME_SECONDS);
+  // A new project's first ref-push fails as REPOSITORY_MISSING, creates the repository, and is
+  // retried after replicationRetry; the new-project cases set that to
+  // TEST_REPLICATION_RETRY_SECONDS
+  // (no longer a full minute), so this timeout budgets the replication delay + retry + push plus a
+  // cushion for project creation.
   protected static final Duration TEST_NEW_PROJECT_TIMEOUT =
       Duration.ofSeconds(
-          (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60)
+          (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_SECONDS + TEST_PUSH_TIME_SECONDS)
               + TEST_PROJECT_CREATION_SECONDS);
 
   @Inject private ProjectOperations projectOperations;

@@ -501,6 +501,11 @@ remote.NAME.replicationRetry
 
 	This is a Gerrit specific extension to the Git remote block.
 
+	For backwards compatibility, a bare number is interpreted as
+	minutes. A time-unit suffix may be appended to configure a
+	finer granularity, for example `30 s`, `90 s` or `2 m`; the value is
+	applied at second precision.
+
 	By default, 1 minute.
 
 remote.NAME.replicationMaxRetries

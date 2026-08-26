@@ -581,7 +581,7 @@ public class Destination {
    * <p>If the reason for rescheduling is to avoid a collision with an in-flight push to the same
    * URI, we don't mark the operation as "retrying," and we schedule using the replication delay,
    * rather than the retry delay. Otherwise, the operation is marked as "retrying" and scheduled to
-   * run following the minutes count determined by class attribute retryDelay.
+   * run following the retry delay (in seconds) determined by class attribute retryDelay.
    *
    * <p>In case the PushOp instance to be scheduled has same URI than one marked as "retrying," it
    * adds to the one pending the refs list of the parameter instance.
@@ -673,7 +673,7 @@ public class Destination {
                     replicationTasksStorage.get().reset(pushOp);
                     @SuppressWarnings("unused")
                     ScheduledFuture<?> ignored2 =
-                        pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.MINUTES);
+                        pool.schedule(pushOp, config.getRetryDelay(), TimeUnit.SECONDS);
                   }
                 } else {
                   pushOp.canceledByReplication();
@@ -725,7 +725,7 @@ public class Destination {
               queue.pending.put(newUri, replacement);
               @SuppressWarnings("unused")
               ScheduledFuture<?> ignored =
-                  pool.schedule(replacement, config.getRetryDelay(), TimeUnit.MINUTES);
+                  pool.schedule(replacement, config.getRetryDelay(), TimeUnit.SECONDS);
               return true;
             });
     repLog.atInfo().log(
