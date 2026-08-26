@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2521d54_edf9f986",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2026-08-26T14:40:08Z",
+      "side": 1,
+      "message": "Done in change 622501.",
+      "parentUuid": "5a859ac1_d55e1f8c",
+      "revId": "cd9f7281efce1943cd5d471db0992b51e7ed95a8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c0629f7_6be9d309",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-08-24T10:57:42Z",
       "side": 1,
       "message": "you use 343s below. it would make it easier to correlate the numbers if you used the same units throughout.",
+      "range": {
+        "startLine": 9,
+        "startChar": 20,
+        "endLine": 9,
+        "endChar": 26
+      },
+      "revId": "cd9f7281efce1943cd5d471db0992b51e7ed95a8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e326e6b_9150d6c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2026-08-26T14:40:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c0629f7_6be9d309",
       "range": {
         "startLine": 9,
         "startChar": 20,
@@ -58,6 +100,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21c58987_e1237b83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2026-08-26T14:40:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99fc42e3_8546828d",
+      "revId": "cd9f7281efce1943cd5d471db0992b51e7ed95a8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "825d94a0_6dc2ed49",
@@ -71,6 +131,30 @@
       "writtenOn": "2026-08-24T10:57:42Z",
       "side": 1,
       "message": "this seems a bit meaningless at first, because it\u0027s not immediately obvious how it connects with the other cited numbers. i guess it\u0027s ~2\\*60+24\\*2. i suggest putting it at the end after \"building up to it\".",
+      "range": {
+        "startLine": 27,
+        "startChar": 20,
+        "endLine": 27,
+        "endChar": 25
+      },
+      "revId": "cd9f7281efce1943cd5d471db0992b51e7ed95a8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3c3a7ee_8592d6d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2026-08-26T14:40:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "825d94a0_6dc2ed49",
       "range": {
         "startLine": 27,
         "startChar": 20,
