@@ -256,7 +256,8 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(
+            project, urlMatch, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
@@ -282,7 +283,8 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, urlMatch, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(
+            project, urlMatch, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
@@ -544,7 +546,8 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(
+            project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
 
     // Wait for the push to land on both the refs
     try (Repository r1 = repoManager.openRepository(replica1Project);
@@ -569,7 +572,8 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(
+            project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
 
     // Wait for the push to land in at least one replica
     try (Repository r1 = repoManager.openRepository(replica1Project);
@@ -600,7 +604,8 @@ public class ReplicationIT extends ReplicationDaemon {
     ReplicationQueue queue = plugin.getSysInjector().getInstance(ReplicationQueue.class);
 
     // First sync - goes to replica1 (index 0)
-    queue.scheduleFullSync(project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
+    queue.scheduleFullSync(
+        project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
 
     try (Repository r1 = repoManager.openRepository(replica1Project)) {
       waitUntil(() -> checkedGetRef(r1, branch1) != null);
@@ -613,7 +618,8 @@ public class ReplicationIT extends ReplicationDaemon {
 
     // Second sync - goes to replica2 (index 1), includes branch1 and branch2
     createNewBranchWithoutPush("refs/heads/master", branch2);
-    queue.scheduleFullSync(project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
+    queue.scheduleFullSync(
+        project, null, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), true);
 
     try (Repository r2 = repoManager.openRepository(replica2Project)) {
       waitUntil(() -> checkedGetRef(r2, branch1) != null && checkedGetRef(r2, branch2) != null);
@@ -638,7 +644,8 @@ public class ReplicationIT extends ReplicationDaemon {
     plugin
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, PushOne.ALL_REFS, Set.of("foo"), new ReplicationState(NO_OP), true);
+        .scheduleFullSync(
+            project, null, PushOne.ALL_REFS, Set.of("foo"), new ReplicationState(NO_OP), true);
 
     try (Repository repo = repoManager.openRepository(targetProject)) {
       waitUntil(() -> checkedGetRef(repo, newRef) != null);
