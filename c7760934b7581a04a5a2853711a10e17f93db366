@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fa6b175_ab2b4fc4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2026-08-27T13:37:39Z",
+      "side": 1,
+      "message": "Agreed — these are pre-existing google-java-format 1.35.0 violations on master (the scheduleFullSync(...) calls exceed 100 columns and were left unwrapped), unrelated to this change.\n\nExtracted them into prerequisite change 622781, so this change now touches only its own lines.",
+      "parentUuid": "4d435d12_b43694f3",
+      "revId": "c7760934b7581a04a5a2853711a10e17f93db366",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b932738e_0c339da7",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-27T11:42:39Z",
       "side": 1,
       "message": "i think it would be more legible to wrap before the new parameter and line up to the matching opening paren.\n\nrepeats",
+      "revId": "c7760934b7581a04a5a2853711a10e17f93db366",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b1bcbdc_586b7bae",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2026-08-27T13:37:39Z",
+      "side": 1,
+      "message": "This is google-java-format 1.35.0\u0027s own wrapping — paren-alignment isn\u0027t something gjf emits, so it\u0027d be reverted on the next tools/gjf.sh run. Kept gjf\u0027s formatting here.",
+      "parentUuid": "b932738e_0c339da7",
       "revId": "c7760934b7581a04a5a2853711a10e17f93db366",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
