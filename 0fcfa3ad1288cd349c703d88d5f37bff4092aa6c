@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38904ba8_7f62271b",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-27T17:05:33Z",
+      "side": 1,
+      "message": "It might be clearer to reverse this sentence: \"For backwards compatibility, a bare number is interpreted as minutes\"",
+      "revId": "0fcfa3ad1288cd349c703d88d5f37bff4092aa6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
