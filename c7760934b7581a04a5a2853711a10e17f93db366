@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d435d12_b43694f3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1013267
+      },
+      "writtenOn": "2026-08-27T11:42:39Z",
+      "side": 1,
+      "message": "i don\u0027t think these unrelated reformattings should be in this commit.\n\nrepeats",
+      "revId": "c7760934b7581a04a5a2853711a10e17f93db366",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b932738e_0c339da7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1013267
+      },
+      "writtenOn": "2026-08-27T11:42:39Z",
+      "side": 1,
+      "message": "i think it would be more legible to wrap before the new parameter and line up to the matching opening paren.\n\nrepeats",
+      "revId": "c7760934b7581a04a5a2853711a10e17f93db366",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
