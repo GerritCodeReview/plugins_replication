@@ -14,7 +14,13 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.hash.Hashing;
+import com.google.gerrit.entities.Project;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.eclipse.jgit.transport.URIish;
@@ -33,7 +39,7 @@ public enum UrlDistributionStrategy {
   ALL("all") {
     @Override
     public Instance newInstance() {
-      return candidates -> candidates;
+      return (project, candidates) -> candidates;
     }
   },
 
@@ -47,11 +53,37 @@ public enum UrlDistributionStrategy {
     @Override
     public Instance newInstance() {
       final AtomicInteger index = new AtomicInteger();
-      return candidates -> {
+      return (project, candidates) -> {
         if (candidates.isEmpty()) {
           return List.of();
         }
         return List.of(candidates.get(Math.floorMod(index.getAndIncrement(), candidates.size())));
+      };
+    }
+  },
+
+  /**
+   * Push to exactly one URL, chosen by hashing the project name so that a given project always maps
+   * to the same URL. Like {@link #ROUND_ROBIN} this writes each push only once, which matters when
+   * the replica hosts share a single backend, but it additionally keeps consecutive updates for one
+   * project on the same URL. Because replication tasks are coalesced per (project, URI), rotating
+   * URLs would let successive updates for one project run as separate tasks racing against the same
+   * backend; pinning the project collapses them into a single task and keeps the receiving host's
+   * caches warm.
+   *
+   * <p>The candidates are sorted before hashing so that the mapping does not depend on the order in
+   * which the URLs happen to be configured, and therefore agrees across hosts.
+   */
+  PROJECT_SHARDED("projectSharded") {
+    @Override
+    public Instance newInstance() {
+      return (project, candidates) -> {
+        if (candidates.isEmpty()) {
+          return List.of();
+        }
+        ImmutableList<URIish> sorted =
+            ImmutableList.sortedCopyOf(Comparator.comparing(URIish::toString), candidates);
+        return List.of(sorted.get(Math.floorMod(hashProjectName(project), sorted.size())));
       };
     }
   };
@@ -64,6 +96,11 @@ public enum UrlDistributionStrategy {
 
   /** Creates a new stateful executor for this distribution strategy. */
   public abstract Instance newInstance();
+
+  /** Hashes a project name with an explicit algorithm, so the result is stable across hosts. */
+  private static int hashProjectName(Project.NameKey project) {
+    return Hashing.murmur3_128().hashString(project.get(), UTF_8).asInt();
+  }
 
   /**
    * Returns the distribution strategy for the given config value, or {@link #ALL} if the value is
@@ -79,6 +116,13 @@ public enum UrlDistributionStrategy {
   /** A stateful executor for a {@link UrlDistributionStrategy} strategy. */
   @FunctionalInterface
   public interface Instance {
-    List<URIish> select(List<URIish> candidates);
+    /**
+     * Selects the URLs to push to out of the candidates for the given project.
+     *
+     * @param project project being replicated, used by project-affine strategies.
+     * @param candidates URLs the project could be pushed to.
+     * @return the subset of candidates to push to.
+     */
+    List<URIish> select(Project.NameKey project, List<URIish> candidates);
   }
 }
