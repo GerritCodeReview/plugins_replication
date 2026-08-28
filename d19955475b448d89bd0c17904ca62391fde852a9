@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5454b24e_a3eaf437",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-28T14:57:35Z",
+      "side": 1,
+      "message": "Unrelated to this change?",
+      "revId": "d19955475b448d89bd0c17904ca62391fde852a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cc5c842_e621667b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-08-28T14:57:35Z",
+      "side": 1,
+      "message": "Project.Namkey uses a String for its hashcode and is already deterministic, use it instead.",
+      "revId": "d19955475b448d89bd0c17904ca62391fde852a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
