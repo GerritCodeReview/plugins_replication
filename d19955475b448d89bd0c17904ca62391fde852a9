@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e747ef17_c7a7d658",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/StartCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-08-29T07:39:51Z",
+      "side": 1,
+      "message": "Correct, that was unrelated it\u0027s --remote args4j fix from e2c7574, which I accidentally absorbed via a git commit --amend onto that commit. Removed; this patchset no longer touches StartCommand.java. Sorry for the noise.",
+      "parentUuid": "5454b24e_a3eaf437",
+      "revId": "d19955475b448d89bd0c17904ca62391fde852a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cc5c842_e621667b",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-28T14:57:35Z",
       "side": 1,
       "message": "Project.Namkey uses a String for its hashcode and is already deterministic, use it instead.",
+      "revId": "d19955475b448d89bd0c17904ca62391fde852a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "349f5750_acccbd11",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-08-29T07:39:51Z",
+      "side": 1,
+      "message": "Done. Switched to project.hashCode() and removed the helper — you\u0027re right, NameKey.hashCode() is final and returns name.hashCode() directly, and String.hashCode() is specified in the javadoc, so it\u0027s stable across JVMs and hosts.",
+      "parentUuid": "5cc5c842_e621667b",
       "revId": "d19955475b448d89bd0c17904ca62391fde852a9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
