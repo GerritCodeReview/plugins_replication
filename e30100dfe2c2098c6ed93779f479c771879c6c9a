@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "860bf6c0_d5719574",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-09-03T19:53:31Z",
+      "side": 1,
+      "message": "Variable name need not be tied to \"objectsDir\" here (but maybe in the subclasses it should be)?",
+      "revId": "e30100dfe2c2098c6ed93779f479c771879c6c9a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "079ccd48_ad2abce9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-09-03T19:53:31Z",
+      "side": 1,
+      "message": "Are these two methods worth it instead of calling the constructors directly?",
+      "revId": "e30100dfe2c2098c6ed93779f479c771879c6c9a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c7a69eb_dea29824",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-09-03T19:53:31Z",
+      "side": 1,
+      "message": "This feels more complicated than needed, create the directory in the constructor, and let the subclasses create their links in their constructors? This also eliminates the need for the abstract link() method.",
+      "revId": "e30100dfe2c2098c6ed93779f479c771879c6c9a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cfcc826_86d3029b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-09-03T19:53:31Z",
+      "side": 1,
+      "message": "As is, this is not tied to the snapshot at all? If not, then it should move out of it as a static method, or the code should move into method above to tie it to the snapshot?",
+      "revId": "e30100dfe2c2098c6ed93779f479c771879c6c9a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
