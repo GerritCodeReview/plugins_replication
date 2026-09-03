@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "364b8960_7f51d84d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-09-03T19:14:03Z",
+      "side": 1,
+      "message": "create() is gone and the dir is now created inside populate(). I kept the failure as a boolean to match the rest of the class (copy() reports rsync\u0027s exit code, and repair() aggregates with \u0026\u003d so one failed action doesn\u0027t skip the others). The cause is still going to be logged via withCause().",
+      "parentUuid": "e29d1d2d_773b9f3a",
+      "revId": "a00cf749358fa0ffc6e8601a1274e09ce63be921",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1af2eafd_9140d9be",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-21T20:47:21Z",
       "side": 1,
       "message": "Feels wrong to have a generically name object (which itself I think is good) with custom link methods. My advice would be to add generic linking methods to this Snapshot object, and then either override the Snapshot to have specific ones for loose vs/packs, or just call the generic link methods with details specific to the tasks being performed.",
+      "revId": "a00cf749358fa0ffc6e8601a1274e09ce63be921",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "835f183a_04402aaa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-09-03T19:14:03Z",
+      "side": 1,
+      "message": "Attempted in next PS",
+      "parentUuid": "1af2eafd_9140d9be",
       "revId": "a00cf749358fa0ffc6e8601a1274e09ce63be921",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -52,6 +88,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56e2b1c4_32c35b62",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-09-03T19:14:03Z",
+      "side": 1,
+      "message": "The main reason I did it is to link only complete pack sets, i.e ones that have both the `.pack` and its matching `.idx`. It also keeps tmp packs and other garbage that the repair has no reason to hardlink, out of the snapshot.",
+      "parentUuid": "670ec07f_03360499",
+      "revId": "a00cf749358fa0ffc6e8601a1274e09ce63be921",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4463a594_83753064",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-08-21T20:47:21Z",
       "side": 1,
       "message": "linkNoExcetion() or quietLink()? don\u0027t bother with unused return value?",
+      "revId": "a00cf749358fa0ffc6e8601a1274e09ce63be921",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eec0f553_925e2a37",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-09-03T19:14:03Z",
+      "side": 1,
+      "message": "Renamed to `linkIfExists`. Return value is actually being used in `linkPackSet()`.",
+      "parentUuid": "4463a594_83753064",
       "revId": "a00cf749358fa0ffc6e8601a1274e09ce63be921",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
