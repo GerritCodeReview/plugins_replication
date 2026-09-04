@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0e31586_285ab956",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-09-04T18:24:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "860bf6c0_d5719574",
+      "revId": "e30100dfe2c2098c6ed93779f479c771879c6c9a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "079ccd48_ad2abce9",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-09-03T19:53:31Z",
       "side": 1,
       "message": "Are these two methods worth it instead of calling the constructors directly?",
+      "revId": "e30100dfe2c2098c6ed93779f479c771879c6c9a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "097d0b7b_630701b5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-09-04T18:24:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "079ccd48_ad2abce9",
       "revId": "e30100dfe2c2098c6ed93779f479c771879c6c9a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -52,6 +88,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85ddac41_827680fe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-09-04T18:24:52Z",
+      "side": 1,
+      "message": "Done. The directory is now created in the constructor and with `link()` gone, I don\u0027t see a point in having the subclasses, so they are gone too. Snapshot is now a concrete final class whose generic link methods are called from `linkLooseObjects()` and `linkPacks()`. Linking now happens inside the caller\u0027s try-with-resources, so a partially linked snapshot should get cleaned up.",
+      "parentUuid": "8c7a69eb_dea29824",
+      "revId": "e30100dfe2c2098c6ed93779f479c771879c6c9a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cfcc826_86d3029b",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-09-03T19:53:31Z",
       "side": 1,
       "message": "As is, this is not tied to the snapshot at all? If not, then it should move out of it as a static method, or the code should move into method above to tie it to the snapshot?",
+      "revId": "e30100dfe2c2098c6ed93779f479c771879c6c9a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f774b855_57d4dc16",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-09-04T18:24:52Z",
+      "side": 1,
+      "message": "Tied it to the snapshot instead now. Both overloads now resolve against `dir`, with the second taking a `subdir` rather than an arbitrary path, and I added a private static `linkInto`.",
+      "parentUuid": "3cfcc826_86d3029b",
       "revId": "e30100dfe2c2098c6ed93779f479c771879c6c9a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }

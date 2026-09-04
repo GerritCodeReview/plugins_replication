@@ -36,6 +36,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed5ee1ff_9d266580",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ProjectRepairer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-09-04T18:24:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "364b8960_7f51d84d",
+      "revId": "a00cf749358fa0ffc6e8601a1274e09ce63be921",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1af2eafd_9140d9be",
