@@ -231,11 +231,13 @@ public class ReplicationQueue
       }
     }
     if (!refNamesToPush.isEmpty()) {
-      for (URIish uri : cfg.getDistributedUris(project, urlMatch)) {
+      for (Map.Entry<URIish, Collection<String>> refsForUri :
+          cfg.getDistributedRefs(project, urlMatch, refNamesToPush).asMap().entrySet()) {
+        URIish uri = refsForUri.getKey();
+        ImmutableSet<String> refs = ImmutableSet.copyOf(refsForUri.getValue());
         replicationTasksStorage.create(
-            ReplicateRefUpdate.create(
-                project.get(), refNamesToPush, uri, cfg.getRemoteConfigName()));
-        cfg.schedule(project, refNamesToPush, uri, state, now);
+            ReplicateRefUpdate.create(project.get(), refs, uri, cfg.getRemoteConfigName()));
+        cfg.schedule(project, refs, uri, state, now);
       }
     }
     if (withoutState) {

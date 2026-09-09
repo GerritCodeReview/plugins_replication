@@ -628,6 +628,43 @@ remote.NAME.urlDistributionStrategy
     distributes load evenly and ensures each push is written exactly once.
     Has no effect if only one URL is configured.
 
+  `projectSharded`
+  : Push to one URL, chosen so that a given project always maps to the same
+    URL. Like `roundRobin` each push is written exactly once, and load is
+    spread across the URLs, but consecutive updates for one project always
+    go to the same URL.
+
+    Prefer this over `roundRobin` when replica hosts share a single backend.
+    Replication tasks are coalesced per (project, URL), so rotating URLs
+    makes successive updates for one project run as separate tasks that race
+    against the same backend; pinning a project to one URL collapses them
+    into a single task and keeps the receiving host's caches warm.
+
+    The mapping is computed from a hash of the project name over the sorted
+    list of URLs, so it does not depend on the order in which the URLs are
+    configured and is identical on every host reading the same config.
+    Adding or removing a URL remaps projects across the remaining URLs.
+    Has no effect if only one URL is configured.
+
+  `refSharded`
+  : Push each ref to one URL, chosen so that a given ref always maps to the
+    same URL. Each ref is still written exactly once, but the refs of a
+    single project are spread over the URLs instead of all going to one.
+
+    Prefer this over `projectSharded` when one project dominates the write
+    traffic of the remote, since `projectSharded` would pin that project to
+    a single URL and leave the others idle.
+
+    The trade-off is that one push event updating several refs can be split
+    into one replication task per URL, so the per-(project, URL) coalescing
+    that `projectSharded` provides is lost. A full sync is not tied to a
+    single ref and is therefore sent to all URLs.
+
+    The mapping is computed from a hash of the ref name over the sorted list
+    of URLs, with the same ordering independence as `projectSharded`. Adding
+    or removing a URL remaps refs across the remaining URLs.
+    Has no effect if only one URL is configured.
+
   Defaults to `all`.
 
 Directory `replication`

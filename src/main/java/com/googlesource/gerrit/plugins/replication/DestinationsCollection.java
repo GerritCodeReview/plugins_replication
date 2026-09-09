@@ -138,7 +138,7 @@ public class DestinationsCollection implements ReplicationDestinations {
           validUris.add(uri);
         }
       }
-      config.getDistributedUris(validUris).forEach(uri -> uris.put(config, uri));
+      config.getDistributedUris(projectName, validUris).forEach(uri -> uris.put(config, uri));
     }
     return uris;
   }
