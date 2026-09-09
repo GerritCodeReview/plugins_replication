@@ -480,12 +480,21 @@ public class ReplicationIT extends ReplicationDaemon {
 
   @Test
   public void shouldReplicateToOnlyOneUrlWhenRoundRobinEnabled() throws Exception {
+    replicateToOnlyOneUrl(UrlDistributionStrategy.ROUND_ROBIN);
+  }
+
+  @Test
+  public void shouldReplicateToOnlyOneUrlWhenProjectShardedEnabled() throws Exception {
+    replicateToOnlyOneUrl(UrlDistributionStrategy.PROJECT_SHARDED);
+  }
+
+  private void replicateToOnlyOneUrl(UrlDistributionStrategy strategy) throws Exception {
     Project.NameKey replica1Project = createTestProject(project + "replica1");
     Project.NameKey replica2Project = createTestProject(project + "replica2");
 
     setReplicationDestination(
         "foo", List.of("replica1", "replica2"), ALL_PROJECTS, TEST_REPLICATION_DELAY_SECONDS);
-    setUrlDistribution("foo", UrlDistributionStrategy.ROUND_ROBIN);
+    setUrlDistribution("foo", strategy);
     reloadConfig();
 
     String newRef = "refs/heads/newForTest";
@@ -547,36 +556,6 @@ public class ReplicationIT extends ReplicationDaemon {
     // replica1 should not have received branch2 (it was only in the second sync)
     try (Repository r1 = repoManager.openRepository(replica1Project)) {
       assertThat(checkedGetRef(r1, branch2)).isNull();
-    }
-  }
-
-  @Test
-  public void shouldReplicateToOnlyOneUrlWhenProjectShardedEnabled() throws Exception {
-    Project.NameKey replica1Project = createTestProject(project + "replica1");
-    Project.NameKey replica2Project = createTestProject(project + "replica2");
-
-    setReplicationDestination(
-        "foo", List.of("replica1", "replica2"), ALL_PROJECTS, TEST_REPLICATION_DELAY_SECONDS);
-    setUrlDistribution("foo", UrlDistributionStrategy.PROJECT_SHARDED);
-    reloadConfig();
-
-    String newRef = "refs/heads/newForTest";
-    createNewBranchWithoutPush("refs/heads/master", newRef);
-
-    plugin
-        .getSysInjector()
-        .getInstance(ReplicationQueue.class)
-        .scheduleFullSync(project, null, new ReplicationState(NO_OP), true);
-
-    // Wait for the push to land in at least one replica
-    try (Repository r1 = repoManager.openRepository(replica1Project);
-        Repository r2 = repoManager.openRepository(replica2Project)) {
-      waitUntil(() -> checkedGetRef(r1, newRef) != null || checkedGetRef(r2, newRef) != null);
-
-      // Exactly one replica should have received the push
-      boolean r1HasRef = checkedGetRef(r1, newRef) != null;
-      boolean r2HasRef = checkedGetRef(r2, newRef) != null;
-      assertThat(r1HasRef ^ r2HasRef).isTrue();
     }
   }
 
