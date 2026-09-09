@@ -628,6 +628,24 @@ remote.NAME.urlDistributionStrategy
     distributes load evenly and ensures each push is written exactly once.
     Has no effect if only one URL is configured.
 
+  `projectSharded`
+  : Push to one URL, chosen so that a given project always maps to the same
+    URL. Like `roundRobin` each push is written exactly once, and load is
+    spread across the URLs, but consecutive updates for one project always
+    go to the same URL.
+
+    Prefer this over `roundRobin` when replica hosts share a single backend.
+    Replication tasks are coalesced per (project, URL), so rotating URLs
+    makes successive updates for one project run as separate tasks that race
+    against the same backend; pinning a project to one URL collapses them
+    into a single task and keeps the receiving host's caches warm.
+
+    The mapping is computed from a hash of the project name over the sorted
+    list of URLs, so it does not depend on the order in which the URLs are
+    configured and is identical on every host reading the same config.
+    Adding or removing a URL remaps projects across the remaining URLs.
+    Has no effect if only one URL is configured.
+
   Defaults to `all`.
 
 Directory `replication`

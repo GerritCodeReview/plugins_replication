@@ -803,11 +803,11 @@ public class Destination {
   }
 
   List<URIish> getDistributedUris(Project.NameKey project, String urlMatch) {
-    return getDistributedUris(getURIs(project, urlMatch));
+    return getDistributedUris(project, getURIs(project, urlMatch));
   }
 
-  List<URIish> getDistributedUris(List<URIish> candidates) {
-    return urlDistributor.select(candidates);
+  List<URIish> getDistributedUris(Project.NameKey project, List<URIish> candidates) {
+    return urlDistributor.select(project, candidates);
   }
 
   URIish getURI(URIish template, Project.NameKey project) throws URISyntaxException {
