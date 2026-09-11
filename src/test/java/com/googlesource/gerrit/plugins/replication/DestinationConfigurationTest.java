@@ -114,4 +114,16 @@ public class DestinationConfigurationTest {
     assertThat(objectUnderTest.getUrlDistributionStrategy())
         .isEqualTo(UrlDistributionStrategy.ROUND_ROBIN);
   }
+
+  @Test
+  public void shouldSetUrlDistributionToProjectShardedWhenConfigured() {
+    // given
+    when(cfgMock.getString("remote", REMOTE, "urlDistributionStrategy"))
+        .thenReturn("projectSharded");
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
+
+    // when / then
+    assertThat(objectUnderTest.getUrlDistributionStrategy())
+        .isEqualTo(UrlDistributionStrategy.PROJECT_SHARDED);
+  }
 }
