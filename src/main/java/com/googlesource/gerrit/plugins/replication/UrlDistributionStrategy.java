@@ -14,7 +14,11 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.common.collect.ImmutableList;
+import com.google.gerrit.entities.Project;
+import com.google.gerrit.entities.Project.NameKey;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.eclipse.jgit.transport.URIish;
@@ -33,7 +37,7 @@ public enum UrlDistributionStrategy {
   ALL("all") {
     @Override
     public Instance newInstance() {
-      return candidates -> candidates;
+      return (project, candidates) -> candidates;
     }
   },
 
@@ -41,17 +45,83 @@ public enum UrlDistributionStrategy {
    * Push to one URL at a time, rotating through the list on each push event. Particularly useful
    * when multiple replica hosts share a single backend (likely via NFS): pushing to all URLs would
    * cause redundant writes to the same underlying storage, while round-robin distributes load
-   * evenly and ensures each push is executed exactly once.
+   * evenly and ensures each push is executed exactly once. On transport failure {@link
+   * Instance#failover} hands the push over to the next URL in the rotation.
    */
   ROUND_ROBIN("roundRobin") {
     @Override
     public Instance newInstance() {
-      final AtomicInteger index = new AtomicInteger();
-      return candidates -> {
-        if (candidates.isEmpty()) {
-          return List.of();
+      return new Instance() {
+        private final AtomicInteger index = new AtomicInteger();
+
+        @Override
+        public List<URIish> select(NameKey project, List<URIish> candidates) {
+          if (candidates.isEmpty()) {
+            return List.of();
+          }
+          return List.of(candidates.get(Math.floorMod(index.getAndIncrement(), candidates.size())));
         }
-        return List.of(candidates.get(Math.floorMod(index.getAndIncrement(), candidates.size())));
+
+        @Override
+        public URIish failover(List<URIish> candidates, URIish failed) {
+          if (candidates.size() < 2) {
+            return failed;
+          }
+          for (int attempt = 0; attempt < candidates.size(); attempt++) {
+            URIish next = candidates.get(Math.floorMod(index.getAndIncrement(), candidates.size()));
+            if (!next.equals(failed)) {
+              return next;
+            }
+          }
+          return failed;
+        }
+      };
+    }
+  },
+
+  /**
+   * Push to exactly one URL, chosen by hashing the project name so that a given project always maps
+   * to the same URL. Like {@link #ROUND_ROBIN} this writes each push only once, which matters when
+   * the replica hosts share a single backend, but it additionally keeps consecutive updates for one
+   * project on the same URL. Because replication tasks are coalesced per (project, URI), rotating
+   * URLs would let successive updates for one project run as separate tasks racing against the same
+   * backend; pinning the project collapses them into a single task and keeps the receiving host's
+   * caches warm.
+   *
+   * <p>The candidates are sorted before indexing so that the mapping does not depend on the order
+   * in which the URLs happen to be configured. Together with {@link Project.NameKey#hashCode()},
+   * which is the specified {@link String#hashCode()} of the project name, this makes every host
+   * reading the same config agree on the mapping.
+   */
+  PROJECT_SHARDED("projectSharded") {
+    @Override
+    public Instance newInstance() {
+      return new Instance() {
+        @Override
+        public List<URIish> select(NameKey project, List<URIish> candidates) {
+          if (candidates.isEmpty()) {
+            return List.of();
+          }
+          ImmutableList<URIish> sorted = sortedByUrl(candidates);
+          return List.of(sorted.get(Math.floorMod(project.hashCode(), sorted.size())));
+        }
+
+        @Override
+        public URIish failover(List<URIish> candidates, URIish failed) {
+          if (candidates.size() < 2) {
+            return failed;
+          }
+          ImmutableList<URIish> sorted = sortedByUrl(candidates);
+          int failedIndex = sorted.indexOf(failed);
+          if (failedIndex < 0) {
+            return failed;
+          }
+          return sorted.get((failedIndex + 1) % sorted.size());
+        }
+
+        private ImmutableList<URIish> sortedByUrl(List<URIish> candidates) {
+          return ImmutableList.sortedCopyOf(Comparator.comparing(URIish::toString), candidates);
+        }
       };
     }
   };
@@ -79,6 +149,21 @@ public enum UrlDistributionStrategy {
   /** A stateful executor for a {@link UrlDistributionStrategy} strategy. */
   @FunctionalInterface
   public interface Instance {
-    List<URIish> select(List<URIish> candidates);
+    /**
+     * Selects the URLs to push to out of the candidates for the given project.
+     *
+     * @param project project being replicated, used by project-affine strategies.
+     * @param candidates URLs the project could be pushed to.
+     * @return the subset of candidates to push to.
+     */
+    List<URIish> select(Project.NameKey project, List<URIish> candidates);
+
+    /**
+     * If a push to any URI returned by {@link #select(Project.NameKey, List)} fails, {@link
+     * #failover(List, URIish)}} is invoked to select the next URI for retry.
+     */
+    default URIish failover(List<URIish> candidates, URIish failed) {
+      return failed;
+    }
   }
 }
