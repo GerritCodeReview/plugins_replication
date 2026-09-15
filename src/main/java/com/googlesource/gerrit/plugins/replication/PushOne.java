@@ -699,9 +699,16 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     List<RemoteRefUpdate> cmds = new ArrayList<>();
     boolean noPerms = !pool.isReplicatePermissions();
     Map<String, Ref> remote = listRemote(tn);
+    // A full sync is scheduled on every URI, so drop the refs another URI is responsible for to
+    // avoid pushing the same out-of-date ref from several of them.
+    Set<String> ownedRefs = pool.refsOwnedBy(uri, projectName, local.keySet());
     for (Ref src : local.values()) {
       if (!canPushRef(src.getName(), noPerms)) {
         repLog.atFine().log("Skipping push of ref %s", src.getName());
+        continue;
+      }
+      if (!ownedRefs.contains(src.getName())) {
+        repLog.atFine().log("Skipping push of ref %s not owned by %s", src.getName(), uri);
         continue;
       }
 
