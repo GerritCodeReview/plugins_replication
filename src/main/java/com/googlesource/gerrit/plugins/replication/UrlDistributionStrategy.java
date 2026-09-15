@@ -15,11 +15,14 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.SetMultimap;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.entities.Project.NameKey;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.eclipse.jgit.transport.URIish;
 
@@ -30,7 +33,7 @@ import org.eclipse.jgit.transport.URIish;
  * executor. Callers (e.g. {@link Destination}) hold the {@link Instance}, while the enum constant
  * itself remains stateless and safe to use in equality checks.
  *
- * <p>Configured via {@code remote.NAME.urlDistribution} in {@code replication.config}.
+ * <p>Configured via {@code remote.NAME.urlDistributionStrategy} in {@code replication.config}.
  */
 public enum UrlDistributionStrategy {
   /** Push to all configured URLs. */
@@ -56,8 +59,8 @@ public enum UrlDistributionStrategy {
 
         @Override
         public List<URIish> urlsToReplicateTo(NameKey project, List<URIish> candidates) {
-          if (candidates.isEmpty()) {
-            return List.of();
+          if (candidates.size() < 2) {
+            return candidates;
           }
           return List.of(candidates.get(Math.floorMod(index.getAndIncrement(), candidates.size())));
         }
@@ -111,16 +114,74 @@ public enum UrlDistributionStrategy {
           if (candidates.size() < 2) {
             return failed;
           }
-          ImmutableList<URIish> sorted = sortedByUrl(candidates);
-          int failedIndex = sorted.indexOf(failed);
-          if (failedIndex < 0) {
-            return failed;
-          }
-          return sorted.get((failedIndex + 1) % sorted.size());
+          return nextAfter(candidates, failed);
+        }
+      };
+    }
+  },
+
+  /**
+   * Push each ref to exactly one URL, chosen by hashing the ref name, so that a given ref always
+   * maps to the same URL while the refs of one project are spread over all URLs. Prefer this over
+   * {@link #PROJECT_SHARDED} when a single project dominates the write traffic of the remote, since
+   * pinning that project to one URL leaves the remaining URLs idle.
+   *
+   * <p>Unlike the other single-URL strategies this can turn one push event into several replication
+   * tasks, because the refs of one event may hash to different URLs. That gives up the
+   * per-(project, URI) task coalescing {@link #PROJECT_SHARDED} relies on, and refs that were
+   * updated together, such as the patch set ref and the NoteDb meta ref of a change, may be split
+   * over separate pushes that do not land at the same time. It is the price for spreading a hot
+   * project over the URLs, and it is bounded because each ref still only ever goes to one URL.
+   *
+   * <p>A full sync is requested with the {@code PushOne.ALL_REFS} marker rather than with real ref
+   * names, and covers refs belonging to every shard, so it is sent to all candidates. Each of those
+   * pushes then places the refs it turned out to cover, keeping only its own, so an out-of-date ref
+   * is still pushed by exactly one of them.
+   *
+   * <p>As for {@link #PROJECT_SHARDED} the candidates are sorted before indexing, so the mapping
+   * does not depend on the order in which the URLs happen to be configured and every host reading
+   * the same config agrees on it. On transport failure {@link Instance#failover} hands the refs of
+   * the failed push over to the next URL.
+   */
+  REF_SHARDED("refSharded") {
+    @Override
+    public Instance newInstance() {
+      return new Instance() {
+        /**
+         * Returns every candidate: the refs of a project are spread over all URLs, so all of them
+         * hold the project and none can be ruled out without knowing the ref.
+         */
+        @Override
+        public List<URIish> urlsToReplicateTo(NameKey project, List<URIish> candidates) {
+          return candidates;
         }
 
-        private ImmutableList<URIish> sortedByUrl(List<URIish> candidates) {
-          return ImmutableList.sortedCopyOf(Comparator.comparing(URIish::toString), candidates);
+        @Override
+        public SetMultimap<URIish, String> refsToReplicateByUrl(
+            NameKey project, Set<String> refNames, List<URIish> candidates, List<URIish> targets) {
+          if (candidates.isEmpty() || refNames.contains(PushOne.ALL_REFS)) {
+            // A full sync is not tied to a single ref and covers refs belonging to every shard, so
+            // it goes to each URL; each of those pushes asks again with the refs it found.
+            return Instance.super.refsToReplicateByUrl(project, refNames, candidates, targets);
+          }
+          ImmutableList<URIish> sorted = sortedByUrl(candidates);
+          SetMultimap<URIish, String> refsByUri = LinkedHashMultimap.create();
+          for (String refName : refNames) {
+            URIish owner = urlOwning(refName, sorted);
+            if (targets.contains(owner)) {
+              // Refs owned by a URL this push is not going to belong to that URL's own push.
+              refsByUri.put(owner, refName);
+            }
+          }
+          return refsByUri;
+        }
+
+        @Override
+        public URIish failover(List<URIish> candidates, URIish failed) {
+          if (candidates.size() < 2) {
+            return failed;
+          }
+          return nextAfter(candidates, failed);
         }
       };
     }
@@ -147,16 +208,64 @@ public enum UrlDistributionStrategy {
   }
 
   /**
+   * Sorts the candidates by URL so that hash-based indexing into them does not depend on the order
+   * in which the URLs happen to be configured. Shared by the sharding strategies, which must agree
+   * on the ordering for every host to derive the same mapping from the same config.
+   */
+  private static ImmutableList<URIish> sortedByUrl(List<URIish> candidates) {
+    return ImmutableList.sortedCopyOf(Comparator.comparing(URIish::toString), candidates);
+  }
+
+  /**
+   * Returns the URL owning the given ref, by hashing its name over the sorted candidates.
+   *
+   * <p>Asked again at push time, on a different host than the one that scheduled the push, so it
+   * may depend on nothing but its arguments. Together with {@link String#hashCode()}, which is
+   * specified, this makes every host reading the same config agree on where a ref belongs.
+   */
+  private static URIish urlOwning(String refName, ImmutableList<URIish> sortedCandidates) {
+    return sortedCandidates.get(Math.floorMod(refName.hashCode(), sortedCandidates.size()));
+  }
+
+  /**
+   * Returns the candidate following the failed one, wrapping around, or the failed one if absent.
+   */
+  private static URIish nextAfter(List<URIish> candidates, URIish failed) {
+    ImmutableList<URIish> sorted = sortedByUrl(candidates);
+    int failedIndex = sorted.indexOf(failed);
+    if (failedIndex < 0) {
+      return failed;
+    }
+    return sorted.get((failedIndex + 1) % sorted.size());
+  }
+
+  /** Maps every given URI to the complete set of refs, i.e. does not shard the refs at all. */
+  private static SetMultimap<URIish, String> everyRefToEachUri(
+      List<URIish> uris, Set<String> refNames) {
+    SetMultimap<URIish, String> refsByUri = LinkedHashMultimap.create();
+    for (URIish uri : uris) {
+      refsByUri.putAll(uri, refNames);
+    }
+    return refsByUri;
+  }
+
+  /**
    * A stateful executor for a {@link UrlDistributionStrategy} strategy.
    *
    * <p>A strategy is asked per reason rather than once for every call site, so that what an
-   * operation does when a remote has several URLs is decided here instead of by the callers.
+   * operation does when a remote has several URLs is decided here instead of by the callers, and
+   * the state a strategy keeps between calls, such as the position in a rotation, lives here.
    */
   @FunctionalInterface
   public interface Instance {
     /**
-     * Selects the URLs to replicate a project to out of the candidates, which is what pushing its
-     * refs, creating it and updating its HEAD all follow.
+     * Selects the URLs to replicate a project to out of the candidates.
+     *
+     * <p>Asked whenever the replicated unit is the project rather than a ref, which is what
+     * updating its HEAD, and by default creating and deleting it, follow: every URL holding the
+     * project needs its own HEAD updated, no matter how its refs are spread. Replicating refs
+     * starts from this answer too, through {@link #refsToReplicateByUrl}, so this is the only
+     * question a strategy has to answer.
      *
      * @param project project being replicated, used by project-affine strategies.
      * @param candidates URLs the project could be pushed to.
@@ -191,6 +300,38 @@ public enum UrlDistributionStrategy {
      */
     default List<URIish> urlsToDeleteFrom(Project.NameKey project, List<URIish> candidates) {
       return urlsToReplicateTo(project, candidates);
+    }
+
+    /**
+     * Splits refs over the URLs to replicate them to.
+     *
+     * <p>Asked twice for the same refs, by {@link Destination#refsToReplicateByUrl} when a ref
+     * update is scheduled, to turn one event into a push per URL, and again by {@link
+     * PushOne#doPushAll} when a full sync runs, to drop the refs the URL it is pushing to does not
+     * hold. A full sync is scheduled on every URL with the {@code PushOne.ALL_REFS} marker instead
+     * of ref names, so the second call, with that URL as the only target, is the first chance to
+     * place the refs it turned out to cover, and it may run on a different host than the one that
+     * scheduled it. A strategy therefore has to answer from its arguments alone.
+     *
+     * <p>Defaults to sending every ref to each URL {@link #urlsToReplicateTo} picked, which is what
+     * the strategies placing whole events do; one placing individual refs overrides this to send
+     * each ref to the URL holding it.
+     *
+     * @param project project being replicated.
+     * @param refNames refs to place, or {@code PushOne.ALL_REFS} for a full sync being scheduled.
+     * @param candidates every URL the project could be pushed to. Ref placement is computed over
+     *     all of them, so that narrowing a push to some of the URLs sends the refs those URLs hold
+     *     rather than re-hashing every ref onto them.
+     * @param targets the URLs this push may go to: the candidates left by the caller's url match
+     *     when scheduling, and the URL being pushed to when a full sync runs.
+     * @return the refs to push, keyed by the URL to push them to.
+     */
+    default SetMultimap<URIish, String> refsToReplicateByUrl(
+        Project.NameKey project,
+        Set<String> refNames,
+        List<URIish> candidates,
+        List<URIish> targets) {
+      return everyRefToEachUri(urlsToReplicateTo(project, targets), refNames);
     }
 
     /**
