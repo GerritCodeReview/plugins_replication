@@ -24,6 +24,7 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+import com.google.common.collect.SetMultimap;
 import com.google.common.io.Files;
 import com.google.common.net.UrlEscapers;
 import com.google.common.util.concurrent.Striped;
@@ -688,6 +689,7 @@ public class Destination {
     replacement.addRefBatches(pushOp.getRefs());
     replacement.addStates(pushOp.getStates());
     replacement.setToRetryWithCount(pushOp.getRetryCount());
+    replacement.markFailedOver();
     pushOp.removeStates();
 
     boolean installed =
@@ -722,6 +724,9 @@ public class Destination {
   private static void consolidateOnto(PushOne into, PushOne from) {
     into.addRefBatches(from.getRefs());
     into.addStates(from.getStates());
+    if (from.hasFailedOver()) {
+      into.markFailedOver();
+    }
     from.removeStates();
   }
 
@@ -854,16 +859,34 @@ public class Destination {
     return r;
   }
 
-  List<URIish> urlsToReplicateTo(Project.NameKey project, String urlMatch) {
-    return urlsToReplicateTo(project, getURIs(project, urlMatch));
-  }
-
   List<URIish> urlsToReplicateTo(Project.NameKey project, List<URIish> candidates) {
     return urlDistributor.urlsToReplicateTo(project, candidates);
   }
 
   List<URIish> urlsToDeleteFrom(Project.NameKey project, List<URIish> candidates) {
     return urlDistributor.urlsToDeleteFrom(project, candidates);
+  }
+
+  /**
+   * Splits the refs updated by one event over the URIs of this remote, as dictated by the remote's
+   * {@code urlDistributionStrategy}.
+   *
+   * @return the refs to push, keyed by the URI to push them to.
+   */
+  SetMultimap<URIish, String> getDistributedRefs(
+      Project.NameKey project, String urlMatch, Set<String> refNames) {
+    return config
+        .getUrlDistributionStrategy()
+        .distribute(
+            urlDistributor, project, refNames, getURIs(project, null), getURIs(project, urlMatch));
+  }
+
+  /**
+   * Narrows the refs of a full sync down to the ones the given URI is responsible for, so that a
+   * sync scheduled on every URI still pushes each out-of-date ref exactly once.
+   */
+  Set<String> refsOwnedBy(URIish uri, Project.NameKey project, Set<String> refNames) {
+    return config.getUrlDistributionStrategy().refsOwnedBy(uri, refNames, getURIs(project, null));
   }
 
   URIish getURI(URIish template, Project.NameKey project) throws URISyntaxException {
