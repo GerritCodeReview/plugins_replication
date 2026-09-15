@@ -496,6 +496,9 @@ public class PushOneTest {
     destinationMock = mock(Destination.class);
     when(destinationMock.requestRunway(any())).thenReturn(RunwayStatus.allowed());
     when(destinationMock.excludedRefsPattern()).thenReturn(ImmutableList.of());
+    // Own every ref, as the strategies that do not shard per ref do.
+    when(destinationMock.refsOwnedBy(any(), any(), any()))
+        .thenAnswer(invocation -> invocation.getArgument(2));
   }
 
   private void setupPermissionBackedMock() {
