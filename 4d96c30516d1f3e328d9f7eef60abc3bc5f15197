@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e062f144_635d329f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1010013
+      },
+      "writtenOn": "2026-09-15T16:56:17Z",
+      "side": 1,
+      "message": "While I do expect full syncs to end up being scheduled across all nodes, we want to ensure that any specific out of date refs in those full syncs only get pushed by a single one of those pushes. Can we make sure this tests that?",
+      "revId": "4d96c30516d1f3e328d9f7eef60abc3bc5f15197",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
