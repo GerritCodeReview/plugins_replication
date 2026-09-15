@@ -22,6 +22,7 @@ import com.google.gerrit.acceptance.PushOneCommit.Result;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.WaitUtil;
+import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.projects.BranchInput;
 import com.google.gerrit.extensions.common.ProjectInfo;
@@ -622,6 +623,73 @@ public class ReplicationIT extends ReplicationDaemon {
     try (Repository otherRepo = repoManager.openRepository(otherProject)) {
       assertThat(checkedGetRef(otherRepo, branch1)).isNull();
       assertThat(checkedGetRef(otherRepo, branch2)).isNull();
+    }
+  }
+
+  @Test
+  public void shouldSpreadRefsAcrossUrlsWhenRefShardedEnabled() throws Exception {
+    Project.NameKey replica1Project = createTestProject(project + "replica1");
+    Project.NameKey replica2Project = createTestProject(project + "replica2");
+
+    setReplicationDestination(
+        "foo", List.of("replica1", "replica2"), ALL_PROJECTS, TEST_REPLICATION_DELAY_SECONDS);
+    setUrlDistribution("foo", UrlDistributionStrategy.REF_SHARDED);
+    reloadConfig();
+
+    // These two ref names hash to different URLs, so they must not end up on the same replica.
+    String branch1 = "refs/heads/branch1";
+    String branch2 = "refs/heads/branch2";
+    createBranch(BranchNameKey.create(project, branch1));
+    createBranch(BranchNameKey.create(project, branch2));
+
+    try (Repository r1 = repoManager.openRepository(replica1Project);
+        Repository r2 = repoManager.openRepository(replica2Project)) {
+      waitUntil(
+          () ->
+              (checkedGetRef(r1, branch1) != null || checkedGetRef(r2, branch1) != null)
+                  && (checkedGetRef(r1, branch2) != null || checkedGetRef(r2, branch2) != null));
+
+      boolean branch1OnReplica1 = checkedGetRef(r1, branch1) != null;
+      boolean branch2OnReplica1 = checkedGetRef(r1, branch2) != null;
+
+      // Each ref is written exactly once ...
+      assertThat(branch1OnReplica1 ^ (checkedGetRef(r2, branch1) != null)).isTrue();
+      assertThat(branch2OnReplica1 ^ (checkedGetRef(r2, branch2) != null)).isTrue();
+
+      // ... and the project's refs are spread over both replicas instead of pinned to one.
+      assertThat(branch1OnReplica1).isNotEqualTo(branch2OnReplica1);
+    }
+  }
+
+  @Test
+  public void shouldPushEachRefOfAFullSyncByOnlyOneUrlWhenRefShardedEnabled() throws Exception {
+    Project.NameKey replica1Project = createTestProject(project + "replica1");
+    Project.NameKey replica2Project = createTestProject(project + "replica2");
+
+    setReplicationDestination(
+        "foo", List.of("replica1", "replica2"), ALL_PROJECTS, TEST_REPLICATION_DELAY_SECONDS);
+    setUrlDistribution("foo", UrlDistributionStrategy.REF_SHARDED);
+    reloadConfig();
+
+    // branch1 hashes to the first URL and branch2 to the second, so the sync has work on both.
+    String branch1 = "refs/heads/branch1";
+    String branch2 = "refs/heads/branch2";
+    createNewBranchWithoutPush("refs/heads/master", branch1);
+    createNewBranchWithoutPush("refs/heads/master", branch2);
+
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .scheduleFullSync(project, null, new ReplicationState(NO_OP), true);
+
+    try (Repository r1 = repoManager.openRepository(replica1Project);
+        Repository r2 = repoManager.openRepository(replica2Project)) {
+      // The full sync is scheduled on both replicas ...
+      waitUntil(() -> checkedGetRef(r1, branch1) != null && checkedGetRef(r2, branch2) != null);
+
+      // ... but each out-of-date ref is pushed by only one of them.
+      assertThat(checkedGetRef(r2, branch1)).isNull();
+      assertThat(checkedGetRef(r1, branch2)).isNull();
     }
   }
 
