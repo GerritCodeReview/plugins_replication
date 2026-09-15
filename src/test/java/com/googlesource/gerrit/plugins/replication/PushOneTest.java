@@ -366,6 +366,19 @@ public class PushOneTest {
   }
 
   @Test
+  public void shouldPushRefsOfTheReplacedUrlWhenFailedOver()
+      throws InterruptedException, IOException {
+    // The refs of a full sync belong to the URL that could not be reached, not to this one.
+    when(destinationMock.refsOwnedBy(any(), any(), any())).thenReturn(ImmutableSet.of());
+    PushOne pushOne = createPushOne(null);
+    pushOne.markFailedOver();
+
+    replicateTwoRefs(pushOne);
+
+    verify(transportMock).push(any(), any());
+  }
+
+  @Test
   public void shouldStopPushingInBatchesWhenPushOperationGetsCanceled()
       throws InterruptedException, IOException {
     when(destinationMock.getPushBatchSize()).thenReturn(1);
@@ -496,6 +509,9 @@ public class PushOneTest {
     destinationMock = mock(Destination.class);
     when(destinationMock.requestRunway(any())).thenReturn(RunwayStatus.allowed());
     when(destinationMock.excludedRefsPattern()).thenReturn(ImmutableList.of());
+    // Own every ref, as the strategies that do not shard per ref do.
+    when(destinationMock.refsOwnedBy(any(), any(), any()))
+        .thenAnswer(invocation -> invocation.getArgument(2));
   }
 
   private void setupPermissionBackedMock() {

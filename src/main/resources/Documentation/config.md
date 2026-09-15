@@ -626,10 +626,6 @@ remote.NAME.urlDistributionStrategy
     hosts share a single NFS backend. Pushing to all URLs simultaneously
     would cause redundant writes to the same underlying storage; round-robin
     distributes load evenly and ensures each push is written exactly once.
-    On a transport error during retry, the next push attempt fails over to a
-    different URL in the rotation (bounded by `replicationRetry`), so a single
-    unreachable host does not block replication. Has no effect if only one URL
-    is configured.
 
   `projectSharded`
   : Push to one URL, chosen so that a given project always maps to the same
@@ -648,12 +644,47 @@ remote.NAME.urlDistributionStrategy
     configured and is identical on every host reading the same config.
     Adding or removing a URL remaps projects across the remaining URLs.
 
-    On a transport error during retry, the next push attempt fails over to a
-    different URL in the rotation (bounded by `replicationRetry`), so a single
-    unreachable host does not block replication. Has no effect if only one URL
-    is configured.
+  `refSharded`
+  : Push each ref to one URL, chosen so that a given ref always maps to the
+    same URL. Each ref is still written exactly once, but the refs of a
+    single project are spread over the URLs instead of all going to one.
 
-    Has no effect if only one URL is configured.
+    Prefer this over `projectSharded` when the write traffic is spread
+    unevenly across the projects of the remote, for instance when a single
+    project dominates it, since `projectSharded` would pin that project to
+    a single URL and leave the others idle.
+
+    The trade-off is that one push event updating several refs can be split
+    into one replication task per URL, so the per-(project, URL) coalescing
+    that `projectSharded` provides is lost.
+
+    A full sync is not tied to a single ref, so it is scheduled on every
+    URL. Each of those pushes skips the refs another URL is responsible
+    for, so an out-of-date ref is still pushed by exactly one of them.
+
+    Each ref is hashed on its own name, so refs that were updated together,
+    such as the patch set ref and the NoteDb meta ref of a change, can be
+    split over separate pushes that do not land at the same time.
+
+    The mapping is computed from a hash over the sorted list of URLs, with
+    the same ordering independence as `projectSharded`. Adding or removing a
+    URL remaps refs across the remaining URLs. Refs already replicated stay
+    where they were written, so run a full sync
+    (`replication start --all --remote <name>`) afterwards to bring the refs
+    that moved to their new URL.
+
+    Selecting URLs with `replication start --all --url <substring>` pushes
+    the refs those URLs own rather than all refs, since the refs of the
+    other URLs are theirs to push and replicating them twice is what this
+    strategy exists to avoid.
+    Use `--all --remote <name>` instead of `--url` to sync every ref of a
+    remote.
+
+  For `roundRobin`, `projectSharded` and `refSharded`, a transport error
+  during retry fails the push over to a different URL (bounded by
+  `replicationRetry`), so that a single unreachable host does not block
+  replication. A push that failed over also takes on the refs of the URL it
+  replaces. These strategies have no effect if only one URL is configured.
 
   Defaults to `all`.
 
