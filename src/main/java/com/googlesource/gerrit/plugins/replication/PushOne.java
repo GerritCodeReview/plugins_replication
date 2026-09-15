@@ -129,6 +129,7 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
   private Repository git;
   private boolean isCollision;
   private boolean retrying;
+  private boolean failedOver;
   private int retryCount;
   private final int maxRetries;
   private boolean canceled;
@@ -274,6 +275,19 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
 
   int getRetryCount() {
     return retryCount;
+  }
+
+  /**
+   * Marks this push as taking over from a URI that could not be reached, which makes it push the
+   * refs of that URI as well as its own. A plain retry stays on its own URI, so the retry count
+   * alone does not tell the two apart.
+   */
+  void markFailedOver() {
+    failedOver = true;
+  }
+
+  boolean hasFailedOver() {
+    return failedOver;
   }
 
   void retryDone() {
@@ -699,7 +713,17 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     List<RemoteRefUpdate> cmds = new ArrayList<>();
     boolean noPerms = !pool.isReplicatePermissions();
     Map<String, Ref> remote = listRemote(tn);
+    // A full sync is scheduled on every URI, so drop the refs another URI is responsible for to
+    // avoid pushing the same out-of-date ref from several of them. A push that failed over stands
+    // in for a URI that could not be reached and therefore keeps that URI's refs as well; only
+    // refs that are actually out of date are pushed, so it writes no more than it has to.
+    Set<String> ownedRefs =
+        failedOver ? local.keySet() : pool.refsOwnedBy(uri, projectName, local.keySet());
     for (Ref src : local.values()) {
+      if (!ownedRefs.contains(src.getName())) {
+        repLog.atFine().log("Skipping push of ref %s not owned by %s", src.getName(), uri);
+        continue;
+      }
       if (!canPushRef(src.getName(), noPerms)) {
         repLog.atFine().log("Skipping push of ref %s", src.getName());
         continue;
