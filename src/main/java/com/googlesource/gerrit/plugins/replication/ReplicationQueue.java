@@ -18,6 +18,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Multimaps;
 import com.google.common.collect.Queues;
 import com.google.gerrit.common.UsedAt;
 import com.google.gerrit.entities.Project;
@@ -231,11 +232,13 @@ public class ReplicationQueue
       }
     }
     if (!refNamesToPush.isEmpty()) {
-      for (URIish uri : cfg.getDistributedUris(project, urlMatch)) {
+      for (Map.Entry<URIish, Set<String>> refsForUri :
+          Multimaps.asMap(cfg.getDistributedRefs(project, urlMatch, refNamesToPush)).entrySet()) {
+        URIish uri = refsForUri.getKey();
+        Set<String> refs = refsForUri.getValue();
         replicationTasksStorage.create(
-            ReplicateRefUpdate.create(
-                project.get(), refNamesToPush, uri, cfg.getRemoteConfigName()));
-        cfg.schedule(project, refNamesToPush, uri, state, now);
+            ReplicateRefUpdate.create(project.get(), refs, uri, cfg.getRemoteConfigName()));
+        cfg.schedule(project, refs, uri, state, now);
       }
     }
     if (withoutState) {
