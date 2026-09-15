@@ -17,6 +17,8 @@ package com.googlesource.gerrit.plugins.replication;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.SetMultimap;
 import com.google.gerrit.entities.Project;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -31,6 +33,15 @@ import org.junit.Test;
 public class UrlDistributionStrategyTest {
   private static final Project.NameKey PROJECT = Project.nameKey("some/project");
   private static final Project.NameKey OTHER_PROJECT = Project.nameKey("some/other/project");
+  private static final String REF = "refs/heads/branch1";
+  private static final Set<String> REFS =
+      Set.of(
+          REF,
+          "refs/heads/branch2",
+          "refs/heads/branch3",
+          "refs/heads/branch4",
+          "refs/heads/branch5",
+          "refs/heads/branch6");
 
   private static ImmutableList<URIish> uris(String... hosts) throws URISyntaxException {
     ImmutableList.Builder<URIish> uris = ImmutableList.builder();
@@ -47,6 +58,8 @@ public class UrlDistributionStrategyTest {
         .isEqualTo(UrlDistributionStrategy.ROUND_ROBIN);
     assertThat(UrlDistributionStrategy.fromConfig("projectSharded"))
         .isEqualTo(UrlDistributionStrategy.PROJECT_SHARDED);
+    assertThat(UrlDistributionStrategy.fromConfig("refSharded"))
+        .isEqualTo(UrlDistributionStrategy.REF_SHARDED);
   }
 
   @Test
@@ -166,5 +179,132 @@ public class UrlDistributionStrategyTest {
     for (UrlDistributionStrategy strategy : UrlDistributionStrategy.values()) {
       assertThat(strategy.newInstance().select(PROJECT, List.of())).isEmpty();
     }
+  }
+
+  @Test
+  public void shouldDistributeNothingWhenThereAreNoCandidates() {
+    for (UrlDistributionStrategy strategy : UrlDistributionStrategy.values()) {
+      assertThat(strategy.newInstance().distribute(PROJECT, REFS, List.of())).isEmpty();
+    }
+  }
+
+  @Test
+  public void projectAffineStrategiesShouldSendEveryRefToEachSelectedUrl() throws Exception {
+    ImmutableList<URIish> candidates = uris("replica1", "replica2", "replica3");
+
+    for (UrlDistributionStrategy strategy :
+        List.of(
+            UrlDistributionStrategy.ALL,
+            UrlDistributionStrategy.ROUND_ROBIN,
+            UrlDistributionStrategy.PROJECT_SHARDED)) {
+      UrlDistributionStrategy.Instance distributor = strategy.newInstance();
+
+      SetMultimap<URIish, String> refsByUri = distributor.distribute(PROJECT, REFS, candidates);
+
+      for (URIish uri : refsByUri.keySet()) {
+        assertThat(refsByUri).valuesForKey(uri).containsExactlyElementsIn(REFS);
+      }
+    }
+  }
+
+  @Test
+  public void refShardedShouldSendEachRefToExactlyOneUrl() throws Exception {
+    ImmutableList<URIish> candidates = uris("replica1", "replica2", "replica3");
+    UrlDistributionStrategy.Instance distributor =
+        UrlDistributionStrategy.REF_SHARDED.newInstance();
+
+    SetMultimap<URIish, String> refsByUri = distributor.distribute(PROJECT, REFS, candidates);
+
+    assertThat(candidates).containsAtLeastElementsIn(refsByUri.keySet());
+    assertThat(refsByUri.values()).containsExactlyElementsIn(REFS);
+
+    ImmutableList<URIish> onlyCandidate = uris("replica1");
+    assertThat(distributor.distribute(PROJECT, REFS, onlyCandidate))
+        .valuesForKey(onlyCandidate.get(0))
+        .containsExactlyElementsIn(REFS);
+  }
+
+  @Test
+  public void refShardedShouldMapEachRefToTheSameUrlEverywhere() throws Exception {
+    ImmutableList<URIish> candidates =
+        uris("replica1", "replica2", "replica3", "replica4", "replica5");
+    UrlDistributionStrategy.Instance distributor =
+        UrlDistributionStrategy.REF_SHARDED.newInstance();
+
+    SetMultimap<URIish, String> expected = distributor.distribute(PROJECT, REFS, candidates);
+
+    // The strategy holds no state, so replaying the event does not rotate the refs.
+    assertThat(distributor.distribute(PROJECT, REFS, candidates)).isEqualTo(expected);
+
+    // Every host agrees, no matter which order it happens to list the URLs in.
+    List<URIish> shuffled = new ArrayList<>(candidates);
+    Random random = new Random(42);
+    for (int i = 0; i < 20; i++) {
+      Collections.shuffle(shuffled, random);
+      assertThat(
+              UrlDistributionStrategy.REF_SHARDED.newInstance().distribute(PROJECT, REFS, shuffled))
+          .isEqualTo(expected);
+    }
+
+    // Only the ref name decides, neither the project nor the other refs of the event.
+    assertThat(distributor.distribute(OTHER_PROJECT, REFS, candidates)).isEqualTo(expected);
+    URIish uriWhenAlone =
+        Iterables.getOnlyElement(distributor.distribute(PROJECT, Set.of(REF), candidates).keySet());
+    assertThat(expected).valuesForKey(uriWhenAlone).contains(REF);
+  }
+
+  @Test
+  public void refShardedShouldSpreadRefsOverAllCandidates() throws Exception {
+    ImmutableList<URIish> candidates = uris("replica1", "replica2", "replica3");
+    UrlDistributionStrategy.Instance distributor =
+        UrlDistributionStrategy.REF_SHARDED.newInstance();
+
+    Set<String> manyRefs = new HashSet<>();
+    for (int i = 0; i < 100; i++) {
+      manyRefs.add("refs/heads/branch" + i);
+    }
+
+    SetMultimap<URIish, String> refsByUri = distributor.distribute(PROJECT, manyRefs, candidates);
+
+    assertThat(refsByUri.keySet()).containsExactlyElementsIn(candidates);
+  }
+
+  @Test
+  public void refShardedShouldSendFullSyncToAllCandidates() throws Exception {
+    ImmutableList<URIish> candidates = uris("replica1", "replica2", "replica3");
+    UrlDistributionStrategy.Instance distributor =
+        UrlDistributionStrategy.REF_SHARDED.newInstance();
+
+    Set<String> allRefs = Set.of(PushOne.ALL_REFS);
+    SetMultimap<URIish, String> refsByUri = distributor.distribute(PROJECT, allRefs, candidates);
+
+    assertThat(refsByUri.keySet()).containsExactlyElementsIn(candidates);
+    for (URIish uri : candidates) {
+      assertThat(refsByUri).valuesForKey(uri).containsExactly(PushOne.ALL_REFS);
+    }
+  }
+
+  @Test
+  public void refShardedShouldSelectEveryCandidateWhenNoRefIsKnown() throws Exception {
+    ImmutableList<URIish> candidates = uris("replica1", "replica2", "replica3");
+    UrlDistributionStrategy.Instance distributor =
+        UrlDistributionStrategy.REF_SHARDED.newInstance();
+
+    assertThat(distributor.select(PROJECT, candidates)).isEqualTo(candidates);
+  }
+
+  @Test
+  public void refShardedShouldFailoverToAnotherCandidate() throws Exception {
+    ImmutableList<URIish> candidates = uris("replica1", "replica2", "replica3");
+    UrlDistributionStrategy.Instance distributor =
+        UrlDistributionStrategy.REF_SHARDED.newInstance();
+
+    for (URIish failed : candidates) {
+      assertThat(distributor.failover(candidates, failed)).isNotEqualTo(failed);
+    }
+
+    ImmutableList<URIish> onlyCandidate = uris("replica1");
+    assertThat(distributor.failover(onlyCandidate, onlyCandidate.get(0)))
+        .isEqualTo(onlyCandidate.get(0));
   }
 }

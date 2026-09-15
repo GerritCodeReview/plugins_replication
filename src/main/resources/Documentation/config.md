@@ -655,6 +655,29 @@ remote.NAME.urlDistributionStrategy
 
     Has no effect if only one URL is configured.
 
+  `refSharded`
+  : Push each ref to one URL, chosen so that a given ref always maps to the
+    same URL. Each ref is still written exactly once, but the refs of a
+    single project are spread over the URLs instead of all going to one.
+
+    Prefer this over `projectSharded` when one project dominates the write
+    traffic of the remote, since `projectSharded` would pin that project to
+    a single URL and leave the others idle.
+
+    The trade-off is that one push event updating several refs can be split
+    into one replication task per URL, so the per-(project, URL) coalescing
+    that `projectSharded` provides is lost. A full sync is not tied to a
+    single ref and is therefore sent to all URLs.
+
+    The mapping is computed from a hash of the ref name over the sorted list
+    of URLs, with the same ordering independence as `projectSharded`. Adding
+    or removing a URL remaps refs across the remaining URLs.
+
+    On a transport error during retry, the refs of the failed push fail over
+    to a different URL (bounded by `replicationRetry`), so a single
+    unreachable host does not block replication. Has no effect if only one
+    URL is configured.
+
   Defaults to `all`.
 
 Directory `replication`
