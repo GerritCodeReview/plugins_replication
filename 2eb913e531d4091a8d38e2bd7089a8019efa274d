@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b41eeb0_27789afd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-09-16T10:49:46Z",
+      "side": 1,
+      "message": "This interface has now evolved to 4 methods. Are they all essential, or is the a good way to restructure the interface to have fewer more essential questions?",
+      "revId": "2eb913e531d4091a8d38e2bd7089a8019efa274d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
