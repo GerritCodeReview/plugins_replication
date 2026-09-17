@@ -16,6 +16,24 @@
       "message": "This interface has now evolved to 4 methods. Are they all essential, or is the a good way to restructure the interface to have fewer more essential questions?",
       "revId": "2eb913e531d4091a8d38e2bd7089a8019efa274d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "063ded31_114d0909",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-17T04:09:09Z",
+      "side": 1,
+      "message": "Point! Collapsed distribute and refsOwnedBy into a single ownerOf question, so the interface is back to three methods and refSharded only answers where a ref belongs, with the splitting and full-sync filtering derived from that and shared by all strategies.",
+      "parentUuid": "1b41eeb0_27789afd",
+      "revId": "2eb913e531d4091a8d38e2bd7089a8019efa274d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
