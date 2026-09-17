@@ -20,6 +20,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f3dce99_01c2e228",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-09-17T22:46:30Z",
+      "side": 1,
+      "message": "is this immutable copy necessary ?",
+      "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "987d7c5e_215784df",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-09-17T22:46:30Z",
+      "side": 1,
+      "message": "This seems fishy to me.\n\nSo url match here filters out urls and we get some hashcode mapping and then we do another filter during PushOne without url match (its null) which gives different mapping and we might always loose some refs.....",
+      "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2befa507_b8a91757",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
         "patchSetId": 5
