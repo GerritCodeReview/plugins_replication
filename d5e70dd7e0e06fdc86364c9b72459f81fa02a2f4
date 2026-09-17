@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2befa507_b8a91757",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-09-17T22:04:37Z",
+      "side": 1,
+      "message": "Given this, why do we still need this method?",
+      "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
