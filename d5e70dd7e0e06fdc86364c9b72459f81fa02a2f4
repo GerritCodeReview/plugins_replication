@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60d72989_453fa8ac",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-09-17T22:35:18Z",
+      "side": 1,
+      "message": "so on a retry (we go to next URI), this skips the refs (that should actually be processed by origin URI) ?",
+      "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2befa507_b8a91757",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
         "patchSetId": 5
@@ -14,6 +31,57 @@
       "writtenOn": "2026-09-17T22:04:37Z",
       "side": 1,
       "message": "Given this, why do we still need this method?",
+      "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c8d68c0_d34391bc",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-09-17T22:35:18Z",
+      "side": 1,
+      "message": "instead of saying one project dominates. say something like traffic is unevenly distributed among the projects.. ?",
+      "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ee8cd1c_8aad3799",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-09-17T22:35:18Z",
+      "side": 1,
+      "message": "each change update would update change ref and meta ref which might end up as two separate tasks. Should we be a little intelligent enough to figure out the change no and hash on it at least for change and meta refs ?",
+      "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b274de55_abfc63e3",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-09-17T22:35:18Z",
+      "side": 1,
+      "message": "This is turning out to be a common sentence for all the distribution strategies should we just put it a level higher and say its applicable to all ?",
       "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
