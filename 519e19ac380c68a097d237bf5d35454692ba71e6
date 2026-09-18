@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c02295a_5d3ba4c1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-09-18T23:54:31Z",
+      "side": 1,
+      "message": "Do this check before the canPushRef() check? I suspect canPushRef is more costly than this one.",
+      "revId": "519e19ac380c68a097d237bf5d35454692ba71e6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7292ae91_98234782",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-09-18T23:54:31Z",
+      "side": 1,
+      "message": "Can you identify the implications of adding/removing uris and then reloading the plugin? Will we be left over with tasks in storage that wont ever get picked up?",
+      "revId": "519e19ac380c68a097d237bf5d35454692ba71e6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d68a27ec_612b25a4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-09-18T23:54:31Z",
+      "side": 1,
+      "message": "Do we need to do this sort for each ref? Can it be done once outside ownerOf?",
+      "revId": "519e19ac380c68a097d237bf5d35454692ba71e6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32eed5b7_ca2347ce",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-09-18T23:54:31Z",
+      "side": 1,
+      "message": "Does this include the change checks refs (for example refs/changes/30/966430/checks)? if not, should it?",
+      "range": {
+        "startLine": 182,
+        "startChar": 41,
+        "endLine": 182,
+        "endChar": 48
+      },
+      "revId": "519e19ac380c68a097d237bf5d35454692ba71e6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
