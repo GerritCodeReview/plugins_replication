@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb32ad4a_e7d62cdd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-18T04:29:11Z",
+      "side": 1,
+      "message": "Resolved. A failed-over push now keeps the refs of the URL it stands in for, and since only out-of-date refs are pushed it writes no more than it has to.",
+      "parentUuid": "60d72989_453fa8ac",
+      "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f3dce99_01c2e228",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-09-17T22:46:30Z",
       "side": 1,
       "message": "is this immutable copy necessary ?",
+      "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f3aa6c7_1c00f98f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-18T04:29:11Z",
+      "side": 1,
+      "message": "No, `ReplicateRefUpdate.create` and schedule both copy already — dropped it and used `Multimaps.asMap` so the values come out as typed Sets.",
+      "parentUuid": "9f3dce99_01c2e228",
       "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -52,6 +88,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55f46c77_4eb63f74",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-18T04:29:11Z",
+      "side": 1,
+      "message": "urlMatch is only ever set by scheduleFullSync, whose ALL_REFS marker is never hashed, so real ref names always arrive with urlMatch null.\npush-time ownership uses the full URL list deliberately so every node derives the same mapping, and replication start --url X then syncs exactly the refs X owns.",
+      "parentUuid": "987d7c5e_215784df",
+      "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2befa507_b8a91757",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-09-17T22:04:37Z",
       "side": 1,
       "message": "Given this, why do we still need this method?",
+      "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5732b208_55fe5f53",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-18T04:29:11Z",
+      "side": 1,
+      "message": "`select` answers the project-level question that ownerOf can\u0027t — a full sync and a project deletion have no ref to hash. refSharded\u0027s answer is \"every URL\", which is what makes a full sync fan out.\nI can default `select` to all candidates and drop the override if you prefer.",
+      "parentUuid": "2befa507_b8a91757",
       "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -86,6 +158,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33f9600d_a4942d7b",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-18T04:29:11Z",
+      "side": 1,
+      "message": "Done, now phrased as write traffic spread unevenly across the projects, with a single dominating project as the example.",
+      "parentUuid": "0c8d68c0_d34391bc",
+      "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ee8cd1c_8aad3799",
@@ -103,6 +193,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b41a43a3_b56863d2",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-18T04:29:11Z",
+      "side": 1,
+      "message": "Agreed, done — all refs of a change hash on the change so its patch set and meta refs stay in one push, while different changes still spread over the URLs.",
+      "parentUuid": "4ee8cd1c_8aad3799",
+      "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b274de55_abfc63e3",
@@ -116,6 +224,24 @@
       "writtenOn": "2026-09-17T22:35:18Z",
       "side": 1,
       "message": "This is turning out to be a common sentence for all the distribution strategies should we just put it a level higher and say its applicable to all ?",
+      "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d9ec28c_0aa62496",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-18T04:29:11Z",
+      "side": 1,
+      "message": "Hoisted into one paragraph covering roundRobin, `projectSharded` and `refSharded`.",
+      "parentUuid": "b274de55_abfc63e3",
       "revId": "d5e70dd7e0e06fdc86364c9b72459f81fa02a2f4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
