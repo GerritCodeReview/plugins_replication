@@ -467,6 +467,11 @@ public class Destination {
       boolean now,
       boolean fromStorage) {
     if (!isPushEnabled()) {
+      state.addPersistOnlyRemote(getRemoteConfigName());
+      repLog.atFine().log(
+          "Not scheduling push for %s:%s => %s; remote %s is persist-only (threads=0),"
+              + " task was written to task storage for another node to push",
+          project, refs, uri, getRemoteConfigName());
       return;
     }
     ImmutableSet.Builder<String> toSchedule = ImmutableSet.builder();

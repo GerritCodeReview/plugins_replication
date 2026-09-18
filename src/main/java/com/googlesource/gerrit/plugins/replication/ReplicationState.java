@@ -16,6 +16,8 @@ package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
@@ -50,6 +52,7 @@ public class ReplicationState {
   private final Table<String, String, RefReplicationStatus> statusByProjectRef;
   private final AtomicInteger totalPushTasksCount = new AtomicInteger();
   private final AtomicInteger finishedPushTasksCount = new AtomicInteger();
+  private final Set<String> persistOnlyRemotes = ConcurrentHashMap.newKeySet();
 
   ReplicationState(PushResultProcessing processing) {
     pushResultProcessing = processing;
@@ -68,6 +71,19 @@ public class ReplicationState {
 
   public boolean hasPushTask() {
     return totalPushTasksCount.get() != 0;
+  }
+
+  /** Records that a task was persisted for a remote that does not push (e.g. persist-only). */
+  public void addPersistOnlyRemote(String remoteName) {
+    persistOnlyRemotes.add(remoteName);
+  }
+
+  public boolean hasPersistOnlyRemotes() {
+    return !persistOnlyRemotes.isEmpty();
+  }
+
+  public Set<String> getPersistOnlyRemotes() {
+    return persistOnlyRemotes;
   }
 
   public void notifyRefReplicated(
