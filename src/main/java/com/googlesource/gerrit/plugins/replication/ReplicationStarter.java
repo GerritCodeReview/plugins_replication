@@ -70,6 +70,10 @@ class ReplicationStarter {
         } catch (InterruptedException e) {
           processing.writeStdErr("We are interrupted while waiting replication to complete");
         }
+      } else if (state.hasPersistOnlyTask()) {
+        processing.writeStdOut(
+            "Nothing to replicate synchronously; ref(s) were persisted for persist-only"
+                + " remote(s) to pick up asynchronously");
       } else {
         processing.writeStdOut("Nothing to replicate");
       }
