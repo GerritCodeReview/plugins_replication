@@ -23,6 +23,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Singleton
 class ReplicationStarter {
@@ -70,6 +71,18 @@ class ReplicationStarter {
         } catch (InterruptedException e) {
           processing.writeStdErr("We are interrupted while waiting replication to complete");
         }
+        if (state.hasPersistOnlyTask()) {
+          processing.writeStdOut(
+              "Note: ref(s) were also persisted for persist-only remote(s) "
+                  + formatRemotes(state)
+                  + " to pick up asynchronously");
+        }
+      } else if (state.hasPersistOnlyTask()) {
+        processing.writeStdOut(
+            "Nothing to replicate synchronously; ref(s) were persisted for persist-only"
+                + " remote(s) "
+                + formatRemotes(state)
+                + " to pick up asynchronously");
       } else {
         processing.writeStdOut(
             "WARNING: No replication scheduled. No configured destination matched the requested"
@@ -77,6 +90,10 @@ class ReplicationStarter {
                 + " them");
       }
     }
+  }
+
+  private static String formatRemotes(ReplicationState state) {
+    return state.getPersistOnlyRemotes().stream().sorted().collect(Collectors.joining(", "));
   }
 
   void start(

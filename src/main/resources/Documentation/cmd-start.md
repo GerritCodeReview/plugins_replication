@@ -63,6 +63,11 @@ command, it may be caused by several reasons, such as you give a wrong url
 pattern in command options, or the authGroup in the `replication.config`
 has no read access for the replicated projects.
 
+If the message instead says refs were persisted for persist-only
+remote(s), the refs were written to the replication tasks storage for
+another node to pick up asynchronously; this is expected for a remote
+configured with `threads = 0` and does not indicate a problem.
+
 If one or several project patterns are supplied, only those projects
 conforming to both this/these pattern(s) and those defined in
 `replication.config` for the target host(s) are queued for replication.
