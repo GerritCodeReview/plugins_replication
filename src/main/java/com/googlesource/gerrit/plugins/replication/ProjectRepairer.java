@@ -26,10 +26,13 @@ import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.OutputStream;
+import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -77,6 +80,7 @@ public class ProjectRepairer {
     if (objectsDir == null) {
       return false;
     }
+    Snapshot.sweepStale(objectsDir.getParent());
 
     boolean isRepaired = true;
     for (Action action : actions) {
@@ -280,11 +284,31 @@ public class ProjectRepairer {
 
   private static final class Snapshot implements AutoCloseable {
     private static final String SNAPSHOT_PREFIX = "replication-repair-snapshot-";
+    private static final Duration MAX_AGE = Duration.ofDays(1);
 
     private final Path dir;
 
     private Snapshot(Path parentDir) throws IOException {
       this.dir = Files.createDirectory(parentDir.resolve(SNAPSHOT_PREFIX + UUID.randomUUID()));
+    }
+
+    private static void sweepStale(Path parentDir) {
+      Instant cutoff = Instant.now().minus(MAX_AGE);
+      try (DirectoryStream<Path> snapshotDirs =
+          Files.newDirectoryStream(parentDir, SNAPSHOT_PREFIX + "*")) {
+        for (Path snapshotDir : snapshotDirs) {
+          try {
+            if (Files.getLastModifiedTime(snapshotDir).toInstant().isBefore(cutoff)) {
+              repLog.atWarning().log("Deleting stale repair snapshot %s", snapshotDir);
+              delete(snapshotDir);
+            }
+          } catch (IOException e) {
+            repLog.atWarning().withCause(e).log("Cannot check repair snapshot %s", snapshotDir);
+          }
+        }
+      } catch (IOException | DirectoryIteratorException e) {
+        repLog.atWarning().withCause(e).log("Cannot sweep repair snapshots in %s", parentDir);
+      }
     }
 
     private void createSubdir(String name) throws IOException {
@@ -311,11 +335,15 @@ public class ProjectRepairer {
 
     @Override
     public void close() {
+      delete(dir);
+    }
+
+    private static void delete(Path snapshotDir) {
       try {
         FileUtils.delete(
-            dir.toFile(), FileUtils.RECURSIVE | FileUtils.SKIP_MISSING | FileUtils.RETRY);
+            snapshotDir.toFile(), FileUtils.RECURSIVE | FileUtils.SKIP_MISSING | FileUtils.RETRY);
       } catch (IOException e) {
-        repLog.atSevere().withCause(e).log("Cannot delete repair snapshot %s", dir);
+        repLog.atSevere().withCause(e).log("Cannot delete repair snapshot %s", snapshotDir);
       }
     }
   }
