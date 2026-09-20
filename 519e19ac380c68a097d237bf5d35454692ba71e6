@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e6b9c58_95371c4b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-20T16:28:51Z",
+      "side": 1,
+      "message": "Done, the ownership check now runs first so the cheap set lookup short-circuits before the ref filters.",
+      "parentUuid": "1c02295a_5d3ba4c1",
+      "revId": "519e19ac380c68a097d237bf5d35454692ba71e6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7292ae91_98234782",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-09-18T23:54:31Z",
       "side": 1,
       "message": "Can you identify the implications of adding/removing uris and then reloading the plugin? Will we be left over with tasks in storage that wont ever get picked up?",
+      "revId": "519e19ac380c68a097d237bf5d35454692ba71e6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7db87978_5d1a7630",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-20T16:28:51Z",
+      "side": 1,
+      "message": "Tasks are persisted per URI by every strategy, so a pending task for a URI that was removed matches no destination on reload and stays in storage; that is pre-existing and not specific to refSharded. For URIs that remain, a pending task is still pushed to its stored URI even if the ref\u0027s owner moved, which costs at most one duplicate write, never a loss. Added a doc note to run a full sync after changing the URL list.",
+      "parentUuid": "7292ae91_98234782",
       "revId": "519e19ac380c68a097d237bf5d35454692ba71e6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -52,6 +88,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6c33c7a_10cadf4b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-20T16:28:51Z",
+      "side": 1,
+      "message": "Good catch, the sort is now done once in distribute/refsOwnedBy and ownerOf just indexes into the sorted list, with the ordering contract stated in its javadoc.",
+      "parentUuid": "d68a27ec_612b25a4",
+      "revId": "519e19ac380c68a097d237bf5d35454692ba71e6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32eed5b7_ca2347ce",
@@ -65,6 +119,30 @@
       "writtenOn": "2026-09-18T23:54:31Z",
       "side": 1,
       "message": "Does this include the change checks refs (for example refs/changes/30/966430/checks)? if not, should it?",
+      "range": {
+        "startLine": 182,
+        "startChar": 41,
+        "endLine": 182,
+        "endChar": 48
+      },
+      "revId": "519e19ac380c68a097d237bf5d35454692ba71e6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "290309a6_942ec697",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-20T16:28:51Z",
+      "side": 1,
+      "message": "It did not, Change.Id.fromRef only recognises patch set, meta and robot-comment refs. It should, so anything under refs/changes/NN/CCCC/ now hashes on that prefix, which covers the checks refs.",
+      "parentUuid": "32eed5b7_ca2347ce",
       "range": {
         "startLine": 182,
         "startChar": 41,
