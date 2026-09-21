@@ -16,6 +16,24 @@
       "message": "Won\u0027t we need to specifically record which remotes are persist-only? Maybe we need a `persistOnlyRemotes` set in ReplicationState. And, then ReplicationStarter can print a message like: \n\n```\nReplication work was persisted but not scheduled for remotes\nfoo, bar.. as they are in persist-only mode\n```",
       "revId": "b9d901952a20002ff1db30262b31718a8764d050",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30743df1_769426e1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-09-21T14:24:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93a9a59e_5b2bbe41",
+      "revId": "b9d901952a20002ff1db30262b31718a8764d050",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
