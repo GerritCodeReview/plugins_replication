@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b033965f_1d7c35bf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-09-21T17:22:36Z",
+      "side": 1,
+      "message": "Let\u0027s not do this in the first pass, as I believe we want a more generic solution to this that does not involve treating different refs differently. For now, I would just document that this strategy may split refs in the same set across different pushes.\n\nIn order to do this properly, we would need to push any refs in a set (in the same file on disk) together. Do you have a proposal on how we can do that?",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "417927da_0f3476a2",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
         "patchSetId": 7
@@ -48,6 +65,23 @@
       "writtenOn": "2026-09-21T14:35:15Z",
       "side": 1,
       "message": "why do this ?, Also we are not considering meta refs ?",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "233ca96d_6bc70372",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-09-21T17:22:36Z",
+      "side": 1,
+      "message": "When I see this method and the method below, I think why do we need these two different approaches? I then have to go through the other plugin code to figure out why. Is there some way we can name these two methods better to help the reader understand why they might be needed?",
       "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
