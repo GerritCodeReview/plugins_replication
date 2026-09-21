@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e6dc9af_83ece222",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-09-21T14:35:15Z",
+      "side": 1,
+      "message": "comment not necessary ?",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f185747a_2fe2e3da",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-09-21T14:35:15Z",
+      "side": 1,
+      "message": "can this be not assumed from the retry count above ?",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "417927da_0f3476a2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-09-21T14:35:15Z",
+      "side": 1,
+      "message": "why do this ?, Also we are not considering meta refs ?",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7714df7d_0ab45188",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-09-21T14:35:15Z",
+      "side": 1,
+      "message": "should mention --all ?",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
