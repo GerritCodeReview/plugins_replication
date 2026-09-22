@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91e5b7c4_e2c21fed",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 4069542
+      },
+      "writtenOn": "2026-09-22T14:36:21Z",
+      "side": 1,
+      "message": "Doesn\u0027t look like it ?  All retries are being failed over looking at Destination#669.",
+      "parentUuid": "80793ed8_8167c6b4",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b033965f_1d7c35bf",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
         "patchSetId": 7
