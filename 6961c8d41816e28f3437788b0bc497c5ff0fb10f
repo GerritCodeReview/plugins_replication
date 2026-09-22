@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed321f85_208ae419",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-22T06:14:41Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "4e6dc9af_83ece222",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f185747a_2fe2e3da",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-09-21T14:35:15Z",
       "side": 1,
       "message": "can this be not assumed from the retry count above ?",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80793ed8_8167c6b4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-22T06:14:41Z",
+      "side": 1,
+      "message": "No, a plain retry stays on its own URI, so a non-zero retry count does not mean the push is standing in for another URI; only the failover path sets this. Said so in the javadoc.",
+      "parentUuid": "f185747a_2fe2e3da",
       "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -52,6 +88,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cd0e8f0_c3e6f239",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-22T06:14:41Z",
+      "side": 1,
+      "message": "Dropped, and documented that refs updated together may be split across pushes. Proposal: hash the set of refs from one event off a single member instead of each ref, so anything written together lands in one push without special-casing ref names. The catch is that refsOwnedBy needs placement recomputable from one ref name to dedupe full syncs, so full syncs would keep the per-ref rule.",
+      "parentUuid": "b033965f_1d7c35bf",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "417927da_0f3476a2",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-09-21T14:35:15Z",
       "side": 1,
       "message": "why do this ?, Also we are not considering meta refs ?",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e6c58ee_c2da8b14",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-22T06:14:41Z",
+      "side": 1,
+      "message": "It kept all refs of a change on one URL, meta refs included since Change.Id.fromRef recognises them, and this branch covered the plugin refs it does not. It is gone now: per Martin\u0027s comment we keep plain ref hashing in the first pass and document that refs updated together can be split.",
+      "parentUuid": "417927da_0f3476a2",
       "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -86,6 +158,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa2b05b9_dfa220d3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-22T06:14:41Z",
+      "side": 1,
+      "message": "Renamed to selectForProject and selectForRef, with a note on the interface saying the first is asked when no single ref decides, which is all a project deletion or a full sync has, and the second per ref, which is what spreads a project over the URLs.",
+      "parentUuid": "233ca96d_6bc70372",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7714df7d_0ab45188",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-09-21T14:35:15Z",
       "side": 1,
       "message": "should mention --all ?",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "559083c0_5a7569a2",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-22T06:14:41Z",
+      "side": 1,
+      "message": "Done, the doc now says replication start --all --remote \u003cname\u003e.",
+      "parentUuid": "7714df7d_0ab45188",
       "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
