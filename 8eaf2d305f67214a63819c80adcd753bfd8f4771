@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e69bc1ba_0dd9a463",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-09-23T00:07:22Z",
+      "side": 1,
+      "message": "This change includes some refactors too and I think moving them to predecessor commits will make the review easier. For example:\n\n1. Instance.select -\u003e Instance.selectForProject rename\n2. Move sortedByUrl and nextAfter out of projectSharded\n3. Prepare URL distribution to shard refs, i.e add selectForRef, distribute etc,.\n4. Add refSharded strategy\n\nMaybe it is not easy to split 3 and 4, but if you can, that will help.",
+      "revId": "8eaf2d305f67214a63819c80adcd753bfd8f4771",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b6075cf7_834ea022",
         "filename": "/COMMIT_MSG",
         "patchSetId": 8
