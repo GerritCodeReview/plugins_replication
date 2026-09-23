@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e11cd1a_65c15456",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/Destination.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2026-09-23T15:40:40Z",
+      "side": 1,
+      "message": "This looks like a breaking change: why are we changing the units from minutes to seconds in a merge up?",
+      "range": {
+        "startLine": 676,
+        "startChar": 24,
+        "endLine": 676,
+        "endChar": 88
+      },
+      "revId": "b033261669b1d71aaf1c3cbe6a64b9f6932b432f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
