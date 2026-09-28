@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b6ed8f_a98861a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-28T05:14:16Z",
+      "side": 1,
+      "message": "Makes sense, I will split it that way. Item 1 is the rename Martin is still discussing, so I would rather settle that first than rebuild the chain twice.",
+      "parentUuid": "e69bc1ba_0dd9a463",
+      "revId": "8eaf2d305f67214a63819c80adcd753bfd8f4771",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6075cf7_834ea022",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-09-22T23:44:37Z",
       "side": 1,
       "message": "Commit msg needs an update as we are no longer doing this.",
+      "range": {
+        "startLine": 15,
+        "startChar": 12,
+        "endLine": 15,
+        "endChar": 48
+      },
+      "revId": "8eaf2d305f67214a63819c80adcd753bfd8f4771",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daf35445_24f47557",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-28T05:14:16Z",
+      "side": 1,
+      "message": "Updated, the change hashing is out of the message.",
+      "parentUuid": "b6075cf7_834ea022",
       "range": {
         "startLine": 15,
         "startChar": 12,
@@ -64,6 +106,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7860beea_8108a392",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-28T05:14:16Z",
+      "side": 1,
+      "message": "Done, distribute and refsOwnedBy now ask once whether the strategy places refs at all, so all and roundRobin skip both the sort and the per-ref loop. I can make it an explicit flag on Instance if you prefer that to asking with one ref.",
+      "parentUuid": "32b65a2c_23e3643c",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 25
+      },
+      "revId": "8eaf2d305f67214a63819c80adcd753bfd8f4771",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7730fc89_20b2710e",
@@ -77,6 +143,24 @@
       "writtenOn": "2026-09-22T14:36:21Z",
       "side": 1,
       "message": "--all should be specified here ?",
+      "revId": "8eaf2d305f67214a63819c80adcd753bfd8f4771",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94b2b4ce_650fadd4",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-28T05:14:16Z",
+      "side": 1,
+      "message": "Done, now replication start --all --url \u003csubstring\u003e.",
+      "parentUuid": "7730fc89_20b2710e",
       "revId": "8eaf2d305f67214a63819c80adcd753bfd8f4771",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }

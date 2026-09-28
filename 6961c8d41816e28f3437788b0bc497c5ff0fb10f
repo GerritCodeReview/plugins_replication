@@ -89,6 +89,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c208bdf_169d7a22",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/PushOne.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-28T05:14:16Z",
+      "side": 1,
+      "message": "Not quite... failoverTo can consolidate onto a push already pending at the new URI, and that one has no retries of its own, so inferring from the retry count would drop the refs of the URI that could not be reached. A retry also stays on its own URI for all and for single-URL remotes.",
+      "parentUuid": "91e5b7c4_e2c21fed",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b033965f_1d7c35bf",
@@ -208,6 +226,24 @@
       "side": 1,
       "message": "Unfortunately this doesn\u0027t really address my concern. My concern was actually answered by you in your reply, why would we ever not be supplying the refs? To address that, I would expect the method name to be something like getUrlForDelete() and getUrlForReplication(). Generality in Java we need not include parameter names in the method name because the type usually conveys that info (but not always such as when it is ambiguous, and the Strings are almost always ambiguous), so we often use the returned value to differentiate things. In this case, that might be something like getAllUrls(), and gerUrl(). \n\nBut I don\u0027t think we can make things that simple, because the purpose of this class is policy, so I think the method names do need to know the reason for the request in order to keep the policy decisions inside this class, and not in the rest of the plugin. I suspect that means we cannot use the same method for deletion and full Sync. Afterall, the policy needs to be different for these, and that policy needs to change with the strategy. In the case of deletions, some strategies should only delete from one url, and others should delete from all. That policy should not be the same for a full Sync, if it is, I think it is buggy?!\n\nMaybe the following would work? urlsToDeleteFrom(), urlsToReplicateTo() which would understand \"..all..\"?",
       "parentUuid": "aa2b05b9_dfa220d3",
+      "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94d3c3f0_19ebdb5c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-09-28T05:14:16Z",
+      "side": 1,
+      "message": "Agreed on naming by purpose. The same method does answer both today: deletions ask it through DestinationsCollection, replication through distribute. Splitting it into urlsToDeleteFrom and urlsToReplicateTo means giving each existing strategy a deletion policy, and roundRobin deletes from a rotating URL today, so it is a behaviour change I would rather not fold in here. Shall I do it as its own change ahead of this one, which also fits Kaushik\u0027s request to move the refactors out?",
+      "parentUuid": "9570d0c9_709a9e20",
       "revId": "6961c8d41816e28f3437788b0bc497c5ff0fb10f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
