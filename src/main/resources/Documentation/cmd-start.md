@@ -58,8 +58,8 @@ other reasons why an administrator may wish to trigger replication:
 	replication on just the affected project can update the
 	mirrors.
 
-If you get message "Nothing to replicate" while running this command,
-it may be caused by several reasons, such as you give a wrong url
+If you get message "WARNING: No replication scheduled" while running this
+command, it may be caused by several reasons, such as you give a wrong url
 pattern in command options, or the authGroup in the `replication.config`
 has no read access for the replicated projects.
 

@@ -71,7 +71,10 @@ class ReplicationStarter {
           processing.writeStdErr("We are interrupted while waiting replication to complete");
         }
       } else {
-        processing.writeStdOut("Nothing to replicate");
+        processing.writeStdOut(
+            "WARNING: No replication scheduled. No configured destination matched the requested"
+                + " projects, ref, URL, or remote, or the destination's authGroup cannot read"
+                + " them");
       }
     }
   }
