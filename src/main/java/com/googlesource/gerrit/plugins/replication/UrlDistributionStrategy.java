@@ -55,7 +55,7 @@ public enum UrlDistributionStrategy {
         private final AtomicInteger index = new AtomicInteger();
 
         @Override
-        public List<URIish> select(NameKey project, List<URIish> candidates) {
+        public List<URIish> urlsToReplicateTo(NameKey project, List<URIish> candidates) {
           if (candidates.isEmpty()) {
             return List.of();
           }
@@ -98,7 +98,7 @@ public enum UrlDistributionStrategy {
     public Instance newInstance() {
       return new Instance() {
         @Override
-        public List<URIish> select(NameKey project, List<URIish> candidates) {
+        public List<URIish> urlsToReplicateTo(NameKey project, List<URIish> candidates) {
           if (candidates.isEmpty()) {
             return List.of();
           }
@@ -146,21 +146,41 @@ public enum UrlDistributionStrategy {
         .orElse(ALL);
   }
 
-  /** A stateful executor for a {@link UrlDistributionStrategy} strategy. */
+  /**
+   * A stateful executor for a {@link UrlDistributionStrategy} strategy.
+   *
+   * <p>A strategy is asked per reason rather than once for every call site, so that what an
+   * operation does when a remote has several URLs is decided here instead of by the callers.
+   */
   @FunctionalInterface
   public interface Instance {
     /**
-     * Selects the URLs to push to out of the candidates for the given project.
+     * Selects the URLs to replicate a project to out of the candidates, which is what pushing its
+     * refs, creating it and updating its HEAD all follow.
      *
      * @param project project being replicated, used by project-affine strategies.
      * @param candidates URLs the project could be pushed to.
      * @return the subset of candidates to push to.
      */
-    List<URIish> select(Project.NameKey project, List<URIish> candidates);
+    List<URIish> urlsToReplicateTo(Project.NameKey project, List<URIish> candidates);
 
     /**
-     * If a push to any URI returned by {@link #select(Project.NameKey, List)} fails, {@link
-     * #failover(List, URIish)}} is invoked to select the next URI for retry.
+     * Selects the URLs to delete a project from out of the candidates.
+     *
+     * <p>Defaults to the URLs the project is replicated to, which is where it was written, and is
+     * separate from them so that a strategy can delete from URLs it would not push to.
+     *
+     * @param project project being deleted.
+     * @param candidates URLs the project could be deleted from.
+     * @return the subset of candidates to delete from.
+     */
+    default List<URIish> urlsToDeleteFrom(Project.NameKey project, List<URIish> candidates) {
+      return urlsToReplicateTo(project, candidates);
+    }
+
+    /**
+     * If a push to any URI returned by {@link #urlsToReplicateTo(Project.NameKey, List)} fails,
+     * {@link #failover(List, URIish)}} is invoked to select the next URI for retry.
      */
     default URIish failover(List<URIish> candidates, URIish failed) {
       return failed;

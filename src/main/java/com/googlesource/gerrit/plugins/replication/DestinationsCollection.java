@@ -138,7 +138,11 @@ public class DestinationsCollection implements ReplicationDestinations {
           validUris.add(uri);
         }
       }
-      config.getDistributedUris(projectName, validUris).forEach(uri -> uris.put(config, uri));
+      List<URIish> distributed =
+          filterType == FilterType.PROJECT_DELETION
+              ? config.urlsToDeleteFrom(projectName, validUris)
+              : config.urlsToReplicateTo(projectName, validUris);
+      distributed.forEach(uri -> uris.put(config, uri));
     }
     return uris;
   }

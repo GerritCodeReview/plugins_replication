@@ -60,7 +60,7 @@ public class UrlDistributionStrategyTest {
     ImmutableList<URIish> candidates = uris("replica1", "replica2", "replica3");
     UrlDistributionStrategy.Instance distributor = UrlDistributionStrategy.ALL.newInstance();
 
-    assertThat(distributor.select(PROJECT, candidates)).isEqualTo(candidates);
+    assertThat(distributor.urlsToReplicateTo(PROJECT, candidates)).isEqualTo(candidates);
   }
 
   @Test
@@ -69,9 +69,12 @@ public class UrlDistributionStrategyTest {
     UrlDistributionStrategy.Instance distributor =
         UrlDistributionStrategy.ROUND_ROBIN.newInstance();
 
-    assertThat(distributor.select(PROJECT, candidates)).containsExactly(candidates.get(0));
-    assertThat(distributor.select(PROJECT, candidates)).containsExactly(candidates.get(1));
-    assertThat(distributor.select(PROJECT, candidates)).containsExactly(candidates.get(0));
+    assertThat(distributor.urlsToReplicateTo(PROJECT, candidates))
+        .containsExactly(candidates.get(0));
+    assertThat(distributor.urlsToReplicateTo(PROJECT, candidates))
+        .containsExactly(candidates.get(1));
+    assertThat(distributor.urlsToReplicateTo(PROJECT, candidates))
+        .containsExactly(candidates.get(0));
   }
 
   @Test
@@ -80,8 +83,10 @@ public class UrlDistributionStrategyTest {
     UrlDistributionStrategy.Instance distributor =
         UrlDistributionStrategy.ROUND_ROBIN.newInstance();
 
-    assertThat(distributor.select(PROJECT, candidates)).containsExactly(candidates.get(0));
-    assertThat(distributor.select(OTHER_PROJECT, candidates)).containsExactly(candidates.get(1));
+    assertThat(distributor.urlsToReplicateTo(PROJECT, candidates))
+        .containsExactly(candidates.get(0));
+    assertThat(distributor.urlsToReplicateTo(OTHER_PROJECT, candidates))
+        .containsExactly(candidates.get(1));
   }
 
   @Test
@@ -90,7 +95,7 @@ public class UrlDistributionStrategyTest {
     UrlDistributionStrategy.Instance distributor =
         UrlDistributionStrategy.PROJECT_SHARDED.newInstance();
 
-    List<URIish> selected = distributor.select(PROJECT, candidates);
+    List<URIish> selected = distributor.urlsToReplicateTo(PROJECT, candidates);
 
     assertThat(selected).hasSize(1);
     assertThat(candidates).containsAtLeastElementsIn(selected);
@@ -102,9 +107,9 @@ public class UrlDistributionStrategyTest {
     UrlDistributionStrategy.Instance distributor =
         UrlDistributionStrategy.PROJECT_SHARDED.newInstance();
 
-    List<URIish> first = distributor.select(PROJECT, candidates);
+    List<URIish> first = distributor.urlsToReplicateTo(PROJECT, candidates);
     for (int i = 0; i < 10; i++) {
-      assertThat(distributor.select(PROJECT, candidates)).isEqualTo(first);
+      assertThat(distributor.urlsToReplicateTo(PROJECT, candidates)).isEqualTo(first);
     }
   }
 
@@ -113,9 +118,13 @@ public class UrlDistributionStrategyTest {
     ImmutableList<URIish> candidates = uris("replica1", "replica2", "replica3");
 
     List<URIish> first =
-        UrlDistributionStrategy.PROJECT_SHARDED.newInstance().select(PROJECT, candidates);
+        UrlDistributionStrategy.PROJECT_SHARDED
+            .newInstance()
+            .urlsToReplicateTo(PROJECT, candidates);
     List<URIish> second =
-        UrlDistributionStrategy.PROJECT_SHARDED.newInstance().select(PROJECT, candidates);
+        UrlDistributionStrategy.PROJECT_SHARDED
+            .newInstance()
+            .urlsToReplicateTo(PROJECT, candidates);
 
     assertThat(second).isEqualTo(first);
   }
@@ -127,13 +136,13 @@ public class UrlDistributionStrategyTest {
     UrlDistributionStrategy.Instance distributor =
         UrlDistributionStrategy.PROJECT_SHARDED.newInstance();
 
-    List<URIish> expected = distributor.select(PROJECT, candidates);
+    List<URIish> expected = distributor.urlsToReplicateTo(PROJECT, candidates);
 
     List<URIish> shuffled = new ArrayList<>(candidates);
     Random random = new Random(42);
     for (int i = 0; i < 20; i++) {
       Collections.shuffle(shuffled, random);
-      assertThat(distributor.select(PROJECT, shuffled)).isEqualTo(expected);
+      assertThat(distributor.urlsToReplicateTo(PROJECT, shuffled)).isEqualTo(expected);
     }
   }
 
@@ -145,7 +154,7 @@ public class UrlDistributionStrategyTest {
 
     Set<URIish> selected = new HashSet<>();
     for (int i = 0; i < 100; i++) {
-      selected.addAll(distributor.select(Project.nameKey("project" + i), candidates));
+      selected.addAll(distributor.urlsToReplicateTo(Project.nameKey("project" + i), candidates));
     }
 
     assertThat(selected).containsExactlyElementsIn(candidates);
@@ -157,14 +166,26 @@ public class UrlDistributionStrategyTest {
     UrlDistributionStrategy.Instance distributor =
         UrlDistributionStrategy.PROJECT_SHARDED.newInstance();
 
-    assertThat(distributor.select(PROJECT, candidates)).isEqualTo(candidates);
-    assertThat(distributor.select(OTHER_PROJECT, candidates)).isEqualTo(candidates);
+    assertThat(distributor.urlsToReplicateTo(PROJECT, candidates)).isEqualTo(candidates);
+    assertThat(distributor.urlsToReplicateTo(OTHER_PROJECT, candidates)).isEqualTo(candidates);
   }
 
   @Test
   public void shouldSelectNothingWhenThereAreNoCandidates() {
     for (UrlDistributionStrategy strategy : UrlDistributionStrategy.values()) {
-      assertThat(strategy.newInstance().select(PROJECT, List.of())).isEmpty();
+      assertThat(strategy.newInstance().urlsToReplicateTo(PROJECT, List.of())).isEmpty();
+    }
+  }
+
+  @Test
+  public void shouldDeleteAProjectFromTheUrlsItIsReplicatedTo() throws Exception {
+    ImmutableList<URIish> candidates = uris("replica1", "replica2", "replica3");
+
+    // Each strategy deletes where it writes: from every URL for all, from the one URL the others
+    // pick. A fresh instance per call keeps the round-robin rotation out of the comparison.
+    for (UrlDistributionStrategy strategy : UrlDistributionStrategy.values()) {
+      assertThat(strategy.newInstance().urlsToDeleteFrom(PROJECT, candidates))
+          .containsExactlyElementsIn(strategy.newInstance().urlsToReplicateTo(PROJECT, candidates));
     }
   }
 }
