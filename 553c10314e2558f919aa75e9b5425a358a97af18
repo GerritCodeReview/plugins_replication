@@ -16,6 +16,24 @@
       "message": "Can we avoid adding another method now, and instead add the refNsme parameter to the existing urlsToReplicateTo method?",
       "revId": "553c10314e2558f919aa75e9b5425a358a97af18",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f87e65_fe2b75fe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-10-01T05:28:05Z",
+      "side": 1,
+      "message": "The parameter cannot go on `urlsToReplicateTo` because that is the stateful one: asking it per `ref` would advance roundRobin\u0027s rotation for every ref instead of once per event, and `refsOwnedBy` asks the same question again at push time on another host, where a rotating counter would answer with its own position and filter every ref away. So I moved it off `Instance` instead: `Instance` is unchanged by this patch, and the `ref` question sits on the strategy `enum`, where being stateless is structural rather than a promise in the javadoc. distribute and `refsOwnedBy` moved with it, and `refsOwnedBy` no longer needs an `Instance`.",
+      "parentUuid": "b6556fab_b02b934b",
+      "revId": "553c10314e2558f919aa75e9b5425a358a97af18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
