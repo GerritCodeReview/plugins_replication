@@ -110,6 +110,53 @@ public class ReplicationTasksStorageTest {
   }
 
   @Test
+  public void canPersistAndReadDeleteProjectTask() throws Exception {
+    ReplicateRefUpdate deletion = ReplicateRefUpdate.createDeleteProject(PROJECT, URISH, REMOTE);
+    storage.create(deletion);
+
+    ReplicateRefUpdate stored =
+        storage.streamWaiting().collect(Collectors.toList()).get(0);
+    assertEquals(ReplicationTasksStorage.TaskType.DELETE_PROJECT, stored.type());
+    assertThat(stored.refs()).isEmpty();
+    assertEquals(deletion.sha1(), stored.sha1());
+  }
+
+  @Test
+  public void canPersistAndReadUpdateHeadTask() throws Exception {
+    ReplicateRefUpdate headUpdate =
+        ReplicateRefUpdate.createUpdateHead(PROJECT, URISH, REMOTE, "refs/heads/other");
+    storage.create(headUpdate);
+
+    ReplicateRefUpdate stored = storage.streamWaiting().collect(Collectors.toList()).get(0);
+    assertEquals(ReplicationTasksStorage.TaskType.UPDATE_HEAD, stored.type());
+    assertEquals("refs/heads/other", stored.newHead());
+  }
+
+  @Test
+  public void taskTypesAndNewHeadProduceDistinctKeys() throws Exception {
+    ReplicateRefUpdate deletion = ReplicateRefUpdate.createDeleteProject(PROJECT, URISH, REMOTE);
+    ReplicateRefUpdate head1 = ReplicateRefUpdate.createUpdateHead(PROJECT, URISH, REMOTE, "a");
+    ReplicateRefUpdate head2 = ReplicateRefUpdate.createUpdateHead(PROJECT, URISH, REMOTE, "b");
+    ReplicateRefUpdate noRefs = ReplicateRefUpdate.create(PROJECT, Set.of(), URISH, REMOTE);
+
+    assertThat(Set.of(deletion.sha1(), head1.sha1(), head2.sha1(), noRefs.sha1())).hasSize(4);
+  }
+
+  @Test
+  public void canStartAndFinishNonRefTask() throws Exception {
+    ReplicateRefUpdate deletion = ReplicateRefUpdate.createDeleteProject(PROJECT, URISH, REMOTE);
+    storage.create(deletion);
+
+    assertTrue(storage.start(deletion));
+    assertFalse(storage.start(deletion));
+    assertThatStream(storage.streamWaiting()).isEmpty();
+    assertThat(storage.streamRunning().collect(Collectors.toList())).hasSize(1);
+
+    storage.finish(deletion);
+    assertNoIncompleteTasks(storage);
+  }
+
+  @Test
   public void canFinishRunningUpdate() throws Exception {
     storage.create(REF_UPDATE);
     storage.start(uriUpdates);

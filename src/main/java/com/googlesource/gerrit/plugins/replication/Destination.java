@@ -557,13 +557,16 @@ public class Destination {
     pushOp.notifyNotAttempted(notAttemptedRefs);
   }
 
-  void scheduleDeleteProject(URIish uri, Project.NameKey project, ProjectDeletionState state) {
+  void scheduleDeleteProject(
+      URIish uri, Project.NameKey project, @Nullable ProjectDeletionState state) {
     if (isPushEnabled()) {
       repLog.atFine().log("scheduling deletion of project %s at %s", project, uri);
       @SuppressWarnings("unused")
       ScheduledFuture<?> ignored =
           pool.schedule(deleteProjectFactory.create(uri, project, state), 0, TimeUnit.SECONDS);
-      state.setScheduled(uri);
+      if (state != null) {
+        state.setScheduled(uri);
+      }
     }
   }
 

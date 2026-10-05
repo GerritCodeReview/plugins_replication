@@ -16,12 +16,14 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.server.ioutil.HexFormat;
 import com.google.gerrit.server.util.IdGenerator;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import com.googlesource.gerrit.plugins.replication.events.ProjectDeletionState;
 import java.util.Optional;
 import org.eclipse.jgit.transport.RemoteConfig;
@@ -31,11 +33,12 @@ public class DeleteProjectTask implements Runnable {
   interface Factory {
 
     DeleteProjectTask create(
-        URIish replicateURI, Project.NameKey project, ProjectDeletionState state);
+        URIish replicateURI, Project.NameKey project, @Nullable ProjectDeletionState state);
   }
 
   private final RemoteConfig config;
   private final DynamicItem<AdminApiFactory> adminApiFactory;
+  private final ReplicationTasksStorage tasksStorage;
   private final int id;
   private final URIish replicateURI;
   private final Project.NameKey project;
@@ -45,12 +48,14 @@ public class DeleteProjectTask implements Runnable {
   DeleteProjectTask(
       RemoteConfig config,
       DynamicItem<AdminApiFactory> adminApiFactory,
+      ReplicationTasksStorage tasksStorage,
       IdGenerator ig,
-      @Assisted ProjectDeletionState state,
+      @Assisted @Nullable ProjectDeletionState state,
       @Assisted URIish replicateURI,
       @Assisted Project.NameKey project) {
     this.config = config;
     this.adminApiFactory = adminApiFactory;
+    this.tasksStorage = tasksStorage;
     this.id = ig.next();
     this.replicateURI = replicateURI;
     this.project = project;
@@ -59,17 +64,30 @@ public class DeleteProjectTask implements Runnable {
 
   @Override
   public void run() {
-    Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI, config.getName());
-    if (adminApi.isPresent()) {
-      if (adminApi.get().deleteProject(project)) {
-        state.setSucceeded(replicateURI);
-      } else {
-        state.setFailed(replicateURI);
-      }
+    ReplicateRefUpdate update =
+        ReplicateRefUpdate.createDeleteProject(project.get(), replicateURI, config.getName());
+    if (!tasksStorage.start(update)) {
+      repLog.atFine().log("%s already started by another node, skipping", this);
       return;
     }
+    try {
+      Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI, config.getName());
+      if (adminApi.isPresent()) {
+        boolean deleted = adminApi.get().deleteProject(project);
+        if (state != null) {
+          if (deleted) {
+            state.setSucceeded(replicateURI);
+          } else {
+            state.setFailed(replicateURI);
+          }
+        }
+        return;
+      }
 
-    repLog.atWarning().log("Cannot delete project %s on remote site %s.", project, replicateURI);
+      repLog.atWarning().log("Cannot delete project %s on remote site %s.", project, replicateURI);
+    } finally {
+      tasksStorage.finish(update);
+    }
   }
 
   @Override

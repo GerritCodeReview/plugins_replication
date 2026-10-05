@@ -74,6 +74,12 @@ import org.eclipse.jgit.transport.URIish;
 public class ReplicationTasksStorage {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
+  public enum TaskType {
+    REF_UPDATE,
+    DELETE_PROJECT,
+    UPDATE_HEAD
+  }
+
   @AutoValue
   public abstract static class ReplicateRefUpdate {
     public static Optional<ReplicateRefUpdate> createOptionally(Path file, Gson gson) {
@@ -94,17 +100,41 @@ public class ReplicationTasksStorage {
 
     public static ReplicateRefUpdate create(
         String project, Set<String> refs, URIish uri, String remote) {
+      return create(project, refs, uri, remote, TaskType.REF_UPDATE, null);
+    }
+
+    public static ReplicateRefUpdate createDeleteProject(
+        String project, URIish uri, String remote) {
+      return create(project, ImmutableSet.of(), uri, remote, TaskType.DELETE_PROJECT, null);
+    }
+
+    public static ReplicateRefUpdate createUpdateHead(
+        String project, URIish uri, String remote, String newHead) {
+      return create(project, ImmutableSet.of(), uri, remote, TaskType.UPDATE_HEAD, newHead);
+    }
+
+    static ReplicateRefUpdate create(
+        String project,
+        Set<String> refs,
+        URIish uri,
+        String remote,
+        TaskType type,
+        @Nullable String newHead) {
+      ImmutableSet<String> refSet = ImmutableSet.copyOf(refs);
+      String uriString = uri.toASCIIString();
       return new AutoValue_ReplicationTasksStorage_ReplicateRefUpdate(
           project,
-          ImmutableSet.copyOf(refs),
-          uri.toASCIIString(),
+          refSet,
+          uriString,
           remote,
-          sha1(project, ImmutableSet.copyOf(refs), uri.toASCIIString(), remote));
+          type,
+          newHead,
+          sha1(project, refSet, uriString, remote, type, newHead));
     }
 
     public static ReplicateRefUpdate create(ReplicateRefUpdate u, String filename) {
       return new AutoValue_ReplicationTasksStorage_ReplicateRefUpdate(
-          u.project(), u.refs(), u.uri(), u.remote(), filename);
+          u.project(), u.refs(), u.uri(), u.remote(), u.type(), u.newHead(), filename);
     }
 
     public abstract String project();
@@ -115,24 +145,51 @@ public class ReplicationTasksStorage {
 
     public abstract String remote();
 
+    public abstract TaskType type();
+
+    @Nullable
+    public abstract String newHead();
+
     public abstract String sha1();
 
-    private static String sha1(String project, Set<String> refs, String uri, String remote) {
-      return ReplicationTasksStorage.sha1(
-              project + "\n" + refs.toString() + "\n" + uri + "\n" + remote)
-          .name();
+    private static String sha1(
+        String project,
+        Set<String> refs,
+        String uri,
+        String remote,
+        TaskType type,
+        @Nullable String newHead) {
+      String legacyKey = project + "\n" + refs.toString() + "\n" + uri + "\n" + remote;
+      String key =
+          type == TaskType.REF_UPDATE ? legacyKey : legacyKey + "\n" + type + "\n" + newHead;
+      return ReplicationTasksStorage.sha1(key).name();
     }
 
     @Override
     public final String toString() {
-      return "ref-update "
-          + project()
-          + ":"
-          + refs().toString()
-          + " uri:"
-          + uri()
-          + " remote:"
-          + remote();
+      switch (type()) {
+        case DELETE_PROJECT:
+          return "delete-project " + project() + " uri:" + uri() + " remote:" + remote();
+        case UPDATE_HEAD:
+          return "update-head "
+              + project()
+              + " to:"
+              + newHead()
+              + " uri:"
+              + uri()
+              + " remote:"
+              + remote();
+        case REF_UPDATE:
+        default:
+          return "ref-update "
+              + project()
+              + ":"
+              + refs().toString()
+              + " uri:"
+              + uri()
+              + " remote:"
+              + remote();
+      }
     }
 
     public static TypeAdapter<ReplicateRefUpdate> typeAdapter(Gson gson) {
@@ -182,6 +239,14 @@ public class ReplicationTasksStorage {
       }
     }
     return startedRefs;
+  }
+
+  public boolean start(ReplicateRefUpdate update) {
+    return new Task(update).start();
+  }
+
+  public void finish(ReplicateRefUpdate update) {
+    new Task(update).finish();
   }
 
   public void reset(UriUpdates uriUpdates) {
@@ -284,6 +349,16 @@ public class ReplicationTasksStorage {
         out.name("remote");
         out.value(value.remote());
 
+        if (value.type() != TaskType.REF_UPDATE) {
+          out.name("type");
+          out.value(value.type().name());
+        }
+
+        if (value.newHead() != null) {
+          out.name("newHead");
+          out.value(value.newHead());
+        }
+
         out.endObject();
       }
 
@@ -298,6 +373,8 @@ public class ReplicationTasksStorage {
         Set<String> refs = new HashSet<>();
         URIish uri = null;
         String remote = null;
+        TaskType type = TaskType.REF_UPDATE;
+        String newHead = null;
 
         String fieldname = null;
         in.beginObject();
@@ -333,13 +410,23 @@ public class ReplicationTasksStorage {
             case "remote":
               remote = in.nextString();
               break;
+            case "type":
+              try {
+                type = TaskType.valueOf(in.nextString());
+              } catch (IllegalArgumentException e) {
+                throw new IOException("Unknown task type in stored task", e);
+              }
+              break;
+            case "newHead":
+              newHead = in.nextString();
+              break;
             default:
               throw new IOException(String.format("Unknown field in stored task: %s", fieldname));
           }
         }
 
         in.endObject();
-        return ReplicateRefUpdate.create(project, refs, uri, remote);
+        return ReplicateRefUpdate.create(project, refs, uri, remote, type, newHead);
       }
     }
 

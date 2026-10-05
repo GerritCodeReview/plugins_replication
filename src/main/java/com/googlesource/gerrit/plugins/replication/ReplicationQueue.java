@@ -269,6 +269,10 @@ public class ReplicationQueue
             @Override
             public void run(ReplicationTasksStorage.ReplicateRefUpdate u) {
               try {
+                if (u.type() != ReplicationTasksStorage.TaskType.REF_UPDATE) {
+                  fireNonRefTaskFromStorage(u);
+                  return;
+                }
                 if (Prune.TRUE.equals(prune)) {
                   if (taskNamesByReplicateRefUpdate.remove(u) != null) {
                     repLog.atFine().log("Task %s is already scheduled, not re-firing", u);
@@ -330,14 +334,48 @@ public class ReplicationQueue
         destinations.get().getURIs(Optional.empty(), p, FilterType.PROJECT_DELETION).entries();
 
     projectsToDelete.forEach(e -> state.setToProcess(e.getValue()));
-    projectsToDelete.forEach(e -> e.getKey().scheduleDeleteProject(e.getValue(), p, state));
+    projectsToDelete.forEach(
+        e -> {
+          replicationTasksStorage.create(
+              ReplicateRefUpdate.createDeleteProject(
+                  p.get(), e.getValue(), e.getKey().getRemoteConfigName()));
+          e.getKey().scheduleDeleteProject(e.getValue(), p, state);
+        });
   }
 
   @Override
   public void onHeadUpdated(HeadUpdatedListener.Event event) {
     Project.NameKey p = Project.nameKey(event.getProjectName());
     destinations.get().getURIs(Optional.empty(), p, FilterType.ALL).entries().stream()
-        .forEach(e -> e.getKey().scheduleUpdateHead(e.getValue(), p, event.getNewHeadName()));
+        .forEach(
+            e -> {
+              replicationTasksStorage.create(
+                  ReplicateRefUpdate.createUpdateHead(
+                      p.get(),
+                      e.getValue(),
+                      e.getKey().getRemoteConfigName(),
+                      event.getNewHeadName()));
+              e.getKey().scheduleUpdateHead(e.getValue(), p, event.getNewHeadName());
+            });
+  }
+
+  private void fireNonRefTaskFromStorage(ReplicateRefUpdate u) throws URISyntaxException {
+    URIish uri = new URIish(u.uri());
+    Project.NameKey project = Project.nameKey(u.project());
+    FilterType filter =
+        u.type() == ReplicationTasksStorage.TaskType.DELETE_PROJECT
+            ? FilterType.PROJECT_DELETION
+            : FilterType.ALL;
+    destinations.get().getURIs(Optional.of(u.remote()), project, filter).entries().stream()
+        .filter(e -> e.getValue().equals(uri))
+        .forEach(
+            e -> {
+              if (u.type() == ReplicationTasksStorage.TaskType.DELETE_PROJECT) {
+                e.getKey().scheduleDeleteProject(uri, project, null);
+              } else {
+                e.getKey().scheduleUpdateHead(uri, project, u.newHead());
+              }
+            });
   }
 
   private void fireBeforeStartupEvents() {

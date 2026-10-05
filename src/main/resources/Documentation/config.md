@@ -549,9 +549,9 @@ remote.NAME.threads
 	`replication.distributionInterval` enabled) pick them up and perform
 	the actual pushes.
 
-	> **NOTE**: In persist-only mode, project deletions and HEAD updates
-	> originating on this node cannot be replicated by other nodes, as
-	> they are not persisted to the task storage.
+	Project deletions and HEAD updates originating on this node are
+	persisted as well. Events about the progress of a project deletion
+	are only emitted by the node that performs it.
 
 	By default, 1 thread.
 

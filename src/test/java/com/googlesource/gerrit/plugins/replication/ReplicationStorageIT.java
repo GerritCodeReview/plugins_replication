@@ -91,6 +91,31 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
   }
 
   @Test
+  public void shouldPersistProjectDeletionWhenRemoteHasZeroThreads() throws Exception {
+    String remote = "persistOnly";
+    String deletedProject = "project-deleted";
+    Project.NameKey replicaProject = createTestProject(deletedProject + "replica");
+    setReplicationDestination(remote, "replica", ALL_PROJECTS);
+    setProjectDeletionReplication(remote, true);
+    config.setInt("remote", remote, "threads", 0);
+    config.save();
+    reloadConfig();
+
+    plugin
+        .getSysInjector()
+        .getInstance(ReplicationQueue.class)
+        .onProjectDeleted(projectDeletedEvent(deletedProject));
+
+    List<ReplicateRefUpdate> waiting = listWaiting();
+    assertThat(waiting).hasSize(1);
+    assertThat(waiting.get(0).type())
+        .isEqualTo(ReplicationTasksStorage.TaskType.DELETE_PROJECT);
+    assertThat(waiting.get(0).project()).isEqualTo(deletedProject);
+    assertThat(waiting.get(0).remote()).isEqualTo(remote);
+    assertThat(nonEmptyProjectExists(replicaProject)).isTrue();
+  }
+
+  @Test
   public void shouldCreateOneReplicationTaskWhenSchedulingRepoFullSync() throws Exception {
     createTestProject(project + "replica");
 

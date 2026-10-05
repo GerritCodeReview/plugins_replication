@@ -22,6 +22,7 @@ import com.google.gerrit.server.ioutil.HexFormat;
 import com.google.gerrit.server.util.IdGenerator;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.util.Optional;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.URIish;
@@ -29,6 +30,7 @@ import org.eclipse.jgit.transport.URIish;
 public class UpdateHeadTask implements Runnable {
   private final DynamicItem<AdminApiFactory> adminApiFactory;
   private final RemoteConfig remoteConfig;
+  private final ReplicationTasksStorage tasksStorage;
   private final int id;
   private final URIish replicateURI;
   private final Project.NameKey project;
@@ -42,12 +44,14 @@ public class UpdateHeadTask implements Runnable {
   UpdateHeadTask(
       DynamicItem<AdminApiFactory> adminApiFactory,
       RemoteConfig remoteConfig,
+      ReplicationTasksStorage tasksStorage,
       IdGenerator ig,
       @Assisted URIish replicateURI,
       @Assisted Project.NameKey project,
       @Assisted String newHead) {
     this.adminApiFactory = adminApiFactory;
     this.remoteConfig = remoteConfig;
+    this.tasksStorage = tasksStorage;
     this.id = ig.next();
     this.replicateURI = replicateURI;
     this.project = project;
@@ -56,15 +60,26 @@ public class UpdateHeadTask implements Runnable {
 
   @Override
   public void run() {
-    Optional<AdminApi> adminApi =
-        adminApiFactory.get().create(replicateURI, remoteConfig.getName());
-    if (adminApi.isPresent()) {
-      adminApi.get().updateHead(project, newHead);
+    ReplicateRefUpdate update =
+        ReplicateRefUpdate.createUpdateHead(
+            project.get(), replicateURI, remoteConfig.getName(), newHead);
+    if (!tasksStorage.start(update)) {
+      repLog.atFine().log("%s already started by another node, skipping", this);
       return;
     }
+    try {
+      Optional<AdminApi> adminApi =
+          adminApiFactory.get().create(replicateURI, remoteConfig.getName());
+      if (adminApi.isPresent()) {
+        adminApi.get().updateHead(project, newHead);
+        return;
+      }
 
-    repLog.atWarning().log(
-        "Cannot update HEAD of project %s on remote site %s.", project, replicateURI);
+      repLog.atWarning().log(
+          "Cannot update HEAD of project %s on remote site %s.", project, replicateURI);
+    } finally {
+      tasksStorage.finish(update);
+    }
   }
 
   @Override
