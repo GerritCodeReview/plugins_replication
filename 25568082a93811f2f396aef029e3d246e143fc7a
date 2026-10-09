@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a8d2c55_608dd796",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-10-09T22:35:14Z",
+      "side": 1,
+      "message": "```suggestion\nWith remote.NAME.threads \u003d 0, a node only persists replication tasks for\n```",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 71
+      },
+      "revId": "25568082a93811f2f396aef029e3d246e143fc7a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "263379c4_0ae50f33",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DeleteProjectTask.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-10-09T22:35:14Z",
+      "side": 1,
+      "message": "Scheduling deletions may be tricky. Consider a scenario where a project was deleted (maybe because it was corrupted) and re-created again. The deletion work may run after the create. Maybe after the delete is replicated, we can check if a project with the same name exists on the primary again and then schedule a ALL_REFS sync if so.",
+      "revId": "25568082a93811f2f396aef029e3d246e143fc7a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6829b119_8d70fd9d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-10-09T22:35:14Z",
+      "side": 1,
+      "message": "Wont this cause distributor to schedule the same project deletion or HEAD update every time it runs? We\u0027ll have to check before firing if it is already scheduled.",
+      "revId": "25568082a93811f2f396aef029e3d246e143fc7a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49dd8338_d124b281",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UpdateHeadTask.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-10-09T22:35:14Z",
+      "side": 1,
+      "message": "Why do we need to keep track of the newHead? We can read it when replicating. Else, we may run into replicating the incorrect HEAD due to ordering (in a MP env). For example, HEAD was updated to h1 and then h2. If the task for h1 runs after, then mirror will have h1 instead of h2.",
+      "range": {
+        "startLine": 65,
+        "startChar": 65,
+        "endLine": 65,
+        "endChar": 72
+      },
+      "revId": "25568082a93811f2f396aef029e3d246e143fc7a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
