@@ -43,6 +43,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ace9b8f8_926554a2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/DeleteProjectTask.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-10-09T22:42:35Z",
+      "side": 1,
+      "message": "I don\u0027t love that solution. Is there some way we can avoid the create/delete race via locking at the TaskStorage layer instead?",
+      "parentUuid": "263379c4_0ae50f33",
+      "revId": "25568082a93811f2f396aef029e3d246e143fc7a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6829b119_8d70fd9d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationQueue.java",
         "patchSetId": 1
