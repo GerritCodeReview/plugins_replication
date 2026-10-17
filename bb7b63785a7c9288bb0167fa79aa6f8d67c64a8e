@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "035cd443_7736380d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5246759
+      },
+      "writtenOn": "2026-10-17T02:54:56Z",
+      "side": 1,
+      "message": "620402: ProjectRepairer: Sweep stale snapshots before repairing | https://gerrit-review.googlesource.com/c/plugins/replication/+/620402",
+      "revId": "bb7b63785a7c9288bb0167fa79aa6f8d67c64a8e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
