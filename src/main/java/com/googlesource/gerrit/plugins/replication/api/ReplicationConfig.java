@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication.api;
 
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.OptionalInt;
 import org.eclipse.jgit.lib.Config;
 
 /** Configuration of all the replication end points. */
@@ -88,6 +89,13 @@ public interface ReplicationConfig {
    * @return command timeout, zero if infinite.
    */
   int getSshCommandTimeout();
+
+  /**
+   * Number of NIO2 I/O worker threads used by each outbound SSH session.
+   *
+   * @return the number of worker threads, or empty to use the Apache MINA sshd default.
+   */
+  OptionalInt getSshNioWorkers();
 
   /**
    * Path of the {@code rsync} binary on the host running Gerrit, used by the {@code replication

@@ -25,6 +25,7 @@ import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.OptionalInt;
 import org.eclipse.jgit.lib.Config;
 
 public class ReplicationConfigImpl implements ReplicationConfig {
@@ -43,6 +44,7 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   private final int maxRefsToShow;
   private int sshCommandTimeout;
   private int sshConnectionTimeout;
+  private final OptionalInt sshNioWorkers;
   private final Duration autoRepairInterval;
   private final int autoRepairMaxAttempts;
   private final int autoRepairConcurrencyLimit;
@@ -70,6 +72,7 @@ public class ReplicationConfigImpl implements ReplicationConfig {
                 "sshConnectionTimeout",
                 DEFAULT_SSH_CONNECTION_TIMEOUT_MS,
                 MILLISECONDS);
+    this.sshNioWorkers = parseSshNioWorkers(config);
     this.autoRepairInterval =
         Duration.ofSeconds(
             ConfigUtil.getTimeUnit(
@@ -90,6 +93,13 @@ public class ReplicationConfigImpl implements ReplicationConfig {
                 DEFAULT_AUTO_REPAIR_CONCURRENCY_LIMIT));
     this.pluginDataDir = pluginDataDir;
     this.useLegacyCredentials = config.getBoolean("gerrit", "useLegacyCredentials", false);
+  }
+
+  private static OptionalInt parseSshNioWorkers(Config config) {
+    if (config.getString("gerrit", null, "sshNioWorkers") == null) {
+      return OptionalInt.empty();
+    }
+    return OptionalInt.of(config.getInt("gerrit", "sshNioWorkers", 0));
   }
 
   @Nullable
@@ -170,6 +180,11 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   @Override
   public int getSshCommandTimeout() {
     return sshCommandTimeout;
+  }
+
+  @Override
+  public OptionalInt getSshNioWorkers() {
+    return sshNioWorkers;
   }
 
   @Override

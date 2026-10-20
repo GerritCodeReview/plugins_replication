@@ -170,6 +170,18 @@ gerrit.sshConnectionTimeout
 :	Timeout for SSH connections. If 0, there is no timeout and
         the client waits indefinitely. By default, 2 minutes.
 
+gerrit.sshNioWorkers
+:	Number of NIO2 I/O worker threads used by each outbound SSH
+	session, i.e. each push to an `ssh://` remote and each SSH command
+	run against a remote's `adminUrl`. Every session creates its own
+	thread pool and destroys it when the session ends, so on hosts with
+	many cores and many concurrent pushes a small value avoids creating
+	and tearing down large numbers of threads.
+
+	Must be positive.
+
+	By default unset, which uses the JGit default.
+
 gerrit.useLegacyCredentials
 :	Use legacy credentials on secure.config which did not allow encryption
 	through a SecureStore provider. Legacy credentials should not be used in
