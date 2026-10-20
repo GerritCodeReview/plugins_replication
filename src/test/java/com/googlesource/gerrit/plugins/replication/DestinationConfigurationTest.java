@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import org.eclipse.jgit.lib.Config;
@@ -45,38 +46,41 @@ public class DestinationConfigurationTest {
   }
 
   @Test
-  public void shouldIgnoreRemotePushBatchSizeWhenClusterReplicationIsConfigured() {
+  public void shouldReturnRemotePushBatchSizeWhenClusterReplicationIsConfigured() {
     // given
     when(cfgMock.getInt("remote", REMOTE, "pushBatchSize", 0)).thenReturn(1);
-    when(cfgMock.getInt("replication", "distributionInterval", 0)).thenReturn(1);
+    lenient().when(cfgMock.getInt("replication", "distributionInterval", 0)).thenReturn(1);
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
 
     // when
     int actual = objectUnderTest.getPushBatchSize();
 
     // then
-    assertThat(actual).isEqualTo(0);
+    assertThat(actual).isEqualTo(1);
   }
 
   @Test
-  public void shouldIgnoreGlobalPushBatchSizeWhenClusterReplicationIsConfigured() {
+  public void shouldReturnGlobalPushBatchSizeWhenClusterReplicationIsConfigured() {
     // given
     int globalPushBatchSize = 1;
     when(cfgMock.getInt("gerrit", "pushBatchSize", 0)).thenReturn(globalPushBatchSize);
     when(cfgMock.getInt("remote", REMOTE, "pushBatchSize", globalPushBatchSize))
         .thenReturn(globalPushBatchSize);
-    when(cfgMock.getInt("replication", "distributionInterval", 0)).thenReturn(1);
+    lenient().when(cfgMock.getInt("replication", "distributionInterval", 0)).thenReturn(1);
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
 
     // when
     int actual = objectUnderTest.getPushBatchSize();
 
     // then
-    assertThat(actual).isEqualTo(0);
+    assertThat(actual).isEqualTo(globalPushBatchSize);
   }
 
   @Test
   public void shouldReturnRemotePushBatchSizeWhenClusterReplicationIsNotConfigured() {
     // given
     when(cfgMock.getInt("remote", REMOTE, "pushBatchSize", 0)).thenReturn(1);
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
 
     // when
     int actual = objectUnderTest.getPushBatchSize();
@@ -92,6 +96,7 @@ public class DestinationConfigurationTest {
     when(cfgMock.getInt("gerrit", "pushBatchSize", 0)).thenReturn(globalPushBatchSize);
     when(cfgMock.getInt("remote", REMOTE, "pushBatchSize", globalPushBatchSize))
         .thenReturn(globalPushBatchSize);
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
 
     // when
     int actual = objectUnderTest.getPushBatchSize();

@@ -159,9 +159,6 @@ gerrit.pushBatchSize
 	refs to be transferred in a single push operation. Note that negative
 	values are treated as `0`.
 
-	Note that `pushBatchSize` is ignored when *Cluster Replication* is configured
-	- when `replication.distributionInterval` has value > 0.
-
 gerrit.sshCommandTimeout
 :	Timeout for SSH command execution. If 0, there is no timeout and
 	the client waits indefinitely. By default, 0.
@@ -723,9 +720,6 @@ remote.NAME.pushBatchSize
 	not set, which means that there are no limitations on number of refs to
 	be transferred in a single push operation). Note that negative values are
 	treated as `0`.
-
-	Note that `pushBatchSize` is ignored when *Cluster Replication* is configured
-	- when `replication.distributionInterval` has value > 0.
 
 remote.NAME.replicateNoteDbMetaRefs
 : Whether to replicate the NoteDb meta refs (`refs/changes/*/meta`,

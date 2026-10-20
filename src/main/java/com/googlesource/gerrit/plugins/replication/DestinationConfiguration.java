@@ -14,7 +14,6 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
-import static com.google.common.base.Suppliers.memoize;
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
 import com.google.common.base.MoreObjects;
@@ -23,7 +22,6 @@ import com.google.gerrit.server.config.ConfigUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import org.eclipse.jgit.lib.Config;
@@ -56,7 +54,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final RemoteConfig remoteConfig;
   private final int maxRetries;
   private final int slowLatencyThreshold;
-  private final Supplier<Integer> pushBatchSize;
+  private final int pushBatchSize;
   private final ImmutableList<Pattern> excludedRefsPattern;
   private final boolean storeRefLog;
   private final String uploadPack;
@@ -106,29 +104,9 @@ public class DestinationConfiguration implements RemoteConfiguration {
                 TimeUnit.SECONDS);
 
     pushBatchSize =
-        memoize(
-            () -> {
-              int configuredBatchSize =
-                  Math.max(
-                      0,
-                      getInt(
-                          remoteConfig,
-                          cfg,
-                          "pushBatchSize",
-                          cfg.getInt("gerrit", "pushBatchSize", 0)));
-              if (configuredBatchSize > 0) {
-                int distributionInterval = cfg.getInt("replication", "distributionInterval", 0);
-                if (distributionInterval > 0) {
-                  repLog.atWarning().log(
-                      "Push in batches cannot be turned on for remote (%s) when 'Cluster"
-                          + " Replication' (replication.distributionInterval) is configured",
-                      name);
-                  return 0;
-                }
-                return configuredBatchSize;
-              }
-              return 0;
-            });
+        Math.max(
+            0,
+            getInt(remoteConfig, cfg, "pushBatchSize", cfg.getInt("gerrit", "pushBatchSize", 0)));
     excludedRefsPattern = getExcludedRefsPattern(cfg, name);
     storeRefLog = cfg.getBoolean("remote", name, "storeRefLog", false);
     uploadPack = cfg.getString("remote", name, "uploadpack");
@@ -266,7 +244,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
 
   @Override
   public int getPushBatchSize() {
-    return pushBatchSize.get();
+    return pushBatchSize;
   }
 
   @Override
