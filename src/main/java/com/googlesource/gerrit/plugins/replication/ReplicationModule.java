@@ -102,7 +102,10 @@ class ReplicationModule extends AbstractModule {
         ProjectDeletionReplicationSucceededEvent.class);
     EventTypes.register(
         ProjectDeletionReplicationDoneEvent.TYPE, ProjectDeletionReplicationDoneEvent.class);
-    bind(SshSessionFactory.class).toProvider(ReplicationSshSessionFactoryProvider.class);
+    bind(SshSessionFactory.class).to(ReplicationSshSessionFactory.class);
+    bind(LifecycleListener.class)
+        .annotatedWith(UniqueAnnotations.create())
+        .to(ReplicationSshSessionFactory.class);
 
     bind(TransportFactory.class).to(TransportFactoryImpl.class).in(Scopes.SINGLETON);
     bind(CloseableHttpClient.class).toProvider(HttpClientProvider.class).in(Scopes.SINGLETON);

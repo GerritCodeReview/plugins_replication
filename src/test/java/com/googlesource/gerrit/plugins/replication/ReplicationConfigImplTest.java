@@ -86,4 +86,29 @@ public class ReplicationConfigImplTest extends AbstractConfigTest {
 
     assertThatIsDestination(destinations.get(0), pushRemote, aRemoteURL);
   }
+
+  @Test
+  public void sshNioWorkersShouldBeUnsetByDefault() throws Exception {
+    newReplicationConfig().save();
+
+    assertThat(newReplicationFileBasedConfig().getSshNioWorkers()).isEmpty();
+  }
+
+  @Test
+  public void shouldLoadSshNioWorkers() throws Exception {
+    FileBasedConfig config = newReplicationConfig();
+    config.setInt("gerrit", null, "sshNioWorkers", 1);
+    config.save();
+
+    assertThat(newReplicationFileBasedConfig().getSshNioWorkers()).hasValue(1);
+  }
+
+  @Test
+  public void shouldIgnoreNonPositiveSshNioWorkers() throws Exception {
+    FileBasedConfig config = newReplicationConfig();
+    config.setInt("gerrit", null, "sshNioWorkers", 0);
+    config.save();
+
+    assertThat(newReplicationFileBasedConfig().getSshNioWorkers()).isEmpty();
+  }
 }
