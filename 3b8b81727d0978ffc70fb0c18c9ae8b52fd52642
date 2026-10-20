@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9ae552c_e083c535",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-10-20T20:29:42Z",
+      "side": 1,
+      "message": "Needs 1255375: SshdSessionFactory: Allow configuring the number of NIO workers | https://gerrithub.io/c/eclipse-jgit/jgit/+/1255375",
+      "revId": "3b8b81727d0978ffc70fb0c18c9ae8b52fd52642",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
