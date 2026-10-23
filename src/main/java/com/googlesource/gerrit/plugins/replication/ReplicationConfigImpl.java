@@ -25,6 +25,7 @@ import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.Optional;
 import java.util.OptionalInt;
 import org.eclipse.jgit.lib.Config;
 
@@ -45,6 +46,7 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   private int sshCommandTimeout;
   private int sshConnectionTimeout;
   private final OptionalInt sshNioWorkers;
+  private final Optional<Duration> sshHeartbeatInterval;
   private final Duration autoRepairInterval;
   private final int autoRepairMaxAttempts;
   private final int autoRepairConcurrencyLimit;
@@ -73,6 +75,7 @@ public class ReplicationConfigImpl implements ReplicationConfig {
                 DEFAULT_SSH_CONNECTION_TIMEOUT_MS,
                 MILLISECONDS);
     this.sshNioWorkers = parseSshNioWorkers(config);
+    this.sshHeartbeatInterval = parseSshHeartbeatInterval(config);
     this.autoRepairInterval =
         Duration.ofSeconds(
             ConfigUtil.getTimeUnit(
@@ -100,6 +103,15 @@ public class ReplicationConfigImpl implements ReplicationConfig {
       return OptionalInt.empty();
     }
     return OptionalInt.of(config.getInt("gerrit", "sshNioWorkers", 0));
+  }
+
+  private static Optional<Duration> parseSshHeartbeatInterval(Config config) {
+    if (config.getString("gerrit", null, "sshHeartbeatInterval") == null) {
+      return Optional.empty();
+    }
+    return Optional.of(
+        Duration.ofSeconds(
+            ConfigUtil.getTimeUnit(config, "gerrit", null, "sshHeartbeatInterval", 0, SECONDS)));
   }
 
   @Nullable
@@ -185,6 +197,11 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   @Override
   public OptionalInt getSshNioWorkers() {
     return sshNioWorkers;
+  }
+
+  @Override
+  public Optional<Duration> getSshHeartbeatInterval() {
+    return sshHeartbeatInterval;
   }
 
   @Override

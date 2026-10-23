@@ -24,6 +24,7 @@ import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -129,6 +130,11 @@ public class AutoReloadConfigDecorator implements ReplicationConfig, LifecycleLi
   @Override
   public synchronized OptionalInt getSshNioWorkers() {
     return currentConfig.getSshNioWorkers();
+  }
+
+  @Override
+  public synchronized Optional<Duration> getSshHeartbeatInterval() {
+    return currentConfig.getSshHeartbeatInterval();
   }
 
   @Override

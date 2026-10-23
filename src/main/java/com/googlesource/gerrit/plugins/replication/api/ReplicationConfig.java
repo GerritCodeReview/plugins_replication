@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication.api;
 
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.Optional;
 import java.util.OptionalInt;
 import org.eclipse.jgit.lib.Config;
 
@@ -96,6 +97,13 @@ public interface ReplicationConfig {
    * @return the number of worker threads, or empty to use the Apache MINA sshd default.
    */
   OptionalInt getSshNioWorkers();
+
+  /**
+   * Interval at which outbound SSH sessions send heartbeats to the remote.
+   *
+   * @return the heartbeat interval, or empty if no heartbeats are sent.
+   */
+  Optional<Duration> getSshHeartbeatInterval();
 
   /**
    * Path of the {@code rsync} binary on the host running Gerrit, used by the {@code replication

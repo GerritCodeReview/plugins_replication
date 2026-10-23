@@ -18,6 +18,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig.FilterType;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.List;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.junit.Test;
@@ -101,5 +102,32 @@ public class ReplicationConfigImplTest extends AbstractConfigTest {
     config.save();
 
     assertThat(newReplicationFileBasedConfig().getSshNioWorkers()).hasValue(1);
+  }
+
+  @Test
+  public void sshHeartbeatIntervalShouldBeUnsetByDefault() throws Exception {
+    newReplicationConfig().save();
+
+    assertThat(newReplicationFileBasedConfig().getSshHeartbeatInterval()).isEmpty();
+  }
+
+  @Test
+  public void shouldLoadSshHeartbeatInterval() throws Exception {
+    FileBasedConfig config = newReplicationConfig();
+    config.setString("gerrit", null, "sshHeartbeatInterval", "1 min");
+    config.save();
+
+    assertThat(newReplicationFileBasedConfig().getSshHeartbeatInterval())
+        .hasValue(Duration.ofMinutes(1));
+  }
+
+  @Test
+  public void shouldLoadSshHeartbeatIntervalWithoutUnitAsSeconds() throws Exception {
+    FileBasedConfig config = newReplicationConfig();
+    config.setInt("gerrit", null, "sshHeartbeatInterval", 30);
+    config.save();
+
+    assertThat(newReplicationFileBasedConfig().getSshHeartbeatInterval())
+        .hasValue(Duration.ofSeconds(30));
   }
 }

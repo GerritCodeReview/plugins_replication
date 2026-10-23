@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import static org.apache.sshd.core.CoreModuleProperties.HEARTBEAT_INTERVAL;
 import static org.apache.sshd.core.CoreModuleProperties.NIO_WORKERS;
 
 import com.google.gerrit.extensions.events.LifecycleListener;
@@ -41,6 +42,9 @@ class ReplicationSshSessionFactory extends SshdSessionFactory implements Lifecyc
   @Override
   protected void configureClient(SshClient client) {
     replicationConfig.getSshNioWorkers().ifPresent(n -> NIO_WORKERS.set(client, n));
+    replicationConfig
+        .getSshHeartbeatInterval()
+        .ifPresent(interval -> HEARTBEAT_INTERVAL.set(client, interval));
   }
 
   @Override

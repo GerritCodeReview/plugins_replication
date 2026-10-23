@@ -182,6 +182,14 @@ gerrit.sshNioWorkers
 
 	By default unset, which uses the JGit default.
 
+gerrit.sshHeartbeatInterval
+:	Interval at which each outbound SSH session sends a heartbeat to the
+	remote, so that a connection which is idle for a long time, for
+	example while the remote indexes a large pack, is not closed by the
+	remote's idle timeout. Values without a unit are in seconds.
+
+	By default unset, which sends no heartbeats.
+
 gerrit.useLegacyCredentials
 :	Use legacy credentials on secure.config which did not allow encryption
 	through a SecureStore provider. Legacy credentials should not be used in
