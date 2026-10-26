@@ -69,6 +69,9 @@ import org.eclipse.jgit.transport.URIish;
  *
  * <p>Tasks are moved atomically via a rename between those directories to indicate the current
  * state of each task.
+ *
+ * <p>Files whose name is not a sha1 are not tasks and are ignored, such as the ".nfsXXXX" files NFS
+ * keeps for deleted files that are still open.
  */
 @Singleton
 public class ReplicationTasksStorage {
@@ -230,7 +233,7 @@ public class ReplicationTasksStorage {
     try {
       return Files.list(path).flatMap(sub -> walkNonDirs(sub));
     } catch (NotDirectoryException e) {
-      return Stream.of(path);
+      return isTaskFileName(path) ? Stream.of(path) : Stream.empty();
     } catch (Exception e) {
       String message = "Error while walking directory";
       if (isMultiPrimary() && e instanceof NoSuchFileException) {
@@ -242,6 +245,11 @@ public class ReplicationTasksStorage {
       }
       return Stream.empty();
     }
+  }
+
+  private static boolean isTaskFileName(Path path) {
+    Path name = path.getFileName();
+    return name != null && ObjectId.isId(name.toString());
   }
 
   @SuppressWarnings("deprecation")
