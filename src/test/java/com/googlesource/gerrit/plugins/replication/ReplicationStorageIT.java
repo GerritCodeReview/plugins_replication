@@ -77,7 +77,7 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
 
     String changeRef = createChange().getPatchSet().refName();
 
-    assertThat(waitingChangeReplicationTasksForRemote(changeRef, remote).count()).isEqualTo(1);
+    assertThat(countWaitingReplicationTasksForRemote(changeRef, remote)).isEqualTo(1);
 
     Destination destination =
         destinationCollection.getAll(FilterType.ALL).stream()
@@ -122,12 +122,12 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
 
     assertThat(listWaitingReplicationTasks(Pattern.quote(specificRef))).hasSize(1);
 
-    tasksStorage
-        .streamWaiting()
-        .forEach(
-            (task) -> {
-              assertThat(task.refs()).containsExactly(specificRef);
-            });
+    try (Stream<ReplicateRefUpdate> tasks = tasksStorage.streamWaiting()) {
+      tasks.forEach(
+          (task) -> {
+            assertThat(task.refs()).containsExactly(specificRef);
+          });
+    }
   }
 
   @Test
@@ -156,17 +156,19 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     reloadConfig();
 
     String changeRef = createChange().getPatchSet().refName();
-    changeReplicationTasksForRemote(tasksStorage.streamWaiting(), changeRef, remote1)
-        .forEach(
-            (update) -> {
-              UriUpdates uriUpdates = new TestUriUpdates(update);
-              tasksStorage.start(uriUpdates);
-              tasksStorage.finish(uriUpdates);
-            });
+    try (Stream<ReplicateRefUpdate> updates =
+        changeReplicationTasksForRemote(tasksStorage.streamWaiting(), changeRef, remote1)) {
+      updates.forEach(
+          (update) -> {
+            UriUpdates uriUpdates = new TestUriUpdates(update);
+            tasksStorage.start(uriUpdates);
+            tasksStorage.finish(uriUpdates);
+          });
+    }
     reloadConfig();
 
-    assertThat(waitingChangeReplicationTasksForRemote(changeRef, remote2).count()).isEqualTo(1);
-    assertThat(waitingChangeReplicationTasksForRemote(changeRef, remote1).count()).isEqualTo(0);
+    assertThat(countWaitingReplicationTasksForRemote(changeRef, remote2)).isEqualTo(1);
+    assertThat(countWaitingReplicationTasksForRemote(changeRef, remote1)).isEqualTo(0);
   }
 
   @Test
@@ -182,13 +184,15 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     reloadConfig();
 
     String changeRef = createChange().getPatchSet().refName();
-    changeReplicationTasksForRemote(tasksStorage.streamWaiting(), changeRef, remote1)
-        .forEach(
-            (update) -> {
-              UriUpdates uriUpdates = new TestUriUpdates(update);
-              tasksStorage.start(uriUpdates);
-              tasksStorage.finish(uriUpdates);
-            });
+    try (Stream<ReplicateRefUpdate> updates =
+        changeReplicationTasksForRemote(tasksStorage.streamWaiting(), changeRef, remote1)) {
+      updates.forEach(
+          (update) -> {
+            UriUpdates uriUpdates = new TestUriUpdates(update);
+            tasksStorage.start(uriUpdates);
+            tasksStorage.finish(uriUpdates);
+          });
+    }
 
     setReplicationDestination(remote1, suffix1, ALL_PROJECTS);
     setReplicationDestination(remote2, suffix2, ALL_PROJECTS);
@@ -212,10 +216,10 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     String changeRef2 = createChange().getPatchSet().refName();
     reloadConfig();
 
-    assertThat(waitingChangeReplicationTasksForRemote(changeRef1, remote1).count()).isEqualTo(1);
-    assertThat(waitingChangeReplicationTasksForRemote(changeRef1, remote2).count()).isEqualTo(1);
-    assertThat(waitingChangeReplicationTasksForRemote(changeRef2, remote1).count()).isEqualTo(1);
-    assertThat(waitingChangeReplicationTasksForRemote(changeRef2, remote2).count()).isEqualTo(1);
+    assertThat(countWaitingReplicationTasksForRemote(changeRef1, remote1)).isEqualTo(1);
+    assertThat(countWaitingReplicationTasksForRemote(changeRef1, remote2)).isEqualTo(1);
+    assertThat(countWaitingReplicationTasksForRemote(changeRef2, remote1)).isEqualTo(1);
+    assertThat(countWaitingReplicationTasksForRemote(changeRef2, remote2)).isEqualTo(1);
   }
 
   @Test
@@ -265,13 +269,13 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
             project, urlMatch, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), false);
 
     assertThat(listWaiting()).hasSize(1);
-    tasksStorage
-        .streamWaiting()
-        .forEach(
-            (task) -> {
-              assertThat(task.uri()).isEqualTo(expectedURI);
-              assertThat(task.refs()).isEqualTo(Set.of(PushOne.ALL_REFS));
-            });
+    try (Stream<ReplicateRefUpdate> tasks = tasksStorage.streamWaiting()) {
+      tasks.forEach(
+          (task) -> {
+            assertThat(task.uri()).isEqualTo(expectedURI);
+            assertThat(task.refs()).isEqualTo(Set.of(PushOne.ALL_REFS));
+          });
+    }
   }
 
   @Test
@@ -291,13 +295,13 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
             project, urlMatch, PushOne.ALL_REFS, Set.of(), new ReplicationState(NO_OP), false);
 
     assertThat(listWaiting()).hasSize(1);
-    tasksStorage
-        .streamWaiting()
-        .forEach(
-            (task) -> {
-              assertThat(task.uri()).isEqualTo(expectedURI);
-              assertThat(task.refs()).isEqualTo(Set.of(PushOne.ALL_REFS));
-            });
+    try (Stream<ReplicateRefUpdate> tasks = tasksStorage.streamWaiting()) {
+      tasks.forEach(
+          (task) -> {
+            assertThat(task.uri()).isEqualTo(expectedURI);
+            assertThat(task.refs()).isEqualTo(Set.of(PushOne.ALL_REFS));
+          });
+    }
   }
 
   @Test
@@ -414,19 +418,20 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
   private boolean isTaskCleanedUp() {
     Path refUpdates = replicationConfig.getEventsDirectory().resolve("ref-updates");
     Path runningUpdates = refUpdates.resolve("running");
-    try {
-      return Files.list(runningUpdates).count() == 0;
+    try (Stream<Path> updates = Files.list(runningUpdates)) {
+      return updates.count() == 0;
     } catch (IOException e) {
       throw new RuntimeException(e.getMessage(), e);
     }
   }
 
-  private Stream<ReplicateRefUpdate> waitingChangeReplicationTasksForRemote(
-      String changeRef, String remote) {
-    return tasksStorage
-        .streamWaiting()
-        .filter(task -> task.refs().stream().anyMatch(ref -> changeRef.equals(ref)))
-        .filter(task -> remote.equals(task.remote()));
+  private long countWaitingReplicationTasksForRemote(String changeRef, String remote) {
+    try (Stream<ReplicateRefUpdate> tasks = tasksStorage.streamWaiting()) {
+      return tasks
+          .filter(task -> task.refs().stream().anyMatch(ref -> changeRef.equals(ref)))
+          .filter(task -> remote.equals(task.remote()))
+          .count();
+    }
   }
 
   private Stream<ReplicateRefUpdate> changeReplicationTasksForRemote(

@@ -196,7 +196,9 @@ public class ReplicationTasksStorage {
   }
 
   public void recoverAll(Predicate<ReplicateRefUpdate> shouldRecover) {
-    streamRunning().filter(shouldRecover).forEach(r -> new Task(r).recover());
+    try (Stream<ReplicateRefUpdate> running = streamRunning()) {
+      running.filter(shouldRecover).forEach(r -> new Task(r).recover());
+    }
   }
 
   public boolean isWaiting(UriUpdates uriUpdates) {
@@ -211,10 +213,14 @@ public class ReplicationTasksStorage {
     }
   }
 
+  /**
+   * Returns the outstanding replication tasks. The returned stream must be closed by the caller.
+   */
   public Stream<ReplicateRefUpdate> streamWaiting() {
     return streamRecursive(createDir(waitingUpdates));
   }
 
+  /** Returns the running replication tasks. The returned stream must be closed by the caller. */
   public Stream<ReplicateRefUpdate> streamRunning() {
     return streamRecursive(createDir(runningUpdates));
   }

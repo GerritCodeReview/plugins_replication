@@ -29,6 +29,7 @@ import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.eclipse.jgit.transport.URIish;
@@ -180,8 +181,10 @@ public class ReplicationTasksStorageTest {
 
     assertThat(new URIish(update.uri())).isEqualTo(expanded);
     assertThatStream(storage.streamWaiting()).hasSize(1);
-    for (ReplicateRefUpdate rru : storage.streamWaiting().collect(Collectors.toList())) {
-      assertThat(new URIish(rru.uri())).isEqualTo(expanded);
+    try (Stream<ReplicateRefUpdate> tasks = storage.streamWaiting()) {
+      for (ReplicateRefUpdate rru : tasks.collect(Collectors.toList())) {
+        assertThat(new URIish(rru.uri())).isEqualTo(expanded);
+      }
     }
   }
 
@@ -310,6 +313,24 @@ public class ReplicationTasksStorageTest {
   public void canRecoverEmpty() throws Exception {
     storage.recoverAll();
     assertNoIncompleteTasks(storage);
+  }
+
+  @Test
+  public void recoverAllClosesRunningStream() throws Exception {
+    storage.create(REF_UPDATE);
+    storage.start(uriUpdates);
+    AtomicBoolean closed = new AtomicBoolean();
+    ReplicationTasksStorage storageWithCloseTracking =
+        new ReplicationTasksStorage(storageSite) {
+          @Override
+          public Stream<ReplicateRefUpdate> streamRunning() {
+            return super.streamRunning().onClose(() -> closed.set(true));
+          }
+        };
+
+    storageWithCloseTracking.recoverAll();
+
+    assertTrue(closed.get());
   }
 
   @Test
@@ -444,7 +465,9 @@ public class ReplicationTasksStorageTest {
   }
 
   protected static IterableSubject assertThatStream(Stream<?> stream) {
-    return assertThat(stream.collect(Collectors.toList()));
+    try (Stream<?> tasks = stream) {
+      return assertThat(tasks.collect(Collectors.toList()));
+    }
   }
 
   public static URIish getUrish(String uri) {
