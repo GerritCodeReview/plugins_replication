@@ -24,6 +24,8 @@ import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.WorkQueue;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig.FilterType;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Duration;
 import java.util.List;
 import java.util.Set;
@@ -144,6 +146,33 @@ public class ReplicationDistributorIT extends ReplicationStorageDaemon {
         .getQueue()
         .pending
         .get(uri);
+  }
+
+  @Test
+  public void distributorIgnoresNfsFiles() throws Exception {
+    String remote = "foo";
+    String replica = "replica";
+    Project.NameKey targetProject = createTestProject(project + replica);
+    setReplicationDestination(remote, replica, ALL_PROJECTS);
+    reloadConfig();
+
+    ReplicationTasksStorage.ReplicateRefUpdate update =
+        ReplicationTasksStorage.ReplicateRefUpdate.create(
+            project.get(),
+            Set.of("refs/heads/foo_branch"),
+            new URIish(getProjectUri(targetProject)),
+            remote);
+    // NFS leaves this behind for a task file deleted while open by a process that then died
+    Path waiting = replicationConfig.getEventsDirectory().resolve("ref-updates").resolve("waiting");
+    tasksStorage.create(update);
+    Files.move(waiting.resolve(update.sha1()), waiting.resolve(".nfs000000004cc412bd000014b6"));
+
+    assertThrows(
+        InterruptedException.class,
+        () ->
+            WaitUtil.waitUntil(
+                () -> !getProjectTasks().isEmpty(),
+                Duration.ofSeconds(TEST_DISTRIBUTION_CYCLE_SECONDS * 2)));
   }
 
   private List<WorkQueue.Task<?>> getProjectTasks() {

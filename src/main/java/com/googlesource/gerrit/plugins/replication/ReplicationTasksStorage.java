@@ -69,6 +69,9 @@ import org.eclipse.jgit.transport.URIish;
  *
  * <p>Tasks are moved atomically via a rename between those directories to indicate the current
  * state of each task.
+ *
+ * <p>Files whose name starts with a dot are not tasks and are ignored, such as the ".nfsXXXX" files
+ * NFS keeps for deleted files that are still open.
  */
 @Singleton
 public class ReplicationTasksStorage {
@@ -228,7 +231,7 @@ public class ReplicationTasksStorage {
 
   private Stream<Path> walkNonDirs(Path path) {
     try {
-      return Files.list(path).flatMap(sub -> walkNonDirs(sub));
+      return Files.list(path).filter(sub -> !isIgnored(sub)).flatMap(sub -> walkNonDirs(sub));
     } catch (NotDirectoryException e) {
       return Stream.of(path);
     } catch (Exception e) {
@@ -242,6 +245,11 @@ public class ReplicationTasksStorage {
       }
       return Stream.empty();
     }
+  }
+
+  private static boolean isIgnored(Path path) {
+    Path name = path.getFileName();
+    return name != null && name.toString().startsWith(".");
   }
 
   @SuppressWarnings("deprecation")
