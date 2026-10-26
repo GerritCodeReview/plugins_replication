@@ -27,6 +27,7 @@ import com.google.gerrit.entities.Project;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -79,6 +80,23 @@ public class ReplicationTasksStorageTest {
   public void canListWaitingUpdate() throws Exception {
     storage.create(REF_UPDATE);
     assertThatStream(storage.streamWaiting()).containsExactly(STORED_REF_UPDATE);
+  }
+
+  @Test
+  public void doesNotListFilesNotNamedBySha1() throws Exception {
+    storage.create(REF_UPDATE);
+    copyWithForeignNames(storageSite.resolve("waiting"));
+    assertThatStream(storage.streamWaiting()).containsExactly(STORED_REF_UPDATE);
+
+    storage.start(uriUpdates);
+    copyWithForeignNames(storageSite.resolve("running"));
+    assertThatStream(storage.streamRunning()).containsExactly(STORED_REF_UPDATE);
+  }
+
+  private static void copyWithForeignNames(Path dir) throws Exception {
+    Path task = dir.resolve(REF_UPDATE.sha1());
+    Files.copy(task, dir.resolve(".nfs000000004cc412bd000014b6"));
+    Files.copy(task, dir.resolve(REF_UPDATE.sha1() + ".orig"));
   }
 
   @Test
