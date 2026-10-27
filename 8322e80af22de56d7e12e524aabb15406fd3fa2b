@@ -16,6 +16,24 @@
       "message": "We could make this stricter and ignore anything that isn\u0027t a sha1 (using `ObjectId.isId()`). I slightly prefer that over special-casing files starting with `.`, but if you have a good reason not to do it, that\u0027s ok with me.",
       "revId": "8322e80af22de56d7e12e524aabb15406fd3fa2b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69d10e6b_7b3b10ed",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/ReplicationTasksStorage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 3255163
+      },
+      "writtenOn": "2026-10-27T02:25:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38d16a9e_5935426f",
+      "revId": "8322e80af22de56d7e12e524aabb15406fd3fa2b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
