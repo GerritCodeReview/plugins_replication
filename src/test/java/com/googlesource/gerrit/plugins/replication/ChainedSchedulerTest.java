@@ -288,6 +288,166 @@ public class ChainedSchedulerTest {
   }
 
   @Test
+  public void exceptionInInitialHasNextCompletes() {
+    ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+    TestRunner runner = new TestRunner();
+    Iterator<String> iterator =
+        new Iterator<String>() {
+          @Override
+          public boolean hasNext() {
+            throw new RuntimeException("hasNext failed");
+          }
+
+          @Override
+          public String next() {
+            return FIRST;
+          }
+        };
+
+    new ChainedScheduler<>(executor, iterator, runner);
+
+    assertThat(runner.awaitDone(1)).isTrue();
+    assertThat(runner.runCount()).isEqualTo(0);
+  }
+
+  @Test
+  public void exceptionInInitialNextCompletes() {
+    ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+    TestRunner runner = new TestRunner();
+    Iterator<String> iterator =
+        new Iterator<String>() {
+          @Override
+          public boolean hasNext() {
+            return true;
+          }
+
+          @Override
+          public String next() {
+            throw new RuntimeException("next failed");
+          }
+        };
+
+    new ChainedScheduler<>(executor, iterator, runner);
+
+    assertThat(runner.awaitDone(1)).isTrue();
+    assertThat(runner.runCount()).isEqualTo(0);
+  }
+
+  @Test
+  public void exceptionInInitialExecuteCompletes() {
+    ScheduledThreadPoolExecutor executor =
+        new ScheduledThreadPoolExecutor(1) {
+          @Override
+          public void execute(Runnable command) {
+            throw new RuntimeException("execute failed");
+          }
+        };
+    TestRunner runner = new TestRunner();
+
+    new ChainedScheduler<>(executor, List.of(FIRST).iterator(), runner);
+
+    assertThat(runner.awaitDone(1)).isTrue();
+    assertThat(runner.runCount()).isEqualTo(0);
+  }
+
+  @Test
+  public void exceptionInHasNextWhileChainingCompletes() throws Exception {
+    ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+    TestRunner runner = new TestRunner();
+    Iterator<String> iterator =
+        new Iterator<String>() {
+          private int hasNextCalls;
+
+          @Override
+          public boolean hasNext() {
+            if (++hasNextCalls == 2) {
+              throw new RuntimeException("hasNext failed");
+            }
+            return true;
+          }
+
+          @Override
+          public String next() {
+            return FIRST;
+          }
+        };
+
+    new ChainedScheduler<>(executor, iterator, runner);
+
+    assertThat(runner.awaitDone(1)).isTrue();
+    assertThat(runner.runCount()).isEqualTo(1);
+  }
+
+  @Test
+  public void exceptionInNextWhileChainingCompletes() throws Exception {
+    ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+    TestRunner runner = new TestRunner();
+    Iterator<String> iterator =
+        new Iterator<String>() {
+          private int hasNextCalls;
+          private int nextCalls;
+
+          @Override
+          public boolean hasNext() {
+            return ++hasNextCalls <= 2;
+          }
+
+          @Override
+          public String next() {
+            if (++nextCalls == 2) {
+              throw new RuntimeException("next failed");
+            }
+            return FIRST;
+          }
+        };
+
+    new ChainedScheduler<>(executor, iterator, runner);
+
+    assertThat(runner.awaitDone(1)).isTrue();
+    assertThat(runner.runCount()).isEqualTo(1);
+  }
+
+  @Test
+  public void exceptionInExecuteWhileChainingCompletes() throws Exception {
+    AtomicInteger executeCalls = new AtomicInteger();
+    ScheduledThreadPoolExecutor executor =
+        new ScheduledThreadPoolExecutor(1) {
+          @Override
+          public void execute(Runnable command) {
+            if (executeCalls.incrementAndGet() == 2) {
+              throw new RuntimeException("execute failed");
+            }
+            super.execute(command);
+          }
+        };
+    TestRunner runner = new TestRunner();
+
+    new ChainedScheduler<>(executor, List.of(FIRST, SECOND).iterator(), runner);
+
+    assertThat(runner.awaitDone(1)).isTrue();
+    assertThat(runner.runCount()).isEqualTo(1);
+  }
+
+  @Test
+  public void streamSchedulerClosesStreamWhenInitialSchedulingFails() {
+    ScheduledThreadPoolExecutor executor =
+        new ScheduledThreadPoolExecutor(1) {
+          @Override
+          public void execute(Runnable command) {
+            throw new RuntimeException("execute failed");
+          }
+        };
+    TestRunner runner = new TestRunner();
+    AtomicBoolean closed = new AtomicBoolean();
+    Stream<String> stream = Stream.of(FIRST).onClose(() -> closed.set(true));
+
+    new ChainedScheduler.StreamScheduler<>(executor, stream, runner);
+
+    assertThat(runner.awaitDone(1)).isTrue();
+    assertThat(closed.get()).isTrue();
+  }
+
+  @Test
   public void onDoneNotCalledBeforeAllCompleted() throws Exception {
     ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
     WaitingRunner runner = new WaitingRunner();

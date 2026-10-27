@@ -165,12 +165,17 @@ public class ChainedScheduler<T> {
    * <li>In particular this guarantee of the java.util.concurrent applies here:
    */
   protected boolean scheduleNext() {
-    if (!iterator.hasNext()) {
+    try {
+      if (!iterator.hasNext()) {
+        return false;
+      }
+
+      schedule(new Chainer(iterator.next()));
+      return true;
+    } catch (RuntimeException e) {
+      logger.atSevere().withCause(e).log("Error while scheduling next item");
       return false;
     }
-
-    schedule(new Chainer(iterator.next()));
-    return true;
   }
 
   protected void schedule(Runnable r) {
