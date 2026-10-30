@@ -16,6 +16,23 @@
       "message": "Any review?",
       "revId": "9a337b22afdf5d63f6a8466dd6781af0f4254b81",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acf59c84_2ca0153b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-10-30T12:51:19Z",
+      "side": 1,
+      "message": "I would suggest splitting this into 2 at least. One api for creation, and another for replicating references?",
+      "revId": "9a337b22afdf5d63f6a8466dd6781af0f4254b81",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
