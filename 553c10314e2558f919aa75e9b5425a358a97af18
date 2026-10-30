@@ -34,6 +34,24 @@
       "parentUuid": "b6556fab_b02b934b",
       "revId": "553c10314e2558f919aa75e9b5425a358a97af18",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2271de9b_76e2500f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-10-30T12:52:02Z",
+      "side": 1,
+      "message": "From am API standpoint, this feels like it is hoisting policy behavior on the callers now?",
+      "parentUuid": "53f87e65_fe2b75fe",
+      "revId": "553c10314e2558f919aa75e9b5425a358a97af18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
