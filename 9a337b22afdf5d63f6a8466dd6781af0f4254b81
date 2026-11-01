@@ -33,6 +33,24 @@
       "message": "I would suggest splitting this into 2 at least. One api for creation, and another for replicating references?",
       "revId": "9a337b22afdf5d63f6a8466dd6781af0f4254b81",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ae239cd_0666fc03",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-11-01T19:52:56Z",
+      "side": 1,
+      "message": "Done — added urlsToCreateOn alongside urlsToReplicateTo and urlsToDeleteFrom, defaulting to the replication URLs so behaviour is unchanged. DestinationsCollection.getURIs now picks by FilterType; a HEAD update stays on urlsToReplicateTo since it replicates a ref like any other.",
+      "parentUuid": "acf59c84_2ca0153b",
+      "revId": "9a337b22afdf5d63f6a8466dd6781af0f4254b81",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
