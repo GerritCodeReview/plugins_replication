@@ -34,6 +34,24 @@
       "parentUuid": "ade81291_8fd9b619",
       "revId": "1af20a3cd3aa6a69626c23aae6d8043f3213c165",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62bd59b3_a433d88e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2026-11-03T18:46:00Z",
+      "side": 1,
+      "message": "Thanks for explaining it @klingarkar@nvidia.com. I believe it would make sense to add the `Depends-On: https://gerrithub.io/c/eclipse-jgit/jgit/+/1257745` and blocking it until the JGit change gets merged.\n\nWith regard to the refs to use when filtering the HAVEs, I believe it should be configurable rather than hardcoded. See my comment on the exclusion of `/checks`, which doesn\u0027t look like a ref that Gerrit core or its core plugins would use.",
+      "parentUuid": "0f553af0_3b018c45",
+      "revId": "1af20a3cd3aa6a69626c23aae6d8043f3213c165",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
