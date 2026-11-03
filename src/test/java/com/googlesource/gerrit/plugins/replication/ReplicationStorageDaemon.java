@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * This class can be extended by any ReplicationStorage*IT class and provides common setup and
@@ -60,10 +61,11 @@ public class ReplicationStorageDaemon extends ReplicationDaemon {
   protected List<ReplicationTasksStorage.ReplicateRefUpdate> listWaitingReplicationTasks(
       String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage
-        .streamWaiting()
-        .filter(task -> refmaskPattern.matcher(task.refs().toArray()[0].toString()).matches())
-        .collect(toList());
+    try (Stream<ReplicationTasksStorage.ReplicateRefUpdate> tasks = tasksStorage.streamWaiting()) {
+      return tasks
+          .filter(task -> refmaskPattern.matcher(task.refs().toArray()[0].toString()).matches())
+          .collect(toList());
+    }
   }
 
   protected void deleteWaitingReplicationTasks(String refRegex) {
@@ -79,10 +81,14 @@ public class ReplicationStorageDaemon extends ReplicationDaemon {
   }
 
   protected List<ReplicationTasksStorage.ReplicateRefUpdate> listWaiting() {
-    return tasksStorage.streamWaiting().collect(Collectors.toList());
+    try (Stream<ReplicationTasksStorage.ReplicateRefUpdate> tasks = tasksStorage.streamWaiting()) {
+      return tasks.collect(Collectors.toList());
+    }
   }
 
   protected List<ReplicationTasksStorage.ReplicateRefUpdate> listRunning() {
-    return tasksStorage.streamRunning().collect(Collectors.toList());
+    try (Stream<ReplicationTasksStorage.ReplicateRefUpdate> tasks = tasksStorage.streamRunning()) {
+      return tasks.collect(Collectors.toList());
+    }
   }
 }

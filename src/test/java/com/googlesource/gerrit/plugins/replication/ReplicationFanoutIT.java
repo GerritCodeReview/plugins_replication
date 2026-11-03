@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -189,9 +190,11 @@ public class ReplicationFanoutIT extends ReplicationDaemon {
 
   private List<ReplicateRefUpdate> listWaitingTasks(String refRegex) {
     Pattern refmaskPattern = Pattern.compile(refRegex);
-    return tasksStorage
-        .streamWaiting()
-        .filter(task -> task.refs().stream().anyMatch(ref -> refmaskPattern.matcher(ref).matches()))
-        .collect(toList());
+    try (Stream<ReplicateRefUpdate> tasks = tasksStorage.streamWaiting()) {
+      return tasks
+          .filter(
+              task -> task.refs().stream().anyMatch(ref -> refmaskPattern.matcher(ref).matches()))
+          .collect(toList());
+    }
   }
 }
