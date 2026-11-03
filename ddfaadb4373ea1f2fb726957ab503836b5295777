@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b389a62b_1645bf59",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AdvertisedRefsForPackFilter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2026-11-03T06:19:21Z",
+      "side": 1,
+      "message": "What are the Gerrit refs ending with `/checks`?",
+      "range": {
+        "startLine": 386,
+        "startChar": 43,
+        "endLine": 386,
+        "endChar": 65
+      },
+      "revId": "ddfaadb4373ea1f2fb726957ab503836b5295777",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
