@@ -52,6 +52,24 @@
       "parentUuid": "53f87e65_fe2b75fe",
       "revId": "553c10314e2558f919aa75e9b5425a358a97af18",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e6f1879_01952351",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-11-03T17:07:56Z",
+      "side": 1,
+      "message": "Marked as unresolved.",
+      "parentUuid": "2271de9b_76e2500f",
+      "revId": "553c10314e2558f919aa75e9b5425a358a97af18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
