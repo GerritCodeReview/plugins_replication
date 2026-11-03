@@ -16,6 +16,24 @@
       "message": "This looks like a plugin to me, similar to what git-refs-filter does already.\nSee: https://github.com/GerritForge/git-refs-filter\n\nI believe it would make sense to have just an extension point in the replication-api and have a plugin implementing it.",
       "revId": "1af20a3cd3aa6a69626c23aae6d8043f3213c165",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f553af0_3b018c45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4665459
+      },
+      "writtenOn": "2026-11-03T18:39:58Z",
+      "side": 1,
+      "message": "The old name, `AdvertisedRefsForPackFilter`, probably made this confusing. I renamed it to `PushHaveRefFilter`. This isn\u0027t about ref advertisement. git-refs-filter I think changes which refs Gerrit advertises to clients. This series doesn\u0027t change what anyone sees. The replica still advertises all its refs.\n\nWhat it changes is the sending side of the replication push, i.e which of the replica\u0027s advertised refs are used as \u0027haves\u0027 when building the pack. JGit currently marks every advertised ref as a have. The filter tries to only keep the refs relevant to each batch\u0027s updates. It depends on a JGit change that is still open and needs some review (see https://gerrithub.io/c/eclipse-jgit/jgit/+/1257745). The plugin only chooses the haves for each push batch, which is tied to how PushOne builds its batches and updates. So I see it as part of how replication pushes rather than a ref-visibility policy.",
+      "parentUuid": "ade81291_8fd9b619",
+      "revId": "1af20a3cd3aa6a69626c23aae6d8043f3213c165",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
