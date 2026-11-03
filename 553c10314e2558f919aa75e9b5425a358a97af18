@@ -70,6 +70,24 @@
       "parentUuid": "2271de9b_76e2500f",
       "revId": "553c10314e2558f919aa75e9b5425a358a97af18",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c8ebb62_8fbbeedc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-11-03T18:46:11Z",
+      "side": 1,
+      "message": "Fair point — moved it behind Instance instead: refsToReplicateTo and refsOwnedBy are defaults next to the urlsTo* family, defaulting to the event-level behaviour, and only refSharded overrides them. Destination now asks the Instance alone, with no enum helpers and no mechanics on the callers; the javadoc states these two are also asked at push time on another host, so an implementation must answer them from its arguments only.",
+      "parentUuid": "7e6f1879_01952351",
+      "revId": "553c10314e2558f919aa75e9b5425a358a97af18",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
