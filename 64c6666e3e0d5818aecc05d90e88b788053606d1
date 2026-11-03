@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cffb7071_a3286a37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2026-11-03T06:35:01Z",
+      "side": 1,
+      "message": "This looks like a plugin to me, similar to what `git-refs-filter` does already.\nSee: https://github.com/GerritForge/git-refs-filter\n\nI believe it would make sense to have just an extension point in the `replication-api` and have a plugin implementing it.",
+      "revId": "64c6666e3e0d5818aecc05d90e88b788053606d1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
