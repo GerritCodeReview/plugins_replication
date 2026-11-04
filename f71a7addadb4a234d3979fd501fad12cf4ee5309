@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dba0025_da835354",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-11-04T03:35:23Z",
+      "side": 1,
+      "message": "With a method named refsToReplicateTo, I expect to get a List or a Wet back, not a Map or MultiMap. To indicate the a Map, a good pattern to use is to name it using something like \u003cValue\u003eBy\u003cKey\u003e, and for a MultiMap, you probably want a name like \u003cValues\u003eBy\u003cKey\u003e (not the \u0027s\u0027 on values).\n\nGiven that I have this method now, why would one need to use the urlsToReplicateTo() method? i.e. why is that a different use case?",
+      "revId": "f71a7addadb4a234d3979fd501fad12cf4ee5309",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
