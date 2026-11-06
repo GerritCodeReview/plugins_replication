@@ -43,7 +43,6 @@ import org.eclipse.jgit.internal.storage.pack.PackExt;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FileUtils;
-import org.eclipse.jgit.util.QuotedString;
 import org.eclipse.jgit.util.io.StreamCopyThread;
 
 @Singleton
@@ -217,6 +216,7 @@ public class ProjectRepairer {
     cmd.add(replicationConfig.getRsyncPath());
     cmd.add("-av");
     cmd.add("--progress");
+    cmd.add("--protect-args");
     cmd.add("-e");
     cmd.add(buildSshTransport(uri));
     if (includes.length > 0) {
@@ -265,7 +265,7 @@ public class ProjectRepairer {
   private static String buildCopyDestination(URIish uri, String destDir) {
     String host = uri.getHost();
     String path = uri.getPath();
-    String remotePath = QuotedString.BOURNE.quote(path + "/" + destDir);
+    String remotePath = path + "/" + destDir;
     String user = uri.getUser();
     if (user != null && !user.isEmpty()) {
       return user + "@" + host + ":" + remotePath;
