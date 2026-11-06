@@ -15,9 +15,8 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.gerrit.entities.Project;
-import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.extensions.annotations.RequiresCapability;
-import com.google.gerrit.server.project.ProjectCache;
+import com.google.gerrit.server.project.ProjectState;
 import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
@@ -41,7 +40,7 @@ import org.kohsuke.args4j.Option;
 @CommandMetaData(name = "repair", description = "Repair a project on replication destinations")
 final class RepairCommand extends SshCommand implements PushResultProcessing.SshOutputCommand {
   @Argument(index = 0, required = true, metaVar = "PROJECT", usage = "project name")
-  private String projectName;
+  private ProjectState projectState;
 
   @Option(
       name = "--url",
@@ -70,7 +69,6 @@ final class RepairCommand extends SshCommand implements PushResultProcessing.Ssh
     actions.addAll(Action.all());
   }
 
-  @Inject private ProjectCache projectCache;
   @Inject private ReplicationDestinations destinations;
   @Inject private ReplicationStarter replicationStarter;
   @Inject private ProjectRepairer projectRepairer;
@@ -79,15 +77,7 @@ final class RepairCommand extends SshCommand implements PushResultProcessing.Ssh
 
   @Override
   protected void run() throws Failure, InterruptedIOException {
-    Project.NameKey project = Project.nameKey(projectName);
-    try {
-      if (projectCache.get(project).isEmpty()) {
-        throw die("Project with name " + projectName + " not found.");
-      }
-    } catch (StorageException e) {
-      throw die(e);
-    }
-
+    Project.NameKey project = projectState.getNameKey();
     Set<URIish> failedUris = repair(project, repairActions());
     if (!failedUris.isEmpty()) {
       throw new UnloggedFailure(1, "Repair failed for " + failedUris.size() + " destination(s)");
