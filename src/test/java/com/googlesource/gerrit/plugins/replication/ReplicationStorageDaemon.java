@@ -36,11 +36,6 @@ public class ReplicationStorageDaemon extends ReplicationDaemon {
   protected static final int TEST_REPLICATION_MAX_RETRIES = 1;
   protected static final Duration TEST_TASK_FINISH_TIMEOUT =
       Duration.ofSeconds(TEST_TASK_FINISH_SECONDS);
-  protected static final Duration MAX_RETRY_WITH_TOLERANCE_TIMEOUT =
-      Duration.ofSeconds(
-          (TEST_REPLICATION_DELAY_SECONDS + TEST_REPLICATION_RETRY_MINUTES * 60)
-                  * TEST_REPLICATION_MAX_RETRIES
-              + 10);
   protected ReplicationTasksStorage tasksStorage;
   protected DestinationsCollection destinationCollection;
   protected ReplicationConfig replicationConfig;

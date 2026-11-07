@@ -22,18 +22,19 @@ import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.projects.BranchInput;
-import com.googlesource.gerrit.plugins.replication.Destination.Queue;
 import com.googlesource.gerrit.plugins.replication.ReplicationTasksStorage.ReplicateRefUpdate;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig.FilterType;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import org.eclipse.jgit.transport.URIish;
@@ -350,11 +351,14 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
     String projectName = "task_cleanup_locks_project_cancelled";
     String remoteDestination = "http://invalidurl:9090/";
     URIish urish = new URIish(remoteDestination + projectName + ".git");
+    Duration retryDelay = Duration.ofSeconds(3);
 
     setReplicationDestination(projectName, "replica", Optional.of(projectName));
     // replace correct urls with invalid one to trigger retry
     config.setString("remote", projectName, "url", remoteDestination + "${name}.git");
     config.setInt("remote", projectName, "replicationMaxRetries", TEST_REPLICATION_MAX_RETRIES);
+    // Leave time to observe the pending retry without waiting for the default minute-long delay.
+    config.setString("remote", projectName, "replicationRetry", retryDelay.toSeconds() + " s");
     config.save();
     reloadConfig();
     Destination destination =
@@ -365,15 +369,25 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
 
     createTestProject(projectName);
 
+    AtomicReference<PushOne> retryingPush = new AtomicReference<>();
     WaitUtil.waitUntil(
-        () -> isTaskRescheduled(destination.getQueue(), urish), TEST_NEW_PROJECT_TIMEOUT);
-    // replicationRetry is set to 1 minute which is the minimum value. That's why
-    // should be safe to get the pushOne object from pending because it should be
-    // here for one minute
-    PushOne pushOp = destination.getQueue().pending.get(urish);
+        () -> {
+          PushOne pending = destination.getQueue().pending.get(urish);
+          if (pending == null || !pending.isRetrying()) {
+            return false;
+          }
+          retryingPush.set(pending);
+          return true;
+        },
+        TEST_NEW_PROJECT_TIMEOUT);
+    PushOne pushOp = retryingPush.get();
 
-    WaitUtil.waitUntil(() -> pushOp.wasCanceled(), MAX_RETRY_WITH_TOLERANCE_TIMEOUT);
+    WaitUtil.waitUntil(
+        () -> pushOp.wasCanceled(),
+        retryDelay.multipliedBy(TEST_REPLICATION_MAX_RETRIES).plusSeconds(10));
+    assertThat(pushOp.getRetryCount()).isGreaterThan(TEST_REPLICATION_MAX_RETRIES);
     WaitUtil.waitUntil(() -> isTaskCleanedUp(), TEST_TASK_FINISH_TIMEOUT);
+    assertThat(destination.getQueue().pending).doesNotContainKey(urish);
   }
 
   private void replicateBranchDeletion(boolean mirror) throws Exception {
@@ -408,11 +422,6 @@ public class ReplicationStorageIT extends ReplicationStorageDaemon {
         .getSysInjector()
         .getInstance(ReplicationQueue.class)
         .scheduleFullSync(project, null, ref, Set.of(), new ReplicationState(NO_OP), false);
-  }
-
-  private boolean isTaskRescheduled(Queue queue, URIish uri) {
-    PushOne pushOne = queue.pending.get(uri);
-    return pushOne == null ? false : pushOne.isRetrying();
   }
 
   private boolean isTaskCleanedUp() {
