@@ -145,9 +145,28 @@ public class DestinationsCollection implements ReplicationDestinations {
           validUris.add(uri);
         }
       }
-      config.getDistributedUris(projectName, validUris).forEach(uri -> uris.put(config, uri));
+      distributedUris(config, filterType, projectName, validUris)
+          .forEach(uri -> uris.put(config, uri));
     }
     return uris;
+  }
+
+  /** Asks the remote's url distribution strategy what the operation at hand should reach. */
+  private static List<URIish> distributedUris(
+      Destination config,
+      FilterType filterType,
+      Project.NameKey projectName,
+      List<URIish> candidates) {
+    switch (filterType) {
+      case PROJECT_CREATION:
+        return config.urlsToCreateOn(projectName, candidates);
+      case PROJECT_DELETION:
+        return config.urlsToDeleteFrom(projectName, candidates);
+      case ALL:
+      default:
+        // A HEAD update, which replicates a ref like any other.
+        return config.urlsToReplicateTo(projectName, candidates);
+    }
   }
 
   @Override
