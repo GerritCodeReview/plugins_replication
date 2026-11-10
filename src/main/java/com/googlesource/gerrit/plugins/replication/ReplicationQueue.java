@@ -236,7 +236,7 @@ public class ReplicationQueue
       }
     }
     if (!refNamesToPush.isEmpty()) {
-      for (URIish uri : cfg.getDistributedUris(project, urlMatch)) {
+      for (URIish uri : cfg.urlsToReplicateTo(project, urlMatch)) {
         replicationTasksStorage.create(
             ReplicateRefUpdate.create(
                 project.get(), refNamesToPush, uri, cfg.getRemoteConfigName()));
