@@ -25,6 +25,8 @@ import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
 import org.eclipse.jgit.lib.Config;
 
 public class ReplicationConfigImpl implements ReplicationConfig {
@@ -48,6 +50,7 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   private final int autoRepairConcurrencyLimit;
   private final Path pluginDataDir;
   private final Config config;
+  private final List<String> projectsAlwaysReplicatedOnPluginStart;
 
   @Inject
   public ReplicationConfigImpl(
@@ -90,6 +93,8 @@ public class ReplicationConfigImpl implements ReplicationConfig {
                 DEFAULT_AUTO_REPAIR_CONCURRENCY_LIMIT));
     this.pluginDataDir = pluginDataDir;
     this.useLegacyCredentials = config.getBoolean("gerrit", "useLegacyCredentials", false);
+    this.projectsAlwaysReplicatedOnPluginStart =
+        Arrays.asList(config.getStringList("gerrit", null, "replicateProjectsOnStartup"));
   }
 
   @Nullable
@@ -191,5 +196,10 @@ public class ReplicationConfigImpl implements ReplicationConfig {
   @Override
   public int getAutoRepairConcurrencyLimit() {
     return autoRepairConcurrencyLimit;
+  }
+
+  @Override
+  public List<String> getProjectsAlwaysReplicatedOnPluginStart() {
+    return projectsAlwaysReplicatedOnPluginStart;
   }
 }

@@ -21,6 +21,7 @@ import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.replication.PushResultProcessing.GitUpdateProcessing;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
 import com.googlesource.gerrit.plugins.replication.events.dispatcher.EventDispatcher;
+import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -48,13 +49,22 @@ public class OnStartStop implements LifecycleListener {
 
   @Override
   public void start() {
-    if (srvInfo.getState() == ServerInformation.State.STARTUP
-        && config.isReplicateAllOnPluginStart()) {
-      ReplicationState state = new ReplicationState(new GitUpdateProcessing(eventDispatcher));
-      pushAllFuture.set(
-          pushAll
-              .create(null, PushOne.ALL_REFS, Set.of(), ReplicationFilter.all(), state, false)
-              .schedule(30, TimeUnit.SECONDS));
+    if (srvInfo.getState() == ServerInformation.State.STARTUP) {
+      ReplicationFilter replicationFilter = null;
+      if (config.isReplicateAllOnPluginStart()) {
+        replicationFilter = ReplicationFilter.all();
+      } else if (!config.getProjectsAlwaysReplicatedOnPluginStart().isEmpty()) {
+        replicationFilter =
+            new ReplicationFilter(
+                config.getProjectsAlwaysReplicatedOnPluginStart(), Collections.emptyList());
+      }
+      if (replicationFilter != null) {
+        ReplicationState state = new ReplicationState(new GitUpdateProcessing(eventDispatcher));
+        pushAllFuture.set(
+            pushAll
+                .create(null, PushOne.ALL_REFS, Set.of(), replicationFilter, state, false)
+                .schedule(30, TimeUnit.SECONDS));
+      }
     }
   }
 
