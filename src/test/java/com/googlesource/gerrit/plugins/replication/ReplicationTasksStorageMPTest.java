@@ -99,6 +99,23 @@ public class ReplicationTasksStorageMPTest {
   }
 
   @Test
+  public void retryIsKeptWhenOtherNodeFinishesSameTask() {
+    nodeA.create(REF_UPDATE);
+    nodeA.start(URI_UPDATES);
+    nodeB.create(REF_UPDATE);
+    nodeB.start(URI_UPDATES);
+    nodeA.finish(URI_UPDATES);
+
+    nodeB.reset(URI_UPDATES);
+    assertThatStream(persistedView.streamWaiting()).containsExactly(STORED_REF_UPDATE);
+    assertThatStream(persistedView.streamRunning()).isEmpty();
+
+    nodeB.start(URI_UPDATES);
+    nodeB.finish(URI_UPDATES);
+    assertNoIncompleteTasks(persistedView);
+  }
+
+  @Test
   public void resetTaskCanBeResetAndCompletedByOtherNode() {
     nodeA.create(REF_UPDATE);
     nodeA.start(URI_UPDATES);

@@ -186,9 +186,19 @@ public class ReplicationTasksStorage {
     return startedRefs;
   }
 
+  /**
+   * Moves the updates of a push that will be retried back to the waiting state.
+   *
+   * <p>With multi-primaries another node may run the same task and delete the running file when it
+   * finishes, possibly having pushed older values. The retry must stay persisted, otherwise the
+   * distributor prunes it as completed externally, so the task is created again in that case.
+   */
   public void reset(UriUpdates uriUpdates) {
     for (ReplicateRefUpdate update : uriUpdates.getReplicateRefUpdates()) {
-      new Task(update).reset();
+      Task task = new Task(update);
+      if (!task.reset()) {
+        task.create();
+      }
     }
   }
 
@@ -392,8 +402,8 @@ public class ReplicationTasksStorage {
       return rename(waiting, running);
     }
 
-    public void reset() {
-      rename(running, waiting);
+    public boolean reset() {
+      return rename(running, waiting);
     }
 
     public void recover() {
