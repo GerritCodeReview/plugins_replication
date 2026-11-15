@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0debf3cb_07c3a6b7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2026-11-15T04:51:36Z",
+      "side": 1,
+      "message": "I can\u0027t tell from the new method names for what is cases they will get called for, I can only guess based on what they return, and it without understanding this, my gut says that we should not be adding new methods, only new parameters.",
+      "revId": "82395bdb4432b8050863357ed632eebf50213e9c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
