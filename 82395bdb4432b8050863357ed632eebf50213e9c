@@ -16,6 +16,24 @@
       "message": "I can\u0027t tell from the new method names for what is cases they will get called for, I can only guess based on what they return, and it without understanding this, my gut says that we should not be adding new methods, only new parameters.",
       "revId": "82395bdb4432b8050863357ed632eebf50213e9c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e90398ba_f02ad6a6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/UrlDistributionStrategy.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 4651293
+      },
+      "writtenOn": "2026-11-16T05:05:51Z",
+      "side": 1,
+      "message": "Oh right, they were the same question asked twice, so refsOwnedBy is gone: a full sync now asks refsToReplicateByUrl with the URL it is pushing to as the only target, which is exactly \"which of these refs are mine\". One new method left, the two answers can no longer drift, and the javadoc now names both callers. roundRobin skips its rotation when asked about a single URL, so the push-time call doesn\u0027t skew the next event.",
+      "parentUuid": "0debf3cb_07c3a6b7",
+      "revId": "82395bdb4432b8050863357ed632eebf50213e9c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
