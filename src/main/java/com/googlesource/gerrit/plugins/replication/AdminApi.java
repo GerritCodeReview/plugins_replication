@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 
 public interface AdminApi {
@@ -25,7 +26,7 @@ public interface AdminApi {
    * @param head initial value for the HEAD
    * @return true if the project was created
    * @deprecated this method should not be used as it does not respect the reflog settings
-   *     <p>Use {@link AdminApi#createProject(Project.NameKey,String,boolean)} instead.
+   *     <p>Use {@link AdminApi#createProject(Project.NameKey,String,String)} instead.
    */
   @Deprecated(since = "3.14", forRemoval = true)
   boolean createProject(Project.NameKey project, String head);
@@ -37,10 +38,24 @@ public interface AdminApi {
    * @param head initial value for the HEAD
    * @param enableRefLog true if the reflog tracking should be enabled
    * @return true if the project was created
+   * @deprecated pass the complete repository configuration to {@link
+   *     #createProject(Project.NameKey, String, String)} instead
    */
+  @Deprecated(since = "3.15", forRemoval = true)
   default boolean createProject(Project.NameKey project, String head, boolean enableRefLog) {
     return createProject(project, head);
   }
+
+  /**
+   * Create a new project with an optional Git configuration.
+   *
+   * @param project the new project to create
+   * @param head initial value for the HEAD
+   * @param gitConfig complete serialized repository configuration, including the reflog setting, or
+   *     {@code null} to use the destination defaults
+   * @return true if the project was created
+   */
+  boolean createProject(Project.NameKey project, String head, @Nullable String gitConfig);
 
   boolean deleteProject(Project.NameKey project);
 

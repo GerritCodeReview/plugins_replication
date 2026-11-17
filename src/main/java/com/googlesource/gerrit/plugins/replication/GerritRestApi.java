@@ -21,6 +21,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.restapi.Url;
+import com.google.gson.JsonObject;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.io.IOException;
@@ -63,12 +64,22 @@ public class GerritRestApi implements AdminApi {
 
   @Override
   public boolean createProject(Project.NameKey project, String head) {
+    return createProject(project, head, null);
+  }
+
+  @Override
+  public boolean createProject(Project.NameKey project, String head, @Nullable String gitConfig) {
     repLog.atInfo().log("Creating project %s on %s", project, uri);
     String url = String.format("%s/a/projects/%s", toHttpUri(uri), Url.encode(project.get()));
     try {
-      return httpClient
-          .execute(new HttpPut(url), new HttpResponseHandler(), getContext())
-          .isSuccessful();
+      HttpPut request = new HttpPut(url);
+      if (gitConfig != null) {
+        JsonObject input = new JsonObject();
+        input.addProperty("git_config", gitConfig);
+        request.setEntity(new StringEntity(input.toString(), UTF_8.name()));
+        request.addHeader(new BasicHeader("Content-Type", "application/json"));
+      }
+      return httpClient.execute(request, new HttpResponseHandler(), getContext()).isSuccessful();
     } catch (IOException e) {
       repLog.atSevere().withCause(e).log("Couldn't perform project creation on %s", uri);
       return false;
