@@ -21,6 +21,9 @@ import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import java.io.IOException;
 import java.io.OutputStream;
+import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.lib.Config;
+import org.eclipse.jgit.lib.ConfigConstants;
 import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.QuotedString;
 
@@ -42,22 +45,42 @@ public class RemoteSsh implements AdminApi {
 
   @Override
   public boolean createProject(Project.NameKey project, String head) {
+    return createProject(project, head, null);
+  }
+
+  @Override
+  public boolean createProject(Project.NameKey project, String head, @Nullable String gitConfig) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
-    String cmd = "mkdir -p " + quotedPath + " && cd " + quotedPath + " && " + git + " init --bare";
-    if (head != null) {
-      cmd = cmd + " && " + git + " symbolic-ref HEAD " + QuotedString.BOURNE.quote(head);
-    }
     OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
+      String cmd =
+          "mkdir -p " + quotedPath + " && cd " + quotedPath + " && " + git + " init --bare";
+      if (gitConfig != null && !gitConfig.isBlank()) {
+        Config sourceConfig = new Config();
+        sourceConfig.fromText(gitConfig);
+        String refFormat =
+            sourceConfig.getString(
+                ConfigConstants.CONFIG_EXTENSIONS_SECTION,
+                null,
+                ConfigConstants.CONFIG_KEY_REF_STORAGE);
+        if (!Strings.isNullOrEmpty(refFormat)) {
+          cmd += " --ref-format=" + QuotedString.BOURNE.quote(refFormat);
+        }
+        cmd +=
+            " && printf '%s' "
+                + QuotedString.BOURNE.quote(gitConfig)
+                + " > "
+                + QuotedString.BOURNE.quote(uri.getPath() + "/config");
+      }
+      if (head != null) {
+        cmd += " && " + git + " symbolic-ref HEAD " + QuotedString.BOURNE.quote(head);
+      }
       sshHelper.executeRemoteSsh(uri, cmd, errStream);
       repLog.atInfo().log("Created remote repository: %s", uri);
-    } catch (IOException e) {
+    } catch (IOException | ConfigInvalidException e) {
       repLog.atSevere().log(
-          "Error creating remote repository at %s:\n"
-              + "  Exception: %s\n"
-              + "  Command: %s\n"
-              + "  Output: %s",
-          uri, e, cmd, errStream);
+          "Error creating remote repository at %s:\n  Exception: %s\n  Output: %s",
+          uri, e, errStream);
       return false;
     }
     return true;
