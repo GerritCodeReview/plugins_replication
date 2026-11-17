@@ -45,6 +45,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
   private final boolean replicateNoteDbMetaRefs;
   private final boolean replicatePermissions;
   private final boolean replicateProjectDeletions;
+  private final boolean replicateGitConfig;
   private final boolean replicateHiddenProjects;
   private final String remoteNameStyle;
   private final ImmutableList<String> urls;
@@ -86,6 +87,7 @@ public class DestinationConfiguration implements RemoteConfiguration {
     replicateNoteDbMetaRefs = cfg.getBoolean("remote", name, "replicateNoteDbMetaRefs", true);
     replicatePermissions = cfg.getBoolean("remote", name, "replicatePermissions", true);
     replicateProjectDeletions = cfg.getBoolean("remote", name, "replicateProjectDeletions", false);
+    replicateGitConfig = cfg.getBoolean("remote", name, "replicateGitConfig", false);
     replicateHiddenProjects = cfg.getBoolean("remote", name, "replicateHiddenProjects", false);
     remoteNameStyle =
         MoreObjects.firstNonNull(cfg.getString("remote", name, "remoteNameStyle"), "slash");
@@ -190,6 +192,10 @@ public class DestinationConfiguration implements RemoteConfiguration {
 
   public boolean replicateProjectDeletions() {
     return replicateProjectDeletions;
+  }
+
+  public boolean replicateGitConfig() {
+    return replicateGitConfig;
   }
 
   public boolean replicateHiddenProjects() {
