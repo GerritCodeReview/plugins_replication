@@ -850,6 +850,10 @@ public class Destination {
     return config.replicateProjectDeletions();
   }
 
+  boolean isReplicateGitConfig() {
+    return config.replicateGitConfig();
+  }
+
   private boolean matches(URIish uri, Project.NameKey project) {
     for (URIish configUri : config.getRemoteConfig().getURIs()) {
       try {
