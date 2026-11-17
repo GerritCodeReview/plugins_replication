@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.gerrit.common.Nullable;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.googlesource.gerrit.plugins.replication.api.ReplicationConfig;
@@ -41,8 +42,17 @@ public class SshHelper {
   }
 
   public int executeRemoteSsh(URIish uri, String cmd, OutputStream errStream) throws IOException {
+    return executeRemoteSsh(uri, cmd, errStream, null);
+  }
+
+  public int executeRemoteSsh(
+      URIish uri, String cmd, OutputStream errStream, @Nullable byte[] standardInput)
+      throws IOException {
     RemoteSession ssh = connect(uri);
     Process proc = ssh.exec(cmd, commandTimeout);
+    if (standardInput != null) {
+      proc.getOutputStream().write(standardInput);
+    }
     proc.getOutputStream().close();
     StreamCopyThread out = new StreamCopyThread(proc.getInputStream(), errStream);
     StreamCopyThread err = new StreamCopyThread(proc.getErrorStream(), errStream);
