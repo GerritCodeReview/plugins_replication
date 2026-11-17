@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.ssh.SshAddressesModule;
 import java.io.IOException;
@@ -23,6 +24,7 @@ import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.jgit.transport.URIish;
+import org.eclipse.jgit.util.QuotedString;
 
 public class GerritSshApi implements AdminApi {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
@@ -42,9 +44,19 @@ public class GerritSshApi implements AdminApi {
 
   @Override
   public boolean createProject(Project.NameKey projectName, String head) {
+    return createProject(projectName, head, false, null);
+  }
+
+  @Override
+  public boolean createProject(
+      Project.NameKey projectName, String head, boolean enableRefLog, @Nullable String gitConfig) {
     OutputStream errStream = sshHelper.newErrorBufferStream();
-    String cmd = "gerrit create-project --branch " + head + " " + projectName.get();
+    String cmd = "gerrit create-project --branch " + head;
     try {
+      if (gitConfig != null) {
+        cmd += " --git-config " + QuotedString.BOURNE.quote(gitConfig);
+      }
+      cmd += " " + projectName.get();
       execute(uri, cmd, errStream);
     } catch (IOException e) {
       logError("creating", uri, errStream, cmd, e);

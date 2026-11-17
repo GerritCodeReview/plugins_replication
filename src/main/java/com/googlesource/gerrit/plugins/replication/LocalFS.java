@@ -16,15 +16,19 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import java.io.File;
 import java.io.IOException;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
+import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.lib.ConfigConstants;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.RefUpdate;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.StoredConfig;
+import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.eclipse.jgit.transport.URIish;
 
 public class LocalFS implements AdminApi {
@@ -42,30 +46,54 @@ public class LocalFS implements AdminApi {
 
   @Override
   public boolean createProject(Project.NameKey project, String head, boolean enableRefLog) {
-    try (Repository repo = new FileRepository(uri.getPath())) {
-      repo.create(true /* bare */);
+    return createProject(project, head, enableRefLog, null);
+  }
 
-      if (head != null && head.startsWith(Constants.R_REFS)) {
-        // It is unclear why the reflog is disabled when updating the HEAD. It has been like that
-        // for over a decade and does not cause issues so far.
-        // One educated guess is that it follows the default of the git config option
-        // core.logAllRefUpdates which is false by default for bare repositories and by default
-        // stores reflogs only for repositories which have a working tree.
-        RefUpdate u = repo.updateRef(Constants.HEAD);
-        u.disableRefLog();
-        u.link(head);
+  @Override
+  public boolean createProject(
+      Project.NameKey project, String head, boolean enableRefLog, @Nullable String gitConfig) {
+    try {
+      Config sourceConfig = null;
+      FileRepositoryBuilder builder =
+          new FileRepositoryBuilder().setGitDir(new File(uri.getPath()));
+      if (gitConfig != null && !gitConfig.isBlank()) {
+        sourceConfig = new Config();
+        sourceConfig.fromText(gitConfig);
+        builder.setRefStorageFormat(
+            sourceConfig.getString(
+                ConfigConstants.CONFIG_EXTENSIONS_SECTION,
+                null,
+                ConfigConstants.CONFIG_KEY_REF_STORAGE));
       }
 
-      StoredConfig config = repo.getConfig();
-      config.setBoolean(
-          ConfigConstants.CONFIG_CORE_SECTION,
-          null,
-          ConfigConstants.CONFIG_KEY_LOGALLREFUPDATES,
-          enableRefLog);
-      config.save();
+      try (Repository repo = builder.build()) {
+        repo.create(true /* bare */);
 
-      repLog.atInfo().log("Created local repository: %s", uri);
-    } catch (IOException e) {
+        if (head != null && head.startsWith(Constants.R_REFS)) {
+          // It is unclear why the reflog is disabled when updating the HEAD. It has been like that
+          // for over a decade and does not cause issues so far.
+          // One educated guess is that it follows the default of the git config option
+          // core.logAllRefUpdates which is false by default for bare repositories and by default
+          // stores reflogs only for repositories which have a working tree.
+          RefUpdate u = repo.updateRef(Constants.HEAD);
+          u.disableRefLog();
+          u.link(head);
+        }
+
+        StoredConfig config = repo.getConfig();
+        if (sourceConfig != null) {
+          config.fromText(sourceConfig.toText());
+        }
+        config.setBoolean(
+            ConfigConstants.CONFIG_CORE_SECTION,
+            null,
+            ConfigConstants.CONFIG_KEY_LOGALLREFUPDATES,
+            enableRefLog);
+        config.save();
+
+        repLog.atInfo().log("Created local repository: %s", uri);
+      }
+    } catch (IOException | ConfigInvalidException e) {
       repLog.atSevere().withCause(e).log("Error creating local repository %s", uri.getPath());
       return false;
     }

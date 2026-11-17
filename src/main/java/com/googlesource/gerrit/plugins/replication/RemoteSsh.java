@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.base.Strings;
 import com.google.gerrit.common.Nullable;
@@ -42,22 +43,34 @@ public class RemoteSsh implements AdminApi {
 
   @Override
   public boolean createProject(Project.NameKey project, String head) {
+    return createProject(project, head, false, null);
+  }
+
+  @Override
+  public boolean createProject(
+      Project.NameKey project, String head, boolean enableRefLog, @Nullable String gitConfig) {
     String quotedPath = QuotedString.BOURNE.quote(uri.getPath());
-    String cmd = "mkdir -p " + quotedPath + " && cd " + quotedPath + " && " + git + " init --bare";
-    if (head != null) {
-      cmd = cmd + " && " + git + " symbolic-ref HEAD " + QuotedString.BOURNE.quote(head);
-    }
     OutputStream errStream = sshHelper.newErrorBufferStream();
     try {
-      sshHelper.executeRemoteSsh(uri, cmd, errStream);
+      String cmd =
+          "mkdir -p " + quotedPath + " && cd " + quotedPath + " && " + git + " init --bare";
+      if (gitConfig != null && !gitConfig.isBlank()) {
+        cmd += " && cat > " + QuotedString.BOURNE.quote(uri.getPath() + "/config");
+      }
+      cmd += " && " + git + " config core.logAllRefUpdates " + enableRefLog;
+      if (head != null) {
+        cmd += " && " + git + " symbolic-ref HEAD " + QuotedString.BOURNE.quote(head);
+      }
+      sshHelper.executeRemoteSsh(
+          uri,
+          cmd,
+          errStream,
+          gitConfig == null || gitConfig.isBlank() ? null : gitConfig.getBytes(UTF_8));
       repLog.atInfo().log("Created remote repository: %s", uri);
     } catch (IOException e) {
       repLog.atSevere().log(
-          "Error creating remote repository at %s:\n"
-              + "  Exception: %s\n"
-              + "  Command: %s\n"
-              + "  Output: %s",
-          uri, e, cmd, errStream);
+          "Error creating remote repository at %s:\n  Exception: %s\n  Output: %s",
+          uri, e, errStream);
       return false;
     }
     return true;
