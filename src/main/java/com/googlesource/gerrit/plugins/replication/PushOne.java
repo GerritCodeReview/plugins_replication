@@ -530,7 +530,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
         try (Repository git = gitManager.openRepository(projectName)) {
           Ref head = git.exactRef(Constants.HEAD);
 
-          if (createProject(projectName, head != null ? getName(head) : null)) {
+          String gitConfig = pool.isReplicateGitConfig() ? git.getConfig().toText() : null;
+          if (createProject(projectName, head != null ? getName(head) : null, gitConfig)) {
             repLog.atWarning().log("Missing repository created; retry replication to %s", uri);
             pool.reschedule(this, Destination.RetryReason.REPOSITORY_MISSING);
           } else {
@@ -549,8 +550,8 @@ class PushOne implements ProjectRunnable, CanceledWhileRunning, UriUpdates {
     }
   }
 
-  private boolean createProject(Project.NameKey project, String head) {
-    return createProjectFactory.create(project, head).create();
+  private boolean createProject(Project.NameKey project, String head, @Nullable String gitConfig) {
+    return createProjectFactory.create(project, head, gitConfig).create();
   }
 
   private String getName(Ref ref) {

@@ -609,6 +609,17 @@ remote.NAME.replicateProjectDeletions
 
 	By default, false, do *not* replicate project deletions.
 
+remote.NAME.replicateGitConfig
+:	If true, the source repository's Git configuration is applied when a
+	missing repository is created. This includes creation-time settings such as
+	`extensions.refStorage`, allowing a Reftable repository to be created with
+	the same ref storage format. The complete configuration is sent through
+	local filesystem, direct SSH, and Gerrit REST project-creation APIs. The
+	legacy `gerrit+ssh` administration API does not support Git configuration
+	and ignores the payload.
+
+	By default, false, and the destination's default Git configuration is used.
+
 remote.NAME.replicateHiddenProjects
 :	If true, hidden projects will be replicated to the remote site.
 

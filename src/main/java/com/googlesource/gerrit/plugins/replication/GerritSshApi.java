@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.replication;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.ssh.SshAddressesModule;
 import java.io.IOException;
@@ -51,6 +52,12 @@ public class GerritSshApi implements AdminApi {
       return false;
     }
     return true;
+  }
+
+  @Override
+  public boolean createProject(
+      Project.NameKey projectName, String head, @Nullable String gitConfig) {
+    return createProject(projectName, head);
   }
 
   @Override
