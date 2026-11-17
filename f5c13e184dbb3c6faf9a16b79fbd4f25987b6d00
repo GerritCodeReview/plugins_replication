@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a8b736a_6f79e30b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2026-11-17T07:25:45Z",
+      "side": 1,
+      "message": "Missing issue id.",
+      "revId": "f5c13e184dbb3c6faf9a16b79fbd4f25987b6d00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7cca8cf_8dfc1fcf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/AdminApi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2026-11-17T07:25:45Z",
+      "side": 1,
+      "message": "```suggestion\n  boolean createProject(\n      Project.NameKey project, String head, boolean enableRefLog, @Nullable String gitConfig);\n  }\n```\n\nThe default implementation just ignores the `gitConfig`, which seems like a bug to me.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 3
+      },
+      "revId": "f5c13e184dbb3c6faf9a16b79fbd4f25987b6d00",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
