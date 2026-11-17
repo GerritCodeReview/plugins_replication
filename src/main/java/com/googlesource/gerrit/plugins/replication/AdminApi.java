@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.replication;
 
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 
 public interface AdminApi {
@@ -41,6 +42,18 @@ public interface AdminApi {
   default boolean createProject(Project.NameKey project, String head, boolean enableRefLog) {
     return createProject(project, head);
   }
+
+  /**
+   * Create a new project with an optional Git configuration.
+   *
+   * @param project the new project to create
+   * @param head initial value for the HEAD
+   * @param enableRefLog true if the reflog tracking should be enabled
+   * @param gitConfig string containing the git configration
+   * @return true if the project was created
+   */
+  boolean createProject(
+      Project.NameKey project, String head, boolean enableRefLog, @Nullable String gitConfig);
 
   boolean deleteProject(Project.NameKey project);
 

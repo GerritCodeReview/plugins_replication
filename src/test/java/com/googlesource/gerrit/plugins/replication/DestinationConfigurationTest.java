@@ -111,6 +111,19 @@ public class DestinationConfigurationTest {
   }
 
   @Test
+  public void shouldNotReplicateGitConfigByDefault() {
+    assertThat(objectUnderTest.replicateGitConfig()).isFalse();
+  }
+
+  @Test
+  public void shouldReplicateGitConfigWhenConfigured() {
+    when(cfgMock.getBoolean("remote", REMOTE, "replicateGitConfig", false)).thenReturn(true);
+    objectUnderTest = new DestinationConfiguration(remoteConfigMock, cfgMock);
+
+    assertThat(objectUnderTest.replicateGitConfig()).isTrue();
+  }
+
+  @Test
   public void shouldTreatBareReplicationRetryAsMinutes() {
     // given
     when(cfgMock.getString("remote", REMOTE, "replicationRetry")).thenReturn("2");
