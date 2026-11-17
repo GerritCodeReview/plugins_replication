@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.replication;
 
 import static com.googlesource.gerrit.plugins.replication.ReplicationQueue.repLog;
 
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.inject.Inject;
@@ -27,7 +28,10 @@ import org.eclipse.jgit.transport.URIish;
 
 public class CreateProjectTask {
   interface Factory {
-    CreateProjectTask create(Project.NameKey project, String head);
+    CreateProjectTask create(
+        Project.NameKey project,
+        @Assisted("head") String head,
+        @Assisted("gitConfig") @Nullable String gitConfig);
   }
 
   private final RemoteConfig config;
@@ -35,6 +39,7 @@ public class CreateProjectTask {
   private final DynamicItem<AdminApiFactory> adminApiFactory;
   private final Project.NameKey project;
   private final String head;
+  private final String gitConfig;
 
   @Inject
   CreateProjectTask(
@@ -42,12 +47,14 @@ public class CreateProjectTask {
       ReplicationDestinations destinations,
       DynamicItem<AdminApiFactory> adminApiFactory,
       @Assisted Project.NameKey project,
-      @Assisted String head) {
+      @Assisted("head") String head,
+      @Assisted("gitConfig") @Nullable String gitConfig) {
     this.config = config;
     this.destinations = destinations;
     this.adminApiFactory = adminApiFactory;
     this.project = project;
     this.head = head;
+    this.gitConfig = gitConfig;
   }
 
   public boolean create() {
@@ -55,14 +62,24 @@ public class CreateProjectTask {
         .getURIs(Optional.of(config.getName()), project, FilterType.PROJECT_CREATION)
         .entries()
         .stream()
-        .map(entry -> createProject(entry.getValue(), project, head, entry.getKey().storeRefLog()))
+        .map(
+            entry ->
+                createProject(
+                    entry.getValue(), project, head, entry.getKey().storeRefLog(), gitConfig))
         .reduce(true, (a, b) -> a && b);
   }
 
   private boolean createProject(
-      URIish replicateURI, Project.NameKey projectName, String head, boolean storeRefLog) {
+      URIish replicateURI,
+      Project.NameKey projectName,
+      String head,
+      boolean storeRefLog,
+      @Nullable String gitConfig) {
     Optional<AdminApi> adminApi = adminApiFactory.get().create(replicateURI, config.getName());
-    if (adminApi.isPresent() && adminApi.get().createProject(projectName, head, storeRefLog)) {
+    if (adminApi.isPresent()
+        && (gitConfig != null
+            ? adminApi.get().createProject(projectName, head, gitConfig)
+            : adminApi.get().createProject(projectName, head, storeRefLog))) {
       return true;
     }
 
