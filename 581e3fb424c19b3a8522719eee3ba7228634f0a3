@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08a9fdc5_ff2a93e3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2026-11-18T08:34:28Z",
+      "side": 1,
+      "message": "I just noticed this is kept for backward compatibility with old releases pre 2.13 [1]:\n\n```\n*Backward compatibility notice*\n\nBefore Gerrit v2.13 it was possible to enable replication to different\nGerrit masters using `gerrit+ssh://`\nas protocol name followed by hostname of another Gerrit server eg.\n\n`gerrit+ssh://replica1.my.org/`\n```\n\nI believe we can just skip the logic of passing the git config in this case, since according to documentation is not already working since the introduction of NoteDb.\n\nI suggest to remove the whole implementation in a followup.\n\n[1]: https://gerrit.googlesource.com/plugins/replication/+/refs/heads/master/src/main/resources/Documentation/config.md",
+      "parentUuid": "6a2618f3_8806f890",
+      "range": {
+        "startLine": 57,
+        "startChar": 17,
+        "endLine": 57,
+        "endChar": 30
+      },
+      "revId": "581e3fb424c19b3a8522719eee3ba7228634f0a3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03081dc6_e06c787e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/RemoteSsh.java",
         "patchSetId": 8
