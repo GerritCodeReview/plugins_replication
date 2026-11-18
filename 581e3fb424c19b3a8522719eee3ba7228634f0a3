@@ -120,6 +120,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac672127_b5c22c78",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/replication/GerritSshApi.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2026-11-18T17:44:16Z",
+      "side": 1,
+      "message": "I have documented this in the plugin documentation.",
+      "parentUuid": "08a9fdc5_ff2a93e3",
+      "range": {
+        "startLine": 57,
+        "startChar": 17,
+        "endLine": 57,
+        "endChar": 30
+      },
+      "revId": "581e3fb424c19b3a8522719eee3ba7228634f0a3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03081dc6_e06c787e",
