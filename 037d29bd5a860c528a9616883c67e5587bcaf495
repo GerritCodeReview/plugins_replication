@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7de92eb5_137c3f88",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/replication/ReplicationStorageIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2026-11-20T17:51:03Z",
+      "side": 1,
+      "message": "Reuse the `setSubMinuteReplicationRetry` helper (I2d561950, built on the seconds-config I54f8e3d4) instead of a new local idiom.\n\nIt\u0027s currently private in ReplicationIT; since ReplicationStorageIT is a sibling (both extend ReplicationDaemon), lift it to the ReplicationDaemon base as protected and call it here. ReplicationIT\u0027s existing calls keep working via inheritance.",
+      "range": {
+        "startLine": 354,
+        "startChar": 0,
+        "endLine": 362,
+        "endChar": 0
+      },
+      "revId": "037d29bd5a860c528a9616883c67e5587bcaf495",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
